@@ -5,8 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital_IS"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="320" Width="500" WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True" Background="Transparent"
+        WindowStyle="None" ResizeMode="NoResize"
+        MouseDown="Window_MouseDown">
     <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border CornerRadius="20" Grid.ColumnSpan="2">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF184095" Offset="0.0"/>
+                        <GradientStop Color="#FF5B317E" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
 
+            
+            <Image Source="hospital.png" Width="250" Height="250"/>
+
+            <StackPanel Grid.Column="1">
+                <StackPanel>
+                <TextBox Background="Transparent" 
+                         Text="Email" 
+                         Foreground="White"
+                         FontWeight="Light"
+                         FontSize="18"
+                         BorderThickness="0"
+                         Width="220"
+                         Margin="10 100 0 0"
+                         Opacity="0.7"/>
+                 </StackPanel>
+                  <Border Height="1" Width="220" Background="White" Opacity="0.7"></Border>
+                <StackPanel>
+                <PasswordBox Background="Transparent" 
+                         Password="Password" 
+                         Foreground="White"
+                         FontWeight="Light"
+                         FontSize="18"
+                         BorderThickness="0"
+                         Width="220"
+                         Margin="10 20 0 0"
+                         Opacity="0.7"/>
+                </StackPanel>
+                <Border Height="1" Width="220" Background="White" Opacity="0.7"></Border>
+                <StackPanel>
+                    <Button Height="20" Width="120"
+                            Content="Login"
+                            Margin="50" Background="LavenderBlush"></Button>
+                </StackPanel>
+            </StackPanel>
+
+        </Grid>
     </Grid>
 </Window>

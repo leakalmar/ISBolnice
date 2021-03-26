@@ -7,4 +7,13 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="hospital.png" />
+    <None Remove="hospital2.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="hospital.png" />
+  </ItemGroup>
+
 </Project>
