@@ -8,10 +8,9 @@ using System;
 
 namespace Model
 {
-   public class EquiptType
+   public enum EquiptType
    {
-      private EnumConstant Stationary;
-      private EnumConstant Dynamic;
-   
+      Stationary,
+      Dynamic
    }
 }

@@ -1,33 +1,27 @@
-/***********************************************************************
- * Module:  PatientFileStorage.cs
- * Author:  Me
- * Purpose: Definition of the Class PatientFileStorage
- ***********************************************************************/
-
 using System;
+using System.Collections.Generic;
+using Model;
 
 namespace Storages
 {
    public class UserFileStorage
    {
+      private string fileLocation;
+      
       public List<User> GetAll()
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
       
       public void SaveUser(Model.User user)
       {
-         // TODO: implement
+         throw new NotImplementedException();
       }
       
       public Model.User GetByEmail(String email)
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
-   
-      private string FileLocation;
    
    }
 }

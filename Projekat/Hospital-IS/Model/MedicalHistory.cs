@@ -12,23 +12,33 @@ namespace Model
    {
       public System.Collections.ArrayList prescription;
       
-      
-      public System.Collections.ArrayList GetPrescription()
+      /// <summary>
+      /// Property for collection of Prescription
+      /// </summary>
+      /// <pdGenerated>Default opposite class collection property</pdGenerated>
+      public System.Collections.ArrayList Prescription
       {
-         if (prescription == null)
-            prescription = new System.Collections.ArrayList();
-         return prescription;
+         get
+         {
+            if (prescription == null)
+               prescription = new System.Collections.ArrayList();
+            return prescription;
+         }
+         set
+         {
+            RemoveAllPrescription();
+            if (value != null)
+            {
+               foreach (Prescription oPrescription in value)
+                  AddPrescription(oPrescription);
+            }
+         }
       }
       
-      
-      public void SetPrescription(System.Collections.ArrayList newPrescription)
-      {
-         RemoveAllPrescription();
-         foreach (Prescription oPrescription in newPrescription)
-            AddPrescription(oPrescription);
-      }
-      
-      
+      /// <summary>
+      /// Add a new Prescription in the collection
+      /// </summary>
+      /// <pdGenerated>Default Add</pdGenerated>
       public void AddPrescription(Prescription newPrescription)
       {
          if (newPrescription == null)
@@ -39,7 +49,10 @@ namespace Model
             this.prescription.Add(newPrescription);
       }
       
-      
+      /// <summary>
+      /// Remove an existing Prescription from the collection
+      /// </summary>
+      /// <pdGenerated>Default Remove</pdGenerated>
       public void RemovePrescription(Prescription oldPrescription)
       {
          if (oldPrescription == null)
@@ -49,7 +62,10 @@ namespace Model
                this.prescription.Remove(oldPrescription);
       }
       
-      
+      /// <summary>
+      /// Remove all instances of Prescription from the collection
+      /// </summary>
+      /// <pdGenerated>Default removeAll</pdGenerated>
       public void RemoveAllPrescription()
       {
          if (prescription != null)
@@ -57,23 +73,33 @@ namespace Model
       }
       public System.Collections.ArrayList test;
       
-      
-      public System.Collections.ArrayList GetTest()
+      /// <summary>
+      /// Property for collection of Test
+      /// </summary>
+      /// <pdGenerated>Default opposite class collection property</pdGenerated>
+      public System.Collections.ArrayList Test
       {
-         if (test == null)
-            test = new System.Collections.ArrayList();
-         return test;
+         get
+         {
+            if (test == null)
+               test = new System.Collections.ArrayList();
+            return test;
+         }
+         set
+         {
+            RemoveAllTest();
+            if (value != null)
+            {
+               foreach (Test oTest in value)
+                  AddTest(oTest);
+            }
+         }
       }
       
-      
-      public void SetTest(System.Collections.ArrayList newTest)
-      {
-         RemoveAllTest();
-         foreach (Test oTest in newTest)
-            AddTest(oTest);
-      }
-      
-      
+      /// <summary>
+      /// Add a new Test in the collection
+      /// </summary>
+      /// <pdGenerated>Default Add</pdGenerated>
       public void AddTest(Test newTest)
       {
          if (newTest == null)
@@ -84,7 +110,10 @@ namespace Model
             this.test.Add(newTest);
       }
       
-      
+      /// <summary>
+      /// Remove an existing Test from the collection
+      /// </summary>
+      /// <pdGenerated>Default Remove</pdGenerated>
       public void RemoveTest(Test oldTest)
       {
          if (oldTest == null)
@@ -94,7 +123,10 @@ namespace Model
                this.test.Remove(oldTest);
       }
       
-      
+      /// <summary>
+      /// Remove all instances of Test from the collection
+      /// </summary>
+      /// <pdGenerated>Default removeAll</pdGenerated>
       public void RemoveAllTest()
       {
          if (test != null)
@@ -102,23 +134,33 @@ namespace Model
       }
       public System.Collections.ArrayList hospitalization;
       
-      
-      public System.Collections.ArrayList GetHospitalization()
+      /// <summary>
+      /// Property for collection of Hospitalization
+      /// </summary>
+      /// <pdGenerated>Default opposite class collection property</pdGenerated>
+      public System.Collections.ArrayList Hospitalization
       {
-         if (hospitalization == null)
-            hospitalization = new System.Collections.ArrayList();
-         return hospitalization;
+         get
+         {
+            if (hospitalization == null)
+               hospitalization = new System.Collections.ArrayList();
+            return hospitalization;
+         }
+         set
+         {
+            RemoveAllHospitalization();
+            if (value != null)
+            {
+               foreach (Hospitalization oHospitalization in value)
+                  AddHospitalization(oHospitalization);
+            }
+         }
       }
       
-      
-      public void SetHospitalization(System.Collections.ArrayList newHospitalization)
-      {
-         RemoveAllHospitalization();
-         foreach (Hospitalization oHospitalization in newHospitalization)
-            AddHospitalization(oHospitalization);
-      }
-      
-      
+      /// <summary>
+      /// Add a new Hospitalization in the collection
+      /// </summary>
+      /// <pdGenerated>Default Add</pdGenerated>
       public void AddHospitalization(Hospitalization newHospitalization)
       {
          if (newHospitalization == null)
@@ -129,7 +171,10 @@ namespace Model
             this.hospitalization.Add(newHospitalization);
       }
       
-      
+      /// <summary>
+      /// Remove an existing Hospitalization from the collection
+      /// </summary>
+      /// <pdGenerated>Default Remove</pdGenerated>
       public void RemoveHospitalization(Hospitalization oldHospitalization)
       {
          if (oldHospitalization == null)
@@ -139,7 +184,10 @@ namespace Model
                this.hospitalization.Remove(oldHospitalization);
       }
       
-      
+      /// <summary>
+      /// Remove all instances of Hospitalization from the collection
+      /// </summary>
+      /// <pdGenerated>Default removeAll</pdGenerated>
       public void RemoveAllHospitalization()
       {
          if (hospitalization != null)

@@ -1,27 +1,23 @@
-/***********************************************************************
- * Module:  SaleStorage.cs
- * Author:  Jovanovic
- * Purpose: Definition of the Class SaleStorage
- ***********************************************************************/
-
 using System;
+using Model;
+using System.Collections.Generic;
+
 
 namespace Storages
 {
    public class RoomStorage
    {
+      private String fileLocation;
+      
       public List<Room> GetAll()
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
       
       public void SaveRoom(Model.Room newRoom)
       {
-         // TODO: implement
+         throw new NotImplementedException();
       }
-   
-      private String FileLocation;
    
    }
 }

@@ -10,42 +10,52 @@ namespace Model
 {
    public class Doctor : Employee
    {
+      private Specialty specialty;
+      
       public void ViewPatientDocuments(Patient patient)
       {
-         // TODO: implement
+         throw new NotImplementedException();
       }
       
       public Boolean UpadatePatient(Patient patient)
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
       
       public Boolean AddPatietientDocument(Patient patient)
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
-   
+      
       public System.Collections.ArrayList doctorAppointment;
       
-      
-      public System.Collections.ArrayList GetDoctorAppointment()
+      /// <summary>
+      /// Property for collection of DoctorAppointment
+      /// </summary>
+      /// <pdGenerated>Default opposite class collection property</pdGenerated>
+      public System.Collections.ArrayList DoctorAppointment
       {
-         if (doctorAppointment == null)
-            doctorAppointment = new System.Collections.ArrayList();
-         return doctorAppointment;
+         get
+         {
+            if (doctorAppointment == null)
+               doctorAppointment = new System.Collections.ArrayList();
+            return doctorAppointment;
+         }
+         set
+         {
+            RemoveAllDoctorAppointment();
+            if (value != null)
+            {
+               foreach (DoctorAppointment oDoctorAppointment in value)
+                  AddDoctorAppointment(oDoctorAppointment);
+            }
+         }
       }
       
-      
-      public void SetDoctorAppointment(System.Collections.ArrayList newDoctorAppointment)
-      {
-         RemoveAllDoctorAppointment();
-         foreach (DoctorAppointment oDoctorAppointment in newDoctorAppointment)
-            AddDoctorAppointment(oDoctorAppointment);
-      }
-      
-      
+      /// <summary>
+      /// Add a new DoctorAppointment in the collection
+      /// </summary>
+      /// <pdGenerated>Default Add</pdGenerated>
       public void AddDoctorAppointment(DoctorAppointment newDoctorAppointment)
       {
          if (newDoctorAppointment == null)
@@ -55,11 +65,14 @@ namespace Model
          if (!this.doctorAppointment.Contains(newDoctorAppointment))
          {
             this.doctorAppointment.Add(newDoctorAppointment);
-            newDoctorAppointment.SetDoctor(this);      
+            newDoctorAppointment.Doctor = this;
          }
       }
       
-      
+      /// <summary>
+      /// Remove an existing DoctorAppointment from the collection
+      /// </summary>
+      /// <pdGenerated>Default Remove</pdGenerated>
       public void RemoveDoctorAppointment(DoctorAppointment oldDoctorAppointment)
       {
          if (oldDoctorAppointment == null)
@@ -68,11 +81,14 @@ namespace Model
             if (this.doctorAppointment.Contains(oldDoctorAppointment))
             {
                this.doctorAppointment.Remove(oldDoctorAppointment);
-               oldDoctorAppointment.SetDoctor((Doctor)null);
+               oldDoctorAppointment.Doctor = null;
             }
       }
       
-      
+      /// <summary>
+      /// Remove all instances of DoctorAppointment from the collection
+      /// </summary>
+      /// <pdGenerated>Default removeAll</pdGenerated>
       public void RemoveAllDoctorAppointment()
       {
          if (doctorAppointment != null)
@@ -82,29 +98,39 @@ namespace Model
                tmpDoctorAppointment.Add(oldDoctorAppointment);
             doctorAppointment.Clear();
             foreach (DoctorAppointment oldDoctorAppointment in tmpDoctorAppointment)
-               oldDoctorAppointment.SetDoctor((Doctor)null);
+               oldDoctorAppointment.Doctor = null;
             tmpDoctorAppointment.Clear();
          }
       }
       public System.Collections.ArrayList patient;
       
-      
-      public System.Collections.ArrayList GetPatient()
+      /// <summary>
+      /// Property for collection of Patient
+      /// </summary>
+      /// <pdGenerated>Default opposite class collection property</pdGenerated>
+      public System.Collections.ArrayList Patient
       {
-         if (patient == null)
-            patient = new System.Collections.ArrayList();
-         return patient;
+         get
+         {
+            if (patient == null)
+               patient = new System.Collections.ArrayList();
+            return patient;
+         }
+         set
+         {
+            RemoveAllPatient();
+            if (value != null)
+            {
+               foreach (Patient oPatient in value)
+                  AddPatient(oPatient);
+            }
+         }
       }
       
-      
-      public void SetPatient(System.Collections.ArrayList newPatient)
-      {
-         RemoveAllPatient();
-         foreach (Patient oPatient in newPatient)
-            AddPatient(oPatient);
-      }
-      
-      
+      /// <summary>
+      /// Add a new Patient in the collection
+      /// </summary>
+      /// <pdGenerated>Default Add</pdGenerated>
       public void AddPatient(Patient newPatient)
       {
          if (newPatient == null)
@@ -114,11 +140,14 @@ namespace Model
          if (!this.patient.Contains(newPatient))
          {
             this.patient.Add(newPatient);
-            newPatient.SetDoctor(this);      
+            newPatient.Doctor = this;
          }
       }
       
-      
+      /// <summary>
+      /// Remove an existing Patient from the collection
+      /// </summary>
+      /// <pdGenerated>Default Remove</pdGenerated>
       public void RemovePatient(Patient oldPatient)
       {
          if (oldPatient == null)
@@ -127,11 +156,14 @@ namespace Model
             if (this.patient.Contains(oldPatient))
             {
                this.patient.Remove(oldPatient);
-               oldPatient.SetDoctor((Doctor)null);
+               oldPatient.Doctor = null;
             }
       }
       
-      
+      /// <summary>
+      /// Remove all instances of Patient from the collection
+      /// </summary>
+      /// <pdGenerated>Default removeAll</pdGenerated>
       public void RemoveAllPatient()
       {
          if (patient != null)
@@ -141,12 +173,10 @@ namespace Model
                tmpPatient.Add(oldPatient);
             patient.Clear();
             foreach (Patient oldPatient in tmpPatient)
-               oldPatient.SetDoctor((Doctor)null);
+               oldPatient.Doctor = null;
             tmpPatient.Clear();
          }
       }
-   
-      private Specialty Specialty;
    
    }
 }

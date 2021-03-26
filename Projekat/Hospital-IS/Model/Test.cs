@@ -10,10 +10,10 @@ namespace Model
 {
    public class Test
    {
-      private String Diagnosis;
-      private DateTime SampleDate;
-      private String TestType;
-      private String Result;
+      private String diagnosis;
+      private DateTime sampleDate;
+      private String testType;
+      private String result;
    
    }
 }

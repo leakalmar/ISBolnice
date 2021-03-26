@@ -1,27 +1,23 @@
-/***********************************************************************
- * Module:  Magacin.cs
- * Author:  Jovanovic
- * Purpose: Definition of the Class Magacin
- ***********************************************************************/
-
 using System;
+using Model;
+using System.Collections.Generic;
+
 
 namespace Storages
 {
    public class EquipStorage
    {
+      private String fileLocation;
+      
       public List<Equipment> GetAll()
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
       
       public void Save(Model.Equipment newEquipt)
       {
-         // TODO: implement
+         throw new NotImplementedException();
       }
-   
-      private String FileLocation;
    
    }
 }

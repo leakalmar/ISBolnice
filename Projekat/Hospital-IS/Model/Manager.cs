@@ -12,31 +12,27 @@ namespace Model
    {
       public Boolean AddRoom()
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
       
       public Boolean RemoveRoom()
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
       
       public void UpdateRoom()
       {
-         // TODO: implement
+         throw new NotImplementedException();
       }
       
       public Boolean MakeAppointment()
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
       
       public Boolean RemoveAppointment(Appointment appointment)
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
    
    }

@@ -1,58 +1,62 @@
-/***********************************************************************
- * Module:  Patient.cs
- * Author:  Asus
- * Purpose: Definition of the Class Patient
- ***********************************************************************/
-
 using System;
+using Model;
+using System.Collections.Generic;
+
 
 namespace Model
 {
    public class Patient : User
    {
+      private int chartId;
+      private String maritalStatus;
+      private User guarantor;
+      private DateTime fileDate;
+      private String employer;
+      private Boolean admitted;
+      private List<String> alergies;
+      private Boolean isGuest = false;
+      
       public Boolean IsAdmitted()
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
       
       public Boolean ReserveAppointment()
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
       
       public Boolean RemoveAppointment(DoctorAppointment appointment)
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
       
       public Boolean UpdateAppointment(Appointment appointment)
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
-   
+      
       public System.Collections.ArrayList doctorAppointment;
-      
-      
-      public System.Collections.ArrayList GetDoctorAppointment()
+
+      public System.Collections.ArrayList DoctorAppointment
       {
-         if (doctorAppointment == null)
-            doctorAppointment = new System.Collections.ArrayList();
-         return doctorAppointment;
+         get
+         {
+            if (doctorAppointment == null)
+               doctorAppointment = new System.Collections.ArrayList();
+            return doctorAppointment;
+         }
+         set
+         {
+            RemoveAllDoctorAppointment();
+            if (value != null)
+            {
+               foreach (DoctorAppointment oDoctorAppointment in value)
+                  AddDoctorAppointment(oDoctorAppointment);
+            }
+         }
       }
-      
-      
-      public void SetDoctorAppointment(System.Collections.ArrayList newDoctorAppointment)
-      {
-         RemoveAllDoctorAppointment();
-         foreach (DoctorAppointment oDoctorAppointment in newDoctorAppointment)
-            AddDoctorAppointment(oDoctorAppointment);
-      }
-      
-      
+
       public void AddDoctorAppointment(DoctorAppointment newDoctorAppointment)
       {
          if (newDoctorAppointment == null)
@@ -62,10 +66,9 @@ namespace Model
          if (!this.doctorAppointment.Contains(newDoctorAppointment))
          {
             this.doctorAppointment.Add(newDoctorAppointment);
-            newDoctorAppointment.SetPatient(this);      
+            newDoctorAppointment.Patient = this;
          }
       }
-      
       
       public void RemoveDoctorAppointment(DoctorAppointment oldDoctorAppointment)
       {
@@ -75,11 +78,10 @@ namespace Model
             if (this.doctorAppointment.Contains(oldDoctorAppointment))
             {
                this.doctorAppointment.Remove(oldDoctorAppointment);
-               oldDoctorAppointment.SetPatient((Patient)null);
+               oldDoctorAppointment.Patient = null;
             }
       }
-      
-      
+
       public void RemoveAllDoctorAppointment()
       {
          if (doctorAppointment != null)
@@ -89,47 +91,37 @@ namespace Model
                tmpDoctorAppointment.Add(oldDoctorAppointment);
             doctorAppointment.Clear();
             foreach (DoctorAppointment oldDoctorAppointment in tmpDoctorAppointment)
-               oldDoctorAppointment.SetPatient((Patient)null);
+               oldDoctorAppointment.Patient = null;
             tmpDoctorAppointment.Clear();
          }
       }
       public MedicalHistory medicalHistory;
       public Doctor doctor;
-      
-      
-      public Doctor GetDoctor()
+
+      public Doctor Doctor
       {
-         return doctor;
-      }
-      
-      
-      
-      public void SetDoctor(Doctor newDoctor)
-      {
-         if (this.doctor != newDoctor)
+         get
          {
-            if (this.doctor != null)
+            return doctor;
+         }
+         set
+         {
+            if (this.doctor == null || !this.doctor.Equals(value))
             {
-               Doctor oldDoctor = this.doctor;
-               this.doctor = null;
-               oldDoctor.RemovePatient(this);
-            }
-            if (newDoctor != null)
-            {
-               this.doctor = newDoctor;
-               this.doctor.AddPatient(this);
+               if (this.doctor != null)
+               {
+                  Doctor oldDoctor = this.doctor;
+                  this.doctor = null;
+                  oldDoctor.RemovePatient(this);
+               }
+               if (value != null)
+               {
+                  this.doctor = value;
+                  this.doctor.AddPatient(this);
+               }
             }
          }
       }
-   
-      private int ChartId;
-      private String MaritalStatus;
-      private User Guarantor;
-      private DateTime FileDate;
-      private String Employer;
-      private Boolean Admitted;
-      private List<String> Alergies;
-      private Boolean IsGuest = False;
    
    }
 }

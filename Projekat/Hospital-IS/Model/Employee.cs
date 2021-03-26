@@ -1,28 +1,46 @@
+// File:    Employee.cs
+// Author:  Asus
+// Created: Friday, March 26, 2021 5:40:08 PM
+// Purpose: Definition of Class Employee
+
 using System;
 
 namespace Model
 {
    public class Employee : User
    {
+      private Double salary;
+      private DateTime employmentDate;
+      
       public System.Collections.ArrayList workDay;
       
-      
-      public System.Collections.ArrayList GetWorkDay()
+      /// <summary>
+      /// Property for collection of WorkDay
+      /// </summary>
+      /// <pdGenerated>Default opposite class collection property</pdGenerated>
+      public System.Collections.ArrayList WorkDay
       {
-         if (workDay == null)
-            workDay = new System.Collections.ArrayList();
-         return workDay;
+         get
+         {
+            if (workDay == null)
+               workDay = new System.Collections.ArrayList();
+            return workDay;
+         }
+         set
+         {
+            RemoveAllWorkDay();
+            if (value != null)
+            {
+               foreach (WorkDay oWorkDay in value)
+                  AddWorkDay(oWorkDay);
+            }
+         }
       }
       
-      
-      public void SetWorkDay(System.Collections.ArrayList newWorkDay)
-      {
-         RemoveAllWorkDay();
-         foreach (WorkDay oWorkDay in newWorkDay)
-            AddWorkDay(oWorkDay);
-      }
-      
-      
+      /// <summary>
+      /// Add a new WorkDay in the collection
+      /// </summary>
+      /// <pdGenerated>Default Add</pdGenerated>
       public void AddWorkDay(WorkDay newWorkDay)
       {
          if (newWorkDay == null)
@@ -33,7 +51,10 @@ namespace Model
             this.workDay.Add(newWorkDay);
       }
       
-      
+      /// <summary>
+      /// Remove an existing WorkDay from the collection
+      /// </summary>
+      /// <pdGenerated>Default Remove</pdGenerated>
       public void RemoveWorkDay(WorkDay oldWorkDay)
       {
          if (oldWorkDay == null)
@@ -43,15 +64,15 @@ namespace Model
                this.workDay.Remove(oldWorkDay);
       }
       
-      
+      /// <summary>
+      /// Remove all instances of WorkDay from the collection
+      /// </summary>
+      /// <pdGenerated>Default removeAll</pdGenerated>
       public void RemoveAllWorkDay()
       {
          if (workDay != null)
             workDay.Clear();
       }
-   
-      private Double Salary;
-      private DateTime EmploymentDate;
    
    }
 }

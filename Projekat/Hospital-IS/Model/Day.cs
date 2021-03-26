@@ -1,16 +1,20 @@
+// File:    Day.cs
+// Author:  Asus
+// Created: Friday, March 26, 2021 5:40:08 PM
+// Purpose: Definition of Enum Day
+
 using System;
 
 namespace Model
 {
-   public class Day
+   public enum Day
    {
-      private EnumConstant Monday;
-      private EnumConstant Tuesday;
-      private EnumConstant Wednesday;
-      private EnumConstant Thursday;
-      private EnumConstant Friday;
-      private EnumConstant Saturday;
-      private EnumConstant Sunday;
-   
+      Monday,
+      Tuesday,
+      Wednesday,
+      Thursday,
+      Friday,
+      Saturday,
+      Sunday
    }
 }

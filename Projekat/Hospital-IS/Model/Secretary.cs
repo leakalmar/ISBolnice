@@ -12,25 +12,22 @@ namespace Model
    {
       public Patient RegisterPatient()
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
       
       public void UpdateInformation(Patient patient)
       {
-         // TODO: implement
+         throw new NotImplementedException();
       }
       
       public Boolean BookAppointment()
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
       
       public Boolean UpdateAppointment(Appointment appointment)
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
    
    }

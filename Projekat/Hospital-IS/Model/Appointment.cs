@@ -4,24 +4,51 @@ namespace Model
 {
    public class Appointment
    {
+      private DateTime date;
+      private double time;
+      private AppointmetType type;
+      private Boolean reserved;
+      
       public Boolean StartAppointment()
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
       
       public Boolean EndAppointment()
       {
-         // TODO: implement
-         return null;
+         throw new NotImplementedException();
       }
-   
+      
       public Room room;
-   
-      private DateTime Date;
-      private double Time;
-      private AppointmetType Type;
-      private Boolean Reserved;
+      
+      /// <summary>
+      /// Property for Room
+      /// </summary>
+      /// <pdGenerated>Default opposite class property</pdGenerated>
+      public Room Room
+      {
+         get
+         {
+            return room;
+         }
+         set
+         {
+            if (this.room == null || !this.room.Equals(value))
+            {
+               if (this.room != null)
+               {
+                  Room oldRoom = this.room;
+                  this.room = null;
+                  oldRoom.RemoveAppointment(this);
+               }
+               if (value != null)
+               {
+                  this.room = value;
+                  this.room.AddAppointment(this);
+               }
+            }
+         }
+      }
    
    }
 }

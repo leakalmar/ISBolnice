@@ -8,23 +8,23 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\USER\\.nuget\\packages\\": {},
+    "C:\\Users\\Asus\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\USER\\Desktop\\Faks\\SiMS\\ISBolnice\\Projekat\\Hospital-IS\\Hospital-IS.csproj",
+      "projectUniqueName": "C:\\Users\\Asus\\Desktop\\SIMS Projekat\\Projekat\\Hospital-IS\\Hospital-IS.csproj",
       "projectName": "Hospital-IS",
-      "projectPath": "C:\\Users\\USER\\Desktop\\Faks\\SiMS\\ISBolnice\\Projekat\\Hospital-IS\\Hospital-IS.csproj",
-      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\USER\\Desktop\\Faks\\SiMS\\ISBolnice\\Projekat\\Hospital-IS\\obj\\",
+      "projectPath": "C:\\Users\\Asus\\Desktop\\SIMS Projekat\\Projekat\\Hospital-IS\\Hospital-IS.csproj",
+      "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Asus\\Desktop\\SIMS Projekat\\Projekat\\Hospital-IS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

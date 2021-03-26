@@ -10,68 +10,74 @@ namespace Model
 {
    public class DoctorAppointment : Appointment
    {
+      private String cause;
+      private String detail;
+      
       public void SetAdmitted(Patient patient)
       {
-         // TODO: implement
+         throw new NotImplementedException();
       }
-   
+      
       public Patient patient;
       
-      
-      public Patient GetPatient()
+      /// <summary>
+      /// Property for Patient
+      /// </summary>
+      /// <pdGenerated>Default opposite class property</pdGenerated>
+      public Patient Patient
       {
-         return patient;
-      }
-      
-      
-      
-      public void SetPatient(Patient newPatient)
-      {
-         if (this.patient != newPatient)
+         get
          {
-            if (this.patient != null)
+            return patient;
+         }
+         set
+         {
+            if (this.patient == null || !this.patient.Equals(value))
             {
-               Patient oldPatient = this.patient;
-               this.patient = null;
-               oldPatient.RemoveDoctorAppointment(this);
-            }
-            if (newPatient != null)
-            {
-               this.patient = newPatient;
-               this.patient.AddDoctorAppointment(this);
+               if (this.patient != null)
+               {
+                  Patient oldPatient = this.patient;
+                  this.patient = null;
+                  oldPatient.RemoveDoctorAppointment(this);
+               }
+               if (value != null)
+               {
+                  this.patient = value;
+                  this.patient.AddDoctorAppointment(this);
+               }
             }
          }
       }
       public Doctor doctor;
       
-      
-      public Doctor GetDoctor()
+      /// <summary>
+      /// Property for Doctor
+      /// </summary>
+      /// <pdGenerated>Default opposite class property</pdGenerated>
+      public Doctor Doctor
       {
-         return doctor;
-      }
-      
-      
-      
-      public void SetDoctor(Doctor newDoctor)
-      {
-         if (this.doctor != newDoctor)
+         get
          {
-            if (this.doctor != null)
+            return doctor;
+         }
+         set
+         {
+            if (this.doctor == null || !this.doctor.Equals(value))
             {
-               Doctor oldDoctor = this.doctor;
-               this.doctor = null;
-               oldDoctor.RemoveDoctorAppointment(this);
-            }
-            if (newDoctor != null)
-            {
-               this.doctor = newDoctor;
-               this.doctor.AddDoctorAppointment(this);
+               if (this.doctor != null)
+               {
+                  Doctor oldDoctor = this.doctor;
+                  this.doctor = null;
+                  oldDoctor.RemoveDoctorAppointment(this);
+               }
+               if (value != null)
+               {
+                  this.doctor = value;
+                  this.doctor.AddDoctorAppointment(this);
+               }
             }
          }
       }
-   
-      private String Cause;
-      private String Detail;
    
    }
 }

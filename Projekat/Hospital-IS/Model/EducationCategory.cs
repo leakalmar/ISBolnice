@@ -8,13 +8,12 @@ using System;
 
 namespace Model
 {
-   public class EducationCategory
+   public enum EducationCategory
    {
-      private EnumConstant GradeSchool;
-      private EnumConstant HighSchool;
-      private EnumConstant Collage;
-      private EnumConstant Graduate;
-      private EnumConstant Degree;
-   
+      GradeSchool,
+      HighSchool,
+      Collage,
+      Graduate,
+      Degree
    }
 }

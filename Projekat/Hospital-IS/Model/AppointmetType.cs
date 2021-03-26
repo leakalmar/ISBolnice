@@ -1,13 +1,17 @@
+// File:    AppointmetType.cs
+// Author:  Asus
+// Created: Friday, March 26, 2021 5:40:08 PM
+// Purpose: Definition of Enum AppointmetType
+
 using System;
 
 namespace Model
 {
-   public class AppointmetType
+   public enum AppointmetType
    {
-      private EnumConstant Operation;
-      private EnumConstant CheckUp;
-      private EnumConstant Renovation;
-      private EnumConstant EquipTransfer;
-   
+      Operation,
+      CheckUp,
+      Renovation,
+      EquipTransfer
    }
 }
