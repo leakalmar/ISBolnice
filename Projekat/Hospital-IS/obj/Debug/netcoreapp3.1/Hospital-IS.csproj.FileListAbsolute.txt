@@ -36,29 +36,3 @@ D:\Users (D)\Desktop\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hosp
 D:\Users (D)\Desktop\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.dll
 D:\Users (D)\Desktop\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.pdb
 D:\Users (D)\Desktop\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.genruntimeconfig.cache
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\bin\Debug\netcoreapp3.1\Hospital-IS.exe
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\bin\Debug\netcoreapp3.1\Hospital-IS.deps.json
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\bin\Debug\netcoreapp3.1\Hospital-IS.runtimeconfig.json
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\bin\Debug\netcoreapp3.1\Hospital-IS.runtimeconfig.dev.json
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\bin\Debug\netcoreapp3.1\Hospital-IS.dll
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\bin\Debug\netcoreapp3.1\Hospital-IS.pdb
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.csprojAssemblyReference.cache
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\MainWindow.g.cs
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\App.g.cs
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS_MarkupCompile.cache
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS_MarkupCompile.lref
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\MainWindow.baml
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.g.resources
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.AssemblyInfoInputs.cache
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.AssemblyInfo.cs
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.csproj.CoreCompileInputs.cache
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.dll
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.pdb
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.genruntimeconfig.cache
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Window1.g.cs
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Window1.baml
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Rooms.g.cs
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Rooms.baml
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\AddNewRoom.g.cs
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\AddNewRoom.baml
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\UpdateRoom.g.cs
