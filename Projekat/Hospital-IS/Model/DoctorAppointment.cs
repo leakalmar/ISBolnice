@@ -1,29 +1,24 @@
-/***********************************************************************
- * Module:  Appointment.cs
- * Author:  Asus
- * Purpose: Definition of the Class Appointment
- ***********************************************************************/
-
 using System;
 
 namespace Model
 {
    public class DoctorAppointment : Appointment
    {
-      private String cause;
-      private String detail;
+      public Patient patient { get; set; }
+      public Doctor doctor{ get; set; }
+    private String cause { get; set; }
+        private String detail { get; set; }
+
+        public DoctorAppointment()
+        {
+
+        }
       
       public void SetAdmitted(Patient patient)
       {
          throw new NotImplementedException();
       }
       
-      public Patient patient;
-      
-      /// <summary>
-      /// Property for Patient
-      /// </summary>
-      /// <pdGenerated>Default opposite class property</pdGenerated>
       public Patient Patient
       {
          get
@@ -48,12 +43,7 @@ namespace Model
             }
          }
       }
-      public Doctor doctor;
       
-      /// <summary>
-      /// Property for Doctor
-      /// </summary>
-      /// <pdGenerated>Default opposite class property</pdGenerated>
       public Doctor Doctor
       {
          get

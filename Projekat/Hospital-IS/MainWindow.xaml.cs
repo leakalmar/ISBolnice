@@ -23,6 +23,7 @@ namespace Hospital_IS
         public MainWindow()
         {
             InitializeComponent();
+            new View.DoctorHomePage().Show();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

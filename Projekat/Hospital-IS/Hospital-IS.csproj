@@ -10,10 +10,19 @@
   <ItemGroup>
     <None Remove="hospital.png" />
     <None Remove="hospital2.png" />
+    <None Remove="View\doctor.jpg" />
+    <None Remove="View\maximize.png" />
+    <None Remove="View\minimize.png" />
+    <None Remove="View\minimize2.png" />
+    <None Remove="View\x-icon.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="hospital.png" />
+    <Resource Include="View\doctor.jpg" />
+    <Resource Include="View\maximize.png" />
+    <Resource Include="View\minimize.png" />
+    <Resource Include="View\x-icon.png" />
   </ItemGroup>
 
 </Project>

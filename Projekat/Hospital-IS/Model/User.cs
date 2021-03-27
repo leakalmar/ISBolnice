@@ -10,18 +10,28 @@ namespace Model
 {
    public class User
    {
-      private EducationCategory education;
-      private int id;
-      private String name;
-      private String surname;
-      private DateTime birthDate;
-      private String phone;
-      private String email;
-      private String gender;
-      private String relationship;
-      private String password;
-      
-      public Boolean LogIn()
+        public EducationCategory education { get; set; }
+        public int Id { get; set; }
+        public String Name { get; set; }
+        public String Surname { get; set; }
+        public DateTime BirthDate { get; set; }
+        public String Phone { get; set; }
+        public String Email { get; set; }
+        public String Gender { get; set; }
+        public String Relationship { get; set; }
+        public String Password { get; set; }
+
+        public User(int id, string name, string surname, DateTime birthDate,string email, string password)
+       {
+            this.Id = id;
+            this.Name = name;
+            this.Surname = surname;
+            this.BirthDate = birthDate;
+            this.Email = email;
+            this.Password = password;
+       }
+
+        public Boolean LogIn()
       {
          throw new NotImplementedException();
       }
@@ -37,11 +47,7 @@ namespace Model
       }
       
       public Hospital hospital;
-      
-      /// <summary>
-      /// Property for Hospital
-      /// </summary>
-      /// <pdGenerated>Default opposite class property</pdGenerated>
+     
       public Hospital Hospital
       {
          get

@@ -10,7 +10,8 @@ namespace Storages
       
       public List<Appointment> GetAllByPatient(Patient patient)
       {
-         throw new NotImplementedException();
+            List<Appointment> all = new List<Appointment>();
+            return all;
       }
       
       public List<Appointment> GetAllByDoctor(Doctor doctor)
