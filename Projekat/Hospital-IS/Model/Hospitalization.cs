@@ -1,18 +1,21 @@
-// File:    Hospitalization.cs
-// Author:  Asus
-// Created: Friday, March 26, 2021 5:40:08 PM
-// Purpose: Definition of Class Hospitalization
 
 using System;
 
 namespace Model
 {
-   public class Hospitalization
-   {
-      private DateTime admissionDate;
-      private DateTime releaseDate;
-      private String detail;
-      private Room room;
-   
-   }
+    public class Hospitalization
+    {
+        public DateTime AdmissionDate { get; set; }
+        public DateTime ReleaseDate { get; set; }
+        public String Detail { get; set; }
+        public Room Room { get; set; }
+
+        public Hospitalization(DateTime admissionDate, DateTime releaseDate, string detail, Room room)
+        {
+            AdmissionDate = admissionDate;
+            ReleaseDate = releaseDate;
+            Detail = detail;
+            Room = room;
+        }
+    }
 }
