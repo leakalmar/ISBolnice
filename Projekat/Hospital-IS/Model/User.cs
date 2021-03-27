@@ -1,72 +1,87 @@
-/***********************************************************************
- * Module:  Person.cs
- * Author:  Asus
- * Purpose: Definition of the Class Person
- ***********************************************************************/
-
 using System;
 
 namespace Model
 {
-   public class User
-   {
-      private EducationCategory education;
-      private int id;
-      private String name;
-      private String surname;
-      private DateTime birthDate;
-      private String phone;
-      private String email;
-      private String gender;
-      private String relationship;
-      private String password;
+    public class User
+    {
+        public EducationCategory education { get; set; }
+        public int Id { get; set; }
+        public String Name { get; set; }
+        public String Surname { get; set; }
+        public DateTime BirthDate { get; set; }
+        public String Phone { get; set; }
+        public String Email { get; set; }
+        public String Gender { get; set; }
+        public String Relationship { get; set; }
+        public String Password { get; set; }
+        public String Address { get; set; }
 
+        public User(int id, string name, string surname, DateTime birthDate, string email, string password, string address)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Surname = surname;
+            this.BirthDate = birthDate;
+            this.Email = email;
+            this.Password = password;
+            this.Address = address;
+        }
+
+        public User(int id, string name, string surname, DateTime birthDate, string email, string password)
+        {
+            Id = id;
+            Name = name;
+            Surname = surname;
+            BirthDate = birthDate;
+            Email = email;
+            Password = password;
+        }
+
+        public User()
+        {
+        }
 
         public Boolean LogIn()
-      {
-         throw new NotImplementedException();
-      }
-      
-      public Boolean ChangePassword()
-      {
-         throw new NotImplementedException();
-      }
-      
-      public void ViewProfile()
-      {
-         throw new NotImplementedException();
-      }
-      
-      public Hospital hospital;
-      
-      /// <summary>
-      /// Property for Hospital
-      /// </summary>
-      /// <pdGenerated>Default opposite class property</pdGenerated>
-      public Hospital Hospital
-      {
-         get
-         {
-            return hospital;
-         }
-         set
-         {
-            if (this.hospital == null || !this.hospital.Equals(value))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Boolean ChangePassword()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ViewProfile()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Hospital hospital;
+
+        public Hospital Hospital
+        {
+            get
             {
-               if (this.hospital != null)
-               {
-                  Hospital oldHospital = this.hospital;
-                  this.hospital = null;
-                  oldHospital.RemoveUser(this);
-               }
-               if (value != null)
-               {
-                  this.hospital = value;
-                  this.hospital.AddUser(this);
-               }
+                return hospital;
             }
-         }
-      }
-   
-   }
+            set
+            {
+                if (this.hospital == null || !this.hospital.Equals(value))
+                {
+                    if (this.hospital != null)
+                    {
+                        Hospital oldHospital = this.hospital;
+                        this.hospital = null;
+                        oldHospital.RemoveUser(this);
+                    }
+                    if (value != null)
+                    {
+                        this.hospital = value;
+                        this.hospital.AddUser(this);
+                    }
+                }
+            }
+        }
+
+    }
 }

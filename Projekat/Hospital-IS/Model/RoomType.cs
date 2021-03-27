@@ -1,11 +1,9 @@
-using System;
-
 namespace Model
 {
-   public enum RoomType
-   {
-      RecoveryRoom,
-      ConsultingRoom,
-      OperationRoom
-   }
+    public enum RoomType
+    {
+        RecoveryRoom,
+        ConsultingRoom,
+        OperationRoom
+    }
 }

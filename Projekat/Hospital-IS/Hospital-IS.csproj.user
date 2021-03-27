@@ -7,16 +7,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="View\AllAppointments.xaml.cs">
+    <Compile Update="PatientRegistration.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\AppointmentPatient.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\DocumentationPatient.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\HomePatient.xaml.cs">
+    <Compile Update="SecretaryMainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -24,16 +18,10 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\AllAppointments.xaml">
+    <Page Update="PatientRegistration.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\AppointmentPatient.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\DocumentationPatient.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\HomePatient.xaml">
+    <Page Update="SecretaryMainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
