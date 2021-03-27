@@ -17,3 +17,34 @@ C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1
 C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.dll
 C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.pdb
 C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.genruntimeconfig.cache
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\bin\Debug\netcoreapp3.1\Hospital-IS.exe
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\bin\Debug\netcoreapp3.1\Hospital-IS.deps.json
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\bin\Debug\netcoreapp3.1\Hospital-IS.runtimeconfig.json
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\bin\Debug\netcoreapp3.1\Hospital-IS.runtimeconfig.dev.json
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\bin\Debug\netcoreapp3.1\Hospital-IS.dll
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\bin\Debug\netcoreapp3.1\Hospital-IS.pdb
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.csprojAssemblyReference.cache
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\PatientRegistration.g.cs
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\SecretaryMainWindow.g.cs
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\AllAppointments.g.cs
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\AppointmentPatient.g.cs
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\DocumentationPatient.g.cs
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\HomePatient.g.cs
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\App.g.cs
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS_MarkupCompile.cache
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS_MarkupCompile.lref
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\MainWindow.baml
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\PatientRegistration.baml
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\SecretaryMainWindow.baml
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\AllAppointments.baml
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\AppointmentPatient.baml
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\DocumentationPatient.baml
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\HomePatient.baml
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.g.resources
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.AssemblyInfoInputs.cache
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.AssemblyInfo.cs
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.csproj.CoreCompileInputs.cache
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.dll
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.pdb
+C:\Users\USER\Desktop\Faks\SiMS\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.genruntimeconfig.cache
