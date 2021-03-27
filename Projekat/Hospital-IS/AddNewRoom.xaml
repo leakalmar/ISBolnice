@@ -22,7 +22,7 @@
 
         <CheckBox x:Name="check1" Content="CheckBox" HorizontalAlignment="Left" Margin="250,168,0,0" VerticalAlignment="Top"/>
         <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="70,284,0,0" Text="Tip sobe" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="250,284,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="combo1" HorizontalAlignment="Left" Margin="250,284,0,0" VerticalAlignment="Top" Width="120"/>
         <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="70,228,0,0" Text="Renoviranje" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="250,228,0,0" VerticalAlignment="Top"/>
         <Button x:Name="potvrdi"   Content="Potvrdi" Click="Button_Click" HorizontalAlignment="Left" Margin="92,355,0,0" VerticalAlignment="Top" Width="75" Height="20" FontSize="13" RenderTransformOrigin="-0.055,0.725"/>

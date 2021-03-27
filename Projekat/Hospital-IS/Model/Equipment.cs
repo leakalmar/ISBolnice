@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using System;
+using System.Collections;
 
 namespace Model
 {
@@ -16,12 +17,24 @@ namespace Model
       private int quantity;
       
       public System.Collections.ArrayList room;
-      
-      /// <summary>
-      /// Property for collection of Room
-      /// </summary>
-      /// <pdGenerated>Default opposite class collection property</pdGenerated>
-      public System.Collections.ArrayList Room
+
+        public Equipment(EquiptType equipType, int equiptId, string name, int quantity, ArrayList room)
+        {
+            this.equipType = equipType;
+            this.equiptId = equiptId;
+            this.name = name;
+            this.quantity = quantity;
+            this.room = room;
+        }
+
+        public EquiptType EquiptType { get; set; }
+        public int EquiptId { get; set; }
+        public String Name { get; set; }
+        public int Quantity { get; set; }
+
+
+        
+        public System.Collections.ArrayList Room
       {
          get
          {
@@ -40,10 +53,7 @@ namespace Model
          }
       }
       
-      /// <summary>
-      /// Add a new Room in the collection
-      /// </summary>
-      /// <pdGenerated>Default Add</pdGenerated>
+      
       public void AddRoom(Room newRoom)
       {
          if (newRoom == null)
@@ -57,10 +67,7 @@ namespace Model
          }
       }
       
-      /// <summary>
-      /// Remove an existing Room from the collection
-      /// </summary>
-      /// <pdGenerated>Default Remove</pdGenerated>
+      
       public void RemoveRoom(Room oldRoom)
       {
          if (oldRoom == null)
@@ -73,10 +80,7 @@ namespace Model
             }
       }
       
-      /// <summary>
-      /// Remove all instances of Room from the collection
-      /// </summary>
-      /// <pdGenerated>Default removeAll</pdGenerated>
+     
       public void RemoveAllRoom()
       {
          if (room != null)
