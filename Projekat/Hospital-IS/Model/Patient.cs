@@ -5,16 +5,15 @@ namespace Model
 {
     public class Patient : User
     {
-        public int chartId { get; set; }
-        public String maritalStatus { get; set; }
-        public DateTime fileDate { get; set; }
-        public String employer { get; set; }
-        public Boolean admitted { get; set; }
-        public List<String> alergies { get; set; }
+        public int ChartId { get; set; }
+        public DateTime FileDate { get; set; }
+        public String Employer { get; set; }
+        public Boolean Admitted { get; set; }
+        public List<String> Alergies { get; set; }
 
-        public Boolean isGuest = false;
+        public Boolean IsGuest = false;
 
-        public Patient(int id, string name, string surname, DateTime birthDate, string adress, string email, string password, int chartId, ) : base(id, name, surname, birthDate, address, email, password)
+        public Patient(int id, string name, string surname, DateTime birthDate, string address, string email, string password, int chartId) : base(id, name, surname, birthDate, address, email, password)
         {
 
         }

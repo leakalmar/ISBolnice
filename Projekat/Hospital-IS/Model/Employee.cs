@@ -1,8 +1,3 @@
-// File:    Employee.cs
-// Author:  Asus
-// Created: Friday, March 26, 2021 5:40:08 PM
-// Purpose: Definition of Class Employee
-
 using System;
 using System.Collections.Generic;
 
@@ -14,7 +9,7 @@ namespace Model
         public DateTime EmploymentDate { get; set; }
         public List<WorkDay> workDay { get; set; }
 
-        public Employee(int id, string name, string surname, DateTime birthDate, string email, string password, double salary, DateTime employmentDate, List<WorkDay> workDays) : base(id, name, surname, birthDate, email, password)
+        public Employee(int id, string name, string surname, DateTime birthDate, string email, string password, string address, double salary, DateTime employmentDate, List<WorkDay> workDays) : base(id, name, surname, birthDate, email, password, address)
         {
             this.Salary = salary;
             this.EmploymentDate = employmentDate;

@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Hospital_IS
 {
@@ -23,7 +11,8 @@ namespace Hospital_IS
         public MainWindow()
         {
             InitializeComponent();
-            new View.DoctorHomePage().Show();
+            SecretaryMainWindow s = new SecretaryMainWindow();
+            s.Show();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

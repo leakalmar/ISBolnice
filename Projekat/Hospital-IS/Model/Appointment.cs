@@ -11,11 +11,11 @@ namespace Model
 
         public Appointment(DateTime date, double time, AppointmetType type, bool reserved, Room room)
         {
-            this.Date = date;
-            this.Time = time;
-            this.Type = type;
-            this.Reserved = reserved;
-            this.Room = room;
+            Date = date;
+            Time = time;
+            Type = type;
+            Reserved = reserved;
+            Room = room;
         }
 
         public Boolean StartAppointment()
