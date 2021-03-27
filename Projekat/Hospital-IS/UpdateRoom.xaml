@@ -25,7 +25,7 @@
         <ComboBox HorizontalAlignment="Left" Margin="250,284,0,0" VerticalAlignment="Top" Width="120"/>
         <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="70,228,0,0" Text="Renoviranje" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="250,228,0,0" VerticalAlignment="Top"/>
-        <Button Content="Potvrdi" HorizontalAlignment="Left" Margin="92,355,0,0" VerticalAlignment="Top" Width="75" Height="20" FontSize="13" RenderTransformOrigin="-0.055,0.725" Click=""/>
+        <Button Content="Potvrdi" HorizontalAlignment="Left" Margin="92,355,0,0" VerticalAlignment="Top" Width="75" Height="20" FontSize="13" RenderTransformOrigin="-0.055,0.725" />
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="250,355,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.356,0.408" Width="75" Height="20" FontSize="13"/>
         <Button  BorderThickness="0" Foreground="White" Background="Transparent" Content="NAZAD" HorizontalAlignment="Left" Margin="33,52,0,0" VerticalAlignment="Top" Width="97" Height="21"/>
 

@@ -7,33 +7,21 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="AddNewRoom.xaml.cs">
+    <Compile Update="PatientRegistration.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Rooms.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UpdateRoom.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Window1.xaml.cs">
+    <Compile Update="SecretaryMainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="AddNewRoom.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Rooms.xaml">
+    <Page Update="PatientRegistration.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UpdateRoom.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Window1.xaml">
+    <Page Update="SecretaryMainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

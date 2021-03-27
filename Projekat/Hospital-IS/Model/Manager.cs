@@ -1,34 +1,33 @@
-/***********************************************************************
- * Module:  Upravnik.cs
- * Author:  Jovanovic
- * Purpose: Definition of the Class Upravnik
- ***********************************************************************/
-
 using System;
+using System.Collections.Generic;
 
 namespace Model
 {
-   public class Manager : Employee
-   {
-      public Boolean AddRoom(Room newroom)
-      {
+    public class Manager : Employee
+    {
+        public Manager(int id, string name, string surname, DateTime birthDate, string email, string password, string address, double salary, DateTime employmentDate, List<WorkDay> workDays) : base(id, name, surname, birthDate, email, password, address, salary, employmentDate, workDays)
+        {
+        }
+
+        public Boolean AddRoom(Room newroom)
+        {
             Hospital.AddRoom(newroom);
             return true;
         }
-      
-      public Boolean RemoveRoom(Room room)
-      {
+
+        public Boolean RemoveRoom(Room room)
+        {
             Hospital.RemoveRoom(room);
-         return true;
-      }
-      
-      public void UpdateRoom(Room room)
-      {
-        var rooms = new System.Collections.ArrayList();
+            return true;
+        }
+
+        public void UpdateRoom(Room room)
+        {
+            var rooms = new System.Collections.ArrayList();
             rooms = Hospital.room;
             foreach (Room r in rooms)
             {
-                if(r == room)
+                if (r == room)
                 {
                     r.RoomFloor = room.RoomFloor;
                     r.RoomIdFloor = room.RoomIdFloor;
@@ -38,16 +37,16 @@ namespace Model
             }
 
         }
-      
-      public Boolean MakeAppointment(Room room)
-      {
-         throw new NotImplementedException();
-      }
-      
-      public Boolean RemoveAppointment(Appointment appointment)
-      {
-         throw new NotImplementedException();
-      }
-   
-   }
+
+        public Boolean MakeAppointment(Room room)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Boolean RemoveAppointment(Appointment appointment)
+        {
+            throw new NotImplementedException();
+        }
+
+    }
 }
