@@ -10,22 +10,36 @@ namespace Model
 {
    public class Manager : Employee
    {
-      public Boolean AddRoom()
+      public Boolean AddRoom(Room newroom)
       {
-         throw new NotImplementedException();
+            Hospital.AddRoom(newroom);
+            return true;
+        }
+      
+      public Boolean RemoveRoom(Room room)
+      {
+            Hospital.RemoveRoom(room);
+         return true;
       }
       
-      public Boolean RemoveRoom()
+      public void UpdateRoom(Room room)
       {
-         throw new NotImplementedException();
-      }
+        var rooms = new System.Collections.ArrayList();
+            rooms = Hospital.room;
+            foreach (Room r in rooms)
+            {
+                if(r == room)
+                {
+                    r.RoomFloor = room.RoomFloor;
+                    r.RoomIdFloor = room.RoomIdFloor;
+                    r.IsFree = room.IsFree;
+                    r.Type = room.Type;
+                }
+            }
+
+        }
       
-      public void UpdateRoom()
-      {
-         throw new NotImplementedException();
-      }
-      
-      public Boolean MakeAppointment()
+      public Boolean MakeAppointment(Room room)
       {
          throw new NotImplementedException();
       }

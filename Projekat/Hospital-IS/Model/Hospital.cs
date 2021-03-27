@@ -80,6 +80,8 @@ namespace Model
             if (this.room.Contains(oldRoom))
                this.room.Remove(oldRoom);
       }
+
+      
       
       public void RemoveAllRoom()
       {

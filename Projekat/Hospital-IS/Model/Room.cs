@@ -10,19 +10,55 @@ namespace Model
 {
    public class Room
    {
-      private RoomType vrsta;
+      private RoomType type;
       private Boolean isFree;
       private Boolean isUsable;
       private int roomFloor;
       private int roomId;
       
       public System.Collections.ArrayList equipment;
-      
-      /// <summary>
-      /// Property for collection of Equipment
-      /// </summary>
-      /// <pdGenerated>Default opposite class collection property</pdGenerated>
-      public System.Collections.ArrayList Equipment
+
+
+
+        public int RoomFloor  
+        {
+            get { return roomFloor; }   
+            set { roomFloor = value; }  
+        }
+
+        public int RoomIdFloor
+        {
+            get { return roomId; }
+            set { roomId = value; }
+        }
+
+        public Boolean IsFree
+        {
+            get { return isFree; }
+            set { isFree = value; }
+        }
+
+        public Boolean IsUsable
+        {
+            get { return isUsable; }
+            set { isUsable = value; }
+        }
+
+        public RoomType Type
+        {
+            get; set;
+        }
+
+        public Room(RoomType type, bool isFree, bool isUsable, int roomFloor, int roomId)
+        {
+            this.type = type;
+            this.isFree = isFree;
+            this.isUsable = isUsable;
+            this.roomFloor = roomFloor;
+            this.roomId = roomId;
+        }
+
+        public System.Collections.ArrayList Equipment
       {
          get
          {

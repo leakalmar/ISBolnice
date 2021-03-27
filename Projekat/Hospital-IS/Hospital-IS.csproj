@@ -8,12 +8,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="director.jpg" />
+    <None Remove="door_open.png" />
+    <None Remove="employee.jpg" />
     <None Remove="hospital.png" />
     <None Remove="hospital2.png" />
+    <None Remove="other_facilities.png" />
+    <None Remove="request.png" />
+    <None Remove="room_icon.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="director.jpg" />
+    <Resource Include="door_open.png" />
+    <Resource Include="employee.jpg" />
     <Resource Include="hospital.png" />
+    <Resource Include="other_facilities.png" />
+    <Resource Include="request.png" />
+    <Resource Include="room_icon.jpg" />
   </ItemGroup>
 
 </Project>
