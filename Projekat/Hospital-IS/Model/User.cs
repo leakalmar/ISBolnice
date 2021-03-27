@@ -20,8 +20,9 @@ namespace Model
       private String gender;
       private String relationship;
       private String password;
-      
-      public Boolean LogIn()
+
+
+        public Boolean LogIn()
       {
          throw new NotImplementedException();
       }

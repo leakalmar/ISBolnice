@@ -15,8 +15,8 @@ namespace Model
       private Boolean admitted;
       private List<String> alergies;
       private Boolean isGuest = false;
-      
-      public Boolean IsAdmitted()
+
+       public Boolean IsAdmitted()
       {
          throw new NotImplementedException();
       }
