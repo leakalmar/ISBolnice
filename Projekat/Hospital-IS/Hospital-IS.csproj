@@ -12,8 +12,11 @@
     <None Remove="employee.jpg" />
     <None Remove="hospital.png" />
     <None Remove="hospital2.png" />
-    <None Remove="other_facilities.png" />
-    <None Remove="room_icon.jpg" />
+    <None Remove="View\bookmark.png" />
+    <None Remove="View\checkmark.png" />
+    <None Remove="View\pill.png" />
+    <None Remove="View\simona.jpg" />
+    <None Remove="View\tube.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,8 +25,11 @@
     <Resource Include="hospital.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="other_facilities.png" />
-    <Resource Include="room_icon.jpg" />
+    <Resource Include="View\bookmark.png" />
+    <Resource Include="View\checkmark.png" />
+    <Resource Include="View\pill.png" />
+    <Resource Include="View\simona.jpg" />
+    <Resource Include="View\tube.png" />
   </ItemGroup>
 
 </Project>

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\App.xaml
-71537599711
+111964984961
 
-37-57891642
+42-613799921
 192-1533232326
-AddNewRoom.xaml;MainWindow.xaml;PatientRegistration.xaml;Rooms.xaml;SecretaryMainWindow.xaml;UpdateRoom.xaml;Window1.xaml;
+AddNewRoom.xaml;MainWindow.xaml;PatientRegistration.xaml;Rooms.xaml;SecretaryMainWindow.xaml;UpdateRoom.xaml;View\DoctorHomePage.xaml;View\ExitMess.xaml;View\HomePage.xaml;View\PatientChart.xaml;Window1.xaml;
 
-True
+False
 

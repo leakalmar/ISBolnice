@@ -4,15 +4,17 @@ namespace Model
 {
     public class Appointment
     {
-        public DateTime Date { get; set; }
-        public double Time { get; set; }
+        public DateTime DateAndTime { get; set; }
+        public String Date {get; set; }
+        public TimeSpan Time { get; set; }
         public AppointmetType Type { get; set; }
         public Boolean Reserved { get; set; }
 
-        public Appointment(DateTime date, double time, AppointmetType type, bool reserved, Room room)
+        public Appointment(DateTime date, AppointmetType type, bool reserved, Room room)
         {
-            Date = date;
-            Time = time;
+            DateAndTime = date;
+            Date = date.ToShortDateString();
+            Time = date.TimeOfDay;
             Type = type;
             Reserved = reserved;
             Room = room;
