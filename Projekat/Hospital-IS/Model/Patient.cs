@@ -1,10 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Model
 {
-    public class Patient : User
+    public class Patient : User, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
         public int ChartId { get; set; }
         public DateTime FileDate { get; set; }
         public String Employer { get; set; }
@@ -15,7 +24,7 @@ namespace Model
 
         public Patient(int id, string name, string surname, DateTime birthDate, string address, string email, string password, int chartId) : base(id, name, surname, birthDate, address, email, password)
         {
-
+            
         }
 
         public List<DoctorAppointment> doctorAppointment { get; set; }

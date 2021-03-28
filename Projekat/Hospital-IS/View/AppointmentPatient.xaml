@@ -83,9 +83,7 @@
                     <ColumnDefinition Width="300"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Izaberite lekara:" Grid.Column="0"  HorizontalAlignment="Left" FontSize="18" Margin="10,30,0,30" Background="{x:Null}"/>
-                <ComboBox Margin="5,33,45,33" Grid.Column="1" Height="28" >
-                    <ComboBoxItem>Doctor 1</ComboBoxItem>
-                </ComboBox>
+                <ComboBox x:Name="Doctors" IsEditable="False" ItemsSource="{Binding Path=TempDoctors}" DisplayMemberPath="Name"  Margin="5,33,45,33" Grid.Column="1" Height="28" />
             </Grid>
             <Grid Height="61">
                 <Grid.ColumnDefinitions>
@@ -93,8 +91,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Izaberite datum pregleda:" Grid.Column="0"  HorizontalAlignment="Left" FontSize="18" Margin="10,30,0,0" Background="{x:Null}"/>
-                <DatePicker Grid.Column="1" Margin="5,33,427,0" FontSize="14"/>
-                <Button x:Name="showApp" Grid.Column="1" Margin="383,33,97,0" Foreground="#FFFDFDFD" Cursor="Hand">
+                <DatePicker x:Name="Calendar" Grid.Column="1" Margin="5,33,427,0" FontSize="14"/>
+                <Button x:Name="showApp" Grid.Column="1" Margin="383,33,97,0" Foreground="#FFFDFDFD" Cursor="Hand" Click="showAvailableApp">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="Black"/>
@@ -105,14 +103,14 @@
                 </Button>
             </Grid>
             <Label Content="Izaberite termin pregleda:" FontSize="18"  Margin="10,60,0,0" Background="{x:Null}"/>
-            <DataGrid Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Margin="110,10,100,50" Height="233" Width="600">
+            <DataGrid x:Name="listOfAppointments" CanUserResizeRows="False" Grid.Column="3" ItemsSource="{Binding AvailableAppoitments, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="2" Margin="110,10,100,50" AutoGenerateColumns="False" Height="233" Width="600">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Vreme" Width="200" IsReadOnly="True"/>
-                    <DataGridCheckBoxColumn Header="Rezervisan" Width="*"/>
+                    <DataGridTextColumn Header="Vreme i datum" Width="300" Binding="{Binding Date, StringFormat=f}" CanUserResize="False" IsReadOnly="True"/>
+                    <DataGridCheckBoxColumn Header="Rezervisan" Binding="{Binding Reserved}" Width="*" CanUserResize="False"/>
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Button x:Name="reserve" Margin="250,0,250,30" FontSize="24" Foreground="#FFF7F6F6" Cursor="Hand">
+            <Button x:Name="reserve" Margin="250,0,250,30" FontSize="24" Foreground="#FFF7F6F6" Cursor="Hand" Click="showAvailableApp">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>

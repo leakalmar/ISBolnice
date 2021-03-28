@@ -13,6 +13,8 @@ namespace Model
         {
         }
 
+
+
         public void ViewPatientDocuments(Patient patient)
         {
             throw new NotImplementedException();
