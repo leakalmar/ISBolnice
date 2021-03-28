@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Model
 {
@@ -9,8 +10,9 @@ namespace Model
 
         public Specialty Specialty { get; set; }
 
-        public Doctor(int id, string name, string surname, DateTime birthDate, string email, string password, string address, double salary, DateTime employmentDate, List<WorkDay> workDays) : base(id, name, surname, birthDate, email, password, address, salary, employmentDate, workDays)
+        public Doctor(int id, string name, string surname, DateTime birthDate, string email, string password, string address, double salary, DateTime employmentDate, List<WorkDay> workDays, Specialty spec) : base(id, name, surname, birthDate, email, password, address, salary, employmentDate, workDays)
         {
+            this.Specialty = spec;
         }
 
 
@@ -30,38 +32,20 @@ namespace Model
             throw new NotImplementedException();
         }
 
-        public System.Collections.ArrayList doctorAppointment;
 
 
-        public System.Collections.ArrayList DoctorAppointment
-        {
-            get
-            {
-                if (doctorAppointment == null)
-                    doctorAppointment = new System.Collections.ArrayList();
-                return doctorAppointment;
-            }
-            set
-            {
-                RemoveAllDoctorAppointment();
-                if (value != null)
-                {
-                    foreach (DoctorAppointment oDoctorAppointment in value)
-                        AddDoctorAppointment(oDoctorAppointment);
-                }
-            }
-        }
+        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
 
 
         public void AddDoctorAppointment(DoctorAppointment newDoctorAppointment)
         {
             if (newDoctorAppointment == null)
                 return;
-            if (this.doctorAppointment == null)
-                this.doctorAppointment = new System.Collections.ArrayList();
-            if (!this.doctorAppointment.Contains(newDoctorAppointment))
+            if (this.DoctorAppointment == null)
+                this.DoctorAppointment = new ObservableCollection<DoctorAppointment>();
+            if (!this.DoctorAppointment.Contains(newDoctorAppointment))
             {
-                this.doctorAppointment.Add(newDoctorAppointment);
+                this.DoctorAppointment.Add(newDoctorAppointment);
                 newDoctorAppointment.Doctor = this;
             }
         }
@@ -71,10 +55,10 @@ namespace Model
         {
             if (oldDoctorAppointment == null)
                 return;
-            if (this.doctorAppointment != null)
-                if (this.doctorAppointment.Contains(oldDoctorAppointment))
+            if (this.DoctorAppointment != null)
+                if (this.DoctorAppointment.Contains(oldDoctorAppointment))
                 {
-                    this.doctorAppointment.Remove(oldDoctorAppointment);
+                    this.DoctorAppointment.Remove(oldDoctorAppointment);
                     oldDoctorAppointment.Doctor = null;
                 }
         }
@@ -82,12 +66,12 @@ namespace Model
 
         public void RemoveAllDoctorAppointment()
         {
-            if (doctorAppointment != null)
+            if (DoctorAppointment != null)
             {
                 System.Collections.ArrayList tmpDoctorAppointment = new System.Collections.ArrayList();
-                foreach (DoctorAppointment oldDoctorAppointment in doctorAppointment)
+                foreach (DoctorAppointment oldDoctorAppointment in DoctorAppointment)
                     tmpDoctorAppointment.Add(oldDoctorAppointment);
-                doctorAppointment.Clear();
+                DoctorAppointment.Clear();
                 foreach (DoctorAppointment oldDoctorAppointment in tmpDoctorAppointment)
                     oldDoctorAppointment.Doctor = null;
                 tmpDoctorAppointment.Clear();

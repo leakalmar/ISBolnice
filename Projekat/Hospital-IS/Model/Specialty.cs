@@ -4,20 +4,13 @@ namespace Model
 {
     public class Specialty
     {
-        public String role { get; set; }
+        public String Role { get; set; }
 
-        public Doctor doctor;
+        public Doctor Doctor { get; set; }
 
-        public Doctor Doctor
+        public Specialty(string role)
         {
-            get
-            {
-                return doctor;
-            }
-            set
-            {
-                this.doctor = value;
-            }
+            this.Role = role;
         }
 
     }
