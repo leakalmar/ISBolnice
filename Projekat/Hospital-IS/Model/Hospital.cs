@@ -15,6 +15,25 @@ namespace Model
         public List<Room> allRooms { get; set; }
         public List<User> allEmployees { get; set; }
 
+
+        private static Hospital instance = null;
+
+        private Hospital()
+        {
+        }
+
+        public static Hospital Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Hospital();
+                }
+                return instance;
+            }
+        }
+
         public Hospital(string name, string city, string country, string address)
         {
             Name = name;
@@ -71,6 +90,7 @@ namespace Model
 
         public void AddRoom(Room newRoom)
         {
+           
             if (newRoom == null)
                 return;
             if (this.room == null)

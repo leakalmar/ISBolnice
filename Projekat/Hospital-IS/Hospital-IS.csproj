@@ -8,14 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="director.jpg" />
+    <None Remove="employee.jpg" />
     <None Remove="hospital.png" />
     <None Remove="hospital2.png" />
+    <None Remove="other_facilities.png" />
+    <None Remove="room_icon.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="director.jpg" />
+    <Resource Include="employee.jpg" />
     <Resource Include="hospital.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="other_facilities.png" />
+    <Resource Include="room_icon.jpg" />
   </ItemGroup>
 
 </Project>

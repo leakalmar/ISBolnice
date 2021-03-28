@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Model;
 
 namespace Hospital_IS
 {
@@ -17,6 +18,15 @@ namespace Hospital_IS
     /// </summary>
     public partial class UpdateRoom : Window
     {
-       
+        private Room currentRoom;
+        public UpdateRoom(Room room)
+        {
+            InitializeComponent();
+            this.currentRoom = room;
+            textbox1.Text = Convert.ToString(currentRoom.RoomFloor);
+            textbox2.Text = Convert.ToString(currentRoom.RoomId);
+            
+           
+        }
     }
 }

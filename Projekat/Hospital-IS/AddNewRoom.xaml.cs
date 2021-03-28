@@ -24,22 +24,35 @@ namespace Hospital_IS
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        
+
+
+        private void potvrdi_Click(object sender, RoutedEventArgs e)
         {
-            int brojSobe = int.Parse(text1.Text);
+            
+            int roomId = Convert.ToInt32(text1.Text);
             bool zauzeto = (bool)check1.IsChecked;
+            bool renoviranje = (bool)check2.IsChecked;
+            int roomFloor = Convert.ToInt32(FloorId.Text);
             RoomType tip;
             if (combo1.Text.Equals("Soba za odmor"))
             {
                 tip = RoomType.RecoveryRoom;
             }
-            else if(combo1.Text.Equals("Operaciona soba"))
+            else if (combo1.Text.Equals("Operaciona soba"))
             {
                 tip = RoomType.OperationRoom;
-            } else 
+            }
+            else
             {
                 tip = RoomType.ConsultingRoom;
             }
+            Room newRoom = new Room(tip,zauzeto, renoviranje,roomFloor,roomId);
+            Manager.Instance.AddRoom(newRoom);
+            Rooms.Room.Add(newRoom);
+            this.Close();
+           
+            
         }
     }
 }

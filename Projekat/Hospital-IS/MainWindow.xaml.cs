@@ -11,8 +11,8 @@ namespace Hospital_IS
         public MainWindow()
         {
             InitializeComponent();
-            SecretaryMainWindow s = new SecretaryMainWindow();
-            s.Show();
+            
+           
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

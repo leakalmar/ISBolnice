@@ -20,9 +20,9 @@
     <Grid>
 
 
-        <DataGrid x:Name="DateGridRooms" IsReadOnly="True" 
-                  SelectionMode="Single" 
-                  Height="412" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="272"  SelectionChanged="DateGridRooms_SelectionChanged" Margin="0,82,10,0" Background="#FFC5DBDF" AutoGenerateColumns="False" >
+        <DataGrid x:Name="DateGridRooms" IsReadOnly="True" ItemsSource="{Binding Room}" AlternatingRowBackground="Gray"
+                  SelectionMode="Single"
+                  Height="412" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="265"  SelectionChanged="DateGridRooms_SelectionChanged" Margin="0,82,10,0" Background="#FFC5DBDF" AutoGenerateColumns="False" >
             <DataGrid.CellStyle>
                 <Style/>
             </DataGrid.CellStyle>
@@ -33,10 +33,10 @@
                 <DropShadowEffect/>
             </DataGrid.Effect>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Vrsta" Width="70"/>
-                <DataGridTextColumn Header="Status sobe" Width="90"/>
-                <DataGridTextColumn Header="Broj" Width="50" />
-                <DataGridTextColumn Header="Sprat" Width="70" />
+                <DataGridTextColumn Header="Broj" Width="50" Binding = "{Binding RoomId}"/>
+                <DataGridTextColumn Header="Sprat" Width="50" Binding="{Binding RoomFloor}"/>
+                <DataGridTextColumn Header="Vrsta" Width="100" Binding="{Binding Type}"/>
+                <DataGridCheckBoxColumn Header="Zauzetost" Width="65" Binding="{Binding IsFree}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Dodaj" HorizontalAlignment="Left" Margin="25,151,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.557,2.713" Background="#FFC5DBDF" Click="Button_Click"/>
