@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Users (D)\Desktop\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\
+C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\
 Hospital_IS
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
-D:\Users (D)\Desktop\ISBolnice\Projekat\Hospital-IS\App.xaml
-31250933235
+C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\App.xaml
+71018579302
 
-331846390768
+38-1032544518
 1921654412462
-MainWindow.xaml;PatientRegistration.xaml;SecretaryMainWindow.xaml;
+MainWindow.xaml;PatientRegistration.xaml;SecretaryMainWindow.xaml;View\DoctorHomePage.xaml;View\ExitMess.xaml;View\HomePage.xaml;View\PatientChart.xaml;
 
-False
+True
 

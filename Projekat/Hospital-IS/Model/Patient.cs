@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Model
 {
@@ -9,16 +10,17 @@ namespace Model
         public DateTime FileDate { get; set; }
         public String Employer { get; set; }
         public Boolean Admitted { get; set; }
-        public List<String> Alergies { get; set; }
+        public ObservableCollection<String> Alergies { get; set; }
 
         public Boolean IsGuest = false;
 
-        public Patient(int id, string name, string surname, DateTime birthDate, string address, string email, string password, int chartId) : base(id, name, surname, birthDate, address, email, password)
+        public Patient(int id, string name, string surname, DateTime birthDate, string address, string email, string password, DateTime filedate, String employer, ObservableCollection<String> alergies) : base(id, name, surname, birthDate, address, email, password)
         {
-
+            this.FileDate = filedate;
+            this.Employer = employer;
+            this.Alergies = alergies;
         }
 
-        public List<DoctorAppointment> doctorAppointment { get; set; }
         public MedicalHistory medicalHistory { get; set; }
 
         public Doctor doctor { get; set; }
@@ -46,34 +48,17 @@ namespace Model
         }
 
 
-        public List<DoctorAppointment> DoctorAppointment
-        {
-            get
-            {
-                if (doctorAppointment == null)
-                    doctorAppointment = new List<DoctorAppointment>();
-                return doctorAppointment;
-            }
-            set
-            {
-                RemoveAllDoctorAppointment();
-                if (value != null)
-                {
-                    foreach (DoctorAppointment oDoctorAppointment in value)
-                        AddDoctorAppointment(oDoctorAppointment);
-                }
-            }
-        }
+        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
 
         public void AddDoctorAppointment(DoctorAppointment newDoctorAppointment)
         {
             if (newDoctorAppointment == null)
                 return;
-            if (this.doctorAppointment == null)
-                this.doctorAppointment = new List<DoctorAppointment>();
-            if (!this.doctorAppointment.Contains(newDoctorAppointment))
+            if (this.DoctorAppointment == null)
+                this.DoctorAppointment = new ObservableCollection<DoctorAppointment>();
+            if (!this.DoctorAppointment.Contains(newDoctorAppointment))
             {
-                this.doctorAppointment.Add(newDoctorAppointment);
+                this.DoctorAppointment.Add(newDoctorAppointment);
                 newDoctorAppointment.Patient = this;
             }
         }
@@ -82,22 +67,22 @@ namespace Model
         {
             if (oldDoctorAppointment == null)
                 return;
-            if (this.doctorAppointment != null)
-                if (this.doctorAppointment.Contains(oldDoctorAppointment))
+            if (this.DoctorAppointment != null)
+                if (this.DoctorAppointment.Contains(oldDoctorAppointment))
                 {
-                    this.doctorAppointment.Remove(oldDoctorAppointment);
+                    this.DoctorAppointment.Remove(oldDoctorAppointment);
                     oldDoctorAppointment.Patient = null;
                 }
         }
 
         public void RemoveAllDoctorAppointment()
         {
-            if (doctorAppointment != null)
+            if (DoctorAppointment != null)
             {
                 System.Collections.ArrayList tmpDoctorAppointment = new System.Collections.ArrayList();
-                foreach (DoctorAppointment oldDoctorAppointment in doctorAppointment)
+                foreach (DoctorAppointment oldDoctorAppointment in DoctorAppointment)
                     tmpDoctorAppointment.Add(oldDoctorAppointment);
-                doctorAppointment.Clear();
+                DoctorAppointment.Clear();
                 foreach (DoctorAppointment oldDoctorAppointment in tmpDoctorAppointment)
                     oldDoctorAppointment.Patient = null;
                 tmpDoctorAppointment.Clear();

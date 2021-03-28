@@ -17,3 +17,15 @@ C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1
 C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.dll
 C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.pdb
 C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.genruntimeconfig.cache
+C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\PatientRegistration.g.cs
+C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\SecretaryMainWindow.g.cs
+C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\DoctorHomePage.g.cs
+C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\ExitMess.g.cs
+C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\PatientChart.g.cs
+C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\PatientRegistration.baml
+C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\SecretaryMainWindow.baml
+C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\DoctorHomePage.baml
+C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\ExitMess.baml
+C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\PatientChart.baml
+C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\HomePage.g.cs
+C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\HomePage.baml

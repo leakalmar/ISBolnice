@@ -16,26 +16,21 @@ namespace Hospital_IS.View
     public partial class DoctorHomePage : Window
     {
         private int colNum = 0;
-        public ObservableCollection<Model.DoctorAppointment> Appointments { get; set; }
-        public Model.Doctor doctor { get; set; }
+        public Model.Doctor Doctor { get; set; }
         public DoctorHomePage()
         {
             InitializeComponent();
             this.DataContext = this;
             //doctor = new Storages.UserFileStorage.GetByEmail(email);
-            doctor = new Model.Doctor();
-            Appointments = new ObservableCollection<Model.DoctorAppointment>();
-            foreach (Model.DoctorAppointment appointment in doctor.doctorAppointment)
+            List<Model.WorkDay> dani = new List<Model.WorkDay>
             {
-                Appointments.Add(appointment);
-            }
+                new Model.WorkDay("Pon", DateTime.Now, DateTime.Now)
+            };
+            Model.Specialty spec = new Model.Specialty("Dermatolog");
+            Model.Doctor doc = new Model.Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani, spec);
+            this.Doctor = doc;
+
             
-        }
-        private void generateColumns(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            colNum++;
-            if (colNum == 3)
-                e.Column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
         public void ExitBtnClick(object sender, RoutedEventArgs e)

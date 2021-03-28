@@ -11,7 +11,13 @@ namespace Storages
 
         public List<Room> GetAll()
         {
-            throw new NotImplementedException();
+            Room r1 = new Room(RoomType.ConsultingRoom, false, true, 2, 25);
+            Room r2 = new Room(RoomType.ConsultingRoom, false, true, 1, 11);
+
+            List<Room> all = new List<Room>();
+            all.Add(r2);
+            all.Add(r1);
+            return all;
         }
 
         public void SaveRoom(Model.Room newRoom)
