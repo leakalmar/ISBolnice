@@ -40,7 +40,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Dodaj" HorizontalAlignment="Left" Margin="25,151,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.557,2.713" Background="#FFC5DBDF" Click="Button_Click"/>
-        <Button Content="Izmeni" HorizontalAlignment="Left" Margin="25,278,0,0" VerticalAlignment="Top" Width="90" Background="#FFC5DBDF"/>
+        <Button Content="Izmeni" HorizontalAlignment="Left" Margin="25,278,0,0" VerticalAlignment="Top" Width="90" Background="#FFC5DBDF" Click="Button_Click_1"/>
         <Button Content="Obrisi" HorizontalAlignment="Left" Margin="25,408,0,0" VerticalAlignment="Top" Width="90" Height="19" Background="#FFC5DBDF"/>
         <TextBlock HorizontalAlignment="Left" Margin="245,32,0,0" Text="Lista soba" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" RenderTransformOrigin="0.464,-0.573" Foreground="White"/>
 

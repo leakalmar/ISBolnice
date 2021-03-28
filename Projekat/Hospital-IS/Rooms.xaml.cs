@@ -18,7 +18,7 @@ namespace Hospital_IS
    
     public partial class Rooms : Window
     {
-        public static ObservableCollection<Room> Room { get; set; }
+       
         public Rooms()
         {
             
@@ -26,14 +26,11 @@ namespace Hospital_IS
             InitializeComponent();
             Room room = new Room(RoomType.ConsultingRoom, true, true, 5, 10);
             Manager.Instance.AddRoom(room);
-            this.DataContext = this;
-            Room = new ObservableCollection<Room>();
-            foreach (Room r in Hospital.Instance.room)
-            {
-                Room.Add(r);
-            }
-            
-            int broj = Room.Count;
+            DateGridRooms.DataContext = Hospital.Instance;
+
+
+
+            int broj = Hospital.Room.Count;
             String mess = Convert.ToString(broj);
             MessageBox.Show(mess);
 
@@ -49,6 +46,13 @@ namespace Hospital_IS
         {
             AddNewRoom room = new AddNewRoom();
             room.Show();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Room room = (Room)DateGridRooms.SelectedItem;
+            UpdateRoom upRoom = new UpdateRoom(room);
+            upRoom.Show();
         }
     }
 }

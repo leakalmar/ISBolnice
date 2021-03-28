@@ -39,26 +39,17 @@ namespace Model
 
         public Boolean RemoveRoom(Room room)
         {
-            Hospital.RemoveRoom(room);
+            Hospital.Instance.RemoveRoom(room);
             return true;
         }
 
-        public void UpdateRoom(Room room)
+        public void UpdateRoom(int oldIndex, Room room)
         {
-            var rooms = new System.Collections.ArrayList();
-            rooms = Hospital.room;
-            foreach (Room r in rooms)
-            {
-                if (r == room)
-                {
-                    r.RoomFloor = room.RoomFloor;
-                    r.RoomId = room.RoomId;
-                    r.IsFree = room.IsFree;
-                    r.Type = room.Type;
-                }
-            }
 
+            Hospital.Instance.UpdateRoom(oldIndex,room);
+           
         }
+
 
         public Boolean MakeAppointment(Room room)
         {

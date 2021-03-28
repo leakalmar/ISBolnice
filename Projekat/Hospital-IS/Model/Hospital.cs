@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Model
 {
@@ -67,52 +68,55 @@ namespace Model
             throw new NotImplementedException();
         }
 
-        public System.Collections.ArrayList room;
+        public static ObservableCollection<Room> Room { get; set; }
 
-        public System.Collections.ArrayList Room
-        {
-            get
-            {
-                if (room == null)
-                    room = new System.Collections.ArrayList();
-                return room;
-            }
-            set
-            {
-                RemoveAllRoom();
-                if (value != null)
-                {
-                    foreach (Room oRoom in value)
-                        AddRoom(oRoom);
-                }
-            }
-        }
+       
 
         public void AddRoom(Room newRoom)
         {
            
             if (newRoom == null)
                 return;
-            if (this.room == null)
-                this.room = new System.Collections.ArrayList();
-            if (!this.room.Contains(newRoom))
-                this.room.Add(newRoom);
+            if (Room == null)
+                Room = new ObservableCollection<Room>();
+            if (!Room.Contains(newRoom))
+                Room.Add(newRoom);
         }
 
         public void RemoveRoom(Room oldRoom)
         {
             if (oldRoom == null)
                 return;
-            if (this.room != null)
-                if (this.room.Contains(oldRoom))
-                    this.room.Remove(oldRoom);
+            if (Room != null)
+                if (Room.Contains(oldRoom))
+                    Room.Remove(oldRoom);
         }
 
         public void RemoveAllRoom()
         {
-            if (room != null)
-                room.Clear();
+            if (Room != null)
+               Room.Clear();
         }
+        public void UpdateRoom(int oldIndex,Room oldRoom)
+        {
+            
+            foreach(Room r in Room)
+            {
+                if(r.RoomId == oldIndex)
+                {
+                    int index = Room.IndexOf(r);
+                    Room.Remove(r);
+                    Room.Insert(index, oldRoom);
+                    break;
+                }
+            }
+            
+            
+        }
+
+
+
+
         public System.Collections.ArrayList user;
 
         public System.Collections.ArrayList User
