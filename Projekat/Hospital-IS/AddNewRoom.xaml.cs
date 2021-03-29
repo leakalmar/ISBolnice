@@ -49,10 +49,17 @@ namespace Hospital_IS
             }
             Room newRoom = new Room(tip,zauzeto, renoviranje,roomFloor,roomId);
             Manager.Instance.AddRoom(newRoom);
+            MessageBox.Show(Convert.ToString(Hospital.Room.Count));
+
           
             this.Close();
            
             
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

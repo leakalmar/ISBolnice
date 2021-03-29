@@ -9,32 +9,29 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Model;
 
 namespace Hospital_IS
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for DeleteRoom.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class DeleteRoom : Window
     {
-        public Window1()
+        private Room roomDelete;
+        public DeleteRoom(Room room)
         {
+            roomDelete = room;
             InitializeComponent();
         }
 
-      
-        private void RoomsButton_Click_1(object sender, RoutedEventArgs e)
-        {
-            Rooms room = new Rooms();
-            room.Show();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.Instance.RemoveRoom(roomDelete);
+            this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

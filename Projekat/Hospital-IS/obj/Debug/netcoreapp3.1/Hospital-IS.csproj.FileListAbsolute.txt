@@ -68,3 +68,5 @@ C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcorea
 C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.dll
 C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.pdb
 C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.genruntimeconfig.cache
+C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\DeleteRoom.g.cs
+C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\DeleteRoom.baml

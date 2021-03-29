@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace Model
 {
@@ -74,22 +75,35 @@ namespace Model
 
         public void AddRoom(Room newRoom)
         {
-           
+
+
             if (newRoom == null)
+            {
                 return;
+            }
             if (Room == null)
+            { 
                 Room = new ObservableCollection<Room>();
+            }
             if (!Room.Contains(newRoom))
+            {
                 Room.Add(newRoom);
+                MessageBox.Show("halo");
+            }
         }
 
         public void RemoveRoom(Room oldRoom)
         {
-            if (oldRoom == null)
-                return;
-            if (Room != null)
-                if (Room.Contains(oldRoom))
-                    Room.Remove(oldRoom);
+            foreach (Room r in Room)
+            {
+                if (r.RoomId == oldRoom.RoomId)
+                {
+                   
+                    Room.Remove(r);
+                    
+                    break;
+                }
+            }
         }
 
         public void RemoveAllRoom()

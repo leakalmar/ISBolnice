@@ -77,11 +77,11 @@
 
         <TextBlock Text="     SOBE" Width="100" Height="25" Grid.Row="8" Margin="0,5,0,0" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0.536,9.928" Grid.RowSpan="2" Grid.Column="2"/>
         <TextBlock  Foreground="White" Grid.Column ="4" HorizontalAlignment="Left" Margin="41,10,0,0" Grid.Row="3" Text="Ime:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock  Foreground="White" Grid.Column="4" HorizontalAlignment="Left" Margin="41,66,0,0" Grid.Row="3" Text="Prezime" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock  Foreground="White" Grid.Column="4" HorizontalAlignment="Left" Margin="41,66,0,0" Grid.Row="3" Text="Prezime:" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBox Background="Transparent" FontWeight="Light" BorderThickness="0" Foreground="White" Opacity="0.7" Grid.Column="4" HorizontalAlignment="Left" Margin="145,8,0,0" Grid.Row="3" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
         <TextBox FontWeight="Light" BorderThickness="0" Background="Transparent" Foreground="White" Opacity="0.7" Grid.Column="4" HorizontalAlignment="Left" Margin="145,66,0,0" Grid.Row="3" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderBrush="#FFCBD1E2"/>
         <TextBlock Foreground ="White" FontSize ="20" Grid.Column="4" HorizontalAlignment="Left" Margin="53,5,0,0" Grid.Row="9" Text="FILIJALE" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <Button  Grid.Column="2"  HorizontalAlignment="Center" Margin="0,28,0,0" Grid.Row="11" VerticalAlignment="Top">
+        <Button Height="50" Width="50" Grid.Column="2"  HorizontalAlignment="Center" Margin="0,28,0,0" Grid.Row="11" VerticalAlignment="Top">
             <StackPanel>
                 <Image Source="employee.jpg" Width="42" RenderTransformOrigin="0.879,8.837" Height="38" />
             </StackPanel>
@@ -104,7 +104,9 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Image Source ="hospital.png" Grid.Column="4" HorizontalAlignment="Left" Height="90" Margin="205,0,0,0" Grid.Row="3" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.661,0.529" Grid.ColumnSpan="2"/>
+        <Image Source ="hospital.png" Grid.Column="4" HorizontalAlignment="Left" Height="90" Margin="225,0,0,0" Grid.Row="3" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.661,0.529" Grid.ColumnSpan="2"/>
+        <Button BorderBrush="White" BorderThickness="1" Foreground="White"  Background="Transparent" Content="Odjavi se" Grid.Column="4" HorizontalAlignment="Left" Margin="41,302,0,0" Grid.Row="11" VerticalAlignment="Top" Height="41" Width="112" Click="Button_Click"/>
+        <TextBlock   Foreground="White" FontSize="18"    Grid.Column="4" HorizontalAlignment="Left" Margin="51,85,0,0" Grid.Row="11" Text="ZAHTEVI" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.034"/>
 
 
 

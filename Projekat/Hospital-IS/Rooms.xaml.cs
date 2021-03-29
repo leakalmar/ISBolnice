@@ -24,17 +24,9 @@ namespace Hospital_IS
             
            
             InitializeComponent();
-            Room room = new Room(RoomType.ConsultingRoom, true, true, 5, 10);
-            Manager.Instance.AddRoom(room);
+          
+            Hospital.Room = new ObservableCollection<Room>();
             DateGridRooms.DataContext = Hospital.Instance;
-
-
-
-            int broj = Hospital.Room.Count;
-            String mess = Convert.ToString(broj);
-            MessageBox.Show(mess);
-
-
         }
 
         private void DateGridRooms_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -51,8 +43,34 @@ namespace Hospital_IS
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Room room = (Room)DateGridRooms.SelectedItem;
-            UpdateRoom upRoom = new UpdateRoom(room);
-            upRoom.Show();
+            if (room == null)
+            {
+                MessageBox.Show("Izaberite sobu");
+            }
+            else
+            {
+                UpdateRoom upRoom = new UpdateRoom(room);
+                upRoom.Show();
+            }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Room room = (Room)DateGridRooms.SelectedItem;
+            if (room == null)
+            {
+                MessageBox.Show("Izaberite sobu");
+            }
+            else
+            {
+                DeleteRoom delRoom = new DeleteRoom(room);
+                delRoom.Show();
+            }
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
