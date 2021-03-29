@@ -1,0 +1,115 @@
+﻿<Window x:Class="Hospital_IS.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital_IS"
+        AllowsTransparency="True"
+        mc:Ignorable="d"
+        WindowStyle="None" WindowStartupLocation="CenterScreen"
+      
+        Title="Upravnik" Height="750" Width="430">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black"/>
+            <GradientStop Color="#FF184095" Offset="0.0"/>
+            <GradientStop Color="#FF5B317E" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+
+
+
+    <Grid>
+        <Grid.Effect>
+            <DropShadowEffect/>
+        </Grid.Effect>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="15"/>
+
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Text="PROFIL" Grid.Row="1" Grid.Column="1" FontSize="35" Grid.ColumnSpan="5" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" />
+        <TextBlock Text="OPCIJE" Grid.Row="5" Grid.Column="4" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" RenderTransformOrigin="-0.352,9.851" Margin="45,0,0,0"/>
+        <Image x:Name="Manager" Source="director.jpg" Height="100" Width="100" Grid.Row="3" Grid.Column="2"/>
+
+        <Button x:Name="RoomsButton" Background="White" BorderThickness="0" Grid.Row="7" Grid.Column="1" Width="50" Height="50" Grid.ColumnSpan="2" Click="RoomsButton_Click_1" RenderTransformOrigin="0.593,0.641">
+            <StackPanel>
+                <Image Source="room_icon.jpg" Width="44" RenderTransformOrigin="0.879,8.837" Height="41" />
+            </StackPanel>
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Button   Background="White" BorderThickness="0" Grid.Column="4" HorizontalAlignment="Left"  Grid.Row="7" VerticalAlignment="Top" Margin="61,3,0,0" Width="50" Height="50">
+            <StackPanel>
+                <Image Source="other_facilities.png" Width="44" RenderTransformOrigin="0.879,8.837" Height="41" />
+            </StackPanel>
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <TextBlock Text="     SOBE" Width="100" Height="25" Grid.Row="8" Margin="0,5,0,0" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0.536,9.928" Grid.RowSpan="2" Grid.Column="2"/>
+        <TextBlock  Foreground="White" Grid.Column ="4" HorizontalAlignment="Left" Margin="41,10,0,0" Grid.Row="3" Text="Ime:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock  Foreground="White" Grid.Column="4" HorizontalAlignment="Left" Margin="41,66,0,0" Grid.Row="3" Text="Prezime:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox Background="Transparent" FontWeight="Light" BorderThickness="0" Foreground="White" Opacity="0.7" Grid.Column="4" HorizontalAlignment="Left" Margin="145,8,0,0" Grid.Row="3" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+        <TextBox FontWeight="Light" BorderThickness="0" Background="Transparent" Foreground="White" Opacity="0.7" Grid.Column="4" HorizontalAlignment="Left" Margin="145,66,0,0" Grid.Row="3" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderBrush="#FFCBD1E2"/>
+        <TextBlock Foreground ="White" FontSize ="20" Grid.Column="4" HorizontalAlignment="Left" Margin="53,5,0,0" Grid.Row="9" Text="FILIJALE" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Button Height="50" Width="50" Grid.Column="2"  HorizontalAlignment="Center" Margin="0,28,0,0" Grid.Row="11" VerticalAlignment="Top">
+            <StackPanel>
+                <Image Source="employee.jpg" Width="42" RenderTransformOrigin="0.879,8.837" Height="38" />
+            </StackPanel>
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBlock  Foreground="White" FontSize="18" Grid.Column="2" HorizontalAlignment="Center" Margin="0,85,0,0" Grid.Row="11" Text="ZAPOSLENI" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+
+        </TextBlock>
+        <Button   Background ="White" Grid.Column="4" HorizontalAlignment="Left" Margin="62,28,0,0" Grid.Row="11" VerticalAlignment="Top" Width="50" Height="50">
+            <StackPanel>
+                <Image Source="request.png" Width="44" RenderTransformOrigin="0.879,8.837" Height="40" />
+            </StackPanel>
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Image Source ="hospital.png" Grid.Column="4" HorizontalAlignment="Left" Height="90" Margin="225,0,0,0" Grid.Row="3" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.661,0.529" Grid.ColumnSpan="2"/>
+        <Button BorderBrush="White" BorderThickness="1" Foreground="White"  Background="Transparent" Content="Odjavi se" Grid.Column="4" HorizontalAlignment="Left" Margin="41,302,0,0" Grid.Row="11" VerticalAlignment="Top" Height="41" Width="112" Click="Button_Click"/>
+        <TextBlock   Foreground="White" FontSize="18"    Grid.Column="4" HorizontalAlignment="Left" Margin="51,85,0,0" Grid.Row="11" Text="ZAHTEVI" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.034"/>
+
+
+
+    </Grid>
+</Window>

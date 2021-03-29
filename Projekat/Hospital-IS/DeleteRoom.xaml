@@ -1,0 +1,24 @@
+﻿<Window x:Class="Hospital_IS.DeleteRoom"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital_IS"
+        mc:Ignorable="d"
+        Title="Brisanje" Height="200" Width="300"
+        WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black"/>
+            <GradientStop Color="#FF184095" Offset="0.0"/>
+            <GradientStop Color="#FF5B317E" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+        <Border BorderThickness="15"></Border>
+        <TextBlock HorizontalAlignment="Left" Margin="51,71,0,0" Foreground="White" Text="Da li zelite da nastavite sa brisanjem?" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.726,0.815"/>
+        <Button Content="Da" Background="Transparent" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Margin="79,119,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="Ne" Background="Transparent" BorderThickness="0" Foreground="White"  HorizontalAlignment="Left" Margin="174,119,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+
+    </Grid>
+</Window>

@@ -4,11 +4,7 @@ namespace Model
 {
     public class Room
     {
-        private RoomType type;
-        private Boolean isFree;
-        private Boolean isUsable;
-        private int roomFloor;
-        private int roomId;
+        
 
         public System.Collections.ArrayList equipment;
 
@@ -16,26 +12,23 @@ namespace Model
 
         public int RoomFloor
         {
-            get { return roomFloor; }
-            set { roomFloor = value; }
+            get; set;
         }
 
-        public int RoomIdFloor
+
+        public int RoomId
         {
-            get { return roomId; }
-            set { roomId = value; }
+            get; set;
         }
 
         public Boolean IsFree
         {
-            get { return isFree; }
-            set { isFree = value; }
+            get; set;
         }
 
         public Boolean IsUsable
         {
-            get { return isUsable; }
-            set { isUsable = value; }
+            get; set;
         }
 
         public RoomType Type
@@ -45,11 +38,11 @@ namespace Model
 
         public Room(RoomType type, bool isFree, bool isUsable, int roomFloor, int roomId)
         {
-            this.type = type;
-            this.isFree = isFree;
-            this.isUsable = isUsable;
-            this.roomFloor = roomFloor;
-            this.roomId = roomId;
+            this.Type = type;
+            this.IsFree = isFree;
+            this.IsUsable = isUsable;
+            this.RoomFloor = roomFloor;
+            this.RoomId = roomId;
         }
 
         public System.Collections.ArrayList Equipment

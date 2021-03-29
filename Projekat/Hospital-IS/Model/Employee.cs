@@ -15,6 +15,10 @@ namespace Model
             this.WorkDay = workDays;
         }
 
+        public Employee()
+        {
+        }
+
         public List<WorkDay> WorkDay
         {get; set;
         }
