@@ -1,6 +1,7 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Storages
 {
@@ -17,9 +18,13 @@ namespace Storages
             };
             Model.Specialty spec = new Model.Specialty("Dermatolog");
             Model.Doctor doc = new Model.Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani,spec);
-            Appointment a1 = new DoctorAppointment(DateTime.Now, AppointmetType.CheckUp, true, r,doc);
-            Appointment a2 = new DoctorAppointment(DateTime.Now, AppointmetType.Operation, true, r, doc);
-            Appointment a3 = new DoctorAppointment(DateTime.Now, AppointmetType.CheckUp, true, r, doc);
+            ObservableCollection<String> alergije = new ObservableCollection<String>();
+            alergije.Add("Tetanus");
+            alergije.Add("Paracetamol");
+            Model.Patient p1 = new Model.Patient(001, "Simona", "Vukmanov Simokov", DateTime.Now.Date, "Petra Drapsina 8", "simona@gmail.com", "123", DateTime.Now, "neki poslodavac", alergije);
+            Appointment a1 = new DoctorAppointment(DateTime.Now, AppointmetType.CheckUp, true, r,doc,p1);
+            Appointment a2 = new DoctorAppointment(DateTime.Now, AppointmetType.Operation, true, r, doc, p1);
+            Appointment a3 = new DoctorAppointment(DateTime.Now, AppointmetType.CheckUp, true, r, doc, p1);
 
             List<Appointment> all = new List<Appointment>();
             all.Add(a1);

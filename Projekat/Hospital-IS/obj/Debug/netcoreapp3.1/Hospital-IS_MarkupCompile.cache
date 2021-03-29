@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 C:\Users\Asus\Desktop\SIMS Projekat\Projekat\Hospital-IS\App.xaml
-71018579302
+10-2120120759
 
-36-659249210
+411268694229
 1921654412462
-MainWindow.xaml;PatientRegistration.xaml;SecretaryMainWindow.xaml;View\DoctorHomePage.xaml;View\ExitMess.xaml;View\HomePage.xaml;View\PatientChart.xaml;
+MainWindow.xaml;PatientRegistration.xaml;SecretaryMainWindow.xaml;View\DoctorHomePage.xaml;View\ExitMess.xaml;View\HomePage.xaml;View\PatientChart.xaml;View\Report.xaml;View\UCPatientChart.xaml;View\UserControlHomePage.xaml;
 
 False
 
