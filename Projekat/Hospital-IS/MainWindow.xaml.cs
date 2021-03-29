@@ -33,6 +33,7 @@ namespace Hospital_IS
             {
                 SecretaryMainWindow smw = new SecretaryMainWindow();
                 smw.Show();
+                this.Close();
             }
             else if (email.Text == "pacijent@gmail.com" && password.Password.ToString() == "pacijent")
             {

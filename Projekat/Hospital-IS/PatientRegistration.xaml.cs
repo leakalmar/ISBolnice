@@ -36,6 +36,10 @@ namespace Hospital_IS
 
             Patient.Password = passwordBox.ToString();
             Patients.Add(Patient);
+
+            Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
+            pfs.SavePatient(Patient);
+
             this.Close();
         }
     }
