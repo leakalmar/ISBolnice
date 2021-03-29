@@ -28,7 +28,7 @@
 
             <StackPanel Grid.Column="1">
                 <StackPanel>
-                <TextBox Background="Transparent"  Name="emailTxt"
+                <TextBox Background="Transparent"  Name="email"
                          Text="Email"
                          Foreground="White"
                          FontWeight="Light"
@@ -40,7 +40,7 @@
                  </StackPanel>
                   <Border Height="1" Width="220" Background="White" Opacity="0.7"></Border>
                 <StackPanel>
-                <PasswordBox Background="Transparent" Name="passwordTxt"
+                <PasswordBox Background="Transparent" Name="password"
                          Password="Password" 
                          Foreground="White"
                          FontWeight="Light"
