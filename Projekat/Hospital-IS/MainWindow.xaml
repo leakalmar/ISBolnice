@@ -28,8 +28,8 @@
 
             <StackPanel Grid.Column="1">
                 <StackPanel>
-                <TextBox Background="Transparent" 
-                         Text="Email" 
+                <TextBox Background="Transparent"  Name="emailTxt"
+                         Text="Email"
                          Foreground="White"
                          FontWeight="Light"
                          FontSize="18"
@@ -40,7 +40,7 @@
                  </StackPanel>
                   <Border Height="1" Width="220" Background="White" Opacity="0.7"></Border>
                 <StackPanel>
-                <PasswordBox Background="Transparent" 
+                <PasswordBox Background="Transparent" Name="passwordTxt"
                          Password="Password" 
                          Foreground="White"
                          FontWeight="Light"
@@ -52,10 +52,11 @@
                 </StackPanel>
                 <Border Height="1" Width="220" Background="White" Opacity="0.7"></Border>
                 <StackPanel>
-                    <Button Height="20" Width="120"
-                            Content="Login"
-                            Margin="50" Background="LavenderBlush"></Button>
-                </StackPanel>
+                <Button Height="20" Width="120"
+                        Content="Login"
+                        Margin="50" Background="LavenderBlush"
+                        Click="Login"/>
+            </StackPanel>
             </StackPanel>
 
     </Grid>

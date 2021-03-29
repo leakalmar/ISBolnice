@@ -12,13 +12,17 @@ namespace Model
         public Boolean Admitted { get; set; }
         public ObservableCollection<String> Alergies { get; set; }
 
-        public Boolean IsGuest = false;
+        public Boolean IsGuest { get; set; } = false;
 
         public Patient(int id, string name, string surname, DateTime birthDate, string address, string email, string password, DateTime filedate, String employer, ObservableCollection<String> alergies) : base(id, name, surname, birthDate, address, email, password)
         {
             this.FileDate = filedate;
             this.Employer = employer;
             this.Alergies = alergies;
+        }
+
+        public Patient()
+        {
         }
 
         public MedicalHistory medicalHistory { get; set; }
@@ -48,7 +52,7 @@ namespace Model
         }
 
 
-        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
+        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; } = new ObservableCollection<DoctorAppointment>();
 
         public void AddDoctorAppointment(DoctorAppointment newDoctorAppointment)
         {

@@ -10,6 +10,9 @@
     <Compile Update="PatientRegistration.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="PatientView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="SecretaryMainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -22,6 +25,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="PatientRegistration.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PatientView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="SecretaryMainWindow.xaml">
