@@ -32,7 +32,7 @@ namespace Hospital_IS.View
                 new WorkDay("Pon", DateTime.Now, DateTime.Now)
             };
             Specialty spec = new Specialty("Dermatolog");
-            Doctor doc = new Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani, spec);
+            Doctor doc = new Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani, spec, null);
             ObservableCollection<String> alergije = new ObservableCollection<String>();
             alergije.Add("Tetanus");
             alergije.Add("Paracetamol");

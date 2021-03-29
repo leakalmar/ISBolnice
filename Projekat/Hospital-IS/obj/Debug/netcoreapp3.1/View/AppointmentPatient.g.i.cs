@@ -141,7 +141,7 @@ namespace Hospital_IS.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Hospital-IS;V1.0.0.0;component/view/appointmentpatient.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Hospital-IS;component/view/appointmentpatient.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\AppointmentPatient.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 D:\Users (D)\Desktop\ISBolnice\Projekat\Hospital-IS\App.xaml
-82115367814
+20-313952961
 
-37-153617141
+51-314162428
 1921654412462
-MainWindow.xaml;PatientRegistration.xaml;PatientView.xaml;SecretaryMainWindow.xaml;View\DoctorHomePage.xaml;View\ExitMess.xaml;View\HomePage.xaml;View\PatientChart.xaml;
+AddNewRoom.xaml;DeleteRoom.xaml;MainWindow.xaml;PatientRegistration.xaml;PatientView.xaml;Rooms.xaml;SecretaryMainWindow.xaml;UpdateRoom.xaml;View\AllAppointments.xaml;View\AppointmentPatient.xaml;View\DoctorHomePage.xaml;View\DocumentationPatient.xaml;View\ExitMess.xaml;View\HomePage.xaml;View\HomePatient.xaml;View\PatientChart.xaml;View\Report.xaml;View\UCPatientChart.xaml;View\UserControlHomePage.xaml;Window1.xaml;
 
 False
 

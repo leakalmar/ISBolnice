@@ -16,7 +16,7 @@ namespace Storages
                 new Model.WorkDay("Pon", DateTime.Now, DateTime.Now)
             };
             Model.Specialty spec = new Model.Specialty("Dermatolog");
-            Model.Doctor doc = new Model.Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani,spec);
+            Model.Doctor doc = new Model.Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani,spec, r);
             Appointment a1 = new DoctorAppointment(DateTime.Now, AppointmetType.CheckUp, true, r,doc,patient);
             Appointment a2 = new DoctorAppointment(DateTime.Now, AppointmetType.Operation, true, r, doc,patient);
             Appointment a3 = new DoctorAppointment(DateTime.Now, AppointmetType.CheckUp, true, r, doc,patient);
