@@ -43,27 +43,27 @@
         <TextBlock Grid.Column="1" Grid.Row="8" Text="Šifra:" Margin="50 20"/>
         <TextBlock Grid.Column="1" Grid.Row="9" Text="Ponovite šifru:" Margin="50 0"/>
 
-        <TextBox Grid.Column="2" Grid.Row="1" Margin="50 20 50 10"/>
-        <TextBox Grid.Column="2" Grid.Row="2" Margin="50 10"/>
+        <TextBox Grid.Column="2" Grid.Row="1" Margin="50 20 50 10" Text="{Binding Patient.Name}"/>
+        <TextBox Grid.Column="2" Grid.Row="2" Margin="50 10" Text="{Binding Patient.Surname}"/>
         <TextBox Grid.Column="2" Grid.Row="3" Margin="50 10"/>
-        <TextBox Grid.Column="2" Grid.Row="4" Margin="50 10"/>
-        <TextBox Grid.Column="2" Grid.Row="5" Margin="50 10"/>
+        <TextBox Grid.Column="2" Grid.Row="4" Margin="50 10" Text="{Binding Patient.Address}"/>
+        <TextBox Grid.Column="2" Grid.Row="5" Margin="50 10" Text="{Binding Patient.Phone}"/>
+        <TextBox Grid.Column="2" Grid.Row="6" Margin="50 10" Text="{Binding Patient.Email}"/>
         <TextBox Grid.Column="2" Grid.Row="6" Margin="50 10"/>
-        <TextBox Grid.Column="2" Grid.Row="6" Margin="50 10"/>
-        <ComboBox Grid.Column="2" Grid.Row="7" Margin="50 10">
+        <ComboBox Name="comboBox" Grid.Column="2" Grid.Row="7" Margin="50 10">
             <ComboBoxItem Content="Žensko"/>
             <ComboBoxItem Content="Muško"/>
         </ComboBox>
-        <PasswordBox Grid.Column="2" Grid.Row="8" Margin="50 20"/>
+        <PasswordBox Name="passwordBox" Grid.Column="2" Grid.Row="8" Margin="50 20"/>
         <PasswordBox Grid.Column="2" Grid.Row="9" Margin="50 0"/>
 
-        <CheckBox Grid.Column="2" Grid.Row="10" FontSize="13"
+        <CheckBox Name="checkBox" Grid.Column="2" Grid.Row="10" FontSize="13"
                   Margin="0 18"
             Content="Kreiranje privremenog guest naloga"/>
 
         <Button Grid.Column="1" Grid.Row="11" Width="120" Height="30"
-                Content="Potvrdi"/>
+                Content="Potvrdi" Click="AddPatient"/>
         <Button Grid.Column="2" Grid.Row="11" Width="120" Height="30"
-                Content="Odustani"/>
+                Content="Odustani" Click="Close"/>
     </Grid>
 </Window>

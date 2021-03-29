@@ -21,7 +21,7 @@ namespace Model
         public Boolean Admitted { get; set; }
         public ObservableCollection<String> Alergies { get; set; }
 
-        public Boolean IsGuest = false;
+        public Boolean IsGuest { get; set; } = false;
 
         public Patient(int id, string name, string surname, DateTime birthDate, string address, string email, string password, DateTime filedate, String employer, ObservableCollection<String> alergies) : base(id, name, surname, birthDate, address, email, password)
         {
@@ -31,7 +31,11 @@ namespace Model
             this.MedicalHistory = new MedicalHistory();
         }
 
-        public MedicalHistory MedicalHistory { get; set; }
+        public Patient()
+        {
+        }
+
+        public MedicalHistory medicalHistory { get; set; }
 
         public Doctor doctor { get; set; }
 
