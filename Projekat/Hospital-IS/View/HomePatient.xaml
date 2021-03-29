@@ -89,10 +89,10 @@
                 <Label Content="ID:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
                 <Label x:Name="Id"  Content="{Binding Path=Id}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
             </Grid>
-      
+
             <Grid>
                 <Label Content="Datum rođenja:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <Label x:Name="Birth"  Content="{Binding Path=BirthDate}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+                <TextBlock x:Name="Birth"  Text="{Binding Path=BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5"/>
             </Grid>
             <Grid>
                 <Label Content="Adresa:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
@@ -100,10 +100,10 @@
             </Grid>
             <Grid >
                 <Label Content="Kreiran nalog:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <Label x:Name="FileDate"  Content="{Binding Path=FileDate, ConverterCulture='de-DE'}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+                <TextBlock x:Name="FileDate"  Text="{Binding Path=FileDate, StringFormat=\{0:dd.MM.yyyy.\}}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5"/>
             </Grid>
             <Grid>
-                <Label Content="Radno mesto:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
+                <Label Content="Poslodavac:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
                 <Label x:Name="Employer" Content="{Binding Path=Employer}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
             </Grid>
             <Grid>
@@ -117,7 +117,7 @@
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Datum i vreme" Binding="{Binding DateAndTime, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" Width="200"/>
                 <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor.Name}" Width="200"/>
-                <DataGridTextColumn Header="Soba" Binding="{Binding Room.RoomIdFloor}" Width="*"/>
+                <DataGridTextColumn Header="Soba" Binding="{Binding Room.RoomId}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="changeApp" Grid.Column="2" Grid.Row="10" Margin="250,230,200,60" Foreground="#FFFDFAFA" FontSize="16" Cursor="Hand" Click="changeAppointment">

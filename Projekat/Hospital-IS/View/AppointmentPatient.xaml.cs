@@ -70,24 +70,24 @@ namespace Hospital_IS.View
 
         private void showAvailableApp(object sender, RoutedEventArgs e)
         {
-            Room tempRoom = new Room(RoomType.ConsultingRoom,true,true,1, 5);
             doctor = (Doctor)Doctors.SelectedItem;
             date = Calendar.SelectedDate.Value;
            
             AvailableAppoitments.Clear();
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year,date.Month,date.Day,8,0,0),AppointmetType.CheckUp,false,tempRoom,doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 8, 30, 0), AppointmetType.CheckUp, false, tempRoom,doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 0, 0), AppointmetType.CheckUp, false, tempRoom,doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 30, 0), AppointmetType.CheckUp, false, tempRoom,doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 0, 0), AppointmetType.CheckUp, false, tempRoom,doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 30, 0), AppointmetType.CheckUp, false, tempRoom, doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 11, 0, 0), AppointmetType.CheckUp, false, tempRoom, doctor, HomePatient.Instance.patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year,date.Month,date.Day,8,0,0),AppointmetType.CheckUp,false,doctor.PrimaryRoom,doctor, HomePatient.Instance.patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 8, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 11, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.patient));
         }
 
         private void reserveAppointment(object sender, RoutedEventArgs e)
         {
             DoctorAppointment docApp = (DoctorAppointment)listOfAppointments.SelectedItem;
             HomePatient.Instance.patient.AddDoctorAppointment(docApp);
+            docApp.Reserved = true;
             AvailableAppoitments.Remove(docApp);
         }
 
@@ -95,22 +95,20 @@ namespace Hospital_IS.View
         {
             Room tempRoom = new Room(RoomType.ConsultingRoom, true, true, 1, 5);
             doctor = docApp.Doctor;
-            Doctors.SelectedItem = doctor;
+            Doctors.SelectedIndex = TempDoctors.IndexOf(doctor);
             date = docApp.DateAndTime;
             Calendar.SelectedDate = date;
             change.Visibility = Visibility.Visible;
             reserve.Visibility = Visibility.Collapsed;
-            DateTime d = new DateTime(date.Year, date.Month, date.Day, 8, 0, 0);
-            String.Format("{0:yy.MM.dd HH:mm}", d);
 
             AvailableAppoitments.Clear();
-            AvailableAppoitments.Add(new DoctorAppointment(d, AppointmetType.CheckUp, false, tempRoom, doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 8, 30, 0), AppointmetType.CheckUp, false, tempRoom, doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 0, 0), AppointmetType.CheckUp, false, tempRoom, doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 30, 0), AppointmetType.CheckUp, false, tempRoom, doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 0, 0), AppointmetType.CheckUp, false, tempRoom, doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 30, 0), AppointmetType.CheckUp, false, tempRoom, doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 11, 0, 0), AppointmetType.CheckUp, false, tempRoom, doctor, HomePatient.Instance.patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 8, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 8, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 11, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.patient));
         }
 
         private void changeAppointmentButton(object sender, RoutedEventArgs e)
@@ -118,6 +116,7 @@ namespace Hospital_IS.View
             DoctorAppointment docApp = (DoctorAppointment)listOfAppointments.SelectedItem;
             HomePatient.Instance.patient.AddDoctorAppointment(docApp);
             HomePatient.Instance.patient.RemoveDoctorAppointment(HomePatient.Instance.changedApp);
+            docApp.Reserved = true;
             AvailableAppoitments.Remove(docApp);
         }
     }

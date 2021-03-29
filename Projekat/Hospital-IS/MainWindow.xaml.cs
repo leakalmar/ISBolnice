@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Hospital_IS.View;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Hospital_IS
@@ -31,9 +32,13 @@ namespace Hospital_IS
             {
                 SecretaryMainWindow smw = new SecretaryMainWindow();
                 smw.Show();
+                this.Close();
             }
             else if (email.Text == "pacijent@gmail.com" && password.Password.ToString() == "pacijent")
             {
+                HomePatient patientWindow = new HomePatient();
+                patientWindow.Show();
+                this.Close();
             }
         }
     }
