@@ -24,8 +24,11 @@ namespace Hospital_IS
             
            
             InitializeComponent();
-          
-            Hospital.Room = new ObservableCollection<Room>();
+
+            if (Hospital.Room == null)
+            {
+                Hospital.Room = new ObservableCollection<Room>();
+            }
             DateGridRooms.DataContext = Hospital.Instance;
         }
 

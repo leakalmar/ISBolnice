@@ -22,6 +22,7 @@ namespace Model
 
         private Hospital()
         {
+            
         }
 
         public static Hospital Instance
@@ -69,7 +70,7 @@ namespace Model
             throw new NotImplementedException();
         }
 
-        public static ObservableCollection<Room> Room { get; set; }
+        public static ObservableCollection<Room> Room  { get; set; }
 
        
 
@@ -81,14 +82,17 @@ namespace Model
             {
                 return;
             }
+
             if (Room == null)
             { 
                 Room = new ObservableCollection<Room>();
+                MessageBox.Show("halo555");
             }
+
             if (!Room.Contains(newRoom))
             {
                 Room.Add(newRoom);
-                MessageBox.Show("halo");
+                
             }
         }
 
