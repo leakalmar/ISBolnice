@@ -1,9 +1,18 @@
 using System;
+using System.ComponentModel;
 
 namespace Model
 {
-    public class User
+    public class User : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
         public EducationCategory education { get; set; }
         public int Id { get; set; }
         public String Name { get; set; }
@@ -16,7 +25,7 @@ namespace Model
         public String Password { get; set; }
         public String Address { get; set; }
 
-        public User(int id, string name, string surname, DateTime birthDate, string email, string password, string address)
+        public User(int id, string name, string surname, DateTime birthDate, string address, string email, string password)
         {
             this.Id = id;
             this.Name = name;

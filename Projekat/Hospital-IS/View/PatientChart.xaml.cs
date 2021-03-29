@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Model;
 
 namespace Hospital_IS.View
 {
@@ -18,59 +19,75 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class PatientChart : Window
     {
-        public Model.Patient patient { get; set; }
+        public Appointment Appointment;
 
-        public ObservableCollection<Model.DoctorAppointment> History { get; set; }
-        public ObservableCollection<Model.DoctorAppointment> Future { get; set; }
-
-        public PatientChart()
+        public PatientChart(DoctorAppointment appointment, bool activButton = false, bool endAppointmentBtn = false)
         {
-            ObservableCollection<String> alergije = new ObservableCollection<String>();
-            alergije.Add("Tetanus");
-            alergije.Add("Paracetamol");
-            Model.Room r1 = new Model.Room(Model.RoomType.ConsultingRoom, false, true, 2, 25);
-            Model.Patient p1 = new Model.Patient(001, "Simona", "Vukmanov Simokov", DateTime.Now.Date, "Petra Drapsina 8", "simona@gmail.com", "123", DateTime.Now, "neki poslodavac", alergije);
-            List<Model.WorkDay> dani = new List<Model.WorkDay>
-            {
-                new Model.WorkDay("Pon", DateTime.Now, DateTime.Now)
-            };
-            Model.Specialty spec = new Model.Specialty("Dermatolog");
-            Model.Doctor doc = new Model.Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani,spec);
-            p1.AddDoctorAppointment(new Model.DoctorAppointment(new DateTime(2020, 05, 03, 12, 0, 0),Model.AppointmetType.CheckUp, true, r1, doc));
-            p1.AddDoctorAppointment(new Model.DoctorAppointment(new DateTime(2018, 07, 20, 9, 0, 0), Model.AppointmetType.CheckUp, true, r1, doc));
-            p1.AddDoctorAppointment(new Model.DoctorAppointment(new DateTime(2016, 11, 19, 16, 0, 0), Model.AppointmetType.CheckUp, true, r1, doc));
-
-
             InitializeComponent();
-            this.patient = p1;
+            reportBtn.IsEnabled = activButton;
+            prescriptionBtn.IsEnabled = activButton;
+            testBtn.IsEnabled = activButton;
+            newAppointmentBtn.IsEnabled = activButton;
+            endBtn.IsEnabled = activButton;
 
-            History = new ObservableCollection<Model.DoctorAppointment>();
-            Future = new ObservableCollection<Model.DoctorAppointment>();
-            FindAppointments();
 
-            PersonalData.DataContext = patient;
-            HistoryGrid.DataContext = patient;
-            patientAppointments.DataContext = this;
-            patientHistory.DataContext = this;
+            if (activButton)
+            {
+                cancleBtn.Visibility = Visibility.Hidden;
+                updateBtn.Visibility = Visibility.Hidden;
+                if (endAppointmentBtn)
+                {
+                    endBtn.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    endBtn.Visibility = Visibility.Hidden;
+                }
+                
+            }
+            else
+            {
+                cancleBtn.Visibility = Visibility.Visible;
+                updateBtn.Visibility = Visibility.Visible;
+                endBtn.Visibility = Visibility.Hidden;
+            }
+
+
+
+            Appointment = appointment;
+            PersonalData.DataContext = appointment.Patient;
+            HistoryGrid.DataContext = appointment.Patient;
+            patientAppointments.DataContext = appointment.Patient;
+            patientHistory.DataContext = appointment.Patient;
 
         }
 
-        public void FindAppointments()
+        public void Report_DoubleClicked(object sender, MouseButtonEventArgs e)
         {
-            foreach (Model.DoctorAppointment doc in patient.DoctorAppointment)
-            {
-                if(doc.DateAndTime < DateTime.Now)
-                {
-                    History.Add(doc);
-                }
-                else if(doc.DateAndTime > DateTime.Now)
-                {
-                    Future.Add(doc);
-                }
+            Model.Report report = (Model.Report)patientHistory.SelectedItem;
+            Window window = new Report(report);
+            window.Show();
+        }
 
+        public void ExitBtnClick(object sender, RoutedEventArgs e)
+        {
+            //Treba settovati appointment na zavrsen
+            bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da zavrsite pregled?").ShowDialog();
+            if (dialog)
+            {
+                this.Close();
             }
         }
 
+        public void MinimizeBtnClick(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        public void MaximizeBtnClick(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Maximized;
+        }
     }
 
     

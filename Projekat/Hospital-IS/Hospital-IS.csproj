@@ -8,24 +8,42 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="director.jpg" />
+    <None Remove="employee.jpg" />
     <None Remove="hospital.png" />
     <None Remove="hospital2.png" />
     <None Remove="View\bookmark.png" />
     <None Remove="View\checkmark.png" />
+    <None Remove="View\doctor.jpg" />
+    <None Remove="View\importance.png" />
+    <None Remove="View\maximize.png" />
+    <None Remove="View\minimize.png" />
+    <None Remove="View\minimizee.png" />
     <None Remove="View\pill.png" />
+    <None Remove="View\report.png" />
     <None Remove="View\simona.jpg" />
     <None Remove="View\tube.png" />
+    <None Remove="View\x-icon.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="director.jpg" />
+    <Resource Include="employee.jpg" />
     <Resource Include="hospital.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="View\bookmark.png" />
     <Resource Include="View\checkmark.png" />
+    <Resource Include="View\doctor.jpg" />
+    <Resource Include="View\importance.png" />
+    <Resource Include="View\maximize.png" />
+    <Resource Include="View\minimize.png" />
+    <Resource Include="View\minimizee.png" />
     <Resource Include="View\pill.png" />
+    <Resource Include="View\report.png" />
     <Resource Include="View\simona.jpg" />
     <Resource Include="View\tube.png" />
+    <Resource Include="View\x-icon.png" />
   </ItemGroup>
 
 </Project>

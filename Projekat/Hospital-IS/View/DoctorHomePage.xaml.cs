@@ -15,22 +15,21 @@ namespace Hospital_IS.View
 {
     public partial class DoctorHomePage : Window
     {
-        private int colNum = 0;
         public Model.Doctor Doctor { get; set; }
         public DoctorHomePage()
         {
             InitializeComponent();
-            this.DataContext = this;
             //doctor = new Storages.UserFileStorage.GetByEmail(email);
             List<Model.WorkDay> dani = new List<Model.WorkDay>
             {
                 new Model.WorkDay("Pon", DateTime.Now, DateTime.Now)
             };
             Model.Specialty spec = new Model.Specialty("Dermatolog");
-            Model.Doctor doc = new Model.Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani, spec);
+            Model.Doctor doc = new Model.Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani, spec, null);
             this.Doctor = doc;
+            this.DataContext = new ViewModel.HomePage();
 
-            
+
         }
 
         public void ExitBtnClick(object sender, RoutedEventArgs e)
@@ -50,6 +49,11 @@ namespace Hospital_IS.View
         public void MaximizeBtnClick(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Maximized;
+        }
+
+        private void HomePage_Clicked(object sender, RoutedEventArgs e)
+        {
+            DataContext = new ViewModel.HomePage();
         }
     }
 }

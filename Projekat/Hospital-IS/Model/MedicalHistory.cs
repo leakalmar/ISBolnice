@@ -7,6 +7,14 @@ namespace Model
 
         public ObservableCollection<Prescription> Prescription { get; set; }
 
+        public MedicalHistory()
+        {
+            Prescription = new ObservableCollection < Prescription >();
+            Test = new ObservableCollection<Test>();
+            Reports = new ObservableCollection<Report>();
+            Hospitalization = new ObservableCollection<Hospitalization>();
+        }
+
         public void AddPrescription(Prescription newPrescription)
         {
             if (newPrescription == null)

@@ -1,11 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Model
 {
-    public class Patient : User
+    public class Patient : User, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
         public int ChartId { get; set; }
         public DateTime FileDate { get; set; }
         public String Employer { get; set; }
@@ -19,13 +28,14 @@ namespace Model
             this.FileDate = filedate;
             this.Employer = employer;
             this.Alergies = alergies;
+            this.MedicalHistory = new MedicalHistory();
         }
 
         public Patient()
         {
         }
 
-        public MedicalHistory medicalHistory { get; set; }
+        public MedicalHistory MedicalHistory { get; set; }
 
         public Doctor doctor { get; set; }
 

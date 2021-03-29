@@ -61,8 +61,7 @@ namespace Hospital_IS
 
         public void AddPatient(Model.Patient patient)
         {
-            if (!patient.IsGuest)
-                Patients.Add(patient);
+            Patients.Add(patient);
         }
         private void DeletePatient(object sender, RoutedEventArgs e)
         {
