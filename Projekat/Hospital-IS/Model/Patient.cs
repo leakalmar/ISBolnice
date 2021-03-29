@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Model
 {
@@ -56,7 +57,7 @@ namespace Model
         }
 
 
-        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
+        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; } = new ObservableCollection<DoctorAppointment>();
 
         public void AddDoctorAppointment(DoctorAppointment newDoctorAppointment)
         {

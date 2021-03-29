@@ -13,7 +13,7 @@ namespace Model
         public bool Test { get; set; }
 
 
-        private Report(DoctorAppointment ap, String cause, String detail, bool recipe=false, bool test=false) : base(ap.DateAndTime, ap.Type, ap.Reserved, ap.Room, ap.Doctor)
+        private Report(DoctorAppointment ap, String cause, String detail, bool recipe=false, bool test=false) : base(ap.DateAndTime, ap.Type, ap.Reserved, ap.Room, ap.Doctor, ap.patient)
         {
             this.DoctorApp = ap;
             this.Cause = cause;

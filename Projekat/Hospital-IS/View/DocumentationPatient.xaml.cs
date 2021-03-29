@@ -21,5 +21,25 @@ namespace Hospital_IS.View
         {
             InitializeComponent();
         }
+
+        private void home(object sender, RoutedEventArgs e)
+        {
+            HomePatient.Instance.Show();
+            this.Close();
+        }
+
+        private void reserveApp(object sender, RoutedEventArgs e)
+        {
+            AppointmentPatient ap = new AppointmentPatient();
+            ap.Show();
+            this.Close();
+        }
+
+        private void showAll(object sender, RoutedEventArgs e)
+        {
+            AllAppointments allApp = new AllAppointments();
+            allApp.Show();
+            this.Close();
+        }
     }
 }

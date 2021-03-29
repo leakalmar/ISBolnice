@@ -36,9 +36,9 @@ namespace Hospital_IS.View
             };
             Model.Specialty spec = new Model.Specialty("Dermatolog");
             Model.Doctor doc = new Model.Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani,spec);
-            p1.AddDoctorAppointment(new Model.DoctorAppointment(new DateTime(2020, 05, 03, 12, 0, 0),Model.AppointmetType.CheckUp, true, r1, doc));
-            p1.AddDoctorAppointment(new Model.DoctorAppointment(new DateTime(2018, 07, 20, 9, 0, 0), Model.AppointmetType.CheckUp, true, r1, doc));
-            p1.AddDoctorAppointment(new Model.DoctorAppointment(new DateTime(2016, 11, 19, 16, 0, 0), Model.AppointmetType.CheckUp, true, r1, doc));
+            p1.AddDoctorAppointment(new Model.DoctorAppointment(new DateTime(2020, 05, 03, 12, 0, 0),Model.AppointmetType.CheckUp, true, r1, doc,p1));
+            p1.AddDoctorAppointment(new Model.DoctorAppointment(new DateTime(2018, 07, 20, 9, 0, 0), Model.AppointmetType.CheckUp, true, r1, doc,p1));
+            p1.AddDoctorAppointment(new Model.DoctorAppointment(new DateTime(2016, 11, 19, 16, 0, 0), Model.AppointmetType.CheckUp, true, r1, doc,p1));
 
 
             InitializeComponent();

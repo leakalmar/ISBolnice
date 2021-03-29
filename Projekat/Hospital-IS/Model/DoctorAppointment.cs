@@ -8,9 +8,10 @@ namespace Model
         public String Detail { get; set; }
 
 
-        public DoctorAppointment(DateTime date, AppointmetType type, bool reserved, Room room, Doctor doc) : base(date, type, reserved, room)
+        public DoctorAppointment(DateTime date, AppointmetType type, bool reserved, Room room, Doctor doc, Patient pat) : base(date, type, reserved, room)
         {
             this.doctor = doc;
+            this.patient = pat;
         }
 
         public void SetAdmitted(Patient patient)

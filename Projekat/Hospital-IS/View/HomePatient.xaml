@@ -76,54 +76,51 @@
         <Button x:Name="ReserveApp" Grid.Column="0" Grid.Row="6" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="reserveApp">Zakaži pregled</Button>
         <Button x:Name="AllApp" Grid.Column="0" Grid.Row="7" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="allApp" >Moji pregledi</Button>
         <Button x:Name="Doc" Grid.Column="0" Grid.Row="8" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="showDoc">Dokumentacija</Button>
-        <StackPanel Grid.RowSpan="8" Grid.Row="2" Grid.Column="1">
+        <StackPanel x:Name="PersonalData" Grid.RowSpan="8" Grid.Row="2" Grid.Column="1">
             <Grid>
                 <Label Content="Ime:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <Label x:Name="Name" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+                <Label x:Name="Name" Content="{Binding Path=Name}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
             </Grid>
             <Grid>
                 <Label Content="Prezime:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <Label x:Name="Surname"  HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+                <Label x:Name="Surname" Content="{Binding Path=Surname}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
             </Grid>
             <Grid>
                 <Label Content="ID:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <Label x:Name="Id"  HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+                <Label x:Name="Id"  Content="{Binding Path=Id}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
             </Grid>
-            <Grid>
-                <Label Content="Broj kartona:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <Label x:Name="CharId"  HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
-            </Grid>
+      
             <Grid>
                 <Label Content="Datum rođenja:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <Label x:Name="Birth"  HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+                <Label x:Name="Birth"  Content="{Binding Path=BirthDate}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
             </Grid>
             <Grid>
                 <Label Content="Adresa:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <Label x:Name="Address"  HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+                <Label x:Name="Address"  Content="{Binding Path=Address}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
             </Grid>
             <Grid >
                 <Label Content="Kreiran nalog:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <Label x:Name="FileDate"  HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+                <Label x:Name="FileDate"  Content="{Binding Path=FileDate, ConverterCulture='de-DE'}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
             </Grid>
             <Grid>
-                <Label Content="Broj telefona:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <Label x:Name="Phone"  HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+                <Label Content="Radno mesto:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
+                <Label x:Name="Employer" Content="{Binding Path=Employer}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
             </Grid>
             <Grid>
                 <Label Content="Email:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <Label x:Name="Email" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+                <Label x:Name="Email" Content="{Binding Path=Email}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
             </Grid>
         </StackPanel>
 
         <Label Content="Lista pregleda:" Grid.Row="1" Grid.Column="2" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
-        <DataGrid x:Name="dataGridAppoitment"  ItemsSource="{Binding doctorAppointment, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="2" Grid.Row="2" Grid.RowSpan="8" Margin="10,10,30,150">
+        <DataGrid x:Name="dataGridAppointment"  ItemsSource="{Binding doctorAppointment, Mode=TwoWay}" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="2" Grid.Row="2" Grid.RowSpan="8" Margin="10,10,30,150">
             <DataGrid.Columns >
-                <DataGridTextColumn Header="Datum"  Binding="{Binding Date, StringFormat=f}" Width="*"/>
-                <!--DataGridTextColumn Header="Vreme"  Width="150/-->
-                <!--DataGridCheckBoxColumn Header="Doktor"  Width="*"/-->
+                <DataGridTextColumn Header="Datum i vreme" Binding="{Binding DateAndTime, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" Width="200"/>
+                <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor.Name}" Width="200"/>
+                <DataGridTextColumn Header="Soba" Binding="{Binding Room.RoomIdFloor}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="changeApp" Grid.Column="2" Grid.Row="10" Margin="250,230,200,60" Foreground="#FFFDFAFA" FontSize="16" Cursor="Hand">
+        <Button x:Name="changeApp" Grid.Column="2" Grid.Row="10" Margin="250,230,200,60" Foreground="#FFFDFAFA" FontSize="16" Cursor="Hand" Click="changeAppointment">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -132,7 +129,7 @@
                 </LinearGradientBrush>
             </Button.Background> Izmeni termin
         </Button>
-        <Button x:Name="deleteApp" Grid.Column="2" Grid.Row="10" Margin="420,230,30,60" Foreground="White" FontSize="16" Cursor="Hand">
+        <Button x:Name="deleteApp" Grid.Column="2" Grid.Row="10" Margin="420,230,30,60" Foreground="White" FontSize="16" Cursor="Hand" Click="deleteAppointment">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>

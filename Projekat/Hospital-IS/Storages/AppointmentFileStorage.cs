@@ -17,9 +17,9 @@ namespace Storages
             };
             Model.Specialty spec = new Model.Specialty("Dermatolog");
             Model.Doctor doc = new Model.Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani,spec);
-            Appointment a1 = new DoctorAppointment(DateTime.Now, AppointmetType.CheckUp, true, r,doc);
-            Appointment a2 = new DoctorAppointment(DateTime.Now, AppointmetType.Operation, true, r, doc);
-            Appointment a3 = new DoctorAppointment(DateTime.Now, AppointmetType.CheckUp, true, r, doc);
+            Appointment a1 = new DoctorAppointment(DateTime.Now, AppointmetType.CheckUp, true, r,doc,patient);
+            Appointment a2 = new DoctorAppointment(DateTime.Now, AppointmetType.Operation, true, r, doc,patient);
+            Appointment a3 = new DoctorAppointment(DateTime.Now, AppointmetType.CheckUp, true, r, doc,patient);
 
             List<Appointment> all = new List<Appointment>();
             all.Add(a1);

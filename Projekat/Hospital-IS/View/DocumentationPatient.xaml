@@ -63,9 +63,9 @@
         <Image Source="../hospital.png" Width="250" Height="250" Grid.RowSpan="5"/>
         <Button x:Name="Logout" Grid.Column="1" Grid.Row="0" Margin="850,0,0,0" Background="{x:Null}" FontSize="16" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand">Odjavi se</Button>
 
-        <Button x:Name="Home" Grid.Column="0" Grid.Row="5" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Background="{x:Null}">Početna strana</Button>
-        <Button x:Name="ReserveApp" Grid.Column="0" Grid.Row="6" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Background="{x:Null}">Zakaži pregled</Button>
-        <Button x:Name="AllApp" Grid.Column="0" Grid.Row="7" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Background="{x:Null}">Moji pregledi</Button>
+        <Button x:Name="Home" Grid.Column="0" Grid.Row="5" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Background="{x:Null}" Click="home">Početna strana</Button>
+        <Button x:Name="ReserveApp" Grid.Column="0" Grid.Row="6" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Background="{x:Null}" Click="reserveApp">Zakaži pregled</Button>
+        <Button x:Name="AllApp" Grid.Column="0" Grid.Row="7" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Background="{x:Null}" Click="showAll">Moji pregledi</Button>
         <Button x:Name="Doc" Grid.Column="0" Grid.Row="8" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
