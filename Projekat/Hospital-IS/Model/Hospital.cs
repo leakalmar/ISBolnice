@@ -76,8 +76,6 @@ namespace Model
 
         public void AddRoom(Room newRoom)
         {
-
-
             if (newRoom == null)
             {
                 return;
@@ -85,8 +83,8 @@ namespace Model
 
             if (Room == null)
             { 
-                Room = new ObservableCollection<Room>();
-                MessageBox.Show("halo555");
+              Room = new ObservableCollection<Room>();
+                
             }
 
             if (!Room.Contains(newRoom))

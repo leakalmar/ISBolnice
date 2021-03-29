@@ -29,6 +29,7 @@ namespace Hospital_IS
             {
                 Hospital.Room = new ObservableCollection<Room>();
             }
+
             DateGridRooms.DataContext = Hospital.Instance;
         }
 
