@@ -49,6 +49,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
+        
         <TextBlock Text="PROFIL" Grid.Row="1" Grid.Column="1" FontSize="35" Grid.ColumnSpan="5" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" />
         <TextBlock Text="OPCIJE" Grid.Row="5" Grid.Column="4" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" RenderTransformOrigin="-0.352,9.851" Margin="45,0,0,0"/>
         <Image x:Name="Manager" Source="director.jpg" Height="100" Width="100" Grid.Row="3" Grid.Column="2"/>

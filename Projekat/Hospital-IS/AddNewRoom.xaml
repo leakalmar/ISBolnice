@@ -33,7 +33,7 @@
         <Button x:Name="potvrdi"   Content="Potvrdi"  HorizontalAlignment="Left" Margin="92,419,0,0" VerticalAlignment="Top" Width="75" Height="20" FontSize="13" Click="potvrdi_Click"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="250,419,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.356,0.408" Width="75" Height="20" FontSize="13" Click="Button_Click"/>
         <Button  BorderThickness="0" Foreground="White" Background="Transparent" Content="NAZAD" HorizontalAlignment="Left" Margin="33,52,0,0" VerticalAlignment="Top" Width="97" Height="21" />
-        <TextBlock HorizontalAlignment="Left" Margin="68,108,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="68,108,0,0" Text="Broj sprata" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBox x:Name="FloorId" HorizontalAlignment="Left" Margin="250,108,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
 
