@@ -35,7 +35,6 @@ C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\bin\Debug\netcorea
 C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\bin\Debug\netcoreapp3.1\Hospital-IS.runtimeconfig.dev.json
 C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\bin\Debug\netcoreapp3.1\Hospital-IS.dll
 C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\bin\Debug\netcoreapp3.1\Hospital-IS.pdb
-C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.csprojAssemblyReference.cache
 C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\AddNewRoom.g.cs
 C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\MainWindow.g.cs
 C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\PatientRegistration.g.cs
@@ -70,3 +69,11 @@ C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcorea
 C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\Hospital-IS.genruntimeconfig.cache
 C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\DeleteRoom.g.cs
 C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\DeleteRoom.baml
+C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\AllAppointments.g.cs
+C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\AppointmentPatient.g.cs
+C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\DocumentationPatient.g.cs
+C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\HomePatient.g.cs
+C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\AllAppointments.baml
+C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\AppointmentPatient.baml
+C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\DocumentationPatient.baml
+C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\View\HomePatient.baml
