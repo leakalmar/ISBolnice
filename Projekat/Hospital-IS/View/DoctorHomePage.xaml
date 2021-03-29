@@ -4,11 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital_IS.View"
+        xmlns:viewmodel="clr-namespace:Hospital_IS.ViewModel"
         mc:Ignorable="d"
         Title="DoctorHomePage" Height="500" Width="800"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None" Background="Transparent"
         AllowsTransparency="True">
+
+    <Window.Resources>
+        <DataTemplate x:Name="homePageTemplete" DataType="{x:Type viewmodel:HomePage}">
+            <local:UserControlHomePage DataContext="{Binding}"/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.03*"/>
@@ -80,7 +87,7 @@
                 <RowDefinition Height="0.1*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Grid.Column="0">
-                <Button Content="Termini" Foreground="FloralWhite" MinWidth="144" MinHeight="30" BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" FontFamily="Cambria Math" />
+                <Button Content="Termini" Foreground="FloralWhite" MinWidth="144" MinHeight="30" BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" FontFamily="Cambria Math" Click="HomePage_Clicked" />
                 <Button Content="Pacijenti" Foreground="FloralWhite" MinWidth="144" MinHeight="30" BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" FontFamily="Cambria Math"/>
                 <Button Content="Lekovi" Foreground="FloralWhite" MinWidth="144" MinHeight="30" BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" FontFamily="Cambria Math"/>
                 <Button Content="Sobe" Foreground="FloralWhite" MinWidth="144" MinHeight="30" BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" FontFamily="Cambria Math"/>
@@ -93,7 +100,7 @@
 
         </Grid>
 
-        <Frame Grid.Row="1" Grid.Column="3" Grid.RowSpan="6"/>
+        <ContentControl Grid.Row="1" Grid.Column="3" Grid.RowSpan="6" Content="{Binding}"/>
 
     </Grid>
 </Window>

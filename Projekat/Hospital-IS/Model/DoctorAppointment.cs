@@ -7,71 +7,25 @@ namespace Model
         public String Cause { get; set; }
         public String Detail { get; set; }
 
+        public String NameSurnamePatient { get; set; }
 
-        public DoctorAppointment(DateTime date, AppointmetType type, bool reserved, Room room, Doctor doc, Patient pat) : base(date, type, reserved, room)
+
+        public DoctorAppointment(DateTime date, AppointmetType type, bool reserved, Room room, Doctor doc, Patient patient) : base(date, type, reserved, room)
         {
-            this.doctor = doc;
-            this.patient = pat;
+            this.NameSurnamePatient = patient.Name + " " + patient.Surname;
+            this.Doctor = doc;
+            this.Patient = patient;
         }
 
         public void SetAdmitted(Patient patient)
         {
             throw new NotImplementedException();
         }
-
-        public Patient patient;
-
-        public Patient Patient
-        {
-            get
-            {
-                return patient;
-            }
-            set
-            {
-                if (this.patient == null || !this.patient.Equals(value))
-                {
-                    if (this.patient != null)
-                    {
-                        Patient oldPatient = this.patient;
-                        this.patient = null;
-                        oldPatient.RemoveDoctorAppointment(this);
-                    }
-                    if (value != null)
-                    {
-                        this.patient = value;
-                        this.patient.AddDoctorAppointment(this);
-                    }
-                }
-            }
-        }
+        public Patient Patient { get; set; }
         public Doctor doctor;
 
 
-        public Doctor Doctor
-        {
-            get
-            {
-                return doctor;
-            }
-            set
-            {
-                if (this.doctor == null || !this.doctor.Equals(value))
-                {
-                    if (this.doctor != null)
-                    {
-                        Doctor oldDoctor = this.doctor;
-                        this.doctor = null;
-                        oldDoctor.RemoveDoctorAppointment(this);
-                    }
-                    if (value != null)
-                    {
-                        this.doctor = value;
-                        this.doctor.AddDoctorAppointment(this);
-                    }
-                }
-            }
-        }
+        public Doctor Doctor { get; set; }
 
     }
 }

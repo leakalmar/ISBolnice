@@ -19,6 +19,15 @@
     <Compile Update="View\HomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Report.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UCPatientChart.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UserControlHomePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="DeleteRoom.xaml">
@@ -34,6 +43,15 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\HomePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Report.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UCPatientChart.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserControlHomePage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
