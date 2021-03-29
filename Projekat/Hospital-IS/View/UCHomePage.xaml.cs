@@ -48,9 +48,9 @@ namespace Hospital_IS.View
             report.AddTest(test);
             p1.MedicalHistory.AddReport(report);
 
-            DoctorAppointment a1 = new DoctorAppointment(new DateTime(2020, 05, 05), AppointmetType.CheckUp, true, r, doc, p1);
-            DoctorAppointment a2 = new DoctorAppointment(new DateTime(2021, 07, 05), AppointmetType.Operation, true, r, doc, p1);
-            DoctorAppointment a3 = new DoctorAppointment(DateTime.Now.AddHours(1), AppointmetType.CheckUp, true, r, doc, p1);
+            DoctorAppointment a1 = new DoctorAppointment(new DateTime(2020, 05, 05), AppointmetType.CheckUp, true, new Room(RoomType.ConsultingRoom, true, true, 1, 1), doc, p1);
+            DoctorAppointment a2 = new DoctorAppointment(new DateTime(2021, 07, 05), AppointmetType.Operation, true, new Room(RoomType.ConsultingRoom, true, true, 1, 1), doc, p1);
+            DoctorAppointment a3 = new DoctorAppointment(DateTime.Now, AppointmetType.CheckUp, true, new Room(RoomType.ConsultingRoom, true, true, 1, 1), doc, p1);
             doc.AddDoctorAppointment(a1);
             doc.AddDoctorAppointment(a2);
             doc.AddDoctorAppointment(a3);

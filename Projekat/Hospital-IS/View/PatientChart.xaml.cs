@@ -19,7 +19,8 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class PatientChart : Window
     {
-        public Appointment Appointment;
+        public DoctorAppointment Appointment;
+        public DoctorSetAppointment scheduled;
 
         public PatientChart(DoctorAppointment appointment, bool activButton = false, bool endAppointmentBtn = false)
         {
@@ -87,6 +88,29 @@ namespace Hospital_IS.View
         public void MaximizeBtnClick(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Maximized;
+        }
+
+        private void appointmentBtn(object sender, RoutedEventArgs e)
+        {
+            if(scheduled == null)
+            {
+                scheduled = new DoctorSetAppointment();
+            }
+            scheduled.Show();
+
+        }
+
+        private void updateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Window w = new DoctorSetAppointment(Appointment);
+            w.Show();
+        }
+
+        private void CancleBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Appointment.Patient.DoctorAppointment.Remove(Appointment);
+            Appointment.Doctor.DoctorAppointment.Remove(Appointment);
+            this.Close();
         }
     }
 

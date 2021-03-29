@@ -199,7 +199,8 @@
 
             <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal" 
                         HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button x:Name="newAppointmentBtn" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                <Button x:Name="newAppointmentBtn" Background="{x:Null}" BorderBrush="{x:Null}" 
+                        Foreground="{x:Null}" Click="appointmentBtn">
                     <StackPanel Orientation="Horizontal" Background="Transparent">
                         <Image Source="bookmark.png"/>
                         <Label Content="Novi termin" Foreground="WhiteSmoke" 
@@ -274,7 +275,8 @@
 
             <DockPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" 
                        VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Button x:Name="updateBtn" Background="{x:Null}" Foreground="{x:Null}" Click="ExitBtnClick" Margin="0,0,100,0">
+                <Button x:Name="updateBtn" Background="{x:Null}" Foreground="{x:Null}" 
+                        Margin="0,0,100,0" Click="updateBtn_Click">
                     <Button.BorderBrush>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="Black"/>
@@ -285,7 +287,8 @@
                                FontFamily="MS Reference Sans Serif" FontSize="14" 
                                VerticalContentAlignment="Center"/>
                 </Button>
-                <Button x:Name="cancleBtn" Background="{x:Null}" Foreground="{x:Null}" Click="ExitBtnClick" Margin="100,0,0,0" Visibility="Visible">
+                <Button x:Name="cancleBtn" Background="{x:Null}" Foreground="{x:Null}" 
+                        Margin="100,0,0,0" Visibility="Visible" Click="CancleBtn_Click">
                     <Button.BorderBrush>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="Black"/>

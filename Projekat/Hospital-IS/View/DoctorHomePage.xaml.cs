@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Model;
 
 namespace Hospital_IS.View
 {
@@ -19,17 +20,14 @@ namespace Hospital_IS.View
         public DoctorHomePage()
         {
             InitializeComponent();
-            //doctor = new Storages.UserFileStorage.GetByEmail(email);
             List<Model.WorkDay> dani = new List<Model.WorkDay>
             {
                 new Model.WorkDay("Pon", DateTime.Now, DateTime.Now)
             };
             Model.Specialty spec = new Model.Specialty("Dermatolog");
-            Model.Doctor doc = new Model.Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani, spec, null);
+            Model.Doctor doc = new Model.Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "doktor@gmail.com", "doktor", "Brace Radica 30", 60000.0, DateTime.Now, dani, spec, new Room(RoomType.ConsultingRoom, true, true, 1, 1));
             this.Doctor = doc;
             this.DataContext = new ViewModel.HomePage();
-
-
         }
 
         public void ExitBtnClick(object sender, RoutedEventArgs e)

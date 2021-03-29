@@ -19,6 +19,9 @@
     <Compile Update="SecretaryMainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\DoctorSetAppointment.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\HomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,7 +31,7 @@
     <Compile Update="View\UCPatientChart.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\UserControlHomePage.xaml.cs">
+    <Compile Update="View\UCHomePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -48,6 +51,9 @@
     <Page Update="SecretaryMainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\DoctorSetAppointment.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\HomePage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -57,7 +63,7 @@
     <Page Update="View\UCPatientChart.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\UserControlHomePage.xaml">
+    <Page Update="View\UCHomePage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
