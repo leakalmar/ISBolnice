@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\Users (D)\Desktop\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\
+C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\obj\Debug\netcoreapp3.1\
 Hospital_IS
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
-D:\Users (D)\Desktop\ISBolnice\Projekat\Hospital-IS\App.xaml
-20-313952961
+C:\Users\Jovanovic\git\Bolnica\ISBolnice\Projekat\Hospital-IS\App.xaml
+20468902101
 
-51-314162428
-1921654412462
+51-2087545424
+192-1533232326
 AddNewRoom.xaml;DeleteRoom.xaml;MainWindow.xaml;PatientRegistration.xaml;PatientView.xaml;Rooms.xaml;SecretaryMainWindow.xaml;UpdateRoom.xaml;View\AllAppointments.xaml;View\AppointmentPatient.xaml;View\DoctorHomePage.xaml;View\DocumentationPatient.xaml;View\ExitMess.xaml;View\HomePage.xaml;View\HomePatient.xaml;View\PatientChart.xaml;View\Report.xaml;View\UCPatientChart.xaml;View\UserControlHomePage.xaml;Window1.xaml;
 
 False
