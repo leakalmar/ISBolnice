@@ -107,7 +107,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Vreme i datum" Width="200" Binding="{Binding DateAndTime,StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" CanUserResize="False" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor.Name}" Width="150"/>
-                    <DataGridTextColumn Header="Soba" Binding="{Binding Room.RoomIdFloor}" Width="150"/>
+                    <DataGridTextColumn Header="Soba" Binding="{Binding Room.RoomId}" Width="150"/>
                     <DataGridCheckBoxColumn Header="Rezervisan" Binding="{Binding Reserved}" Width="*" CanUserResize="False" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
