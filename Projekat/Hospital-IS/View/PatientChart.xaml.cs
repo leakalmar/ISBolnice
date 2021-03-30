@@ -10,7 +10,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Hospital_IS.Storages;
 using Model;
+using Storages;
 
 namespace Hospital_IS.View
 {
@@ -20,7 +22,8 @@ namespace Hospital_IS.View
     public partial class PatientChart : Window
     {
         public DoctorAppointment Appointment;
-        public DoctorAppointment newAppointment;
+        AppointmentFileStorage afs = new AppointmentFileStorage();
+        ObservableCollection<DoctorAppointment> patientDocApp { get; set; }
 
         public PatientChart(DoctorAppointment appointment, bool activButton = false, bool endAppointmentBtn = false)
         {
@@ -54,11 +57,11 @@ namespace Hospital_IS.View
             }
 
 
-
+            patientDocApp = afs.GetAllByPatient(appointment.Patient.Id);
             Appointment = appointment;
             PersonalData.DataContext = appointment.Patient;
             HistoryGrid.DataContext = appointment.Patient;
-            patientAppointments.DataContext = appointment.Patient;
+            patientAppointments.DataContext = patientDocApp;
             patientHistory.DataContext = appointment.Patient;
 
         }
@@ -98,14 +101,17 @@ namespace Hospital_IS.View
 
         private void updateBtn_Click(object sender, RoutedEventArgs e)
         {
-            Window w = new DoctorSetAppointment(Appointment);
+            Window w = new DoctorSetAppointment(Appointment,true);
             w.Show();
         }
 
         private void CancleBtn_Click(object sender, RoutedEventArgs e)
         {
-            Appointment.Patient.RemoveDoctorAppointment(Appointment);
-            Appointment.Doctor.RemoveDoctorAppointment(Appointment);
+            Hospital.Instance.allAppointments.Remove(Appointment);
+            DoctorHomePage.Instance.DoctorAppointment.Remove(Appointment);
+            MainWindow login = new MainWindow();
+            AppointmentFileStorage afs = new AppointmentFileStorage();
+            afs.SaveAppointment(Hospital.Instance.allAppointments);
             this.Close();
         }
 

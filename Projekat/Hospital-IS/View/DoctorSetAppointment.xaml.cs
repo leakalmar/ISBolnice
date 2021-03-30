@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Model;
+using Storages;
 
 namespace Hospital_IS.View
 {
@@ -22,6 +23,9 @@ namespace Hospital_IS.View
         public ObservableCollection<DoctorAppointment> AvailableAppoitments { get; set; }
         public ObservableCollection<Doctor> TempDoctors { get; set; }
         public DoctorAppointment Appointment { get; set; }
+        RoomStorage rs =  new RoomStorage();
+
+
         public ObservableCollection<Room> TempRooms { get; set; }
         public WorkDay day;
         public Doctor doctor;
@@ -34,34 +38,25 @@ namespace Hospital_IS.View
             this.DataContext = this;
             AvailableAppoitments = new ObservableCollection<DoctorAppointment>();
             TempDoctors = new ObservableCollection<Doctor>();
-            TempRooms = new ObservableCollection<Room>();
+            TempRooms = rs.GetAll();
 
 
             Room tempRoom = new Room(RoomType.ConsultingRoom, true, true, 1, 5);
             day = new WorkDay(Day.Monday, new DateTime(2021, 3, 29, 8, 0, 0), new DateTime(2021, 3, 29, 16, 0, 0));
             List<WorkDay> days = new List<WorkDay>();
             days.Add(day);
-            Doctor tempDoctor = new Doctor(1, "Doktor", "Doca", new DateTime(1976, 5, 5), "doca@gmail.com", null, "Laze Kostica 55,Novi Sad", 70000, new DateTime(2018, 5, 5), days, new Specialty("dermatolog"), tempRoom);
-            Doctor tempDoctor1 = new Doctor(1, "Doktor2", "Doca2", new DateTime(1977, 5, 5), "doca@gmail.com", null, "Laze Kostica 55,Novi Sad", 70000, new DateTime(2018, 5, 5), days, new Specialty("dermatolog"), tempRoom);
+            Doctor tempDoctor = new Doctor(1, "Doktor", "Doca", new DateTime(1976, 5, 5), "doca@gmail.com", null, "Laze Kostica 55,Novi Sad", 70000, new DateTime(2018, 5, 5), days, new Specialty("dermatolog"), tempRoom.RoomId);
+            Doctor tempDoctor1 = new Doctor(1, "Doktor2", "Doca2", new DateTime(1977, 5, 5), "doca@gmail.com", null, "Laze Kostica 55,Novi Sad", 70000, new DateTime(2018, 5, 5), days, new Specialty("dermatolog"), tempRoom.RoomId);
             TempDoctors.Add(tempDoctor);
             TempDoctors.Add(tempDoctor1);
             TempDoctors.Add(DoctorHomePage.Instance.Doctor);
 
-            TempRooms.Add(new Room(RoomType.ConsultingRoom, true, true, 1, 2));
-            TempRooms.Add(new Room(RoomType.ConsultingRoom, true, true, 1, 3));
-            TempRooms.Add(new Room(RoomType.ConsultingRoom, true, true, 1, 4));
-            TempRooms.Add(tempRoom);
-            TempRooms.Add(new Room(RoomType.OperationRoom, true, true, 1, 6));
-            TempRooms.Add(new Room(RoomType.OperationRoom, true, true, 1, 7));
-            TempRooms.Add(new Room(RoomType.OperationRoom, true, true, 1, 8));
-            TempRooms.Add(DoctorHomePage.Instance.Doctor.PrimaryRoom);
 
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 8, 30, 0), AppointmetType.CheckUp, false, TempRooms[0], doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 0, 0), AppointmetType.CheckUp, false, TempRooms[1], doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 30, 0), AppointmetType.CheckUp, false, TempRooms[2], doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 0, 0), AppointmetType.CheckUp, false, TempRooms[3], doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 30, 0), AppointmetType.CheckUp, false, TempRooms[4], doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 11, 0, 0), AppointmetType.CheckUp, false, TempRooms[5], doctor, HomePatient.Instance.patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 8, 30, 0), AppointmetType.CheckUp, false, TempRooms[0].RoomId, doctor, appointment.Patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 0, 0), AppointmetType.CheckUp, false, TempRooms[1].RoomId, doctor, appointment.Patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 30, 0), AppointmetType.CheckUp, false, TempRooms[2].RoomId, doctor, appointment.Patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 0, 0), AppointmetType.CheckUp, false, TempRooms[3].RoomId, doctor, appointment.Patient));
+            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 30, 0), AppointmetType.CheckUp, false, TempRooms[4].RoomId, doctor, appointment.Patient));
 
             rooms.SelectedItem = appointment.Doctor.PrimaryRoom;
             Doctors.SelectedItem = appointment.Doctor;
@@ -87,33 +82,75 @@ namespace Hospital_IS.View
             //   if(tempRoom.RoomId == r.Room.RoomId && tempRoom.RoomFloor == r.Room.RoomFloor && tempRoom.Type.Equals(r.Room.Type))
             //  AvailableAppoitments.Add(r);
             //}
+            ObservableCollection<DoctorAppointment> appList = new ObservableCollection<DoctorAppointment>();
+            DoctorAppointment app1 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 8, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, Appointment.Patient);
+            appList.Add(app1);
+            DoctorAppointment app2 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 8, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, Appointment.Patient);
+            appList.Add(app2);
+            DoctorAppointment app3 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, Appointment.Patient);
+            appList.Add(app3);
+            DoctorAppointment app4 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, Appointment.Patient);
+            appList.Add(app4);
+            DoctorAppointment app5 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, Appointment.Patient);
+            appList.Add(app5);
+            DoctorAppointment app6 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, Appointment.Patient);
+            appList.Add(app6);
+            DoctorAppointment app7 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 11, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, Appointment.Patient);
+            appList.Add(app7);
+
             AvailableAppoitments.Clear();
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 8, 0, 0), AppointmetType.CheckUp, false, tempRoom, doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 8, 30, 0), AppointmetType.CheckUp, false, tempRoom, doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 0, 0), AppointmetType.CheckUp, false, tempRoom, doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 30, 0), AppointmetType.CheckUp, false, tempRoom, doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 0, 0), AppointmetType.CheckUp, false, tempRoom, doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 30, 0), AppointmetType.CheckUp, false, tempRoom, doctor, HomePatient.Instance.patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 11, 0, 0), AppointmetType.CheckUp, false, tempRoom, doctor, HomePatient.Instance.patient));
+            bool flag = false;
+            foreach (DoctorAppointment ap in appList)
+            {
+                foreach (DoctorAppointment hospital in Hospital.Instance.allAppointments)
+                {
+                    if (ap.DateAndTime == hospital.DateAndTime)
+                        flag = true;
+                }
+                if (flag == false)
+                {
+                    AvailableAppoitments.Add(ap);
+                }
+                else
+                {
+                    flag = false;
+                }
+            }
         }
 
         private void reserveAppointment(object sender, RoutedEventArgs e)
         {
             DoctorAppointment docApp = (DoctorAppointment)listOfAppointments.SelectedItem;
-            DoctorHomePage.Instance.Doctor.AddDoctorAppointment(docApp);
-            Appointment.Patient.AddDoctorAppointment(docApp);
+            Hospital.Instance.AddAppointment(docApp);
+            DoctorHomePage.Instance.DoctorAppointment.Add(docApp);
+            Appointment.Reserved = true;
             AvailableAppoitments.Remove(docApp);
+            MainWindow login = new MainWindow();
+            AppointmentFileStorage afs = new AppointmentFileStorage();
+            afs.SaveAppointment(Hospital.Instance.allAppointments);
             this.Close();
         }
 
         private void changeAppointmentButton(object sender, RoutedEventArgs e)
         {
             DoctorAppointment docApp = (DoctorAppointment)listOfAppointments.SelectedItem;
-            DoctorHomePage.Instance.Doctor.RemoveDoctorAppointment(Appointment);
-            DoctorHomePage.Instance.Doctor.AddDoctorAppointment(docApp);
-            Appointment.Patient.AddDoctorAppointment(docApp);
-            Appointment.Patient.RemoveDoctorAppointment(Appointment);
+
+            Hospital.Instance.RemoveAppointment(Appointment);
+
+
+            DoctorHomePage.Instance.DoctorAppointment.Remove(Appointment);
+            Appointment.Reserved = false;
+            AvailableAppoitments.Add(Appointment);
+
+            Hospital.Instance.AddAppointment(docApp);
+            DoctorHomePage.Instance.DoctorAppointment.Add(docApp);
+            docApp.Reserved = true;
             AvailableAppoitments.Remove(docApp);
+
+            MainWindow login = new MainWindow();
+            AppointmentFileStorage afs = new AppointmentFileStorage();
+            afs.SaveAppointment(Hospital.Instance.allAppointments);
+
             this.Close();
         }
 

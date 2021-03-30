@@ -21,12 +21,11 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class UserControlHomePage : UserControl
     {
-        public Doctor Doctor { get; set; }
+        public ObservableCollection<DoctorAppointment> appointments;
         public UserControlHomePage()
         {
             InitializeComponent();
-            this.Doctor = DoctorHomePage.Instance.Doctor;
-            docotrAppointments.DataContext = Doctor.DoctorAppointment;
+            docotrAppointments.DataContext = DoctorHomePage.Instance.DoctorAppointment;
         }
 
         private void Patient_Selected(object sender, KeyEventArgs e)

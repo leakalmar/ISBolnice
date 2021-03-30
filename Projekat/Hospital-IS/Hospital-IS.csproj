@@ -18,7 +18,6 @@
     <None Remove="View\importance.png" />
     <None Remove="View\maximize.png" />
     <None Remove="View\minimize.png" />
-    <None Remove="View\minimizee.png" />
     <None Remove="View\pill.png" />
     <None Remove="View\report.png" />
     <None Remove="View\simona.jpg" />
@@ -42,7 +41,6 @@
     <Resource Include="Resources\importance.png" />
     <Resource Include="Resources\maximize.png" />
     <Resource Include="Resources\minimize.png" />
-    <Resource Include="View\minimizee.png" />
     <Resource Include="Resources\pill.png" />
     <Resource Include="Resources\report.png" />
     <Resource Include="Resources\simona.jpg" />

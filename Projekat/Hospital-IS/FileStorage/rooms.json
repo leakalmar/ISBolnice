@@ -9,5 +9,49 @@
     "Type": 2,
     "Equipment": [],
     "Appointment": []
+  },
+  {
+    "equipment": null,
+    "appointment": null,
+    "RoomFloor": 1,
+    "RoomId": 1,
+    "IsFree": true,
+    "IsUsable": false,
+    "Type": 2,
+    "Equipment": [],
+    "Appointment": []
+  },
+  {
+    "equipment": null,
+    "appointment": null,
+    "RoomFloor": 1,
+    "RoomId": 2,
+    "IsFree": true,
+    "IsUsable": false,
+    "Type": 2,
+    "Equipment": [],
+    "Appointment": []
+  },
+  {
+    "equipment": null,
+    "appointment": null,
+    "RoomFloor": 1,
+    "RoomId": 3,
+    "IsFree": true,
+    "IsUsable": false,
+    "Type": 2,
+    "Equipment": [],
+    "Appointment": []
+  },
+  {
+    "equipment": null,
+    "appointment": null,
+    "RoomFloor": 1,
+    "RoomId": 4,
+    "IsFree": true,
+    "IsUsable": false,
+    "Type": 2,
+    "Equipment": [],
+    "Appointment": []
   }
 ]

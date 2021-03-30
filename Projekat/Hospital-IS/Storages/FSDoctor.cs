@@ -2,12 +2,13 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 
 namespace Hospital_IS.Storages
 {
-    class FSDoctor
+    public class FSDoctor
     {
         private string fileLocation;
 
@@ -16,10 +17,10 @@ namespace Hospital_IS.Storages
             this.fileLocation = "../../../FileStorage/doctors.json";
         }
 
-        public List<Doctor> GetAll()
+        public ObservableCollection<Doctor> GetAll()
         {
             String text = File.ReadAllText(this.fileLocation);
-            List<Doctor> doctors = JsonConvert.DeserializeObject<List<Doctor>>(text);
+            ObservableCollection<Doctor> doctors = JsonConvert.DeserializeObject<ObservableCollection<Doctor>>(text);
 
 
             /*
@@ -41,17 +42,41 @@ namespace Hospital_IS.Storages
             return doctors;
         }
 
-        public void Save(List<Doctor> users)
+        public void Save(Doctor doctor)
         {
-            var file = JsonConvert.SerializeObject(users, Formatting.Indented,new JsonSerializerSettings()
+            ObservableCollection<Doctor> doctors = GetAll();
+            doctors.Add(doctor);
+
+            var file = JsonConvert.SerializeObject(doctors, Formatting.Indented,new JsonSerializerSettings()
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             });
             using (StreamWriter writer = new StreamWriter(this.fileLocation))
             {
                 writer.Write(file);
             }
+        }
+        public Boolean UpdateDoctor(Doctor doctor)
+        {
+            ObservableCollection<Doctor> doctors = GetAll();
+
+            for (int i = 0; i < doctors.Count; i++)
+            {
+                if (doctor.Id.Equals(doctors[i].Id))
+                {
+                    doctors.Remove(doctors[i]);
+                    doctors.Insert(i, doctor);
+
+                    var file = JsonConvert.SerializeObject(doctors, Formatting.Indented);
+                    using (StreamWriter writer = new StreamWriter(this.fileLocation))
+                    {
+                        writer.Write(file);
+                    }
+
+                    return true;
+                }
+            }
+            return false;
         }
 
         public Model.Doctor GetByEmail(String email)

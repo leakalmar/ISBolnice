@@ -8,7 +8,7 @@ namespace Model
         public Double Salary { get; set; }
         public DateTime EmploymentDate { get; set; }
 
-        public Employee(int id, string name, string surname, DateTime birthDate, string email, string password, string address, double salary, DateTime employmentDate, List<WorkDay> workDays) : base(id, name, surname, birthDate, email, password, address)
+        public Employee(int id, string name, string surname, DateTime birthDate, string address, string email, string password,  double salary, DateTime employmentDate, List<WorkDay> workDays) : base(id, name, surname, birthDate, address, email, password)
         {
             this.Salary = salary;
             this.EmploymentDate = employmentDate;

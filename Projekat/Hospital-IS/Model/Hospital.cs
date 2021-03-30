@@ -97,6 +97,21 @@ namespace Model
             }
         }
 
+        public void RemoveAppointment(DoctorAppointment oldDocApp)
+        {
+            for (int i = 0; i <allAppointments.Count; i++){
+            {
+                    if (oldDocApp.DateAndTime.Equals(allAppointments[i].DateAndTime))
+                    {
+                        allAppointments.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
+
+            
+        }
+
         public static ObservableCollection<Room> Room  { get; set; }
 
        
@@ -158,14 +173,14 @@ namespace Model
         }
 
 
-        public List<Doctor> Doctors { get; set; }
+        public ObservableCollection<Doctor> Doctors { get; set; }
 
         public void AddDoctor(Doctor newDoctor)
         {
             if (newDoctor == null)
                 return;
             if (this.Doctors == null)
-                this.Doctors = new List<Doctor>();
+                this.Doctors = new ObservableCollection<Doctor>();
             if (!this.Doctors.Contains(newDoctor))
             {
                 this.Doctors.Add(newDoctor);
@@ -189,7 +204,7 @@ namespace Model
         {
             if (Doctors != null)
             {
-                List<Doctor> tmpDoctor = new List<Doctor>();
+                ObservableCollection<Doctor> tmpDoctor = new ObservableCollection<Doctor>();
                 foreach (Doctor oldDoctor in Doctors)
                     tmpDoctor.Add(oldDoctor);
                 Doctors.Clear();
