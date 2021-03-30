@@ -9,7 +9,10 @@ namespace Model
         public System.Collections.ArrayList equipment;
 
 
+        public Room()
+        {
 
+        }
         public int RoomFloor
         {
             get; set;

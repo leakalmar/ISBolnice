@@ -35,6 +35,8 @@ namespace Hospital_IS
             DateGridRooms.DataContext = Hospital.Instance;
         }
 
+        
+
         private void DateGridRooms_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 

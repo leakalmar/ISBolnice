@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfRoom xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Room>
+    <equipment />
+    <appointment />
+    <RoomFloor>123</RoomFloor>
+    <RoomId>123</RoomId>
+    <IsFree>true</IsFree>
+    <IsUsable>false</IsUsable>
+    <Type>OperationRoom</Type>
+    <Equipment />
+    <Appointment />
+  </Room>
+  <Room>
+    <equipment />
+    <appointment />
+    <RoomFloor>123</RoomFloor>
+    <RoomId>456</RoomId>
+    <IsFree>true</IsFree>
+    <IsUsable>false</IsUsable>
+    <Type>OperationRoom</Type>
+    <Equipment />
+    <Appointment />
+  </Room>
+</ArrayOfRoom>

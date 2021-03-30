@@ -4,17 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace Storages
 {
     public class RoomStorage
     {
         private String fileLocation ;
-
+        private ObservableCollection<Room> allRooms = new ObservableCollection<Room>();
 
         public RoomStorage()
         {
-            this.fileLocation = "../../../FileStorage/rooms.json";
+            this.fileLocation = "../../../FileStorage/rooms.xml";
         }
 
         public ObservableCollection<Room>  GetAll()
@@ -27,21 +28,35 @@ namespace Storages
             all.Add(r1);
             return all;*/
 
-            String text = File.ReadAllText(this.fileLocation);
+            /*String text = File.ReadAllText(this.fileLocation);
             ObservableCollection<Room>  allRooms  = JsonConvert.DeserializeObject<ObservableCollection<Room>>(text);
-            return allRooms;
+            return allRooms*/
+
+
+             if (File.ReadAllText("../../../FileStorage/rooms.xml").Trim().Equals(""))
+            {
+                return allRooms;
+            }
+            else
+            {
+                FileStream filestream = File.OpenRead("../../../FileStorage/rooms.xml");
+                XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Room>));
+                allRooms = (ObservableCollection<Room>)serializer.Deserialize(filestream);
+                filestream.Close();
+                return allRooms;
+            }
+            
 
         }
 
         public void SaveRooms(ObservableCollection<Room> allRooms)
         {
-            
 
-            var file = JsonConvert.SerializeObject(allRooms, Formatting.Indented);
-            using (StreamWriter writer = new StreamWriter(this.fileLocation))
-            {
-                writer.Write(file);
-            }
+
+            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Room>));
+            TextWriter filestream = new StreamWriter("../../../FileStorage/rooms.xml");
+            serializer.Serialize(filestream, allRooms);
+            filestream.Close();
         }
 
     }
