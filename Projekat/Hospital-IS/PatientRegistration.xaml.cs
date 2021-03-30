@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
 using System.Windows;
 
 namespace Hospital_IS
@@ -9,14 +9,10 @@ namespace Hospital_IS
     public partial class PatientRegistration : Window
     {
         public Model.Patient Patient { get; set; } = new Model.Patient();
-        public ObservableCollection<Model.Patient> Patients { get; set; } = new ObservableCollection<Model.Patient>();
-
-
-        public PatientRegistration(ObservableCollection<Model.Patient> patients)
+        public PatientRegistration()
         {
             InitializeComponent();
             this.DataContext = this;
-            Patients = patients;
         }
         private void Close(object sender, RoutedEventArgs e)
         {
@@ -30,12 +26,20 @@ namespace Hospital_IS
 
             if (comboBox.SelectedIndex == 0)
                 Patient.Gender = "Žensko";
-            else
+            else if (comboBox.SelectedIndex == 1)
                 Patient.Gender = "Muško";
 
+            try
+            {
+                DateTime birthDate = DateTime.ParseExact(birthdateTxt.Text, "dd.MM.yyyy.", System.Globalization.CultureInfo.InvariantCulture);
+                Patient.BirthDate = birthDate;
+            }
+            catch (Exception ex)
+            {
+            }
 
             Patient.Password = passwordBox.ToString();
-            Patients.Add(Patient);
+            SecretaryMainWindow.Instance.Patients.Add(Patient);
 
             Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
             pfs.SavePatient(Patient);
