@@ -13,7 +13,7 @@ namespace Model
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-        public EducationCategory education { get; set; }
+        public EducationCategory Education { get; set; } 
         public int Id { get; set; }
         public String Name { get; set; }
         public String Surname { get; set; }

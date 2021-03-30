@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Model;
+using Storages;
 
 namespace Hospital_IS
 {
@@ -18,16 +19,17 @@ namespace Hospital_IS
    
     public partial class Rooms : Window
     {
-       
+
+        private RoomStorage roomStorage = new RoomStorage();
         public Rooms()
         {
-            
-           
+
+
             InitializeComponent();
 
             if (Hospital.Room == null)
             {
-                Hospital.Room = new ObservableCollection<Room>();
+                Hospital.Room = roomStorage.GetAll();
             }
 
             DateGridRooms.DataContext = Hospital.Instance;

@@ -26,6 +26,8 @@ namespace Hospital_IS
         {
             if (email.Text == "upravnik@gmail.com" && password.Password.ToString() == "upravnik")
             {
+                Window1 win = new Window1();
+                win.Show();
             }
             else if (email.Text == "doktor@gmail.com" && password.Password.ToString() == "doktor")
             {
@@ -34,8 +36,7 @@ namespace Hospital_IS
             }
             else if (email.Text == "sekretar@gmail.com" && password.Password.ToString() == "sekretar")
             {
-                SecretaryMainWindow smw = new SecretaryMainWindow();
-                smw.Show();
+                SecretaryMainWindow.Instance.Show();
                 this.Close();
             }
             else if (email.Text == "pacijent@gmail.com" && password.Password.ToString() == "pacijent")
