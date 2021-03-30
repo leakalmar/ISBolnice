@@ -11,7 +11,6 @@ namespace Model
         public String City { get; set; }
         public String Country { get; set; }
         public String Address { get; set; }
-        public List<Appointment> allAppointments { get; set; }
         public List<Patient> allPatients { get; set; }
         public List<Equipment> allEquipment { get; set; }
         public List<Room> allRooms { get; set; }
@@ -68,6 +67,28 @@ namespace Model
         public List<User> GetAllEmployees()
         {
             throw new NotImplementedException();
+        }
+
+        public ObservableCollection<DoctorAppointment> allAppointments { get; set; }
+
+        public void AddAppointment(DoctorAppointment docApp)
+        {
+            if (docApp == null)
+            {
+                return;
+            }
+
+            if (allAppointments == null)
+            {
+                allAppointments = new ObservableCollection<DoctorAppointment>();
+
+            }
+
+            if (!allAppointments.Contains(docApp))
+            {
+                allAppointments.Add(docApp);
+
+            }
         }
 
         public static ObservableCollection<Room> Room  { get; set; }

@@ -1,0 +1,382 @@
+[
+  {
+    "doctor": null,
+    "room": 0,
+    "Cause": null,
+    "Detail": null,
+    "NameSurnamePatient": "Simona Stantic",
+    "Patient": {
+      "hospital": null,
+      "ChartId": 0,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "IsGuest": false,
+      "MedicalHistory": {
+        "Prescription": [],
+        "Test": [],
+        "Reports": [],
+        "Hospitalization": []
+      },
+      "doctor": null,
+      "Doctor": null,
+      "education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T23:21:22.7048652+02:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": null,
+      "hospital": null,
+      "Specialty": {
+        "Role": "dermatolog",
+        "Doctor": null
+      },
+      "PrimaryRoom": 5,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2018-05-05T00:00:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-03-29T08:00:00",
+          "EndTime": "2021-03-29T16:00:00"
+        }
+      ],
+      "education": 0,
+      "Id": 1,
+      "Name": "Doktor",
+      "Surname": "Doca",
+      "BirthDate": "1976-05-05T00:00:00",
+      "Phone": null,
+      "Email": "doca@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": null,
+      "Address": "Laze Kostica 55,Novi Sad",
+      "Hospital": null
+    },
+    "DateAndTime": "2021-04-01T11:00:00",
+    "Date": "4/1/2021",
+    "Time": "11:00:00",
+    "Type": 1,
+    "Reserved": true,
+    "Room": 5
+  },
+  {
+    "doctor": null,
+    "room": 0,
+    "Cause": null,
+    "Detail": null,
+    "NameSurnamePatient": "Simona Stantic",
+    "Patient": {
+      "hospital": null,
+      "ChartId": 0,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "IsGuest": false,
+      "MedicalHistory": {
+        "Prescription": [],
+        "Test": [],
+        "Reports": [],
+        "Hospitalization": []
+      },
+      "doctor": null,
+      "Doctor": null,
+      "education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T23:21:22.7048652+02:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": null,
+      "hospital": null,
+      "Specialty": {
+        "Role": "dermatolog",
+        "Doctor": null
+      },
+      "PrimaryRoom": 5,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2018-05-05T00:00:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-03-29T08:00:00",
+          "EndTime": "2021-03-29T16:00:00"
+        }
+      ],
+      "education": 0,
+      "Id": 1,
+      "Name": "Doktor",
+      "Surname": "Doca",
+      "BirthDate": "1976-05-05T00:00:00",
+      "Phone": null,
+      "Email": "doca@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": null,
+      "Address": "Laze Kostica 55,Novi Sad",
+      "Hospital": null
+    },
+    "DateAndTime": "2021-04-01T09:30:00",
+    "Date": "4/1/2021",
+    "Time": "09:30:00",
+    "Type": 1,
+    "Reserved": true,
+    "Room": 5
+  },
+  {
+    "doctor": null,
+    "room": 0,
+    "Cause": null,
+    "Detail": null,
+    "NameSurnamePatient": "Simona Stantic",
+    "Patient": {
+      "hospital": null,
+      "ChartId": 0,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "IsGuest": false,
+      "MedicalHistory": {
+        "Prescription": [],
+        "Test": [],
+        "Reports": [],
+        "Hospitalization": []
+      },
+      "doctor": null,
+      "Doctor": null,
+      "education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T23:21:22.7048652+02:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": null,
+      "hospital": null,
+      "Specialty": {
+        "Role": "dermatolog",
+        "Doctor": null
+      },
+      "PrimaryRoom": 5,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2018-05-05T00:00:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-03-29T08:00:00",
+          "EndTime": "2021-03-29T16:00:00"
+        }
+      ],
+      "education": 0,
+      "Id": 1,
+      "Name": "Doktor2",
+      "Surname": "Doca2",
+      "BirthDate": "1977-05-05T00:00:00",
+      "Phone": null,
+      "Email": null,
+      "Gender": null,
+      "Relationship": null,
+      "Password": "Laze Kostica 55,Novi Sad",
+      "Address": "doca@gmail.com",
+      "Hospital": null
+    },
+    "DateAndTime": "2021-04-01T10:30:00",
+    "Date": "4/1/2021",
+    "Time": "10:30:00",
+    "Type": 1,
+    "Reserved": true,
+    "Room": 5
+  },
+  {
+    "doctor": null,
+    "room": 0,
+    "Cause": null,
+    "Detail": null,
+    "NameSurnamePatient": "Simona Stantic",
+    "Patient": {
+      "hospital": null,
+      "ChartId": 0,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "IsGuest": false,
+      "MedicalHistory": {
+        "Prescription": [],
+        "Test": [],
+        "Reports": [],
+        "Hospitalization": []
+      },
+      "doctor": null,
+      "Doctor": null,
+      "education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T23:21:22.7048652+02:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": null,
+      "hospital": null,
+      "Specialty": {
+        "Role": "dermatolog",
+        "Doctor": null
+      },
+      "PrimaryRoom": 5,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2018-05-05T00:00:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-03-29T08:00:00",
+          "EndTime": "2021-03-29T16:00:00"
+        }
+      ],
+      "education": 0,
+      "Id": 1,
+      "Name": "Doktor2",
+      "Surname": "Doca2",
+      "BirthDate": "1977-05-05T00:00:00",
+      "Phone": null,
+      "Email": "Laze Kostica 55,Novi Sad",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "doca@gmail.com",
+      "Address": null,
+      "Hospital": null
+    },
+    "DateAndTime": "2021-04-01T08:00:00",
+    "Date": "4/1/2021",
+    "Time": "08:00:00",
+    "Type": 1,
+    "Reserved": true,
+    "Room": 5
+  },
+  {
+    "doctor": null,
+    "room": 0,
+    "Cause": null,
+    "Detail": null,
+    "NameSurnamePatient": "Simona Stantic",
+    "Patient": {
+      "hospital": null,
+      "ChartId": 0,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "IsGuest": false,
+      "MedicalHistory": {
+        "Prescription": [],
+        "Test": [],
+        "Reports": [],
+        "Hospitalization": []
+      },
+      "doctor": null,
+      "Doctor": null,
+      "education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T23:21:22.7048652+02:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": null,
+      "hospital": null,
+      "Specialty": {
+        "Role": "dermatolog",
+        "Doctor": null
+      },
+      "PrimaryRoom": 5,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2018-05-05T00:00:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-03-29T08:00:00",
+          "EndTime": "2021-03-29T16:00:00"
+        }
+      ],
+      "education": 0,
+      "Id": 1,
+      "Name": "Doktor2",
+      "Surname": "Doca2",
+      "BirthDate": "1977-05-05T00:00:00",
+      "Phone": null,
+      "Email": "doca@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": null,
+      "Address": "Laze Kostica 55,Novi Sad",
+      "Hospital": null
+    },
+    "DateAndTime": "2021-04-12T09:00:00",
+    "Date": "4/12/2021",
+    "Time": "09:00:00",
+    "Type": 1,
+    "Reserved": true,
+    "Room": 5
+  }
+]

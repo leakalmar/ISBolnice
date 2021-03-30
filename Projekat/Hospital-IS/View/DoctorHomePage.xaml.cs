@@ -22,10 +22,10 @@ namespace Hospital_IS.View
             //doctor = new Storages.UserFileStorage.GetByEmail(email);
             List<Model.WorkDay> dani = new List<Model.WorkDay>
             {
-                new Model.WorkDay("Pon", DateTime.Now, DateTime.Now)
+                new Model.WorkDay(Model.Day.Monday, DateTime.Now, DateTime.Now)
             };
             Model.Specialty spec = new Model.Specialty("Dermatolog");
-            Model.Doctor doc = new Model.Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani, spec, null);
+            Model.Doctor doc = new Model.Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani, spec, 1);
             this.Doctor = doc;
             this.DataContext = new ViewModel.HomePage();
 

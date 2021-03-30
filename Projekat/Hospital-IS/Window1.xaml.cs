@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Storages;
+using Model;
 
 namespace Hospital_IS
 {
@@ -17,6 +19,7 @@ namespace Hospital_IS
     /// </summary>
     public partial class Window1 : Window
     {
+        private RoomStorage roomStorage = new RoomStorage();
         public Window1()
         {
             InitializeComponent();
@@ -36,6 +39,7 @@ namespace Hospital_IS
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            roomStorage.SaveRooms(Hospital.Room);
             this.Close();
         }
     }
