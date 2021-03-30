@@ -1,3 +1,4 @@
+using Hospital_IS.Storages;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Model
 
         private Hospital()
         {
-            
+
         }
 
         public static Hospital Instance
@@ -32,6 +33,10 @@ namespace Model
                 if (instance == null)
                 {
                     instance = new Hospital();
+                    FSDoctor dfs = new FSDoctor();
+                    PatientFileStorage pfs = new PatientFileStorage();
+                    instance.Doctors = dfs.GetAll();
+                    instance.allPatients = pfs.GetAll();
                 }
                 return instance;
             }
@@ -114,7 +119,7 @@ namespace Model
 
         public static ObservableCollection<Room> Room  { get; set; }
 
-       
+
 
         public void AddRoom(Room newRoom)
         {
@@ -124,15 +129,15 @@ namespace Model
             }
 
             if (Room == null)
-            { 
+            {
               Room = new ObservableCollection<Room>();
-                
+
             }
 
             if (!Room.Contains(newRoom))
             {
                 Room.Add(newRoom);
-                
+
             }
         }
 
@@ -142,9 +147,9 @@ namespace Model
             {
                 if (r.RoomId == oldRoom.RoomId)
                 {
-                   
+
                     Room.Remove(r);
-                    
+
                     break;
                 }
             }
@@ -157,7 +162,7 @@ namespace Model
         }
         public void UpdateRoom(int oldIndex,Room oldRoom)
         {
-            
+
             foreach(Room r in Room)
             {
                 if(r.RoomId == oldIndex)
@@ -168,43 +173,63 @@ namespace Model
                     break;
                 }
             }
-            
-            
+
+
         }
 
 
+        public ObservableCollection<Doctor> Doctors { get; set; }
 
-
-        public System.Collections.ArrayList user;
-
-        public System.Collections.ArrayList User
+        public void AddDoctor(Doctor newDoctor)
         {
-            get
+            if (newDoctor == null)
+                return;
+            if (this.Doctors == null)
+                this.Doctors = new ObservableCollection<Doctor>();
+            if (!this.Doctors.Contains(newDoctor))
             {
-                if (user == null)
-                    user = new System.Collections.ArrayList();
-                return user;
-            }
-            set
-            {
-                RemoveAllUser();
-                if (value != null)
-                {
-                    foreach (User oUser in value)
-                        AddUser(oUser);
-                }
+                this.Doctors.Add(newDoctor);
+                newDoctor.Hospital = this;
             }
         }
+
+        public void RemoveDoctor(Doctor oldDoctor)
+        {
+            if (oldDoctor == null)
+                return;
+            if (this.Doctors != null)
+                if (this.Doctors.Contains(oldDoctor))
+                {
+                    this.Doctors.Remove(oldDoctor);
+                    oldDoctor.Hospital = null;
+                }
+        }
+
+        public void RemoveAllDoctors()
+        {
+            if (Doctors != null)
+            {
+                ObservableCollection<Doctor> tmpDoctor = new ObservableCollection<Doctor>();
+                foreach (Doctor oldDoctor in Doctors)
+                    tmpDoctor.Add(oldDoctor);
+                Doctors.Clear();
+                foreach (Doctor oldDoctor in tmpDoctor)
+                    oldDoctor.Hospital = null;
+                tmpDoctor.Clear();
+            }
+        }
+
+        public List<User> User { get; set; }
 
         public void AddUser(User newUser)
         {
             if (newUser == null)
                 return;
-            if (this.user == null)
-                this.user = new System.Collections.ArrayList();
-            if (!this.user.Contains(newUser))
+            if (this.User == null)
+                this.User = new List<User>();
+            if (!this.User.Contains(newUser))
             {
-                this.user.Add(newUser);
+                this.User.Add(newUser);
                 newUser.Hospital = this;
             }
         }
@@ -213,22 +238,22 @@ namespace Model
         {
             if (oldUser == null)
                 return;
-            if (this.user != null)
-                if (this.user.Contains(oldUser))
+            if (this.User != null)
+                if (this.User.Contains(oldUser))
                 {
-                    this.user.Remove(oldUser);
+                    this.User.Remove(oldUser);
                     oldUser.Hospital = null;
                 }
         }
 
         public void RemoveAllUser()
         {
-            if (user != null)
+            if (User != null)
             {
-                System.Collections.ArrayList tmpUser = new System.Collections.ArrayList();
-                foreach (User oldUser in user)
+                List<User> tmpUser = new List<User>();
+                foreach (User oldUser in User)
                     tmpUser.Add(oldUser);
-                user.Clear();
+                User.Clear();
                 foreach (User oldUser in tmpUser)
                     oldUser.Hospital = null;
                 tmpUser.Clear();

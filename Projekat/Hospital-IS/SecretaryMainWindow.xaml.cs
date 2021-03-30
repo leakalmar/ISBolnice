@@ -28,7 +28,7 @@ namespace Hospital_IS
             }
         }
 
-        private SecretaryMainWindow()
+        public SecretaryMainWindow()
         {
             InitializeComponent();
 

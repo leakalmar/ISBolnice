@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Hospital_IS.Storages;
+using Model;
+using Storages;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -15,18 +18,27 @@ namespace Hospital_IS.View
 {
     public partial class DoctorHomePage : Window
     {
+        private static DoctorHomePage instance = null;
         public Model.Doctor Doctor { get; set; }
+        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; } = new ObservableCollection<DoctorAppointment>();
+
+        FSDoctor dfs = new FSDoctor();
+
+        public static DoctorHomePage Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new DoctorHomePage();
+                }
+                return instance;
+            }
+        }
         public DoctorHomePage()
         {
             InitializeComponent();
-            //doctor = new Storages.UserFileStorage.GetByEmail(email);
-            List<Model.WorkDay> dani = new List<Model.WorkDay>
-            {
-                new Model.WorkDay(Model.Day.Monday, DateTime.Now, DateTime.Now)
-            };
-            Model.Specialty spec = new Model.Specialty("Dermatolog");
-            Model.Doctor doc = new Model.Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani, spec, 1);
-            this.Doctor = doc;
+            Doctor = MainWindow.DoctortUser;
             this.DataContext = new ViewModel.HomePage();
 
 
@@ -37,7 +49,14 @@ namespace Hospital_IS.View
             bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da se odjavite?").ShowDialog();
            if (dialog)
             {
+                dfs.UpdateDoctor(Doctor);
+                MainWindow login = new MainWindow();
+                login.Show();
+                this.Hide();
+                AppointmentFileStorage afs = new AppointmentFileStorage();
+                afs.SaveAppointment(Hospital.Instance.allAppointments);
                 this.Close();
+                
             }
          }
 

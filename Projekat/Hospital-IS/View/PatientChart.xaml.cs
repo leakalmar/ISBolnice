@@ -10,7 +10,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Hospital_IS.Storages;
 using Model;
+using Storages;
 
 namespace Hospital_IS.View
 {
@@ -19,7 +21,9 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class PatientChart : Window
     {
-        public Appointment Appointment;
+        public DoctorAppointment Appointment;
+        AppointmentFileStorage afs = new AppointmentFileStorage();
+        ObservableCollection<DoctorAppointment> patientDocApp { get; set; }
 
         public PatientChart(DoctorAppointment appointment, bool activButton = false, bool endAppointmentBtn = false)
         {
@@ -53,11 +57,11 @@ namespace Hospital_IS.View
             }
 
 
-
+            patientDocApp = afs.GetAllByPatient(appointment.Patient.Id);
             Appointment = appointment;
             PersonalData.DataContext = appointment.Patient;
             HistoryGrid.DataContext = appointment.Patient;
-            patientAppointments.DataContext = appointment.Patient;
+            patientAppointments.DataContext = patientDocApp;
             patientHistory.DataContext = appointment.Patient;
 
         }
@@ -87,6 +91,35 @@ namespace Hospital_IS.View
         public void MaximizeBtnClick(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Maximized;
+        }
+
+        private void appointmentBtn(object sender, RoutedEventArgs e)
+        {
+            Window w = new DoctorSetAppointment(Appointment);
+            w.Show();
+        }
+
+        private void updateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Window w = new DoctorSetAppointment(Appointment,true);
+            w.Show();
+        }
+
+        private void CancleBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Hospital.Instance.allAppointments.Remove(Appointment);
+            DoctorHomePage.Instance.DoctorAppointment.Remove(Appointment);
+            MainWindow login = new MainWindow();
+            AppointmentFileStorage afs = new AppointmentFileStorage();
+            afs.SaveAppointment(Hospital.Instance.allAppointments);
+            this.Close();
+        }
+
+        private void futureApp_DoubleClicked(object sender, MouseButtonEventArgs e)
+        {
+            DoctorAppointment future = (DoctorAppointment)patientAppointments.SelectedItem;
+            Window window = new DoctorSetAppointment(future,true);
+            window.Show();
         }
     }
 

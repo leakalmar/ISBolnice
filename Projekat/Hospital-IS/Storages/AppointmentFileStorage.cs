@@ -39,9 +39,19 @@ namespace Storages
 
         }
 
-        public List<Appointment> GetAllByDoctor(Doctor doctor)
+        public ObservableCollection<DoctorAppointment> GetAllByDoctor(int doctor)
         {
-            throw new NotImplementedException();
+            String text = File.ReadAllText(this.fileLocation);
+            ObservableCollection<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<ObservableCollection<DoctorAppointment>>(text);
+            ObservableCollection<DoctorAppointment> doctorAppointments = new ObservableCollection<DoctorAppointment>();
+            foreach (DoctorAppointment docApp in allAppointments)
+            {
+                if (docApp.Doctor.Id == doctor)
+                {
+                    doctorAppointments.Add(docApp);
+                }
+            }
+            return doctorAppointments;
         }
 
         public void SaveAppointment(ObservableCollection<DoctorAppointment> allAppointments)

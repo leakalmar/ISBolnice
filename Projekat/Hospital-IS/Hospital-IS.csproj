@@ -9,18 +9,15 @@
 
   <ItemGroup>
     <None Remove="director.jpg" />
-    <None Remove="door_open.png" />
     <None Remove="employee.jpg" />
     <None Remove="hospital.png" />
     <None Remove="hospital2.png" />
-    <None Remove="room_icon.jpg" />
     <None Remove="View\bookmark.png" />
     <None Remove="View\checkmark.png" />
     <None Remove="View\doctor.jpg" />
     <None Remove="View\importance.png" />
     <None Remove="View\maximize.png" />
     <None Remove="View\minimize.png" />
-    <None Remove="View\minimizee.png" />
     <None Remove="View\pill.png" />
     <None Remove="View\report.png" />
     <None Remove="View\simona.jpg" />
@@ -34,24 +31,21 @@
 
   <ItemGroup>
     <Resource Include="director.jpg" />
-    <Resource Include="door_open.png" />
     <Resource Include="employee.jpg" />
     <Resource Include="hospital.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="room_icon.jpg" />
-    <Resource Include="View\bookmark.png" />
-    <Resource Include="View\checkmark.png" />
-    <Resource Include="View\doctor.jpg" />
-    <Resource Include="View\importance.png" />
-    <Resource Include="View\maximize.png" />
-    <Resource Include="View\minimize.png" />
-    <Resource Include="View\minimizee.png" />
-    <Resource Include="View\pill.png" />
-    <Resource Include="View\report.png" />
-    <Resource Include="View\simona.jpg" />
-    <Resource Include="View\tube.png" />
-    <Resource Include="View\x-icon.png" />
+    <Resource Include="Resources\bookmark.png" />
+    <Resource Include="Resources\checkmark.png" />
+    <Resource Include="Resources\doctor.jpg" />
+    <Resource Include="Resources\importance.png" />
+    <Resource Include="Resources\maximize.png" />
+    <Resource Include="Resources\minimize.png" />
+    <Resource Include="Resources\pill.png" />
+    <Resource Include="Resources\report.png" />
+    <Resource Include="Resources\simona.jpg" />
+    <Resource Include="Resources\tube.png" />
+    <Resource Include="Resources\x-icon.png" />
   </ItemGroup>
 
 </Project>

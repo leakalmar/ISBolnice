@@ -22,7 +22,6 @@ namespace Model
             throw new NotImplementedException();
         }
         public Patient Patient { get; set; }
-        public Doctor doctor;
 
 
         public Doctor Doctor { get; set; }
