@@ -1,3 +1,4 @@
+using Storages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -88,6 +89,26 @@ namespace Model
             {
                 allAppointments.Add(docApp);
 
+            }
+        }
+
+        public void RemoveAppointment(DoctorAppointment docApp)
+        {
+            if (docApp == null)
+            {
+                return;
+            }
+
+            if (allAppointments != null)
+            {
+                foreach (DoctorAppointment doctorAppointment in allAppointments)
+                {
+                    if (docApp.DateAndTime.Equals(doctorAppointment.DateAndTime))
+                    {
+                         allAppointments.Remove(doctorAppointment);
+                         break;
+                    }
+                }
             }
         }
 

@@ -72,18 +72,32 @@ namespace Hospital_IS.View
         private void deleteAppointment(object sender, RoutedEventArgs e)
         {
             DoctorAppointment doctorApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
-            //Patient.DoctorAppointment.Remove(doctorApp);
-            Hospital.Instance.allAppointments.Remove(doctorApp);
-            DoctorAppointment.Remove(doctorApp);
-            doctorApp.Reserved = false;
+            if (doctorApp == null)
+            {
+                MessageBox.Show("Izaberite termin!");
+            }
+            else
+            {
+                Hospital.Instance.RemoveAppointment(doctorApp);
+                DoctorAppointment.Remove(doctorApp);
+                doctorApp.Reserved = false;
+            }
+            
         }
 
         private void changeAppointment(object sender, RoutedEventArgs e)
         {
             changedApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
-            AppointmentPatient ap = new AppointmentPatient();
-            ap.Show();
-            ap.changeAppointment(changedApp);
+            if (changedApp == null)
+            {
+                MessageBox.Show("Izaberite termin!");
+            }
+            else
+            {
+                AppointmentPatient ap = new AppointmentPatient();
+                ap.Show();
+                ap.changeAppointment(changedApp);
+            }
         }
         
         private void logout(object sender, RoutedEventArgs e)
