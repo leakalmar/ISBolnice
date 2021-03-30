@@ -217,18 +217,26 @@
                 <DataGrid x:Name="patientAppointments" ItemsSource="{Binding DoctorAppointment}" 
                           Background="Transparent" RowBackground="Transparent" Foreground="White" 
                           ScrollViewer.VerticalScrollBarVisibility="Auto" BorderThickness="0,0,0,0"
-                          AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled"
+                          AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" 
+                          BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                          HorizontalScrollBarVisibility="Disabled"
                           >
                     <DataGrid.Resources>
-                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" 
+                               TargetType="{x:Type DataGridColumnHeader}">
                             <Setter Property="Background" Value="#FF2E3B55" />
                         </Style>
                     </DataGrid.Resources>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Datum" Binding="{Binding Date}" CanUserResize="False"/>
+                        <DataGridTextColumn Header="Datum" Binding="{Binding DateAndTime}" CanUserResize="False"/>
                         <DataGridTextColumn Header="Uzrok" Binding="{Binding Cause}"/>
                         <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor.Specialty.Role}"/>
                     </DataGrid.Columns>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick" Handler="futureApp_DoubleClicked"/>
+                        </Style>
+                    </DataGrid.RowStyle>
                 </DataGrid>
             </GroupBox>
 
@@ -237,10 +245,12 @@
                 <DataGrid x:Name="patientHistory" ItemsSource="{Binding MedicalHistory.Reports}" 
                           Background="Transparent" RowBackground="Transparent" Foreground="White" 
                           ScrollViewer.VerticalScrollBarVisibility="Auto" BorderThickness="0,0,0,0"
-                          AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" BorderBrush="{x:Null}"
+                          AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" 
+                          BorderBrush="{x:Null}"
                           >
                     <DataGrid.Resources>
-                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" 
+                               TargetType="{x:Type DataGridColumnHeader}">
                             <Setter Property="Background" Value="#FF2E3B55" />
                         </Style>
                     </DataGrid.Resources>

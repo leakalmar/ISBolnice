@@ -25,7 +25,8 @@
                       ScrollViewer.VerticalScrollBarVisibility="Auto" BorderThickness="0,0,0,0"
                       AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" 
                       BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                      HorizontalScrollBarVisibility="Disabled" KeyDown="Patient_Selected">
+                      HorizontalScrollBarVisibility="Disabled" KeyDown="Patient_Selected"
+                      RowHeaderWidth="0">
                 <DataGrid.Resources>
                     <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" 
                            TargetType="{x:Type DataGridColumnHeader}">

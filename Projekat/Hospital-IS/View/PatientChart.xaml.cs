@@ -20,7 +20,7 @@ namespace Hospital_IS.View
     public partial class PatientChart : Window
     {
         public DoctorAppointment Appointment;
-        public DoctorSetAppointment scheduled;
+        public DoctorAppointment newAppointment;
 
         public PatientChart(DoctorAppointment appointment, bool activButton = false, bool endAppointmentBtn = false)
         {
@@ -92,12 +92,8 @@ namespace Hospital_IS.View
 
         private void appointmentBtn(object sender, RoutedEventArgs e)
         {
-            if(scheduled == null)
-            {
-                scheduled = new DoctorSetAppointment();
-            }
-            scheduled.Show();
-
+            Window w = new DoctorSetAppointment(Appointment);
+            w.Show();
         }
 
         private void updateBtn_Click(object sender, RoutedEventArgs e)
@@ -108,9 +104,16 @@ namespace Hospital_IS.View
 
         private void CancleBtn_Click(object sender, RoutedEventArgs e)
         {
-            Appointment.Patient.DoctorAppointment.Remove(Appointment);
-            Appointment.Doctor.DoctorAppointment.Remove(Appointment);
+            Appointment.Patient.RemoveDoctorAppointment(Appointment);
+            Appointment.Doctor.RemoveDoctorAppointment(Appointment);
             this.Close();
+        }
+
+        private void futureApp_DoubleClicked(object sender, MouseButtonEventArgs e)
+        {
+            DoctorAppointment future = (DoctorAppointment)patientAppointments.SelectedItem;
+            Window window = new DoctorSetAppointment(future,true);
+            window.Show();
         }
     }
 

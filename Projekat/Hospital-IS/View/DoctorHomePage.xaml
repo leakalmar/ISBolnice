@@ -47,7 +47,8 @@
         <Border CornerRadius="20" Grid.ColumnSpan="7" Grid.Row="0" Background="#FF2E3B55">
         </Border>
 
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="3">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" 
+                    Grid.Row="0" Grid.Column="3">
             <Button Height="20" Width="20" Opacity="0.6" BorderThickness="0" Click="MinimizeBtnClick">
                 <Button.Background>
                     <ImageBrush ImageSource="minimize.png"/>
@@ -72,7 +73,9 @@
             </Ellipse.Fill>
         </Ellipse>
 
-        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Width="auto" HorizontalAlignment="Center" FontSize="14" FontFamily="Verdana" Foreground="FloralWhite">
+        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" 
+                   Width="auto" HorizontalAlignment="Center" FontSize="14" FontFamily="Verdana" 
+                   Foreground="FloralWhite">
             Dragana Vukmanov Simokov
         </TextBlock>
 
@@ -87,16 +90,39 @@
                 <RowDefinition Height="0.1*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Grid.Column="0">
-                <Button Content="Termini" Foreground="FloralWhite" MinWidth="144" MinHeight="30" BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" FontFamily="Cambria Math" Click="HomePage_Clicked" />
-                <Button Content="Pacijenti" Foreground="FloralWhite" MinWidth="144" MinHeight="30" BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" FontFamily="Cambria Math"/>
-                <Button Content="Lekovi" Foreground="FloralWhite" MinWidth="144" MinHeight="30" BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" FontFamily="Cambria Math"/>
-                <Button Content="Sobe" Foreground="FloralWhite" MinWidth="144" MinHeight="30" BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" FontFamily="Cambria Math"/>
-                <Button Content="Zahtevi" Foreground="FloralWhite" MinWidth="144" MinHeight="30" BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" FontFamily="Cambria Math"/>
-                <Button Content="Info" Foreground="FloralWhite" MinWidth="144" MinHeight="30" BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" FontFamily="Cambria Math"/>
-                <Button Content="Poruke" Foreground="FloralWhite" MinWidth="144" MinHeight="30" BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" FontFamily="Cambria Math"/>
+                <Button Content="Termini" Foreground="FloralWhite" MinWidth="144" MinHeight="30" 
+                        BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" 
+                        FontFamily="Cambria Math" Click="HomePage_Clicked" />
+                <Button Content="Pacijenti" Foreground="FloralWhite" MinWidth="144" MinHeight="30" 
+                        BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" 
+                        FontFamily="Cambria Math"/>
+                <Button Content="Lekovi" Foreground="FloralWhite" MinWidth="144" MinHeight="30" 
+                        BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" 
+                        FontFamily="Cambria Math"/>
+                <Button Content="Sobe" Foreground="FloralWhite" MinWidth="144" MinHeight="30" 
+                        BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" 
+                        FontFamily="Cambria Math"/>
+                <Button Content="Zahtevi" Foreground="FloralWhite" MinWidth="144" MinHeight="30" 
+                        BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" 
+                        FontFamily="Cambria Math"/>
+                <Button Content="Info" Foreground="FloralWhite" MinWidth="144" MinHeight="30" 
+                        BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" 
+                        FontFamily="Cambria Math"/>
+                <Button Content="Poruke" Foreground="FloralWhite" MinWidth="144" MinHeight="30" 
+                        BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" 
+                        FontFamily="Cambria Math"/>
             </StackPanel>
 
-            <Button Grid.Column="0" Grid.Row="1" Width="100" Height="20" Content="Odjavi se" Foreground="FloralWhite" Background="{x:Null}" BorderBrush="White"/>
+            <Button Grid.Column="0" Grid.Row="1" Width="100" Height="20" Content="Odjavi se" 
+                    Foreground="FloralWhite" Background="{x:Null}"
+                    Click="ExitBtnClick">
+                <Button.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.BorderBrush>
+            </Button>
 
         </Grid>
 
