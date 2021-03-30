@@ -17,12 +17,10 @@ namespace Hospital_IS
         PatientFileStorage pfs = new PatientFileStorage();
         AppointmentFileStorage afs = new AppointmentFileStorage();
         public static Patient PatientUser { get; set; }
-        public static ObservableCollection<DoctorAppointment> doctorAppointments { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            doctorAppointments = new ObservableCollection<DoctorAppointment>();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -41,9 +39,7 @@ namespace Hospital_IS
                 if (email.Text == p.Email && password.Password.ToString() == p.Password)
                 {
                     PatientUser = p;
-                    //    PatientUser.DoctorAppointment = afs.GetAllByPatient(p);
                     HomePatient.Instance.DoctorAppointment = afs.GetAllByPatient(p.Id);
-                    //doctorAppointments = afs.GetAllByPatient();
                     HomePatient.Instance.Show();
                     this.Close();
                 }

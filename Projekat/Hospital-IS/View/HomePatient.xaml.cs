@@ -44,8 +44,6 @@ namespace Hospital_IS.View
             Patient = MainWindow.PatientUser;
             this.DataContext = this;
             PersonalData.DataContext = Patient;
-            //dataGridAppointment.DataContext = Patient;
-            //DoctorAppointment = MainWindow.doctorAppointments;
         }
 
         private void reserveApp(object sender, RoutedEventArgs e)

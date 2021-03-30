@@ -117,7 +117,7 @@
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Datum i vreme" Binding="{Binding DateAndTime, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" Width="200"/>
                 <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor.Name}" Width="200"/>
-                <DataGridTextColumn Header="Soba" Binding="{Binding Room.RoomId}" Width="*"/>
+                <DataGridTextColumn Header="Soba" Binding="{Binding Room}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="changeApp" Grid.Column="2" Grid.Row="10" Margin="250,230,200,60" Foreground="#FFFDFAFA" FontSize="16" Cursor="Hand" Click="changeAppointment">

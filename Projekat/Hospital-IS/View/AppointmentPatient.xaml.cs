@@ -95,7 +95,6 @@ namespace Hospital_IS.View
 
         public void changeAppointment(DoctorAppointment docApp)
         {
-            Room tempRoom = new Room(RoomType.ConsultingRoom, true, true, 1, 5);
             doctor = docApp.Doctor;
             if(docApp.Doctor == TempDoctors[0])
                 Doctors.SelectedIndex = 0;
