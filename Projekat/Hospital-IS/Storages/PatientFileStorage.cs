@@ -47,6 +47,30 @@ namespace Hospital_IS.Storages
                 writer.Write(file);
             }
         }
+
+        public Boolean  UpdatePatient(Patient patient)
+        {
+            List<Patient> patients = GetAll();
+
+            for (int i = 0; i < patients.Count; i++)
+            {
+                if (patient.Id.Equals(patients[i].Id))
+                {
+                    patients.Remove(patients[i]);
+                    patients.Insert(i, patient);
+
+                    var file = JsonConvert.SerializeObject(patients, Formatting.Indented);
+                    using (StreamWriter writer = new StreamWriter(this.fileLocation))
+                    {
+                        writer.Write(file);
+                    }
+
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public Boolean DeletePatient(Patient patient) 
         {
             List<Patient> patients = GetAll();

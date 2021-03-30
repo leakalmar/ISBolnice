@@ -23,6 +23,14 @@ namespace Hospital_IS
             InitializeComponent();
             Patient = patient;
             this.DataContext = this;
+            if (patient.Education.Equals(Model.EducationCategory.NA))
+                eduTxt.Text = " ";
+            else if (patient.Education.Equals(Model.EducationCategory.GradeSchool))
+                eduTxt.Text = "Osnovna škola";
+            else if (patient.Education.Equals(Model.EducationCategory.HighSchool))
+                eduTxt.Text = "Srednja škola";
+            else if (patient.Education.Equals(Model.EducationCategory.College))
+                eduTxt.Text = "Fakultet";
         }
 
         private void Close(object sender, RoutedEventArgs e)
