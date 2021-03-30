@@ -32,7 +32,7 @@ namespace Hospital_IS.View
                 return instance;
             }
         }
-
+        
         public Patient patient { get; set; }
         public ObservableCollection<DoctorAppointment> doctorAppointment { get; set; }
         public DoctorAppointment changedApp;
@@ -40,11 +40,11 @@ namespace Hospital_IS.View
         {
             InitializeComponent();
 
-            patient = new Patient(1, "Marko", "Petrovic", new DateTime(1999, 5, 12), "Strazilovska 25,Novi Sad", "mare_pera@gmail.com", null, new DateTime(2020, 5, 12), "SAM SVOJ GAZDA", null);
+            patient = MainWindow.User;
             doctorAppointment = new ObservableCollection<DoctorAppointment>();
             this.DataContext = this;
             PersonalData.DataContext = patient;
-            doctorAppointment = patient.DoctorAppointment;
+            dataGridAppointment.DataContext = patient;
         }
 
         private void reserveApp(object sender, RoutedEventArgs e)
@@ -83,6 +83,13 @@ namespace Hospital_IS.View
             AppointmentPatient ap = new AppointmentPatient();
             ap.Show();
             ap.changeAppointment(changedApp);
+        }
+        
+        private void logout(object sender, RoutedEventArgs e)
+        {
+            MainWindow login = new MainWindow();
+            login.Show();
+            this.Hide();
         }
     }
 }

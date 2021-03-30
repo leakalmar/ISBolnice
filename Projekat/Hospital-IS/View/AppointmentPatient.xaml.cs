@@ -36,7 +36,7 @@ namespace Hospital_IS.View
 
 
             Room tempRoom = new Room(RoomType.ConsultingRoom, true, true, 1, 5);
-            day = new WorkDay("Monday", new DateTime(2021, 3, 29, 8, 0, 0), new DateTime(2021, 3, 29, 16, 0, 0));
+            day = new WorkDay(Day.Monday, new DateTime(2021, 3, 29, 8, 0, 0), new DateTime(2021, 3, 29, 16, 0, 0));
             List<WorkDay> days = new List<WorkDay>();
             days.Add(day);
             Doctor tempDoctor = new Doctor(1, "Doktor", "Doca", new DateTime(1976, 5, 5), "doca@gmail.com", null, "Laze Kostica 55,Novi Sad", 70000, new DateTime(2018, 5, 5), days, new Specialty("dermatolog"), tempRoom);
@@ -95,7 +95,10 @@ namespace Hospital_IS.View
         {
             Room tempRoom = new Room(RoomType.ConsultingRoom, true, true, 1, 5);
             doctor = docApp.Doctor;
-            Doctors.SelectedIndex = TempDoctors.IndexOf(doctor);
+            if(docApp.Doctor == TempDoctors[0])
+                Doctors.SelectedIndex = 0;
+            else if (docApp.Doctor == TempDoctors[0])
+                Doctors.SelectedIndex = 1;
             date = docApp.DateAndTime;
             Calendar.SelectedDate = date;
             change.Visibility = Visibility.Visible;

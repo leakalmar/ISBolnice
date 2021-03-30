@@ -27,7 +27,7 @@ namespace Hospital_IS.View
             InitializeComponent();
             List<WorkDay> dani = new List<WorkDay>
             {
-                new WorkDay("Pon", DateTime.Now, DateTime.Now)
+                new WorkDay(Day.Monday, DateTime.Now, DateTime.Now)
             };
             Specialty spec = new Specialty("Dermatolog");
             Doctor doc = new Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani, spec, null);

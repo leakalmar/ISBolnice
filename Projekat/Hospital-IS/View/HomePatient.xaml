@@ -62,7 +62,7 @@
         BorderThickness="1,0,0,0" Background="{x:Null}" />
 
         <Image Source="../hospital.png" Width="250" Height="250" Grid.RowSpan="5"/>
-        <Button x:Name="Logout" Grid.Column="2" Grid.Row="0" Margin="450,0,0,0" Background="{x:Null}" FontSize="16" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand">Odjavi se</Button>
+        <Button x:Name="Logout" Grid.Column="2" Grid.Row="0" Margin="450,0,0,0" Background="{x:Null}" FontSize="16" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="logout">Odjavi se</Button>
 
         <Button x:Name="Home" Grid.Column="0" Grid.Row="5" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand">
             <Button.Background>
@@ -113,7 +113,7 @@
         </StackPanel>
 
         <Label Content="Lista pregleda:" Grid.Row="1" Grid.Column="2" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
-        <DataGrid x:Name="dataGridAppointment"  ItemsSource="{Binding doctorAppointment, Mode=TwoWay}" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="2" Grid.Row="2" Grid.RowSpan="8" Margin="10,10,30,150">
+        <DataGrid x:Name="dataGridAppointment"  ItemsSource="{Binding DoctorAppointment, Mode=TwoWay}" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="2" Grid.Row="2" Grid.RowSpan="8" Margin="10,10,30,150">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Datum i vreme" Binding="{Binding DateAndTime, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" Width="200"/>
                 <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor.Name}" Width="200"/>

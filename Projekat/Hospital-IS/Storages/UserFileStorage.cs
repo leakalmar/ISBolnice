@@ -15,7 +15,7 @@ namespace Storages
 
             List<WorkDay> dani = new List<WorkDay>
             {
-                new WorkDay("Pon", DateTime.Now, DateTime.Now)
+                new WorkDay(Day.Monday, DateTime.Now, DateTime.Now)
             };
 
             ObservableCollection<String> alergije = new ObservableCollection<String>();
