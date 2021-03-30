@@ -26,7 +26,7 @@ namespace Hospital_IS
             }
             else if (email.Text == "doktor@gmail.com" && password.Password.ToString() == "doktor")
             {
-                View.DoctorHomePage dhp = new View.DoctorHomePage();
+                View.DoctorHomePage dhp = View.DoctorHomePage.Instance;
                 dhp.Show();
             }
             else if (email.Text == "sekretar@gmail.com" && password.Password.ToString() == "sekretar")

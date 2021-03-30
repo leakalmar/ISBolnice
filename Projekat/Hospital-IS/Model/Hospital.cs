@@ -1,3 +1,4 @@
+using Storages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -32,6 +33,9 @@ namespace Model
                 if (instance == null)
                 {
                     instance = new Hospital();
+                    UserFileStorage ufs = new UserFileStorage();
+                    instance.User = ufs.GetAll();
+                    ufs.Save(instance.User);
                 }
                 return instance;
             }
@@ -133,36 +137,17 @@ namespace Model
 
 
 
-        public System.Collections.ArrayList user;
-
-        public System.Collections.ArrayList User
-        {
-            get
-            {
-                if (user == null)
-                    user = new System.Collections.ArrayList();
-                return user;
-            }
-            set
-            {
-                RemoveAllUser();
-                if (value != null)
-                {
-                    foreach (User oUser in value)
-                        AddUser(oUser);
-                }
-            }
-        }
+        public List<User> User { get; set; }
 
         public void AddUser(User newUser)
         {
             if (newUser == null)
                 return;
-            if (this.user == null)
-                this.user = new System.Collections.ArrayList();
-            if (!this.user.Contains(newUser))
+            if (this.User == null)
+                this.User = new List<User>();
+            if (!this.User.Contains(newUser))
             {
-                this.user.Add(newUser);
+                this.User.Add(newUser);
                 newUser.Hospital = this;
             }
         }
@@ -171,22 +156,22 @@ namespace Model
         {
             if (oldUser == null)
                 return;
-            if (this.user != null)
-                if (this.user.Contains(oldUser))
+            if (this.User != null)
+                if (this.User.Contains(oldUser))
                 {
-                    this.user.Remove(oldUser);
+                    this.User.Remove(oldUser);
                     oldUser.Hospital = null;
                 }
         }
 
         public void RemoveAllUser()
         {
-            if (user != null)
+            if (User != null)
             {
-                System.Collections.ArrayList tmpUser = new System.Collections.ArrayList();
-                foreach (User oldUser in user)
+                List<User> tmpUser = new List<User>();
+                foreach (User oldUser in User)
                     tmpUser.Add(oldUser);
-                user.Clear();
+                User.Clear();
                 foreach (User oldUser in tmpUser)
                     oldUser.Hospital = null;
                 tmpUser.Clear();

@@ -13,7 +13,7 @@ namespace Storages
             Room r = new Room(RoomType.ConsultingRoom, false, true, 2, 25);
             List<Model.WorkDay> dani = new List<Model.WorkDay>
             {
-                new Model.WorkDay("Pon", DateTime.Now, DateTime.Now)
+                new Model.WorkDay(Day.Monday, DateTime.Now, DateTime.Now)
             };
             Model.Specialty spec = new Model.Specialty("Dermatolog");
             Model.Doctor doc = new Model.Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani,spec, r);

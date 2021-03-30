@@ -42,24 +42,24 @@
                     Grid.Row="0" Grid.Column="4">
             <Button Height="20" Width="20" Opacity="0.6" BorderThickness="0" Click="MinimizeBtnClick">
                 <Button.Background>
-                    <ImageBrush ImageSource="minimize.png"/>
+                    <ImageBrush ImageSource="pack://application:,,,/Resources/minimize.png"/>
                 </Button.Background>
             </Button>
             <Button Height="20" Width="20" Opacity="0.6" BorderThickness="0" Click="MaximizeBtnClick">
                 <Button.Background>
-                    <ImageBrush ImageSource="maximize.png"/>
+                    <ImageBrush ImageSource="pack://application:,,,/Resources/maximize.png"/>
                 </Button.Background>
             </Button>
             <Button Height="20" Width="20" Opacity="0.6" BorderThickness="0" Click="ExitBtnClick">
                 <Button.Background>
-                    <ImageBrush ImageSource="x-icon.png"/>
+                    <ImageBrush ImageSource="pack://application:,,,/Resources/x-icon.png"/>
                 </Button.Background>
             </Button>
         </StackPanel>
 
         <Ellipse Height="auto" Width="auto" Grid.Row="2" Grid.Column="2">
             <Ellipse.Fill>
-                <ImageBrush ImageSource="simona.jpg"/>
+                <ImageBrush ImageSource="pack://application:,,,/Resources/simona.jpg"/>
             </Ellipse.Fill>
         </Ellipse>
 
@@ -162,11 +162,11 @@
                         HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button x:Name="reportBtn" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
                     <StackPanel Orientation="Horizontal" Background="Transparent">
-                        <Image Source="report.png"/>
+                        <Image Source="pack://application:,,,/Resources/report.png"/>
                         <Label Content="Izveštaj" Foreground="WhiteSmoke" 
                                FontFamily="MS Reference Sans Serif" FontSize="14" 
                                VerticalContentAlignment="Center"/>
-                        <Image Source="importance.png" Margin="5,5,5,5"/>
+                        <Image Source="pack://application:,,,/Resources/importance.png" Margin="5,5,5,5"/>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -175,11 +175,11 @@
                         HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button x:Name="prescriptionBtn" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
                     <StackPanel Orientation="Horizontal" Background="Transparent">
-                        <Image Source="pill.png"/>
+                        <Image Source="pack://application:,,,/Resources/pill.png"/>
                         <Label Content="Recept" Foreground="WhiteSmoke" 
                                FontFamily="MS Reference Sans Serif" FontSize="14" 
                                VerticalContentAlignment="Center"/>
-                        <Image Source="checkmark.png" Visibility="Hidden"/>
+                        <Image Source="pack://application:,,,/Resources/checkmark.png" Visibility="Hidden"/>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -188,11 +188,11 @@
                         HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button x:Name="testBtn" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
                     <StackPanel Orientation="Horizontal" Background="Transparent">
-                        <Image Source="tube.png"/>
+                        <Image Source="pack://application:,,,/Resources/tube.png"/>
                         <Label Content="Labaratorijski uput" Foreground="WhiteSmoke" 
                                FontFamily="MS Reference Sans Serif" FontSize="14" 
                                VerticalContentAlignment="Center"/>
-                        <Image Source="checkmark.png" Visibility="Hidden"/>
+                        <Image Source="pack://application:,,,/Resources/checkmark.png" Visibility="Hidden"/>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -202,11 +202,11 @@
                 <Button x:Name="newAppointmentBtn" Background="{x:Null}" BorderBrush="{x:Null}" 
                         Foreground="{x:Null}" Click="appointmentBtn">
                     <StackPanel Orientation="Horizontal" Background="Transparent">
-                        <Image Source="bookmark.png"/>
+                        <Image Source="pack://application:,,,/Resources/bookmark.png"/>
                         <Label Content="Novi termin" Foreground="WhiteSmoke" 
                                FontFamily="MS Reference Sans Serif" FontSize="14" 
                                VerticalContentAlignment="Center"/>
-                        <Image Source="checkmark.png" Visibility="Hidden"/>
+                        <Image Source="pack://application:,,,/Resources/checkmark.png" Visibility="Hidden"/>
                     </StackPanel>
                 </Button>
             </StackPanel>
