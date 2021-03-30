@@ -1,28 +1,30 @@
-using Model;
+﻿using Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
+using System.Text;
 
-namespace Storages
+namespace Hospital_IS.Storages
 {
-    public class UserFileStorage
+    class FSDoctor
     {
         private string fileLocation;
 
-        public UserFileStorage()
+        public FSDoctor()
         {
             this.fileLocation = "../../../FileStorage/doctors.json";
         }
 
-        public List<User> GetAll()
+        public List<Doctor> GetAll()
         {
             String text = File.ReadAllText(this.fileLocation);
-            List<User> users = JsonConvert.DeserializeObject<List<User>>(text);
+            List<Doctor> doctors = JsonConvert.DeserializeObject<List<Doctor>>(text);
+
 
             /*
-             * List<WorkDay> dani = new List<WorkDay>();
+             * List<Doctor> doctors = new List<Doctor>();
+            List<WorkDay> dani = new List<WorkDay>();
             dani.Add(new WorkDay(Day.Monday, new DateTime(2020, 02, 02, 8, 0, 0), new DateTime(2020, 02, 02, 20, 0, 0)));
             dani.Add(new WorkDay(Day.Tuesday, new DateTime(2020, 02, 02, 8, 0, 0), new DateTime(2020, 02, 02, 20, 0, 0)));
             dani.Add(new WorkDay(Day.Wednesday, new DateTime(2020, 02, 02, 8, 0, 0), new DateTime(2020, 02, 02, 20, 0, 0)));
@@ -33,12 +35,13 @@ namespace Storages
             Specialty spec = new Specialty("Dermatolog");
             Room r = new Room(RoomType.ConsultingRoom, false, true, 2, 25);
             Doctor doc = new Doctor(101, "Dragana", "Vukmanov Simokov", new DateTime(1980, 05, 12), "doktor@gmail.com", "doktor", "Brace Radica 30", 70000.0, DateTime.Now, dani, spec, r);
-            users.Add(doc);
+            doctors.Add(doc);
             */
-            return users;
+
+            return doctors;
         }
 
-        public void Save(List<User> users)
+        public void Save(List<Doctor> users)
         {
             var file = JsonConvert.SerializeObject(users, Formatting.Indented);
             using (StreamWriter writer = new StreamWriter(this.fileLocation))
@@ -47,10 +50,9 @@ namespace Storages
             }
         }
 
-        public Model.User GetByEmail(String email)
+        public Model.Doctor GetByEmail(String email)
         {
             throw new NotImplementedException();
         }
-
     }
 }

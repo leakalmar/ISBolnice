@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using Hospital_IS.View;
+using Model;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Hospital_IS
@@ -26,7 +28,7 @@ namespace Hospital_IS
             }
             else if (email.Text == "doktor@gmail.com" && password.Password.ToString() == "doktor")
             {
-                View.DoctorHomePage dhp = View.DoctorHomePage.Instance;
+                DoctorHomePage dhp = DoctorHomePage.Instance;
                 dhp.Show();
             }
             else if (email.Text == "sekretar@gmail.com" && password.Password.ToString() == "sekretar")

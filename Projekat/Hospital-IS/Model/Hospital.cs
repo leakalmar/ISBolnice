@@ -1,3 +1,4 @@
+using Hospital_IS.Storages;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -33,9 +34,10 @@ namespace Model
                 if (instance == null)
                 {
                     instance = new Hospital();
-                    UserFileStorage ufs = new UserFileStorage();
-                    instance.User = ufs.GetAll();
-                    ufs.Save(instance.User);
+                    FSDoctor dfs = new FSDoctor();
+                    PatientFileStorage pfs = new PatientFileStorage();
+                    instance.Doctors = dfs.GetAll();
+                    instance.allPatients = pfs.GetAll();
                 }
                 return instance;
             }
@@ -135,7 +137,46 @@ namespace Model
         }
 
 
+        public List<Doctor> Doctors { get; set; }
 
+        public void AddDoctor(Doctor newDoctor)
+        {
+            if (newDoctor == null)
+                return;
+            if (this.Doctors == null)
+                this.Doctors = new List<Doctor>();
+            if (!this.Doctors.Contains(newDoctor))
+            {
+                this.Doctors.Add(newDoctor);
+                newDoctor.Hospital = this;
+            }
+        }
+
+        public void RemoveDoctor(Doctor oldDoctor)
+        {
+            if (oldDoctor == null)
+                return;
+            if (this.Doctors != null)
+                if (this.Doctors.Contains(oldDoctor))
+                {
+                    this.Doctors.Remove(oldDoctor);
+                    oldDoctor.Hospital = null;
+                }
+        }
+
+        public void RemoveAllDoctors()
+        {
+            if (Doctors != null)
+            {
+                List<Doctor> tmpDoctor = new List<Doctor>();
+                foreach (Doctor oldDoctor in Doctors)
+                    tmpDoctor.Add(oldDoctor);
+                Doctors.Clear();
+                foreach (Doctor oldDoctor in tmpDoctor)
+                    oldDoctor.Hospital = null;
+                tmpDoctor.Clear();
+            }
+        }
 
         public List<User> User { get; set; }
 
