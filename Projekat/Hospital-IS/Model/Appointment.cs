@@ -10,7 +10,7 @@ namespace Model
         public AppointmetType Type { get; set; }
         public Boolean Reserved { get; set; }
 
-        public Appointment(DateTime date, AppointmetType type, bool reserved, Room room)
+        public Appointment(DateTime date, AppointmetType type, bool reserved, int room)
         {
             DateAndTime = date;
             Date = date.ToShortDateString();
@@ -30,32 +30,9 @@ namespace Model
             throw new NotImplementedException();
         }
 
-        public Room room;
+        public int room;
 
-        public Room Room
-        {
-            get
-            {
-                return room;
-            }
-            set
-            {
-                if (this.room == null || !this.room.Equals(value))
-                {
-                    if (this.room != null)
-                    {
-                        Room oldRoom = this.room;
-                        this.room = null;
-                        oldRoom.RemoveAppointment(this);
-                    }
-                    if (value != null)
-                    {
-                        this.room = value;
-                        this.room.AddAppointment(this);
-                    }
-                }
-            }
-        }
+        public int Room { get; set; }
 
     }
 }

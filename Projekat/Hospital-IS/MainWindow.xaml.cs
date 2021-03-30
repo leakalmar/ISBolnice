@@ -1,6 +1,9 @@
-﻿using Hospital_IS.View;
+﻿using Hospital_IS.Storages;
+using Hospital_IS.View;
 using Model;
+using Storages;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,12 +14,15 @@ namespace Hospital_IS
     /// </summary>
     public partial class MainWindow : Window
     {
-        Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
-        public static Patient User { get; set; }
+        PatientFileStorage pfs = new PatientFileStorage();
+        AppointmentFileStorage afs = new AppointmentFileStorage();
+        public static Patient PatientUser { get; set; }
+        public static ObservableCollection<DoctorAppointment> doctorAppointments { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
+            doctorAppointments = new ObservableCollection<DoctorAppointment>();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -28,12 +34,16 @@ namespace Hospital_IS
         private void Login(object sender, RoutedEventArgs e)
         {
             List<Patient> patients = pfs.GetAll();
+            Hospital.Instance.allAppointments=afs.GetAll();
 
             foreach (Patient p in patients)
             {
                 if (email.Text == p.Email && password.Password.ToString() == p.Password)
                 {
-                    User = p;
+                    PatientUser = p;
+                    //    PatientUser.DoctorAppointment = afs.GetAllByPatient(p);
+                    HomePatient.Instance.DoctorAppointment = afs.GetAllByPatient(p.Id);
+                    //doctorAppointments = afs.GetAllByPatient();
                     HomePatient.Instance.Show();
                     this.Close();
                 }

@@ -1,4 +1,5 @@
 ﻿using Model;
+using Storages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,18 +34,18 @@ namespace Hospital_IS.View
             }
         }
         
-        public Patient patient { get; set; }
-        public ObservableCollection<DoctorAppointment> doctorAppointment { get; set; }
+        public Patient Patient { get; set; }
         public DoctorAppointment changedApp;
+        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
         public HomePatient()
         {
             InitializeComponent();
 
-            patient = MainWindow.User;
-            doctorAppointment = new ObservableCollection<DoctorAppointment>();
+            Patient = MainWindow.PatientUser;
             this.DataContext = this;
-            PersonalData.DataContext = patient;
-            dataGridAppointment.DataContext = patient;
+            PersonalData.DataContext = Patient;
+            //dataGridAppointment.DataContext = Patient;
+            //DoctorAppointment = MainWindow.doctorAppointments;
         }
 
         private void reserveApp(object sender, RoutedEventArgs e)
@@ -73,7 +74,9 @@ namespace Hospital_IS.View
         private void deleteAppointment(object sender, RoutedEventArgs e)
         {
             DoctorAppointment doctorApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
-            patient.DoctorAppointment.Remove(doctorApp);
+            //Patient.DoctorAppointment.Remove(doctorApp);
+            Hospital.Instance.allAppointments.Remove(doctorApp);
+            DoctorAppointment.Remove(doctorApp);
             doctorApp.Reserved = false;
         }
 
@@ -90,6 +93,8 @@ namespace Hospital_IS.View
             MainWindow login = new MainWindow();
             login.Show();
             this.Hide();
+            AppointmentFileStorage afs = new AppointmentFileStorage();
+            afs.SaveAppointment(Hospital.Instance.allAppointments);
         }
     }
 }

@@ -68,7 +68,7 @@ namespace Hospital_IS.Storages
             }
             return false;
         }
-        public Boolean Update(Patient p)
+ /*       public Boolean Update(Patient p)
         {
             List<Patient> patients = GetAll();
             for (int i = 0; i < patients.Count; i++)
@@ -104,6 +104,6 @@ namespace Hospital_IS.Storages
                 }
             }
             return false;
-        }
+        }*/
     }
 }

@@ -104,8 +104,8 @@ namespace Model
         }
         public System.Collections.ArrayList appointment;
 
-        public System.Collections.ArrayList Appointment
-        {
+        public System.Collections.ArrayList Appointment { get; set; }
+     /*   {
             get
             {
                 if (appointment == null)
@@ -132,7 +132,7 @@ namespace Model
             if (!this.appointment.Contains(newAppointment))
             {
                 this.appointment.Add(newAppointment);
-                newAppointment.Room = this;
+                newAppointment.Room = this.RoomId;
             }
         }
 
@@ -162,6 +162,6 @@ namespace Model
                 tmpAppointment.Clear();
             }
         }
-
+     */
     }
 }

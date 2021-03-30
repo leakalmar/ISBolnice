@@ -41,7 +41,7 @@ namespace Hospital_IS.View
 
         public void FindAppointments(ObservableCollection<Model.DoctorAppointment> history, ObservableCollection<Model.DoctorAppointment> future)
         {
-            foreach (Model.DoctorAppointment doc in Patient.DoctorAppointment)
+        /*    foreach (Model.DoctorAppointment doc in Patient.DoctorAppointment)
             {
                 if (doc.DateAndTime < DateTime.Now)
                 {
@@ -53,6 +53,7 @@ namespace Hospital_IS.View
                 }
 
             }
+        */
         }
     }
 }

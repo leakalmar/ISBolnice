@@ -11,13 +11,13 @@ namespace Model
         public Specialty Specialty { get; set; }
 
         public Doctor(int id, string name, string surname, DateTime birthDate, string email, string password, string address, 
-            double salary, DateTime employmentDate, List<WorkDay> workDays, Specialty spec, Room primaryRoom) : base(id, name, surname, birthDate, email, password, address, salary, employmentDate, workDays)
+            double salary, DateTime employmentDate, List<WorkDay> workDays, Specialty spec, int primaryRoom) : base(id, name, surname, birthDate, email, password, address, salary, employmentDate, workDays)
         {
             this.Specialty = spec;
             this.PrimaryRoom = primaryRoom;
         }
 
-        public Room PrimaryRoom { get; set; }
+        public int PrimaryRoom { get; set; }
 
 
         public void ViewPatientDocuments(Patient patient)
@@ -35,51 +35,6 @@ namespace Model
             throw new NotImplementedException();
         }
 
-
-
-        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
-
-
-        public void AddDoctorAppointment(DoctorAppointment newDoctorAppointment)
-        {
-            if (newDoctorAppointment == null)
-                return;
-            if (this.DoctorAppointment == null)
-                this.DoctorAppointment = new ObservableCollection<DoctorAppointment>();
-            if (!this.DoctorAppointment.Contains(newDoctorAppointment))
-            {
-                this.DoctorAppointment.Add(newDoctorAppointment);
-                newDoctorAppointment.Doctor = this;
-            }
-        }
-
-
-        public void RemoveDoctorAppointment(DoctorAppointment oldDoctorAppointment)
-        {
-            if (oldDoctorAppointment == null)
-                return;
-            if (this.DoctorAppointment != null)
-                if (this.DoctorAppointment.Contains(oldDoctorAppointment))
-                {
-                    this.DoctorAppointment.Remove(oldDoctorAppointment);
-                    oldDoctorAppointment.Doctor = null;
-                }
-        }
-
-
-        public void RemoveAllDoctorAppointment()
-        {
-            if (DoctorAppointment != null)
-            {
-                System.Collections.ArrayList tmpDoctorAppointment = new System.Collections.ArrayList();
-                foreach (DoctorAppointment oldDoctorAppointment in DoctorAppointment)
-                    tmpDoctorAppointment.Add(oldDoctorAppointment);
-                DoctorAppointment.Clear();
-                foreach (DoctorAppointment oldDoctorAppointment in tmpDoctorAppointment)
-                    oldDoctorAppointment.Doctor = null;
-                tmpDoctorAppointment.Clear();
-            }
-        }
         public System.Collections.ArrayList patient;
 
 
