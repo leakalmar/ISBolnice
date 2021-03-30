@@ -3,9 +3,10 @@ namespace Model
 {
     public enum EducationCategory
     {
+        NA,
         GradeSchool,
         HighSchool,
-        Collage,
+        College,
         Graduate,
         Degree
     }

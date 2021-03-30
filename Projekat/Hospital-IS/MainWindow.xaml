@@ -55,7 +55,7 @@
                 <Button Height="20" Width="120"
                         Content="Login"
                         Margin="50" Background="LavenderBlush"
-                        Click="Login"/>
+                        Click="Login" IsDefault="True"/>
             </StackPanel>
             </StackPanel>
 
