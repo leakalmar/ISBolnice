@@ -43,7 +43,11 @@ namespace Hospital_IS.Storages
 
         public void Save(List<Doctor> users)
         {
-            var file = JsonConvert.SerializeObject(users, Formatting.Indented);
+            var file = JsonConvert.SerializeObject(users, Formatting.Indented,new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+            });
             using (StreamWriter writer = new StreamWriter(this.fileLocation))
             {
                 writer.Write(file);

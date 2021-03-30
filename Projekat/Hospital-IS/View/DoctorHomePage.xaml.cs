@@ -80,11 +80,11 @@ namespace Hospital_IS.View
            if (dialog)
             {
                 this.Close();
-                dfs.Save(Hospital.Instance.Doctors);
-                foreach (Patient p in Hospital.Instance.allPatients)
-                {
-                    pfs.SavePatient(p);
-                }
+                //dfs.Save(Hospital.Instance.Doctors);
+                //foreach (Patient p in Hospital.Instance.allPatients)
+               // {
+                 //   pfs.SavePatient(p);
+               // }
             }
          }
 
