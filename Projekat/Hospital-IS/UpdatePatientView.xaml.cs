@@ -24,10 +24,13 @@ namespace Hospital_IS
             InitializeComponent();
             Patient = patient;
 
-            if (Patient.Gender.Equals("Žensko"))
-                genComboBox.SelectedIndex = 0;
-            else if (Patient.Gender.Equals("Muško"))
-                genComboBox.SelectedIndex = 1;
+            if (Patient.Gender != null)
+            {
+                if (Patient.Gender.Equals("Žensko"))
+                    genComboBox.SelectedIndex = 0;
+                else if (Patient.Gender.Equals("Muško"))
+                    genComboBox.SelectedIndex = 1;
+            }
 
             if (Patient.Education.Equals(Model.EducationCategory.GradeSchool))
                 eduComboBox.SelectedIndex = 0;

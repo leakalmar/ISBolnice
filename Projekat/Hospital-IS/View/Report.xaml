@@ -43,17 +43,17 @@
                     Grid.Row="0" Grid.Column="4">
             <Button Height="20" Width="20" Opacity="0.6" BorderThickness="0" Click="MinimizeBtnClick">
                 <Button.Background>
-                    <ImageBrush ImageSource="minimize.png"/>
+                    <ImageBrush ImageSource="pack://application:,,,/Resources/minimize.png"/>
                 </Button.Background>
             </Button>
             <Button Height="20" Width="20" Opacity="0.6" BorderThickness="0" Click="MaximizeBtnClick">
                 <Button.Background>
-                    <ImageBrush ImageSource="maximize.png"/>
+                    <ImageBrush ImageSource="pack://application:,,,/Resources/maximize.png"/>
                 </Button.Background>
             </Button>
             <Button Height="20" Width="20" Opacity="0.6" BorderThickness="0" Click="ExitBtnClick">
                 <Button.Background>
-                    <ImageBrush ImageSource="x-icon.png"/>
+                    <ImageBrush ImageSource="pack://application:,,,/Resources/x-icon.png"/>
                 </Button.Background>
             </Button>
         </StackPanel>

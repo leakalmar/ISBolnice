@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using Hospital_IS.View;
+using Model;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Hospital_IS
@@ -12,6 +14,7 @@ namespace Hospital_IS
         {
             InitializeComponent();
         }
+
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -28,6 +31,8 @@ namespace Hospital_IS
             }
             else if (email.Text == "doktor@gmail.com" && password.Password.ToString() == "doktor")
             {
+                DoctorHomePage dhp = DoctorHomePage.Instance;
+                dhp.Show();
             }
             else if (email.Text == "sekretar@gmail.com" && password.Password.ToString() == "sekretar")
             {
