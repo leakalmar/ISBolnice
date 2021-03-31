@@ -1,0 +1,24 @@
+[
+  {
+    "equipment": null,
+    "appointment": null,
+    "RoomFloor": 123,
+    "RoomId": 123,
+    "IsFree": true,
+    "IsUsable": false,
+    "Type": 2,
+    "Equipment": [],
+    "Appointment": []
+  },
+  {
+    "equipment": null,
+    "appointment": null,
+    "RoomFloor": 123,
+    "RoomId": 123,
+    "IsFree": true,
+    "IsUsable": false,
+    "Type": 2,
+    "Equipment": [],
+    "Appointment": null
+  }
+]

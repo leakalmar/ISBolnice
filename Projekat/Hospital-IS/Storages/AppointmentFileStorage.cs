@@ -1,6 +1,9 @@
 using Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 
 namespace Storages
 {
@@ -8,36 +11,56 @@ namespace Storages
     {
         private string fileLocation;
 
-        public List<Appointment> GetAllByPatient(Patient patient)
+        public AppointmentFileStorage()
         {
-            Room r = new Room(RoomType.ConsultingRoom, false, true, 2, 25);
-            List<Model.WorkDay> dani = new List<Model.WorkDay>
+            this.fileLocation = "../../../FileStorage/appointments.json";
+        }
+
+        public ObservableCollection<DoctorAppointment> GetAll()
+        {
+            String text = File.ReadAllText(this.fileLocation);
+            ObservableCollection<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<ObservableCollection<DoctorAppointment>>(text);
+            return allAppointments;
+        }
+
+        public ObservableCollection<DoctorAppointment> GetAllByPatient(int patient)
+        {
+            String text = File.ReadAllText(this.fileLocation);
+            ObservableCollection<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<ObservableCollection<DoctorAppointment>>(text);
+            ObservableCollection<DoctorAppointment> patientAppointments = new ObservableCollection<DoctorAppointment>();
+            foreach (DoctorAppointment docApp in allAppointments)
             {
-                new Model.WorkDay(Day.Monday, DateTime.Now, DateTime.Now)
-            };
-            Model.Specialty spec = new Model.Specialty("Dermatolog");
-            Model.Doctor doc = new Model.Doctor(111, "Dragana", "Vukmanov Simokov", DateTime.Now, "dragana@gmail.com", "123", "Brace Radica 30", 60000.0, DateTime.Now, dani,spec, r);
-            Appointment a1 = new DoctorAppointment(DateTime.Now, AppointmetType.CheckUp, true, r,doc,patient);
-            Appointment a2 = new DoctorAppointment(DateTime.Now, AppointmetType.Operation, true, r, doc,patient);
-            Appointment a3 = new DoctorAppointment(DateTime.Now, AppointmetType.CheckUp, true, r, doc,patient);
-
-            List<Appointment> all = new List<Appointment>();
-            all.Add(a1);
-            all.Add(a2);
-            all.Add(a3);
-
-            return all;
+                if(docApp.Patient.Id == patient)
+                {
+                    patientAppointments.Add(docApp);
+                }
+            }
+            return patientAppointments;
 
         }
 
-        public List<Appointment> GetAllByDoctor(Doctor doctor)
+        public ObservableCollection<DoctorAppointment> GetAllByDoctor(int doctor)
         {
-            throw new NotImplementedException();
+            String text = File.ReadAllText(this.fileLocation);
+            ObservableCollection<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<ObservableCollection<DoctorAppointment>>(text);
+            ObservableCollection<DoctorAppointment> doctorAppointments = new ObservableCollection<DoctorAppointment>();
+            foreach (DoctorAppointment docApp in allAppointments)
+            {
+                if (docApp.Doctor.Id == doctor)
+                {
+                    doctorAppointments.Add(docApp);
+                }
+            }
+            return doctorAppointments;
         }
 
-        public void SaveAppointment(Appointment appointment)
+        public void SaveAppointment(ObservableCollection<DoctorAppointment> allAppointments)
         {
-            throw new NotImplementedException();
+            var file = JsonConvert.SerializeObject(allAppointments, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
+            using (StreamWriter writer = new StreamWriter(this.fileLocation))
+            {
+                writer.Write(file);
+            }
         }
 
         public List<Appointment> GetAllByRoom(Model.Room room)

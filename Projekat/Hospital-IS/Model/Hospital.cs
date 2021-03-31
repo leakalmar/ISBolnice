@@ -13,7 +13,6 @@ namespace Model
         public String City { get; set; }
         public String Country { get; set; }
         public String Address { get; set; }
-        public List<Appointment> allAppointments { get; set; }
         public List<Patient> allPatients { get; set; }
         public List<Equipment> allEquipment { get; set; }
         public List<Room> allRooms { get; set; }
@@ -24,7 +23,7 @@ namespace Model
 
         private Hospital()
         {
-            
+
         }
 
         public static Hospital Instance
@@ -76,9 +75,51 @@ namespace Model
             throw new NotImplementedException();
         }
 
+        public ObservableCollection<DoctorAppointment> allAppointments { get; set; }
+
+        public void AddAppointment(DoctorAppointment docApp)
+        {
+            if (docApp == null)
+            {
+                return;
+            }
+
+            if (allAppointments == null)
+            {
+                allAppointments = new ObservableCollection<DoctorAppointment>();
+
+            }
+
+            if (!allAppointments.Contains(docApp))
+            {
+                allAppointments.Add(docApp);
+
+            }
+        }
+
+        public void RemoveAppointment(DoctorAppointment docApp)
+        {
+            if (docApp == null)
+            {
+                return;
+            }
+
+            if (allAppointments != null)
+            {
+                foreach (DoctorAppointment doctorAppointment in allAppointments)
+                {
+                    if (docApp.DateAndTime.Equals(doctorAppointment.DateAndTime))
+                    {
+                         allAppointments.Remove(doctorAppointment);
+                         break;
+                    }
+                }
+            }
+        }
+
         public static ObservableCollection<Room> Room  { get; set; }
 
-       
+
 
         public void AddRoom(Room newRoom)
         {
@@ -88,15 +129,15 @@ namespace Model
             }
 
             if (Room == null)
-            { 
+            {
               Room = new ObservableCollection<Room>();
-                
+
             }
 
             if (!Room.Contains(newRoom))
             {
                 Room.Add(newRoom);
-                
+
             }
         }
 
@@ -106,9 +147,9 @@ namespace Model
             {
                 if (r.RoomId == oldRoom.RoomId)
                 {
-                   
+
                     Room.Remove(r);
-                    
+
                     break;
                 }
             }
@@ -121,7 +162,7 @@ namespace Model
         }
         public void UpdateRoom(int oldIndex,Room oldRoom)
         {
-            
+
             foreach(Room r in Room)
             {
                 if(r.RoomId == oldIndex)
@@ -132,19 +173,19 @@ namespace Model
                     break;
                 }
             }
-            
-            
+
+
         }
 
 
-        public List<Doctor> Doctors { get; set; }
+        public ObservableCollection<Doctor> Doctors { get; set; }
 
         public void AddDoctor(Doctor newDoctor)
         {
             if (newDoctor == null)
                 return;
             if (this.Doctors == null)
-                this.Doctors = new List<Doctor>();
+                this.Doctors = new ObservableCollection<Doctor>();
             if (!this.Doctors.Contains(newDoctor))
             {
                 this.Doctors.Add(newDoctor);
@@ -168,7 +209,7 @@ namespace Model
         {
             if (Doctors != null)
             {
-                List<Doctor> tmpDoctor = new List<Doctor>();
+                ObservableCollection<Doctor> tmpDoctor = new ObservableCollection<Doctor>();
                 foreach (Doctor oldDoctor in Doctors)
                     tmpDoctor.Add(oldDoctor);
                 Doctors.Clear();

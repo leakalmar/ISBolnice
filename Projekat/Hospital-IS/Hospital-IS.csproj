@@ -9,16 +9,20 @@
 
   <ItemGroup>
     <None Remove="director.jpg" />
+    <None Remove="door_open.png" />
     <None Remove="employee.jpg" />
     <None Remove="hospital.png" />
     <None Remove="hospital2.png" />
+    <None Remove="other_facilities.png" />
+    <None Remove="request.png" />
+    <None Remove="room_icon.jpg" />
+    <None Remove="thredots.png" />
     <None Remove="View\bookmark.png" />
     <None Remove="View\checkmark.png" />
     <None Remove="View\doctor.jpg" />
     <None Remove="View\importance.png" />
     <None Remove="View\maximize.png" />
     <None Remove="View\minimize.png" />
-    <None Remove="View\minimizee.png" />
     <None Remove="View\pill.png" />
     <None Remove="View\report.png" />
     <None Remove="View\simona.jpg" />
@@ -31,23 +35,31 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="director.jpg" />
-    <Resource Include="employee.jpg" />
+    <Resource Include="director.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="door_open.png" />
+    <Resource Include="employee.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="hospital.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="other_facilities.png" />
+    <Resource Include="request.png" />
     <Resource Include="Resources\bookmark.png" />
     <Resource Include="Resources\checkmark.png" />
     <Resource Include="Resources\doctor.jpg" />
     <Resource Include="Resources\importance.png" />
     <Resource Include="Resources\maximize.png" />
     <Resource Include="Resources\minimize.png" />
-    <Resource Include="View\minimizee.png" />
     <Resource Include="Resources\pill.png" />
     <Resource Include="Resources\report.png" />
     <Resource Include="Resources\simona.jpg" />
     <Resource Include="Resources\tube.png" />
     <Resource Include="Resources\x-icon.png" />
+    <Resource Include="room_icon.jpg" />
+    <Resource Include="thredots.png" />
   </ItemGroup>
 
 </Project>

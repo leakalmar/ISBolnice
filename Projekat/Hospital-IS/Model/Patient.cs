@@ -64,7 +64,7 @@ namespace Model
             throw new NotImplementedException();
         }
 
-
+/*
         public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; } = new ObservableCollection<DoctorAppointment>();
 
         public void AddDoctorAppointment(DoctorAppointment newDoctorAppointment)
@@ -105,7 +105,7 @@ namespace Model
                 tmpDoctorAppointment.Clear();
             }
         }
-
+*/
         public Doctor Doctor
         {
             get

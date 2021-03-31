@@ -134,7 +134,7 @@
                                         CanUserResize="False" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor.Name}" 
                                         Width="1*"/>
-                    <DataGridTextColumn Header="Soba" Binding="{Binding Room.RoomId}" 
+                    <DataGridTextColumn Header="Soba" Binding="{Binding Room}" 
                                         Width="0.3*"/>
                     <DataGridCheckBoxColumn Header="Rezervisan" Binding="{Binding Reserved}" 
                                             Width="0.3*" CanUserResize="False" 
