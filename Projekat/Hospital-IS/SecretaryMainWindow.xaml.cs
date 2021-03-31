@@ -51,7 +51,6 @@ namespace Hospital_IS
             Model.Patient p2 = new Model.Patient(1212, "Nikolina", "Perić", new DateTime(1972, 10, 12), "nikolina@gmail.com", "sifra", "Bulevar Evrope 11", DateTime.Now, "", null);
             Model.Patient p3 = new Model.Patient(2314, "Ana", "Zorić", new DateTime(1995, 11, 12), "ana@gmail.com", "sifra", "Bulevar Evrope 21", DateTime.Now, "", null);
             Model.Patient p4 = new Model.Patient(1234, "Petar", "Petrović", new DateTime(2000, 12, 9), "petar@gmail.com", "sifra", "Šekspirova 18", DateTime.Now, "", null);
-
             Patients.Add(p1);
             Patients.Add(p2);
             Patients.Add(p3);
