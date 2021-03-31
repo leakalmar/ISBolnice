@@ -40,23 +40,7 @@ namespace Hospital_IS.View
             TempDoctors = new ObservableCollection<Doctor>();
             TempRooms = rs.GetAll();
 
-
-            Room tempRoom = new Room(RoomType.ConsultingRoom, true, true, 1, 5);
-            day = new WorkDay(Day.Monday, new DateTime(2021, 3, 29, 8, 0, 0), new DateTime(2021, 3, 29, 16, 0, 0));
-            List<WorkDay> days = new List<WorkDay>();
-            days.Add(day);
-            Doctor tempDoctor = new Doctor(1, "Doktor", "Doca", new DateTime(1976, 5, 5), "doca@gmail.com", null, "Laze Kostica 55,Novi Sad", 70000, new DateTime(2018, 5, 5), days, new Specialty("dermatolog"), tempRoom.RoomId);
-            Doctor tempDoctor1 = new Doctor(1, "Doktor2", "Doca2", new DateTime(1977, 5, 5), "doca@gmail.com", null, "Laze Kostica 55,Novi Sad", 70000, new DateTime(2018, 5, 5), days, new Specialty("dermatolog"), tempRoom.RoomId);
-            TempDoctors.Add(tempDoctor);
-            TempDoctors.Add(tempDoctor1);
             TempDoctors.Add(DoctorHomePage.Instance.Doctor);
-
-
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 8, 30, 0), AppointmetType.CheckUp, false, TempRooms[0].RoomId, doctor, appointment.Patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 0, 0), AppointmetType.CheckUp, false, TempRooms[1].RoomId, doctor, appointment.Patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 30, 0), AppointmetType.CheckUp, false, TempRooms[2].RoomId, doctor, appointment.Patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 0, 0), AppointmetType.CheckUp, false, TempRooms[3].RoomId, doctor, appointment.Patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 30, 0), AppointmetType.CheckUp, false, TempRooms[4].RoomId, doctor, appointment.Patient));
 
             rooms.SelectedItem = appointment.Doctor.PrimaryRoom;
             Doctors.SelectedItem = appointment.Doctor;
