@@ -68,8 +68,8 @@ namespace Hospital_IS
             }
             else if (email.Text == "sekretar@gmail.com" && password.Password.ToString() == "sekretar")
             {
-                SecretaryMainWindow smw = new SecretaryMainWindow();
-                smw.Show();
+                SecretaryMainWindow.Instance.Show();
+
                 this.Close();
             }
         }
