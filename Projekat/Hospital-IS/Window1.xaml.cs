@@ -14,23 +14,35 @@ using Model;
 
 namespace Hospital_IS
 {
-    /// <summary>
-    /// Interaction logic for Window1.xaml
-    /// </summary>
+  
     public partial class Window1 : Window
     {
         private RoomStorage roomStorage = new RoomStorage();
-        public Window1()
+        private static Window1 instance = null;
+        public static Window1 Instance
         {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Window1();
+                }
+                return instance;
+            }
+        }
+        private Window1()
+        {
+            if (Hospital.Room == null)
+            {
+                Hospital.Room = roomStorage.GetAll();
+              
+            }
             InitializeComponent();
+            DataGridRooms.DataContext = Hospital.Instance;
         }
 
       
-        private void RoomsButton_Click_1(object sender, RoutedEventArgs e)
-        {
-            Rooms room = new Rooms();
-            room.Show();
-        }
+       
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -39,8 +51,9 @@ namespace Hospital_IS
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            roomStorage.SaveRooms(Hospital.Room);
-            this.Close();
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.Show();
+            this.Hide();
         }
     }
 }

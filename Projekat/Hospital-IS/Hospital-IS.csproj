@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Rooms.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="director.jpg" />
     <None Remove="door_open.png" />
     <None Remove="employee.jpg" />
@@ -15,10 +19,15 @@
     <None Remove="hospital2.png" />
     <None Remove="other_facilities.png" />
     <None Remove="request.png" />
+    <None Remove="Resources\addroom.png" />
+    <None Remove="Resources\deleteroom.png" />
+    <None Remove="Resources\edit.png" />
     <None Remove="Resources\filijale.png" />
     <None Remove="Resources\hospitalroom.png" />
     <None Remove="Resources\menubar.png" />
+    <None Remove="Resources\options.png" />
     <None Remove="Resources\room.png" />
+    <None Remove="Resources\room1.png" />
     <None Remove="Resources\toolbar.png" />
     <None Remove="Resources\worker.png" />
     <None Remove="room_icon.jpg" />
@@ -34,6 +43,10 @@
     <None Remove="View\simona.jpg" />
     <None Remove="View\tube.png" />
     <None Remove="View\x-icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Rooms.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,18 +66,23 @@
     </Resource>
     <Resource Include="other_facilities.png" />
     <Resource Include="request.png" />
+    <Resource Include="Resources\addroom.png" />
     <Resource Include="Resources\bookmark.png" />
     <Resource Include="Resources\checkmark.png" />
+    <Resource Include="Resources\deleteroom.png" />
     <Resource Include="Resources\doctor.jpg" />
+    <Resource Include="Resources\edit.png" />
     <Resource Include="Resources\filijale.png" />
     <Resource Include="Resources\hospitalroom.png" />
     <Resource Include="Resources\importance.png" />
     <Resource Include="Resources\maximize.png" />
     <Resource Include="Resources\menubar.png" />
     <Resource Include="Resources\minimize.png" />
+    <Resource Include="Resources\options.png" />
     <Resource Include="Resources\pill.png" />
     <Resource Include="Resources\report.png" />
     <Resource Include="Resources\room.png" />
+    <Resource Include="Resources\room1.png" />
     <Resource Include="Resources\simona.jpg" />
     <Resource Include="Resources\toolbar.png" />
     <Resource Include="Resources\tube.png" />

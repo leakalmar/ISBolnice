@@ -22,7 +22,7 @@
 
         <DataGrid x:Name="DateGridRooms" IsReadOnly="True" ItemsSource="{Binding Room}" AlternatingRowBackground="NavajoWhite"
                   SelectionMode="Single"
-                  Height="412" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="265"  SelectionChanged="DateGridRooms_SelectionChanged" Margin="0,82,10,0" Background="#FFC5DBDF" AutoGenerateColumns="False" >
+                  Height="412" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="265"   Margin="0,82,10,0" Background="#FFC5DBDF" AutoGenerateColumns="False" >
             <DataGrid.CellStyle>
                 <Style/>
             </DataGrid.CellStyle>
