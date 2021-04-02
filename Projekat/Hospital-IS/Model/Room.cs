@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 
 namespace Model
 {
@@ -6,7 +7,7 @@ namespace Model
     {
         
 
-        public System.Collections.ArrayList equipment;
+       
 
 
         public Room()
@@ -39,6 +40,10 @@ namespace Model
             get; set;
         }
 
+        public string RoomIdType
+        {
+            get { return RoomId + " " + Type; }
+        }
         public Room(RoomType type, bool isFree, bool isUsable, int roomFloor, int roomId)
         {
             this.Type = type;
@@ -48,62 +53,64 @@ namespace Model
             this.RoomId = roomId;
         }
 
-        public System.Collections.ArrayList Equipment
+        public  ObservableCollection<Equipment> Equipment { get; set; }
+
+
+
+        public void AddEquipment(Equipment newEquip)
         {
-            get
+            if (newEquip == null)
             {
-                if (equipment == null)
-                    equipment = new System.Collections.ArrayList();
-                return equipment;
+                return;
             }
-            set
+
+            if (Equipment == null)
             {
-                RemoveAllEquipment();
-                if (value != null)
+                Equipment = new ObservableCollection<Equipment>();
+
+            }
+
+            if (!Equipment.Contains(newEquip))
+            {
+                Equipment.Add(newEquip);
+
+            }
+        }
+
+        public void RemoveEquipment(Equipment oldEquip)
+        {
+            foreach (Equipment r in Equipment)
+            {
+                if (r.EquiptId == oldEquip.EquiptId)
                 {
-                    foreach (Equipment oEquipment in value)
-                        AddEquipment(oEquipment);
+
+                    Equipment.Remove(r);
+
+                    break;
                 }
             }
         }
 
-        public void AddEquipment(Equipment newEquipment)
+        public void RemoveAllRoom()
         {
-            if (newEquipment == null)
-                return;
-            if (this.equipment == null)
-                this.equipment = new System.Collections.ArrayList();
-            if (!this.equipment.Contains(newEquipment))
-            {
-                this.equipment.Add(newEquipment);
-                newEquipment.AddRoom(this);
-            }
+            if (Equipment != null)
+                Equipment.Clear();
         }
-
-        public void RemoveEquipment(Equipment oldEquipment)
+        public void UpdateEquipment(Equipment updateEquip)
         {
-            if (oldEquipment == null)
-                return;
-            if (this.equipment != null)
-                if (this.equipment.Contains(oldEquipment))
+
+            foreach (Equipment r in Equipment)
+            {
+                if (r.EquiptId == updateEquip.EquiptId)
                 {
-                    this.equipment.Remove(oldEquipment);
-                    oldEquipment.RemoveRoom(this);
+                    int index = Equipment.IndexOf(r);
+                    Equipment.Remove(r);
+                    Equipment.Insert(index, updateEquip);
+                    break;
                 }
-        }
-
-        public void RemoveAllEquipment()
-        {
-            if (equipment != null)
-            {
-                System.Collections.ArrayList tmpEquipment = new System.Collections.ArrayList();
-                foreach (Equipment oldEquipment in equipment)
-                    tmpEquipment.Add(oldEquipment);
-                equipment.Clear();
-                foreach (Equipment oldEquipment in tmpEquipment)
-                    oldEquipment.RemoveRoom(this);
-                tmpEquipment.Clear();
             }
+
+
         }
         public System.Collections.ArrayList appointment;
 

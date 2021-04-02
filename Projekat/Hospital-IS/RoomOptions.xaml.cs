@@ -13,9 +13,7 @@ using Model;
 
 namespace Hospital_IS
 {
-    /// <summary>
-    /// Interaction logic for RoomOptions.xaml
-    /// </summary>
+    
     public partial class RoomOptions : Window
     {
         public RoomOptions()

@@ -35,7 +35,10 @@ namespace Hospital_IS
             if (Hospital.Room == null)
             {
                 Hospital.Room = roomStorage.GetAll();
-              
+                Room room = new Room(RoomType.StorageRoom, true, true, 12, 15);
+                Equipment eqip = new Equipment(EquiptType.Dynamic, 50, "makaze", 50);
+                room.AddEquipment(eqip);
+                Hospital.Room.Add(room);
             }
             InitializeComponent();
             DataGridRooms.DataContext = Hospital.Instance;
@@ -53,6 +56,13 @@ namespace Hospital_IS
         {
             RoomOptions roomOptions = new RoomOptions();
             roomOptions.Show();
+            this.Hide();
+        }
+
+        private void Eqiupment_Click(object sender, RoutedEventArgs e)
+        {
+            EquipmentWindow.Instance.Show();
+           
             this.Hide();
         }
     }

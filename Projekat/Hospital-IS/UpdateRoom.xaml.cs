@@ -23,6 +23,7 @@ namespace Hospital_IS
         {
             InitializeComponent();
             this.currentRoom = room;
+
             textbox1.Text = Convert.ToString(currentRoom.RoomFloor);
             textbox2.Text = Convert.ToString(currentRoom.RoomId);
             check1.IsChecked = currentRoom.IsFree;
@@ -35,6 +36,9 @@ namespace Hospital_IS
             }
              else if (currentRoom.Type.Equals(RoomType.ConsultingRoom)){
                 combo1.SelectedIndex = 2;
+            } else if (currentRoom.Type.Equals(RoomType.StorageRoom))
+            {
+                combo1.SelectedIndex = 3;
             }
 
             
@@ -55,6 +59,10 @@ namespace Hospital_IS
             else if (combo1.Text.Equals("Operaciona soba"))
             {
                 tip = RoomType.OperationRoom;
+            }
+            else if (combo1.Text.Equals("Magacin"))
+            {
+                tip = RoomType.StorageRoom;
             }
             else
             {

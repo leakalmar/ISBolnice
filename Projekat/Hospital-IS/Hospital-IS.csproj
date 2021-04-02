@@ -29,6 +29,7 @@
     <None Remove="Resources\room.png" />
     <None Remove="Resources\room1.png" />
     <None Remove="Resources\toolbar.png" />
+    <None Remove="Resources\transfer.png" />
     <None Remove="Resources\worker.png" />
     <None Remove="room_icon.jpg" />
     <None Remove="thredots.png" />
@@ -85,6 +86,7 @@
     <Resource Include="Resources\room1.png" />
     <Resource Include="Resources\simona.jpg" />
     <Resource Include="Resources\toolbar.png" />
+    <Resource Include="Resources\transfer.png" />
     <Resource Include="Resources\tube.png" />
     <Resource Include="Resources\worker.png" />
     <Resource Include="Resources\x-icon.png" />

@@ -43,6 +43,10 @@ namespace Hospital_IS
             {
                 tip = RoomType.OperationRoom;
             }
+            else if (combo1.Text.Equals("Magacin"))
+            {
+                tip = RoomType.StorageRoom;
+            }
             else
             {
                 tip = RoomType.ConsultingRoom;
