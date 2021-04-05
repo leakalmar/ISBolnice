@@ -20,14 +20,17 @@
     <None Remove="other_facilities.png" />
     <None Remove="request.png" />
     <None Remove="Resources\addroom.png" />
+    <None Remove="Resources\backbutton.png" />
     <None Remove="Resources\deleteroom.png" />
     <None Remove="Resources\edit.png" />
     <None Remove="Resources\filijale.png" />
     <None Remove="Resources\hospitalroom.png" />
+    <None Remove="Resources\manager.png" />
     <None Remove="Resources\menubar.png" />
     <None Remove="Resources\options.png" />
     <None Remove="Resources\room.png" />
     <None Remove="Resources\room1.png" />
+    <None Remove="Resources\settings.png" />
     <None Remove="Resources\toolbar.png" />
     <None Remove="Resources\transfer.png" />
     <None Remove="Resources\worker.png" />
@@ -68,6 +71,7 @@
     <Resource Include="other_facilities.png" />
     <Resource Include="request.png" />
     <Resource Include="Resources\addroom.png" />
+    <Resource Include="Resources\backbutton.png" />
     <Resource Include="Resources\bookmark.png" />
     <Resource Include="Resources\checkmark.png" />
     <Resource Include="Resources\deleteroom.png" />
@@ -76,6 +80,7 @@
     <Resource Include="Resources\filijale.png" />
     <Resource Include="Resources\hospitalroom.png" />
     <Resource Include="Resources\importance.png" />
+    <Resource Include="Resources\manager.png" />
     <Resource Include="Resources\maximize.png" />
     <Resource Include="Resources\menubar.png" />
     <Resource Include="Resources\minimize.png" />
@@ -84,6 +89,7 @@
     <Resource Include="Resources\report.png" />
     <Resource Include="Resources\room.png" />
     <Resource Include="Resources\room1.png" />
+    <Resource Include="Resources\settings.png" />
     <Resource Include="Resources\simona.jpg" />
     <Resource Include="Resources\toolbar.png" />
     <Resource Include="Resources\transfer.png" />

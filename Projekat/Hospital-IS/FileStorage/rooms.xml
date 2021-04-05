@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfRoom xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Room>
-    <equipment />
     <appointment />
     <RoomFloor>123</RoomFloor>
     <RoomId>123</RoomId>
@@ -12,7 +11,6 @@
     <Appointment />
   </Room>
   <Room>
-    <equipment />
     <appointment />
     <RoomFloor>123</RoomFloor>
     <RoomId>456</RoomId>
@@ -20,6 +18,29 @@
     <IsUsable>false</IsUsable>
     <Type>OperationRoom</Type>
     <Equipment />
+    <Appointment />
+  </Room>
+  <Room>
+    <appointment />
+    <RoomFloor>12</RoomFloor>
+    <RoomId>15</RoomId>
+    <IsFree>true</IsFree>
+    <IsUsable>true</IsUsable>
+    <Type>StorageRoom</Type>
+    <Equipment>
+      <Equipment>
+        <EquipType>Dynamic</EquipType>
+        <EquiptId>50</EquiptId>
+        <Name>makaze</Name>
+        <Quantity>50</Quantity>
+      </Equipment>
+      <Equipment>
+        <EquipType>Stationary</EquipType>
+        <EquiptId>2</EquiptId>
+        <Name>papir</Name>
+        <Quantity>100</Quantity>
+      </Equipment>
+    </Equipment>
     <Appointment />
   </Room>
 </ArrayOfRoom>

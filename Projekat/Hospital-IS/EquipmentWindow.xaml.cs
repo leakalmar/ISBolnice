@@ -14,9 +14,7 @@ using Model;
 
 namespace Hospital_IS
 {
-    /// <summary>
-    /// Interaction logic for EquipmentWindow.xaml
-    /// </summary>
+    
     public partial class EquipmentWindow : Window
     {
 
@@ -50,6 +48,16 @@ namespace Hospital_IS
         {
             Window1.Instance.Show();
             this.Hide();
+        }
+
+        public void refreshGrid(Room room)
+        {
+            TempEquip.Clear();
+            foreach (Equipment eq in room.Equipment)
+            {
+
+                TempEquip.Add(eq);
+            }
         }
 
         private void Combo_SelectionChanged(object sender, SelectionChangedEventArgs e)

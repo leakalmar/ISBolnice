@@ -20,17 +20,7 @@ namespace Storages
 
         public ObservableCollection<Room>  GetAll()
         {
-            /*Room r1 = new Room(RoomType.ConsultingRoom, false, true, 2, 25);
-            Room r2 = new Room(RoomType.ConsultingRoom, false, true, 1, 11);
-
-            List<Room> all = new List<Room>();
-            all.Add(r2);
-            all.Add(r1);
-            return all;*/
-
-            /*String text = File.ReadAllText(this.fileLocation);
-            ObservableCollection<Room>  allRooms  = JsonConvert.DeserializeObject<ObservableCollection<Room>>(text);
-            return allRooms*/
+            
 
 
              if (File.ReadAllText("../../../FileStorage/rooms.xml").Trim().Equals(""))

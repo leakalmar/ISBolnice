@@ -148,6 +148,11 @@
                 <TextBlock Grid.Row="3" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text ="Izmeni opremu" Foreground="#624cfc"  />
                 <TextBlock Grid.Row="5" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text = "Ukloni opremu" Foreground="#624cfc"  />
                 <TextBlock Grid.Row="7" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text = "Transfer opreme" Foreground="#624cfc"  />
+                <ComboBox x:Name="ComboTransfer"   Grid.Row="7" Grid.Column="4" Width="100" >
+                    <ComboBoxItem Content="Dinamicka"/>
+                    <ComboBoxItem Content="Staticka"/>
+                </ComboBox>
+
             </Grid>
         </StackPanel>
 

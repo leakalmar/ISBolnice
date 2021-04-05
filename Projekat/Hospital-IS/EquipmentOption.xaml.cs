@@ -22,6 +22,10 @@ namespace Hospital_IS
 
         public ObservableCollection<Equipment> TempEquip { get; set; }
         public ObservableCollection<Room> TempRoom { get; set; }
+
+        public Room currentRoom;
+
+        public int currentIndex;
         public EquipmentOption(Room room,int index)
         {
             InitializeComponent();
@@ -29,6 +33,8 @@ namespace Hospital_IS
              TempRoom = Hospital.Room;
               Combo.SelectedIndex = index;
                Combo.IsEnabled = false;
+            currentRoom = room;
+            currentIndex = index;
             TempEquip = new ObservableCollection<Equipment>();
             foreach (Equipment eq in room.Equipment)
             {
@@ -50,17 +56,28 @@ namespace Hospital_IS
 
         private void EditEquipment_Click(object sender, RoutedEventArgs e)
         {
-
+            Equipment equipment = (Equipment)DataGridEquipment.SelectedItem;
+            if( equipment == null)
+            {
+                MessageBox.Show("Izaberite opremu");
+            }
+            EditEquipment edit = new EditEquipment(currentRoom, equipment, currentIndex);
+            edit.Show();
+            this.Hide();
         }
 
         private void AddEquipment_Click(object sender, RoutedEventArgs e)
         {
-
+            AddEquipment addEquipment = new AddEquipment(currentRoom,currentIndex);
+            addEquipment.Show();
+            this.Hide();
         }
 
         private void Equipment_Click(object sender, RoutedEventArgs e)
         {
+            EquipmentWindow.Instance.refreshGrid(currentRoom);
             EquipmentWindow.Instance.Show();
+
             this.Hide();
            
            
