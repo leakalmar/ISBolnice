@@ -260,5 +260,41 @@ namespace Model
             }
         }
 
+        public void TransferEquipmentDynamic(Room sourceRoom, Room destinationRoom, Equipment equip, int quantity)
+        {
+
+           foreach(Equipment eq in sourceRoom.Equipment)
+            {
+                if(eq.EquiptId == equip.EquiptId)
+                {
+                    if(eq.Quantity > quantity)
+                    {
+                        eq.Quantity = eq.Quantity - quantity;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Nedovoljna kolcina");
+                        return;
+                    }
+                            
+                }
+            }
+           bool check = false;
+           foreach (Equipment eq in destinationRoom.Equipment)
+            {
+                if (eq.EquiptId == equip.EquiptId)
+                {
+                    eq.Quantity = eq.Quantity + quantity;
+                    check = true;
+                    break;
+                }
+               
+            }
+            if (!check)
+            {
+                destinationRoom.Equipment.Add(new Equipment(equip.EquipType, equip.EquiptId, equip.Name, quantity));
+            }
+        }
+
     }
 }

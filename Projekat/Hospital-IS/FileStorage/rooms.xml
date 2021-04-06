@@ -17,7 +17,14 @@
     <IsFree>true</IsFree>
     <IsUsable>false</IsUsable>
     <Type>OperationRoom</Type>
-    <Equipment />
+    <Equipment>
+      <Equipment>
+        <EquipType>Stationary</EquipType>
+        <EquiptId>2</EquiptId>
+        <Name>papir</Name>
+        <Quantity>50</Quantity>
+      </Equipment>
+    </Equipment>
     <Appointment />
   </Room>
   <Room>
@@ -38,7 +45,7 @@
         <EquipType>Stationary</EquipType>
         <EquiptId>2</EquiptId>
         <Name>papir</Name>
-        <Quantity>100</Quantity>
+        <Quantity>50</Quantity>
       </Equipment>
     </Equipment>
     <Appointment />

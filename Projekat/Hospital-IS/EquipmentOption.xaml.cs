@@ -46,7 +46,9 @@ namespace Hospital_IS
 
         private void TransferEquipment_Click(object sender, RoutedEventArgs e)
         {
-
+            TransferDynamic transfer = new TransferDynamic(currentRoom,currentIndex);
+            transfer.Show();
+            this.Hide();
         }
 
         private void DeleteEquipment_Click(object sender, RoutedEventArgs e)
@@ -88,6 +90,6 @@ namespace Hospital_IS
 
         }
 
-      
+    
     }
 }

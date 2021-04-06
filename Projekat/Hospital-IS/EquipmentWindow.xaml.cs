@@ -60,22 +60,9 @@ namespace Hospital_IS
             }
         }
 
-        private void Combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Room room = (Room)Combo.SelectedItem;
-            MessageBox.Show(Convert.ToString(room.Equipment.Count));
-            TempEquip.Clear();
-            foreach(Equipment eq in room.Equipment)
-            {
-                
-                TempEquip.Add(eq);
-            }   
-        }
+      
 
-        private void DataGridEquipment_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+       
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -85,6 +72,17 @@ namespace Hospital_IS
 
         }
 
+        private void Combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+            Room room = (Room)Combo.SelectedItem;
+            MessageBox.Show("haloo");
+            TempEquip.Clear();
+            foreach (Equipment eq in room.Equipment)
+            {
 
+                TempEquip.Add(eq);
+            }
+        }
     }
 }
