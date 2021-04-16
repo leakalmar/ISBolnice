@@ -80,7 +80,7 @@ namespace Hospital_IS
 
         private void ShowPatient(object sender, RoutedEventArgs e)
         {
-            Model.Patient patient = (Model.Patient) dataGridPatients.SelectedItem;
+            Model.Patient patient = (Model.Patient)dataGridPatients.SelectedItem;
             PatientView pv = new PatientView(patient);
             pv.Show();
         }

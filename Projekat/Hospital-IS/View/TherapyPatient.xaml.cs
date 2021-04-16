@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Model;
+using Storages;
+using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Hospital_IS.View
 {
     /// <summary>
     /// Interaction logic for DocumentationPatient.xaml
     /// </summary>
-    public partial class DocumentationPatient : Window
+    public partial class TherapyPatient : Window
     {
-        public DocumentationPatient()
+
+        private ObservableCollection<Prescription> Prescriptions { get; set; }
+        public TherapyPatient()
         {
             InitializeComponent();
         }
@@ -40,6 +35,15 @@ namespace Hospital_IS.View
             AllAppointments allApp = new AllAppointments();
             allApp.Show();
             this.Close();
+        }
+
+        private void logout(object sender, RoutedEventArgs e)
+        {
+            MainWindow login = new MainWindow();
+            login.Show();
+            this.Hide();
+            AppointmentFileStorage afs = new AppointmentFileStorage();
+            afs.SaveAppointment(Hospital.Instance.allAppointments);
         }
     }
 }

@@ -9,7 +9,12 @@
         AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize"
         >
-    <Grid>
+    <Grid Background="#FF184095">
+        <Grid.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="0,20,0,0"/>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="40"/>
@@ -27,7 +32,7 @@
             <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border CornerRadius="20,20,0,0" Grid.ColumnSpan="3" Grid.RowSpan="1" >
+        <Border Grid.ColumnSpan="3" Grid.RowSpan="1" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -36,7 +41,7 @@
             </Border.Background>
         </Border>
 
-        <Border CornerRadius="20,0,0,20" Grid.ColumnSpan="1" Grid.RowSpan="10" >
+        <Border Grid.ColumnSpan="1" Grid.RowSpan="10" BorderBrush="#FFF9F2F2" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -46,36 +51,40 @@
             </Border.Background>
         </Border>
 
-        <Border CornerRadius="0,0,20,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="9" >
+        <Border CornerRadius="20,0,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="9" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
-
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
 
-        <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="9" BorderBrush="Black" 
-        BorderThickness="1,0,0,0" Background="{x:Null}" />
+        <!--Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="9" BorderBrush="Black" 
+        BorderThickness="1,0,0,0" Background="{x:Null}" /-->
 
-        <Border Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" BorderBrush="Black" 
-        BorderThickness="1,0,0,0" Background="{x:Null}" />
+        <!--Border Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" BorderBrush="Black" 
+        BorderThickness="1,0,0,0" Background="{x:Null}" /-->
 
         <Image Source="../hospital.png" Width="250" Height="250" Grid.RowSpan="5"/>
         <Button x:Name="Logout" Grid.Column="2" Grid.Row="0" Margin="450,0,0,0" Background="{x:Null}" FontSize="16" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="logout">Odjavi se</Button>
 
-        <Button x:Name="Home" Grid.Column="0" Grid.Row="5" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand">
-            <Button.Background>
+        <Button x:Name="Home" Grid.Column="0" Grid.Row="5" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Background="White" Foreground="#FF184095" Cursor="Hand" BorderThickness="1,1,0,1">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20,0,0,20"/>
+                </Style>
+            </Button.Resources>
+            <!--Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF184095" Offset="0"/>
                     <GradientStop Color="#FF184095" Offset="0.267"/>
                     <GradientStop Color="#FFC9C9C9" Offset="0.79"/>
                 </LinearGradientBrush>
-            </Button.Background> Početna strana
+            </Button.Background--> Početna strana
         </Button>
         <Button x:Name="ReserveApp" Grid.Column="0" Grid.Row="6" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="reserveApp">Zakaži pregled</Button>
         <Button x:Name="AllApp" Grid.Column="0" Grid.Row="7" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="allApp" >Moji pregledi</Button>
-        <Button x:Name="Doc" Grid.Column="0" Grid.Row="8" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="showDoc">Dokumentacija</Button>
+        <Button x:Name="Therapy" Grid.Column="0" Grid.Row="8" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="showTherapy" Content="Terapije"/>
         <StackPanel x:Name="PersonalData" Grid.RowSpan="8" Grid.Row="2" Grid.Column="1">
             <Grid>
                 <Label Content="Ime:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
@@ -114,6 +123,11 @@
 
         <Label Content="Lista pregleda:" Grid.Row="1" Grid.Column="2" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
         <DataGrid x:Name="dataGridAppointment"  ItemsSource="{Binding DoctorAppointment, Mode=TwoWay}" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="2" Grid.Row="2" Grid.RowSpan="8" Margin="10,10,30,150">
+            <DataGrid.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="0,0,20,20"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Datum i vreme" Binding="{Binding DateAndTime, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" Width="200"/>
                 <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor.Name}" Width="200"/>
@@ -121,6 +135,11 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="changeApp" Grid.Column="2" Grid.Row="10" Margin="250,230,200,60" Foreground="#FFFDFAFA" FontSize="16" Cursor="Hand" Click="changeAppointment">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20,20,20,20"/>
+                </Style>
+            </Button.Resources>
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -130,6 +149,11 @@
             </Button.Background> Izmeni termin
         </Button>
         <Button x:Name="deleteApp" Grid.Column="2" Grid.Row="10" Margin="420,230,30,60" Foreground="White" FontSize="16" Cursor="Hand" Click="deleteAppointment">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20,20,20,20"/>
+                </Style>
+            </Button.Resources>
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>

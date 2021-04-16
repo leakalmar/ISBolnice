@@ -1,18 +1,8 @@
 ﻿using Hospital_IS.Storages;
 using Model;
 using Storages;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Hospital_IS.View
 {
@@ -47,7 +37,7 @@ namespace Hospital_IS.View
         public void ExitBtnClick(object sender, RoutedEventArgs e)
         {
             bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da se odjavite?").ShowDialog();
-           if (dialog)
+            if (dialog)
             {
                 dfs.UpdateDoctor(Doctor);
                 MainWindow login = new MainWindow();
@@ -56,9 +46,9 @@ namespace Hospital_IS.View
                 AppointmentFileStorage afs = new AppointmentFileStorage();
                 afs.SaveAppointment(Hospital.Instance.allAppointments);
                 this.Close();
-                
+
             }
-         }
+        }
 
         public void MinimizeBtnClick(object sender, RoutedEventArgs e)
         {

@@ -1,4 +1,4 @@
-﻿<Window x:Class="Hospital_IS.View.DocumentationPatient"
+﻿<Window x:Class="Hospital_IS.View.TherapyPatient"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,7 +9,7 @@
         AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize"
         >
-    <Grid>
+    <Grid Background="#FF184095">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="40"/>
@@ -26,7 +26,7 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border CornerRadius="20,20,0,0" Grid.ColumnSpan="2" Grid.RowSpan="1" >
+        <Border Grid.ColumnSpan="2" Grid.RowSpan="1" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -35,7 +35,7 @@
             </Border.Background>
         </Border>
 
-        <Border CornerRadius="20,0,0,20" Grid.ColumnSpan="1" Grid.RowSpan="10" >
+        <Border Grid.ColumnSpan="1" Grid.RowSpan="10" BorderBrush="White" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -45,7 +45,7 @@
             </Border.Background>
         </Border>
 
-        <Border CornerRadius="0,0,20,0" Grid.Column="1" Grid.Row="1" Grid.RowSpan="9" >
+        <Border CornerRadius="20,0,0,0" Grid.Column="1" Grid.Row="1" Grid.RowSpan="9" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -54,26 +54,24 @@
             </Border.Background>
         </Border>
 
-        <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="9" BorderBrush="Black" 
+        <!--Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="9" BorderBrush="Black" 
         BorderThickness="1,0,0,0" Background="{x:Null}" />
 
         <Border Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" BorderBrush="Black" 
-        BorderThickness="1,0,0,0" Background="{x:Null}" />
+        BorderThickness="1,0,0,0" Background="{x:Null}" /-->
 
         <Image Source="../hospital.png" Width="250" Height="250" Grid.RowSpan="5"/>
-        <Button x:Name="Logout" Grid.Column="1" Grid.Row="0" Margin="850,0,0,0" Background="{x:Null}" FontSize="16" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand">Odjavi se</Button>
+        <Button x:Name="Logout" Grid.Column="1" Grid.Row="0" Margin="850,0,0,0" Background="{x:Null}" FontSize="16" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="logout">Odjavi se</Button>
 
         <Button x:Name="Home" Grid.Column="0" Grid.Row="5" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Background="{x:Null}" Click="home">Početna strana</Button>
         <Button x:Name="ReserveApp" Grid.Column="0" Grid.Row="6" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Background="{x:Null}" Click="reserveApp">Zakaži pregled</Button>
         <Button x:Name="AllApp" Grid.Column="0" Grid.Row="7" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Background="{x:Null}" Click="showAll">Moji pregledi</Button>
-        <Button x:Name="Doc" Grid.Column="0" Grid.Row="8" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF184095" Offset="0"/>
-                    <GradientStop Color="#FF184095" Offset="0.267"/>
-                    <GradientStop Color="#FFC9C9C9" Offset="0.79"/>
-                </LinearGradientBrush>
-            </Button.Background>Dokumentacija
+        <Button x:Name="Therapy" Grid.Column="0" Grid.Row="8" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Background="White" Foreground="#FF184095" Cursor="Hand" BorderThickness="1,1,0,1" Content="Terapije">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="20,0,0,20"/>
+                </Style>
+            </Button.Resources>
         </Button>
     </Grid>
 </Window>

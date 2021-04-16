@@ -1,9 +1,7 @@
 using Hospital_IS.Storages;
-using Storages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace Model
 {
@@ -110,14 +108,14 @@ namespace Model
                 {
                     if (docApp.DateAndTime.Equals(doctorAppointment.DateAndTime))
                     {
-                         allAppointments.Remove(doctorAppointment);
-                         break;
+                        allAppointments.Remove(doctorAppointment);
+                        break;
                     }
                 }
             }
         }
 
-        public static ObservableCollection<Room> Room  { get; set; }
+        public static ObservableCollection<Room> Room { get; set; }
 
 
 
@@ -130,7 +128,7 @@ namespace Model
 
             if (Room == null)
             {
-              Room = new ObservableCollection<Room>();
+                Room = new ObservableCollection<Room>();
 
             }
 
@@ -158,14 +156,14 @@ namespace Model
         public void RemoveAllRoom()
         {
             if (Room != null)
-               Room.Clear();
+                Room.Clear();
         }
-        public void UpdateRoom(int oldIndex,Room oldRoom)
+        public void UpdateRoom(int oldIndex, Room oldRoom)
         {
 
-            foreach(Room r in Room)
+            foreach (Room r in Room)
             {
-                if(r.RoomId == oldIndex)
+                if (r.RoomId == oldIndex)
                 {
                     int index = Room.IndexOf(r);
                     Room.Remove(r);

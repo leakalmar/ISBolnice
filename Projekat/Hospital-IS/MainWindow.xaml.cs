@@ -35,7 +35,7 @@ namespace Hospital_IS
         private void Login(object sender, RoutedEventArgs e)
         {
             List<Patient> patients = pfs.GetAll();
-            Hospital.Instance.allAppointments=afs.GetAll();
+            Hospital.Instance.allAppointments = afs.GetAll();
             ObservableCollection<Doctor> doctors = dfs.GetAll();
 
             foreach (Patient p in patients)

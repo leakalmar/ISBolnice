@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Model;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Model;
 
 namespace Hospital_IS
 {
@@ -30,15 +21,18 @@ namespace Hospital_IS
             if (currentRoom.Type.Equals(RoomType.RecoveryRoom))
             {
                 combo1.SelectedIndex = 0;
-            } else if (currentRoom.Type.Equals(RoomType.OperationRoom)){
+            }
+            else if (currentRoom.Type.Equals(RoomType.OperationRoom))
+            {
                 combo1.SelectedIndex = 1;
             }
-             else if (currentRoom.Type.Equals(RoomType.ConsultingRoom)){
+            else if (currentRoom.Type.Equals(RoomType.ConsultingRoom))
+            {
                 combo1.SelectedIndex = 2;
             }
 
-            
-           
+
+
         }
 
         private void potvrdi_Click(object sender, RoutedEventArgs e)
@@ -62,8 +56,8 @@ namespace Hospital_IS
             }
             Room room = new Room(tip, zauzeto, renoviranje, roomFloor, roomId);
             Manager.Instance.UpdateRoom(currentRoom.RoomId, room);
-           
-           
+
+
             this.Close();
         }
 
