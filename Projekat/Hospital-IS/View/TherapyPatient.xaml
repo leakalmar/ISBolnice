@@ -54,12 +54,6 @@
             </Border.Background>
         </Border>
 
-        <!--Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="9" BorderBrush="Black" 
-        BorderThickness="1,0,0,0" Background="{x:Null}" />
-
-        <Border Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" BorderBrush="Black" 
-        BorderThickness="1,0,0,0" Background="{x:Null}" /-->
-
         <Image Source="../hospital.png" Width="250" Height="250" Grid.RowSpan="5"/>
         <Button x:Name="Logout" Grid.Column="1" Grid.Row="0" Margin="850,0,0,0" Background="{x:Null}" FontSize="16" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="logout">Odjavi se</Button>
 
