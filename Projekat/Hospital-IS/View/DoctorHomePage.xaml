@@ -6,127 +6,146 @@
         xmlns:local="clr-namespace:Hospital_IS.View"
         xmlns:viewmodel="clr-namespace:Hospital_IS.ViewModel"
         mc:Ignorable="d"
-        Title="DoctorHomePage" Height="500" Width="800"
+        Title="DoctorHomePage" Height="640" Width="1024"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None" Background="Transparent"
         AllowsTransparency="True">
 
-    <Window.Resources>
-        <DataTemplate x:Name="homePageTemplete" DataType="{x:Type viewmodel:HomePage}">
-            <local:UserControlHomePage DataContext="{Binding}"/>
-        </DataTemplate>
-    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.03*"/>
-            <ColumnDefinition Width="0.12*"/>
-            <ColumnDefinition Width="0.2*" />
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="0.15*" />
             <ColumnDefinition/>
-            <ColumnDefinition Width="0.04*"/>
+            <ColumnDefinition Width="0.01*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="0.03*"/>
             <RowDefinition Height="0.15*"/>
             <RowDefinition Height="0.03*"/>
-            <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="0.05*"/>
             <RowDefinition/>
             <RowDefinition Height="0.04*"/>
         </Grid.RowDefinitions>
         <Border CornerRadius="20" Grid.RowSpan="8" Grid.ColumnSpan="8">
             <Border.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FF184095" Offset="0.0"/>
+                <LinearGradientBrush EndPoint="1,1" StartPoint="0.8,0.5">
+                    <GradientStop Color="#FF213250" Offset="0"/>
                     <GradientStop Color="#FF5B317E" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
 
-        <Border CornerRadius="20" Grid.ColumnSpan="7" Grid.Row="0" Background="#FF2E3B55">
+        <Border CornerRadius="20" Grid.ColumnSpan="7" Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="White">
         </Border>
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" 
                     Grid.Row="0" Grid.Column="3">
-            <Button Height="20" Width="20" Opacity="0.6" BorderThickness="0" Click="MinimizeBtnClick">
-                <Button.Background>
-                    <ImageBrush ImageSource="pack://application:,,,/Resources/minimize.png"/>
-                </Button.Background>
+            <Button x:Name="min" Height="20" Width="20" Opacity="0.6" BorderThickness="0" Click="MinBtnClick" 
+                    Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="14">
+                _
             </Button>
-            <Button Height="20" Width="20" Opacity="0.6" BorderThickness="0" Click="MaximizeBtnClick">
-                <Button.Background>
-                    <ImageBrush ImageSource="pack://application:,,,/Resources/maximize.png"/>
-                </Button.Background>
+            <Button x:Name="full" Height="20" Width="20" Opacity="0.6" BorderThickness="0" Click="FullBtnClick" 
+                    Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="14">
+                ⛶
             </Button>
-            <Button Height="20" Width="20" Opacity="0.6" BorderThickness="0" Click="ExitBtnClick">
-                <Button.Background>
-                    <ImageBrush ImageSource="pack://application:,,,/Resources/x-icon.png"/>
-                </Button.Background>
+            <Button x:Name="exit" Height="20" Width="20" Opacity="0.6" BorderThickness="0" Click="ExitBtnClick" 
+                    Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="14">
+                X
             </Button>
+
         </StackPanel>
 
 
-        <Ellipse Height="auto" Width="auto" Grid.Row="2" Grid.Column="1" Margin="12,5,13,4">
+        <Ellipse Height="50" Width="50" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="pack://application:,,,/Resources/doctor.jpg"/>
             </Ellipse.Fill>
         </Ellipse>
 
         <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" 
-                   Width="auto" HorizontalAlignment="Center" FontSize="14" FontFamily="Verdana" 
-                   Foreground="FloralWhite">
-            Dragana Vukmanov Simokov
+                   Width="auto" HorizontalAlignment="Center" FontSize="16" FontFamily="Palatino Linotype" 
+                   Foreground="FloralWhite" FontWeight="Bold" Margin="10,0,0,0">
+            Dragana Stamenković
         </TextBlock>
 
-        <Grid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-                <RowDefinition Height="0.1*"/>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Grid.Column="0">
-                <Button Content="Termini" Foreground="FloralWhite" MinWidth="144" MinHeight="30" 
-                        BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" 
-                        FontFamily="Cambria Math" Click="HomePage_Clicked" />
-                <Button Content="Pacijenti" Foreground="FloralWhite" MinWidth="144" MinHeight="30" 
-                        BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" 
-                        FontFamily="Cambria Math"/>
-                <Button Content="Lekovi" Foreground="FloralWhite" MinWidth="144" MinHeight="30" 
-                        BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" 
-                        FontFamily="Cambria Math"/>
-                <Button Content="Sobe" Foreground="FloralWhite" MinWidth="144" MinHeight="30" 
-                        BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" 
-                        FontFamily="Cambria Math"/>
-                <Button Content="Zahtevi" Foreground="FloralWhite" MinWidth="144" MinHeight="30" 
-                        BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" 
-                        FontFamily="Cambria Math"/>
-                <Button Content="Info" Foreground="FloralWhite" MinWidth="144" MinHeight="30" 
-                        BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" 
-                        FontFamily="Cambria Math"/>
-                <Button Content="Poruke" Foreground="FloralWhite" MinWidth="144" MinHeight="30" 
-                        BorderThickness="0,0,0,0" Background="{x:Null}" FontSize="16" 
-                        FontFamily="Cambria Math"/>
-            </StackPanel>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
 
-            <Button Grid.Column="0" Grid.Row="1" Width="100" Height="20" Content="Odjavi se" 
-                    Foreground="FloralWhite" Background="{x:Null}"
-                    Click="ExitBtnClick">
-                <Button.BorderBrush>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="White" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.BorderBrush>
-            </Button>
+            </Grid.RowDefinitions>
+            <RadioButton Content="Početna" 
+                         Uid="0"
+                        Style="{StaticResource MenuButtonTheme}"
+                         Grid.Row="1"
+                        Click="Meni_Clicked" />
+            <RadioButton Content="Termini" 
+                         Uid="1"
+                        Style="{StaticResource MenuButtonTheme}"
+                         Grid.Row="2"
+                        Click="Meni_Clicked" />
+            <RadioButton Content="Pacijenti" 
+                         Uid="2" 
+                        Style="{StaticResource MenuButtonTheme}"
+                         Grid.Row="3"
+                        Click="Meni_Clicked"/>
+            <RadioButton Content="Lekovi" 
+                         Uid="3" 
+                        Style="{StaticResource MenuButtonTheme}"
+                         Grid.Row="4"
+                        Click="Meni_Clicked"/>
+            <RadioButton Content="Sobe"  
+                         Uid="4"
+                        Style="{StaticResource MenuButtonTheme}"
+                         Grid.Row="5"
+                        Click="Meni_Clicked"/>
+            <RadioButton Content="Izdavanje recepta"  
+                         Uid="5"
+                        Style="{StaticResource MenuButtonTheme}"
+                         Grid.Row="6" 
+                        Click="Meni_Clicked"/>
+            <RadioButton Content="Odobravanje leka" 
+                         Uid="6" 
+                        Style="{StaticResource MenuButtonTheme}"
+                         Grid.Row="7"
+                        Click="Meni_Clicked"/>
+            <RadioButton Content="Obaveštenja" 
+                         Uid="7" 
+                        Style="{StaticResource MenuButtonTheme}"
+                         Grid.Row="8" 
+                        Click="Meni_Clicked"/>
+
+            <Border CornerRadius="10" BorderThickness="1" BorderBrush="FloralWhite" Grid.Row="10" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center" Padding="10,0,10,0">
+                <Button Content="Odjavi se" 
+                    Foreground="FloralWhite" Background="#FF213250"
+                    BorderThickness="0"
+                    Click="ExitBtnClick" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                </Button>
+            </Border>
+
+            <Button Grid.Row="11" Content="Podešavanja" 
+                    Foreground="FloralWhite" Background="{x:Null}" VerticalAlignment="Top" FontWeight="Normal"/>
 
         </Grid>
 
-        <ContentControl Grid.Row="1" Grid.Column="3" Grid.RowSpan="6" Content="{Binding}"/>
+ 
+        <ContentControl x:Name="Home" Content="{Binding}" Grid.Row="2" Grid.Column="3" Grid.RowSpan="3" 
+                        Margin="20,20,15,0"/>
+
+
+        
 
     </Grid>
 </Window>

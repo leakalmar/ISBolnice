@@ -4,21 +4,69 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Hospital_IS.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.35*"/>
+            <RowDefinition Height="0.5*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Frame x:Name="HomePage" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <GroupBox Header="Zakazani pregledi" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+            <StackPanel Grid.Row="0" Grid.Column="0">
+                <TextBlock FontSize="20" Foreground="White" HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" FontFamily="Eras ITC" Margin="0,15,0,0">
+                    Termini
+                </TextBlock>
+                <Image Source="pack://application:,,,/Resources/calendar.png" Width="130"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="2">
+                <TextBlock FontSize="20" Foreground="White" HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" FontFamily="Eras ITC" Margin="0,15,0,0">
+                    Pacijenti
+                </TextBlock>
+                <Image Source="pack://application:,,,/Resources/bed.png" Grid.Column="1" Width="130"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="3">
+                <Label FontSize="20" Foreground="White" HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" FontFamily="Eras ITC" Padding="0,-4,0,0" 
+                           >Izdavanje</Label>
+                <Label FontSize="20" Foreground="White" HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" FontFamily="Eras ITC" Padding="0,0,0,0">recepta</Label>
+                <Image Source="pack://application:,,,/Resources/treatment.png" Grid.Column="2" 
+                       Width="130"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="4">
+                <Label FontSize="20" Foreground="White" HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" FontFamily="Eras ITC" Padding="0,-4,0,0" 
+                           >Odobravanje</Label>
+                <Label FontSize="20" Foreground="White" HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" FontFamily="Eras ITC" Padding="0,-4,0,0" 
+                           >leka</Label>
+                <Image Source="pack://application:,,,/Resources/pill.png" Grid.Column="4" Width="130"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="5">
+                <Label FontSize="20" Foreground="White" HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" FontFamily="Eras ITC" Padding="5,5,5,5" Margin="0,10,0,0" 
+                           >Obaveštenja</Label>
+                <Image Source="pack://application:,,,/Resources/notification.png" Grid.Column="4" Width="130"/>
+            </StackPanel>
+
+            <Path Grid.Column="1" Stroke="White" StrokeThickness="3" Data="M0,0 V175" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat"/>
+
+        </Grid>
+
+        <Frame x:Name="HomePage" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"/>
+
+        <GroupBox Header="Zakazani pregledi" Grid.Row="1" Grid.Column="0"
                       BorderBrush="#FF2E3B55" Foreground="White">
             <DataGrid x:Name="docotrAppointments" ItemsSource="{Binding}" 
                       Background="Transparent" RowBackground="Transparent" Foreground="White" 
@@ -38,7 +86,9 @@
                                         CanUserResize="False" Width="0.05*"/>
                     <DataGridTextColumn Header="Pacijent" Binding="{Binding NameSurnamePatient}" 
                                         CanUserResize="False" Width="0.05*"/>
-                    <DataGridTextColumn Header="Uzrok" Binding="{Binding Cause}" CanUserResize="False" 
+                    <DataGridTextColumn Header="Tip" Binding="{Binding Cause}" CanUserResize="False" 
+                                        Width="0.05*"/>
+                    <DataGridTextColumn Header="Soba" Binding="{Binding Cause}" CanUserResize="False" 
                                         Width="0.05*"/>
                 </DataGrid.Columns>
                 <DataGrid.RowStyle>
@@ -49,4 +99,6 @@
             </DataGrid>
         </GroupBox>
     </Grid>
+
+    
 </UserControl>

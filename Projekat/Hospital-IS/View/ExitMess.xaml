@@ -28,19 +28,13 @@
         </Border>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2">
-            <Button Height="20" Width="20" Opacity="0.6" BorderThickness="0" Click="BtnClickOdustani">
-                <Button.Background>
-                    <ImageBrush ImageSource="pack://application:,,,/Resources/x-icon.png"/>
-                </Button.Background>
-            </Button>
+            <Button Height="20" Width="20" Opacity="0.6" BorderThickness="0" Click="BtnClickOdustani" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="14">
+            X</Button>
         </StackPanel>
 
-   
-        <Label Name="lblQuestion" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Verdana" FontSize="20" Foreground="FloralWhite" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label.Content>
-                <TextBlock TextWrapping="Wrap" FontSize="18">Da li ste sigurni da zelite da se odjavite?</TextBlock>
-            </Label.Content>
-        </Label>
+
+        <TextBlock Name="lblQuestion" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Verdana" FontSize="20" Foreground="FloralWhite" HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight">
+        </TextBlock>
 
         
         <Button Name ="btnOk" Width="120" Height="30" Grid.Row="2" Grid.Column="1" FontSize="18" Click="BtnClickPotvrdi">Potvrdi</Button>

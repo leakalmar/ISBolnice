@@ -20,7 +20,7 @@ namespace Hospital_IS.View
         public ExitMess(string question)
         {
             InitializeComponent();
-            lblQuestion.Content = question;
+            lblQuestion.Text = question;
         }
 
         public void BtnClickPotvrdi(object sender, RoutedEventArgs e)

@@ -12,6 +12,13 @@
     <None Remove="employee.jpg" />
     <None Remove="hospital.png" />
     <None Remove="hospital2.png" />
+    <None Remove="Resources\add-row.png" />
+    <None Remove="Resources\bed.png" />
+    <None Remove="Resources\calendar.png" />
+    <None Remove="Resources\notification.png" />
+    <None Remove="Resources\pill-hand.png" />
+    <None Remove="Resources\print.png" />
+    <None Remove="Resources\treatment.png" />
     <None Remove="View\bookmark.png" />
     <None Remove="View\checkmark.png" />
     <None Remove="View\doctor.jpg" />
@@ -35,15 +42,22 @@
     <Resource Include="hospital.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\add-row.png" />
+    <Resource Include="Resources\bed.png" />
     <Resource Include="Resources\bookmark.png" />
+    <Resource Include="Resources\calendar.png" />
     <Resource Include="Resources\checkmark.png" />
     <Resource Include="Resources\doctor.jpg" />
     <Resource Include="Resources\importance.png" />
     <Resource Include="Resources\maximize.png" />
     <Resource Include="Resources\minimize.png" />
+    <Resource Include="Resources\notification.png" />
+    <Resource Include="Resources\pill-hand.png" />
     <Resource Include="Resources\pill.png" />
+    <Resource Include="Resources\print.png" />
     <Resource Include="Resources\report.png" />
     <Resource Include="Resources\simona.jpg" />
+    <Resource Include="Resources\treatment.png" />
     <Resource Include="Resources\tube.png" />
     <Resource Include="Resources\x-icon.png" />
   </ItemGroup>

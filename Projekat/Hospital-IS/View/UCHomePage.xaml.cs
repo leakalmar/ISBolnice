@@ -31,31 +31,29 @@ namespace Hospital_IS.View
         private void Patient_Selected(object sender, KeyEventArgs e)
         {
             DoctorAppointment appointment= (DoctorAppointment)docotrAppointments.SelectedItem;
-            Window window = new PatientChart(appointment);
-            window.Show();
+            DoctorHomePage.Instance.Home.Content = new UCPatientChart(appointment);
         }
 
         public void Patient_DoubleClicked(object sender, MouseButtonEventArgs e)
         {
             DoctorAppointment ap = (DoctorAppointment)docotrAppointments.SelectedItem;
-            DoctorAppointment first = (DoctorAppointment)docotrAppointments.SelectedItems[0];
 
-            if (ap.Equals(first) && ap.DateAndTime.Date.Equals(DateTime.Now.Date))
-            {
-                Window window = new PatientChart(ap, true, true);
-                window.Show();
-            }
-            else if (ap.DateAndTime > DateTime.Now.AddDays(1))
-            {
-                Window window = new PatientChart(ap, false, false);
-                window.Show();
-            }
-            else
-            {
-                Window window = new PatientChart(ap,false, true);
-                window.Show();
-            }
-            
+            //if (ap.Equals(first) && ap.DateAndTime.Date.Equals(DateTime.Now.Date))
+            //{
+            //    DoctorHomePage.Instance.Home.Content = new UCPatientChart(ap, true, true);
+            //}
+            //else if (ap.DateAndTime > DateTime.Now.AddDays(1))
+            //{
+            //    DoctorHomePage.Instance.Home.Content = new UCPatientChart(ap, false, false);
+            //}
+            //else
+            //{
+            //    DoctorHomePage.Instance.Home.Content = new UCPatientChart(ap,false, true);
+            //}
+
+            DoctorHomePage.Instance.Home.Content = new UCAppDetail(ap);
+
+
         }
     }
 }

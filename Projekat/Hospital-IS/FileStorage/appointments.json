@@ -67,9 +67,9 @@
       "Address": null,
       "Hospital": null
     },
-    "DateAndTime": "2021-04-01T11:00:00",
-    "Date": "4/1/2021",
-    "Time": "11:00:00",
+    "DateAndTime": "2021-04-12T21:00:00",
+    "Date": "4/12/2021",
+    "Time": "21:00:00",
     "Type": 1,
     "Reserved": true,
     "Room": 5
@@ -142,9 +142,9 @@
       "Address": "Brace Radica 15",
       "Hospital": null
     },
-    "DateAndTime": "2021-03-31T09:00:00",
-    "Date": "3/31/2021",
-    "Time": "09:00:00",
+    "DateAndTime": "2021-04-12T21:00:00",
+    "Date": "4/12/2021",
+    "Time": "21:00:00",
     "Type": 1,
     "Reserved": true,
     "Room": 1

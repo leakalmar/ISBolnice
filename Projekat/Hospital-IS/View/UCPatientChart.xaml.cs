@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using Model;
+using Storages;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Model;
 
 namespace Hospital_IS.View
 {
@@ -20,40 +11,112 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class UCPatientChart : UserControl
     {
-        public Model.Patient Patient { get; set; }
+        public UCReport report;
+        public DoctorAppointment Appointment;
+        AppointmentFileStorage afs = new AppointmentFileStorage();
 
-        public UCPatientChart(Patient patient)
+        public UCPatientChart(DoctorAppointment appointment, bool start = false)
         {
             InitializeComponent();
-            this.Patient = patient;
+            if (start)
+            {
+                end.Visibility = Visibility.Visible;
+                back.Visibility = Visibility.Collapsed;
+                reportBtn.Visibility = Visibility.Visible;
+            }
 
-            ObservableCollection<Model.DoctorAppointment> History = new ObservableCollection<Model.DoctorAppointment>();
-            ObservableCollection<Model.DoctorAppointment> Future = new ObservableCollection<Model.DoctorAppointment>();
-            FindAppointments(History, Future);
 
-
-            PersonalData.DataContext = patient;
-            HistoryGrid.DataContext = patient;
-            patientAppointments.DataContext = Future;
-            patientHistory.DataContext = History;
+            Appointment = appointment;
+            PersonalData.DataContext = appointment.Patient;
+            report = new UCReport();
+            patientInfo.Content = report;
 
         }
 
-        public void FindAppointments(ObservableCollection<Model.DoctorAppointment> history, ObservableCollection<Model.DoctorAppointment> future)
+        public void Report_DoubleClicked(object sender, MouseButtonEventArgs e)
         {
-        /*    foreach (Model.DoctorAppointment doc in Patient.DoctorAppointment)
-            {
-                if (doc.DateAndTime < DateTime.Now)
-                {
-                    history.Add(doc);
-                }
-                else if (doc.DateAndTime > DateTime.Now)
-                {
-                    future.Add(doc);
-                }
+            //Model.Report report = (Model.Report)patientHistory.SelectedItem;
+            //Window window = new Report(report);
+            //window.Show();
+        }
 
+        public void ExitBtnClick(object sender, RoutedEventArgs e)
+        {
+            //Treba settovati appointment na zavrsen
+            bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da završite pregled?").ShowDialog();
+            if (dialog)
+            {
+                DoctorHomePage.Instance.Home.Content = new UserControlHomePage();
             }
-        */
+        }
+
+        private void appointmentBtn(object sender, RoutedEventArgs e)
+        {
+            Window w = new DoctorSetAppointment(Appointment);
+            w.Show();
+        }
+
+        private void updateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Window w = new DoctorSetAppointment(Appointment, true);
+            w.Show();
+        }
+
+        private void CancleBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Hospital.Instance.allAppointments.Remove(Appointment);
+            DoctorHomePage.Instance.DoctorAppointment.Remove(Appointment);
+            MainWindow login = new MainWindow();
+            AppointmentFileStorage afs = new AppointmentFileStorage();
+            afs.SaveAppointment(Hospital.Instance.allAppointments);
+            DoctorHomePage.Instance.Home.Content = new UserControlHomePage();
+        }
+
+        private void futureApp_DoubleClicked(object sender, MouseButtonEventArgs e)
+        {
+            //DoctorAppointment future = (DoctorAppointment)patientAppointments.SelectedItem;
+            //Window window = new DoctorSetAppointment(future, true);
+            //window.Show();
+        }
+
+        private void TabBtnClick(object sender, RoutedEventArgs e)
+        {
+            int index = int.Parse(((Button)e.Source).Uid);
+
+           
+
+            bool started = false;
+            if (end.Visibility == Visibility.Visible)
+            {
+                started = true;
+                marker.Margin = new Thickness(120 * index, 0, 0, 0);
+            }
+            else
+            {
+                marker.Margin = new Thickness(120 * index - 120, 0, 0, 0);
+            }
+
+            switch (index)
+            {
+                case 0:
+                    patientInfo.Content = report;
+                    break;
+                case 1:
+                    patientInfo.Content = new UCGeneralInfo(Appointment.Patient, started);
+                    break;
+                case 2:
+                    patientInfo.Content = new UCHistory(Appointment.Patient);
+                    break;
+                case 3:
+                    patientInfo.Content = new UCScheduledApp(Appointment.Patient, started);
+                    break;
+                case 4:
+                    patientInfo.Content = new UCTherapy(Appointment.Patient, started);
+                    break;
+                case 5:
+                    patientInfo.Content = new UCTest(Appointment.Patient, started);
+                    break;
+            }
         }
     }
 }
