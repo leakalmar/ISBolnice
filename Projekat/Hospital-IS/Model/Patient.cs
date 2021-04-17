@@ -19,6 +19,7 @@ namespace Model
         public String Employer { get; set; }
         public Boolean Admitted { get; set; }
         public ObservableCollection<String> Alergies { get; set; }
+        public ObservableCollection<Therapy> Therapies { get; set; }
 
         public Boolean IsGuest { get; set; } = false;
 

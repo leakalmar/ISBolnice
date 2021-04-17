@@ -2,6 +2,8 @@
 using Storages;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Hospital_IS.View
 {
@@ -11,10 +13,11 @@ namespace Hospital_IS.View
     public partial class TherapyPatient : Window
     {
 
-        private ObservableCollection<Prescription> Prescriptions { get; set; }
+        private ObservableCollection<Therapy> Therapies { get; set; }
         public TherapyPatient()
         {
             InitializeComponent();
+            Therapies = HomePatient.Instance.Patient.Therapies;
         }
 
         private void home(object sender, RoutedEventArgs e)
@@ -44,6 +47,16 @@ namespace Hospital_IS.View
             this.Hide();
             AppointmentFileStorage afs = new AppointmentFileStorage();
             afs.SaveAppointment(Hospital.Instance.allAppointments);
+        }
+
+        private void showRow(object sender, MouseButtonEventArgs e)
+        {
+            var row = ItemsControl.ContainerFromElement((DataGrid)sender,
+                                        e.OriginalSource as DependencyObject) as DataGridRow;
+
+            if (row == null) return;
+
+
         }
     }
 }

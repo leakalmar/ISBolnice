@@ -67,6 +67,17 @@
                 </Style>
             </Button.Resources>
         </Button>
+
+        <Label Content="Terapije:" Grid.Row="1" Grid.Column="1" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
+        <DataGrid x:Name="dataGridAppoitment" MouseDoubleClick="showRow" ItemsSource="{Binding Therapies, Mode=TwoWay}"  CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="2" Grid.RowSpan="9" Margin="10,10,430,300">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Vreme"  Width="100"/>
+                <DataGridTextColumn Header="Lek"  Width="100"/>
+                <DataGridTextColumn Header="Količina"  Width="50"/>
+                <DataGridTextColumn Header="Početak terapije"  Width="*"/>
+                <DataGridTextColumn Header="Kraj terapije"  Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
 

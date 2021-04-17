@@ -3,7 +3,7 @@ using Storages;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
-
+using System.Windows.Threading;
 
 namespace Hospital_IS.View
 {
@@ -35,6 +35,22 @@ namespace Hospital_IS.View
             Patient = MainWindow.PatientUser;
             this.DataContext = this;
             PersonalData.DataContext = Patient;
+            DispatcherTimer dispatcherTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMinutes(5)
+            };
+            dispatcherTimer.Tick += timer_Tick;
+            dispatcherTimer.Start();
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            DateTime time= DateTime.Now;
+
+            foreach (Therapy t in Patient.Therapies)
+            {
+                
+            }
         }
 
         private void reserveApp(object sender, RoutedEventArgs e)
