@@ -84,5 +84,23 @@ namespace Hospital_IS
         {
             SecretaryMainWindow.Instance.RefreshGrid();
         }
+
+        private void AddNewAllergy(object sender, RoutedEventArgs e)
+        {
+            AddAllergy aa = new AddAllergy();
+            aa.Show();
+        }
+
+        private void ChangeAllergy(object sender, RoutedEventArgs e)
+        {
+            UpdateAllergy ua = new UpdateAllergy();
+            ua.Show();
+        }
+
+        private void DeleteAllergy(object sender, RoutedEventArgs e)
+        {
+            RemoveAllergy ra = new RemoveAllergy();
+            ra.Show();
+        }
     }
 }
