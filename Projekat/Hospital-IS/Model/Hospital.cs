@@ -75,6 +75,19 @@ namespace Model
             throw new NotImplementedException();
         }
 
+        public List<DoctorAppointment> GetAllAppointmentsByDoctor(Doctor doctor)
+        {
+            List<DoctorAppointment> ret = new List<DoctorAppointment>();
+            foreach(DoctorAppointment dapp in allAppointments)
+            {
+                if (dapp.Doctor.Id.Equals(doctor.Id))
+                {
+                    ret.Add(dapp);
+                }
+            }
+            return ret;
+        }
+
         public ObservableCollection<DoctorAppointment> allAppointments { get; set; }
 
         public void AddAppointment(DoctorAppointment docApp)
