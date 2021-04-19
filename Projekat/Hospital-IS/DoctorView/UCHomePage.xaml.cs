@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 using Model;
 using Hospital_IS.DoctorView;
 using System.ComponentModel;
+using System.Windows.Data;
 
 namespace Hospital_IS.DoctorView
 {
