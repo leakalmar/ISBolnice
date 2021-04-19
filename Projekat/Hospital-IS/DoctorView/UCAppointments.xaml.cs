@@ -57,9 +57,12 @@ namespace Hospital_IS.DoctorView
             if(details.Visibility == Visibility.Visible)
             {
                 docotrAppointments.Height = 195;
-                ChangeApp.Appointment = (DoctorAppointment)docotrAppointments.SelectedItem;
+                if(docotrAppointments.SelectedItem != null)
+                {
+                    ChangeApp.Appointment = (DoctorAppointment)docotrAppointments.SelectedItem;
+                }
             }
-            else if(details.Visibility == Visibility.Collapsed)
+            else
             {
                 docotrAppointments.Height = 430;
             }

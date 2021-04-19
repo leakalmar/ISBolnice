@@ -10,6 +10,9 @@ namespace Model
         public AppointmetType Type { get; set; }
         public Boolean Reserved { get; set; }
 
+        public DateTime AppointmentStart { get; set; }
+
+        public DateTime AppointmentEnd { get; set; }
         public Appointment(DateTime date, AppointmetType type, bool reserved, int room)
         {
             DateAndTime = date;

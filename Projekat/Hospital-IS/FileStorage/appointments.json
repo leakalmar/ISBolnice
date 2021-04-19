@@ -14,6 +14,7 @@
         "Tetanus",
         "Paracetamol"
       ],
+      "Therapies": null,
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
@@ -89,6 +90,7 @@
         "Tetanus",
         "Paracetamol"
       ],
+      "Therapies": null,
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
@@ -164,6 +166,7 @@
         "Tetanus",
         "Paracetamol"
       ],
+      "Therapies": null,
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
@@ -239,6 +242,7 @@
         "Tetanus",
         "Paracetamol"
       ],
+      "Therapies": null,
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
@@ -292,11 +296,11 @@
       "Address": "Brace Radica 15",
       "Hospital": null
     },
-    "DateAndTime": "2021-04-25T09:00:00",
-    "Date": "4/25/2021",
-    "Time": "09:00:00",
+    "DateAndTime": "2021-04-19T08:00:00",
+    "Date": "4/19/2021",
+    "Time": "08:00:00",
     "Type": 1,
     "Reserved": true,
-    "Room": 1
+    "Room": 3
   }
 ]

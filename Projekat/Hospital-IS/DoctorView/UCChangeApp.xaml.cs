@@ -1,19 +1,12 @@
-﻿using Hospital_IS.Storages;
-using Model;
+﻿using Model;
 using Storages;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
@@ -23,14 +16,14 @@ namespace Hospital_IS.DoctorView
     public partial class UCChangeApp : UserControl
     {
         ContentControl panel;
-        private ObservableCollection<DoctorAppointment> AvailableAppoitments { get; set; }
 
         private DoctorAppointment _appointment;
 
         public DoctorAppointment Appointment
         {
             get { return _appointment; }
-            set {
+            set
+            {
                 _appointment = value;
                 foreach (Doctor d in MainWindow.Doctors)
                 {
@@ -58,131 +51,16 @@ namespace Hospital_IS.DoctorView
             InitializeComponent();
             doctors.DataContext = MainWindow.Doctors;
             rooms.DataContext = MainWindow.Rooms;
-            AvailableAppoitments = new ObservableCollection<DoctorAppointment>();
+            
             panel = details;
         }
 
-        private void doctor_changed(object sender, SelectionChangedEventArgs e)
+        private void filter_changed(object sender, SelectionChangedEventArgs e)
         {
-            SelectedDatesCollection dates = calendar.SelectedDates;
-            ObservableCollection<DoctorAppointment> appList = new ObservableCollection<DoctorAppointment>();
-            Doctor doc = (Doctor)doctors.SelectedItem;
-
-            int hour = 0;
-            foreach (DateTime d in dates)
-            {
-                for (int i = 0; i < 16; i++)
-                {
-                    if (i % 2 == 0)
-                    {
-                        appList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, 8 + i / 2, 0, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, Appointment.Patient));
-                        hour = 8 + i / 2;
-                    }
-                    else
-                    {
-                        appList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, hour, 30, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, Appointment.Patient));
-                    }
-
-                }
-            }
-            
-            AvailableAppoitments.Clear();
-            bool flag = false;
-            foreach (DoctorAppointment ap in appList)
-            {
-                foreach (DoctorAppointment hospital in Hospital.Instance.allAppointments)
-                {
-                    if (ap.DateAndTime == hospital.DateAndTime)
-                        flag = true;
-                }
-                if (flag == false)
-                {
-                    AvailableAppoitments.Add(ap);
-                }
-                else
-                {
-                    flag = false;
-                }
-            }
-
-            app.DataContext = AvailableAppoitments;
-        }
-
-        private void room_changed(object sender, SelectionChangedEventArgs e)
-        {
-            SelectedDatesCollection dates = calendar.SelectedDates;
-            ObservableCollection<DoctorAppointment> appList = new ObservableCollection<DoctorAppointment>();
-            
             Doctor doc = (Doctor)doctors.SelectedItem;
             Room room = (Room)rooms.SelectedItem;
-            if (doc == null || room == null){
-                foreach(Doctor d in MainWindow.Doctors)
-                {
-                    if (d.Id.Equals(Appointment.Doctor.Id))
-                    {
-                        doctors.SelectedItem = d;
-                        doc = (Doctor)doctors.SelectedItem;
-                    }
-                }
-                foreach (Room r in MainWindow.Rooms)
-                {
-                    if (r.RoomId.Equals(Appointment.Room))
-                    {
-                        rooms.SelectedItem = r;
-                        room = (Room)rooms.SelectedItem;
-                    }
-                }
-            }
-
-            int hour = 0;
-                foreach (DateTime d in dates)
-            {
-                for (int i = 0; i < 16; i++)
-                {
-                    if (i % 2 == 0)
-                    {
-                        appList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, 8 + i/2, 0, 0), AppointmetType.CheckUp, false, room.RoomId, doc, Appointment.Patient));
-                        hour = 8 + i / 2;
-                    }
-                    else
-                    {
-                        appList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, hour, 30, 0), AppointmetType.CheckUp, false, room.RoomId, doc, Appointment.Patient));
-                    }
-
-                }
-            }
-
-
-            AvailableAppoitments.Clear();
-            bool flag = false;
-            foreach (DoctorAppointment ap in appList)
-            {
-                foreach (DoctorAppointment hospital in Hospital.Instance.allAppointments)
-                {
-                    if (ap.DateAndTime == hospital.DateAndTime)
-                        flag = true;
-                }
-                if (flag == false)
-                {
-                    AvailableAppoitments.Add(ap);
-                }
-                else
-                {
-                    flag = false;
-                }
-            }
-
-            app.DataContext = AvailableAppoitments;
-        }
-
-        private void calendar_changed(object sender, SelectionChangedEventArgs e)
-        {
             SelectedDatesCollection dates = calendar.SelectedDates;
-            ObservableCollection<DoctorAppointment> appList = new ObservableCollection<DoctorAppointment>();
-
-            Doctor doc = (Doctor)doctors.SelectedItem;
-            Room room = (Room)rooms.SelectedItem;
-            if (doc == null || room == null)
+            if (doc == null)
             {
                 foreach (Doctor d in MainWindow.Doctors)
                 {
@@ -192,6 +70,9 @@ namespace Hospital_IS.DoctorView
                         doc = d;
                     }
                 }
+            }
+            if (room == null) 
+            { 
                 foreach (Room r in MainWindow.Rooms)
                 {
                     if (r.RoomId.Equals(Appointment.Room))
@@ -201,6 +82,13 @@ namespace Hospital_IS.DoctorView
                     }
                 }
             }
+            if(dates == null)
+            {
+                calendar.SelectedDate = DateTime.Now.Date;
+                dates = calendar.SelectedDates;
+            }
+            ObservableCollection<DoctorAppointment> appList = new ObservableCollection<DoctorAppointment>();
+            
 
             int hour = 0;
             foreach (DateTime d in dates)
@@ -209,7 +97,7 @@ namespace Hospital_IS.DoctorView
                 {
                     if (i % 2 == 0)
                     {
-                        appList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, 8 + i/2, 0, 0), AppointmetType.CheckUp, false, room.RoomId, doc, Appointment.Patient));
+                        appList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, 8 + i / 2, 0, 0), AppointmetType.CheckUp, false, room.RoomId, doc, Appointment.Patient));
                         hour = 8 + i / 2;
                     }
                     else
@@ -219,36 +107,168 @@ namespace Hospital_IS.DoctorView
 
                 }
             }
-
-
-            AvailableAppoitments.Clear();
-            bool flag = false;
-            foreach (DoctorAppointment ap in appList)
+            ICollectionView view = CollectionViewSource.GetDefaultView(appList);
+            view.Filter = null;
+            view.Filter = delegate (object item)
             {
-                foreach (DoctorAppointment hospital in Hospital.Instance.allAppointments)
+                bool found = false;
+                foreach (DoctorAppointment dapp in Hospital.Instance.GetAllAppointmentsByDoctor(doc))
                 {
-                    if (ap.DateAndTime == hospital.DateAndTime)
-                        flag = true;
+                    found = ((DoctorAppointment)item).Room.Equals(room.RoomId) & ((DoctorAppointment)item).DateAndTime.Equals(dapp.DateAndTime);
                 }
-                if (flag == false)
-                {
-                    AvailableAppoitments.Add(ap);
-                }
-                else
-                {
-                    flag = false;
-                }
-            }
 
-            app.DataContext = AvailableAppoitments;
+                if (!found) 
+                {
+                    foreach (Appointment app in Hospital.Instance.GetAllAppByRoom(room))
+                    {
+                        found = app.AppointmentStart > ((DoctorAppointment)item).DateAndTime & app.AppointmentEnd < ((DoctorAppointment)item).DateAndTime;
+                    }
+                }
+                
+
+                //ako ga je pronasao znaci da ne treba da prikazuje
+                return !found;
+            };
+            app.DataContext = appList;
+
         }
 
-        private void DataGridRow_KeyDown(object sender, KeyEventArgs e)
-        {
-            
-        }
+        //private void room_changed(object sender, SelectionChangedEventArgs e)
+        //{
+        //    SelectedDatesCollection dates = calendar.SelectedDates;
+        //    ObservableCollection<DoctorAppointment> appList = new ObservableCollection<DoctorAppointment>();
 
-        private void DataGridRow_PreviewKeyDown(object sender, KeyEventArgs e)
+        //    Doctor doc = (Doctor)doctors.SelectedItem;
+        //    Room room = (Room)rooms.SelectedItem;
+        //    if (doc == null || room == null){
+        //        foreach(Doctor d in MainWindow.Doctors)
+        //        {
+        //            if (d.Id.Equals(Appointment.Doctor.Id))
+        //            {
+        //                doctors.SelectedItem = d;
+        //                doc = (Doctor)doctors.SelectedItem;
+        //            }
+        //        }
+        //        foreach (Room r in MainWindow.Rooms)
+        //        {
+        //            if (r.RoomId.Equals(Appointment.Room))
+        //            {
+        //                rooms.SelectedItem = r;
+        //                room = (Room)rooms.SelectedItem;
+        //            }
+        //        }
+        //    }
+
+        //    int hour = 0;
+        //        foreach (DateTime d in dates)
+        //    {
+        //        for (int i = 0; i < 16; i++)
+        //        {
+        //            if (i % 2 == 0)
+        //            {
+        //                appList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, 8 + i/2, 0, 0), AppointmetType.CheckUp, false, room.RoomId, doc, Appointment.Patient));
+        //                hour = 8 + i / 2;
+        //            }
+        //            else
+        //            {
+        //                appList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, hour, 30, 0), AppointmetType.CheckUp, false, room.RoomId, doc, Appointment.Patient));
+        //            }
+
+        //        }
+        //    }
+
+
+        //    AvailableAppoitments.Clear();
+        //    bool flag = false;
+        //    foreach (DoctorAppointment ap in appList)
+        //    {
+        //        foreach (DoctorAppointment hospital in Hospital.Instance.GetAllAppByRoom(room))
+        //        {
+        //            if (ap.DateAndTime == hospital.DateAndTime)
+        //                flag = true;
+        //        }
+        //        if (flag == false)
+        //        {
+        //            AvailableAppoitments.Add(ap);
+        //        }
+        //        else
+        //        {
+        //            flag = false;
+        //        }
+        //    }
+
+        //    app.DataContext = AvailableAppoitments;
+        //}
+
+        //private void calendar_changed(object sender, SelectionChangedEventArgs e)
+        //{
+        //    SelectedDatesCollection dates = calendar.SelectedDates;
+        //    ObservableCollection<DoctorAppointment> appList = new ObservableCollection<DoctorAppointment>();
+
+        //    Doctor doc = (Doctor)doctors.SelectedItem;
+        //    Room room = (Room)rooms.SelectedItem;
+        //    if (doc == null || room == null)
+        //    {
+        //        foreach (Doctor d in MainWindow.Doctors)
+        //        {
+        //            if (d.Id.Equals(Appointment.Doctor.Id))
+        //            {
+        //                doctors.SelectedItem = d;
+        //                doc = d;
+        //            }
+        //        }
+        //        foreach (Room r in MainWindow.Rooms)
+        //        {
+        //            if (r.RoomId.Equals(Appointment.Room))
+        //            {
+        //                rooms.SelectedItem = r;
+        //                room = r;
+        //            }
+        //        }
+        //    }
+
+        //    int hour = 0;
+        //    foreach (DateTime d in dates)
+        //    {
+        //        for (int i = 0; i < 16; i++)
+        //        {
+        //            if (i % 2 == 0)
+        //            {
+        //                appList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, 8 + i/2, 0, 0), AppointmetType.CheckUp, false, room.RoomId, doc, Appointment.Patient));
+        //                hour = 8 + i / 2;
+        //            }
+        //            else
+        //            {
+        //                appList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, hour, 30, 0), AppointmetType.CheckUp, false, room.RoomId, doc, Appointment.Patient));
+        //            }
+
+        //        }
+        //    }
+
+
+        //    AvailableAppoitments.Clear();
+        //    bool flag = false;
+        //    foreach (DoctorAppointment ap in appList)
+        //    {
+        //        foreach (DoctorAppointment hospital in Hospital.Instance.allAppointments)
+        //        {
+        //            if (ap.DateAndTime == hospital.DateAndTime)
+        //                flag = true;
+        //        }
+        //        if (flag == false)
+        //        {
+        //            AvailableAppoitments.Add(ap);
+        //        }
+        //        else
+        //        {
+        //            flag = false;
+        //        }
+        //    }
+
+        //    app.DataContext = AvailableAppoitments;
+        //}
+
+        private void ChangeApp_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
@@ -259,12 +279,10 @@ namespace Hospital_IS.DoctorView
 
                 DoctorHomePage.Instance.DoctorAppointment.Remove(Appointment);
                 Appointment.Reserved = false;
-                AvailableAppoitments.Add(Appointment);
 
                 Hospital.Instance.AddAppointment(docApp);
                 DoctorHomePage.Instance.DoctorAppointment.Add(docApp);
                 docApp.Reserved = true;
-                AvailableAppoitments.Remove(docApp);
 
                 MainWindow login = new MainWindow();
                 AppointmentFileStorage afs = new AppointmentFileStorage();

@@ -86,6 +86,19 @@ namespace Model
             return ret;
         }
 
+        public List<Appointment> GetAllAppByRoom(Room room)
+        {
+            List<Appointment> ret = new List<Appointment>();
+            foreach (Appointment app in allAppointments)
+            {
+                if (app.Room.Equals(room.RoomId))
+                {
+                    ret.Add(app);
+                }
+            }
+            return ret;
+        }
+
         public ObservableCollection<DoctorAppointment> allAppointments { get; set; }
 
         public void AddAppointment(DoctorAppointment docApp)

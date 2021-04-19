@@ -29,7 +29,7 @@
                        VerticalAlignment="Bottom"/>
                 <ComboBox x:Name="doctors" ItemsSource="{Binding}" Grid.Row="0" Grid.Column="2" 
                       Height="24.62" HorizontalAlignment="Stretch"
-                      VerticalAlignment="Bottom" Padding="1" SelectionChanged="doctor_changed">
+                      VerticalAlignment="Bottom" Padding="1" SelectionChanged="filter_changed">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock>
@@ -45,7 +45,7 @@
                 </ComboBox>
                 <ComboBox x:Name="rooms" ItemsSource="{Binding}" Grid.Row="0" Grid.Column="5" 
                        Height="24.62" HorizontalAlignment="Stretch"
-                       VerticalAlignment="Bottom" Padding="1" SelectionChanged="room_changed">
+                       VerticalAlignment="Bottom" Padding="1" SelectionChanged="filter_changed">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <Label Content="{Binding RoomId}" Padding="0"/>
@@ -54,7 +54,7 @@
                 </ComboBox>
                 <Calendar Name="calendar" SelectionMode="MultipleRange" Grid.Column="0" 
                           HorizontalAlignment="Center" VerticalAlignment="Center" 
-                          Grid.RowSpan="2" SelectedDatesChanged="calendar_changed"/>
+                          Grid.RowSpan="2" SelectedDatesChanged="filter_changed"/>
 
                 <DataGrid x:Name="app" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
                           ItemsSource="{Binding}" Margin="10"
@@ -78,7 +78,7 @@
                     </DataGrid.Columns>
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">
-                            <EventSetter Event="KeyDown" Handler="DataGridRow_PreviewKeyDown"/>
+                            <EventSetter Event="KeyDown" Handler="ChangeApp_KeyDown"/>
                         </Style>
                     </DataGrid.RowStyle>
                 </DataGrid>
