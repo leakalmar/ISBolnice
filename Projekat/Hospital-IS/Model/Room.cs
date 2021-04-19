@@ -14,16 +14,20 @@ namespace Model
         {
 
         }
+
+
         public int RoomFloor
         {
             get; set;
         }
 
 
-        public int RoomId
+        public int RoomNumber
         {
             get; set;
         }
+
+        public int RoomId { get; set; }
 
         public Boolean IsFree
         {
@@ -44,13 +48,15 @@ namespace Model
         {
             get { return RoomId + " " + Type; }
         }
-        public Room(RoomType type, bool isFree, bool isUsable, int roomFloor, int roomId)
+
+        public Room(int roomFloor, int roomNumber, int roomId, bool isFree, bool isUsable, RoomType type)
         {
-            this.Type = type;
-            this.IsFree = isFree;
-            this.IsUsable = isUsable;
-            this.RoomFloor = roomFloor;
-            this.RoomId = roomId;
+            RoomFloor = roomFloor;
+            RoomNumber = roomNumber;
+            RoomId = roomId;
+            IsFree = isFree;
+            IsUsable = isUsable;
+            Type = type;
         }
 
         public  ObservableCollection<Equipment> Equipment { get; set; }

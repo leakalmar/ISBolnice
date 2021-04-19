@@ -54,7 +54,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Properties.Resources.Designer.cs">
+      <HintPath>..\..\..\..\..\Downloads\DateTimePickerSample\DateTimePickerSample\obj\x86\Debug\TempPE\Properties.Resources.Designer.cs.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>..\..\..\..\..\Downloads\DateTimePickerSample\DateTimePickerSample\bin\Debug\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

@@ -50,19 +50,24 @@ namespace Hospital_IS
             this.Hide();
         }
 
-        public void refreshGrid(Room room)
+        public void refreshGrid(Room room,int index)
         {
-            TempEquip.Clear();
-            foreach (Equipment eq in room.Equipment)
+            if (room != null)
             {
+                TempEquip.Clear();
+                foreach (Equipment eq in room.Equipment)
+                {
 
-                TempEquip.Add(eq);
+                    TempEquip.Add(eq);
+                }
             }
+            else
+            {
+                TempEquip = new ObservableCollection<Equipment>();
+            }
+            Combo.SelectedIndex = index;
+
         }
-
-      
-
-       
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -76,7 +81,6 @@ namespace Hospital_IS
         {
            
             Room room = (Room)Combo.SelectedItem;
-            MessageBox.Show("haloo");
             TempEquip.Clear();
             foreach (Equipment eq in room.Equipment)
             {

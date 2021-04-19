@@ -2,52 +2,48 @@
 <ArrayOfRoom xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Room>
     <appointment />
-    <RoomFloor>123</RoomFloor>
-    <RoomId>123</RoomId>
-    <IsFree>true</IsFree>
+    <RoomFloor>1</RoomFloor>
+    <RoomNumber>101</RoomNumber>
+    <RoomId>1</RoomId>
+    <IsFree>false</IsFree>
     <IsUsable>false</IsUsable>
-    <Type>OperationRoom</Type>
+    <Type>StorageRoom</Type>
+    <Equipment>
+      <Equipment>
+        <EquipType>Stationary</EquipType>
+        <EquiptId>3</EquiptId>
+        <Name>hiruski sto</Name>
+        <Quantity>200</Quantity>
+      </Equipment>
+      <Equipment>
+        <EquipType>Dynamic</EquipType>
+        <EquiptId>2</EquiptId>
+        <Name>maske za lice</Name>
+        <Quantity>1500</Quantity>
+      </Equipment>
+    </Equipment>
+    <Appointment />
+  </Room>
+  <Room>
+    <appointment />
+    <RoomFloor>2</RoomFloor>
+    <RoomNumber>201</RoomNumber>
+    <RoomId>2</RoomId>
+    <IsFree>false</IsFree>
+    <IsUsable>false</IsUsable>
+    <Type>ConsultingRoom</Type>
     <Equipment />
     <Appointment />
   </Room>
   <Room>
     <appointment />
-    <RoomFloor>123</RoomFloor>
-    <RoomId>456</RoomId>
-    <IsFree>true</IsFree>
-    <IsUsable>false</IsUsable>
-    <Type>OperationRoom</Type>
-    <Equipment>
-      <Equipment>
-        <EquipType>Stationary</EquipType>
-        <EquiptId>2</EquiptId>
-        <Name>papir</Name>
-        <Quantity>50</Quantity>
-      </Equipment>
-    </Equipment>
-    <Appointment />
-  </Room>
-  <Room>
-    <appointment />
-    <RoomFloor>12</RoomFloor>
-    <RoomId>15</RoomId>
-    <IsFree>true</IsFree>
+    <RoomFloor>3</RoomFloor>
+    <RoomNumber>301</RoomNumber>
+    <RoomId>3</RoomId>
+    <IsFree>false</IsFree>
     <IsUsable>true</IsUsable>
-    <Type>StorageRoom</Type>
-    <Equipment>
-      <Equipment>
-        <EquipType>Dynamic</EquipType>
-        <EquiptId>50</EquiptId>
-        <Name>makaze</Name>
-        <Quantity>50</Quantity>
-      </Equipment>
-      <Equipment>
-        <EquipType>Stationary</EquipType>
-        <EquiptId>2</EquiptId>
-        <Name>papir</Name>
-        <Quantity>50</Quantity>
-      </Equipment>
-    </Equipment>
+    <Type>ConsultingRoom</Type>
+    <Equipment />
     <Appointment />
   </Room>
 </ArrayOfRoom>

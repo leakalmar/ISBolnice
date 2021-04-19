@@ -44,7 +44,7 @@
         <TextBlock Text="Kolicina:" Grid.Column="1" Grid.Row="7" Foreground="White" Width="150" VerticalAlignment="Center" TextAlignment="Left" FontSize="18"/>
         <TextBox x:Name="name" Grid.Row="3" Grid.Column="2" Height="25"  FontSize="15" />
         <ComboBox x:Name="type" Grid.Row="5" Height="25" Grid.Column="2" FontSize="15"  >
-            <ComboBoxItem Content="Dinamicna"/>
+            <ComboBoxItem Content="Dinamicka"/>
             <ComboBoxItem Content="Staticka"/>
         </ComboBox>
         <TextBox x:Name="quantity" Grid.Row="7" Grid.Column="2" Height="25" FontSize="15" />

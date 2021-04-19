@@ -31,7 +31,7 @@ namespace Hospital_IS
         {
             String name1 = name.Text;
             EquiptType type1;
-            if (type.Text.Equals("dinamicka"))
+            if (type.Text.Equals("Dinamicka"))
             {
                 type1 = EquiptType.Dynamic;
             }else

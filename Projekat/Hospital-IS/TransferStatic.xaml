@@ -5,9 +5,89 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital_IS"
         mc:Ignorable="d"
-          WindowStyle="None" WindowStartupLocation="CenterScreen"
-        Title="Transfer staticke" Height="750" Width="430">
+          AllowsTransparency="True"
+      
+        WindowStyle="None" WindowStartupLocation="CenterScreen"
+        Title="Transfer dinamicne opreme" Height="750" Width="430">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" >
+            <GradientStop Color="Black"/>
+            <GradientStop Color="#FF184095" Offset="0.0"/>
+            <GradientStop Color="#FF5B317E" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="17"/>
+            <ColumnDefinition Width="45"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="95"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="95"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="45"/>
+            <ColumnDefinition Width="17"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions >
+            <RowDefinition Height="30" />
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+
+        </Grid.RowDefinitions>
+        <Button x:Name="Back" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" Foreground="White" Content="Nazad" FontSize="18" BorderBrush="White" Click="Back_Click"/>
+        <TextBlock Text="Transfer opreme" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="3"  FontSize="25" Foreground="White" TextAlignment="Center"/>
+        <TextBlock Text="Izaberite sobu:" Height="25" Foreground="White" FontSize="13" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" />
+        <ComboBox x:Name="ComboSource"  Grid.Column="3"  Grid.Row="3"  ItemsSource="{Binding Path= SourceRoom}" DisplayMemberPath="RoomIdType"   HorizontalAlignment="Left" Width="90" Height="22"  SelectionChanged ="ComboSource_SelectionChanged" />
+        <TextBlock Text="Izaberite sobu:" Height="25" Foreground="White" FontSize="13" TextAlignment="Center" VerticalAlignment="Center" Grid.Column="5" Grid.Row="3" />
+        <ComboBox  x:Name="ComboDestionation" Grid.Column="6" Grid.ColumnSpan="3"  Grid.Row="3"  ItemsSource="{Binding Path= DestinationRoom }" DisplayMemberPath="RoomIdType"  
+                   HorizontalAlignment="Left" Width="90" Height="22" VerticalAlignment="Top" SelectionChanged="ComboDestionation_SelectionChanged"/>
+        <TextBlock Text="Izvor" Foreground="White" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="5" FontSize="20" TextAlignment="Center"/>
+        <TextBlock Text="Odredište" Foreground="White" Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="5" FontSize="20" TextAlignment="Center"/>
+        <GridSplitter Background="White" Width="3" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="4" Foreground="Aqua"  Grid.RowSpan="4" />
+        <DataGrid x:Name="DataGridSource"  Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Width="160" IsReadOnly="True" ItemsSource="{Binding Path= SourceEquip}" AlternatingRowBackground="NavajoWhite"  
+                  Background="#FFC5DBDF" Focusable="True" AutoGenerateColumns="False"  SelectionMode="Single">
+            <DataGrid.CellStyle>
+                <Style/>
+            </DataGrid.CellStyle>
+            <DataGrid.ColumnHeaderStyle>
+                <Style/>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.Effect>
+                <DropShadowEffect/>
+            </DataGrid.Effect>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naziv" Width="80" Binding = "{Binding Name}"/>
+                <DataGridTextColumn Header="Kolicina" Width="80" Binding="{Binding Quantity}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid x:Name="DataGridDestination" Grid.Row="7" Grid.Column="5" Grid.ColumnSpan="3" Width="160" IsReadOnly="True" ItemsSource="{Binding Path= DestinationEquip}" AlternatingRowBackground="NavajoWhite"  
+                  Background="#FFC5DBDF"  AutoGenerateColumns="False"  SelectionMode="Single">
+            <DataGrid.CellStyle>
+                <Style/>
+            </DataGrid.CellStyle>
+            <DataGrid.ColumnHeaderStyle>
+                <Style/>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.Effect>
+                <DropShadowEffect/>
+            </DataGrid.Effect>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naziv" Width="80" Binding = "{Binding Name}"/>
+                <DataGridTextColumn Header="Kolicina" Width="80" Binding="{Binding Quantity}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock Grid.Row="9" Grid.Column="1" Text="Unesite kolicinu za trasnsfer:" Grid.ColumnSpan="3" Foreground="White" FontSize="15" TextAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="QuantityBox" Grid.Row="9" Grid.Column="5" Height="25" FontSize="15" />
+        <Button x:Name="Transfer" Grid.Row="11" Grid.Column="3" Grid.ColumnSpan="3" Width="150" Height="30" Background="Transparent" BorderBrush="White" Foreground="White" FontSize="20" Content="Zakazi termin" Click="Transfer_Click"/>
     </Grid>
 </Window>

@@ -41,7 +41,7 @@
 
             </DataGrid.Columns>
         </DataGrid>
-       
+
         <StackPanel Height="70" Background="White" Margin="0,0,0,680" Grid.ColumnSpan="6" Grid.RowSpan="5" HorizontalAlignment="Left" Width="430">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -81,7 +81,7 @@
                 </Button>
             </Grid>
         </StackPanel>
-        <ComboBox x:Name="Combo"  ItemsSource="{Binding Path=TempRoom}" DisplayMemberPath="RoomIdType"   HorizontalAlignment="Left" Margin="177,128,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="Combo"  ItemsSource="{Binding Path=TempRoom}" DisplayMemberPath="RoomIdType"   HorizontalAlignment="Left" Margin="177,128,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Combo_SelectionChanged"/>
         <TextBox HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" FontSize="15" Foreground="White" Margin="40,128,0,0"  Text="Izaberite sobu:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <StackPanel Background="White" Margin="0,555,0,0" >
             <Grid>
@@ -148,7 +148,7 @@
                 <TextBlock Grid.Row="3" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text ="Izmeni opremu" Foreground="#624cfc"  />
                 <TextBlock Grid.Row="5" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text = "Ukloni opremu" Foreground="#624cfc"  />
                 <TextBlock Grid.Row="7" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text = "Transfer opreme" Foreground="#624cfc"  />
-                <ComboBox x:Name="ComboTransfer"   Grid.Row="7" Grid.Column="4" Width="100" >
+                <ComboBox x:Name="ComboTransfer"   Grid.Row="7" Grid.Column="4" FontSize="18" SelectedIndex="0" Margin="23,0,10,0" Loaded="myCombo_Loaded">
                     <ComboBoxItem Content="Dinamicka"/>
                     <ComboBoxItem Content="Staticka"/>
                 </ComboBox>

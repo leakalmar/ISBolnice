@@ -35,7 +35,7 @@
                 <DropShadowEffect/>
             </DataGrid.Effect>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Broj" Width="70" Binding = "{Binding RoomId}"/>
+                <DataGridTextColumn Header="Broj" Width="70" Binding = "{Binding RoomNumber}"/>
                 <DataGridTextColumn Header="Sprat" Width="70" Binding="{Binding RoomFloor}"/>
                 <DataGridTextColumn Header="Vrsta" Width="70" Binding="{Binding Type}"/>
                 <DataGridCheckBoxColumn Header="Zauzetost" Width="70" Binding="{Binding IsFree}"/>

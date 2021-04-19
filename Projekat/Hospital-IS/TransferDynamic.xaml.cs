@@ -40,8 +40,9 @@ namespace Hospital_IS
 
             foreach(Room r in Hospital.Room)
             {
+                if (r.Type == RoomType.StorageRoom)
                 SourceRoom.Add(r);
-                DestinationRoom.Add(r);
+           
             }
             
 
@@ -58,7 +59,11 @@ namespace Hospital_IS
                 SourceEquip.Clear();
                 foreach(Equipment eq in room.Equipment)
                 {
-                    SourceEquip.Add(eq);
+                    if(eq.EquipType == EquiptType.Dynamic)
+                    {
+                        SourceEquip.Add(eq);
+                    }
+                   
                 }
                
             }
@@ -68,28 +73,7 @@ namespace Hospital_IS
             }     
         }
 
-        private void ComboDestionation_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-           
-            Room room = (Room)ComboDestionation.SelectedItem;
-            if (room.Equipment != null)
-            {
-                DestinationEquip.Clear();
-                foreach (Equipment eq in room.Equipment)
-                {
-                   
-
-                    DestinationEquip.Add(eq);
-                }
-            }
-            else
-            {
-                DestinationEquip = new ObservableCollection<Equipment>();
-            }
-
-            DataGridDestination.IsEnabled = false;
-        }
+     
 
         private void Transfer_Click(object sender, RoutedEventArgs e)
         {
@@ -104,27 +88,22 @@ namespace Hospital_IS
 
             Equipment equip = (Equipment)DataGridSource.SelectedItem;
 
-            Room roomDestination = (Room)ComboDestionation.SelectedItem;
-
-            Manager.Instance.TransferEquipment(roomSource, roomDestination, equip, quantity);
-            refreshGrid(roomSource, roomDestination);
-
+            bool isSucces = Hospital.Instance.TransferEquipment(roomSource, equip, quantity);
+            if (!isSucces)
+            {
+                MessageBox.Show("Nedovoljna kolicina");
+            }
+            else
+            {
+                MessageBox.Show("Uspjesno izvrseno");
+                refreshGrid(roomSource);
+            }
+           
         }
 
-        private void refreshGrid(Room sourceRooom, Room destinationRoom)
+        private void refreshGrid(Room sourceRooom)
         {
-            if (destinationRoom.Equipment != null)
-            {
-                DestinationEquip.Clear();
-                foreach (Equipment eq in destinationRoom.Equipment)
-                {
-
-
-                    DestinationEquip.Add(eq);
-                }
-            }
-
-
+           
             if (sourceRooom.Equipment != null)
             {
                 SourceEquip.Clear();

@@ -30,7 +30,7 @@ namespace Hospital_IS
         private void potvrdi_Click(object sender, RoutedEventArgs e)
         {
             
-            int roomId = Convert.ToInt32(text1.Text);
+            int roomNumber = Convert.ToInt32(text1.Text);
             bool zauzeto = (bool)check1.IsChecked;
             bool renoviranje = (bool)check2.IsChecked;
             int roomFloor = Convert.ToInt32(FloorId.Text);
@@ -51,7 +51,10 @@ namespace Hospital_IS
             {
                 tip = RoomType.ConsultingRoom;
             }
-            Room newRoom = new Room(tip,zauzeto, renoviranje,roomFloor,roomId);
+
+            int roomId = Hospital.Room.Count + 1;
+            Room newRoom = new Room(roomFloor, roomNumber, roomId, zauzeto, renoviranje, tip);
+
             Manager.Instance.AddRoom(newRoom);
     
 

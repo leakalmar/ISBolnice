@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -30,9 +31,8 @@ namespace Hospital_IS
         {
             InitializeComponent();
             this.DataContext = this;
-             TempRoom = Hospital.Room;
-              Combo.SelectedIndex = index;
-               Combo.IsEnabled = false;
+            TempRoom = Hospital.Room;
+            Combo.SelectedIndex = index;
             currentRoom = room;
             currentIndex = index;
             TempEquip = new ObservableCollection<Equipment>();
@@ -42,42 +42,97 @@ namespace Hospital_IS
             }
         }
 
+        public EquipmentOption()
+        {
+            InitializeComponent();
+            this.DataContext = this;
+            TempRoom = Hospital.Room;
+            TempEquip = new ObservableCollection<Equipment>();
+          
+        }
+
+        private void Combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            currentRoom = (Room)Combo.SelectedItem;
+            TempEquip.Clear();
+            foreach (Equipment eq in currentRoom.Equipment)
+            {
+
+                TempEquip.Add(eq);
+            }
+        }
+
 
 
         private void TransferEquipment_Click(object sender, RoutedEventArgs e)
         {
-            TransferDynamic transfer = new TransferDynamic(currentRoom,currentIndex);
-            transfer.Show();
-            this.Hide();
+           
+            if (ComboTransfer.Text.Equals("Dinamicka"))
+            {
+                TransferDynamic transfer = new TransferDynamic(currentRoom, currentIndex);
+                transfer.Show();
+                this.Hide();
+            }
+            else
+            {
+                TransferStatic transfer = new TransferStatic();
+                transfer.Show();
+                this.Hide();
+            }
+          
         }
+
+
 
         private void DeleteEquipment_Click(object sender, RoutedEventArgs e)
         {
+            Equipment equipment = (Equipment)DataGridEquipment.SelectedItem;
+            if (equipment == null)
+            {
+                MessageBox.Show("Izaberite opremu");
 
+            }
+            else
+            { 
+                TempEquip.Remove(equipment);
+                currentRoom.RemoveEquipment(equipment);
+            }
         }
 
         private void EditEquipment_Click(object sender, RoutedEventArgs e)
         {
             Equipment equipment = (Equipment)DataGridEquipment.SelectedItem;
-            if( equipment == null)
+            if (equipment == null)
             {
                 MessageBox.Show("Izaberite opremu");
+
             }
-            EditEquipment edit = new EditEquipment(currentRoom, equipment, currentIndex);
-            edit.Show();
-            this.Hide();
+            else
+            {
+                EditEquipment edit = new EditEquipment(currentRoom, equipment, currentIndex);
+                edit.Show();
+                this.Hide();
+            }
         }
 
         private void AddEquipment_Click(object sender, RoutedEventArgs e)
         {
-            AddEquipment addEquipment = new AddEquipment(currentRoom,currentIndex);
-            addEquipment.Show();
-            this.Hide();
+            if(currentRoom.Type == RoomType.StorageRoom)
+            {
+                AddEquipment addEquipment = new AddEquipment(currentRoom, currentIndex);
+                addEquipment.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Dodavanje moguce samo u magacine");
+            }
         }
 
         private void Equipment_Click(object sender, RoutedEventArgs e)
         {
-            EquipmentWindow.Instance.refreshGrid(currentRoom);
+            EquipmentWindow.Instance.refreshGrid(currentRoom,Combo.SelectedIndex);
             EquipmentWindow.Instance.Show();
 
             this.Hide();
@@ -90,6 +145,12 @@ namespace Hospital_IS
 
         }
 
-    
+
+        private void myCombo_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ControlTemplate ct = this.ComboTransfer.Template;
+            Popup pop = ct.FindName("PART_Popup", this.ComboTransfer) as Popup;
+            pop.Placement = PlacementMode.Top;
+        }
     }
 }

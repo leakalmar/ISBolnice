@@ -91,7 +91,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Izaberite datum pregleda:" Grid.Column="0"  HorizontalAlignment="Left" FontSize="18" Margin="10,30,0,0" Background="{x:Null}"/>
-                <DatePicker x:Name="Calendar" Grid.Column="1" Margin="5,33,427,0" FontSize="14" DisplayDateStart="03/29/2021 16:29:04" SelectedDateFormat="Short"/>
+                <DatePicker x:Name="Calendar" Grid.Column="1" Margin="5,33,427,0" FontSize="14" DisplayDateStart="03/29/2021 16:29:04" SelectedDateFormat="Short" Height="28" VerticalAlignment="Top"/>
                 <Button x:Name="showApp" Grid.Column="1" Margin="383,33,97,0" Foreground="#FFFDFDFD" Cursor="Hand" Click="showAvailableApp">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
