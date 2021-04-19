@@ -10,12 +10,30 @@ namespace Model
         public DateTime DatePosted { get; set; }
         public DateTime LastChanged { get; set; }
 
-        public Notification(string title, string text, DateTime datePosted, DateTime lastChanged)
+        public Notification(string title, string text, DateTime datePosted)
         {
             Title = title;
             Text = text;
             DatePosted = datePosted;
-            LastChanged = lastChanged;
+            LastChanged = datePosted;
+            generateId();
         }
+        public Notification(string title, string text, DateTime datePosted, DateTime lastChanged) : this(title, text, datePosted)
+        {
+            LastChanged = lastChanged;
+            generateId();
+        }
+
+        public Notification()
+        {
+            generateId();
+        }
+
+        private void generateId() 
+        {
+            Random rand = new Random();
+            this.Id = rand.Next(1, 1000);
+        }
+
     }
 }

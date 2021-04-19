@@ -30,7 +30,7 @@
                    FontSize="14" Margin="10"/>
         </ScrollViewer>
 
-        <Button Grid.Row="3" Grid.ColumnSpan="3" Content="OK"
+        <Button Grid.Row="3" Grid.ColumnSpan="3" Content="OK" FontSize="15"
                 Width="55" Click="Close"/>
 
     </Grid>

@@ -27,7 +27,7 @@ namespace Hospital_IS.Storages
         public void SaveNotification(Notification notification)
         {
             List<Notification> notifications = GetAll();
-            notifications.Add(notification);
+            notifications.Insert(0, notification);
 
             var file = JsonConvert.SerializeObject(notifications, Formatting.Indented);
             using (StreamWriter writer = new StreamWriter(this.fileLocation))
