@@ -34,6 +34,7 @@ namespace Model
 
 
 
+
         [JsonConstructor]
         public Appointment(DateTime appointmentstart, DateTime appointmentEnd, AppointmetType type, int room)
         {
