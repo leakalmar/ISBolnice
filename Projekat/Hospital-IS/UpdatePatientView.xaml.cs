@@ -9,11 +9,13 @@ namespace Hospital_IS
     public partial class UpdatePatientView : Window
     {
         public Model.Patient Patient { get; set; }
+        public UCPatientsView ucp;
 
-        public UpdatePatientView(Model.Patient patient)
+        public UpdatePatientView(Model.Patient patient, UCPatientsView ucp)
         {
             InitializeComponent();
             Patient = patient;
+            this.ucp = ucp;
 
             if (Patient.Gender != null)
             {
@@ -57,8 +59,8 @@ namespace Hospital_IS
             {
             }
 
-            SecretaryMainWindow.Instance.dataGridPatients.ItemsSource = null;
-            SecretaryMainWindow.Instance.dataGridPatients.ItemsSource = SecretaryMainWindow.Instance.Patients;
+            ucp.dataGridPatients.ItemsSource = null;
+            ucp.dataGridPatients.ItemsSource = ucp.Patients;
             Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
             pfs.UpdatePatient(Patient);
 
@@ -67,13 +69,31 @@ namespace Hospital_IS
 
         private void Close(object sender, RoutedEventArgs e)
         {
-            SecretaryMainWindow.Instance.RefreshGrid();
+            ucp.RefreshGrid();
             this.Close();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            SecretaryMainWindow.Instance.RefreshGrid();
+            ucp.RefreshGrid();
+        }
+
+        private void AddNewAllergy(object sender, RoutedEventArgs e)
+        {
+            AddAllergy aa = new AddAllergy();
+            aa.Show();
+        }
+
+        private void ChangeAllergy(object sender, RoutedEventArgs e)
+        {
+            UpdateAllergy ua = new UpdateAllergy();
+            ua.Show();
+        }
+
+        private void DeleteAllergy(object sender, RoutedEventArgs e)
+        {
+            RemoveAllergy ra = new RemoveAllergy();
+            ra.Show();
         }
     }
 }
