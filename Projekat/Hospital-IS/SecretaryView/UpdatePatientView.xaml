@@ -76,8 +76,18 @@
         <TextBox Name="employerTxt" Grid.Column="2" Grid.Row="10" Margin="20 5" Text="{Binding Patient.Employer}"/>
         <!--<TextBox Name="emerContactTxt" Grid.Column="2" Grid.Row="11" Margin="20 5" Text="{Binding Patient.Guarantor}"/>-->
 
-        <DataGrid x:Name="dataGridAlergies" ItemsSource="{Binding Patient.Alergies}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
-                  Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="12" Grid.RowSpan="3" Margin="10" RowHeaderWidth="0"
+        <StackPanel Grid.Column="1" Grid.Row="12" Grid.RowSpan="3" 
+                    Margin="10">
+            <Button Content="Dodaj" Width="55" Margin="20 30 20 10" 
+                    FontSize="12" Click="AddNewAllergy"/>
+            <Button Content="Izmeni" Width="55" Margin="20 0 20 10" 
+                    FontSize="12" Click="ChangeAllergy"/>
+            <Button Content="Obrisi" Width="55" Margin="20 0 20 10" 
+                    FontSize="12" Click="DeleteAllergy"/>
+        </StackPanel>
+        
+        <DataGrid x:Name="dataGridAllergies" ItemsSource="{Binding Allergies}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
+                  Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="12" Grid.RowSpan="3" Margin="10 10 40 10" RowHeaderWidth="0"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   Background="Transparent" RowBackground="AliceBlue" FontSize="9">
             <DataGrid.Columns>
@@ -86,7 +96,7 @@
 
         </DataGrid>
 
-
+        
         <StackPanel Orientation="Horizontal" Grid.Row="15" Grid.ColumnSpan="4" HorizontalAlignment="Center">
             <Button Content="Potvrdi" Width="65" Margin="5 5 30 5"
                     Click="UpdatePatient"/>

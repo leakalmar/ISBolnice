@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Model
@@ -13,7 +14,7 @@ namespace Model
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-        public EducationCategory Education { get; set; } 
+        public EducationCategory Education { get; set; }
         public int Id { get; set; }
         public String Name { get; set; }
         public String Surname { get; set; }
@@ -24,6 +25,7 @@ namespace Model
         public String Relationship { get; set; }
         public String Password { get; set; }
         public String Address { get; set; }
+        public List<int> Notifications { get; set; }
 
         public User(int id, string name, string surname, DateTime birthDate, string address, string email, string password)
         {

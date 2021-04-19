@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 
 namespace Model
 {
-    public class Report: DoctorAppointment
+    public class Report : DoctorAppointment
     {
         public DoctorAppointment DoctorApp { get; set; }
 
@@ -17,7 +15,7 @@ namespace Model
         public ObservableCollection<Test> Test { get; set; }
 
 
-        public Report(DoctorAppointment ap, String cause, String detail, bool recipe=false, bool test=false) : base(ap.DateAndTime, ap.Type, ap.Reserved, ap.Room, ap.Doctor, ap.Patient)
+        public Report(DoctorAppointment ap, String cause, String detail, bool recipe = false, bool test = false) : base(ap.DateAndTime, ap.Type, ap.Reserved, ap.Room, ap.Doctor, ap.Patient)
         {
             this.DoctorApp = ap;
             this.Cause = cause;

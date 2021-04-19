@@ -30,7 +30,7 @@ namespace Storages
             ObservableCollection<DoctorAppointment> patientAppointments = new ObservableCollection<DoctorAppointment>();
             foreach (DoctorAppointment docApp in allAppointments)
             {
-                if(docApp.Patient.Id == patient)
+                if (docApp.Patient.Id == patient)
                 {
                     patientAppointments.Add(docApp);
                 }
@@ -56,7 +56,7 @@ namespace Storages
 
         public void SaveAppointment(ObservableCollection<DoctorAppointment> allAppointments)
         {
-            var file = JsonConvert.SerializeObject(allAppointments, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
+            var file = JsonConvert.SerializeObject(allAppointments, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
             using (StreamWriter writer = new StreamWriter(this.fileLocation))
             {
                 writer.Write(file);

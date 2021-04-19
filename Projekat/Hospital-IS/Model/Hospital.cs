@@ -42,7 +42,7 @@ namespace Model
             }
         }
 
-      
+
 
         public Hospital(string name, string city, string country, string address)
         {
@@ -85,7 +85,7 @@ namespace Model
 
         private void getAllClassicAppointment()
         {
-           
+
             AllClassicAppointments = classicAppointment.GetAll();
         }
 
@@ -173,14 +173,14 @@ namespace Model
                 {
                     if (docApp.DateAndTime.Equals(doctorAppointment.DateAndTime))
                     {
-                         allAppointments.Remove(doctorAppointment);
-                         break;
+                        allAppointments.Remove(doctorAppointment);
+                        break;
                     }
                 }
             }
         }
 
-        public static ObservableCollection<Room> Room  { get; set; }
+        public static ObservableCollection<Room> Room { get; set; }
 
 
 
@@ -193,7 +193,7 @@ namespace Model
 
             if (Room == null)
             {
-              Room = new ObservableCollection<Room>();
+                Room = new ObservableCollection<Room>();
 
             }
 
@@ -221,12 +221,12 @@ namespace Model
         public void RemoveAllRoom()
         {
             if (Room != null)
-               Room.Clear();
+                Room.Clear();
         }
         public void UpdateRoom(Room oldRoom)
         {
 
-            foreach(Room r in Room)
+            foreach (Room r in Room)
             {
                 if(r.RoomId == oldRoom.RoomId)
                 {
@@ -325,7 +325,7 @@ namespace Model
 
 
 
-       
+
 
         public bool TransferEquipmentStatic(Room sourceRoom, Room destinationRoom, Equipment equip, int quantity,DateTime startDate, DateTime endDate, String Description)
         {
@@ -333,7 +333,7 @@ namespace Model
             ObservableCollection<Appointment> sourceRoomAppointment = getAppByRoom(sourceRoom.RoomId);
             bool checkSourceRoomAppointment = checkAppointment(sourceRoomAppointment, startDate, endDate);
             ObservableCollection<Appointment> destinationRoomAppointment = getAppByRoom(destinationRoom.RoomId);
-    
+
             bool checkDestionationRoomAppointment = checkAppointment(destinationRoomAppointment, startDate, endDate);
 
            if(checkSourceRoomAppointment && checkDestionationRoomAppointment)
@@ -357,7 +357,7 @@ namespace Model
                 bool between = IsBetweenDates(start, end, appointment);
                 if (between || start < appointment.AppointmentStart && end > appointment.AppointmentEnd)
                 {
-                   
+
                     isFree = false;
                     break;
                 }
@@ -368,7 +368,7 @@ namespace Model
 
         private static bool IsBetweenDates(DateTime start, DateTime end, Appointment appointment)
         {
-            
+
             return (start >= appointment.AppointmentStart && start <= appointment.AppointmentEnd) || (end >= appointment.AppointmentStart && end <= appointment.AppointmentEnd);
         }
 
@@ -398,7 +398,7 @@ namespace Model
                         eq.Quantity = eq.Quantity - quantity;
                         return true;
                     }
-                   
+
                 }
             }
             return false;
