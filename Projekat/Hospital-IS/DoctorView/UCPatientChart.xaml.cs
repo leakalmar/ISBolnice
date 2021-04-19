@@ -118,5 +118,12 @@ namespace Hospital_IS.DoctorView
                     break;
             }
         }
+
+        private void back_clicked(object sender, KeyEventArgs e)
+        {
+            DoctorHomePage.Instance.Home = new UCAppDetail(Appointment);
+        }
+
+
     }
 }

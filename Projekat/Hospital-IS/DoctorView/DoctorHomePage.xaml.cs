@@ -94,7 +94,7 @@ namespace Hospital_IS.DoctorView
                 this.Hide();
                 AppointmentFileStorage afs = new AppointmentFileStorage();
                 afs.SaveAppointment(Hospital.Instance.allAppointments);
-                this.Close();
+                this.Hide();
                 
             }
          }

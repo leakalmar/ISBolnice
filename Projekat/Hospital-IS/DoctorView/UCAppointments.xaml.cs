@@ -52,14 +52,6 @@ namespace Hospital_IS.DoctorView
             details.Visibility = Visibility.Visible;
         }
 
-        public void change_Visibility()
-        {
-            if(details.Visibility == Visibility.Visible)
-            {
-                details.Visibility = Visibility.Collapsed;
-            }
-        }
-
         private void conten_changed(object sender, DependencyPropertyChangedEventArgs e)
         {
             if(details.Visibility == Visibility.Visible)
@@ -99,6 +91,26 @@ namespace Hospital_IS.DoctorView
             {
                 return ((DoctorAppointment)item).Type.ToString().Equals(selected) & ((DoctorAppointment)item).Room == room.RoomId & ((DoctorAppointment)item).DateAndTime.Date <= endDate.Date & ((DoctorAppointment)item).DateAndTime.Date >= startDate.Date;
             };
+        }
+
+        private void Delete_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Delete)
+            {
+                DoctorAppointment app = (DoctorAppointment)docotrAppointments.SelectedItem;
+                if(app.DateAndTime > DateTime.Now.AddDays(1))
+                {
+                    bool dialog = (bool)new ExitMess("Da li želite da otkažete termin?").ShowDialog();
+                    if (dialog)
+                    {
+                        Hospital.Instance.RemoveAppointment(app);
+                        DoctorHomePage.Instance.DoctorAppointment.Remove(app);
+                        app.Reserved = false;
+                        AppointmentFileStorage afs = new AppointmentFileStorage();
+                        afs.SaveAppointment(Hospital.Instance.allAppointments);
+                    }
+                }
+            }
         }
     }
 }

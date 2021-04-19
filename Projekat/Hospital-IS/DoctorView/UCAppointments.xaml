@@ -84,6 +84,7 @@
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <EventSetter Event="MouseDoubleClick" Handler="App_MouseDoubleClick"/>
+                    <EventSetter Event="KeyDown" Handler="Delete_KeyDown"/>
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
