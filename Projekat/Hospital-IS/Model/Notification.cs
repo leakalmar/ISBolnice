@@ -32,7 +32,7 @@ namespace Model
         private void generateId() 
         {
             Random rand = new Random();
-            this.Id = rand.Next(1, 1000);
+            this.Id = rand.Next(1, 100000);
         }
 
     }

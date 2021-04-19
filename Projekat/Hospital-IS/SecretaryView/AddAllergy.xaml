@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital_IS"
         mc:Ignorable="d"
         Title="Dodavanje alergena" WindowStartupLocation="CenterScreen"
-        Height="220" Width="300" >
+        Height="320" Width="400" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -17,18 +17,25 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="Unesite alergene:"
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Аko dodajete više alergena odvojite ih zarezom."
+                   Margin="0 0 0 5" FontSize="12"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="Unesite alergene:"
                    Margin="0 0 0 5" FontSize="14"/>
-        <TextBox Grid.Row="2" Grid.RowSpan="2" 
+        <TextBox Grid.Row="3" Grid.RowSpan="2"  Name="txtAllergies"
                  Grid.Column="1" Grid.ColumnSpan="2"/>
         
         <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="4" HorizontalAlignment="Center">
-            <Button Content="Potvrdi" Width="55" Height="20" Margin="5 5 15 5"/>
-            <Button Content="Odustani" Width="55" Height="20" Margin="15 5 5 5"/>
+            <Button Content="Potvrdi" Width="55" Height="20" 
+                    Margin="5 5 15 5"
+                    Click="AddAllergies"/>
+            <Button Content="Odustani" Width="55" Height="20" 
+                    Margin="15 5 5 5"
+                    Click="Close"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +18,7 @@ namespace Hospital_IS
     /// </summary>
     public partial class UpdatePatientView : Window
     {
+        public ObservableCollection<String> Allergies { get; set; }
         public Model.Patient Patient { get; set; }
         public UCPatientsView ucp;
 
@@ -41,7 +43,19 @@ namespace Hospital_IS
             else if (Patient.Education.Equals(Model.EducationCategory.College))
                 eduComboBox.SelectedIndex = 2;
 
+            Allergies = new ObservableCollection<String>(Patient.Alergies);
+
             this.DataContext = this;
+        }
+
+        internal void deleteAllergy()
+        {
+            if ((string) dataGridAllergies.SelectedItem != null)
+            {
+                string allergy = (string)dataGridAllergies.SelectedItem;
+                Allergies.Remove(allergy);
+                Patient.Alergies.Remove(allergy);
+            }
         }
 
         private void UpdatePatient(object sender, RoutedEventArgs e)
@@ -89,7 +103,7 @@ namespace Hospital_IS
 
         private void AddNewAllergy(object sender, RoutedEventArgs e)
         {
-            AddAllergy aa = new AddAllergy();
+            AddAllergy aa = new AddAllergy(this);
             aa.Show();
         }
 
@@ -101,7 +115,7 @@ namespace Hospital_IS
 
         private void DeleteAllergy(object sender, RoutedEventArgs e)
         {
-            RemoveAllergy ra = new RemoveAllergy();
+            RemoveAllergy ra = new RemoveAllergy(this);
             ra.Show();
         }
     }

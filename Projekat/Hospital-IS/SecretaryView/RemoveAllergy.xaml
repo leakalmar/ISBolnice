@@ -28,8 +28,8 @@
                    Text="Da li ste sigurni da želite da uklonite alregen?"/>
         
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <Button Content="Da" Width="40" Height="20" Margin="5 5 25 5"/>
-            <Button Content="Ne" Width="40" Height="20" Margin="25 5 5 5"/>
+            <Button Content="Da" Width="40" Height="20" Margin="5 5 25 5" Click="DeleteAllergy"/>
+            <Button Content="Ne" Width="40" Height="20" Margin="25 5 5 5" Click="Close"/>
         </StackPanel>
     </Grid>
 </Window>

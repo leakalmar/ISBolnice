@@ -17,9 +17,22 @@ namespace Hospital_IS
     /// </summary>
     public partial class RemoveAllergy : Window
     {
-        public RemoveAllergy()
+        private UpdatePatientView upv;
+        public RemoveAllergy(UpdatePatientView upv)
         {
             InitializeComponent();
+            this.upv = upv;
+        }
+
+        private void DeleteAllergy(object sender, RoutedEventArgs e)
+        {
+            upv.deleteAllergy();
+            this.Close();
+        }
+
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
