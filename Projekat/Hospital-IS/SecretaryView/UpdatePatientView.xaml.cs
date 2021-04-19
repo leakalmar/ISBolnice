@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,12 +18,15 @@ namespace Hospital_IS
     /// </summary>
     public partial class UpdatePatientView : Window
     {
+        public ObservableCollection<String> Allergies { get; set; }
         public Model.Patient Patient { get; set; }
+        public UCPatientsView ucp;
 
-        public UpdatePatientView(Model.Patient patient)
+        public UpdatePatientView(Model.Patient patient, UCPatientsView ucp)
         {
             InitializeComponent();
             Patient = patient;
+            this.ucp = ucp;
 
             if (Patient.Gender != null)
             {
@@ -39,7 +43,19 @@ namespace Hospital_IS
             else if (Patient.Education.Equals(Model.EducationCategory.College))
                 eduComboBox.SelectedIndex = 2;
 
+            Allergies = new ObservableCollection<String>(Patient.Alergies);
+
             this.DataContext = this;
+        }
+
+        internal void deleteAllergy()
+        {
+            if ((string) dataGridAllergies.SelectedItem != null)
+            {
+                string allergy = (string)dataGridAllergies.SelectedItem;
+                Allergies.Remove(allergy);
+                Patient.Alergies.Remove(allergy);
+            }
         }
 
         private void UpdatePatient(object sender, RoutedEventArgs e)
@@ -66,8 +82,8 @@ namespace Hospital_IS
             {
             }
 
-            SecretaryMainWindow.Instance.dataGridPatients.ItemsSource = null;
-            SecretaryMainWindow.Instance.dataGridPatients.ItemsSource = SecretaryMainWindow.Instance.Patients;
+            ucp.dataGridPatients.ItemsSource = null;
+            ucp.dataGridPatients.ItemsSource = ucp.Patients;
             Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
             pfs.UpdatePatient(Patient);
 
@@ -76,13 +92,31 @@ namespace Hospital_IS
 
         private void Close(object sender, RoutedEventArgs e)
         {
-            SecretaryMainWindow.Instance.RefreshGrid();
+            ucp.RefreshGrid();
             this.Close();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            SecretaryMainWindow.Instance.RefreshGrid();
+            ucp.RefreshGrid();
+        }
+
+        private void AddNewAllergy(object sender, RoutedEventArgs e)
+        {
+            AddAllergy aa = new AddAllergy(this);
+            aa.Show();
+        }
+
+        private void ChangeAllergy(object sender, RoutedEventArgs e)
+        {
+            UpdateAllergy ua = new UpdateAllergy();
+            ua.Show();
+        }
+
+        private void DeleteAllergy(object sender, RoutedEventArgs e)
+        {
+            RemoveAllergy ra = new RemoveAllergy(this);
+            ra.Show();
         }
     }
 }
