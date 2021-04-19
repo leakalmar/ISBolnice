@@ -13,11 +13,12 @@ namespace Hospital_IS.View
     public partial class TherapyPatient : Window
     {
 
-        private ObservableCollection<Therapy> Therapies { get; set; }
+        public ObservableCollection<Therapy> Therapies { get; set; }
         public TherapyPatient()
         {
             InitializeComponent();
             Therapies = HomePatient.Instance.Patient.Therapies;
+            this.DataContext = this;
         }
 
         private void home(object sender, RoutedEventArgs e)
@@ -56,6 +57,15 @@ namespace Hospital_IS.View
 
             if (row == null) return;
 
+            Therapy therapyInfo = (Therapy)dataGridTherapy.SelectedItem;
+            Name.Content = therapyInfo.Medicine.Name;
+            Quantity.Content = therapyInfo.Quantity;
+            TimesADay.Content = therapyInfo.TimesADay;
+            StartTherapy.Text = therapyInfo.TherapyStart.ToString("dd.MM.yyyy.");
+            EndTherapy.Text = therapyInfo.TherapyStart.ToString("dd.MM.yyyy.");
+            Usage.Text = therapyInfo.Medicine.Usage;
+            SideEffects.Text = therapyInfo.Medicine.SideEffects;
+            TherapyInfo.Visibility = Visibility.Visible;
 
         }
     }
