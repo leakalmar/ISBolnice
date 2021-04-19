@@ -123,6 +123,8 @@ namespace Model
         {
             ObservableCollection<Appointment> allApointemnts = new ObservableCollection<Appointment>();
 
+
+
             foreach(Appointment ap in getAppByRoom(roomIdSource))
             {
                 allApointemnts.Add(ap);
@@ -336,6 +338,7 @@ namespace Model
 
            if(checkSourceRoomAppointment && checkDestionationRoomAppointment)
             {
+
                 MessageBox.Show("Uspjesno zakazivanje");
             }
 
