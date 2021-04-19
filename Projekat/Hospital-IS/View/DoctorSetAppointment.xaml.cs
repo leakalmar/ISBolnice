@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Model;
+﻿using Model;
 using Storages;
+using System;
+using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace Hospital_IS.View
 {
@@ -23,7 +14,7 @@ namespace Hospital_IS.View
         public ObservableCollection<DoctorAppointment> AvailableAppoitments { get; set; }
         public ObservableCollection<Doctor> TempDoctors { get; set; }
         public DoctorAppointment Appointment { get; set; }
-        RoomStorage rs =  new RoomStorage();
+        RoomStorage rs = new RoomStorage();
 
 
         public ObservableCollection<Room> TempRooms { get; set; }

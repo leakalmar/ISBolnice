@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Model;
+using System;
 using System.Collections.ObjectModel;
-using System.Data;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Model;
 
 namespace Hospital_IS.View
 {
@@ -30,7 +21,7 @@ namespace Hospital_IS.View
 
         private void Patient_Selected(object sender, KeyEventArgs e)
         {
-            DoctorAppointment appointment= (DoctorAppointment)docotrAppointments.SelectedItem;
+            DoctorAppointment appointment = (DoctorAppointment)docotrAppointments.SelectedItem;
             Window window = new PatientChart(appointment);
             window.Show();
         }
@@ -52,10 +43,10 @@ namespace Hospital_IS.View
             }
             else
             {
-                Window window = new PatientChart(ap,false, true);
+                Window window = new PatientChart(ap, false, true);
                 window.Show();
             }
-            
+
         }
     }
 }

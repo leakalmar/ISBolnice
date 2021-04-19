@@ -14,6 +14,7 @@
         "Tetanus",
         "Paracetamol"
       ],
+      "Therapies": null,
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
