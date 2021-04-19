@@ -43,5 +43,12 @@ namespace Hospital_IS.View
             AppointmentFileStorage afs = new AppointmentFileStorage();
             afs.SaveAppointment(Hospital.Instance.allAppointments);
         }
+
+        private void showNotifications(object sender, RoutedEventArgs e)
+        {
+            PatientNotifications notifications = new PatientNotifications();
+            notifications.Show();
+            this.Close();
+        }
     }
 }

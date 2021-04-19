@@ -53,6 +53,13 @@ namespace Hospital_IS.View
             this.Close();
         }
 
+        private void showNotifications(object sender, RoutedEventArgs e)
+        {
+            PatientNotifications notifications = new PatientNotifications();
+            notifications.Show();
+            this.Close();
+        }
+
         private void showAvailableApp(object sender, RoutedEventArgs e)
         {
             doctor = (Doctor)Doctors.SelectedItem;
@@ -234,5 +241,6 @@ namespace Hospital_IS.View
             AppointmentFileStorage afs = new AppointmentFileStorage();
             afs.SaveAppointment(Hospital.Instance.allAppointments);
         }
+
     }
 }

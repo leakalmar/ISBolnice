@@ -20,6 +20,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -36,7 +37,7 @@
             </Border.Background>
         </Border>
 
-        <Border Grid.ColumnSpan="1" Grid.RowSpan="10" BorderBrush="White" >
+        <Border Grid.ColumnSpan="1" Grid.RowSpan="11" BorderBrush="White" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -46,7 +47,7 @@
             </Border.Background>
         </Border>
 
-        <Border CornerRadius="20,0,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="9" >
+        <Border CornerRadius="20,0,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="10" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -68,20 +69,20 @@
                 </Style>
             </Button.Resources>
         </Button>
-
+        <Button x:Name="Notifications" Grid.Column="0" Grid.Row="9" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Cursor="Hand" BorderThickness="1,1,0,1" Click="showNotifications">Obaveštenja</Button>
+        
         <Label Content="Terapije:" Grid.Row="1" Grid.Column="1" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
         <DataGrid x:Name="dataGridTherapy" MouseDoubleClick="showRow" IsReadOnly="True" ItemsSource="{Binding Therapies, Mode=TwoWay}"  CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="2" Grid.RowSpan="9" Margin="10,10,10,300">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Vreme"  Width="100" Binding="{Binding FirstUsageTime}"/>
+                <DataGridTextColumn Header="Vreme"  Width="100" Binding="{Binding FirstUsageTime, StringFormat=\{0:0h\}}"/>
                 <DataGridTextColumn Header="Lek"  Width="100" Binding="{Binding Medicine.Name}"/>
                 <DataGridTextColumn Header="Količina"  Width="50" Binding="{Binding Quantity}"/>
                 <DataGridTextColumn Header="Početak terapije"  Width="*" Binding="{Binding TherapyStart, StringFormat=\{0:dd.MM.yyyy.\}}"/>
                 <DataGridTextColumn Header="Kraj terapije"  Width="*" Binding="{Binding TherapyEnd, StringFormat=\{0:dd.MM.yyyy.\}}"/>
             </DataGrid.Columns>
         </DataGrid>
-
-        <Border x:Name="TherapyInfo" BorderThickness="1" BorderBrush="Black" Grid.Column="2" Grid.Row="2" Grid.RowSpan="8" Margin="10,10,10,100" Visibility="Hidden">
-            <StackPanel x:Name="PersonalData" Grid.RowSpan="8" Grid.Row="2" Grid.Column="2" Margin="10,10,10,100" >
+        <Border x:Name="TherapyInfo" BorderThickness="1" BorderBrush="Black" Grid.Column="2" Grid.Row="2" Grid.RowSpan="9" Margin="10,10,10,100" Visibility="Hidden">
+            <StackPanel x:Name="PersonalData" Grid.RowSpan="9" Grid.Row="2" Grid.Column="2" Margin="10,10,10,10" >
 
                 <Grid>
                     <Label Content="Naziv leka:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
@@ -95,7 +96,10 @@
                     <Label Content="Koliko puta dnevno:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
                     <Label x:Name="TimesADay"  HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18"/>
                 </Grid>
-
+                <Grid>
+                    <Label Content="Na svakih:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
+                    <Label x:Name="TimeSpan" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" />
+                </Grid>
                 <Grid>
                     <Label Content="Datum početka terapije:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
                     <TextBlock x:Name="StartTherapy"  HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5"/>
@@ -105,9 +109,9 @@
                     <TextBlock x:Name="EndTherapy"  HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18"/>
                 </Grid>
                 <Label Content="Uputstvo za upotrebu:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <TextBlock x:Name="Usage"  Width="413" Background="{x:Null}" FontSize="18" Height="130"/>
+                <TextBlock x:Name="Usage"  Width="414" Background="{x:Null}" FontSize="18" Height="94"/>
                 <Label Content="Neželjena dejstva:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <TextBlock x:Name="SideEffects"  Width="413" Background="{x:Null}" FontSize="18" Height="130"/>
+                <TextBlock x:Name="SideEffects"  Width="414" Background="{x:Null}" FontSize="18" Height="106"/>
 
             </StackPanel>
         </Border>

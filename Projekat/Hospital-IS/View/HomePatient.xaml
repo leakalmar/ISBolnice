@@ -25,6 +25,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -41,7 +42,7 @@
             </Border.Background>
         </Border>
 
-        <Border Grid.ColumnSpan="1" Grid.RowSpan="10" BorderBrush="#FFF9F2F2" >
+        <Border Grid.ColumnSpan="1" Grid.RowSpan="11" BorderBrush="#FFF9F2F2" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -51,7 +52,7 @@
             </Border.Background>
         </Border>
 
-        <Border CornerRadius="20,0,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="9" >
+        <Border CornerRadius="20,0,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="10" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -85,6 +86,7 @@
         <Button x:Name="ReserveApp" Grid.Column="0" Grid.Row="6" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="reserveApp">Zakaži pregled</Button>
         <Button x:Name="AllApp" Grid.Column="0" Grid.Row="7" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="allApp" >Moji pregledi</Button>
         <Button x:Name="Therapy" Grid.Column="0" Grid.Row="8" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="showTherapy" Content="Terapije"/>
+        <Button x:Name="Notifications" Grid.Column="0" Grid.Row="9" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Cursor="Hand" BorderThickness="1,1,0,1" Click="showNotifications">Obaveštenja</Button>
         <StackPanel x:Name="PersonalData" Grid.RowSpan="8" Grid.Row="2" Grid.Column="1">
             <Grid>
                 <Label Content="Ime:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
@@ -122,7 +124,7 @@
         </StackPanel>
 
         <Label Content="Lista pregleda:" Grid.Row="1" Grid.Column="2" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
-        <DataGrid x:Name="dataGridAppointment"  ItemsSource="{Binding DoctorAppointment, Mode=TwoWay}" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="2" Grid.Row="2" Grid.RowSpan="8" Margin="10,10,30,150">
+        <DataGrid x:Name="dataGridAppointment"  ItemsSource="{Binding DoctorAppointment, Mode=TwoWay}" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="2" Grid.Row="2" Grid.RowSpan="9" Margin="10,10,30,100">
             <DataGrid.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="0,0,20,20"/>
@@ -134,7 +136,7 @@
                 <DataGridTextColumn Header="Soba" Binding="{Binding Room}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="changeApp" Grid.Column="2" Grid.Row="10" Margin="250,230,200,60" Foreground="#FFFDFAFA" FontSize="16" Cursor="Hand" Click="changeAppointment">
+        <Button x:Name="changeApp" Grid.Column="2" Grid.Row="10" Margin="250,230,200,40" Foreground="#FFFDFAFA" FontSize="16" Cursor="Hand" Click="changeAppointment">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20,20,20,20"/>
@@ -148,7 +150,7 @@
                 </LinearGradientBrush>
             </Button.Background> Izmeni termin
         </Button>
-        <Button x:Name="deleteApp" Grid.Column="2" Grid.Row="10" Margin="420,230,30,60" Foreground="White" FontSize="16" Cursor="Hand" Click="deleteAppointment">
+        <Button x:Name="deleteApp" Grid.Column="2" Grid.Row="11" Margin="420,230,30,40" Foreground="White" FontSize="16" Cursor="Hand" Click="deleteAppointment">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20,20,20,20"/>
