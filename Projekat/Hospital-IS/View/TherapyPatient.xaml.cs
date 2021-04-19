@@ -1,17 +1,23 @@
 ﻿using Model;
 using Storages;
+using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Hospital_IS.View
 {
     /// <summary>
-    /// Interaction logic for AllAppointments.xaml
+    /// Interaction logic for DocumentationPatient.xaml
     /// </summary>
-    public partial class AllAppointments : Window
+    public partial class TherapyPatient : Window
     {
-        public AllAppointments()
+
+        private ObservableCollection<Therapy> Therapies { get; set; }
+        public TherapyPatient()
         {
             InitializeComponent();
+            Therapies = HomePatient.Instance.Patient.Therapies;
         }
 
         private void home(object sender, RoutedEventArgs e)
@@ -20,7 +26,6 @@ namespace Hospital_IS.View
             this.Close();
         }
 
-
         private void reserveApp(object sender, RoutedEventArgs e)
         {
             AppointmentPatient ap = new AppointmentPatient();
@@ -28,10 +33,10 @@ namespace Hospital_IS.View
             this.Close();
         }
 
-        private void showTherapy(object sender, RoutedEventArgs e)
+        private void showAll(object sender, RoutedEventArgs e)
         {
-            TherapyPatient doc = new TherapyPatient();
-            doc.Show();
+            AllAppointments allApp = new AllAppointments();
+            allApp.Show();
             this.Close();
         }
 
@@ -39,9 +44,19 @@ namespace Hospital_IS.View
         {
             MainWindow login = new MainWindow();
             login.Show();
-            this.Close();
+            this.Hide();
             AppointmentFileStorage afs = new AppointmentFileStorage();
             afs.SaveAppointment(Hospital.Instance.allAppointments);
+        }
+
+        private void showRow(object sender, MouseButtonEventArgs e)
+        {
+            var row = ItemsControl.ContainerFromElement((DataGrid)sender,
+                                        e.OriginalSource as DependencyObject) as DataGridRow;
+
+            if (row == null) return;
+
+
         }
     }
 }

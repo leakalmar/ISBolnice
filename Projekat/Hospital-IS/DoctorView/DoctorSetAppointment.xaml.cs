@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Model;
+using Storages;
+using System;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -24,7 +24,7 @@ namespace Hospital_IS.DoctorView
         public ObservableCollection<DoctorAppointment> AvailableAppoitments { get; set; }
         public ObservableCollection<Doctor> TempDoctors { get; set; }
         public DoctorAppointment Appointment { get; set; }
-        RoomStorage rs =  new RoomStorage();
+        RoomStorage rs = new RoomStorage();
 
 
         public ObservableCollection<Room> TempRooms { get; set; }
@@ -51,13 +51,6 @@ namespace Hospital_IS.DoctorView
             TempDoctors.Add(tempDoctor);
             TempDoctors.Add(tempDoctor1);
             TempDoctors.Add(DoctorHomePage.Instance.GetDoctor());
-
-
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 8, 30, 0), AppointmetType.CheckUp, false, TempRooms[0].RoomId, doctor, appointment.Patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 0, 0), AppointmetType.CheckUp, false, TempRooms[1].RoomId, doctor, appointment.Patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 9, 30, 0), AppointmetType.CheckUp, false, TempRooms[2].RoomId, doctor, appointment.Patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 0, 0), AppointmetType.CheckUp, false, TempRooms[3].RoomId, doctor, appointment.Patient));
-            AvailableAppoitments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, 10, 30, 0), AppointmetType.CheckUp, false, TempRooms[4].RoomId, doctor, appointment.Patient));
 
             rooms.SelectedItem = appointment.Doctor.PrimaryRoom;
             Doctors.SelectedItem = appointment.Doctor;

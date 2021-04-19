@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Model;
+using Storages;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Storages;
-using Model;
 
 namespace Hospital_IS
 {
@@ -25,7 +16,7 @@ namespace Hospital_IS
             InitializeComponent();
         }
 
-      
+
         private void RoomsButton_Click_1(object sender, RoutedEventArgs e)
         {
             Rooms room = new Rooms();

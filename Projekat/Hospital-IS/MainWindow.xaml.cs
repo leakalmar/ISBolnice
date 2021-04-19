@@ -49,9 +49,7 @@ namespace Hospital_IS
                 if (email.Text == p.Email && password.Password.ToString() == p.Password)
                 {
                     PatientUser = p;
-                    //    PatientUser.DoctorAppointment = afs.GetAllByPatient(p);
                     HomePatient.Instance.DoctorAppointment = afs.GetAllByPatient(p.Id);
-                    //doctorAppointments = afs.GetAllByPatient();
                     HomePatient.Instance.Show();
                     this.Close();
                 }
@@ -73,11 +71,12 @@ namespace Hospital_IS
             {
                 Window1 win = new Window1();
                 win.Show();
+                this.Close();
             }
             else if (email.Text == "sekretar@gmail.com" && password.Password.ToString() == "sekretar")
             {
-                SecretaryMainWindow smw = new SecretaryMainWindow();
-                smw.Show();
+                SecretaryMainWindow.Instance.Show();
+
                 this.Close();
             }
         }

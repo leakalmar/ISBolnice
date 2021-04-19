@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="director.jpg" />
+    <None Remove="door_open.png" />
     <None Remove="employee.jpg" />
     <None Remove="hospital.png" />
     <None Remove="hospital2.png" />
@@ -30,6 +31,10 @@
     <None Remove="View\simona.jpg" />
     <None Remove="View\tube.png" />
     <None Remove="View\x-icon.png" />
+    <None Remove="other_facilities.png" />
+    <None Remove="request.png" />
+    <None Remove="room_icon.jpg" />
+    <None Remove="thredots.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,8 +42,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="director.jpg" />
-    <Resource Include="employee.jpg" />
+    <Resource Include="director.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="door_open.png" />
+    <Resource Include="employee.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="hospital.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -60,6 +70,10 @@
     <Resource Include="Resources\treatment.png" />
     <Resource Include="Resources\tube.png" />
     <Resource Include="Resources\x-icon.png" />
+    <Resource Include="room_icon.jpg" />
+    <Resource Include="thredots.png" />
+    <Resource Include="other_facilities.png" />
+    <Resource Include="request.png" />
   </ItemGroup>
 
 </Project>

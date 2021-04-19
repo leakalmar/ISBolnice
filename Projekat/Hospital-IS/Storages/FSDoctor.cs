@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Text;
 
 namespace Hospital_IS.Storages
 {
@@ -47,7 +46,7 @@ namespace Hospital_IS.Storages
             ObservableCollection<Doctor> doctors = GetAll();
             doctors.Add(doctor);
 
-            var file = JsonConvert.SerializeObject(doctors, Formatting.Indented,new JsonSerializerSettings()
+            var file = JsonConvert.SerializeObject(doctors, Formatting.Indented, new JsonSerializerSettings()
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             });

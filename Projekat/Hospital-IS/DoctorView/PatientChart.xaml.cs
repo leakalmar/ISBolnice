@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Model;
+using Storages;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -48,7 +44,7 @@ namespace Hospital_IS.DoctorView
                 {
                     endBtn.Visibility = Visibility.Hidden;
                 }
-                
+
             }
             else
             {
@@ -102,7 +98,7 @@ namespace Hospital_IS.DoctorView
 
         private void updateBtn_Click(object sender, RoutedEventArgs e)
         {
-            Window w = new DoctorSetAppointment(Appointment,true);
+            Window w = new DoctorSetAppointment(Appointment, true);
             w.Show();
         }
 
@@ -119,10 +115,10 @@ namespace Hospital_IS.DoctorView
         private void futureApp_DoubleClicked(object sender, MouseButtonEventArgs e)
         {
             DoctorAppointment future = (DoctorAppointment)patientAppointments.SelectedItem;
-            Window window = new DoctorSetAppointment(future,true);
+            Window window = new DoctorSetAppointment(future, true);
             window.Show();
         }
     }
 
-    
+
 }

@@ -1,18 +1,9 @@
 ﻿using Model;
 using Storages;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-
+using System.Windows.Threading;
 
 namespace Hospital_IS.View
 {
@@ -33,7 +24,7 @@ namespace Hospital_IS.View
                 return instance;
             }
         }
-        
+
         public Patient Patient { get; set; }
         public DoctorAppointment changedApp;
         public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
@@ -44,13 +35,27 @@ namespace Hospital_IS.View
             Patient = MainWindow.PatientUser;
             this.DataContext = this;
             PersonalData.DataContext = Patient;
-            //dataGridAppointment.DataContext = Patient;
-            //DoctorAppointment = MainWindow.doctorAppointments;
+            DispatcherTimer dispatcherTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMinutes(5)
+            };
+            dispatcherTimer.Tick += timer_Tick;
+            dispatcherTimer.Start();
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            DateTime time= DateTime.Now;
+
+            foreach (Therapy t in Patient.Therapies)
+            {
+                
+            }
         }
 
         private void reserveApp(object sender, RoutedEventArgs e)
         {
-            
+
             AppointmentPatient ap = new AppointmentPatient();
             ap.Show();
             this.Hide();
@@ -64,9 +69,9 @@ namespace Hospital_IS.View
             this.Hide();
         }
 
-        private void showDoc(object sender, RoutedEventArgs e)
+        private void showTherapy(object sender, RoutedEventArgs e)
         {
-            DocumentationPatient doc = new DocumentationPatient();
+            TherapyPatient doc = new TherapyPatient();
             doc.Show();
             this.Hide();
         }
@@ -74,20 +79,39 @@ namespace Hospital_IS.View
         private void deleteAppointment(object sender, RoutedEventArgs e)
         {
             DoctorAppointment doctorApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
-            //Patient.DoctorAppointment.Remove(doctorApp);
-            Hospital.Instance.allAppointments.Remove(doctorApp);
-            DoctorAppointment.Remove(doctorApp);
-            doctorApp.Reserved = false;
+            DateTime today = DateTime.Today;
+            if (doctorApp == null)
+            {
+                MessageBox.Show("Izaberite termin!");
+            }
+            else if (doctorApp.DateAndTime.Date < today.AddDays(3))
+            {
+                MessageBox.Show("Ne možete otkazati termin na manje od 3 dana do termina!");
+            }
+            else
+            {
+                Hospital.Instance.RemoveAppointment(doctorApp);
+                DoctorAppointment.Remove(doctorApp);
+                doctorApp.Reserved = false;
+            }
+
         }
 
         private void changeAppointment(object sender, RoutedEventArgs e)
         {
             changedApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
-            AppointmentPatient ap = new AppointmentPatient();
-            ap.Show();
-            ap.changeAppointment(changedApp);
+            if (changedApp == null)
+            {
+                MessageBox.Show("Izaberite termin!");
+            }
+            else
+            {
+                AppointmentPatient ap = new AppointmentPatient();
+                ap.Show();
+                ap.changeAppointment(changedApp);
+            }
         }
-        
+
         private void logout(object sender, RoutedEventArgs e)
         {
             MainWindow login = new MainWindow();

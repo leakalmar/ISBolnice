@@ -5,7 +5,7 @@ namespace Model
     public class Appointment
     {
         public DateTime DateAndTime { get; set; }
-        public String Date {get; set; }
+        public String Date { get; set; }
         public TimeSpan Time { get; set; }
         public AppointmetType Type { get; set; }
         public Boolean Reserved { get; set; }
