@@ -9,10 +9,12 @@ namespace Hospital_IS
     public partial class PatientRegistration : Window
     {
         public Model.Patient Patient { get; set; } = new Model.Patient();
-        public PatientRegistration()
+        public UCPatientsView ucp;
+        public PatientRegistration(UCPatientsView ucp)
         {
             InitializeComponent();
             this.DataContext = this;
+            this.ucp = ucp;
         }
         private void Close(object sender, RoutedEventArgs e)
         {
@@ -39,7 +41,7 @@ namespace Hospital_IS
             }
 
             Patient.Password = passwordBox.ToString();
-            SecretaryMainWindow.Instance.Patients.Add(Patient);
+            ucp.Patients.Add(Patient);
 
             Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
             pfs.SavePatient(Patient);

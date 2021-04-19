@@ -11,8 +11,8 @@ namespace Hospital_IS
     /// </summary>
     public partial class SecretaryMainWindow : Window
     {
-        public ObservableCollection<Model.Patient> Patients { get; set; }
-        Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
+        UCPatientsView ucp = new UCPatientsView();
+        UCNotificationsView ucn = new UCNotificationsView();
 
         private static SecretaryMainWindow instance = null;
 
@@ -32,8 +32,6 @@ namespace Hospital_IS
         {
             InitializeComponent();
 
-            RefreshGrid();
-
             CurrentTimeLabel.Content = DateTime.Now.ToString("HH:mm  dd.MM.yyyy.");
             DispatcherTimer dispatcherTimer = new DispatcherTimer
             {
@@ -42,7 +40,9 @@ namespace Hospital_IS
             dispatcherTimer.Tick += timer_Tick;
             dispatcherTimer.Start();
 
-            this.DataContext = this;
+            HomePage.Content = ucp;
+
+            // this.DataContext = this;
 
             /*ObservableCollection<String> alergije = new ObservableCollection<String>();
             alergije.Add("Tetanus");
@@ -58,46 +58,14 @@ namespace Hospital_IS
 
         }
 
-        public void RefreshGrid()
-        {
-            if (Patients != null)
-                Patients.Clear();
-            List<Model.Patient> patients = pfs.GetAll();
-            Patients = new ObservableCollection<Model.Patient>(patients);
-            dataGridPatients.ItemsSource = Patients;
-        }
+
 
         private void timer_Tick(object sender, EventArgs e)
         {
             CurrentTimeLabel.Content = DateTime.Now.ToString("HH:mm  dd.MM.yyyy.");
         }
 
-        private void AddNewPatient(object sender, RoutedEventArgs e)
-        {
-            PatientRegistration pr = new PatientRegistration();
-            pr.Show();
-        }
-
-        private void ShowPatient(object sender, RoutedEventArgs e)
-        {
-            Model.Patient patient = (Model.Patient) dataGridPatients.SelectedItem;
-            PatientView pv = new PatientView(patient);
-            pv.Show();
-        }
-
-        private void UpdatePatient(object sender, RoutedEventArgs e)
-        {
-            Model.Patient patient = (Model.Patient)dataGridPatients.SelectedItem;
-            UpdatePatientView upv = new UpdatePatientView(patient);
-            upv.Show();
-        }
-
-        private void DeletePatient(object sender, RoutedEventArgs e)
-        {
-            Model.Patient patient = (Model.Patient)dataGridPatients.SelectedItem;
-            Patients.Remove(patient);
-            pfs.DeletePatient(patient);
-        }
+        
 
         private void Logout(object sender, RoutedEventArgs e)
         {
@@ -106,14 +74,14 @@ namespace Hospital_IS
             this.Visibility = Visibility.Hidden;
         }
 
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        private void btnPatients_Click(object sender, RoutedEventArgs e)
         {
-            if (value != null && value is DateTime && (DateTime)value < new DateTime(2, 1, 1))
-            {
-                return "";
-            }
-            else
-                return value;
+            HomePage.Content = ucp;
+        }
+
+        private void btnNotifications_Click(object sender, RoutedEventArgs e)
+        {
+            HomePage.Content = ucn;
         }
     }
 }
