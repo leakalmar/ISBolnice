@@ -4,6 +4,7 @@ namespace Model
     {
         RecoveryRoom,
         ConsultingRoom,
-        OperationRoom
+        OperationRoom,
+        StorageRoom
     }
 }

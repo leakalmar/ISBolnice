@@ -1,14 +1,26 @@
+using Newtonsoft.Json;
 using System;
 
 namespace Model
 {
     public class Appointment
     {
+        
         public DateTime DateAndTime { get; set; }
         public String Date { get; set; }
         public TimeSpan Time { get; set; }
-        public AppointmetType Type { get; set; }
+       
         public Boolean Reserved { get; set; }
+
+        [JsonProperty]
+        public  DateTime AppointmentStart { get; set; }
+        [JsonProperty]
+        public DateTime AppointmentEnd { get; set; }
+        [JsonProperty]
+        public AppointmetType Type { get; set; }
+        [JsonProperty]
+        public int Room { get; set; }
+
 
         public Appointment(DateTime date, AppointmetType type, bool reserved, int room)
         {
@@ -20,19 +32,18 @@ namespace Model
             Room = room;
         }
 
-        public Boolean StartAppointment()
+
+
+        [JsonConstructor]
+        public Appointment(DateTime appointmentstart, DateTime appointmentEnd, AppointmetType type, int room)
         {
-            throw new NotImplementedException();
+            AppointmentStart = appointmentstart;
+            AppointmentEnd = appointmentEnd;
+            Type = type;
+            Room = room;
         }
 
-        public Boolean EndAppointment()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int room;
-
-        public int Room { get; set; }
+        
 
     }
 }

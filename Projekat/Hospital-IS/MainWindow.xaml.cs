@@ -62,8 +62,7 @@ namespace Hospital_IS
 
             if (email.Text == "upravnik@gmail.com" && password.Password.ToString() == "upravnik")
             {
-                Window1 win = new Window1();
-                win.Show();
+                Window1.Instance.Show();
                 this.Close();
             }
             else if (email.Text == "sekretar@gmail.com" && password.Password.ToString() == "sekretar")

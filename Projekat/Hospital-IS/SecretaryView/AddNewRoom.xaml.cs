@@ -1,6 +1,15 @@
-﻿using Model;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using Model;
 
 
 namespace Hospital_IS
@@ -15,13 +24,13 @@ namespace Hospital_IS
             InitializeComponent();
         }
 
-
+        
 
 
         private void potvrdi_Click(object sender, RoutedEventArgs e)
         {
-
-            int roomId = Convert.ToInt32(text1.Text);
+            
+            int roomNumber = Convert.ToInt32(text1.Text);
             bool zauzeto = (bool)check1.IsChecked;
             bool renoviranje = (bool)check2.IsChecked;
             int roomFloor = Convert.ToInt32(FloorId.Text);
@@ -34,18 +43,25 @@ namespace Hospital_IS
             {
                 tip = RoomType.OperationRoom;
             }
+            else if (combo1.Text.Equals("Magacin"))
+            {
+                tip = RoomType.StorageRoom;
+            }
             else
             {
                 tip = RoomType.ConsultingRoom;
             }
-            Room newRoom = new Room(tip, zauzeto, renoviranje, roomFloor, roomId);
+
+            int roomId = Hospital.Room.Count + 1;
+            Room newRoom = new Room(roomFloor, roomNumber, roomId, zauzeto, renoviranje, tip);
+
             Manager.Instance.AddRoom(newRoom);
+    
 
-
-
+          
             this.Close();
-
-
+           
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -27,6 +27,7 @@
             <ComboBoxItem Content="Soba za odmor"/>
             <ComboBoxItem Content="Operaciona soba"/>
             <ComboBoxItem Content="Soba za pregled"/>
+            <ComboBoxItem Content="Magacin"/>
         </ComboBox>
         <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="70,267,0,0" Text="Renoviranje" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <CheckBox x:Name ="check2"   HorizontalAlignment="Left" Margin="250,267,0,0" VerticalAlignment="Top"/>

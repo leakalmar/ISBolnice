@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Rooms.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="director.jpg" />
     <None Remove="door_open.png" />
     <None Remove="employee.jpg" />
@@ -15,6 +19,21 @@
     <None Remove="hospital2.png" />
     <None Remove="other_facilities.png" />
     <None Remove="request.png" />
+    <None Remove="Resources\addroom.png" />
+    <None Remove="Resources\backbutton.png" />
+    <None Remove="Resources\deleteroom.png" />
+    <None Remove="Resources\edit.png" />
+    <None Remove="Resources\filijale.png" />
+    <None Remove="Resources\hospitalroom.png" />
+    <None Remove="Resources\manager.png" />
+    <None Remove="Resources\menubar.png" />
+    <None Remove="Resources\options.png" />
+    <None Remove="Resources\room.png" />
+    <None Remove="Resources\room1.png" />
+    <None Remove="Resources\settings.png" />
+    <None Remove="Resources\toolbar.png" />
+    <None Remove="Resources\transfer.png" />
+    <None Remove="Resources\worker.png" />
     <None Remove="room_icon.jpg" />
     <None Remove="thredots.png" />
     <None Remove="View\bookmark.png" />
@@ -31,7 +50,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Rooms.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Properties.Resources.Designer.cs">
+      <HintPath>..\..\..\..\..\Downloads\DateTimePickerSample\DateTimePickerSample\obj\x86\Debug\TempPE\Properties.Resources.Designer.cs.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>..\..\..\..\..\Downloads\DateTimePickerSample\DateTimePickerSample\bin\Debug\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
@@ -47,16 +80,31 @@
     </Resource>
     <Resource Include="other_facilities.png" />
     <Resource Include="request.png" />
+    <Resource Include="Resources\addroom.png" />
+    <Resource Include="Resources\backbutton.png" />
     <Resource Include="Resources\bookmark.png" />
     <Resource Include="Resources\checkmark.png" />
+    <Resource Include="Resources\deleteroom.png" />
     <Resource Include="Resources\doctor.jpg" />
+    <Resource Include="Resources\edit.png" />
+    <Resource Include="Resources\filijale.png" />
+    <Resource Include="Resources\hospitalroom.png" />
     <Resource Include="Resources\importance.png" />
+    <Resource Include="Resources\manager.png" />
     <Resource Include="Resources\maximize.png" />
+    <Resource Include="Resources\menubar.png" />
     <Resource Include="Resources\minimize.png" />
+    <Resource Include="Resources\options.png" />
     <Resource Include="Resources\pill.png" />
     <Resource Include="Resources\report.png" />
+    <Resource Include="Resources\room.png" />
+    <Resource Include="Resources\room1.png" />
+    <Resource Include="Resources\settings.png" />
     <Resource Include="Resources\simona.jpg" />
+    <Resource Include="Resources\toolbar.png" />
+    <Resource Include="Resources\transfer.png" />
     <Resource Include="Resources\tube.png" />
+    <Resource Include="Resources\worker.png" />
     <Resource Include="Resources\x-icon.png" />
     <Resource Include="room_icon.jpg" />
     <Resource Include="thredots.png" />
