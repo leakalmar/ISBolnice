@@ -9,7 +9,6 @@ namespace Model
 
         public String NameSurnamePatient { get; set; }
 
-
         public DoctorAppointment(DateTime date, AppointmetType type, bool reserved, int room, Doctor doc, Patient patient) : base(date, type, reserved, room)
         {
             this.NameSurnamePatient = patient.Name + " " + patient.Surname;
@@ -22,7 +21,6 @@ namespace Model
             throw new NotImplementedException();
         }
         public Patient Patient { get; set; }
-        public Doctor doctor;
 
 
         public Doctor Doctor { get; set; }

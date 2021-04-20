@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,44 +10,34 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Model;
-using Storages;
 
 namespace Hospital_IS
 {
-
-   
-    public partial class Rooms : Window
+    
+    public partial class RoomOptions : Window
     {
-
-        private RoomStorage roomStorage = new RoomStorage();
-        public Rooms()
+        public RoomOptions()
         {
-
-
             InitializeComponent();
-
-            if (Hospital.Room == null)
-            {
-                Hospital.Room = roomStorage.GetAll();
-            }
-
-            DateGridRooms.DataContext = Hospital.Instance;
-        }
-
-        private void DateGridRooms_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            DataGridRooms1.DataContext = Hospital.Instance;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Window1.Instance.Show();
+            this.Hide();
+
+        }
+
+        private void AddRoom_Click(object sender, RoutedEventArgs e)
         {
             AddNewRoom room = new AddNewRoom();
             room.Show();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void EditRoom_Click(object sender, RoutedEventArgs e)
         {
-            Room room = (Room)DateGridRooms.SelectedItem;
+            Room room = (Room)DataGridRooms1.SelectedItem;
             if (room == null)
             {
                 MessageBox.Show("Izaberite sobu");
@@ -60,9 +49,9 @@ namespace Hospital_IS
             }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void DeleteRoom_Click(object sender, RoutedEventArgs e)
         {
-            Room room = (Room)DateGridRooms.SelectedItem;
+            Room room = (Room)DataGridRooms1.SelectedItem;
             if (room == null)
             {
                 MessageBox.Show("Izaberite sobu");
@@ -72,11 +61,7 @@ namespace Hospital_IS
                 DeleteRoom delRoom = new DeleteRoom(room);
                 delRoom.Show();
             }
-        }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

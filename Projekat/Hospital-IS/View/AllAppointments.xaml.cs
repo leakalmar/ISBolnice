@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Model;
+using Storages;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Hospital_IS.View
 {
@@ -36,10 +28,26 @@ namespace Hospital_IS.View
             this.Close();
         }
 
-        private void showDoc(object sender, RoutedEventArgs e)
+        private void showTherapy(object sender, RoutedEventArgs e)
         {
-            DocumentationPatient doc = new DocumentationPatient();
+            TherapyPatient doc = new TherapyPatient();
             doc.Show();
+            this.Close();
+        }
+
+        private void logout(object sender, RoutedEventArgs e)
+        {
+            MainWindow login = new MainWindow();
+            login.Show();
+            this.Close();
+            AppointmentFileStorage afs = new AppointmentFileStorage();
+            afs.SaveAppointment(Hospital.Instance.allAppointments);
+        }
+
+        private void showNotifications(object sender, RoutedEventArgs e)
+        {
+            PatientNotifications notifications = new PatientNotifications();
+            notifications.Show();
             this.Close();
         }
     }

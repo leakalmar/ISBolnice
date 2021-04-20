@@ -1,13 +1,19 @@
 using System;
+using System.Collections.ObjectModel;
 
 namespace Model
 {
     public class Room
     {
-        
 
-        public System.Collections.ArrayList equipment;
 
+       
+
+
+        public Room()
+        {
+
+        }
 
 
         public int RoomFloor
@@ -16,10 +22,12 @@ namespace Model
         }
 
 
-        public int RoomId
+        public int RoomNumber
         {
             get; set;
         }
+
+        public int RoomId { get; set; }
 
         public Boolean IsFree
         {
@@ -36,132 +44,140 @@ namespace Model
             get; set;
         }
 
-        public Room(RoomType type, bool isFree, bool isUsable, int roomFloor, int roomId)
+        public string RoomIdType
         {
-            this.Type = type;
-            this.IsFree = isFree;
-            this.IsUsable = isUsable;
-            this.RoomFloor = roomFloor;
-            this.RoomId = roomId;
+            get { return RoomId + " " + Type; }
         }
 
-        public System.Collections.ArrayList Equipment
+        public Room(int roomFloor, int roomNumber, int roomId, bool isFree, bool isUsable, RoomType type)
         {
-            get
+            RoomFloor = roomFloor;
+            RoomNumber = roomNumber;
+            RoomId = roomId;
+            IsFree = isFree;
+            IsUsable = isUsable;
+            Type = type;
+        }
+
+        public  ObservableCollection<Equipment> Equipment { get; set; }
+
+
+
+        public void AddEquipment(Equipment newEquip)
+        {
+            if (newEquip == null)
             {
-                if (equipment == null)
-                    equipment = new System.Collections.ArrayList();
-                return equipment;
+                return;
             }
-            set
+
+            if (Equipment == null)
             {
-                RemoveAllEquipment();
-                if (value != null)
+                Equipment = new ObservableCollection<Equipment>();
+
+            }
+
+            if (!Equipment.Contains(newEquip))
+            {
+                Equipment.Add(newEquip);
+
+            }
+        }
+
+        public void RemoveEquipment(Equipment oldEquip)
+        {
+            foreach (Equipment r in Equipment)
+            {
+                if (r.EquiptId == oldEquip.EquiptId)
                 {
-                    foreach (Equipment oEquipment in value)
-                        AddEquipment(oEquipment);
+
+                    Equipment.Remove(r);
+
+                    break;
                 }
             }
         }
 
-        public void AddEquipment(Equipment newEquipment)
+        public void RemoveAllRoom()
         {
-            if (newEquipment == null)
-                return;
-            if (this.equipment == null)
-                this.equipment = new System.Collections.ArrayList();
-            if (!this.equipment.Contains(newEquipment))
-            {
-                this.equipment.Add(newEquipment);
-                newEquipment.AddRoom(this);
-            }
+            if (Equipment != null)
+                Equipment.Clear();
         }
-
-        public void RemoveEquipment(Equipment oldEquipment)
+        public void UpdateEquipment(Equipment updateEquip)
         {
-            if (oldEquipment == null)
-                return;
-            if (this.equipment != null)
-                if (this.equipment.Contains(oldEquipment))
+
+            foreach (Equipment r in Equipment)
+            {
+                if (r.EquiptId == updateEquip.EquiptId)
                 {
-                    this.equipment.Remove(oldEquipment);
-                    oldEquipment.RemoveRoom(this);
+                    int index = Equipment.IndexOf(r);
+                    Equipment.Remove(r);
+                    Equipment.Insert(index, updateEquip);
+                    break;
                 }
-        }
-
-        public void RemoveAllEquipment()
-        {
-            if (equipment != null)
-            {
-                System.Collections.ArrayList tmpEquipment = new System.Collections.ArrayList();
-                foreach (Equipment oldEquipment in equipment)
-                    tmpEquipment.Add(oldEquipment);
-                equipment.Clear();
-                foreach (Equipment oldEquipment in tmpEquipment)
-                    oldEquipment.RemoveRoom(this);
-                tmpEquipment.Clear();
             }
+
+
         }
         public System.Collections.ArrayList appointment;
 
         public System.Collections.ArrayList Appointment { get; set; }
-     /*   {
-            get
-            {
-                if (appointment == null)
-                    appointment = new System.Collections.ArrayList();
-                return appointment;
-            }
-            set
-            {
-                RemoveAllAppointment();
-                if (value != null)
-                {
-                    foreach (Appointment oAppointment in value)
-                        AddAppointment(oAppointment);
-                }
-            }
-        }
+        /*   {
+               get
+               {
+                   if (appointment == null)
+                       appointment = new System.Collections.ArrayList();
+                   return appointment;
+               }
+               set
+               {
+                   RemoveAllAppointment();
+                   if (value != null)
+                   {
+                       foreach (Appointment oAppointment in value)
+                           AddAppointment(oAppointment);
+                   }
+               }
+           }
 
-        public void AddAppointment(Appointment newAppointment)
-        {
-            if (newAppointment == null)
-                return;
-            if (this.appointment == null)
-                this.appointment = new System.Collections.ArrayList();
-            if (!this.appointment.Contains(newAppointment))
-            {
-                this.appointment.Add(newAppointment);
-                newAppointment.Room = this.RoomId;
-            }
-        }
+           public void AddAppointment(Appointment newAppointment)
+           {
+               if (newAppointment == null)
+                   return;
+               if (this.appointment == null)
+                   this.appointment = new System.Collections.ArrayList();
+               if (!this.appointment.Contains(newAppointment))
+               {
+                   this.appointment.Add(newAppointment);
+                   newAppointment.Room = this.RoomId;
+               }
+           }
 
 
-        public void RemoveAppointment(Appointment oldAppointment)
-        {
-            if (oldAppointment == null)
-                return;
-            if (this.appointment != null)
-                if (this.appointment.Contains(oldAppointment))
-                {
-                    this.appointment.Remove(oldAppointment);
-                    oldAppointment.Room = null;
-                }
-        }
+           public void RemoveAppointment(Appointment oldAppointment)
+           {
+               if (oldAppointment == null)
+                   return;
+               if (this.appointment != null)
+                   if (this.appointment.Contains(oldAppointment))
+                   {
+                       this.appointment.Remove(oldAppointment);
+                       oldAppointment.Room = null;
+                   }
+           }
 
-        public void RemoveAllAppointment()
-        {
-            if (appointment != null)
-            {
-                System.Collections.ArrayList tmpAppointment = new System.Collections.ArrayList();
-                foreach (Appointment oldAppointment in appointment)
-                    tmpAppointment.Add(oldAppointment);
-                appointment.Clear();
-                foreach (Appointment oldAppointment in tmpAppointment)
-                    oldAppointment.Room = null;
-                tmpAppointment.Clear();
-            }
-        }
-     */
+           public void RemoveAllAppointment()
+           {
+               if (appointment != null)
+               {
+                   System.Collections.ArrayList tmpAppointment = new System.Collections.ArrayList();
+                   foreach (Appointment oldAppointment in appointment)
+                       tmpAppointment.Add(oldAppointment);
+                   appointment.Clear();
+                   foreach (Appointment oldAppointment in tmpAppointment)
+                       oldAppointment.Room = null;
+                   tmpAppointment.Clear();
+               }
+           }
+        */
     }
 }

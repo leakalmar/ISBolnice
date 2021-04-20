@@ -31,9 +31,9 @@ namespace Model
 
         public Boolean AddRoom(Room newroom)
         {
-            
+
             Hospital.Instance.AddRoom(newroom);
-           
+
             return true;
         }
 
@@ -46,8 +46,8 @@ namespace Model
         public void UpdateRoom(int oldIndex, Room room)
         {
 
-            Hospital.Instance.UpdateRoom(oldIndex,room);
-           
+            Hospital.Instance.UpdateRoom(room);
+
         }
 
 
@@ -60,6 +60,7 @@ namespace Model
         {
             throw new NotImplementedException();
         }
+
 
     }
 }

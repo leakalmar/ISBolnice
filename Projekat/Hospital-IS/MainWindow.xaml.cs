@@ -17,7 +17,10 @@ namespace Hospital_IS
     {
         PatientFileStorage pfs = new PatientFileStorage();
         AppointmentFileStorage afs = new AppointmentFileStorage();
+        FSDoctor dfs = new FSDoctor();
         public static Patient PatientUser { get; set; }
+        public static Doctor DoctortUser { get; set; }
+        public static ObservableCollection<DoctorAppointment> doctorAppointments { get; set; }
 
         public MainWindow()
         {
@@ -33,7 +36,8 @@ namespace Hospital_IS
         private void Login(object sender, RoutedEventArgs e)
         {
             List<Patient> patients = pfs.GetAll();
-            Hospital.Instance.allAppointments=afs.GetAll();
+            Hospital.Instance.allAppointments = afs.GetAll();
+            ObservableCollection<Doctor> doctors = dfs.GetAll();
 
             foreach (Patient p in patients)
             {
@@ -46,23 +50,27 @@ namespace Hospital_IS
                 }
             }
 
+            foreach (Doctor d in doctors)
+            {
+                if (email.Text == d.Email && password.Password.ToString() == d.Password)
+                {
+                    DoctortUser = d;
+                    DoctorHomePage.Instance.DoctorAppointment = afs.GetAllByDoctor(d.Id);
+                    DoctorHomePage.Instance.Show();
+                    this.Close();
+                }
+            }
+
             if (email.Text == "upravnik@gmail.com" && password.Password.ToString() == "upravnik")
             {
-                Window1 win = new Window1();
-                win.Show();
+                Window1.Instance.Show();
                 this.Close();
-            }
-            else if (email.Text == "doktor@gmail.com" && password.Password.ToString() == "doktor")
-            {
             }
             else if (email.Text == "sekretar@gmail.com" && password.Password.ToString() == "sekretar")
             {
                 SecretaryMainWindow.Instance.Show();
+
                 this.Close();
-            }
-            else if (email.Text == "pacijent@gmail.com" && password.Password.ToString() == "pacijent")
-            {
-                
             }
         }
 

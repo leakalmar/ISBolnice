@@ -2,9 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Text;
 
 namespace Hospital_IS.Storages
 {
@@ -41,14 +39,18 @@ namespace Hospital_IS.Storages
             List<Patient> patients = GetAll();
             patients.Add(patient);
 
-            var file = JsonConvert.SerializeObject(patients, Formatting.Indented);
+            var file = JsonConvert.SerializeObject(patients, Formatting.Indented, new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+            });
             using (StreamWriter writer = new StreamWriter(this.fileLocation))
             {
                 writer.Write(file);
             }
         }
 
-        public Boolean  UpdatePatient(Patient patient)
+        public Boolean UpdatePatient(Patient patient)
         {
             List<Patient> patients = GetAll();
 
@@ -71,11 +73,11 @@ namespace Hospital_IS.Storages
             return false;
         }
 
-        public Boolean DeletePatient(Patient patient) 
+        public Boolean DeletePatient(Patient patient)
         {
             List<Patient> patients = GetAll();
 
-            for (int i = 0; i < patients.Count; i++) 
+            for (int i = 0; i < patients.Count; i++)
             {
                 if (patient.Id.Equals(patients[i].Id))
                 {
@@ -92,42 +94,42 @@ namespace Hospital_IS.Storages
             }
             return false;
         }
- /*       public Boolean Update(Patient p)
-        {
-            List<Patient> patients = GetAll();
-            for (int i = 0; i < patients.Count; i++)
-            {
-                if (patients[i].Jmbg.Equals(p.Jmbg))
-                {
-                    patients[i].Name = p.Name;
-                    patients[i].Surname = p.Surname;
-                    patients[i].DateOfBirth = p.DateOfBirth;
-                    patients[i].Sex = p.Sex;
-                    patients[i].PhoneNumber = p.PhoneNumber;
-                    patients[i].Adress = p.Adress;
-                    patients[i].IdCard = p.IdCard;
-                    patients[i].Email = p.Email;
-                    patients[i].EmergencyContact = p.EmergencyContact;
-                    patients[i].MedicalRecord = p.MedicalRecord;
-                    patients[i].Username = p.Username;
-                    patients[i].IsGuest = p.IsGuest;
-                    patients[i].Password = p.Password;
+        /*       public Boolean Update(Patient p)
+               {
+                   List<Patient> patients = GetAll();
+                   for (int i = 0; i < patients.Count; i++)
+                   {
+                       if (patients[i].Jmbg.Equals(p.Jmbg))
+                       {
+                           patients[i].Name = p.Name;
+                           patients[i].Surname = p.Surname;
+                           patients[i].DateOfBirth = p.DateOfBirth;
+                           patients[i].Sex = p.Sex;
+                           patients[i].PhoneNumber = p.PhoneNumber;
+                           patients[i].Adress = p.Adress;
+                           patients[i].IdCard = p.IdCard;
+                           patients[i].Email = p.Email;
+                           patients[i].EmergencyContact = p.EmergencyContact;
+                           patients[i].MedicalRecord = p.MedicalRecord;
+                           patients[i].Username = p.Username;
+                           patients[i].IsGuest = p.IsGuest;
+                           patients[i].Password = p.Password;
 
-                    try
-                    {
-                        var jsonToFile = JsonConvert.SerializeObject(patients, Formatting.Indented);
-                        using (StreamWriter writer = new StreamWriter(this.FileName))
-                        {
-                            writer.Write(jsonToFile);
-                        }
-                    }
-                    catch (Exception e)
-                    {
+                           try
+                           {
+                               var jsonToFile = JsonConvert.SerializeObject(patients, Formatting.Indented);
+                               using (StreamWriter writer = new StreamWriter(this.FileName))
+                               {
+                                   writer.Write(jsonToFile);
+                               }
+                           }
+                           catch (Exception e)
+                           {
 
-                    }
-                }
-            }
-            return false;
-        }*/
+                           }
+                       }
+                   }
+                   return false;
+               }*/
     }
 }

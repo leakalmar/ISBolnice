@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Model
 {
@@ -10,8 +9,8 @@ namespace Model
 
         public Specialty Specialty { get; set; }
 
-        public Doctor(int id, string name, string surname, DateTime birthDate, string email, string password, string address, 
-            double salary, DateTime employmentDate, List<WorkDay> workDays, Specialty spec, int primaryRoom) : base(id, name, surname, birthDate, email, password, address, salary, employmentDate, workDays)
+        public Doctor(int id, string name, string surname, DateTime birthDate, string email, string password, string address,
+            double salary, DateTime employmentDate, List<WorkDay> workDays, Specialty spec, int primaryRoom) : base(id, name, surname, birthDate, address, email, password, salary, employmentDate, workDays)
         {
             this.Specialty = spec;
             this.PrimaryRoom = primaryRoom;

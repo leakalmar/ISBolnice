@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -20,6 +19,25 @@ namespace Model
         public String Employer { get; set; }
         public Boolean Admitted { get; set; }
         public ObservableCollection<String> Alergies { get; set; }
+        public ObservableCollection<Therapy> therapies;
+        public ObservableCollection<Therapy> Therapies
+        {
+            get
+            {
+                if (therapies == null)
+                    therapies = new ObservableCollection<Therapy>();
+                return therapies;
+            }
+            set
+            {
+                RemoveAllTherapies();
+                if (value != null)
+                {
+                    foreach (Therapy therapy in value)
+                        AddTherapy(therapy);
+                }
+            }
+        }
 
         public Boolean IsGuest { get; set; } = false;
 
@@ -36,10 +54,7 @@ namespace Model
         }
 
         public MedicalHistory MedicalHistory { get; set; }
-
         public Doctor doctor { get; set; }
-
-
 
         public Boolean IsAdmitted()
         {
@@ -61,48 +76,6 @@ namespace Model
             throw new NotImplementedException();
         }
 
-/*
-        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; } = new ObservableCollection<DoctorAppointment>();
-
-        public void AddDoctorAppointment(DoctorAppointment newDoctorAppointment)
-        {
-            if (newDoctorAppointment == null)
-                return;
-            if (this.DoctorAppointment == null)
-                this.DoctorAppointment = new ObservableCollection<DoctorAppointment>();
-            if (!this.DoctorAppointment.Contains(newDoctorAppointment))
-            {
-                this.DoctorAppointment.Add(newDoctorAppointment);
-                newDoctorAppointment.Patient = this;
-            }
-        }
-
-        public void RemoveDoctorAppointment(DoctorAppointment oldDoctorAppointment)
-        {
-            if (oldDoctorAppointment == null)
-                return;
-            if (this.DoctorAppointment != null)
-                if (this.DoctorAppointment.Contains(oldDoctorAppointment))
-                {
-                    this.DoctorAppointment.Remove(oldDoctorAppointment);
-                    oldDoctorAppointment.Patient = null;
-                }
-        }
-
-        public void RemoveAllDoctorAppointment()
-        {
-            if (DoctorAppointment != null)
-            {
-                System.Collections.ArrayList tmpDoctorAppointment = new System.Collections.ArrayList();
-                foreach (DoctorAppointment oldDoctorAppointment in DoctorAppointment)
-                    tmpDoctorAppointment.Add(oldDoctorAppointment);
-                DoctorAppointment.Clear();
-                foreach (DoctorAppointment oldDoctorAppointment in tmpDoctorAppointment)
-                    oldDoctorAppointment.Patient = null;
-                tmpDoctorAppointment.Clear();
-            }
-        }
-*/
         public Doctor Doctor
         {
             get
@@ -128,5 +101,35 @@ namespace Model
             }
         }
 
+        public void AddTherapy(Therapy newTherapy)
+        {
+            if (newTherapy == null)
+                return;
+            if (this.therapies == null)
+                this.therapies = new ObservableCollection<Therapy>();
+            if (!this.therapies.Contains(newTherapy))
+            {
+                this.therapies.Add(newTherapy);
+            }
+        }
+
+        public void RemoveTherapy(Therapy oldTherapy)
+        {
+            if (oldTherapy == null)
+                return;
+            if (this.therapies != null)
+                if (this.therapies.Contains(oldTherapy))
+                {
+                    this.therapies.Remove(oldTherapy);
+                }
+        }
+
+        public void RemoveAllTherapies()
+        {
+            if (therapies != null)
+            {
+                therapies.Clear();
+            }
+        }
     }
 }

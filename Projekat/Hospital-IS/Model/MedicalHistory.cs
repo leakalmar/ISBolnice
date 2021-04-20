@@ -9,7 +9,7 @@ namespace Model
 
         public MedicalHistory()
         {
-            Prescription = new ObservableCollection < Prescription >();
+            Prescription = new ObservableCollection<Prescription>();
             Test = new ObservableCollection<Test>();
             Reports = new ObservableCollection<Report>();
             Hospitalization = new ObservableCollection<Hospitalization>();

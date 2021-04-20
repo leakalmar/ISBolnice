@@ -1,0 +1,33 @@
+[
+  {
+    "patient": [],
+    "hospital": null,
+    "Specialty": {
+      "Role": "Dermatolog",
+      "Doctor": null
+    },
+    "PrimaryRoom": 1,
+    "Patient": [],
+    "Salary": 70000.0,
+    "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+    "WorkDay": [
+      {
+        "Day": 0,
+        "StartTime": "2021-02-02T08:00:00",
+        "EndTime": "2021-02-02T20:00:00"
+      }
+    ],
+    "Education": 0,
+    "Id": 101,
+    "Name": "Dragana",
+    "Surname": "Vukmanov Simokov",
+    "BirthDate": "1985-05-07T00:00:00",
+    "Phone": null,
+    "Email": "dragana@gmail.com",
+    "Gender": null,
+    "Relationship": null,
+    "Password": "dragana",
+    "Address": "Brace Radica 15",
+    "Hospital": null
+  }
+]

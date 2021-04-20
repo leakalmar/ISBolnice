@@ -21,15 +21,16 @@
         <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="70,214,0,0" Text="Zauzetost" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.542,2.143" />
 
 
-        <CheckBox x:Name="check1" Content="CheckBox" HorizontalAlignment="Left" Margin="250,214,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="check1" HorizontalAlignment="Left" Margin="250,214,0,0" VerticalAlignment="Top"/>
         <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="70,320,0,0" Text="Tip sobe" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <ComboBox x:Name="combo1" HorizontalAlignment="Left" Margin="250,320,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0"> 
             <ComboBoxItem Content="Soba za odmor"/>
             <ComboBoxItem Content="Operaciona soba"/>
             <ComboBoxItem Content="Soba za pregled"/>
+            <ComboBoxItem Content="Magacin"/>
         </ComboBox>
         <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="70,267,0,0" Text="Renoviranje" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <CheckBox x:Name ="check2"  Content="CheckBox" HorizontalAlignment="Left" Margin="250,267,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name ="check2"   HorizontalAlignment="Left" Margin="250,267,0,0" VerticalAlignment="Top"/>
         <Button x:Name="potvrdi"   Content="Potvrdi"  HorizontalAlignment="Left" Margin="92,419,0,0" VerticalAlignment="Top" Width="75" Height="20" FontSize="13" Click="potvrdi_Click"/>
         <Button Content="Odustani" HorizontalAlignment="Left" Margin="250,419,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.356,0.408" Width="75" Height="20" FontSize="13" Click="Button_Click"/>
         <Button  BorderThickness="0" Foreground="White" Background="Transparent" Content="NAZAD" HorizontalAlignment="Left" Margin="33,52,0,0" VerticalAlignment="Top" Width="97" Height="21" />

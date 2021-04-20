@@ -23,8 +23,9 @@ namespace Hospital_IS
         {
             InitializeComponent();
             this.currentRoom = room;
+
             textbox1.Text = Convert.ToString(currentRoom.RoomFloor);
-            textbox2.Text = Convert.ToString(currentRoom.RoomId);
+            textbox2.Text = Convert.ToString(currentRoom.RoomNumber);
             check1.IsChecked = currentRoom.IsFree;
             check2.IsChecked = currentRoom.IsUsable;
             if (currentRoom.Type.Equals(RoomType.RecoveryRoom))
@@ -35,6 +36,9 @@ namespace Hospital_IS
             }
              else if (currentRoom.Type.Equals(RoomType.ConsultingRoom)){
                 combo1.SelectedIndex = 2;
+            } else if (currentRoom.Type.Equals(RoomType.StorageRoom))
+            {
+                combo1.SelectedIndex = 3;
             }
 
             
@@ -43,7 +47,7 @@ namespace Hospital_IS
 
         private void potvrdi_Click(object sender, RoutedEventArgs e)
         {
-            int roomId = Convert.ToInt32(textbox2.Text);
+            int roomNumber = Convert.ToInt32(textbox2.Text);
             bool zauzeto = (bool)check1.IsChecked;
             bool renoviranje = (bool)check2.IsChecked;
             int roomFloor = Convert.ToInt32(textbox1.Text);
@@ -56,13 +60,16 @@ namespace Hospital_IS
             {
                 tip = RoomType.OperationRoom;
             }
+            else if (combo1.Text.Equals("Magacin"))
+            {
+                tip = RoomType.StorageRoom;
+            }
             else
             {
                 tip = RoomType.ConsultingRoom;
             }
-            Room room = new Room(tip, zauzeto, renoviranje, roomFloor, roomId);
+            Room room = new Room(roomFloor,roomNumber,currentRoom.RoomId,zauzeto,renoviranje,tip);
             Manager.Instance.UpdateRoom(currentRoom.RoomId, room);
-           
            
             this.Close();
         }

@@ -30,7 +30,7 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2">
             <Button Height="20" Width="20" Opacity="0.6" BorderThickness="0" Click="BtnClickOdustani">
                 <Button.Background>
-                    <ImageBrush ImageSource="x-icon.png"/>
+                    <ImageBrush ImageSource="pack://application:,,,/Resources/x-icon.png"/>
                 </Button.Background>
             </Button>
         </StackPanel>
@@ -38,7 +38,7 @@
    
         <Label Name="lblQuestion" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Verdana" FontSize="20" Foreground="FloralWhite" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label.Content>
-                <TextBlock TextWrapping="Wrap">Da li ste sigurni da zelite da se odjavite?</TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="18">Da li ste sigurni da zelite da se odjavite?</TextBlock>
             </Label.Content>
         </Label>
 

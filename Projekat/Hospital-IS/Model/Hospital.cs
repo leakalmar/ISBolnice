@@ -1,3 +1,5 @@
+using Hospital_IS.Storages;
+using Storages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,7 +23,7 @@ namespace Model
 
         private Hospital()
         {
-            
+
         }
 
         public static Hospital Instance
@@ -31,10 +33,16 @@ namespace Model
                 if (instance == null)
                 {
                     instance = new Hospital();
+                    FSDoctor dfs = new FSDoctor();
+                    PatientFileStorage pfs = new PatientFileStorage();
+                    instance.Doctors = dfs.GetAll();
+                    instance.allPatients = pfs.GetAll();
                 }
                 return instance;
             }
         }
+
+
 
         public Hospital(string name, string city, string country, string address)
         {
@@ -70,6 +78,67 @@ namespace Model
         }
 
         public ObservableCollection<DoctorAppointment> allAppointments { get; set; }
+        public ObservableCollection<Appointment> AllClassicAppointments { get; set; }
+
+        private ClassicAppointmentStorage classicAppointment = new ClassicAppointmentStorage();
+
+
+        private void getAllClassicAppointment()
+        {
+
+            AllClassicAppointments = classicAppointment.GetAll();
+        }
+
+
+
+
+        public void AddClassicAppointment(Appointment appointemnt)
+        {
+            getAllClassicAppointment();
+            if (appointemnt == null)
+            {
+                return;
+            }
+
+            if (AllClassicAppointments == null)
+            {
+                AllClassicAppointments = new ObservableCollection<Appointment>();
+
+            }
+
+            if (!AllClassicAppointments.Contains(appointemnt))
+            {
+                AllClassicAppointments.Add(appointemnt);
+
+                classicAppointment.SaveAppointment(AllClassicAppointments);
+            }
+        }
+
+        public ObservableCollection<Appointment> getAppByRoom(int roomID)
+        {
+            return classicAppointment.GetAllByRoomId(roomID);
+        }
+
+        public ObservableCollection<Appointment> getAllAppByTwoRoom(int roomIdSource, int roomIdDestination)
+        {
+            ObservableCollection<Appointment> allApointemnts = new ObservableCollection<Appointment>();
+
+
+
+            foreach(Appointment ap in getAppByRoom(roomIdSource))
+            {
+                allApointemnts.Add(ap);
+            }
+
+            foreach (Appointment ap in getAppByRoom(roomIdDestination))
+            {
+                allApointemnts.Add(ap);
+            }
+
+
+            return allApointemnts;
+        }
+
 
         public void AddAppointment(DoctorAppointment docApp)
         {
@@ -91,9 +160,29 @@ namespace Model
             }
         }
 
-        public static ObservableCollection<Room> Room  { get; set; }
+        public void RemoveAppointment(DoctorAppointment docApp)
+        {
+            if (docApp == null)
+            {
+                return;
+            }
 
-       
+            if (allAppointments != null)
+            {
+                foreach (DoctorAppointment doctorAppointment in allAppointments)
+                {
+                    if (docApp.DateAndTime.Equals(doctorAppointment.DateAndTime))
+                    {
+                        allAppointments.Remove(doctorAppointment);
+                        break;
+                    }
+                }
+            }
+        }
+
+        public static ObservableCollection<Room> Room { get; set; }
+
+
 
         public void AddRoom(Room newRoom)
         {
@@ -103,15 +192,15 @@ namespace Model
             }
 
             if (Room == null)
-            { 
-              Room = new ObservableCollection<Room>();
-                
+            {
+                Room = new ObservableCollection<Room>();
+
             }
 
             if (!Room.Contains(newRoom))
             {
                 Room.Add(newRoom);
-                
+
             }
         }
 
@@ -121,9 +210,9 @@ namespace Model
             {
                 if (r.RoomId == oldRoom.RoomId)
                 {
-                   
+
                     Room.Remove(r);
-                    
+
                     break;
                 }
             }
@@ -132,14 +221,14 @@ namespace Model
         public void RemoveAllRoom()
         {
             if (Room != null)
-               Room.Clear();
+                Room.Clear();
         }
-        public void UpdateRoom(int oldIndex,Room oldRoom)
+        public void UpdateRoom(Room oldRoom)
         {
-            
-            foreach(Room r in Room)
+
+            foreach (Room r in Room)
             {
-                if(r.RoomId == oldIndex)
+                if(r.RoomId == oldRoom.RoomId)
                 {
                     int index = Room.IndexOf(r);
                     Room.Remove(r);
@@ -147,43 +236,63 @@ namespace Model
                     break;
                 }
             }
-            
-            
+
+
         }
 
 
+        public ObservableCollection<Doctor> Doctors { get; set; }
 
-
-        public System.Collections.ArrayList user;
-
-        public System.Collections.ArrayList User
+        public void AddDoctor(Doctor newDoctor)
         {
-            get
+            if (newDoctor == null)
+                return;
+            if (this.Doctors == null)
+                this.Doctors = new ObservableCollection<Doctor>();
+            if (!this.Doctors.Contains(newDoctor))
             {
-                if (user == null)
-                    user = new System.Collections.ArrayList();
-                return user;
-            }
-            set
-            {
-                RemoveAllUser();
-                if (value != null)
-                {
-                    foreach (User oUser in value)
-                        AddUser(oUser);
-                }
+                this.Doctors.Add(newDoctor);
+                newDoctor.Hospital = this;
             }
         }
+
+        public void RemoveDoctor(Doctor oldDoctor)
+        {
+            if (oldDoctor == null)
+                return;
+            if (this.Doctors != null)
+                if (this.Doctors.Contains(oldDoctor))
+                {
+                    this.Doctors.Remove(oldDoctor);
+                    oldDoctor.Hospital = null;
+                }
+        }
+
+        public void RemoveAllDoctors()
+        {
+            if (Doctors != null)
+            {
+                ObservableCollection<Doctor> tmpDoctor = new ObservableCollection<Doctor>();
+                foreach (Doctor oldDoctor in Doctors)
+                    tmpDoctor.Add(oldDoctor);
+                Doctors.Clear();
+                foreach (Doctor oldDoctor in tmpDoctor)
+                    oldDoctor.Hospital = null;
+                tmpDoctor.Clear();
+            }
+        }
+
+        public List<User> User { get; set; }
 
         public void AddUser(User newUser)
         {
             if (newUser == null)
                 return;
-            if (this.user == null)
-                this.user = new System.Collections.ArrayList();
-            if (!this.user.Contains(newUser))
+            if (this.User == null)
+                this.User = new List<User>();
+            if (!this.User.Contains(newUser))
             {
-                this.user.Add(newUser);
+                this.User.Add(newUser);
                 newUser.Hospital = this;
             }
         }
@@ -192,27 +301,107 @@ namespace Model
         {
             if (oldUser == null)
                 return;
-            if (this.user != null)
-                if (this.user.Contains(oldUser))
+            if (this.User != null)
+                if (this.User.Contains(oldUser))
                 {
-                    this.user.Remove(oldUser);
+                    this.User.Remove(oldUser);
                     oldUser.Hospital = null;
                 }
         }
 
         public void RemoveAllUser()
         {
-            if (user != null)
+            if (User != null)
             {
-                System.Collections.ArrayList tmpUser = new System.Collections.ArrayList();
-                foreach (User oldUser in user)
+                List<User> tmpUser = new List<User>();
+                foreach (User oldUser in User)
                     tmpUser.Add(oldUser);
-                user.Clear();
+                User.Clear();
                 foreach (User oldUser in tmpUser)
                     oldUser.Hospital = null;
                 tmpUser.Clear();
             }
         }
 
+
+
+
+
+        public bool TransferEquipmentStatic(Room sourceRoom, Room destinationRoom, Equipment equip, int quantity,DateTime startDate, DateTime endDate, String Description)
+        {
+            bool checkQuantity =  CheckQuantity(sourceRoom, equip, quantity);
+            ObservableCollection<Appointment> sourceRoomAppointment = getAppByRoom(sourceRoom.RoomId);
+            bool checkSourceRoomAppointment = checkAppointment(sourceRoomAppointment, startDate, endDate);
+            ObservableCollection<Appointment> destinationRoomAppointment = getAppByRoom(destinationRoom.RoomId);
+
+            bool checkDestionationRoomAppointment = checkAppointment(destinationRoomAppointment, startDate, endDate);
+
+           if(checkSourceRoomAppointment && checkDestionationRoomAppointment)
+            {
+
+                MessageBox.Show("Uspjesno zakazivanje");
+            }
+
+
+
+            return checkQuantity;
+        }
+
+        private bool checkAppointment(ObservableCollection<Appointment> RoomAppointment,DateTime start, DateTime end)
+        {
+            bool isFree = true;
+
+            foreach(Appointment appointment in RoomAppointment)
+            {
+
+                bool between = IsBetweenDates(start, end, appointment);
+                if (between || start < appointment.AppointmentStart && end > appointment.AppointmentEnd)
+                {
+
+                    isFree = false;
+                    break;
+                }
+
+            }
+            return isFree;
+        }
+
+        private static bool IsBetweenDates(DateTime start, DateTime end, Appointment appointment)
+        {
+
+            return (start >= appointment.AppointmentStart && start <= appointment.AppointmentEnd) || (end >= appointment.AppointmentStart && end <= appointment.AppointmentEnd);
+        }
+
+        private static bool CheckQuantity(Room sourceRoom, Equipment equip, int quantity)
+        {
+            foreach (Equipment eq in sourceRoom.Equipment)
+            {
+                if (eq.EquiptId == equip.EquiptId)
+                {
+                    if (equip.Quantity - quantity >= 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool TransferEquipment(Room sourceRoom, Equipment equip, int quantity)
+        {
+            foreach (Equipment eq in sourceRoom.Equipment)
+            {
+                if (eq.EquiptId == equip.EquiptId)
+                {
+                    if (eq.Quantity > quantity)
+                    {
+                        eq.Quantity = eq.Quantity - quantity;
+                        return true;
+                    }
+
+                }
+            }
+            return false;
+        }
     }
 }
