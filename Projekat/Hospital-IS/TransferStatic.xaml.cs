@@ -101,7 +101,7 @@ namespace Hospital_IS
                 if (quantity <= 0)
                 {
                     MessageBox.Show("Unesite ispravnu kolicinu");
-                    QuantityBox.Text = "";
+                    QuantityBox.Text = " ";
                 }
                 else
                 {
@@ -120,9 +120,15 @@ namespace Hospital_IS
 
             Room roomDestination = (Room)ComboDestionation.SelectedItem;
 
+           
+
             if(roomDestination == null || roomSource == null || equip == null || isNumberOverZero == false)
             {
                 MessageBox.Show("Unesite sve podatke");
+            }else if (!Hospital.Instance.CheckQuantity(roomSource, equip, quantity))
+            {
+                MessageBox.Show("Nedovoljna kolicina");
+                QuantityBox.Text = "";
             }
             else {
 

@@ -123,8 +123,6 @@ namespace Model
         {
             ObservableCollection<Appointment> allApointemnts = new ObservableCollection<Appointment>();
 
-
-
             foreach(Appointment ap in getAppByRoom(roomIdSource))
             {
                 allApointemnts.Add(ap);
@@ -329,7 +327,7 @@ namespace Model
 
         public bool TransferEquipmentStatic(Room sourceRoom, Room destinationRoom, Equipment equip, int quantity,DateTime startDate, DateTime endDate, String Description)
         {
-            bool checkQuantity =  CheckQuantity(sourceRoom, equip, quantity);
+           
             ObservableCollection<Appointment> sourceRoomAppointment = getAppByRoom(sourceRoom.RoomId);
             bool checkSourceRoomAppointment = checkAppointment(sourceRoomAppointment, startDate, endDate);
             ObservableCollection<Appointment> destinationRoomAppointment = getAppByRoom(destinationRoom.RoomId);
@@ -338,13 +336,25 @@ namespace Model
 
            if(checkSourceRoomAppointment && checkDestionationRoomAppointment)
             {
+                Transfer transfer = new Transfer(sourceRoom.RoomId, destinationRoom.RoomId, equip,quantity, endDate,false);
+                sourceRoom.AddTransfer(transfer);
+                if(sourceRoom.Type != RoomType.StorageRoom)
+                {
+                    Appointment appointment = new Appointment(startDate, endDate, AppointmetType.EquipTransfer, sourceRoom.RoomId);
+                    AddClassicAppointment(appointment);
+                }
 
-                MessageBox.Show("Uspjesno zakazivanje");
+                if(destinationRoom.Type != RoomType.StorageRoom)
+                {
+                    Appointment appointment = new Appointment(startDate, endDate, AppointmetType.EquipTransfer,destinationRoom.RoomId);
+                    AddClassicAppointment(appointment);
+                }
+                
             }
 
 
 
-            return checkQuantity;
+            return checkSourceRoomAppointment && checkDestionationRoomAppointment;
         }
 
         private bool checkAppointment(ObservableCollection<Appointment> RoomAppointment,DateTime start, DateTime end)
@@ -372,7 +382,7 @@ namespace Model
             return (start >= appointment.AppointmentStart && start <= appointment.AppointmentEnd) || (end >= appointment.AppointmentStart && end <= appointment.AppointmentEnd);
         }
 
-        private static bool CheckQuantity(Room sourceRoom, Equipment equip, int quantity)
+        public bool CheckQuantity(Room sourceRoom, Equipment equip, int quantity)
         {
             foreach (Equipment eq in sourceRoom.Equipment)
             {
@@ -402,6 +412,54 @@ namespace Model
                 }
             }
             return false;
+        }
+
+        private Room getRoomById(int roomId)
+        {
+            foreach(Room r in Room)
+            {
+                if(r.RoomId == roomId)
+                {
+                    return r;
+                }
+            }
+            return null;
+        }
+
+        public void TransferStaticEquipment(int sourceRoomId,int destinationRoomId,Equipment equip, int quantity)
+        {
+
+            Room sourceRoom = getRoomById(sourceRoomId);
+            Room destinationRoom = getRoomById(destinationRoomId);
+
+            foreach (Equipment eq in sourceRoom.Equipment)
+            {
+                if (eq.EquiptId == equip.EquiptId)
+                {
+                    if (eq.Quantity > quantity)
+                    {
+                        eq.Quantity = eq.Quantity - quantity;
+                    }
+
+                }
+            }
+
+            bool exist = false;
+            foreach(Equipment eq in destinationRoom.Equipment)
+            {
+                if (eq.EquiptId == equip.EquiptId)
+                {
+
+                    eq.Quantity = eq.Quantity + quantity;
+                    exist = true;
+                }
+            }
+
+            if (!exist)
+            {
+                Equipment equipment = new Equipment(equip.EquipType, equip.EquiptId, equip.Name, quantity);
+                destinationRoom.Equipment.Add(equipment);
+            }
         }
     }
 }

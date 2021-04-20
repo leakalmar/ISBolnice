@@ -46,6 +46,8 @@ namespace Hospital_IS
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             TransferStatic transferStatic = new TransferStatic();
+            this.Hide();
+            transferStatic.Show();
         }
 
         private void AffirmTransfer_Click(object sender, RoutedEventArgs e)
@@ -62,8 +64,19 @@ namespace Hospital_IS
                 MessageBox.Show("Izaberite odgovarajuci datum i vrijeme");
             }
 
-            Hospital.Instance.TransferEquipmentStatic(sourceRoom, destinationRoom, equip, quantity, dateTimeStart, dateTimeEnd, "dobar termin");
-           
+           bool isSucces = Hospital.Instance.TransferEquipmentStatic(sourceRoom, destinationRoom, equip, quantity, dateTimeStart, dateTimeEnd, "dobar termin");
+
+            if (!isSucces)
+            {
+                MessageBox.Show("Niste uspjeli da zakazete termin");
+            }
+            else
+            {
+                MessageBox.Show("Uspjesno zakazivanje termina");
+                this.Hide();
+                TransferStatic transferStatic = new TransferStatic();
+                transferStatic.Show();
+            }
            
         }
 
