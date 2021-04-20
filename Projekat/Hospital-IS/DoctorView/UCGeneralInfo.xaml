@@ -14,7 +14,7 @@
 
         <Border CornerRadius="20" Grid.ColumnSpan="2" BorderThickness="1"  
                 Background="#FF213250" BorderBrush="FloralWhite"
-                Margin="250,5,250,5" x:Name="change">
+                Margin="250,5,250,5" x:Name="change" >
             <Button FontSize="18" BorderThickness="0" Background="{x:Null}" Content="Izmeni"
                             Foreground="FloralWhite" HorizontalAlignment="Stretch"/>
         </Border>

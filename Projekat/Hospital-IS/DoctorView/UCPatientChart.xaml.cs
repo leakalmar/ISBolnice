@@ -210,7 +210,16 @@ namespace Hospital_IS.DoctorView
             }
             afs.UpdateAppointment(Appointment);
             DoctorHomePage.Instance.Home.Children.Remove(this);
-            DoctorHomePage.Instance.Home.Children.Add(new UCAppDetail(null));
+            UCAppDetail r = new UCAppDetail(null);
+            if(r.docotrAppointments.Items.Count == 0)
+            {
+                int index = DoctorHomePage.Instance.Home.Children.IndexOf(DoctorHomePage.Instance.HomePage);
+                DoctorHomePage.Instance.Home.Children[index].Visibility = Visibility.Visible;
+            }
+            else
+            {
+                DoctorHomePage.Instance.Home.Children.Add(r);
+            }
         }
     }
 }

@@ -305,12 +305,7 @@
       "Address": "Brace Radica 15",
       "Hospital": null
     },
-    "Report": {
-      "Amnesis": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-      "HaveRecipe": false,
-      "HaveTest": false,
-      "ReportId": "4/20/2021 3:30:00 PM"
-    },
+    "Report": null,
     "DateAndTime": "2021-04-20T15:30:00",
     "Date": "4/20/2021",
     "Time": "15:30:00",

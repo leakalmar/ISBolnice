@@ -21,7 +21,24 @@ namespace Hospital_IS.DoctorView
     public partial class UCScheduledApp : UserControl
     {
         AppointmentFileStorage afs = new AppointmentFileStorage();
-        public bool Started { get; set; }
+        private bool _started;
+
+        public bool Started
+        {
+            get { return _started; }
+            set
+            {
+                _started = value;
+                if (!Started)
+                {
+                    add.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    add.Visibility = Visibility.Visible;
+                }
+            }
+        }
         public UCScheduledApp(Patient patient)
         {
             InitializeComponent();
@@ -37,5 +54,10 @@ namespace Hospital_IS.DoctorView
             }
         }
 
+        private void NewApp_Click(object sender, RoutedEventArgs e)
+        {
+            (this.Parent as Grid).Visibility = Visibility.Collapsed;
+            DoctorHomePage.Instance.Home.Children.Add(new UCNewApp());
+        }
     }
 }

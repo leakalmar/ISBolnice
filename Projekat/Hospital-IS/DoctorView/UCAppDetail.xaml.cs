@@ -29,25 +29,6 @@ namespace Hospital_IS.DoctorView
             docotrAppointments.SelectedItem = doctorAppointment;
             info.DataContext = doctorAppointment;
             info2.DataContext = doctorAppointment;
-            DoctorAppointment first = DoctorHomePage.Instance.DoctorAppointment[0];
-            foreach (DoctorAppointment docapp in DoctorHomePage.Instance.DoctorAppointment)
-            {
-                if (docapp.DateAndTime.Date == first.DateAndTime.Date & docapp.DateAndTime.TimeOfDay < first.DateAndTime.TimeOfDay)
-                {
-                    first = docapp;
-                }
-            }
-            if(doctorAppointment == null)
-            {
-                doctorAppointment = first;
-                docotrAppointments.SelectedItem = first;
-                info.DataContext = first;
-                info2.DataContext = first;
-            }
-            if (!doctorAppointment.Equals(first))
-            {
-                start.IsEnabled = false;
-            }
 
             ICollectionView view = new CollectionViewSource { Source = DoctorHomePage.Instance.DoctorAppointment }.View;
             view.Filter = delegate (object item)
@@ -56,13 +37,6 @@ namespace Hospital_IS.DoctorView
             };
             view.SortDescriptions.Add(new SortDescription("DateAndTime", ListSortDirection.Ascending));
             docotrAppointments.DataContext = view;
-
-            if (view.IsEmpty)
-            {
-                DoctorHomePage.Instance.Home.Children.Clear();
-                DoctorHomePage.Instance.Home.DataContext = new UserControlHomePage();
-                return;
-            }
         }
 
         private void CartBtnClick(object sender, RoutedEventArgs e)
@@ -80,24 +54,6 @@ namespace Hospital_IS.DoctorView
         private void docotrAppointments_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DoctorAppointment app = (DoctorAppointment)docotrAppointments.SelectedItem;
-            DoctorAppointment first = app;
-            foreach (DoctorAppointment docapp in DoctorHomePage.Instance.DoctorAppointment)
-            {
-                if (docapp.DateAndTime.Date == first.DateAndTime.Date & docapp.DateAndTime.TimeOfDay < first.DateAndTime.TimeOfDay)
-                {
-                    System.Diagnostics.Debug.WriteLine(docapp.DateAndTime.TimeOfDay);
-                    first = docapp;
-                }
-            }
-
-            if (!app.DateAndTime.TimeOfDay.Equals(first.DateAndTime.TimeOfDay) & app.DateAndTime.Date == first.DateAndTime.Date)
-            {
-                start.IsEnabled = false;
-            }
-            else
-            {
-                start.IsEnabled = true;
-            }
             info.DataContext = app;
             info2.DataContext = app;
         }

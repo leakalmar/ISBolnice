@@ -1,6 +1,7 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,7 +20,26 @@ namespace Hospital_IS.DoctorView
     /// </summary>
     public partial class UCGeneralInfo : UserControl
     {
-        public bool Started { get; set; }
+
+
+        private bool _started;
+
+        public bool Started
+        {
+            get { return _started; }
+            set { 
+                _started = value;
+                if (!Started)
+                {
+                    change.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    change.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
         public UCGeneralInfo(Patient p)
         {
             InitializeComponent();
@@ -34,5 +54,6 @@ namespace Hospital_IS.DoctorView
                 change.Visibility = Visibility.Visible;
             }
         }
+
     }
 }

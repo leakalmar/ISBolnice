@@ -17,7 +17,7 @@
                 Background="#FF213250" BorderBrush="FloralWhite"
                 Margin="250,5,250,5" x:Name="add">
             <Button FontSize="18" BorderThickness="0" Background="{x:Null}" Content="Novi termin"
-                            Foreground="FloralWhite" HorizontalAlignment="Stretch"/>
+                            Foreground="FloralWhite" HorizontalAlignment="Stretch" Click="NewApp_Click"/>
         </Border>
 
         <DataGrid x:Name="dataGrid" ItemsSource="{Binding}" Grid.Row="2"
