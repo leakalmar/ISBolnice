@@ -1,9 +1,11 @@
+using Hospital_IS.DoctorView;
 using Hospital_IS.Storages;
 using Storages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Model
 {
@@ -77,9 +79,9 @@ namespace Model
             throw new NotImplementedException();
         }
 
-        public List<DoctorAppointment> GetAllAppointmentsByDoctor(Doctor doctor)
+        public ObservableCollection<Appointment> GetAllAppointmentsByDoctor(Doctor doctor)
         {
-            List<DoctorAppointment> ret = new List<DoctorAppointment>();
+            ObservableCollection<Appointment> ret = new ObservableCollection<Appointment>();
             foreach(DoctorAppointment dapp in allAppointments)
             {
                 if (dapp.Doctor.Id.Equals(doctor.Id))
@@ -154,9 +156,9 @@ namespace Model
                 allApointemnts.Add(ap);
             }
 
-           
 
-          
+
+
             foreach (Appointment ap in getAppByRoom(roomIdDestination))
             {
                 allApointemnts.Add(ap);
@@ -356,7 +358,7 @@ namespace Model
 
         public bool TransferEquipmentStatic(Room sourceRoom, Room destinationRoom, Equipment equip, int quantity,DateTime startDate, DateTime endDate, String Description)
         {
-           
+
             ObservableCollection<Appointment> sourceRoomAppointment = getAppByRoom(sourceRoom.RoomId);
             bool checkSourceRoomAppointment = checkAppointment(sourceRoomAppointment, startDate, endDate);
             ObservableCollection<Appointment> destinationRoomAppointment = getAppByRoom(destinationRoom.RoomId);
@@ -378,12 +380,50 @@ namespace Model
                     Appointment appointment = new Appointment(startDate, endDate, AppointmetType.EquipTransfer,destinationRoom.RoomId);
                     AddClassicAppointment(appointment);
                 }
-                
+
             }
 
 
 
             return checkSourceRoomAppointment && checkDestionationRoomAppointment;
+        }
+
+        //public ObservableCollection<DoctorAppointment> CheckDoctorAppointments(ObservableCollection<DoctorAppointment> newAppointments, int RoomId)
+        //{
+        //    ObservableCollection<DoctorAppointment> ret = new ObservableCollection<DoctorAppointment>();
+        //    foreach (DoctorAppointment d in newAppointments)
+        //    {
+        //        if (d.Room != RoomId)
+        //        {
+        //            ret.Add(d);
+        //        }
+        //        bool checkDoctor = checkAppointment(GetAllAppointmentsByDoctor(d.Doctor), d.AppointmentStart, d.AppointmentEnd);
+        //        if(checkDoctor)
+        //        {
+        //            ret.Add(d);
+        //        }
+        //    }
+        //    return ret;
+
+        //}
+
+        public ObservableCollection<DoctorAppointment> CheckDoctorAppointments(ObservableCollection<DoctorAppointment> newAppointments, int roomId, SelectedDatesCollection dates)
+        {
+            ObservableCollection<DoctorAppointment> ret = new ObservableCollection<DoctorAppointment>();
+            foreach (DateTime d in dates)
+            {
+                foreach (DoctorAppointment ap in newAppointments)
+                {
+                    if (ap.AppointmentStart.Date.Equals(d.Date) && ap.Room.Equals(roomId))
+                    {
+                        if (Hospital.Instance.checkAppointment(Hospital.Instance.GetAllAppointmentsByDoctor(DoctorHomePage.Instance.GetDoctor()), ap.AppointmentStart, ap.AppointmentEnd))
+                        {
+                            ret.Add(ap);
+                        }
+                    }
+                }
+            }
+            return ret;
         }
 
         private bool checkAppointment(ObservableCollection<Appointment> RoomAppointment,DateTime start, DateTime end)
@@ -435,12 +475,12 @@ namespace Model
                     if (eq.Quantity > quantity)
                     {
                         eq.Quantity = eq.Quantity - quantity;
-                       
+
                     }
 
                 }
             }
-         
+
         }
 
         private Room getRoomById(int roomId)

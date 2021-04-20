@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 
 namespace Model
@@ -10,6 +11,8 @@ namespace Model
         public String NameSurnamePatient { get; set; }
         public String AppTypeText { get; set; }
 
+
+        [JsonConstructor]
         public DoctorAppointment(DateTime date, AppointmetType type, bool reserved, int room, Doctor doc, Patient patient) : base(date, type, reserved, room)
         {
             this.NameSurnamePatient = patient.Name + " " + patient.Surname;
@@ -19,6 +22,12 @@ namespace Model
 
         public DoctorAppointment()
         {
+        }
+        public DoctorAppointment(DateTime dateStart, DateTime dateEnd, AppointmetType type, int room, Doctor doc, Patient patient) : base(dateStart, dateEnd, type, room)
+        {
+            this.NameSurnamePatient = patient.Name + " " + patient.Surname;
+            this.Doctor = doc;
+            this.Patient = patient;
         }
 
         public void SetAdmitted(Patient patient)

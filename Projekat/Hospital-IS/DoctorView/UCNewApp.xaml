@@ -53,26 +53,18 @@
         <ComboBox x:Name="rooms" ItemsSource="{Binding}" Grid.Row="2" Grid.Column="2"
                 Height="24.62" HorizontalAlignment="Stretch" FontSize="14"
                 VerticalAlignment="Center" Padding="1" SelectionChanged="filter_changed"
-                Margin="0,0,100,0">>
+                Margin="0,0,100,0">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding RoomId}" Padding="0" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox x:Name="types" ItemsSource="{Binding}" Grid.Row="3" Grid.Column="2"
-                Height="24.62" HorizontalAlignment="Stretch" FontSize="14"
-                VerticalAlignment="Center" Padding="1" SelectionChanged="filter_changed"
-                Margin="0,0,100,0">>
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <Label Content="{Binding RoomId}" Padding="0" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+        <ComboBox x:Name="types" Grid.Row="3" Grid.Column="2" Height="24.62"
+                HorizontalAlignment="Stretch" FontSize="14" VerticalAlignment="Center"
+                Padding="1" SelectionChanged="filter_changed" Margin="0,0,100,0" />
         <TextBox x:Name="duration" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center"
-                FontSize="14" Margin="0,0,100,0"
-                PreviewTextInput="duration_PreviewTextInput"/>
+                FontSize="14" Margin="0,0,100,0" />
 
         <Calendar Name="calendar" SelectionMode="MultipleRange" Grid.Column="0"
                 Grid.RowSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -81,29 +73,34 @@
         <GroupBox Header="Rezultati pretrage" FontSize="16" Grid.Row="5"
                 Grid.ColumnSpan="3" BorderBrush="#FF2E3B55" Foreground="White"
                 Grid.RowSpan="2" Margin="0,0,0,20">
-            <DataGrid x:Name="medicines" ItemsSource="{Binding}" Margin="10"
+            <DataGrid x:Name="appointments" ItemsSource="{Binding}" Margin="10"
                     Background="Transparent" RowBackground="Transparent"
                     Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Auto"
                     BorderThickness="0,0,0,0" AutoGenerateColumns="False"
                     SelectionMode="Single" IsReadOnly="True" BorderBrush="{x:Null}"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     HorizontalScrollBarVisibility="Disabled" FontSize="14"
-                    RowHeaderWidth="0" CanUserSortColumns="False">
+                    RowHeaderWidth="0" CanUserSortColumns="False" MouseDoubleClick="appointments_MouseDoubleClick">
                 <DataGrid.Resources>
                     <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
                             TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="Background" Value="#FF2E3B55" />
+                        <EventSetter Event="KeyDown" Handler="setAppointment_KeyDown" />
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Naziv leka" Binding="{Binding Key.Name}"
+                    <DataGridTextColumn Header="Datum"
+                            Binding="{Binding AppointmentEnd.Date,StringFormat=\{0:MM/dd/yyyy\}}"
                             CanUserResize="False" Width="0.05*" SortDirection="Ascending" />
-                    <DataGridTextColumn Header="Sastav"
-                            Binding="{Binding Key.Composition}" CanUserResize="False"
-                            Width="0.05*" />
-                    <DataGridCheckBoxColumn Header="Dodato"
-                            Binding="{Binding Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
-                            x:Name="isAdded" CanUserResize="False" Width="0.05*" />
+                    <DataGridTextColumn Header="Od" CanUserResize="False" Width="0.05*"
+                            Binding="{Binding AppointmentStart.TimeOfDay}" />
+                    <DataGridTextColumn Header="Do" x:Name="to" CanUserResize="False"
+                            Width="0.05*" Binding="{Binding AppointmentEnd.TimeOfDay}" />
+                    <DataGridTextColumn Header="Tip" CanUserResize="False" Width="0.05*"
+                            Binding="{Binding Type}" />
+                    <DataGridCheckBoxColumn Header="Slobodno" x:Name="isAdded"
+                            CanUserResize="False" Width="0.05*"
+                            Binding="{Binding Reserved}" />
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

@@ -20,17 +20,17 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Datum" Binding="{Binding DoctorApp.Date}" 
+                <DataGridTextColumn Header="Datum" Binding="{Binding Date}" 
                                         CanUserResize="False" Width="0.05*"/>
-                <DataGridTextColumn Header="Tip pregleda" Binding="{Binding DoctorApp.Type}" 
+                <DataGridTextColumn Header="Tip pregleda" Binding="{Binding Type}" 
                                         CanUserResize="False" Width="0.05*"/>
-                <DataGridTextColumn Header="Dijagnoza" Binding="{Binding DoctorApp.Cause}" CanUserResize="False" 
+                <DataGridTextColumn Header="Dijagnoza" Binding="{Binding Cause}" CanUserResize="False" 
                                         Width="0.05*"/>
-                <DataGridTextColumn Header="Doktor" Binding="{Binding DoctorApp.Doctor.Surname}" CanUserResize="False" 
+                <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor.Surname}" CanUserResize="False" 
                                         Width="0.05*"/>
-                <DataGridCheckBoxColumn Header="Recept" Binding="{Binding HaveRecipe}" CanUserResize="False" 
+                <DataGridCheckBoxColumn Header="Recept" Binding="{Binding Report.HaveRecipe}" CanUserResize="False" 
                                         Width="0.02*"/>
-                <DataGridCheckBoxColumn Header="Test" Binding="{Binding HaveTest}" CanUserResize="False" 
+                <DataGridCheckBoxColumn Header="Test" Binding="{Binding Report.HaveTest}" CanUserResize="False" 
                                         Width="0.02*"/>
             </DataGrid.Columns>
             <DataGrid.RowStyle>

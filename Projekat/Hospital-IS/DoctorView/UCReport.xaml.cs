@@ -27,7 +27,10 @@ namespace Hospital_IS.DoctorView
             InitializeComponent();
             Patient = appointment.Patient;
             Appointment = appointment;
-            reportDetail.Text = Appointment.Report.Amnesis;
+            if(Appointment.Report != null)
+            {
+                reportDetail.Text = Appointment.Report.Amnesis;
+            }
             
             medicines.DataContext = appointment.Patient.MedicalHistory.GetByAppointment(Appointment);
 

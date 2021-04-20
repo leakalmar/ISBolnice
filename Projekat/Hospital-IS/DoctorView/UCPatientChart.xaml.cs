@@ -35,7 +35,7 @@ namespace Hospital_IS.DoctorView
             Report = new UCReport(appointment);
             General = new UCGeneralInfo(Appointment.Patient);
             History = new UCHistory(Appointment.Patient);
-            App = new UCScheduledApp(Appointment.Patient);
+            App = new UCScheduledApp(Appointment);
             Therapy = new UCTherapy(Appointment.Patient);
             Test = new UCTest(Appointment.Patient);
 
@@ -182,7 +182,11 @@ namespace Hospital_IS.DoctorView
 
         private void back_clicked(object sender, KeyEventArgs e)
         {
-            DoctorHomePage.Instance.Home.Children.Remove(this);
+            if(e.Key == Key.Escape)
+            {
+                DoctorHomePage.Instance.Home.Children.Remove(this);
+                DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(Appointment, true));
+            }
         }
 
         private void patientInfo_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -219,6 +223,16 @@ namespace Hospital_IS.DoctorView
             else
             {
                 DoctorHomePage.Instance.Home.Children.Add(r);
+            }
+        }
+
+        private void back_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (back.IsVisible)
+            {
+                DoctorHomePage.Instance.Home.Children.Remove(this);
+                DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(Appointment, true));
+
             }
         }
     }
