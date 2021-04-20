@@ -372,11 +372,11 @@ namespace Model
 
 
 
-        public bool TransferEquipmentStatic(Room sourceRoom, Room destinationRoom, Equipment equip, int quantity,DateTime startDate, DateTime endDate, String Description)
+        public bool TransferEquipmentStatic(Room sourceRoom, Room destinationRoom, Equipment equip, int quantity,DateTime startDate, DateTime endDate, String description)
         {
 
             ObservableCollection<Appointment> RoomsAppointment = getAllAppByTwoRoom(sourceRoom.RoomId, destinationRoom.RoomId);
-            bool checkRoomAppointment = checkAppointment(RoomsAppointment, startDate, endDate);
+            bool checkRoomAppointment = CheckAppointment(RoomsAppointment, startDate, endDate);
 
            if (checkRoomAppointment)
             {
@@ -428,7 +428,7 @@ namespace Model
                 {
                     if (ap.AppointmentStart.Date.Equals(d.Date) && ap.Room.Equals(roomId))
                     {
-                        if (Hospital.Instance.checkAppointment(Hospital.Instance.GetAllAppointmentsByDoctor(DoctorHomePage.Instance.GetDoctor()), ap.AppointmentStart, ap.AppointmentEnd))
+                        if (Hospital.Instance.CheckAppointment(Hospital.Instance.GetAllAppointmentsByDoctor(DoctorHomePage.Instance.GetDoctor()), ap.AppointmentStart, ap.AppointmentEnd))
                         {
                             ret.Add(ap);
                         }
@@ -438,7 +438,7 @@ namespace Model
             return ret;
         }
 
-        private bool checkAppointment(ObservableCollection<Appointment> RoomAppointment,DateTime start, DateTime end)
+        private bool CheckAppointment(ObservableCollection<Appointment> RoomAppointment,DateTime start, DateTime end)
         {
             bool isFree = true;
 
