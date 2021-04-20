@@ -109,9 +109,9 @@
         <Separator Grid.Row="3" Grid.ColumnSpan="4" VerticalAlignment="Bottom" />
         <Border Grid.Row="4" Grid.ColumnSpan="4" CornerRadius="20" BorderThickness="1"  Background="#FF213250" 
                 BorderBrush="FloralWhite"  HorizontalAlignment="Center" VerticalAlignment="Center" 
-                Padding="150,5,150,5" x:Name="back" MouseDown="back_MouseDown">
-            <Button Content="Nazad" Foreground="FloralWhite" FontSize="18" 
-                    BorderThickness="0" Background="{x:Null}"/>
+                Padding="150,5,150,5" x:Name="back" >
+            <Button Content="Nazad" Foreground="FloralWhite" FontSize="18"
+                    BorderThickness="0" Background="{x:Null}" MouseDown="back_MouseDown" />
         </Border>
         <Border Grid.Row="4" Grid.ColumnSpan="4" CornerRadius="20" BorderThickness="1"  Background="#FF213250" 
                 BorderBrush="FloralWhite"  HorizontalAlignment="Center" VerticalAlignment="Center" 

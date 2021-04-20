@@ -29,11 +29,12 @@ namespace Hospital_IS.DoctorView
             docotrAppointments.SelectedItem = doctorAppointment;
             info.DataContext = doctorAppointment;
             info2.DataContext = doctorAppointment;
+            
 
             ICollectionView view = new CollectionViewSource { Source = DoctorHomePage.Instance.DoctorAppointment }.View;
             view.Filter = delegate (object item)
             {
-                return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date & ((DoctorAppointment)item).Report == null;
+                return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date;
             };
             view.SortDescriptions.Add(new SortDescription("AppointmentStart", ListSortDirection.Ascending));
             docotrAppointments.DataContext = view;
@@ -54,6 +55,14 @@ namespace Hospital_IS.DoctorView
         private void docotrAppointments_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DoctorAppointment app = (DoctorAppointment)docotrAppointments.SelectedItem;
+            if(app.Report != null)
+            {
+                start.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                start.Visibility = Visibility.Visible;
+            }
             info.DataContext = app;
             info2.DataContext = app;
         }

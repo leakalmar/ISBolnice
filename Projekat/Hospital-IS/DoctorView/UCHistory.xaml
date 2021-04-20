@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Hospital_IS.DoctorView"
              mc:Ignorable="d" 
              d:DesignHeight="344.660194174757" d:DesignWidth="783">
-    <Grid Margin="0,25,0,0">
+    <Grid Margin="0,25,0,0" >
         <DataGrid x:Name="dataGrid" ItemsSource="{Binding}" 
                       Background="Transparent" RowBackground="Transparent" Foreground="White" 
                       ScrollViewer.VerticalScrollBarVisibility="Auto" BorderThickness="0"

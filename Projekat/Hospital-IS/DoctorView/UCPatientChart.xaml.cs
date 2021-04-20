@@ -34,7 +34,7 @@ namespace Hospital_IS.DoctorView
             Appointment = appointment;
             Report = new UCReport(appointment);
             General = new UCGeneralInfo(Appointment.Patient);
-            History = new UCHistory(Appointment.Patient);
+            History = new UCHistory(Appointment);
             App = new UCScheduledApp(Appointment);
             Therapy = new UCTherapy(Appointment.Patient);
             Test = new UCTest(Appointment.Patient);
@@ -159,6 +159,7 @@ namespace Hospital_IS.DoctorView
                     Last = 1;
                     break;
                 case 2:
+                    History.Started = started;
                     patientInfo.Children.Add(History);
                     Last = 2;
                     break;
@@ -185,7 +186,12 @@ namespace Hospital_IS.DoctorView
             if(e.Key == Key.Escape)
             {
                 DoctorHomePage.Instance.Home.Children.Remove(this);
-                DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(Appointment, true));
+                Hospital.Instance.RemoveAppointment(Appointment);
+                Appointment.Report.Amnesis = Report.reportDetail.Text;
+                Hospital.Instance.AddAppointment(Appointment);
+                AppointmentFileStorage apf = new AppointmentFileStorage();
+                apf.SaveAppointment(Hospital.Instance.allAppointments);
+                DoctorHomePage.Instance.Home.Children.Add(this);
             }
         }
 
@@ -215,15 +221,7 @@ namespace Hospital_IS.DoctorView
             afs.UpdateAppointment(Appointment);
             DoctorHomePage.Instance.Home.Children.Remove(this);
             UCAppDetail r = new UCAppDetail(null);
-            if(r.docotrAppointments.Items.Count == 0)
-            {
-                int index = DoctorHomePage.Instance.Home.Children.IndexOf(DoctorHomePage.Instance.HomePage);
-                DoctorHomePage.Instance.Home.Children[index].Visibility = Visibility.Visible;
-            }
-            else
-            {
-                DoctorHomePage.Instance.Home.Children.Add(r);
-            }
+            DoctorHomePage.Instance.Home.Children.Add(r);
         }
 
         private void back_MouseDown(object sender, MouseButtonEventArgs e)
@@ -231,7 +229,7 @@ namespace Hospital_IS.DoctorView
             if (back.IsVisible)
             {
                 DoctorHomePage.Instance.Home.Children.Remove(this);
-                DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(Appointment, true));
+                DoctorHomePage.Instance.Home.Children.Add(new UCAppDetail(Appointment));
 
             }
         }

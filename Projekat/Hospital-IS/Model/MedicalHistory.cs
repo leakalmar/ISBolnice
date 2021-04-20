@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -164,6 +165,19 @@ namespace Model
             foreach (Prescription p in Prescription)
             {
                 if (p.DatePrescribed.Equals(docApp.AppointmentStart))
+                {
+                    ret.Add(p);
+                }
+            }
+            return ret;
+        }
+
+        public ObservableCollection<Prescription> GetPresciptionByReport(DateTime report)
+        {
+            ObservableCollection<Prescription> ret = new ObservableCollection<Prescription>();
+            foreach (Prescription p in Prescription)
+            {
+                if(p.DatePrescribed == report)
                 {
                     ret.Add(p);
                 }
