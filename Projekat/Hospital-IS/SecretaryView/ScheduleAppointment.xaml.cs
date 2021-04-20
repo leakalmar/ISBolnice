@@ -92,6 +92,8 @@ namespace Hospital_IS.SecretaryView
             {
             }
 
+            DocAppointment.Reserved = true;
+
             uca.Appointments.Add(DocAppointment);
 
             afs.SaveAppointment(uca.Appointments);
