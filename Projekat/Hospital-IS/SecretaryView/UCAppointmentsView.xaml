@@ -42,16 +42,28 @@
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   Background="Transparent" RowBackground="AliceBlue">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Doktor" 
-                                    Binding="{Binding DoctorFullName}" Width="auto"/>
-                <DataGridTextColumn Header="Pacijent" 
-                                    Binding="{Binding NameSurnamePatient}" Width="*"/>
+                <DataGridTextColumn Header="Doktor" Width="*">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{} {0} {1}">
+                            <Binding Path="Doctor.Name"/>
+                            <Binding Path="Doctor.Surname"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Pacijent"  Width="*">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{} {0} {1}">
+                            <Binding Path="Patient.Name"/>
+                            <Binding Path="Patient.Surname"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Datum" 
-                                    Binding="{Binding DateAndTime, StringFormat=\{0:dd.MM.yyyy.\}}" Width="*"/>
+                                    Binding="{Binding DateAndTime, StringFormat=\{0:dd.MM.yyyy.\}}" Width="auto"/>
                 <DataGridTextColumn Header="Vreme" 
-                                    Binding="{Binding DateAndTime, StringFormat=\{0:HH:mm\}}" Width="*"/>
+                                    Binding="{Binding DateAndTime, StringFormat=\{0:HH:mm\}}" Width="auto"/>
                 <DataGridTextColumn Header="Tip pregleda" 
-                                    Binding="{Binding AppTypeText}" Width="*"/>
+                                    Binding="{Binding AppTypeText}" Width="auto"/>
                 <DataGridTextColumn Header="Soba" 
                                     Binding="{Binding Room}" Width="*"/>
             </DataGrid.Columns>

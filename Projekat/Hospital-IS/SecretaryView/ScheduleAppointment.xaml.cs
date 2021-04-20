@@ -4,8 +4,9 @@ using Storages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows;
-
+using System.Windows.Media;
 
 namespace Hospital_IS.SecretaryView
 {
@@ -15,13 +16,12 @@ namespace Hospital_IS.SecretaryView
     public partial class ScheduleAppointment : Window
     {
         public DoctorAppointment DocAppointment { get; set; } = new DoctorAppointment();
+        AppointmentFileStorage afs = new AppointmentFileStorage();
         private UCAppointmentsView uca;
-        public ObservableCollection<string> PatientNames { get; set; } = new ObservableCollection<string>();
-        public ObservableCollection<string> DoctorNames { get; set; } = new ObservableCollection<string>();
-        public ObservableCollection<int> RoomNumbers { get; set; } = new ObservableCollection<int>();
-
         public ObservableCollection<Patient> Patients { get; set; } = new ObservableCollection<Patient>();
         public ObservableCollection<Doctor> Doctors { get; set; } = new ObservableCollection<Doctor>();
+
+        public ObservableCollection<Room> Rooms { get; set; } = new ObservableCollection<Room>();
 
         public ScheduleAppointment(UCAppointmentsView uca)
         {
@@ -31,18 +31,12 @@ namespace Hospital_IS.SecretaryView
             PatientFileStorage pfs = new PatientFileStorage();
             List<Patient> patients = pfs.GetAll();
             Patients = new ObservableCollection<Patient>(patients);
-            for (int i = 0; i < patients.Count; i++)
-                PatientNames.Add(patients[i].Name + " " + patients[i].Surname);
 
             FSDoctor fsd = new FSDoctor();
             Doctors = fsd.GetAll();
-            for (int i = 0; i < Doctors.Count; i++)
-                DoctorNames.Add(Doctors[i].Name + " " + Doctors[i].Surname);
 
             RoomStorage rs = new RoomStorage();
-            ObservableCollection<Room> Rooms = rs.GetAll();
-            for (int i = 0; i < Rooms.Count; i++)
-                RoomNumbers.Add(Rooms[i].RoomNumber);
+            Rooms = rs.GetAll();
 
 
             this.DataContext = this;
@@ -50,39 +44,52 @@ namespace Hospital_IS.SecretaryView
 
         private void NewAppointment(object sender, RoutedEventArgs e)
         {
+            //  pacijent
             DocAppointment.Patient = Patients[cbPatient.SelectedIndex];
+
+            //  doktor
             DocAppointment.Doctor = Doctors[cbDoctor.SelectedIndex];
+
+            // soba
             if (cbRoom.IsEnabled)
-                DocAppointment.Room = RoomNumbers[cbRoom.SelectedIndex];
+                DocAppointment.Room = Rooms[cbRoom.SelectedIndex].RoomNumber;
             else
-                DocAppointment.Room = DocAppointment.Doctor.PrimaryRoom;
+                DocAppointment.Room = findRoomNumber(DocAppointment.Doctor.PrimaryRoom);
 
+            // tip pregleda
             if (cbAppType.SelectedIndex == 0)
+            {
                 DocAppointment.Type = AppointmetType.CheckUp;
+                DocAppointment.AppTypeText = "Pregled";
+            }
             else if (cbAppType.SelectedIndex == 1)
+            {
                 DocAppointment.Type = AppointmetType.Operation;
+                DocAppointment.AppTypeText = "Operacija";
+            }
 
+            // datum, vreme i trajanje pregleda
             try
             {
-                DateTime appDate = DateTime.ParseExact(txtAppDate.Text, "dd.MM.yyyy.", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime appDate = DateTime.ParseExact(txtAppDate.Text, "dd.MM.yyyy.", CultureInfo.InvariantCulture);
                 DocAppointment.DateAndTime = appDate;
 
                 DateTime appStart = new DateTime();
 
                 if (cbAppType.SelectedIndex == 0)
                 {
-                    appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
-                    DocAppointment.AppointmentStart = appStart;
+                    appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
+                    DocAppointment.AppointmentStart = appDate.Date.Add(appStart.TimeOfDay);
 
-                    DocAppointment.AppointmentEnd = appStart.AddMinutes(30);
+                    DocAppointment.AppointmentEnd = DocAppointment.AppointmentStart.AddMinutes(30);
                 }
                 else if (cbAppType.SelectedIndex == 1)
                 {
-                    appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
-                    DocAppointment.AppointmentStart = appStart;
+                    appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
+                    DocAppointment.AppointmentStart = appDate.Date.Add(appStart.TimeOfDay);
 
-                    DateTime appEnd = DateTime.ParseExact(txtEndOfApp.Text, "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
-                    DocAppointment.AppointmentEnd = appEnd;
+                    DateTime appEnd = DateTime.ParseExact(txtEndOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
+                    DocAppointment.AppointmentEnd = appDate.Date.Add(appEnd.TimeOfDay);
                 }
 
                 DocAppointment.DateAndTime = appDate.Date.Add(appStart.TimeOfDay);
@@ -91,12 +98,8 @@ namespace Hospital_IS.SecretaryView
             {
             }
 
-            DocAppointment.NameSurnamePatient = cbPatient.SelectedValue.ToString();
-            DocAppointment.DoctorFullName = cbDoctor.SelectedValue.ToString();
-
             uca.Appointments.Add(DocAppointment);
 
-            AppointmentFileStorage afs = new AppointmentFileStorage();
             afs.SaveAppointment(uca.Appointments);
 
             this.Close();
@@ -123,6 +126,119 @@ namespace Hospital_IS.SecretaryView
                 txtEndOfApp.IsEnabled = true;
                 cbRoom.IsEnabled = true;
             }
+        }
+
+        private void txtEndOfApp_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ObservableCollection<DoctorAppointment> appsByRoom = new ObservableCollection<DoctorAppointment>();
+            if (cbAppType.SelectedIndex == 0)
+                appsByRoom = afs.GetAllByRoom(Doctors[cbDoctor.SelectedIndex].PrimaryRoom);
+            else if (cbAppType.SelectedIndex == 1)
+                appsByRoom = afs.GetAllByRoom(Rooms[cbRoom.SelectedIndex].RoomId);
+
+            ObservableCollection<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(Doctors[cbDoctor.SelectedIndex].Id);
+
+            if (checkAppointment(appsByRoom, appsByDoctor))
+            {
+                btnConfirm.IsEnabled = true;
+                txtStartOfApp.Background = new SolidColorBrush(Colors.White);
+                txtEndOfApp.Background = new SolidColorBrush(Colors.White);
+            }
+            else
+            {
+                txtStartOfApp.Background = new SolidColorBrush(Colors.Red);
+                txtEndOfApp.Background = new SolidColorBrush(Colors.Red);
+                btnConfirm.IsEnabled = false;
+            }
+
+
+        }
+
+        private void txtStartOfApp_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (cbAppType.SelectedIndex == 0 && !string.IsNullOrEmpty(txtStartOfApp.Text))
+            {
+                DateTime appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime appEnd = appStart.AddMinutes(30);
+                txtEndOfApp.Text = appEnd.ToString("t", DateTimeFormatInfo.InvariantInfo);
+
+                ObservableCollection<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(Doctors[cbDoctor.SelectedIndex].Id);
+                ObservableCollection<DoctorAppointment> appsByRoom = new ObservableCollection<DoctorAppointment>();
+                if (cbAppType.SelectedIndex == 0)
+                    appsByRoom = afs.GetAllByRoom(Doctors[cbDoctor.SelectedIndex].PrimaryRoom);
+                else if (cbAppType.SelectedIndex == 1)
+                    appsByRoom = afs.GetAllByRoom(Rooms[cbRoom.SelectedIndex].RoomId);
+                if (checkAppointment(appsByRoom, appsByDoctor))
+                {
+                    btnConfirm.IsEnabled = true;
+                    txtStartOfApp.Background = new SolidColorBrush(Colors.White);
+                    txtEndOfApp.Background = new SolidColorBrush(Colors.White);
+                }
+                else
+                {
+                    txtStartOfApp.Background = new SolidColorBrush(Colors.Red);
+                    txtEndOfApp.Background = new SolidColorBrush(Colors.Red);
+                    btnConfirm.IsEnabled = false;
+                }
+
+            }
+        }
+
+        private bool checkAppointment(ObservableCollection<DoctorAppointment> RoomAppointments, ObservableCollection<DoctorAppointment> DoctorAppointments)
+        {
+            DateTime start;
+            DateTime end;
+            DateTime date = DateTime.ParseExact(txtAppDate.Text, "dd.MM.yyyy.", CultureInfo.InvariantCulture);
+            start = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
+            start = date.Date.Add(start.TimeOfDay);
+
+            end = DateTime.ParseExact(txtEndOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
+            end = date.Date.Add(end.TimeOfDay);
+
+            foreach (Appointment appointment in RoomAppointments)
+            {
+
+                bool between = IsBetweenDates(start, end, appointment);
+                if (between || start < appointment.AppointmentStart && end > appointment.AppointmentEnd)
+                {
+                    return false;
+                }
+
+            }
+
+            if (DoctorAppointments.Count == 0)
+                return true;
+
+            
+
+            foreach (Appointment appointment in DoctorAppointments)
+            {
+
+                bool between = IsBetweenDates(start, end, appointment);
+                if (between || (start <= appointment.AppointmentStart && end >= appointment.AppointmentEnd))
+                {
+                    return false;
+                }
+
+            }
+
+            return true;
+
+        }
+
+        private static bool IsBetweenDates(DateTime start, DateTime end, Appointment appointment)
+        {
+            return (start >= appointment.AppointmentStart && start < appointment.AppointmentEnd) || (end > appointment.AppointmentStart && end <= appointment.AppointmentEnd);
+        }
+
+        private int findRoomNumber(int roomId)
+        {
+            foreach (Room room in Rooms)
+            {
+                if (room.RoomId == roomId)
+                    return room.RoomNumber;
+            }
+            return 0;
         }
     }
 }
