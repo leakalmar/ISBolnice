@@ -79,11 +79,15 @@ namespace Hospital_IS
             if (room != null)
             {
                 TempEquip.Clear();
-                foreach (Equipment eq in room.Equipment)
+                if(room.Equipment != null)
                 {
+                    foreach (Equipment eq in room.Equipment)
+                    {
 
-                    TempEquip.Add(eq);
+                        TempEquip.Add(eq);
+                    }
                 }
+                
             }
             else
             {

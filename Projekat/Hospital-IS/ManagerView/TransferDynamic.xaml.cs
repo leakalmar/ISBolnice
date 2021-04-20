@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Model;
 using System.Collections.ObjectModel;
-
+using System.Linq;
 
 namespace Hospital_IS
 {
@@ -25,8 +25,8 @@ namespace Hospital_IS
 
         public ObservableCollection<Room> DestinationRoom { get; set; }
 
-        private Room currentRoom;
-        private int currentIndex;
+        private static Room currentRoom;
+        private static int currentIndex;
         public TransferDynamic(Room room, int index)
         {
             InitializeComponent();
@@ -44,9 +44,6 @@ namespace Hospital_IS
                 SourceRoom.Add(r);
            
             }
-            
-
-           
            
         }
 
@@ -73,32 +70,54 @@ namespace Hospital_IS
             }     
         }
 
-     
+
 
         private void Transfer_Click(object sender, RoutedEventArgs e)
         {
-            int quantity = Convert.ToInt32(QuantityBox.Text);
-            if (quantity <= 0)
-            {
-                MessageBox.Show("Unesite ispravnu kolicinu");
-                QuantityBox.Text = "";
-            }
 
+            bool isEmpty = false;
+            if (QuantityBox.Text.Equals(""))
+            {
+                isEmpty = true;
+            }
+           
+
+
+
+            bool isIntString = QuantityBox.Text.All(char.IsDigit);
+            
+            bool isNumberOverZero = true;
+            if (!isIntString || isEmpty == true)
+            { 
+                MessageBox.Show("Unesite pozitivan broj broj");
+                isNumberOverZero = false;
+            }
             Room roomSource = (Room)ComboSource.SelectedItem;
 
             Equipment equip = (Equipment)DataGridSource.SelectedItem;
 
-            bool isSucces = Hospital.Instance.TransferEquipment(roomSource, equip, quantity);
-            if (!isSucces)
+
+            if (isNumberOverZero)
             {
-                MessageBox.Show("Nedovoljna kolicina");
-            }
-            else
-            {
-                MessageBox.Show("Uspjesno izvrseno");
-                refreshGrid(roomSource);
+                int quantity = Convert.ToInt32(QuantityBox.Text);
+                if (roomSource == null || equip == null)
+                {
+                    MessageBox.Show("Unesite sve podatke ispravno!");
+                }
+                else if (!Hospital.Instance.CheckQuantity(roomSource, equip, quantity))
+                {
+                    MessageBox.Show("Nedovoljna kolicina");
+                    QuantityBox.Text = "";
+                }
+                else
+                {
+                    Hospital.Instance.TransferEquipment(roomSource, equip, quantity);
+                    refreshGrid(roomSource);
+                    MessageBox.Show("Uspjesan transfer");
+                }
             }
            
+
         }
 
         private void refreshGrid(Room sourceRooom)
@@ -109,20 +128,20 @@ namespace Hospital_IS
                 SourceEquip.Clear();
                 foreach (Equipment eq in sourceRooom.Equipment)
                 {
-
-
-                    SourceEquip.Add(eq);
+                    if (eq.EquipType == EquiptType.Dynamic)
+                    {
+                        SourceEquip.Add(eq);
+                    }
                 }
             }
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
+           
             EquipmentOption option = new EquipmentOption(currentRoom, currentIndex);
             option.Show();
-            this.Hide();
-           
-           
+            this.Close();
         }
     }
 }

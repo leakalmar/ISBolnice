@@ -69,5 +69,10 @@ namespace Hospital_IS
             managerLogout.Show();
             this.Hide();
         }
+
+        private void sobe_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

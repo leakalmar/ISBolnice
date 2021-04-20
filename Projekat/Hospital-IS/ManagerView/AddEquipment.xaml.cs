@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -39,9 +40,10 @@ namespace Hospital_IS
                 type1 = EquiptType.Stationary;
             }
             int quantity1 = Convert.ToInt32(quantity.Text);
-            int id = Convert.ToInt32(currentRoom.Equipment.Count);
 
-            currentRoom.AddEquipment(new Equipment(type1, ++id, name1, quantity1));
+
+            int id = genereteId(currentRoom.Equipment);
+            currentRoom.AddEquipment(new Equipment(type1, id, name1, quantity1));
 
 
             
@@ -49,6 +51,20 @@ namespace Hospital_IS
             equipmentOption.Show();
             this.Hide();
 
+        }
+
+        private int genereteId(ObservableCollection<Equipment> equipList)
+        {
+            int id = -1;
+            foreach (Equipment eq in equipList)
+            {
+                if (eq.EquiptId > id)
+                {
+                    id = eq.EquiptId;
+                }
+            }
+
+            return ++id;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

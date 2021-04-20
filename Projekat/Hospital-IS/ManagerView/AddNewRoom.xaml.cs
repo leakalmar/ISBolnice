@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -52,8 +53,8 @@ namespace Hospital_IS
                 tip = RoomType.ConsultingRoom;
             }
 
-            int roomId = Hospital.Room.Count + 1;
-            Room newRoom = new Room(roomFloor, roomNumber, roomId, zauzeto, renoviranje, tip);
+            int id = genereteId(Hospital.Room);
+            Room newRoom = new Room(roomFloor, roomNumber, id, zauzeto, renoviranje, tip);
 
             Manager.Instance.AddRoom(newRoom);
     
@@ -62,6 +63,20 @@ namespace Hospital_IS
             this.Close();
            
             
+        }
+
+        private int genereteId(ObservableCollection<Room> room)
+        {
+            int id = -1;
+            foreach(Room r in room)
+            {
+                if(r.RoomId > id)
+                {
+                    id = r.RoomId;
+                }
+            }
+
+            return ++id;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -397,7 +397,7 @@ namespace Model
             return false;
         }
 
-        public bool TransferEquipment(Room sourceRoom, Equipment equip, int quantity)
+        public void TransferEquipment(Room sourceRoom, Equipment equip, int quantity)
         {
             foreach (Equipment eq in sourceRoom.Equipment)
             {
@@ -406,12 +406,12 @@ namespace Model
                     if (eq.Quantity > quantity)
                     {
                         eq.Quantity = eq.Quantity - quantity;
-                        return true;
+                       
                     }
 
                 }
             }
-            return false;
+         
         }
 
         private Room getRoomById(int roomId)
@@ -432,17 +432,7 @@ namespace Model
             Room sourceRoom = getRoomById(sourceRoomId);
             Room destinationRoom = getRoomById(destinationRoomId);
 
-            foreach (Equipment eq in sourceRoom.Equipment)
-            {
-                if (eq.EquiptId == equip.EquiptId)
-                {
-                    if (eq.Quantity > quantity)
-                    {
-                        eq.Quantity = eq.Quantity - quantity;
-                    }
-
-                }
-            }
+            TransferEquipment(sourceRoom, equip, quantity);
 
             bool exist = false;
             foreach(Equipment eq in destinationRoom.Equipment)
