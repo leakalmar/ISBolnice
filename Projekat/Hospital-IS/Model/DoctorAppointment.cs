@@ -15,7 +15,8 @@ namespace Model
         [JsonConstructor]
         public DoctorAppointment(DateTime date, AppointmetType type, bool reserved, int room, Doctor doc, Patient patient) : base(date, type, reserved, room)
         {
-            this.NameSurnamePatient = patient.Name + " " + patient.Surname;
+            if (patient != null)
+                this.NameSurnamePatient = patient.Name + " " + patient.Surname;
             this.Doctor = doc;
             this.Patient = patient;
         }

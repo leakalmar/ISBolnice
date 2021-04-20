@@ -56,5 +56,24 @@ namespace Storages
                 writer.Write(file);
             }
         }
+
+
+        public ObservableCollection<DoctorAppointment> GetAllDocAppointmentsById(int roomId)
+        {
+            String text = File.ReadAllText(this.fileLocation);
+            ObservableCollection<DoctorAppointment> appointments = JsonConvert.DeserializeObject<ObservableCollection<DoctorAppointment>>(text);
+
+            ObservableCollection<DoctorAppointment> roomAppointment = new ObservableCollection<DoctorAppointment>();
+
+            foreach (DoctorAppointment appointment in appointments)
+            {
+
+                if (appointment.Room == roomId)
+                {
+                    roomAppointment.Add(appointment);
+                }
+            }
+            return roomAppointment;
+        }
     }
 }

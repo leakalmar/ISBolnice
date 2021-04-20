@@ -80,7 +80,15 @@ namespace Hospital_IS.Storages
 
         public Model.Doctor GetByEmail(String email)
         {
-            throw new NotImplementedException();
+            ObservableCollection<Doctor> doctors = GetAll();
+            for (int i = 0; i < doctors.Count; i++)
+            {
+                if (email.Equals(doctors[i].Email))
+                {
+                    return doctors[i];
+                }
+            }
+            return null;
         }
     }
 }

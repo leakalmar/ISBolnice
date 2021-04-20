@@ -25,7 +25,7 @@ namespace Model
         public String Relationship { get; set; }
         public String Password { get; set; }
         public String Address { get; set; }
-        public List<int> Notifications { get; set; }
+        public List<int> Notifications { get; set; } = new List<int>();
 
         public User(int id, string name, string surname, DateTime birthDate, string address, string email, string password)
         {
@@ -36,6 +36,7 @@ namespace Model
             this.Email = email;
             this.Password = password;
             this.Address = address;
+            Notifications = new List<int>();
         }
 
         public User(int id, string name, string surname, DateTime birthDate, string email, string password)
@@ -46,10 +47,12 @@ namespace Model
             BirthDate = birthDate;
             Email = email;
             Password = password;
+            Notifications = new List<int>();
         }
 
         public User()
         {
+            Notifications = new List<int>();
         }
 
         public Boolean LogIn()
@@ -92,6 +95,13 @@ namespace Model
                     }
                 }
             }
+        }
+
+        public void addNotification(int notificationId)
+        {
+            if (Notifications == null)
+                Notifications = new List<int>();
+            Notifications.Add(notificationId);
         }
 
     }
