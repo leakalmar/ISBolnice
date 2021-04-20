@@ -8,13 +8,13 @@ namespace Model
 
         public Boolean Reserved { get; set; }
 
-        [JsonProperty]
+        
         public  DateTime AppointmentStart { get; set; }
-        [JsonProperty]
+       
         public DateTime AppointmentEnd { get; set; }
-        [JsonProperty]
+        
         public AppointmetType Type { get; set; }
-        [JsonProperty]
+        
         public int Room { get; set; }
 
 
@@ -34,7 +34,6 @@ namespace Model
         {
         }
 
-        [JsonConstructor]
         public Appointment(DateTime appointmentstart, DateTime appointmentEnd, AppointmetType type, int room)
         {
             AppointmentStart = appointmentstart;

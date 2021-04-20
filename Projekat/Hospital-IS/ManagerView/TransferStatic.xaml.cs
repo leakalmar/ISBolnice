@@ -35,6 +35,7 @@ namespace Hospital_IS
             SourceEquip = new ObservableCollection<Equipment>();
             DestinationEquip = new ObservableCollection<Equipment>();
 
+            DataGridDestination.IsEnabled = false;
             foreach (Room r in Hospital.Room)
             {
                 SourceRoom.Add(r);
@@ -50,20 +51,39 @@ namespace Hospital_IS
         {
 
             Room room = (Room)ComboSource.SelectedItem;
-            if (room.Equipment != null)
-            {
-                SourceEquip.Clear();
-                foreach (Equipment eq in room.Equipment)
-                {
-                    if(eq.EquipType == EquiptType.Stationary)
-                        SourceEquip.Add(eq);
-                }
+            Room destiantionRoom = (Room)ComboDestionation.SelectedItem;
 
-            }
-            else
+            
+            if(room != null && destiantionRoom != null)
             {
-                SourceEquip = new ObservableCollection<Equipment>();
+                if (room.RoomId == destiantionRoom.RoomId)
+                {
+                    MessageBox.Show("Nije dozvoljeno birati iste sobe");
+                    ComboSource.SelectedIndex = -1;
+                    room = (Room)ComboSource.SelectedItem;
+                    SourceEquip.Clear();
+                }
             }
+
+            if(room != null)
+            {
+                if (room.Equipment != null)
+                {
+                    SourceEquip.Clear();
+                    foreach (Equipment eq in room.Equipment)
+                    {
+                        if (eq.EquipType == EquiptType.Stationary)
+                            SourceEquip.Add(eq);
+                    }
+
+                }
+                else
+                {
+                    SourceEquip = new ObservableCollection<Equipment>();
+                }
+            }
+            
+            
         }
 
         private void ComboDestionation_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -71,21 +91,38 @@ namespace Hospital_IS
 
 
             Room room = (Room)ComboDestionation.SelectedItem;
-            if (room.Equipment != null)
+            Room sourceRoom = (Room)ComboSource.SelectedItem;
+
+            if (room != null && sourceRoom != null)
             {
-                DestinationEquip.Clear();
-                foreach (Equipment eq in room.Equipment)
+                
+                if (room.RoomId == sourceRoom.RoomId)
                 {
-                    if (eq.EquipType == EquiptType.Stationary)
-                        DestinationEquip.Add(eq);
+                    MessageBox.Show("Nije dozvoljeno birati iste sobe");
+                    ComboDestionation.SelectedIndex = -1;
+                    room = (Room)ComboDestionation.SelectedItem;
+                    DestinationEquip.Clear();
                 }
             }
-            else
+            if(room != null)
             {
-                DestinationEquip = new ObservableCollection<Equipment>();
+                if (room.Equipment != null)
+                {
+                    DestinationEquip.Clear();
+                    foreach (Equipment eq in room.Equipment)
+                    {
+                        if (eq.EquipType == EquiptType.Stationary)
+                            DestinationEquip.Add(eq);
+                    }
+                }
+                else
+                {
+                    DestinationEquip = new ObservableCollection<Equipment>();
+                }
             }
+           
+           
 
-            DataGridDestination.IsEnabled = false;
         }
 
         private void Transfer_Click(object sender, RoutedEventArgs e)

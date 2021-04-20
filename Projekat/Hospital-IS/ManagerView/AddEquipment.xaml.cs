@@ -64,7 +64,31 @@ namespace Hospital_IS
                 }
             }
 
-            return ++id;
+
+            bool isUnique = checkIfUnique(id);
+
+            while (!isUnique)
+            {
+                ++id;
+                isUnique = checkIfUnique(id);
+            }
+
+            return id;
+        }
+
+        private bool checkIfUnique(int id)
+        {
+            foreach(Room room in Hospital.Room)
+            {
+                foreach(Equipment eq in room.Equipment)
+                {
+                    if(eq.EquiptId == id)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

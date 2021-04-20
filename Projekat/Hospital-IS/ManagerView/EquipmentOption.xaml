@@ -35,6 +35,7 @@
                 <DropShadowEffect/>
             </DataGrid.Effect>
             <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Width="70" Binding = "{Binding EquiptId}"/>
                 <DataGridTextColumn Header="Naziv" Width="70" Binding = "{Binding Name}"/>
                 <DataGridTextColumn Header="Kolicina" Width="70" Binding="{Binding Quantity}"/>
                 <DataGridTextColumn Header="Vrsta" Width="70" Binding="{Binding EquipType}"/>
