@@ -110,6 +110,7 @@ namespace Model
 
         private ClassicAppointmentStorage classicAppointment = new ClassicAppointmentStorage();
 
+        private AppointmentFileStorage appointmentStorage = new AppointmentFileStorage();
 
         private void getAllClassicAppointment()
         {
@@ -147,24 +148,39 @@ namespace Model
             return classicAppointment.GetAllByRoomId(roomID);
         }
 
+
+        public ObservableCollection<DoctorAppointment> getDocAppByRoom(int roomID)
+        {
+            return appointmentStorage.GetAllByRoom(roomID);
+        }
+
         public ObservableCollection<Appointment> getAllAppByTwoRoom(int roomIdSource, int roomIdDestination)
         {
             ObservableCollection<Appointment> allApointemnts = new ObservableCollection<Appointment>();
 
-            foreach(Appointment ap in getAppByRoom(roomIdSource))
+
+            foreach(Appointment ap in getDocAppByRoom(roomIdSource))
             {
                 allApointemnts.Add(ap);
             }
 
+            foreach (Appointment ap in getDocAppByRoom(roomIdDestination))
+            {
+                allApointemnts.Add(ap);
+            }
 
-
+            foreach (Appointment ap in getAppByRoom(roomIdSource))
+            {
+                allApointemnts.Add(ap);
+            }
+           
 
             foreach (Appointment ap in getAppByRoom(roomIdDestination))
             {
                 allApointemnts.Add(ap);
             }
 
-
+          
             return allApointemnts;
         }
 
@@ -359,33 +375,29 @@ namespace Model
         public bool TransferEquipmentStatic(Room sourceRoom, Room destinationRoom, Equipment equip, int quantity,DateTime startDate, DateTime endDate, String Description)
         {
 
-            ObservableCollection<Appointment> sourceRoomAppointment = getAppByRoom(sourceRoom.RoomId);
-            bool checkSourceRoomAppointment = checkAppointment(sourceRoomAppointment, startDate, endDate);
-            ObservableCollection<Appointment> destinationRoomAppointment = getAppByRoom(destinationRoom.RoomId);
+            ObservableCollection<Appointment> RoomsAppointment = getAllAppByTwoRoom(sourceRoom.RoomId, destinationRoom.RoomId);
+            bool checkRoomAppointment = checkAppointment(RoomsAppointment, startDate, endDate);
 
-            bool checkDestionationRoomAppointment = checkAppointment(destinationRoomAppointment, startDate, endDate);
-
-           if(checkSourceRoomAppointment && checkDestionationRoomAppointment)
+           if (checkRoomAppointment)
             {
                 Transfer transfer = new Transfer(sourceRoom.RoomId, destinationRoom.RoomId, equip,quantity, endDate,false);
                 sourceRoom.AddTransfer(transfer);
                 if(sourceRoom.Type != RoomType.StorageRoom)
                 {
                     Appointment appointment = new Appointment(startDate, endDate, AppointmetType.EquipTransfer, sourceRoom.RoomId);
+                    appointment.Reserved = true;
                     AddClassicAppointment(appointment);
                 }
 
                 if(destinationRoom.Type != RoomType.StorageRoom)
                 {
                     Appointment appointment = new Appointment(startDate, endDate, AppointmetType.EquipTransfer,destinationRoom.RoomId);
+                    appointment.Reserved = true;
                     AddClassicAppointment(appointment);
                 }
 
             }
-
-
-
-            return checkSourceRoomAppointment && checkDestionationRoomAppointment;
+            return checkRoomAppointment;
         }
 
         //public ObservableCollection<DoctorAppointment> CheckDoctorAppointments(ObservableCollection<DoctorAppointment> newAppointments, int RoomId)

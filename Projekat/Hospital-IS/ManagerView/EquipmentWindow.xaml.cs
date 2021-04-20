@@ -110,11 +110,18 @@ namespace Hospital_IS
            
             Room room = (Room)Combo.SelectedItem;
             TempEquip.Clear();
-            foreach (Equipment eq in room.Equipment)
+            if(room != null)
             {
+                if (room.Equipment != null)
+                {
+                    foreach (Equipment eq in room.Equipment)
+                    {
 
-                TempEquip.Add(eq);
+                        TempEquip.Add(eq);
+                    }
+                }
             }
+           
         }
     }
 }
