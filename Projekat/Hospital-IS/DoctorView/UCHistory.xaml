@@ -20,7 +20,7 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Datum" Binding="{Binding Date}" 
+                <DataGridTextColumn Header="Datum" Binding="{Binding AppointmentStart}" 
                                         CanUserResize="False" Width="0.05*"/>
                 <DataGridTextColumn Header="Tip pregleda" Binding="{Binding Type}" 
                                         CanUserResize="False" Width="0.05*"/>

@@ -321,6 +321,245 @@
     },
     "Report": null,
     "Reserved": true,
+    "AppointmentStart": "2021-04-22T09:00:00",
+    "AppointmentEnd": "2021-04-22T09:30:00",
+    "Type": 1,
+    "Room": 1
+  },
+  {
+    "Cause": null,
+    "Detail": null,
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "Patient": {
+      "hospital": null,
+      "ChartId": 0,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "IsGuest": false,
+      "MedicalHistory": {
+        "Prescription": [],
+        "Test": [],
+        "Reports": [],
+        "Hospitalization": [],
+        "Therapies": []
+      },
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T23:21:22.7048652+02:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Notifications": null,
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Role": "Dermatolog",
+        "Doctor": null
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 101,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Notifications": null,
+      "Hospital": null
+    },
+    "Report": null,
+    "Reserved": true,
+    "AppointmentStart": "2021-04-20T12:00:00",
+    "AppointmentEnd": "2021-04-20T12:30:00",
+    "Type": 1,
+    "Room": 2
+  },
+  {
+    "Cause": null,
+    "Detail": null,
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "Patient": {
+      "hospital": null,
+      "ChartId": 0,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "IsGuest": false,
+      "MedicalHistory": {
+        "Prescription": [],
+        "Test": [],
+        "Reports": [],
+        "Hospitalization": [],
+        "Therapies": []
+      },
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T23:21:22.7048652+02:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Notifications": null,
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Role": "Dermatolog",
+        "Doctor": null
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 101,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Notifications": null,
+      "Hospital": null
+    },
+    "Report": null,
+    "Reserved": true,
+    "AppointmentStart": "2021-04-20T19:30:00",
+    "AppointmentEnd": "2021-04-20T20:00:00",
+    "Type": 1,
+    "Room": 1
+  },
+  {
+    "Cause": null,
+    "Detail": null,
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "Patient": {
+      "hospital": null,
+      "ChartId": 0,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "IsGuest": false,
+      "MedicalHistory": {
+        "Prescription": [],
+        "Test": [],
+        "Reports": [],
+        "Hospitalization": [],
+        "Therapies": []
+      },
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T23:21:22.7048652+02:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Notifications": null,
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Role": "Dermatolog",
+        "Doctor": null
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 101,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Notifications": null,
+      "Hospital": null
+    },
+    "Report": {
+      "Amnesis": "",
+      "HaveRecipe": false,
+      "HaveTest": false,
+      "ReportId": "4/20/2021 9:30:00 AM"
+    },
+    "Reserved": true,
     "AppointmentStart": "2021-04-20T09:30:00",
     "AppointmentEnd": "2021-04-20T10:00:00",
     "Type": 1,
@@ -399,8 +638,169 @@
     },
     "Report": null,
     "Reserved": true,
-    "AppointmentStart": "2021-04-22T09:00:00",
-    "AppointmentEnd": "2021-04-22T09:30:00",
+    "AppointmentStart": "2021-04-20T16:00:00",
+    "AppointmentEnd": "2021-04-20T17:00:00",
+    "Type": 0,
+    "Room": 2
+  },
+  {
+    "Cause": null,
+    "Detail": null,
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "Patient": {
+      "hospital": null,
+      "ChartId": 0,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "IsGuest": false,
+      "MedicalHistory": {
+        "Prescription": [],
+        "Test": [],
+        "Reports": [],
+        "Hospitalization": [],
+        "Therapies": []
+      },
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T23:21:22.7048652+02:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Notifications": null,
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Role": "Dermatolog",
+        "Doctor": null
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 101,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Notifications": null,
+      "Hospital": null
+    },
+    "Report": {
+      "Amnesis": "",
+      "HaveRecipe": false,
+      "HaveTest": false,
+      "ReportId": "4/20/2021 8:00:00 AM"
+    },
+    "Reserved": true,
+    "AppointmentStart": "2021-04-20T08:00:00",
+    "AppointmentEnd": "2021-04-20T09:00:00",
+    "Type": 0,
+    "Room": 2
+  },
+  {
+    "Cause": null,
+    "Detail": null,
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "Patient": {
+      "hospital": null,
+      "ChartId": 0,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "IsGuest": false,
+      "MedicalHistory": {
+        "Prescription": [],
+        "Test": [],
+        "Reports": [],
+        "Hospitalization": [],
+        "Therapies": []
+      },
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T23:21:22.7048652+02:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Notifications": null,
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Role": "Dermatolog",
+        "Doctor": null
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 101,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Notifications": null,
+      "Hospital": null
+    },
+    "Report": null,
+    "Reserved": true,
+    "AppointmentStart": "2021-04-22T10:30:00",
+    "AppointmentEnd": "2021-04-22T11:00:00",
     "Type": 1,
     "Room": 1
   }
