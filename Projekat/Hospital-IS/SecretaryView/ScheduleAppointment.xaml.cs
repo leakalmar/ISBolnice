@@ -20,7 +20,6 @@ namespace Hospital_IS.SecretaryView
         private UCAppointmentsView uca;
         public ObservableCollection<Patient> Patients { get; set; } = new ObservableCollection<Patient>();
         public ObservableCollection<Doctor> Doctors { get; set; } = new ObservableCollection<Doctor>();
-
         public ObservableCollection<Room> Rooms { get; set; } = new ObservableCollection<Room>();
 
         public ScheduleAppointment(UCAppointmentsView uca)
@@ -74,20 +73,15 @@ namespace Hospital_IS.SecretaryView
                 DateTime appDate = DateTime.ParseExact(txtAppDate.Text, "dd.MM.yyyy.", CultureInfo.InvariantCulture);
                 DocAppointment.DateAndTime = appDate;
 
-                DateTime appStart = new DateTime();
+                DateTime appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
+                DocAppointment.AppointmentStart = appDate.Date.Add(appStart.TimeOfDay);
 
                 if (cbAppType.SelectedIndex == 0)
                 {
-                    appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
-                    DocAppointment.AppointmentStart = appDate.Date.Add(appStart.TimeOfDay);
-
                     DocAppointment.AppointmentEnd = DocAppointment.AppointmentStart.AddMinutes(30);
                 }
                 else if (cbAppType.SelectedIndex == 1)
                 {
-                    appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
-                    DocAppointment.AppointmentStart = appDate.Date.Add(appStart.TimeOfDay);
-
                     DateTime appEnd = DateTime.ParseExact(txtEndOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
                     DocAppointment.AppointmentEnd = appDate.Date.Add(appEnd.TimeOfDay);
                 }
@@ -138,20 +132,7 @@ namespace Hospital_IS.SecretaryView
 
             ObservableCollection<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(Doctors[cbDoctor.SelectedIndex].Id);
 
-            if (checkAppointment(appsByRoom, appsByDoctor))
-            {
-                btnConfirm.IsEnabled = true;
-                txtStartOfApp.Background = new SolidColorBrush(Colors.White);
-                txtEndOfApp.Background = new SolidColorBrush(Colors.White);
-            }
-            else
-            {
-                txtStartOfApp.Background = new SolidColorBrush(Colors.Red);
-                txtEndOfApp.Background = new SolidColorBrush(Colors.Red);
-                btnConfirm.IsEnabled = false;
-            }
-
-
+            confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
         }
 
         private void txtStartOfApp_LostFocus(object sender, RoutedEventArgs e)
@@ -162,25 +143,32 @@ namespace Hospital_IS.SecretaryView
                 DateTime appEnd = appStart.AddMinutes(30);
                 txtEndOfApp.Text = appEnd.ToString("t", DateTimeFormatInfo.InvariantInfo);
 
+
+
                 ObservableCollection<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(Doctors[cbDoctor.SelectedIndex].Id);
                 ObservableCollection<DoctorAppointment> appsByRoom = new ObservableCollection<DoctorAppointment>();
                 if (cbAppType.SelectedIndex == 0)
                     appsByRoom = afs.GetAllByRoom(Doctors[cbDoctor.SelectedIndex].PrimaryRoom);
                 else if (cbAppType.SelectedIndex == 1)
                     appsByRoom = afs.GetAllByRoom(Rooms[cbRoom.SelectedIndex].RoomId);
-                if (checkAppointment(appsByRoom, appsByDoctor))
-                {
-                    btnConfirm.IsEnabled = true;
-                    txtStartOfApp.Background = new SolidColorBrush(Colors.White);
-                    txtEndOfApp.Background = new SolidColorBrush(Colors.White);
-                }
-                else
-                {
-                    txtStartOfApp.Background = new SolidColorBrush(Colors.Red);
-                    txtEndOfApp.Background = new SolidColorBrush(Colors.Red);
-                    btnConfirm.IsEnabled = false;
-                }
 
+                confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
+            }
+        }
+
+        private void confirmAppointmentDate(bool isValid)
+        {
+            if (isValid)
+            {
+                btnConfirm.IsEnabled = true;
+                txtStartOfApp.Background = new SolidColorBrush(Colors.White);
+                txtEndOfApp.Background = new SolidColorBrush(Colors.White);
+            }
+            else
+            {
+                txtStartOfApp.Background = new SolidColorBrush(Colors.Red);
+                txtEndOfApp.Background = new SolidColorBrush(Colors.Red);
+                btnConfirm.IsEnabled = false;
             }
         }
 

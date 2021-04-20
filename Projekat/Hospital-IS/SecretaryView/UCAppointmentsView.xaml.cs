@@ -1,9 +1,6 @@
 ﻿using Model;
 using Storages;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -21,6 +18,18 @@ namespace Hospital_IS.SecretaryView
             InitializeComponent();
             AppointmentFileStorage afs = new AppointmentFileStorage();
             Appointments = afs.GetAll();
+
+            foreach (DoctorAppointment appointment in Appointments)
+            {
+                if (string.IsNullOrEmpty(appointment.AppTypeText))
+                {
+                    if (appointment.Type == AppointmetType.CheckUp)
+                        appointment.AppTypeText = "Pregled";
+                    else if (appointment.Type == AppointmetType.Operation)
+                        appointment.AppTypeText = "Operacija";
+                }
+            }
+
             dataGridAppointments.ItemsSource = Appointments;
             this.DataContext = this;
 

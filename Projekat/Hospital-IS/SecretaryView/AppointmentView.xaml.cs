@@ -23,7 +23,7 @@ namespace Hospital_IS.SecretaryView
             {
                 TimeSpan span = appointment.AppointmentEnd - appointment.AppointmentStart;
                 double minutes = span.TotalMinutes;
-                txtDuration.Text = minutes.ToString();
+                txtDuration.Text = minutes.ToString() + " min";
             }
         }
 

@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
-        Title="Prikaz termina" Height="420" Width="480"
+        Title="Prikaz termina" Height="400" Width="500"
         WindowStartupLocation="CenterScreen"
-        FontSize="17"
+        FontSize="16"
         FontWeight="Light"
         Background="#CCC5CFE5">
     <Grid>
@@ -41,8 +41,22 @@
 
 
 
-        <TextBlock Grid.Column="2" Grid.Row="1" Margin="20 10 20 5" Text="{Binding DocAppointment.NameSurnamePatient}"/>
-        <TextBlock Grid.Column="2" Grid.Row="2" Margin="20 5" Text="{Binding DocAppointment.DoctorFullName}"/>
+        <TextBlock Grid.Column="2" Grid.Row="1" Margin="20 10 20 5">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} {1}">
+                    <Binding Path="DocAppointment.Patient.Name"/>
+                    <Binding Path="DocAppointment.Patient.Surname"/>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <TextBlock FontSize="15" Grid.Column="2" Grid.Row="2" Margin="20 5">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} {1}">
+                    <Binding Path="DocAppointment.Doctor.Name"/>
+                    <Binding Path="DocAppointment.Doctor.Surname"/>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
         <TextBlock Grid.Column="2" Grid.Row="3" Margin="20 5" Text="{Binding DocAppointment.AppTypeText}"/>
         <TextBlock Grid.Column="2" Grid.Row="4" Margin="20 5" Text="{Binding DocAppointment.DateAndTime, StringFormat=\{0:dd.MM.yyyy.  HH:mm\}}"/>
         <TextBlock Grid.Column="2" Grid.Row="5" Margin="20 5" Text="{Binding Duration}"
