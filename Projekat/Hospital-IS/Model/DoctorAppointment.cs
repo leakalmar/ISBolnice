@@ -19,10 +19,11 @@ namespace Model
             this.Doctor = doc;
             this.Patient = patient;
         }
-
+        
         public DoctorAppointment()
         {
         }
+        
         public DoctorAppointment(DateTime dateStart, DateTime dateEnd, AppointmetType type, int room, Doctor doc, Patient patient) : base(dateStart, dateEnd, type, room)
         {
             this.NameSurnamePatient = patient.Name + " " + patient.Surname;
