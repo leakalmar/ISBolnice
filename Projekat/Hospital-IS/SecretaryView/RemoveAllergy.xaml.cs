@@ -18,15 +18,17 @@ namespace Hospital_IS
     public partial class RemoveAllergy : Window
     {
         private UpdatePatientView upv;
+        string allergy;
         public RemoveAllergy(UpdatePatientView upv)
         {
             InitializeComponent();
             this.upv = upv;
+            allergy = (string)upv.dataGridAllergies.SelectedItem;
+            txtConfirmation.Text = "Da li ste sigurni da želite da uklonite alregen \"" + allergy + "\"?";
         }
 
         private void DeleteAllergy(object sender, RoutedEventArgs e)
         {
-            string allergy = (string)upv.dataGridAllergies.SelectedItem;
             upv.Allergies.Remove(allergy);
             upv.Patient.Alergies.Remove(allergy);
             this.Close();

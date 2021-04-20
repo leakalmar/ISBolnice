@@ -89,7 +89,7 @@
         <DataGrid x:Name="dataGridAllergies" ItemsSource="{Binding Allergies}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
                   Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="12" Grid.RowSpan="3" Margin="10 10 40 10" RowHeaderWidth="0"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  Background="Transparent" RowBackground="AliceBlue" FontSize="9">
+                  Background="Transparent" RowBackground="AliceBlue" FontSize="11">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Alergije" Binding="{Binding}" Width="*"/>
             </DataGrid.Columns>
