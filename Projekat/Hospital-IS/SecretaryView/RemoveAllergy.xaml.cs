@@ -26,7 +26,9 @@ namespace Hospital_IS
 
         private void DeleteAllergy(object sender, RoutedEventArgs e)
         {
-            upv.deleteAllergy();
+            string allergy = (string)upv.dataGridAllergies.SelectedItem;
+            upv.Allergies.Remove(allergy);
+            upv.Patient.Alergies.Remove(allergy);
             this.Close();
         }
 

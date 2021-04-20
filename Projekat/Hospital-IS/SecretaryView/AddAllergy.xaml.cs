@@ -28,12 +28,15 @@ namespace Hospital_IS
 
         private void AddAllergies(object sender, RoutedEventArgs e)
         {
-            string Allergies = txtAllergies.Text;
-            string[] Allergy = Allergies.Split(',');
-            for (int i = 0; i < Allergy.Length; i++)
+            if (!string.IsNullOrEmpty(txtAllergies.Text))
             {
-                upv.Allergies.Add(Allergy[i].Trim());
-                upv.Patient.Alergies.Add(Allergy[i].Trim());
+                string Allergies = txtAllergies.Text;
+                string[] Allergy = Allergies.Split(',');
+                for (int i = 0; i < Allergy.Length; i++)
+                {
+                    upv.Allergies.Add(Allergy[i].Trim());
+                    upv.Patient.Alergies.Add(Allergy[i].Trim());
+                }
             }
             this.Close();
         }
