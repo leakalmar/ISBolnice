@@ -21,14 +21,19 @@ namespace Hospital_IS.DoctorView
     public partial class UCScheduledApp : UserControl
     {
         AppointmentFileStorage afs = new AppointmentFileStorage();
-        public UCScheduledApp(Patient patient, bool started)
+        public bool Started { get; set; }
+        public UCScheduledApp(Patient patient)
         {
             InitializeComponent();
             dataGrid.DataContext = afs.GetAllByPatient(patient.Id);
 
-            if (!started)
+            if (!Started)
             {
                 add.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                add.Visibility = Visibility.Visible;
             }
         }
 

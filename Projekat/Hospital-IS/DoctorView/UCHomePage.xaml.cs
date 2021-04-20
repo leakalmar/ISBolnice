@@ -23,26 +23,28 @@ namespace Hospital_IS.DoctorView
         public UserControlHomePage()
         {
             InitializeComponent();
-            docotrAppointments.DataContext = DoctorHomePage.Instance.DoctorAppointment;
 
-            ICollectionView view = CollectionViewSource.GetDefaultView(DoctorHomePage.Instance.DoctorAppointment);
-            view.Filter = delegate (object item)
+            ICollectionView app = new CollectionViewSource { Source = DoctorHomePage.Instance.DoctorAppointment }.View;
+            app.Filter = delegate (object item)
             {
-                return ((DoctorAppointment)item).DateAndTime.Date == DateTime.Now.Date;
+                return ((DoctorAppointment)item).DateAndTime.Date == DateTime.Now.Date & ((DoctorAppointment)item).Report == null;
             };
-            view.SortDescriptions.Add(new SortDescription("DateAndTime", ListSortDirection.Ascending));
+            app.SortDescriptions.Add(new SortDescription("DateAndTime", ListSortDirection.Ascending));
+            docotrAppointments.DataContext = app;
+
         }
 
         private void Patient_Selected(object sender, KeyEventArgs e)
         {
             DoctorAppointment appointment= (DoctorAppointment)docotrAppointments.SelectedItem;
-            DoctorHomePage.Instance.Home.Content = new UCPatientChart(appointment);
+            DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(appointment));
         }
 
         public void Patient_DoubleClicked(object sender, MouseButtonEventArgs e)
         {
+            this.Visibility = Visibility.Collapsed;
             DoctorAppointment ap = (DoctorAppointment)docotrAppointments.SelectedItem;
-            DoctorHomePage.Instance.Home.Content = new UCAppDetail(ap);
+            DoctorHomePage.Instance.Home.Children.Add(new UCAppDetail(ap));
 
 
         }

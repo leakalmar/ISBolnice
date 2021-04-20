@@ -5,23 +5,14 @@ namespace Model
 {
     public class Prescription
     {
-        public ObservableCollection<String> Medicine { get; set; }
+        public Medicine Medicine { get; set; }
+        public DateTime DatePrescribed { get; set; }
 
-        public Prescription()
+
+        public Prescription(Medicine med, DateTime datePrescribed)
         {
-            Medicine = new ObservableCollection<string>();
+            Medicine = med;
+            DatePrescribed = datePrescribed;
         }
-
-        public void AddMedicine(String medicine)
-        {
-            Medicine.Add(medicine);
-        }
-
-        public void RemoveMedicine(String medicine)
-        {
-            Medicine.Remove(medicine);
-        }
-
-
     }
 }

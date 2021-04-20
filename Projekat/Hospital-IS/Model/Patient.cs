@@ -35,7 +35,7 @@ namespace Model
         {
         }
 
-        public MedicalHistory MedicalHistory { get; set; }
+        public MedicalHistory MedicalHistory { get; set; } = new MedicalHistory();
 
 
         public Doctor doctor { get; set; }

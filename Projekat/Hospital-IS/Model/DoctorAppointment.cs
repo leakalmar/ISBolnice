@@ -26,5 +26,7 @@ namespace Model
 
         public Doctor Doctor { get; set; }
 
+        public Model.Report Report { get; set; }
+
     }
 }

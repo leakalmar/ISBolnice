@@ -21,6 +21,9 @@ namespace Hospital_IS.DoctorView
     {
         private static DoctorHomePage instance = null;
         private Doctor doctor;
+        public UserControlHomePage HomePage;
+        public UCAppointments Appointments;
+        private int Last { get; set; } = 0;
 
         public Doctor GetDoctor()
         {
@@ -119,13 +122,13 @@ namespace Hospital_IS.DoctorView
         {
             int index = int.Parse(((RadioButton)e.Source).Uid);
 
-            switch (index)
+            switch (Last)
             {
                 case 0:
-                    Home.Content = new UserControlHomePage();
+                    Home.Children.Remove(HomePage);
                     break;
                 case 1:
-                    Home.Content = new UCAppointments();
+                    Home.Children.Remove(Appointments);
                     break;
                 case 2:
                     break;
@@ -139,8 +142,35 @@ namespace Hospital_IS.DoctorView
                     break;
                 case 7:
                     break;
-                default:
-                    Home.Content = new UserControlHomePage();
+            }
+
+            switch (index)
+            {
+                case 0:
+                    Home.Children.Add(HomePage);
+                    Last = 0;
+                    break;
+                case 1:
+                    Home.Children.Add(Appointments);
+                    Last = 1;
+                    break;
+                case 2:
+                    Last = 2;
+                    break;
+                case 3:
+                    Last = 3;
+                    break;
+                case 4:
+                    Last = 4;
+                    break;
+                case 5:
+                    Last = 5;
+                    break;
+                case 6:
+                    Last = 6;
+                    break;
+                case 7:
+                    Last = 7;
                     break;
             }
         }

@@ -88,12 +88,14 @@ namespace Hospital_IS.DoctorView
             }
             String selected = (String)type.SelectedItem;
 
-            ICollectionView view = CollectionViewSource.GetDefaultView(DoctorHomePage.Instance.DoctorAppointment);
+            ICollectionView view = new CollectionViewSource { Source = DoctorHomePage.Instance.DoctorAppointment }.View;
             view.Filter = null;
             view.Filter = delegate (object item)
             {
                 return ((DoctorAppointment)item).Type.ToString().Equals(selected) & ((DoctorAppointment)item).Room == room.RoomId & ((DoctorAppointment)item).DateAndTime.Date <= endDate.Date & ((DoctorAppointment)item).DateAndTime.Date >= startDate.Date;
             };
+
+            docotrAppointments.DataContext = view;
         }
 
         private void Delete_KeyDown(object sender, KeyEventArgs e)

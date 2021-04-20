@@ -61,7 +61,9 @@ namespace Hospital_IS
                 {
                     DoctortUser = d;
                     DoctorHomePage.Instance.DoctorAppointment = afs.GetAllByDoctor(d.Id);
-                    DoctorHomePage.Instance.Home.Content = new UserControlHomePage();
+                    DoctorHomePage.Instance.HomePage = new UserControlHomePage();
+                    DoctorHomePage.Instance.Appointments = new UCAppointments();
+                    DoctorHomePage.Instance.Home.Children.Add(DoctorHomePage.Instance.HomePage);
                     DoctorHomePage.Instance.Show();
                     this.Close();
                 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Model
@@ -121,6 +122,19 @@ namespace Model
         {
             if (Hospitalization != null)
                 Hospitalization.Clear();
+        }
+
+        public List<Prescription> GetByAppointment(DoctorAppointment docApp)
+        {
+            List<Prescription> ret = new List<Prescription>();
+            foreach(Prescription p in Prescription)
+            {
+                if (p.DatePrescribed.Equals(docApp.DateAndTime))
+                {
+                    ret.Add(p);
+                }
+            }
+            return ret;
         }
     }
 }

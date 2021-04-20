@@ -19,14 +19,19 @@ namespace Hospital_IS.DoctorView
     /// </summary>
     public partial class UCTherapy : UserControl
     {
-        public UCTherapy(Patient patient, bool started)
+        public bool Started{get;set;}
+        public UCTherapy(Patient patient)
         {
             InitializeComponent();
             dataGrid.DataContext = patient;
 
-            if (!started)
+            if (!Started)
             {
                 add.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                add.Visibility = Visibility.Visible;
             }
         }
     }

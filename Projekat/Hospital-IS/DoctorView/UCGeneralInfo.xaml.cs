@@ -19,14 +19,19 @@ namespace Hospital_IS.DoctorView
     /// </summary>
     public partial class UCGeneralInfo : UserControl
     {
-        public UCGeneralInfo(Patient p, bool started)
+        public bool Started { get; set; }
+        public UCGeneralInfo(Patient p)
         {
             InitializeComponent();
             info.DataContext = p;
 
-            if (!started)
+            if (!Started)
             {
                 change.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                change.Visibility = Visibility.Visible;
             }
         }
     }

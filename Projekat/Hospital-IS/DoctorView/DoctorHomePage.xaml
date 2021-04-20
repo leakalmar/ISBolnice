@@ -141,8 +141,10 @@
         </Grid>
 
 
-        <ContentControl x:Name="Home" Grid.Row="2" Grid.Column="3" Grid.RowSpan="3" 
-                        Margin="20,20,15,0"/>
+        <Grid x:Name="Home" Grid.Row="2" Grid.Column="3" Grid.RowSpan="3" 
+                        Margin="20,20,15,0">
+            <ContentPresenter/>
+        </Grid>
 
 
 

@@ -68,5 +68,19 @@ namespace Storages
             throw new NotImplementedException();
         }
 
+        public void UpdateAppointment(DoctorAppointment appointment)
+        {
+            ObservableCollection<DoctorAppointment> docApp = GetAll();
+            foreach(DoctorAppointment d in docApp)
+            {
+                if(d.DateAndTime.Equals(appointment.DateAndTime) & d.Doctor.Id.Equals(appointment.Doctor.Id) & d.Room.Equals(appointment.Room))
+                {
+                    docApp.Remove(d);
+                    docApp.Add(appointment);
+                    SaveAppointment(docApp);
+                    return;
+                }
+            }
+        }
     }
 }

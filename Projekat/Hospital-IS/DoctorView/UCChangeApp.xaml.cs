@@ -107,7 +107,7 @@ namespace Hospital_IS.DoctorView
 
                 }
             }
-            ICollectionView view = CollectionViewSource.GetDefaultView(appList);
+            ICollectionView view = new CollectionViewSource { Source = appList }.View;
             view.Filter = null;
             view.Filter = delegate (object item)
             {
@@ -129,7 +129,7 @@ namespace Hospital_IS.DoctorView
                 //ako ga je pronasao znaci da ne treba da prikazuje
                 return !found;
             };
-            app.DataContext = appList;
+            app.DataContext = view;
 
         }
 
