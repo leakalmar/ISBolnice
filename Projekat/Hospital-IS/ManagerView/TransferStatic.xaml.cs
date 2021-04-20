@@ -36,13 +36,8 @@ namespace Hospital_IS
             DestinationEquip = new ObservableCollection<Equipment>();
 
             DataGridDestination.IsEnabled = false;
-            foreach (Room r in Hospital.Room)
-            {
-                SourceRoom.Add(r);
-                DestinationRoom.Add(r);
-            }
-
-
+            SourceRoom = Hospital.Instance.GetAllRooms();
+            DestinationRoom = Hospital.Instance.GetAllRooms();
 
 
         }
@@ -128,49 +123,69 @@ namespace Hospital_IS
         private void Transfer_Click(object sender, RoutedEventArgs e)
         {
 
+            bool isSucces = Validate();
+            if (isSucces)
+            {
+                int quantity = Convert.ToInt32(QuantityBox.Text);
+                Room roomSource = (Room)ComboSource.SelectedItem;
+
+                Equipment equip = (Equipment)DataGridSource.SelectedItem;
+
+                Room roomDestination = (Room)ComboDestionation.SelectedItem;
+
+                TransferAppointment transferAppointment = new TransferAppointment(roomSource, roomDestination, equip, quantity);
+                transferAppointment.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Provjerite unesene podatke i odabranu opremu");
+            }
+            
+        }
+
+        private bool Validate()
+        {
             bool isEmpty = false;
             if (QuantityBox.Text.Equals(""))
             {
                 isEmpty = true;
             }
 
-
-
-
             bool isIntString = QuantityBox.Text.All(char.IsDigit);
 
             bool isNumberOverZero = true;
             if (!isIntString || isEmpty == true)
             {
-                MessageBox.Show("Unesite pozitivan broj broj");
+
                 isNumberOverZero = false;
             }
             Room roomSource = (Room)ComboSource.SelectedItem;
-            Room roomDestination = (Room)ComboDestionation.SelectedItem;
 
             Equipment equip = (Equipment)DataGridSource.SelectedItem;
 
+            Room roomDestination = (Room)ComboDestionation.SelectedItem;
 
-
+            bool isCorrect = false;
             if (isNumberOverZero)
             {
                 int quantity = Convert.ToInt32(QuantityBox.Text);
-                if (roomSource == null || equip == null)
+                if (roomSource == null || equip == null || roomDestination == null)
                 {
-                    MessageBox.Show("Unesite sve podatke ispravno!");
+
                 }
                 else if (!Hospital.Instance.CheckQuantity(roomSource, equip, quantity))
                 {
-                    MessageBox.Show("Nedovoljna kolicina");
+
                     QuantityBox.Text = "";
                 }
                 else
                 {
-                    TransferAppointment transferAppointment = new TransferAppointment(roomSource, roomDestination, equip, quantity);
-                    transferAppointment.Show();
-                    this.Hide();
+                    isCorrect = true;
                 }
             }
+
+            return isNumberOverZero && isCorrect;
         }
 
         private void refreshGrid(Room sourceRooom, Room destinationRoom)

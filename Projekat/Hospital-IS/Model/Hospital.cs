@@ -17,9 +17,11 @@ namespace Model
         public String Address { get; set; }
         public List<Patient> allPatients { get; set; }
         public List<Equipment> allEquipment { get; set; }
+
         public List<Room> allRooms { get; set; }
         public List<User> allEmployees { get; set; }
 
+        public RoomStorage roomStorage = new RoomStorage();
 
         private static Hospital instance = null;
 
@@ -69,9 +71,9 @@ namespace Model
             throw new NotImplementedException();
         }
 
-        public List<Room> GetAllRooms()
+        public ObservableCollection<Room> GetAllRooms()
         {
-            throw new NotImplementedException();
+            return roomStorage.GetAll();
         }
 
         public List<User> GetAllEmployees()
@@ -283,6 +285,13 @@ namespace Model
             }
 
 
+        }
+
+       
+
+        public ObservableCollection<Room> getRoomByType(RoomType type)
+        {
+            return roomStorage.GetRoomsByType(type);
         }
 
 
