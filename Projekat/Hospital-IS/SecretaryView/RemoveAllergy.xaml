@@ -23,7 +23,7 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Name="txtConfirmation"
                    FontSize="17" TextWrapping="Wrap" 
                    Text="Da li ste sigurni da želite da uklonite alregen?"/>
         

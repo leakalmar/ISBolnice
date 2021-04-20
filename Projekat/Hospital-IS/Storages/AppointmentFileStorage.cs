@@ -63,9 +63,19 @@ namespace Storages
             }
         }
 
-        public List<Appointment> GetAllByRoom(Model.Room room)
+        public ObservableCollection<DoctorAppointment> GetAllByRoom(int roomId)
         {
-            throw new NotImplementedException();
+            String text = File.ReadAllText(this.fileLocation);
+            ObservableCollection<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<ObservableCollection<DoctorAppointment>>(text);
+            ObservableCollection<DoctorAppointment> roomAppointments = new ObservableCollection<DoctorAppointment>();
+            foreach (DoctorAppointment roomApp in allAppointments)
+            {
+                if (roomApp.Room == roomId)
+                {
+                    roomAppointments.Add(roomApp);
+                }
+            }
+            return roomAppointments;
         }
 
         public void UpdateAppointment(DoctorAppointment appointment)

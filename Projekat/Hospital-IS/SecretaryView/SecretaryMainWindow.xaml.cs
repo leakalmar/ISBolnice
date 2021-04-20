@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using Hospital_IS.SecretaryView;
+using System;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -13,6 +12,7 @@ namespace Hospital_IS
     {
         UCPatientsView ucp = new UCPatientsView();
         UCNotificationsView ucn = new UCNotificationsView();
+        UCAppointmentsView uca = new UCAppointmentsView();
 
         private static SecretaryMainWindow instance = null;
 
@@ -82,6 +82,11 @@ namespace Hospital_IS
         private void btnNotifications_Click(object sender, RoutedEventArgs e)
         {
             HomePage.Content = ucn;
+        }
+
+        private void btnAppointments_Click(object sender, RoutedEventArgs e)
+        {
+            HomePage.Content = uca;
         }
     }
 }
