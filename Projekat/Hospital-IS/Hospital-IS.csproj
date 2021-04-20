@@ -82,8 +82,6 @@
     </Resource>
     <Resource Include="Resources\add-row.png" />
     <Resource Include="Resources\bed.png" />
-    <Resource Include="other_facilities.png" />
-    <Resource Include="request.png" />
     <Resource Include="Resources\addroom.png" />
     <Resource Include="Resources\backbutton.png" />
     <Resource Include="Resources\bookmark.png" />
