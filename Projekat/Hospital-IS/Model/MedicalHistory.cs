@@ -157,5 +157,18 @@ namespace Model
                 Therapies.Clear();
             }
         }
+
+        public List<Prescription> GetByAppointment(DoctorAppointment docApp)
+        {
+            List<Prescription> ret = new List<Prescription>();
+            foreach (Prescription p in Prescription)
+            {
+                if (p.DatePrescribed.Equals(docApp.DateAndTime))
+                {
+                    ret.Add(p);
+                }
+            }
+            return ret;
+        }
     }
 }
