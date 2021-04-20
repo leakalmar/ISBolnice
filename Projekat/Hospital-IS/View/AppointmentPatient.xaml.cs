@@ -24,7 +24,7 @@ namespace Hospital_IS.View
             InitializeComponent();
             this.DataContext = this;
             AvailableAppoitments = new ObservableCollection<DoctorAppointment>();
-            TempDoctors = Hospital.Instance.Doctors;
+            Doctors.DataContext = Hospital.Instance.Doctors;
             DateTime today = DateTime.Today;
             Calendar.DisplayDateStart = today;
             Calendar.SelectedDate = today;
@@ -103,41 +103,75 @@ namespace Hospital_IS.View
                 {
                     if (!doc.Id.Equals(doctor.Id))
                     {
-                        DoctorAppointment appTime1 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.Patient);
+                        DoctorAppointment appTime1 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doc, HomePatient.Instance.Patient);
                         appList.Add(appTime1);
-                        DoctorAppointment appTime2 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.Patient);
+                        DoctorAppointment appTime2 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doc, HomePatient.Instance.Patient);
                         appList.Add(appTime2);
-                        DoctorAppointment appTime3 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.Patient);
+                        DoctorAppointment appTime3 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doc, HomePatient.Instance.Patient);
                         appList.Add(appTime3);
-                        DoctorAppointment appTime4 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.Patient);
+                        DoctorAppointment appTime4 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doc, HomePatient.Instance.Patient);
                         appList.Add(appTime4);
-                        DoctorAppointment appTime5 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.Patient);
+                        DoctorAppointment appTime5 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doc, HomePatient.Instance.Patient);
                         appList.Add(appTime5);
-                        DoctorAppointment appTime6 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.Patient);
+                        DoctorAppointment appTime6 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doc, HomePatient.Instance.Patient);
                         appList.Add(appTime6);
                     }
                 }
             }
-
+            
             AvailableAppoitments.Clear();
-            bool flag = false;
+            bool isReserved = false;
+            ObservableCollection<Appointment> roomAppointments = Hospital.Instance.getAppByRoom(doctor.PrimaryRoom);
             foreach (DoctorAppointment ap in appList)
             {
-                foreach (DoctorAppointment hospital in Hospital.Instance.allAppointments)
+                if (TimePriority.IsChecked == true)
                 {
-                    if (ap.DateAndTime == hospital.DateAndTime && ap.Doctor.Id.Equals(hospital.Doctor.Id))
-                        flag = true;
+                    roomAppointments.Clear();
+                    roomAppointments = Hospital.Instance.getAppByRoom(ap.Room);
                 }
-                if (flag == false)
+
+                isReserved = IsAppointmentFree(ap, roomAppointments);
+
+                if (isReserved == false)
                 {
                     AvailableAppoitments.Add(ap);
                 }
                 else
                 {
-                    flag = false;
+                    isReserved = false;
                 }
             }
 
+        }
+
+        private static bool IsAppointmentFree(DoctorAppointment doctorAppointment, ObservableCollection<Appointment> roomAppointments)
+        {
+            bool isReserved = false;
+            foreach (DoctorAppointment hospital in Hospital.Instance.allAppointments)
+            {
+                if (doctorAppointment.DateAndTime == hospital.DateAndTime && doctorAppointment.Doctor.Id.Equals(hospital.Doctor.Id))
+                {
+                    isReserved = true;
+                    return isReserved;
+                }    
+            }
+
+            foreach (Appointment app in roomAppointments)
+            {
+                bool between = IsBetweenDates(doctorAppointment.DateAndTime, doctorAppointment.AppointmentEnd, app);
+                if (between || doctorAppointment.DateAndTime <= app.AppointmentStart && doctorAppointment.AppointmentEnd >= app.AppointmentEnd)
+                {
+
+                    isReserved = true;
+                    return isReserved;
+                }
+            }
+            return isReserved;
+        }
+
+        private static bool IsBetweenDates(DateTime start, DateTime end, Appointment appointment)
+        {
+            return (start >= appointment.AppointmentStart && start < appointment.AppointmentEnd) || (end > appointment.AppointmentStart && end <= appointment.AppointmentEnd);
         }
 
         private void reserveAppointment(object sender, RoutedEventArgs e)

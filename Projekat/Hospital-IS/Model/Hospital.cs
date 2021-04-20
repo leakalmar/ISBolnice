@@ -1,7 +1,9 @@
 using Hospital_IS.Storages;
+using Storages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace Model
 {

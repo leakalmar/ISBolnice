@@ -19,25 +19,7 @@ namespace Model
         public String Employer { get; set; }
         public Boolean Admitted { get; set; }
         public ObservableCollection<String> Alergies { get; set; }
-        public ObservableCollection<Therapy> therapies;
-        public ObservableCollection<Therapy> Therapies
-        {
-            get
-            {
-                if (therapies == null)
-                    therapies = new ObservableCollection<Therapy>();
-                return therapies;
-            }
-            set
-            {
-                RemoveAllTherapies();
-                if (value != null)
-                {
-                    foreach (Therapy therapy in value)
-                        AddTherapy(therapy);
-                }
-            }
-        }
+        
 
         public Boolean IsGuest { get; set; } = false;
 
@@ -98,37 +80,6 @@ namespace Model
                         this.doctor.AddPatient(this);
                     }
                 }
-            }
-        }
-
-        public void AddTherapy(Therapy newTherapy)
-        {
-            if (newTherapy == null)
-                return;
-            if (this.therapies == null)
-                this.therapies = new ObservableCollection<Therapy>();
-            if (!this.therapies.Contains(newTherapy))
-            {
-                this.therapies.Add(newTherapy);
-            }
-        }
-
-        public void RemoveTherapy(Therapy oldTherapy)
-        {
-            if (oldTherapy == null)
-                return;
-            if (this.therapies != null)
-                if (this.therapies.Contains(oldTherapy))
-                {
-                    this.therapies.Remove(oldTherapy);
-                }
-        }
-
-        public void RemoveAllTherapies()
-        {
-            if (therapies != null)
-            {
-                therapies.Clear();
             }
         }
     }

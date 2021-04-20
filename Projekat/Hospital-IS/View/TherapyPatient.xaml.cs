@@ -17,7 +17,7 @@ namespace Hospital_IS.View
         public TherapyPatient()
         {
             InitializeComponent();
-            Therapies = HomePatient.Instance.Patient.Therapies;
+            Therapies = HomePatient.Instance.Patient.MedicalHistory.Therapies;
             this.DataContext = this;
         }
 

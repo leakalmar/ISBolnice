@@ -72,7 +72,7 @@
         <Button x:Name="Notifications" Grid.Column="0" Grid.Row="9" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Cursor="Hand" BorderThickness="1,1,0,1" Click="showNotifications">Obaveštenja</Button>
         
         <Label Content="Terapije:" Grid.Row="1" Grid.Column="1" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
-        <DataGrid x:Name="dataGridTherapy" MouseDoubleClick="showRow" IsReadOnly="True" ItemsSource="{Binding Therapies, Mode=TwoWay}"  CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="2" Grid.RowSpan="9" Margin="10,10,10,300">
+        <DataGrid x:Name="dataGridTherapy" MouseDoubleClick="showRow" IsReadOnly="True" ItemsSource="{Binding Therapies, Mode=TwoWay}"  CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="2" Grid.RowSpan="9" Margin="10,10,10,300" CanUserResizeColumns="False" CanUserResizeRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vreme"  Width="100" Binding="{Binding FirstUsageTime, StringFormat=\{0:0h\}}"/>
                 <DataGridTextColumn Header="Lek"  Width="100" Binding="{Binding Medicine.Name}"/>
