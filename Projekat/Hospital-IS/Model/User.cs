@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Model
@@ -24,6 +25,7 @@ namespace Model
         public String Relationship { get; set; }
         public String Password { get; set; }
         public String Address { get; set; }
+        public List<int> Notifications { get; set; }
 
         public User(int id, string name, string surname, DateTime birthDate, string address, string email, string password)
         {

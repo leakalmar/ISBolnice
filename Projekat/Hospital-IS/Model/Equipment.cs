@@ -10,20 +10,23 @@ namespace Model
         public String Name { get; set; }
         public int Quantity { get; set; }
 
-        public System.Collections.ArrayList room;
+       
 
-        public Equipment(EquiptType equipType, int equiptId, string name, int quantity, ArrayList room)
+        public Equipment(EquiptType equipType, int equiptId, string name, int quantity)
         {
             this.EquipType = equipType;
             this.EquiptId = equiptId;
             this.Name = name;
             this.Quantity = quantity;
-            this.room = room;
+          
         }
 
+        public Equipment()
+        {
 
+        }
 
-        public System.Collections.ArrayList Room
+       /* public System.Collections.ArrayList Room
         {
             get
             {
@@ -82,7 +85,7 @@ namespace Model
                     oldRoom.RemoveEquipment(this);
                 tmpRoom.Clear();
             }
-        }
+        }*/
 
     }
 }

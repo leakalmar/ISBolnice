@@ -20,6 +20,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -35,7 +36,7 @@
             </Border.Background>
         </Border>
 
-        <Border Grid.ColumnSpan="1" Grid.RowSpan="10" BorderBrush="White" >
+        <Border Grid.ColumnSpan="1" Grid.RowSpan="11" BorderBrush="White" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -45,7 +46,7 @@
             </Border.Background>
         </Border>
 
-        <Border CornerRadius="20,0,0,0" Grid.Column="1" Grid.Row="1" Grid.RowSpan="9" >
+        <Border CornerRadius="20,0,0,0" Grid.Column="1" Grid.Row="1" Grid.RowSpan="10" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -67,8 +68,8 @@
         </Button>
         <Button x:Name="AllApp" Grid.Column="0" Grid.Row="7" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="allApp">Moji pregledi</Button>
         <Button x:Name="Therapy" Grid.Column="0" Grid.Row="8" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="showTherapy" Content="Terapije"/>
-
-        <StackPanel Grid.RowSpan="9" Grid.Row="1" Grid.Column="1">
+        <Button x:Name="Notifications" Grid.Column="0" Grid.Row="9" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Cursor="Hand" BorderThickness="1,1,0,1" Click="showNotifications">Obaveštenja</Button>
+        <StackPanel Grid.RowSpan="10" Grid.Row="1" Grid.Column="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="300"/>
@@ -109,7 +110,7 @@
                 <RadioButton x:Name="DoctorPriority" GroupName="Priority" Margin="10,121,600,0" Grid.Column="2" Content="Lekar" FontSize="18" VerticalAlignment="Top"/>
                 <RadioButton x:Name="TimePriority" GroupName="Priority" Margin="150,121,400,0" Grid.Column="2" Content="Vreme" FontSize="18" VerticalAlignment="Top"/>
             </Grid>
-            
+
             <DataGrid x:Name="listOfAppointments" CanUserResizeRows="False" Grid.Column="3" ItemsSource="{Binding AvailableAppoitments, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="2" Margin="110,10,100,50" AutoGenerateColumns="False" Height="233" Width="600">
                 <DataGrid.Resources>
                     <Style TargetType="Border">
@@ -118,9 +119,8 @@
                 </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Vreme i datum" Width="200" Binding="{Binding DateAndTime,StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" CanUserResize="False" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor.Name}" Width="150"/>
-                    <DataGridTextColumn Header="Soba" Binding="{Binding Room}" Width="150"/>
-                    <DataGridCheckBoxColumn Header="Rezervisan" Binding="{Binding Reserved}" Width="*" CanUserResize="False" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor.Name}" Width="200"/>
+                    <DataGridTextColumn Header="Soba" Binding="{Binding Room}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -155,4 +155,3 @@
         </StackPanel>
     </Grid>
 </Window>
-

@@ -13,11 +13,12 @@ namespace Hospital_IS.View
     public partial class TherapyPatient : Window
     {
 
-        private ObservableCollection<Therapy> Therapies { get; set; }
+        public ObservableCollection<Therapy> Therapies { get; set; }
         public TherapyPatient()
         {
             InitializeComponent();
             Therapies = HomePatient.Instance.Patient.Therapies;
+            this.DataContext = this;
         }
 
         private void home(object sender, RoutedEventArgs e)
@@ -40,6 +41,13 @@ namespace Hospital_IS.View
             this.Close();
         }
 
+        private void showNotifications(object sender, RoutedEventArgs e)
+        {
+            PatientNotifications notifications = new PatientNotifications();
+            notifications.Show();
+            this.Close();
+        }
+
         private void logout(object sender, RoutedEventArgs e)
         {
             MainWindow login = new MainWindow();
@@ -51,12 +59,17 @@ namespace Hospital_IS.View
 
         private void showRow(object sender, MouseButtonEventArgs e)
         {
-            var row = ItemsControl.ContainerFromElement((DataGrid)sender,
-                                        e.OriginalSource as DependencyObject) as DataGridRow;
-
-            if (row == null) return;
-
-
+            Therapy therapyInfo = (Therapy)dataGridTherapy.SelectedItem;
+            int usageHourDifference = (int)24/therapyInfo.TimesADay;
+            Name.Content = therapyInfo.Medicine.Name;
+            Quantity.Content = therapyInfo.Quantity;
+            TimesADay.Content = therapyInfo.TimesADay;
+            TimeSpan.Content = usageHourDifference.ToString() + "h";
+            StartTherapy.Text = therapyInfo.TherapyStart.ToString("dd.MM.yyyy.");
+            EndTherapy.Text = therapyInfo.TherapyStart.ToString("dd.MM.yyyy.");
+            Usage.Text = therapyInfo.Medicine.Usage;
+            SideEffects.Text = therapyInfo.Medicine.SideEffects;
+            TherapyInfo.Visibility = Visibility.Visible;
         }
     }
 }

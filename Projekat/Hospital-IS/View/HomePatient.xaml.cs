@@ -33,11 +33,19 @@ namespace Hospital_IS.View
             InitializeComponent();
 
             Patient = MainWindow.PatientUser;
+            Medicine medicine = new Medicine("Bromazepam", "Loš sastav", "Najebao si", "Kad hoćeš");
+            Therapy t = new Therapy(medicine, 1, 2, new DateTime(2021, 4, 19), new DateTime(2021, 5, 1));
+            Medicine medicine1 = new Medicine("Brufen", "Loš sastav", "Najebao si", "Kad hoćeš");
+            Therapy t1 = new Therapy(medicine1, 1, 3, new DateTime(2021, 4, 19), new DateTime(2021, 5, 1));
+            t.FirstUsageTime = 8;
+            t1.FirstUsageTime = 8;
+            Patient.AddTherapy(t);
+            Patient.AddTherapy(t1);
             this.DataContext = this;
             PersonalData.DataContext = Patient;
             DispatcherTimer dispatcherTimer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromMinutes(5)
+                Interval = TimeSpan.FromMinutes(1)
             };
             dispatcherTimer.Tick += timer_Tick;
             dispatcherTimer.Start();
@@ -47,9 +55,16 @@ namespace Hospital_IS.View
         {
             DateTime time= DateTime.Now;
 
-            foreach (Therapy t in Patient.Therapies)
+            foreach (Therapy therapy in Patient.Therapies)
             {
-                
+                int usageHourDifference = (int)24/therapy.TimesADay;
+                for (int i = 0; i < therapy.TimesADay; i++)
+                {
+                    if (time.AddHours(2).Hour == (therapy.FirstUsageTime + i * usageHourDifference) && time.Minute == 0)
+                    {
+                        MessageBox.Show("Vreme je da popijete lek: " + therapy.Medicine.Name);
+                    }
+                }
             }
         }
 
@@ -119,6 +134,13 @@ namespace Hospital_IS.View
             this.Hide();
             AppointmentFileStorage afs = new AppointmentFileStorage();
             afs.SaveAppointment(Hospital.Instance.allAppointments);
+        }
+
+        private void showNotifications(object sender, RoutedEventArgs e)
+        {
+            PatientNotifications notifications = new PatientNotifications();
+            notifications.Show();
+            this.Hide();
         }
     }
 }

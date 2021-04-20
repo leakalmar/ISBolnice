@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Hospital_IS.DoctorView" mc:Ignorable="d"
         d:DesignHeight="555" d:DesignWidth="783">
-    <Grid KeyDown="back_KeyDown">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="auto" />
@@ -88,9 +88,7 @@
                     SelectionMode="Single" IsReadOnly="True" BorderBrush="{x:Null}"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     HorizontalScrollBarVisibility="Disabled" FontSize="14"
-                    RowHeaderWidth="0" CanUserSortColumns="False"
-                    MouseDoubleClick="medicines_MouseDoubleClick"
-                    PreviewKeyDown="addMedicine_KeyDown">
+                    RowHeaderWidth="0" CanUserSortColumns="False">
                 <DataGrid.Resources>
                     <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
                             TargetType="{x:Type DataGridColumnHeader}">

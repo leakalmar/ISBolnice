@@ -28,8 +28,8 @@ namespace Hospital_IS.DoctorView
         public void Report_DoubleClicked(object sender, MouseButtonEventArgs e)
         {
             Model.Report report = (Model.Report)dataGrid.SelectedItem;
-            Window window = new Report(report);
-            window.Show();
+            //Window window = new Report(report);
+            //window.Show();
         }
     }
 }

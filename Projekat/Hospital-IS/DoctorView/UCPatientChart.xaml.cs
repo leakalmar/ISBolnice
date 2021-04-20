@@ -81,14 +81,14 @@ namespace Hospital_IS.DoctorView
 
         private void appointmentBtn(object sender, RoutedEventArgs e)
         {
-            Window w = new DoctorSetAppointment(Appointment);
-            w.Show();
+            //Window w = new DoctorSetAppointment(Appointment);
+            //w.Show();
         }
 
         private void updateBtn_Click(object sender, RoutedEventArgs e)
         {
-            Window w = new DoctorSetAppointment(Appointment, true);
-            w.Show();
+            //Window w = new DoctorSetAppointment(Appointment, true);
+            //w.Show();
         }
 
         private void CancleBtn_Click(object sender, RoutedEventArgs e)

@@ -1,7 +1,9 @@
 using Hospital_IS.Storages;
+using Storages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace Model
 {
@@ -39,6 +41,8 @@ namespace Model
                 return instance;
             }
         }
+
+
 
         public Hospital(string name, string city, string country, string address)
         {
@@ -100,6 +104,67 @@ namespace Model
         }
 
         public ObservableCollection<DoctorAppointment> allAppointments { get; set; }
+        public ObservableCollection<Appointment> AllClassicAppointments { get; set; }
+
+        private ClassicAppointmentStorage classicAppointment = new ClassicAppointmentStorage();
+
+
+        private void getAllClassicAppointment()
+        {
+
+            AllClassicAppointments = classicAppointment.GetAll();
+        }
+
+
+
+
+        public void AddClassicAppointment(Appointment appointemnt)
+        {
+            getAllClassicAppointment();
+            if (appointemnt == null)
+            {
+                return;
+            }
+
+            if (AllClassicAppointments == null)
+            {
+                AllClassicAppointments = new ObservableCollection<Appointment>();
+
+            }
+
+            if (!AllClassicAppointments.Contains(appointemnt))
+            {
+                AllClassicAppointments.Add(appointemnt);
+
+                classicAppointment.SaveAppointment(AllClassicAppointments);
+            }
+        }
+
+        public ObservableCollection<Appointment> getAppByRoom(int roomID)
+        {
+            return classicAppointment.GetAllByRoomId(roomID);
+        }
+
+        public ObservableCollection<Appointment> getAllAppByTwoRoom(int roomIdSource, int roomIdDestination)
+        {
+            ObservableCollection<Appointment> allApointemnts = new ObservableCollection<Appointment>();
+
+
+
+            foreach(Appointment ap in getAppByRoom(roomIdSource))
+            {
+                allApointemnts.Add(ap);
+            }
+
+            foreach (Appointment ap in getAppByRoom(roomIdDestination))
+            {
+                allApointemnts.Add(ap);
+            }
+
+
+            return allApointemnts;
+        }
+
 
         public void AddAppointment(DoctorAppointment docApp)
         {
@@ -184,12 +249,12 @@ namespace Model
             if (Room != null)
                 Room.Clear();
         }
-        public void UpdateRoom(int oldIndex, Room oldRoom)
+        public void UpdateRoom(Room oldRoom)
         {
 
             foreach (Room r in Room)
             {
-                if (r.RoomId == oldIndex)
+                if(r.RoomId == oldRoom.RoomId)
                 {
                     int index = Room.IndexOf(r);
                     Room.Remove(r);
@@ -284,5 +349,85 @@ namespace Model
             }
         }
 
+
+
+
+
+        public bool TransferEquipmentStatic(Room sourceRoom, Room destinationRoom, Equipment equip, int quantity,DateTime startDate, DateTime endDate, String Description)
+        {
+            bool checkQuantity =  CheckQuantity(sourceRoom, equip, quantity);
+            ObservableCollection<Appointment> sourceRoomAppointment = getAppByRoom(sourceRoom.RoomId);
+            bool checkSourceRoomAppointment = checkAppointment(sourceRoomAppointment, startDate, endDate);
+            ObservableCollection<Appointment> destinationRoomAppointment = getAppByRoom(destinationRoom.RoomId);
+
+            bool checkDestionationRoomAppointment = checkAppointment(destinationRoomAppointment, startDate, endDate);
+
+           if(checkSourceRoomAppointment && checkDestionationRoomAppointment)
+            {
+
+                MessageBox.Show("Uspjesno zakazivanje");
+            }
+
+
+
+            return checkQuantity;
+        }
+
+        private bool checkAppointment(ObservableCollection<Appointment> RoomAppointment,DateTime start, DateTime end)
+        {
+            bool isFree = true;
+
+            foreach(Appointment appointment in RoomAppointment)
+            {
+
+                bool between = IsBetweenDates(start, end, appointment);
+                if (between || start < appointment.AppointmentStart && end > appointment.AppointmentEnd)
+                {
+
+                    isFree = false;
+                    break;
+                }
+
+            }
+            return isFree;
+        }
+
+        private static bool IsBetweenDates(DateTime start, DateTime end, Appointment appointment)
+        {
+
+            return (start >= appointment.AppointmentStart && start <= appointment.AppointmentEnd) || (end >= appointment.AppointmentStart && end <= appointment.AppointmentEnd);
+        }
+
+        private static bool CheckQuantity(Room sourceRoom, Equipment equip, int quantity)
+        {
+            foreach (Equipment eq in sourceRoom.Equipment)
+            {
+                if (eq.EquiptId == equip.EquiptId)
+                {
+                    if (equip.Quantity - quantity >= 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool TransferEquipment(Room sourceRoom, Equipment equip, int quantity)
+        {
+            foreach (Equipment eq in sourceRoom.Equipment)
+            {
+                if (eq.EquiptId == equip.EquiptId)
+                {
+                    if (eq.Quantity > quantity)
+                    {
+                        eq.Quantity = eq.Quantity - quantity;
+                        return true;
+                    }
+
+                }
+            }
+            return false;
+        }
     }
 }

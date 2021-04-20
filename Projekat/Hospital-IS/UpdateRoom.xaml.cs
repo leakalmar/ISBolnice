@@ -1,6 +1,15 @@
-﻿using Model;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using Model;
 
 namespace Hospital_IS
 {
@@ -14,30 +23,31 @@ namespace Hospital_IS
         {
             InitializeComponent();
             this.currentRoom = room;
+
             textbox1.Text = Convert.ToString(currentRoom.RoomFloor);
-            textbox2.Text = Convert.ToString(currentRoom.RoomId);
+            textbox2.Text = Convert.ToString(currentRoom.RoomNumber);
             check1.IsChecked = currentRoom.IsFree;
             check2.IsChecked = currentRoom.IsUsable;
             if (currentRoom.Type.Equals(RoomType.RecoveryRoom))
             {
                 combo1.SelectedIndex = 0;
-            }
-            else if (currentRoom.Type.Equals(RoomType.OperationRoom))
-            {
+            } else if (currentRoom.Type.Equals(RoomType.OperationRoom)){
                 combo1.SelectedIndex = 1;
             }
-            else if (currentRoom.Type.Equals(RoomType.ConsultingRoom))
-            {
+             else if (currentRoom.Type.Equals(RoomType.ConsultingRoom)){
                 combo1.SelectedIndex = 2;
+            } else if (currentRoom.Type.Equals(RoomType.StorageRoom))
+            {
+                combo1.SelectedIndex = 3;
             }
 
-
-
+            
+           
         }
 
         private void potvrdi_Click(object sender, RoutedEventArgs e)
         {
-            int roomId = Convert.ToInt32(textbox2.Text);
+            int roomNumber = Convert.ToInt32(textbox2.Text);
             bool zauzeto = (bool)check1.IsChecked;
             bool renoviranje = (bool)check2.IsChecked;
             int roomFloor = Convert.ToInt32(textbox1.Text);
@@ -50,14 +60,17 @@ namespace Hospital_IS
             {
                 tip = RoomType.OperationRoom;
             }
+            else if (combo1.Text.Equals("Magacin"))
+            {
+                tip = RoomType.StorageRoom;
+            }
             else
             {
                 tip = RoomType.ConsultingRoom;
             }
-            Room room = new Room(tip, zauzeto, renoviranje, roomFloor, roomId);
+            Room room = new Room(roomFloor,roomNumber,currentRoom.RoomId,zauzeto,renoviranje,tip);
             Manager.Instance.UpdateRoom(currentRoom.RoomId, room);
-
-
+           
             this.Close();
         }
 

@@ -20,6 +20,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -35,7 +36,7 @@
             </Border.Background>
         </Border>
 
-        <Border Grid.ColumnSpan="1" Grid.RowSpan="10" BorderBrush="White" >
+        <Border Grid.ColumnSpan="1" Grid.RowSpan="11" BorderBrush="White" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -45,7 +46,7 @@
             </Border.Background>
         </Border>
 
-        <Border CornerRadius="20,0,0,0" Grid.Column="1" Grid.Row="1" Grid.RowSpan="9" >
+        <Border CornerRadius="20,0,0,0" Grid.Column="1" Grid.Row="1" Grid.RowSpan="10" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -73,7 +74,8 @@
             </Button.Resources>Moji pregledi
         </Button>
         <Button x:Name="Therapy" Grid.Column="0" Grid.Row="8" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" Click="showTherapy" Content="Terapije"/>
-
+        <Button x:Name="Notifications" Grid.Column="0" Grid.Row="9" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Cursor="Hand" BorderThickness="1,1,0,1" Click="showNotifications">Obaveštenja</Button>
+       
         <Label Content="Lista pregleda:" Grid.Row="1" Grid.Column="1" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
         <DataGrid x:Name="dataGridAppoitment"  CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="2" Grid.RowSpan="9" Margin="10,10,30,30">
             <DataGrid.Columns >

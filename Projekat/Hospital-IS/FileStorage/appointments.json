@@ -1,10 +1,10 @@
 [
   {
-    "room": 0,
     "Cause": null,
     "Detail": null,
     "NameSurnamePatient": "Stefan Beckovic",
     "Patient": {
+      "therapies": null,
       "hospital": null,
       "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7064891+02:00",
@@ -14,7 +14,7 @@
         "Tetanus",
         "Paracetamol"
       ],
-      "Therapies": null,
+      "Therapies": [],
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
@@ -35,6 +35,7 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Zelengoska 15",
+      "Notifications": null,
       "Hospital": null
     },
     "Doctor": {
@@ -66,24 +67,25 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
+      "Notifications": null,
       "Hospital": null
     },
     "Report": null,
     "DateAndTime": "2021-04-25T08:00:00",
     "Date": "4/25/2021",
     "Time": "08:00:00",
-    "Type": 1,
     "Reserved": true,
     "AppointmentStart": "0001-01-01T00:00:00",
     "AppointmentEnd": "0001-01-01T00:00:00",
+    "Type": 1,
     "Room": 1
   },
   {
-    "room": 0,
     "Cause": null,
     "Detail": null,
     "NameSurnamePatient": "Simona Stantic",
     "Patient": {
+      "therapies": null,
       "hospital": null,
       "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
@@ -93,7 +95,7 @@
         "Tetanus",
         "Paracetamol"
       ],
-      "Therapies": null,
+      "Therapies": [],
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
@@ -114,6 +116,7 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
+      "Notifications": null,
       "Hospital": null
     },
     "Doctor": {
@@ -145,24 +148,25 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
+      "Notifications": null,
       "Hospital": null
     },
     "Report": null,
     "DateAndTime": "2021-04-25T10:00:00",
     "Date": "4/25/2021",
     "Time": "10:00:00",
-    "Type": 1,
     "Reserved": true,
     "AppointmentStart": "0001-01-01T00:00:00",
     "AppointmentEnd": "0001-01-01T00:00:00",
+    "Type": 1,
     "Room": 1
   },
   {
-    "room": 0,
     "Cause": null,
     "Detail": null,
     "NameSurnamePatient": "Simona Stantic",
     "Patient": {
+      "therapies": null,
       "hospital": null,
       "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
@@ -172,7 +176,7 @@
         "Tetanus",
         "Paracetamol"
       ],
-      "Therapies": null,
+      "Therapies": [],
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
@@ -193,6 +197,7 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
+      "Notifications": null,
       "Hospital": null
     },
     "Doctor": {
@@ -224,24 +229,25 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
+      "Notifications": null,
       "Hospital": null
     },
     "Report": null,
     "DateAndTime": "2021-04-22T09:30:00",
     "Date": "4/22/2021",
     "Time": "09:30:00",
-    "Type": 1,
     "Reserved": true,
     "AppointmentStart": "0001-01-01T00:00:00",
     "AppointmentEnd": "0001-01-01T00:00:00",
+    "Type": 1,
     "Room": 3
   },
   {
-    "room": 0,
     "Cause": null,
     "Detail": null,
     "NameSurnamePatient": "Simona Stantic",
     "Patient": {
+      "therapies": null,
       "hospital": null,
       "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
@@ -251,10 +257,20 @@
         "Tetanus",
         "Paracetamol"
       ],
-      "Therapies": null,
+      "Therapies": [],
       "IsGuest": false,
       "MedicalHistory": {
-        "Prescription": [],
+        "Prescription": [
+          {
+            "Medicine": {
+              "Name": "Tritace 10mg tableta",
+              "Composition": "",
+              "SideEffects": "",
+              "Usage": ""
+            },
+            "DatePrescribed": "2021-04-20T15:30:00"
+          }
+        ],
         "Test": [],
         "Reports": [],
         "Hospitalization": []
@@ -272,6 +288,7 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
+      "Notifications": null,
       "Hospital": null
     },
     "Doctor": {
@@ -303,16 +320,22 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
+      "Notifications": null,
       "Hospital": null
     },
-    "Report": null,
+    "Report": {
+      "Amnesis": "jyhnbgfdc",
+      "HaveRecipe": true,
+      "HaveTest": false,
+      "ReportId": "4/20/2021 3:30:00 PM"
+    },
     "DateAndTime": "2021-04-20T15:30:00",
     "Date": "4/20/2021",
     "Time": "15:30:00",
-    "Type": 1,
     "Reserved": true,
     "AppointmentStart": "0001-01-01T00:00:00",
     "AppointmentEnd": "0001-01-01T00:00:00",
+    "Type": 1,
     "Room": 3
   }
 ]
