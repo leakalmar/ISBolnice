@@ -36,6 +36,7 @@ namespace Model
             this.Email = email;
             this.Password = password;
             this.Address = address;
+            Notifications = new List<int>();
         }
 
         public User(int id, string name, string surname, DateTime birthDate, string email, string password)
@@ -46,10 +47,12 @@ namespace Model
             BirthDate = birthDate;
             Email = email;
             Password = password;
+            Notifications = new List<int>();
         }
 
         public User()
         {
+            Notifications = new List<int>();
         }
 
         public Boolean LogIn()
@@ -98,7 +101,6 @@ namespace Model
         {
             if (Notifications == null)
                 Notifications = new List<int>();
-
             Notifications.Add(notificationId);
         }
 

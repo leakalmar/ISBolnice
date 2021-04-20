@@ -43,13 +43,15 @@ namespace Hospital_IS.SecretaryView
             NotificationFileStorage nfs = new NotificationFileStorage();
             nfs.SaveNotification(notification);
 
-            appointment.Patient.addNotification(notification.Id);
             PatientFileStorage pfs = new PatientFileStorage();
-            pfs.UpdatePatient(appointment.Patient);
+            Patient patient = pfs.GetPatientById(appointment.Patient.Id);
+            patient.addNotification(notification.Id);
+            pfs.UpdatePatient(patient);
 
-            appointment.Doctor.addNotification(notification.Id);
             FSDoctor fsd = new FSDoctor();
-            fsd.UpdateDoctor(appointment.Doctor);
+            Doctor doctor = fsd.GetByEmail(appointment.Doctor.Email);
+            doctor.addNotification(notification.Id);
+            fsd.UpdateDoctor(doctor);
         }
 
         private void Close(object sender, RoutedEventArgs e)
