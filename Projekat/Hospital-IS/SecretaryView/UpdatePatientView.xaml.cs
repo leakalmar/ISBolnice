@@ -41,16 +41,6 @@ namespace Hospital_IS
             this.DataContext = this;
         }
 
-        internal void deleteAllergy()
-        {
-            if ((string) dataGridAllergies.SelectedItem != null)
-            {
-                string allergy = (string)dataGridAllergies.SelectedItem;
-                Allergies.Remove(allergy);
-                Patient.Alergies.Remove(allergy);
-            }
-        }
-
         private void UpdatePatient(object sender, RoutedEventArgs e)
         {
             if (genComboBox.SelectedIndex == 0)
@@ -74,6 +64,8 @@ namespace Hospital_IS
             catch (Exception ex)
             {
             }
+
+
 
             ucp.dataGridPatients.ItemsSource = null;
             ucp.dataGridPatients.ItemsSource = ucp.Patients;
@@ -102,14 +94,20 @@ namespace Hospital_IS
 
         private void ChangeAllergy(object sender, RoutedEventArgs e)
         {
-            UpdateAllergy ua = new UpdateAllergy();
-            ua.Show();
+            if ((string)dataGridAllergies.SelectedItem != null)
+            {
+                UpdateAllergy ua = new UpdateAllergy(this);
+                ua.Show();
+            }
         }
 
         private void DeleteAllergy(object sender, RoutedEventArgs e)
         {
-            RemoveAllergy ra = new RemoveAllergy(this);
-            ra.Show();
+            if ((string)dataGridAllergies.SelectedItem != null)
+            {
+                RemoveAllergy ra = new RemoveAllergy(this);
+                ra.Show();
+            }
         }
     }
 }

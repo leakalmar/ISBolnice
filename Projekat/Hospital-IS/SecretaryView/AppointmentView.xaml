@@ -1,0 +1,72 @@
+﻿<Window x:Class="Hospital_IS.SecretaryView.AppointmentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
+        mc:Ignorable="d"
+        Title="Prikaz termina" Height="400" Width="500"
+        WindowStartupLocation="CenterScreen"
+        FontSize="16"
+        FontWeight="Light"
+        Background="#CCC5CFE5">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="Pacijent" Margin="20 10 20 5"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="Doktor" Margin="20 5"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Tip pregleda" Margin="20 5"/>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="Datum i vreme pregleda" Margin="20 5"/>
+        <TextBlock Grid.Column="1" Grid.Row="5" Text="Trajanje pregleda" Margin="20 5"/>
+        <TextBlock Grid.Column="1" Grid.Row="6" Text="Soba" Margin="20 5"/>
+        <TextBlock Grid.Column="1" Grid.Row="7" Text="Opis" Margin="20 5"/>
+
+
+
+        <TextBlock Grid.Column="2" Grid.Row="1" Margin="20 10 20 5">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} {1}">
+                    <Binding Path="DocAppointment.Patient.Name"/>
+                    <Binding Path="DocAppointment.Patient.Surname"/>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <TextBlock FontSize="15" Grid.Column="2" Grid.Row="2" Margin="20 5">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} {1}">
+                    <Binding Path="DocAppointment.Doctor.Name"/>
+                    <Binding Path="DocAppointment.Doctor.Surname"/>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <TextBlock Grid.Column="2" Grid.Row="3" Margin="20 5" Text="{Binding DocAppointment.AppTypeText}"/>
+        <TextBlock Grid.Column="2" Grid.Row="4" Margin="20 5" Text="{Binding DocAppointment.DateAndTime, StringFormat=\{0:dd.MM.yyyy.  HH:mm\}}"/>
+        <TextBlock Grid.Column="2" Grid.Row="5" Margin="20 5" Text="{Binding Duration}"
+                   Name="txtDuration"/>
+        <TextBlock Grid.Column="2" Grid.Row="6" Margin="20 5" Text="{Binding DocAppointment.Room}"/>
+        <TextBox Grid.Column="2" Grid.Row="7" Grid.RowSpan="2"  Height="80" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 Margin="20 5" IsEnabled="False" Text="{Binding DocAppointment.Detail}"
+                 VerticalAlignment="Top" FontSize="13" TextWrapping="Wrap"/>
+
+        <Button Grid.Row="8" Grid.ColumnSpan="4" Content="OK"
+                Width="55" Click="Close"/>
+    </Grid>
+</Window>

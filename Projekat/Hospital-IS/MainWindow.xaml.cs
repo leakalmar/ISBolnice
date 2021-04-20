@@ -5,6 +5,7 @@ using Storages;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Hospital_IS
@@ -72,5 +73,23 @@ namespace Hospital_IS
                 this.Close();
             }
         }
+
+        private void email_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (email.Text.Equals("Email"))
+                email.Text = string.Empty;
+        }
+        private void email_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(email.Text))
+                email.Text = "Email";
+        }
+
+        private void password_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (password.Password.ToString().Equals("Password"))
+                password.Password = string.Empty;
+        }
+
     }
 }

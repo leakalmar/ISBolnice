@@ -15,7 +15,7 @@
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -23,11 +23,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Аko dodajete više alergena odvojite ih zarezom."
-                   Margin="0 0 0 5" FontSize="12"/>
+                   Margin="0 0 0 10" FontSize="12"/>
         <TextBlock Grid.Row="2" Grid.Column="1" Text="Unesite alergene:"
                    Margin="0 0 0 5" FontSize="14"/>
         <TextBox Grid.Row="3" Grid.RowSpan="2"  Name="txtAllergies"
-                 Grid.Column="1" Grid.ColumnSpan="2"/>
+                 Grid.Column="1" Grid.ColumnSpan="2" 
+                 ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
         
         <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="4" HorizontalAlignment="Center">
             <Button Content="Potvrdi" Width="55" Height="20" 

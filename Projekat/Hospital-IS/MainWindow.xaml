@@ -36,7 +36,9 @@
                          BorderThickness="0"
                          Width="220"
                          Margin="10 100 0 0"
-                         Opacity="0.7"/>
+                         Opacity="0.7"
+                         GotFocus="email_GotFocus"
+                         LostFocus="email_LostFocus"/>
                  </StackPanel>
                   <Border Height="1" Width="220" Background="White" Opacity="0.7"></Border>
                 <StackPanel>
@@ -48,7 +50,8 @@
                          BorderThickness="0"
                          Width="220"
                          Margin="10 20 0 0"
-                         Opacity="0.7"/>
+                         Opacity="0.7"
+                         GotFocus="password_GotFocus"/>
                 </StackPanel>
                 <Border Height="1" Width="220" Background="White" Opacity="0.7"></Border>
                 <StackPanel>

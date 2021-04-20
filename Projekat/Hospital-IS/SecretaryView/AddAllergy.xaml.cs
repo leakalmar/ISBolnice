@@ -1,16 +1,4 @@
-﻿using Hospital_IS.Storages;
-using Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace Hospital_IS
 {
@@ -28,12 +16,15 @@ namespace Hospital_IS
 
         private void AddAllergies(object sender, RoutedEventArgs e)
         {
-            string Allergies = txtAllergies.Text;
-            string[] Allergy = Allergies.Split(',');
-            for (int i = 0; i < Allergy.Length; i++)
+            if (!string.IsNullOrEmpty(txtAllergies.Text))
             {
-                upv.Allergies.Add(Allergy[i].Trim());
-                upv.Patient.Alergies.Add(Allergy[i].Trim());
+                string Allergies = txtAllergies.Text;
+                string[] Allergy = Allergies.Split(',');
+                for (int i = 0; i < Allergy.Length; i++)
+                {
+                    upv.Allergies.Add(Allergy[i].Trim());
+                    upv.Patient.Alergies.Add(Allergy[i].Trim());
+                }
             }
             this.Close();
         }
