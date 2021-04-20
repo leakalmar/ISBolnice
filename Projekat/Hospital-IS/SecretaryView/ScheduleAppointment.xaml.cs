@@ -17,6 +17,8 @@ namespace Hospital_IS.SecretaryView
     {
         public DoctorAppointment DocAppointment { get; set; } = new DoctorAppointment();
         AppointmentFileStorage afs = new AppointmentFileStorage();
+        ClassicAppointmentStorage cas = new ClassicAppointmentStorage();
+
         private UCAppointmentsView uca;
         public ObservableCollection<Patient> Patients { get; set; } = new ObservableCollection<Patient>();
         public ObservableCollection<Doctor> Doctors { get; set; } = new ObservableCollection<Doctor>();
@@ -126,14 +128,31 @@ namespace Hospital_IS.SecretaryView
         private void txtEndOfApp_LostFocus(object sender, RoutedEventArgs e)
         {
             ObservableCollection<DoctorAppointment> appsByRoom = new ObservableCollection<DoctorAppointment>();
+            ObservableCollection<DoctorAppointment> ClassicAppsByRoom = new ObservableCollection<DoctorAppointment>();
             if (cbAppType.SelectedIndex == 0)
+            {
                 appsByRoom = afs.GetAllByRoom(Doctors[cbDoctor.SelectedIndex].PrimaryRoom);
+                ClassicAppsByRoom = cas.GetAllDocAppointmentsById(Doctors[cbDoctor.SelectedIndex].PrimaryRoom);
+            }
             else if (cbAppType.SelectedIndex == 1)
+            {
                 appsByRoom = afs.GetAllByRoom(Rooms[cbRoom.SelectedIndex].RoomId);
+                ClassicAppsByRoom = cas.GetAllDocAppointmentsById(Rooms[cbRoom.SelectedIndex].RoomId);
+            }
+            appsByRoom = ConcatCollections(appsByRoom, ClassicAppsByRoom);
 
             ObservableCollection<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(Doctors[cbDoctor.SelectedIndex].Id);
 
             confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
+        }
+
+        private ObservableCollection<DoctorAppointment> ConcatCollections(ObservableCollection<DoctorAppointment> apps1, ObservableCollection<DoctorAppointment> apps2) 
+        {
+            foreach (DoctorAppointment appointment in apps2)
+            {
+                apps1.Add(appointment);
+            }
+            return apps1;
         }
 
         private void txtStartOfApp_LostFocus(object sender, RoutedEventArgs e)
@@ -148,10 +167,19 @@ namespace Hospital_IS.SecretaryView
 
                 ObservableCollection<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(Doctors[cbDoctor.SelectedIndex].Id);
                 ObservableCollection<DoctorAppointment> appsByRoom = new ObservableCollection<DoctorAppointment>();
-                if (cbAppType.SelectedIndex == 0) 
+                ObservableCollection<DoctorAppointment> ClassicAppsByRoom = new ObservableCollection<DoctorAppointment>();
+                if (cbAppType.SelectedIndex == 0)
+                {
                     appsByRoom = afs.GetAllByRoom(Doctors[cbDoctor.SelectedIndex].PrimaryRoom);
+                    ClassicAppsByRoom = cas.GetAllDocAppointmentsById(Doctors[cbDoctor.SelectedIndex].PrimaryRoom);
+                }
                 else if (cbAppType.SelectedIndex == 1)
+                {
                     appsByRoom = afs.GetAllByRoom(Rooms[cbRoom.SelectedIndex].RoomId);
+                    ClassicAppsByRoom = cas.GetAllDocAppointmentsById(Rooms[cbRoom.SelectedIndex].RoomId);
+                }
+
+                appsByRoom = ConcatCollections(appsByRoom, ClassicAppsByRoom);
 
                 confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
             }

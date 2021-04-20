@@ -17,6 +17,7 @@ namespace Hospital_IS.SecretaryView
         public DoctorAppointment DocAppointment { get; set; }
 
         AppointmentFileStorage afs = new AppointmentFileStorage();
+        ClassicAppointmentStorage cas = new ClassicAppointmentStorage();
 
         UCAppointmentsView uca;
 
@@ -135,6 +136,9 @@ namespace Hospital_IS.SecretaryView
             ObservableCollection<DoctorAppointment> appsByRoom = afs.GetAllByRoom(DocAppointment.Room);
             ObservableCollection<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(DocAppointment.Doctor.Id);
 
+            ObservableCollection<DoctorAppointment> ClassicAppsByRoom = cas.GetAllDocAppointmentsById(DocAppointment.Room);
+            appsByRoom = ConcatCollections(appsByRoom, ClassicAppsByRoom);
+
             confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
         }
 
@@ -150,8 +154,19 @@ namespace Hospital_IS.SecretaryView
                 ObservableCollection<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(DocAppointment.Doctor.Id);
                 ObservableCollection<DoctorAppointment> appsByRoom = afs.GetAllByRoom(DocAppointment.Room);
 
+                ObservableCollection<DoctorAppointment> ClassicAppsByRoom = cas.GetAllDocAppointmentsById(DocAppointment.Room);
+                appsByRoom = ConcatCollections(appsByRoom, ClassicAppsByRoom);
+
                 confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
             }
+        }
+        private ObservableCollection<DoctorAppointment> ConcatCollections(ObservableCollection<DoctorAppointment> apps1, ObservableCollection<DoctorAppointment> apps2)
+        {
+            foreach (DoctorAppointment appointment in apps2)
+            {
+                apps1.Add(appointment);
+            }
+            return apps1;
         }
 
         private void confirmAppointmentDate(bool isValid)
