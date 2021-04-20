@@ -43,15 +43,15 @@
                   Background="Transparent" RowBackground="AliceBlue">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Doktor" 
-                                    Binding="{Binding Doctor.Name}" Width="*"/>
+                                    Binding="{Binding DoctorFullName}" Width="auto"/>
                 <DataGridTextColumn Header="Pacijent" 
                                     Binding="{Binding NameSurnamePatient}" Width="*"/>
                 <DataGridTextColumn Header="Datum" 
                                     Binding="{Binding DateAndTime, StringFormat=\{0:dd.MM.yyyy.\}}" Width="*"/>
                 <DataGridTextColumn Header="Vreme" 
-                                    Binding="{Binding DateAndTime, StringFormat=\{0:HH:mm.\}}" Width="*"/>
+                                    Binding="{Binding DateAndTime, StringFormat=\{0:HH:mm\}}" Width="*"/>
                 <DataGridTextColumn Header="Tip pregleda" 
-                                    Binding="{Binding AppointmetType}" Width="*"/>
+                                    Binding="{Binding AppTypeText}" Width="*"/>
                 <DataGridTextColumn Header="Soba" 
                                     Binding="{Binding Room}" Width="*"/>
             </DataGrid.Columns>

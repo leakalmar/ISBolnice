@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Model;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Hospital_IS.SecretaryView
 {
@@ -17,9 +9,27 @@ namespace Hospital_IS.SecretaryView
     /// </summary>
     public partial class AppointmentView : Window
     {
-        public AppointmentView()
+        public DoctorAppointment DocAppointment { get; set; }
+        public string Duration { get; set; }
+        public AppointmentView(DoctorAppointment appointment)
         {
             InitializeComponent();
+            this.DocAppointment = appointment;
+            this.DataContext = this;
+
+            if (appointment.Type == AppointmetType.CheckUp)
+                txtDuration.Text = "30 min";
+            else if (appointment.Type == AppointmetType.Operation)
+            {
+                TimeSpan span = appointment.AppointmentEnd - appointment.AppointmentStart;
+                double minutes = span.TotalMinutes;
+                txtDuration.Text = minutes.ToString();
+            }
+        }
+
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

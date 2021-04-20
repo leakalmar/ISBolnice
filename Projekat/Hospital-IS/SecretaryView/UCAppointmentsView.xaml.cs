@@ -15,6 +15,7 @@ namespace Hospital_IS.SecretaryView
     public partial class UCAppointmentsView : UserControl
     {
         public ObservableCollection<DoctorAppointment> Appointments { get; set; }
+
         public UCAppointmentsView()
         {
             InitializeComponent();
@@ -27,7 +28,12 @@ namespace Hospital_IS.SecretaryView
 
         private void ShowAppointment(object sender, RoutedEventArgs e)
         {
-
+            if ((DoctorAppointment)dataGridAppointments.SelectedItem != null)
+            {
+                DoctorAppointment appointment = (DoctorAppointment)dataGridAppointments.SelectedItem;
+                AppointmentView av = new AppointmentView(appointment);
+                av.Show();
+            }
         }
 
         private void UpdateAppointment(object sender, RoutedEventArgs e)
@@ -37,7 +43,8 @@ namespace Hospital_IS.SecretaryView
 
         private void ScheduleAppointment(object sender, RoutedEventArgs e)
         {
-
+            ScheduleAppointment sa = new ScheduleAppointment(this);
+            sa.Show();
         }
     }
 }

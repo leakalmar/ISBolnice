@@ -8,12 +8,26 @@ namespace Model
         public String Detail { get; set; }
 
         public String NameSurnamePatient { get; set; }
+        public String DoctorFullName { get; set; }
+        public String AppTypeText { get; set; }
 
         public DoctorAppointment(DateTime date, AppointmetType type, bool reserved, int room, Doctor doc, Patient patient) : base(date, type, reserved, room)
         {
             this.NameSurnamePatient = patient.Name + " " + patient.Surname;
             this.Doctor = doc;
             this.Patient = patient;
+
+            if (doc != null)
+                this.DoctorFullName = doc.Name + " " + patient.Surname;
+
+            if (type == AppointmetType.CheckUp)
+                this.AppTypeText = "Pregled";
+            else if (type == AppointmetType.Operation)
+                this.AppTypeText = "Operiacija";
+        }
+
+        public DoctorAppointment()
+        {
         }
 
         public void SetAdmitted(Patient patient)
