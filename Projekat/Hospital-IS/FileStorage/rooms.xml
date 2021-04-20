@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfRoom xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Room>
-    <appointment />
     <RoomFloor>1</RoomFloor>
     <RoomNumber>101</RoomNumber>
     <RoomId>1</RoomId>
@@ -22,10 +21,9 @@
         <Quantity>1500</Quantity>
       </Equipment>
     </Equipment>
-    <Appointment />
+    <TransferList />
   </Room>
   <Room>
-    <appointment />
     <RoomFloor>2</RoomFloor>
     <RoomNumber>201</RoomNumber>
     <RoomId>2</RoomId>
@@ -33,10 +31,9 @@
     <IsUsable>false</IsUsable>
     <Type>ConsultingRoom</Type>
     <Equipment />
-    <Appointment />
+    <TransferList />
   </Room>
   <Room>
-    <appointment />
     <RoomFloor>3</RoomFloor>
     <RoomNumber>301</RoomNumber>
     <RoomId>3</RoomId>
@@ -44,6 +41,6 @@
     <IsUsable>true</IsUsable>
     <Type>ConsultingRoom</Type>
     <Equipment />
-    <Appointment />
+    <TransferList />
   </Room>
 </ArrayOfRoom>

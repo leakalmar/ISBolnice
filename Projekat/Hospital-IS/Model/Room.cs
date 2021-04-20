@@ -1,13 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Model
 {
     public class Room
     {
-
-
-       
 
 
         public Room()
@@ -118,66 +116,26 @@ namespace Model
 
 
         }
-        public System.Collections.ArrayList appointment;
+        public List<Transfer> TransferList { get; set; }
 
-        public System.Collections.ArrayList Appointment { get; set; }
-        /*   {
-               get
-               {
-                   if (appointment == null)
-                       appointment = new System.Collections.ArrayList();
-                   return appointment;
-               }
-               set
-               {
-                   RemoveAllAppointment();
-                   if (value != null)
-                   {
-                       foreach (Appointment oAppointment in value)
-                           AddAppointment(oAppointment);
-                   }
-               }
-           }
+        public void AddTransfer(Transfer transfer)
+        {
+            if (transfer == null)
+            {
+                return;
+            }
 
-           public void AddAppointment(Appointment newAppointment)
-           {
-               if (newAppointment == null)
-                   return;
-               if (this.appointment == null)
-                   this.appointment = new System.Collections.ArrayList();
-               if (!this.appointment.Contains(newAppointment))
-               {
-                   this.appointment.Add(newAppointment);
-                   newAppointment.Room = this.RoomId;
-               }
-           }
+            if (TransferList == null)
+            {
+                TransferList = new List<Transfer>();
 
+            }
 
-           public void RemoveAppointment(Appointment oldAppointment)
-           {
-               if (oldAppointment == null)
-                   return;
-               if (this.appointment != null)
-                   if (this.appointment.Contains(oldAppointment))
-                   {
-                       this.appointment.Remove(oldAppointment);
-                       oldAppointment.Room = null;
-                   }
-           }
+            if (!TransferList.Contains(transfer))
+            {
+                TransferList.Add(transfer);
 
-           public void RemoveAllAppointment()
-           {
-               if (appointment != null)
-               {
-                   System.Collections.ArrayList tmpAppointment = new System.Collections.ArrayList();
-                   foreach (Appointment oldAppointment in appointment)
-                       tmpAppointment.Add(oldAppointment);
-                   appointment.Clear();
-                   foreach (Appointment oldAppointment in tmpAppointment)
-                       oldAppointment.Room = null;
-                   tmpAppointment.Clear();
-               }
-           }
-        */
+            }
+        }
     }
 }

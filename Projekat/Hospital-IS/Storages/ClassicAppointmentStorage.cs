@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
+using System.Windows;
 
 namespace Storages
 {
@@ -28,13 +29,18 @@ namespace Storages
         public ObservableCollection<Appointment> GetAllByRoomId(int roomId )
         {
             ObservableCollection<Appointment> appointments = GetAll();
+
+           
+
             ObservableCollection<Appointment> roomAppointment = new ObservableCollection<Appointment>();
 
             foreach (Appointment appointment in appointments)
             {
+              
                 if (appointment.Room == roomId)
                 {
                     roomAppointment.Add(appointment);
+                   
                 }
             }
 

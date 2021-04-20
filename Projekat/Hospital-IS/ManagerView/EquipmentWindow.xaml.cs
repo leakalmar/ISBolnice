@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Model;
 
 namespace Hospital_IS
@@ -40,8 +41,31 @@ namespace Hospital_IS
            
             TempRoom = Hospital.Room;
             TempEquip = new ObservableCollection<Equipment>();
-           
-           
+            DispatcherTimer dispatcherTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMinutes(1)
+            };
+            dispatcherTimer.Tick += timer_Tick;
+            dispatcherTimer.Start();
+
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            DateTime time = DateTime.Now;
+
+            foreach(Room r in Hospital.Room)
+            {
+                foreach(Transfer trans in r.TransferList)
+                {
+                    if(trans.TransferEnd <= time && trans.isMade == false)
+                    {
+                        trans.isMade = true;
+                        Hospital.Instance.TransferStaticEquipment(trans.SourceRoomId, trans.DestinationRoomId, trans.Equip, trans.Quantity);
+                        MessageBox.Show("Desio se transfer");
+                    }
+                }
+            }
         }
 
         private void Room_Click(object sender, RoutedEventArgs e)
@@ -55,11 +79,15 @@ namespace Hospital_IS
             if (room != null)
             {
                 TempEquip.Clear();
-                foreach (Equipment eq in room.Equipment)
+                if(room.Equipment != null)
                 {
+                    foreach (Equipment eq in room.Equipment)
+                    {
 
-                    TempEquip.Add(eq);
+                        TempEquip.Add(eq);
+                    }
                 }
+                
             }
             else
             {

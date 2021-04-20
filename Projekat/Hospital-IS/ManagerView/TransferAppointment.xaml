@@ -57,7 +57,7 @@
             </Button.Resources>
 
             <StackPanel>
-                <Image Source="Resources/backbutton.png" Width="50" Height="50"/>
+                <Image Source="pack://application:,,,/Resources/backbutton.png" Width="50" Height="50"/>
             </StackPanel>
         </Button>
         <DataGrid Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="3" ItemsSource="{Binding AllAppointments}">

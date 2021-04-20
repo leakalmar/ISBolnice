@@ -77,13 +77,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="director.jpg">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="door_open.png" />
-    <Resource Include="employee.jpg">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="hospital.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -122,8 +115,6 @@
     <Resource Include="Resources\tube.png" />
     <Resource Include="Resources\worker.png" />
     <Resource Include="Resources\x-icon.png" />
-    <Resource Include="room_icon.jpg" />
-    <Resource Include="thredots.png" />
   </ItemGroup>
 
 </Project>
