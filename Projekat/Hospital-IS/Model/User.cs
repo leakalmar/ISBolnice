@@ -25,7 +25,7 @@ namespace Model
         public String Relationship { get; set; }
         public String Password { get; set; }
         public String Address { get; set; }
-        public List<int> Notifications { get; set; }
+        public List<int> Notifications { get; set; } = new List<int>();
 
         public User(int id, string name, string surname, DateTime birthDate, string address, string email, string password)
         {
@@ -92,6 +92,14 @@ namespace Model
                     }
                 }
             }
+        }
+
+        public void addNotification(int notificationId)
+        {
+            if (Notifications == null)
+                Notifications = new List<int>();
+
+            Notifications.Add(notificationId);
         }
 
     }

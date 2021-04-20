@@ -50,6 +50,15 @@ namespace Hospital_IS.SecretaryView
 
         }
 
+        private void DeleteAppointment(object sender, RoutedEventArgs e)
+        {
+            if ((DoctorAppointment)dataGridAppointments.SelectedItem != null)
+            {
+                CancelAppointment ca = new CancelAppointment(this);
+                ca.Show();
+            }
+        }
+
         private void ScheduleAppointment(object sender, RoutedEventArgs e)
         {
             ScheduleAppointment sa = new ScheduleAppointment(this);

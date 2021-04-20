@@ -1,7 +1,9 @@
-﻿using Model;
+﻿using Hospital_IS.Storages;
+using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,14 +21,17 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class PatientNotifications : Window
     {
-        List<Notification> notifications = new List<Notification>();
+        public ObservableCollection<Notification> NotificationMessages { get; set; } = new ObservableCollection<Notification>();
+        private NotificationFileStorage nfs = new NotificationFileStorage();
         public PatientNotifications()
         {
             InitializeComponent();
-          //  notifications = HomePatient.Instance.Patient.Notifications;
+            List<Notification> notifications = nfs.GetAllByUser(HomePatient.Instance.Patient);
+            NotificationMessages = new ObservableCollection<Notification>(notifications);
 
-         //   if (notifications.Count > 0)
-             //   ListViewNotifications.ItemsSource = notifications;
+
+            if (NotificationMessages.Count > 0)
+                ListViewNotifications.ItemsSource = NotificationMessages;
         }
 
         private void logout(object sender, RoutedEventArgs e)
@@ -71,14 +76,15 @@ namespace Hospital_IS.View
             Notification n = findNotification(Int32.Parse(button.Tag.ToString()));
             NotificationView nv = new NotificationView(n);
             nv.Show();
+
         }
 
         private Notification findNotification(int id)
         {
-            for (int i = 0; i < notifications.Count; i++)
+            for (int i = 0; i < NotificationMessages.Count; i++)
             {
-                if (id == notifications[i].Id)
-                    return notifications[i];
+                if (id == NotificationMessages[i].Id)
+                    return NotificationMessages[i];
             }
             return null;
         }
