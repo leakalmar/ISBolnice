@@ -21,7 +21,7 @@ namespace Model
         public Appointment(DateTime date, AppointmetType type, bool reserved, int room)
         {
             AppointmentStart = date;
-            if (type == AppointmetType.CheckUp)
+            if (type.Equals(AppointmetType.CheckUp))
             {
                 AppointmentEnd = AppointmentStart.AddMinutes(30);
             }
@@ -29,11 +29,11 @@ namespace Model
             Reserved = reserved;
             Room = room;
         }
-
+        
         public Appointment()
         {
         }
-
+        
         [JsonConstructor]
         public Appointment(DateTime appointmentstart, DateTime appointmentEnd, AppointmetType type, int room)
         {
