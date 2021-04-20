@@ -65,7 +65,7 @@
                         </Style>
                     </Button.Resources>
                     <StackPanel>
-                        <Image Source="Resources/menubar.png" Width="55" Height="64" />
+                        <Image Source="pack://application:,,,/Resources/menubar.png" Width="55" Height="64" />
                     </StackPanel>
                 </Button>
                 <TextBlock Grid.RowSpan="2"  Text="Oprema" Grid.Column="2" Grid.Row ="1" FontWeight="SemiBold" Margin="25,15,0,0" FontSize="25" VerticalAlignment="Top" Foreground="#624cfc"/>
@@ -76,7 +76,7 @@
                         </Style>
                     </Button.Resources>
                     <StackPanel>
-                        <Image Source="Resources/options.png" HorizontalAlignment="Left" Width="55" Height="64" />
+                        <Image Source="pack://application:,,,/Resources/options.png" HorizontalAlignment="Left" Width="55" Height="64" />
                     </StackPanel>
                 </Button>
             </Grid>
@@ -111,7 +111,7 @@
                         </Style>
                     </Button.Resources>
                     <StackPanel>
-                        <Image Source="Resources/addroom.png" HorizontalAlignment="Left" Width="40" Height="35" />
+                        <Image Source="pack://application:,,,/Resources/addroom.png" HorizontalAlignment="Left" Width="40" Height="35" />
                     </StackPanel>
                 </Button>
                 <Button x:Name="EditEquipment" BorderThickness="0" Grid.Column="1" Grid.Row="3" Height="35" Width="45" Background="White" Click = "EditEquipment_Click" >
@@ -121,7 +121,7 @@
                         </Style>
                     </Button.Resources>
                     <StackPanel>
-                        <Image Source="Resources/edit.png" HorizontalAlignment="Left" Width="40" Height="35" />
+                        <Image Source="pack://application:,,,/Resources/edit.png" HorizontalAlignment="Left" Width="40" Height="35" />
                     </StackPanel>
                 </Button>
                 <Button x:Name="DeleteEquipment" BorderThickness="0" Grid.Column="1" Grid.Row="5" Height="35" Width="45" Background="White" Click= "DeleteEquipment_Click">
@@ -131,7 +131,7 @@
                         </Style>
                     </Button.Resources>
                     <StackPanel>
-                        <Image Source="Resources/deleteroom.png" HorizontalAlignment="Left" Width="40" Height="35" />
+                        <Image Source="pack://application:,,,/Resources/deleteroom.png" HorizontalAlignment="Left" Width="40" Height="35" />
                     </StackPanel>
                 </Button>
                 <Button x:Name="TransferEquipment" BorderThickness="0" Grid.Column="1" Grid.Row="7" Height="35" Width="45" Background="White" Click="TransferEquipment_Click"  >
@@ -141,7 +141,7 @@
                         </Style>
                     </Button.Resources>
                     <StackPanel>
-                        <Image Source="Resources/transfer.png" HorizontalAlignment="Left" Width="40" Height="35" />
+                        <Image Source="pack://application:,,,/Resources/transfer.png" HorizontalAlignment="Left" Width="40" Height="35" />
                     </StackPanel>
                 </Button>
                 <TextBlock Grid.Row="1" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text ="Dodaj opremu" Foreground="#624cfc"  />

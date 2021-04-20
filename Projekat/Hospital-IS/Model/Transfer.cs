@@ -7,17 +7,28 @@ namespace Model
     public class Transfer
     {
 
-        public Room sourceRoom { get; set; }
-        public Room destinationRoom { get; set; }
-        public Equipment equip { get; set;}
-        public int quantity { get; set; }
+        public int SourceRoomId { get; set; }
+        public int DestinationRoomId { get; set; }
+        public Equipment Equip { get; set;}
+        public int Quantity { get; set; }
 
-        public Transfer(Room sourceRoom, Room destinationRoom, Equipment equip, int quantity)
+        public DateTime TransferEnd { get; set; }
+
+        public Boolean isMade { get; set; }
+
+        public Transfer(int sourceRoomId, int destinationRoomId, Equipment equip, int quantity, DateTime transferEnd,Boolean isMade)
         {
-            this.sourceRoom = sourceRoom;
-            this.destinationRoom = destinationRoom;
-            this.equip = equip;
-            this.quantity = quantity;
+            SourceRoomId = sourceRoomId;
+            DestinationRoomId = destinationRoomId;
+            Equip = equip;
+            Quantity = quantity;
+            TransferEnd = transferEnd;
+            isMade = isMade;
+        }
+
+        public Transfer()
+        {
+
         }
     }
 }

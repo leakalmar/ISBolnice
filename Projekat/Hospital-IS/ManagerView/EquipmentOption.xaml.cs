@@ -24,21 +24,30 @@ namespace Hospital_IS
         public ObservableCollection<Equipment> TempEquip { get; set; }
         public ObservableCollection<Room> TempRoom { get; set; }
 
-        public Room currentRoom;
+        public static Room currentRoom { get; set; }
 
-        public int currentIndex;
+        public static int currentIndex { get; set; }
         public EquipmentOption(Room room,int index)
         {
+
+           
             InitializeComponent();
             this.DataContext = this;
             TempRoom = Hospital.Room;
-            Combo.SelectedIndex = index;
-            currentRoom = room;
-            currentIndex = index;
             TempEquip = new ObservableCollection<Equipment>();
-            foreach (Equipment eq in room.Equipment)
+            Combo.SelectedIndex = index;
+
+            currentRoom = room;
+            if (currentRoom == null)
             {
-                TempEquip.Add(eq);
+                currentRoom = new Room();
+            }
+            if(currentRoom.Equipment != null)
+            {
+                foreach (Equipment eq in currentRoom.Equipment)
+                {
+                    TempEquip.Add(eq);
+                }
             }
         }
 
@@ -55,10 +64,11 @@ namespace Hospital_IS
         {
 
             currentRoom = (Room)Combo.SelectedItem;
+            
             TempEquip.Clear();
             foreach (Equipment eq in currentRoom.Equipment)
             {
-
+               
                 TempEquip.Add(eq);
             }
         }

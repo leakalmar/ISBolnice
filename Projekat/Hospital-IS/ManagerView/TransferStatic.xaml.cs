@@ -25,8 +25,7 @@ namespace Hospital_IS
 
         public ObservableCollection<Room> DestinationRoom { get; set; }
 
-        private Room currentRoom;
-        private int currentIndex;
+        
         public TransferStatic()
         {
             InitializeComponent();
@@ -92,48 +91,49 @@ namespace Hospital_IS
         private void Transfer_Click(object sender, RoutedEventArgs e)
         {
 
-            bool isIntString = QuantityBox.Text.All(char.IsDigit);
-            int quantity = 0;
-            bool isNumberOverZero = false;
-            if (isIntString)
+            bool isEmpty = false;
+            if (QuantityBox.Text.Equals(""))
             {
-                quantity = Convert.ToInt32(QuantityBox.Text);
-                if (quantity <= 0)
+                isEmpty = true;
+            }
+
+
+
+
+            bool isIntString = QuantityBox.Text.All(char.IsDigit);
+
+            bool isNumberOverZero = true;
+            if (!isIntString || isEmpty == true)
+            {
+                MessageBox.Show("Unesite pozitivan broj broj");
+                isNumberOverZero = false;
+            }
+            Room roomSource = (Room)ComboSource.SelectedItem;
+            Room roomDestination = (Room)ComboDestionation.SelectedItem;
+
+            Equipment equip = (Equipment)DataGridSource.SelectedItem;
+
+
+
+            if (isNumberOverZero)
+            {
+                int quantity = Convert.ToInt32(QuantityBox.Text);
+                if (roomSource == null || equip == null)
                 {
-                    MessageBox.Show("Unesite ispravnu kolicinu");
+                    MessageBox.Show("Unesite sve podatke ispravno!");
+                }
+                else if (!Hospital.Instance.CheckQuantity(roomSource, equip, quantity))
+                {
+                    MessageBox.Show("Nedovoljna kolicina");
                     QuantityBox.Text = "";
                 }
                 else
                 {
-                    isNumberOverZero = true;
+                    TransferAppointment transferAppointment = new TransferAppointment(roomSource, roomDestination, equip, quantity);
+                    transferAppointment.Show();
+                    this.Hide();
                 }
             }
-            else
-            {
-                MessageBox.Show("Unesite samo broj");
-            }
-           
-
-            Room roomSource = (Room)ComboSource.SelectedItem;
-
-            Equipment equip = (Equipment)DataGridSource.SelectedItem;
-
-            Room roomDestination = (Room)ComboDestionation.SelectedItem;
-
-            if(roomDestination == null || roomSource == null || equip == null || isNumberOverZero == false)
-            {
-                MessageBox.Show("Unesite sve podatke");
-            }
-            else {
-
-                TransferAppointment transferAppointment = new TransferAppointment(roomSource, roomDestination, equip, quantity);
-                transferAppointment.Show();
-                this.Hide();
-
-            }
-
-
-
         }
 
         private void refreshGrid(Room sourceRooom, Room destinationRoom)
@@ -167,8 +167,6 @@ namespace Hospital_IS
             EquipmentOption option = new EquipmentOption();
             option.Show();
             this.Hide();
-
-
         }
     }
 }
