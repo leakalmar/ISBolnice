@@ -12,7 +12,7 @@
         <EquipType>Stationary</EquipType>
         <EquiptId>3</EquiptId>
         <Name>hiruski sto</Name>
-        <Quantity>200</Quantity>
+        <Quantity>195</Quantity>
       </Equipment>
       <Equipment>
         <EquipType>Dynamic</EquipType>
@@ -21,7 +21,21 @@
         <Quantity>1500</Quantity>
       </Equipment>
     </Equipment>
-    <TransferList />
+    <TransferList>
+      <Transfer>
+        <SourceRoomId>1</SourceRoomId>
+        <DestinationRoomId>2</DestinationRoomId>
+        <Equip>
+          <EquipType>Stationary</EquipType>
+          <EquiptId>3</EquiptId>
+          <Name>hiruski sto</Name>
+          <Quantity>195</Quantity>
+        </Equip>
+        <Quantity>5</Quantity>
+        <TransferEnd>2021-04-20T19:59:27</TransferEnd>
+        <isMade>true</isMade>
+      </Transfer>
+    </TransferList>
   </Room>
   <Room>
     <RoomFloor>2</RoomFloor>
@@ -30,7 +44,14 @@
     <IsFree>false</IsFree>
     <IsUsable>false</IsUsable>
     <Type>ConsultingRoom</Type>
-    <Equipment />
+    <Equipment>
+      <Equipment>
+        <EquipType>Stationary</EquipType>
+        <EquiptId>3</EquiptId>
+        <Name>hiruski sto</Name>
+        <Quantity>5</Quantity>
+      </Equipment>
+    </Equipment>
     <TransferList />
   </Room>
   <Room>

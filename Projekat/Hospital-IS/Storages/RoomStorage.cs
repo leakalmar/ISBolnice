@@ -39,6 +39,21 @@ namespace Storages
 
         }
 
+
+        public ObservableCollection<Room> GetRoomsByType(RoomType type)
+        {
+            ObservableCollection<Room> allRoomByType = new ObservableCollection<Room>();
+
+            foreach(Room room in GetAll())
+            {
+                if(room.Type == RoomType.StorageRoom)
+                {
+                    allRoomByType.Add(room);
+                }
+            }
+            return allRoomByType;
+        }
+
         public void SaveRooms(ObservableCollection<Room> allRooms)
         {
 

@@ -1,11 +1,8 @@
 [
   {
-    "AppointmentStart": "0001-01-01T00:00:00",
-    "Date": null,
-    "Time": "00:00:00",
-    "Reserved": false,
-    "AppointmentStart": "2021-04-20T17:42:29",
-    "AppointmentEnd": "2021-04-20T18:42:29",
+    "Reserved": true,
+    "AppointmentStart": "2021-04-20T19:57:27",
+    "AppointmentEnd": "2021-04-20T19:59:27",
     "Type": 3,
     "Room": 2
   }

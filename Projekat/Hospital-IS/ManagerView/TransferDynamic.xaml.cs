@@ -34,16 +34,11 @@ namespace Hospital_IS
             currentRoom = room;
             this.DataContext = this;
             SourceRoom = new ObservableCollection<Room>();
-            DestinationRoom = new ObservableCollection<Room>();
             SourceEquip = new ObservableCollection<Equipment>();
             DestinationEquip = new ObservableCollection<Equipment>();
 
-            foreach(Room r in Hospital.Room)
-            {
-                if (r.Type == RoomType.StorageRoom)
-                SourceRoom.Add(r);
-           
-            }
+
+            SourceRoom = Hospital.Instance.getRoomByType(RoomType.StorageRoom);
            
         }
 
@@ -74,50 +69,63 @@ namespace Hospital_IS
 
         private void Transfer_Click(object sender, RoutedEventArgs e)
         {
+           bool isSucess = Validate();
+            if (isSucess)
+            {
+                Room roomSource = (Room)ComboSource.SelectedItem;
 
+                Equipment equip = (Equipment)DataGridSource.SelectedItem;
+                int quantity = Convert.ToInt32(QuantityBox.Text);
+                Hospital.Instance.TransferEquipment(roomSource, equip, quantity);
+                refreshGrid(roomSource);
+                MessageBox.Show("Uspjesan transfer");
+            }
+            else
+            {
+                MessageBox.Show("Provjerite unesene podatke i odabranu opremu");
+            }
+        }
+
+        private bool Validate()
+        {
             bool isEmpty = false;
             if (QuantityBox.Text.Equals(""))
             {
                 isEmpty = true;
             }
-           
-
-
 
             bool isIntString = QuantityBox.Text.All(char.IsDigit);
-            
+
             bool isNumberOverZero = true;
             if (!isIntString || isEmpty == true)
-            { 
-                MessageBox.Show("Unesite pozitivan broj broj");
+            {
+                
                 isNumberOverZero = false;
             }
             Room roomSource = (Room)ComboSource.SelectedItem;
 
             Equipment equip = (Equipment)DataGridSource.SelectedItem;
 
-
+            bool isCorrect = false;
             if (isNumberOverZero)
             {
                 int quantity = Convert.ToInt32(QuantityBox.Text);
                 if (roomSource == null || equip == null)
                 {
-                    MessageBox.Show("Unesite sve podatke ispravno!");
+                   
                 }
                 else if (!Hospital.Instance.CheckQuantity(roomSource, equip, quantity))
                 {
-                    MessageBox.Show("Nedovoljna kolicina");
+                   
                     QuantityBox.Text = "";
                 }
                 else
                 {
-                    Hospital.Instance.TransferEquipment(roomSource, equip, quantity);
-                    refreshGrid(roomSource);
-                    MessageBox.Show("Uspjesan transfer");
+                    isCorrect = true;
                 }
             }
-           
 
+            return isNumberOverZero && isCorrect;
         }
 
         private void refreshGrid(Room sourceRooom)
