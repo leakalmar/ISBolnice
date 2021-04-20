@@ -4,28 +4,8 @@
     "Date": null,
     "Time": "00:00:00",
     "Reserved": false,
-    "AppointmentStart": "2021-04-19T21:30:00",
-    "AppointmentEnd": "2021-04-19T22:30:00",
-    "Type": 1,
-    "Room": 2
-  },
-  {
-    "DateAndTime": "0001-01-01T00:00:00",
-    "Date": null,
-    "Time": "00:00:00",
-    "Reserved": false,
-    "AppointmentStart": "2021-04-19T18:30:00",
-    "AppointmentEnd": "2021-04-19T19:30:00",
-    "Type": 1,
-    "Room": 2
-  },
-  {
-    "DateAndTime": "0001-01-01T00:00:00",
-    "Date": null,
-    "Time": "00:00:00",
-    "Reserved": false,
-    "AppointmentStart": "2021-04-20T02:14:53",
-    "AppointmentEnd": "2021-04-20T02:16:53",
+    "AppointmentStart": "2021-04-20T17:42:29",
+    "AppointmentEnd": "2021-04-20T18:42:29",
     "Type": 3,
     "Room": 2
   }

@@ -26,9 +26,7 @@ namespace Hospital_IS
         public TransferAppointment(Room sourceRoom, Room destinationRoom,Equipment equip,int quantity)
         {
             
-          
-            
-
+        
             this.sourceRoom = sourceRoom;
             this.destinationRoom = destinationRoom;
             this.equip = equip;
@@ -36,9 +34,8 @@ namespace Hospital_IS
 
             InitializeComponent();
             
-            AllAppointments = Hospital.Instance.getAllAppByTwoRoom(destinationRoom.RoomId,sourceRoom.RoomId);
-            int velicina = AllAppointments.Count;
-            MessageBox.Show(Convert.ToString(velicina));
+            AllAppointments = Hospital.Instance.getAllAppByTwoRoom(sourceRoom.RoomId,destinationRoom.RoomId);
+           
             this.DataContext = this;
 
         }
@@ -58,15 +55,16 @@ namespace Hospital_IS
             String endDateAndTime = TransferEnd.Text;
             DateTime dateTimeEnd = Convert.ToDateTime(endDateAndTime);
 
-
+            bool corect = true;
             if(dateTimeEnd < DateTime.Now || dateTimeStart < DateTime.Now || dateTimeStart >= dateTimeEnd)
             {
-                MessageBox.Show("Izaberite odgovarajuci datum i vrijeme");
+               
+                corect = false;
             }
 
            bool isSucces = Hospital.Instance.TransferEquipmentStatic(sourceRoom, destinationRoom, equip, quantity, dateTimeStart, dateTimeEnd, "dobar termin");
 
-            if (!isSucces)
+            if (!isSucces || !corect)
             {
                 MessageBox.Show("Niste uspjeli da zakazete termin");
             }

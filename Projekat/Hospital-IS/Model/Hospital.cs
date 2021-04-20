@@ -128,6 +128,9 @@ namespace Model
                 allApointemnts.Add(ap);
             }
 
+           
+
+          
             foreach (Appointment ap in getAppByRoom(roomIdDestination))
             {
                 allApointemnts.Add(ap);
@@ -365,7 +368,7 @@ namespace Model
             {
 
                 bool between = IsBetweenDates(start, end, appointment);
-                if (between || start < appointment.AppointmentStart && end > appointment.AppointmentEnd)
+                if (between || (start <= appointment.AppointmentStart && end >= appointment.AppointmentEnd))
                 {
 
                     isFree = false;
@@ -379,7 +382,7 @@ namespace Model
         private static bool IsBetweenDates(DateTime start, DateTime end, Appointment appointment)
         {
 
-            return (start >= appointment.AppointmentStart && start <= appointment.AppointmentEnd) || (end >= appointment.AppointmentStart && end <= appointment.AppointmentEnd);
+            return (start > appointment.AppointmentStart && start < appointment.AppointmentEnd) || (end > appointment.AppointmentStart && end < appointment.AppointmentEnd);
         }
 
         public bool CheckQuantity(Room sourceRoom, Equipment equip, int quantity)

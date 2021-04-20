@@ -109,7 +109,7 @@ namespace Hospital_IS
                 isNumberOverZero = false;
             }
             Room roomSource = (Room)ComboSource.SelectedItem;
-            Room roomDestination = (Room)ComboSource.SelectedItem;
+            Room roomDestination = (Room)ComboDestionation.SelectedItem;
 
             Equipment equip = (Equipment)DataGridSource.SelectedItem;
 
