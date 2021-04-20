@@ -77,6 +77,32 @@ namespace Model
             throw new NotImplementedException();
         }
 
+        public List<DoctorAppointment> GetAllAppointmentsByDoctor(Doctor doctor)
+        {
+            List<DoctorAppointment> ret = new List<DoctorAppointment>();
+            foreach(DoctorAppointment dapp in allAppointments)
+            {
+                if (dapp.Doctor.Id.Equals(doctor.Id))
+                {
+                    ret.Add(dapp);
+                }
+            }
+            return ret;
+        }
+
+        public List<Appointment> GetAllAppByRoom(Room room)
+        {
+            List<Appointment> ret = new List<Appointment>();
+            foreach (Appointment app in allAppointments)
+            {
+                if (app.Room.Equals(room.RoomId))
+                {
+                    ret.Add(app);
+                }
+            }
+            return ret;
+        }
+
         public ObservableCollection<DoctorAppointment> allAppointments { get; set; }
         public ObservableCollection<Appointment> AllClassicAppointments { get; set; }
 

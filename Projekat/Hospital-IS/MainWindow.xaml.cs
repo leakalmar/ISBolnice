@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using Hospital_IS.DoctorView;
 
 namespace Hospital_IS
 {
@@ -17,13 +18,19 @@ namespace Hospital_IS
         PatientFileStorage pfs = new PatientFileStorage();
         AppointmentFileStorage afs = new AppointmentFileStorage();
         FSDoctor dfs = new FSDoctor();
+        RoomStorage rfs = new RoomStorage();
         public static Patient PatientUser { get; set; }
         public static Doctor DoctortUser { get; set; }
-        public static ObservableCollection<DoctorAppointment> doctorAppointments { get; set; }
+
+        //Dodala jer mi treba ista referenca svuda kako bi mogla da postavim selektovanje za combobox
+        public static ObservableCollection<Doctor> Doctors { get; set; }
+        public static ObservableCollection<Room> Rooms { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
+            Doctors = dfs.GetAll();
+            Rooms = rfs.GetAll();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -35,8 +42,7 @@ namespace Hospital_IS
         private void Login(object sender, RoutedEventArgs e)
         {
             List<Patient> patients = pfs.GetAll();
-            Hospital.Instance.allAppointments = afs.GetAll();
-            ObservableCollection<Doctor> doctors = dfs.GetAll();
+            Hospital.Instance.allAppointments=afs.GetAll();
 
             foreach (Patient p in patients)
             {
@@ -49,12 +55,15 @@ namespace Hospital_IS
                 }
             }
 
-            foreach (Doctor d in doctors)
+            foreach (Doctor d in Doctors)
             {
                 if (email.Text == d.Email && password.Password.ToString() == d.Password)
                 {
                     DoctortUser = d;
                     DoctorHomePage.Instance.DoctorAppointment = afs.GetAllByDoctor(d.Id);
+                    DoctorHomePage.Instance.HomePage = new UserControlHomePage();
+                    DoctorHomePage.Instance.Appointments = new UCAppointments();
+                    DoctorHomePage.Instance.Home.Children.Add(DoctorHomePage.Instance.HomePage);
                     DoctorHomePage.Instance.Show();
                     this.Close();
                 }

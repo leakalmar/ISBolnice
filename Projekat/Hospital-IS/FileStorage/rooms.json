@@ -13,8 +13,30 @@
   {
     "equipment": null,
     "appointment": null,
-    "RoomFloor": 123,
-    "RoomId": 123,
+    "RoomFloor": 1,
+    "RoomId": 1,
+    "IsFree": true,
+    "IsUsable": false,
+    "Type": 2,
+    "Equipment": [],
+    "Appointment": null
+  },
+  {
+    "equipment": null,
+    "appointment": null,
+    "RoomFloor": 1,
+    "RoomId": 2,
+    "IsFree": true,
+    "IsUsable": false,
+    "Type": 2,
+    "Equipment": [],
+    "Appointment": null
+  },
+  {
+    "equipment": null,
+    "appointment": null,
+    "RoomFloor": 1,
+    "RoomId": 3,
     "IsFree": true,
     "IsUsable": false,
     "Type": 2,

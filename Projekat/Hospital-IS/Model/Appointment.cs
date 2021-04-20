@@ -5,11 +5,11 @@ namespace Model
 {
     public class Appointment
     {
-        
+
         public DateTime DateAndTime { get; set; }
         public String Date { get; set; }
         public TimeSpan Time { get; set; }
-       
+
         public Boolean Reserved { get; set; }
 
         [JsonProperty]
@@ -44,7 +44,7 @@ namespace Model
             Room = room;
         }
 
-        
+
 
     }
 }

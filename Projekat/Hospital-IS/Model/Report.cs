@@ -3,32 +3,20 @@ using System.Collections.ObjectModel;
 
 namespace Model
 {
-    public class Report : DoctorAppointment
+    public class Report
     {
-        public DoctorAppointment DoctorApp { get; set; }
-
+        public String Amnesis { get; set; }
         public bool HaveRecipe { get; set; }
 
         public bool HaveTest { get; set; }
+        public String ReportId { get; set; }
 
-        public Prescription Prescription { get; set; }
-        public ObservableCollection<Test> Test { get; set; }
-
-
-        public Report(DoctorAppointment ap, String cause, String detail, bool recipe = false, bool test = false) : base(ap.DateAndTime, ap.Type, ap.Reserved, ap.Room, ap.Doctor, ap.Patient)
-        {
-            this.DoctorApp = ap;
-            this.Cause = cause;
-            this.Detail = detail;
-            this.HaveRecipe = recipe;
-            this.HaveTest = test;
-            this.Test = new ObservableCollection<Test>();
+        public Report(DateTime appointmentDate) {
+            this.HaveRecipe = false;
+            this.HaveTest = false;
+            this.ReportId = appointmentDate.ToString();
         }
 
-        public void AddTest(Test test)
-        {
-            Test.Add(test);
-        }
 
     }
 }
