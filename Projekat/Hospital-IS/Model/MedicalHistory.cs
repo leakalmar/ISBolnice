@@ -13,6 +13,7 @@ namespace Model
             Test = new ObservableCollection<Test>();
             Reports = new ObservableCollection<Report>();
             Hospitalization = new ObservableCollection<Hospitalization>();
+            Therapies = new ObservableCollection<Therapy>();
         }
 
         public void AddPrescription(Prescription newPrescription)
@@ -121,6 +122,39 @@ namespace Model
         {
             if (Hospitalization != null)
                 Hospitalization.Clear();
+        }
+
+        public ObservableCollection<Therapy> Therapies { get; set; }
+
+        public void AddTherapy(Therapy newTherapy)
+        {
+            if (newTherapy == null)
+                return;
+            if (this.Therapies == null)
+                this.Therapies = new ObservableCollection<Therapy>();
+            if (!this.Therapies.Contains(newTherapy))
+            {
+                this.Therapies.Add(newTherapy);
+            }
+        }
+
+        public void RemoveTherapy(Therapy oldTherapy)
+        {
+            if (oldTherapy == null)
+                return;
+            if (this.Therapies != null)
+                if (this.Therapies.Contains(oldTherapy))
+                {
+                    this.Therapies.Remove(oldTherapy);
+                }
+        }
+
+        public void RemoveAllTherapies()
+        {
+            if (Therapies != null)
+            {
+                Therapies.Clear();
+            }
         }
     }
 }

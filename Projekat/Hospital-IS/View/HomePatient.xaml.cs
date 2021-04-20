@@ -39,8 +39,8 @@ namespace Hospital_IS.View
             Therapy t1 = new Therapy(medicine1, 1, 3, new DateTime(2021, 4, 19), new DateTime(2021, 5, 1));
             t.FirstUsageTime = 8;
             t1.FirstUsageTime = 8;
-            Patient.AddTherapy(t);
-            Patient.AddTherapy(t1);
+            Patient.MedicalHistory.AddTherapy(t);
+            Patient.MedicalHistory.AddTherapy(t1);
             this.DataContext = this;
             PersonalData.DataContext = Patient;
             DispatcherTimer dispatcherTimer = new DispatcherTimer
@@ -55,7 +55,7 @@ namespace Hospital_IS.View
         {
             DateTime time= DateTime.Now;
 
-            foreach (Therapy therapy in Patient.Therapies)
+            foreach (Therapy therapy in Patient.MedicalHistory.Therapies)
             {
                 int usageHourDifference = (int)24/therapy.TimesADay;
                 for (int i = 0; i < therapy.TimesADay; i++)
