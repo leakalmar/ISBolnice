@@ -149,7 +149,7 @@ namespace Hospital_IS.View
             bool isReserved = false;
             foreach (DoctorAppointment hospital in Hospital.Instance.allAppointments)
             {
-                if (doctorAppointment.DateAndTime == hospital.DateAndTime && doctorAppointment.Doctor.Id.Equals(hospital.Doctor.Id))
+                if (doctorAppointment.AppointmentStart == hospital.AppointmentStart && doctorAppointment.Doctor.Id.Equals(hospital.Doctor.Id))
                 {
                     isReserved = true;
                     return isReserved;
@@ -158,8 +158,8 @@ namespace Hospital_IS.View
 
             foreach (Appointment app in roomAppointments)
             {
-                bool between = IsBetweenDates(doctorAppointment.DateAndTime, doctorAppointment.AppointmentEnd, app);
-                if (between || doctorAppointment.DateAndTime <= app.AppointmentStart && doctorAppointment.AppointmentEnd >= app.AppointmentEnd)
+                bool between = IsBetweenDates(doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd, app);
+                if (between || doctorAppointment.AppointmentStart <= app.AppointmentStart && doctorAppointment.AppointmentEnd >= app.AppointmentEnd)
                 {
 
                     isReserved = true;
@@ -193,7 +193,7 @@ namespace Hospital_IS.View
         public void changeAppointment(DoctorAppointment docApp)
         {
             doctor = docApp.Doctor;
-            date = docApp.DateAndTime;
+            date = docApp.AppointmentStart;
             Calendar.SelectedDate = date;
             Calendar.DisplayDateStart = date;
             Calendar.DisplayDateEnd = new DateTime(date.Year, date.Month, date.Day + 3);
@@ -242,7 +242,7 @@ namespace Hospital_IS.View
             {
                 foreach (DoctorAppointment hospital in Hospital.Instance.allAppointments)
                 {
-                    if (ap.DateAndTime == hospital.DateAndTime)
+                    if (ap.AppointmentStart == hospital.AppointmentStart)
                         flag = true;
                 }
                 if (flag == false)

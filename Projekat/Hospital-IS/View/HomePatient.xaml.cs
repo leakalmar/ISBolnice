@@ -99,7 +99,7 @@ namespace Hospital_IS.View
             {
                 MessageBox.Show("Izaberite termin!");
             }
-            else if (doctorApp.DateAndTime.Date < today.AddDays(3))
+            else if (doctorApp.AppointmentStart.Date < today.AddDays(3))
             {
                 MessageBox.Show("Ne možete otkazati termin na manje od 3 dana do termina!");
             }

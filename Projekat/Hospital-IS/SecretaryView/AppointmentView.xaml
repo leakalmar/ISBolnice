@@ -58,7 +58,7 @@
             </TextBlock.Text>
         </TextBlock>
         <TextBlock Grid.Column="2" Grid.Row="3" Margin="20 5" Text="{Binding DocAppointment.AppTypeText}"/>
-        <TextBlock Grid.Column="2" Grid.Row="4" Margin="20 5" Text="{Binding DocAppointment.DateAndTime, StringFormat=\{0:dd.MM.yyyy.  HH:mm\}}"/>
+        <TextBlock Grid.Column="2" Grid.Row="4" Margin="20 5" Text="{Binding DocAppointment.AppointmentStart, StringFormat=\{0:dd.MM.yyyy.  HH:mm\}}"/>
         <TextBlock Grid.Column="2" Grid.Row="5" Margin="20 5" Text="{Binding Duration}"
                    Name="txtDuration"/>
         <TextBlock Grid.Column="2" Grid.Row="6" Margin="20 5" Text="{Binding DocAppointment.Room}"/>

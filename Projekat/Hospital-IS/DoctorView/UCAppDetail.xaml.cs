@@ -33,9 +33,9 @@ namespace Hospital_IS.DoctorView
             ICollectionView view = new CollectionViewSource { Source = DoctorHomePage.Instance.DoctorAppointment }.View;
             view.Filter = delegate (object item)
             {
-                return ((DoctorAppointment)item).DateAndTime.Date == DateTime.Now.Date & ((DoctorAppointment)item).Report == null;
+                return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date & ((DoctorAppointment)item).Report == null;
             };
-            view.SortDescriptions.Add(new SortDescription("DateAndTime", ListSortDirection.Ascending));
+            view.SortDescriptions.Add(new SortDescription("AppointmentStart", ListSortDirection.Ascending));
             docotrAppointments.DataContext = view;
         }
 

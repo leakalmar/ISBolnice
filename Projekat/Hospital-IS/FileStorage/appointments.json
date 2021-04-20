@@ -3,8 +3,8 @@
     "Cause": null,
     "Detail": null,
     "NameSurnamePatient": "Stefan Beckovic",
+    "AppTypeText": null,
     "Patient": {
-      "therapies": [],
       "hospital": null,
       "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7064891+02:00",
@@ -14,13 +14,13 @@
         "Tetanus",
         "Paracetamol"
       ],
-      "Therapies": [],
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
         "Test": [],
         "Reports": [],
-        "Hospitalization": []
+        "Hospitalization": [],
+        "Therapies": []
       },
       "doctor": null,
       "Doctor": null,
@@ -71,9 +71,6 @@
       "Hospital": null
     },
     "Report": null,
-    "DateAndTime": "2021-04-25T08:00:00",
-    "Date": "4/25/2021",
-    "Time": "08:00:00",
     "Reserved": true,
     "AppointmentStart": "2021-04-25T08:00:00",
     "AppointmentEnd": "2021-04-25T08:30:00",
@@ -84,8 +81,8 @@
     "Cause": null,
     "Detail": null,
     "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
     "Patient": {
-      "therapies": [],
       "hospital": null,
       "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
@@ -95,13 +92,13 @@
         "Tetanus",
         "Paracetamol"
       ],
-      "Therapies": [],
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
         "Test": [],
         "Reports": [],
-        "Hospitalization": []
+        "Hospitalization": [],
+        "Therapies": []
       },
       "doctor": null,
       "Doctor": null,
@@ -152,9 +149,6 @@
       "Hospital": null
     },
     "Report": null,
-    "DateAndTime": "2021-04-22T09:30:00",
-    "Date": "4/22/2021",
-    "Time": "09:30:00",
     "Reserved": true,
     "AppointmentStart": "2021-04-22T09:30:00",
     "AppointmentEnd": "2021-04-22T10:00:00",
@@ -165,8 +159,8 @@
     "Cause": null,
     "Detail": null,
     "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
     "Patient": {
-      "therapies": [],
       "hospital": null,
       "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
@@ -176,7 +170,6 @@
         "Tetanus",
         "Paracetamol"
       ],
-      "Therapies": [],
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [
@@ -192,7 +185,8 @@
         ],
         "Test": [],
         "Reports": [],
-        "Hospitalization": []
+        "Hospitalization": [],
+        "Therapies": []
       },
       "doctor": null,
       "Doctor": null,
@@ -248,9 +242,6 @@
       "HaveTest": false,
       "ReportId": "4/20/2021 3:30:00 PM"
     },
-    "DateAndTime": "2021-04-20T15:30:00",
-    "Date": "4/20/2021",
-    "Time": "15:30:00",
     "Reserved": true,
     "AppointmentStart": "2021-04-20T15:30:00",
     "AppointmentEnd": "2021-04-20T16:00:00",
@@ -261,8 +252,8 @@
     "Cause": null,
     "Detail": null,
     "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
     "Patient": {
-      "therapies": [],
       "hospital": null,
       "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
@@ -272,13 +263,13 @@
         "Tetanus",
         "Paracetamol"
       ],
-      "Therapies": [],
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
         "Test": [],
         "Reports": [],
-        "Hospitalization": []
+        "Hospitalization": [],
+        "Therapies": []
       },
       "doctor": null,
       "Doctor": null,
@@ -329,9 +320,6 @@
       "Hospital": null
     },
     "Report": null,
-    "DateAndTime": "2021-04-20T09:30:00",
-    "Date": "4/20/2021",
-    "Time": "09:30:00",
     "Reserved": true,
     "AppointmentStart": "2021-04-20T09:30:00",
     "AppointmentEnd": "2021-04-20T10:00:00",
@@ -342,8 +330,8 @@
     "Cause": null,
     "Detail": null,
     "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
     "Patient": {
-      "therapies": [],
       "hospital": null,
       "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
@@ -353,13 +341,13 @@
         "Tetanus",
         "Paracetamol"
       ],
-      "Therapies": [],
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
         "Test": [],
         "Reports": [],
-        "Hospitalization": []
+        "Hospitalization": [],
+        "Therapies": []
       },
       "doctor": null,
       "Doctor": null,
@@ -410,9 +398,6 @@
       "Hospital": null
     },
     "Report": null,
-    "DateAndTime": "2021-04-22T09:00:00",
-    "Date": "4/22/2021",
-    "Time": "00:00:00",
     "Reserved": true,
     "AppointmentStart": "2021-04-22T09:00:00",
     "AppointmentEnd": "2021-04-22T09:30:00",

@@ -70,7 +70,7 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Datum i Vreme" Binding="{Binding DateAndTime}" 
+                <DataGridTextColumn Header="Datum i Vreme" Binding="{Binding AppointmentStart}" 
                                         CanUserResize="False" Width="0.05*"/>
                 <DataGridTextColumn Header="Pacijent" Binding="{Binding NameSurnamePatient}" 
                                         CanUserResize="False" Width="0.05*"/>

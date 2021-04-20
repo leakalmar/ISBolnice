@@ -73,10 +73,10 @@
                     </DataGrid.Resources>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Datum"
-                                Binding="{Binding DateAndTime.Date, StringFormat=\{0:MM/dd/yyyy\}}"
+                                Binding="{Binding AppointmentStart.Date, StringFormat=\{0:MM/dd/yyyy\}}"
                                 CanUserResize="False" Width="0.05*" />
                         <DataGridTextColumn Header="Vreme"
-                                Binding="{Binding DateAndTime.TimeOfDay}"
+                                Binding="{Binding AppointmentStart.TimeOfDay}"
                                 CanUserResize="False" Width="0.05*" />
                     </DataGrid.Columns>
                     <DataGrid.RowStyle>

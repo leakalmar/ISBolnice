@@ -27,9 +27,9 @@ namespace Hospital_IS.DoctorView
             
             app.Filter = delegate (object item)
             {
-                return ((DoctorAppointment)item).DateAndTime.Date == DateTime.Now.Date & ((DoctorAppointment)item).Report == null;
+                return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date & ((DoctorAppointment)item).Report == null;
             };
-            app.SortDescriptions.Add(new SortDescription("DateAndTime", ListSortDirection.Ascending));
+            app.SortDescriptions.Add(new SortDescription("AppointmentStart", ListSortDirection.Ascending));
             docotrAppointments.DataContext = app;
 
         }
@@ -54,9 +54,9 @@ namespace Hospital_IS.DoctorView
             ICollectionView app = CollectionViewSource.GetDefaultView(DoctorHomePage.Instance.DoctorAppointment); 
             app.Filter = delegate (object item)
             {
-                return ((DoctorAppointment)item).DateAndTime.Date == DateTime.Now.Date & ((DoctorAppointment)item).Report == null;
+                return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date & ((DoctorAppointment)item).Report == null;
             };
-            app.SortDescriptions.Add(new SortDescription("DateAndTime", ListSortDirection.Ascending));
+            app.SortDescriptions.Add(new SortDescription("AppointmentStart", ListSortDirection.Ascending));
             docotrAppointments.DataContext = app;
         }
     }

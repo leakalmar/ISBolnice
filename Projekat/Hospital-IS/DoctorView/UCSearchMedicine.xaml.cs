@@ -61,7 +61,7 @@ namespace Hospital_IS.DoctorView
             if(e.Key.Equals(Key.Enter))
             {
                 KeyValuePair<Medicine, bool> med = (KeyValuePair<Medicine, bool>)medicines.SelectedItem;
-                Appointment.Patient.MedicalHistory.AddPrescription(new Prescription(med.Key,Appointment.DateAndTime));
+                Appointment.Patient.MedicalHistory.AddPrescription(new Prescription(med.Key,Appointment.AppointmentStart));
                 added[med.Key] = true;
                 medicines.Items.Refresh();
                 search.Focus();
@@ -111,7 +111,7 @@ namespace Hospital_IS.DoctorView
             if (!med.Value)
             {
                 
-                Appointment.Patient.MedicalHistory.AddPrescription(new Prescription(med.Key, Appointment.DateAndTime));
+                Appointment.Patient.MedicalHistory.AddPrescription(new Prescription(med.Key, Appointment.AppointmentStart));
                 added[med.Key] = true;
                 medicines.Items.Refresh();
                 search.Focus();

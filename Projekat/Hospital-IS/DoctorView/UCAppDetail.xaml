@@ -29,7 +29,7 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Vreme" Binding="{Binding DateAndTime.TimeOfDay}" 
+                    <DataGridTextColumn Header="Vreme" Binding="{Binding AppointmentStart.TimeOfDay}" 
                                         CanUserResize="False" Width="0.05*" SortDirection="Ascending"/>
                     <DataGridTextColumn Header="Pacijent" Binding="{Binding NameSurnamePatient}" 
                                         CanUserResize="False" Width="0.05*"/>

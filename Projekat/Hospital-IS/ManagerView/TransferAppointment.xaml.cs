@@ -49,11 +49,11 @@ namespace Hospital_IS
 
         private void AffirmTransfer_Click(object sender, RoutedEventArgs e)
         {
-            String startDateAndTime = TransferStart.Text;
-            DateTime dateTimeStart = Convert.ToDateTime(startDateAndTime);
+            String startAppointmentStart = TransferStart.Text;
+            DateTime dateTimeStart = Convert.ToDateTime(startAppointmentStart);
 
-            String endDateAndTime = TransferEnd.Text;
-            DateTime dateTimeEnd = Convert.ToDateTime(endDateAndTime);
+            String endAppointmentStart = TransferEnd.Text;
+            DateTime dateTimeEnd = Convert.ToDateTime(endAppointmentStart);
 
             bool corect = true;
             if(dateTimeEnd < DateTime.Now || dateTimeStart < DateTime.Now || dateTimeStart >= dateTimeEnd)

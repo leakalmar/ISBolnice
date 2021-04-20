@@ -163,7 +163,7 @@ namespace Model
             List<Prescription> ret = new List<Prescription>();
             foreach (Prescription p in Prescription)
             {
-                if (p.DatePrescribed.Equals(docApp.DateAndTime))
+                if (p.DatePrescribed.Equals(docApp.AppointmentStart))
                 {
                     ret.Add(p);
                 }

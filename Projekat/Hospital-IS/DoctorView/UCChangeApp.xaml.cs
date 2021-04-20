@@ -114,14 +114,14 @@ namespace Hospital_IS.DoctorView
                 bool found = false;
                 foreach (DoctorAppointment dapp in Hospital.Instance.GetAllAppointmentsByDoctor(doc))
                 {
-                    found = ((DoctorAppointment)item).Room.Equals(room.RoomId) & ((DoctorAppointment)item).DateAndTime.Equals(dapp.DateAndTime);
+                    found = ((DoctorAppointment)item).Room.Equals(room.RoomId) & ((DoctorAppointment)item).AppointmentStart.Equals(dapp.AppointmentStart);
                 }
 
                 if (!found) 
                 {
                     foreach (Appointment app in Hospital.Instance.GetAllAppByRoom(room))
                     {
-                        found = app.AppointmentStart > ((DoctorAppointment)item).DateAndTime & app.AppointmentEnd < ((DoctorAppointment)item).DateAndTime;
+                        found = app.AppointmentStart > ((DoctorAppointment)item).AppointmentStart & app.AppointmentEnd < ((DoctorAppointment)item).AppointmentStart;
                     }
                 }
                 
@@ -184,7 +184,7 @@ namespace Hospital_IS.DoctorView
         //    {
         //        foreach (DoctorAppointment hospital in Hospital.Instance.GetAllAppByRoom(room))
         //        {
-        //            if (ap.DateAndTime == hospital.DateAndTime)
+        //            if (ap.AppointmentStart == hospital.AppointmentStart)
         //                flag = true;
         //        }
         //        if (flag == false)
@@ -252,7 +252,7 @@ namespace Hospital_IS.DoctorView
         //    {
         //        foreach (DoctorAppointment hospital in Hospital.Instance.allAppointments)
         //        {
-        //            if (ap.DateAndTime == hospital.DateAndTime)
+        //            if (ap.AppointmentStart == hospital.AppointmentStart)
         //                flag = true;
         //        }
         //        if (flag == false)

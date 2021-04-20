@@ -29,7 +29,7 @@ namespace Hospital_IS.DoctorView
 
             if (appointment.Report == null & start)
             {
-                appointment.Report = new Model.Report(appointment.DateAndTime);
+                appointment.Report = new Model.Report(appointment.AppointmentStart);
             }
             Appointment = appointment;
             Report = new UCReport(appointment);

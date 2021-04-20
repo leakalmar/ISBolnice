@@ -71,7 +71,7 @@ namespace Hospital_IS.SecretaryView
             try
             {
                 DateTime appDate = DateTime.ParseExact(txtAppDate.Text, "dd.MM.yyyy.", CultureInfo.InvariantCulture);
-                DocAppointment.DateAndTime = appDate;
+                DocAppointment.AppointmentStart = appDate;
 
                 DateTime appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
                 DocAppointment.AppointmentStart = appDate.Date.Add(appStart.TimeOfDay);
@@ -86,7 +86,7 @@ namespace Hospital_IS.SecretaryView
                     DocAppointment.AppointmentEnd = appDate.Date.Add(appEnd.TimeOfDay);
                 }
 
-                DocAppointment.DateAndTime = appDate.Date.Add(appStart.TimeOfDay);
+                DocAppointment.AppointmentStart = appDate.Date.Add(appStart.TimeOfDay);
             }
             catch (Exception ex)
             {

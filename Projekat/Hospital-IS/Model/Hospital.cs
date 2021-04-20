@@ -200,7 +200,7 @@ namespace Model
             {
                 foreach (DoctorAppointment doctorAppointment in allAppointments)
                 {
-                    if (docApp.DateAndTime.Equals(doctorAppointment.DateAndTime))
+                    if (docApp.AppointmentStart.Equals(doctorAppointment.AppointmentStart))
                     {
                         allAppointments.Remove(doctorAppointment);
                         break;

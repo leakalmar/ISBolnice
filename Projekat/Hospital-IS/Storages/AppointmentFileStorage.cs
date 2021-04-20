@@ -83,7 +83,7 @@ namespace Storages
             ObservableCollection<DoctorAppointment> docApp = GetAll();
             foreach(DoctorAppointment d in docApp)
             {
-                if(d.DateAndTime.Equals(appointment.DateAndTime) & d.Doctor.Id.Equals(appointment.Doctor.Id) & d.Room.Equals(appointment.Room))
+                if(d.AppointmentStart.Equals(appointment.AppointmentStart) & d.Doctor.Id.Equals(appointment.Doctor.Id) & d.Room.Equals(appointment.Room))
                 {
                     docApp.Remove(d);
                     docApp.Add(appointment);

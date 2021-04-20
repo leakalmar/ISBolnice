@@ -33,7 +33,7 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Datum" Binding="{Binding DateAndTime}" 
+                <DataGridTextColumn Header="Datum" Binding="{Binding AppointmentStart}" 
                                         CanUserResize="False" Width="0.05*"/>
                 <DataGridTextColumn Header="Test" Binding="{Binding Type}" 
                                         CanUserResize="False" Width="0.05*"/>

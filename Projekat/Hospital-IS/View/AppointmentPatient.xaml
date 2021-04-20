@@ -131,7 +131,7 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Vreme i datum" Width="200" Binding="{Binding DateAndTime,StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" CanUserResize="False" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Vreme i datum" Width="200" Binding="{Binding AppointmentStart,StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" CanUserResize="False" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor.Surname}" Width="200"/>
                     <DataGridTextColumn Header="Soba" Binding="{Binding Room}" Width="*"/>
                 </DataGrid.Columns>

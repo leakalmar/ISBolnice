@@ -92,7 +92,7 @@ namespace Hospital_IS.DoctorView
             view.Filter = null;
             view.Filter = delegate (object item)
             {
-                return ((DoctorAppointment)item).Type.ToString().Equals(selected) & ((DoctorAppointment)item).Room == room.RoomId & ((DoctorAppointment)item).DateAndTime.Date <= endDate.Date & ((DoctorAppointment)item).DateAndTime.Date >= startDate.Date;
+                return ((DoctorAppointment)item).Type.ToString().Equals(selected) & ((DoctorAppointment)item).Room == room.RoomId & ((DoctorAppointment)item).AppointmentStart.Date <= endDate.Date & ((DoctorAppointment)item).AppointmentStart.Date >= startDate.Date;
             };
 
             docotrAppointments.DataContext = view;
@@ -103,7 +103,7 @@ namespace Hospital_IS.DoctorView
             if(e.Key == Key.Delete)
             {
                 DoctorAppointment app = (DoctorAppointment)docotrAppointments.SelectedItem;
-                if(app.DateAndTime > DateTime.Now.AddDays(1))
+                if(app.AppointmentStart > DateTime.Now.AddDays(1))
                 {
                     bool dialog = (bool)new ExitMess("Da li želite da otkažete termin?").ShowDialog();
                     if (dialog)

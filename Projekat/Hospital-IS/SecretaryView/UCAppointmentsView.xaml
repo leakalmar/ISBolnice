@@ -59,9 +59,9 @@
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Datum" 
-                                    Binding="{Binding DateAndTime, StringFormat=\{0: dd.MM.yyyy. \}}" Width="auto"/>
+                                    Binding="{Binding AppointmentStart, StringFormat=\{0: dd.MM.yyyy. \}}" Width="auto"/>
                 <DataGridTextColumn Header="Vreme" 
-                                    Binding="{Binding DateAndTime, StringFormat=\{0: HH:mm \}}" Width="auto"/>
+                                    Binding="{Binding AppointmentStart, StringFormat=\{0: HH:mm \}}" Width="auto"/>
                 <DataGridTextColumn Header="Tip pregleda" 
                                     Binding="{Binding AppTypeText}" Width="auto"/>
                 <DataGridTextColumn Header="Soba" 

@@ -6,10 +6,6 @@ namespace Model
     public class Appointment
     {
 
-        public DateTime DateAndTime { get; set; }
-        public String Date { get; set; }
-        public TimeSpan Time { get; set; }
-
         public Boolean Reserved { get; set; }
 
         [JsonProperty]
@@ -24,9 +20,11 @@ namespace Model
 
         public Appointment(DateTime date, AppointmetType type, bool reserved, int room)
         {
-            DateAndTime = date;
-            Date = date.ToShortDateString();
-            Time = date.TimeOfDay;
+            AppointmentStart = date;
+            if (type == AppointmetType.CheckUp)
+            {
+                AppointmentEnd = AppointmentStart.AddMinutes(30);
+            }
             Type = type;
             Reserved = reserved;
             Room = room;
