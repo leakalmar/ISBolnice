@@ -1,9 +1,11 @@
+using Hospital_IS.DoctorView;
 using Hospital_IS.Storages;
 using Storages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Model
 {
@@ -77,9 +79,9 @@ namespace Model
             throw new NotImplementedException();
         }
 
-        public List<DoctorAppointment> GetAllAppointmentsByDoctor(Doctor doctor)
+        public ObservableCollection<Appointment> GetAllAppointmentsByDoctor(Doctor doctor)
         {
-            List<DoctorAppointment> ret = new List<DoctorAppointment>();
+            ObservableCollection<Appointment> ret = new ObservableCollection<Appointment>();
             foreach(DoctorAppointment dapp in allAppointments)
             {
                 if (dapp.Doctor.Id.Equals(doctor.Id))
@@ -373,6 +375,44 @@ namespace Model
             return checkQuantity;
         }
 
+        //public ObservableCollection<DoctorAppointment> CheckDoctorAppointments(ObservableCollection<DoctorAppointment> newAppointments, int RoomId)
+        //{
+        //    ObservableCollection<DoctorAppointment> ret = new ObservableCollection<DoctorAppointment>();
+        //    foreach (DoctorAppointment d in newAppointments)
+        //    {
+        //        if (d.Room != RoomId)
+        //        {
+        //            ret.Add(d);
+        //        }
+        //        bool checkDoctor = checkAppointment(GetAllAppointmentsByDoctor(d.Doctor), d.AppointmentStart, d.AppointmentEnd);
+        //        if(checkDoctor)
+        //        {
+        //            ret.Add(d);
+        //        }
+        //    }
+        //    return ret;
+
+        //}
+
+        public ObservableCollection<DoctorAppointment> CheckDoctorAppointments(ObservableCollection<DoctorAppointment> newAppointments, int roomId, SelectedDatesCollection dates)
+        {
+            ObservableCollection<DoctorAppointment> ret = new ObservableCollection<DoctorAppointment>();
+            foreach (DateTime d in dates)
+            {
+                foreach (DoctorAppointment ap in newAppointments)
+                {
+                    if (ap.AppointmentStart.Date.Equals(d.Date) && ap.Room.Equals(roomId))
+                    {
+                        if (Hospital.Instance.checkAppointment(Hospital.Instance.GetAllAppointmentsByDoctor(DoctorHomePage.Instance.GetDoctor()), ap.AppointmentStart, ap.AppointmentEnd))
+                        {
+                            ret.Add(ap);
+                        }
+                    }
+                }
+            }
+            return ret;
+        }
+
         private bool checkAppointment(ObservableCollection<Appointment> RoomAppointment,DateTime start, DateTime end)
         {
             bool isFree = true;
@@ -381,7 +421,7 @@ namespace Model
             {
 
                 bool between = IsBetweenDates(start, end, appointment);
-                if (between || start < appointment.AppointmentStart && end > appointment.AppointmentEnd)
+                if (between || (start <= appointment.AppointmentStart && end >= appointment.AppointmentEnd))
                 {
 
                     isFree = false;
@@ -395,7 +435,7 @@ namespace Model
         private static bool IsBetweenDates(DateTime start, DateTime end, Appointment appointment)
         {
 
-            return (start >= appointment.AppointmentStart && start <= appointment.AppointmentEnd) || (end >= appointment.AppointmentStart && end <= appointment.AppointmentEnd);
+            return (start >= appointment.AppointmentStart && start < appointment.AppointmentEnd) || (end > appointment.AppointmentStart && end <= appointment.AppointmentEnd);
         }
 
         private static bool CheckQuantity(Room sourceRoom, Equipment equip, int quantity)

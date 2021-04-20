@@ -1,6 +1,8 @@
 ﻿using Model;
+using Storages;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,10 +21,15 @@ namespace Hospital_IS.DoctorView
     /// </summary>
     public partial class UCHistory : UserControl
     {
+        private AppointmentFileStorage afs { get; } = new AppointmentFileStorage();
         public UCHistory(Patient patient)
         {
-            InitializeComponent();
-            dataGrid.DataContext = patient.MedicalHistory.Reports;
+            InitializeComponent(); ICollectionView view = new CollectionViewSource { Source = afs.GetAllByPatient(patient.Id) }.View; view.Filter = null;
+            view.Filter = delegate (object item)
+            {
+                return ((DoctorAppointment)item).Report != null;
+            };
+            dataGrid.DataContext = view;
         }
 
         public void Report_DoubleClicked(object sender, MouseButtonEventArgs e)

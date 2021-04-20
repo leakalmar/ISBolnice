@@ -2,6 +2,7 @@
 using Storages;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -39,10 +40,18 @@ namespace Hospital_IS.DoctorView
                 }
             }
         }
-        public UCScheduledApp(Patient patient)
+        public DoctorAppointment Appointment { get; }
+        public UCScheduledApp(DoctorAppointment appointment)
         {
             InitializeComponent();
-            dataGrid.DataContext = afs.GetAllByPatient(patient.Id);
+
+            ICollectionView view = new CollectionViewSource{ Source = afs.GetAllByPatient(appointment.Patient.Id)}.View; view.Filter = null;
+            view.Filter = delegate (object item)
+            {
+                return ((DoctorAppointment)item).Report == null;
+            };
+            dataGrid.DataContext = view;
+            Appointment = appointment;
 
             if (!Started)
             {
@@ -57,7 +66,7 @@ namespace Hospital_IS.DoctorView
         private void NewApp_Click(object sender, RoutedEventArgs e)
         {
             (this.Parent as Grid).Visibility = Visibility.Collapsed;
-            DoctorHomePage.Instance.Home.Children.Add(new UCNewApp());
+            DoctorHomePage.Instance.Home.Children.Add(new UCNewApp(Appointment));
         }
     }
 }
