@@ -27,7 +27,7 @@
           "TimesADay": 2,
           "TherapyStart": "2021-04-19T00:00:00",
           "TherapyEnd": "2021-05-01T00:00:00",
-          "FirstUsageTime": 10
+          "FirstUsageTime": 11
         },
         {
           "Medicine": {

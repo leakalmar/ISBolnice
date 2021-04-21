@@ -56,7 +56,7 @@ namespace Hospital_IS.View
             notifications.Show();
             this.Close();
         }
-
+        //Drugi doktor je hardcode-ovan u FSDoctor klasi,samo radi pokazivanja funkcionalnosti(Samo ga otkomentarisati pri pokretanju da bi se prikazao)
         private void showAvailableApp(object sender, RoutedEventArgs e)
         {
             doctor = (Doctor)Doctors.SelectedItem;
@@ -100,17 +100,17 @@ namespace Hospital_IS.View
                 {
                     if (!doc.Id.Equals(doctor.Id))
                     {
-                        DoctorAppointment appTime1 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doc, HomePatient.Instance.Patient);
+                        DoctorAppointment appTime1 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 0, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, HomePatient.Instance.Patient);
                         appList.Add(appTime1);
-                        DoctorAppointment appTime2 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doc, HomePatient.Instance.Patient);
+                        DoctorAppointment appTime2 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 30, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, HomePatient.Instance.Patient);
                         appList.Add(appTime2);
-                        DoctorAppointment appTime3 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doc, HomePatient.Instance.Patient);
+                        DoctorAppointment appTime3 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 0, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, HomePatient.Instance.Patient);
                         appList.Add(appTime3);
-                        DoctorAppointment appTime4 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doc, HomePatient.Instance.Patient);
+                        DoctorAppointment appTime4 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 30, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, HomePatient.Instance.Patient);
                         appList.Add(appTime4);
-                        DoctorAppointment appTime5 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doc, HomePatient.Instance.Patient);
+                        DoctorAppointment appTime5 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 0, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, HomePatient.Instance.Patient);
                         appList.Add(appTime5);
-                        DoctorAppointment appTime6 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doc, HomePatient.Instance.Patient);
+                        DoctorAppointment appTime6 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 30, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, HomePatient.Instance.Patient);
                         appList.Add(appTime6);
                     }
                 }
@@ -234,14 +234,12 @@ namespace Hospital_IS.View
             appList.Add(app6);
 
             AvailableAppoitments.Clear();
+            ObservableCollection<Appointment> roomAppointments = Hospital.Instance.getAppByRoom(doctor.PrimaryRoom);
             bool flag = false;
             foreach (DoctorAppointment ap in appList)
             {
-                foreach (DoctorAppointment hospital in Hospital.Instance.allAppointments)
-                {
-                    if (ap.AppointmentStart == hospital.AppointmentStart)
-                        flag = true;
-                }
+                flag = IsAppointmentFree(ap, roomAppointments);
+
                 if (flag == false)
                 {
                     AvailableAppoitments.Add(ap);
@@ -255,7 +253,7 @@ namespace Hospital_IS.View
 
         private void changeAppointmentButton(object sender, RoutedEventArgs e)
         {
-            DoctorAppointment docApp = (DoctorAppointment)listOfAppointments.SelectedItem; ;
+            DoctorAppointment docApp = (DoctorAppointment)listOfAppointments.SelectedItem; 
             HomePatient.Instance.DoctorAppointment.Remove(HomePatient.Instance.changedApp);
             Hospital.Instance.RemoveAppointment(HomePatient.Instance.changedApp);
             HomePatient.Instance.DoctorAppointment.Add(docApp);

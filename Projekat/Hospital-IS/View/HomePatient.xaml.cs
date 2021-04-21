@@ -33,7 +33,7 @@ namespace Hospital_IS.View
             InitializeComponent();
 
             Patient = MainWindow.PatientUser;
-           /* Medicine medicine = new Medicine("Bromazepam", "1 tableta sadrži 1,5 mg, 3 mg, odnosno 6 mg bromazepama.",
+            /*Medicine medicine = new Medicine("Bromazepam", "1 tableta sadrži 1,5 mg, 3 mg, odnosno 6 mg bromazepama.",
                 "U osetljivih bolesnika, naročito kod većih doza, može se javiti blagi umor, pospanost i vrtoglavica," +
                 " a povremeno slabost mišića i ataksija. Ova neželjena dejstva mogu se izbeći prilagođavanjem doze.", "Doziranje je individualno." +
                 " Prosečna doza za ambulantne pacijente je 1,5-3 mg, do 3 puta na dan." +
@@ -43,7 +43,7 @@ namespace Hospital_IS.View
                 " Kod manjeg broja bolesnika mogu se, javiti gastrointestinalne smetnje.", "Ibuprofen se uzima posle jela." +
                 " Doziranje treba individualno uskladiti tako da se sa najmanjom mogućom dozom postigne željeni terapijski efekat.");
             Therapy t1 = new Therapy(medicine1, 1, 3, new DateTime(2021, 4, 19), new DateTime(2021, 5, 1));
-            t.FirstUsageTime = 10;
+            t.FirstUsageTime = 11;
             t1.FirstUsageTime = 8;
             Patient.MedicalHistory.AddTherapy(t);
             Patient.MedicalHistory.AddTherapy(t1);*/
@@ -66,7 +66,7 @@ namespace Hospital_IS.View
                 int usageHourDifference = (int)24/therapy.TimesADay;
                 for (int i = 0; i < therapy.TimesADay; i++)
                 {
-                    if (time.AddHours(2).Hour == (therapy.FirstUsageTime + i * usageHourDifference) && time.Minute == 00)
+                    if (time.AddHours(2).Hour == (therapy.FirstUsageTime + i * usageHourDifference) && time.Minute == 38)
                     {
                         MessageBox.Show("Za 2 sata treba da popijete lek: " + therapy.Medicine.Name);
                     }
