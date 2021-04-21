@@ -61,8 +61,16 @@ namespace Hospital_IS
                     if(trans.TransferEnd <= time && trans.isMade == false)
                     {
                         trans.isMade = true;
-                        Hospital.Instance.TransferStaticEquipment(trans.SourceRoomId, trans.DestinationRoomId, trans.Equip, trans.Quantity);
-                        MessageBox.Show("Desio se transfer");
+                        bool isSuces = Hospital.Instance.TransferStaticEquipment(trans.SourceRoomId, trans.DestinationRoomId, trans.Equip, trans.Quantity);
+                        if (isSuces)
+                        {
+                            MessageBox.Show("Uspjesan transfer");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Neuspjesan transfer");
+                        }
+                        
                     }
                 }
             }

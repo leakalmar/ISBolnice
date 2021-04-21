@@ -499,30 +499,36 @@ namespace Model
             return null;
         }
 
-        public void TransferStaticEquipment(int sourceRoomId, int destinationRoomId, Equipment equip, int quantity)
+        public Boolean TransferStaticEquipment(int sourceRoomId, int destinationRoomId, Equipment equip, int quantity)
         {
 
             Room sourceRoom = getRoomById(sourceRoomId);
             Room destinationRoom = getRoomById(destinationRoomId);
 
-            TransferEquipment(sourceRoom, equip, quantity);
+            bool isEnoughEquipment = CheckQuantity(sourceRoom, equip, quantity);
 
-            bool exist = false;
-            foreach (Equipment eq in destinationRoom.Equipment)
+            if (isEnoughEquipment)
             {
-                if (eq.EquiptId == equip.EquiptId)
-                {
+                TransferEquipment(sourceRoom, equip, quantity);
 
-                    eq.Quantity = eq.Quantity + quantity;
-                    exist = true;
+                bool exist = false;
+                foreach (Equipment eq in destinationRoom.Equipment)
+                {
+                    if (eq.EquiptId == equip.EquiptId)
+                    {
+
+                        eq.Quantity = eq.Quantity + quantity;
+                        exist = true;
+                    }
+                }
+
+                if (!exist)
+                {
+                    Equipment equipment = new Equipment(equip.EquipType, equip.EquiptId, equip.Name, quantity);
+                    destinationRoom.Equipment.Add(equipment);
                 }
             }
-
-            if (!exist)
-            {
-                Equipment equipment = new Equipment(equip.EquipType, equip.EquiptId, equip.Name, quantity);
-                destinationRoom.Equipment.Add(equipment);
-            }
+            return isEnoughEquipment;
         }
     }
 }
