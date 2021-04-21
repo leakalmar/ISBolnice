@@ -53,23 +53,19 @@ namespace Hospital_IS
         private void timer_Tick(object sender, EventArgs e)
         {
             DateTime time = DateTime.Now;
-
+           
             foreach(Room r in Hospital.Room)
             {
                 foreach(Transfer trans in r.TransferList)
                 {
-                    if(trans.TransferEnd <= time && trans.isMade == false)
+                    MessageBox.Show(Convert.ToString(time));
+                    if (trans.TransferEnd <= time && trans.isMade == false)
                     {
-                        trans.isMade = true;
-                        bool isSuces = Hospital.Instance.TransferStaticEquipment(trans.SourceRoomId, trans.DestinationRoomId, trans.Equip, trans.Quantity);
-                        if (isSuces)
-                        {
-                            MessageBox.Show("Uspjesan transfer");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Neuspjesan transfer");
-                        }
+                       trans.isMade = true;
+                       Hospital.Instance.TransferStaticEquipment(trans.SourceRoomId, trans.DestinationRoomId, trans.Equip, trans.Quantity);
+                      
+                       MessageBox.Show("Uspjesan transfer");
+                    
                         
                     }
                 }

@@ -391,6 +391,7 @@ namespace Model
             {
                 Transfer transfer = new Transfer(sourceRoom.RoomId, destinationRoom.RoomId, equip, quantity, endDate, false);
                 sourceRoom.AddTransfer(transfer);
+                MessageBox.Show(Convert.ToString(sourceRoom.TransferList.Count) +"haloo");
                 if (sourceRoom.Type != RoomType.StorageRoom)
                 {
                     Appointment appointment = new Appointment(startDate, endDate, AppointmetType.EquipTransfer, sourceRoom.RoomId);
@@ -507,8 +508,7 @@ namespace Model
 
             bool isEnoughEquipment = CheckQuantity(sourceRoom, equip, quantity);
 
-            if (isEnoughEquipment)
-            {
+          
                 TransferEquipment(sourceRoom, equip, quantity);
 
                 bool exist = false;
@@ -527,8 +527,9 @@ namespace Model
                     Equipment equipment = new Equipment(equip.EquipType, equip.EquiptId, equip.Name, quantity);
                     destinationRoom.Equipment.Add(equipment);
                 }
-            }
-            return isEnoughEquipment;
+            
+
+            return true;
         }
     }
 }

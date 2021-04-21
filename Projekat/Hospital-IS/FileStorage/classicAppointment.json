@@ -1,8 +1,15 @@
 [
   {
     "Reserved": true,
-    "AppointmentStart": "2021-04-20T19:57:27",
-    "AppointmentEnd": "2021-04-20T19:59:27",
+    "AppointmentStart": "2021-04-21T10:01:54",
+    "AppointmentEnd": "2021-04-21T10:03:54",
+    "Type": 3,
+    "Room": 2
+  },
+  {
+    "Reserved": true,
+    "AppointmentStart": "2021-04-21T10:05:29",
+    "AppointmentEnd": "2021-04-21T10:07:29",
     "Type": 3,
     "Room": 2
   }
