@@ -94,6 +94,21 @@ namespace Hospital_IS.Storages
             }
             return false;
         }
+
+        public Patient GetPatientById(int patientId)
+        {
+            List<Patient> patients = GetAll();
+            for (int i = 0; i < patients.Count; i++)
+            {
+                if (patientId.Equals(patients[i].Id))
+                {
+                    return patients[i];
+                }
+            }
+            return null;
+        }
+
+
         /*       public Boolean Update(Patient p)
                {
                    List<Patient> patients = GetAll();

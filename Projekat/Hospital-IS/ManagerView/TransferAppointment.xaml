@@ -60,7 +60,7 @@
                 <Image Source="pack://application:,,,/Resources/backbutton.png" Width="50" Height="50"/>
             </StackPanel>
         </Button>
-        <DataGrid Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="3" ItemsSource="{Binding AllAppointments}">
+        <DataGrid Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="3" ItemsSource="{Binding AllAppointments}" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vrsta" Width="85" Binding="{Binding Type}"/>
                 <DataGridTextColumn Header="Vrijeme pocetka" Width="120" Binding="{Binding  AppointmentStart,StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" CanUserResize="False" IsReadOnly="True"/>

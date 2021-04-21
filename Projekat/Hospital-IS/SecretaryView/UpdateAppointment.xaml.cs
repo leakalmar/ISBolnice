@@ -2,7 +2,6 @@
 using Model;
 using Storages;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows;
@@ -11,27 +10,44 @@ using System.Windows.Media;
 namespace Hospital_IS.SecretaryView
 {
     /// <summary>
-    /// Interaction logic for ScheduleAppointment.xaml
+    /// Interaction logic for UpdateAppointment.xaml
     /// </summary>
-    public partial class ScheduleAppointment : Window
+    public partial class UpdateAppointment : Window
     {
-        public DoctorAppointment DocAppointment { get; set; } = new DoctorAppointment();
+        public DoctorAppointment DocAppointment { get; set; }
+
         AppointmentFileStorage afs = new AppointmentFileStorage();
         ClassicAppointmentStorage cas = new ClassicAppointmentStorage();
 
-        private UCAppointmentsView uca;
-        public ObservableCollection<Patient> Patients { get; set; } = new ObservableCollection<Patient>();
+        UCAppointmentsView uca;
+
         public ObservableCollection<Doctor> Doctors { get; set; } = new ObservableCollection<Doctor>();
         public ObservableCollection<Room> Rooms { get; set; } = new ObservableCollection<Room>();
 
-        public ScheduleAppointment(UCAppointmentsView uca)
+        public DoctorAppointment OldApp { get; set; } = new DoctorAppointment();  //zameniti sa id-em posle
+
+        public UpdateAppointment(DoctorAppointment appointment, UCAppointmentsView uca)
         {
             InitializeComponent();
+            DocAppointment = appointment;
+            this.DataContext = this;
             this.uca = uca;
 
-            PatientFileStorage pfs = new PatientFileStorage();
-            List<Patient> patients = pfs.GetAll();
-            Patients = new ObservableCollection<Patient>(patients);
+            if (DocAppointment.Type == AppointmetType.CheckUp)
+            {
+                txtAppType.Text = "Pregled";
+                txtEndOfApp.IsEnabled = false;
+            }
+            else if (DocAppointment.Type == AppointmetType.Operation)
+            {
+                txtAppType.Text = "Operacija";
+            }
+
+            txtRoom.Text = DocAppointment.Room.ToString();
+
+            txtAppDate.Text = DocAppointment.AppointmentStart.ToString("dd.MM.yyyy.");
+
+            OldApp.AppointmentStart = DocAppointment.AppointmentStart;
 
             FSDoctor fsd = new FSDoctor();
             Doctors = fsd.GetAll();
@@ -39,37 +55,10 @@ namespace Hospital_IS.SecretaryView
             RoomStorage rs = new RoomStorage();
             Rooms = rs.GetAll();
 
-
-            this.DataContext = this;
         }
 
-        private void NewAppointment(object sender, RoutedEventArgs e)
+        private void ChangeAppointment(object sender, RoutedEventArgs e)
         {
-            //  pacijent
-            DocAppointment.Patient = Patients[cbPatient.SelectedIndex];
-
-            //  doktor
-            DocAppointment.Doctor = Doctors[cbDoctor.SelectedIndex];
-
-            // soba
-            if (cbRoom.IsEnabled)
-                DocAppointment.Room = Rooms[cbRoom.SelectedIndex].RoomNumber;
-            else
-                DocAppointment.Room = DocAppointment.Doctor.PrimaryRoom;
-
-            // tip pregleda
-            if (cbAppType.SelectedIndex == 0)
-            {
-                DocAppointment.Type = AppointmetType.CheckUp;
-                DocAppointment.AppTypeText = "Pregled";
-            }
-            else if (cbAppType.SelectedIndex == 1)
-            {
-                DocAppointment.Type = AppointmetType.Operation;
-                DocAppointment.AppTypeText = "Operacija";
-            }
-
-            // datum, vreme i trajanje pregleda
             try
             {
                 DateTime appDate = DateTime.ParseExact(txtAppDate.Text, "dd.MM.yyyy.", CultureInfo.InvariantCulture);
@@ -78,11 +67,11 @@ namespace Hospital_IS.SecretaryView
                 DateTime appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
                 DocAppointment.AppointmentStart = appDate.Date.Add(appStart.TimeOfDay);
 
-                if (cbAppType.SelectedIndex == 0)
+                if (DocAppointment.Type == AppointmetType.CheckUp)
                 {
                     DocAppointment.AppointmentEnd = DocAppointment.AppointmentStart.AddMinutes(30);
                 }
-                else if (cbAppType.SelectedIndex == 1)
+                else if (DocAppointment.Type == AppointmetType.Operation)
                 {
                     DateTime appEnd = DateTime.ParseExact(txtEndOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
                     DocAppointment.AppointmentEnd = appDate.Date.Add(appEnd.TimeOfDay);
@@ -93,96 +82,91 @@ namespace Hospital_IS.SecretaryView
             {
             }
 
-            DocAppointment.Reserved = true;
+            /*uca.dataGridAppointments.ItemsSource = null;          --Ubaciti id u Appointment
+            uca.dataGridAppointments.ItemsSource = uca.Appointments;
+            afs.UpdateAppointment(DocAppointment);*/
 
-            uca.Appointments.Add(DocAppointment);
+            sendNotification(OldApp, DocAppointment);
 
-            afs.SaveAppointment(uca.Appointments);
-
+            Hospital.Instance.RemoveAppointment(OldApp);
+            Hospital.Instance.AddAppointment(DocAppointment);
+            afs.SaveAppointment(Hospital.Instance.allAppointments);
+            uca.RefreshGrid();
             this.Close();
         }
 
+        private void sendNotification(DoctorAppointment oldApp, DoctorAppointment appointment)
+        {
+            string title = "Pomeren pregled";
 
+            string text = "Pregled koji ste imali " + oldApp.AppointmentStart.ToString("dd.MM.yyyy.") + " u "
+                + oldApp.AppointmentStart.ToString("HH:mm") + "h je pomeren za "
+                + appointment.AppointmentStart.ToString("dd.MM.yyyy.") + " u " + appointment.AppointmentStart.ToString("HH:mm");
 
+            Notification notification = new Notification(title, text, DateTime.Now);
 
+            NotificationFileStorage nfs = new NotificationFileStorage();
+            nfs.SaveNotification(notification);
+
+            PatientFileStorage pfs = new PatientFileStorage();
+            Patient patient = pfs.GetPatientById(appointment.Patient.Id);
+            patient.addNotification(notification.Id);
+            pfs.UpdatePatient(patient);
+
+            FSDoctor fsd = new FSDoctor();
+            Doctor doctor = fsd.GetByEmail(appointment.Doctor.Email);
+            doctor.addNotification(notification.Id);
+            fsd.UpdateDoctor(doctor);
+        }
 
         private void Close(object sender, RoutedEventArgs e)
         {
+            uca.RefreshGrid();
             this.Close();
         }
 
-        private void cbAppType_LostFocus(object sender, RoutedEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (cbAppType.SelectedIndex == 0)
-            {
-                txtEndOfApp.IsEnabled = false;
-                cbRoom.IsEnabled = false;
-            }
-            else 
-            {
-                txtEndOfApp.IsEnabled = true;
-                cbRoom.IsEnabled = true;
-            }
+            uca.RefreshGrid();
         }
+
 
         private void txtEndOfApp_LostFocus(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<DoctorAppointment> appsByRoom = new ObservableCollection<DoctorAppointment>();
-            ObservableCollection<DoctorAppointment> ClassicAppsByRoom = new ObservableCollection<DoctorAppointment>();
-            if (cbAppType.SelectedIndex == 0)
-            {
-                appsByRoom = afs.GetAllByRoom(Doctors[cbDoctor.SelectedIndex].PrimaryRoom);
-                ClassicAppsByRoom = cas.GetAllDocAppointmentsById(Doctors[cbDoctor.SelectedIndex].PrimaryRoom);
-            }
-            else if (cbAppType.SelectedIndex == 1)
-            {
-                appsByRoom = afs.GetAllByRoom(Rooms[cbRoom.SelectedIndex].RoomId);
-                ClassicAppsByRoom = cas.GetAllDocAppointmentsById(Rooms[cbRoom.SelectedIndex].RoomId);
-            }
-            appsByRoom = ConcatCollections(appsByRoom, ClassicAppsByRoom);
+            ObservableCollection<DoctorAppointment> appsByRoom = afs.GetAllByRoom(DocAppointment.Room);
+            ObservableCollection<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(DocAppointment.Doctor.Id);
 
-            ObservableCollection<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(Doctors[cbDoctor.SelectedIndex].Id);
+            ObservableCollection<DoctorAppointment> ClassicAppsByRoom = cas.GetAllDocAppointmentsById(DocAppointment.Room);
+            appsByRoom = ConcatCollections(appsByRoom, ClassicAppsByRoom);
 
             confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
         }
 
-        private ObservableCollection<DoctorAppointment> ConcatCollections(ObservableCollection<DoctorAppointment> apps1, ObservableCollection<DoctorAppointment> apps2) 
+        private void txtStartOfApp_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (DocAppointment.Type == AppointmetType.CheckUp && !string.IsNullOrEmpty(txtStartOfApp.Text))
+            {
+                DateTime appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
+                DateTime appEnd = appStart.AddMinutes(30);
+                txtEndOfApp.Text = appEnd.ToString("t", DateTimeFormatInfo.InvariantInfo);
+
+
+                ObservableCollection<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(DocAppointment.Doctor.Id);
+                ObservableCollection<DoctorAppointment> appsByRoom = afs.GetAllByRoom(DocAppointment.Room);
+
+                ObservableCollection<DoctorAppointment> ClassicAppsByRoom = cas.GetAllDocAppointmentsById(DocAppointment.Room);
+                appsByRoom = ConcatCollections(appsByRoom, ClassicAppsByRoom);
+
+                confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
+            }
+        }
+        private ObservableCollection<DoctorAppointment> ConcatCollections(ObservableCollection<DoctorAppointment> apps1, ObservableCollection<DoctorAppointment> apps2)
         {
             foreach (DoctorAppointment appointment in apps2)
             {
                 apps1.Add(appointment);
             }
             return apps1;
-        }
-
-        private void txtStartOfApp_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (cbAppType.SelectedIndex == 0 && !string.IsNullOrEmpty(txtStartOfApp.Text))
-            {
-                DateTime appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
-                DateTime appEnd = appStart.AddMinutes(30);
-                txtEndOfApp.Text = appEnd.ToString("t", DateTimeFormatInfo.InvariantInfo);
-
-
-
-                ObservableCollection<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(Doctors[cbDoctor.SelectedIndex].Id);
-                ObservableCollection<DoctorAppointment> appsByRoom = new ObservableCollection<DoctorAppointment>();
-                ObservableCollection<DoctorAppointment> ClassicAppsByRoom = new ObservableCollection<DoctorAppointment>();
-                if (cbAppType.SelectedIndex == 0)
-                {
-                    appsByRoom = afs.GetAllByRoom(Doctors[cbDoctor.SelectedIndex].PrimaryRoom);
-                    ClassicAppsByRoom = cas.GetAllDocAppointmentsById(Doctors[cbDoctor.SelectedIndex].PrimaryRoom);
-                }
-                else if (cbAppType.SelectedIndex == 1)
-                {
-                    appsByRoom = afs.GetAllByRoom(Rooms[cbRoom.SelectedIndex].RoomId);
-                    ClassicAppsByRoom = cas.GetAllDocAppointmentsById(Rooms[cbRoom.SelectedIndex].RoomId);
-                }
-
-                appsByRoom = ConcatCollections(appsByRoom, ClassicAppsByRoom);
-
-                confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
-            }
         }
 
         private void confirmAppointmentDate(bool isValid)
@@ -226,7 +210,7 @@ namespace Hospital_IS.SecretaryView
             if (DoctorAppointments.Count == 0)
                 return true;
 
-            
+
 
             foreach (Appointment appointment in DoctorAppointments)
             {
@@ -248,7 +232,7 @@ namespace Hospital_IS.SecretaryView
             return (start >= appointment.AppointmentStart && start < appointment.AppointmentEnd) || (end > appointment.AppointmentStart && end <= appointment.AppointmentEnd);
         }
 
-        /*private int findRoomNumber(int roomId)
+        private int findRoomNumber(int roomId)
         {
             foreach (Room room in Rooms)
             {
@@ -256,6 +240,6 @@ namespace Hospital_IS.SecretaryView
                     return room.RoomNumber;
             }
             return 0;
-        }*/
+        }
     }
 }

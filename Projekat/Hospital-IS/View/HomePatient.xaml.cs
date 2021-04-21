@@ -33,14 +33,20 @@ namespace Hospital_IS.View
             InitializeComponent();
 
             Patient = MainWindow.PatientUser;
-            Medicine medicine = new Medicine("Bromazepam", "Loš sastav", "Najebao si", "Kad hoćeš");
+           /* Medicine medicine = new Medicine("Bromazepam", "1 tableta sadrži 1,5 mg, 3 mg, odnosno 6 mg bromazepama.",
+                "U osetljivih bolesnika, naročito kod većih doza, može se javiti blagi umor, pospanost i vrtoglavica," +
+                " a povremeno slabost mišića i ataksija. Ova neželjena dejstva mogu se izbeći prilagođavanjem doze.", "Doziranje je individualno." +
+                " Prosečna doza za ambulantne pacijente je 1,5-3 mg, do 3 puta na dan." +
+                " U težim oblicima bolesti, naročito kod hospitalizovanih bolesnika, daje se 6-12 mg, 2 do 3 puta na dan.");
             Therapy t = new Therapy(medicine, 1, 2, new DateTime(2021, 4, 19), new DateTime(2021, 5, 1));
-            Medicine medicine1 = new Medicine("Brufen", "Loš sastav", "Najebao si", "Kad hoćeš");
+            Medicine medicine1 = new Medicine("Brufen", "1 film tableta sadrži 400 mg ibuprofena 5 ml sirupa sadrži 100 mg Ibuprofena", "Ibuprofen se dobro podnosi, a neželjena dejstva su veoma retka i nestaju prekidom terapije." +
+                " Kod manjeg broja bolesnika mogu se, javiti gastrointestinalne smetnje.", "Ibuprofen se uzima posle jela." +
+                " Doziranje treba individualno uskladiti tako da se sa najmanjom mogućom dozom postigne željeni terapijski efekat.");
             Therapy t1 = new Therapy(medicine1, 1, 3, new DateTime(2021, 4, 19), new DateTime(2021, 5, 1));
-            t.FirstUsageTime = 8;
+            t.FirstUsageTime = 10;
             t1.FirstUsageTime = 8;
             Patient.MedicalHistory.AddTherapy(t);
-            Patient.MedicalHistory.AddTherapy(t1);
+            Patient.MedicalHistory.AddTherapy(t1);*/
             this.DataContext = this;
             PersonalData.DataContext = Patient;
             DispatcherTimer dispatcherTimer = new DispatcherTimer
@@ -60,9 +66,9 @@ namespace Hospital_IS.View
                 int usageHourDifference = (int)24/therapy.TimesADay;
                 for (int i = 0; i < therapy.TimesADay; i++)
                 {
-                    if (time.AddHours(2).Hour == (therapy.FirstUsageTime + i * usageHourDifference) && time.Minute == 0)
+                    if (time.AddHours(2).Hour == (therapy.FirstUsageTime + i * usageHourDifference) && time.Minute == 00)
                     {
-                        MessageBox.Show("Vreme je da popijete lek: " + therapy.Medicine.Name);
+                        MessageBox.Show("Za 2 sata treba da popijete lek: " + therapy.Medicine.Name);
                     }
                 }
             }
@@ -134,6 +140,8 @@ namespace Hospital_IS.View
             this.Hide();
             AppointmentFileStorage afs = new AppointmentFileStorage();
             afs.SaveAppointment(Hospital.Instance.allAppointments);
+            Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
+            pfs.UpdatePatient(Patient);
         }
 
         private void showNotifications(object sender, RoutedEventArgs e)

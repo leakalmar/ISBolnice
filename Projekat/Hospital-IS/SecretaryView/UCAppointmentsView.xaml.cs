@@ -16,6 +16,16 @@ namespace Hospital_IS.SecretaryView
         public UCAppointmentsView()
         {
             InitializeComponent();
+            RefreshGrid();
+
+            this.DataContext = this;
+
+        }
+
+        public void RefreshGrid()
+        {
+            if (Appointments != null)
+                Appointments.Clear();
             AppointmentFileStorage afs = new AppointmentFileStorage();
             Appointments = afs.GetAll();
 
@@ -31,8 +41,6 @@ namespace Hospital_IS.SecretaryView
             }
 
             dataGridAppointments.ItemsSource = Appointments;
-            this.DataContext = this;
-
         }
 
         private void ShowAppointment(object sender, RoutedEventArgs e)
@@ -47,7 +55,21 @@ namespace Hospital_IS.SecretaryView
 
         private void UpdateAppointment(object sender, RoutedEventArgs e)
         {
+            if ((DoctorAppointment)dataGridAppointments.SelectedItem != null)
+            {
+                DoctorAppointment appointment = (DoctorAppointment)dataGridAppointments.SelectedItem;
+                UpdateAppointment ua = new UpdateAppointment(appointment, this);
+                ua.Show();
+            }
+        }
 
+        private void DeleteAppointment(object sender, RoutedEventArgs e)
+        {
+            if ((DoctorAppointment)dataGridAppointments.SelectedItem != null)
+            {
+                CancelAppointment ca = new CancelAppointment(this);
+                ca.Show();
+            }
         }
 
         private void ScheduleAppointment(object sender, RoutedEventArgs e)

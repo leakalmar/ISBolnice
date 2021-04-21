@@ -109,9 +109,9 @@
                     <TextBlock x:Name="EndTherapy"  HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18"/>
                 </Grid>
                 <Label Content="Uputstvo za upotrebu:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <TextBlock x:Name="Usage"  Width="414" Background="{x:Null}" FontSize="18" Height="94"/>
+                <TextBlock x:Name="Usage" TextWrapping="Wrap" Width="414" Background="{x:Null}" Height="94" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" MinWidth="414" MinHeight="94" MaxWidth="414" MaxHeight="94"/>
                 <Label Content="Neželjena dejstva:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <TextBlock x:Name="SideEffects"  Width="414" Background="{x:Null}" FontSize="18" Height="106"/>
+                <TextBlock x:Name="SideEffects" TextWrapping="Wrap" Width="414" Background="{x:Null}" Height="106" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MinWidth="414" MinHeight="106" MaxWidth="414" MaxHeight="106"/>
 
             </StackPanel>
         </Border>

@@ -31,6 +31,10 @@
                 Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
                 HorizontalAlignment="Left" Click="UpdateAppointment"/>
 
+            <Button Width="55" Content="Otkaži" Height="30" Margin="10 0 10 0"
+                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
+                HorizontalAlignment="Left" Click="DeleteAppointment"/>
+
             <Button Width="110" Content="Zakaži novi termin" Height="30" Margin="40 0 0 0 "
                 Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
                 Click="ScheduleAppointment"/>
