@@ -55,6 +55,8 @@ namespace Hospital_IS.View
             this.Hide();
             AppointmentFileStorage afs = new AppointmentFileStorage();
             afs.SaveAppointment(Hospital.Instance.allAppointments);
+            Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
+            pfs.UpdatePatient(HomePatient.Instance.Patient);
         }
 
         private void showRow(object sender, MouseButtonEventArgs e)

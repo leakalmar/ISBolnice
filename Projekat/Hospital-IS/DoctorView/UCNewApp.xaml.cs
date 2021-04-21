@@ -82,7 +82,16 @@ namespace Hospital_IS.DoctorView
 
             foreach (DateTime d in dates)
             {
-                DateTime last = new DateTime(d.Year, d.Month, d.Day, 8, 00, 00);
+                DateTime last;
+                if (d.Date == DateTime.Now.Date)
+                {
+                    last = new DateTime(d.Year, d.Month, d.Day, DateTime.Now.Hour, 00, 00);
+                }
+                else
+                {
+                    last = new DateTime(d.Year, d.Month, d.Day, 8, 00, 00);
+
+                }
                 System.Diagnostics.Debug.WriteLine(last.ToString());
                 System.Diagnostics.Debug.WriteLine("D   " + d.ToString());
                 while (last.TimeOfDay < new DateTime(DateTime.Now.Date.Year, DateTime.Now.Date.Month, DateTime.Now.Date.Day, 20, 00, 00).TimeOfDay)
@@ -109,11 +118,7 @@ namespace Hospital_IS.DoctorView
                             DoctorAppointment dt = new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, last.Hour, last.Minute, 0), new DateTime(d.Year, d.Month, d.Day, last.AddHours(hours).Hour, last.AddMinutes(minutes).Minute, 0), AppointmetType.Operation, room.RoomId, doc, Appointment.Patient);
                             appList.Add(dt);
                             System.Diagnostics.Debug.WriteLine(dt.AppointmentStart.ToString());
-                            last = last.AddHours(int.Parse((string)parts.GetValue(0)));
-                            if (parts.Length == 2)
-                            {
-                                last = last.AddMinutes(30);
-                            }
+                            last = last.AddMinutes(30);
                         }
                         else
                         {
@@ -134,7 +139,8 @@ namespace Hospital_IS.DoctorView
                 {
                     foreach (DoctorAppointment ap in Hospital.Instance.GetAllAppointmentsByDoctor(DoctorHomePage.Instance.GetDoctor()))
                     {
-                        if (ap.Room == d.Room && ap.AppointmentStart == d.AppointmentStart && ap.AppointmentEnd == ap.AppointmentEnd)
+                        if ((ap.AppointmentStart > d.AppointmentStart && ap.AppointmentStart < d.AppointmentEnd) || (ap.AppointmentEnd > d.AppointmentStart && ap.AppointmentEnd < d.AppointmentEnd) || 
+                            (ap.AppointmentStart <= d.AppointmentStart && ap.AppointmentEnd >= d.AppointmentEnd))
                         {
                             d.Reserved = true;
                         }
@@ -170,6 +176,10 @@ namespace Hospital_IS.DoctorView
         private void appointments_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DoctorAppointment selected = (DoctorAppointment)appointments.SelectedItem;
+            if(selected.Reserved == true)
+            {
+                return;
+            }
             selected.Reserved = true;
             Hospital.Instance.AddAppointment(selected);
             DoctorHomePage.Instance.DoctorAppointment.Add(selected);

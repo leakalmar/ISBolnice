@@ -42,6 +42,8 @@ namespace Hospital_IS.View
             this.Close();
             AppointmentFileStorage afs = new AppointmentFileStorage();
             afs.SaveAppointment(Hospital.Instance.allAppointments);
+            Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
+            pfs.UpdatePatient(HomePatient.Instance.Patient);
         }
 
         private void showNotifications(object sender, RoutedEventArgs e)

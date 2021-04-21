@@ -12,11 +12,8 @@ namespace Hospital_IS.View
     public partial class AppointmentPatient : Window
     {
         public ObservableCollection<DoctorAppointment> AvailableAppoitments { get; set; }
-        public ObservableCollection<Doctor> TempDoctors { get; set; }
-        public WorkDay day;
         public Doctor doctor;
         public DateTime date;
-        public Patient patient;
 
 
         public AppointmentPatient()
@@ -274,6 +271,8 @@ namespace Hospital_IS.View
             this.Close();
             AppointmentFileStorage afs = new AppointmentFileStorage();
             afs.SaveAppointment(Hospital.Instance.allAppointments);
+            Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
+            pfs.UpdatePatient(HomePatient.Instance.Patient);
         }
 
     }

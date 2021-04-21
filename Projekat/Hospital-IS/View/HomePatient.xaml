@@ -97,11 +97,6 @@
                 <Label x:Name="Surname" Content="{Binding Path=Surname}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
             </Grid>
             <Grid>
-                <Label Content="ID:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <Label x:Name="Id"  Content="{Binding Path=Id}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
-            </Grid>
-
-            <Grid>
                 <Label Content="Datum rođenja:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
                 <TextBlock x:Name="Birth"  Text="{Binding Path=BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5"/>
             </Grid>
