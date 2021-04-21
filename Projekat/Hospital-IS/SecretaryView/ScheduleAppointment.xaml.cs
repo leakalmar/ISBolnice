@@ -97,7 +97,11 @@ namespace Hospital_IS.SecretaryView
 
             uca.Appointments.Add(DocAppointment);
 
+            Hospital.Instance.AddAppointment(DocAppointment);
+
             afs.SaveAppointment(uca.Appointments);
+
+            uca.RefreshGrid();
 
             this.Close();
         }
