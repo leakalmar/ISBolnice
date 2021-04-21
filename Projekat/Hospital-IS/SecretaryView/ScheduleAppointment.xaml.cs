@@ -97,7 +97,7 @@ namespace Hospital_IS.SecretaryView
 
             uca.Appointments.Add(DocAppointment);
 
-            Hospital.Instance.AddAppointment(DocAppointment);
+            Hospital.Instance.AddAppointment(DocAppointment);   //izmeniti kako se cuva update-ovan termin, da ne bude preko hospital
 
             afs.SaveAppointment(uca.Appointments);
 
@@ -122,7 +122,7 @@ namespace Hospital_IS.SecretaryView
                 txtEndOfApp.IsEnabled = false;
                 cbRoom.IsEnabled = false;
             }
-            else 
+            else
             {
                 txtEndOfApp.IsEnabled = true;
                 cbRoom.IsEnabled = true;
@@ -150,7 +150,7 @@ namespace Hospital_IS.SecretaryView
             confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
         }
 
-        private ObservableCollection<DoctorAppointment> ConcatCollections(ObservableCollection<DoctorAppointment> apps1, ObservableCollection<DoctorAppointment> apps2) 
+        private ObservableCollection<DoctorAppointment> ConcatCollections(ObservableCollection<DoctorAppointment> apps1, ObservableCollection<DoctorAppointment> apps2)
         {
             foreach (DoctorAppointment appointment in apps2)
             {
@@ -230,7 +230,7 @@ namespace Hospital_IS.SecretaryView
             if (DoctorAppointments.Count == 0)
                 return true;
 
-            
+
 
             foreach (Appointment appointment in DoctorAppointments)
             {
