@@ -1,7 +1,9 @@
-﻿using Model;
+﻿using Hospital_IS.Storages;
+using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
 using System.Windows;
@@ -21,10 +23,11 @@ namespace Hospital_IS.DoctorView
     /// </summary>
     public partial class UCPatients : UserControl
     {
+        PatientFileStorage pfs = new PatientFileStorage();
         public UCPatients()
         {
             InitializeComponent();
-            ICollectionView app = new CollectionViewSource { Source = Hospital.Instance.GetAllPatients() }.View;
+            ICollectionView app = new CollectionViewSource { Source = pfs.GetAll()}.View;
 
             //app.Filter = delegate (object item)
             //{
@@ -38,8 +41,20 @@ namespace Hospital_IS.DoctorView
         {
             Patient patient = (Patient)patients.SelectedItem;
             AppointmentFileStorage afs = new AppointmentFileStorage();
-            afs.GetAllByPatient(patient.Id);
-            DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(appointment));
+            ObservableCollection<DoctorAppointment> appointments = afs.GetAllByPatient(patient.Id);
+            DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(appointments[0]));
+            this.Visibility = Visibility.Collapsed;
+        }
+
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            ICollectionView app = CollectionViewSource.GetDefaultView(pfs.GetAll());
+           // app.Filter = delegate (object item)
+            //{
+           //     return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date;
+            //};
+            //app.SortDescriptions.Add(new SortDescription("AppointmentStart", ListSortDirection.Ascending));
+            patients.DataContext = app;
         }
     }
 }

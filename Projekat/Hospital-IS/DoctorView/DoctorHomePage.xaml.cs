@@ -23,6 +23,7 @@ namespace Hospital_IS.DoctorView
         private Doctor doctor;
         public UserControlHomePage HomePage;
         public UCAppointments Appointments;
+        public UCPatients Patients;
         private int Last { get; set; } = 0;
 
         public Doctor GetDoctor()
@@ -125,12 +126,16 @@ namespace Hospital_IS.DoctorView
             switch (Last)
             {
                 case 0:
+                    Home.Children.Clear();
                     Home.Children.Remove(HomePage);
                     break;
                 case 1:
+                    Home.Children.Clear();
                     Home.Children.Remove(Appointments);
                     break;
                 case 2:
+                    Home.Children.Clear();
+                    Home.Children.Remove(Patients);
                     break;
                 case 3:
                     break;
@@ -155,6 +160,7 @@ namespace Hospital_IS.DoctorView
                     Last = 1;
                     break;
                 case 2:
+                    Home.Children.Add(Patients);
                     Last = 2;
                     break;
                 case 3:

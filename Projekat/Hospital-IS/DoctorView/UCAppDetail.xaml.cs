@@ -37,6 +37,7 @@ namespace Hospital_IS.DoctorView
                 return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date;
             };
             view.SortDescriptions.Add(new SortDescription("AppointmentStart", ListSortDirection.Ascending));
+
             docotrAppointments.DataContext = view;
         }
 
