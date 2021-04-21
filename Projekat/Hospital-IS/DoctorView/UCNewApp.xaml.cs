@@ -135,18 +135,8 @@ namespace Hospital_IS.DoctorView
             //ObservableCollection<DoctorAppointment > ret = Hospital.Instance.CheckDoctorAppointments(appList,room.RoomId);
             if(type == "CheckUp")
             {
-                foreach (DoctorAppointment d in appList)
-                {
-                    foreach (DoctorAppointment ap in Hospital.Instance.GetAllAppointmentsByDoctor(DoctorHomePage.Instance.GetDoctor()))
-                    {
-                        if ((ap.AppointmentStart > d.AppointmentStart && ap.AppointmentStart < d.AppointmentEnd) || (ap.AppointmentEnd > d.AppointmentStart && ap.AppointmentEnd < d.AppointmentEnd) || 
-                            (ap.AppointmentStart <= d.AppointmentStart && ap.AppointmentEnd >= d.AppointmentEnd))
-                        {
-                            d.Reserved = true;
-                        }
-                    }
-                }
-                appointments.DataContext = appList;
+                ObservableCollection<DoctorAppointment> ret = Hospital.Instance.CheckDoctorAppointments(appList, room.RoomId, dates);
+                appointments.DataContext = ret;
             }
             else
             {
