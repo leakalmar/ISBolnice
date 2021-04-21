@@ -84,7 +84,7 @@ namespace Model
         public ObservableCollection<Appointment> GetAllAppointmentsByDoctor(Doctor doctor)
         {
             ObservableCollection<Appointment> ret = new ObservableCollection<Appointment>();
-            foreach(DoctorAppointment dapp in allAppointments)
+            foreach (DoctorAppointment dapp in allAppointments)
             {
                 if (dapp.Doctor.Id.Equals(doctor.Id))
                 {
@@ -175,14 +175,14 @@ namespace Model
             {
                 allApointemnts.Add(ap);
             }
-           
+
 
             foreach (Appointment ap in getAppByRoom(roomIdDestination))
             {
                 allApointemnts.Add(ap);
             }
 
-          
+
             return allApointemnts;
         }
 
@@ -275,7 +275,7 @@ namespace Model
 
             foreach (Room r in Room)
             {
-                if(r.RoomId == oldRoom.RoomId)
+                if (r.RoomId == oldRoom.RoomId)
                 {
                     int index = Room.IndexOf(r);
                     Room.Remove(r);
@@ -287,7 +287,7 @@ namespace Model
 
         }
 
-       
+
 
         public ObservableCollection<Room> getRoomByType(RoomType type)
         {
@@ -389,16 +389,16 @@ namespace Model
 
            if (checkRoomAppointment)
             {
-                Transfer transfer = new Transfer(sourceRoom.RoomId, destinationRoom.RoomId, equip,quantity, endDate,false);
+                Transfer transfer = new Transfer(sourceRoom.RoomId, destinationRoom.RoomId, equip, quantity, endDate, false);
                 sourceRoom.AddTransfer(transfer);
-                if(sourceRoom.Type != RoomType.StorageRoom)
+                if (sourceRoom.Type != RoomType.StorageRoom)
                 {
                     Appointment appointment = new Appointment(startDate, endDate, AppointmetType.EquipTransfer, sourceRoom.RoomId);
                     appointment.Reserved = true;
                     AddClassicAppointment(appointment);
                 }
 
-                if(destinationRoom.Type != RoomType.StorageRoom)
+                if (destinationRoom.Type != RoomType.StorageRoom)
                 {
                     Appointment appointment = new Appointment(startDate, endDate, AppointmetType.EquipTransfer,destinationRoom.RoomId);
                     appointment.Reserved = true;
@@ -409,24 +409,6 @@ namespace Model
             return checkRoomAppointment;
         }
 
-        //public ObservableCollection<DoctorAppointment> CheckDoctorAppointments(ObservableCollection<DoctorAppointment> newAppointments, int RoomId)
-        //{
-        //    ObservableCollection<DoctorAppointment> ret = new ObservableCollection<DoctorAppointment>();
-        //    foreach (DoctorAppointment d in newAppointments)
-        //    {
-        //        if (d.Room != RoomId)
-        //        {
-        //            ret.Add(d);
-        //        }
-        //        bool checkDoctor = checkAppointment(GetAllAppointmentsByDoctor(d.Doctor), d.AppointmentStart, d.AppointmentEnd);
-        //        if(checkDoctor)
-        //        {
-        //            ret.Add(d);
-        //        }
-        //    }
-        //    return ret;
-
-        //}
 
         public ObservableCollection<DoctorAppointment> CheckDoctorAppointments(ObservableCollection<DoctorAppointment> newAppointments, int roomId, SelectedDatesCollection dates)
         {
@@ -451,7 +433,7 @@ namespace Model
         {
             bool isFree = true;
 
-            foreach(Appointment appointment in RoomAppointment)
+            foreach (Appointment appointment in RoomAppointment)
             {
 
                 bool between = IsBetweenDates(start, end, appointment);
@@ -506,9 +488,9 @@ namespace Model
 
         private Room getRoomById(int roomId)
         {
-            foreach(Room r in Room)
+            foreach (Room r in Room)
             {
-                if(r.RoomId == roomId)
+                if (r.RoomId == roomId)
                 {
                     return r;
                 }
@@ -516,7 +498,7 @@ namespace Model
             return null;
         }
 
-        public void TransferStaticEquipment(int sourceRoomId,int destinationRoomId,Equipment equip, int quantity)
+        public void TransferStaticEquipment(int sourceRoomId, int destinationRoomId, Equipment equip, int quantity)
         {
 
             Room sourceRoom = getRoomById(sourceRoomId);
@@ -525,7 +507,7 @@ namespace Model
             TransferEquipment(sourceRoom, equip, quantity);
 
             bool exist = false;
-            foreach(Equipment eq in destinationRoom.Equipment)
+            foreach (Equipment eq in destinationRoom.Equipment)
             {
                 if (eq.EquiptId == equip.EquiptId)
                 {

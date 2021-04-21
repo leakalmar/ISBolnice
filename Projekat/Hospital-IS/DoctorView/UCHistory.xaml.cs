@@ -22,21 +22,45 @@ namespace Hospital_IS.DoctorView
     public partial class UCHistory : UserControl
     {
         private AppointmentFileStorage afs { get; } = new AppointmentFileStorage();
-        public UCHistory(Patient patient)
+        private DoctorAppointment Appointment;
+        private bool _started;
+
+        public bool Started
         {
-            InitializeComponent(); ICollectionView view = new CollectionViewSource { Source = afs.GetAllByPatient(patient.Id) }.View; view.Filter = null;
+            get { return _started; }
+            set
+            {
+                _started = value;
+            }
+        }
+        public UCHistory(DoctorAppointment appointment)
+        {
+            InitializeComponent(); 
+            ICollectionView view = new CollectionViewSource { Source = afs.GetAllByPatient(appointment.Patient.Id) }.View; view.Filter = null;
             view.Filter = delegate (object item)
             {
                 return ((DoctorAppointment)item).Report != null;
             };
             dataGrid.DataContext = view;
+            Appointment = appointment;
         }
 
         public void Report_DoubleClicked(object sender, MouseButtonEventArgs e)
         {
-            Model.Report report = (Model.Report)dataGrid.SelectedItem;
-            //Window window = new Report(report);
-            //window.Show();
+            DoctorAppointment appointment = (DoctorAppointment)dataGrid.SelectedItem;
+            if(appointment.AppointmentStart == Appointment.AppointmentStart)
+            {
+                OldReport r = new OldReport(appointment, Appointment);
+                r.Started = true;
+                r.Show();
+            }
+            else
+            {
+                OldReport r = new OldReport(appointment, Appointment);
+                r.Started = false;
+                r.Show();
+            }
+            
         }
     }
 }

@@ -48,7 +48,7 @@ namespace Hospital_IS.DoctorView
             ICollectionView view = new CollectionViewSource{ Source = afs.GetAllByPatient(appointment.Patient.Id)}.View; view.Filter = null;
             view.Filter = delegate (object item)
             {
-                return ((DoctorAppointment)item).Report == null;
+                return ((DoctorAppointment)item).Report == null && ((DoctorAppointment)item).AppointmentStart > DateTime.Now;
             };
             dataGrid.DataContext = view;
             Appointment = appointment;
