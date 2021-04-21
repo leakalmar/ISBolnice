@@ -97,7 +97,11 @@ namespace Hospital_IS.SecretaryView
 
             uca.Appointments.Add(DocAppointment);
 
+            Hospital.Instance.AddAppointment(DocAppointment);   //izmeniti kako se cuva update-ovan termin, da ne bude preko hospital
+
             afs.SaveAppointment(uca.Appointments);
+
+            uca.RefreshGrid();
 
             this.Close();
         }
