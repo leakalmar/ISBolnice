@@ -71,7 +71,7 @@ namespace Model
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<Room> GetAllRooms()
+        public List<Room> GetAllRooms()
         {
             return roomStorage.GetAll();
         }
@@ -81,9 +81,9 @@ namespace Model
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<Appointment> GetAllAppointmentsByDoctor(Doctor doctor)
+        public List<Appointment> GetAllAppointmentsByDoctor(Doctor doctor)
         {
-            ObservableCollection<Appointment> ret = new ObservableCollection<Appointment>();
+            List<Appointment> ret = new List<Appointment>();
             foreach (DoctorAppointment dapp in allAppointments)
             {
                 if (dapp.Doctor.Id.Equals(doctor.Id))
@@ -107,8 +107,8 @@ namespace Model
             return ret;
         }
 
-        public ObservableCollection<DoctorAppointment> allAppointments { get; set; }
-        public ObservableCollection<Appointment> AllClassicAppointments { get; set; }
+        public List<DoctorAppointment> allAppointments { get; set; }
+        public List<Appointment> AllClassicAppointments { get; set; }
 
         private ClassicAppointmentStorage classicAppointment = new ClassicAppointmentStorage();
 
@@ -133,7 +133,7 @@ namespace Model
 
             if (AllClassicAppointments == null)
             {
-                AllClassicAppointments = new ObservableCollection<Appointment>();
+                AllClassicAppointments = new List<Appointment>();
 
             }
 
@@ -145,20 +145,20 @@ namespace Model
             }
         }
 
-        public ObservableCollection<Appointment> getAppByRoom(int roomID)
+        public List<Appointment> getAppByRoom(int roomID)
         {
             return classicAppointment.GetAllByRoomId(roomID);
         }
 
 
-        public ObservableCollection<DoctorAppointment> getDocAppByRoom(int roomID)
+        public List<DoctorAppointment> getDocAppByRoom(int roomID)
         {
             return appointmentStorage.GetAllByRoom(roomID);
         }
 
-        public ObservableCollection<Appointment> getAllAppByTwoRoom(int roomIdSource, int roomIdDestination)
+        public List<Appointment> getAllAppByTwoRoom(int roomIdSource, int roomIdDestination)
         {
-            ObservableCollection<Appointment> allApointemnts = new ObservableCollection<Appointment>();
+            List<Appointment> allApointemnts = new List<Appointment>();
 
 
             foreach(Appointment ap in getDocAppByRoom(roomIdSource))
@@ -196,7 +196,7 @@ namespace Model
 
             if (allAppointments == null)
             {
-                allAppointments = new ObservableCollection<DoctorAppointment>();
+                allAppointments = new List<DoctorAppointment>();
 
             }
 
@@ -227,7 +227,7 @@ namespace Model
             }
         }
 
-        public static ObservableCollection<Room> Room { get; set; }
+        public static List<Room> Room { get; set; }
 
 
 
@@ -240,7 +240,7 @@ namespace Model
 
             if (Room == null)
             {
-                Room = new ObservableCollection<Room>();
+                Room = new List<Room>();
 
             }
 
@@ -289,20 +289,20 @@ namespace Model
 
 
 
-        public ObservableCollection<Room> getRoomByType(RoomType type)
+        public List<Room> getRoomByType(RoomType type)
         {
             return roomStorage.GetRoomsByType(type);
         }
 
 
-        public ObservableCollection<Doctor> Doctors { get; set; }
+        public List<Doctor> Doctors { get; set; }
 
         public void AddDoctor(Doctor newDoctor)
         {
             if (newDoctor == null)
                 return;
             if (this.Doctors == null)
-                this.Doctors = new ObservableCollection<Doctor>();
+                this.Doctors = new List<Doctor>();
             if (!this.Doctors.Contains(newDoctor))
             {
                 this.Doctors.Add(newDoctor);
@@ -326,7 +326,7 @@ namespace Model
         {
             if (Doctors != null)
             {
-                ObservableCollection<Doctor> tmpDoctor = new ObservableCollection<Doctor>();
+                List<Doctor> tmpDoctor = new List<Doctor>();
                 foreach (Doctor oldDoctor in Doctors)
                     tmpDoctor.Add(oldDoctor);
                 Doctors.Clear();
@@ -384,7 +384,7 @@ namespace Model
         public bool TransferEquipmentStatic(Room sourceRoom, Room destinationRoom, Equipment equip, int quantity,DateTime startDate, DateTime endDate, String description)
         {
 
-            ObservableCollection<Appointment> RoomsAppointment = getAllAppByTwoRoom(sourceRoom.RoomId, destinationRoom.RoomId);
+            List<Appointment> RoomsAppointment = getAllAppByTwoRoom(sourceRoom.RoomId, destinationRoom.RoomId);
             bool checkRoomAppointment = CheckAppointment(RoomsAppointment, startDate, endDate);
 
            if (checkRoomAppointment)
@@ -411,9 +411,9 @@ namespace Model
         }
 
 
-        public ObservableCollection<DoctorAppointment> CheckDoctorAppointments(ObservableCollection<DoctorAppointment> newAppointments, int roomId, SelectedDatesCollection dates)
+        public List<DoctorAppointment> CheckDoctorAppointments(List<DoctorAppointment> newAppointments, int roomId, SelectedDatesCollection dates)
         {
-            ObservableCollection<DoctorAppointment> ret = new ObservableCollection<DoctorAppointment>();
+            List<DoctorAppointment> ret = new List<DoctorAppointment>();
             foreach (DateTime d in dates)
             {
                 foreach (DoctorAppointment ap in newAppointments)
@@ -431,7 +431,7 @@ namespace Model
             return ret;
         }
 
-        private bool CheckAppointment(ObservableCollection<Appointment> RoomAppointment,DateTime start, DateTime end)
+        private bool CheckAppointment(List<Appointment> RoomAppointment,DateTime start, DateTime end)
         {
             bool isFree = true;
 

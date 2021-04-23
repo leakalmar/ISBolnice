@@ -33,7 +33,7 @@ namespace Hospital_IS
            
             InitializeComponent();
             this.DataContext = this;
-            TempRoom = Hospital.Room;
+            TempRoom = new ObservableCollection<Room>(Hospital.Room);
             TempEquip = new ObservableCollection<Equipment>();
             Combo.SelectedIndex = index;
 
@@ -55,7 +55,7 @@ namespace Hospital_IS
         {
             InitializeComponent();
             this.DataContext = this;
-            TempRoom = Hospital.Room;
+            TempRoom = new ObservableCollection<Room>(Hospital.Room);
             TempEquip = new ObservableCollection<Equipment>();
           
         }

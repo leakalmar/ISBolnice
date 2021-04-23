@@ -1,6 +1,7 @@
 ﻿using Model;
 using Storages;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -118,7 +119,7 @@ namespace Hospital_IS.View
             
             AvailableAppoitments.Clear();
             bool isReserved = false;
-            ObservableCollection<Appointment> roomAppointments = Hospital.Instance.getAppByRoom(doctor.PrimaryRoom);
+            List<Appointment> roomAppointments = Hospital.Instance.getAppByRoom(doctor.PrimaryRoom);
             foreach (DoctorAppointment ap in appList)
             {
                 if (TimePriority.IsChecked == true)
@@ -141,7 +142,7 @@ namespace Hospital_IS.View
 
         }
 
-        private static bool IsAppointmentFree(DoctorAppointment doctorAppointment, ObservableCollection<Appointment> roomAppointments)
+        private static bool IsAppointmentFree(DoctorAppointment doctorAppointment, List<Appointment> roomAppointments)
         {
             bool isReserved = false;
             foreach (DoctorAppointment hospital in Hospital.Instance.allAppointments)
@@ -234,7 +235,7 @@ namespace Hospital_IS.View
             appList.Add(app6);
 
             AvailableAppoitments.Clear();
-            ObservableCollection<Appointment> roomAppointments = Hospital.Instance.getAppByRoom(doctor.PrimaryRoom);
+            List<Appointment> roomAppointments = Hospital.Instance.getAppByRoom(doctor.PrimaryRoom);
             bool flag = false;
             foreach (DoctorAppointment ap in appList)
             {

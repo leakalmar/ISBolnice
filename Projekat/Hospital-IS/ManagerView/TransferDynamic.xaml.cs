@@ -38,7 +38,7 @@ namespace Hospital_IS
             DestinationEquip = new ObservableCollection<Equipment>();
 
 
-            SourceRoom = Hospital.Instance.getRoomByType(RoomType.StorageRoom);
+            SourceRoom = new ObservableCollection<Room>(Hospital.Instance.getRoomByType(RoomType.StorageRoom));
            
         }
 

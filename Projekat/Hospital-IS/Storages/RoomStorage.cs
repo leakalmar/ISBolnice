@@ -11,14 +11,14 @@ namespace Storages
     public class RoomStorage
     {
         private String fileLocation ;
-        private ObservableCollection<Room> allRooms = new ObservableCollection<Room>();
+        private List<Room> allRooms = new List<Room>();
 
         public RoomStorage()
         {
             this.fileLocation = "../../../FileStorage/rooms.xml";
         }
 
-        public ObservableCollection<Room>  GetAll()
+        public List<Room>  GetAll()
         {
             
 
@@ -30,8 +30,8 @@ namespace Storages
             else
             {
                 FileStream filestream = File.OpenRead("../../../FileStorage/rooms.xml");
-                XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Room>));
-                allRooms = (ObservableCollection<Room>)serializer.Deserialize(filestream);
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Room>));
+                allRooms = (List<Room>)serializer.Deserialize(filestream);
                 filestream.Close();
                 return allRooms;
             }
@@ -40,9 +40,9 @@ namespace Storages
         }
 
 
-        public ObservableCollection<Room> GetRoomsByType(RoomType type)
+        public List<Room> GetRoomsByType(RoomType type)
         {
-            ObservableCollection<Room> allRoomByType = new ObservableCollection<Room>();
+            List<Room> allRoomByType = new List<Room>();
 
             foreach(Room room in GetAll())
             {
@@ -54,11 +54,11 @@ namespace Storages
             return allRoomByType;
         }
 
-        public void SaveRooms(ObservableCollection<Room> allRooms)
+        public void SaveRooms(List<Room> allRooms)
         {
 
 
-            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Room>));
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Room>));
             TextWriter filestream = new StreamWriter("../../../FileStorage/rooms.xml");
             serializer.Serialize(filestream, allRooms);
             filestream.Close();

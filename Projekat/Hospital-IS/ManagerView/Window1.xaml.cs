@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Storages;
 using Model;
+using System.Collections.ObjectModel;
 
 namespace Hospital_IS
 {
@@ -38,7 +39,7 @@ namespace Hospital_IS
                
             }
             InitializeComponent();
-            DataGridRooms.DataContext = Hospital.Instance;
+            DataGridRooms.DataContext = new ObservableCollection<Room>(Hospital.Room);
         }
 
       

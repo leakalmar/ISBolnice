@@ -77,7 +77,7 @@ namespace Hospital_IS.DoctorView
                 calendar.SelectedDate = DateTime.Now;
                 dates = calendar.SelectedDates;
             }
-            ObservableCollection<DoctorAppointment> appList = new ObservableCollection<DoctorAppointment>();
+            List<DoctorAppointment> appList = new List<DoctorAppointment>();
 
 
             foreach (DateTime d in dates)
@@ -135,12 +135,12 @@ namespace Hospital_IS.DoctorView
             //ObservableCollection<DoctorAppointment > ret = Hospital.Instance.CheckDoctorAppointments(appList,room.RoomId);
             if(type == "CheckUp")
             {
-                ObservableCollection<DoctorAppointment> ret = Hospital.Instance.CheckDoctorAppointments(appList, room.RoomId, dates);
+                ObservableCollection<DoctorAppointment> ret = new ObservableCollection<DoctorAppointment>(Hospital.Instance.CheckDoctorAppointments(appList, room.RoomId, dates));
                 appointments.DataContext = ret;
             }
             else
             {
-                ObservableCollection<DoctorAppointment > ret = Hospital.Instance.CheckDoctorAppointments(appList,room.RoomId,dates);
+                ObservableCollection<DoctorAppointment > ret = new ObservableCollection<DoctorAppointment>(Hospital.Instance.CheckDoctorAppointments(appList,room.RoomId,dates));
                 appointments.DataContext = ret;
             }
 
@@ -154,7 +154,7 @@ namespace Hospital_IS.DoctorView
                 selected.Reserved = true;
                 Hospital.Instance.AddAppointment(selected);
                 DoctorHomePage.Instance.DoctorAppointment.Add(selected);
-                ObservableCollection<DoctorAppointment> list = afs.GetAll();
+                List<DoctorAppointment> list = afs.GetAll();
                 list.Add(selected);
                 afs.SaveAppointment(list);
 
@@ -173,7 +173,7 @@ namespace Hospital_IS.DoctorView
             selected.Reserved = true;
             Hospital.Instance.AddAppointment(selected);
             DoctorHomePage.Instance.DoctorAppointment.Add(selected);
-            ObservableCollection<DoctorAppointment> list = afs.GetAll();
+            List<DoctorAppointment> list = afs.GetAll();
             list.Add(selected);
             afs.SaveAppointment(list);
 

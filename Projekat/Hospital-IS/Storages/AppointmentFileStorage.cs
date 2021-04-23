@@ -16,18 +16,18 @@ namespace Storages
             this.fileLocation = "../../../FileStorage/appointments.json";
         }
 
-        public ObservableCollection<DoctorAppointment> GetAll()
+        public List<DoctorAppointment> GetAll()
         {
             String text = File.ReadAllText(this.fileLocation);
-            ObservableCollection<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<ObservableCollection<DoctorAppointment>>(text);
+            List<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<List<DoctorAppointment>>(text);
             return allAppointments;
         }
 
-        public ObservableCollection<DoctorAppointment> GetAllByPatient(int patient)
+        public List<DoctorAppointment> GetAllByPatient(int patient)
         {
             String text = File.ReadAllText(this.fileLocation);
-            ObservableCollection<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<ObservableCollection<DoctorAppointment>>(text);
-            ObservableCollection<DoctorAppointment> patientAppointments = new ObservableCollection<DoctorAppointment>();
+            List<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<List<DoctorAppointment>>(text);
+            List<DoctorAppointment> patientAppointments = new List<DoctorAppointment>();
             foreach (DoctorAppointment docApp in allAppointments)
             {
                 if (docApp.Patient.Id == patient)
@@ -39,11 +39,11 @@ namespace Storages
 
         }
 
-        public ObservableCollection<DoctorAppointment> GetAllByDoctor(int doctor)
+        public List<DoctorAppointment> GetAllByDoctor(int doctor)
         {
             String text = File.ReadAllText(this.fileLocation);
-            ObservableCollection<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<ObservableCollection<DoctorAppointment>>(text);
-            ObservableCollection<DoctorAppointment> doctorAppointments = new ObservableCollection<DoctorAppointment>();
+            List<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<List<DoctorAppointment>>(text);
+            List<DoctorAppointment> doctorAppointments = new List<DoctorAppointment>();
             foreach (DoctorAppointment docApp in allAppointments)
             {
                 if (docApp.Doctor.Id == doctor)
@@ -54,7 +54,7 @@ namespace Storages
             return doctorAppointments;
         }
 
-        public void SaveAppointment(ObservableCollection<DoctorAppointment> allAppointments)
+        public void SaveAppointment(List<DoctorAppointment> allAppointments)
         {
             var file = JsonConvert.SerializeObject(allAppointments, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
             using (StreamWriter writer = new StreamWriter(this.fileLocation))
@@ -63,11 +63,11 @@ namespace Storages
             }
         }
 
-        public ObservableCollection<DoctorAppointment> GetAllByRoom(int roomId)
+        public List<DoctorAppointment> GetAllByRoom(int roomId)
         {
             String text = File.ReadAllText(this.fileLocation);
-            ObservableCollection<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<ObservableCollection<DoctorAppointment>>(text);
-            ObservableCollection<DoctorAppointment> roomAppointments = new ObservableCollection<DoctorAppointment>();
+            List<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<List<DoctorAppointment>>(text);
+            List<DoctorAppointment> roomAppointments = new List<DoctorAppointment>();
             foreach (DoctorAppointment roomApp in allAppointments)
             {
                 if (roomApp.Room == roomId)
@@ -80,7 +80,7 @@ namespace Storages
 
         public void UpdateAppointment(DoctorAppointment appointment)
         {
-            ObservableCollection<DoctorAppointment> docApp = GetAll();
+            List<DoctorAppointment> docApp = GetAll();
             foreach(DoctorAppointment d in docApp)
             {
                 if(d.AppointmentStart.Equals(appointment.AppointmentStart) & d.Doctor.Id.Equals(appointment.Doctor.Id) & d.Room.Equals(appointment.Room))

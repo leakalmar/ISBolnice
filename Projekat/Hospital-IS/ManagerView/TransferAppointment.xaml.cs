@@ -34,7 +34,7 @@ namespace Hospital_IS
 
             InitializeComponent();
             
-            AllAppointments = Hospital.Instance.getAllAppByTwoRoom(sourceRoom.RoomId,destinationRoom.RoomId);
+            AllAppointments = new ObservableCollection<Appointment>(Hospital.Instance.getAllAppByTwoRoom(sourceRoom.RoomId,destinationRoom.RoomId));
            
             this.DataContext = this;
 

@@ -65,7 +65,7 @@ namespace Hospital_IS
             
         }
 
-        private int genereteId(ObservableCollection<Room> room)
+        private int genereteId(List<Room> room)
         {
             int id = -1;
             foreach(Room r in room)

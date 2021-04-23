@@ -1,5 +1,6 @@
 ﻿using Model;
 using Storages;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,7 +28,8 @@ namespace Hospital_IS.SecretaryView
             if (Appointments != null)
                 Appointments.Clear();
             AppointmentFileStorage afs = new AppointmentFileStorage();
-            Appointments = afs.GetAll();
+            List<DoctorAppointment> appointments = afs.GetAll();
+            Appointments = new ObservableCollection<DoctorAppointment>(appointments);
 
             foreach (DoctorAppointment appointment in Appointments)
             {

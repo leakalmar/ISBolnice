@@ -2,6 +2,7 @@
 using Model;
 using Storages;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows;
@@ -50,10 +51,10 @@ namespace Hospital_IS.SecretaryView
             OldApp.AppointmentStart = DocAppointment.AppointmentStart;
 
             FSDoctor fsd = new FSDoctor();
-            Doctors = fsd.GetAll();
+            Doctors = new ObservableCollection<Doctor>(fsd.GetAll());
 
             RoomStorage rs = new RoomStorage();
-            Rooms = rs.GetAll();
+            Rooms = new ObservableCollection<Room>(rs.GetAll());
 
         }
 
@@ -133,10 +134,10 @@ namespace Hospital_IS.SecretaryView
 
         private void txtEndOfApp_LostFocus(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<DoctorAppointment> appsByRoom = afs.GetAllByRoom(DocAppointment.Room);
-            ObservableCollection<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(DocAppointment.Doctor.Id);
+            List<DoctorAppointment> appsByRoom = afs.GetAllByRoom(DocAppointment.Room);
+            List<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(DocAppointment.Doctor.Id);
 
-            ObservableCollection<DoctorAppointment> ClassicAppsByRoom = cas.GetAllDocAppointmentsById(DocAppointment.Room);
+            List<DoctorAppointment> ClassicAppsByRoom = cas.GetAllDocAppointmentsById(DocAppointment.Room);
             appsByRoom = ConcatCollections(appsByRoom, ClassicAppsByRoom);
 
             confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
@@ -151,16 +152,16 @@ namespace Hospital_IS.SecretaryView
                 txtEndOfApp.Text = appEnd.ToString("t", DateTimeFormatInfo.InvariantInfo);
 
 
-                ObservableCollection<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(DocAppointment.Doctor.Id);
-                ObservableCollection<DoctorAppointment> appsByRoom = afs.GetAllByRoom(DocAppointment.Room);
+                List<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(DocAppointment.Doctor.Id);
+                List<DoctorAppointment> appsByRoom = afs.GetAllByRoom(DocAppointment.Room);
 
-                ObservableCollection<DoctorAppointment> ClassicAppsByRoom = cas.GetAllDocAppointmentsById(DocAppointment.Room);
+                List<DoctorAppointment> ClassicAppsByRoom = cas.GetAllDocAppointmentsById(DocAppointment.Room);
                 appsByRoom = ConcatCollections(appsByRoom, ClassicAppsByRoom);
 
                 confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
             }
         }
-        private ObservableCollection<DoctorAppointment> ConcatCollections(ObservableCollection<DoctorAppointment> apps1, ObservableCollection<DoctorAppointment> apps2)
+        private List<DoctorAppointment> ConcatCollections(List<DoctorAppointment> apps1, List<DoctorAppointment> apps2)
         {
             foreach (DoctorAppointment appointment in apps2)
             {
@@ -185,7 +186,7 @@ namespace Hospital_IS.SecretaryView
             }
         }
 
-        private bool checkAppointment(ObservableCollection<DoctorAppointment> RoomAppointments, ObservableCollection<DoctorAppointment> DoctorAppointments)
+        private bool checkAppointment(List<DoctorAppointment> RoomAppointments, List<DoctorAppointment> DoctorAppointments)
         {
             DateTime start;
             DateTime end;

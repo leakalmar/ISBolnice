@@ -39,7 +39,7 @@ namespace Hospital_IS
             
             this.DataContext = this;
            
-            TempRoom = Hospital.Room;
+            TempRoom = new ObservableCollection<Room>(Hospital.Room);
             TempEquip = new ObservableCollection<Equipment>();
             DispatcherTimer dispatcherTimer = new DispatcherTimer
             {

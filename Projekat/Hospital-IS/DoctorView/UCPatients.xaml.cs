@@ -41,7 +41,7 @@ namespace Hospital_IS.DoctorView
         {
             Patient patient = (Patient)patients.SelectedItem;
             AppointmentFileStorage afs = new AppointmentFileStorage();
-            ObservableCollection<DoctorAppointment> appointments = afs.GetAllByPatient(patient.Id);
+            List<DoctorAppointment> appointments = afs.GetAllByPatient(patient.Id);
             DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(appointments[0]));
             this.Visibility = Visibility.Collapsed;
         }

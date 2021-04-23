@@ -36,8 +36,8 @@ namespace Hospital_IS
             DestinationEquip = new ObservableCollection<Equipment>();
 
             DataGridDestination.IsEnabled = false;
-            SourceRoom = Hospital.Room;
-            DestinationRoom = Hospital.Room;
+            SourceRoom = new ObservableCollection<Room>(Hospital.Room);
+            DestinationRoom = new ObservableCollection<Room>(Hospital.Room);
 
 
         }

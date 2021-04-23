@@ -16,10 +16,10 @@ namespace Hospital_IS.Storages
             this.fileLocation = "../../../FileStorage/doctors.json";
         }
 
-        public ObservableCollection<Doctor> GetAll()
+        public List<Doctor> GetAll()
         {
             String text = File.ReadAllText(this.fileLocation);
-            ObservableCollection<Doctor> doctors = JsonConvert.DeserializeObject<ObservableCollection<Doctor>>(text);
+            List<Doctor> doctors = JsonConvert.DeserializeObject<List<Doctor>>(text);
 
 
             /*
@@ -43,7 +43,7 @@ namespace Hospital_IS.Storages
 
         public void Save(Doctor doctor)
         {
-            ObservableCollection<Doctor> doctors = GetAll();
+            List<Doctor> doctors = GetAll();
             doctors.Add(doctor);
 
             var file = JsonConvert.SerializeObject(doctors, Formatting.Indented, new JsonSerializerSettings()
@@ -57,7 +57,7 @@ namespace Hospital_IS.Storages
         }
         public Boolean UpdateDoctor(Doctor doctor)
         {
-            ObservableCollection<Doctor> doctors = GetAll();
+            List<Doctor> doctors = GetAll();
 
             for (int i = 0; i < doctors.Count; i++)
             {
@@ -80,7 +80,7 @@ namespace Hospital_IS.Storages
 
         public Model.Doctor GetByEmail(String email)
         {
-            ObservableCollection<Doctor> doctors = GetAll();
+            List<Doctor> doctors = GetAll();
             for (int i = 0; i < doctors.Count; i++)
             {
                 if (email.Equals(doctors[i].Email))

@@ -24,8 +24,8 @@ namespace Hospital_IS
         public static Doctor DoctortUser { get; set; }
 
         //Dodala jer mi treba ista referenca svuda kako bi mogla da postavim selektovanje za combobox
-        public static ObservableCollection<Doctor> Doctors { get; set; }
-        public static ObservableCollection<Room> Rooms { get; set; }
+        public static List<Doctor> Doctors { get; set; }
+        public static List<Room> Rooms { get; set; }
 
         public MainWindow()
         {
@@ -50,7 +50,7 @@ namespace Hospital_IS
                 if (email.Text == p.Email && password.Password.ToString() == p.Password)
                 {
                     PatientUser = p;
-                    HomePatient.Instance.DoctorAppointment = afs.GetAllByPatient(p.Id);
+                    HomePatient.Instance.DoctorAppointment = new ObservableCollection<DoctorAppointment>(afs.GetAllByPatient(p.Id));
                     HomePatient.Instance.Show();
                     this.Close();
                 }
@@ -61,7 +61,7 @@ namespace Hospital_IS
                 if (email.Text == d.Email && password.Password.ToString() == d.Password)
                 {
                     DoctortUser = d;
-                    DoctorHomePage.Instance.DoctorAppointment = afs.GetAllByDoctor(d.Id);
+                    DoctorHomePage.Instance.DoctorAppointment = new ObservableCollection<DoctorAppointment>(afs.GetAllByDoctor(d.Id));
                     DoctorHomePage.Instance.HomePage = new UserControlHomePage();
                     DoctorHomePage.Instance.Appointments = new UCAppointments();
                     DoctorHomePage.Instance.Patients = new UCPatients();
