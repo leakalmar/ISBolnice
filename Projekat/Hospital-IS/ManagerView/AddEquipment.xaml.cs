@@ -65,18 +65,18 @@ namespace Hospital_IS
             }
 
 
-            bool isUnique = checkIfUnique(id);
+            bool isUnique = CheckIfUnique(id);
 
             while (!isUnique)
             {
                 ++id;
-                isUnique = checkIfUnique(id);
+                isUnique = CheckIfUnique(id);
             }
 
             return id;
         }
 
-        private bool checkIfUnique(int id)
+        private bool CheckIfUnique(int id)
         {
             foreach(Room room in Hospital.Room)
             {
