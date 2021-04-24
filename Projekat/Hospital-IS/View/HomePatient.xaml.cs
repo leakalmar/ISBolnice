@@ -28,7 +28,7 @@ namespace Hospital_IS.View
         public Patient Patient { get; set; }
         public DoctorAppointment changedApp;
         public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
-        public HomePatient()
+        private HomePatient()
         {
             InitializeComponent();
 

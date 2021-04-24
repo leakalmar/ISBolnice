@@ -1,4 +1,5 @@
 ﻿using Model;
+using Service;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -182,7 +183,7 @@ namespace Hospital_IS.View
             else
             {
                 HomePatient.Instance.DoctorAppointment.Add(docApp);
-                Hospital.Instance.AddAppointment(docApp);
+                DoctorAppointmentService.Instance.AddAppointment(docApp);
                 docApp.Reserved = true;
                 AvailableAppoitments.Remove(docApp);
             }
@@ -256,9 +257,9 @@ namespace Hospital_IS.View
         {
             DoctorAppointment docApp = (DoctorAppointment)listOfAppointments.SelectedItem; 
             HomePatient.Instance.DoctorAppointment.Remove(HomePatient.Instance.changedApp);
-            Hospital.Instance.RemoveAppointment(HomePatient.Instance.changedApp);
+            DoctorAppointmentService.Instance.RemoveAppointment(HomePatient.Instance.changedApp);
             HomePatient.Instance.DoctorAppointment.Add(docApp);
-            Hospital.Instance.allAppointments.Add(docApp);
+            DoctorAppointmentService.Instance.AddAppointment(docApp);
             docApp.Reserved = true;
             AvailableAppoitments.Remove(docApp);
         }
