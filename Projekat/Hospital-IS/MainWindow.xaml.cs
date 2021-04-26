@@ -50,7 +50,6 @@ namespace Hospital_IS
                 if (email.Text == p.Email && password.Password.ToString() == p.Password)
                 {
                     PatientUser = p;
-                    //HomePatient.Instance.DoctorAppointment = new ObservableCollection<DoctorAppointment>(afs.GetAllByPatient(p.Id));
                     HomePatient.Instance.Show();
                     this.Close();
                 }

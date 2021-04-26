@@ -140,32 +140,34 @@ namespace Service
 
         private bool VerifyAppointment(DoctorAppointment doctorAppointment, List<Appointment> roomAppointments)
         {
-            bool isReserved = false;
-            foreach (DoctorAppointment hospital in Hospital.Instance.allAppointments)
+            bool isFree = true;
+            foreach (DoctorAppointment hospital in allAppointments)
             {
                 if (doctorAppointment.AppointmentStart == hospital.AppointmentStart && doctorAppointment.Doctor.Id.Equals(hospital.Doctor.Id))
                 {
-                    isReserved = true;
-                    return isReserved;
+                    isFree = false;
+                    return isFree;
                 }
             }
-            //Dodati proveru za sobe
-            throw new NotImplementedException();
+
+            isFree = AppointmentService.Instance.CheckAppointment(roomAppointments, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd);
+            return isFree;
         }
 
-        public List<DoctorAppointment> SuggestAppointmetsToPatient(String timeSlot, Doctor doctor,Patient patient, DateTime date, Boolean priority)
+        public List<DoctorAppointment> SuggestAppointmentsToPatient(String timeSlot, Doctor doctor,Patient patient, DateTime date, Boolean priority)
         {
             List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
             List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForPatient(timeSlot, doctor, patient, date, priority);
+            List<Appointment> roomAppointments = AppointmentService.Instance.getAppByRoom(doctor.PrimaryRoom);
             foreach (DoctorAppointment doctorAppointment in allPossibleAppointments)
             {
-                /*bool isReserved = VerifyAppointment(doctorAppointment);
-                if (!isReserved)
+                bool isFree = VerifyAppointment(doctorAppointment, roomAppointments);
+                if (isFree)
                 {
                     availableAppointments.Add(doctorAppointment);
-                }*/
+                }
             }
-            throw new NotImplementedException();
+            return availableAppointments;
         }
 
         public List<DoctorAppointment> SuggestAppointmetsToDoctor(DateTime date, int idRoom, AppointmetType type, TimeSpan duration)
