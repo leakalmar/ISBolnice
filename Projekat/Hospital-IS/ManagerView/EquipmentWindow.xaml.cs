@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Controllers;
 using Model;
 
 namespace Hospital_IS
@@ -36,11 +37,13 @@ namespace Hospital_IS
         private EquipmentWindow()
         {
             InitializeComponent();
-            
-            this.DataContext = this;
-           
-            TempRoom = new ObservableCollection<Room>(Hospital.Room);
-            TempEquip = new ObservableCollection<Equipment>();
+
+
+
+
+            DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
+
+            Combo.DataContext = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
             DispatcherTimer dispatcherTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMinutes(1)
@@ -50,20 +53,30 @@ namespace Hospital_IS
 
         }
 
+
+        public void refresh()
+        {
+          
+            Combo.DataContext = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
+           
+        }
+
         private void timer_Tick(object sender, EventArgs e)
         {
             DateTime time = DateTime.Now;
+
+            MessageBox.Show(Convert.ToString(TransferController.Instance.getAllTransfers().Count));
            
-            foreach(Room r in Hospital.Room)
+            foreach(Room r in RoomController.Instance.getAllRooms())
             {
-                foreach(Transfer trans in r.TransferList)
+                foreach(Transfer trans in TransferController.Instance.getAllTransfers())
                 {
-                    MessageBox.Show(Convert.ToString(time));
+                   
                     if (trans.TransferEnd <= time && trans.isMade == false)
                     {
                        trans.isMade = true;
-                       Hospital.Instance.TransferStaticEquipment(trans.SourceRoomId, trans.DestinationRoomId, trans.Equip, trans.Quantity);
-                      
+                       TransferController.Instance.TransferStaticEquipment(trans.SourceRoomId, trans.DestinationRoomId, trans.Equip, trans.Quantity);
+                        
                        MessageBox.Show("Uspjesan transfer");
                     
                         
@@ -82,20 +95,18 @@ namespace Hospital_IS
         {
             if (room != null)
             {
-                TempEquip.Clear();
-                if(room.Equipment != null)
+                if (room.Equipment != null)
                 {
-                    foreach (Equipment eq in room.Equipment)
-                    {
-
-                        TempEquip.Add(eq);
-                    }
+                    DataGridEquipment.DataContext = new ObservableCollection<Equipment>(room.Equipment);
                 }
-                
-            }
+                else
+                {
+                    DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
+                }
+            }   
             else
             {
-                TempEquip = new ObservableCollection<Equipment>();
+                DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
             }
             Combo.SelectedIndex = index;
 
@@ -113,17 +124,21 @@ namespace Hospital_IS
         {
            
             Room room = (Room)Combo.SelectedItem;
-            TempEquip.Clear();
+         
             if(room != null)
             {
                 if (room.Equipment != null)
                 {
-                    foreach (Equipment eq in room.Equipment)
-                    {
-
-                        TempEquip.Add(eq);
-                    }
+                    DataGridEquipment.DataContext = new ObservableCollection<Equipment>(room.Equipment);
                 }
+                else
+                {
+                    DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
+                }
+            }
+            else
+            {
+                DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
             }
            
         }

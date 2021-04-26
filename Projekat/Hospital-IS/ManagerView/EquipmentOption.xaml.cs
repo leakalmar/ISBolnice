@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,8 +34,9 @@ namespace Hospital_IS
            
             InitializeComponent();
             this.DataContext = this;
-            TempRoom = new ObservableCollection<Room>(Hospital.Room);
+            TempRoom = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
             TempEquip = new ObservableCollection<Equipment>();
+           
             Combo.SelectedIndex = index;
 
             currentRoom = room;
@@ -55,7 +57,7 @@ namespace Hospital_IS
         {
             InitializeComponent();
             this.DataContext = this;
-            TempRoom = new ObservableCollection<Room>(Hospital.Room);
+            TempRoom = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
             TempEquip = new ObservableCollection<Equipment>();
           
         }
@@ -66,11 +68,15 @@ namespace Hospital_IS
             currentRoom = (Room)Combo.SelectedItem;
             
             TempEquip.Clear();
-            foreach (Equipment eq in currentRoom.Equipment)
+            if(currentRoom.Equipment != null)
             {
-               
-                TempEquip.Add(eq);
+                foreach (Equipment eq in currentRoom.Equipment)
+                {
+
+                    TempEquip.Add(eq);
+                }
             }
+           
         }
 
 
@@ -130,7 +136,8 @@ namespace Hospital_IS
         {
             if(currentRoom.Type == RoomType.StorageRoom)
             {
-                AddEquipment addEquipment = new AddEquipment(currentRoom, currentIndex);
+              
+                AddEquipment addEquipment = new AddEquipment(currentRoom, Combo.SelectedIndex);
                 addEquipment.Show();
                 this.Hide();
             }
@@ -161,6 +168,11 @@ namespace Hospital_IS
             ControlTemplate ct = this.ComboTransfer.Template;
             Popup pop = ct.FindName("PART_Popup", this.ComboTransfer) as Popup;
             pop.Placement = PlacementMode.Top;
+        }
+
+        private void DataGridEquipment_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

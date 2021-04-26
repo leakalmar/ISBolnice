@@ -15,53 +15,26 @@ namespace Storages
 
         public RoomStorage()
         {
-            this.fileLocation = "../../../FileStorage/rooms.xml";
+            this.fileLocation = "../../../FileStorage/rooms.json";
         }
 
         public List<Room>  GetAll()
         {
-            
-
-
-             if (File.ReadAllText("../../../FileStorage/rooms.xml").Trim().Equals(""))
-            {
-                return allRooms;
-            }
-            else
-            {
-                FileStream filestream = File.OpenRead("../../../FileStorage/rooms.xml");
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Room>));
-                allRooms = (List<Room>)serializer.Deserialize(filestream);
-                filestream.Close();
-                return allRooms;
-            }
-            
-
+            String text = File.ReadAllText(this.fileLocation);
+            List<Room> allRooms = JsonConvert.DeserializeObject<List<Room>>(text);
+            return allRooms;
+         
         }
 
 
-        public List<Room> GetRoomsByType(RoomType type)
-        {
-            List<Room> allRoomByType = new List<Room>();
-
-            foreach(Room room in GetAll())
-            {
-                if(room.Type == RoomType.StorageRoom)
-                {
-                    allRoomByType.Add(room);
-                }
-            }
-            return allRoomByType;
-        }
-
+      
         public void SaveRooms(List<Room> allRooms)
         {
-
-
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Room>));
-            TextWriter filestream = new StreamWriter("../../../FileStorage/rooms.xml");
-            serializer.Serialize(filestream, allRooms);
-            filestream.Close();
+            var file = JsonConvert.SerializeObject(allRooms, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+            using (StreamWriter writer = new StreamWriter(this.fileLocation))
+            {
+                writer.Write(file);
+            }
         }
 
     }

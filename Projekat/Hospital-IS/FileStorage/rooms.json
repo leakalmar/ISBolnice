@@ -1,46 +1,69 @@
 [
   {
-    "equipment": null,
-    "appointment": null,
-    "RoomFloor": 123,
-    "RoomId": 123,
-    "IsFree": true,
+    "RoomFloor": 1,
+    "RoomNumber": 101,
+    "RoomId": 0,
+    "IsFree": false,
     "IsUsable": false,
     "Type": 2,
-    "Equipment": [],
-    "Appointment": []
+    "RoomIdType": "0 OperationRoom",
+    "Equipment": null
   },
   {
-    "equipment": null,
-    "appointment": null,
-    "RoomFloor": 1,
+    "RoomFloor": 2,
+    "RoomNumber": 205,
     "RoomId": 1,
-    "IsFree": true,
+    "IsFree": false,
     "IsUsable": false,
-    "Type": 2,
-    "Equipment": [],
-    "Appointment": null
+    "Type": 1,
+    "RoomIdType": "1 ConsultingRoom",
+    "Equipment": null
   },
   {
-    "equipment": null,
-    "appointment": null,
     "RoomFloor": 1,
+    "RoomNumber": 101,
     "RoomId": 2,
-    "IsFree": true,
+    "IsFree": false,
     "IsUsable": false,
-    "Type": 2,
-    "Equipment": [],
-    "Appointment": null
+    "Type": 3,
+    "RoomIdType": "2 StorageRoom",
+    "Equipment": [
+      {
+        "EquipType": 1,
+        "EquiptId": 1,
+        "Name": "makaze",
+        "Quantity": 75
+      }
+    ]
   },
   {
-    "equipment": null,
-    "appointment": null,
-    "RoomFloor": 1,
+    "RoomFloor": 5,
+    "RoomNumber": 601,
     "RoomId": 3,
-    "IsFree": true,
+    "IsFree": false,
     "IsUsable": false,
     "Type": 2,
-    "Equipment": [],
-    "Appointment": null
+    "RoomIdType": "3 OperationRoom",
+    "Equipment": null
+  },
+  {
+    "RoomFloor": 101,
+    "RoomNumber": 50,
+    "RoomId": 4,
+    "IsFree": false,
+    "IsUsable": false,
+    "Type": 2,
+    "RoomIdType": "4 OperationRoom",
+    "Equipment": null
+  },
+  {
+    "RoomFloor": 25,
+    "RoomNumber": 52,
+    "RoomId": 5,
+    "IsFree": false,
+    "IsUsable": false,
+    "Type": 2,
+    "RoomIdType": "5 OperationRoom",
+    "Equipment": null
   }
 ]

@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Controllers;
 using Model;
 
 
@@ -53,14 +54,16 @@ namespace Hospital_IS
                 tip = RoomType.ConsultingRoom;
             }
 
-            int id = genereteId(Hospital.Room);
+            int id = genereteId(RoomController.Instance.getAllRooms());
             Room newRoom = new Room(roomFloor, roomNumber, id, zauzeto, renoviranje, tip);
 
-            Manager.Instance.AddRoom(newRoom);
-    
+            RoomController.Instance.AddRoom(newRoom);
 
-          
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.Show();
             this.Close();
+
+
            
             
         }
@@ -81,7 +84,10 @@ namespace Hospital_IS
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.Show();
             this.Close();
+            
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using Storages;
 using Model;
 using System.Collections.ObjectModel;
+using Controllers;
 
 namespace Hospital_IS
 {
@@ -33,16 +34,16 @@ namespace Hospital_IS
         }
         private Window1()
         {
-            if (Hospital.Room == null)
-            {
-                Hospital.Room = roomStorage.GetAll();
                
-            }
             InitializeComponent();
-            DataGridRooms.DataContext = new ObservableCollection<Room>(Hospital.Room);
+            DataGridRooms.DataContext = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
         }
 
-      
+        
+        public void refresh()
+        {
+            DataGridRooms.DataContext = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
+        }
        
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -59,6 +60,7 @@ namespace Hospital_IS
 
         private void Eqiupment_Click(object sender, RoutedEventArgs e)
         {
+            EquipmentWindow.Instance.refresh();
             EquipmentWindow.Instance.Show();
            
             this.Hide();

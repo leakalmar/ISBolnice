@@ -24,8 +24,7 @@ namespace Hospital_IS
 
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
-            RoomStorage roomStorage = new RoomStorage();
-            roomStorage.SaveRooms(Hospital.Room);
+           
             this.Close();
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();

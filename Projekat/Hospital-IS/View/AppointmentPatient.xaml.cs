@@ -132,13 +132,13 @@ namespace Hospital_IS.View
             
             AvailableAppointmets.Clear();
             bool isReserved = false;
-            List<Appointment> roomAppointments = Hospital.Instance.getAppByRoom(doctor.PrimaryRoom);
+            List<Appointment> roomAppointments = AppointmentController.Instance.getAppByRoomId(doctor.PrimaryRoom);
             foreach (DoctorAppointment ap in appList)
             {
                 if (TimePriority.IsChecked == true)
                 {
                     roomAppointments.Clear();
-                    roomAppointments = Hospital.Instance.getAppByRoom(ap.Room);
+                    roomAppointments = AppointmentController.Instance.getAppByRoomId(ap.Room);
                 }
 
                 isReserved = IsAppointmentFree(ap, roomAppointments);
@@ -247,8 +247,8 @@ namespace Hospital_IS.View
             DoctorAppointment app6 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.Patient);
             appList.Add(app6);
 
-            AvailableAppointmets.Clear();
-            List<Appointment> roomAppointments = Hospital.Instance.getAppByRoom(doctor.PrimaryRoom);
+            AvailableAppoitments.Clear();
+            List<Appointment> roomAppointments = AppointmentController.Instance.getAppByRoomId(doctor.PrimaryRoom); 
             bool flag = false;
             foreach (DoctorAppointment ap in appList)
             {
