@@ -1,4 +1,5 @@
-﻿using Hospital_IS.DoctorView;
+﻿using Controllers;
+using Hospital_IS.DoctorView;
 using Hospital_IS.Storages;
 using Model;
 using Storages;
@@ -108,11 +109,9 @@ namespace Hospital_IS.DoctorView
                     bool dialog = (bool)new ExitMess("Da li želite da otkažete termin?").ShowDialog();
                     if (dialog)
                     {
-                        Hospital.Instance.RemoveAppointment(app);
+                        DoctorAppointmentController.Instance.RemoveAppointment(app);
                         DoctorHomePage.Instance.DoctorAppointment.Remove(app);
                         app.Reserved = false;
-                        AppointmentFileStorage afs = new AppointmentFileStorage();
-                        afs.SaveAppointment(Hospital.Instance.allAppointments);
                     }
                 }
             }

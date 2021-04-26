@@ -1,4 +1,5 @@
 ﻿using Model;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -48,6 +49,11 @@ namespace Controllers
         public void AddPatient(Patient patient)
         {
 
+        }
+
+        public List<Patient> GetAll()
+        {
+            return PatientService.Instance.allPatients;
         }
     }
 }

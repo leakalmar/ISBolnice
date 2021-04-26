@@ -1,4 +1,5 @@
-﻿using Hospital_IS.Storages;
+﻿using Controllers;
+using Hospital_IS.Storages;
 using Model;
 using Storages;
 using System;
@@ -27,7 +28,7 @@ namespace Hospital_IS.DoctorView
         public UCPatients()
         {
             InitializeComponent();
-            ICollectionView app = new CollectionViewSource { Source = pfs.GetAll()}.View;
+            ICollectionView app = new CollectionViewSource { Source = PatientController.Instance.GetAll()}.View;
 
             //app.Filter = delegate (object item)
             //{

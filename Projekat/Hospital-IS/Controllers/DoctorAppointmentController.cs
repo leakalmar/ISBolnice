@@ -2,7 +2,9 @@
 using Service;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
+using System.Windows.Controls;
 
 namespace Controllers
 {
@@ -24,6 +26,10 @@ namespace Controllers
         private DoctorAppointmentController()
         {
 
+        }
+        public List<DoctorAppointment> GetAllByDoctor(int doctorId)
+        {
+            return DoctorAppointmentService.Instance.GetAllByDoctor(doctorId);
         }
 
         public void AddAppointment(DoctorAppointment doctorAppointment)
@@ -47,10 +53,12 @@ namespace Controllers
             throw new NotImplementedException();
         }
 
-        public List<DoctorAppointment> SuggestAppointmetsToDoctor(DateTime date, int idRoom, AppointmetType type, TimeSpan duration)
+        public List<DoctorAppointment> SuggestAppointmetsToDoctor(DateTime date, int idRoom, AppointmetType type, String duration)
         {
             DoctorAppointmentService.Instance.SuggestAppointmetsToDoctor(date, idRoom, type, duration);
             throw new NotImplementedException();
         }
+
+        
     }
 }

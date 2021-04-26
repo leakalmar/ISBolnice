@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -125,15 +126,15 @@ namespace Hospital_IS.DoctorView
                             appointments.DataContext = new ObservableCollection<DoctorAppointment>();
                             return;
                         }
-                       
-                        
+
+
                     }
 
                 }
             }
 
             //ObservableCollection<DoctorAppointment > ret = Hospital.Instance.CheckDoctorAppointments(appList,room.RoomId);
-            if(type == "CheckUp")
+            if (type == "CheckUp")
             {
                 ObservableCollection<DoctorAppointment> ret = new ObservableCollection<DoctorAppointment>(Hospital.Instance.CheckDoctorAppointments(appList, room.RoomId, dates));
                 appointments.DataContext = ret;
@@ -152,11 +153,8 @@ namespace Hospital_IS.DoctorView
             {
                 DoctorAppointment selected = (DoctorAppointment)appointments.SelectedItem;
                 selected.Reserved = true;
-                Hospital.Instance.AddAppointment(selected);
+                DoctorAppointmentController.Instance.AddAppointment(selected);
                 DoctorHomePage.Instance.DoctorAppointment.Add(selected);
-                List<DoctorAppointment> list = afs.GetAll();
-                list.Add(selected);
-                afs.SaveAppointment(list);
 
                 DoctorHomePage.Instance.Home.Children.Remove(this);
                 DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(Appointment, true));
@@ -171,11 +169,8 @@ namespace Hospital_IS.DoctorView
                 return;
             }
             selected.Reserved = true;
-            Hospital.Instance.AddAppointment(selected);
+            DoctorAppointmentController.Instance.AddAppointment(selected);
             DoctorHomePage.Instance.DoctorAppointment.Add(selected);
-            List<DoctorAppointment> list = afs.GetAll();
-            list.Add(selected);
-            afs.SaveAppointment(list);
 
             DoctorHomePage.Instance.Home.Children.Remove(this);
             DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(Appointment, true));
