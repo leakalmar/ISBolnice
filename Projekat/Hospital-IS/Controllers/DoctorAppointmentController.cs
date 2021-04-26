@@ -41,16 +41,25 @@ namespace Controllers
             DoctorAppointmentService.Instance.UpdateAppointment(doctorAppointment);
         }
 
-        public List<DoctorAppointment> SuggestAppointmetsToPatient(String timeSlot,Doctor doctor, DateTime date, Boolean priority)
+        public List<DoctorAppointment> SuggestAppointmetsToPatient(String timeSlot,Doctor doctor,Patient patient, DateTime date, Boolean priority)
         {
-            DoctorAppointmentService.Instance.SuggestAppointmetsToPatient(timeSlot, doctor, date, priority);
-            throw new NotImplementedException();
+            return DoctorAppointmentService.Instance.SuggestAppointmetsToPatient(timeSlot, doctor, patient, date, priority);
         }
 
         public List<DoctorAppointment> SuggestAppointmetsToDoctor(DateTime date, int idRoom, AppointmetType type, TimeSpan duration)
         {
             DoctorAppointmentService.Instance.SuggestAppointmetsToDoctor(date, idRoom, type, duration);
             throw new NotImplementedException();
+        }
+
+        public List<DoctorAppointment> GetFutureAppointmentsByPatient(int patientId)
+        {
+            return DoctorAppointmentService.Instance.GetFutureAppointmentsByPatient(patientId);
+        }
+
+        public List<DoctorAppointment> GetAllAppointmentsByPatient(int patientId)
+        {
+            return DoctorAppointmentService.Instance.GetAllAppointmentsByPatient(patientId);
         }
     }
 }

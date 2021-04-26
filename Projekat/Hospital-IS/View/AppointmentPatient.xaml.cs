@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using Service;
 using Storages;
 using System;
@@ -13,16 +14,15 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class AppointmentPatient : Window
     {
-        public ObservableCollection<DoctorAppointment> AvailableAppoitments { get; set; }
-        public Doctor doctor;
-        public DateTime date;
-
+        public ObservableCollection<DoctorAppointment> AvailableAppointmets { get; set; }
+        private Doctor doctor;
+        private DateTime date;
 
         public AppointmentPatient()
         {
             InitializeComponent();
             this.DataContext = this;
-            AvailableAppoitments = new ObservableCollection<DoctorAppointment>();
+            AvailableAppointmets = new ObservableCollection<DoctorAppointment>();
             Doctors.DataContext = Hospital.Instance.Doctors;
             DateTime today = DateTime.Today;
             Calendar.DisplayDateStart = today;
@@ -61,8 +61,20 @@ namespace Hospital_IS.View
         //Drugi doktor je hardcode-ovan u FSDoctor klasi,samo radi pokazivanja funkcionalnosti(Samo ga otkomentarisati pri pokretanju da bi se prikazao)
         private void showAvailableApp(object sender, RoutedEventArgs e)
         {
+           // AvailableAppointmets.Clear();
             doctor = (Doctor)Doctors.SelectedItem;
             date = Calendar.SelectedDate.Value;
+           /* bool timePriority = false;
+            if (TimePriority.IsChecked == true)
+            {
+                timePriority = true;
+            }
+            
+            foreach (DoctorAppointment doctorAppointment in DoctorAppointmentController.Instance.SuggestAppointmetsToPatient(TimeSlot.Text, doctor, HomePatient.Instance.Patient, date, timePriority))
+            {
+                AvailableAppointmets.Add(doctorAppointment);
+            }
+            */
             int slotStart = 8;
 
             if (TimeSlot.Text.Equals("8:00-11:00"))
@@ -118,7 +130,7 @@ namespace Hospital_IS.View
                 }
             }
             
-            AvailableAppoitments.Clear();
+            AvailableAppointmets.Clear();
             bool isReserved = false;
             List<Appointment> roomAppointments = Hospital.Instance.getAppByRoom(doctor.PrimaryRoom);
             foreach (DoctorAppointment ap in appList)
@@ -133,7 +145,7 @@ namespace Hospital_IS.View
 
                 if (isReserved == false)
                 {
-                    AvailableAppoitments.Add(ap);
+                    AvailableAppointmets.Add(ap);
                 }
                 else
                 {
@@ -183,9 +195,9 @@ namespace Hospital_IS.View
             else
             {
                 HomePatient.Instance.DoctorAppointment.Add(docApp);
-                DoctorAppointmentService.Instance.AddAppointment(docApp);
+                DoctorAppointmentController.Instance.AddAppointment(docApp);
                 docApp.Reserved = true;
-                AvailableAppoitments.Remove(docApp);
+                AvailableAppointmets.Remove(docApp);
             }
         }
 
@@ -235,7 +247,7 @@ namespace Hospital_IS.View
             DoctorAppointment app6 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, HomePatient.Instance.Patient);
             appList.Add(app6);
 
-            AvailableAppoitments.Clear();
+            AvailableAppointmets.Clear();
             List<Appointment> roomAppointments = Hospital.Instance.getAppByRoom(doctor.PrimaryRoom);
             bool flag = false;
             foreach (DoctorAppointment ap in appList)
@@ -244,7 +256,7 @@ namespace Hospital_IS.View
 
                 if (flag == false)
                 {
-                    AvailableAppoitments.Add(ap);
+                    AvailableAppointmets.Add(ap);
                 }
                 else
                 {
@@ -257,11 +269,11 @@ namespace Hospital_IS.View
         {
             DoctorAppointment docApp = (DoctorAppointment)listOfAppointments.SelectedItem; 
             HomePatient.Instance.DoctorAppointment.Remove(HomePatient.Instance.changedApp);
-            DoctorAppointmentService.Instance.RemoveAppointment(HomePatient.Instance.changedApp);
+            DoctorAppointmentController.Instance.RemoveAppointment(HomePatient.Instance.changedApp);
             HomePatient.Instance.DoctorAppointment.Add(docApp);
-            DoctorAppointmentService.Instance.AddAppointment(docApp);
+            DoctorAppointmentController.Instance.AddAppointment(docApp);
             docApp.Reserved = true;
-            AvailableAppoitments.Remove(docApp);
+            AvailableAppointmets.Remove(docApp);
         }
 
         private void logout(object sender, RoutedEventArgs e)

@@ -80,6 +80,64 @@ namespace Service
             throw new NotImplementedException();
         }
 
+        private List<DoctorAppointment> GenerateAppointmentForPatient(String timeSlot, Doctor doctor,Patient patient, DateTime date, Boolean priority)
+        {
+            int slotStart = 8;
+            if (timeSlot.Equals("8:00-11:00"))
+            {
+                slotStart = 8;
+            }
+            else if (timeSlot.Equals("11:00-14:00"))
+            {
+                slotStart = 11;
+            }
+            else if (timeSlot.Equals("14:00-17:00"))
+            {
+                slotStart = 14;
+            }
+            else if (timeSlot.Equals("17:00-20:00"))
+            {
+                slotStart = 17;
+            }
+
+            List<DoctorAppointment> allPossibleAppointments = new List<DoctorAppointment>();
+            DoctorAppointment app1 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
+            allPossibleAppointments.Add(app1);
+            DoctorAppointment app2 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
+            allPossibleAppointments.Add(app2);
+            DoctorAppointment app3 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
+            allPossibleAppointments.Add(app3);
+            DoctorAppointment app4 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
+            allPossibleAppointments.Add(app4);
+            DoctorAppointment app5 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
+            allPossibleAppointments.Add(app5);
+            DoctorAppointment app6 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
+            allPossibleAppointments.Add(app6);
+
+            if (priority == true)
+            {
+                foreach (Doctor doc in Hospital.Instance.Doctors)
+                {
+                    if (!doc.Id.Equals(doctor.Id))
+                    {
+                        DoctorAppointment appTime1 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 0, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, patient);
+                        allPossibleAppointments.Add(appTime1);
+                        DoctorAppointment appTime2 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 30, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, patient);
+                        allPossibleAppointments.Add(appTime2);
+                        DoctorAppointment appTime3 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 0, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, patient);
+                        allPossibleAppointments.Add(appTime3);
+                        DoctorAppointment appTime4 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 30, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, patient);
+                        allPossibleAppointments.Add(appTime4);
+                        DoctorAppointment appTime5 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 0, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, patient);
+                        allPossibleAppointments.Add(appTime5);
+                        DoctorAppointment appTime6 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 30, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, patient);
+                        allPossibleAppointments.Add(appTime6);
+                    }
+                }
+            }
+            return allPossibleAppointments;
+        }
+
         private bool VerifyAppointment(DoctorAppointment doctorAppointment, List<Appointment> roomAppointments)
         {
             bool isReserved = false;
@@ -95,14 +153,51 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public List<DoctorAppointment> SuggestAppointmetsToPatient(String timeSlot, Doctor doctor, DateTime da, Boolean priority)
+        public List<DoctorAppointment> SuggestAppointmetsToPatient(String timeSlot, Doctor doctor,Patient patient, DateTime date, Boolean priority)
         {
+            List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
+            List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForPatient(timeSlot, doctor, patient, date, priority);
+            foreach (DoctorAppointment doctorAppointment in allPossibleAppointments)
+            {
+                /*bool isReserved = VerifyAppointment(doctorAppointment);
+                if (!isReserved)
+                {
+                    availableAppointments.Add(doctorAppointment);
+                }*/
+            }
             throw new NotImplementedException();
         }
 
         public List<DoctorAppointment> SuggestAppointmetsToDoctor(DateTime date, int idRoom, AppointmetType type, TimeSpan duration)
         {
             throw new NotImplementedException();
+        }
+
+        public List<DoctorAppointment> GetFutureAppointmentsByPatient(int patientId)
+        {
+            List<DoctorAppointment> futurePatientAppointments = new List<DoctorAppointment>();
+            List<DoctorAppointment> allPatientAppointmets = GetAllAppointmentsByPatient(patientId);
+            foreach(DoctorAppointment doctorAppointment in allPatientAppointmets)
+            {
+                if (doctorAppointment.AppointmentStart.Date >= DateTime.Today)
+                {
+                    futurePatientAppointments.Add(doctorAppointment);
+                }
+            }
+            return futurePatientAppointments;
+        }
+
+        public List<DoctorAppointment> GetAllAppointmentsByPatient(int patientId)
+        {
+            List<DoctorAppointment> patientAppointments = new List<DoctorAppointment>();
+            foreach (DoctorAppointment docApp in allAppointments)
+            {
+                if (docApp.Patient.Id == patientId)
+                {
+                    patientAppointments.Add(docApp);
+                }
+            }
+            return patientAppointments;
         }
     }
 }
