@@ -57,7 +57,7 @@ namespace Model
             Type = type;
         }
 
-        public  ObservableCollection<Equipment> Equipment { get; set; }
+        public  List<Equipment> Equipment  {get; set; }
 
 
 
@@ -70,7 +70,7 @@ namespace Model
 
             if (Equipment == null)
             {
-                Equipment = new ObservableCollection<Equipment>();
+                Equipment = new List<Equipment>();
 
             }
 
@@ -116,26 +116,6 @@ namespace Model
 
 
         }
-        public List<Transfer> TransferList { get; set; }
-
-        public void AddTransfer(Transfer transfer)
-        {
-            if (transfer == null)
-            {
-                return;
-            }
-
-            if (TransferList == null)
-            {
-                TransferList = new List<Transfer>();
-
-            }
-
-            if (!TransferList.Contains(transfer))
-            {
-                TransferList.Add(transfer);
-
-            }
-        }
+      
     }
 }

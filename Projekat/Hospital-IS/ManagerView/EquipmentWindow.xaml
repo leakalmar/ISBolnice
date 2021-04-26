@@ -21,7 +21,7 @@
 
 
     <Grid >
-        <DataGrid x:Name="DataGridEquipment"  IsReadOnly="True" ItemsSource="{Binding Path= TempEquip}" AlternatingRowBackground="NavajoWhite"
+        <DataGrid x:Name="DataGridEquipment"  IsReadOnly="True" ItemsSource="{Binding}" AlternatingRowBackground="NavajoWhite"
                   SelectionMode="Single"
                   Height="350" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="350" Background="#FFC5DBDF" AutoGenerateColumns="False" 
                   Margin="0,173,0,0" >
@@ -161,7 +161,7 @@
                 </Button>
             </Grid>
         </StackPanel>
-        <ComboBox x:Name="Combo"  ItemsSource="{Binding Path=TempRoom}" DisplayMemberPath="RoomIdType"   HorizontalAlignment="Left" Margin="177,128,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Combo_SelectionChanged"/>
+        <ComboBox x:Name="Combo"  ItemsSource="{Binding}" DisplayMemberPath="RoomIdType"   HorizontalAlignment="Left" Margin="177,128,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Combo_SelectionChanged"/>
         <TextBox HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" FontSize="15" Foreground="White" Margin="40,128,0,0"  Text="Izaberite sobu:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         
 

@@ -24,7 +24,7 @@
         <DataGrid x:Name="DataGridEquipment"  IsReadOnly="True" ItemsSource="{Binding Path= TempEquip}" AlternatingRowBackground="NavajoWhite"
                   SelectionMode="Single"
                   Height="350" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="350" Background="#FFC5DBDF" AutoGenerateColumns="False" 
-                 Margin="0,173,0,0" >
+                 Margin="0,173,0,0" SelectionChanged="DataGridEquipment_SelectionChanged" >
             <DataGrid.CellStyle>
                 <Style/>
             </DataGrid.CellStyle>

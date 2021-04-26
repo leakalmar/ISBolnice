@@ -1,5 +1,6 @@
 using Hospital_IS.DoctorView;
 using Hospital_IS.Storages;
+using Service;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -114,41 +115,7 @@ namespace Model
 
         private AppointmentFileStorage appointmentStorage = new AppointmentFileStorage();
 
-        private void getAllClassicAppointment()
-        {
-
-            AllClassicAppointments = classicAppointment.GetAll();
-        }
-
-
-
-
-        public void AddClassicAppointment(Appointment appointemnt)
-        {
-            getAllClassicAppointment();
-            if (appointemnt == null)
-            {
-                return;
-            }
-
-            if (AllClassicAppointments == null)
-            {
-                AllClassicAppointments = new List<Appointment>();
-
-            }
-
-            if (!AllClassicAppointments.Contains(appointemnt))
-            {
-                AllClassicAppointments.Add(appointemnt);
-
-                classicAppointment.SaveAppointment(AllClassicAppointments);
-            }
-        }
-
-        public List<Appointment> getAppByRoom(int roomID)
-        {
-            return classicAppointment.GetAllByRoomId(roomID);
-        }
+     
 
 
         public List<DoctorAppointment> getDocAppByRoom(int roomID)
@@ -156,36 +123,7 @@ namespace Model
             return appointmentStorage.GetAllByRoom(roomID);
         }
 
-        public List<Appointment> getAllAppByTwoRoom(int roomIdSource, int roomIdDestination)
-        {
-            List<Appointment> allApointemnts = new List<Appointment>();
-
-
-            foreach(Appointment ap in getDocAppByRoom(roomIdSource))
-            {
-                allApointemnts.Add(ap);
-            }
-
-            foreach (Appointment ap in getDocAppByRoom(roomIdDestination))
-            {
-                allApointemnts.Add(ap);
-            }
-
-            foreach (Appointment ap in getAppByRoom(roomIdSource))
-            {
-                allApointemnts.Add(ap);
-            }
-
-
-            foreach (Appointment ap in getAppByRoom(roomIdDestination))
-            {
-                allApointemnts.Add(ap);
-            }
-
-
-            return allApointemnts;
-        }
-
+      
 
         public void AddAppointment(DoctorAppointment docApp)
         {
@@ -227,72 +165,12 @@ namespace Model
             }
         }
 
-        public static List<Room> Room { get; set; }
+       
+ 
 
 
 
-        public void AddRoom(Room newRoom)
-        {
-            if (newRoom == null)
-            {
-                return;
-            }
-
-            if (Room == null)
-            {
-                Room = new List<Room>();
-
-            }
-
-            if (!Room.Contains(newRoom))
-            {
-                Room.Add(newRoom);
-
-            }
-        }
-
-        public void RemoveRoom(Room oldRoom)
-        {
-            foreach (Room r in Room)
-            {
-                if (r.RoomId == oldRoom.RoomId)
-                {
-
-                    Room.Remove(r);
-
-                    break;
-                }
-            }
-        }
-
-        public void RemoveAllRoom()
-        {
-            if (Room != null)
-                Room.Clear();
-        }
-        public void UpdateRoom(Room oldRoom)
-        {
-
-            foreach (Room r in Room)
-            {
-                if (r.RoomId == oldRoom.RoomId)
-                {
-                    int index = Room.IndexOf(r);
-                    Room.Remove(r);
-                    Room.Insert(index, oldRoom);
-                    break;
-                }
-            }
-
-
-        }
-
-
-
-        public List<Room> getRoomByType(RoomType type)
-        {
-            return roomStorage.GetRoomsByType(type);
-        }
+       
 
 
         public List<Doctor> Doctors { get; set; }
@@ -381,36 +259,7 @@ namespace Model
 
 
 
-        public bool TransferEquipmentStatic(Room sourceRoom, Room destinationRoom, Equipment equip, int quantity,DateTime startDate, DateTime endDate, String description)
-        {
-
-            List<Appointment> RoomsAppointment = getAllAppByTwoRoom(sourceRoom.RoomId, destinationRoom.RoomId);
-            bool checkRoomAppointment = CheckAppointment(RoomsAppointment, startDate, endDate);
-
-           if (checkRoomAppointment)
-            {
-                Transfer transfer = new Transfer(sourceRoom.RoomId, destinationRoom.RoomId, equip, quantity, endDate, false);
-                sourceRoom.AddTransfer(transfer);
-                MessageBox.Show(Convert.ToString(sourceRoom.TransferList.Count) +"haloo");
-                if (sourceRoom.Type != RoomType.StorageRoom)
-                {
-                    Appointment appointment = new Appointment(startDate, endDate, AppointmetType.EquipTransfer, sourceRoom.RoomId);
-                    appointment.Reserved = true;
-                    AddClassicAppointment(appointment);
-                }
-
-                if (destinationRoom.Type != RoomType.StorageRoom)
-                {
-                    Appointment appointment = new Appointment(startDate, endDate, AppointmetType.EquipTransfer,destinationRoom.RoomId);
-                    appointment.Reserved = true;
-                    AddClassicAppointment(appointment);
-                }
-
-            }
-            return checkRoomAppointment;
-        }
-
-
+     
         public List<DoctorAppointment> CheckDoctorAppointments(List<DoctorAppointment> newAppointments, int roomId, SelectedDatesCollection dates)
         {
             List<DoctorAppointment> ret = new List<DoctorAppointment>();
@@ -421,7 +270,7 @@ namespace Model
                     if (ap.AppointmentStart.Date.Equals(d.Date) && ap.Room.Equals(roomId))
                     {
                         if (Hospital.Instance.CheckAppointment(Hospital.Instance.GetAllAppointmentsByDoctor(DoctorHomePage.Instance.GetDoctor()), ap.AppointmentStart, ap.AppointmentEnd) && 
-                            Hospital.Instance.CheckAppointment(Hospital.Instance.getAppByRoom(roomId), ap.AppointmentStart,ap.AppointmentEnd))
+                            Hospital.Instance.CheckAppointment(AppointmentService.Instance.getAppByRoom(roomId), ap.AppointmentStart,ap.AppointmentEnd))
                         {
                             ret.Add(ap);
                         }
@@ -431,11 +280,13 @@ namespace Model
             return ret;
         }
 
-        private bool CheckAppointment(List<Appointment> RoomAppointment,DateTime start, DateTime end)
+
+
+        public bool CheckAppointment(List<Appointment> roomAppointment, DateTime start, DateTime end)
         {
             bool isFree = true;
 
-            foreach (Appointment appointment in RoomAppointment)
+            foreach (Appointment appointment in roomAppointment)
             {
 
                 bool between = IsBetweenDates(start, end, appointment);
@@ -450,11 +301,11 @@ namespace Model
             return isFree;
         }
 
-        private static bool IsBetweenDates(DateTime start, DateTime end, Appointment appointment)
+        public bool IsBetweenDates(DateTime end, DateTime start, Appointment appointment)
         {
-
             return (start > appointment.AppointmentStart && start < appointment.AppointmentEnd) || (end > appointment.AppointmentStart && end < appointment.AppointmentEnd);
         }
+
 
         public bool CheckQuantity(Room sourceRoom, Equipment equip, int quantity)
         {
@@ -471,65 +322,10 @@ namespace Model
             return false;
         }
 
-        public void TransferEquipment(Room sourceRoom, Equipment equip, int quantity)
-        {
-            foreach (Equipment eq in sourceRoom.Equipment)
-            {
-                if (eq.EquiptId == equip.EquiptId)
-                {
-                    if (eq.Quantity > quantity)
-                    {
-                        eq.Quantity = eq.Quantity - quantity;
+       
 
-                    }
+       
 
-                }
-            }
-
-        }
-
-        private Room getRoomById(int roomId)
-        {
-            foreach (Room r in Room)
-            {
-                if (r.RoomId == roomId)
-                {
-                    return r;
-                }
-            }
-            return null;
-        }
-
-        public Boolean TransferStaticEquipment(int sourceRoomId, int destinationRoomId, Equipment equip, int quantity)
-        {
-
-            Room sourceRoom = getRoomById(sourceRoomId);
-            Room destinationRoom = getRoomById(destinationRoomId);
-
-            bool isEnoughEquipment = CheckQuantity(sourceRoom, equip, quantity);
-
-          
-                TransferEquipment(sourceRoom, equip, quantity);
-
-                bool exist = false;
-                foreach (Equipment eq in destinationRoom.Equipment)
-                {
-                    if (eq.EquiptId == equip.EquiptId)
-                    {
-
-                        eq.Quantity = eq.Quantity + quantity;
-                        exist = true;
-                    }
-                }
-
-                if (!exist)
-                {
-                    Equipment equipment = new Equipment(equip.EquipType, equip.EquiptId, equip.Name, quantity);
-                    destinationRoom.Equipment.Add(equipment);
-                }
-            
-
-            return true;
-        }
+       
     }
 }

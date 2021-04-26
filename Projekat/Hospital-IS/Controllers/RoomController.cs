@@ -1,4 +1,5 @@
 ﻿using Model;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,22 +28,48 @@ namespace Controllers
 
         public bool CheckQuantity(Room sourceRoom, Equipment equip, int quantity)
         {
-            throw new NotImplementedException();
+           return RoomService.Instance.CheckQuantity(sourceRoom, equip, quantity);
         }
 
         public void AddRoom(Room room)
         {
-
+            RoomService.Instance.AddRoom(room);
         }
 
         public void RemoveRoom(Room room)
         {
-
+            RoomService.Instance.RemoveRoom(room);
         }
 
         public void UpdateRoom(Room room)
         {
+            RoomService.Instance.UpdateRoom(room);
+        }
 
+        public List<Room> getAllRooms()
+        {
+            return RoomService.Instance.getAllRooms();
+        }
+
+        public List<Room> getRoomByType(RoomType type)
+        {
+            return RoomService.Instance.getRoomByType(type);
+        }
+
+        public void AddEquipment(Room room, Equipment newEquip)
+        {
+            RoomService.Instance.AddEquipment(room,newEquip);
+        }
+
+        public void RemoveEquipment(Room room, Equipment oldEquip)
+        {
+            RoomService.Instance.RemoveEquipment(room,oldEquip);
+        }
+
+
+        public void UpdateEquipment(Room room, Equipment updateEquip)
+        {
+            RoomService.Instance.UpdateEquipment(room,updateEquip);
         }
     }
 }

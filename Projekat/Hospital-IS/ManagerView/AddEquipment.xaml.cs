@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Controllers;
 using Model;
 
 namespace Hospital_IS
@@ -43,48 +44,61 @@ namespace Hospital_IS
 
 
             int id = genereteId(currentRoom.Equipment);
-            currentRoom.AddEquipment(new Equipment(type1, id, name1, quantity1));
+          
 
-
-            
+            RoomController.Instance.AddEquipment(currentRoom, new Equipment(type1, id, name1, quantity1));
+       
             EquipmentOption equipmentOption = new EquipmentOption(currentRoom, currentIndex);
             equipmentOption.Show();
             this.Hide();
 
         }
 
-        private int genereteId(ObservableCollection<Equipment> equipList)
+        private int genereteId(List<Equipment> equipList)
         {
-            int id = -1;
-            foreach (Equipment eq in equipList)
+            if(equipList != null)
             {
-                if (eq.EquiptId > id)
+
+                int id = 0;
+                foreach (Equipment eq in equipList)
                 {
-                    id = eq.EquiptId;
+                    if (eq.EquiptId > id)
+                    {
+                        id = eq.EquiptId;
+                    }
+
                 }
+
+
+                bool isUnique = CheckIfUnique(id);
+
+                while (!isUnique)
+                {
+                    ++id;
+                    isUnique = CheckIfUnique(id);
+                }
+
+                return id;
             }
-
-
-            bool isUnique = CheckIfUnique(id);
-
-            while (!isUnique)
+            else
             {
-                ++id;
-                isUnique = CheckIfUnique(id);
+                return 1;
             }
-
-            return id;
+           
         }
 
         private bool CheckIfUnique(int id)
         {
-            foreach(Room room in Hospital.Room)
+            foreach(Room room in RoomController.Instance.getAllRooms())
             {
-                foreach(Equipment eq in room.Equipment)
+                if (room.Equipment != null)
                 {
-                    if(eq.EquiptId == id)
+                    foreach (Equipment eq in room.Equipment)
                     {
-                        return false;
+                        if (eq.EquiptId == id)
+                        {
+                            return false;
+                        }
                     }
                 }
             }

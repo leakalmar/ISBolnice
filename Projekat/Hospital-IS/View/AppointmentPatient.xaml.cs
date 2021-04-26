@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using Service;
 using Storages;
 using System;
@@ -120,13 +121,13 @@ namespace Hospital_IS.View
             
             AvailableAppoitments.Clear();
             bool isReserved = false;
-            List<Appointment> roomAppointments = Hospital.Instance.getAppByRoom(doctor.PrimaryRoom);
+            List<Appointment> roomAppointments = AppointmentController.Instance.getAppByRoomId(doctor.PrimaryRoom);
             foreach (DoctorAppointment ap in appList)
             {
                 if (TimePriority.IsChecked == true)
                 {
                     roomAppointments.Clear();
-                    roomAppointments = Hospital.Instance.getAppByRoom(ap.Room);
+                    roomAppointments = AppointmentController.Instance.getAppByRoomId(ap.Room);
                 }
 
                 isReserved = IsAppointmentFree(ap, roomAppointments);
@@ -236,7 +237,7 @@ namespace Hospital_IS.View
             appList.Add(app6);
 
             AvailableAppoitments.Clear();
-            List<Appointment> roomAppointments = Hospital.Instance.getAppByRoom(doctor.PrimaryRoom);
+            List<Appointment> roomAppointments = AppointmentController.Instance.getAppByRoomId(doctor.PrimaryRoom); 
             bool flag = false;
             foreach (DoctorAppointment ap in appList)
             {
