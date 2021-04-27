@@ -1,8 +1,10 @@
-﻿using Model;
+﻿using Hospital_IS.DoctorView;
+using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Controls;
 
 namespace Service
 {
@@ -27,6 +29,19 @@ namespace Service
         private DoctorAppointmentService()
         {
             allAppointments = afs.GetAll();
+        }
+
+        public List<DoctorAppointment> GetAllByDoctor(int doctorId)
+        {
+            List<DoctorAppointment> doctorAppointments = new List<DoctorAppointment>();
+            foreach (DoctorAppointment docApp in allAppointments)
+            {
+                if (docApp.Doctor.Id == doctorId)
+                {
+                    doctorAppointments.Add(docApp);
+                }
+            }
+            return doctorAppointments;
         }
 
         public void AddAppointment(DoctorAppointment doctorAppointment)
@@ -71,14 +86,62 @@ namespace Service
 
         }
 
-        public void UpdateAppointment(DoctorAppointment doctorAppointment)
+        public void UpdateAppointment(DoctorAppointment oldDoctorAppointment, DoctorAppointment newDoctorAppointment)
         {
-
+            for (int i = 0; i < allAppointments.Count; i++)
+            {
+                if (oldDoctorAppointment.AppointmentStart == allAppointments[i].AppointmentStart && oldDoctorAppointment.Room == allAppointments[i].Room && oldDoctorAppointment.Doctor.Id == allAppointments[i].Doctor.Id)
+                {
+                    allAppointments.Remove(allAppointments[i]);
+                    allAppointments.Insert(i, newDoctorAppointment);
+                    afs.SaveAppointment(allAppointments);
+                    return;
+                }
+            }
         }
 
-        private List<DoctorAppointment> GenerateAppointment()
+        private List<DoctorAppointment> GenerateAppointmentForDoctor(SelectedDatesCollection dates, int idRoom, AppointmetType type, TimeSpan duration, Patient patient)
         {
-            throw new NotImplementedException();
+            List<DoctorAppointment> appointmentList = new List<DoctorAppointment>();
+
+            foreach (DateTime d in dates)
+            {
+                DateTime lastTimeCreated;
+                //Set date from witch could start appointments
+                if (d.Date == DateTime.Now.Date)
+                {
+                    lastTimeCreated = new DateTime(d.Year, d.Month, d.Day, DateTime.Now.Hour, 30, 00);
+                }
+                else
+                {
+                    lastTimeCreated = new DateTime(d.Year, d.Month, d.Day, 8, 00, 00);
+                }
+
+                while (lastTimeCreated.TimeOfDay < new DateTime(DateTime.Now.Date.Year, DateTime.Now.Date.Month, DateTime.Now.Date.Day, 20, 00, 00).TimeOfDay)
+                {
+                    if (type == AppointmetType.CheckUp)
+                    {
+                        appointmentList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, lastTimeCreated.Hour, lastTimeCreated.Minute, 0), AppointmetType.CheckUp, false, idRoom, DoctorHomePage.Instance.GetDoctor(), patient));
+                        lastTimeCreated = lastTimeCreated.AddMinutes(30);
+                    }
+                    else
+                    {
+                        if(duration.TotalMinutes != 0)
+                        {
+                            DateTime startTime = new DateTime(d.Year, d.Month, d.Day, lastTimeCreated.Hour, lastTimeCreated.Minute, 0);
+                            DoctorAppointment newAppointment = new DoctorAppointment(startTime, AppointmetType.Operation, false, idRoom, DoctorHomePage.Instance.GetDoctor(), patient);
+                            newAppointment.AppointmentEnd = startTime.Add(duration);
+                            appointmentList.Add(newAppointment);
+                            lastTimeCreated = lastTimeCreated.AddMinutes(30);
+                        }
+                        else
+                        {
+                            return appointmentList;
+                        }
+                    }
+                }
+            }
+            return appointmentList;
         }
 
         private List<DoctorAppointment> GenerateAppointmentForPatient(String timeSlot, Doctor doctor,Patient patient, DateTime date, Boolean priority)
@@ -155,6 +218,20 @@ namespace Service
             return isFree;
         }
 
+        private bool VerifyAppointmentByPatient(DoctorAppointment doctorAppointment,int idPatient)
+        {
+            bool isFree = true;
+            foreach (DoctorAppointment patientAppointment in GetAllAppointmentsByPatient(idPatient))
+            {
+                if (doctorAppointment.AppointmentStart == patientAppointment.AppointmentStart)
+                {
+                    isFree = false;
+                    return isFree;
+                }
+            }
+            return isFree;
+        }
+
         public List<DoctorAppointment> SuggestAppointmentsToPatient(String timeSlot, Doctor doctor,Patient patient, DateTime date, Boolean priority)
         {
             List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
@@ -171,9 +248,24 @@ namespace Service
             return availableAppointments;
         }
 
-        public List<DoctorAppointment> SuggestAppointmetsToDoctor(DateTime date, int idRoom, AppointmetType type, TimeSpan duration)
+        public List<DoctorAppointment> SuggestAppointmetsToDoctor(SelectedDatesCollection dates, int idRoom, AppointmetType type, TimeSpan duration, Patient patient)
         {
-            throw new NotImplementedException();
+            List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
+            List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForDoctor(dates,idRoom,type,duration,patient);
+            List<Appointment> roomAppointments = AppointmentService.Instance.getAppByRoom(idRoom);
+            foreach (DoctorAppointment doctorAppointment in allPossibleAppointments)
+            {
+                bool isFree = VerifyAppointment(doctorAppointment, roomAppointments);
+                if (isFree)
+                {
+                    isFree = VerifyAppointmentByPatient(doctorAppointment, patient.Id);
+                }
+                if (isFree)
+                {
+                    availableAppointments.Add(doctorAppointment);
+                }
+            }
+            return availableAppointments;
         }
 
         public List<DoctorAppointment> GetFutureAppointmentsByPatient(int patientId)

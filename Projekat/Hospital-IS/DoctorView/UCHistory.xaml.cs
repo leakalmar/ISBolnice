@@ -1,7 +1,9 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
 using System.Windows;
@@ -21,7 +23,6 @@ namespace Hospital_IS.DoctorView
     /// </summary>
     public partial class UCHistory : UserControl
     {
-        private AppointmentFileStorage afs { get; } = new AppointmentFileStorage();
         private DoctorAppointment Appointment;
         private bool _started;
 
@@ -35,8 +36,9 @@ namespace Hospital_IS.DoctorView
         }
         public UCHistory(DoctorAppointment appointment)
         {
-            InitializeComponent(); 
-            ICollectionView view = new CollectionViewSource { Source = afs.GetAllByPatient(appointment.Patient.Id) }.View; view.Filter = null;
+            InitializeComponent();
+            ObservableCollection<DoctorAppointment> appointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(appointment.Patient.Id));
+            ICollectionView view = new CollectionViewSource { Source = appointments }.View; view.Filter = null;
             view.Filter = delegate (object item)
             {
                 return ((DoctorAppointment)item).Report != null;

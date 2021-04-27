@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital_IS.DoctorView" mc:Ignorable="d"
         Height="344.660194174757" Width="783" WindowStartupLocation="CenterScreen" WindowStyle="None"
         Background="Transparent" AllowsTransparency="True">
-    <Grid KeyDown="Grid_KeyDown">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
