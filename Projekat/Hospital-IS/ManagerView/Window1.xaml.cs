@@ -77,5 +77,15 @@ namespace Hospital_IS
         {
 
         }
+
+        private void OtherOptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            OtherOptions.Visibility = Visibility.Visible;
+        }
+
+        private void CloseOptions_Click(object sender, RoutedEventArgs e)
+        {
+            OtherOptions.Visibility = Visibility.Hidden;
+        }
     }
 }

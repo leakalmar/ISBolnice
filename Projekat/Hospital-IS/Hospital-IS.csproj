@@ -18,8 +18,10 @@
     <None Remove="hospital.png" />
     <None Remove="hospital2.png" />
     <None Remove="Resources\add-row.png" />
+    <None Remove="Resources\angledown.png" />
     <None Remove="Resources\bed.png" />
     <None Remove="Resources\calendar.png" />
+    <None Remove="Resources\lekovi.png" />
     <None Remove="Resources\notification.png" />
     <None Remove="Resources\pill-hand.png" />
     <None Remove="Resources\print.png" />
@@ -81,6 +83,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\add-row.png" />
+    <Resource Include="Resources\angledown.png" />
     <Resource Include="Resources\bed.png" />
     <Resource Include="Resources\addroom.png" />
     <Resource Include="Resources\backbutton.png" />
@@ -93,6 +96,7 @@
     <Resource Include="Resources\filijale.png" />
     <Resource Include="Resources\hospitalroom.png" />
     <Resource Include="Resources\importance.png" />
+    <Resource Include="Resources\lekovi.png" />
     <Resource Include="Resources\manager.png" />
     <Resource Include="Resources\maximize.png" />
     <Resource Include="Resources\menubar.png" />
