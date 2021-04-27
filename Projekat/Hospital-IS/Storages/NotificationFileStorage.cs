@@ -24,23 +24,6 @@ namespace Hospital_IS.Storages
             return notifications;
         }
 
-        public List<Notification> GetAllByUser(int userId)
-        {
-            List<Notification> notifications = GetAll();
-            List<Notification> userNotifications = new List<Notification>();
-
-            foreach (Notification notif in notifications)
-            {
-                foreach (int id in notif.Recipients)
-                {
-                    if (userId == id)
-                        userNotifications.Add(notif);
-                 }
-            }
-
-            return userNotifications;
-        }
-
         public void SaveNotification(Notification notification)
         {
             List<Notification> notifications = GetAll();
