@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Controllers;
 using Model;
 
 namespace Hospital_IS
@@ -69,14 +70,22 @@ namespace Hospital_IS
                 tip = RoomType.ConsultingRoom;
             }
             Room room = new Room(roomFloor,roomNumber,currentRoom.RoomId,zauzeto,renoviranje,tip);
-            Manager.Instance.UpdateRoom(currentRoom.RoomId, room);
-           
+            RoomController.Instance.UpdateRoom(room);
+
+
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.Show();
             this.Close();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.Show();
             this.Close();
+
         }
     }
 }

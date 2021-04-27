@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using Storages;
 using System;
 using System.Collections.ObjectModel;
@@ -33,6 +34,7 @@ namespace Hospital_IS.View
             InitializeComponent();
 
             Patient = MainWindow.PatientUser;
+            DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(Patient.Id));
             /*Medicine medicine = new Medicine("Bromazepam", "1 tableta sadrži 1,5 mg, 3 mg, odnosno 6 mg bromazepama.",
                 "U osetljivih bolesnika, naročito kod većih doza, može se javiti blagi umor, pospanost i vrtoglavica," +
                 " a povremeno slabost mišića i ataksija. Ova neželjena dejstva mogu se izbeći prilagođavanjem doze.", "Doziranje je individualno." +
@@ -111,7 +113,7 @@ namespace Hospital_IS.View
             }
             else
             {
-                Hospital.Instance.RemoveAppointment(doctorApp);
+                DoctorAppointmentController.Instance.RemoveAppointment(doctorApp);
                 DoctorAppointment.Remove(doctorApp);
                 doctorApp.Reserved = false;
             }

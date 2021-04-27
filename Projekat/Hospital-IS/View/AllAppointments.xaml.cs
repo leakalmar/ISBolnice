@@ -1,5 +1,7 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using Storages;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Hospital_IS.View
@@ -9,9 +11,13 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class AllAppointments : Window
     {
+        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
+
         public AllAppointments()
         {
             InitializeComponent();
+            DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(HomePatient.Instance.Patient.Id));
+            this.DataContext = this;
         }
 
         private void home(object sender, RoutedEventArgs e)

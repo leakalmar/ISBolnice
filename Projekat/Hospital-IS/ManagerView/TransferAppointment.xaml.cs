@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,7 +35,7 @@ namespace Hospital_IS
 
             InitializeComponent();
             
-            AllAppointments = new ObservableCollection<Appointment>(Hospital.Instance.getAllAppByTwoRoom(sourceRoom.RoomId,destinationRoom.RoomId));
+            AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.getAllAppByTwoRooms(sourceRoom.RoomId,destinationRoom.RoomId));
            
             this.DataContext = this;
 
@@ -62,7 +63,7 @@ namespace Hospital_IS
                 corect = false;
             }
 
-           bool isSucces = Hospital.Instance.TransferEquipmentStatic(sourceRoom, destinationRoom, equip, quantity, dateTimeStart, dateTimeEnd, "dobar termin");
+           bool isSucces = TransferController.Instance.TransferEquipmentStatic(sourceRoom, destinationRoom, equip, quantity, dateTimeStart, dateTimeEnd, "dobar termin");
 
             if (!isSucces || !corect)
             {

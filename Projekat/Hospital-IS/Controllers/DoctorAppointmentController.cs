@@ -47,10 +47,9 @@ namespace Controllers
             DoctorAppointmentService.Instance.UpdateAppointment(doctorAppointment);
         }
 
-        public List<DoctorAppointment> SuggestAppointmetsToPatient(String timeSlot,Doctor doctor, DateTime date, Boolean priority)
+        public List<DoctorAppointment> SuggestAppointmentsToPatient(String timeSlot,Doctor doctor,Patient patient, DateTime date, Boolean priority)
         {
-            DoctorAppointmentService.Instance.SuggestAppointmetsToPatient(timeSlot, doctor, date, priority);
-            throw new NotImplementedException();
+            return DoctorAppointmentService.Instance.SuggestAppointmentsToPatient(timeSlot, doctor, patient, date, priority);
         }
 
         public List<DoctorAppointment> SuggestAppointmetsToDoctor(DateTime date, int idRoom, AppointmetType type, String duration)
@@ -59,6 +58,6 @@ namespace Controllers
             throw new NotImplementedException();
         }
 
-        
+
     }
 }

@@ -14,6 +14,7 @@ namespace Hospital_IS.View
     {
 
         public ObservableCollection<Therapy> Therapies { get; set; }
+
         public TherapyPatient()
         {
             InitializeComponent();
@@ -68,7 +69,7 @@ namespace Hospital_IS.View
             TimesADay.Content = therapyInfo.TimesADay;
             TimeSpan.Content = usageHourDifference.ToString() + "h";
             StartTherapy.Text = therapyInfo.TherapyStart.ToString("dd.MM.yyyy.");
-            EndTherapy.Text = therapyInfo.TherapyStart.ToString("dd.MM.yyyy.");
+            EndTherapy.Text = therapyInfo.TherapyEnd.ToString("dd.MM.yyyy.");
             Usage.Text = therapyInfo.Medicine.Usage;
             SideEffects.Text = therapyInfo.Medicine.SideEffects;
             TherapyInfo.Visibility = Visibility.Visible;

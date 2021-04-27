@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using Model;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Controllers;
 
 namespace Hospital_IS
 {
@@ -38,7 +39,7 @@ namespace Hospital_IS
             DestinationEquip = new ObservableCollection<Equipment>();
 
 
-            SourceRoom = new ObservableCollection<Room>(Hospital.Instance.getRoomByType(RoomType.StorageRoom));
+            SourceRoom = new ObservableCollection<Room>(RoomController.Instance.getRoomByType(RoomType.StorageRoom));
            
         }
 
@@ -76,7 +77,7 @@ namespace Hospital_IS
 
                 Equipment equip = (Equipment)DataGridSource.SelectedItem;
                 int quantity = Convert.ToInt32(QuantityBox.Text);
-                Hospital.Instance.TransferEquipment(roomSource, equip, quantity);
+                TransferController.Instance.TransferEquipment(roomSource, equip, quantity);
                 refreshGrid(roomSource);
                 MessageBox.Show("Uspjesan transfer");
             }
