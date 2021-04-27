@@ -24,19 +24,18 @@ namespace Hospital_IS.Storages
             return notifications;
         }
 
-        public List<Notification> GetAllByUser(Patient patient)
+        public List<Notification> GetAllByUser(int userId)
         {
             List<Notification> notifications = GetAll();
             List<Notification> userNotifications = new List<Notification>();
 
             foreach (Notification notif in notifications)
             {
-                if (patient.Notifications != null)
-                    foreach (int id in patient.Notifications)
-                    {
-                        if (notif.Id == id)
-                            userNotifications.Add(notif);
-                    }
+                foreach (int id in notif.Recipients)
+                {
+                    if (userId == id)
+                        userNotifications.Add(notif);
+                 }
             }
 
             return userNotifications;
@@ -97,6 +96,15 @@ namespace Hospital_IS.Storages
                 }
             }
             return false;
+        }
+
+        public void SaveNotifications(List<Notification> notifications)
+        {
+            var file = JsonConvert.SerializeObject(notifications, Formatting.Indented);
+            using (StreamWriter writer = new StreamWriter(this.fileLocation))
+            {
+                writer.Write(file);
+            }
         }
     }
 }

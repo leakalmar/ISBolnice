@@ -26,14 +26,14 @@ namespace Controllers
 
         }
 
+        public List<Patient> GetAll()
+        {
+            return PatientService.Instance.allPatients;
+        }
+
         public void GetPatientChart(Patient patient)
         {
 
-        }
-
-        public bool UpdatePatient(Patient patient)
-        {
-            throw new NotImplementedException();
         }
 
         public void AddPrescription(Patient patient, String datePrescribed, Medicine medicine)
@@ -48,12 +48,17 @@ namespace Controllers
 
         public void AddPatient(Patient patient)
         {
-
+            PatientService.Instance.AddPatient(patient);
         }
 
-        public List<Patient> GetAll()
+        public void UpdatePatient(Patient patient)
         {
-            return PatientService.Instance.allPatients;
+            PatientService.Instance.UpdatePatient(patient);
+        }
+
+        public void DeletePatient(Patient patient)
+        {
+            PatientService.Instance.DeletePatient(patient);
         }
     }
 }
