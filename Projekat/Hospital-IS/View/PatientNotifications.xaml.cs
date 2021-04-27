@@ -39,8 +39,6 @@ namespace Hospital_IS.View
             MainWindow login = new MainWindow();
             login.Show();
             this.Hide();
-            AppointmentFileStorage afs = new AppointmentFileStorage();
-            afs.SaveAppointment(Hospital.Instance.allAppointments);
         }
 
         private void home(object sender, RoutedEventArgs e)

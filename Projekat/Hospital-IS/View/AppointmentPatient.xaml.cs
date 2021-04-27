@@ -144,8 +144,6 @@ namespace Hospital_IS.View
             MainWindow login = new MainWindow();
             login.Show();
             this.Close();
-            AppointmentFileStorage afs = new AppointmentFileStorage();
-            afs.SaveAppointment(Hospital.Instance.allAppointments);
             Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
             pfs.UpdatePatient(HomePatient.Instance.Patient);
         }

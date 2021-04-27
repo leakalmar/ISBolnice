@@ -63,6 +63,7 @@ namespace Service
                     if (doctorAppointment.AppointmentStart.Equals(doctorApp.AppointmentStart))
                     {
                         allAppointments.Remove(doctorApp);
+                        afs.SaveAppointment(allAppointments);
                         break;
                     }
                 }
