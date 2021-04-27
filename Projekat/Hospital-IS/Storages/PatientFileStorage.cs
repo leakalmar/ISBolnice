@@ -108,6 +108,19 @@ namespace Hospital_IS.Storages
             return null;
         }
 
+        public void SavePatients(List<Patient> patients)
+        {
+            var file = JsonConvert.SerializeObject(patients, Formatting.Indented, new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+            });
+            using (StreamWriter writer = new StreamWriter(this.fileLocation))
+            {
+                writer.Write(file);
+            }
+        }
+
 
         /*       public Boolean Update(Patient p)
                {

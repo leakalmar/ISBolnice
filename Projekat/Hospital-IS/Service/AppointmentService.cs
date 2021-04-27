@@ -3,6 +3,7 @@ using Storages;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 
 namespace Service
 {
@@ -81,14 +82,12 @@ namespace Service
         public bool CheckAppointment(List<Appointment> roomAppointment, DateTime start, DateTime end)
         {
             bool isFree = true;
-
             foreach (Appointment appointment in roomAppointment)
             {
-
+                
                 bool between = IsBetweenDates(start, end, appointment);
                 if (between || (start <= appointment.AppointmentStart && end >= appointment.AppointmentEnd))
                 {
-
                     isFree = false;
                     break;
                 }
@@ -97,7 +96,7 @@ namespace Service
             return isFree;
         }
 
-        public bool IsBetweenDates(DateTime end, DateTime start, Appointment appointment)
+        public bool IsBetweenDates(DateTime start, DateTime end, Appointment appointment)
         {
             return (start > appointment.AppointmentStart && start < appointment.AppointmentEnd) || (end > appointment.AppointmentStart && end < appointment.AppointmentEnd);
         }

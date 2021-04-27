@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Model;
+using Service;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -21,7 +23,11 @@ namespace Controllers
 
         private DoctorController()
         {
+        }
 
+        public List<Doctor> getAll()
+        {
+            return DoctorService.Instance.allDoctors;
         }
     }
 }

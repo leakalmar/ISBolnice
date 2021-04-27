@@ -105,19 +105,11 @@ namespace Hospital_IS.SecretaryView
                 + appointment.AppointmentStart.ToString("dd.MM.yyyy.") + " u " + appointment.AppointmentStart.ToString("HH:mm");
 
             Notification notification = new Notification(title, text, DateTime.Now);
+            notification.Recipients.Add(appointment.Patient.Id);
+            notification.Recipients.Add(appointment.Doctor.Id);
 
             NotificationFileStorage nfs = new NotificationFileStorage();
             nfs.SaveNotification(notification);
-
-            PatientFileStorage pfs = new PatientFileStorage();
-            Patient patient = pfs.GetPatientById(appointment.Patient.Id);
-            patient.addNotification(notification.Id);
-            pfs.UpdatePatient(patient);
-
-            FSDoctor fsd = new FSDoctor();
-            Doctor doctor = fsd.GetByEmail(appointment.Doctor.Email);
-            doctor.addNotification(notification.Id);
-            fsd.UpdateDoctor(doctor);
         }
 
         private void Close(object sender, RoutedEventArgs e)

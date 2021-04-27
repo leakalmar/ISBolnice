@@ -1,4 +1,5 @@
-﻿using Hospital_IS.Storages;
+﻿using Hospital_IS.Controllers;
+using Hospital_IS.Storages;
 using Model;
 using Storages;
 using System;
@@ -22,11 +23,10 @@ namespace Hospital_IS.View
     public partial class PatientNotifications : Window
     {
         public ObservableCollection<Notification> NotificationMessages { get; set; } = new ObservableCollection<Notification>();
-        private NotificationFileStorage nfs = new NotificationFileStorage();
         public PatientNotifications()
         {
             InitializeComponent();
-            List<Notification> notifications = nfs.GetAllByUser(HomePatient.Instance.Patient);
+            List<Notification> notifications = NotificationController.Instance.GetAllByUser(HomePatient.Instance.Patient.Id);
             NotificationMessages = new ObservableCollection<Notification>(notifications);
 
 
@@ -39,8 +39,6 @@ namespace Hospital_IS.View
             MainWindow login = new MainWindow();
             login.Show();
             this.Hide();
-            AppointmentFileStorage afs = new AppointmentFileStorage();
-            afs.SaveAppointment(Hospital.Instance.allAppointments);
         }
 
         private void home(object sender, RoutedEventArgs e)

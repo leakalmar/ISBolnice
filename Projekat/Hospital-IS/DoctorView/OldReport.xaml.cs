@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for OldReport.xaml
-    /// </summary>
     public partial class OldReport : Window
     {
         private DoctorAppointment NowAppointment;
@@ -58,11 +56,10 @@ namespace Hospital_IS.DoctorView
             {
                 if (Started)
                 {
-                    Hospital.Instance.RemoveAppointment(Appointment);
+                    //ovde bi isao update reporta
+                    DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
                     Appointment.Report.Amnesis = reportDetail.Text;
-                    Hospital.Instance.AddAppointment(Appointment);
-                    AppointmentFileStorage apf = new AppointmentFileStorage();
-                    apf.SaveAppointment(Hospital.Instance.allAppointments);
+                    DoctorAppointmentController.Instance.AddAppointment(Appointment);
                 }
 
                 DoctorHomePage.Instance.Home.Children.Clear();
@@ -73,11 +70,10 @@ namespace Hospital_IS.DoctorView
         {
             if (Started)
             {
-                Hospital.Instance.RemoveAppointment(Appointment);
+                //ovde bi isao update reporta
+                DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
                 Appointment.Report.Amnesis = reportDetail.Text;
-                Hospital.Instance.AddAppointment(Appointment);
-                AppointmentFileStorage apf = new AppointmentFileStorage();
-                apf.SaveAppointment(Hospital.Instance.allAppointments);
+                DoctorAppointmentController.Instance.AddAppointment(Appointment);
             }
 
             this.Close();

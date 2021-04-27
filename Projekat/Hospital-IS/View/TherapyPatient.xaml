@@ -94,7 +94,7 @@
                 </Grid>
                 <Grid>
                     <Label Content="Koliko puta dnevno:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                    <Label x:Name="TimesADay"  HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18"/>
+                    <Label x:Name="TimesADay" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18"/>
                 </Grid>
                 <Grid>
                     <Label Content="Na svakih:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
@@ -102,7 +102,7 @@
                 </Grid>
                 <Grid>
                     <Label Content="Datum početka terapije:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                    <TextBlock x:Name="StartTherapy"  HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5"/>
+                    <TextBlock x:Name="StartTherapy" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5"/>
                 </Grid>
                 <Grid>
                     <Label Content="Datum kraja terapije:" Width="200"  HorizontalAlignment="Left" FontSize="18" />

@@ -26,17 +26,12 @@ namespace Service
 
         private PatientService()
         {
-
+            allPatients = pfs.GetAll();
         }
 
         public void GetPatientChart(Patient patient)
         {
 
-        }
-
-        public bool UpdatePatient(Patient patient)
-        {
-            throw new NotImplementedException();
         }
 
         public void AddPrescription(Patient patient,String datePrescribed, Medicine medicine)
@@ -51,7 +46,37 @@ namespace Service
 
         public void AddPatient(Patient patient)
         {
+            allPatients.Add(patient);
 
+            pfs.SavePatients(allPatients);
+        }
+
+        public void UpdatePatient(Patient patient)
+        {
+            for (int i = 0; i < allPatients.Count; i++)
+            {
+                if (patient.Id.Equals(allPatients[i].Id))
+                {
+                    allPatients.Remove(allPatients[i]);
+                    allPatients.Insert(i, patient);
+                }
+            }
+
+
+            pfs.SavePatients(allPatients);
+        }
+
+        public void DeletePatient(Patient patient)
+        {
+            for (int i = 0; i < allPatients.Count; i++)
+            {
+                if (patient.Id.Equals(allPatients[i].Id))
+                {
+                    allPatients.Remove(allPatients[i]);
+                }
+            }
+
+            pfs.SavePatients(allPatients);
         }
 
     }

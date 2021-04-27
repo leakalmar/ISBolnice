@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using Storages;
 using System.Windows;
 using System.Windows.Controls;
@@ -93,11 +94,8 @@ namespace Hospital_IS.DoctorView
 
         private void CancleBtn_Click(object sender, RoutedEventArgs e)
         {
-            Hospital.Instance.allAppointments.Remove(Appointment);
+            DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
             DoctorHomePage.Instance.DoctorAppointment.Remove(Appointment);
-            MainWindow login = new MainWindow();
-            AppointmentFileStorage afs = new AppointmentFileStorage();
-            afs.SaveAppointment(Hospital.Instance.allAppointments);
             DoctorHomePage.Instance.Home.Children.Add(DoctorHomePage.Instance.HomePage);
         }
 
@@ -186,11 +184,9 @@ namespace Hospital_IS.DoctorView
             if(e.Key == Key.Escape)
             {
                 DoctorHomePage.Instance.Home.Children.Remove(this);
-                Hospital.Instance.RemoveAppointment(Appointment);
+                DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
                 Appointment.Report.Amnesis = Report.reportDetail.Text;
-                Hospital.Instance.AddAppointment(Appointment);
-                AppointmentFileStorage apf = new AppointmentFileStorage();
-                apf.SaveAppointment(Hospital.Instance.allAppointments);
+                DoctorAppointmentController.Instance.AddAppointment(Appointment);
                 DoctorHomePage.Instance.Home.Children.Add(this);
             }
         }

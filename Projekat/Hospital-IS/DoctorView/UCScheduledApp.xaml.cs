@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -16,12 +17,8 @@ using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for UCScheduledApp.xaml
-    /// </summary>
     public partial class UCScheduledApp : UserControl
     {
-        AppointmentFileStorage afs = new AppointmentFileStorage();
         private bool _started;
 
         public bool Started
@@ -45,7 +42,8 @@ namespace Hospital_IS.DoctorView
         {
             InitializeComponent();
 
-            ICollectionView view = new CollectionViewSource{ Source = afs.GetAllByPatient(appointment.Patient.Id)}.View; view.Filter = null;
+            ICollectionView view = new CollectionViewSource{ Source = DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(appointment.Patient.Id)}.View; 
+            view.Filter = null;
             view.Filter = delegate (object item)
             {
                 return ((DoctorAppointment)item).Report == null && ((DoctorAppointment)item).AppointmentStart > DateTime.Now;

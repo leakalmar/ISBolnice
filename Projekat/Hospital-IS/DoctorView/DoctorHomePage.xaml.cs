@@ -96,9 +96,6 @@ namespace Hospital_IS.DoctorView
                 MainWindow login = new MainWindow();
                 login.Show();
                 this.Hide();
-                AppointmentFileStorage afs = new AppointmentFileStorage();
-                afs.SaveAppointment(Hospital.Instance.allAppointments);
-                this.Hide();
                 
             }
          }

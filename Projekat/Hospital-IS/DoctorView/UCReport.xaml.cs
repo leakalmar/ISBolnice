@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for UCReport.xaml
-    /// </summary>
     public partial class UCReport : UserControl
     {
         Patient Patient { get; set; }

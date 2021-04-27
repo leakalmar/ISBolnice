@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Hospital_IS.DoctorView;
+using Controllers;
 
 namespace Hospital_IS
 {
@@ -50,7 +51,6 @@ namespace Hospital_IS
                 if (email.Text == p.Email && password.Password.ToString() == p.Password)
                 {
                     PatientUser = p;
-                    HomePatient.Instance.DoctorAppointment = new ObservableCollection<DoctorAppointment>(afs.GetAllByPatient(p.Id));
                     HomePatient.Instance.Show();
                     this.Close();
                 }
@@ -61,7 +61,7 @@ namespace Hospital_IS
                 if (email.Text == d.Email && password.Password.ToString() == d.Password)
                 {
                     DoctortUser = d;
-                    DoctorHomePage.Instance.DoctorAppointment = new ObservableCollection<DoctorAppointment>(afs.GetAllByDoctor(d.Id));
+                    DoctorHomePage.Instance.DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllByDoctor(d.Id));
                     DoctorHomePage.Instance.HomePage = new UserControlHomePage();
                     DoctorHomePage.Instance.Appointments = new UCAppointments();
                     DoctorHomePage.Instance.Patients = new UCPatients();
