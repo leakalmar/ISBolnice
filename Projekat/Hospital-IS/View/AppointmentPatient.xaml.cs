@@ -98,7 +98,7 @@ namespace Hospital_IS.View
             date = docApp.AppointmentStart;
             Calendar.SelectedDate = date;
             Calendar.DisplayDateStart = date;
-            Calendar.DisplayDateEnd = new DateTime(date.Year, date.Month, date.Day + 3);
+            Calendar.DisplayDateEnd = date.AddDays(3);
             change.Visibility = Visibility.Visible;
             reserve.Visibility = Visibility.Collapsed;
             
@@ -130,11 +130,10 @@ namespace Hospital_IS.View
 
         private void changeAppointmentButton(object sender, RoutedEventArgs e)
         {
-            DoctorAppointment docApp = (DoctorAppointment)listOfAppointments.SelectedItem; 
+            DoctorAppointment docApp = (DoctorAppointment)listOfAppointments.SelectedItem;
+            DoctorAppointmentController.Instance.UpdateAppointment(HomePatient.Instance.changedApp, docApp);
             HomePatient.Instance.DoctorAppointment.Remove(HomePatient.Instance.changedApp);
-            DoctorAppointmentController.Instance.RemoveAppointment(HomePatient.Instance.changedApp);
             HomePatient.Instance.DoctorAppointment.Add(docApp);
-            DoctorAppointmentController.Instance.AddAppointment(docApp);
             docApp.Reserved = true;
             AvailableAppointments.Remove(docApp);
         }

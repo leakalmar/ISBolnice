@@ -57,8 +57,14 @@ namespace Controllers
             return DoctorAppointmentService.Instance.SuggestAppointmetsToDoctor(dates, idRoom, type, duration,patient);
         }
 
+        public List<DoctorAppointment> GetFutureAppointmentsByPatient(int patientId)
+        {
+            return DoctorAppointmentService.Instance.GetFutureAppointmentsByPatient(patientId);
+        }
 
-
-
+        public List<DoctorAppointment> GetAllAppointmentsByPatient(int patientId)
+        {
+            return DoctorAppointmentService.Instance.GetAllAppointmentsByPatient(patientId);
+        }
     }
 }
