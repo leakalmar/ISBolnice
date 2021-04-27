@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for UCOldReport.xaml
-    /// </summary>
     public partial class UCOldReport : UserControl
     {
         private DoctorAppointment NowAppointment;

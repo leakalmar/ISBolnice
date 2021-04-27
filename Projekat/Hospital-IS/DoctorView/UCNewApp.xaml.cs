@@ -4,24 +4,11 @@ using Storages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for UCNewApp.xaml
-    /// </summary>
     public partial class UCNewApp : UserControl
     {
         public DoctorAppointment Appointment { get; }
@@ -48,9 +35,11 @@ namespace Hospital_IS.DoctorView
             Doctor doc = (Doctor)doctors.SelectedItem;
             Room room = (Room)rooms.SelectedItem;
             SelectedDatesCollection dates = calendar.SelectedDates;
-            String type = (string)types.SelectedItem;
-            String dur = duration.Text;
-            String[] parts = dur.Split(".");
+            AppointmetType type = AppointmetType.CheckUp;
+            if (types.SelectedItem.Equals(AppointmetType.Operation.ToString())){
+                type = AppointmetType.Operation;
+            }
+            String[] parts = duration.Text.Split(".");
             if (doc == null)
             {
                 foreach (Doctor d in MainWindow.Doctors)
@@ -78,73 +67,27 @@ namespace Hospital_IS.DoctorView
                 calendar.SelectedDate = DateTime.Now;
                 dates = calendar.SelectedDates;
             }
-            List<DoctorAppointment> appList = new List<DoctorAppointment>();
 
 
-            foreach (DateTime d in dates)
+            int hours = 0;
+            int minutes = 0;
+            if (type == AppointmetType.Operation)
             {
-                DateTime last;
-                if (d.Date == DateTime.Now.Date)
+                if (parts.GetValue(0) != "")
                 {
-                    last = new DateTime(d.Year, d.Month, d.Day, DateTime.Now.Hour, 00, 00);
+                    hours = int.Parse((string)parts.GetValue(0));
+                    if (parts.Length == 2)
+                    {
+                        minutes = 30;
+                    }
                 }
                 else
                 {
-                    last = new DateTime(d.Year, d.Month, d.Day, 8, 00, 00);
-
-                }
-                System.Diagnostics.Debug.WriteLine(last.ToString());
-                System.Diagnostics.Debug.WriteLine("D   " + d.ToString());
-                while (last.TimeOfDay < new DateTime(DateTime.Now.Date.Year, DateTime.Now.Date.Month, DateTime.Now.Date.Day, 20, 00, 00).TimeOfDay)
-                {
-                    if (type == "CheckUp")
-                    {
-                        DoctorAppointment dt = new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, last.Hour, last.Minute, 0), new DateTime(d.Year, d.Month, d.Day, last.AddMinutes(30).Hour, last.AddMinutes(30).Minute, 0), AppointmetType.CheckUp, room.RoomId, doc, Appointment.Patient);
-                        appList.Add(dt);
-                        last = last.AddMinutes(30);
-                    }
-                    else
-                    {
-                        int hours = 0;
-                        int minutes = 0;
-                        if (parts.GetValue(0) != "")
-                        {
-                            hours = int.Parse((string)parts.GetValue(0));
-                            minutes = 0;
-                            if (parts.Length == 2)
-                            {
-                                minutes = 30;
-                            }
-
-                            DoctorAppointment dt = new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, last.Hour, last.Minute, 0), new DateTime(d.Year, d.Month, d.Day, last.AddHours(hours).Hour, last.AddMinutes(minutes).Minute, 0), AppointmetType.Operation, room.RoomId, doc, Appointment.Patient);
-                            appList.Add(dt);
-                            System.Diagnostics.Debug.WriteLine(dt.AppointmentStart.ToString());
-                            last = last.AddMinutes(30);
-                        }
-                        else
-                        {
-                            appointments.DataContext = new ObservableCollection<DoctorAppointment>();
-                            return;
-                        }
-
-
-                    }
-
+                    return;
                 }
             }
-
-            //ObservableCollection<DoctorAppointment > ret = Hospital.Instance.CheckDoctorAppointments(appList,room.RoomId);
-            if (type == "CheckUp")
-            {
-                ObservableCollection<DoctorAppointment> ret = new ObservableCollection<DoctorAppointment>(Hospital.Instance.CheckDoctorAppointments(appList, room.RoomId, dates));
-                appointments.DataContext = ret;
-            }
-            else
-            {
-                ObservableCollection<DoctorAppointment > ret = new ObservableCollection<DoctorAppointment>(Hospital.Instance.CheckDoctorAppointments(appList,room.RoomId,dates));
-                appointments.DataContext = ret;
-            }
-
+            TimeSpan durationTimeSpan = new TimeSpan(hours, minutes, 0);
+            appointments.DataContext = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates,room.RoomId, type, durationTimeSpan, Appointment.Patient);
         }
 
         private void setAppointment_KeyDown(object sender, KeyEventArgs e)

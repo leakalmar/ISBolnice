@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for OldReport.xaml
-    /// </summary>
     public partial class OldReport : Window
     {
         private DoctorAppointment NowAppointment;

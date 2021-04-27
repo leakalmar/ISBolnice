@@ -16,9 +16,6 @@ using System.ComponentModel;
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for UCAppDetail.xaml
-    /// </summary>
     public partial class UCAppDetail : UserControl
     {
 

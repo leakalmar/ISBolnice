@@ -1,7 +1,7 @@
 ﻿using Controllers;
 using Model;
-using Storages;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
@@ -11,9 +11,6 @@ using System.Windows.Input;
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for UCChangeApp.xaml
-    /// </summary>
     public partial class UCChangeApp : UserControl
     {
         ContentControl panel;
@@ -88,27 +85,12 @@ namespace Hospital_IS.DoctorView
                 calendar.SelectedDate = DateTime.Now.Date;
                 dates = calendar.SelectedDates;
             }
-            ObservableCollection<DoctorAppointment> appList = new ObservableCollection<DoctorAppointment>();
-            
 
-            int hour = 0;
-            foreach (DateTime d in dates)
-            {
-                for (int i = 0; i < 16; i++)
-                {
-                    if (i % 2 == 0)
-                    {
-                        appList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, 8 + i / 2, 0, 0), AppointmetType.CheckUp, false, room.RoomId, doc, Appointment.Patient));
-                        hour = 8 + i / 2;
-                    }
-                    else
-                    {
-                        appList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, hour, 30, 0), AppointmetType.CheckUp, false, room.RoomId, doc, Appointment.Patient));
-                    }
+            TimeSpan duration = Appointment.AppointmentEnd - Appointment.AppointmentStart;
+            List<DoctorAppointment> list = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates,room.RoomId,Appointment.Type,duration,Appointment.Patient);
+            ObservableCollection<DoctorAppointment> possibleAppointments = new ObservableCollection<DoctorAppointment>(list);
 
-                }
-            }
-            ICollectionView view = new CollectionViewSource { Source = appList }.View;
+            /*ICollectionView view = new CollectionViewSource { Source = possibleAppointments }.View;
             view.Filter = null;
             view.Filter = delegate (object item)
             {
@@ -129,8 +111,8 @@ namespace Hospital_IS.DoctorView
 
                 //ako ga je pronasao znaci da ne treba da prikazuje
                 return !found;
-            };
-            app.DataContext = view;
+            };*/
+            app.DataContext = possibleAppointments;
 
         }
 
@@ -138,15 +120,12 @@ namespace Hospital_IS.DoctorView
         {
             if (e.Key == Key.Enter)
             {
-                DoctorAppointment docApp = (DoctorAppointment)app.SelectedItem;
+                DoctorAppointment newDoctorAppointment = (DoctorAppointment)app.SelectedItem;
+                newDoctorAppointment.Reserved = true;
+                DoctorAppointmentController.Instance.UpdateAppointment(Appointment, newDoctorAppointment);
 
-                DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
                 DoctorHomePage.Instance.DoctorAppointment.Remove(Appointment);
-                Appointment.Reserved = false;
-
-                DoctorAppointmentController.Instance.AddAppointment(docApp);
-                DoctorHomePage.Instance.DoctorAppointment.Add(docApp);
-                docApp.Reserved = true;
+                DoctorHomePage.Instance.DoctorAppointment.Add(newDoctorAppointment);
 
                 panel.Visibility = Visibility.Collapsed;
             }

@@ -19,16 +19,13 @@ using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for UCPatients.xaml
-    /// </summary>
     public partial class UCPatients : UserControl
     {
-        PatientFileStorage pfs = new PatientFileStorage();
         public UCPatients()
         {
             InitializeComponent();
-            ICollectionView app = new CollectionViewSource { Source = PatientController.Instance.GetAll()}.View;
+            ObservableCollection<Patient> allPatients = new ObservableCollection<Patient>(PatientController.Instance.GetAll());
+            ICollectionView app = new CollectionViewSource { Source = allPatients }.View;
 
             //app.Filter = delegate (object item)
             //{
@@ -49,7 +46,8 @@ namespace Hospital_IS.DoctorView
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ICollectionView app = CollectionViewSource.GetDefaultView(pfs.GetAll());
+            ObservableCollection<Patient> allPatients = new ObservableCollection<Patient> (PatientController.Instance.GetAll());
+            ICollectionView app = CollectionViewSource.GetDefaultView(allPatients);
            // app.Filter = delegate (object item)
             //{
            //     return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date;

@@ -26,7 +26,7 @@ namespace Service
 
         private PatientService()
         {
-
+            allPatients = pfs.GetAll();
         }
 
         public void GetPatientChart(Patient patient)

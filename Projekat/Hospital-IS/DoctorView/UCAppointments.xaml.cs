@@ -1,10 +1,6 @@
 ﻿using Controllers;
-using Hospital_IS.DoctorView;
-using Hospital_IS.Storages;
 using Model;
-using Storages;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Windows;
@@ -19,11 +15,6 @@ using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for UCAppointments.xaml
-    /// </summary>
-    /// 
-
     public partial class UCAppointments : UserControl
     {
         private UCChangeApp ChangeApp { get; set; }
@@ -40,7 +31,6 @@ namespace Hospital_IS.DoctorView
             from.SelectedDate = DateTime.Now.Date;
             to.SelectedDate = DateTime.Now.Date.AddDays(7);
             type.SelectedIndex = 1;
-            System.Diagnostics.Debug.WriteLine(DoctorHomePage.Instance.GetPrimaryRoom());
             rooms.SelectedItem = DoctorHomePage.Instance.GetPrimaryRoom();
 
             DoctorAppointment ap = (DoctorAppointment)docotrAppointments.SelectedItem;

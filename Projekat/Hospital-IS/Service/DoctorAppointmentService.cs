@@ -86,63 +86,62 @@ namespace Service
 
         }
 
-        public void UpdateAppointment(DoctorAppointment doctorAppointment)
+        public void UpdateAppointment(DoctorAppointment oldDoctorAppointment, DoctorAppointment newDoctorAppointment)
         {
-
+            for (int i = 0; i < allAppointments.Count; i++)
+            {
+                if (oldDoctorAppointment.AppointmentStart == allAppointments[i].AppointmentStart && oldDoctorAppointment.Room == allAppointments[i].Room && oldDoctorAppointment.Doctor.Id == allAppointments[i].Doctor.Id)
+                {
+                    allAppointments.Remove(allAppointments[i]);
+                    allAppointments.Insert(i, newDoctorAppointment);
+                    afs.SaveAppointment(allAppointments);
+                    return;
+                }
+            }
         }
 
-        private List<DoctorAppointment> GenerateAppointmentForDoctor(SelectedDatesCollection dates, int idRoom, AppointmetType type, String duration, Patient patient)
+        private List<DoctorAppointment> GenerateAppointmentForDoctor(SelectedDatesCollection dates, int idRoom, AppointmetType type, TimeSpan duration, Patient patient)
         {
-            List<DoctorAppointment> appList = new List<DoctorAppointment>();
-            String[] parts = duration.Split(".");
-
-
+            List<DoctorAppointment> appointmentList = new List<DoctorAppointment>();
 
             foreach (DateTime d in dates)
             {
-                DateTime last;
+                DateTime lastTimeCreated;
+                //Set date from witch could start appointments
                 if (d.Date == DateTime.Now.Date)
                 {
-                    last = new DateTime(d.Year, d.Month, d.Day, DateTime.Now.Hour, 00, 00);
+                    lastTimeCreated = new DateTime(d.Year, d.Month, d.Day, DateTime.Now.Hour, 30, 00);
                 }
                 else
                 {
-                    last = new DateTime(d.Year, d.Month, d.Day, 8, 00, 00);
-
+                    lastTimeCreated = new DateTime(d.Year, d.Month, d.Day, 8, 00, 00);
                 }
 
-                while (last.TimeOfDay < new DateTime(DateTime.Now.Date.Year, DateTime.Now.Date.Month, DateTime.Now.Date.Day, 20, 00, 00).TimeOfDay)
+                while (lastTimeCreated.TimeOfDay < new DateTime(DateTime.Now.Date.Year, DateTime.Now.Date.Month, DateTime.Now.Date.Day, 20, 00, 00).TimeOfDay)
                 {
                     if (type == AppointmetType.CheckUp)
                     {
-                        DoctorAppointment dt = new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, last.Hour, last.Minute, 0), AppointmetType.CheckUp, true, idRoom, DoctorHomePage.Instance.GetDoctor(), patient);
-                        appList.Add(dt);
-                        last = last.AddMinutes(30);
+                        appointmentList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, lastTimeCreated.Hour, lastTimeCreated.Minute, 0), AppointmetType.CheckUp, false, idRoom, DoctorHomePage.Instance.GetDoctor(), patient));
+                        lastTimeCreated = lastTimeCreated.AddMinutes(30);
                     }
                     else
                     {
-                        int hours = 0;
-                        int minutes = 0;
-                        if (parts.GetValue(0) != "")
+                        if(duration.TotalMinutes != 0)
                         {
-                            hours = int.Parse((string)parts.GetValue(0));
-                            minutes = 0;
-                            if (parts.Length == 2)
-                            {
-                                minutes = 30;
-                            }
-                            DoctorAppointment dt = new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, last.Hour, last.Minute, 0), AppointmetType.Operation, true, idRoom, DoctorHomePage.Instance.GetDoctor(), patient);
-                            dt.AppointmentEnd = new DateTime(d.Year, d.Month, d.Day, last.AddHours(hours).Hour, last.AddMinutes(minutes).Minute, 0);
-                            last = last.AddMinutes(30);
+                            DateTime startTime = new DateTime(d.Year, d.Month, d.Day, lastTimeCreated.Hour, lastTimeCreated.Minute, 0);
+                            DoctorAppointment newAppointment = new DoctorAppointment(startTime, AppointmetType.Operation, false, idRoom, DoctorHomePage.Instance.GetDoctor(), patient);
+                            newAppointment.AppointmentEnd = startTime.Add(duration);
+                            appointmentList.Add(newAppointment);
+                            lastTimeCreated = lastTimeCreated.AddMinutes(30);
                         }
                         else
                         {
-                            return appList;
+                            return appointmentList;
                         }
                     }
                 }
             }
-            return appList;
+            return appointmentList;
         }
 
         private List<DoctorAppointment> GenerateAppointmentForPatient(String timeSlot, Doctor doctor,Patient patient, DateTime date, Boolean priority)
@@ -219,6 +218,20 @@ namespace Service
             return isFree;
         }
 
+        private bool VerifyAppointmentByPatient(DoctorAppointment doctorAppointment,int idPatient)
+        {
+            bool isFree = true;
+            foreach (DoctorAppointment patientAppointment in GetAllAppointmentsByPatient(idPatient))
+            {
+                if (doctorAppointment.AppointmentStart == patientAppointment.AppointmentStart)
+                {
+                    isFree = false;
+                    return isFree;
+                }
+            }
+            return isFree;
+        }
+
         public List<DoctorAppointment> SuggestAppointmentsToPatient(String timeSlot, Doctor doctor,Patient patient, DateTime date, Boolean priority)
         {
             List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
@@ -235,9 +248,24 @@ namespace Service
             return availableAppointments;
         }
 
-        public List<DoctorAppointment> SuggestAppointmetsToDoctor(DateTime date, int idRoom, AppointmetType type, String duration)
+        public List<DoctorAppointment> SuggestAppointmetsToDoctor(SelectedDatesCollection dates, int idRoom, AppointmetType type, TimeSpan duration, Patient patient)
         {
-            throw new NotImplementedException();
+            List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
+            List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForDoctor(dates,idRoom,type,duration,patient);
+            List<Appointment> roomAppointments = AppointmentService.Instance.getAppByRoom(idRoom);
+            foreach (DoctorAppointment doctorAppointment in allPossibleAppointments)
+            {
+                bool isFree = VerifyAppointment(doctorAppointment, roomAppointments);
+                if (isFree)
+                {
+                    isFree = VerifyAppointmentByPatient(doctorAppointment, patient.Id);
+                }
+                if (isFree)
+                {
+                    availableAppointments.Add(doctorAppointment);
+                }
+            }
+            return availableAppointments;
         }
 
         public List<DoctorAppointment> GetFutureAppointmentsByPatient(int patientId)

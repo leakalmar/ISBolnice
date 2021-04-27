@@ -42,9 +42,9 @@ namespace Controllers
             DoctorAppointmentService.Instance.RemoveAppointment(doctorAppointment);
         }
 
-        public void UpdateAppointment(DoctorAppointment doctorAppointment)
+        public void UpdateAppointment(DoctorAppointment oldDoctorAppointment, DoctorAppointment newDoctorAppointment)
         {
-            DoctorAppointmentService.Instance.UpdateAppointment(doctorAppointment);
+            DoctorAppointmentService.Instance.UpdateAppointment(oldDoctorAppointment, newDoctorAppointment);
         }
 
         public List<DoctorAppointment> SuggestAppointmentsToPatient(String timeSlot,Doctor doctor,Patient patient, DateTime date, Boolean priority)
@@ -52,11 +52,12 @@ namespace Controllers
             return DoctorAppointmentService.Instance.SuggestAppointmentsToPatient(timeSlot, doctor, patient, date, priority);
         }
 
-        public List<DoctorAppointment> SuggestAppointmetsToDoctor(DateTime date, int idRoom, AppointmetType type, String duration)
+        public List<DoctorAppointment> SuggestAppointmetsToDoctor(SelectedDatesCollection dates, int idRoom, AppointmetType type, TimeSpan duration, Patient patient)
         {
-            DoctorAppointmentService.Instance.SuggestAppointmetsToDoctor(date, idRoom, type, duration);
-            throw new NotImplementedException();
+            return DoctorAppointmentService.Instance.SuggestAppointmetsToDoctor(dates, idRoom, type, duration,patient);
         }
+
+
 
 
     }

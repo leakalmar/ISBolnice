@@ -2,17 +2,13 @@
 using Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
@@ -24,19 +20,41 @@ namespace Hospital_IS.DoctorView
         public MedicineFileStorage mfs = new MedicineFileStorage();
         public DoctorAppointment Appointment { get; set; }
 
-        public Dictionary<Medicine,bool> added { get; set; } = new Dictionary<Medicine, bool>();
+        public ObservableCollection<MedicineObject> medicineObjects { get; set; }
         public UCSearchMedicine(DoctorAppointment appointment)
         {
             InitializeComponent();
             Appointment = appointment;
-            foreach (Prescription p in appointment.Patient.MedicalHistory.GetByAppointment(Appointment))
+            
+            medicines.DataContext = GenerateListOfMedicines();
+            alergies.DataContext = appointment.Patient.Alergies;
+            
+            
+        }
+
+        private bool CheckAlergies(Medicine med)
+        {
+            foreach(String allergie in Appointment.Patient.Alergies)
             {
-                added.Add(p.Medicine, true);
+                if (med.Name.ToLower().Contains(allergie.ToLower()))
+                {
+                    return true;
+                }
             }
-            foreach(Medicine med in mfs.GetAll())
+            return false;
+        }
+
+        private object GenerateListOfMedicines()
+        {
+            medicineObjects = new ObservableCollection<MedicineObject>();
+            foreach (Prescription p in Appointment.Patient.MedicalHistory.GetByAppointment(Appointment))
+            {
+                medicineObjects.Add(new MedicineObject(p.Medicine,true,false));
+            }
+            foreach (Medicine med in mfs.GetAll())
             {
                 bool found = false;
-                foreach (Prescription p in appointment.Patient.MedicalHistory.GetByAppointment(Appointment))
+                foreach (Prescription p in Appointment.Patient.MedicalHistory.GetByAppointment(Appointment))
                 {
                     if (med.Name.Equals(p.Medicine.Name))
                     {
@@ -45,38 +63,44 @@ namespace Hospital_IS.DoctorView
                 }
                 if (!found)
                 {
-                    added.Add(med, false);
+                    bool allergic = CheckAlergies(med);
+                    medicineObjects.Add(new MedicineObject(med,false,allergic));
                 }
             }
-
-            
-            medicines.DataContext = added;
-            alergies.DataContext = appointment.Patient.Alergies;
-            
-            
+            return medicineObjects;
         }
 
         private void addMedicine_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key.Equals(Key.Enter))
+            MedicineObject med = (MedicineObject)medicines.SelectedItem;
+
+            if(med.Allergic == true)
             {
-                KeyValuePair<Medicine, bool> med = (KeyValuePair<Medicine, bool>)medicines.SelectedItem;
-                Appointment.Patient.MedicalHistory.AddPrescription(new Prescription(med.Key,Appointment.AppointmentStart));
-                added[med.Key] = true;
+                ExitMess mess= new ExitMess("Pacijent je alergican na izabrani lek!");
+                mess.btnCancle.Visibility = Visibility.Collapsed;
+                mess.btnOk.Content = "U redu";
+                mess.ShowDialog();
+                return;
+                
+            }
+
+            if (e.Key.Equals(Key.Enter))
+            {
+                Appointment.Patient.MedicalHistory.AddPrescription(new Prescription(med.Medicine,Appointment.AppointmentStart));
+                med.Check = true;
                 medicines.Items.Refresh();
                 search.Focus();
             }
             else if (e.Key == Key.Delete)
             {
-                KeyValuePair<Medicine, bool> med = (KeyValuePair<Medicine, bool>)medicines.SelectedItem;
-                foreach(Prescription p in Appointment.Patient.MedicalHistory.GetByAppointment(Appointment))
+                foreach (Prescription p in Appointment.Patient.MedicalHistory.GetByAppointment(Appointment))
                 {
-                    if (p.Medicine.Name.Equals(med.Key.Name))
+                    if (p.Medicine.Name.Equals(med.Medicine.Name))
                     {
                         Appointment.Patient.MedicalHistory.RemovePrescription(p);
                     }
                 }
-                added[med.Key] = false;
+                med.Check = false;
                 medicines.Items.Refresh();
                 search.Focus();
             }
@@ -94,38 +118,93 @@ namespace Hospital_IS.DoctorView
 
         private void medicines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            KeyValuePair<Medicine, bool> med = (KeyValuePair<Medicine, bool>)medicines.SelectedItem;
-            medInfo.DataContext = med.Key;
+            MedicineObject med = (MedicineObject)medicines.SelectedItem;
+            if (checkMedicationComposition(med.Medicine))
+            {
+                allergieMess.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                allergieMess.Visibility = Visibility.Collapsed;
+            }
+            medInfo.DataContext = med.Medicine;
+        }
+
+        private bool checkMedicationComposition(Medicine medicine)
+        {
+            String[] components = medicine.Composition.Split(",");
+            foreach(String c in components)
+            {
+                foreach (String allergie in Appointment.Patient.Alergies)
+                {
+                    Medicine med = findMedicine(allergie);
+                    if(med != null)
+                    {
+                        String[] allergieComponents = med.Composition.Split(",");
+                        foreach(String allergieComp in allergieComponents)
+                        {
+                            if (c.ToLower().Equals(allergieComp.ToLower()))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            
+            return false;
+        }
+
+        private Medicine findMedicine(String allergie)
+        {
+            foreach(Medicine med in mfs.GetAll())
+            {
+                if (med.Name.ToLower().Contains(allergie.ToLower()))
+                {
+                    return med;
+                }
+            }
+            return null;
         }
 
         private void DataGridRow_Selected(object sender, RoutedEventArgs e)
         {
-            KeyValuePair<Medicine, bool> med = (KeyValuePair<Medicine, bool>)medicines.SelectedItem;
-            medInfo.DataContext = med.Key;
+            MedicineObject med = (MedicineObject)medicines.SelectedItem;
+            medInfo.DataContext = med.Medicine;
         }
 
         private void medicines_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            KeyValuePair<Medicine, bool> med = (KeyValuePair<Medicine, bool>)medicines.SelectedItem;
+            MedicineObject med = (MedicineObject)medicines.SelectedItem;
 
-            if (!med.Value)
+            if (med.Allergic == true)
             {
-                
-                Appointment.Patient.MedicalHistory.AddPrescription(new Prescription(med.Key, Appointment.AppointmentStart));
-                added[med.Key] = true;
+                ExitMess mess = new ExitMess("Pacijent je alergican na izabrani lek!");
+                mess.btnCancle.Visibility = Visibility.Collapsed;
+                mess.btnOk.Content = "U redu";
+                mess.ShowDialog();
+                return;
+
+            }
+
+            if (!med.Check)
+            {
+                Appointment.Patient.MedicalHistory.AddPrescription(new Prescription(med.Medicine, Appointment.AppointmentStart));
+                med.Check = true;
                 medicines.Items.Refresh();
                 search.Focus();
             }
             else
-            { 
+            {
                 foreach (Prescription p in Appointment.Patient.MedicalHistory.GetByAppointment(Appointment))
                 {
-                    if (p.Medicine.Name.Equals(med.Key.Name))
+                    if (p.Medicine.Name.Equals(med.Medicine.Name))
                     {
                         Appointment.Patient.MedicalHistory.RemovePrescription(p);
                     }
                 }
-                added[med.Key] = false;
+                med.Check = false;
                 medicines.Items.Refresh();
                 search.Focus();
             }
