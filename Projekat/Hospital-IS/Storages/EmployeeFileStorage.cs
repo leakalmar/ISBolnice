@@ -29,6 +29,7 @@ namespace Storages
         {
             String text = File.ReadAllText(this.fileLocation);
             List<Employee> allEmployees = JsonConvert.DeserializeObject<List<Employee>>(text);
+
             return allEmployees;
         }
     }
