@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Hospital_IS.DoctorView;
+using Service;
 
 namespace Hospital_IS.DoctorView
 {

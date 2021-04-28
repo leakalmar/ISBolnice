@@ -8,7 +8,8 @@ namespace Model
 
         public Boolean Reserved { get; set; }
 
-        
+        public String AppointmentCause { get; set; }
+
         public  DateTime AppointmentStart { get; set; }
        
         public DateTime AppointmentEnd { get; set; }

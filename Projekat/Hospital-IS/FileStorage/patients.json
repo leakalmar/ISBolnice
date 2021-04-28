@@ -57,7 +57,6 @@
     "Relationship": null,
     "Password": "123",
     "Address": "Petra Drapsina 8",
-    "Notifications": null,
     "Hospital": null
   },
   {
@@ -91,7 +90,6 @@
     "Relationship": null,
     "Password": "123",
     "Address": "Zelengoska 15",
-    "Notifications": null,
     "Hospital": null
   },
   {
@@ -125,7 +123,6 @@
     "Relationship": null,
     "Password": "123",
     "Address": "Dure Dakovica 10",
-    "Notifications": null,
     "Hospital": null
   }
 ]

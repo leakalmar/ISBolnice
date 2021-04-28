@@ -5,7 +5,7 @@ namespace Model
 {
     public class Report
     {
-        public String Amnesis { get; set; }
+        public String Anamnesis { get; set; }
         public bool HaveRecipe { get; set; }
 
         public bool HaveTest { get; set; }
