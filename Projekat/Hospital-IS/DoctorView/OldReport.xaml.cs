@@ -41,8 +41,8 @@ namespace Hospital_IS.DoctorView
 
             Appointment = appointment;
             NowAppointment = nowAppointment;
-            reportDetail2.Text = Appointment.Report.Amnesis;
-            reportDetail.Text = Appointment.Report.Amnesis;
+            reportDetail2.Text = Appointment.Report.Anamnesis;
+            reportDetail.Text = Appointment.Report.Anamnesis;
             medicines.DataContext = Appointment.Patient.MedicalHistory.GetPresciptionByReport(Appointment.AppointmentStart);
             name.Content = Appointment.Doctor.Name;
             surname.Content = Appointment.Doctor.Surname;
@@ -58,7 +58,7 @@ namespace Hospital_IS.DoctorView
                 {
                     //ovde bi isao update reporta
                     DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
-                    Appointment.Report.Amnesis = reportDetail.Text;
+                    Appointment.Report.Anamnesis = reportDetail.Text;
                     DoctorAppointmentController.Instance.AddAppointment(Appointment);
                 }
 
@@ -72,7 +72,7 @@ namespace Hospital_IS.DoctorView
             {
                 //ovde bi isao update reporta
                 DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
-                Appointment.Report.Amnesis = reportDetail.Text;
+                Appointment.Report.Anamnesis = reportDetail.Text;
                 DoctorAppointmentController.Instance.AddAppointment(Appointment);
             }
 

@@ -5,9 +5,6 @@ namespace Model
 {
     public class DoctorAppointment : Appointment
     {
-        public String Cause { get; set; }
-        public String Detail { get; set; }
-
         public String NameSurnamePatient { get; set; }
         public String AppTypeText { get; set; }
 
