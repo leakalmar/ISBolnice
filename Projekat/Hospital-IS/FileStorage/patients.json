@@ -9,6 +9,11 @@
       "Tetanus",
       "Paracetamol"
     ],
+    "TrollMechanism": {
+      "TrollCheckStartDate": "2021-04-29T00:00:00",
+      "AppointmentCounterInTimeRange": 2,
+      "IsTroll": false
+    },
     "IsGuest": false,
     "MedicalHistory": {
       "Prescription": [],
@@ -69,6 +74,11 @@
       "Tetanus",
       "Paracetamol"
     ],
+    "TrollMechanism": {
+      "TrollCheckStartDate": "0001-01-01T00:00:00",
+      "AppointmentCounterInTimeRange": 0,
+      "IsTroll": false
+    },
     "IsGuest": false,
     "MedicalHistory": {
       "Prescription": [],
@@ -102,6 +112,11 @@
       "Tetanus",
       "Paracetamol"
     ],
+    "TrollMechanism": {
+      "TrollCheckStartDate": "0001-01-01T00:00:00",
+      "AppointmentCounterInTimeRange": 0,
+      "IsTroll": false
+    },
     "IsGuest": false,
     "MedicalHistory": {
       "Prescription": [],

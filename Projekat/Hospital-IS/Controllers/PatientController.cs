@@ -60,5 +60,10 @@ namespace Controllers
         {
             PatientService.Instance.DeletePatient(patient);
         }
+
+        public bool IsPatientTroll(Patient patient, DoctorAppointment doctorAppointment)
+        {
+            return PatientService.Instance.IsPatientTroll(patient, doctorAppointment);
+        }
     }
 }

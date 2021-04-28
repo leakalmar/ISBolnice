@@ -294,5 +294,18 @@ namespace Service
             }
             return patientAppointments;
         }
+
+        public int GetNumberOfAppointmentsInTimeRange(int patientId, DateTime timeRangeStart, DateTime timeRangeEnd)
+        {
+            int numberOfAppointments = 0;
+            foreach (DoctorAppointment docApp in allAppointments)
+            {
+                if (docApp.Patient.Id == patientId && docApp.AppointmentStart >= timeRangeStart && docApp.AppointmentStart <= timeRangeEnd)
+                {
+                    numberOfAppointments++;
+                }
+            }
+            return numberOfAppointments;
+        }
     }
 }

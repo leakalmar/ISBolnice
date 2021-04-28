@@ -132,7 +132,14 @@
                 </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Vreme i datum" Width="200" Binding="{Binding AppointmentStart,StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" CanUserResize="False" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor.Surname}" Width="200"/>
+                    <DataGridTextColumn Header="Doktor"  Width="200">
+                        <DataGridTextColumn.Binding>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path=" Doctor.Name"/>
+                                <Binding Path=" Doctor.Surname"/>
+                            </MultiBinding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
                     <DataGridTextColumn Header="Soba" Binding="{Binding Room}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>

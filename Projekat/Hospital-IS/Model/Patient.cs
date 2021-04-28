@@ -19,8 +19,8 @@ namespace Model
         public String Employer { get; set; }
         public Boolean Admitted { get; set; }
         public ObservableCollection<String> Alergies { get; set; }
+        public AntiTroll TrollMechanism { get; set; } = new AntiTroll();
         
-
         public Boolean IsGuest { get; set; } = false;
 
         public Patient(int id, string name, string surname, DateTime birthDate, string address, string email, string password, DateTime filedate, String employer, ObservableCollection<String> alergies) : base(id, name, surname, birthDate, address, email, password)
@@ -28,7 +28,6 @@ namespace Model
             this.FileDate = filedate;
             this.Employer = employer;
             this.Alergies = alergies;
-            this.MedicalHistory = new MedicalHistory();
         }
 
         public Patient()
@@ -39,26 +38,6 @@ namespace Model
 
 
         public Doctor doctor { get; set; }
-
-        public Boolean IsAdmitted()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Boolean ReserveAppointment()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Boolean RemoveAppointment(DoctorAppointment appointment)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Boolean UpdateAppointment(Appointment appointment)
-        {
-            throw new NotImplementedException();
-        }
 
         public Doctor Doctor
         {

@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using Hospital_IS.Storages;
 using Model;
 using Storages;
 using System;
@@ -49,6 +50,10 @@ namespace Hospital_IS.View
             t1.FirstUsageTime = 8;
             Patient.MedicalHistory.AddTherapy(t);
             Patient.MedicalHistory.AddTherapy(t1);*/
+            /*Patient.TrollMechanism.TimeRange = 14;
+            Patient.TrollMechanism.AppointmentCounterInTimeRange = 2;
+            Patient.TrollMechanism.TrollCheckStartDate = new DateTime(2021, 4, 29);
+            Patient.TrollMechanism.IsTroll = false;*/
             this.DataContext = this;
             PersonalData.DataContext = Patient;
             DispatcherTimer dispatcherTimer = new DispatcherTimer
@@ -140,6 +145,8 @@ namespace Hospital_IS.View
             MainWindow login = new MainWindow();
             login.Show();
             this.Hide();
+            PatientFileStorage pfs = new PatientFileStorage();
+            pfs.UpdatePatient(Patient);
         }
 
         private void showNotifications(object sender, RoutedEventArgs e)

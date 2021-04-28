@@ -27,6 +27,7 @@ namespace Service
         private PatientService()
         {
             AllPatients = pfs.GetAll();
+            UpdatePatientTrollMechanism();
         }
 
         public void GetPatientChart(Patient patient)
@@ -89,5 +90,48 @@ namespace Service
             return allPatientIDs;
         }
 
+        public bool IsPatientTroll(Patient patient, DoctorAppointment doctorAppointment)
+        {
+            int timeRange = 14;
+            int maxAppointmentsInTimeRange = 3;
+            if (doctorAppointment.AppointmentStart < patient.TrollMechanism.TrollCheckStartDate.AddDays(timeRange))
+            {
+                patient.TrollMechanism.AppointmentCounterInTimeRange++;
+                if (patient.TrollMechanism.AppointmentCounterInTimeRange >= maxAppointmentsInTimeRange)
+                {
+                    patient.TrollMechanism.IsTroll = true;
+                    patient.TrollMechanism.TrollCheckStartDate = doctorAppointment.AppointmentStart.Date;
+                    return patient.TrollMechanism.IsTroll;
+                }
+            }
+            else if (doctorAppointment.AppointmentStart >= patient.TrollMechanism.TrollCheckStartDate.AddDays(timeRange) && patient.TrollMechanism.IsTroll)
+            {
+                patient.TrollMechanism.IsTroll = false;
+                patient.TrollMechanism.TrollCheckStartDate = doctorAppointment.AppointmentStart.Date;
+                patient.TrollMechanism.AppointmentCounterInTimeRange = 1;
+            }
+            return patient.TrollMechanism.IsTroll;
+        }
+
+        private void UpdatePatientTrollMechanism()
+        {
+            int timeRange = 14;
+            int maxAppointmentsInTimeRange = 3;
+            foreach (Patient patient in AllPatients)
+            {
+                if (patient.TrollMechanism.TrollCheckStartDate.AddDays(timeRange) == DateTime.Today)
+                {
+                    patient.TrollMechanism.TrollCheckStartDate = DateTime.Today;
+                    if (DoctorAppointmentService.Instance.GetNumberOfAppointmentsInTimeRange(patient.Id, DateTime.Today, DateTime.Today.AddDays(timeRange)) > maxAppointmentsInTimeRange)
+                    {
+                        patient.TrollMechanism.IsTroll = true;
+                    }
+                    else
+                    {
+                        patient.TrollMechanism.AppointmentCounterInTimeRange = DoctorAppointmentService.Instance.GetNumberOfAppointmentsInTimeRange(patient.Id, DateTime.Today, DateTime.Today.AddDays(timeRange));
+                    }                  
+                }
+            }
+        }
     }
 }

@@ -85,10 +85,17 @@ namespace Hospital_IS.View
             }
             else
             {
-                HomePatient.Instance.DoctorAppointment.Add(docApp);
-                DoctorAppointmentController.Instance.AddAppointment(docApp);
-                docApp.Reserved = true;
-                AvailableAppointments.Remove(docApp);
+                if (!PatientController.Instance.IsPatientTroll(HomePatient.Instance.Patient, docApp))
+                {
+                    HomePatient.Instance.DoctorAppointment.Add(docApp);
+                    DoctorAppointmentController.Instance.AddAppointment(docApp);
+                    docApp.Reserved = true;
+                    AvailableAppointments.Remove(docApp);
+                }
+                else
+                {
+                    MessageBox.Show("Zbog učestalog zakazivanja ili izmene termina, ne možete zakazati termin!");
+                }               
             }
         }
 
@@ -131,11 +138,25 @@ namespace Hospital_IS.View
         private void changeAppointmentButton(object sender, RoutedEventArgs e)
         {
             DoctorAppointment docApp = (DoctorAppointment)listOfAppointments.SelectedItem;
-            DoctorAppointmentController.Instance.UpdateAppointment(HomePatient.Instance.changedApp, docApp);
-            HomePatient.Instance.DoctorAppointment.Remove(HomePatient.Instance.changedApp);
-            HomePatient.Instance.DoctorAppointment.Add(docApp);
-            docApp.Reserved = true;
-            AvailableAppointments.Remove(docApp);
+            if (docApp == null)
+            {
+                MessageBox.Show("Izaberite termin!");
+            }
+            else
+            {
+                if (!PatientController.Instance.IsPatientTroll(HomePatient.Instance.Patient, docApp))
+                {
+                    DoctorAppointmentController.Instance.UpdateAppointment(HomePatient.Instance.changedApp, (DoctorAppointment)listOfAppointments.SelectedItem);
+                    HomePatient.Instance.DoctorAppointment.Remove(HomePatient.Instance.changedApp);
+                    HomePatient.Instance.DoctorAppointment.Add(docApp);
+                    docApp.Reserved = true;
+                    AvailableAppointments.Remove(docApp);
+                }
+                else
+                {
+                    MessageBox.Show("Zbog učestalog zakazivanja ili izmene termina, ne možete zakazati termin!");
+                }
+            }          
         }
 
         private void logout(object sender, RoutedEventArgs e)
