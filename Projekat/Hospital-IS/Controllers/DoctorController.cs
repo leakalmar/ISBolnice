@@ -27,7 +27,7 @@ namespace Controllers
 
         public List<Doctor> getAll()
         {
-            return DoctorService.Instance.allDoctors;
+            return DoctorService.Instance.AllDoctors;
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Hospital_IS.DoctorView;
 using Controllers;
+using Service;
 
 namespace Hospital_IS
 {
@@ -33,6 +34,7 @@ namespace Hospital_IS
             InitializeComponent();
             Doctors = dfs.GetAll();
             Rooms = rfs.GetAll();
+            UserService.Instance.GetAllUsersIDs();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

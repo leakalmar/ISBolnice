@@ -28,7 +28,7 @@ namespace Controllers
 
         public List<Patient> GetAll()
         {
-            return PatientService.Instance.allPatients;
+            return PatientService.Instance.AllPatients;
         }
 
         public void GetPatientChart(Patient patient)

@@ -1,3 +1,4 @@
+using Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,7 +49,7 @@ namespace Model
         }
 
         public User()
-        { 
+        {
         }
 
         public Boolean LogIn()

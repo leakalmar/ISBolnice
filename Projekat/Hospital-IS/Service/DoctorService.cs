@@ -9,7 +9,7 @@ namespace Service
     class DoctorService
     {
         private FSDoctor dfs = new FSDoctor();
-        public List<Doctor> allDoctors { get; set; }
+        public List<Doctor> AllDoctors { get; set; }
 
         private static DoctorService instance = null;
         public static DoctorService Instance
@@ -26,7 +26,17 @@ namespace Service
 
         private DoctorService()
         {
-            allDoctors = dfs.GetAll();
+            AllDoctors = dfs.GetAll();
+        }
+
+        public List<int> GetDoctorIDs()
+        {
+            List<int> allDoctorIDs = new List<int>();
+            foreach (Employee employee in AllDoctors)
+            {
+                allDoctorIDs.Add(employee.Id);
+            }
+            return allDoctorIDs;
         }
     }
 }
