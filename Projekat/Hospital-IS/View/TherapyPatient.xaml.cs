@@ -54,8 +54,6 @@ namespace Hospital_IS.View
             MainWindow login = new MainWindow();
             login.Show();
             this.Hide();
-            Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
-            pfs.UpdatePatient(HomePatient.Instance.Patient);
         }
 
         private void showRow(object sender, MouseButtonEventArgs e)

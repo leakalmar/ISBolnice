@@ -143,8 +143,6 @@ namespace Hospital_IS.View
             MainWindow login = new MainWindow();
             login.Show();
             this.Close();
-            Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
-            pfs.UpdatePatient(HomePatient.Instance.Patient);
         }
 
     }

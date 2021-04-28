@@ -124,7 +124,7 @@
                 <RadioButton x:Name="TimePriority" GroupName="Priority" Margin="150,121,400,0" Grid.Column="2" Content="Vreme" FontSize="18" VerticalAlignment="Top"/>
             </Grid>
 
-            <DataGrid x:Name="listOfAppointments" CanUserResizeRows="False" CanUserAddRows="False" Grid.Column="3" ItemsSource="{Binding AvailableAppointments, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="2" Margin="110,10,100,50" AutoGenerateColumns="False" Height="233" Width="600">
+            <DataGrid x:Name="listOfAppointments" CanUserResizeRows="False" CanUserAddRows="False" Grid.Column="3" ItemsSource="{Binding AvailableAppointments, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="2" Margin="110,10,100,50" AutoGenerateColumns="False" Height="233" Width="600" RowHeaderWidth="0">
                 <DataGrid.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="0,0,20,20"/>

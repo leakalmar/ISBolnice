@@ -71,7 +71,7 @@
         <Button x:Name="Notifications" Grid.Column="0" Grid.Row="9" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Cursor="Hand" BorderThickness="1,1,0,1" Click="showNotifications">Obaveštenja</Button>
        
         <Label Content="Lista pregleda:" Grid.Row="1" Grid.Column="1" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
-        <DataGrid x:Name="dataGridAppoitment"  CanUserAddRows="False" ItemsSource="{Binding DoctorAppointment, Mode=TwoWay}" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="2" Grid.RowSpan="8" Margin="10,10,440,0">
+        <DataGrid x:Name="dataGridAppoitment"  CanUserAddRows="False" ItemsSource="{Binding DoctorAppointment, Mode=TwoWay}" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="2" Grid.RowSpan="8" Margin="10,10,440,0" RowHeaderWidth="0">
             <DataGrid.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="0,0,20,20"/>
