@@ -68,7 +68,7 @@
                  LostFocus="txtEndOfApp_LostFocus"/>
        
         <TextBox Grid.Column="2" Grid.Row="8" Height="80" Margin="50 20"
-                 ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="{Binding DocAppointment.Detail}"/>
+                 ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="{Binding DocAppointment.AppointmentCause}"/>
 
         <Button Name="btnConfirm" Grid.Column="1" Grid.Row="11" Width="120" Height="30"
                 Content="Potvrdi" Click="ChangeAppointment"/>

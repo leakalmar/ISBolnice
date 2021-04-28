@@ -27,6 +27,12 @@ namespace Controllers
         {
 
         }
+
+        public List<DoctorAppointment> GetAll()
+        {
+            return DoctorAppointmentService.Instance.allAppointments;
+        }
+
         public List<DoctorAppointment> GetAllByDoctor(int doctorId)
         {
             return DoctorAppointmentService.Instance.GetAllByDoctor(doctorId);
@@ -65,6 +71,11 @@ namespace Controllers
         public List<DoctorAppointment> GetAllAppointmentsByPatient(int patientId)
         {
             return DoctorAppointmentService.Instance.GetAllAppointmentsByPatient(patientId);
+        }
+
+        public void ReloadDoctorAppointments()
+        {
+            DoctorAppointmentService.Instance.ReloadDoctorAppointments();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Hospital_IS.Storages;
+﻿using Controllers;
+using Hospital_IS.Storages;
 using Model;
 using Storages;
 using System;
@@ -29,16 +30,9 @@ namespace Hospital_IS.SecretaryView
             InitializeComponent();
             this.uca = uca;
 
-            PatientFileStorage pfs = new PatientFileStorage();
-            List<Patient> patients = pfs.GetAll();
-            Patients = new ObservableCollection<Patient>(patients);
-
-            FSDoctor fsd = new FSDoctor();
-            Doctors = new ObservableCollection<Doctor>(fsd.GetAll());
-
-            RoomStorage rs = new RoomStorage();
-            Rooms = new ObservableCollection<Room>(rs.GetAll());
-
+            Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAll());
+            Doctors = new ObservableCollection<Doctor>(DoctorController.Instance.GetAll());
+            Rooms = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
 
             this.DataContext = this;
         }
@@ -95,21 +89,12 @@ namespace Hospital_IS.SecretaryView
 
             DocAppointment.Reserved = true;
 
-            uca.Appointments.Add(DocAppointment);
-
-            Hospital.Instance.AddAppointment(DocAppointment);   //izmeniti kako se cuva update-ovan termin, da ne bude preko hospital
-
-            List<DoctorAppointment> apps = new List<DoctorAppointment>(uca.Appointments);
-            afs.SaveAppointment(apps);
+            DoctorAppointmentController.Instance.AddAppointment(DocAppointment);
 
             uca.RefreshGrid();
 
             this.Close();
         }
-
-
-
-
 
         private void Close(object sender, RoutedEventArgs e)
         {
@@ -121,37 +106,19 @@ namespace Hospital_IS.SecretaryView
             if (cbAppType.SelectedIndex == 0)
             {
                 txtEndOfApp.IsEnabled = false;
-                cbRoom.IsEnabled = false;
             }
             else
             {
                 txtEndOfApp.IsEnabled = true;
-                cbRoom.IsEnabled = true;
             }
         }
 
         private void txtEndOfApp_LostFocus(object sender, RoutedEventArgs e)
         {
-            List<DoctorAppointment> appsByRoom = new List<DoctorAppointment>();
-            List<DoctorAppointment> ClassicAppsByRoom = new List<DoctorAppointment>();
-            if (cbAppType.SelectedIndex == 0)
-            {
-                appsByRoom = afs.GetAllByRoom(Doctors[cbDoctor.SelectedIndex].PrimaryRoom);
-                ClassicAppsByRoom = cas.GetAllDocAppointmentsById(Doctors[cbDoctor.SelectedIndex].PrimaryRoom);
-            }
-            else if (cbAppType.SelectedIndex == 1)
-            {
-                appsByRoom = afs.GetAllByRoom(Rooms[cbRoom.SelectedIndex].RoomId);
-                ClassicAppsByRoom = cas.GetAllDocAppointmentsById(Rooms[cbRoom.SelectedIndex].RoomId);
-            }
-            appsByRoom = ConcatCollections(appsByRoom, ClassicAppsByRoom);
-
-            List<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(Doctors[cbDoctor.SelectedIndex].Id);
-
-            confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
+            ScheduleApp();
         }
 
-        private List<DoctorAppointment> ConcatCollections(List<DoctorAppointment> apps1, List<DoctorAppointment> apps2)
+        private List<DoctorAppointment> ConcatRoomAppointments(List<DoctorAppointment> apps1, List<DoctorAppointment> apps2)
         {
             foreach (DoctorAppointment appointment in apps2)
             {
@@ -164,30 +131,26 @@ namespace Hospital_IS.SecretaryView
         {
             if (cbAppType.SelectedIndex == 0 && !string.IsNullOrEmpty(txtStartOfApp.Text))
             {
-                DateTime appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
                 DateTime appEnd = appStart.AddMinutes(30);
                 txtEndOfApp.Text = appEnd.ToString("t", DateTimeFormatInfo.InvariantInfo);
 
 
 
-                List<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(Doctors[cbDoctor.SelectedIndex].Id);
-                List<DoctorAppointment> appsByRoom = new List<DoctorAppointment>();
-                List<DoctorAppointment> ClassicAppsByRoom = new List<DoctorAppointment>();
-                if (cbAppType.SelectedIndex == 0)
-                {
-                    appsByRoom = afs.GetAllByRoom(Doctors[cbDoctor.SelectedIndex].PrimaryRoom);
-                    ClassicAppsByRoom = cas.GetAllDocAppointmentsById(Doctors[cbDoctor.SelectedIndex].PrimaryRoom);
-                }
-                else if (cbAppType.SelectedIndex == 1)
-                {
-                    appsByRoom = afs.GetAllByRoom(Rooms[cbRoom.SelectedIndex].RoomId);
-                    ClassicAppsByRoom = cas.GetAllDocAppointmentsById(Rooms[cbRoom.SelectedIndex].RoomId);
-                }
-
-                appsByRoom = ConcatCollections(appsByRoom, ClassicAppsByRoom);
-
-                confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
+                ScheduleApp();
             }
+        }
+
+        private void ScheduleApp()
+        {
+            List<DoctorAppointment> appsByRoom = afs.GetAllByRoom(Rooms[cbRoom.SelectedIndex].RoomId);
+            List<DoctorAppointment> ClassicAppsByRoom = cas.GetAllDocAppointmentsById(Rooms[cbRoom.SelectedIndex].RoomId);
+
+            appsByRoom = ConcatRoomAppointments(appsByRoom, ClassicAppsByRoom);
+
+            List<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(Doctors[cbDoctor.SelectedIndex].Id);
+
+            confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
         }
 
         private void confirmAppointmentDate(bool isValid)
@@ -253,14 +216,5 @@ namespace Hospital_IS.SecretaryView
             return (start >= appointment.AppointmentStart && start < appointment.AppointmentEnd) || (end > appointment.AppointmentStart && end <= appointment.AppointmentEnd);
         }
 
-        /*private int findRoomNumber(int roomId)
-        {
-            foreach (Room room in Rooms)
-            {
-                if (room.RoomId == roomId)
-                    return room.RoomNumber;
-            }
-            return 0;
-        }*/
     }
 }

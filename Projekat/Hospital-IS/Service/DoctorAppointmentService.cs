@@ -75,7 +75,7 @@ namespace Service
             {
                 foreach (DoctorAppointment doctorApp in allAppointments)
                 {
-                    if (doctorAppointment.AppointmentStart.Equals(doctorApp.AppointmentStart))
+                    if (doctorAppointment.AppointmentStart.Equals(doctorApp.AppointmentStart) && doctorAppointment.Doctor.Id.Equals(doctorApp.Doctor.Id))
                     {
                         allAppointments.Remove(doctorApp);
                         afs.SaveAppointment(allAppointments);
@@ -293,6 +293,11 @@ namespace Service
                 }
             }
             return patientAppointments;
+        }
+
+        public void ReloadDoctorAppointments()
+        {
+            allAppointments = afs.GetAll();
         }
     }
 }

@@ -48,7 +48,7 @@ namespace Hospital_IS.Service
 
         public void AddNotification(Notification notification)
         {
-            allNotifications.Add(notification);
+            allNotifications.Insert(0, notification);
 
             nfs.SaveNotifications(allNotifications);
         }

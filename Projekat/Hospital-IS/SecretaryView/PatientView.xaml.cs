@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Model;
+using System.Windows;
 
 namespace Hospital_IS
 {
@@ -7,19 +8,19 @@ namespace Hospital_IS
     /// </summary>
     public partial class PatientView : Window
     {
-        public Model.Patient Patient { get; set; }
-        public PatientView(Model.Patient patient)
+        public Patient Patient { get; set; }
+        public PatientView(Patient patient)
         {
             InitializeComponent();
             Patient = patient;
             this.DataContext = this;
-            if (patient.Education.Equals(Model.EducationCategory.NA))
+            if (patient.Education.Equals(EducationCategory.NA))
                 eduTxt.Text = " ";
-            else if (patient.Education.Equals(Model.EducationCategory.GradeSchool))
+            else if (patient.Education.Equals(EducationCategory.GradeSchool))
                 eduTxt.Text = "Osnovna škola";
-            else if (patient.Education.Equals(Model.EducationCategory.HighSchool))
+            else if (patient.Education.Equals(EducationCategory.HighSchool))
                 eduTxt.Text = "Srednja škola";
-            else if (patient.Education.Equals(Model.EducationCategory.College))
+            else if (patient.Education.Equals(EducationCategory.College))
                 eduTxt.Text = "Fakultet";
         }
 
