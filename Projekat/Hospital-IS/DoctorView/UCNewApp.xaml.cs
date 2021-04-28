@@ -12,7 +12,6 @@ namespace Hospital_IS.DoctorView
     public partial class UCNewApp : UserControl
     {
         public DoctorAppointment Appointment { get; }
-        private AppointmentFileStorage afs { get; } = new AppointmentFileStorage();
         public UCNewApp(DoctorAppointment appointment)
         {
             InitializeComponent();
@@ -73,7 +72,7 @@ namespace Hospital_IS.DoctorView
             int minutes = 0;
             if (type == AppointmetType.Operation)
             {
-                if (parts.GetValue(0) != "")
+                if ((string)parts.GetValue(0) != "")
                 {
                     hours = int.Parse((string)parts.GetValue(0));
                     if (parts.Length == 2)
