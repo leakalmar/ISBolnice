@@ -32,8 +32,28 @@ namespace Service
 
         public void AddAppointmentEvaluation(PatientAppointmentEvaluationDTO appointmentEvaluation)
         {
-            AllAppointmentEvaluations.Add(appointmentEvaluation);
+            AddAppointment(appointmentEvaluation);
             evaluationStorage.SaveAppointment(AllAppointmentEvaluations);
+        }
+
+        public void AddAppointment(PatientAppointmentEvaluationDTO appointmentEvaluation)
+        {
+            if (appointmentEvaluation == null)
+            {
+                return;
+            }
+
+            if (AllAppointmentEvaluations == null)
+            {
+                AllAppointmentEvaluations = new List<PatientAppointmentEvaluationDTO>();
+
+            }
+
+            if (!AllAppointmentEvaluations.Contains(appointmentEvaluation))
+            {
+                AllAppointmentEvaluations.Add(appointmentEvaluation);
+
+            }
         }
 
         public Boolean IsAppointmentEvaluated(DoctorAppointment appointmentEvaluation)

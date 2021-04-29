@@ -18,8 +18,6 @@ namespace Hospital_IS
     /// </summary>
     public partial class MainWindow : Window
     {
-        PatientFileStorage pfs = new PatientFileStorage();
-        AppointmentFileStorage afs = new AppointmentFileStorage();
         FSDoctor dfs = new FSDoctor();
         RoomStorage rfs = new RoomStorage();
         public static Patient PatientUser { get; set; }
@@ -45,8 +43,8 @@ namespace Hospital_IS
 
         private void Login(object sender, RoutedEventArgs e)
         {
-            List<Patient> patients = pfs.GetAll();
-            Hospital.Instance.allAppointments=afs.GetAll();
+            List<Patient> patients = PatientService.Instance.AllPatients;
+            Hospital.Instance.allAppointments=DoctorAppointmentService.Instance.allAppointments;
 
             foreach (Patient p in patients)
             {
