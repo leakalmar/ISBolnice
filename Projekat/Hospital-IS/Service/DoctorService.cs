@@ -1,12 +1,10 @@
 ﻿using Hospital_IS.Storages;
 using Model;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service
 {
-    class DoctorService
+    public class DoctorService
     {
         private FSDoctor dfs = new FSDoctor();
         public List<Doctor> AllDoctors { get; set; }

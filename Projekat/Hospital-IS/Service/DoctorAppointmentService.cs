@@ -121,7 +121,7 @@ namespace Service
                 {
                     if (type == AppointmetType.CheckUp)
                     {
-                        appointmentList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, lastTimeCreated.Hour, lastTimeCreated.Minute, 0), AppointmetType.CheckUp, false, idRoom, DoctorHomePage.Instance.GetDoctor(), patient));
+                        appointmentList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, lastTimeCreated.Hour, lastTimeCreated.Minute, 0), AppointmetType.CheckUp, false, idRoom, DoctorHomePage.Instance.Doctor, patient));
                         lastTimeCreated = lastTimeCreated.AddMinutes(30);
                     }
                     else
@@ -129,7 +129,7 @@ namespace Service
                         if (duration.TotalMinutes != 0)
                         {
                             DateTime startTime = new DateTime(d.Year, d.Month, d.Day, lastTimeCreated.Hour, lastTimeCreated.Minute, 0);
-                            DoctorAppointment newAppointment = new DoctorAppointment(startTime, AppointmetType.Operation, false, idRoom, DoctorHomePage.Instance.GetDoctor(), patient);
+                            DoctorAppointment newAppointment = new DoctorAppointment(startTime, AppointmetType.Operation, false, idRoom, DoctorHomePage.Instance.Doctor, patient);
                             newAppointment.AppointmentEnd = startTime.Add(duration);
                             appointmentList.Add(newAppointment);
                             lastTimeCreated = lastTimeCreated.AddMinutes(30);
