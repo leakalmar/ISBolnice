@@ -110,13 +110,7 @@
                     <Label x:Name="Room" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White" />
                 </Grid>
                 <Label Content="Detalji:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
-                <TextBlock x:Name="Details" TextWrapping="Wrap" Width="320" Background="{x:Null}" Height="91" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" MinWidth="220" MinHeight="94" MaxWidth="220" MaxHeight="94" Foreground="White"/>
-                <Grid>
-                    <Label Content="Ocena:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
-                    <Label x:Name="Evaluation" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White" />
-                </Grid>
-                <Label Content="Komentar:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
-                <TextBlock x:Name="Comment" TextWrapping="Wrap" Width="320" Background="{x:Null}" Height="140" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" MinWidth="220" MinHeight="94" MaxWidth="220" MaxHeight="94" Foreground="White"/>
+                <TextBlock x:Name="Details" TextWrapping="Wrap" Width="320" Background="{x:Null}" Height="302" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" MinWidth="220" MinHeight="94" MaxWidth="220" MaxHeight="94" Foreground="White"/>
             </StackPanel>
         </Border>
         <Button x:Name="evaluateApp" Visibility="Hidden" Grid.Column="2" Grid.Row="10" Margin="600,230,10,40" Foreground="#FFFDFAFA" FontSize="18" Cursor="Hand" Click="showEvaluationWindow">
