@@ -1,6 +1,7 @@
 ﻿using Controllers;
 using Hospital_IS.Storages;
 using Model;
+using Service;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -143,14 +144,40 @@ namespace Hospital_IS.SecretaryView
 
         private void ScheduleApp()
         {
-            List<DoctorAppointment> appsByRoom = afs.GetAllByRoom(Rooms[cbRoom.SelectedIndex].RoomId);
-            List<DoctorAppointment> ClassicAppsByRoom = cas.GetAllDocAppointmentsById(Rooms[cbRoom.SelectedIndex].RoomId);
+            //List<DoctorAppointment> appsByRoom = afs.GetAllByRoom(Rooms[cbRoom.SelectedIndex].RoomId);
+            //List<DoctorAppointment> ClassicAppsByRoom = cas.GetAllDocAppointmentsById(Rooms[cbRoom.SelectedIndex].RoomId);
 
-            appsByRoom = ConcatRoomAppointments(appsByRoom, ClassicAppsByRoom);
+            //appsByRoom = ConcatRoomAppointments(appsByRoom, ClassicAppsByRoom);
 
-            List<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(Doctors[cbDoctor.SelectedIndex].Id);
+            //List<DoctorAppointment> appsByDoctor = afs.GetAllByDoctor(Doctors[cbDoctor.SelectedIndex].Id);
 
-            confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
+            // confirmAppointmentDate(checkAppointment(appsByRoom, appsByDoctor));
+            DocAppointment.Doctor = Doctors[cbDoctor.SelectedIndex];
+            DocAppointment.Room = Rooms[cbRoom.SelectedIndex].RoomNumber;
+            try
+            {
+                DateTime appDate = DateTime.ParseExact(txtAppDate.Text, "dd.MM.yyyy.", CultureInfo.InvariantCulture);
+                DocAppointment.AppointmentStart = appDate;
+
+                DateTime appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
+                DocAppointment.AppointmentStart = appDate.Date.Add(appStart.TimeOfDay);
+
+                if (cbAppType.SelectedIndex == 0)
+                {
+                    DocAppointment.AppointmentEnd = DocAppointment.AppointmentStart.AddMinutes(30);
+                }
+                else if (cbAppType.SelectedIndex == 1)
+                {
+                    DateTime appEnd = DateTime.ParseExact(txtEndOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
+                    DocAppointment.AppointmentEnd = appDate.Date.Add(appEnd.TimeOfDay);
+                }
+
+            }
+            catch (Exception ex)
+            {
+            }
+
+            confirmAppointmentDate(DoctorAppointmentController.Instance.VerifyAppointment(DocAppointment, null));
         }
 
         private void confirmAppointmentDate(bool isValid)
