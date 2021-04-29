@@ -21,7 +21,7 @@
         </ComboBox>
         <Label Content="Komentar:" Width="150" Margin="20,83,0,167" HorizontalAlignment="Left" FontSize="22" Foreground="#FF184095" FontWeight="Bold" />
         <TextBox x:Name="Comment" BorderBrush="#FF184095" TextWrapping="Wrap" Width="400" Background="{x:Null}" Height="100" Margin="25,132,25,68" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" Foreground="Black"/>
-        <Button x:Name="Evaluate" Grid.Column="1" Margin="100,250,100,20" Foreground="#FFFDFDFD" Cursor="Hand" FontSize="18">
+        <Button x:Name="Evaluate" Grid.Column="1" Margin="100,250,100,20" Foreground="#FFFDFDFD" Cursor="Hand" FontSize="18" Click="EvaluateAppointment">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20,20,20,20"/>

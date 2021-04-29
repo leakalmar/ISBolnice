@@ -75,8 +75,16 @@ namespace Hospital_IS.View
 
         private void showEvaluationWindow(object sender, RoutedEventArgs e)
         {
-            PatientAppointmentEvaluation appointmentEvaluation = new PatientAppointmentEvaluation();
-            appointmentEvaluation.Show();
+            if (PatientAppointmentEvaluationController.Instance.IsAppointmentEvaluated((DoctorAppointment)dataGridAppointment.SelectedItem))
+            {
+                MessageBox.Show("Pregled je već ocenjen!");
+            }
+            else
+            {
+                PatientAppointmentEvaluation appointmentEvaluation = new PatientAppointmentEvaluation((DoctorAppointment)dataGridAppointment.SelectedItem);
+                appointmentEvaluation.Show();
+            }
+           
         }
     }
 }
