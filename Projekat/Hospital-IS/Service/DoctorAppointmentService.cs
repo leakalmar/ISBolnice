@@ -294,5 +294,19 @@ namespace Service
             }
             return patientAppointments;
         }
+
+        public List<DoctorAppointment> GetAllAppointmentsByRoomId(int roomId)
+        {
+            List<DoctorAppointment> roomAppointments = new List<DoctorAppointment>();
+
+            foreach (DoctorAppointment docApp in allAppointments)
+            {
+                if (docApp.Room == roomId)
+                {
+                    roomAppointments.Add(docApp);
+                }
+            }
+            return roomAppointments;
+        }
     }
 }

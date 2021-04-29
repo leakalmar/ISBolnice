@@ -25,6 +25,7 @@
     <None Remove="Resources\notification.png" />
     <None Remove="Resources\pill-hand.png" />
     <None Remove="Resources\print.png" />
+    <None Remove="Resources\renovation.png" />
     <None Remove="Resources\treatment.png" />
     <None Remove="other_facilities.png" />
     <None Remove="request.png" />
@@ -106,6 +107,7 @@
     <Resource Include="Resources\options.png" />
     <Resource Include="Resources\pill.png" />
     <Resource Include="Resources\print.png" />
+    <Resource Include="Resources\renovation.png" />
     <Resource Include="Resources\report.png" />
     <Resource Include="Resources\room.png" />
     <Resource Include="Resources\room1.png" />
