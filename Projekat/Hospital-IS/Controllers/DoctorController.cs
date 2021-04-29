@@ -29,5 +29,10 @@ namespace Controllers
         {
             return DoctorService.Instance.AllDoctors;
         }
+
+        public List<Doctor> GetDoctorsBySpecilty(Specialty specialty)
+        {
+            return DoctorService.Instance.GetDoctorsBySpecialty(specialty);
+        }
     }
 }

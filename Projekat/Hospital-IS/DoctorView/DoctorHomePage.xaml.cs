@@ -69,6 +69,7 @@ namespace Hospital_IS.DoctorView
             Patients = new UCPatients();
             Medicines = new UCMedicines();
             Home.Children.Add(HomePage);
+            nameSurname.Text = Doctor.Name.ToString() +" "+ Doctor.Surname.ToString();
         }
 
         public void ExitBtnClick(object sender, RoutedEventArgs e)

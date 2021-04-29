@@ -42,7 +42,7 @@
       "patient": [],
       "hospital": null,
       "Specialty": {
-        "Role": "Dermatolog"
+        "Name": "Dermatolog"
       },
       "PrimaryRoom": 1,
       "Patient": [],
@@ -148,7 +148,7 @@
       "patient": [],
       "hospital": null,
       "Specialty": {
-        "Role": "Dermatolog"
+        "Name": "Dermatolog"
       },
       "PrimaryRoom": 5,
       "Patient": [],
@@ -255,7 +255,7 @@
       "patient": [],
       "hospital": null,
       "Specialty": {
-        "Role": "Dermatolog"
+        "Name": "Dermatolog"
       },
       "PrimaryRoom": 1,
       "Patient": [],
@@ -361,7 +361,7 @@
       "patient": [],
       "hospital": null,
       "Specialty": {
-        "Role": "Dermatolog"
+        "Name": "Dermatolog"
       },
       "PrimaryRoom": 1,
       "Patient": [],
@@ -467,7 +467,7 @@
       "patient": [],
       "hospital": null,
       "Specialty": {
-        "Role": "Dermatolog"
+        "Name": "Dermatolog"
       },
       "PrimaryRoom": 1,
       "Patient": [],
@@ -573,7 +573,7 @@
       "patient": [],
       "hospital": null,
       "Specialty": {
-        "Role": "Dermatolog"
+        "Name": "Dermatolog"
       },
       "PrimaryRoom": 1,
       "Patient": [],

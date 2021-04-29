@@ -1,5 +1,6 @@
 ﻿using Hospital_IS.Storages;
 using Model;
+using System;
 using System.Collections.Generic;
 
 namespace Service
@@ -35,6 +36,19 @@ namespace Service
                 allDoctorIDs.Add(employee.Id);
             }
             return allDoctorIDs;
+        }
+
+        internal List<Doctor> GetDoctorsBySpecialty(Specialty specialty)
+        {
+            List<Doctor> doctorsBySpecialty = new List<Doctor>();
+            foreach(Doctor doctor in AllDoctors)
+            {
+                if (doctor.Specialty.Name.Equals(specialty.Name))
+                {
+                    doctorsBySpecialty.Add(doctor);
+                }
+            }
+            return doctorsBySpecialty;
         }
     }
 }
