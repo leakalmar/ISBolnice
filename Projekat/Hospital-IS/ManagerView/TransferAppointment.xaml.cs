@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using DTOs;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -63,7 +64,8 @@ namespace Hospital_IS
                 corect = false;
             }
 
-           bool isSucces = TransferController.Instance.TransferEquipmentStatic(sourceRoom, destinationRoom, equip, quantity, dateTimeStart, dateTimeEnd, "dobar termin");
+            StaticTransferAppointmentDTO staticTransfer = new StaticTransferAppointmentDTO(sourceRoom, destinationRoom, equip, quantity, dateTimeStart, dateTimeEnd, "doabar");
+           bool isSucces = TransferController.Instance.TransferEquipmentStatic(staticTransfer);
 
             if (!isSucces || !corect)
             {

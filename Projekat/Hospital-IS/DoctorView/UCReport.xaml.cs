@@ -26,7 +26,7 @@ namespace Hospital_IS.DoctorView
             Appointment = appointment;
             if(Appointment.Report != null)
             {
-                reportDetail.Text = Appointment.Report.Amnesis;
+                reportDetail.Text = Appointment.Report.Anamnesis;
             }
             
             medicines.DataContext = appointment.Patient.MedicalHistory.GetByAppointment(Appointment);
@@ -36,7 +36,7 @@ namespace Hospital_IS.DoctorView
         private void Perscription_Click(object sender, RoutedEventArgs e)
         {
             (this.Parent as Grid).Visibility = Visibility.Collapsed;
-            Appointment.Report.Amnesis = reportDetail.Text;
+            Appointment.Report.Anamnesis = reportDetail.Text;
             DoctorHomePage.Instance.Home.Children.Add(new UCSearchMedicine(Appointment));
         }
 

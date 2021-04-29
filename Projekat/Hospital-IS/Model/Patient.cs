@@ -28,7 +28,6 @@ namespace Model
             this.FileDate = filedate;
             this.Employer = employer;
             this.Alergies = alergies;
-            this.MedicalHistory = new MedicalHistory();
         }
 
         public Patient()

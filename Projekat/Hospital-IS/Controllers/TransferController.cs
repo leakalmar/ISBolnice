@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using DTOs;
+using Model;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -26,19 +27,20 @@ namespace Controllers
 
         }
 
-        public Boolean TransferEquipmentStatic(Model.Room sourceRoom, Model.Room destiantionRoom, Model.Equipment equip, int quantity, DateTime startDate, DateTime endDate, String description)
+        public Boolean TransferEquipmentStatic(StaticTransferAppointmentDTO staticTransfer)
         {
-            return TransferService.Instance.TransferEquipmentStatic(sourceRoom, destiantionRoom, equip, quantity, startDate, endDate, description);
+            return TransferService.Instance.ScheduleStaticTransfer(staticTransfer);
         }
 
-        public void TransferEquipment(Model.Room sourceRoom, Model.Equipment equip, int quantity)
+        public void TransferEquipment(Room sourceRoom, Equipment equip, int quantity)
         {
-            TransferService.Instance.TransferEquipment(sourceRoom, equip, quantity);
+            TransferService.Instance.ReduceEquipmentQuantity(sourceRoom, equip, quantity);
         }
 
-        public void TransferStaticEquipment(int sourceRoomId, int destinationRoomId, Model.Equipment equip, int quantity)
+        public void TransferStaticEquipment(Transfer transfer)
         {
-            TransferService.Instance.TransferStaticEquipment(sourceRoomId, destinationRoomId, equip, quantity);
+           
+            TransferService.Instance.ExecuteStaticTransfer(transfer);
         }
 
         public List<Transfer> getAllTransfers()

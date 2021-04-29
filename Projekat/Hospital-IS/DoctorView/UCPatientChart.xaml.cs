@@ -185,7 +185,7 @@ namespace Hospital_IS.DoctorView
             {
                 DoctorHomePage.Instance.Home.Children.Remove(this);
                 DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
-                Appointment.Report.Amnesis = Report.reportDetail.Text;
+                Appointment.Report.Anamnesis = Report.reportDetail.Text;
                 DoctorAppointmentController.Instance.AddAppointment(Appointment);
                 DoctorHomePage.Instance.Home.Children.Add(this);
             }
@@ -201,7 +201,7 @@ namespace Hospital_IS.DoctorView
 
         private void EndApp_KeyDown(object sender, KeyEventArgs e)
         {
-            Appointment.Report.Amnesis = Report.reportDetail.Text;
+            Appointment.Report.Anamnesis = Report.reportDetail.Text;
             afs.UpdateAppointment(Appointment);
             DoctorHomePage.Instance.Home.Children.Remove(this);
             DoctorHomePage.Instance.Home.Children.Add(new UCAppDetail(null));
@@ -209,7 +209,7 @@ namespace Hospital_IS.DoctorView
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Appointment.Report.Amnesis = Report.reportDetail.Text;
+            Appointment.Report.Anamnesis = Report.reportDetail.Text;
             if(Appointment.Patient.MedicalHistory.GetByAppointment(Appointment).Count != 0)
             {
                 Appointment.Report.HaveRecipe = true;
