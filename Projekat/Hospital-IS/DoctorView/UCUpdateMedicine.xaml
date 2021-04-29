@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:Hospital_IS.DoctorView" mc:Ignorable="d"
         d:DesignHeight="575.84" d:DesignWidth="783.487394957983">
 
+    <UserControl.InputBindings>
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding AddCommand}" />
+    </UserControl.InputBindings>
     <Grid x:Name="medInfo">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -49,7 +52,7 @@
             <Border Grid.Row="0" CornerRadius="20,20,0,0" BorderThickness="1,1,0,1"
                     Background="#FF213250" BorderBrush="FloralWhite">
                 <Button FontSize="14" BorderThickness="0" Background="{x:Null}"
-                        Content="Dodaj" Foreground="FloralWhite"
+                        Content="Dodaj" Foreground="FloralWhite" x:Name="compositionAdd"
                         HorizontalAlignment="Stretch" Click="CompositionAdd_Click">
                 </Button>
             </Border>

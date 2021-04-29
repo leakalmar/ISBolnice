@@ -18,6 +18,55 @@ using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
+    public class AddKey : ICommand
+    {
+        public event EventHandler CanExecuteChanged;
+        public object UIGrid;
+        public object UIList;
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object parameter)
+        {
+            MessageBox.Show("DS");
+            ReplaceMedicineName newMedicine = new ReplaceMedicineName("");
+            ((ObservableCollection<ReplaceMedicineName>)UIList).Add(newMedicine);
+            ((DataGrid)UIGrid).Items.Refresh();
+            ((DataGrid)UIGrid).Focus();
+            ((DataGrid)UIGrid).SelectedItem = newMedicine;
+            ((DataGrid)UIGrid).ScrollIntoView(((DataGrid)UIGrid).Items.GetItemAt(((DataGrid)UIGrid).Items.Count - 1));
+            var cellcontent = ((DataGrid)UIGrid).Columns[0].GetCellContent(((DataGrid)UIGrid).SelectedItem);
+            var cell = cellcontent?.Parent as DataGridCell;
+            if (cell != null)
+            {
+                cell.Focus();
+            }
+        }
+    }
+    public class AddCommandContext
+    {
+        public object list { get; set; }
+        public object gridToAdd { get; set; }
+        public ICommand AddCommand
+        {
+            get
+            {
+                MessageBox.Show("DS");
+                return new AddKey()
+                {
+
+                    UIGrid = gridToAdd,
+                    UIList = list
+                };
+
+
+
+            }
+        }
+    }
     public partial class UCUpdateMedicine : UserControl
     {
         public ObservableCollection<MedicineComponent> CompositionOfMedicine { get; set; }
@@ -34,6 +83,27 @@ namespace Hospital_IS.DoctorView
             composition.CanUserAddRows = true;
             change.CanUserAddRows = true;
             change.ItemsSource = ReplaceMedicines;
+            this.DataContext = new AddCommandContext()
+            {
+                gridToAdd = change,
+                list = ReplaceMedicines
+            };
+
+            if(composition.Items[0] != null)
+            {
+                composition.SelectedIndex = 0;
+                var cellcontent = composition.Columns[0].GetCellContent(composition.SelectedItem);
+                var cell = cellcontent?.Parent as DataGridCell;
+                if (cell != null)
+                {
+                    cell.Focus();
+                }
+            }else
+            {
+                compositionAdd.Focus();
+            }
+
+
         }
 
         private void save_Click(object sender, RoutedEventArgs e)

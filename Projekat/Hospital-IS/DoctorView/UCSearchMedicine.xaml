@@ -105,7 +105,14 @@
                         VerticalScrollBarVisibility="Auto" Grid.Row="2" Margin="20,5,20,10" >
                     <ListBox ItemsSource="{Binding Composition}" FontSize="14"
                             FontFamily="Verdana" Foreground="FloralWhite"
-                            Background="{x:Null}" BorderThickness="0"/>
+                            Background="{x:Null}" BorderThickness="0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Component}"
+                                        Foreground="FloralWhite" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </ScrollViewer>
                 <Label Content="Zamena" Grid.Row="3" FontSize="14" FontFamily="Verdana"
                         Foreground="FloralWhite" HorizontalAlignment="Center"
@@ -114,9 +121,16 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                         VerticalScrollBarVisibility="Auto" Grid.Row="4"
                         Margin="20,5,20,10" >
-                    <ListBox ItemsSource="{Binding Composition}" FontSize="14"
+                    <ListBox ItemsSource="{Binding ReplaceMedicine}" FontSize="14"
                             FontFamily="Verdana" Foreground="FloralWhite"
-                            Background="{x:Null}" BorderThickness="0"/>
+                            Background="{x:Null}" BorderThickness="0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"
+                                        Foreground="FloralWhite" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </ScrollViewer>
 
                 <Label Content="Terapijske indikacije" FontSize="14" FontFamily="Verdana"
