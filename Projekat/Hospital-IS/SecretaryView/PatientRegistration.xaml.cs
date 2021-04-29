@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Service;
+using System;
 using System.Windows;
 
 namespace Hospital_IS
@@ -23,6 +24,7 @@ namespace Hospital_IS
 
         private void AddPatient(object sender, RoutedEventArgs e)
         {
+            Patient.Id = UserService.Instance.GenerateUserID();
             if (checkBox.IsChecked == true)
                 Patient.IsGuest = true;
 

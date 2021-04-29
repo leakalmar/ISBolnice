@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using DTOs;
+using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -30,35 +31,45 @@ namespace Service
            
         }
 
-        public Boolean TransferEquipmentStatic(Room sourceRoom, Room destinationRoom,Equipment equip, int quantity, DateTime startDate, DateTime endDate, String description)
+        public Boolean ScheduleStaticTransfer(StaticTransferAppointmentDTO staticTransfer)
         {
-            List<Appointment> RoomsAppointment = AppointmentService.Instance.getAllAppByTwoRooms(sourceRoom.RoomId, destinationRoom.RoomId);
-            bool checkRoomAppointment = AppointmentService.Instance.CheckAppointment(RoomsAppointment, startDate, endDate);
+            List<Appointment> RoomsAppointment = AppointmentService.Instance.getAllAppByTwoRooms(staticTransfer.SourceRoom.RoomId, staticTransfer.DestinationRoom.RoomId);
+            bool checkRoomAppointment = AppointmentService.Instance.CheckAppointment(RoomsAppointment, staticTransfer.StartDate, staticTransfer.EndDate);
 
             if (checkRoomAppointment)
             {
-                Transfer transfer = new Transfer(sourceRoom.RoomId, destinationRoom.RoomId, equip, quantity, endDate, false);
-                AddTransfer(transfer);
-              
-                if (sourceRoom.Type != RoomType.StorageRoom)
-                {
-                    Appointment appointment = new Appointment(startDate, endDate, AppointmetType.EquipTransfer, sourceRoom.RoomId);
-                    appointment.Reserved = true;
-                    AppointmentService.Instance.AddAppointment(appointment);
-                }
-
-                if (destinationRoom.Type != RoomType.StorageRoom)
-                {
-                    Appointment appointment = new Appointment(startDate, endDate, AppointmetType.EquipTransfer, destinationRoom.RoomId);
-                    appointment.Reserved = true;
-                    AppointmentService.Instance.AddAppointment(appointment);
-                }
+                CreateAppointmentForEquipmentTransfer(staticTransfer);
 
             }
             return checkRoomAppointment;
         }
 
-        public void TransferEquipment(Model.Room sourceRoom, Model.Equipment equip, int quantity)
+        private void CreateAppointmentForEquipmentTransfer(StaticTransferAppointmentDTO staticTransfer)
+        {
+            Transfer transfer = new Transfer(staticTransfer.SourceRoom.RoomId, staticTransfer.DestinationRoom.RoomId, staticTransfer.Equip, staticTransfer.Quantity, staticTransfer.EndDate, false);
+            AddTransfer(transfer);
+
+            if (staticTransfer.SourceRoom.Type != RoomType.StorageRoom)
+            {
+                CreateAppointment(staticTransfer,staticTransfer.SourceRoom.RoomId);
+            }
+
+            if (staticTransfer.DestinationRoom.Type != RoomType.StorageRoom)
+            {
+                CreateAppointment(staticTransfer,staticTransfer.DestinationRoom.RoomId);
+            }
+        }
+
+        private static void CreateAppointment(StaticTransferAppointmentDTO staticTransfer,int roomId)
+        {
+            Appointment appointment = new Appointment(staticTransfer.StartDate, staticTransfer.EndDate, AppointmetType.EquipTransfer, roomId);
+            appointment.Reserved = true;
+            AppointmentService.Instance.AddAppointment(appointment);
+        }
+
+
+
+        public void ReduceEquipmentQuantity(Model.Room sourceRoom, Model.Equipment equip, int quantity)
         {
             foreach (Equipment eq in sourceRoom.Equipment)
             {
@@ -76,19 +87,26 @@ namespace Service
 
         }
 
-        public void TransferStaticEquipment(int sourceRoomId, int destinationRoomId, Model.Equipment equip, int quantity)
+        public void ExecuteStaticTransfer(Transfer transfer)
         {
 
             tfs.Save(allTransfer);
-            Room sourceRoom = RoomService.Instance.getRoomById(sourceRoomId);
-            Room destinationRoom = RoomService.Instance.getRoomById(destinationRoomId);
+            Room sourceRoom = RoomService.Instance.getRoomById(transfer.SourceRoomId);
+            Room destinationRoom = RoomService.Instance.getRoomById(transfer.DestinationRoomId);
 
-            bool isEnoughEquipment = RoomService.Instance.CheckQuantity(sourceRoom, equip, quantity);
+            bool isEnoughEquipment = RoomService.Instance.CheckQuantity(sourceRoom, transfer.Equip, transfer.Quantity);
 
 
-            TransferEquipment(sourceRoom, equip, quantity);
+            ReduceEquipmentQuantity(sourceRoom, transfer.Equip, transfer.Quantity);
 
-            if(destinationRoom.Equipment == null)
+            IncreaseEquipmentQuantity(transfer.Equip, transfer.Quantity, destinationRoom);
+
+            RoomService.Instance.SaveChange();
+        }
+
+        private static void IncreaseEquipmentQuantity(Equipment equip, int quantity, Room destinationRoom)
+        {
+            if (destinationRoom.Equipment == null)
             {
                 destinationRoom.Equipment = new List<Equipment>();
             }
@@ -108,10 +126,10 @@ namespace Service
                 Equipment equipment = new Equipment(equip.EquipType, equip.EquiptId, equip.Name, quantity);
                 destinationRoom.Equipment.Add(equipment);
             }
-
-            RoomService.Instance.SaveChange();
         }
-    
+
+
+
         public void AddTransfer(Transfer transfer)
         {
             allTransfer.Add(transfer);

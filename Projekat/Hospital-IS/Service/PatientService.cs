@@ -9,7 +9,7 @@ namespace Service
     class PatientService
     {
         private PatientFileStorage pfs = new PatientFileStorage();
-        public List<Patient> allPatients { get; set; }
+        public List<Patient> AllPatients { get; set; }
 
         private static PatientService instance = null;
         public static PatientService Instance
@@ -26,7 +26,7 @@ namespace Service
 
         private PatientService()
         {
-            allPatients = pfs.GetAll();
+            AllPatients = pfs.GetAll();
         }
 
         public void GetPatientChart(Patient patient)
@@ -46,37 +46,47 @@ namespace Service
 
         public void AddPatient(Patient patient)
         {
-            allPatients.Add(patient);
+            AllPatients.Add(patient);
 
-            pfs.SavePatients(allPatients);
+            pfs.SavePatients(AllPatients);
         }
 
         public void UpdatePatient(Patient patient)
         {
-            for (int i = 0; i < allPatients.Count; i++)
+            for (int i = 0; i < AllPatients.Count; i++)
             {
-                if (patient.Id.Equals(allPatients[i].Id))
+                if (patient.Id.Equals(AllPatients[i].Id))
                 {
-                    allPatients.Remove(allPatients[i]);
-                    allPatients.Insert(i, patient);
+                    AllPatients.Remove(AllPatients[i]);
+                    AllPatients.Insert(i, patient);
                 }
             }
 
 
-            pfs.SavePatients(allPatients);
+            pfs.SavePatients(AllPatients);
         }
 
         public void DeletePatient(Patient patient)
         {
-            for (int i = 0; i < allPatients.Count; i++)
+            for (int i = 0; i < AllPatients.Count; i++)
             {
-                if (patient.Id.Equals(allPatients[i].Id))
+                if (patient.Id.Equals(AllPatients[i].Id))
                 {
-                    allPatients.Remove(allPatients[i]);
+                    AllPatients.Remove(AllPatients[i]);
                 }
             }
 
-            pfs.SavePatients(allPatients);
+            pfs.SavePatients(AllPatients);
+        }
+
+        public List<int> GetPatientIDs()
+        {
+            List<int> allPatientIDs = new List<int>();
+            foreach (Patient patient in AllPatients)
+            {
+                allPatientIDs.Add(patient.Id);
+            }
+            return allPatientIDs;
         }
 
     }

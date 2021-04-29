@@ -75,7 +75,7 @@ namespace Hospital_IS
                     if (trans.TransferEnd <= time && trans.isMade == false)
                     {
                        trans.isMade = true;
-                       TransferController.Instance.TransferStaticEquipment(trans.SourceRoomId, trans.DestinationRoomId, trans.Equip, trans.Quantity);
+                       TransferController.Instance.TransferStaticEquipment(trans);
                         
                        MessageBox.Show("Uspjesan transfer");
                     

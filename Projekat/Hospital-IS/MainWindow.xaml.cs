@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Hospital_IS.DoctorView;
 using Controllers;
+using Service;
 
 namespace Hospital_IS
 {
@@ -22,7 +23,6 @@ namespace Hospital_IS
         FSDoctor dfs = new FSDoctor();
         RoomStorage rfs = new RoomStorage();
         public static Patient PatientUser { get; set; }
-        public static Doctor DoctortUser { get; set; }
 
         //Dodala jer mi treba ista referenca svuda kako bi mogla da postavim selektovanje za combobox
         public static List<Doctor> Doctors { get; set; }
@@ -33,6 +33,7 @@ namespace Hospital_IS
             InitializeComponent();
             Doctors = dfs.GetAll();
             Rooms = rfs.GetAll();
+            UserService.Instance.GetAllUsersIDs();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -56,16 +57,11 @@ namespace Hospital_IS
                 }
             }
 
-            foreach (Doctor d in Doctors)
+            foreach (Doctor doctor in Doctors)
             {
-                if (email.Text == d.Email && password.Password.ToString() == d.Password)
+                if (email.Text == doctor.Email && password.Password.ToString() == doctor.Password)
                 {
-                    DoctortUser = d;
-                    DoctorHomePage.Instance.DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllByDoctor(d.Id));
-                    DoctorHomePage.Instance.HomePage = new UserControlHomePage();
-                    DoctorHomePage.Instance.Appointments = new UCAppointments();
-                    DoctorHomePage.Instance.Patients = new UCPatients();
-                    DoctorHomePage.Instance.Home.Children.Add(DoctorHomePage.Instance.HomePage);
+                    DoctorHomePage.Instance.ChangeDoctor(doctor);
                     DoctorHomePage.Instance.Show();
                     this.Close();
                 }

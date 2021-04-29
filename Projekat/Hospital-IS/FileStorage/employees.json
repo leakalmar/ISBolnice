@@ -1,0 +1,110 @@
+[
+  {
+    "hospital": null,
+    "Salary": 120000.0,
+    "EmploymentDate": "2015-01-01T00:00:00",
+    "WorkDay": [
+      {
+        "Day": 0,
+        "StartTime": "2020-02-02T08:00:00",
+        "EndTime": "2020-02-02T20:00:00"
+      },
+      {
+        "Day": 1,
+        "StartTime": "2020-02-02T08:00:00",
+        "EndTime": "2020-02-02T20:00:00"
+      },
+      {
+        "Day": 2,
+        "StartTime": "2020-02-02T08:00:00",
+        "EndTime": "2020-02-02T20:00:00"
+      },
+      {
+        "Day": 3,
+        "StartTime": "2020-02-02T08:00:00",
+        "EndTime": "2020-02-02T20:00:00"
+      },
+      {
+        "Day": 4,
+        "StartTime": "2020-02-02T08:00:00",
+        "EndTime": "2020-02-02T20:00:00"
+      },
+      {
+        "Day": 5,
+        "StartTime": "2020-02-02T08:00:00",
+        "EndTime": "2020-02-02T20:00:00"
+      },
+      {
+        "Day": 6,
+        "StartTime": "2020-02-02T08:00:00",
+        "EndTime": "2020-02-02T20:00:00"
+      }
+    ],
+    "Education": 0,
+    "Id": 5,
+    "Name": "Aleksandar",
+    "Surname": "Bjelobaba",
+    "BirthDate": "1990-04-15T00:00:00",
+    "Phone": null,
+    "Email": "sekretar",
+    "Gender": null,
+    "Relationship": null,
+    "Password": "Bulevar Evrope 25, Novi Sad",
+    "Address": "sekretar@gmail.com",
+    "Hospital": null
+  },
+  {
+    "hospital": null,
+    "Salary": 180000.0,
+    "EmploymentDate": "2012-01-05T00:00:00",
+    "WorkDay": [
+      {
+        "Day": 0,
+        "StartTime": "2020-02-02T08:00:00",
+        "EndTime": "2020-02-02T20:00:00"
+      },
+      {
+        "Day": 1,
+        "StartTime": "2020-02-02T08:00:00",
+        "EndTime": "2020-02-02T20:00:00"
+      },
+      {
+        "Day": 2,
+        "StartTime": "2020-02-02T08:00:00",
+        "EndTime": "2020-02-02T20:00:00"
+      },
+      {
+        "Day": 3,
+        "StartTime": "2020-02-02T08:00:00",
+        "EndTime": "2020-02-02T20:00:00"
+      },
+      {
+        "Day": 4,
+        "StartTime": "2020-02-02T08:00:00",
+        "EndTime": "2020-02-02T20:00:00"
+      },
+      {
+        "Day": 5,
+        "StartTime": "2020-02-02T08:00:00",
+        "EndTime": "2020-02-02T20:00:00"
+      },
+      {
+        "Day": 6,
+        "StartTime": "2020-02-02T08:00:00",
+        "EndTime": "2020-02-02T20:00:00"
+      }
+    ],
+    "Education": 0,
+    "Id": 6,
+    "Name": "Marko",
+    "Surname": "Matijević",
+    "BirthDate": "1970-04-11T00:00:00",
+    "Phone": null,
+    "Email": "manager",
+    "Gender": null,
+    "Relationship": null,
+    "Password": "Laze Kostića 14, Novi Sad",
+    "Address": "manager@gmail.com",
+    "Hospital": null
+  }
+]

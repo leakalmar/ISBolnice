@@ -269,7 +269,7 @@ namespace Model
                 {
                     if (ap.AppointmentStart.Date.Equals(d.Date) && ap.Room.Equals(roomId))
                     {
-                        if (Hospital.Instance.CheckAppointment(Hospital.Instance.GetAllAppointmentsByDoctor(DoctorHomePage.Instance.GetDoctor()), ap.AppointmentStart, ap.AppointmentEnd) && 
+                        if (Hospital.Instance.CheckAppointment(Hospital.Instance.GetAllAppointmentsByDoctor(DoctorHomePage.Instance.Doctor), ap.AppointmentStart, ap.AppointmentEnd) && 
                             Hospital.Instance.CheckAppointment(AppointmentService.Instance.getAppByRoom(roomId), ap.AppointmentStart,ap.AppointmentEnd))
                         {
                             ret.Add(ap);

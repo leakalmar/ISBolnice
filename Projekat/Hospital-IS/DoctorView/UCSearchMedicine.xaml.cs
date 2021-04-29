@@ -1,4 +1,5 @@
-﻿using Hospital_IS.Storages;
+﻿using DoctorView;
+using Hospital_IS.Storages;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace Hospital_IS.DoctorView
             
             medicines.DataContext = GenerateListOfMedicines();
             alergies.DataContext = appointment.Patient.Alergies;
+            medInfo.DataContext = medicines.SelectedItem;
             
             
         }
@@ -132,18 +134,18 @@ namespace Hospital_IS.DoctorView
 
         private bool checkMedicationComposition(Medicine medicine)
         {
-            String[] components = medicine.Composition.Split(",");
-            foreach(String c in components)
+            List<MedicineComponent> components = medicine.Composition;
+            foreach(MedicineComponent c in components)
             {
                 foreach (String allergie in Appointment.Patient.Alergies)
                 {
                     Medicine med = findMedicine(allergie);
                     if(med != null)
                     {
-                        String[] allergieComponents = med.Composition.Split(",");
-                        foreach(String allergieComp in allergieComponents)
+                        List<MedicineComponent> allergieComponents = med.Composition;
+                        foreach(MedicineComponent allergieComp in allergieComponents)
                         {
-                            if (c.ToLower().Equals(allergieComp.ToLower()))
+                            if (c.Component.ToLower().Equals(allergieComp.Component.ToLower()))
                             {
                                 return true;
                             }
