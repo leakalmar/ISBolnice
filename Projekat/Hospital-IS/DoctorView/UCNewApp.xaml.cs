@@ -43,7 +43,7 @@ namespace Hospital_IS.DoctorView
             {
                 foreach (Doctor d in MainWindow.Doctors)
                 {
-                    if (d.Id.Equals(DoctorHomePage.Instance.GetDoctor().Id))
+                    if (d.Id.Equals(DoctorHomePage.Instance.Doctor.Id))
                     {
                         doctors.SelectedItem = d;
                         doc = d;
@@ -52,14 +52,7 @@ namespace Hospital_IS.DoctorView
             }
             if (room == null)
             {
-                foreach (Room r in MainWindow.Rooms)
-                {
-                    if (r.RoomId.Equals(DoctorHomePage.Instance.GetDoctor().PrimaryRoom))
-                    {
-                        rooms.SelectedItem = r;
-                        room = r;
-                    }
-                }
+                room = DoctorHomePage.Instance.PrimaryRoom;
             }
             if (dates.Count == 0)
             {

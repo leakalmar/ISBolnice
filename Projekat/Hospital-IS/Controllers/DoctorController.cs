@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Controllers
 {
-    class DoctorController
+    public class DoctorController
     {
         private static DoctorController instance = null;
         public static DoctorController Instance

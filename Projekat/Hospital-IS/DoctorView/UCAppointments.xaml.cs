@@ -31,7 +31,7 @@ namespace Hospital_IS.DoctorView
             from.SelectedDate = DateTime.Now.Date;
             to.SelectedDate = DateTime.Now.Date.AddDays(7);
             type.SelectedIndex = 1;
-            rooms.SelectedItem = DoctorHomePage.Instance.GetPrimaryRoom();
+            rooms.SelectedItem = DoctorHomePage.Instance.PrimaryRoom;
 
             DoctorAppointment ap = (DoctorAppointment)docotrAppointments.SelectedItem;
             ChangeApp = new UCChangeApp(details);
@@ -75,7 +75,7 @@ namespace Hospital_IS.DoctorView
 
             if (room == null)
             {
-                room = DoctorHomePage.Instance.GetPrimaryRoom();
+                room = DoctorHomePage.Instance.PrimaryRoom;
             }
             String selected = (String)type.SelectedItem;
 
