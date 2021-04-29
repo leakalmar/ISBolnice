@@ -24,14 +24,23 @@
     "Name": "Paracetamol 500mg tableta",
     "Composition": [
       {
-        "Component": "gdfsgds"
+        "Component": "celuloz"
       },
       {
-        "Component": "fdsfadf"
+        "Component": "mikrokristalna"
+      },
+      {
+        "Component": "kroskarmeloza-natrijum"
+      },
+      {
+        "Component": "povidon K-30"
+      },
+      {
+        "Component": "magnezijum-stearat"
       }
     ],
-    "SideEffects": "Preosetljivost na paracetamol ili na bilo koju od pomoćnih supstanci.gfdsa",
-    "Usage": "Paracetamol je blag analgetik i antipiretik. Upotreba tableta se preporučuje za lečenje bolnih i febrilnih stanja kao što su glavobolja (uključujući i migrenu i tenzionu glavobolju), zubobolja, bol u leđima, reumatski bolovi i bolovi u mišićima, dismenoreja, bol u grlu, kao i za ublažavanje groznice, odnosno tegoba i bolova koji prate prehladu i grip. Lek se takođe može koristiti kao simptomatska terapija kod bolova povezanih sa osteoartritisom.fdsga",
+    "SideEffects": "Preosetljivost na paracetamol ili na bilo koju od pomoćnih supstanci.",
+    "Usage": "Paracetamol je blag analgetik i antipiretik. Upotreba tableta se preporučuje za lečenje bolnih i febrilnih stanja kao što su glavobolja (uključujući i migrenu i tenzionu glavobolju), zubobolja, bol u leđima, reumatski bolovi i bolovi u mišićima, dismenoreja, bol u grlu, kao i za ublažavanje groznice, odnosno tegoba i bolova koji prate prehladu i grip. Lek se takođe može koristiti kao simptomatska terapija kod bolova povezanih sa osteoartritisom.",
     "ReplaceMedicine": []
   }
 ]

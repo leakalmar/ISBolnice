@@ -50,7 +50,8 @@
                     Background="#FF213250" BorderBrush="FloralWhite">
                 <Button FontSize="14" BorderThickness="0" Background="{x:Null}"
                         Content="Dodaj" Foreground="FloralWhite"
-                        HorizontalAlignment="Stretch" Click="CompositionAdd_Click"/>
+                        HorizontalAlignment="Stretch" Click="CompositionAdd_Click">
+                </Button>
             </Border>
             <Image Source="pack://application:,,,/Resources/add-row.png"
                     Margin="290,0,0,0" Grid.ColumnSpan="2" Height="20"
