@@ -31,9 +31,9 @@ namespace Controllers
             return AppointmentService.Instance.getAllAppByTwoRooms(roomIdSource, roomIdDestination);
         }
 
-        public bool CheckAppointment(List<Appointment> roomAppointment, DateTime start, DateTime end)
+        public bool CheckAppointment(List<Appointment> appointments, DateTime start, DateTime end)
         {
-            throw new NotImplementedException();
+            return AppointmentService.Instance.CheckAppointment(appointments, start, end);
         }
 
         public bool IsBetweenDates(DateTime end, DateTime start, Appointment appointment)
