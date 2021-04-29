@@ -1,15 +1,5 @@
 [
   {
-    "RoomFloor": 1,
-    "RoomNumber": 101,
-    "RoomId": 0,
-    "IsFree": false,
-    "IsUsable": false,
-    "Type": 2,
-    "RoomIdType": "0 OperationRoom",
-    "Equipment": null
-  },
-  {
     "RoomFloor": 2,
     "RoomNumber": 205,
     "RoomId": 1,
