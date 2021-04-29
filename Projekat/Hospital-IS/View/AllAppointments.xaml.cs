@@ -1,6 +1,7 @@
 ﻿using Controllers;
 using Model;
 using Storages;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -53,6 +54,37 @@ namespace Hospital_IS.View
             PatientNotifications notifications = new PatientNotifications();
             notifications.Show();
             this.Close();
+        }
+
+        private void showRow(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            DoctorAppointment docApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
+            Date.Text = docApp.AppointmentStart.ToString("dd.MM.yyyy.");
+            Doctor.Content = docApp.Doctor.Name + docApp.Doctor.Surname;
+            AppointmentType.Content = docApp.AppTypeText;
+            Room.Content = docApp.Room;
+            //Details.Text = 
+            //Evaluation.Content = 
+            //Comment.Text=
+            if (docApp.AppointmentStart <= DateTime.Today)
+            {
+                evaluateApp.Visibility = Visibility.Visible;
+            }
+            AppointmentInfo.Visibility = Visibility.Visible;
+        }
+
+        private void showEvaluationWindow(object sender, RoutedEventArgs e)
+        {
+            if (PatientAppointmentEvaluationController.Instance.IsAppointmentEvaluated((DoctorAppointment)dataGridAppointment.SelectedItem))
+            {
+                MessageBox.Show("Pregled je već ocenjen!");
+            }
+            else
+            {
+                PatientAppointmentEvaluation appointmentEvaluation = new PatientAppointmentEvaluation((DoctorAppointment)dataGridAppointment.SelectedItem);
+                appointmentEvaluation.Show();
+            }
+           
         }
     }
 }

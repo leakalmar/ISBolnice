@@ -73,7 +73,7 @@ namespace Hospital_IS.View
                 int usageHourDifference = (int)24/therapy.TimesADay;
                 for (int i = 0; i < therapy.TimesADay; i++)
                 {
-                    if (time.AddHours(2).Hour == (therapy.FirstUsageTime + i * usageHourDifference) && time.Minute == 38)
+                    if (time.AddHours(2).Hour == (therapy.FirstUsageTime + i * usageHourDifference) && time.Minute == 00)
                     {
                         MessageBox.Show("Za 2 sata treba da popijete lek: " + therapy.Medicine.Name);
                     }
@@ -108,11 +108,12 @@ namespace Hospital_IS.View
         {
             DoctorAppointment doctorApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
             DateTime today = DateTime.Today;
+            int dayLimiter = 3;
             if (doctorApp == null)
             {
                 MessageBox.Show("Izaberite termin!");
             }
-            else if (doctorApp.AppointmentStart.Date < today.AddDays(3))
+            else if (doctorApp.AppointmentStart.Date < today.AddDays(dayLimiter))
             {
                 MessageBox.Show("Ne možete otkazati termin na manje od 3 dana do termina!");
             }

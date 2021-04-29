@@ -101,7 +101,7 @@ namespace Hospital_IS.View
 
         public void changeAppointment(DoctorAppointment docApp)
         {
-            doctor = docApp.Doctor;
+            Doctors.SelectedItem = docApp.Doctor;
             date = docApp.AppointmentStart;
             Calendar.SelectedDate = date;
             Calendar.DisplayDateStart = date;
@@ -127,7 +127,7 @@ namespace Hospital_IS.View
             }
             
             AvailableAppointments.Clear();
-            List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(TimeSlot.Text, doctor, HomePatient.Instance.Patient, date, false);
+            List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(TimeSlot.Text, docApp.Doctor, HomePatient.Instance.Patient, date, false);
             foreach (DoctorAppointment doctorAppointment in docApps)
             {
                 AvailableAppointments.Add(doctorAppointment);
