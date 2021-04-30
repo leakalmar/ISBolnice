@@ -138,6 +138,8 @@
                         <DataGridCheckBoxColumn Header="Slobodno" x:Name="isAdded"
                                 CanUserResize="False" Width="0.05*"
                                 Binding="{Binding Appointment.Reserved}" />
+                        <DataGridCheckBoxColumn Header="Hitno" CanUserResize="False"
+                                Width="0.05*" Binding="{Binding Appointment.IsUrgent}" />
                     </DataGrid.Columns>
                     <DataGrid.RowStyle>
                         <Style TargetType="{x:Type DataGridRow}"

@@ -10,7 +10,7 @@ namespace Hospital_IS.DoctorView
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null) { return null; }
+            if (value == null) { return 0; }
 
             return ((String)value).Any(x => !char.IsLetter(x)) ? 5 : 0;
         }

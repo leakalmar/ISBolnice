@@ -89,7 +89,7 @@ namespace Hospital_IS.DoctorView
             }
 
             TimeSpan duration = Appointment.AppointmentEnd - Appointment.AppointmentStart;
-            List<DoctorAppointment> list = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, room.RoomId, Appointment.Type, duration, Appointment.Patient, doc);
+            List<DoctorAppointment> list = DoctorAppointmentController.Instance.GetSuggestedAndReservedByDoctor(dates, Appointment.IsUrgent, room.RoomId, Appointment.Type, duration, Appointment.Patient, doc);
             ObservableCollection<DoctorAppointment> possibleAppointments = new ObservableCollection<DoctorAppointment>(list);
 
             /*ICollectionView view = new CollectionViewSource { Source = possibleAppointments }.View;

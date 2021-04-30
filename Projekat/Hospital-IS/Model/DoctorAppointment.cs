@@ -7,6 +7,7 @@ namespace Model
     {
         public String NameSurnamePatient { get; set; }
         public String AppTypeText { get; set; }
+        public bool IsUrgent { get; set; } = false;
 
 
         [JsonConstructor]

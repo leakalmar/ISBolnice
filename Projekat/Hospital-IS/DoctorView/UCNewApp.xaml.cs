@@ -61,21 +61,12 @@ namespace Hospital_IS.DoctorView
         }
 
         public DoctorAppointment Appointment { get; }
-        private bool _imageEnum = false;
-
-        public bool ImageEnum
-        {
-            get { return _imageEnum; }
-            set { 
-                _imageEnum = value;
-                OnPropertyChanged("ImageEnum");
-            }
-        }
+        public bool Emergency = false;
 
         public UCNewApp(DoctorAppointment appointment)
         {
             InitializeComponent();
-            ImageEnum = false;
+            Emergency = false;
             cause.BorderBrush = Brushes.PaleVioletRed;
             cause.DataContext = this;
             Appointment = appointment;
@@ -148,8 +139,7 @@ namespace Hospital_IS.DoctorView
 
 
                 changeVisibilityOfFields(type, doctor);
-                List<DoctorAppointment> allAppointments = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, room.RoomId, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
-                allAppointments.AddRange(DoctorAppointmentController.Instance.GetAllByDoctorAndDates(doctor.Id, dates));
+                List<DoctorAppointment> allAppointments = DoctorAppointmentController.Instance.GetSuggestedAndReservedByDoctor(dates, Emergency, room.RoomId, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
 
                 ICollectionView view = new CollectionViewSource { Source = ConvertList(allAppointments) }.View;
                 view.SortDescriptions.Clear();
@@ -165,7 +155,7 @@ namespace Hospital_IS.DoctorView
             List<AppointmentRow> list = new List<AppointmentRow>();
             foreach (DoctorAppointment da in allAppointments)
             {
-                list.Add(new AppointmentRow(da, ImageEnum));
+                list.Add(new AppointmentRow(da, Emergency));
             }
 
             return list;
@@ -264,7 +254,7 @@ namespace Hospital_IS.DoctorView
 
         private void appointments_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DoctorAppointment selected = (DoctorAppointment)appointments.SelectedItem;
+            DoctorAppointment selected = (DoctorAppointment)((AppointmentRow)appointments.SelectedItem).Appointment;
             var row = appointments.ItemContainerGenerator.ContainerFromItem(selected) as DataGridRow;
 
 
@@ -297,7 +287,7 @@ namespace Hospital_IS.DoctorView
         private void save_Click(object sender, RoutedEventArgs e)
         {
 
-            DoctorAppointment selected = (DoctorAppointment)appointments.SelectedItem;
+            DoctorAppointment selected = (DoctorAppointment)((AppointmentRow)appointments.SelectedItem).Appointment;
 
             if (selected.Reserved == true)
             {
@@ -320,19 +310,19 @@ namespace Hospital_IS.DoctorView
 
         private void emergency_Click(object sender, RoutedEventArgs e)
         {
-            if(ImageEnum == false)
+            if(Emergency == false)
             {
                 Image image = new Image();
                 image.Source = new BitmapImage(new Uri(@"pack://application:,,,/Resources/redsiren.png"));
                 emergency.Content = image;
-                ImageEnum = true;
+                Emergency = true;
             }
             else
             {
                 Image image = new Image();
                 image.Source = new BitmapImage(new Uri(@"pack://application:,,,/Resources/siren.png"));
                 emergency.Content = image;
-                ImageEnum = false;
+                Emergency = false;
             }
             filterAppointments();
         }

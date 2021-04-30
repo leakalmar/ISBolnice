@@ -118,11 +118,14 @@ namespace Service
                     lastTimeCreated = new DateTime(d.Year, d.Month, d.Day, 8, 00, 00);
                 }
 
+                DoctorAppointment newAppointment;
                 while (lastTimeCreated.TimeOfDay < new DateTime(DateTime.Now.Date.Year, DateTime.Now.Date.Month, DateTime.Now.Date.Day, 20, 00, 00).TimeOfDay)
                 {
                     if (tempAppointment.Type == AppointmetType.CheckUp)
                     {
-                        appointmentList.Add(new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, lastTimeCreated.Hour, lastTimeCreated.Minute, 0), AppointmetType.CheckUp, false, tempAppointment.Room, tempAppointment.Doctor, tempAppointment.Patient));
+                        newAppointment = new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, lastTimeCreated.Hour, lastTimeCreated.Minute, 0), AppointmetType.CheckUp, false, tempAppointment.Room, tempAppointment.Doctor, tempAppointment.Patient);
+                        newAppointment.IsUrgent = tempAppointment.IsUrgent;
+                        appointmentList.Add(newAppointment);
                         lastTimeCreated = lastTimeCreated.AddMinutes(30);
                     }
                     else
@@ -131,10 +134,11 @@ namespace Service
                         if (duration.TotalMinutes != 0)
                         {
                             DateTime startTime = new DateTime(d.Year, d.Month, d.Day, lastTimeCreated.Hour, lastTimeCreated.Minute, 0);
-                            DoctorAppointment newAppointment = new DoctorAppointment(startTime, AppointmetType.Operation, false, tempAppointment.Room, tempAppointment.Doctor, tempAppointment.Patient);
+                            newAppointment = new DoctorAppointment(startTime, AppointmetType.Operation, false, tempAppointment.Room, tempAppointment.Doctor, tempAppointment.Patient);
                             newAppointment.AppointmentEnd = startTime.Add(duration);
+                            newAppointment.IsUrgent = tempAppointment.IsUrgent;
                             appointmentList.Add(newAppointment);
-                            lastTimeCreated = lastTimeCreated.AddMinutes(30);
+                            lastTimeCreated = lastTimeCreated.Add(duration);
                         }
                         else
                         {
@@ -252,9 +256,18 @@ namespace Service
 
         public List<DoctorAppointment> SuggestAppointmetsToDoctor(SelectedDatesCollection dates, DoctorAppointment tempAppointment)
         {
-            List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
+            List<DoctorAppointment> allAppointments = new List<DoctorAppointment>();
             List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForDoctor(dates, tempAppointment);
             List<Appointment> roomAppointments = AppointmentService.Instance.getAppByRoom(tempAppointment.Room);
+
+            GetAvailableAppointmentsByDoctor(tempAppointment, allAppointments, allPossibleAppointments, roomAppointments);
+            allAppointments.AddRange(GetAllByDoctorAndDates(tempAppointment.Doctor.Id, dates));
+
+            return allAppointments;
+        }
+
+        private void GetAvailableAppointmentsByDoctor(DoctorAppointment tempAppointment, List<DoctorAppointment> availableAppointments, List<DoctorAppointment> allPossibleAppointments, List<Appointment> roomAppointments)
+        {
             foreach (DoctorAppointment doctorAppointment in allPossibleAppointments)
             {
                 bool isFree = VerifyAppointment(doctorAppointment, roomAppointments);
@@ -267,7 +280,6 @@ namespace Service
                     availableAppointments.Add(doctorAppointment);
                 }
             }
-            return availableAppointments;
         }
 
         public List<DoctorAppointment> GetFutureAppointmentsByPatient(int patientId)
