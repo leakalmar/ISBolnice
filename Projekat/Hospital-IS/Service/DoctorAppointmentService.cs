@@ -4,6 +4,7 @@ using Storages;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Service
@@ -294,6 +295,24 @@ namespace Service
                 }
             }
             return patientAppointments;
+        }
+
+        public List<DoctorAppointment> GetAllByDoctorAndDates(int idDoctor, SelectedDatesCollection dates)
+        {
+            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
+            List<DateTime> datesWithoutTime = new List<DateTime>();
+            foreach(DateTime date in dates)
+            {
+                datesWithoutTime.Add(date.Date);
+            }
+            foreach (DoctorAppointment docApp in allAppointments)
+            {
+                if (docApp.Doctor.Id == idDoctor && datesWithoutTime.Contains(docApp.AppointmentStart.Date))
+                {
+                    appointments.Add(docApp);
+                }
+            }
+            return appointments;
         }
     }
 }

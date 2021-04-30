@@ -1,12 +1,17 @@
 ﻿using Controllers;
 using Model;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Hospital_IS.DoctorView
 {
@@ -56,9 +61,21 @@ namespace Hospital_IS.DoctorView
         }
 
         public DoctorAppointment Appointment { get; }
+        private bool _imageEnum = false;
+
+        public bool ImageEnum
+        {
+            get { return _imageEnum; }
+            set { 
+                _imageEnum = value;
+                OnPropertyChanged("ImageEnum");
+            }
+        }
+
         public UCNewApp(DoctorAppointment appointment)
         {
             InitializeComponent();
+            ImageEnum = false;
             cause.BorderBrush = Brushes.PaleVioletRed;
             cause.DataContext = this;
             Appointment = appointment;
@@ -86,6 +103,7 @@ namespace Hospital_IS.DoctorView
                 if (s.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name))
                 {
                     specialization.SelectedItem = s;
+                    break;
                 }
             }
 
@@ -94,6 +112,7 @@ namespace Hospital_IS.DoctorView
                 if (d.Id.Equals(DoctorHomePage.Instance.Doctor.Id))
                 {
                     doctors.SelectedItem = d;
+                    break;
                 }
             }
 
@@ -103,6 +122,7 @@ namespace Hospital_IS.DoctorView
                 if (r.RoomId.Equals(DoctorHomePage.Instance.PrimaryRoom.RoomId))
                 {
                     rooms.SelectedItem = r;
+                    break;
                 }
             }
             calendar.SelectedDate = DateTime.Now;
@@ -121,16 +141,34 @@ namespace Hospital_IS.DoctorView
             }
             else
             {
-                Doctor doc = (Doctor)doctors.SelectedItem;
+                Doctor doctor = (Doctor)doctors.SelectedItem;
                 Room room = (Room)rooms.SelectedItem;
                 SelectedDatesCollection dates = calendar.SelectedDates;
                 AppointmetType type = FindType();
-                //TimeSpan durationTimeSpan = ParseInputOfDuration(type);
 
-                changeVisibilityOfFields(type, doc);
-                appointments.DataContext = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, room.RoomId, type, (TimeSpan)duration.Value, Appointment.Patient, doc);
+
+                changeVisibilityOfFields(type, doctor);
+                List<DoctorAppointment> allAppointments = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, room.RoomId, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
+                allAppointments.AddRange(DoctorAppointmentController.Instance.GetAllByDoctorAndDates(doctor.Id, dates));
+
+                ICollectionView view = new CollectionViewSource { Source = ConvertList(allAppointments) }.View;
+                view.SortDescriptions.Clear();
+                view.SortDescriptions.Add(new SortDescription("Appointment.AppointmentStart", ListSortDirection.Ascending));
+
+                appointments.DataContext = view;
             }
 
+        }
+
+        private List<AppointmentRow> ConvertList(List<DoctorAppointment> allAppointments)
+        {
+            List<AppointmentRow> list = new List<AppointmentRow>();
+            foreach (DoctorAppointment da in allAppointments)
+            {
+                list.Add(new AppointmentRow(da, ImageEnum));
+            }
+
+            return list;
         }
 
         private AppointmetType FindType()
@@ -146,24 +184,6 @@ namespace Hospital_IS.DoctorView
             }
 
             return type;
-        }
-
-        private TimeSpan ParseInputOfDuration(AppointmetType type)
-        {
-            String[] parts = duration.Text.Split(".");
-            int hours = 0, minutes = 0;
-            if (type == AppointmetType.Operation)
-            {
-                if ((string)parts.GetValue(0) != "")
-                {
-                    hours = int.Parse((string)parts.GetValue(0));
-                    if (parts.Length == 2)
-                    {
-                        minutes = 30;
-                    }
-                }
-            }
-            return new TimeSpan(hours, minutes, 0);
         }
 
         private void specialization_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -244,9 +264,11 @@ namespace Hospital_IS.DoctorView
 
         private void appointments_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            DoctorAppointment selected = (DoctorAppointment)appointments.SelectedItem;
+            var row = appointments.ItemContainerGenerator.ContainerFromItem(selected) as DataGridRow;
+
 
             schedule.Visibility = Visibility.Collapsed;
-            DoctorAppointment selected = (DoctorAppointment)appointments.SelectedItem;
             date.Content = selected.AppointmentStart.Date;
             time.Content = selected.AppointmentStart.TimeOfDay;
             documentSpecialty.Content = selected.Doctor.Specialty.Name;
@@ -294,6 +316,25 @@ namespace Hospital_IS.DoctorView
         {
             schedule.Visibility = Visibility.Visible;
             document.Visibility = Visibility.Collapsed;
+        }
+
+        private void emergency_Click(object sender, RoutedEventArgs e)
+        {
+            if(ImageEnum == false)
+            {
+                Image image = new Image();
+                image.Source = new BitmapImage(new Uri(@"pack://application:,,,/Resources/redsiren.png"));
+                emergency.Content = image;
+                ImageEnum = true;
+            }
+            else
+            {
+                Image image = new Image();
+                image.Source = new BitmapImage(new Uri(@"pack://application:,,,/Resources/siren.png"));
+                emergency.Content = image;
+                ImageEnum = false;
+            }
+            filterAppointments();
         }
     }
 

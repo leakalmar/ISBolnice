@@ -23,6 +23,8 @@
     <None Remove="Resources\notification.png" />
     <None Remove="Resources\pill-hand.png" />
     <None Remove="Resources\print.png" />
+    <None Remove="Resources\redsiren.png" />
+    <None Remove="Resources\siren.png" />
     <None Remove="Resources\treatment.png" />
     <None Remove="other_facilities.png" />
     <None Remove="request.png" />
@@ -102,11 +104,13 @@
     <Resource Include="Resources\options.png" />
     <Resource Include="Resources\pill.png" />
     <Resource Include="Resources\print.png" />
+    <Resource Include="Resources\redsiren.png" />
     <Resource Include="Resources\report.png" />
     <Resource Include="Resources\room.png" />
     <Resource Include="Resources\room1.png" />
     <Resource Include="Resources\settings.png" />
     <Resource Include="Resources\simona.jpg" />
+    <Resource Include="Resources\siren.png" />
     <Resource Include="Resources\treatment.png" />
     <Resource Include="Resources\toolbar.png" />
     <Resource Include="Resources\transfer.png" />

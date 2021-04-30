@@ -68,5 +68,10 @@ namespace Controllers
         {
             return DoctorAppointmentService.Instance.GetAllAppointmentsByPatient(patientId);
         }
+
+        public List<DoctorAppointment> GetAllByDoctorAndDates(int idDoctor, SelectedDatesCollection dates)
+        {
+            return DoctorAppointmentService.Instance.GetAllByDoctorAndDates(idDoctor, dates);
+        }
     }
 }

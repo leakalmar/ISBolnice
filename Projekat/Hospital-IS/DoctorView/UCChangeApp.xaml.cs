@@ -53,6 +53,10 @@ namespace Hospital_IS.DoctorView
 
         private void filter_changed(object sender, SelectionChangedEventArgs e)
         {
+            if (rooms.SelectedItem == null || doctors.SelectedItem == null || calendar.SelectedDate == null)
+            {
+                return;
+            }
             Doctor doc = (Doctor)doctors.SelectedItem;
             Room room = (Room)rooms.SelectedItem;
             SelectedDatesCollection dates = calendar.SelectedDates;
