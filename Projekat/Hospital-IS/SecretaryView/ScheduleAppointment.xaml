@@ -82,7 +82,7 @@
                 <DataTemplate>
                     <TextBlock>
                         <TextBlock.Text>
-                            <Binding Path="RoomNumber"/>
+                            <Binding Path="RoomId"/>
                         </TextBlock.Text>
                     </TextBlock>
                 </DataTemplate>
