@@ -1,21 +1,66 @@
 ﻿using Controllers;
 using Model;
-using Storages;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows;
+using System.Windows.Media;
 
 namespace Hospital_IS.DoctorView
 {
-    public partial class UCNewApp : UserControl
+    public partial class UCNewApp : UserControl, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        private String _documentMessage;
+
+        public String DocumentMessage
+        {
+            get { return _documentMessage; }
+            set
+            {
+                if (value != _documentMessage)
+                {
+                    _documentMessage = value;
+
+                }
+                DoctorAppointment selected = (DoctorAppointment)appointments.SelectedItem;
+
+                if (!DoctorHomePage.Instance.Doctor.Id.Equals(selected.Doctor.Id))
+                {
+                    if (value.Any(x => !char.IsLetter(x)) || value == "")
+                    {
+                        save.IsEnabled = false;
+                    }
+                    else
+                    {
+                        save.IsEnabled = true;
+                    }
+                }
+                else
+                {
+                    save.IsEnabled = true;
+                }
+                OnPropertyChanged("DocumentMessage");
+            }
+        }
+
         public DoctorAppointment Appointment { get; }
         public UCNewApp(DoctorAppointment appointment)
         {
             InitializeComponent();
+            cause.BorderBrush = Brushes.PaleVioletRed;
+            cause.DataContext = this;
             Appointment = appointment;
             doctors.DataContext = MainWindow.Doctors;
             rooms.DataContext = MainWindow.Rooms;
@@ -83,7 +128,7 @@ namespace Hospital_IS.DoctorView
                 //TimeSpan durationTimeSpan = ParseInputOfDuration(type);
 
                 changeVisibilityOfFields(type, doc);
-                appointments.DataContext = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, room.RoomId, type, (TimeSpan)duration.Value, Appointment.Patient);
+                appointments.DataContext = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, room.RoomId, type, (TimeSpan)duration.Value, Appointment.Patient, doc);
             }
 
         }
@@ -181,7 +226,7 @@ namespace Hospital_IS.DoctorView
                 lblType.Visibility = Visibility.Visible;
                 lblDuration.Visibility = Visibility.Visible;
             }
-        }    
+        }
 
         private void setAppointment_KeyDown(object sender, KeyEventArgs e)
         {
@@ -199,18 +244,19 @@ namespace Hospital_IS.DoctorView
 
         private void appointments_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
+
             schedule.Visibility = Visibility.Collapsed;
             DoctorAppointment selected = (DoctorAppointment)appointments.SelectedItem;
             date.Content = selected.AppointmentStart.Date;
             time.Content = selected.AppointmentStart.TimeOfDay;
             documentSpecialty.Content = selected.Doctor.Specialty.Name;
-            
+
             documentDoctor.Content = selected.Doctor.Name.ToString() + " " + ShortSurname(selected.Doctor);
-            thisDoctor.Content = DoctorHomePage.Instance.Doctor.Name.ToString() +" "+ ShortSurname(selected.Doctor);
+            thisDoctor.Content = DoctorHomePage.Instance.Doctor.Name.ToString() + " " + ShortSurname(DoctorHomePage.Instance.Doctor);
             today.Content = DateTime.Now.Date;
-            
+
             document.Visibility = Visibility.Visible;
+            cause.Focus();
 
 
         }
@@ -228,7 +274,9 @@ namespace Hospital_IS.DoctorView
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
+
             DoctorAppointment selected = (DoctorAppointment)appointments.SelectedItem;
+
             if (selected.Reserved == true)
             {
                 return;

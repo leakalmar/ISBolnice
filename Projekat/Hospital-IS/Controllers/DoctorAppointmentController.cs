@@ -52,9 +52,11 @@ namespace Controllers
             return DoctorAppointmentService.Instance.SuggestAppointmentsToPatient(timeSlot, doctor, patient, date, priority);
         }
 
-        public List<DoctorAppointment> SuggestAppointmetsToDoctor(SelectedDatesCollection dates, int idRoom, AppointmetType type, TimeSpan duration, Patient patient)
+        public List<DoctorAppointment> SuggestAppointmetsToDoctor(SelectedDatesCollection dates, int idRoom, AppointmetType type, TimeSpan duration, Patient patient, Doctor doctor)
         {
-            return DoctorAppointmentService.Instance.SuggestAppointmetsToDoctor(dates, idRoom, type, duration,patient);
+            DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, idRoom, doctor, patient);
+            tempAppointment.AppointmentEnd = dates[0].Add(duration);
+            return DoctorAppointmentService.Instance.SuggestAppointmetsToDoctor(dates, tempAppointment);
         }
 
         public List<DoctorAppointment> GetFutureAppointmentsByPatient(int patientId)

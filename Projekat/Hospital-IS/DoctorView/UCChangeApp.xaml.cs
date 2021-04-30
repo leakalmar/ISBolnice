@@ -3,10 +3,8 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Hospital_IS.DoctorView
@@ -49,7 +47,7 @@ namespace Hospital_IS.DoctorView
             InitializeComponent();
             doctors.DataContext = MainWindow.Doctors;
             rooms.DataContext = MainWindow.Rooms;
-            
+
             panel = details;
         }
 
@@ -69,8 +67,8 @@ namespace Hospital_IS.DoctorView
                     }
                 }
             }
-            if (room == null) 
-            { 
+            if (room == null)
+            {
                 foreach (Room r in MainWindow.Rooms)
                 {
                     if (r.RoomId.Equals(Appointment.Room))
@@ -80,14 +78,14 @@ namespace Hospital_IS.DoctorView
                     }
                 }
             }
-            if(dates == null)
+            if (dates == null)
             {
                 calendar.SelectedDate = DateTime.Now.Date;
                 dates = calendar.SelectedDates;
             }
 
             TimeSpan duration = Appointment.AppointmentEnd - Appointment.AppointmentStart;
-            List<DoctorAppointment> list = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates,room.RoomId,Appointment.Type,duration,Appointment.Patient);
+            List<DoctorAppointment> list = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, room.RoomId, Appointment.Type, duration, Appointment.Patient, doc);
             ObservableCollection<DoctorAppointment> possibleAppointments = new ObservableCollection<DoctorAppointment>(list);
 
             /*ICollectionView view = new CollectionViewSource { Source = possibleAppointments }.View;

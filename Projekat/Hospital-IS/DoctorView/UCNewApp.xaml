@@ -5,8 +5,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Hospital_IS.DoctorView" mc:Ignorable="d"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf" d:DesignHeight="555"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        d:DesignHeight="555"
         d:DesignWidth="783">
+    <UserControl.Resources>
+        <local:RedConverter x:Key="RedConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid x:Name="schedule" Visibility="Visible">
             <Grid.ColumnDefinitions>
@@ -182,8 +186,17 @@
                     Margin="70,0,70,0" BorderThickness="0,0,0,2" BorderBrush="Gray"
                     Grid.ColumnSpan="3"/>
             <TextBox Grid.Row="6" Grid.ColumnSpan="3" Background="Transparent"
-                    Foreground="FloralWhite" BorderThickness="0" x:Name="cause"
-                    FontSize="16" Margin="70,0,70,0" />
+                    Foreground="FloralWhite" x:Name="cause"
+                    FontSize="16" Margin="70,0,70,0"
+                    BorderThickness="{Binding DocumentMessage,Converter={StaticResource RedConverter}}"
+                     >
+                 <TextBox.Text>
+                    <Binding Path="DocumentMessage" UpdateSourceTrigger="PropertyChanged">
+                        
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            
             <Label Grid.Row="7" Grid.Column="1" Margin="0,100,70,0" FontFamily="Verdana"
                     Foreground="FloralWhite" Content="{Binding}" Grid.ColumnSpan="2"
                     HorizontalAlignment="Right" x:Name="thisDoctor" FontSize="16"/>
