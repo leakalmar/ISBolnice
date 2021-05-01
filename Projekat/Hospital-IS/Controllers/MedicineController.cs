@@ -42,5 +42,10 @@ namespace Controllers
             MedicineService.Instance.UpdateMedicineWithName(oldName, medicine);
 
         }
+
+        public void AddNewMedicine(Medicine medicine)
+        {
+            MedicineService.Instance.AddNewMedicine(medicine);
+        }
     }
 }

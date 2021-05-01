@@ -42,7 +42,7 @@ namespace Service
             }
         }
 
-        internal void UpdateMedicineWithName(string oldName, Medicine medicine)
+        public void UpdateMedicineWithName(string oldName, Medicine medicine)
         {
             for (int i = 0; i < AllMedicines.Count; i++)
             {
@@ -53,6 +53,12 @@ namespace Service
                     mfs.Save(AllMedicines);
                 }
             }
+        }
+
+        public void AddNewMedicine(Medicine medicine)
+        {
+            AllMedicines.Add(medicine);
+            mfs.Save(AllMedicines);
         }
     }
 }

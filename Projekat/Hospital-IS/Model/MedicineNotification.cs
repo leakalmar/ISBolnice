@@ -9,6 +9,7 @@ namespace Model
         public String Title { get; set; }
         public Medicine Medicine { get; set; }
         public List<int> DoctorIds { get; set; }
+        public String Note { get; set; }
 
         public MedicineNotification(string title, Medicine medicine, List<int> doctorIds)
         {

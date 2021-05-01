@@ -43,6 +43,7 @@ namespace Hospital_IS.DoctorView
         public UCAppointments Appointments;
         public UCPatients Patients;
         public UCMedicines Medicines;
+        public UCApproveMedicine ApproveMedicine;
 
 
         
@@ -68,6 +69,7 @@ namespace Hospital_IS.DoctorView
             Appointments = new UCAppointments();
             Patients = new UCPatients();
             Medicines = new UCMedicines();
+            ApproveMedicine = new UCApproveMedicine();
             Home.Children.Add(HomePage);
         }
 
@@ -127,6 +129,8 @@ namespace Hospital_IS.DoctorView
                 case 5:
                     break;
                 case 6:
+                    Home.Children.Clear();
+                    Home.Children.Remove(ApproveMedicine);
                     break;
                 case 7:
                     break;
@@ -161,6 +165,8 @@ namespace Hospital_IS.DoctorView
                     Last = 5;
                     break;
                 case 6:
+                    ApproveMedicine.Visibility = Visibility.Visible;
+                    Home.Children.Add(ApproveMedicine);
                     Last = 6;
                     break;
                 case 7:

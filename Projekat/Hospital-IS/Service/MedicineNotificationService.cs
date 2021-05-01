@@ -28,11 +28,48 @@ namespace Service
         {
             allNotification = mnfs.GetAll();
         }
+        public List<MedicineNotification> GetAllByDoctorId(int idDoctor)
+        {
+            List<MedicineNotification> notificationForDoctor = new List<MedicineNotification>();
+            foreach(MedicineNotification medicineNotification in allNotification)
+            {
+                if (medicineNotification.DoctorIds.Contains(idDoctor))
+                {
+                    notificationForDoctor.Add(medicineNotification);
+                }
+            }
+            return notificationForDoctor;
+        }
 
         internal void AddNotification(MedicineNotification medicineNotification)
         {
             allNotification.Add(medicineNotification);
             mnfs.Save(allNotification);
+        }
+
+        public void UpdateMedicineNotification(MedicineNotification reviewdNotification)
+        {
+            for(int i = 0; i< allNotification.Count; i++)
+            {
+                if (allNotification[i].Medicine.Name.Equals(reviewdNotification.Medicine.Name))
+                {
+                    allNotification.RemoveAt(i);
+                    allNotification.Insert(i, reviewdNotification);
+                    mnfs.Save(allNotification);
+                }
+            }
+        }
+
+        public void DeleteMedicineNotification(MedicineNotification reviewdNotification)
+        {
+            for (int i = 0; i < allNotification.Count; i++)
+            {
+                if (allNotification[i].Medicine.Name.Equals(reviewdNotification.Medicine.Name))
+                {
+                    allNotification.RemoveAt(i);
+                    mnfs.Save(allNotification);
+                }
+            }
         }
     }
 }
