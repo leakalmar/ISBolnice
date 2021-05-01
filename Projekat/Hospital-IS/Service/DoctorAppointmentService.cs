@@ -268,17 +268,17 @@ namespace Service
 
         public List<DoctorAppointment> SuggestAppointmetsToDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
         {
-            List<DoctorAppointment> allAppointments = GetAvailableAppointmentsByDoctor(tempAppointment, allAppointments, allPossibleAppointments, roomAppointments);
+            List<DoctorAppointment> allAppointments = GetAvailableAppointmentsByDoctor(dates, tempAppointment);
             allAppointments.AddRange(GetAllByDoctorAndDates(tempAppointment.Doctor.Id, dates));
 
             return allAppointments;
         }
 
-        private void GetAvailableAppointmentsByDoctor(DoctorAppointment tempAppointment, List<DoctorAppointment> availableAppointments, List<DoctorAppointment> allPossibleAppointments, List<Appointment> roomAppointments)
+        private List<DoctorAppointment> GetAvailableAppointmentsByDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
         {
             List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
-            List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForDoctor(dates, idRoom, type, duration, patient);
-            List<Appointment> roomAppointments = AppointmentService.Instance.getAppByRoom(idRoom);
+            List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForDoctor(dates, tempAppointment);
+            List<Appointment> roomAppointments = AppointmentService.Instance.getAppByRoom(tempAppointment.Room);
             foreach (DoctorAppointment doctorAppointment in allPossibleAppointments)
             {
                 bool isFree = VerifyAppointment(doctorAppointment, roomAppointments);
@@ -291,6 +291,7 @@ namespace Service
                     availableAppointments.Add(doctorAppointment);
                 }
             }
+            return availableAppointments;
         }
 
         public List<DoctorAppointment> GetFutureAppointmentsByPatient(int patientId)

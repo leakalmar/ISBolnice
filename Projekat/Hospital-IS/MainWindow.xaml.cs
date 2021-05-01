@@ -30,7 +30,7 @@ namespace Hospital_IS
         public MainWindow()
         {
             InitializeComponent();
-            Doctors = DoctorController.Instance.getAll();
+            Doctors = DoctorController.Instance.GetAll();
             Rooms = RoomController.Instance.getAllRooms();
             Specialties = SpecializationController.Instance.GetAll();
             UserService.Instance.GetAllUsersIDs();
