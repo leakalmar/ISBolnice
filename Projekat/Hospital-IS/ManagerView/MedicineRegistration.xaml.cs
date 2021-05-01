@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -42,7 +43,13 @@ namespace Hospital_IS.ManagerView
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-          
+            List<ReplaceMedicineName> medicineNames = ReplaceMedicines.ToList();
+            List<MedicineComponent> medicineComponents = CompositionOfMedicine.ToList();
+            String sideEffect = SideEffecct.Text;
+            String therapeutic = Usage.Text;
+            String name = MedicineName.Text;
+            ChooseRecipient recipient = new ChooseRecipient(name,sideEffect,therapeutic,medicineNames,medicineComponents);
+            recipient.Show();
 
         }
 

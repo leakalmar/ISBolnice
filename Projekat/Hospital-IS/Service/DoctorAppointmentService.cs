@@ -316,6 +316,11 @@ namespace Service
                 if (docApp.Room == roomId)
                 {
                     roomAppointments.Add(docApp);
+                }
+            }
+            return roomAppointments;
+        }
+
         public void ReloadDoctorAppointments()
         {
             allAppointments = afs.GetAll();

@@ -3,7 +3,7 @@
     "patient": [],
     "hospital": null,
     "Specialty": {
-      "Role": "Dermatolog"
+      "Name": "Dermatolog"
     },
     "PrimaryRoom": 1,
     "Patient": [],
