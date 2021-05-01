@@ -134,7 +134,7 @@ namespace Hospital_IS.DoctorView
             {
                 Doctor doctor = (Doctor)doctors.SelectedItem;
                 Room room = (Room)rooms.SelectedItem;
-                SelectedDatesCollection dates = calendar.SelectedDates;
+                List<DateTime> dates = new List<DateTime>(calendar.SelectedDates);
                 AppointmetType type = FindType();
 
 

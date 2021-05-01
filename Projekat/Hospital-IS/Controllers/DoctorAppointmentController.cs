@@ -52,7 +52,7 @@ namespace Controllers
             return DoctorAppointmentService.Instance.SuggestAppointmentsToPatient(timeSlot, doctor, patient, date, priority);
         }
 
-        public List<DoctorAppointment> GetSuggestedAndReservedByDoctor(SelectedDatesCollection dates, bool isUrgent,int idRoom, AppointmetType type, TimeSpan duration, Patient patient, Doctor doctor)
+        public List<DoctorAppointment> GetSuggestedAndReservedByDoctor(List<DateTime> dates, bool isUrgent,int idRoom, AppointmetType type, TimeSpan duration, Patient patient, Doctor doctor)
         {
             DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, idRoom, doctor, patient);
             tempAppointment.AppointmentEnd = dates[0].Add(duration);
@@ -70,7 +70,7 @@ namespace Controllers
             return DoctorAppointmentService.Instance.GetAllAppointmentsByPatient(patientId);
         }
 
-        public List<DoctorAppointment> GetAllByDoctorAndDates(int idDoctor, SelectedDatesCollection dates)
+        public List<DoctorAppointment> GetAllByDoctorAndDates(int idDoctor, List<DateTime> dates)
         {
             return DoctorAppointmentService.Instance.GetAllByDoctorAndDates(idDoctor, dates);
         }

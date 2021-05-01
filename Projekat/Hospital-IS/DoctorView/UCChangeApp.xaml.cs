@@ -59,7 +59,7 @@ namespace Hospital_IS.DoctorView
             }
             Doctor doc = (Doctor)doctors.SelectedItem;
             Room room = (Room)rooms.SelectedItem;
-            SelectedDatesCollection dates = calendar.SelectedDates;
+            List<DateTime> dates = new List<DateTime>(calendar.SelectedDates);
             if (doc == null)
             {
                 foreach (Doctor d in MainWindow.Doctors)
@@ -85,7 +85,7 @@ namespace Hospital_IS.DoctorView
             if (dates == null)
             {
                 calendar.SelectedDate = DateTime.Now.Date;
-                dates = calendar.SelectedDates;
+                dates = new List<DateTime>(calendar.SelectedDates);
             }
 
             TimeSpan duration = Appointment.AppointmentEnd - Appointment.AppointmentStart;

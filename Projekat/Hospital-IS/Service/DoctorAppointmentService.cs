@@ -101,7 +101,7 @@ namespace Service
             }
         }
 
-        private List<DoctorAppointment> GenerateAppointmentForDoctor(SelectedDatesCollection dates, DoctorAppointment tempAppointment)
+        private List<DoctorAppointment> GenerateAppointmentForDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
         {
             List<DoctorAppointment> appointmentList = new List<DoctorAppointment>();
 
@@ -254,7 +254,7 @@ namespace Service
             return availableAppointments;
         }
 
-        public List<DoctorAppointment> SuggestAppointmetsToDoctor(SelectedDatesCollection dates, DoctorAppointment tempAppointment)
+        public List<DoctorAppointment> SuggestAppointmetsToDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
         {
             List<DoctorAppointment> allAppointments = new List<DoctorAppointment>();
             List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForDoctor(dates, tempAppointment);
@@ -309,7 +309,7 @@ namespace Service
             return patientAppointments;
         }
 
-        public List<DoctorAppointment> GetAllByDoctorAndDates(int idDoctor, SelectedDatesCollection dates)
+        public List<DoctorAppointment> GetAllByDoctorAndDates(int idDoctor, List<DateTime> dates)
         {
             List<DoctorAppointment> appointments = new List<DoctorAppointment>();
             List<DateTime> datesWithoutTime = new List<DateTime>();
