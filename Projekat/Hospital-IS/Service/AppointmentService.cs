@@ -104,10 +104,10 @@ namespace Service
             return roomAppointment;
         }
 
-        public bool CheckAppointment(List<Appointment> roomAppointment, DateTime start, DateTime end)
+        public bool CheckAppointment(List<Appointment> appointments, DateTime start, DateTime end)
         {
             bool isFree = true;
-            foreach (Appointment appointment in roomAppointment)
+            foreach (Appointment appointment in appointments)
             {
                 
                 bool between = IsBetweenDates(start, end, appointment);

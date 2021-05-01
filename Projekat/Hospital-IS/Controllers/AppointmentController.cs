@@ -31,14 +31,17 @@ namespace Controllers
             return AppointmentService.Instance.getAllAppByTwoRooms(roomIdSource, roomIdDestination);
         }
 
+
         public List<Appointment> GetAppointments(int roomID)
         {
             return AppointmentService.Instance.GetAllApointmentsByRoomId(roomID);
         }
 
-        public bool CheckAppointment(List<Appointment> roomAppointment, DateTime start, DateTime end)
+    
+
+        public bool CheckAppointment(List<Appointment> appointments, DateTime start, DateTime end)
         {
-            throw new NotImplementedException();
+            return AppointmentService.Instance.CheckAppointment(appointments, start, end);
         }
 
 

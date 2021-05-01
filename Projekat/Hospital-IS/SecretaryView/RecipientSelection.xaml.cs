@@ -24,7 +24,7 @@ namespace Hospital_IS.SecretaryView
             this.cn = cn;
 
             Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAll());
-            Doctors = new ObservableCollection<Doctor>(DoctorController.Instance.getAll());
+            Doctors = new ObservableCollection<Doctor>(DoctorController.Instance.GetAll());
 
             this.DataContext = this;
         }

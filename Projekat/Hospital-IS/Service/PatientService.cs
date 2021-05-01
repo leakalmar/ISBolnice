@@ -89,5 +89,10 @@ namespace Service
             return allPatientIDs;
         }
 
+        public void ReloadPatients()
+        {
+            AllPatients = pfs.GetAll();
+        }
+
     }
 }

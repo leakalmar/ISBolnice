@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using Storages;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,9 +28,9 @@ namespace Hospital_IS.SecretaryView
         {
             if (Appointments != null)
                 Appointments.Clear();
-            AppointmentFileStorage afs = new AppointmentFileStorage();
-            List<DoctorAppointment> appointments = afs.GetAll();
-            Appointments = new ObservableCollection<DoctorAppointment>(appointments);
+
+            DoctorAppointmentController.Instance.ReloadDoctorAppointments();
+            Appointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAll());
 
             foreach (DoctorAppointment appointment in Appointments)
             {
