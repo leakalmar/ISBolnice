@@ -217,7 +217,7 @@
                 </Button>
 
                 <TextBlock  Text="Lekovi" Grid.Column="1" Grid.Row ="2" FontWeight="SemiBold" FontSize="18" Height="20" HorizontalAlignment="Center" Foreground="#624cfc"/>
-                <Button  BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="80" Background="White"  Click="Button_Click">
+                <Button x:Name="MedicineView" BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="80" Background="White"  Click="MedicineView_Click">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>

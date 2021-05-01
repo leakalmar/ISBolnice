@@ -3,10 +3,331 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hospital_IS.ManagerView"
+        xmlns:local="clr-namespace:Hospital_IS" 
+        AllowsTransparency="True"
         mc:Ignorable="d"
-        Title="MedicineView" Height="450" Width="800">
-    <Grid>
-        
+        WindowStyle="None" WindowStartupLocation="CenterScreen"
+      
+        Title="Upravnik" Height="750" Width="430">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" >
+            <GradientStop Color="Black"/>
+            <GradientStop Color="#FF184095" Offset="0.0"/>
+            <GradientStop Color="#FF5B317E" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+
+
+
+    <Grid >
+
+        <DataGrid x:Name="DataGridMedicine"  IsReadOnly="True" ItemsSource="{Binding}" AlternatingRowBackground="NavajoWhite"
+                  SelectionMode="Single"
+                  Height="430" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="350" Margin="40,145,40,0" Background="#FFC5DBDF" AutoGenerateColumns="False"  >
+            <DataGrid.CellStyle>
+                <Style/>
+            </DataGrid.CellStyle>
+            <DataGrid.ColumnHeaderStyle>
+                <Style/>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.Effect>
+                <DropShadowEffect/>
+            </DataGrid.Effect>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naziv leka" Binding="{Binding Name}"
+                            CanUserResize="False" Width="0.05*" SortDirection="Ascending" />
+                <DataGridTemplateColumn Header="Sastav" CanUserResize="False"
+                            Width="0.05*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ItemsControl ItemsSource="{Binding Composition}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Padding="0,0,5,0" Foreground="Black"
+                                                    Content="{Binding Component}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel  Height="90" Background="White"  Margin="0,670,0,0"   >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="3"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="3"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="2" Grid.Column="1" Height="20" Text="SOBE" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#624cfc"   />
+                <Button x:Name="Room"  BorderThickness="0" Width="80" Grid.Column="1" Grid.Row="1" Background="Transparent" Click="Room_Click" >
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/room.png" Width="70" Height="60"/>
+                    </StackPanel>
+                </Button>
+                <TextBlock Grid.Row="2" Grid.Column="3" Height="20" Text="RADNICI" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#624cfc"   />
+                <Button BorderThickness="0" Width="80" Grid.Column="3" Grid.Row="1"  Background="Transparent" >
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/worker.png" Width="70"  Height="60" />
+                    </StackPanel>
+                </Button>
+                <TextBlock Grid.Row="2" Grid.Column="5" Height="20" Text="FILIJALE" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#624cfc"   />
+                <Button BorderThickness="0" Width="80" Grid.Column="5" Grid.Row="1"  Background="Transparent" >
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/filijale.png" Width="70"  Height="60" />
+                    </StackPanel>
+                </Button>
+                <TextBlock Grid.Row="2" Grid.Column="7" Height="20" Text="OPREMA" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#624cfc"   />
+                <Button x:Name="Eqiupment" BorderThickness="0" Width="80" Grid.Column="7" Grid.Row="1"  Background="Transparent" Click="Eqiupment_Click">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/hospitalroom.png" Width="70"  Height="60" />
+                    </StackPanel>
+                </Button>
+                
+                <TextBlock Grid.Row="2" Grid.Column="9" Height="20" Text="Ostalo" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#624cfc"  />
+                <Button x:Name="OtherOptionsButton" BorderThickness="0" Width="80" Grid.Column="9" Grid.Row="1"   Click= "OtherOptionsButton_Click" >
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/toolbar.png" Width="70"  Height="60" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+        </StackPanel>
+        <StackPanel Height="70" Background="White" Margin="0,0,0,680" Grid.ColumnSpan="6" Grid.RowSpan="5" HorizontalAlignment="Left" Width="430">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="15"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="3"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="Profil"  Grid.RowSpan="2" BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9" Click="Profil_Click">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/menubar.png" Width="55" Height="64" />
+                    </StackPanel>
+                </Button>
+                <TextBlock Grid.RowSpan="2"  Text="Lekovi" Grid.Column="2" Grid.Row ="1" FontWeight="SemiBold" Margin="25,15,0,0" FontSize="25" VerticalAlignment="Top" Foreground="#624cfc"/>
+                <Button x:Name="Options" Grid.RowSpan="2" BorderThickness="0" Grid.Column="7" Grid.Row="1" Width="40" Background="White" Margin="0,0,0,9" Click="Options_Click">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/options.png" HorizontalAlignment="Left" Width="50" Height="64" />
+                    </StackPanel>
+                </Button>
+                <Button Grid.RowSpan="2" BorderThickness="0" Grid.Column="5" Grid.Row="1" Width="50" Background="White" Margin="0,0,0,9" >
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/question.png"  Width="50" Height="64" />
+                    </StackPanel>
+                </Button>
+                <Button Grid.RowSpan="2" BorderThickness="0" Grid.Column="3" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/search.png"  Width="50" Height="64" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </StackPanel>
+        <StackPanel x:Name="OtherOptions" Visibility="Hidden" Background="White" Margin="0,471,0,80" >
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="3"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="63"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="CloseOptions" BorderThickness="0"  Grid.Column="5" Grid.Row="0" Height="40"  Width="40" Background="White"  >
+
+                    <StackPanel>
+                        <Image  Source="pack://application:,,,/Resources/angledown.png" Width="40" Height="40"  />
+                    </StackPanel>
+                </Button>
+
+                <TextBlock  Text="Lekovi" Grid.Column="1" Grid.Row ="2" FontWeight="SemiBold" FontSize="18" Height="20" HorizontalAlignment="Center" Foreground="#624cfc"/>
+                <Button  BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="80" Background="White">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image  Source="pack://application:,,,/Resources/lekovi.png" Width="70" Height="60" />
+                    </StackPanel>
+                </Button>
+                <Separator Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="12" Height ="6"  Background= "Black"  />
+            </Grid>
+        </StackPanel>
+        <StackPanel x:Name="MedicineOptions"   Background="White" Visibility="Collapsed"  Margin="0,510,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Button  x:Name="RegistrationMedicine" BorderThickness="0" Grid.Column="1" Grid.Row="1" Height="35" Width="45" Background="White" Click="RegistrationMedicine_Click">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/registration.png" HorizontalAlignment="Left" Width="40" Height="35" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="MedicineInsight" BorderThickness="0" Grid.Column="1" Grid.Row="3" Height="35" Width="45" Background="White" Click="MedicineInsight_Click" >
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/insight.png" HorizontalAlignment="Left" Width="40" Height="35" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="EditMedicine" BorderThickness="0" Grid.Column="1" Grid.Row="5" Height="35" Width="45" Background="White" Click="EditMedicine_Click" >
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/edit.png" HorizontalAlignment="Left" Width="40" Height="35" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="DeleteMedicine" BorderThickness="0" Grid.Column="1" Grid.Row="7" Height="35" Width="45" Background="White" Click="DeleteMedicine_Click" >
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/deleteroom.png" HorizontalAlignment="Left" Width="40" Height="35" />
+                    </StackPanel>
+                </Button>
+                <Button BorderThickness="0" Grid.Column="1" Grid.Row="9" Height="35" Width="45" Background="White"  >
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/shoppingcart.png" HorizontalAlignment="Left" Width="40" Height="35" />
+                    </StackPanel>
+                </Button>
+                <TextBlock Grid.Row="1" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text ="Registracija leka" Foreground="#624cfc"  />
+                <TextBlock Grid.Row="3" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text ="Uvid u lek" Foreground="#624cfc"  />
+                <TextBlock Grid.Row="5" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text = "Izmena leka" Foreground="#624cfc"  />
+                <TextBlock Grid.Row="7" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text = "Brisanje leka" Foreground="#624cfc"  />
+                <TextBlock Grid.Row="9" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text = "Nabavka lekova" Foreground="#624cfc"  />
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>

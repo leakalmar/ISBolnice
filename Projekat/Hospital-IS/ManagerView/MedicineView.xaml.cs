@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Controllers;
+using Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +23,80 @@ namespace Hospital_IS.ManagerView
         public MedicineView()
         {
             InitializeComponent();
+            DataGridMedicine.DataContext = new ObservableCollection<Medicine>(MedicineController.Instance.GetAll());
+        }
+
+        private void Room_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Eqiupment_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OtherOptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (OtherOptions.Visibility == Visibility.Visible)
+            {
+                OtherOptions.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                OtherOptions.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Options_Click(object sender, RoutedEventArgs e)
+        {
+            if(MedicineOptions.Visibility == Visibility.Visible)
+            {
+                MedicineOptions.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                MedicineOptions.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Profil_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RegistrationMedicine_Click(object sender, RoutedEventArgs e)
+        {
+            MedicineRegistration medicineRegistration = new MedicineRegistration();
+            medicineRegistration.Show();
+            this.Hide();
+        }
+
+        private void MedicineInsight_Click(object sender, RoutedEventArgs e)
+        {
+            Medicine medicine = (Medicine)DataGridMedicine.SelectedItem;
+            MedicineInfoView medicineInfo = new MedicineInfoView(medicine);
+
+            medicineInfo.Show();
+            this.Hide();
+        }
+
+        private void EditMedicine_Click(object sender, RoutedEventArgs e)
+        {
+            Medicine medicine = (Medicine)DataGridMedicine.SelectedItem;
+            MedicineEditView medicineEdit = new MedicineEditView(medicine);
+            medicineEdit.Show();
+            this.Hide();
+        }
+
+        private void DeleteMedicine_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DataGridRooms_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
