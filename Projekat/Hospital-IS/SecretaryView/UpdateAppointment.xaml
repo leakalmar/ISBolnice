@@ -46,29 +46,29 @@
         <TextBlock Name="txtPatient" Grid.Column="2" Grid.Row="2" Margin="50 10">
             <TextBlock.Text>
                 <MultiBinding StringFormat="{}{0} {1}">
-                    <Binding Path="DocAppointment.Patient.Name"/>
-                    <Binding Path="DocAppointment.Patient.Surname"/>
+                    <Binding Path="NewDocAppointment.Patient.Name"/>
+                    <Binding Path="NewDocAppointment.Patient.Surname"/>
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
         <TextBlock Name="txtDoctor" Grid.Column="2" Grid.Row="3" Margin="50 10" FontSize="17">
             <TextBlock.Text>
                 <MultiBinding StringFormat="{}{0} {1}">
-                    <Binding Path="DocAppointment.Doctor.Name"/>
-                    <Binding Path="DocAppointment.Doctor.Surname"/>
+                    <Binding Path="NewDocAppointment.Doctor.Name"/>
+                    <Binding Path="NewDocAppointment.Doctor.Surname"/>
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
-        <TextBlock Name="txtRoom" Grid.Column="2" Grid.Row="4" Margin="50 10"/>
+        <TextBlock Name="txtRoom" Grid.Column="2" Grid.Row="4" Margin="50 10" Text="{Binding NewDocAppointment.Room}"/>
 
-        <TextBox Name="txtAppDate"  Grid.Column="2" Grid.Row="5" Margin="50 10" />
-        <TextBox Name="txtStartOfApp" Grid.Column="2" Grid.Row="6" Margin="50 10" Text="{Binding DocAppointment.AppointmentStart, StringFormat=\{0:HH:mm\}}"
+        <TextBox Name="txtAppDate"  Grid.Column="2" Grid.Row="5" Margin="50 10"/>
+        <TextBox Name="txtStartOfApp" Grid.Column="2" Grid.Row="6" Margin="50 10"
                  LostFocus="txtStartOfApp_LostFocus"/>
-        <TextBox Name="txtEndOfApp" Grid.Column="2" Grid.Row="7" Margin="50 10" Text="{Binding DocAppointment.AppointmentEnd, StringFormat=\{0:HH:mm\}}"
+        <TextBox Name="txtEndOfApp" Grid.Column="2" Grid.Row="7" Margin="50 10"
                  LostFocus="txtEndOfApp_LostFocus"/>
        
         <TextBox Grid.Column="2" Grid.Row="8" Height="80" Margin="50 20"
-                 ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="{Binding DocAppointment.Detail}"/>
+                 ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="{Binding NewDocAppointment.AppointmentCause}"/>
 
         <Button Name="btnConfirm" Grid.Column="1" Grid.Row="11" Width="120" Height="30"
                 Content="Potvrdi" Click="ChangeAppointment"/>

@@ -60,5 +60,10 @@ namespace Controllers
         {
             PatientService.Instance.DeletePatient(patient);
         }
+
+        public void ReloadPatients()
+        {
+            PatientService.Instance.ReloadPatients();
+        }
     }
 }

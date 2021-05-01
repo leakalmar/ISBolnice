@@ -1,0 +1,23 @@
+[
+  {
+    "Title": "Odobrenje Flonidan 100mg",
+    "Medicine": {
+      "Name": "Flonidan 100mg",
+      "Composition": [
+        {
+          "Component": "sve i svasta"
+        }
+      ],
+      "SideEffects": "Posapnost,umor",
+      "Usage": "Smanjuje alergijsku reakciju",
+      "ReplaceMedicine": [
+        {
+          "Name": "svi alergiijski"
+        }
+      ]
+    },
+    "DoctorIds": [
+      4
+    ]
+  }
+]

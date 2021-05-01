@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Controllers;
+using Hospital_IS.ManagerView;
 using Model;
 
 namespace Hospital_IS
@@ -73,6 +74,21 @@ namespace Hospital_IS
                 DeleteRoom delRoom = new DeleteRoom(room);
                 delRoom.Show();
                 refresh();
+            }
+
+        }
+
+        private void RenovationRoom_Click(object sender, RoutedEventArgs e)
+        {
+            Room room = (Room)DataGridRooms1.SelectedItem;
+            if (room == null)
+            {
+                MessageBox.Show("Izaberite sobu");
+            }
+            else
+            {
+                RenovationView renView = new RenovationView(room);
+                renView.Show();
             }
 
         }
