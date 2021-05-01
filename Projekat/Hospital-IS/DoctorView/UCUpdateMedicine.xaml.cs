@@ -31,7 +31,6 @@ namespace Hospital_IS.DoctorView
 
         public void Execute(object parameter)
         {
-            MessageBox.Show("DS");
             ReplaceMedicineName newMedicine = new ReplaceMedicineName("");
             ((ObservableCollection<ReplaceMedicineName>)UIList).Add(newMedicine);
             ((DataGrid)UIGrid).Items.Refresh();
@@ -54,7 +53,6 @@ namespace Hospital_IS.DoctorView
         {
             get
             {
-                MessageBox.Show("DS");
                 return new AddKey()
                 {
 
