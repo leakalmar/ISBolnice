@@ -43,6 +43,7 @@ namespace Hospital_IS.DoctorView
         public UCAppointments Appointments;
         public UCPatients Patients;
         public UCMedicines Medicines;
+        public UCDoctorNotifications Notifications;
 
 
         
@@ -68,6 +69,7 @@ namespace Hospital_IS.DoctorView
             Appointments = new UCAppointments();
             Patients = new UCPatients();
             Medicines = new UCMedicines();
+            Notifications = new UCDoctorNotifications();
             Home.Children.Add(HomePage);
             nameSurname.Text = Doctor.Name.ToString() +" "+ Doctor.Surname.ToString();
         }
@@ -130,6 +132,8 @@ namespace Hospital_IS.DoctorView
                 case 6:
                     break;
                 case 7:
+                    Home.Children.Clear();
+                    Home.Children.Remove(Notifications);
                     break;
             }
 
@@ -165,6 +169,8 @@ namespace Hospital_IS.DoctorView
                     Last = 6;
                     break;
                 case 7:
+                    Notifications.Visibility = Visibility.Visible;
+                    Home.Children.Add(Notifications);
                     Last = 7;
                     break;
             }

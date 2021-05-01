@@ -15,12 +15,12 @@
     <None Remove="director.jpg" />
     <None Remove="door_open.png" />
     <None Remove="employee.jpg" />
-    <None Remove="hospital.png" />
-    <None Remove="hospital2.png" />
     <None Remove="Resources\add-row.png" />
     <None Remove="Resources\angledown.png" />
     <None Remove="Resources\bed.png" />
     <None Remove="Resources\calendar.png" />
+    <None Remove="Resources\hospital.png" />
+    <None Remove="Resources\hospitalCroped.png" />
     <None Remove="Resources\insight.png" />
     <None Remove="Resources\lekovi.png" />
     <None Remove="Resources\notification.png" />
@@ -102,6 +102,8 @@
     <Resource Include="Resources\doctor.jpg" />
     <Resource Include="Resources\edit.png" />
     <Resource Include="Resources\filijale.png" />
+    <Resource Include="Resources\hospital.png" />
+    <Resource Include="Resources\hospitalCroped.png" />
     <Resource Include="Resources\hospitalroom.png" />
     <Resource Include="Resources\importance.png" />
     <Resource Include="Resources\insight.png" />
