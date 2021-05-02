@@ -312,14 +312,6 @@ namespace Service
 
 
 
-
-
-
-
-
-
-
-
         public List<SuggestedEmergencyAppDTO> GenerateEmergencyAppointmentsForSecretary(EmergencyAppointmentDTO emerAppointmentDTO)
         {
             List<DoctorAppointment> appointments = new List<DoctorAppointment>();
@@ -331,7 +323,7 @@ namespace Service
                 DateTime appointmentStart = RoundUp(DateTime.Now, TimeSpan.FromMinutes(15));
                 for (int i = 0; i < 4; i++)
                 {
-                    appointments.Add(new DoctorAppointment(appointmentStart, appointmentStart.AddMinutes(emerAppointmentDTO.DurationInMinutes), emerAppointmentDTO.AppointmetType, 
+                    appointments.Add(new DoctorAppointment(appointmentStart, appointmentStart.AddMinutes(emerAppointmentDTO.DurationInMinutes), emerAppointmentDTO.AppointmetType,
                         emerAppointmentDTO.Room.RoomId, doc, emerAppointmentDTO.Patient));
                     appointmentStart = appointmentStart.AddMinutes(15);
                 }
@@ -396,7 +388,7 @@ namespace Service
         }
         public bool AreAppointmentsOverlaping(DoctorAppointment newAppointment, DoctorAppointment appointment)
         {
-            return (newAppointment.AppointmentStart >= appointment.AppointmentStart && newAppointment.AppointmentStart < appointment.AppointmentEnd) 
+            return (newAppointment.AppointmentStart >= appointment.AppointmentStart && newAppointment.AppointmentStart < appointment.AppointmentEnd)
                 || (newAppointment.AppointmentEnd > appointment.AppointmentStart && newAppointment.AppointmentEnd <= appointment.AppointmentEnd)
                 || (newAppointment.AppointmentStart <= appointment.AppointmentStart && newAppointment.AppointmentEnd >= appointment.AppointmentEnd);
         }
@@ -433,6 +425,21 @@ namespace Service
             }
 
             return newAppointments;
+
+        }
+
+        public List<DoctorAppointment> GetAllAppointmentsByRoomId(int roomId)
+        {
+            List<DoctorAppointment> roomAppointments = new List<DoctorAppointment>();
+
+            foreach (DoctorAppointment docApp in allAppointments)
+            {
+                if (docApp.Room == roomId)
+                {
+                    roomAppointments.Add(docApp);
+                }
+            }
+            return roomAppointments;
 
         }
 

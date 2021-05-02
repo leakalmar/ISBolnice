@@ -32,38 +32,64 @@ namespace Service
 
         public List<Appointment> getAllAppByTwoRooms(int roomIdSource, int roomIdDestination)
         {
-            List<Appointment> allApointemnts = new List<Appointment>();
+            List<Appointment> allApointments = new List<Appointment>();
 
+            allAppointments = GetAllApointmentsByRoomId(roomIdSource);
 
-           /* foreach (Appointment ap in getDocAppByRoom(roomIdSource))
-            {
-                allApointemnts.Add(ap);
-            }
+            allAppointments.AddRange(GetAllApointmentsByRoomId(roomIdDestination));
 
-            foreach (Appointment ap in getDocAppByRoom(roomIdDestination))
-            {
-                allApointemnts.Add(ap);
-            }*/
+            return allApointments;
 
+        }
+
+        public List<Appointment> GetAllApointmentsByRoomId(int roomID)
+        {
+            List<Appointment> allAppointments = new List<Appointment>();
+            GetAllDoctorsAppointment(roomID, allAppointments);
+
+            GetAllClassicAppointments(roomID, allAppointments);
+
+            return allAppointments;
+
+        }
+
+        private void GetAllClassicAppointments(int roomIdSource, List<Appointment> allApointments)
+        {
             foreach (Appointment ap in getAppByRoom(roomIdSource))
             {
-                allApointemnts.Add(ap);
+                allApointments.Add(ap);
             }
+        }
 
-
-            foreach (Appointment ap in getAppByRoom(roomIdDestination))
+        private void GetAllDoctorsAppointment(int roomIdSource, List<Appointment> allApointments)
+        {
+            foreach (Appointment ap in DoctorAppointmentService.Instance.GetAllAppointmentsByRoomId(roomIdSource))
             {
-                allApointemnts.Add(ap);
+                allApointments.Add(ap);
             }
-
-
-            return allApointemnts;
         }
 
 
+        public bool MakeRenovationAppointment(Appointment appointment)
+        {
+            List<Appointment> appointments = new List<Appointment>();
+
+            appointments = GetAllApointmentsByRoomId(appointment.Room);
+
+            bool isPossible = CheckAppointment(appointments, appointment.AppointmentStart, appointment.AppointmentEnd);
+
+            if (isPossible)
+            {
+
+                appointment.Reserved = true;
+                AddAppointment(appointment);
+            }
+
+            return isPossible;
+        }
+
         public List<Appointment> getAppByRoom(int roomId)
         {
- 
             List<Appointment> roomAppointment = new List<Appointment>();
 
             foreach (Appointment appointment in allAppointments)
@@ -75,7 +101,6 @@ namespace Service
 
                 }
             }
-
             return roomAppointment;
         }
 
@@ -118,7 +143,7 @@ namespace Service
             if (!allAppointments.Contains(appointment))
             {
                 allAppointments.Add(appointment);
-
+                afs.SaveAppointment(allAppointments);
               
             }
         }
