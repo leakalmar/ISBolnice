@@ -42,6 +42,8 @@ namespace Controllers
             MedicineNotificationService.Instance.AddNotification(medicineNotification);
         }
 
+        
+
         public void DisapproveMedicine(MedicineNotification reviewdNotification, string text)
         {
             reviewdNotification.Note = text;
@@ -54,6 +56,11 @@ namespace Controllers
         {
             MedicineService.Instance.AddNewMedicine(reviewdNotification.Medicine);
             MedicineNotificationService.Instance.DeleteMedicineNotification(reviewdNotification);
+        }
+
+        public List<MedicineNotification> GetAll()
+        {
+            return MedicineNotificationService.Instance.GetAll();
         }
     }
 }

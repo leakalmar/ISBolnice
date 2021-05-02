@@ -13,11 +13,11 @@ using System.Windows.Shapes;
 namespace Hospital_IS.ManagerView
 {
     /// <summary>
-    /// Interaction logic for NotificationView.xaml
+    /// Interaction logic for NotificationInfoView.xaml
     /// </summary>
-    public partial class NotificationView : Window
+    public partial class NotificationInfoView : Window
     {
-        public NotificationView()
+        public NotificationInfoView()
         {
             InitializeComponent();
         }
