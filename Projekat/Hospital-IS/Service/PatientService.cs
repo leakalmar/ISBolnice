@@ -89,6 +89,28 @@ namespace Service
             return allPatientIDs;
         }
 
+        public List<Patient> GetAllRegisteredPatients()
+        {
+            List<Patient> registeredPatients = new List<Patient>();
+            foreach (Patient patient in AllPatients)
+            {
+                if (!patient.IsGuest)
+                    registeredPatients.Add(patient);
+            }
+            return registeredPatients;
+        }
+
+        public List<Patient> GetAllGuests()
+        {
+            List<Patient> guests = new List<Patient>();
+            foreach (Patient patient in AllPatients)
+            {
+                if (patient.IsGuest)
+                    guests.Add(patient);
+            }
+            return guests;
+        }
+
         public void ReloadPatients()
         {
             AllPatients = pfs.GetAll();

@@ -1,6 +1,5 @@
 ﻿using Controllers;
 using Hospital_IS.Controllers;
-using Hospital_IS.Storages;
 using Model;
 using System;
 using System.Globalization;
@@ -40,7 +39,7 @@ namespace Hospital_IS.SecretaryView
 
             txtAppDate.Text = OldDocAppointment.AppointmentStart.ToString("dd.MM.yyyy.");
             txtStartOfApp.Text = OldDocAppointment.AppointmentStart.ToString("HH:mm");
-            txtEndOfApp.Text = OldDocAppointment.AppointmentStart.ToString("HH:mm");
+            txtEndOfApp.Text = OldDocAppointment.AppointmentEnd.ToString("HH:mm");
 
             NewDocAppointment = new DoctorAppointment(OldDocAppointment);
         }
@@ -60,7 +59,7 @@ namespace Hospital_IS.SecretaryView
 
             string text = "Pregled koji ste imali " + oldApp.AppointmentStart.ToString("dd.MM.yyyy.") + " u "
                 + oldApp.AppointmentStart.ToString("HH:mm") + "h je pomeren za "
-                + appointment.AppointmentStart.ToString("dd.MM.yyyy.") + " u " + appointment.AppointmentStart.ToString("HH:mm");
+                + appointment.AppointmentStart.ToString("dd.MM.yyyy.") + " u " + appointment.AppointmentStart.ToString("HH:mm") + "h.";
 
             Notification notification = new Notification(title, text, DateTime.Now);
             notification.Recipients.Add(appointment.Patient.Id);

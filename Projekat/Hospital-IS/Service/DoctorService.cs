@@ -36,5 +36,19 @@ namespace Service
             }
             return allDoctorIDs;
         }
+
+        public List<Doctor> GetDoctorsBySpecialty(string specialtyName)
+        {
+            List<Doctor> doctors = new List<Doctor>();
+
+            foreach (Doctor doctor in AllDoctors) 
+            {
+                if (specialtyName.Equals(doctor.Specialty.Name))
+                    doctors.Add(doctor);
+
+            }
+            return doctors;
+        }
+
     }
 }

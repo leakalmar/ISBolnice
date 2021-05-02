@@ -4,6 +4,7 @@ using Storages;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Service
@@ -306,6 +307,156 @@ namespace Service
             }
             return patientAppointments;
         }
+
+
+
+
+
+
+
+
+
+
+
+        public List<SuggestedEmergencyAppDTO> GenerateEmergencyAppointmentsForSecretary(Room room, Specialty specialty, int durationInMinutes)
+        {
+            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
+
+            List<Doctor> doctors = DoctorService.Instance.GetDoctorsBySpecialty(specialty.Name);
+
+            AppointmetType type;
+
+            if (specialty.Name.Equals(""))
+                type = AppointmetType.CheckUp;
+            else
+                type = AppointmetType.Operation;
+
+
+            DateTime appointmentStart = RoundUp(DateTime.Now, TimeSpan.FromMinutes(15));
+
+            foreach (Doctor doc in doctors)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    appointments.Add(new DoctorAppointment(appointmentStart, type, false, room.RoomId, doc, null));
+                    appointmentStart = appointmentStart.AddMinutes(15);
+                }
+            }
+
+            List<SuggestedEmergencyAppDTO> suggestedAppointments = FormEmergencyAppDTOs(appointments, durationInMinutes);
+            //suggestedAppointments.Sort(); sortirati jos
+
+            return suggestedAppointments;
+        }
+
+        private List<SuggestedEmergencyAppDTO> FormEmergencyAppDTOs(List<DoctorAppointment> appointments, int durationInMinutes)
+        {
+            List<SuggestedEmergencyAppDTO> suggestedAppointments = new List<SuggestedEmergencyAppDTO>();
+            foreach (DoctorAppointment appointment in appointments)
+            {
+                SuggestedEmergencyAppDTO appDTO = new SuggestedEmergencyAppDTO(appointment);
+                //appDTO.ConflictingAppointments = new List<DoctorAppointment>(FindConflictingAppointments(appointment));
+                //if (appDTO.ConflictingAppointments.Count > 0)
+                    //appDTO.RescheduledAppointments = new List<DoctorAppointment>(FindNextFreeAppointments(appDTO.ConflictingAppointments, durationInMinutes));
+                //appDTO.CalculateTotalReschedulePeriod();
+
+                List<DoctorAppointment> ca = FindConflictingAppointments(appointment);      //ako se stavi gore onda ne radi vise
+                foreach (DoctorAppointment da in ca)
+                    appDTO.ConflictingAppointments.Add(da);
+                List<DoctorAppointment> ra = FindNextFreeAppointments(FindConflictingAppointments(appointment), durationInMinutes);
+                foreach (DoctorAppointment da in ra)
+                    appDTO.RescheduledAppointments.Add(da);
+                appDTO.CalculateTotalReschedulePeriod();
+
+                //MessageBox.Show(appDTO.ConflictingAppointments.Count.ToString());       // ne dodaje u listu  ???
+                //MessageBox.Show(FindConflictingAppointments(appointment).Count.ToString());
+                //MessageBox.Show(FindConflictingAppointments(appointment).Count.ToString());
+                MessageBox.Show("U ca " + ca.Count.ToString() +
+                    "\nU FUNKCIJI DIREKTNO " + FindConflictingAppointments(appointment).Count.ToString() +
+                    "\nU OBJEKTU " + appDTO.RescheduledAppointments.Count.ToString());
+                suggestedAppointments.Add(appDTO);
+
+            }
+
+            return suggestedAppointments;
+        }
+
+
+        private DateTime RoundUp(DateTime dt, TimeSpan ts)
+        {
+            return new DateTime((dt.Ticks + ts.Ticks - 1) / ts.Ticks * ts.Ticks, dt.Kind);
+        }
+
+        public List<DoctorAppointment> FindConflictingAppointments(DoctorAppointment appointment)
+        {
+            List<DoctorAppointment> conflictingAppointments = new List<DoctorAppointment>();
+            foreach (DoctorAppointment app in allAppointments)
+            {
+                if ((appointment.Doctor.Id.Equals(app.Doctor.Id) || appointment.Room.Equals(app.Room))) //&& app.AppointmentStart > DateTime.Now
+                {
+                    if (CheckAppointmentDates(appointment, app))
+                        conflictingAppointments.Add(app);
+                }
+            }
+            //MessageBox.Show("okej: " + conflictingAppointments.Count.ToString());
+
+            return conflictingAppointments;
+        }
+
+        private bool CheckAppointmentDates(DoctorAppointment newAppointment, DoctorAppointment appointment)
+        {
+            if (AreAppointmentsOverlaping(newAppointment, appointment))
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool AreAppointmentsOverlaping(DoctorAppointment newAppointment, DoctorAppointment appointment)
+        {
+            return (newAppointment.AppointmentStart >= appointment.AppointmentStart && newAppointment.AppointmentStart < appointment.AppointmentEnd) 
+                || (newAppointment.AppointmentEnd > appointment.AppointmentStart && newAppointment.AppointmentEnd <= appointment.AppointmentEnd)
+                || (newAppointment.AppointmentStart <= appointment.AppointmentStart && newAppointment.AppointmentEnd >= appointment.AppointmentEnd);
+        }
+
+        public List<DoctorAppointment> FindNextFreeAppointments(List<DoctorAppointment> oldAppointments, double emergencyAppDuration)
+        {
+            DateTime appointmentStart = DateTime.Now.AddMinutes(emergencyAppDuration);
+            appointmentStart = RoundUp(appointmentStart, TimeSpan.FromMinutes(30));
+            appointmentStart = appointmentStart.AddMinutes(60);
+            List<DoctorAppointment> newAppointments = new List<DoctorAppointment>();
+
+            while (oldAppointments.Count > 0)
+            {
+                for (int i = 0; i < oldAppointments.Count; i++)
+                {
+                    TimeSpan appointmentDuration = oldAppointments[i].AppointmentEnd - oldAppointments[i].AppointmentStart;
+                    DoctorAppointment appointment = new DoctorAppointment(oldAppointments[i]);
+                    appointment.AppointmentStart = appointmentStart;
+                    appointment.AppointmentEnd = appointmentStart.Add(appointmentDuration);
+                    if (appointment.AppointmentStart.TimeOfDay >= new TimeSpan(8, 0, 0) && appointment.AppointmentStart.TimeOfDay < new TimeSpan(20, 0, 0)
+                            && VerifyAppointment(appointment, null))
+                    {
+                        newAppointments.Add(appointment);
+                        oldAppointments.Remove(oldAppointments[i]);
+                        appointmentStart = appointmentStart.Add(appointmentDuration);
+                    }
+                }
+                appointmentStart = appointmentStart.AddMinutes(30);
+            }
+
+            return newAppointments;
+
+        }
+
+
+
+
+
+
+
+
+
+
 
         public void ReloadDoctorAppointments()
         {
