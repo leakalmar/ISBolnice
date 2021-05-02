@@ -18,7 +18,7 @@ namespace Hospital_IS.SecretaryView
         public ObservableCollection<Doctor> Doctors { get; set; } = new ObservableCollection<Doctor>();
         public ObservableCollection<Room> Rooms { get; set; } = new ObservableCollection<Room>();
 
-        private UCAppointmentsView uca;
+        public UCAppointmentsView uca;
 
         public ScheduleAppointment(UCAppointmentsView uca)
         {
@@ -148,9 +148,14 @@ namespace Hospital_IS.SecretaryView
 
         private void btnEmergency_Click(object sender, RoutedEventArgs e)
         {
-            ScheduleEmergencyAppointment sea = new ScheduleEmergencyAppointment();
+            ScheduleEmergencyAppointment sea = new ScheduleEmergencyAppointment(this);
             sea.Show();
-            this.Close();
+            this.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

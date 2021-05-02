@@ -5,8 +5,7 @@ namespace Model
     public class RescheduledAppointmentDTO
     {
         public DoctorAppointment DocAppointment { get; set; } = new DoctorAppointment();
-        public DateTime NewAppointmentStart { get; set; }
-        public DateTime NewAppointmentEnd { get; set; }
+        public DoctorAppointment OldDocAppointment { get; set; } = new DoctorAppointment();
 
         public RescheduledAppointmentDTO(DoctorAppointment doctorAppointment)
         {
@@ -19,6 +18,8 @@ namespace Model
             DocAppointment.Doctor = doctorAppointment.Doctor;
             DocAppointment.Patient = doctorAppointment.Patient;
             DocAppointment.AppTypeText = doctorAppointment.AppTypeText;
+
+            OldDocAppointment = new DoctorAppointment(DocAppointment);
         }
     }
 }

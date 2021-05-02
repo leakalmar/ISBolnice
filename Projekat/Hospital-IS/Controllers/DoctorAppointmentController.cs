@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Hospital_IS.DTOs;
+using Model;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -76,6 +77,11 @@ namespace Controllers
         public void ReloadDoctorAppointments()
         {
             DoctorAppointmentService.Instance.ReloadDoctorAppointments();
+        }
+
+        internal IEnumerable<SuggestedEmergencyAppDTO> GenerateEmergencyAppointmentsForSecretary(EmergencyAppointmentDTO emerAppointment)
+        {
+            return DoctorAppointmentService.Instance.GenerateEmergencyAppointmentsForSecretary(emerAppointment);
         }
 
         public bool VerifyAppointment(DoctorAppointment doctorAppointment, List<Appointment> roomAppointments)

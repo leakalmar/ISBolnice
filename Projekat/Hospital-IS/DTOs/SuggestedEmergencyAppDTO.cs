@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows;
 
 namespace Model
 {
@@ -8,25 +7,25 @@ namespace Model
     {
         public DoctorAppointment SuggestedAppointment { get; set; }
         public List<DoctorAppointment> ConflictingAppointments { get; set; } 
-        public List<DoctorAppointment> RescheduledAppointments { get; set; }
-        public int TotalReshedulePeriodInDays { get; set; }
+        public List<RescheduledAppointmentDTO> RescheduledAppointments { get; set; }
+        public int TotalReshedulePeriodInHours { get; set; }
 
         public SuggestedEmergencyAppDTO(DoctorAppointment appointment)
         {
             SuggestedAppointment = appointment;
             ConflictingAppointments = new List<DoctorAppointment>();
-            RescheduledAppointments = new List<DoctorAppointment>();
+            RescheduledAppointments = new List<RescheduledAppointmentDTO>();
         }
 
         public void CalculateTotalReschedulePeriod()
         {
-            TotalReshedulePeriodInDays = 0;
+            TotalReshedulePeriodInHours = 0;
             if (ConflictingAppointments.Count > 0)
                 for (int i = 0; i < ConflictingAppointments.Count; i++)
                 {
-                    TimeSpan period = RescheduledAppointments[i].AppointmentStart - ConflictingAppointments[i].AppointmentStart;
-                    int days = (int)period.TotalDays;
-                    TotalReshedulePeriodInDays += days;
+                    TimeSpan period = RescheduledAppointments[i].DocAppointment.AppointmentStart - ConflictingAppointments[i].AppointmentStart;
+                    int days = (int)period.TotalHours;
+                    TotalReshedulePeriodInHours += days;
                 }
         }
 
