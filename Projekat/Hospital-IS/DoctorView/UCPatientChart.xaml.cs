@@ -1,44 +1,39 @@
 ﻿using Controllers;
 using Model;
 using Storages;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for UCPatientChart.xaml
-    /// </summary>
     public partial class UCPatientChart : UserControl
     {
-        private UCReport report;
-        private DoctorAppointment Appointment;
-        AppointmentFileStorage afs = new AppointmentFileStorage();
-        private UCReport Report { get; set; }
-        private UCGeneralInfo General { get; set; }
-        private UCHistory History { get; set; }
-        private UCScheduledApp App { get; set; }
-        private UCTherapy Therapy{get;set;}
-        private UCTest Test { set; get; }
-        private int Last { get; set; }
+        public Patient Patient;
+        public DoctorAppointment Appointment;
+
+        public Report ReportObject { get; set; }
+        public UCReport ReportView { get; set; }
+        public UCGeneralInfo General { get; set; }
+        public UCHistory History { get; set; }
+        public UCScheduledApp App { get; set; }
+        public UCTherapy Therapy{get;set;}
+        public UCTest Test { set; get; }
+        public int Last { get; set; }
 
 
-        public UCPatientChart(DoctorAppointment appointment, bool start = false)
+        public UCPatientChart(DoctorAppointment appointment,bool start = false)
         {
             InitializeComponent();
-
-            if (appointment.Report == null & start)
-            {
-                appointment.Report = new Model.Report(appointment.AppointmentStart);
-            }
+            ReportView = new UCReport(this);
             Appointment = appointment;
-            Report = new UCReport(appointment);
-            General = new UCGeneralInfo(Appointment.Patient);
-            History = new UCHistory(Appointment);
-            App = new UCScheduledApp(Appointment);
-            Therapy = new UCTherapy(Appointment.Patient);
-            Test = new UCTest(Appointment.Patient);
+            Patient = Appointment.Patient;
+            General = new UCGeneralInfo(this);
+            History = new UCHistory(this);
+            App = new UCScheduledApp(this);
+            Therapy = new UCTherapy(this);
+            Test = new UCTest(this);
 
             if (start)
             {
@@ -46,7 +41,7 @@ namespace Hospital_IS.DoctorView
                 end.Visibility = Visibility.Visible;
                 back.Visibility = Visibility.Collapsed;
                 reportBtn.Visibility = Visibility.Visible;                
-                patientInfo.Children.Add(Report);
+                patientInfo.Children.Add(ReportView);
                 Last = 0;
             }
             else
@@ -57,53 +52,9 @@ namespace Hospital_IS.DoctorView
 
 
             
-            PersonalData.DataContext = appointment.Patient;
+            PersonalData.DataContext = Patient;
             
 
-        }
-
-        public void Report_DoubleClicked(object sender, MouseButtonEventArgs e)
-        {
-            //Model.Report report = (Model.Report)patientHistory.SelectedItem;
-            //Window window = new Report(report);
-            //window.Show();
-        }
-
-        public void ExitBtnClick(object sender, RoutedEventArgs e)
-        {
-            //Treba settovati appointment na zavrsen
-            bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da završite pregled?").ShowDialog();
-            if (dialog)
-            {
-                DoctorHomePage.Instance.Home.Children.Remove(this);
-                DoctorHomePage.Instance.Home.Children.Add(DoctorHomePage.Instance.HomePage);
-            }
-        }
-
-        private void appointmentBtn(object sender, RoutedEventArgs e)
-        {
-            //Window w = new DoctorSetAppointment(Appointment);
-            //w.Show();
-        }
-
-        private void updateBtn_Click(object sender, RoutedEventArgs e)
-        {
-            //Window w = new DoctorSetAppointment(Appointment, true);
-            //w.Show();
-        }
-
-        private void CancleBtn_Click(object sender, RoutedEventArgs e)
-        {
-            DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
-            DoctorHomePage.Instance.DoctorAppointment.Remove(Appointment);
-            DoctorHomePage.Instance.Home.Children.Add(DoctorHomePage.Instance.HomePage);
-        }
-
-        private void futureApp_DoubleClicked(object sender, MouseButtonEventArgs e)
-        {
-            //DoctorAppointment future = (DoctorAppointment)patientAppointments.SelectedItem;
-            //Window window = new DoctorSetAppointment(future, true);
-            //window.Show();
         }
 
         private void TabBtnClick(object sender, RoutedEventArgs e)
@@ -125,7 +76,7 @@ namespace Hospital_IS.DoctorView
             switch (Last)
             {
                 case 0:
-                    patientInfo.Children.Remove(Report);
+                    patientInfo.Children.Remove(ReportView);
                     break;
                 case 1:
                     patientInfo.Children.Remove(General);
@@ -148,7 +99,7 @@ namespace Hospital_IS.DoctorView
             switch (index)
             {
                 case 0:
-                    patientInfo.Children.Add(Report);
+                    patientInfo.Children.Add(ReportView);
                     Last = 0;
                     break;
                 case 1:
@@ -183,11 +134,11 @@ namespace Hospital_IS.DoctorView
         {
             if(e.Key == Key.Escape)
             {
-                DoctorHomePage.Instance.Home.Children.Remove(this);
-                DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
-                Appointment.Report.Anamnesis = Report.reportDetail.Text;
-                DoctorAppointmentController.Instance.AddAppointment(Appointment);
-                DoctorHomePage.Instance.Home.Children.Add(this);
+                //DoctorHomePage.Instance.Home.Children.Remove(this);
+                //DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
+                //Appointment.Report.Anamnesis = Report.reportDetail.Text;
+                //DoctorAppointmentController.Instance.AddAppointment(Appointment);
+                //DoctorHomePage.Instance.Home.Children.Add(this);
             }
         }
 
@@ -201,20 +152,20 @@ namespace Hospital_IS.DoctorView
 
         private void EndApp_KeyDown(object sender, KeyEventArgs e)
         {
-            Appointment.Report.Anamnesis = Report.reportDetail.Text;
-            afs.UpdateAppointment(Appointment);
+            ChartController.Instance.AddReport(Appointment, ReportView.reportDetail.Text, ReportView.Prescriptions.Count, Patient);
+            ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView.Prescriptions), Patient);
             DoctorHomePage.Instance.Home.Children.Remove(this);
             DoctorHomePage.Instance.Home.Children.Add(new UCAppDetail(null));
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void EndAppointment_Click(object sender, RoutedEventArgs e)
         {
-            Appointment.Report.Anamnesis = Report.reportDetail.Text;
-            if(Appointment.Patient.MedicalHistory.GetByAppointment(Appointment).Count != 0)
-            {
-                Appointment.Report.HaveRecipe = true;
-            }
-            afs.UpdateAppointment(Appointment);
+            DoctorAppointment oldAppointment = new DoctorAppointment( Appointment);
+            Appointment.IsFinished = true;
+            DoctorAppointmentController.Instance.UpdateAppointment(oldAppointment, Appointment);
+            ChartController.Instance.AddReport(Appointment, ReportView.reportDetail.Text, ReportView.Prescriptions.Count, Patient);
+            ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView.Prescriptions), Patient);
+
             DoctorHomePage.Instance.Home.Children.Remove(this);
             UCAppDetail r = new UCAppDetail(null);
             DoctorHomePage.Instance.Home.Children.Add(r);
@@ -225,7 +176,7 @@ namespace Hospital_IS.DoctorView
             if (back.IsVisible)
             {
                 DoctorHomePage.Instance.Home.Children.Remove(this);
-                DoctorHomePage.Instance.Home.Children.Add(new UCAppDetail(Appointment));
+                DoctorHomePage.Instance.Home.Children.Add(new UCAppDetail());
 
             }
         }

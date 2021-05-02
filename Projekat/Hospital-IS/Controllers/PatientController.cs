@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using DoctorView;
+using Model;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -64,6 +65,16 @@ namespace Controllers
         public void ReloadPatients()
         {
             PatientService.Instance.ReloadPatients();
+        }
+
+        public bool CheckIfAllergic(Patient patient, Medicine medicine)
+        {
+            return PatientService.Instance.CheckIfAllergic(patient.Alergies, medicine.Name);
+        }
+
+        public bool CheckIfAllergicToComponent(Patient patient,Medicine medicine)
+        {
+            return PatientService.Instance.CheckIfAllergicToComponent(medicine.Composition, patient.Alergies);
         }
     }
 }

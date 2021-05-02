@@ -60,5 +60,17 @@ namespace Service
             AllMedicines.Add(medicine);
             mfs.Save(AllMedicines);
         }
+
+        public Medicine FindMedicine(string allergie)
+        {
+            foreach (Medicine med in AllMedicines)
+            {
+                if (med.Name.ToLower().Contains(allergie.ToLower()))
+                {
+                    return med;
+                }
+            }
+            return null;
+        }
     }
 }

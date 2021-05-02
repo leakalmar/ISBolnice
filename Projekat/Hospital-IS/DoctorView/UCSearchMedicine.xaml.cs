@@ -1,4 +1,5 @@
-﻿using DoctorView;
+﻿using Controllers;
+using DoctorView;
 using Hospital_IS.Storages;
 using Model;
 using System;
@@ -19,44 +20,31 @@ namespace Hospital_IS.DoctorView
     public partial class UCSearchMedicine : UserControl
     {
         public MedicineFileStorage mfs = new MedicineFileStorage();
-        public DoctorAppointment Appointment { get; set; }
-
+        public Patient Patient { get; set; }
         public ObservableCollection<MedicineObject> medicineObjects { get; set; }
-        public UCSearchMedicine(DoctorAppointment appointment)
+        public UCPatientChart PatientChart { get; set; }
+        public UCSearchMedicine(UCPatientChart patientChart)
         {
             InitializeComponent();
-            Appointment = appointment;
-            
+            PatientChart = patientChart;
+            Patient = patientChart.Patient;
             medicines.DataContext = GenerateListOfMedicines();
-            alergies.DataContext = appointment.Patient.Alergies;
-            medInfo.DataContext = medicines.SelectedItem;
-            
-            
-        }
-
-        private bool CheckAlergies(Medicine med)
-        {
-            foreach(String allergie in Appointment.Patient.Alergies)
-            {
-                if (med.Name.ToLower().Contains(allergie.ToLower()))
-                {
-                    return true;
-                }
-            }
-            return false;
+            alergies.DataContext = Patient.Alergies;
+            //medicines.SelectedItem = medicines.Items[0];
+            //medInfo.DataContext = medicines.Items[0];
         }
 
         private object GenerateListOfMedicines()
         {
             medicineObjects = new ObservableCollection<MedicineObject>();
-            foreach (Prescription p in Appointment.Patient.MedicalHistory.GetByAppointment(Appointment))
+            foreach (Prescription p in PatientChart.ReportView.Prescriptions)
             {
-                medicineObjects.Add(new MedicineObject(p.Medicine,true,false));
+                medicineObjects.Add(new MedicineObject(p.Medicine, true, false));
             }
             foreach (Medicine med in mfs.GetAll())
             {
                 bool found = false;
-                foreach (Prescription p in Appointment.Patient.MedicalHistory.GetByAppointment(Appointment))
+                foreach (Prescription p in PatientChart.ReportView.Prescriptions)
                 {
                     if (med.Name.Equals(p.Medicine.Name))
                     {
@@ -65,8 +53,8 @@ namespace Hospital_IS.DoctorView
                 }
                 if (!found)
                 {
-                    bool allergic = CheckAlergies(med);
-                    medicineObjects.Add(new MedicineObject(med,false,allergic));
+                    bool allergic = PatientController.Instance.CheckIfAllergic(Patient, med);
+                    medicineObjects.Add(new MedicineObject(med, false, allergic));
                 }
             }
             return medicineObjects;
@@ -76,32 +64,37 @@ namespace Hospital_IS.DoctorView
         {
             MedicineObject med = (MedicineObject)medicines.SelectedItem;
 
-            if(med.Allergic == true)
+            if (med.Allergic == true)
             {
-                ExitMess mess= new ExitMess("Pacijent je alergican na izabrani lek!");
+                ExitMess mess = new ExitMess("Pacijent je alergican na izabrani lek!");
                 mess.btnCancle.Visibility = Visibility.Collapsed;
                 mess.btnOk.Content = "U redu";
                 mess.ShowDialog();
                 return;
-                
+
             }
 
             if (e.Key.Equals(Key.Enter))
             {
-                Appointment.Patient.MedicalHistory.AddPrescription(new Prescription(med.Medicine,Appointment.AppointmentStart));
-                med.Check = true;
-                medicines.Items.Refresh();
-                search.Focus();
+                if (med.Check == false)
+                {
+                    PatientChart.ReportView.Prescriptions.Add(new Prescription(med.Medicine, PatientChart.Appointment.AppointmentStart));
+                    med.Check = true;
+                    medicines.Items.Refresh();
+                    search.Focus();
+                }
+                else
+                {
+                    PatientChart.ReportView.Prescriptions.Remove(new Prescription(med.Medicine, PatientChart.Appointment.AppointmentStart));
+                    med.Check = false;
+                    medicines.Items.Refresh();
+                    search.Focus();
+                }
+
             }
             else if (e.Key == Key.Delete)
             {
-                foreach (Prescription p in Appointment.Patient.MedicalHistory.GetByAppointment(Appointment))
-                {
-                    if (p.Medicine.Name.Equals(med.Medicine.Name))
-                    {
-                        Appointment.Patient.MedicalHistory.RemovePrescription(p);
-                    }
-                }
+                PatientChart.ReportView.Prescriptions.Remove(new Prescription(med.Medicine, PatientChart.Appointment.AppointmentStart));
                 med.Check = false;
                 medicines.Items.Refresh();
                 search.Focus();
@@ -110,18 +103,17 @@ namespace Hospital_IS.DoctorView
 
         private void back_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Escape)
+            if (e.Key == Key.Back)
             {
-
                 DoctorHomePage.Instance.Home.Children.Remove(this);
-                DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(Appointment,true));
+                PatientChart.Visibility = Visibility.Visible;
             }
         }
 
         private void medicines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MedicineObject med = (MedicineObject)medicines.SelectedItem;
-            if (checkMedicationComposition(med.Medicine))
+            if (PatientController.Instance.CheckIfAllergicToComponent(PatientChart.Patient, med.Medicine))
             {
                 allergieMess.Visibility = Visibility.Visible;
             }
@@ -130,44 +122,6 @@ namespace Hospital_IS.DoctorView
                 allergieMess.Visibility = Visibility.Collapsed;
             }
             medInfo.DataContext = med.Medicine;
-        }
-
-        private bool checkMedicationComposition(Medicine medicine)
-        {
-            List<MedicineComponent> components = medicine.Composition;
-            foreach(MedicineComponent c in components)
-            {
-                foreach (String allergie in Appointment.Patient.Alergies)
-                {
-                    Medicine med = findMedicine(allergie);
-                    if(med != null)
-                    {
-                        List<MedicineComponent> allergieComponents = med.Composition;
-                        foreach(MedicineComponent allergieComp in allergieComponents)
-                        {
-                            if (c.Component.ToLower().Equals(allergieComp.Component.ToLower()))
-                            {
-                                return true;
-                            }
-                        }
-                    }
-                    
-                }
-            }
-            
-            return false;
-        }
-
-        private Medicine findMedicine(String allergie)
-        {
-            foreach(Medicine med in mfs.GetAll())
-            {
-                if (med.Name.ToLower().Contains(allergie.ToLower()))
-                {
-                    return med;
-                }
-            }
-            return null;
         }
 
         private void DataGridRow_Selected(object sender, RoutedEventArgs e)
@@ -190,22 +144,16 @@ namespace Hospital_IS.DoctorView
 
             }
 
-            if (!med.Check)
+            if (med.Check == false)
             {
-                Appointment.Patient.MedicalHistory.AddPrescription(new Prescription(med.Medicine, Appointment.AppointmentStart));
+                PatientChart.ReportView.Prescriptions.Add(new Prescription(med.Medicine, PatientChart.Appointment.AppointmentStart));
                 med.Check = true;
                 medicines.Items.Refresh();
                 search.Focus();
             }
             else
             {
-                foreach (Prescription p in Appointment.Patient.MedicalHistory.GetByAppointment(Appointment))
-                {
-                    if (p.Medicine.Name.Equals(med.Medicine.Name))
-                    {
-                        Appointment.Patient.MedicalHistory.RemovePrescription(p);
-                    }
-                }
+                PatientChart.ReportView.Prescriptions.Remove(new Prescription(med.Medicine, PatientChart.Appointment.AppointmentStart));
                 med.Check = false;
                 medicines.Items.Refresh();
                 search.Focus();

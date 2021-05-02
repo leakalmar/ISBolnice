@@ -1,6 +1,8 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -17,27 +19,23 @@ namespace Hospital_IS.DoctorView
 {
     public partial class UCReport : UserControl
     {
-        Patient Patient { get; set; }
-        DoctorAppointment Appointment { get; set; }
-        public UCReport(DoctorAppointment appointment)
+        public UCPatientChart PatientChart { get; set; }
+        public ObservableCollection<Prescription> Prescriptions { get; set; }
+        public Patient Patient { get; set; }
+        public UCReport(UCPatientChart patientChart)
         {
             InitializeComponent();
-            Patient = appointment.Patient;
-            Appointment = appointment;
-            if(Appointment.Report != null)
-            {
-                reportDetail.Text = Appointment.Report.Anamnesis;
-            }
-            
-            medicines.DataContext = appointment.Patient.MedicalHistory.GetByAppointment(Appointment);
+            Prescriptions = new ObservableCollection<Prescription>();
+            PatientChart = patientChart;
+            Patient = patientChart.Patient;
+            medicines.DataContext = Prescriptions;
 
         }
 
         private void Perscription_Click(object sender, RoutedEventArgs e)
         {
-            (this.Parent as Grid).Visibility = Visibility.Collapsed;
-            Appointment.Report.Anamnesis = reportDetail.Text;
-            DoctorHomePage.Instance.Home.Children.Add(new UCSearchMedicine(Appointment));
+            PatientChart.Visibility = Visibility.Collapsed;
+            DoctorHomePage.Instance.Home.Children.Add(new UCSearchMedicine(PatientChart));
         }
 
         private void delete_(object sender, KeyEventArgs e)
@@ -47,18 +45,8 @@ namespace Hospital_IS.DoctorView
 
         private void delete_prescription(object sender, KeyEventArgs e)
         {
-            Prescription selected = (Prescription)medicines.SelectedItem;
-            if (e.Key == Key.Delete)
-            {
-                foreach (Prescription p in Appointment.Patient.MedicalHistory.GetByAppointment(Appointment))
-                {
-                    if (p.Medicine.Name.Equals(selected.Medicine.Name))
-                    {
-                        Appointment.Patient.MedicalHistory.RemovePrescription(p);
-                    }
-                }
-            }
-            medicines.DataContext = Appointment.Patient.MedicalHistory.GetByAppointment(Appointment);
+            Prescriptions.Remove((Prescription)medicines.SelectedItem);
+            medicines.Items.Refresh();
         }
     }
 }

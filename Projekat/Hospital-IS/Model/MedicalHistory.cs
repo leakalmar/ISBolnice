@@ -6,14 +6,18 @@ namespace Model
 {
     public class MedicalHistory
     {
-
-        public ObservableCollection<Prescription> Prescription { get; set; }
+        public int Id { get; set; }
+        public List<Prescription> Prescription { get; set; }
+        public ObservableCollection<Test> Test { get; set; }
+        public List<Report> Reports { get; set; }
+        public ObservableCollection<Hospitalization> Hospitalization { get; set; }
+        public ObservableCollection<Therapy> Therapies { get; set; }
 
         public MedicalHistory()
         {
-            Prescription = new ObservableCollection<Prescription>();
+            Prescription = new List<Prescription>();
             Test = new ObservableCollection<Test>();
-            Reports = new ObservableCollection<Report>();
+            Reports = new List<Report>();
             Hospitalization = new ObservableCollection<Hospitalization>();
             Therapies = new ObservableCollection<Therapy>();
         }
@@ -23,7 +27,7 @@ namespace Model
             if (newPrescription == null)
                 return;
             if (this.Prescription == null)
-                this.Prescription = new ObservableCollection<Prescription>();
+                this.Prescription = new List<Prescription>();
             if (!this.Prescription.Contains(newPrescription))
                 this.Prescription.Add(newPrescription);
         }
@@ -43,7 +47,7 @@ namespace Model
                 Prescription.Clear();
         }
 
-        public ObservableCollection<Test> Test { get; set; }
+
 
         public void AddTest(Test newTest)
         {
@@ -70,14 +74,14 @@ namespace Model
                 Test.Clear();
         }
 
-        public ObservableCollection<Report> Reports { get; set; }
+
 
         public void AddReport(Report newReport)
         {
             if (newReport == null)
                 return;
             if (this.Reports == null)
-                this.Reports = new ObservableCollection<Report>();
+                this.Reports = new List<Report>();
             if (!this.Reports.Contains(newReport))
                 this.Reports.Add(newReport);
         }
@@ -98,7 +102,7 @@ namespace Model
                 Reports.Clear();
         }
 
-        public ObservableCollection<Hospitalization> Hospitalization { get; set; }
+
 
         public void AddHospitalization(Hospitalization newHospitalization)
         {
@@ -126,7 +130,7 @@ namespace Model
                 Hospitalization.Clear();
         }
 
-        public ObservableCollection<Therapy> Therapies { get; set; }
+
 
         public void AddTherapy(Therapy newTherapy)
         {
@@ -164,7 +168,7 @@ namespace Model
             List<Prescription> ret = new List<Prescription>();
             foreach (Prescription p in Prescription)
             {
-                if (p.DatePrescribed.Equals(docApp.AppointmentStart))
+                if (p.DatePrescribed.Date.Equals(docApp.AppointmentStart.Date))
                 {
                     ret.Add(p);
                 }
@@ -177,7 +181,7 @@ namespace Model
             ObservableCollection<Prescription> ret = new ObservableCollection<Prescription>();
             foreach (Prescription p in Prescription)
             {
-                if(p.DatePrescribed == report)
+                if (p.DatePrescribed == report)
                 {
                     ret.Add(p);
                 }

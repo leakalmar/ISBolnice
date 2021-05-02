@@ -1,12 +1,9 @@
 [
   {
-    "Cause": null,
-    "Detail": null,
     "NameSurnamePatient": "Simona Stantic",
     "AppTypeText": null,
     "Patient": {
       "hospital": null,
-      "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -16,6 +13,7 @@
       ],
       "IsGuest": false,
       "MedicalHistory": {
+        "Id": 0,
         "Prescription": [],
         "Test": [],
         "Reports": [],
@@ -35,14 +33,13 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
-      "Notifications": null,
       "Hospital": null
     },
     "Doctor": {
       "patient": [],
       "hospital": null,
       "Specialty": {
-        "Role": "Dermatolog"
+        "Name": null
       },
       "PrimaryRoom": 1,
       "Patient": [],
@@ -66,24 +63,21 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
-      "Notifications": null,
       "Hospital": null
     },
-    "Report": null,
+    "IsFinished": true,
     "Reserved": true,
+    "AppointmentCause": null,
     "AppointmentStart": "2021-04-22T09:00:00",
     "AppointmentEnd": "2021-04-22T09:30:00",
     "Type": 1,
     "Room": 1
   },
   {
-    "Cause": null,
-    "Detail": null,
     "NameSurnamePatient": "Simona Stantic",
     "AppTypeText": null,
     "Patient": {
       "hospital": null,
-      "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -93,6 +87,7 @@
       ],
       "IsGuest": false,
       "MedicalHistory": {
+        "Id": 0,
         "Prescription": [],
         "Test": [],
         "Reports": [],
@@ -141,14 +136,13 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
-      "Notifications": null,
       "Hospital": null
     },
     "Doctor": {
       "patient": [],
       "hospital": null,
       "Specialty": {
-        "Role": "Dermatolog"
+        "Name": null
       },
       "PrimaryRoom": 5,
       "Patient": [],
@@ -202,24 +196,21 @@
       "Relationship": null,
       "Password": "doktor",
       "Address": "Brace Radica 30",
-      "Notifications": [],
       "Hospital": null
     },
-    "Report": null,
+    "IsFinished": true,
     "Reserved": true,
+    "AppointmentCause": null,
     "AppointmentStart": "2021-04-22T09:00:00",
     "AppointmentEnd": "2021-04-22T09:30:00",
     "Type": 1,
     "Room": 5
   },
   {
-    "Cause": null,
-    "Detail": null,
     "NameSurnamePatient": "Stefan Beckovic",
     "AppTypeText": null,
     "Patient": {
       "hospital": null,
-      "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7064891+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -229,6 +220,7 @@
       ],
       "IsGuest": false,
       "MedicalHistory": {
+        "Id": 0,
         "Prescription": [],
         "Test": [],
         "Reports": [],
@@ -248,14 +240,13 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Zelengoska 15",
-      "Notifications": null,
       "Hospital": null
     },
     "Doctor": {
       "patient": [],
       "hospital": null,
       "Specialty": {
-        "Role": "Dermatolog"
+        "Name": null
       },
       "PrimaryRoom": 1,
       "Patient": [],
@@ -279,24 +270,21 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
-      "Notifications": [],
       "Hospital": null
     },
-    "Report": null,
+    "IsFinished": true,
     "Reserved": true,
+    "AppointmentCause": null,
     "AppointmentStart": "2021-04-23T08:30:00",
     "AppointmentEnd": "2021-04-23T09:00:00",
     "Type": 1,
     "Room": 1
   },
   {
-    "Cause": null,
-    "Detail": null,
     "NameSurnamePatient": "Simona Stantic",
     "AppTypeText": null,
     "Patient": {
       "hospital": null,
-      "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -306,6 +294,7 @@
       ],
       "IsGuest": false,
       "MedicalHistory": {
+        "Id": 0,
         "Prescription": [],
         "Test": [],
         "Reports": [],
@@ -354,14 +343,13 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
-      "Notifications": null,
       "Hospital": null
     },
     "Doctor": {
       "patient": [],
       "hospital": null,
       "Specialty": {
-        "Role": "Dermatolog"
+        "Name": null
       },
       "PrimaryRoom": 1,
       "Patient": [],
@@ -385,24 +373,21 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
-      "Notifications": [],
       "Hospital": null
     },
-    "Report": null,
+    "IsFinished": true,
     "Reserved": true,
+    "AppointmentCause": null,
     "AppointmentStart": "2021-04-30T09:30:00",
     "AppointmentEnd": "2021-04-30T10:00:00",
     "Type": 1,
     "Room": 1
   },
   {
-    "Cause": null,
-    "Detail": null,
     "NameSurnamePatient": "Simona Stantic",
     "AppTypeText": null,
     "Patient": {
       "hospital": null,
-      "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -412,6 +397,7 @@
       ],
       "IsGuest": false,
       "MedicalHistory": {
+        "Id": 0,
         "Prescription": [],
         "Test": [],
         "Reports": [],
@@ -460,14 +446,13 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
-      "Notifications": null,
       "Hospital": null
     },
     "Doctor": {
       "patient": [],
       "hospital": null,
       "Specialty": {
-        "Role": "Dermatolog"
+        "Name": "Dermatolog"
       },
       "PrimaryRoom": 1,
       "Patient": [],
@@ -491,24 +476,21 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
-      "Notifications": [],
       "Hospital": null
     },
-    "Report": null,
+    "IsFinished": true,
     "Reserved": true,
-    "AppointmentStart": "2021-04-29T09:30:00",
-    "AppointmentEnd": "2021-04-29T10:00:00",
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-05-02T12:00:00",
+    "AppointmentEnd": "2021-05-02T12:30:00",
     "Type": 1,
     "Room": 1
   },
   {
-    "Cause": null,
-    "Detail": null,
     "NameSurnamePatient": "Simona Stantic",
     "AppTypeText": null,
     "Patient": {
       "hospital": null,
-      "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -518,6 +500,7 @@
       ],
       "IsGuest": false,
       "MedicalHistory": {
+        "Id": 0,
         "Prescription": [],
         "Test": [],
         "Reports": [],
@@ -566,14 +549,13 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
-      "Notifications": null,
       "Hospital": null
     },
     "Doctor": {
       "patient": [],
       "hospital": null,
       "Specialty": {
-        "Role": "Dermatolog"
+        "Name": null
       },
       "PrimaryRoom": 1,
       "Patient": [],
@@ -597,18 +579,355 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
-      "Notifications": [],
       "Hospital": null
     },
-    "Report": {
-      "Amnesis": "",
-      "HaveRecipe": false,
-      "HaveTest": false,
-      "ReportId": "4/24/2021 9:30:00 AM"
-    },
+    "IsFinished": false,
     "Reserved": true,
+    "AppointmentCause": null,
     "AppointmentStart": "2021-04-24T09:30:00",
     "AppointmentEnd": "2021-04-24T10:00:00",
+    "Type": 1,
+    "Room": 1
+  },
+  {
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "IsGuest": false,
+      "MedicalHistory": {
+        "Id": 0,
+        "Prescription": [
+          {
+            "Medicine": {
+              "Name": "Defrinol tableta",
+              "Composition": [],
+              "SideEffects": "",
+              "Usage": "",
+              "ReplaceMedicine": []
+            },
+            "DatePrescribed": "2021-05-02T11:00:00"
+          }
+        ],
+        "Test": [],
+        "Reports": [],
+        "Hospitalization": [],
+        "Therapies": [
+          {
+            "Medicine": {
+              "Name": "Bromazepam",
+              "Composition": [],
+              "SideEffects": "Najebao si",
+              "Usage": "Kad hoćeš",
+              "ReplaceMedicine": null
+            },
+            "Quantity": 1,
+            "TimesADay": 2,
+            "TherapyStart": "2021-04-19T00:00:00",
+            "TherapyEnd": "2021-05-01T00:00:00",
+            "FirstUsageTime": 8
+          },
+          {
+            "Medicine": {
+              "Name": "Brufen",
+              "Composition": [],
+              "SideEffects": "Najebao si",
+              "Usage": "Kad hoćeš",
+              "ReplaceMedicine": null
+            },
+            "Quantity": 1,
+            "TimesADay": 3,
+            "TherapyStart": "2021-04-19T00:00:00",
+            "TherapyEnd": "2021-05-01T00:00:00",
+            "FirstUsageTime": 8
+          }
+        ]
+      },
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": true,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-05-02T19:00:00",
+    "AppointmentEnd": "2021-05-02T19:30:00",
+    "Type": 1,
+    "Room": 1
+  },
+  {
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "IsGuest": false,
+      "MedicalHistory": {
+        "Id": 0,
+        "Prescription": [
+          {
+            "Medicine": {
+              "Name": "Defrinol tableta",
+              "Composition": [],
+              "SideEffects": "",
+              "Usage": "",
+              "ReplaceMedicine": []
+            },
+            "DatePrescribed": "2021-05-02T11:00:00"
+          }
+        ],
+        "Test": [],
+        "Reports": [],
+        "Hospitalization": [],
+        "Therapies": [
+          {
+            "Medicine": {
+              "Name": "Bromazepam",
+              "Composition": [],
+              "SideEffects": "Najebao si",
+              "Usage": "Kad hoćeš",
+              "ReplaceMedicine": null
+            },
+            "Quantity": 1,
+            "TimesADay": 2,
+            "TherapyStart": "2021-04-19T00:00:00",
+            "TherapyEnd": "2021-05-01T00:00:00",
+            "FirstUsageTime": 8
+          },
+          {
+            "Medicine": {
+              "Name": "Brufen",
+              "Composition": [],
+              "SideEffects": "Najebao si",
+              "Usage": "Kad hoćeš",
+              "ReplaceMedicine": null
+            },
+            "Quantity": 1,
+            "TimesADay": 3,
+            "TherapyStart": "2021-04-19T00:00:00",
+            "TherapyEnd": "2021-05-01T00:00:00",
+            "FirstUsageTime": 8
+          }
+        ]
+      },
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-05-02T19:30:00",
+    "AppointmentEnd": "2021-05-02T20:00:00",
+    "Type": 1,
+    "Room": 1
+  },
+  {
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "IsGuest": false,
+      "MedicalHistory": {
+        "Id": 0,
+        "Prescription": [
+          {
+            "Medicine": {
+              "Name": "Defrinol tableta",
+              "Composition": [],
+              "SideEffects": "",
+              "Usage": "",
+              "ReplaceMedicine": []
+            },
+            "DatePrescribed": "2021-05-02T11:00:00"
+          }
+        ],
+        "Test": [],
+        "Reports": [],
+        "Hospitalization": [],
+        "Therapies": [
+          {
+            "Medicine": {
+              "Name": "Bromazepam",
+              "Composition": [],
+              "SideEffects": "Najebao si",
+              "Usage": "Kad hoćeš",
+              "ReplaceMedicine": null
+            },
+            "Quantity": 1,
+            "TimesADay": 2,
+            "TherapyStart": "2021-04-19T00:00:00",
+            "TherapyEnd": "2021-05-01T00:00:00",
+            "FirstUsageTime": 8
+          },
+          {
+            "Medicine": {
+              "Name": "Brufen",
+              "Composition": [],
+              "SideEffects": "Najebao si",
+              "Usage": "Kad hoćeš",
+              "ReplaceMedicine": null
+            },
+            "Quantity": 1,
+            "TimesADay": 3,
+            "TherapyStart": "2021-04-19T00:00:00",
+            "TherapyEnd": "2021-05-01T00:00:00",
+            "FirstUsageTime": 8
+          }
+        ]
+      },
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-05-02T11:00:00",
+    "AppointmentEnd": "2021-05-02T11:30:00",
     "Type": 1,
     "Room": 1
   }

@@ -1,7 +1,6 @@
 [
   {
     "hospital": null,
-    "ChartId": 0,
     "FileDate": "2021-03-29T23:21:22.7048933+02:00",
     "Employer": "neki poslodavac",
     "Admitted": false,
@@ -11,6 +10,7 @@
     ],
     "IsGuest": false,
     "MedicalHistory": {
+      "Id": 1,
       "Prescription": [],
       "Test": [],
       "Reports": [],
@@ -63,7 +63,6 @@
   },
   {
     "hospital": null,
-    "ChartId": 0,
     "FileDate": "2021-03-29T23:21:22.7064891+02:00",
     "Employer": "neki poslodavac",
     "Admitted": false,
@@ -73,6 +72,7 @@
     ],
     "IsGuest": false,
     "MedicalHistory": {
+      "Id": 2,
       "Prescription": [],
       "Test": [],
       "Reports": [],
@@ -96,7 +96,6 @@
   },
   {
     "hospital": null,
-    "ChartId": 0,
     "FileDate": "2021-03-29T23:21:22.7064923+02:00",
     "Employer": "neki poslodavac",
     "Admitted": false,
@@ -106,6 +105,7 @@
     ],
     "IsGuest": false,
     "MedicalHistory": {
+      "Id": 3,
       "Prescription": [],
       "Test": [],
       "Reports": [],
