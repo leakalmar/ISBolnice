@@ -35,5 +35,10 @@ namespace Hospital_IS
             Window1.Instance.Show();
             this.Hide();
         }
+
+        private void Notifications_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

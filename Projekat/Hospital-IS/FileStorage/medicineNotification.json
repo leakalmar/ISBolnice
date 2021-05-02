@@ -1,6 +1,6 @@
 [
   {
-    "Title": "Odobrenje Flonidan 100mg",
+    "Title": "Odbijen Flonidan 100mg",
     "Medicine": {
       "Name": "Flonidan 100mg",
       "Composition": [
@@ -16,8 +16,7 @@
         }
       ]
     },
-    "DoctorIds": [
-      4
-    ]
+    "DoctorIds": [],
+    "Note": "frferferfreferferferefrfreferfrf"
   }
 ]
