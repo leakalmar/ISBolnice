@@ -326,11 +326,9 @@ namespace Service
 
             List<Doctor> doctors = DoctorService.Instance.GetDoctorsBySpecialty(emerAppointmentDTO.Specialty.Name);
 
-            DateTime appointmentStart = RoundUp(DateTime.Now, TimeSpan.FromMinutes(15));
-
             foreach (Doctor doc in doctors)
             {
-                appointmentStart = RoundUp(DateTime.Now, TimeSpan.FromMinutes(15));
+                DateTime appointmentStart = RoundUp(DateTime.Now, TimeSpan.FromMinutes(15));
                 for (int i = 0; i < 4; i++)
                 {
                     appointments.Add(new DoctorAppointment(appointmentStart, appointmentStart.AddMinutes(emerAppointmentDTO.DurationInMinutes), emerAppointmentDTO.AppointmetType, 
@@ -351,10 +349,6 @@ namespace Service
             foreach (DoctorAppointment appointment in appointments)
             {
                 SuggestedEmergencyAppDTO appDTO = new SuggestedEmergencyAppDTO(appointment);
-                //appDTO.ConflictingAppointments = new List<DoctorAppointment>(FindConflictingAppointments(appointment));
-                //if (appDTO.ConflictingAppointments.Count > 0)
-                    //appDTO.RescheduledAppointments = new List<DoctorAppointment>(FindNextFreeAppointments(appDTO.ConflictingAppointments, durationInMinutes));
-                //appDTO.CalculateTotalReschedulePeriod();
 
                 List<DoctorAppointment> ca = FindConflictingAppointments(appointment);
                 foreach (DoctorAppointment da in ca)
@@ -364,10 +358,6 @@ namespace Service
                     appDTO.RescheduledAppointments.Add(da);
                 appDTO.CalculateTotalReschedulePeriod();
 
-
-                /*MessageBox.Show("U ca " + ca.Count.ToString() +
-                    "\nU FUNKCIJI DIREKTNO " + FindConflictingAppointments(appointment).Count.ToString() +
-                    "\nU OBJEKTU " + appDTO.RescheduledAppointments.Count.ToString());*/
                 suggestedAppointments.Add(appDTO);
 
             }
@@ -427,7 +417,7 @@ namespace Service
                     RescheduledAppointmentDTO appointment = new RescheduledAppointmentDTO(oldAppointments[i]);
                     appointment.DocAppointment.AppointmentStart = appointmentStart;
                     appointment.DocAppointment.AppointmentEnd = appointmentStart.Add(appointmentDuration);
-                    if (appointment.DocAppointment.AppointmentStart.TimeOfDay >= new TimeSpan(8, 0, 0) && appointment.DocAppointment.AppointmentStart.TimeOfDay < new TimeSpan(23, 30, 0)
+                    if (appointment.DocAppointment.AppointmentStart.TimeOfDay >= new TimeSpan(8, 0, 0) && appointment.DocAppointment.AppointmentEnd.TimeOfDay < new TimeSpan(20, 0, 0)
                             && VerifyAppointment(appointment.DocAppointment, null))
                     {
                         newAppointments.Add(appointment);
@@ -445,16 +435,6 @@ namespace Service
             return newAppointments;
 
         }
-
-
-
-
-
-
-
-
-
-
 
         public void ReloadDoctorAppointments()
         {
