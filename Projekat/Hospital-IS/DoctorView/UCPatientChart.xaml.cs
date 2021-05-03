@@ -12,7 +12,6 @@ namespace Hospital_IS.DoctorView
     /// </summary>
     public partial class UCPatientChart : UserControl
     {
-        private UCReport report;
         private DoctorAppointment Appointment;
         AppointmentFileStorage afs = new AppointmentFileStorage();
         private UCReport Report { get; set; }

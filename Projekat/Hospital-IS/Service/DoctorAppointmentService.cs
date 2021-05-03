@@ -106,14 +106,30 @@ namespace Service
         private List<DoctorAppointment> GenerateAppointmentForDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
         {
             List<DoctorAppointment> appointmentList = new List<DoctorAppointment>();
+            DateTime lastTimeCreated = DateTime.Now;
 
             foreach (DateTime d in dates)
-            {
-                DateTime lastTimeCreated;
+            {                
                 //Set date from witch could start appointments
                 if (d.Date == DateTime.Now.Date)
                 {
-                    lastTimeCreated = new DateTime(d.Year, d.Month, d.Day, DateTime.Now.Hour, 30, 00);
+                    if (DateTime.Now.Minute < 15)
+                    {
+                        lastTimeCreated = new DateTime(d.Year, d.Month, d.Day, DateTime.Now.Hour, 15, 00);
+                    }
+                    else if (DateTime.Now.Minute < 30)
+                    {
+                        lastTimeCreated = new DateTime(d.Year, d.Month, d.Day, DateTime.Now.Hour, 30, 00);
+                    }
+                    else if (DateTime.Now.Minute < 45)
+                    {
+                        lastTimeCreated = new DateTime(d.Year, d.Month, d.Day, DateTime.Now.Hour, 45, 00);
+                    }
+                    else if (DateTime.Now.Minute >= 45)
+                    {
+                        lastTimeCreated = new DateTime(d.Year, d.Month, d.Day, DateTime.Now.Hour + 1, 00, 00);
+                    }
+
                 }
                 else
                 {
@@ -128,7 +144,7 @@ namespace Service
                         newAppointment = new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, lastTimeCreated.Hour, lastTimeCreated.Minute, 0), AppointmetType.CheckUp, false, tempAppointment.Room, tempAppointment.Doctor, tempAppointment.Patient);
                         newAppointment.IsUrgent = tempAppointment.IsUrgent;
                         appointmentList.Add(newAppointment);
-                        lastTimeCreated = lastTimeCreated.AddMinutes(30);
+                        lastTimeCreated = lastTimeCreated.AddMinutes(15);
                     }
                     else
                     {
@@ -140,7 +156,7 @@ namespace Service
                             newAppointment.AppointmentEnd = startTime.Add(duration);
                             newAppointment.IsUrgent = tempAppointment.IsUrgent;
                             appointmentList.Add(newAppointment);
-                            lastTimeCreated = lastTimeCreated.Add(duration);
+                            lastTimeCreated = lastTimeCreated.AddMinutes(15);
                         }
                         else
                         {
@@ -270,7 +286,9 @@ namespace Service
 
         public List<DoctorAppointment> SuggestAppointmetsToDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
         {
-            List<DoctorAppointment> allAppointments = GetAvailableAppointmentsByDoctor(dates, tempAppointment);
+            List<DoctorAppointment> allAppointments = new List<DoctorAppointment>();
+
+            allAppointments = GetAvailableAppointmentsByDoctor(dates, tempAppointment);
             allAppointments.AddRange(GetAllByDoctorAndDates(tempAppointment.Doctor.Id, dates));
 
             return allAppointments;
@@ -344,6 +362,26 @@ namespace Service
 
             List<SuggestedEmergencyAppDTO> suggestedAppointments = FormEmergencyAppDTOs(appointments, emerAppointmentDTO.DurationInMinutes);
             suggestedAppointments.Sort((x, y) => x.TotalReshedulePeriodInHours.CompareTo(y.TotalReshedulePeriodInHours));
+
+            return suggestedAppointments;
+        }
+
+        public List<SuggestedEmergencyAppDTO> GenerateEmergencyAppointmentsForDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
+        {
+            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
+
+            List<Doctor> doctors = DoctorService.Instance.GetDoctorsBySpecialty(tempAppointment.Doctor.Specialty.Name);
+
+            foreach (Doctor doc in doctors)
+            {
+                tempAppointment.Doctor = doc;
+                List < DoctorAppointment > allPossibleAppointments = GenerateAppointmentForDoctor(dates, tempAppointment);
+                appointments.AddRange(allPossibleAppointments);
+            }
+
+            int durationInMinutes = (int)(tempAppointment.AppointmentEnd - tempAppointment.AppointmentStart).TotalMinutes;
+            List<SuggestedEmergencyAppDTO> suggestedAppointments = FormEmergencyAppDTOs(appointments, durationInMinutes);
+            suggestedAppointments.Sort((x, y) => x.ConflictingAppointments.Count.CompareTo(y.ConflictingAppointments.Count));
 
             return suggestedAppointments;
         }
@@ -478,7 +516,7 @@ namespace Service
         {
             List<DoctorAppointment> appointments = new List<DoctorAppointment>();
             List<DateTime> datesWithoutTime = new List<DateTime>();
-            foreach(DateTime date in dates)
+            foreach (DateTime date in dates)
             {
                 datesWithoutTime.Add(date.Date);
             }

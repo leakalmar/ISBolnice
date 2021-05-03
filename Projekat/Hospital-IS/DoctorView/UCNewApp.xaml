@@ -13,7 +13,7 @@
     <Grid>
         <Grid x:Name="schedule" Visibility="Visible">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*" />
                 <ColumnDefinition Width="0.25*" />
                 <ColumnDefinition Width="0.2*" />
                 <ColumnDefinition Width="0.09*" />
@@ -31,10 +31,10 @@
             </Grid.RowDefinitions>
 
             <Button Grid.Column="3" Grid.Row="4" Background="Transparent"
-                    BorderThickness="0" x:Name="emergency" Click="emergency_Click" Margin="5">
+                    BorderThickness="0" x:Name="emergency" Click="emergency_Click"
+                    Margin="5">
                 <Image Source="pack://application:,,,/Resources/siren.png" />
             </Button>
-            
 
             <Label Content="Novi termin" FontSize="20" BorderThickness="0"
                     Foreground="FloralWhite" HorizontalAlignment="Center"
@@ -105,7 +105,8 @@
 
             <GroupBox Header="Rezultati pretrage" FontSize="16" Grid.Row="5"
                     Grid.ColumnSpan="6" BorderBrush="#FF2E3B55" Foreground="White"
-                    Grid.RowSpan="2" Margin="0,0,0,20">
+                    Grid.RowSpan="2" Margin="0,0,0,20" x:Name="appointmentsGroupBox"
+                    Visibility="Visible">
                 <DataGrid x:Name="appointments" ItemsSource="{Binding}" Margin="10"
                         Background="Transparent" RowBackground="Transparent"
                         Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -113,8 +114,7 @@
                         SelectionMode="Single" IsReadOnly="True" BorderBrush="{x:Null}"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                         HorizontalScrollBarVisibility="Disabled" FontSize="14"
-                        RowHeaderWidth="0" CanUserSortColumns="False"
-                        MouseDoubleClick="appointments_MouseDoubleClick">
+                        RowHeaderWidth="0">
                     <DataGrid.Resources>
                         <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
                                 TargetType="{x:Type DataGridColumnHeader}">
@@ -125,26 +125,25 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Datum"
                                 Binding="{Binding Appointment.AppointmentEnd.Date,StringFormat=\{0:MM/dd/yyyy\}}"
-                                CanUserResize="False" Width="0.05*"
-                                SortDirection="Ascending" />
+                                Width="0.05*" SortDirection="Ascending" />
                         <DataGridTextColumn Header="Od" CanUserResize="False"
                                 Width="0.05*"
                                 Binding="{Binding Appointment.AppointmentStart.TimeOfDay}" />
-                        <DataGridTextColumn Header="Do" x:Name="to" CanUserResize="False"
-                                Width="0.05*"
+                        <DataGridTextColumn Header="Do" x:Name="to" Width="0.05*"
                                 Binding="{Binding Appointment.AppointmentEnd.TimeOfDay}" />
-                        <DataGridTextColumn Header="Tip" CanUserResize="False"
-                                Width="0.05*" Binding="{Binding Appointment.Type}" />
-                        <DataGridCheckBoxColumn Header="Slobodno" x:Name="isAdded"
-                                CanUserResize="False" Width="0.05*"
-                                Binding="{Binding Appointment.Reserved}" />
-                        <DataGridCheckBoxColumn Header="Hitno" CanUserResize="False"
-                                Width="0.05*" Binding="{Binding Appointment.IsUrgent}" />
+                        <DataGridTextColumn Header="Tip" Width="0.05*"
+                                Binding="{Binding Appointment.Type}" />
+                        <DataGridCheckBoxColumn Header="Zauzeto" x:Name="isAdded"
+                                Width="0.05*" Binding="{Binding Appointment.Reserved}" />
+                        <DataGridCheckBoxColumn Header="Hitno" Width="0.05*"
+                                Binding="{Binding Appointment.IsUrgent}" />
                     </DataGrid.Columns>
                     <DataGrid.RowStyle>
                         <Style TargetType="{x:Type DataGridRow}"
                                 BasedOn="{StaticResource {x:Type DataGridRow}}">
                             <Setter Property="IsEnabled" Value="True" />
+                            <EventSetter Event="MouseDoubleClick"
+                                    Handler="appointments_MouseDoubleClick" />
                             <Style.Triggers>
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
@@ -159,6 +158,54 @@
                                     </MultiDataTrigger.Setters>
                                 </MultiDataTrigger>
                             </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+                </DataGrid>
+            </GroupBox>
+
+            <GroupBox Header="Rezultati pretrage" FontSize="16" Grid.Row="5"
+                    Grid.ColumnSpan="6" BorderBrush="#FF2E3B55" Foreground="White"
+                    Grid.RowSpan="2" Margin="0,0,0,20" x:Name="emergencyGroupBox"
+                    Visibility="Collapsed">
+                <DataGrid x:Name="emergencyAppointments" ItemsSource="{Binding}"
+                        Margin="10" Background="Transparent" RowBackground="Transparent"
+                        Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        BorderThickness="0,0,0,0" AutoGenerateColumns="False"
+                        SelectionMode="Single" IsReadOnly="True" BorderBrush="{x:Null}"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        HorizontalScrollBarVisibility="Disabled" FontSize="14"
+                        RowHeaderWidth="0">
+                    <DataGrid.Resources>
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
+                                TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#FF2E3B55" />
+                            <EventSetter Event="KeyDown" Handler="setAppointment_KeyDown" />
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Datum"
+                                Binding="{Binding SuggestedAppointment.AppointmentEnd.Date,StringFormat=\{0:MM/dd/yyyy\}}"
+                                SortDirection="Ascending" />
+                        <DataGridTextColumn Header="Od" CanUserResize="False"
+                                Binding="{Binding SuggestedAppointment.AppointmentStart.TimeOfDay}" />
+                        <DataGridTextColumn Header="Doktor" x:Name="doctor"
+                                SortMemberPath="Surname" Width="*">
+                            <DataGridTextColumn.Binding>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="SuggestedAppointment.Doctor.Surname" />
+                                    <Binding Path="SuggestedAppointment.Doctor.Name" />
+                                </MultiBinding>
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
+                        <!--<DataGridCheckBoxColumn Header="Zauzeto" x:Name="taken" Binding="False" />-->
+                        <DataGridTextColumn Header="Broj pomeranja" x:Name="reschedule"
+                                CanUserResize="False"
+                                Binding="{Binding ConflictingAppointments.Count,StringFormat={}\{0:N0\}}" />
+                    </DataGrid.Columns>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick"
+                                    Handler="emergencyApp_MouseDoubleClick" />
                         </Style>
                     </DataGrid.RowStyle>
                 </DataGrid>

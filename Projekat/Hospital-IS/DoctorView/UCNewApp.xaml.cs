@@ -39,9 +39,9 @@ namespace Hospital_IS.DoctorView
                     _documentMessage = value;
 
                 }
-                DoctorAppointment selected = (DoctorAppointment)appointments.SelectedItem;
+                AppointmentRow selected = (AppointmentRow)appointments.SelectedItem;
 
-                if (!DoctorHomePage.Instance.Doctor.Id.Equals(selected.Doctor.Id))
+                if (!DoctorHomePage.Instance.Doctor.Id.Equals(selected.Appointment.Doctor.Id))
                 {
                     if (value.Any(x => !char.IsLetter(x)) || value == "")
                     {
@@ -136,16 +136,34 @@ namespace Hospital_IS.DoctorView
                 Room room = (Room)rooms.SelectedItem;
                 List<DateTime> dates = new List<DateTime>(calendar.SelectedDates);
                 AppointmetType type = FindType();
+                Specialty specialty = (Specialty)specialization.SelectedItem;
 
 
                 changeVisibilityOfFields(type, doctor);
-                List<DoctorAppointment> allAppointments = DoctorAppointmentController.Instance.GetSuggestedAndReservedByDoctor(dates, Emergency, room.RoomId, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
+                if (Emergency)
+                {
+                    List<SuggestedEmergencyAppDTO> allEmergencyAppointments = DoctorAppointmentController.Instance.GetSuggestedEmergencyAppsForDoctor(dates, Emergency,room, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
+                    ICollectionView view = new CollectionViewSource { Source = allEmergencyAppointments }.View;
+                    //view.SortDescriptions.Clear();
+                    //view.SortDescriptions.Add(new SortDescription("SuggestedAppointment.AppointmentStart", ListSortDirection.Ascending));
 
-                ICollectionView view = new CollectionViewSource { Source = ConvertList(allAppointments) }.View;
-                view.SortDescriptions.Clear();
-                view.SortDescriptions.Add(new SortDescription("Appointment.AppointmentStart", ListSortDirection.Ascending));
+                    emergencyAppointments.DataContext = view;
+                    appointmentsGroupBox.Visibility = Visibility.Collapsed;
+                    emergencyGroupBox.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    List<DoctorAppointment> allAppointments = DoctorAppointmentController.Instance.GetSuggestedAppointmentsByDoctor(dates, Emergency, room, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
+                    ICollectionView view = new CollectionViewSource { Source = ConvertList(allAppointments) }.View;
+                    view.SortDescriptions.Clear();
+                    view.SortDescriptions.Add(new SortDescription("Appointment.AppointmentStart", ListSortDirection.Ascending));
 
-                appointments.DataContext = view;
+                    appointments.DataContext = view;
+                    emergencyGroupBox.Visibility = Visibility.Collapsed;
+                    appointmentsGroupBox.Visibility = Visibility.Visible;
+                }
+
+                
             }
 
         }
@@ -255,8 +273,6 @@ namespace Hospital_IS.DoctorView
         private void appointments_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DoctorAppointment selected = (DoctorAppointment)((AppointmentRow)appointments.SelectedItem).Appointment;
-            var row = appointments.ItemContainerGenerator.ContainerFromItem(selected) as DataGridRow;
-
 
             schedule.Visibility = Visibility.Collapsed;
             date.Content = selected.AppointmentStart.Date;
@@ -269,7 +285,20 @@ namespace Hospital_IS.DoctorView
 
             document.Visibility = Visibility.Visible;
             cause.Focus();
+        }
 
+        private void emergencyApp_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            SuggestedEmergencyAppDTO selected = (SuggestedEmergencyAppDTO)emergencyAppointments.SelectedItem;
+            
+            foreach(RescheduledAppointmentDTO rescheduled in selected.RescheduledAppointments)
+            {
+                DoctorAppointmentController.Instance.UpdateAppointment(rescheduled.OldDocAppointment, rescheduled.DocAppointment);  //notifikacije ???
+            }
+            DoctorAppointmentController.Instance.AddAppointment(selected.SuggestedAppointment);
+
+            DoctorHomePage.Instance.Home.Children.Remove(this);
+            DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(Appointment, true));
 
         }
 

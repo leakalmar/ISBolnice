@@ -59,12 +59,21 @@ namespace Controllers
             return DoctorAppointmentService.Instance.SuggestAppointmentsToPatient(timeSlot, doctor, patient, date, priority);
         }
 
-        public List<DoctorAppointment> GetSuggestedAndReservedByDoctor(List<DateTime> dates, bool isUrgent,int idRoom, AppointmetType type, TimeSpan duration, Patient patient, Doctor doctor)
+        public List<DoctorAppointment> GetSuggestedAppointmentsByDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmetType type, TimeSpan duration, Patient patient, Doctor doctor)
         {
-            DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, idRoom, doctor, patient);
+
+            DoctorAppointment tempAppointment = new DoctorAppointment(new DateTime(dates[0].Year, dates[0].Month, dates[0].Day, 08, 00, 00), type, false, room.RoomId, doctor, patient);
             tempAppointment.AppointmentEnd = dates[0].Add(duration);
             tempAppointment.IsUrgent = isUrgent;
             return DoctorAppointmentService.Instance.SuggestAppointmetsToDoctor(dates, tempAppointment);
+        }
+
+        public List<SuggestedEmergencyAppDTO> GetSuggestedEmergencyAppsForDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmetType type, TimeSpan duration, Patient patient, Doctor doctor)
+        {
+            DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, room.RoomId, doctor, patient);
+            tempAppointment.AppointmentEnd = dates[0].Add(duration);
+            tempAppointment.IsUrgent = isUrgent;
+            return DoctorAppointmentService.Instance.GenerateEmergencyAppointmentsForDoctor(dates, tempAppointment);
         }
 
         public List<DoctorAppointment> GetFutureAppointmentsByPatient(int patientId)
