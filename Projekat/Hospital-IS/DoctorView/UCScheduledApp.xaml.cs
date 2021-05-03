@@ -47,7 +47,7 @@ namespace Hospital_IS.DoctorView
             view.Filter = null;
             view.Filter = delegate (object item)
             {
-                return ((DoctorAppointment)item).IsFinished == null && ((DoctorAppointment)item).AppointmentStart > DateTime.Now;
+                return ((DoctorAppointment)item).AppointmentStart > DateTime.Now;
             };
             dataGrid.DataContext = view;
             Appointment = PatientChart.Appointment;

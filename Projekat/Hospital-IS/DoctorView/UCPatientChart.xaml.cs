@@ -152,17 +152,17 @@ namespace Hospital_IS.DoctorView
 
         private void EndApp_KeyDown(object sender, KeyEventArgs e)
         {
+            DoctorAppointmentController.Instance.EndAppointment(Appointment);
             ChartController.Instance.AddReport(Appointment, ReportView.reportDetail.Text, ReportView.Prescriptions.Count, Patient);
             ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView.Prescriptions), Patient);
+
             DoctorHomePage.Instance.Home.Children.Remove(this);
             DoctorHomePage.Instance.Home.Children.Add(new UCAppDetail(null));
         }
 
         private void EndAppointment_Click(object sender, RoutedEventArgs e)
         {
-            DoctorAppointment oldAppointment = new DoctorAppointment( Appointment);
-            Appointment.IsFinished = true;
-            DoctorAppointmentController.Instance.UpdateAppointment(oldAppointment, Appointment);
+            DoctorAppointmentController.Instance.EndAppointment(Appointment);
             ChartController.Instance.AddReport(Appointment, ReportView.reportDetail.Text, ReportView.Prescriptions.Count, Patient);
             ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView.Prescriptions), Patient);
 

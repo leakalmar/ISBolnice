@@ -53,6 +53,12 @@ namespace Controllers
             DoctorAppointmentService.Instance.UpdateAppointment(oldDoctorAppointment, newDoctorAppointment);
         }
 
+        public void EndAppointment(DoctorAppointment doctorAppointment)
+        {
+            doctorAppointment.IsFinished = true;
+            DoctorAppointmentService.Instance.UpdateAppointment(doctorAppointment,doctorAppointment);
+        }
+
         public List<DoctorAppointment> SuggestAppointmentsToPatient(String timeSlot, Doctor doctor, Patient patient, DateTime date, Boolean priority)
         {
             return DoctorAppointmentService.Instance.SuggestAppointmentsToPatient(timeSlot, doctor, patient, date, priority);
