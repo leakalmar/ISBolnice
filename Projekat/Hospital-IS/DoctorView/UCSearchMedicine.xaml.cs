@@ -172,10 +172,5 @@ namespace Hospital_IS.DoctorView
                 
             }
         }
-
-        private void FrameworkElement_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

@@ -40,7 +40,8 @@ namespace Hospital_IS.DoctorView
 
         private void delete_(object sender, KeyEventArgs e)
         {
-
+            Prescriptions.Remove((Prescription)medicines.SelectedItem);
+            medicines.Items.Refresh();
         }
 
         private void delete_prescription(object sender, KeyEventArgs e)
