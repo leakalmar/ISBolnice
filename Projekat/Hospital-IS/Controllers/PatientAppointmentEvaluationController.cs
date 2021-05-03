@@ -36,5 +36,10 @@ namespace Controllers
         {
             return PatientAppointmentEvaluationService.Instance.IsAppointmentEvaluated(appointmentEvaluation);
         }
+
+        public Boolean ShowHospitalEvaluation(int patientId)
+        {
+            return PatientAppointmentEvaluationService.Instance.ShowHospitalEvaluation(patientId);
+        }
     }
 }

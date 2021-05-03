@@ -32,6 +32,13 @@ namespace Hospital_IS.View
             AppointmentEvaluation.Grade = Grades.SelectedIndex + 1;
             AppointmentEvaluation.Comment = Comment.Text;
             PatientAppointmentEvaluationController.Instance.AddAppointmentEvaluation(AppointmentEvaluation);
+            if (PatientAppointmentEvaluationController.Instance.ShowHospitalEvaluation(HomePatient.Instance.Patient.Id))
+            {
+                //Napraviti prozor za pitanje da li zeli da oceni bolnicu,ako zeli napravi prozor sa anketom/ocenjivanjem bolnice
+                YesNoDialogMessage yesNoDialog = new YesNoDialogMessage("Da li želite da ocenite bolnicu?");
+                yesNoDialog.Show();
+                this.Close();
+            }
             this.Close();
         }
     }

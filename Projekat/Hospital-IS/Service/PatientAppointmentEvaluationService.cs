@@ -67,5 +67,24 @@ namespace Service
             }
             return false;
         }
+
+        public Boolean ShowHospitalEvaluation(int patientId)
+        {
+            int appointmentCounter = 0;
+            int hospitalEvaluation = 3;
+            foreach (PatientAppointmentEvaluationDTO appointment in AllAppointmentEvaluations)
+            {
+                if (appointment.PatientId == patientId)
+                {
+                    appointmentCounter++;
+                }
+            }
+
+            if (appointmentCounter % hospitalEvaluation == 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
