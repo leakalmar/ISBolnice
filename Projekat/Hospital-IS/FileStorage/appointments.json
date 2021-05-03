@@ -1,5 +1,7 @@
 [
   {
+    "Cause": null,
+    "Detail": null,
     "NameSurnamePatient": "Simona Stantic",
     "AppTypeText": null,
     "Patient": {
@@ -12,11 +14,6 @@
         "Tetanus",
         "Paracetamol"
       ],
-      "TrollMechanism": {
-        "TrollCheckStartDate": "0001-01-01T00:00:00",
-        "AppointmentCounterInTimeRange": 0,
-        "IsTroll": false
-      },
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
@@ -38,6 +35,7 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
+      "Notifications": null,
       "Hospital": null
     },
     "Doctor": {
@@ -68,11 +66,11 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
+      "Notifications": null,
       "Hospital": null
     },
     "Report": null,
     "Reserved": true,
-    "AppointmentCause": null,
     "AppointmentStart": "2021-04-22T09:00:00",
     "AppointmentEnd": "2021-04-22T09:30:00",
     "Type": 1,
@@ -229,11 +227,6 @@
         "Tetanus",
         "Paracetamol"
       ],
-      "TrollMechanism": {
-        "TrollCheckStartDate": "0001-01-01T00:00:00",
-        "AppointmentCounterInTimeRange": 0,
-        "IsTroll": false
-      },
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
@@ -255,6 +248,7 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Zelengoska 15",
+      "Notifications": null,
       "Hospital": null
     },
     "Doctor": {
@@ -285,17 +279,19 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
+      "Notifications": [],
       "Hospital": null
     },
     "Report": null,
     "Reserved": true,
-    "AppointmentCause": null,
     "AppointmentStart": "2021-04-23T08:30:00",
     "AppointmentEnd": "2021-04-23T09:00:00",
     "Type": 1,
     "Room": 1
   },
   {
+    "Cause": null,
+    "Detail": null,
     "NameSurnamePatient": "Simona Stantic",
     "AppTypeText": null,
     "Patient": {
@@ -308,11 +304,6 @@
         "Tetanus",
         "Paracetamol"
       ],
-      "TrollMechanism": {
-        "TrollCheckStartDate": "0001-01-01T00:00:00",
-        "AppointmentCounterInTimeRange": 0,
-        "IsTroll": false
-      },
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
@@ -363,6 +354,7 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
+      "Notifications": null,
       "Hospital": null
     },
     "Doctor": {
@@ -393,17 +385,19 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
+      "Notifications": [],
       "Hospital": null
     },
     "Report": null,
     "Reserved": true,
-    "AppointmentCause": null,
     "AppointmentStart": "2021-04-30T09:30:00",
     "AppointmentEnd": "2021-04-30T10:00:00",
     "Type": 1,
     "Room": 1
   },
   {
+    "Cause": null,
+    "Detail": null,
     "NameSurnamePatient": "Simona Stantic",
     "AppTypeText": null,
     "Patient": {
@@ -416,11 +410,6 @@
         "Tetanus",
         "Paracetamol"
       ],
-      "TrollMechanism": {
-        "TrollCheckStartDate": "2021-06-22T00:00:00",
-        "AppointmentCounterInTimeRange": 2,
-        "IsTroll": false
-      },
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
@@ -431,22 +420,24 @@
           {
             "Medicine": {
               "Name": "Bromazepam",
-              "Composition": "1 tableta sadrži 1,5 mg, 3 mg, odnosno 6 mg bromazepama.",
-              "SideEffects": "U osetljivih bolesnika, naročito kod većih doza, može se javiti blagi umor, pospanost i vrtoglavica, a povremeno slabost mišića i ataksija. Ova neželjena dejstva mogu se izbeći prilagođavanjem doze.",
-              "Usage": "Doziranje je individualno. Prosečna doza za ambulantne pacijente je 1,5-3 mg, do 3 puta na dan. U težim oblicima bolesti, naročito kod hospitalizovanih bolesnika, daje se 6-12 mg, 2 do 3 puta na dan."
+              "Composition": [],
+              "SideEffects": "Najebao si",
+              "Usage": "Kad hoćeš",
+              "ReplaceMedicine": null
             },
             "Quantity": 1,
             "TimesADay": 2,
             "TherapyStart": "2021-04-19T00:00:00",
             "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 11
+            "FirstUsageTime": 8
           },
           {
             "Medicine": {
               "Name": "Brufen",
-              "Composition": "1 film tableta sadrži 400 mg ibuprofena 5 ml sirupa sadrži 100 mg Ibuprofena",
-              "SideEffects": "Ibuprofen se dobro podnosi, a neželjena dejstva su veoma retka i nestaju prekidom terapije. Kod manjeg broja bolesnika mogu se, javiti gastrointestinalne smetnje.",
-              "Usage": "Ibuprofen se uzima posle jela. Doziranje treba individualno uskladiti tako da se sa najmanjom mogućom dozom postigne željeni terapijski efekat."
+              "Composition": [],
+              "SideEffects": "Najebao si",
+              "Usage": "Kad hoćeš",
+              "ReplaceMedicine": null
             },
             "Quantity": 1,
             "TimesADay": 3,
@@ -469,6 +460,7 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
+      "Notifications": null,
       "Hospital": null
     },
     "Doctor": {
@@ -499,17 +491,19 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
+      "Notifications": [],
       "Hospital": null
     },
     "Report": null,
-    "Reserved": false,
-    "AppointmentCause": null,
-    "AppointmentStart": "2021-04-29T10:30:00",
-    "AppointmentEnd": "2021-04-29T11:00:00",
+    "Reserved": true,
+    "AppointmentStart": "2021-04-29T09:30:00",
+    "AppointmentEnd": "2021-04-29T10:00:00",
     "Type": 1,
     "Room": 1
   },
   {
+    "Cause": null,
+    "Detail": null,
     "NameSurnamePatient": "Simona Stantic",
     "AppTypeText": null,
     "Patient": {
@@ -522,11 +516,6 @@
         "Tetanus",
         "Paracetamol"
       ],
-      "TrollMechanism": {
-        "TrollCheckStartDate": "0001-01-01T00:00:00",
-        "AppointmentCounterInTimeRange": 0,
-        "IsTroll": false
-      },
       "IsGuest": false,
       "MedicalHistory": {
         "Prescription": [],
@@ -537,9 +526,10 @@
           {
             "Medicine": {
               "Name": "Bromazepam",
-              "Composition": "Loš sastav",
+              "Composition": [],
               "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš"
+              "Usage": "Kad hoćeš",
+              "ReplaceMedicine": null
             },
             "Quantity": 1,
             "TimesADay": 2,
@@ -550,9 +540,10 @@
           {
             "Medicine": {
               "Name": "Brufen",
-              "Composition": "Loš sastav",
+              "Composition": [],
               "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš"
+              "Usage": "Kad hoćeš",
+              "ReplaceMedicine": null
             },
             "Quantity": 1,
             "TimesADay": 3,
@@ -575,6 +566,7 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
+      "Notifications": null,
       "Hospital": null
     },
     "Doctor": {
@@ -605,16 +597,16 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
+      "Notifications": [],
       "Hospital": null
     },
     "Report": {
-      "Anamnesis": null,
+      "Amnesis": "",
       "HaveRecipe": false,
       "HaveTest": false,
       "ReportId": "4/24/2021 9:30:00 AM"
     },
     "Reserved": true,
-    "AppointmentCause": null,
     "AppointmentStart": "2021-04-24T09:30:00",
     "AppointmentEnd": "2021-04-24T10:00:00",
     "Type": 1,
