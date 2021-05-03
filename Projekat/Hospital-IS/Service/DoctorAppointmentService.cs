@@ -137,7 +137,7 @@ namespace Service
                 }
 
                 DoctorAppointment newAppointment;
-                while (lastTimeCreated.TimeOfDay < new DateTime(DateTime.Now.Date.Year, DateTime.Now.Date.Month, DateTime.Now.Date.Day, 20, 00, 00).TimeOfDay)
+                while (lastTimeCreated.TimeOfDay < new DateTime(DateTime.Now.Date.Year, DateTime.Now.Date.Month, DateTime.Now.Date.Day, 23, 00, 00).TimeOfDay)
                 {
                     if (tempAppointment.Type == AppointmetType.CheckUp)
                     {
@@ -357,6 +357,8 @@ namespace Service
             int durationInMinutes = (int)(tempAppointment.AppointmentEnd - tempAppointment.AppointmentStart).TotalMinutes;
             List<SuggestedEmergencyAppDTO> suggestedAppointments = FormEmergencyAppDTOs(appointments, durationInMinutes);
             suggestedAppointments.Sort((x, y) => x.ConflictingAppointments.Count.CompareTo(y.ConflictingAppointments.Count));
+            SetConflictingIsUrgent(suggestedAppointments);
+            CheckIfConflictingIsStarted(suggestedAppointments);
 
             return suggestedAppointments;
         }
@@ -380,7 +382,8 @@ namespace Service
 
             List<SuggestedEmergencyAppDTO> suggestedAppointments = FormEmergencyAppDTOs(appointments, emerAppointmentDTO.DurationInMinutes);
             suggestedAppointments.Sort((x, y) => x.TotalReshedulePeriodInHours.CompareTo(y.TotalReshedulePeriodInHours));
-            //izbaciti neodgovarajuce termine ako je conflicting hitan ili je neki vec zapocet
+            suggestedAppointments = CheckIfConflictingIsUrgent(suggestedAppointments);
+            CheckIfConflictingIsStarted(suggestedAppointments);
 
             return suggestedAppointments;
         }
@@ -418,7 +421,7 @@ namespace Service
             List<DoctorAppointment> conflictingAppointments = new List<DoctorAppointment>();
             foreach (DoctorAppointment app in allAppointments)
             {
-                if ((appointment.Doctor.Id.Equals(app.Doctor.Id) || appointment.Room.Equals(app.Room))) //&& app.AppointmentStart > DateTime.Now
+                if ((appointment.Doctor.Id.Equals(app.Doctor.Id) || appointment.Room.Equals(app.Room)))
                 {
                     if (CheckAppointmentDates(appointment, app))
                         conflictingAppointments.Add(app);
@@ -459,7 +462,7 @@ namespace Service
                     RescheduledAppointmentDTO appointment = new RescheduledAppointmentDTO(oldAppointments[i]);
                     appointment.DocAppointment.AppointmentStart = appointmentStart;
                     appointment.DocAppointment.AppointmentEnd = appointmentStart.Add(appointmentDuration);
-                    if (appointment.DocAppointment.AppointmentStart.TimeOfDay >= new TimeSpan(8, 0, 0) && appointment.DocAppointment.AppointmentEnd.TimeOfDay < new TimeSpan(20, 0, 0)
+                    if (appointment.DocAppointment.AppointmentStart.TimeOfDay >= new TimeSpan(8, 0, 0) && appointment.DocAppointment.AppointmentEnd.TimeOfDay < new TimeSpan(23, 0, 0)
                             && VerifyAppointment(appointment.DocAppointment, null))
                     {
                         newAppointments.Add(appointment);
@@ -476,6 +479,42 @@ namespace Service
 
             return newAppointments;
 
+        }
+
+        public List<SuggestedEmergencyAppDTO> CheckIfConflictingIsUrgent(List<SuggestedEmergencyAppDTO> suggestedEmergencyApps)
+        {
+            List<SuggestedEmergencyAppDTO> validSuggestedApp = new List<SuggestedEmergencyAppDTO>();
+            foreach (SuggestedEmergencyAppDTO suggested in suggestedEmergencyApps)
+            {
+                suggested.CheckIfConflictingIsUrgent();
+                if (!suggested.ConflictingIsUrgent)
+                {
+                    validSuggestedApp.Add(suggested);
+                }
+            }
+            return validSuggestedApp;
+        }
+
+        public void SetConflictingIsUrgent(List<SuggestedEmergencyAppDTO> suggestedEmergencyApps)
+        {
+            foreach(SuggestedEmergencyAppDTO suggested in suggestedEmergencyApps)
+            {
+                suggested.CheckIfConflictingIsUrgent();
+            }
+        }
+
+        public void CheckIfConflictingIsStarted(List<SuggestedEmergencyAppDTO> suggestedEmergencyApps)
+        { 
+            for (int i = 0; i < suggestedEmergencyApps.Count; i++)
+            {
+                foreach(DoctorAppointment conflicting in suggestedEmergencyApps[i].ConflictingAppointments)
+                {
+                    if(conflicting.AppointmentStart < DateTime.Now)
+                    {
+                        suggestedEmergencyApps.Remove(suggestedEmergencyApps[i]);
+                    }
+                }
+            }
         }
 
         public List<DoctorAppointment> GetAllAppointmentsByRoomId(int roomId)

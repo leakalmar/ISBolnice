@@ -204,10 +204,11 @@
                                 </MultiBinding>
                             </DataGridTextColumn.Binding>
                         </DataGridTextColumn>
-                        <!--<DataGridCheckBoxColumn Header="Zauzeto" x:Name="taken" Binding="False" />-->
                         <DataGridTextColumn Header="Broj pomeranja" x:Name="reschedule"
                                 CanUserResize="False"
                                 Binding="{Binding ConflictingAppointments.Count,StringFormat={}\{0:N0\}}" />
+                        <DataGridCheckBoxColumn Header="Pomeranje hitnog slucaja"
+                                Binding="{Binding ConflictingIsUrgent}" />
                     </DataGrid.Columns>
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">

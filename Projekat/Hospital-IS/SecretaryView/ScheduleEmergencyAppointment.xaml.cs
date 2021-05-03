@@ -99,6 +99,7 @@ namespace Hospital_IS.SecretaryView
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             sa.Visibility = Visibility.Visible;
+            this.Close();
         }
     }
 }
