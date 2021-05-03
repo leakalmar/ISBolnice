@@ -48,6 +48,8 @@ namespace Hospital_IS
 
             NotificationController.Instance.AddNotification(Notification);
 
+            ucn.RefreshList();
+
             this.Close();
         }
 

@@ -46,6 +46,11 @@ namespace Hospital_IS.Service
             return userNotifications;
         }
 
+        public void ReloadNotifications()
+        {
+            allNotifications = nfs.GetAll();
+        }
+
         public void AddNotification(Notification notification)
         {
             allNotifications.Insert(0, notification);
