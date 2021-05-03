@@ -8,18 +8,18 @@ namespace Model
     {
         public int Id { get; set; }
         public List<Prescription> Prescription { get; set; }
-        public ObservableCollection<Test> Test { get; set; }
+        public List<Test> Test { get; set; }
         public List<Report> Reports { get; set; }
-        public ObservableCollection<Hospitalization> Hospitalization { get; set; }
-        public ObservableCollection<Therapy> Therapies { get; set; }
+        public List<Hospitalization> Hospitalization { get; set; }
+        public List<Therapy> Therapies { get; set; }
 
         public MedicalHistory()
         {
             Prescription = new List<Prescription>();
-            Test = new ObservableCollection<Test>();
+            Test = new List<Test>();
             Reports = new List<Report>();
-            Hospitalization = new ObservableCollection<Hospitalization>();
-            Therapies = new ObservableCollection<Therapy>();
+            Hospitalization = new List<Hospitalization>();
+            Therapies = new List<Therapy>();
         }
 
         public void AddPrescription(Prescription newPrescription)
@@ -54,7 +54,7 @@ namespace Model
             if (newTest == null)
                 return;
             if (this.Test == null)
-                this.Test = new ObservableCollection<Test>();
+                this.Test = new List<Test>();
             if (!this.Test.Contains(newTest))
                 this.Test.Add(newTest);
         }
@@ -109,7 +109,7 @@ namespace Model
             if (newHospitalization == null)
                 return;
             if (this.Hospitalization == null)
-                this.Hospitalization = new ObservableCollection<Hospitalization>();
+                this.Hospitalization = new List<Hospitalization>();
             if (!this.Hospitalization.Contains(newHospitalization))
                 this.Hospitalization.Add(newHospitalization);
         }
@@ -137,7 +137,7 @@ namespace Model
             if (newTherapy == null)
                 return;
             if (this.Therapies == null)
-                this.Therapies = new ObservableCollection<Therapy>();
+                this.Therapies = new List<Therapy>();
             if (!this.Therapies.Contains(newTherapy))
             {
                 this.Therapies.Add(newTherapy);

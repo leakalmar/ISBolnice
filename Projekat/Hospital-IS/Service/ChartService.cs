@@ -30,6 +30,12 @@ namespace Service
             AllCharts = cfs.GetAll();
         }
 
+        public List<Therapy> GetTherapiesByPatientId(int id)
+        {
+            MedicalHistory medicalHistory = GetChartById(id);
+            return medicalHistory.Therapies;
+        }
+
         public MedicalHistory GetChartById(int id)
         {
             foreach(MedicalHistory medicalHistory in AllCharts)
@@ -48,7 +54,7 @@ namespace Service
             return medicalHistory.Prescription;
         }
 
-        internal List<Prescription> GetPrescriptionsForReport(int id, DateTime reportId)
+        public List<Prescription> GetPrescriptionsForReport(int id, DateTime reportId)
         {
             List<Prescription> allPrescriptions = GetPrescriptionsByPatientId(id);
             List<Prescription> reportPrescriptions = new List<Prescription>();
@@ -62,41 +68,18 @@ namespace Service
             return reportPrescriptions;
         }
 
-        internal void DeletePrescription(int id, Prescription selectedPrescription)
+        public void AddPrescriptions(List<Prescription> prescriptions, int id)
         {
-            foreach(MedicalHistory medicalHistory in AllCharts)
-            {
-                if (medicalHistory.Id.Equals(id))
-                {
-                    medicalHistory.Prescription.Remove(selectedPrescription);
-                    cfs.SaveChart(AllCharts);
-                }
-            }
-        }
-
-        internal void AddPrescriptions(List<Prescription> prescriptions, int id)
-        {
-            foreach (MedicalHistory medicalHistory in AllCharts)
-            {
-                if (medicalHistory.Id.Equals(id))
-                {
-                    medicalHistory.Prescription.AddRange(prescriptions);
-                    cfs.SaveChart(AllCharts);
-                }
-            }
+            MedicalHistory medicalHistory = GetChartById(id);
+            medicalHistory.Prescription.AddRange(prescriptions);
+            cfs.SaveChart(AllCharts);
         }
 
         public void AddReport(Report newReport, int id)
         {
-            foreach(MedicalHistory medicalHistory in AllCharts)
-            {
-                if (medicalHistory.Id.Equals(id))
-                {
-                    medicalHistory.Reports.Add(newReport);
-                    cfs.SaveChart(AllCharts);
-                    return;
-                }
-            }
+            MedicalHistory medicalHistory = GetChartById(id);
+            medicalHistory.Reports.Add(newReport);
+            cfs.SaveChart(AllCharts);
         }
 
         public void UpdateReport(int id, Report report)

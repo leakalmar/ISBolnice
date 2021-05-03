@@ -12,14 +12,6 @@
         "Paracetamol"
       ],
       "IsGuest": false,
-      "MedicalHistory": {
-        "Id": 0,
-        "Prescription": [],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": []
-      },
       "doctor": null,
       "Doctor": null,
       "Education": 0,
@@ -86,43 +78,6 @@
         "Paracetamol"
       ],
       "IsGuest": false,
-      "MedicalHistory": {
-        "Id": 0,
-        "Prescription": [],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": [
-          {
-            "Medicine": {
-              "Name": "Bromazepam",
-              "Composition": [],
-              "SideEffects": "U osetljivih bolesnika, naročito kod većih doza, može se javiti blagi umor, pospanost i vrtoglavica, a povremeno slabost mišića i ataksija. Ova neželjena dejstva mogu se izbeći prilagođavanjem doze.",
-              "Usage": "Doziranje je individualno. Prosečna doza za ambulantne pacijente je 1,5-3 mg, do 3 puta na dan. U težim oblicima bolesti, naročito kod hospitalizovanih bolesnika, daje se 6-12 mg, 2 do 3 puta na dan.",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 2,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 11
-          },
-          {
-            "Medicine": {
-              "Name": "Brufen",
-              "Composition": [],
-              "SideEffects": "Ibuprofen se dobro podnosi, a neželjena dejstva su veoma retka i nestaju prekidom terapije. Kod manjeg broja bolesnika mogu se, javiti gastrointestinalne smetnje.",
-              "Usage": "Ibuprofen se uzima posle jela. Doziranje treba individualno uskladiti tako da se sa najmanjom mogućom dozom postigne željeni terapijski efekat.",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 3,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          }
-        ]
-      },
       "doctor": null,
       "Doctor": null,
       "Education": 0,
@@ -219,14 +174,6 @@
         "Paracetamol"
       ],
       "IsGuest": false,
-      "MedicalHistory": {
-        "Id": 0,
-        "Prescription": [],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": []
-      },
       "doctor": null,
       "Doctor": null,
       "Education": 0,
@@ -293,43 +240,6 @@
         "Paracetamol"
       ],
       "IsGuest": false,
-      "MedicalHistory": {
-        "Id": 0,
-        "Prescription": [],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": [
-          {
-            "Medicine": {
-              "Name": "Bromazepam",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 2,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          },
-          {
-            "Medicine": {
-              "Name": "Brufen",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 3,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          }
-        ]
-      },
       "doctor": null,
       "Doctor": null,
       "Education": 0,
@@ -396,43 +306,6 @@
         "Paracetamol"
       ],
       "IsGuest": false,
-      "MedicalHistory": {
-        "Id": 0,
-        "Prescription": [],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": [
-          {
-            "Medicine": {
-              "Name": "Bromazepam",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 2,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          },
-          {
-            "Medicine": {
-              "Name": "Brufen",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 3,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          }
-        ]
-      },
       "doctor": null,
       "Doctor": null,
       "Education": 0,
@@ -499,43 +372,6 @@
         "Paracetamol"
       ],
       "IsGuest": false,
-      "MedicalHistory": {
-        "Id": 0,
-        "Prescription": [],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": [
-          {
-            "Medicine": {
-              "Name": "Bromazepam",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 2,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          },
-          {
-            "Medicine": {
-              "Name": "Brufen",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 3,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          }
-        ]
-      },
       "doctor": null,
       "Doctor": null,
       "Education": 0,
@@ -602,54 +438,6 @@
         "Paracetamol"
       ],
       "IsGuest": false,
-      "MedicalHistory": {
-        "Id": 0,
-        "Prescription": [
-          {
-            "Medicine": {
-              "Name": "Defrinol tableta",
-              "Composition": [],
-              "SideEffects": "",
-              "Usage": "",
-              "ReplaceMedicine": []
-            },
-            "DatePrescribed": "2021-05-02T11:00:00"
-          }
-        ],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": [
-          {
-            "Medicine": {
-              "Name": "Bromazepam",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 2,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          },
-          {
-            "Medicine": {
-              "Name": "Brufen",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 3,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          }
-        ]
-      },
       "doctor": null,
       "Doctor": null,
       "Education": 0,
@@ -716,54 +504,6 @@
         "Paracetamol"
       ],
       "IsGuest": false,
-      "MedicalHistory": {
-        "Id": 0,
-        "Prescription": [
-          {
-            "Medicine": {
-              "Name": "Defrinol tableta",
-              "Composition": [],
-              "SideEffects": "",
-              "Usage": "",
-              "ReplaceMedicine": []
-            },
-            "DatePrescribed": "2021-05-02T11:00:00"
-          }
-        ],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": [
-          {
-            "Medicine": {
-              "Name": "Bromazepam",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 2,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          },
-          {
-            "Medicine": {
-              "Name": "Brufen",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 3,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          }
-        ]
-      },
       "doctor": null,
       "Doctor": null,
       "Education": 0,
@@ -830,54 +570,6 @@
         "Paracetamol"
       ],
       "IsGuest": false,
-      "MedicalHistory": {
-        "Id": 0,
-        "Prescription": [
-          {
-            "Medicine": {
-              "Name": "Defrinol tableta",
-              "Composition": [],
-              "SideEffects": "",
-              "Usage": "",
-              "ReplaceMedicine": []
-            },
-            "DatePrescribed": "2021-05-02T11:00:00"
-          }
-        ],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": [
-          {
-            "Medicine": {
-              "Name": "Bromazepam",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 2,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          },
-          {
-            "Medicine": {
-              "Name": "Brufen",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 3,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          }
-        ]
-      },
       "doctor": null,
       "Doctor": null,
       "Education": 0,

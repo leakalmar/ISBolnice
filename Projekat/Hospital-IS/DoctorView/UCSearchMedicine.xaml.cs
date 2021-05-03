@@ -19,7 +19,6 @@ namespace Hospital_IS.DoctorView
     /// </summary>
     public partial class UCSearchMedicine : UserControl
     {
-        public MedicineFileStorage mfs = new MedicineFileStorage();
         public Patient Patient { get; set; }
         public ObservableCollection<MedicineObject> medicineObjects { get; set; }
         public UCPatientChart PatientChart { get; set; }
@@ -41,7 +40,7 @@ namespace Hospital_IS.DoctorView
             {
                 medicineObjects.Add(new MedicineObject(p.Medicine, true, false));
             }
-            foreach (Medicine med in mfs.GetAll())
+            foreach (Medicine med in MedicineController.Instance.GetAll())
             {
                 bool found = false;
                 foreach (Prescription p in PatientChart.ReportView.Prescriptions)
@@ -94,10 +93,16 @@ namespace Hospital_IS.DoctorView
             }
             else if (e.Key == Key.Delete)
             {
-                PatientChart.ReportView.Prescriptions.Remove(new Prescription(med.Medicine, PatientChart.Appointment.AppointmentStart));
-                med.Check = false;
-                medicines.Items.Refresh();
-                search.Focus();
+                foreach (Prescription prescription in PatientChart.ReportView.Prescriptions)
+                {
+                    if (prescription.Medicine.Name.Equals(med.Medicine.Name))
+                    {
+                        PatientChart.ReportView.Prescriptions.Remove(prescription); med.Check = false;
+                        medicines.Items.Refresh();
+                        search.Focus();
+                        return;
+                    }
+                }
             }
         }
 
@@ -153,10 +158,18 @@ namespace Hospital_IS.DoctorView
             }
             else
             {
-                PatientChart.ReportView.Prescriptions.Remove(new Prescription(med.Medicine, PatientChart.Appointment.AppointmentStart));
-                med.Check = false;
-                medicines.Items.Refresh();
-                search.Focus();
+                foreach (Prescription prescription in PatientChart.ReportView.Prescriptions)
+                {
+                    if (prescription.Medicine.Name.Equals(med.Medicine.Name))
+                    {
+                        PatientChart.ReportView.Prescriptions.Remove(prescription); med.Check = false;
+                        medicines.Items.Refresh();
+                        search.Focus();
+                        return;
+                    }
+                }
+                
+                
             }
         }
 

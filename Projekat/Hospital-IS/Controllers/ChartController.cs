@@ -27,6 +27,11 @@ namespace Controllers
 
         }
 
+        public List<Therapy> GetTherapiesByPatient(Patient patient)
+        {
+            return ChartService.Instance.GetTherapiesByPatientId(patient.Id);
+        }
+
         public MedicalHistory GetChartByPatient(Patient patient)
         {
             return ChartService.Instance.GetChartById(patient.Id);

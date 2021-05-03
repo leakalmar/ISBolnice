@@ -63,7 +63,7 @@ namespace Hospital_IS.View
         {
             DateTime time= DateTime.Now;
 
-            foreach (Therapy therapy in Patient.MedicalHistory.Therapies)
+            foreach (Therapy therapy in ChartController.Instance.GetTherapiesByPatient(HomePatient.Instance.Patient))
             {
                 int usageHourDifference = (int)24/therapy.TimesADay;
                 for (int i = 0; i < therapy.TimesADay; i++)

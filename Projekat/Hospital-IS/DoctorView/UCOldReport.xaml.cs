@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
+    //Klasa nije updatovana!
     public partial class UCOldReport : UserControl
     {
         private DoctorAppointment NowAppointment;
@@ -42,7 +43,7 @@ namespace Hospital_IS.DoctorView
             Appointment = appointment;
             NowAppointment = nowAppointment;
             //reportDetail.Text = Appointment.Report.Anamnesis;
-            medicines.DataContext = Appointment.Patient.MedicalHistory.GetPresciptionByReport(Appointment.AppointmentStart);
+            //medicines.DataContext = Appointment.Patient.MedicalHistory.GetPresciptionByReport(Appointment.AppointmentStart);
             name.Content = Appointment.Doctor.Name;
             surname.Content = Appointment.Doctor.Surname;
             date.Content = Appointment.AppointmentStart;
