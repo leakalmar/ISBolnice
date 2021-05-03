@@ -24,8 +24,8 @@ namespace Hospital_IS.ManagerView
         public ManagerNotificationView()
         {
             InitializeComponent();
-            Notifications = new ObservableCollection<MedicineNotification>(MedicineNotificationController.Instance.GetAll());
-
+            Notifications = new ObservableCollection<MedicineNotification>(MedicineNotificationController.Instance.GetAllByDoctorId(6));
+            
             ListViewNotifications.Items.Clear();
             if (Notifications.Count > 0)
                 ListViewNotifications.ItemsSource = Notifications;
@@ -44,9 +44,14 @@ namespace Hospital_IS.ManagerView
         {
             MedicineNotification selectedNotification = (MedicineNotification)ListViewNotifications.SelectedItem;
 
-            NotificationInfoView infoView = new NotificationInfoView();
+            NotificationInfoView infoView = new NotificationInfoView(selectedNotification);
+           
+           
             infoView.Show();
+            this.Hide();
         }
+
+      
     }
 }
 

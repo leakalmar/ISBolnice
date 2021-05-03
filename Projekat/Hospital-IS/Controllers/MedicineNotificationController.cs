@@ -28,6 +28,8 @@ namespace Controllers
             return MedicineNotificationService.Instance.GetAllByDoctorId(idDoctor);
         }
 
+
+
         private MedicineNotificationController()
         {
           
@@ -38,6 +40,8 @@ namespace Controllers
             Medicine medicine = new Medicine(nameClass, medicineComponentsClass, sideEffectClass, therapeuticClass, medicineNamesClass);
 
             MedicineNotification medicineNotification = new MedicineNotification("Odobrenje" + " " + nameClass, medicine, doctorsIds);
+            medicineNotification.SenderId.Add(6);
+            medicineNotification.DateSent = DateTime.Now;
 
             MedicineNotificationService.Instance.AddNotification(medicineNotification);
         }
@@ -48,7 +52,10 @@ namespace Controllers
         {
             reviewdNotification.Note = text;
             reviewdNotification.Title = "Odbijen " + reviewdNotification.Medicine.Name;
-            reviewdNotification.DoctorIds.Clear();
+            reviewdNotification.SenderId.AddRange(reviewdNotification.RecieverIds);
+            reviewdNotification.RecieverIds.Clear();
+            reviewdNotification.RecieverIds.Add(6);
+            reviewdNotification.DateSent = DateTime.Now;
             MedicineNotificationService.Instance.UpdateMedicineNotification(reviewdNotification);
         }
 

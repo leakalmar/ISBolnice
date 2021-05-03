@@ -22,10 +22,20 @@ namespace Hospital_IS.ManagerView
     {
         public ObservableCollection<MedicineComponent> CompositionOfMedicine { get; set; }
         public ObservableCollection<ReplaceMedicineName> ReplaceMedicines { get; set; }
-        public MedicineInfoView(Medicine medicine)
+
+        public MedicineNotification medicineNotification1 { get; set; }
+        public MedicineInfoView(Medicine medicine, String parent, MedicineNotification medicineNotification)
         {
-           
+            medicineNotification1 = medicineNotification;
             InitializeComponent();
+            if (parent.Equals("notification"))
+            {
+                Back.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                BackTonotification.Visibility = Visibility.Collapsed;
+            }
             MedicalInformation.DataContext = medicine;
             MedicineName.Text = medicine.Name;
             ReplaceMedicines = new ObservableCollection<ReplaceMedicineName>(medicine.ReplaceMedicine);
@@ -42,6 +52,12 @@ namespace Hospital_IS.ManagerView
             this.Hide();
         }
 
-      
+        private void BackTonotification_Click(object sender, RoutedEventArgs e)
+        {
+            NotificationInfoView notificationInfoView = new NotificationInfoView(medicineNotification1);
+            notificationInfoView.Show();
+            this.Hide();
+
+        }
     }
 }
