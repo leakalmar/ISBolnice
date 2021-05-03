@@ -166,7 +166,24 @@ namespace Service
             {
                 slotStart = 17;
             }
+            /*
+            List<DoctorAppointment> allPossibleAppointments = new List<DoctorAppointment>();
+            DateTime possibleAppointmentTime;
+            if (date.Date == DateTime.Now.Date)
+            {
+                possibleAppointmentTime = new DateTime(date.Year, date.Month, date.Day, DateTime.Now.Hour, 30, 00);
+            }
+            else
+            {
+                possibleAppointmentTime = new DateTime(date.Year, date.Month, date.Day, slotStart, 00, 00);
+            }
 
+            while (possibleAppointmentTime.TimeOfDay < new DateTime(date.Year, date.Month, date.Day, 20, 00, 00).TimeOfDay || possibleAppointmentTime.Hour < slotStart + slotLength)
+            {
+                allPossibleAppointments.Add(new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, possibleAppointmentTime.Hour, possibleAppointmentTime.Minute, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, patient));
+                possibleAppointmentTime = possibleAppointmentTime.AddMinutes(30);
+            }
+            */
             List<DoctorAppointment> allPossibleAppointments = new List<DoctorAppointment>();
             DoctorAppointment app1 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
             allPossibleAppointments.Add(app1);

@@ -28,7 +28,7 @@ namespace Hospital_IS.View
         }
 
         public Patient Patient { get; set; }
-        public DoctorAppointment changedApp;
+        public DoctorAppointment rescheduledApp;
         public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
         private HomePatient()
         {
@@ -104,7 +104,7 @@ namespace Hospital_IS.View
             this.Hide();
         }
 
-        private void deleteAppointment(object sender, RoutedEventArgs e)
+        private void CancelAppointment(object sender, RoutedEventArgs e)
         {
             DoctorAppointment doctorApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
             DateTime today = DateTime.Today;
@@ -126,10 +126,10 @@ namespace Hospital_IS.View
 
         }
 
-        private void changeAppointment(object sender, RoutedEventArgs e)
+        private void RescheduleAppointment(object sender, RoutedEventArgs e)
         {
-            changedApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
-            if (changedApp == null)
+            rescheduledApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
+            if (rescheduledApp == null)
             {
                 MessageBox.Show("Izaberite termin!");
             }
@@ -137,7 +137,7 @@ namespace Hospital_IS.View
             {
                 AppointmentPatient ap = new AppointmentPatient();
                 ap.Show();
-                ap.changeAppointment(changedApp);
+                ap.RescheduleAppointment(rescheduledApp);
             }
         }
 
