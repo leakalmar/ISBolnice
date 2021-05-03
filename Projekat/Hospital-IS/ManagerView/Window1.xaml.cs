@@ -13,6 +13,7 @@ using Storages;
 using Model;
 using System.Collections.ObjectModel;
 using Controllers;
+using Hospital_IS.ManagerView;
 
 namespace Hospital_IS
 {
@@ -76,6 +77,31 @@ namespace Hospital_IS
         private void sobe_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void OtherOptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (OtherOptions.Visibility == Visibility.Visible)
+            {
+                OtherOptions.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                OtherOptions.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void CloseOptions_Click(object sender, RoutedEventArgs e)
+        {
+            OtherOptions.Visibility = Visibility.Hidden;
+        }
+
+        private void MedicineView_Click(object sender, RoutedEventArgs e)
+        {
+            MedicineView medicineView = new MedicineView();
+           
+            medicineView.Show();
+            this.Hide();
         }
     }
 }

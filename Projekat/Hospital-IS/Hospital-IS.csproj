@@ -18,11 +18,19 @@
     <None Remove="hospital.png" />
     <None Remove="hospital2.png" />
     <None Remove="Resources\add-row.png" />
+    <None Remove="Resources\angledown.png" />
     <None Remove="Resources\bed.png" />
     <None Remove="Resources\calendar.png" />
+    <None Remove="Resources\insight.png" />
+    <None Remove="Resources\lekovi.png" />
     <None Remove="Resources\notification.png" />
     <None Remove="Resources\pill-hand.png" />
     <None Remove="Resources\print.png" />
+    <None Remove="Resources\question.png" />
+    <None Remove="Resources\registration.png" />
+    <None Remove="Resources\renovation.png" />
+    <None Remove="Resources\search.png" />
+    <None Remove="Resources\shoppingcart.png" />
     <None Remove="Resources\treatment.png" />
     <None Remove="other_facilities.png" />
     <None Remove="request.png" />
@@ -81,6 +89,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\add-row.png" />
+    <Resource Include="Resources\angledown.png" />
     <Resource Include="Resources\bed.png" />
     <Resource Include="Resources\addroom.png" />
     <Resource Include="Resources\backbutton.png" />
@@ -93,6 +102,8 @@
     <Resource Include="Resources\filijale.png" />
     <Resource Include="Resources\hospitalroom.png" />
     <Resource Include="Resources\importance.png" />
+    <Resource Include="Resources\insight.png" />
+    <Resource Include="Resources\lekovi.png" />
     <Resource Include="Resources\manager.png" />
     <Resource Include="Resources\maximize.png" />
     <Resource Include="Resources\menubar.png" />
@@ -102,10 +113,15 @@
     <Resource Include="Resources\options.png" />
     <Resource Include="Resources\pill.png" />
     <Resource Include="Resources\print.png" />
+    <Resource Include="Resources\question.png" />
+    <Resource Include="Resources\registration.png" />
+    <Resource Include="Resources\renovation.png" />
     <Resource Include="Resources\report.png" />
     <Resource Include="Resources\room.png" />
     <Resource Include="Resources\room1.png" />
+    <Resource Include="Resources\search.png" />
     <Resource Include="Resources\settings.png" />
+    <Resource Include="Resources\shoppingcart.png" />
     <Resource Include="Resources\simona.jpg" />
     <Resource Include="Resources\treatment.png" />
     <Resource Include="Resources\toolbar.png" />

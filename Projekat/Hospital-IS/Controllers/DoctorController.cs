@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Controllers
 {
-    class DoctorController
+    public class DoctorController
     {
         private static DoctorController instance = null;
         public static DoctorController Instance
@@ -25,7 +25,7 @@ namespace Controllers
         {
         }
 
-        public List<Doctor> getAll()
+        public List<Doctor> GetAll()
         {
             return DoctorService.Instance.AllDoctors;
         }

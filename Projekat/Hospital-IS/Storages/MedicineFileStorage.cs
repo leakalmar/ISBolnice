@@ -24,11 +24,8 @@ namespace Hospital_IS.Storages
             return medicines;
         }
 
-        public void Save(Medicine medicine)
+        public void Save(List<Medicine> medicines)
         {
-            List<Medicine> medicines = GetAll();
-            medicines.Add(medicine);
-
             var file = JsonConvert.SerializeObject(medicines, Formatting.Indented, new JsonSerializerSettings()
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore

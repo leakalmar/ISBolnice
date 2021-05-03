@@ -40,6 +40,11 @@ namespace Hospital_IS.Controllers
             NotificationService.Instance.AddNotification(notification);
         }
 
+        public void ReloadNotifications()
+        {
+            NotificationService.Instance.ReloadNotifications();
+        }
+
         public void UpdateNotification(Notification notification)
         {
             NotificationService.Instance.UpdateNotification(notification);

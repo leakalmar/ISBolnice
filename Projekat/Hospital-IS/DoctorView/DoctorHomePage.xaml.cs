@@ -15,50 +15,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Hospital_IS.DoctorView;
 using Service;
+using Controllers;
 
 namespace Hospital_IS.DoctorView
 {
     public partial class DoctorHomePage : Window
     {
         private static DoctorHomePage instance = null;
-        private Doctor doctor;
-        public UserControlHomePage HomePage;
-        public UCAppointments Appointments;
-        public UCPatients Patients;
-        private int Last { get; set; } = 0;
-
-        public Doctor GetDoctor()
-        {
-            return doctor;
-        }
-
-        public void SetDoctor(Doctor value)
-        {
-            doctor = value;
-        }
-
-        private ObservableCollection<DoctorAppointment> _doctorAppointments = new ObservableCollection<DoctorAppointment>();
-
-        public ObservableCollection<DoctorAppointment> DoctorAppointment
-        {
-            get { return  _doctorAppointments; }
-            set {  _doctorAppointments =  value; }
-        }
-
-
-        FSDoctor dfs = new FSDoctor();
-        private Room primaryRoom;
-
-        public Room GetPrimaryRoom()
-        {
-            return primaryRoom;
-        }
-
-        public void SetPrimaryRoom(Room value)
-        {
-            primaryRoom = value;
-        }
-
         public static DoctorHomePage Instance
         {
             get
@@ -70,22 +33,44 @@ namespace Hospital_IS.DoctorView
                 return instance;
             }
         }
+        public Doctor Doctor { get; set; }
+        public Room PrimaryRoom { get; set; }
+        private int Last { get; set; } = 0;
+        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
+
+
+        public UserControlHomePage HomePage;
+        public UCAppointments Appointments;
+        public UCPatients Patients;
+        public UCMedicines Medicines;
+        public UCApproveMedicine ApproveMedicine;
+
+
+        
         public DoctorHomePage()
         {
-            InitializeComponent();
-            SetDoctor(MainWindow.DoctortUser);
+            InitializeComponent();            
+            start.IsChecked = true;
+        }
+
+        public void ChangeDoctor(Doctor doctor)
+        {
+            Doctor = doctor;
             foreach (Room r in MainWindow.Rooms)
             {
-                if (r.RoomId.Equals(doctor.PrimaryRoom))
+                if (r.RoomId.Equals(Doctor.PrimaryRoom))
                 {
-                    SetPrimaryRoom(r);
+                    PrimaryRoom = r;
                     break;
                 }
             }
-            start.IsChecked = true;
-
-
-
+            DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllByDoctor(Doctor.Id));
+            HomePage = new UserControlHomePage();
+            Appointments = new UCAppointments();
+            Patients = new UCPatients();
+            Medicines = new UCMedicines();
+            ApproveMedicine = new UCApproveMedicine();
+            Home.Children.Add(HomePage);
         }
 
         public void ExitBtnClick(object sender, RoutedEventArgs e)
@@ -93,7 +78,7 @@ namespace Hospital_IS.DoctorView
             bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da se odjavite?").ShowDialog();
            if (dialog)
             {
-                dfs.UpdateDoctor(GetDoctor());
+                //DoctorController.Instance..UpdateDoctor(Doctor);
                 MainWindow login = new MainWindow();
                 login.Show();
                 this.Hide();
@@ -136,12 +121,16 @@ namespace Hospital_IS.DoctorView
                     Home.Children.Remove(Patients);
                     break;
                 case 3:
+                    Home.Children.Clear();
+                    Home.Children.Remove(Medicines);
                     break;
                 case 4:
                     break;
                 case 5:
                     break;
                 case 6:
+                    Home.Children.Clear();
+                    Home.Children.Remove(ApproveMedicine);
                     break;
                 case 7:
                     break;
@@ -150,18 +139,23 @@ namespace Hospital_IS.DoctorView
             switch (index)
             {
                 case 0:
+                    HomePage.Visibility = Visibility.Visible;
                     Home.Children.Add(HomePage);
                     Last = 0;
                     break;
                 case 1:
+                    Appointments.Visibility = Visibility.Visible;
                     Home.Children.Add(Appointments);
                     Last = 1;
                     break;
                 case 2:
+                    Patients.Visibility = Visibility.Visible;
                     Home.Children.Add(Patients);
                     Last = 2;
                     break;
                 case 3:
+                    Medicines.Visibility = Visibility.Visible;
+                    Home.Children.Add(Medicines);
                     Last = 3;
                     break;
                 case 4:
@@ -171,6 +165,8 @@ namespace Hospital_IS.DoctorView
                     Last = 5;
                     break;
                 case 6:
+                    ApproveMedicine.Visibility = Visibility.Visible;
+                    Home.Children.Add(ApproveMedicine);
                     Last = 6;
                     break;
                 case 7:

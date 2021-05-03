@@ -1,4 +1,5 @@
-﻿using Hospital_IS.SecretaryView;
+﻿using Hospital_IS.Controllers;
+using Hospital_IS.SecretaryView;
 using Hospital_IS.Storages;
 using Model;
 using System;
@@ -14,7 +15,6 @@ namespace Hospital_IS
     public partial class CreateNotification : Window
     {
         public Notification Notification { get; set; } = new Notification();
-        NotificationFileStorage nfs = new NotificationFileStorage();
 
         public List<int> Ids { get; set; } = new List<int>();
 
@@ -45,8 +45,10 @@ namespace Hospital_IS
             }
 
             ucn.Notifications.Insert(0, Notification);
- 
-            nfs.SaveNotification(Notification);
+
+            NotificationController.Instance.AddNotification(Notification);
+
+            ucn.RefreshList();
 
             this.Close();
         }

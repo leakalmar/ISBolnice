@@ -50,7 +50,7 @@
                                                Text="{Binding DatePosted, StringFormat=\{0:HH:mm  dd.MM.yyyy.\}}" Margin="10" FontSize="9" FontWeight="Light"/>
                                     <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="2">
                                         <Button Tag="{Binding Id}" Content="Prikaži" VerticalAlignment="Top" Margin="10" Click="ShowNotification" HorizontalAlignment="Right"/>
-                                        <Button Content="Izmeni" VerticalAlignment="Top"  Margin="10"/>
+                                        <Button Tag="{Binding Id}" Content="Izmeni" VerticalAlignment="Top"  Margin="10" Click="UpdateNotification"/>
                                     </StackPanel>
                                 </Grid>
                             </Border>

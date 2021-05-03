@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Hospital_IS.DTOs;
+using Model;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,12 @@ namespace Controllers
         {
 
         }
+
+        public List<DoctorAppointment> GetAll()
+        {
+            return DoctorAppointmentService.Instance.allAppointments;
+        }
+
         public List<DoctorAppointment> GetAllByDoctor(int doctorId)
         {
             return DoctorAppointmentService.Instance.GetAllByDoctor(doctorId);
@@ -47,14 +54,14 @@ namespace Controllers
             DoctorAppointmentService.Instance.UpdateAppointment(oldDoctorAppointment, newDoctorAppointment);
         }
 
-        public List<DoctorAppointment> SuggestAppointmentsToPatient(String timeSlot,Doctor doctor,Patient patient, DateTime date, Boolean priority)
+        public List<DoctorAppointment> SuggestAppointmentsToPatient(String timeSlot, Doctor doctor, Patient patient, DateTime date, Boolean priority)
         {
             return DoctorAppointmentService.Instance.SuggestAppointmentsToPatient(timeSlot, doctor, patient, date, priority);
         }
 
         public List<DoctorAppointment> SuggestAppointmetsToDoctor(SelectedDatesCollection dates, int idRoom, AppointmetType type, TimeSpan duration, Patient patient)
         {
-            return DoctorAppointmentService.Instance.SuggestAppointmetsToDoctor(dates, idRoom, type, duration,patient);
+            return DoctorAppointmentService.Instance.SuggestAppointmetsToDoctor(dates, idRoom, type, duration, patient);
         }
 
         public List<DoctorAppointment> GetFutureAppointmentsByPatient(int patientId)
@@ -65,6 +72,21 @@ namespace Controllers
         public List<DoctorAppointment> GetAllAppointmentsByPatient(int patientId)
         {
             return DoctorAppointmentService.Instance.GetAllAppointmentsByPatient(patientId);
+        }
+
+        public void ReloadDoctorAppointments()
+        {
+            DoctorAppointmentService.Instance.ReloadDoctorAppointments();
+        }
+
+        internal IEnumerable<SuggestedEmergencyAppDTO> GenerateEmergencyAppointmentsForSecretary(EmergencyAppointmentDTO emerAppointment)
+        {
+            return DoctorAppointmentService.Instance.GenerateEmergencyAppointmentsForSecretary(emerAppointment);
+        }
+
+        public bool VerifyAppointment(DoctorAppointment doctorAppointment, List<Appointment> roomAppointments)
+        {
+            return DoctorAppointmentService.Instance.VerifyAppointment(doctorAppointment, roomAppointments);
         }
     }
 }
