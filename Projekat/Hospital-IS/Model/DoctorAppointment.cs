@@ -30,6 +30,19 @@ namespace Model
             this.Patient = patient;
         }
 
+        public DoctorAppointment(DoctorAppointment docApp) 
+        {
+            this.Reserved = docApp.Reserved;
+            this.AppointmentCause = docApp.AppointmentCause;
+            this.AppointmentStart = docApp.AppointmentStart;
+            this.AppointmentEnd = docApp.AppointmentEnd;
+            this.Type = docApp.Type;
+            this.Room = docApp.Room;
+            this.Doctor = docApp.Doctor;
+            this.Patient = docApp.Patient;
+            this.AppTypeText = docApp.AppTypeText;
+        }
+
         public void SetAdmitted(Patient patient)
         {
             throw new NotImplementedException();

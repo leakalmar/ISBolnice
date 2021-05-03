@@ -29,24 +29,25 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="Tip pregleda:" Margin="50 20 50 10"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Pacijent:" Margin="50 10"/>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="Doktor:" Margin="50 10"/>
+        <TextBlock Grid.Column="1" Grid.Row="5" Text="Soba:" Margin="50 10"/>
+        <TextBlock Grid.Column="1" Grid.Row="6" Text="Datum pregleda:" Margin="50 10"/>
+        <TextBlock Grid.Column="1" Grid.Row="7" Text="Početak pregleda:" Margin="50 10"/>
+        <TextBlock Grid.Column="1" Grid.Row="8" Text="Kraj pregleda:" Margin="50 10"/>
+        <TextBlock Grid.Column="1" Grid.Row="9" Text="Opis:" Margin="50 20"/>
 
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Tip pregleda:" Margin="50 20 50 10"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="Pacijent:" Margin="50 10"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Doktor:" Margin="50 10"/>
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="Soba:" Margin="50 10"/>
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="Datum pregleda:" Margin="50 10"/>
-        <TextBlock Grid.Column="1" Grid.Row="6" Text="Početak pregleda:" Margin="50 10"/>
-        <TextBlock Grid.Column="1" Grid.Row="7" Text="Kraj pregleda:" Margin="50 10"/>
-        <TextBlock Grid.Column="1" Grid.Row="8" Text="Opis:" Margin="50 20"/>
-
-        <ComboBox Name="cbAppType" Grid.Column="2" Grid.Row="1" Margin="50 20 50 10" LostFocus="cbAppType_LostFocus" FontSize="15">
+        <ComboBox Name="cbAppType" Grid.Column="2" Grid.Row="2" Margin="50 20 50 10" LostFocus="cbAppType_LostFocus" FontSize="15">
             <ComboBoxItem Content="Pregled"/>
             <ComboBoxItem Content="Operacija"/>
         </ComboBox>
-        <ComboBox Name="cbPatient" Grid.Column="2" Grid.Row="2" Margin="50 10" ItemsSource="{Binding Patients}" FontSize="15">
+        <ComboBox Name="cbPatient" Grid.Column="2" Grid.Row="3" Margin="50 10" ItemsSource="{Binding Patients}" FontSize="15">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
@@ -60,7 +61,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox Name="cbDoctor" Grid.Column="2" Grid.Row="3" Margin="50 10" ItemsSource="{Binding Doctors}" FontSize="15">
+        <ComboBox Name="cbDoctor" Grid.Column="2" Grid.Row="4" Margin="50 10" ItemsSource="{Binding Doctors}" FontSize="15">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
@@ -74,27 +75,30 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBox Name="txtAppDate"  Grid.Column="2" Grid.Row="5" Margin="50 10"/>
-        <TextBox Name="txtStartOfApp" Grid.Column="2" Grid.Row="6" Margin="50 10" LostFocus="txtStartOfApp_LostFocus"/>
-        <TextBox Name="txtEndOfApp" Grid.Column="2" Grid.Row="7" Margin="50 10" LostFocus="txtEndOfApp_LostFocus"/>
-        <ComboBox Name="cbRoom" Grid.Column="2" Grid.Row="4" Margin="50 10" ItemsSource="{Binding Rooms}">
+        <TextBox Name="txtAppDate"  Grid.Column="2" Grid.Row="6" Margin="50 10"/>
+        <TextBox Name="txtStartOfApp" Grid.Column="2" Grid.Row="7" Margin="50 10" LostFocus="txtStartOfApp_LostFocus"/>
+        <TextBox Name="txtEndOfApp" Grid.Column="2" Grid.Row="8" Margin="50 10" LostFocus="txtEndOfApp_LostFocus"/>
+        <ComboBox Name="cbRoom" Grid.Column="2" Grid.Row="5" Margin="50 10" ItemsSource="{Binding Rooms}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
                         <TextBlock.Text>
-                            <Binding Path="RoomNumber"/>
+                            <Binding Path="RoomId"/>
                         </TextBlock.Text>
                     </TextBlock>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-            
         </ComboBox>
-        <TextBox Grid.Column="2" Grid.Row="8" Height="80" Margin="50 20"
-                 ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="{Binding DocAppointment.Detail}"/>
+        
+        <TextBox Grid.Column="2" Grid.Row="9" Height="80" Margin="50 20"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="{Binding DocAppointment.AppointmentCause}"/>
 
-        <Button Name="btnConfirm" Grid.Column="1" Grid.Row="11" Width="120" Height="30"
+        <Button Name="btnConfirm" Grid.Column="1" Grid.Row="12" Width="120" Height="30"
                 Content="Potvrdi" Click="NewAppointment"/>
-        <Button Grid.Column="2" Grid.Row="11" Width="120" Height="30"
+        <Button Grid.Column="2" Grid.Row="12" Width="120" Height="30"
                 Content="Odustani" Click="Close"/>
+
+        <Button Name="btnEmergency" Content="Hitan pregled?" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                Width="130" HorizontalAlignment="Right" Margin="0 20 50 0" Click="btnEmergency_Click"/>
     </Grid>
 </Window>

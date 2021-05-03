@@ -1,8 +1,8 @@
-﻿using Service;
+﻿using Controllers;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,8 +14,7 @@ namespace Hospital_IS
     /// </summary>
     public partial class UCPatientsView : UserControl
     {
-        public ObservableCollection<Model.Patient> Patients { get; set; }
-        Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
+        public ObservableCollection<Patient> Patients { get; set; }
 
         public UCPatientsView()
         {
@@ -30,8 +29,9 @@ namespace Hospital_IS
         {
             if (Patients != null)
                 Patients.Clear();
-            List<Model.Patient> patients = pfs.GetAll();
-            Patients = new ObservableCollection<Model.Patient>(patients);
+
+            PatientController.Instance.ReloadPatients();
+            Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAll());
             dataGridPatients.ItemsSource = Patients;
         }
 
@@ -43,9 +43,9 @@ namespace Hospital_IS
 
         private void ShowPatient(object sender, RoutedEventArgs e)
         {
-            if ((Model.Patient)dataGridPatients.SelectedItem != null)
+            if ((Patient)dataGridPatients.SelectedItem != null)
             {
-                Model.Patient patient = (Model.Patient)dataGridPatients.SelectedItem;
+                Patient patient = (Patient)dataGridPatients.SelectedItem;
                 PatientView pv = new PatientView(patient);
                 pv.Show();
             }
@@ -53,9 +53,9 @@ namespace Hospital_IS
 
         private void UpdatePatient(object sender, RoutedEventArgs e)
         {
-            if ((Model.Patient)dataGridPatients.SelectedItem != null)
+            if ((Patient)dataGridPatients.SelectedItem != null)
             {
-                Model.Patient patient = (Model.Patient)dataGridPatients.SelectedItem;
+                Patient patient = (Patient)dataGridPatients.SelectedItem;
                 UpdatePatientView upv = new UpdatePatientView(patient, this);
                 upv.Show();
             }
@@ -63,11 +63,11 @@ namespace Hospital_IS
 
         private void DeletePatient(object sender, RoutedEventArgs e)
         {
-            if ((Model.Patient)dataGridPatients.SelectedItem != null)
+            if ((Patient)dataGridPatients.SelectedItem != null)
             {
-                Model.Patient patient = (Model.Patient)dataGridPatients.SelectedItem;
+                Patient patient = (Patient)dataGridPatients.SelectedItem;
                 Patients.Remove(patient);
-                pfs.DeletePatient(patient);
+                PatientController.Instance.DeletePatient(patient);
             }
         }
 

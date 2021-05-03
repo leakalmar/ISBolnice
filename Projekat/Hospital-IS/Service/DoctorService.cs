@@ -38,17 +38,18 @@ namespace Service
             return allDoctorIDs;
         }
 
-        internal List<Doctor> GetDoctorsBySpecialty(Specialty specialty)
+        public List<Doctor> GetDoctorsBySpecialty(string specialtyName)
         {
-            List<Doctor> doctorsBySpecialty = new List<Doctor>();
-            foreach(Doctor doctor in AllDoctors)
+            List<Doctor> doctors = new List<Doctor>();
+
+            foreach (Doctor doctor in AllDoctors) 
             {
-                if (doctor.Specialty.Name.Equals(specialty.Name))
-                {
-                    doctorsBySpecialty.Add(doctor);
-                }
+                if (specialtyName.Equals(doctor.Specialty.Name))
+                    doctors.Add(doctor);
+
             }
-            return doctorsBySpecialty;
+            return doctors;
         }
+
     }
 }
