@@ -148,12 +148,12 @@ namespace Service
                     }
                     else
                     {
-                        TimeSpan duration = tempAppointment.AppointmentEnd.Subtract(tempAppointment.AppointmentStart);
-                        if (duration.TotalMinutes != 0)
+                        int duration = (int)tempAppointment.AppointmentEnd.Subtract(tempAppointment.AppointmentStart).TotalMinutes;
+                        if (duration != 0)
                         {
                             DateTime startTime = new DateTime(d.Year, d.Month, d.Day, lastTimeCreated.Hour, lastTimeCreated.Minute, 0);
                             newAppointment = new DoctorAppointment(startTime, AppointmetType.Operation, false, tempAppointment.Room, tempAppointment.Doctor, tempAppointment.Patient);
-                            newAppointment.AppointmentEnd = startTime.Add(duration);
+                            newAppointment.AppointmentEnd = startTime.AddMinutes(duration);
                             newAppointment.IsUrgent = tempAppointment.IsUrgent;
                             appointmentList.Add(newAppointment);
                             lastTimeCreated = lastTimeCreated.AddMinutes(15);
@@ -341,7 +341,25 @@ namespace Service
             return patientAppointments;
         }
 
+        public List<SuggestedEmergencyAppDTO> GenerateEmergencyAppointmentsForDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
+        {
+            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
 
+            List<Doctor> doctors = DoctorService.Instance.GetDoctorsBySpecialty(tempAppointment.Doctor.Specialty.Name);
+
+            foreach (Doctor doc in doctors)
+            {
+                tempAppointment.Doctor = doc;
+                List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForDoctor(dates, tempAppointment);
+                appointments.AddRange(allPossibleAppointments);
+            }
+
+            int durationInMinutes = (int)(tempAppointment.AppointmentEnd - tempAppointment.AppointmentStart).TotalMinutes;
+            List<SuggestedEmergencyAppDTO> suggestedAppointments = FormEmergencyAppDTOs(appointments, durationInMinutes);
+            suggestedAppointments.Sort((x, y) => x.ConflictingAppointments.Count.CompareTo(y.ConflictingAppointments.Count));
+
+            return suggestedAppointments;
+        }
 
         public List<SuggestedEmergencyAppDTO> GenerateEmergencyAppointmentsForSecretary(EmergencyAppointmentDTO emerAppointmentDTO)
         {
@@ -362,26 +380,7 @@ namespace Service
 
             List<SuggestedEmergencyAppDTO> suggestedAppointments = FormEmergencyAppDTOs(appointments, emerAppointmentDTO.DurationInMinutes);
             suggestedAppointments.Sort((x, y) => x.TotalReshedulePeriodInHours.CompareTo(y.TotalReshedulePeriodInHours));
-
-            return suggestedAppointments;
-        }
-
-        public List<SuggestedEmergencyAppDTO> GenerateEmergencyAppointmentsForDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
-        {
-            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
-
-            List<Doctor> doctors = DoctorService.Instance.GetDoctorsBySpecialty(tempAppointment.Doctor.Specialty.Name);
-
-            foreach (Doctor doc in doctors)
-            {
-                tempAppointment.Doctor = doc;
-                List < DoctorAppointment > allPossibleAppointments = GenerateAppointmentForDoctor(dates, tempAppointment);
-                appointments.AddRange(allPossibleAppointments);
-            }
-
-            int durationInMinutes = (int)(tempAppointment.AppointmentEnd - tempAppointment.AppointmentStart).TotalMinutes;
-            List<SuggestedEmergencyAppDTO> suggestedAppointments = FormEmergencyAppDTOs(appointments, durationInMinutes);
-            suggestedAppointments.Sort((x, y) => x.ConflictingAppointments.Count.CompareTo(y.ConflictingAppointments.Count));
+            //izbaciti neodgovarajuce termine ako je conflicting hitan ili je neki vec zapocet
 
             return suggestedAppointments;
         }

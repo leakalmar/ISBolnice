@@ -41,6 +41,7 @@ namespace Controllers
 
         public void AddAppointment(DoctorAppointment doctorAppointment)
         {
+            doctorAppointment.Reserved = true;
             DoctorAppointmentService.Instance.AddAppointment(doctorAppointment);
         }
 
@@ -62,7 +63,7 @@ namespace Controllers
         public List<DoctorAppointment> GetSuggestedAppointmentsByDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmetType type, TimeSpan duration, Patient patient, Doctor doctor)
         {
 
-            DoctorAppointment tempAppointment = new DoctorAppointment(new DateTime(dates[0].Year, dates[0].Month, dates[0].Day, 08, 00, 00), type, false, room.RoomId, doctor, patient);
+            DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, room.RoomId, doctor, patient);
             tempAppointment.AppointmentEnd = dates[0].Add(duration);
             tempAppointment.IsUrgent = isUrgent;
             return DoctorAppointmentService.Instance.SuggestAppointmetsToDoctor(dates, tempAppointment);

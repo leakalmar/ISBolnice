@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 
 namespace Hospital_IS.DoctorView
@@ -13,7 +14,7 @@ namespace Hospital_IS.DoctorView
             {
                 String text = (String)value;
                 //ako ne sadrzi slovo onda je true
-                if (text.Any(x => !char.IsLetter(x))) return new ValidationResult(false, "Opis uputa mora biti popunjen.");
+                if (Regex.IsMatch(text, @"")) return new ValidationResult(false, "Opis uputa mora biti popunjen.");
                 else return new ValidationResult(true, null);
             }
             else
