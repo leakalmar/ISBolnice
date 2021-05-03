@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using Hospital_IS.Controllers;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -105,12 +106,28 @@ namespace Hospital_IS.DoctorView
                 return;
             }
             SelectedAppointment.AppointmentCause = cause.Text;
+
+            sendNotification(SelectedAppointment);
             DoctorAppointmentController.Instance.AddAppointment(SelectedAppointment);
             DoctorHomePage.Instance.DoctorAppointment.Add(SelectedAppointment);
 
             DoctorHomePage.Instance.Home.Children.Remove(this);
             DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(SchedulingAppointment.Appointment, true));
         }
+
+        private void sendNotification(DoctorAppointment appointment)
+        {
+            string title = "Zakazan pregled";
+
+            string text = "Novi pregled Vam je zakazan " + appointment.AppointmentStart.ToString("dd.MM.yyyy.") + " u "
+                + appointment.AppointmentStart.ToString("HH:mm") + ".";
+
+            Notification notification = new Notification(title, text, DateTime.Now);
+            notification.Recipients.Add(appointment.Patient.Id);
+
+            NotificationController.Instance.AddNotification(notification);
+        }
+
 
         private void cancle_Click(object sender, RoutedEventArgs e)
         {

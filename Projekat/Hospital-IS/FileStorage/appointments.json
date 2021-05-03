@@ -691,7 +691,28 @@
       ],
       "IsGuest": false,
       "MedicalHistory": {
-        "Prescription": [],
+        "Prescription": [
+          {
+            "Medicine": {
+              "Name": "Tritace 10mg tableta",
+              "Composition": [],
+              "SideEffects": "",
+              "Usage": "",
+              "ReplaceMedicine": []
+            },
+            "DatePrescribed": "2021-05-03T09:00:00"
+          },
+          {
+            "Medicine": {
+              "Name": "Defrinol tableta",
+              "Composition": [],
+              "SideEffects": "",
+              "Usage": "",
+              "ReplaceMedicine": []
+            },
+            "DatePrescribed": "2021-05-03T09:00:00"
+          }
+        ],
         "Test": [],
         "Reports": [],
         "Hospitalization": [],
@@ -771,7 +792,12 @@
       "Address": "Brace Radica 15",
       "Hospital": null
     },
-    "Report": null,
+    "Report": {
+      "Anamnesis": "gadf",
+      "HaveRecipe": false,
+      "HaveTest": false,
+      "ReportId": "03-May-2021 09:00:00 AM"
+    },
     "Reserved": true,
     "AppointmentCause": null,
     "AppointmentStart": "2021-05-03T09:00:00",

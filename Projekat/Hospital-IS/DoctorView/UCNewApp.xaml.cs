@@ -274,6 +274,7 @@ namespace Hospital_IS.DoctorView
 
         private void emergencyApp_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+
             SuggestedEmergencyAppDTO selected = (SuggestedEmergencyAppDTO)emergencyAppointments.SelectedItem;
 
             foreach (RescheduledAppointmentDTO rescheduled in selected.RescheduledAppointments)
