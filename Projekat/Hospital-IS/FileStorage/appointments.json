@@ -138,8 +138,8 @@
     "IsFinished": false,
     "Reserved": true,
     "AppointmentCause": null,
-    "AppointmentStart": "2021-04-23T08:30:00",
-    "AppointmentEnd": "2021-04-23T09:00:00",
+    "AppointmentStart": "2021-05-05T08:30:00",
+    "AppointmentEnd": "2021-05-05T09:00:00",
     "Type": 1,
     "Room": 1
   },
@@ -282,8 +282,8 @@
     "IsFinished": false,
     "Reserved": true,
     "AppointmentCause": null,
-    "AppointmentStart": "2021-05-05T01:15:00",
-    "AppointmentEnd": "2021-05-05T01:45:00",
+    "AppointmentStart": "2021-05-05T09:15:00",
+    "AppointmentEnd": "2021-05-05T09:45:00",
     "Type": 1,
     "Room": 1
   },
