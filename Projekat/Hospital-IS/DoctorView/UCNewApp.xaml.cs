@@ -285,7 +285,7 @@ namespace Hospital_IS.DoctorView
             DoctorAppointmentController.Instance.AddAppointment(selected.SuggestedAppointment);
 
             DoctorHomePage.Instance.Home.Children.Remove(this);
-            DoctorHomePage.Instance.Home.Children.Add(PatientChart);
+            DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(Appointment, true));
         }
 
         private void emergency_Click(object sender, RoutedEventArgs e)

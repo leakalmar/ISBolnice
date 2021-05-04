@@ -41,7 +41,6 @@ namespace Hospital_IS.DoctorView
         private void App_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ChangeApp.Appointment = (DoctorAppointment)docotrAppointments.SelectedItem;
-            MessageBox.Show(ChangeApp.Appointment.Patient.Name);
             details.Visibility = Visibility.Visible;
         }
 
