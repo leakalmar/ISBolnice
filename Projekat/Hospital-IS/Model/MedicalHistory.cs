@@ -6,16 +6,20 @@ namespace Model
 {
     public class MedicalHistory
     {
-
-        public ObservableCollection<Prescription> Prescription { get; set; }
+        public int Id { get; set; }
+        public List<Prescription> Prescription { get; set; }
+        public List<Test> Test { get; set; }
+        public List<Report> Reports { get; set; }
+        public List<Hospitalization> Hospitalization { get; set; }
+        public List<Therapy> Therapies { get; set; }
 
         public MedicalHistory()
         {
-            Prescription = new ObservableCollection<Prescription>();
-            Test = new ObservableCollection<Test>();
-            Reports = new ObservableCollection<Report>();
-            Hospitalization = new ObservableCollection<Hospitalization>();
-            Therapies = new ObservableCollection<Therapy>();
+            Prescription = new List<Prescription>();
+            Test = new List<Test>();
+            Reports = new List<Report>();
+            Hospitalization = new List<Hospitalization>();
+            Therapies = new List<Therapy>();
         }
 
         public void AddPrescription(Prescription newPrescription)
@@ -23,7 +27,7 @@ namespace Model
             if (newPrescription == null)
                 return;
             if (this.Prescription == null)
-                this.Prescription = new ObservableCollection<Prescription>();
+                this.Prescription = new List<Prescription>();
             if (!this.Prescription.Contains(newPrescription))
                 this.Prescription.Add(newPrescription);
         }
@@ -43,14 +47,14 @@ namespace Model
                 Prescription.Clear();
         }
 
-        public ObservableCollection<Test> Test { get; set; }
+
 
         public void AddTest(Test newTest)
         {
             if (newTest == null)
                 return;
             if (this.Test == null)
-                this.Test = new ObservableCollection<Test>();
+                this.Test = new List<Test>();
             if (!this.Test.Contains(newTest))
                 this.Test.Add(newTest);
         }
@@ -70,14 +74,14 @@ namespace Model
                 Test.Clear();
         }
 
-        public ObservableCollection<Report> Reports { get; set; }
+
 
         public void AddReport(Report newReport)
         {
             if (newReport == null)
                 return;
             if (this.Reports == null)
-                this.Reports = new ObservableCollection<Report>();
+                this.Reports = new List<Report>();
             if (!this.Reports.Contains(newReport))
                 this.Reports.Add(newReport);
         }
@@ -98,14 +102,14 @@ namespace Model
                 Reports.Clear();
         }
 
-        public ObservableCollection<Hospitalization> Hospitalization { get; set; }
+
 
         public void AddHospitalization(Hospitalization newHospitalization)
         {
             if (newHospitalization == null)
                 return;
             if (this.Hospitalization == null)
-                this.Hospitalization = new ObservableCollection<Hospitalization>();
+                this.Hospitalization = new List<Hospitalization>();
             if (!this.Hospitalization.Contains(newHospitalization))
                 this.Hospitalization.Add(newHospitalization);
         }
@@ -126,14 +130,14 @@ namespace Model
                 Hospitalization.Clear();
         }
 
-        public ObservableCollection<Therapy> Therapies { get; set; }
+
 
         public void AddTherapy(Therapy newTherapy)
         {
             if (newTherapy == null)
                 return;
             if (this.Therapies == null)
-                this.Therapies = new ObservableCollection<Therapy>();
+                this.Therapies = new List<Therapy>();
             if (!this.Therapies.Contains(newTherapy))
             {
                 this.Therapies.Add(newTherapy);
@@ -164,7 +168,7 @@ namespace Model
             List<Prescription> ret = new List<Prescription>();
             foreach (Prescription p in Prescription)
             {
-                if (p.DatePrescribed.Equals(docApp.AppointmentStart))
+                if (p.DatePrescribed.Date.Equals(docApp.AppointmentStart.Date))
                 {
                     ret.Add(p);
                 }
@@ -177,7 +181,7 @@ namespace Model
             ObservableCollection<Prescription> ret = new ObservableCollection<Prescription>();
             foreach (Prescription p in Prescription)
             {
-                if(p.DatePrescribed == report)
+                if (p.DatePrescribed == report)
                 {
                     ret.Add(p);
                 }

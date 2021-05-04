@@ -5,7 +5,6 @@
     "IsUrgent": false,
     "Patient": {
       "hospital": null,
-      "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -14,13 +13,6 @@
         "Paracetamol"
       ],
       "IsGuest": false,
-      "MedicalHistory": {
-        "Prescription": [],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": []
-      },
       "doctor": null,
       "Doctor": null,
       "Education": 0,
@@ -66,7 +58,7 @@
       "Address": "Brace Radica 15",
       "Hospital": null
     },
-    "Report": null,
+    "IsFinished": true,
     "Reserved": true,
     "AppointmentCause": null,
     "AppointmentStart": "2021-04-22T09:00:00",
@@ -80,7 +72,6 @@
     "IsUrgent": false,
     "Patient": {
       "hospital": null,
-      "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -89,42 +80,6 @@
         "Paracetamol"
       ],
       "IsGuest": false,
-      "MedicalHistory": {
-        "Prescription": [],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": [
-          {
-            "Medicine": {
-              "Name": "Bromazepam",
-              "Composition": [],
-              "SideEffects": "U osetljivih bolesnika, naročito kod većih doza, može se javiti blagi umor, pospanost i vrtoglavica, a povremeno slabost mišića i ataksija. Ova neželjena dejstva mogu se izbeći prilagođavanjem doze.",
-              "Usage": "Doziranje je individualno. Prosečna doza za ambulantne pacijente je 1,5-3 mg, do 3 puta na dan. U težim oblicima bolesti, naročito kod hospitalizovanih bolesnika, daje se 6-12 mg, 2 do 3 puta na dan.",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 2,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 11
-          },
-          {
-            "Medicine": {
-              "Name": "Brufen",
-              "Composition": [],
-              "SideEffects": "Ibuprofen se dobro podnosi, a neželjena dejstva su veoma retka i nestaju prekidom terapije. Kod manjeg broja bolesnika mogu se, javiti gastrointestinalne smetnje.",
-              "Usage": "Ibuprofen se uzima posle jela. Doziranje treba individualno uskladiti tako da se sa najmanjom mogućom dozom postigne željeni terapijski efekat.",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 3,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          }
-        ]
-      },
       "doctor": null,
       "Doctor": null,
       "Education": 0,
@@ -200,7 +155,7 @@
       "Address": "Brace Radica 30",
       "Hospital": null
     },
-    "Report": null,
+    "IsFinished": true,
     "Reserved": true,
     "AppointmentCause": null,
     "AppointmentStart": "2021-04-22T09:00:00",
@@ -209,13 +164,12 @@
     "Room": 5
   },
   {
-    "NameSurnamePatient": "Simona Stantic",
+    "NameSurnamePatient": "Stefan Beckovic",
     "AppTypeText": null,
     "IsUrgent": false,
     "Patient": {
       "hospital": null,
-      "ChartId": 0,
-      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "FileDate": "2021-03-29T23:21:22.7064891+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
       "Alergies": [
@@ -223,42 +177,6 @@
         "Paracetamol"
       ],
       "IsGuest": false,
-      "MedicalHistory": {
-        "Prescription": [],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": [
-          {
-            "Medicine": {
-              "Name": "Bromazepam",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 2,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          },
-          {
-            "Medicine": {
-              "Name": "Brufen",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 3,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          }
-        ]
-      },
       "doctor": null,
       "Doctor": null,
       "Education": 0,
@@ -271,7 +189,7 @@
       "Gender": null,
       "Relationship": null,
       "Password": "123",
-      "Address": "Petra Drapsina 8",
+      "Address": "Zelengoska 15",
       "Hospital": null
     },
     "Doctor": {
@@ -304,11 +222,11 @@
       "Address": "Brace Radica 15",
       "Hospital": null
     },
-    "Report": null,
+    "IsFinished": true,
     "Reserved": true,
     "AppointmentCause": null,
-    "AppointmentStart": "2021-04-29T09:30:00",
-    "AppointmentEnd": "2021-04-29T10:00:00",
+    "AppointmentStart": "2021-04-23T08:30:00",
+    "AppointmentEnd": "2021-04-23T09:00:00",
     "Type": 1,
     "Room": 1
   },
@@ -318,7 +236,6 @@
     "IsUrgent": false,
     "Patient": {
       "hospital": null,
-      "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -327,42 +244,6 @@
         "Paracetamol"
       ],
       "IsGuest": false,
-      "MedicalHistory": {
-        "Prescription": [],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": [
-          {
-            "Medicine": {
-              "Name": "Bromazepam",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 2,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          },
-          {
-            "Medicine": {
-              "Name": "Brufen",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 3,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          }
-        ]
-      },
       "doctor": null,
       "Doctor": null,
       "Education": 0,
@@ -408,12 +289,140 @@
       "Address": "Brace Radica 15",
       "Hospital": null
     },
-    "Report": {
-      "Anamnesis": null,
-      "HaveRecipe": false,
-      "HaveTest": false,
-      "ReportId": "4/24/2021 9:30:00 AM"
+    "IsFinished": true,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-04-30T09:30:00",
+    "AppointmentEnd": "2021-04-30T10:00:00",
+    "Type": 1,
+    "Room": 1
+  },
+  {
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "IsGuest": false,
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
     },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": true,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-05-02T12:00:00",
+    "AppointmentEnd": "2021-05-02T12:30:00",
+    "Type": 1,
+    "Room": 1
+  },
+  {
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "IsGuest": false,
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": null
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": false,
     "Reserved": true,
     "AppointmentCause": null,
     "AppointmentStart": "2021-04-24T09:30:00",
@@ -422,162 +431,10 @@
     "Room": 1
   },
   {
-    "NameSurnamePatient": "Stefan Beckovic",
-    "AppTypeText": null,
-    "IsUrgent": false,
-    "Patient": {
-      "hospital": null,
-      "ChartId": 0,
-      "FileDate": "2021-03-29T23:21:22.7064891+02:00",
-      "Employer": "neki poslodavac",
-      "Admitted": false,
-      "Alergies": [
-        "Tetanus",
-        "Paracetamol"
-      ],
-      "IsGuest": false,
-      "MedicalHistory": {
-        "Prescription": [],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": []
-      },
-      "doctor": null,
-      "Doctor": null,
-      "Education": 0,
-      "Id": 2,
-      "Name": "Stefan",
-      "Surname": "Beckovic",
-      "BirthDate": "2021-03-29T23:21:22.7064868+02:00",
-      "Phone": null,
-      "Email": "stefan@gmail.com",
-      "Gender": null,
-      "Relationship": null,
-      "Password": "123",
-      "Address": "Zelengoska 15",
-      "Hospital": null
-    },
-    "Doctor": {
-      "patient": [],
-      "hospital": null,
-      "Specialty": {
-        "Name": "Dermatolog"
-      },
-      "PrimaryRoom": 3,
-      "Patient": [],
-      "Salary": 70000.0,
-      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-      "WorkDay": [
-        {
-          "Day": 0,
-          "StartTime": "2021-02-02T08:00:00",
-          "EndTime": "2021-02-02T20:00:00"
-        }
-      ],
-      "Education": 0,
-      "Id": 6,
-      "Name": "Ivan",
-      "Surname": "Stankovic",
-      "BirthDate": "1985-05-07T00:00:00",
-      "Phone": null,
-      "Email": "ivan@gmail.com",
-      "Gender": null,
-      "Relationship": null,
-      "Password": "ivan",
-      "Address": "Brace Radica 15",
-      "Hospital": null
-    },
-    "Report": null,
-    "Reserved": true,
-    "AppointmentCause": "",
-    "AppointmentStart": "2021-04-30T18:00:00",
-    "AppointmentEnd": "2021-04-30T18:30:00",
-    "Type": 1,
-    "Room": 1
-  },
-  {
-    "NameSurnamePatient": "Stefan Beckovic",
-    "AppTypeText": null,
-    "IsUrgent": false,
-    "Patient": {
-      "hospital": null,
-      "ChartId": 0,
-      "FileDate": "2021-03-29T23:21:22.7064891+02:00",
-      "Employer": "neki poslodavac",
-      "Admitted": false,
-      "Alergies": [
-        "Tetanus",
-        "Paracetamol"
-      ],
-      "IsGuest": false,
-      "MedicalHistory": {
-        "Prescription": [],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": []
-      },
-      "doctor": null,
-      "Doctor": null,
-      "Education": 0,
-      "Id": 2,
-      "Name": "Stefan",
-      "Surname": "Beckovic",
-      "BirthDate": "2021-03-29T23:21:22.7064868+02:00",
-      "Phone": null,
-      "Email": "stefan@gmail.com",
-      "Gender": null,
-      "Relationship": null,
-      "Password": "123",
-      "Address": "Zelengoska 15",
-      "Hospital": null
-    },
-    "Doctor": {
-      "patient": [],
-      "hospital": null,
-      "Specialty": {
-        "Name": "Dermatolog"
-      },
-      "PrimaryRoom": 1,
-      "Patient": [],
-      "Salary": 70000.0,
-      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-      "WorkDay": [
-        {
-          "Day": 0,
-          "StartTime": "2021-02-02T08:00:00",
-          "EndTime": "2021-02-02T20:00:00"
-        }
-      ],
-      "Education": 0,
-      "Id": 4,
-      "Name": "Dragana",
-      "Surname": "Vukmanov Simokov",
-      "BirthDate": "1985-05-07T00:00:00",
-      "Phone": null,
-      "Email": "dragana@gmail.com",
-      "Gender": null,
-      "Relationship": null,
-      "Password": "dragana",
-      "Address": "Brace Radica 15",
-      "Hospital": null
-    },
-    "Report": null,
-    "Reserved": true,
-    "AppointmentCause": null,
-    "AppointmentStart": "2021-04-30T19:30:00",
-    "AppointmentEnd": "2021-04-30T20:00:00",
-    "Type": 1,
-    "Room": 1
-  },
-  {
     "NameSurnamePatient": "Simona Stantic",
     "AppTypeText": null,
-    "IsUrgent": false,
     "Patient": {
       "hospital": null,
-      "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -586,42 +443,6 @@
         "Paracetamol"
       ],
       "IsGuest": false,
-      "MedicalHistory": {
-        "Prescription": [],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": [
-          {
-            "Medicine": {
-              "Name": "Bromazepam",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 2,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          },
-          {
-            "Medicine": {
-              "Name": "Brufen",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 3,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          }
-        ]
-      },
       "doctor": null,
       "Doctor": null,
       "Education": 0,
@@ -667,11 +488,11 @@
       "Address": "Brace Radica 15",
       "Hospital": null
     },
-    "Report": null,
+    "IsFinished": true,
     "Reserved": true,
-    "AppointmentCause": "",
-    "AppointmentStart": "2021-05-01T10:30:00",
-    "AppointmentEnd": "2021-05-01T11:00:00",
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-05-02T19:00:00",
+    "AppointmentEnd": "2021-05-02T19:30:00",
     "Type": 1,
     "Room": 1
   },
@@ -681,7 +502,6 @@
     "IsUrgent": false,
     "Patient": {
       "hospital": null,
-      "ChartId": 0,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -690,42 +510,6 @@
         "Paracetamol"
       ],
       "IsGuest": false,
-      "MedicalHistory": {
-        "Prescription": [],
-        "Test": [],
-        "Reports": [],
-        "Hospitalization": [],
-        "Therapies": [
-          {
-            "Medicine": {
-              "Name": "Bromazepam",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 2,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          },
-          {
-            "Medicine": {
-              "Name": "Brufen",
-              "Composition": [],
-              "SideEffects": "Najebao si",
-              "Usage": "Kad hoćeš",
-              "ReplaceMedicine": null
-            },
-            "Quantity": 1,
-            "TimesADay": 3,
-            "TherapyStart": "2021-04-19T00:00:00",
-            "TherapyEnd": "2021-05-01T00:00:00",
-            "FirstUsageTime": 8
-          }
-        ]
-      },
       "doctor": null,
       "Doctor": null,
       "Education": 0,
@@ -771,11 +555,77 @@
       "Address": "Brace Radica 15",
       "Hospital": null
     },
-    "Report": null,
+    "IsFinished": false,
     "Reserved": true,
     "AppointmentCause": null,
-    "AppointmentStart": "2021-05-04T08:30:00",
-    "AppointmentEnd": "2021-05-04T09:00:00",
+    "AppointmentStart": "2021-05-02T19:30:00",
+    "AppointmentEnd": "2021-05-02T20:00:00",
+    "Type": 1,
+    "Room": 1
+  },
+  {
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "IsGuest": false,
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-05-02T11:00:00",
+    "AppointmentEnd": "2021-05-02T11:30:00",
     "Type": 1,
     "Room": 1
   }

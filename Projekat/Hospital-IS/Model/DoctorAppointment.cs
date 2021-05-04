@@ -52,7 +52,7 @@ namespace Model
 
         public Doctor Doctor { get; set; }
 
-        public Model.Report Report { get; set; }
+        public bool IsFinished { get; set; }
 
     }
 }

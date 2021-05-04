@@ -63,13 +63,15 @@ namespace Hospital_IS.DoctorView
         public DoctorAppointment Appointment { get; }
         public bool Emergency = false;
 
-        public UCNewApp(DoctorAppointment appointment)
+        private UCPatientChart PatientChart;
+        public UCNewApp(UCPatientChart patientChart)
         {
             InitializeComponent();
             Emergency = false;
-            cause.BorderBrush = Brushes.PaleVioletRed;
-            cause.DataContext = this;
+
             Appointment = appointment;
+            PatientChart = patientChart;
+            Appointment = patientChart.Appointment;
             doctors.DataContext = MainWindow.Doctors;
             rooms.DataContext = MainWindow.Rooms;
 
@@ -248,7 +250,7 @@ namespace Hospital_IS.DoctorView
                 DoctorHomePage.Instance.DoctorAppointment.Add(selected);
 
                 DoctorHomePage.Instance.Home.Children.Remove(this);
-                DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(Appointment, true));
+                DoctorHomePage.Instance.Home.Children.Add(PatientChart);
             }
         }
 
@@ -299,7 +301,7 @@ namespace Hospital_IS.DoctorView
             DoctorHomePage.Instance.DoctorAppointment.Add(selected);
 
             DoctorHomePage.Instance.Home.Children.Remove(this);
-            DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(Appointment, true));
+            DoctorHomePage.Instance.Home.Children.Add(PatientChart);
         }
 
         private void cancle_Click(object sender, RoutedEventArgs e)

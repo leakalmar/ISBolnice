@@ -1,7 +1,9 @@
-﻿using Hospital_IS.Storages;
+﻿using DoctorView;
+using Hospital_IS.Storages;
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Service
@@ -77,6 +79,44 @@ namespace Service
             }
 
             pfs.SavePatients(AllPatients);
+        }
+
+        public bool CheckIfAllergicToComponent(List<MedicineComponent> composition, ObservableCollection<string> alergies)
+        {
+            List<MedicineComponent> components = composition;
+            foreach (MedicineComponent c in components)
+            {
+                foreach (String allergie in alergies)
+                {
+                    Medicine med = MedicineService.Instance.FindMedicine(allergie);
+                    if (med != null)
+                    {
+                        List<MedicineComponent> allergieComponents = med.Composition;
+                        foreach (MedicineComponent allergieComp in allergieComponents)
+                        {
+                            if (c.Component.ToLower().Equals(allergieComp.Component.ToLower()))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            return false;
+        }
+
+        public bool CheckIfAllergic(ObservableCollection<string> alergies, string name)
+        {
+            foreach (String allergie in alergies)
+            {
+                if (name.ToLower().Contains(allergie.ToLower()))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public List<int> GetPatientIDs()

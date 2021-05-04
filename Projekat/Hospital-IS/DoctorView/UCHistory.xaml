@@ -20,17 +20,17 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Datum" Binding="{Binding AppointmentStart}" 
+                <DataGridTextColumn Header="Datum" Binding="{Binding ReportId}" 
                                         CanUserResize="False" Width="0.05*"/>
                 <DataGridTextColumn Header="Tip pregleda" Binding="{Binding Type}" 
                                         CanUserResize="False" Width="0.05*"/>
                 <DataGridTextColumn Header="Dijagnoza" Binding="{Binding Cause}" CanUserResize="False" 
                                         Width="0.05*"/>
-                <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor.Surname}" CanUserResize="False" 
+                <DataGridTextColumn Header="Doktor" Binding="{Binding DoctorSurname}" CanUserResize="False" 
                                         Width="0.05*"/>
-                <DataGridCheckBoxColumn Header="Recept" Binding="{Binding Report.HaveRecipe}" CanUserResize="False" 
+                <DataGridCheckBoxColumn Header="Recept" Binding="{Binding HaveRecipe}" CanUserResize="False" 
                                         Width="0.02*"/>
-                <DataGridCheckBoxColumn Header="Test" Binding="{Binding Report.HaveTest}" CanUserResize="False" 
+                <DataGridCheckBoxColumn Header="Test" Binding="{Binding HaveTest}" CanUserResize="False" 
                                         Width="0.02*"/>
             </DataGrid.Columns>
             <DataGrid.RowStyle>
