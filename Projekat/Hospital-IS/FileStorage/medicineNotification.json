@@ -1,10 +1,9 @@
 [
   {
     "SenderId": [
-      6,
-      4
+      6
     ],
-    "Title": "Odbijen Flonidan 100mg",
+    "Title": "RE:Odobrenje Flonidan 100mg",
     "Medicine": {
       "Name": "Flonidan 100mg",
       "Composition": [
@@ -16,14 +15,40 @@
       "Usage": "okej",
       "ReplaceMedicine": [
         {
-          "Name": "sve super"
+          "Name": "svi alergijski"
         }
       ]
     },
     "RecieverIds": [
+      4
+    ],
+    "Note": null,
+    "DateSent": "2021-05-04T10:59:05.3001104+02:00"
+  },
+  {
+    "SenderId": [
       6
     ],
-    "Note": "Jednostavno je lijek los",
-    "DateSent": "2021-05-03T15:47:17.6334707+02:00"
+    "Title": "RE:Odobrenje Brufen 2000mg",
+    "Medicine": {
+      "Name": "Brufen 2000mg",
+      "Composition": [
+        {
+          "Component": "saSAsaSASAxza"
+        }
+      ],
+      "SideEffects": "axaXZAxz",
+      "Usage": "aSSAxaX",
+      "ReplaceMedicine": [
+        {
+          "Name": "Asass"
+        }
+      ]
+    },
+    "RecieverIds": [
+      4
+    ],
+    "Note": null,
+    "DateSent": "2021-05-04T11:12:56.4104807+02:00"
   }
 ]

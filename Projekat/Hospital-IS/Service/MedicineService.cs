@@ -60,5 +60,7 @@ namespace Service
             AllMedicines.Add(medicine);
             mfs.Save(AllMedicines);
         }
+
+       
     }
 }

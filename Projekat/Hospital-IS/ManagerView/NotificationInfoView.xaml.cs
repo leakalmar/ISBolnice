@@ -48,12 +48,19 @@ namespace Hospital_IS.ManagerView
 
         private void MedicineChange_Click(object sender, RoutedEventArgs e)
         {
-
+            MedicineNotificationChage medicineNotification = new MedicineNotificationChage(MedicineNotification);
+            medicineNotification.Show();
+            this.Close();
         }
 
         private void MedicineDelete_Click(object sender, RoutedEventArgs e)
         {
 
+            MedicineNotificationController.Instance.DeleteNotification(MedicineNotification);
+            
+            ManagerNotificationView managerNotification = new ManagerNotificationView();
+            managerNotification.Show();
+            this.Hide();
         }
     }
 }

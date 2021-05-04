@@ -48,7 +48,7 @@ namespace Hospital_IS.ManagerView
             String sideEffect = SideEffecct.Text;
             String therapeutic = Usage.Text;
             String name = MedicineName.Text;
-            ChooseRecipient recipient = new ChooseRecipient(name,sideEffect,therapeutic,medicineNames,medicineComponents);
+            ChooseRecipient recipient = new ChooseRecipient(name,sideEffect,therapeutic,medicineNames,medicineComponents,"registartion");
             recipient.Show();
 
         }

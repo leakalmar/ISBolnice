@@ -74,6 +74,12 @@ namespace Service
             }
         }
 
+        internal void DeleteNotification(MedicineNotification medicineNotification)
+        {
+            allNotification.Remove(medicineNotification);
+            mnfs.Save(allNotification);
+        }
+
         public List<MedicineNotification> GetAll()
         {
             return allNotification;

@@ -173,7 +173,7 @@
                         <Image Source="pack://application:,,,/Resources/question.png"  Width="50" Height="64" />
                     </StackPanel>
                 </Button>
-                <Button Grid.RowSpan="2" BorderThickness="0" Grid.Column="3" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9" Click="Button_Click">
+                <Button x:Name="Search" Grid.RowSpan="2" BorderThickness="0" Grid.Column="3" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9" Click="Search_Click">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
