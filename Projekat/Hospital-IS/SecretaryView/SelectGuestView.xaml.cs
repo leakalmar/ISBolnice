@@ -32,7 +32,7 @@ namespace Hospital_IS.SecretaryView
 
         private void AddNewGuest(object sender, RoutedEventArgs e)
         {
-            Patient patient = new Patient();
+            Patient patient = new Patient();                    //prebaciti u servis
             patient.Id = UserService.Instance.GenerateUserID();
             patient.IsGuest = true;
             patient.BirthDate = DateTime.Now;
@@ -44,14 +44,19 @@ namespace Hospital_IS.SecretaryView
         private void Select(object sender, RoutedEventArgs e)
         {
             Patient patient = (Patient)dataGridGuests.SelectedItem;
-            sea.cbPatient.SelectedValue = patient.Id.ToString();
+            sea.txtGuest.Text = patient.Id.ToString();
+
+            sea.txtGuest.Visibility = Visibility.Visible;
             sea.cbPatient.IsEnabled = false;
+            sea.cbPatient.Visibility = Visibility.Collapsed;
             this.Close();
         }
 
         private void Close(object sender, RoutedEventArgs e)
         {
+            sea.txtGuest.Visibility = Visibility.Collapsed;
             sea.cbPatient.IsEnabled = true;
+            sea.cbPatient.Visibility = Visibility.Visible;
             this.Close();
         }
     }

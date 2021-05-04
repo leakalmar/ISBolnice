@@ -25,7 +25,7 @@ namespace Hospital_IS.SecretaryView
             InitializeComponent();
             this.uca = uca;
 
-            Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAll());
+            Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAllRegisteredPatients());
             Doctors = new ObservableCollection<Doctor>(DoctorController.Instance.GetAll());
 
             this.DataContext = this;

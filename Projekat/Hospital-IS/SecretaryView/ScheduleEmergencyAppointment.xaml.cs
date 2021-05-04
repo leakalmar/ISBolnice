@@ -25,7 +25,7 @@ namespace Hospital_IS.SecretaryView
             InitializeComponent();
             this.sa = sa;
 
-            Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAll());
+            Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAllRegisteredPatients());
             Specializations = new ObservableCollection<Specialty>(SpecializationController.Instance.GetAll());
 
             this.DataContext = this;
@@ -72,7 +72,10 @@ namespace Hospital_IS.SecretaryView
                 emerAppointmentDTO.AppointmetType = AppointmentType.Operation;
 
             emerAppointmentDTO.Specialty = Specializations[cbSpecialty.SelectedIndex];
-            emerAppointmentDTO.Patient = Patients[cbPatient.SelectedIndex];
+            if (cbPatient.IsEnabled)
+                emerAppointmentDTO.Patient = Patients[cbPatient.SelectedIndex];
+            else
+                emerAppointmentDTO.Patient = PatientController.Instance.GetPatientByID(Int32.Parse(txtGuest.Text));
             emerAppointmentDTO.Room = Rooms[cbRoom.SelectedIndex];
             emerAppointmentDTO.DurationInMinutes = Int32.Parse(txtAppDuration.Text);
 

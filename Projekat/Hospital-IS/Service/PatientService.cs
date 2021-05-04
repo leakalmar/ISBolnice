@@ -184,6 +184,16 @@ namespace Service
             return guests;
         }
 
+        public Patient GetPatientByID(int id) 
+        {
+            foreach (Patient patient in AllPatients)
+            {
+                if (patient.Id.Equals(id))
+                    return patient;
+            }
+            return null;
+        }
+
         public void ReloadPatients()
         {
             AllPatients = pfs.GetAll();

@@ -55,6 +55,11 @@ namespace Controllers
             return PatientService.Instance.GetAllGuests();
         }
 
+        public Patient GetPatientByID(int id)
+        {
+            return PatientService.Instance.GetPatientByID(id);
+        }
+
         public void ReloadPatients()
         {
             PatientService.Instance.ReloadPatients();
