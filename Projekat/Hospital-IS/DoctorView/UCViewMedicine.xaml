@@ -47,10 +47,9 @@
                     Background="Transparent" RowBackground="Transparent"
                     ScrollViewer.VerticalScrollBarVisibility="Auto" BorderThickness="0"
                     AutoGenerateColumns="False" BorderBrush="{x:Null}"
-                    CanUserDeleteRows="True"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     HorizontalScrollBarVisibility="Disabled" RowHeaderWidth="0"
-                    CanUserSortColumns="False">
+                    CanUserSortColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Path=Component}" Width="*" />
                 </DataGrid.Columns>
@@ -70,7 +69,7 @@
                     AutoGenerateColumns="False" BorderBrush="{x:Null}"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     HorizontalScrollBarVisibility="Disabled" RowHeaderWidth="0"
-                    CanUserSortColumns="False">
+                    CanUserSortColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Path=Name}" Width="*" />
                 </DataGrid.Columns>
