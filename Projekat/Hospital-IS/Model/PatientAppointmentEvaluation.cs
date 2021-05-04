@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTOs
+namespace Model
 {
     public class PatientAppointmentEvaluation
     {
+
         public int Grade { get; set; }
         public String Comment { get; set; }
         public DateTime DoctorAppointmentDate { get; set; }

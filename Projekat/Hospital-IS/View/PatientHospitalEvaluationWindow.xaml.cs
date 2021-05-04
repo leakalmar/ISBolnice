@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital_IS.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -15,16 +16,17 @@ namespace Hospital_IS.View
     /// <summary>
     /// Interaction logic for PatientHospitalEvaluation.xaml
     /// </summary>
-    public partial class PatientHospitalEvaluation : Window
+    public partial class PatientHospitalEvaluationWindow : Window
     {
-        public PatientHospitalEvaluation()
+        public PatientHospitalEvaluationWindow()
         {
             InitializeComponent();
         }
 
         private void EvaluateHospital(object sender, RoutedEventArgs e)
         {
-
+            PatientHospitalEvaluationController.Instance.AddAppointmentEvaluation(Grades.SelectedIndex+1, Comment.Text, DateTime.Today, HomePatient.Instance.Patient.Id);
+            this.Close();
         }
     }
 }

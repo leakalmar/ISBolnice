@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using Hospital_IS.DTOs;
 using Model;
 using Service;
 using Storages;
@@ -69,7 +70,8 @@ namespace Hospital_IS.View
             }
             
             AvailableAppointments.Clear();
-            List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(TimeSlot.Text, doctor, HomePatient.Instance.Patient, date, timePriority);
+            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.Text, doctor, HomePatient.Instance.Patient, date, timePriority);
+            List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(possibleAppointment);
             foreach (DoctorAppointment doctorAppointment in docApps)
             {
                 AvailableAppointments.Add(doctorAppointment);
@@ -128,7 +130,8 @@ namespace Hospital_IS.View
             }
             
             AvailableAppointments.Clear();
-            List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(TimeSlot.Text, docApp.Doctor, HomePatient.Instance.Patient, date, false);
+            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.Text, docApp.Doctor, HomePatient.Instance.Patient, date, false);
+            List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(possibleAppointment);
             foreach (DoctorAppointment doctorAppointment in docApps)
             {
                 AvailableAppointments.Add(doctorAppointment);

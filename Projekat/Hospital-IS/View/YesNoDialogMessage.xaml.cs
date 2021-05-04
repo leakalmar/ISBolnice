@@ -25,7 +25,7 @@ namespace Hospital_IS.View
 
         private void EvaluateHospital(object sender, RoutedEventArgs e)
         {
-            PatientHospitalEvaluation hospitalEvaluation = new PatientHospitalEvaluation();
+            PatientHospitalEvaluationWindow hospitalEvaluation = new PatientHospitalEvaluationWindow();
             hospitalEvaluation.Show();
             this.Close();
         }
