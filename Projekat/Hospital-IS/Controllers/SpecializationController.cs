@@ -27,7 +27,7 @@ namespace Controllers
 
         public List<Specialty> GetAll()
         {
-            return SpecializationService.Instance.AllSpecialties;
+            return SpecializationService.Instance.GetAll();
         }
 
     }

@@ -52,7 +52,7 @@ namespace Controllers
             reviewdNotification.Note = text;
             reviewdNotification.Title = "Odbijen " + reviewdNotification.Medicine.Name;
             reviewdNotification.SenderId.Clear();
-            reviewdNotification.SenderId.AddRange(reviewdNotification.RecieverIds);
+            reviewdNotification.SenderId.Add(DoctorHomePage.Instance.Doctor.Id);
             reviewdNotification.RecieverIds.Clear();
             reviewdNotification.RecieverIds.Add(6);
             reviewdNotification.DateSent = DateTime.Now;

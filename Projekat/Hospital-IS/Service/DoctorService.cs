@@ -28,7 +28,10 @@ namespace Service
             AllDoctors = dfs.GetAll();
         }
 
-
+        public List<Doctor> GetAll()
+        {
+            return AllDoctors;
+        }
 
         public List<int> GetDoctorIds()
         {

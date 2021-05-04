@@ -28,5 +28,10 @@ namespace Service
         {
             AllSpecialties = sfs.GetAll();
         }
+
+        public List<Specialty> GetAll()
+        {
+            return AllSpecialties;
+        }
     }
 }

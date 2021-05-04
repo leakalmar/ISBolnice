@@ -282,8 +282,8 @@
     "IsFinished": false,
     "Reserved": true,
     "AppointmentCause": null,
-    "AppointmentStart": "2021-05-04T15:00:00",
-    "AppointmentEnd": "2021-05-04T15:30:00",
+    "AppointmentStart": "2021-05-05T01:15:00",
+    "AppointmentEnd": "2021-05-05T01:45:00",
     "Type": 1,
     "Room": 1
   },

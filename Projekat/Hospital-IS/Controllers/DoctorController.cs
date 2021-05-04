@@ -32,7 +32,7 @@ namespace Controllers
 
         public List<Doctor> GetAll()
         {
-            return DoctorService.Instance.AllDoctors;
+            return DoctorService.Instance.GetAll();
         }
 
         public List<Doctor> GetDoctorsBySpecilty(Specialty specialty)

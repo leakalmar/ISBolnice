@@ -151,7 +151,7 @@ namespace Service
                 }
 
                 DoctorAppointment newAppointment;
-                while (lastTimeCreated.TimeOfDay < new DateTime(DateTime.Now.Date.Year, DateTime.Now.Date.Month, DateTime.Now.Date.Day, 23, 00, 00).TimeOfDay)
+                while (lastTimeCreated.TimeOfDay < new DateTime(DateTime.Now.Date.Year, DateTime.Now.Date.Month, DateTime.Now.Date.Day, 20, 00, 00).TimeOfDay)
                 {
                     if (tempAppointment.Type == AppointmentType.CheckUp)
                     {
@@ -451,7 +451,7 @@ namespace Service
                     RescheduledAppointmentDTO appointment = new RescheduledAppointmentDTO(oldAppointments[i]);
                     appointment.NewDocAppointment.AppointmentStart = appointmentStart;
                     appointment.NewDocAppointment.AppointmentEnd = appointmentStart.Add(appointmentDuration);
-                    if (appointment.NewDocAppointment.AppointmentStart.TimeOfDay >= new TimeSpan(8, 0, 0) && appointment.NewDocAppointment.AppointmentEnd.TimeOfDay < new TimeSpan(23, 0, 0)
+                    if (appointment.NewDocAppointment.AppointmentStart.TimeOfDay >= new TimeSpan(8, 0, 0) && appointment.NewDocAppointment.AppointmentEnd.TimeOfDay < new TimeSpan(20, 0, 0)
                             && VerifyAppointment(appointment.NewDocAppointment))
                     {
                         newAppointments.Add(appointment);
