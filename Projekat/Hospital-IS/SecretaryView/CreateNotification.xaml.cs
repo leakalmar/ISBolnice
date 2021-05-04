@@ -1,7 +1,9 @@
-﻿using Hospital_IS.Controllers;
+﻿using Controllers;
+using Hospital_IS.Controllers;
 using Hospital_IS.SecretaryView;
 using Hospital_IS.Storages;
 using Model;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -37,16 +39,26 @@ namespace Hospital_IS
         {
             Notification.DatePosted = DateTime.Now;
             Notification.LastChanged = DateTime.Now;
-            
+
             if (rbSelectSome.IsChecked == true)
             {
                 foreach (int id in Ids)
                     Notification.Recipients.Add(id);
             }
+            else if (rbSelectAll.IsChecked == true)
+            {
+                foreach (Patient patient in PatientController.Instance.GetAllRegisteredPatients())
+                    Notification.Recipients.Add(patient.Id);
+
+                foreach (Doctor doctor in DoctorController.Instance.GetAll())
+                    Notification.Recipients.Add(doctor.Id);
+            }
 
             ucn.Notifications.Insert(0, Notification);
 
             NotificationController.Instance.AddNotification(Notification);
+
+            ucn.RefreshList();
 
             this.Close();
         }

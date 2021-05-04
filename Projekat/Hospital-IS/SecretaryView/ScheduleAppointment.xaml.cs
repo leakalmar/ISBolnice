@@ -18,16 +18,15 @@ namespace Hospital_IS.SecretaryView
         public ObservableCollection<Doctor> Doctors { get; set; } = new ObservableCollection<Doctor>();
         public ObservableCollection<Room> Rooms { get; set; } = new ObservableCollection<Room>();
 
-        private UCAppointmentsView uca;
+        public UCAppointmentsView uca;
 
         public ScheduleAppointment(UCAppointmentsView uca)
         {
             InitializeComponent();
             this.uca = uca;
 
-            Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAll());
+            Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAllRegisteredPatients());
             Doctors = new ObservableCollection<Doctor>(DoctorController.Instance.GetAll());
-            Rooms = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
 
             this.DataContext = this;
         }
@@ -40,12 +39,12 @@ namespace Hospital_IS.SecretaryView
             // tip pregleda
             if (cbAppType.SelectedIndex == 0)
             {
-                DocAppointment.Type = AppointmetType.CheckUp;
+                DocAppointment.Type = AppointmentType.CheckUp;
                 DocAppointment.AppTypeText = "Pregled";
             }
             else if (cbAppType.SelectedIndex == 1)
             {
-                DocAppointment.Type = AppointmetType.Operation;
+                DocAppointment.Type = AppointmentType.Operation;
                 DocAppointment.AppTypeText = "Operacija";
             }
 
@@ -68,10 +67,14 @@ namespace Hospital_IS.SecretaryView
             if (cbAppType.SelectedIndex == 0)
             {
                 txtEndOfApp.IsEnabled = false;
+                Rooms = new ObservableCollection<Room>(RoomController.Instance.GetRoomByType(RoomType.ConsultingRoom));
+                cbRoom.ItemsSource = Rooms;
             }
             else
             {
                 txtEndOfApp.IsEnabled = true;
+                Rooms = new ObservableCollection<Room>(RoomController.Instance.GetRoomByType(RoomType.OperationRoom));
+                cbRoom.ItemsSource = Rooms;
             }
         }
 
@@ -124,7 +127,7 @@ namespace Hospital_IS.SecretaryView
             {
             }
 
-            EnableAppointmentConfirmation(DoctorAppointmentController.Instance.VerifyAppointment(DocAppointment, null));
+            EnableAppointmentConfirmation(DoctorAppointmentController.Instance.VerifyAppointment(DocAppointment));
         }
 
         private void EnableAppointmentConfirmation(bool isValid)
@@ -143,5 +146,16 @@ namespace Hospital_IS.SecretaryView
             }
         }
 
+        private void btnEmergency_Click(object sender, RoutedEventArgs e)
+        {
+            ScheduleEmergencyAppointment sea = new ScheduleEmergencyAppointment(this);
+            sea.Show();
+            this.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

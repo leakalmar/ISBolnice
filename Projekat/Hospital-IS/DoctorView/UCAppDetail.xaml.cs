@@ -13,20 +13,21 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Hospital_IS.DoctorView;
 using System.ComponentModel;
+using Controllers;
 
 namespace Hospital_IS.DoctorView
 {
     public partial class UCAppDetail : UserControl
     {
 
-        public UCAppDetail(DoctorAppointment doctorAppointment)
+        public UCAppDetail(DoctorAppointment doctorAppointment = null)
         {
             InitializeComponent();
             docotrAppointments.DataContext = DoctorHomePage.Instance.DoctorAppointment;
             docotrAppointments.SelectedItem = doctorAppointment;
             info.DataContext = doctorAppointment;
             info2.DataContext = doctorAppointment;
-            
+
 
             ICollectionView view = new CollectionViewSource { Source = DoctorHomePage.Instance.DoctorAppointment }.View;
             view.Filter = delegate (object item)
@@ -41,19 +42,21 @@ namespace Hospital_IS.DoctorView
         private void CartBtnClick(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Collapsed;
-            DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart((DoctorAppointment) docotrAppointments.SelectedItem));
+            DoctorAppointment selectedAppointment = (DoctorAppointment)docotrAppointments.SelectedItem;
+            DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(selectedAppointment));
         }
 
         private void StartBtnClick(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Collapsed;
-            DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart((DoctorAppointment)docotrAppointments.SelectedItem, true));
+            DoctorAppointment selectedAppointment = (DoctorAppointment)docotrAppointments.SelectedItem;
+            DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(selectedAppointment, true));
         }
 
         private void docotrAppointments_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DoctorAppointment app = (DoctorAppointment)docotrAppointments.SelectedItem;
-            if(app.Report != null)
+            if (app.IsFinished)
             {
                 start.Visibility = Visibility.Hidden;
             }

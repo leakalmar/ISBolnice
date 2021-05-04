@@ -87,5 +87,20 @@
         "Name": "Asass"
       }
     ]
+  },
+  {
+    "Name": "Flonidan 100mg",
+    "Composition": [
+      {
+        "Component": "sve najbolje"
+      }
+    ],
+    "SideEffects": "okej",
+    "Usage": "okej",
+    "ReplaceMedicine": [
+      {
+        "Name": "svi alergijski"
+      }
+    ]
   }
 ]

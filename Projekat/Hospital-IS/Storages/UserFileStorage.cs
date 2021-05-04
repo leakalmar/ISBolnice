@@ -18,7 +18,7 @@ namespace Storages
                 new WorkDay(Day.Monday, DateTime.Now, DateTime.Now)
             };
 
-            ObservableCollection<String> alergije = new ObservableCollection<String>();
+            List<String> alergije = new List<String>();
             alergije.Add("Tetanus");
             alergije.Add("Paracetamol");
             Model.Specialty spec = new Model.Specialty("Dermatolog");
@@ -34,11 +34,6 @@ namespace Storages
         }
 
         public void SaveUser(Model.User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Model.User GetByEmail(String email)
         {
             throw new NotImplementedException();
         }

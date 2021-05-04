@@ -17,9 +17,9 @@ namespace Hospital_IS.SecretaryView
             this.DocAppointment = appointment;
             this.DataContext = this;
 
-            if (appointment.Type == AppointmetType.CheckUp)
+            if (appointment.Type == AppointmentType.CheckUp)
                 txtDuration.Text = "30 min";
-            else if (appointment.Type == AppointmetType.Operation)
+            else if (appointment.Type == AppointmentType.Operation)
             {
                 TimeSpan span = appointment.AppointmentEnd - appointment.AppointmentStart;
                 double minutes = span.TotalMinutes;

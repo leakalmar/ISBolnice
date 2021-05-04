@@ -1,4 +1,5 @@
 ﻿using DoctorView;
+using Hospital_IS.DoctorView;
 using Model;
 using Service;
 using System;
@@ -48,9 +49,16 @@ namespace Controllers
             MedicineService.Instance.AddNewMedicine(medicine);
         }
 
-        internal void DeleteMedicine(Medicine medicine)
+
+        public void DeleteMedicine(Medicine medicine)
         {
             MedicineService.Instance.DeleteMedicine(medicine);
+        }
+
+        public Medicine FindMedicineByName(String name)
+        {
+            return MedicineService.Instance.FindMedicineByName(name);
+   
         }
     }
 }

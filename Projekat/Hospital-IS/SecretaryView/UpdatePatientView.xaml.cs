@@ -36,7 +36,8 @@ namespace Hospital_IS
             else if (Patient.Education.Equals(EducationCategory.College))
                 eduComboBox.SelectedIndex = 2;
 
-            Allergies = new ObservableCollection<String>(Patient.Alergies);
+            if (Patient.Alergies != null)
+                Allergies = new ObservableCollection<String>(Patient.Alergies);
 
             this.DataContext = this;
         }

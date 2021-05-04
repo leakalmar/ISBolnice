@@ -9,7 +9,7 @@ namespace Service
     public class MedicineNotificationService
     {
         private MedcineNotificationStorage mnfs = new MedcineNotificationStorage();
-        public List<MedicineNotification> allNotification { get; set; } = new List<MedicineNotification>();
+        public List<MedicineNotification> AllNotification { get; set; } = new List<MedicineNotification>();
 
         private static MedicineNotificationService instance = null;
         public static MedicineNotificationService Instance
@@ -26,12 +26,12 @@ namespace Service
 
         private MedicineNotificationService()
         {
-            allNotification = mnfs.GetAll();
+            AllNotification = mnfs.GetAll();
         }
         public List<MedicineNotification> GetAllByDoctorId(int idDoctor)
         {
             List<MedicineNotification> notificationForDoctor = new List<MedicineNotification>();
-            foreach(MedicineNotification medicineNotification in allNotification)
+            foreach(MedicineNotification medicineNotification in AllNotification)
             {
                 if (medicineNotification.RecieverIds.Contains(idDoctor))
                 {
@@ -43,46 +43,44 @@ namespace Service
 
         public void AddNotification(MedicineNotification medicineNotification)
         {
-            allNotification.Add(medicineNotification);
-            mnfs.Save(allNotification);
+            AllNotification.Add(medicineNotification);
+            mnfs.Save(AllNotification);
         }
 
         public void UpdateMedicineNotification(MedicineNotification reviewdNotification)
         {
-            for(int i = 0; i< allNotification.Count; i++)
+            for(int i = 0; i< AllNotification.Count; i++)
             {
-                if (allNotification[i].Medicine.Name.Equals(reviewdNotification.Medicine.Name))
+                if (AllNotification[i].Medicine.Name.Equals(reviewdNotification.Medicine.Name))
                 {
-                    allNotification.RemoveAt(i);
-                    allNotification.Insert(i, reviewdNotification);
-                    mnfs.Save(allNotification);
+                    AllNotification.RemoveAt(i);
+                    AllNotification.Insert(i, reviewdNotification);
+                    mnfs.Save(AllNotification);
                 }
             }
         }
 
-        
-
         public void DeleteMedicineNotification(MedicineNotification reviewdNotification)
         {
-            for (int i = 0; i < allNotification.Count; i++)
+            for (int i = 0; i < AllNotification.Count; i++)
             {
-                if (allNotification[i].Medicine.Name.Equals(reviewdNotification.Medicine.Name))
+                if (AllNotification[i].Medicine.Name.Equals(reviewdNotification.Medicine.Name))
                 {
-                    allNotification.RemoveAt(i);
-                    mnfs.Save(allNotification);
+                    AllNotification.RemoveAt(i);
+                    mnfs.Save(AllNotification);
                 }
             }
         }
 
         public void DeleteNotification(MedicineNotification medicineNotification)
         {
-            allNotification.Remove(medicineNotification);
-            mnfs.Save(allNotification);
+            AllNotification.Remove(medicineNotification);
+            mnfs.Save(AllNotification);
         }
 
         public List<MedicineNotification> GetAll()
         {
-            return allNotification;
+            return AllNotification;
         }
     }
 }

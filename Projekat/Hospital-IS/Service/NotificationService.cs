@@ -10,7 +10,7 @@ namespace Hospital_IS.Service
     {
         private NotificationFileStorage nfs = new NotificationFileStorage();
 
-        public List<Notification> allNotifications { get; set; }
+        public List<Notification> AllNotifications { get; set; }
 
         private static NotificationService instance = null;
         public static NotificationService Instance
@@ -27,14 +27,14 @@ namespace Hospital_IS.Service
 
         private NotificationService()
         {
-            allNotifications = nfs.GetAll();
+            AllNotifications = nfs.GetAll();
         }
 
         public List<Notification> GetAllByUser(int userId)
         {
             List<Notification> userNotifications = new List<Notification>();
 
-            foreach (Notification notif in allNotifications)
+            foreach (Notification notif in AllNotifications)
             {
                 foreach (int id in notif.Recipients)
                 {
@@ -46,39 +46,44 @@ namespace Hospital_IS.Service
             return userNotifications;
         }
 
+        public void ReloadNotifications()
+        {
+            AllNotifications = nfs.GetAll();
+        }
+
         public void AddNotification(Notification notification)
         {
-            allNotifications.Insert(0, notification);
+            AllNotifications.Insert(0, notification);
 
-            nfs.SaveNotifications(allNotifications);
+            nfs.SaveNotifications(AllNotifications);
         }
 
         public void UpdateNotification(Notification notification)
         {
 
-            for (int i = 0; i < allNotifications.Count; i++)
+            for (int i = 0; i < AllNotifications.Count; i++)
             {
-                if (notification.Id.Equals(allNotifications[i].Id))
+                if (notification.Id.Equals(AllNotifications[i].Id))
                 {
-                    allNotifications.Remove(allNotifications[i]);
-                    allNotifications.Insert(i, notification);
+                    AllNotifications.Remove(AllNotifications[i]);
+                    AllNotifications.Insert(i, notification);
                 }
             }
 
-            nfs.SaveNotifications(allNotifications);
+            nfs.SaveNotifications(AllNotifications);
         }
 
         public void DeleteNotification(Notification notification)
         {
-            for (int i = 0; i < allNotifications.Count; i++)
+            for (int i = 0; i < AllNotifications.Count; i++)
             {
-                if (notification.Id.Equals(allNotifications[i].Id))
+                if (notification.Id.Equals(AllNotifications[i].Id))
                 {
-                    allNotifications.Remove(allNotifications[i]);
+                    AllNotifications.Remove(AllNotifications[i]);
                 }
             }
 
-            nfs.SaveNotifications(allNotifications);
+            nfs.SaveNotifications(AllNotifications);
         }
 
 

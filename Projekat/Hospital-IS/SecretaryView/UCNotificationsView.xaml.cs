@@ -1,4 +1,5 @@
 ﻿using Hospital_IS.Controllers;
+using Hospital_IS.SecretaryView;
 using Hospital_IS.Storages;
 using Model;
 using System;
@@ -28,10 +29,20 @@ namespace Hospital_IS
 
         }
 
+        public void RefreshList()
+        {
+            if (Notifications != null)
+                Notifications.Clear();
+
+            NotificationController.Instance.ReloadNotifications();
+            Notifications = new ObservableCollection<Notification>(NotificationController.Instance.GetAll());
+            ListViewNotifications.ItemsSource = Notifications;
+        }
+
         private void ShowNotification(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            Notification n = findNotification(Int32.Parse(button.Tag.ToString()));
+            Notification n = FindNotification(Int32.Parse(button.Tag.ToString()));
             NotificationView nv = new NotificationView(n);
             nv.Show();
 
@@ -43,7 +54,7 @@ namespace Hospital_IS
             cn.Show();
         }
 
-        private Notification findNotification(int id)
+        private Notification FindNotification(int id)
         {
             for (int i = 0; i < Notifications.Count; i++)
             {
@@ -53,5 +64,12 @@ namespace Hospital_IS
             return null;
         }
 
+        private void UpdateNotification(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Notification n = FindNotification(Int32.Parse(button.Tag.ToString()));
+            UpdateNotification un = new UpdateNotification(n, this);
+            un.Show();
+        }
     }
 }

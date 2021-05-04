@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using Hospital_IS.DTOs;
 using Model;
 using Service;
 using Storages;
@@ -58,7 +59,7 @@ namespace Hospital_IS.View
             this.Close();
         }
         //Drugi doktor je hardcode-ovan u FSDoctor klasi,samo radi pokazivanja funkcionalnosti(Samo ga otkomentarisati pri pokretanju da bi se prikazao)
-        private void showAvailableApp(object sender, RoutedEventArgs e)
+        private void ShowAvailableApp(object sender, RoutedEventArgs e)
         {            
             doctor = (Doctor)Doctors.SelectedItem;
             date = Calendar.SelectedDate.Value;
@@ -69,7 +70,8 @@ namespace Hospital_IS.View
             }
             
             AvailableAppointments.Clear();
-            List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(TimeSlot.Text, doctor, HomePatient.Instance.Patient, date, timePriority);
+            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.Text, doctor, HomePatient.Instance.Patient, date, timePriority);
+            List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(possibleAppointment);
             foreach (DoctorAppointment doctorAppointment in docApps)
             {
                 AvailableAppointments.Add(doctorAppointment);
@@ -85,22 +87,30 @@ namespace Hospital_IS.View
             }
             else
             {
-                HomePatient.Instance.DoctorAppointment.Add(docApp);
-                DoctorAppointmentController.Instance.AddAppointment(docApp);
-                docApp.Reserved = true;
-                AvailableAppointments.Remove(docApp);
+                if (!PatientController.Instance.IsPatientTroll(HomePatient.Instance.Patient, docApp))
+                {
+                    HomePatient.Instance.DoctorAppointment.Add(docApp);
+                    DoctorAppointmentController.Instance.AddAppointment(docApp);
+                    docApp.Reserved = true;
+                    AvailableAppointments.Remove(docApp);
+                }
+                else
+                {
+                    MessageBox.Show("Zbog učestalog zakazivanja ili izmene termina, ne možete zakazati termin!");
+                }               
             }
         }
 
-        public void changeAppointment(DoctorAppointment docApp)
+        public void RescheduleAppointment(DoctorAppointment docApp)
         {
-            doctor = docApp.Doctor;
+            int maximumDayDifference = 3;
+            Doctors.SelectedItem = docApp.Doctor;
             date = docApp.AppointmentStart;
             Calendar.SelectedDate = date;
             Calendar.DisplayDateStart = date;
-            Calendar.DisplayDateEnd = date.AddDays(3);
-            change.Visibility = Visibility.Visible;
-            reserve.Visibility = Visibility.Collapsed;
+            Calendar.DisplayDateEnd = date.AddDays(maximumDayDifference);
+            change.Visibility = Visibility.Visible;         //Dugme za izmenu termina pregleda
+            reserve.Visibility = Visibility.Collapsed;      //Dugme za zakazivanje pregleda
             
             if (date.Hour < 11)
             {
@@ -120,7 +130,8 @@ namespace Hospital_IS.View
             }
             
             AvailableAppointments.Clear();
-            List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(TimeSlot.Text, doctor, HomePatient.Instance.Patient, date, false);
+            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.Text, docApp.Doctor, HomePatient.Instance.Patient, date, false);
+            List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(possibleAppointment);
             foreach (DoctorAppointment doctorAppointment in docApps)
             {
                 AvailableAppointments.Add(doctorAppointment);
@@ -128,14 +139,28 @@ namespace Hospital_IS.View
             
         }
 
-        private void changeAppointmentButton(object sender, RoutedEventArgs e)
+        private void RescheduleAppointmentButton(object sender, RoutedEventArgs e)
         {
             DoctorAppointment docApp = (DoctorAppointment)listOfAppointments.SelectedItem;
-            DoctorAppointmentController.Instance.UpdateAppointment(HomePatient.Instance.changedApp, docApp);
-            HomePatient.Instance.DoctorAppointment.Remove(HomePatient.Instance.changedApp);
-            HomePatient.Instance.DoctorAppointment.Add(docApp);
-            docApp.Reserved = true;
-            AvailableAppointments.Remove(docApp);
+            if (docApp == null)
+            {
+                MessageBox.Show("Izaberite termin!");
+            }
+            else
+            {
+                if (!PatientController.Instance.IsPatientTroll(HomePatient.Instance.Patient, docApp))
+                {
+                    DoctorAppointmentController.Instance.UpdateAppointment(HomePatient.Instance.rescheduledApp, docApp);
+                    HomePatient.Instance.DoctorAppointment.Remove(HomePatient.Instance.rescheduledApp);
+                    HomePatient.Instance.DoctorAppointment.Add(docApp);
+                    docApp.Reserved = true;
+                    AvailableAppointments.Remove(docApp);
+                }
+                else
+                {
+                    MessageBox.Show("Zbog učestalog zakazivanja ili izmene termina, ne možete zakazati termin!");
+                }
+            }          
         }
 
         private void logout(object sender, RoutedEventArgs e)
@@ -143,8 +168,6 @@ namespace Hospital_IS.View
             MainWindow login = new MainWindow();
             login.Show();
             this.Close();
-            Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
-            pfs.UpdatePatient(HomePatient.Instance.Patient);
         }
 
     }

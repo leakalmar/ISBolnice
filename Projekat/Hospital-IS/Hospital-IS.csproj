@@ -21,6 +21,8 @@
     <None Remove="Resources\angledown.png" />
     <None Remove="Resources\bed.png" />
     <None Remove="Resources\calendar.png" />
+    <None Remove="Resources\hospital.png" />
+    <None Remove="Resources\hospitalCroped.png" />
     <None Remove="Resources\insight.png" />
     <None Remove="Resources\lekovi.png" />
     <None Remove="Resources\notification.png" />
@@ -33,6 +35,8 @@
     <None Remove="Resources\renovation.png" />
     <None Remove="Resources\search.png" />
     <None Remove="Resources\shoppingcart.png" />
+    <None Remove="Resources\redsiren.png" />
+    <None Remove="Resources\siren.png" />
     <None Remove="Resources\treatment.png" />
     <None Remove="other_facilities.png" />
     <None Remove="request.png" />
@@ -102,6 +106,8 @@
     <Resource Include="Resources\doctor.jpg" />
     <Resource Include="Resources\edit.png" />
     <Resource Include="Resources\filijale.png" />
+    <Resource Include="Resources\hospital.png" />
+    <Resource Include="Resources\hospitalCroped.png" />
     <Resource Include="Resources\hospitalroom.png" />
     <Resource Include="Resources\importance.png" />
     <Resource Include="Resources\insight.png" />
@@ -120,6 +126,7 @@
     <Resource Include="Resources\question.png" />
     <Resource Include="Resources\registration.png" />
     <Resource Include="Resources\renovation.png" />
+    <Resource Include="Resources\redsiren.png" />
     <Resource Include="Resources\report.png" />
     <Resource Include="Resources\room.png" />
     <Resource Include="Resources\room1.png" />
@@ -127,6 +134,7 @@
     <Resource Include="Resources\settings.png" />
     <Resource Include="Resources\shoppingcart.png" />
     <Resource Include="Resources\simona.jpg" />
+    <Resource Include="Resources\siren.png" />
     <Resource Include="Resources\treatment.png" />
     <Resource Include="Resources\toolbar.png" />
     <Resource Include="Resources\transfer.png" />

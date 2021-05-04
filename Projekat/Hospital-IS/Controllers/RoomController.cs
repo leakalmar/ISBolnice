@@ -46,14 +46,14 @@ namespace Controllers
             RoomService.Instance.UpdateRoom(room);
         }
 
-        public List<Room> getAllRooms()
+        public List<Room> GetAllRooms()
         {
-            return RoomService.Instance.getAllRooms();
+            return RoomService.Instance.GetAllRooms();
         }
 
-        public List<Room> getRoomByType(RoomType type)
+        public List<Room> GetRoomByType(RoomType type)
         {
-            return RoomService.Instance.getRoomByType(type);
+            return RoomService.Instance.GetRoomByType(type);
         }
 
         public void AddEquipment(Room room, Equipment newEquip)

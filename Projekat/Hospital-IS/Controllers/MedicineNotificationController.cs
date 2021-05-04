@@ -1,4 +1,5 @@
 ﻿using DoctorView;
+using Hospital_IS.DoctorView;
 using Model;
 using Service;
 using System;
@@ -46,8 +47,6 @@ namespace Controllers
             MedicineNotificationService.Instance.AddNotification(medicineNotification);
         }
 
-        
-
         public void DisapproveMedicine(MedicineNotification reviewdNotification, string text)
         {
             reviewdNotification.Note = text;
@@ -62,15 +61,13 @@ namespace Controllers
 
         public void DeleteNotification(MedicineNotification medicineNotification)
         {
-
-            MedicineNotificationService.Instance.DeleteNotification(medicineNotification);
-            
+            MedicineNotificationService.Instance.DeleteNotification(medicineNotification);    
         }
 
         public void ApproveMedicine(MedicineNotification reviewdNotification)
         {
             MedicineService.Instance.AddNewMedicine(reviewdNotification.Medicine);
-            MedicineNotificationService.Instance.DeleteMedicineNotification(reviewdNotification);
+            MedicineNotificationService.Instance.DeleteNotification(reviewdNotification);
         }
 
         public List<MedicineNotification> GetAll()

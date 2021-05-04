@@ -18,12 +18,12 @@ namespace Model
 
         public Transfer(int sourceRoomId, int destinationRoomId, Equipment equip, int quantity, DateTime transferEnd,Boolean isMade)
         {
-            SourceRoomId = sourceRoomId;
-            DestinationRoomId = destinationRoomId;
-            Equip = equip;
-            Quantity = quantity;
-            TransferEnd = transferEnd;
-            isMade = isMade;
+            this.SourceRoomId = sourceRoomId;
+            this.DestinationRoomId = destinationRoomId;
+            this.Equip = equip;
+            this.Quantity = quantity;
+            this.TransferEnd = transferEnd;
+            this.isMade = isMade;
         }
 
         public Transfer()

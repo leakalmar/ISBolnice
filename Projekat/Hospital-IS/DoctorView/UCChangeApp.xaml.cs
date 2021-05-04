@@ -3,10 +3,8 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Hospital_IS.DoctorView
@@ -40,6 +38,7 @@ namespace Hospital_IS.DoctorView
                     }
                 }
                 calendar.SelectedDate = DateTime.Now.Date;
+                FindAppointments((Doctor)doctors.SelectedItem, (Room)rooms.SelectedItem, new List<DateTime>(calendar.SelectedDates));
             }
         }
 
@@ -49,15 +48,19 @@ namespace Hospital_IS.DoctorView
             InitializeComponent();
             doctors.DataContext = MainWindow.Doctors;
             rooms.DataContext = MainWindow.Rooms;
-            
+
             panel = details;
         }
 
         private void filter_changed(object sender, SelectionChangedEventArgs e)
         {
+            if (rooms.SelectedItem == null || doctors.SelectedItem == null || calendar.SelectedDate == null)
+            {
+                return;
+            }
             Doctor doc = (Doctor)doctors.SelectedItem;
             Room room = (Room)rooms.SelectedItem;
-            SelectedDatesCollection dates = calendar.SelectedDates;
+            List<DateTime> dates = new List<DateTime>(calendar.SelectedDates);
             if (doc == null)
             {
                 foreach (Doctor d in MainWindow.Doctors)
@@ -69,8 +72,8 @@ namespace Hospital_IS.DoctorView
                     }
                 }
             }
-            if (room == null) 
-            { 
+            if (room == null)
+            {
                 foreach (Room r in MainWindow.Rooms)
                 {
                     if (r.RoomId.Equals(Appointment.Room))
@@ -80,40 +83,22 @@ namespace Hospital_IS.DoctorView
                     }
                 }
             }
-            if(dates == null)
+            if (dates == null)
             {
                 calendar.SelectedDate = DateTime.Now.Date;
-                dates = calendar.SelectedDates;
+                dates = new List<DateTime>(calendar.SelectedDates);
             }
 
+            FindAppointments(doc, room, dates);
+
+        }
+
+        private void FindAppointments(Doctor doc, Room room, List<DateTime> dates)
+        {
             TimeSpan duration = Appointment.AppointmentEnd - Appointment.AppointmentStart;
-            List<DoctorAppointment> list = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates,room.RoomId,Appointment.Type,duration,Appointment.Patient);
+            List<DoctorAppointment> list = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, Appointment.IsUrgent, room, Appointment.Type, duration, Appointment.Patient, doc);
             ObservableCollection<DoctorAppointment> possibleAppointments = new ObservableCollection<DoctorAppointment>(list);
-
-            /*ICollectionView view = new CollectionViewSource { Source = possibleAppointments }.View;
-            view.Filter = null;
-            view.Filter = delegate (object item)
-            {
-                bool found = false;
-                foreach (DoctorAppointment dapp in DoctorAppointmentController.Instance.GetAllByDoctor(doc.Id))
-                {
-                    found = ((DoctorAppointment)item).Room.Equals(room.RoomId) & ((DoctorAppointment)item).AppointmentStart.Equals(dapp.AppointmentStart);
-                }
-
-                if (!found) 
-                {
-                    foreach (Appointment app in Hospital.Instance.GetAllAppByRoom(room))
-                    {
-                        found = app.AppointmentStart > ((DoctorAppointment)item).AppointmentStart & app.AppointmentEnd < ((DoctorAppointment)item).AppointmentStart;
-                    }
-                }
-                
-
-                //ako ga je pronasao znaci da ne treba da prikazuje
-                return !found;
-            };*/
             app.DataContext = possibleAppointments;
-
         }
 
         private void ChangeApp_KeyDown(object sender, KeyEventArgs e)

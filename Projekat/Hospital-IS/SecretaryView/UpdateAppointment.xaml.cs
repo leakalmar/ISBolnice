@@ -1,6 +1,5 @@
 ﻿using Controllers;
 using Hospital_IS.Controllers;
-using Hospital_IS.Storages;
 using Model;
 using System;
 using System.Globalization;
@@ -28,19 +27,19 @@ namespace Hospital_IS.SecretaryView
 
             this.DataContext = this;
 
-            if (OldDocAppointment.Type == AppointmetType.CheckUp)
+            if (OldDocAppointment.Type == AppointmentType.CheckUp)
             {
                 txtAppType.Text = "Pregled";
                 txtEndOfApp.IsEnabled = false;
             }
-            else if (OldDocAppointment.Type == AppointmetType.Operation)
+            else if (OldDocAppointment.Type == AppointmentType.Operation)
             {
                 txtAppType.Text = "Operacija";
             }
 
             txtAppDate.Text = OldDocAppointment.AppointmentStart.ToString("dd.MM.yyyy.");
             txtStartOfApp.Text = OldDocAppointment.AppointmentStart.ToString("HH:mm");
-            txtEndOfApp.Text = OldDocAppointment.AppointmentStart.ToString("HH:mm");
+            txtEndOfApp.Text = OldDocAppointment.AppointmentEnd.ToString("HH:mm");
 
             NewDocAppointment = new DoctorAppointment(OldDocAppointment);
         }
@@ -60,7 +59,7 @@ namespace Hospital_IS.SecretaryView
 
             string text = "Pregled koji ste imali " + oldApp.AppointmentStart.ToString("dd.MM.yyyy.") + " u "
                 + oldApp.AppointmentStart.ToString("HH:mm") + "h je pomeren za "
-                + appointment.AppointmentStart.ToString("dd.MM.yyyy.") + " u " + appointment.AppointmentStart.ToString("HH:mm");
+                + appointment.AppointmentStart.ToString("dd.MM.yyyy.") + " u " + appointment.AppointmentStart.ToString("HH:mm") + "h.";
 
             Notification notification = new Notification(title, text, DateTime.Now);
             notification.Recipients.Add(appointment.Patient.Id);
@@ -88,7 +87,7 @@ namespace Hospital_IS.SecretaryView
 
         private void txtStartOfApp_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (OldDocAppointment.Type == AppointmetType.CheckUp && !string.IsNullOrEmpty(txtStartOfApp.Text))
+            if (OldDocAppointment.Type == AppointmentType.CheckUp && !string.IsNullOrEmpty(txtStartOfApp.Text))
             {
                 DateTime appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
                 DateTime appEnd = appStart.AddMinutes(30);
@@ -109,11 +108,11 @@ namespace Hospital_IS.SecretaryView
                 DateTime appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
                 NewDocAppointment.AppointmentStart = appDate.Date.Add(appStart.TimeOfDay);
 
-                if (NewDocAppointment.Type == AppointmetType.CheckUp)
+                if (NewDocAppointment.Type == AppointmentType.CheckUp)
                 {
                     NewDocAppointment.AppointmentEnd = NewDocAppointment.AppointmentStart.AddMinutes(30);
                 }
-                else if (NewDocAppointment.Type == AppointmetType.Operation)
+                else if (NewDocAppointment.Type == AppointmentType.Operation)
                 {
                     DateTime appEnd = DateTime.ParseExact(txtEndOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
                     NewDocAppointment.AppointmentEnd = appDate.Date.Add(appEnd.TimeOfDay);
@@ -124,7 +123,7 @@ namespace Hospital_IS.SecretaryView
             {
             }
 
-            EnableAppointmentConfirmation(DoctorAppointmentController.Instance.VerifyAppointment(NewDocAppointment, null));
+            EnableAppointmentConfirmation(DoctorAppointmentController.Instance.VerifyAppointment(NewDocAppointment));
         }
 
         private void EnableAppointmentConfirmation(bool isValid)

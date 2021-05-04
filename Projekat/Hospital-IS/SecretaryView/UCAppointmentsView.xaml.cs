@@ -36,9 +36,9 @@ namespace Hospital_IS.SecretaryView
             {
                 if (string.IsNullOrEmpty(appointment.AppTypeText))
                 {
-                    if (appointment.Type == AppointmetType.CheckUp)
+                    if (appointment.Type == AppointmentType.CheckUp)
                         appointment.AppTypeText = "Pregled";
-                    else if (appointment.Type == AppointmetType.Operation)
+                    else if (appointment.Type == AppointmentType.Operation)
                         appointment.AppTypeText = "Operacija";
                 }
             }

@@ -51,7 +51,7 @@
                    Text="Zaposleni"/>
 
         <ListBox x:Name="lbDoctors" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" 
-                 Margin="0 10"  ItemsSource="{Binding Doctors}"
+                 Margin="0 10"  ItemsSource="{Binding Doctors}" SelectionMode="Multiple"
                  ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListBox.ItemTemplate>
                 <DataTemplate>

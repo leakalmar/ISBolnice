@@ -33,7 +33,7 @@ namespace Service
 
         public Boolean ScheduleStaticTransfer(StaticTransferAppointmentDTO staticTransfer)
         {
-            List<Appointment> RoomsAppointment = AppointmentService.Instance.getAllAppByTwoRooms(staticTransfer.SourceRoom.RoomId, staticTransfer.DestinationRoom.RoomId);
+            List<Appointment> RoomsAppointment = AppointmentService.Instance.GetAllAppByTwoRooms(staticTransfer.SourceRoom.RoomId, staticTransfer.DestinationRoom.RoomId);
             bool checkRoomAppointment = AppointmentService.Instance.CheckAppointment(RoomsAppointment, staticTransfer.StartDate, staticTransfer.EndDate);
 
             if (checkRoomAppointment)
@@ -62,14 +62,14 @@ namespace Service
 
         private static void CreateAppointment(StaticTransferAppointmentDTO staticTransfer,int roomId)
         {
-            Appointment appointment = new Appointment(staticTransfer.StartDate, staticTransfer.EndDate, AppointmetType.EquipTransfer, roomId);
+            Appointment appointment = new Appointment(staticTransfer.StartDate, staticTransfer.EndDate, AppointmentType.EquipTransfer, roomId);
             appointment.Reserved = true;
             AppointmentService.Instance.AddAppointment(appointment);
         }
 
 
 
-        public void ReduceEquipmentQuantity(Model.Room sourceRoom, Model.Equipment equip, int quantity)
+        public void ReduceEquipmentQuantity(Room sourceRoom, Equipment equip, int quantity)
         {
             foreach (Equipment eq in sourceRoom.Equipment)
             {
@@ -91,8 +91,8 @@ namespace Service
         {
 
             tfs.Save(allTransfer);
-            Room sourceRoom = RoomService.Instance.getRoomById(transfer.SourceRoomId);
-            Room destinationRoom = RoomService.Instance.getRoomById(transfer.DestinationRoomId);
+            Room sourceRoom = RoomService.Instance.GetRoomById(transfer.SourceRoomId);
+            Room destinationRoom = RoomService.Instance.GetRoomById(transfer.DestinationRoomId);
 
             bool isEnoughEquipment = RoomService.Instance.CheckQuantity(sourceRoom, transfer.Equip, transfer.Quantity);
 
@@ -139,7 +139,7 @@ namespace Service
             tfs.Save(allTransfer);
         }
 
-        public List<Transfer> getAllTransfers()
+        public List<Transfer> GetAllTransfers()
         {
             return allTransfer;
         }
