@@ -120,6 +120,8 @@ namespace Hospital_IS
 
         }
 
+
+
         private void Combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
@@ -141,6 +143,18 @@ namespace Hospital_IS
                 DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
             }
            
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            if(SearchPanel.Visibility == Visibility.Collapsed)
+            {
+                SearchPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                SearchPanel.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

@@ -28,12 +28,14 @@ namespace Hospital_IS.ManagerView
 
         private void Room_Click(object sender, RoutedEventArgs e)
         {
-
+            Window1.Instance.Show();
+            this.Hide();
         }
 
         private void Eqiupment_Click(object sender, RoutedEventArgs e)
         {
-
+            EquipmentWindow.Instance.Show();
+            this.Hide();
         }
 
         private void OtherOptionsButton_Click(object sender, RoutedEventArgs e)
@@ -75,7 +77,7 @@ namespace Hospital_IS.ManagerView
         private void MedicineInsight_Click(object sender, RoutedEventArgs e)
         {
             Medicine medicine = (Medicine)DataGridMedicine.SelectedItem;
-            MedicineInfoView medicineInfo = new MedicineInfoView(medicine);
+            MedicineInfoView medicineInfo = new MedicineInfoView(medicine, "info", null); ;
 
             medicineInfo.Show();
             this.Hide();

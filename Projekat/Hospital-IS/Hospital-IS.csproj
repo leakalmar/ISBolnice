@@ -24,6 +24,8 @@
     <None Remove="Resources\insight.png" />
     <None Remove="Resources\lekovi.png" />
     <None Remove="Resources\notification.png" />
+    <None Remove="Resources\notification1.png" />
+    <None Remove="Resources\obavest.png" />
     <None Remove="Resources\pill-hand.png" />
     <None Remove="Resources\print.png" />
     <None Remove="Resources\question.png" />
@@ -109,6 +111,8 @@
     <Resource Include="Resources\menubar.png" />
     <Resource Include="Resources\minimize.png" />
     <Resource Include="Resources\notification.png" />
+    <Resource Include="Resources\notification1.png" />
+    <Resource Include="Resources\obavest.png" />
     <Resource Include="Resources\pill-hand.png" />
     <Resource Include="Resources\options.png" />
     <Resource Include="Resources\pill.png" />

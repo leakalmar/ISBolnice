@@ -103,5 +103,10 @@ namespace Hospital_IS
             medicineView.Show();
             this.Hide();
         }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

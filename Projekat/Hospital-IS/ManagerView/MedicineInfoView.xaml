@@ -58,6 +58,17 @@
                 <Image Source="pack://application:,,,/Resources/backbutton.png" Width="50" Height="50"/>
             </StackPanel>
         </Button>
+        <Button x:Name="BackTonotification"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1"  Background="Transparent" Click="BackTonotification_Click"  >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+
+            <StackPanel>
+                <Image Source="pack://application:,,,/Resources/backbutton.png" Width="50" Height="50"/>
+            </StackPanel>
+        </Button>
         <Label Grid.Row="1" Grid.Column="2" Content="Informacije o lekovima" Grid.ColumnSpan="2" Foreground="White" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <Label Grid.Row="3" Grid.Column="1" Content="Naziv leka" Grid.ColumnSpan="2" Foreground="White" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         <TextBox x:Name="MedicineName" Grid.Row="3" Grid.Column="3" FontSize="15" Height="25" Background="Transparent" BorderThickness="0,0,0,4" 

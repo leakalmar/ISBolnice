@@ -9,7 +9,7 @@ namespace Service
     public class MedicineNotificationService
     {
         private MedcineNotificationStorage mnfs = new MedcineNotificationStorage();
-        public List<MedicineNotification> allNotification { get; set; }
+        public List<MedicineNotification> allNotification { get; set; } = new List<MedicineNotification>();
 
         private static MedicineNotificationService instance = null;
         public static MedicineNotificationService Instance
@@ -33,7 +33,7 @@ namespace Service
             List<MedicineNotification> notificationForDoctor = new List<MedicineNotification>();
             foreach(MedicineNotification medicineNotification in allNotification)
             {
-                if (medicineNotification.DoctorIds.Contains(idDoctor))
+                if (medicineNotification.RecieverIds.Contains(idDoctor))
                 {
                     notificationForDoctor.Add(medicineNotification);
                 }
@@ -41,7 +41,7 @@ namespace Service
             return notificationForDoctor;
         }
 
-        internal void AddNotification(MedicineNotification medicineNotification)
+        public void AddNotification(MedicineNotification medicineNotification)
         {
             allNotification.Add(medicineNotification);
             mnfs.Save(allNotification);
@@ -60,6 +60,8 @@ namespace Service
             }
         }
 
+        
+
         public void DeleteMedicineNotification(MedicineNotification reviewdNotification)
         {
             for (int i = 0; i < allNotification.Count; i++)
@@ -70,6 +72,17 @@ namespace Service
                     mnfs.Save(allNotification);
                 }
             }
+        }
+
+        internal void DeleteNotification(MedicineNotification medicineNotification)
+        {
+            allNotification.Remove(medicineNotification);
+            mnfs.Save(allNotification);
+        }
+
+        public List<MedicineNotification> GetAll()
+        {
+            return allNotification;
         }
     }
 }

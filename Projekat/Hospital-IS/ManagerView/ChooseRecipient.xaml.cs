@@ -28,7 +28,7 @@ namespace Hospital_IS.ManagerView
         private String therapeuticClass;
         private List<ReplaceMedicineName> medicineNamesClass;
         private List<MedicineComponent> medicineComponentsClass;
-        public ChooseRecipient(string name, string sideEffect,string therapeutic, List<ReplaceMedicineName> medicineNames,List<MedicineComponent> medicineComponents )
+        public ChooseRecipient(string name, string sideEffect,string therapeutic, List<ReplaceMedicineName> medicineNames,List<MedicineComponent> medicineComponents,String parent )
         {
             nameClass = name;
             sideEffectClass = sideEffect;
@@ -36,6 +36,16 @@ namespace Hospital_IS.ManagerView
             medicineComponentsClass = medicineComponents;
             medicineNamesClass = medicineNames;
             InitializeComponent();
+            if (parent.Equals("notification"))
+            {
+                Close.Visibility = Visibility.Collapsed;
+                Send.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                CloseNotification.Visibility = Visibility.Collapsed;
+                SendReNotification.Visibility = Visibility.Collapsed;
+            }
             DataGridDoctors.DataContext = new ObservableCollection<Doctor>(DoctorController.Instance.GetAll());
 
         }
@@ -51,9 +61,48 @@ namespace Hospital_IS.ManagerView
                 doctorsIds.Add(doc.Id);
             }
 
+            if (doctorsIds.Count == 0)
+            {
+                MessageBox.Show("Izaberite primaoca");
+            }
+            else
+            {
+                MedicineNotificationController.Instance.CreateNotification(nameClass, sideEffectClass, therapeuticClass, medicineNamesClass, medicineComponentsClass, doctorsIds);
+                this.Close();
+            }
+        }
 
-            MedicineNotificationController.Instance.CreateNotification(nameClass, sideEffectClass, therapeuticClass, medicineNamesClass, medicineComponentsClass, doctorsIds);
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
             this.Close();
+        }
+
+        private void CloseNotification_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void SendReNotification_Click(object sender, RoutedEventArgs e)
+        {
+
+            List<int> doctorsIds = new List<int>();
+
+            foreach (var doctor in DataGridDoctors.SelectedItems)
+            {
+                Doctor doc = (Doctor)doctor;
+                doctorsIds.Add(doc.Id);
+            }
+
+            if (doctorsIds.Count == 0)
+            {
+                MessageBox.Show("Izaberite primaoca");
+            }
+            else
+            { 
+
+                MedicineNotificationController.Instance.CreateReNotification(nameClass, sideEffectClass, therapeuticClass, medicineNamesClass, medicineComponentsClass, doctorsIds);
+                this.Close();
+            }
         }
     }
 }

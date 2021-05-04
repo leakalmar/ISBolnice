@@ -33,7 +33,7 @@ namespace Service
         {
 
             AllUserIDs = AdministrationEmployeeService.Instance.GetEmployeIDs();
-            AllUserIDs.AddRange(DoctorService.Instance.GetDoctorIDs());
+            AllUserIDs.AddRange(DoctorService.Instance.GetDoctorIds());
             AllUserIDs.AddRange(PatientService.Instance.GetPatientIDs());
 
         }

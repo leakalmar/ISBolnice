@@ -1,10 +1,8 @@
-﻿using Controllers;
-using DoctorView;
+﻿using DoctorView;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,48 +16,44 @@ using System.Windows.Shapes;
 namespace Hospital_IS.ManagerView
 {
     /// <summary>
-    /// Interaction logic for MedicineEditView.xaml
+    /// Interaction logic for MedicineNotificationChage.xaml
     /// </summary>
-    public partial class MedicineEditView : Window
-    {
+    public partial class MedicineNotificationChage : Window
+    { 
+        public MedicineNotification MedicineNotification { get; set; }
         public ObservableCollection<MedicineComponent> CompositionOfMedicine { get; set; }
         public ObservableCollection<ReplaceMedicineName> ReplaceMedicines { get; set; }
 
-        private Medicine currentMedicine;
-        public MedicineEditView(Medicine medicine)
+      
+        public MedicineNotificationChage(MedicineNotification notification)
         {
+            MedicineNotification = notification;
             InitializeComponent();
-            currentMedicine = medicine;
-            MedicalInformation.DataContext = medicine;
-            MedicineName.Text = medicine.Name;
-            ReplaceMedicines = new ObservableCollection<ReplaceMedicineName>(medicine.ReplaceMedicine);
-            CompositionOfMedicine = new ObservableCollection<MedicineComponent>(medicine.Composition);
+           
+            MedicalInformation.DataContext = notification.Medicine;
+            MedicineName.Text = notification.Medicine.Name;
+            ReplaceMedicines = new ObservableCollection<ReplaceMedicineName>(notification.Medicine.ReplaceMedicine);
+            CompositionOfMedicine = new ObservableCollection<MedicineComponent>(notification.Medicine.Composition);
             composition.ItemsSource = CompositionOfMedicine;
             change.ItemsSource = ReplaceMedicines;
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            MedicineView medicineView = new MedicineView();
-            medicineView.Show();
-            this.Hide();
+            NotificationInfoView notification = new NotificationInfoView(MedicineNotification);
+            notification.Show();
+            this.Close();
         }
 
-        private void Save_Click(object sender, RoutedEventArgs e)
+       
+        private void Send_Click(object sender, RoutedEventArgs e)
         {
-            List<ReplaceMedicineName> medicineNames = ReplaceMedicines.ToList();
-            List<MedicineComponent> medicineComponents = CompositionOfMedicine.ToList();
-            String sideEffect = SideEffecct.Text;
-            String therapeutic = Usage.Text;
-            String name = MedicineName.Text;
+           
+         ChooseRecipient recipient = new ChooseRecipient(MedicineNotification.Medicine.Name, MedicineNotification.Medicine.SideEffects, MedicineNotification.Medicine.Usage,
+            MedicineNotification.Medicine.ReplaceMedicine, MedicineNotification.Medicine.Composition, "notification");
 
-            MedicineController.Instance.UpdateMedicineWithName(currentMedicine.Name, name, medicineComponents, sideEffect, therapeutic, medicineNames);
-            MedicineView medicineView = new MedicineView();
-            medicineView.Show();
-            this.Hide();
-
+            recipient.Show();
         }
-
         private void AddMedicine_Click(object sender, RoutedEventArgs e)
         {
 
@@ -75,7 +69,7 @@ namespace Hospital_IS.ManagerView
             {
                 cell.Focus();
             }
-           
+
         }
 
         private void AddContent_Click(object sender, RoutedEventArgs e)
@@ -94,7 +88,5 @@ namespace Hospital_IS.ManagerView
                 cell.Focus();
             }
         }
-
-       
     }
 }

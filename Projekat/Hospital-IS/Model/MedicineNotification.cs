@@ -6,16 +6,19 @@ namespace Model
 {
     public class MedicineNotification
     {
+        public List<int> SenderId { get; set; } = new List<int>();
         public String Title { get; set; }
         public Medicine Medicine { get; set; }
-        public List<int> DoctorIds { get; set; }
+        public List<int> RecieverIds { get; set; }
         public String Note { get; set; }
 
-        public MedicineNotification(string title, Medicine medicine, List<int> doctorIds)
+        public DateTime DateSent { get; set; }
+
+        public MedicineNotification(string title, Medicine medicine, List<int> recieverIds)
         {
             Title = title;
             Medicine = medicine;
-            DoctorIds = doctorIds;
+            RecieverIds = recieverIds;
         }
     }
 }
