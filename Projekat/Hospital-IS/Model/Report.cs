@@ -14,7 +14,7 @@ namespace Model
         public String DoctorName { get; set; }
         public String DoctorSurname { get; set; }
         public AppointmetType Type { get; set; }
-        String Cause { get; set; }
+        public String Cause { get; set; }
 
         public Report(DateTime appointmentDate, String doctorName, String doctorSurname, AppointmetType type, String cause) {
             this.HaveRecipe = false;

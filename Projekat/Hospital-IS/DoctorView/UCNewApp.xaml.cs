@@ -69,7 +69,6 @@ namespace Hospital_IS.DoctorView
             InitializeComponent();
             Emergency = false;
 
-            Appointment = appointment;
             PatientChart = patientChart;
             Appointment = patientChart.Appointment;
             doctors.DataContext = MainWindow.Doctors;
