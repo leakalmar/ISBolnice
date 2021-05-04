@@ -60,8 +60,6 @@ namespace Service
             }
         }
 
-        
-
         public void DeleteMedicineNotification(MedicineNotification reviewdNotification)
         {
             for (int i = 0; i < allNotification.Count; i++)
