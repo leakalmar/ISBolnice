@@ -49,6 +49,23 @@ namespace Hospital_IS.ManagerView
         {
             List<ReplaceMedicineName> medicineNames = ReplaceMedicines.ToList();
             List<MedicineComponent> medicineComponents = CompositionOfMedicine.ToList();
+
+            for (int i = 0; i < medicineNames.Count; i++)
+            {
+                if (medicineNames[i].Name.Equals(""))
+                {
+                    medicineNames.RemoveAt(i);
+                }
+            }
+
+            for (int i = 0; i< medicineComponents.Count;i++)
+            {
+                if (medicineComponents[i].Component.Equals(""))
+                {
+                    medicineComponents.RemoveAt(i);
+                }
+            }
+
             String sideEffect = SideEffecct.Text;
             String therapeutic = Usage.Text;
             String name = MedicineName.Text;

@@ -99,7 +99,7 @@ namespace Hospital_IS
         private void MedicineView_Click(object sender, RoutedEventArgs e)
         {
             MedicineView medicineView = new MedicineView();
-           
+            OtherOptions.Visibility = Visibility.Hidden;
             medicineView.Show();
             this.Hide();
         }

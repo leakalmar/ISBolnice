@@ -113,13 +113,16 @@ namespace Hospital_IS.ManagerView
             if (medicine != null)
             {
                 MedicineController.Instance.DeleteMedicine(medicine);
+                DataGridMedicine.DataContext = new ObservableCollection<Medicine>(MedicineController.Instance.GetAll());
+
+            }
+            else
+            {
+                MessageBox.Show("Izaberite lijek");
             }
 
         }
 
-        private void DataGridRooms_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+      
     }
 }

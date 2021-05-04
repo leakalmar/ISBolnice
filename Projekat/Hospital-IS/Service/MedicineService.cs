@@ -55,9 +55,10 @@ namespace Service
             }
         }
 
-        internal void DeleteMedicine(Medicine medicine)
+        public void DeleteMedicine(Medicine medicine)
         {
-            throw new NotImplementedException();
+            AllMedicines.Remove(medicine);
+            mfs.Save(AllMedicines);
         }
 
         public void AddNewMedicine(Medicine medicine)
