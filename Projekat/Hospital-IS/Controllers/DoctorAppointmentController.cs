@@ -61,9 +61,9 @@ namespace Controllers
             DoctorAppointmentService.Instance.UpdateAppointment(doctorAppointment,doctorAppointment);
         }
 
-        public List<DoctorAppointment> SuggestAppointmentsToPatient(String timeSlot, Doctor doctor, Patient patient, DateTime date, Boolean priority)
+        public List<DoctorAppointment> SuggestAppointmentsToPatient(PossibleAppointmentForPatientDTO possibleAppointment)
         {
-            return DoctorAppointmentService.Instance.SuggestAppointmentsToPatient(timeSlot, doctor, patient, date, priority);
+            return DoctorAppointmentService.Instance.SuggestAppointmentsToPatient(possibleAppointment);
         }
 
         public List<DoctorAppointment> SuggestAppointmetsToDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmentType type, TimeSpan duration, Patient patient, Doctor doctor)

@@ -81,7 +81,7 @@ namespace Hospital_IS.View
             }
             else
             {
-                PatientAppointmentEvaluation appointmentEvaluation = new PatientAppointmentEvaluation((DoctorAppointment)dataGridAppointment.SelectedItem);
+                PatientAppointmentEvaluationWindow appointmentEvaluation = new PatientAppointmentEvaluationWindow((DoctorAppointment)dataGridAppointment.SelectedItem);
                 appointmentEvaluation.Show();
             }
            

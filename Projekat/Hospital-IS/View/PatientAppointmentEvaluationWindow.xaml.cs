@@ -1,5 +1,4 @@
 ﻿using Controllers;
-using DTOs;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -18,13 +17,13 @@ namespace Hospital_IS.View
     /// <summary>
     /// Interaction logic for PatientAppointmentEvaluation.xaml
     /// </summary>
-    public partial class PatientAppointmentEvaluation : Window
+    public partial class PatientAppointmentEvaluationWindow : Window
     {
-        public global::DTOs.PatientAppointmentEvaluation AppointmentEvaluation { get; set; }
-        public PatientAppointmentEvaluation(DoctorAppointment doctorAppointment)
+        public PatientAppointmentEvaluation AppointmentEvaluation { get; set; }
+        public PatientAppointmentEvaluationWindow(DoctorAppointment doctorAppointment)
         {
             InitializeComponent();
-            AppointmentEvaluation = new global::DTOs.PatientAppointmentEvaluation(doctorAppointment.AppointmentStart.Date, doctorAppointment.Patient.Id, doctorAppointment.Doctor.Id);
+            AppointmentEvaluation = new PatientAppointmentEvaluation(doctorAppointment.AppointmentStart.Date, doctorAppointment.Patient.Id, doctorAppointment.Doctor.Id);
         }
 
         private void EvaluateAppointment(object sender, RoutedEventArgs e)

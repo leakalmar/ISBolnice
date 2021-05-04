@@ -36,7 +36,7 @@ namespace Service
             EvaluationStorage.SaveAppointments(AllAppointmentEvaluations);
         }
 
-        public void AddAppointment(PatientAppointmentEvaluation appointmentEvaluation)
+        private void AddAppointment(PatientAppointmentEvaluation appointmentEvaluation)
         {
             if (appointmentEvaluation == null)
             {
