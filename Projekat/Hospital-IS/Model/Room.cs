@@ -57,7 +57,7 @@ namespace Model
             Type = type;
         }
 
-        public  List<Equipment> Equipment  {get; set; }
+        public List<Equipment> Equipment { get; set; } = new List<Equipment>();
 
 
 

@@ -96,10 +96,12 @@ namespace Service
 
             bool isEnoughEquipment = RoomService.Instance.CheckQuantity(sourceRoom, transfer.Equip, transfer.Quantity);
 
+            if (isEnoughEquipment)
+            {
+                ReduceEquipmentQuantity(sourceRoom, transfer.Equip, transfer.Quantity);
 
-            ReduceEquipmentQuantity(sourceRoom, transfer.Equip, transfer.Quantity);
-
-            IncreaseEquipmentQuantity(transfer.Equip, transfer.Quantity, destinationRoom);
+                IncreaseEquipmentQuantity(transfer.Equip, transfer.Quantity, destinationRoom);
+            }
 
             RoomService.Instance.SaveChange();
         }
@@ -110,6 +112,7 @@ namespace Service
             {
                 destinationRoom.Equipment = new List<Equipment>();
             }
+
             bool exist = false;
             foreach (Equipment eq in destinationRoom.Equipment)
             {

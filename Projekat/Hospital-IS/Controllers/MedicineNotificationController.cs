@@ -35,11 +35,11 @@ namespace Controllers
           
         }
 
-        internal void CreateNotification(string nameClass, string sideEffectClass, string therapeuticClass, List<ReplaceMedicineName> medicineNamesClass, List<MedicineComponent> medicineComponentsClass, List<int> doctorsIds)
+        public void CreateNotification(string name, string sideEffect, string usage, List<ReplaceMedicineName> medicineNames, List<MedicineComponent> medicineComponents, List<int> recieverIds)
         {
-            Medicine medicine = new Medicine(nameClass, medicineComponentsClass, sideEffectClass, therapeuticClass, medicineNamesClass);
+            Medicine medicine = new Medicine(name, medicineComponents, sideEffect, usage, medicineNames);
 
-            MedicineNotification medicineNotification = new MedicineNotification("Odobrenje" + " " + nameClass, medicine, doctorsIds);
+            MedicineNotification medicineNotification = new MedicineNotification("Odobrenje" + " " + name, medicine, recieverIds);
             medicineNotification.SenderId.Add(6);
             medicineNotification.DateSent = DateTime.Now;
 
@@ -78,11 +78,11 @@ namespace Controllers
             return MedicineNotificationService.Instance.GetAll();
         }
 
-        internal void CreateReNotification(string nameClass, string sideEffectClass, string therapeuticClass, List<ReplaceMedicineName> medicineNamesClass, List<MedicineComponent> medicineComponentsClass, List<int> doctorsIds)
+        internal void CreateReNotification(string name, string sideEffect, string therapeutic, List<ReplaceMedicineName> medicineNames, List<MedicineComponent> medicineComponents, List<int> recieverIds)
         {
-            Medicine medicine = new Medicine(nameClass, medicineComponentsClass, sideEffectClass, therapeuticClass, medicineNamesClass);
+            Medicine medicine = new Medicine(name, medicineComponents, sideEffect, therapeutic, medicineNames);
 
-            MedicineNotification medicineNotification = new MedicineNotification("RE:Odobrenje" + " " + nameClass, medicine, doctorsIds);
+            MedicineNotification medicineNotification = new MedicineNotification("RE:Odobrenje" + " " + name, medicine, recieverIds);
             medicineNotification.SenderId.Add(6);
             medicineNotification.DateSent = DateTime.Now;
 
