@@ -18,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for UCHistory.xaml
-    /// </summary>
     public partial class UCHistory : UserControl
     {
         private DoctorAppointment Appointment;
@@ -34,31 +31,26 @@ namespace Hospital_IS.DoctorView
                 _started = value;
             }
         }
-        public UCHistory(DoctorAppointment appointment)
+        public UCHistory(UCPatientChart patientChart)
         {
             InitializeComponent();
-            ObservableCollection<DoctorAppointment> appointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(appointment.Patient.Id));
-            ICollectionView view = new CollectionViewSource { Source = appointments }.View; view.Filter = null;
-            view.Filter = delegate (object item)
-            {
-                return ((DoctorAppointment)item).Report != null;
-            };
-            dataGrid.DataContext = view;
-            Appointment = appointment;
+            ObservableCollection<Report> reports = new ObservableCollection<Report>(ChartController.Instance.GetReportsByPatient(patientChart.Patient));
+            dataGrid.DataContext = reports;
+            Appointment = patientChart.Appointment;
         }
 
         public void Report_DoubleClicked(object sender, MouseButtonEventArgs e)
         {
-            DoctorAppointment appointment = (DoctorAppointment)dataGrid.SelectedItem;
-            if(appointment.AppointmentStart == Appointment.AppointmentStart)
+            Report report = (Report)dataGrid.SelectedItem;
+            if(report.ReportId.Equals(Appointment.AppointmentStart))
             {
-                OldReport r = new OldReport(appointment, Appointment);
+                OldReport r = new OldReport(report, Appointment);
                 r.Started = true;
                 r.Show();
             }
             else
             {
-                OldReport r = new OldReport(appointment, Appointment);
+                OldReport r = new OldReport(report, Appointment);
                 r.Started = false;
                 r.Show();
             }

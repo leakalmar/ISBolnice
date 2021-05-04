@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace Hospital_IS.DoctorView
 {
     /// <summary>
-    /// Interaction logic for UCMedicationComposition.xaml
+    /// Interaction logic for UCNotificationDisplay.xaml
     /// </summary>
-    public partial class UCMedicationComposition : UserControl
+    public partial class UCNotificationDisplay : UserControl
     {
-        public UCMedicationComposition()
+        public UCNotificationDisplay()
         {
             InitializeComponent();
         }

@@ -118,7 +118,8 @@
                     <Label Grid.Row="4" Grid.Column="0" Content="Kratak opis:" Foreground="FloralWhite"/>
                     <Border Grid.Row="5" Grid.ColumnSpan ="3" BorderBrush="FloralWhite" BorderThickness="1"
                             MinWidth="350" MinHeight="100">
-                        <TextBlock Background="Transparent" Foreground="FloralWhite" Text="{Binding Detail}"/>
+                        <TextBlock Background="Transparent" Foreground="FloralWhite"
+                                Text="{Binding AppointmentCause}"/>
                     </Border>
 
                     <Grid Grid.Row="6" Grid.ColumnSpan="3" >

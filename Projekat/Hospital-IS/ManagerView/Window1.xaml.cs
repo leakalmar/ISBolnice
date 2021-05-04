@@ -37,13 +37,13 @@ namespace Hospital_IS
         {
                
             InitializeComponent();
-            DataGridRooms.DataContext = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
+            DataGridRooms.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
         }
 
         
         public void refresh()
         {
-            DataGridRooms.DataContext = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
+            DataGridRooms.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
         }
        
 
@@ -102,6 +102,11 @@ namespace Hospital_IS
            
             medicineView.Show();
             this.Hide();
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

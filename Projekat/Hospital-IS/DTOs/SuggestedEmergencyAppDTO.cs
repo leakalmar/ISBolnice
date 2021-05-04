@@ -9,6 +9,7 @@ namespace Model
         public List<DoctorAppointment> ConflictingAppointments { get; set; } 
         public List<RescheduledAppointmentDTO> RescheduledAppointments { get; set; }
         public int TotalReshedulePeriodInHours { get; set; }
+        public bool ConflictingIsUrgent { get; set; }
 
         public SuggestedEmergencyAppDTO(DoctorAppointment appointment)
         {
@@ -23,10 +24,32 @@ namespace Model
             if (ConflictingAppointments.Count > 0)
                 for (int i = 0; i < ConflictingAppointments.Count; i++)
                 {
-                    TimeSpan period = RescheduledAppointments[i].DocAppointment.AppointmentStart - ConflictingAppointments[i].AppointmentStart;
+                    TimeSpan period = RescheduledAppointments[i].NewDocAppointment.AppointmentStart - ConflictingAppointments[i].AppointmentStart;
                     int days = (int)period.TotalHours;
                     TotalReshedulePeriodInHours += days;
                 }
+        }
+
+        public void CheckIfConflictingIsUrgent()
+        {
+            bool valueSet = false;
+            foreach(DoctorAppointment conflictiong in ConflictingAppointments)
+            {
+                if (conflictiong.IsUrgent)
+                {
+                    this.ConflictingIsUrgent = true;
+                    valueSet = true;
+                    break;
+                }
+            }
+
+            if (!valueSet)
+            {
+                this.ConflictingIsUrgent = false;
+            }
+            
+            return;
+
         }
 
     }

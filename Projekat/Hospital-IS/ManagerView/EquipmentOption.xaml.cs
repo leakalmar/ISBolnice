@@ -34,7 +34,7 @@ namespace Hospital_IS
            
             InitializeComponent();
             this.DataContext = this;
-            TempRoom = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
+            TempRoom = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
             TempEquip = new ObservableCollection<Equipment>();
            
             Combo.SelectedIndex = index;
@@ -57,7 +57,7 @@ namespace Hospital_IS
         {
             InitializeComponent();
             this.DataContext = this;
-            TempRoom = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
+            TempRoom = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
             TempEquip = new ObservableCollection<Equipment>();
           
         }

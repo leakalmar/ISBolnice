@@ -27,25 +27,25 @@ namespace Controllers
 
         }
 
-        public Boolean TransferEquipmentStatic(StaticTransferAppointmentDTO staticTransfer)
+        public Boolean ScheduleStaticTransfer(StaticTransferAppointmentDTO staticTransfer)
         {
             return TransferService.Instance.ScheduleStaticTransfer(staticTransfer);
         }
 
-        public void TransferEquipment(Room sourceRoom, Equipment equip, int quantity)
+        public void ReduceEquipmentQuantity(Room sourceRoom, Equipment equip, int quantity)
         {
             TransferService.Instance.ReduceEquipmentQuantity(sourceRoom, equip, quantity);
         }
 
-        public void TransferStaticEquipment(Transfer transfer)
+        public void ExecuteStaticTransfer(Transfer transfer)
         {
            
             TransferService.Instance.ExecuteStaticTransfer(transfer);
         }
 
-        public List<Transfer> getAllTransfers()
+        public List<Transfer> GetAllTransfers()
         {
-            return TransferService.Instance.getAllTransfers();
+            return TransferService.Instance.GetAllTransfers();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Hospital_IS.ManagerView
         public Room CurrentRoom { get; set; }
         public RenovationView(Room room)
         {
-            allAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.getAppByRoomId(room.RoomId));
+            allAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(room.RoomId));
             InitializeComponent();
             CurrentRoom = room;
             RenovationDateGrid.DataContext = allAppointments;
@@ -67,7 +67,7 @@ namespace Hospital_IS.ManagerView
                     if (isSuccces)
                     {
                         MessageBox.Show("Uspjesno zakazan termin");
-                        RenovationDateGrid.DataContext = new ObservableCollection<Appointment>(AppointmentController.Instance.getAppByRoomId(CurrentRoom.RoomId));
+                        RenovationDateGrid.DataContext = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(CurrentRoom.RoomId));
                     }
                     else
                     {

@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using Storages;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -18,7 +19,7 @@ namespace Hospital_IS.View
         public TherapyPatient()
         {
             InitializeComponent();
-            Therapies = HomePatient.Instance.Patient.MedicalHistory.Therapies;
+            Therapies = new ObservableCollection<Therapy>(ChartController.Instance.GetTherapiesByPatient(HomePatient.Instance.Patient));
             this.DataContext = this;
         }
 
@@ -54,14 +55,12 @@ namespace Hospital_IS.View
             MainWindow login = new MainWindow();
             login.Show();
             this.Hide();
-            Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
-            pfs.UpdatePatient(HomePatient.Instance.Patient);
         }
 
         private void showRow(object sender, MouseButtonEventArgs e)
         {
             Therapy therapyInfo = (Therapy)dataGridTherapy.SelectedItem;
-            int usageHourDifference = (int)24/therapyInfo.TimesADay;
+            int usageHourDifference = (int)24 / therapyInfo.TimesADay;
             Name.Content = therapyInfo.Medicine.Name;
             Quantity.Content = therapyInfo.Quantity;
             TimesADay.Content = therapyInfo.TimesADay;

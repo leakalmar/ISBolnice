@@ -34,7 +34,6 @@
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF3558A2"/>
             </DataGrid.Resources>
-
         </DataGrid>
 
 

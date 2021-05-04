@@ -25,7 +25,7 @@ namespace Hospital_IS.SecretaryView
             InitializeComponent();
             this.sa = sa;
 
-            Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAll());
+            Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAllRegisteredPatients());
             Specializations = new ObservableCollection<Specialty>(SpecializationController.Instance.GetAll());
 
             this.DataContext = this;
@@ -36,7 +36,7 @@ namespace Hospital_IS.SecretaryView
         {
             foreach (RescheduledAppointmentDTO raDTO in RescheduledAppointments)
             {
-                DoctorAppointmentController.Instance.UpdateAppointment(raDTO.OldDocAppointment, raDTO.DocAppointment);  //notifikacije ???
+                DoctorAppointmentController.Instance.UpdateAppointment(raDTO.OldDocAppointment, raDTO.NewDocAppointment);  //notifikacije ???
             }
             DoctorAppointmentController.Instance.AddAppointment(SuggestedAppointments[dgSuggestedAppointments.SelectedIndex].SuggestedAppointment);
 
@@ -51,13 +51,13 @@ namespace Hospital_IS.SecretaryView
             if (cbAppType.SelectedIndex == 0)
             {
                 cbSpecialty.IsEnabled = false;
-                Rooms = new ObservableCollection<Room>(RoomController.Instance.getRoomByType(RoomType.ConsultingRoom));
+                Rooms = new ObservableCollection<Room>(RoomController.Instance.GetRoomByType(RoomType.ConsultingRoom));
                 cbRoom.ItemsSource = Rooms;
             }
             else
             {
                 cbSpecialty.IsEnabled = true;
-                Rooms = new ObservableCollection<Room>(RoomController.Instance.getRoomByType(RoomType.OperationRoom));
+                Rooms = new ObservableCollection<Room>(RoomController.Instance.GetRoomByType(RoomType.OperationRoom));
                 cbRoom.ItemsSource = Rooms;
             }
         }
@@ -67,12 +67,15 @@ namespace Hospital_IS.SecretaryView
 
             EmergencyAppointmentDTO emerAppointmentDTO = new EmergencyAppointmentDTO();
             if (cbAppType.SelectedIndex == 0)
-                emerAppointmentDTO.AppointmetType = AppointmetType.CheckUp;
+                emerAppointmentDTO.AppointmetType = AppointmentType.CheckUp;
             else if (cbAppType.SelectedIndex == 1)
-                emerAppointmentDTO.AppointmetType = AppointmetType.Operation;
+                emerAppointmentDTO.AppointmetType = AppointmentType.Operation;
 
             emerAppointmentDTO.Specialty = Specializations[cbSpecialty.SelectedIndex];
-            emerAppointmentDTO.Patient = Patients[cbPatient.SelectedIndex];
+            if (cbPatient.IsEnabled)
+                emerAppointmentDTO.Patient = Patients[cbPatient.SelectedIndex];
+            else
+                emerAppointmentDTO.Patient = PatientController.Instance.GetPatientByID(Int32.Parse(txtGuest.Text));
             emerAppointmentDTO.Room = Rooms[cbRoom.SelectedIndex];
             emerAppointmentDTO.DurationInMinutes = Int32.Parse(txtAppDuration.Text);
 
@@ -99,6 +102,13 @@ namespace Hospital_IS.SecretaryView
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             sa.Visibility = Visibility.Visible;
+            this.Close();
+        }
+
+        private void SelectGuest(object sender, RoutedEventArgs e)
+        {
+            SelectGuestView sg = new SelectGuestView(this);
+            sg.Show();
         }
     }
 }

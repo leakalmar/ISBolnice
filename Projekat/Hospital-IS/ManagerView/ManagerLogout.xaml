@@ -124,6 +124,8 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
                 <Ellipse Width="60" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
                     <Ellipse.Fill>
@@ -139,7 +141,7 @@
                         </Style>
                     </Button.Resources>
                     <StackPanel>
-                        <Image Source="Resources/settings.png" Width="40"  Height="40" />
+                        <Image Source="pack://application:,,,/Resources/settings.png" Width="40"  Height="40" />
                     </StackPanel>
                 </Button>
                 <TextBlock Text="  Podešavanja" Grid.Row="4" Grid.Column="3" Foreground="White" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
@@ -151,6 +153,17 @@
                     </Button.Resources>
                     <StackPanel>
                         <Image Source="pack://application:,,,/Resources/backbutton.png" Width="50"  Height="50" />
+                    </StackPanel>
+                </Button>
+                <TextBlock Text="  Obavestenja i zahtevi" Grid.Row="6" Grid.Column="3" Foreground="White" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Button x:Name="Notifications" BorderThickness="0" Width="40" Height="40" Grid.Column="1" Grid.Row="6"   Background="Transparent" Click="Notifications_Click" >
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/notification1.png" Width="40"  Height="40" />
                     </StackPanel>
                 </Button>
                 <GridSplitter Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="3" Foreground="White" Height="5" Background="White" HorizontalAlignment="Stretch" Margin="0,0,-10,0"   />

@@ -23,13 +23,13 @@ namespace Hospital_IS
         {
           
             InitializeComponent();
-            DataGridRooms1.DataContext = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
+            DataGridRooms1.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
         }
 
 
         public void refresh()
         {
-            DataGridRooms1.DataContext = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
+            DataGridRooms1.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

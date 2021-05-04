@@ -89,7 +89,7 @@ namespace Hospital_IS
 
         private bool CheckIfUnique(int id)
         {
-            foreach(Room room in RoomController.Instance.getAllRooms())
+            foreach(Room room in RoomController.Instance.GetAllRooms())
             {
                 if (room.Equipment != null)
                 {

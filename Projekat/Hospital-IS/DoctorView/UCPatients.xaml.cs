@@ -38,8 +38,7 @@ namespace Hospital_IS.DoctorView
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Patient patient = (Patient)patients.SelectedItem;
-            AppointmentFileStorage afs = new AppointmentFileStorage();
-            List<DoctorAppointment> appointments = afs.GetAllByPatient(patient.Id);
+            List<DoctorAppointment> appointments = DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(patient.Id);
             DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(appointments[0]));
             this.Visibility = Visibility.Collapsed;
         }

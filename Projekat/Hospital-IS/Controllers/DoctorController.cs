@@ -25,9 +25,19 @@ namespace Controllers
         {
         }
 
+        public List<Doctor> GetAllDoctorsByIds(List<int> senderIds)
+        {
+            return DoctorService.Instance.GetAllDoctorsByIds(senderIds);
+        }
+
         public List<Doctor> GetAll()
         {
             return DoctorService.Instance.AllDoctors;
+        }
+
+        public List<Doctor> GetDoctorsBySpecilty(Specialty specialty)
+        {
+            return DoctorService.Instance.GetDoctorsBySpecialty(specialty.Name);
         }
     }
 }

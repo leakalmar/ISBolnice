@@ -26,8 +26,6 @@ namespace Storages
          
         }
 
-
-      
         public void SaveRooms(List<Room> allRooms)
         {
             var file = JsonConvert.SerializeObject(allRooms, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });

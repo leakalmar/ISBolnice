@@ -39,13 +39,15 @@
         <TextBlock Grid.Row="4" Grid.Column="1"
                    Text="Soba" Margin="70 0 0 20"/>
         <TextBlock Grid.Row="5" Grid.Column="1"
-                   Text="Trajanje" Margin="70 0 0 20"/>
+                   Text="Trajanje(min)" Margin="70 0 0 20"/>
 
-        <ComboBox Name="cbAppType" Grid.Row="1" 
-                  Grid.Column="2" Margin="20 0 70 20" LostFocus="cbAppType_LostFocus" FontSize="15">
-            <ComboBoxItem Content="Pregled"/>
-            <ComboBoxItem Content="Operacija"/>
+        <ComboBox Name="cbAppType" Grid.Row="1" Grid.Column="2" Margin="20 0 70 20"
+                LostFocus="cbAppType_LostFocus" FontSize="15">
+            <ComboBoxItem Content="Pregled" />
+            <ComboBoxItem Content="Operacija" />
         </ComboBox>
+
+        <TextBox Name="txtGuest" Grid.Column="2" Grid.Row="2" Margin="20 0 70 20" IsEnabled="False"/>
 
         <ComboBox Name="cbPatient" Grid.Column="2" Grid.Row="2" Margin="20 0 70 20" ItemsSource="{Binding Patients}" FontSize="15" Height="26" VerticalAlignment="Bottom">
             <ComboBox.ItemTemplate>
@@ -146,6 +148,9 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Button Content="Gost" Grid.Row="2" Grid.Column="2" FontSize="17" VerticalAlignment="Top" HorizontalAlignment="Right"
+                    Height="28" Width="45" Margin="0 0 0 0" Click="SelectGuest"/>
 
         <Button Name="btnConfirm" Grid.Column="1" Grid.Row="8" Width="110" Height="30"
                 Content="Potvrdi" Margin="0 5 0 0" Click="AddNewEmergencyAppointment"/>

@@ -71,7 +71,7 @@
                             x:Name="surname" />
                     <Label Content="{Binding}" Foreground="FloralWhite" FontSize="12"
                             x:Name="date" />
-                    <Button Content="Nazad" Click="Button_Click" />
+                    <Button Content="Nazad" Click="Back_Click" />
                 </StackPanel>
             </Label.Content>
         </Label>
