@@ -55,6 +55,12 @@ namespace Service
             }
         }
 
+        public void DeleteMedicine(Medicine medicine)
+        {
+            AllMedicines.Remove(medicine);
+            mfs.Save(AllMedicines);
+        }
+
         public void AddNewMedicine(Medicine medicine)
         {
             AllMedicines.Add(medicine);

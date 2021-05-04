@@ -72,7 +72,7 @@ namespace Service
             }
         }
 
-        internal void DeleteNotification(MedicineNotification medicineNotification)
+        public void DeleteNotification(MedicineNotification medicineNotification)
         {
             AllNotification.Remove(medicineNotification);
             mnfs.Save(AllNotification);

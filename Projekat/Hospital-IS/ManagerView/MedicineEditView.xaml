@@ -115,7 +115,7 @@
                 VerticalAlignment="Top" RenderTransformOrigin="-0.258,0.185" Margin="11,15,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2" Height="29" Width="39" Click="AddContent_Click"/>
         <Button x:Name="AddContent"  Content="Dodaj"  BorderThickness="0" Background="Transparent" Foreground="White" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="8"
                 VerticalAlignment="Top" RenderTransformOrigin="-0.258,0.185" Margin="10,18,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2" Height="29" Width="39"  Click="AddMedicine_Click" />
-        <Button x:Name="Save" Content="Posalji ponovo" Width="150" Height="30" BorderBrush="AntiqueWhite" Background="Transparent" Foreground="White" Grid.Column="3" HorizontalAlignment="Left"
+        <Button x:Name="Save" Content="Izmeni lek" Width="150" Height="30" BorderBrush="AntiqueWhite" Background="Transparent" Foreground="White" Grid.Column="3" HorizontalAlignment="Left"
                 Margin="5,43,0,0" Grid.Row="16" VerticalAlignment="Top" RenderTransformOrigin="0.653,-0.97" Click="Save_Click"/>
     </Grid>
 </Window>

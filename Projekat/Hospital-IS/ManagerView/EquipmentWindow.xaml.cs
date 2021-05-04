@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,8 +21,7 @@ namespace Hospital_IS
     public partial class EquipmentWindow : Window
     {
 
-        public ObservableCollection<Room> TempRoom { get; set; }
-        public ObservableCollection<Equipment> TempEquip { get; set; }
+      
         private static EquipmentWindow instance = null;
         public static EquipmentWindow Instance
         {
@@ -37,7 +37,6 @@ namespace Hospital_IS
         private EquipmentWindow()
         {
             InitializeComponent();
-
 
 
 
@@ -124,23 +123,33 @@ namespace Hospital_IS
 
         private void Combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
+
             Room room = (Room)Combo.SelectedItem;
-         
-            if(room != null)
+
+           
+           
+            if (room != null)
             {
                 if (room.Equipment != null)
                 {
-                    DataGridEquipment.DataContext = new ObservableCollection<Equipment>(room.Equipment);
+                    ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                    view.Filter = null;
+                    DataGridEquipment.DataContext = view;
                 }
                 else
                 {
-                    DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
+                    room.Equipment = new List<Equipment>();
+                    ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                    view.Filter = null;
+                    DataGridEquipment.DataContext = view;
                 }
             }
             else
             {
-                DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
+
+                ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                view.Filter = null;
+                DataGridEquipment.DataContext = view;
             }
            
         }
@@ -155,6 +164,78 @@ namespace Hospital_IS
             {
                 SearchPanel.Visibility = Visibility.Collapsed;
             }
+        }
+        
+
+        private void SeacrhDateGrid_Click(object sender, RoutedEventArgs e)
+        {
+            String text = SearchBox.Text.ToLower();
+            String[] textSplit = text.Split(" ");
+           
+
+            Room room = (Room)Combo.SelectedItem;
+            if (text.Length != 0)
+            {
+                if (room != null)
+                {
+                    ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                    view.Filter = null;
+                   view.Filter = delegate (object item)
+                   {
+                       String name = ((Equipment)item).Name.ToLower();
+                       int quantity = 0;
+                       try
+                       {
+                            quantity = Convert.ToInt32(textSplit[1]);
+                       }catch(Exception e)
+                       {
+                            quantity = 0;
+                       }
+                       return name.Contains(textSplit[0]) && ((Equipment)item).Quantity >= quantity;
+                   };
+                    DataGridEquipment.DataContext = view;
+                }
+            }
+            else
+            {
+                if (room != null)
+                {
+                    ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                    view.Filter = null;
+                    DataGridEquipment.DataContext = view;
+                }
+            }
+        }
+
+        private void ComboType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Room room = (Room)Combo.SelectedItem;
+            EquiptType type;
+            if(ComboType.SelectedIndex == 0)
+            {
+                type = EquiptType.Dynamic;
+            }
+            else
+            {
+                type = EquiptType.Stationary;
+
+            }
+
+            if (room != null)
+            {
+                ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                view.Filter = null;
+                 view.Filter = delegate (object item)
+                {
+                    return ((Equipment)item).EquipType == type;
+                };
+                DataGridEquipment.DataContext = view;
+            }
+        }
+
+        private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            SearchBox.Text = "";
         }
     }
 }

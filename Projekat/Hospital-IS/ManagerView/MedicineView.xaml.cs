@@ -76,29 +76,53 @@ namespace Hospital_IS.ManagerView
 
         private void MedicineInsight_Click(object sender, RoutedEventArgs e)
         {
-            Medicine medicine = (Medicine)DataGridMedicine.SelectedItem;
-            MedicineInfoView medicineInfo = new MedicineInfoView(medicine, "info", null); ;
 
-            medicineInfo.Show();
-            this.Hide();
+            Medicine medicine = (Medicine)DataGridMedicine.SelectedItem;
+            if (medicine != null)
+            {
+                MedicineInfoView medicineInfo = new MedicineInfoView(medicine, "info", null); ;
+
+                medicineInfo.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Izaberite lijek");
+            }
         }
 
         private void EditMedicine_Click(object sender, RoutedEventArgs e)
         {
             Medicine medicine = (Medicine)DataGridMedicine.SelectedItem;
-            MedicineEditView medicineEdit = new MedicineEditView(medicine);
-            medicineEdit.Show();
-            this.Hide();
+
+            if (medicine != null)
+            {
+                MedicineEditView medicineEdit = new MedicineEditView(medicine);
+                medicineEdit.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Izaberite lijek");
+            }
         }
 
         private void DeleteMedicine_Click(object sender, RoutedEventArgs e)
         {
+            Medicine medicine = (Medicine)DataGridMedicine.SelectedItem;
+            if (medicine != null)
+            {
+                MedicineController.Instance.DeleteMedicine(medicine);
+                DataGridMedicine.DataContext = new ObservableCollection<Medicine>(MedicineController.Instance.GetAll());
+
+            }
+            else
+            {
+                MessageBox.Show("Izaberite lijek");
+            }
 
         }
 
-        private void DataGridRooms_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+      
     }
 }

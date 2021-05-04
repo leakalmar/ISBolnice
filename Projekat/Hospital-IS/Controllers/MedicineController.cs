@@ -49,9 +49,16 @@ namespace Controllers
             MedicineService.Instance.AddNewMedicine(medicine);
         }
 
+
+        public void DeleteMedicine(Medicine medicine)
+        {
+            MedicineService.Instance.DeleteMedicine(medicine);
+        }
+
         public Medicine FindMedicineByName(String name)
         {
             return MedicineService.Instance.FindMedicineByName(name);
+   
         }
     }
 }
