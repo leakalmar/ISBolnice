@@ -129,14 +129,14 @@
                 Grid.ColumnSpan="2" />
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" Grid.ColumnSpan="2"
                 VerticalScrollBarVisibility="Auto" Grid.Row="5" Margin="20,0,20,20">
-            <TextBox Text="{Binding Usage}" TextWrapping="Wrap" FontSize="14"
+            <TextBox TextWrapping="Wrap" FontSize="14"
                     x:Name="usage" FontFamily="Verdana" Foreground="FloralWhite"
                     Background="Transparent" BorderThickness="0" />
         </ScrollViewer>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                 VerticalScrollBarVisibility="Auto" Grid.Row="7" Grid.ColumnSpan="2"
                 Margin="20,0,20,20">
-            <TextBox Text="{Binding SideEffects}" TextWrapping="Wrap" FontSize="14"
+            <TextBox TextWrapping="Wrap" FontSize="14"
                     x:Name="sideEff" BorderThickness="0" FontFamily="Verdana"
                     Foreground="FloralWhite" Background="{x:Null}" />
         </ScrollViewer>

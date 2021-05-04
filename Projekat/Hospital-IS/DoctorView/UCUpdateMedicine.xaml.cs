@@ -69,25 +69,33 @@ namespace Hospital_IS.DoctorView
     {
         public ObservableCollection<MedicineComponent> CompositionOfMedicine { get; set; }
         public ObservableCollection<ReplaceMedicineName> ReplaceMedicines { get; set; }
+        public String newUsage { get; set; }
+        public String NewSideEffects { get; set; }
         public Medicine MedicineWhichIsUpdated { get; set; }
         public UCUpdateMedicine(Medicine medicine)
         {
             InitializeComponent();
-            medInfo.DataContext = medicine;
             MedicineWhichIsUpdated = medicine;
             ReplaceMedicines = new ObservableCollection<ReplaceMedicineName>(medicine.ReplaceMedicine);
             CompositionOfMedicine = new ObservableCollection<MedicineComponent>(medicine.Composition);
+            NewSideEffects = medicine.SideEffects;
+            newUsage = medicine.Usage;
+            medInfo.DataContext = MedicineWhichIsUpdated;
+            usage.Text = newUsage;
+            sideEff.Text = NewSideEffects;
+
+
+
             composition.ItemsSource = CompositionOfMedicine;
-            composition.CanUserAddRows = true;
-            change.CanUserAddRows = true;
             change.ItemsSource = ReplaceMedicines;
+
             this.DataContext = new AddCommandContext()
             {
                 gridToAdd = change,
                 list = ReplaceMedicines
             };
 
-            if(composition.Items[0] != null)
+            if(composition.Items.Count != 0)
             {
                 composition.SelectedIndex = 0;
                 var cellcontent = composition.Columns[0].GetCellContent(composition.SelectedItem);
