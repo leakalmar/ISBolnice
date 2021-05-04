@@ -268,13 +268,13 @@ namespace Service
 
         public List<DoctorAppointment> SuggestAppointmetsToDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
         {
-            List<DoctorAppointment> allAppointments = GetAvailableAppointmentsByDoctor(tempAppointment);
+            List<DoctorAppointment> allAppointments = GetAvailableAppointmentsByDoctor(dates, tempAppointment);
             allAppointments.AddRange(GetAllByDoctorAndDates(tempAppointment.Doctor.Id, dates));
 
             return allAppointments;
         }
 
-        private void GetAvailableAppointmentsByDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
+        private List<DoctorAppointment> GetAvailableAppointmentsByDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
         {
             List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
             List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForDoctor(dates, tempAppointment);
@@ -291,6 +291,7 @@ namespace Service
                     availableAppointments.Add(doctorAppointment);
                 }
             }
+            return availableAppointments;
         }
 
         public List<DoctorAppointment> GetFutureAppointmentsByPatient(int patientId)

@@ -745,7 +745,7 @@
       "patient": [],
       "hospital": null,
       "Specialty": {
-        "Name": null
+        "Name": "Dermatolog"
       },
       "PrimaryRoom": 1,
       "Patient": [],
@@ -771,16 +771,11 @@
       "Address": "Brace Radica 15",
       "Hospital": null
     },
-    "Report": {
-      "Anamnesis": "",
-      "HaveRecipe": false,
-      "HaveTest": false,
-      "ReportId": "30-Apr-2021 09:30:00 AM"
-    },
+    "Report": null,
     "Reserved": true,
     "AppointmentCause": null,
-    "AppointmentStart": "2021-04-30T09:30:00",
-    "AppointmentEnd": "2021-04-30T10:00:00",
+    "AppointmentStart": "2021-05-04T08:30:00",
+    "AppointmentEnd": "2021-05-04T09:00:00",
     "Type": 1,
     "Room": 1
   }
