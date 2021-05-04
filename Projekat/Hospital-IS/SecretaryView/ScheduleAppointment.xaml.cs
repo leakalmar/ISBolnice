@@ -18,7 +18,7 @@ namespace Hospital_IS.SecretaryView
         public ObservableCollection<Doctor> Doctors { get; set; } = new ObservableCollection<Doctor>();
         public ObservableCollection<Room> Rooms { get; set; } = new ObservableCollection<Room>();
 
-        private UCAppointmentsView uca;
+        public UCAppointmentsView uca;
 
         public ScheduleAppointment(UCAppointmentsView uca)
         {
@@ -27,7 +27,6 @@ namespace Hospital_IS.SecretaryView
 
             Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAll());
             Doctors = new ObservableCollection<Doctor>(DoctorController.Instance.GetAll());
-            Rooms = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
 
             this.DataContext = this;
         }
@@ -68,10 +67,14 @@ namespace Hospital_IS.SecretaryView
             if (cbAppType.SelectedIndex == 0)
             {
                 txtEndOfApp.IsEnabled = false;
+                Rooms = new ObservableCollection<Room>(RoomController.Instance.getRoomByType(RoomType.ConsultingRoom));
+                cbRoom.ItemsSource = Rooms;
             }
             else
             {
                 txtEndOfApp.IsEnabled = true;
+                Rooms = new ObservableCollection<Room>(RoomController.Instance.getRoomByType(RoomType.OperationRoom));
+                cbRoom.ItemsSource = Rooms;
             }
         }
 
@@ -143,5 +146,16 @@ namespace Hospital_IS.SecretaryView
             }
         }
 
+        private void btnEmergency_Click(object sender, RoutedEventArgs e)
+        {
+            ScheduleEmergencyAppointment sea = new ScheduleEmergencyAppointment(this);
+            sea.Show();
+            this.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

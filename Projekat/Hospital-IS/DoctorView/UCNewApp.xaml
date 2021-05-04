@@ -13,7 +13,7 @@
     <Grid>
         <Grid x:Name="schedule" Visibility="Visible">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*" />
                 <ColumnDefinition Width="0.25*" />
                 <ColumnDefinition Width="0.2*" />
                 <ColumnDefinition Width="0.09*" />
@@ -31,10 +31,10 @@
             </Grid.RowDefinitions>
 
             <Button Grid.Column="3" Grid.Row="4" Background="Transparent"
-                    BorderThickness="0" x:Name="emergency" Click="emergency_Click" Margin="5">
+                    BorderThickness="0" x:Name="emergency" Click="emergency_Click"
+                    Margin="5">
                 <Image Source="pack://application:,,,/Resources/siren.png" />
             </Button>
-            
 
             <Label Content="Novi termin" FontSize="20" BorderThickness="0"
                     Foreground="FloralWhite" HorizontalAlignment="Center"
@@ -54,7 +54,12 @@
 
             <ComboBox x:Name="types" Grid.Row="4" Grid.Column="2" Height="24.62"
                     HorizontalAlignment="Stretch" FontSize="14" VerticalAlignment="Center"
-                    Padding="1" SelectionChanged="filter_changed" Margin="0,0,15,0" />
+                    Padding="1" SelectionChanged="types_SelectionChanged"
+                    Margin="0,0,15,0">
+                <ComboBoxItem Content="Pregled" />
+                <ComboBoxItem Content="Operacija" />
+            </ComboBox>
+            
             <ComboBox x:Name="doctors" ItemsSource="{Binding}" Grid.Row="2"
                     Grid.Column="2" Height="24.62" HorizontalAlignment="Stretch"
                     FontSize="14" Grid.ColumnSpan="4" Margin="0,0,20,0"
@@ -105,7 +110,8 @@
 
             <GroupBox Header="Rezultati pretrage" FontSize="16" Grid.Row="5"
                     Grid.ColumnSpan="6" BorderBrush="#FF2E3B55" Foreground="White"
-                    Grid.RowSpan="2" Margin="0,0,0,20">
+                    Grid.RowSpan="2" Margin="0,0,0,20" x:Name="appointmentsGroupBox"
+                    Visibility="Visible">
                 <DataGrid x:Name="appointments" ItemsSource="{Binding}" Margin="10"
                         Background="Transparent" RowBackground="Transparent"
                         Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -113,8 +119,7 @@
                         SelectionMode="Single" IsReadOnly="True" BorderBrush="{x:Null}"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                         HorizontalScrollBarVisibility="Disabled" FontSize="14"
-                        RowHeaderWidth="0" CanUserSortColumns="False"
-                        MouseDoubleClick="appointments_MouseDoubleClick">
+                        RowHeaderWidth="0">
                     <DataGrid.Resources>
                         <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
                                 TargetType="{x:Type DataGridColumnHeader}">
@@ -125,26 +130,25 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Datum"
                                 Binding="{Binding Appointment.AppointmentEnd.Date,StringFormat=\{0:MM/dd/yyyy\}}"
-                                CanUserResize="False" Width="0.05*"
-                                SortDirection="Ascending" />
+                                Width="0.05*" SortDirection="Ascending" />
                         <DataGridTextColumn Header="Od" CanUserResize="False"
                                 Width="0.05*"
                                 Binding="{Binding Appointment.AppointmentStart.TimeOfDay}" />
-                        <DataGridTextColumn Header="Do" x:Name="to" CanUserResize="False"
-                                Width="0.05*"
+                        <DataGridTextColumn Header="Do" x:Name="to" Width="0.05*"
                                 Binding="{Binding Appointment.AppointmentEnd.TimeOfDay}" />
-                        <DataGridTextColumn Header="Tip" CanUserResize="False"
-                                Width="0.05*" Binding="{Binding Appointment.Type}" />
-                        <DataGridCheckBoxColumn Header="Slobodno" x:Name="isAdded"
-                                CanUserResize="False" Width="0.05*"
-                                Binding="{Binding Appointment.Reserved}" />
-                        <DataGridCheckBoxColumn Header="Hitno" CanUserResize="False"
-                                Width="0.05*" Binding="{Binding Appointment.IsUrgent}" />
+                        <DataGridTextColumn Header="Tip" Width="0.05*"
+                                Binding="{Binding Appointment.Type}" />
+                        <DataGridCheckBoxColumn Header="Zauzeto" x:Name="isAdded"
+                                Width="0.05*" Binding="{Binding Appointment.Reserved}" />
+                        <DataGridCheckBoxColumn Header="Hitno" Width="0.05*"
+                                Binding="{Binding Appointment.IsUrgent}" />
                     </DataGrid.Columns>
                     <DataGrid.RowStyle>
                         <Style TargetType="{x:Type DataGridRow}"
                                 BasedOn="{StaticResource {x:Type DataGridRow}}">
                             <Setter Property="IsEnabled" Value="True" />
+                            <EventSetter Event="MouseDoubleClick"
+                                    Handler="appointments_MouseDoubleClick" />
                             <Style.Triggers>
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
@@ -164,86 +168,56 @@
                 </DataGrid>
             </GroupBox>
 
-        </Grid>
-
-        <Grid x:Name="document" Visibility="Collapsed">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="0.35*" />
-                <ColumnDefinition Width="0.65*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-            </Grid.RowDefinitions>
-
-            <Label Content="Uput" FontSize="20" BorderThickness="0"
-                    Foreground="FloralWhite" HorizontalAlignment="Center"
-                    Grid.ColumnSpan="3" FontWeight="Bold" VerticalAlignment="Center"
-                    Margin="0,0,0,40" />
-            <Label Grid.Row="1" Grid.Column="2" FontFamily="Verdana"
-                    Foreground="FloralWhite" Content="{Binding}" FontSize="16"
-                    HorizontalAlignment="Right" x:Name="date" Margin="0,0,70,0" />
-            <Label Grid.Row="2" Grid.Column="2" FontFamily="Verdana"
-                    Foreground="FloralWhite" Content="{Binding}" Margin="0,0,70,0"
-                    HorizontalAlignment="Right" x:Name="time" FontSize="16" />
-            <Label Grid.Row="3" Grid.Column="2" FontFamily="Verdana" FontSize="16"
-                    Foreground="FloralWhite" Content="{Binding}" Margin="0,0,70,0"
-                    HorizontalAlignment="Right" x:Name="documentSpecialty" />
-            <Label Grid.Row="4" Grid.Column="2" FontFamily="Verdana" FontSize="16"
-                    Foreground="FloralWhite" Content="{Binding}" Margin="0,0,70,0"
-                    HorizontalAlignment="Right" x:Name="documentDoctor" />
-            <Label Grid.Row="1" Grid.Column="1" FontFamily="Verdana" FontSize="16"
-                    Foreground="FloralWhite" Content="Datum:" />
-            <Label Grid.Row="2" Grid.Column="1" FontFamily="Verdana" FontSize="16"
-                    Foreground="FloralWhite" Content="Vreme:" />
-            <Label Grid.Row="3" Grid.Column="1" FontFamily="Verdana" FontSize="16"
-                    Foreground="FloralWhite" Content="Specijalizacija:" />
-            <Label Grid.Row="4" Grid.Column="1" FontFamily="Verdana" FontSize="16"
-                    Foreground="FloralWhite" Content="Doktor:" />
-            <Label Content="Opis" FontSize="16" FontFamily="Verdana"
-                    Foreground="FloralWhite" Grid.Row="5" Padding="30,0,0,0"
-                    Margin="70,0,70,0" BorderThickness="0,0,0,2" BorderBrush="Gray"
-                    Grid.ColumnSpan="3" />
-            <TextBox Grid.Row="6" Grid.ColumnSpan="3" Background="Transparent"
-                    Foreground="FloralWhite" x:Name="cause" FontSize="16"
-                    Margin="70,0,70,0"
-                    BorderThickness="{Binding DocumentMessage,Converter={StaticResource RedConverter}}">
-                <TextBox.Text>
-                    <Binding Path="DocumentMessage" UpdateSourceTrigger="PropertyChanged">
-
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
-
-            <Label Grid.Row="7" Grid.Column="1" Margin="0,100,70,0" FontFamily="Verdana"
-                    Foreground="FloralWhite" Content="{Binding}" Grid.ColumnSpan="2"
-                    HorizontalAlignment="Right" x:Name="thisDoctor" FontSize="16" />
-            <Label Grid.Row="8" Grid.Column="1" Margin="0,0,70,50" FontFamily="Verdana"
-                    Foreground="FloralWhite" Content="{Binding}" Grid.ColumnSpan="2"
-                    HorizontalAlignment="Right" x:Name="today" FontSize="16" />
-
-            <Border Grid.Row="9" CornerRadius="20" BorderThickness="1" Grid.Column="1"
-                    Background="#FF213250" BorderBrush="FloralWhite" Margin="90,0,90,10"
-                    Grid.ColumnSpan="2">
-                <Button FontSize="16" BorderThickness="0" Background="{x:Null}"
-                        Content="Potvrdi" Foreground="FloralWhite"
-                        HorizontalAlignment="Stretch" Click="save_Click" x:Name="save" />
-            </Border>
-            <Border Grid.Row="9" CornerRadius="20" BorderThickness="1" Grid.Column="0"
-                    Background="#FF213250" BorderBrush="FloralWhite" Margin="90,0,90,10">
-                <Button FontSize="16" BorderThickness="0" Background="{x:Null}"
-                        Content="Nazad" Foreground="FloralWhite"
-                        HorizontalAlignment="Stretch" Click="cancle_Click" x:Name="cancle" />
-            </Border>
+            <GroupBox Header="Rezultati pretrage" FontSize="16" Grid.Row="5"
+                    Grid.ColumnSpan="6" BorderBrush="#FF2E3B55" Foreground="White"
+                    Grid.RowSpan="2" Margin="0,0,0,20" x:Name="emergencyGroupBox"
+                    Visibility="Collapsed">
+                <DataGrid x:Name="emergencyAppointments" ItemsSource="{Binding}"
+                        Margin="10" Background="Transparent" RowBackground="Transparent"
+                        Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        BorderThickness="0,0,0,0" AutoGenerateColumns="False"
+                        SelectionMode="Single" IsReadOnly="True" BorderBrush="{x:Null}"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        HorizontalScrollBarVisibility="Disabled" FontSize="14"
+                        RowHeaderWidth="0">
+                    <DataGrid.Resources>
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
+                                TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#FF2E3B55" />
+                            <EventSetter Event="KeyDown" Handler="setAppointment_KeyDown" />
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Datum"
+                                Binding="{Binding SuggestedAppointment.AppointmentEnd.Date,StringFormat=\{0:MM/dd/yyyy\}}"
+                                SortDirection="Ascending" />
+                        <DataGridTextColumn Header="Od" CanUserResize="False"
+                                Binding="{Binding SuggestedAppointment.AppointmentStart.TimeOfDay}" />
+                        <DataGridTextColumn Header="Do"
+                                Binding="{Binding SuggestedAppointment.AppointmentEnd.TimeOfDay}" />
+                        <DataGridTextColumn Header="Doktor" x:Name="doctor"
+                                SortMemberPath="Surname" Width="*">
+                            <DataGridTextColumn.Binding>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="SuggestedAppointment.Doctor.Surname" />
+                                    <Binding Path="SuggestedAppointment.Doctor.Name" />
+                                </MultiBinding>
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Broj pomeranja" x:Name="reschedule"
+                                CanUserResize="False"
+                                Binding="{Binding ConflictingAppointments.Count,StringFormat={}\{0:N0\}}" />
+                        <DataGridCheckBoxColumn Header="Pomeranje hitnog slucaja"
+                                Binding="{Binding ConflictingIsUrgent}" />
+                    </DataGrid.Columns>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick"
+                                    Handler="emergencyApp_MouseDoubleClick" />
+                        </Style>
+                    </DataGrid.RowStyle>
+                </DataGrid>
+            </GroupBox>
 
         </Grid>
     </Grid>

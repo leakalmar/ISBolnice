@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Data;
 
 namespace Hospital_IS.DoctorView
@@ -12,7 +13,7 @@ namespace Hospital_IS.DoctorView
         {
             if (value == null) { return 0; }
 
-            return ((String)value).Any(x => !char.IsLetter(x)) ? 5 : 0;
+            return ((String)value == "" || (String)value == null) ? 1 : 0;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

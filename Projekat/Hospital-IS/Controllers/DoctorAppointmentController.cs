@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Hospital_IS.DTOs;
+using Model;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,7 @@ namespace Controllers
 
         public void AddAppointment(DoctorAppointment doctorAppointment)
         {
+            doctorAppointment.Reserved = true;
             DoctorAppointmentService.Instance.AddAppointment(doctorAppointment);
         }
 
@@ -64,12 +66,21 @@ namespace Controllers
             return DoctorAppointmentService.Instance.SuggestAppointmentsToPatient(timeSlot, doctor, patient, date, priority);
         }
 
-        public List<DoctorAppointment> GetSuggestedAndReservedByDoctor(List<DateTime> dates, bool isUrgent,int idRoom, AppointmetType type, TimeSpan duration, Patient patient, Doctor doctor)
+        public List<DoctorAppointment> GetSuggestedAppointmentsByDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmetType type, TimeSpan duration, Patient patient, Doctor doctor)
         {
-            DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, idRoom, doctor, patient);
+
+            DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, room.RoomId, doctor, patient);
             tempAppointment.AppointmentEnd = dates[0].Add(duration);
             tempAppointment.IsUrgent = isUrgent;
             return DoctorAppointmentService.Instance.SuggestAppointmetsToDoctor(dates, tempAppointment);
+        }
+
+        public List<SuggestedEmergencyAppDTO> GetSuggestedEmergencyAppsForDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmetType type, TimeSpan duration, Patient patient, Doctor doctor)
+        {
+            DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, room.RoomId, doctor, patient);
+            tempAppointment.AppointmentEnd = dates[0].Add(duration);
+            tempAppointment.IsUrgent = isUrgent;
+            return DoctorAppointmentService.Instance.GenerateEmergencyAppointmentsForDoctor(dates, tempAppointment);
         }
 
         public List<DoctorAppointment> GetFutureAppointmentsByPatient(int patientId)
@@ -85,6 +96,11 @@ namespace Controllers
         public void ReloadDoctorAppointments()
         {
             DoctorAppointmentService.Instance.ReloadDoctorAppointments();
+        }
+
+        internal IEnumerable<SuggestedEmergencyAppDTO> GenerateEmergencyAppointmentsForSecretary(EmergencyAppointmentDTO emerAppointment)
+        {
+            return DoctorAppointmentService.Instance.GenerateEmergencyAppointmentsForSecretary(emerAppointment);
         }
 
         public bool VerifyAppointment(DoctorAppointment doctorAppointment, List<Appointment> roomAppointments)

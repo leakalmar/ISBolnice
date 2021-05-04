@@ -104,7 +104,7 @@ namespace Service
 
             foreach (Room room in allRooms)
             {
-                if (room.Type == RoomType.StorageRoom)
+                if (room.Type == type)
                 {
                     allRoomByType.Add(room);
                 }

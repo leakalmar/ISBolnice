@@ -32,7 +32,7 @@ namespace Controllers
 
         public List<Doctor> GetDoctorsBySpecilty(Specialty specialty)
         {
-            return DoctorService.Instance.GetDoctorsBySpecialty(specialty);
+            return DoctorService.Instance.GetDoctorsBySpecialty(specialty.Name);
         }
     }
 }

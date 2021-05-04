@@ -15,51 +15,10 @@ using System.Windows.Media.Imaging;
 
 namespace Hospital_IS.DoctorView
 {
-    public partial class UCNewApp : UserControl, INotifyPropertyChanged
+    public partial class UCNewApp : UserControl
     {
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
-        private String _documentMessage;
-
-        public String DocumentMessage
-        {
-            get { return _documentMessage; }
-            set
-            {
-                if (value != _documentMessage)
-                {
-                    _documentMessage = value;
-
-                }
-                DoctorAppointment selected = (DoctorAppointment)appointments.SelectedItem;
-
-                if (!DoctorHomePage.Instance.Doctor.Id.Equals(selected.Doctor.Id))
-                {
-                    if (value.Any(x => !char.IsLetter(x)) || value == "")
-                    {
-                        save.IsEnabled = false;
-                    }
-                    else
-                    {
-                        save.IsEnabled = true;
-                    }
-                }
-                else
-                {
-                    save.IsEnabled = true;
-                }
-                OnPropertyChanged("DocumentMessage");
-            }
-        }
-
+        public ObservableCollection<Room> Rooms { get; set; }
         public DoctorAppointment Appointment { get; }
         public bool Emergency = false;
 
@@ -72,14 +31,14 @@ namespace Hospital_IS.DoctorView
             PatientChart = patientChart;
             Appointment = patientChart.Appointment;
             doctors.DataContext = MainWindow.Doctors;
-            rooms.DataContext = MainWindow.Rooms;
+            rooms.DataContext = Rooms;
+            duration.Value = new TimeSpan(0);
 
             string[] list = Enum.GetNames(typeof(AppointmetType));
             string[] docApp = new string[2];
             docApp[0] = list[0];
             docApp[1] = list[1];
 
-            types.ItemsSource = docApp;
             specialization.ItemsSource = MainWindow.Specialties;
             InitializeComoboBoxes();
 
@@ -87,7 +46,7 @@ namespace Hospital_IS.DoctorView
 
         private void InitializeComoboBoxes()
         {
-            types.SelectedIndex = 1;
+            types.SelectedIndex = 0;
             duration.Value = new TimeSpan(0);
 
             foreach (Specialty s in MainWindow.Specialties)
@@ -137,17 +96,61 @@ namespace Hospital_IS.DoctorView
                 Room room = (Room)rooms.SelectedItem;
                 List<DateTime> dates = new List<DateTime>(calendar.SelectedDates);
                 AppointmetType type = FindType();
-
+                Specialty specialty = (Specialty)specialization.SelectedItem;
 
                 changeVisibilityOfFields(type, doctor);
-                List<DoctorAppointment> allAppointments = DoctorAppointmentController.Instance.GetSuggestedAndReservedByDoctor(dates, Emergency, room.RoomId, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
 
-                ICollectionView view = new CollectionViewSource { Source = ConvertList(allAppointments) }.View;
-                view.SortDescriptions.Clear();
-                view.SortDescriptions.Add(new SortDescription("Appointment.AppointmentStart", ListSortDirection.Ascending));
+                if (Emergency)
+                {
+                    List<SuggestedEmergencyAppDTO> allEmergencyAppointments = DoctorAppointmentController.Instance.GetSuggestedEmergencyAppsForDoctor(dates, Emergency, room, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
+                    ICollectionView view = new CollectionViewSource { Source = allEmergencyAppointments }.View;
+                    view.GroupDescriptions.Add((new PropertyGroupDescription("SuggestedAppointment.Doctor.Surname")));
+                    if (doctor.Id != -1)
+                    {
+                        view.Filter = null;
+                        view.Filter = delegate (object item)
+                        {
+                            return ((SuggestedEmergencyAppDTO)item).SuggestedAppointment.Doctor.Id == doctor.Id;
+                        };
+                    }
 
-                appointments.DataContext = view;
+
+                    emergencyAppointments.DataContext = view;
+                    appointmentsGroupBox.Visibility = Visibility.Collapsed;
+                    emergencyGroupBox.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    List<DoctorAppointment> allAppointments = DoctorAppointmentController.Instance.GetSuggestedAppointmentsByDoctor(dates, Emergency, room, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
+                    ICollectionView view = new CollectionViewSource { Source = ConvertList(allAppointments) }.View;
+                    view.SortDescriptions.Clear();
+                    view.SortDescriptions.Add(new SortDescription("Appointment.AppointmentStart", ListSortDirection.Ascending));
+
+                    appointments.DataContext = view;
+                    emergencyGroupBox.Visibility = Visibility.Collapsed;
+                    appointmentsGroupBox.Visibility = Visibility.Visible;
+                }
+
+
             }
+
+        }
+
+
+        private void types_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (FindType() == AppointmetType.CheckUp)
+            {
+                Rooms = new ObservableCollection<Room>(RoomController.Instance.getRoomByType(RoomType.ConsultingRoom));
+                rooms.ItemsSource = Rooms;
+            }
+            else
+            {
+                Rooms = new ObservableCollection<Room>(RoomController.Instance.getRoomByType(RoomType.OperationRoom));
+                rooms.ItemsSource = Rooms;
+            }
+            rooms.SelectedItem = Rooms[0];
+            filterAppointments();
 
         }
 
@@ -165,7 +168,7 @@ namespace Hospital_IS.DoctorView
         private AppointmetType FindType()
         {
             AppointmetType type;
-            if (types.SelectedItem.Equals(AppointmetType.CheckUp.ToString()))
+            if (((ComboBoxItem)types.SelectedItem).Content.Equals("Pregled"))
             {
                 type = AppointmetType.CheckUp;
             }
@@ -180,7 +183,18 @@ namespace Hospital_IS.DoctorView
         private void specialization_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Specialty selectedSpecialty = (Specialty)specialization.SelectedItem;
-            doctors.DataContext = DoctorController.Instance.GetDoctorsBySpecilty(selectedSpecialty);
+            if (Emergency)
+            {
+                List<Doctor> docs = new List<Doctor>();
+                docs.Add(new Doctor(-1, "Svi", "doktori", DateTime.Now, null, null, null, 0, DateTime.Now, null, selectedSpecialty, 0));
+                docs.AddRange(DoctorController.Instance.GetDoctorsBySpecilty(selectedSpecialty));
+                doctors.DataContext = docs;
+            }
+            else
+            {
+                doctors.DataContext = DoctorController.Instance.GetDoctorsBySpecilty(selectedSpecialty);
+            }
+
 
             if (selectedSpecialty.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name))
             {
@@ -195,7 +209,7 @@ namespace Hospital_IS.DoctorView
             else
             {
                 doctors.SelectedIndex = 0;
-                types.SelectedIndex = 1;
+                types.SelectedIndex = 0;
             }
 
             if (types.SelectedItem != null && doctors.SelectedItem != null)
@@ -210,16 +224,7 @@ namespace Hospital_IS.DoctorView
 
         private void changeVisibilityOfFields(AppointmetType type, Doctor doctor)
         {
-            if (!doctor.Specialty.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name))
-            {
-                rooms.Visibility = Visibility.Collapsed;
-                types.Visibility = Visibility.Collapsed;
-                duration.Visibility = Visibility.Collapsed;
-                lblRoom.Visibility = Visibility.Collapsed;
-                lblType.Visibility = Visibility.Collapsed;
-                lblDuration.Visibility = Visibility.Collapsed;
-            }
-            if (doctor.Specialty.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name) && type == AppointmetType.CheckUp)
+            if ((doctor.Specialty.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name) && type == AppointmetType.CheckUp) || (Emergency && type == AppointmetType.CheckUp))
             {
                 rooms.Visibility = Visibility.Visible;
                 types.Visibility = Visibility.Visible;
@@ -228,7 +233,7 @@ namespace Hospital_IS.DoctorView
                 lblType.Visibility = Visibility.Visible;
                 lblDuration.Visibility = Visibility.Collapsed;
             }
-            if (doctor.Specialty.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name) && type == AppointmetType.Operation)
+            else if ((doctor.Specialty.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name) && type == AppointmetType.Operation) || Emergency)
             {
                 rooms.Visibility = Visibility.Visible;
                 types.Visibility = Visibility.Visible;
@@ -236,6 +241,15 @@ namespace Hospital_IS.DoctorView
                 lblRoom.Visibility = Visibility.Visible;
                 lblType.Visibility = Visibility.Visible;
                 lblDuration.Visibility = Visibility.Visible;
+            }
+            else if (!doctor.Specialty.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name))
+            {
+                rooms.Visibility = Visibility.Collapsed;
+                types.Visibility = Visibility.Collapsed;
+                duration.Visibility = Visibility.Collapsed;
+                lblRoom.Visibility = Visibility.Collapsed;
+                lblType.Visibility = Visibility.Collapsed;
+                lblDuration.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -255,64 +269,37 @@ namespace Hospital_IS.DoctorView
 
         private void appointments_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DoctorAppointment selected = (DoctorAppointment)((AppointmentRow)appointments.SelectedItem).Appointment;
-            var row = appointments.ItemContainerGenerator.ContainerFromItem(selected) as DataGridRow;
-
-
-            schedule.Visibility = Visibility.Collapsed;
-            date.Content = selected.AppointmentStart.Date;
-            time.Content = selected.AppointmentStart.TimeOfDay;
-            documentSpecialty.Content = selected.Doctor.Specialty.Name;
-
-            documentDoctor.Content = selected.Doctor.Name.ToString() + " " + ShortSurname(selected.Doctor);
-            thisDoctor.Content = DoctorHomePage.Instance.Doctor.Name.ToString() + " " + ShortSurname(DoctorHomePage.Instance.Doctor);
-            today.Content = DateTime.Now.Date;
-
-            document.Visibility = Visibility.Visible;
-            cause.Focus();
-
-
+            this.Visibility = Visibility.Collapsed;
+            DoctorHomePage.Instance.Home.Children.Add(new UCIssueInstruction(this));
         }
 
-        private string ShortSurname(Doctor doctor)
-        {
-            String newSurname = doctor.Surname;
-            if (doctor.Surname.Length > 11)
-            {
-                String[] surnames = doctor.Surname.Split(" ");
-                newSurname = surnames[0].ToCharArray()[0].ToString() + ". " + surnames[1];
-            }
-            return newSurname;
-        }
-
-        private void save_Click(object sender, RoutedEventArgs e)
+        private void emergencyApp_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
-            DoctorAppointment selected = (DoctorAppointment)((AppointmentRow)appointments.SelectedItem).Appointment;
+            SuggestedEmergencyAppDTO selected = (SuggestedEmergencyAppDTO)emergencyAppointments.SelectedItem;
 
-            if (selected.Reserved == true)
+            foreach (RescheduledAppointmentDTO rescheduled in selected.RescheduledAppointments)
             {
-                return;
+                DoctorAppointmentController.Instance.UpdateAppointment(rescheduled.OldDocAppointment, rescheduled.DocAppointment);  //notifikacije ???
             }
-            selected.Reserved = true;
-            selected.AppointmentCause = cause.Text;
-            DoctorAppointmentController.Instance.AddAppointment(selected);
-            DoctorHomePage.Instance.DoctorAppointment.Add(selected);
+            DoctorAppointmentController.Instance.AddAppointment(selected.SuggestedAppointment);
 
             DoctorHomePage.Instance.Home.Children.Remove(this);
             DoctorHomePage.Instance.Home.Children.Add(PatientChart);
         }
 
-        private void cancle_Click(object sender, RoutedEventArgs e)
-        {
-            schedule.Visibility = Visibility.Visible;
-            document.Visibility = Visibility.Collapsed;
         }
 
         private void emergency_Click(object sender, RoutedEventArgs e)
         {
-            if(Emergency == false)
+            if (Emergency == false)
             {
+                Specialty selectedSpecialty = (Specialty)specialization.SelectedItem;
+                List<Doctor> docs = new List<Doctor>();
+                docs.Add(new Doctor(-1, "Svi", "doktori", DateTime.Now, null, null, null, 0, DateTime.Now, null, selectedSpecialty, 0));
+                docs.AddRange(DoctorController.Instance.GetDoctorsBySpecilty(selectedSpecialty));
+                doctors.DataContext = docs;
+
                 Image image = new Image();
                 image.Source = new BitmapImage(new Uri(@"pack://application:,,,/Resources/redsiren.png"));
                 emergency.Content = image;
@@ -320,6 +307,10 @@ namespace Hospital_IS.DoctorView
             }
             else
             {
+                Specialty selectedSpecialty = (Specialty)specialization.SelectedItem;
+                doctors.DataContext = DoctorController.Instance.GetDoctorsBySpecilty(selectedSpecialty);
+                types.SelectedIndex = 0;
+
                 Image image = new Image();
                 image.Source = new BitmapImage(new Uri(@"pack://application:,,,/Resources/siren.png"));
                 emergency.Content = image;

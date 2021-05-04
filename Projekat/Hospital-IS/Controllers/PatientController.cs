@@ -61,6 +61,14 @@ namespace Controllers
         {
             PatientService.Instance.DeletePatient(patient);
         }
+        public List<Patient> GetAllRegisteredPatients()
+        {
+            return PatientService.Instance.GetAllRegisteredPatients();
+        }
+        public List<Patient> GetAllGuests()
+        {
+            return PatientService.Instance.GetAllGuests();
+        }
 
         public void ReloadPatients()
         {
