@@ -66,7 +66,7 @@ namespace Controllers
             return DoctorAppointmentService.Instance.SuggestAppointmentsToPatient(timeSlot, doctor, patient, date, priority);
         }
 
-        public List<DoctorAppointment> GetSuggestedAppointmentsByDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmetType type, TimeSpan duration, Patient patient, Doctor doctor)
+        public List<DoctorAppointment> SuggestAppointmetsToDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmentType type, TimeSpan duration, Patient patient, Doctor doctor)
         {
 
             DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, room.RoomId, doctor, patient);
@@ -75,7 +75,7 @@ namespace Controllers
             return DoctorAppointmentService.Instance.SuggestAppointmetsToDoctor(dates, tempAppointment);
         }
 
-        public List<SuggestedEmergencyAppDTO> GetSuggestedEmergencyAppsForDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmetType type, TimeSpan duration, Patient patient, Doctor doctor)
+        public List<SuggestedEmergencyAppDTO> SuggestEmergencyAppsToDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmentType type, TimeSpan duration, Patient patient, Doctor doctor)
         {
             DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, room.RoomId, doctor, patient);
             tempAppointment.AppointmentEnd = dates[0].Add(duration);
@@ -90,7 +90,7 @@ namespace Controllers
 
         public List<DoctorAppointment> GetAllAppointmentsByPatient(int patientId)
         {
-            return DoctorAppointmentService.Instance.GetAllAppointmentsByPatient(patientId);
+            return DoctorAppointmentService.Instance.GetAllByPatient(patientId);
         }
 
         public void ReloadDoctorAppointments()
@@ -103,9 +103,9 @@ namespace Controllers
             return DoctorAppointmentService.Instance.GenerateEmergencyAppointmentsForSecretary(emerAppointment);
         }
 
-        public bool VerifyAppointment(DoctorAppointment doctorAppointment, List<Appointment> roomAppointments)
+        public bool VerifyAppointment(DoctorAppointment doctorAppointment)
         {
-            return DoctorAppointmentService.Instance.VerifyAppointment(doctorAppointment, roomAppointments);
+            return DoctorAppointmentService.Instance.VerifyAppointment(doctorAppointment);
         }
 
         public List<DoctorAppointment> GetAllByDoctorAndDates(int idDoctor, List<DateTime> dates)

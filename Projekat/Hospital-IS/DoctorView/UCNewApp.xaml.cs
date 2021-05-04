@@ -34,7 +34,7 @@ namespace Hospital_IS.DoctorView
             rooms.DataContext = Rooms;
             duration.Value = new TimeSpan(0);
 
-            string[] list = Enum.GetNames(typeof(AppointmetType));
+            string[] list = Enum.GetNames(typeof(AppointmentType));
             string[] docApp = new string[2];
             docApp[0] = list[0];
             docApp[1] = list[1];
@@ -95,7 +95,7 @@ namespace Hospital_IS.DoctorView
                 Doctor doctor = (Doctor)doctors.SelectedItem;
                 Room room = (Room)rooms.SelectedItem;
                 List<DateTime> dates = new List<DateTime>(calendar.SelectedDates);
-                AppointmetType type = FindType();
+                AppointmentType type = FindType();
                 Specialty specialty = (Specialty)specialization.SelectedItem;
 
                 changeVisibilityOfFields(type, doctor);
@@ -105,11 +105,11 @@ namespace Hospital_IS.DoctorView
 
         }
 
-        private void ListAppointments(Doctor doctor, Room room, List<DateTime> dates, AppointmetType type)
+        private void ListAppointments(Doctor doctor, Room room, List<DateTime> dates, AppointmentType type)
         {
             if (Emergency)
             {
-                List<SuggestedEmergencyAppDTO> allEmergencyAppointments = DoctorAppointmentController.Instance.GetSuggestedEmergencyAppsForDoctor(dates, Emergency, room, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
+                List<SuggestedEmergencyAppDTO> allEmergencyAppointments = DoctorAppointmentController.Instance.SuggestEmergencyAppsToDoctor(dates, Emergency, room, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
                 ICollectionView view = new CollectionViewSource { Source = allEmergencyAppointments }.View;
                 view.GroupDescriptions.Add((new PropertyGroupDescription("SuggestedAppointment.Doctor.Surname")));
                 if (doctor.Id != -1)
@@ -128,7 +128,7 @@ namespace Hospital_IS.DoctorView
             }
             else
             {
-                List<DoctorAppointment> allAppointments = DoctorAppointmentController.Instance.GetSuggestedAppointmentsByDoctor(dates, Emergency, room, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
+                List<DoctorAppointment> allAppointments = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, Emergency, room, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
                 ICollectionView view = new CollectionViewSource { Source = ConvertList(allAppointments) }.View;
                 view.SortDescriptions.Clear();
                 view.SortDescriptions.Add(new SortDescription("Appointment.AppointmentStart", ListSortDirection.Ascending));
@@ -141,14 +141,14 @@ namespace Hospital_IS.DoctorView
 
         private void types_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (FindType() == AppointmetType.CheckUp)
+            if (FindType() == AppointmentType.CheckUp)
             {
-                Rooms = new ObservableCollection<Room>(RoomController.Instance.getRoomByType(RoomType.ConsultingRoom));
+                Rooms = new ObservableCollection<Room>(RoomController.Instance.GetRoomByType(RoomType.ConsultingRoom));
                 rooms.ItemsSource = Rooms;
             }
             else
             {
-                Rooms = new ObservableCollection<Room>(RoomController.Instance.getRoomByType(RoomType.OperationRoom));
+                Rooms = new ObservableCollection<Room>(RoomController.Instance.GetRoomByType(RoomType.OperationRoom));
                 rooms.ItemsSource = Rooms;
             }
             rooms.SelectedItem = Rooms[0];
@@ -167,16 +167,16 @@ namespace Hospital_IS.DoctorView
             return list;
         }
 
-        private AppointmetType FindType()
+        private AppointmentType FindType()
         {
-            AppointmetType type;
+            AppointmentType type;
             if (((ComboBoxItem)types.SelectedItem).Content.Equals("Pregled"))
             {
-                type = AppointmetType.CheckUp;
+                type = AppointmentType.CheckUp;
             }
             else
             {
-                type = AppointmetType.Operation;
+                type = AppointmentType.Operation;
             }
 
             return type;
@@ -224,9 +224,9 @@ namespace Hospital_IS.DoctorView
             filterAppointments();
         }
 
-        private void changeVisibilityOfFields(AppointmetType type, Doctor doctor)
+        private void changeVisibilityOfFields(AppointmentType type, Doctor doctor)
         {
-            if ((doctor.Specialty.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name) && type == AppointmetType.CheckUp) || (Emergency && type == AppointmetType.CheckUp))
+            if ((doctor.Specialty.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name) && type == AppointmentType.CheckUp) || (Emergency && type == AppointmentType.CheckUp))
             {
                 rooms.Visibility = Visibility.Visible;
                 types.Visibility = Visibility.Visible;
@@ -235,7 +235,7 @@ namespace Hospital_IS.DoctorView
                 lblType.Visibility = Visibility.Visible;
                 lblDuration.Visibility = Visibility.Collapsed;
             }
-            else if ((doctor.Specialty.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name) && type == AppointmetType.Operation) || Emergency)
+            else if ((doctor.Specialty.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name) && type == AppointmentType.Operation) || Emergency)
             {
                 rooms.Visibility = Visibility.Visible;
                 types.Visibility = Visibility.Visible;

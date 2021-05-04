@@ -32,7 +32,8 @@
         "ReportId": "2021-05-02T19:00:00",
         "DoctorName": "Dragana",
         "DoctorSurname": "Vukmanov Simokov",
-        "Type": 1
+        "Type": 1,
+        "Cause": null
       }
     ],
     "Hospitalization": [],

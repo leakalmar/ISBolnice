@@ -54,7 +54,7 @@ namespace Hospital_IS
                 tip = RoomType.ConsultingRoom;
             }
 
-            int id = genereteId(RoomController.Instance.getAllRooms());
+            int id = genereteId(RoomController.Instance.GetAllRooms());
             Room newRoom = new Room(roomFloor, roomNumber, id, zauzeto, renoviranje, tip);
 
             RoomController.Instance.AddRoom(newRoom);

@@ -9,8 +9,8 @@ namespace Service
 {
     public class PatientAppointmentEvaluationService
     {
-        private PatientAppointmentEvaluationStorage evaluationStorage = new PatientAppointmentEvaluationStorage();
-        public List<PatientAppointmentEvaluationDTO> AllAppointmentEvaluations { get; set; }
+        private PatientAppointmentEvaluationStorage EvaluationStorage = new PatientAppointmentEvaluationStorage();
+        public List<PatientAppointmentEvaluation> AllAppointmentEvaluations { get; set; }
 
         private static PatientAppointmentEvaluationService instance = null;
         public static PatientAppointmentEvaluationService Instance
@@ -27,16 +27,16 @@ namespace Service
 
         private PatientAppointmentEvaluationService()
         {
-            AllAppointmentEvaluations = evaluationStorage.GetAll();
+            AllAppointmentEvaluations = EvaluationStorage.GetAll();
         }
 
-        public void AddAppointmentEvaluation(PatientAppointmentEvaluationDTO appointmentEvaluation)
+        public void AddAppointmentEvaluation(PatientAppointmentEvaluation appointmentEvaluation)
         {
             AddAppointment(appointmentEvaluation);
-            evaluationStorage.SaveAppointment(AllAppointmentEvaluations);
+            EvaluationStorage.SaveAppointments(AllAppointmentEvaluations);
         }
 
-        public void AddAppointment(PatientAppointmentEvaluationDTO appointmentEvaluation)
+        public void AddAppointment(PatientAppointmentEvaluation appointmentEvaluation)
         {
             if (appointmentEvaluation == null)
             {
@@ -45,7 +45,7 @@ namespace Service
 
             if (AllAppointmentEvaluations == null)
             {
-                AllAppointmentEvaluations = new List<PatientAppointmentEvaluationDTO>();
+                AllAppointmentEvaluations = new List<PatientAppointmentEvaluation>();
 
             }
 
@@ -58,7 +58,7 @@ namespace Service
 
         public Boolean IsAppointmentEvaluated(DoctorAppointment appointmentEvaluation)
         {
-            foreach (PatientAppointmentEvaluationDTO appointment in AllAppointmentEvaluations)
+            foreach (PatientAppointmentEvaluation appointment in AllAppointmentEvaluations)
             {
                 if(appointment.DoctorAppointmentDate == appointmentEvaluation.AppointmentStart.Date && appointment.DoctorId == appointmentEvaluation.Doctor.Id && appointment.PatientId == appointmentEvaluation.Patient.Id)
                 {
@@ -72,7 +72,7 @@ namespace Service
         {
             int appointmentCounter = 0;
             int hospitalEvaluation = 3;
-            foreach (PatientAppointmentEvaluationDTO appointment in AllAppointmentEvaluations)
+            foreach (PatientAppointmentEvaluation appointment in AllAppointmentEvaluations)
             {
                 if (appointment.PatientId == patientId)
                 {

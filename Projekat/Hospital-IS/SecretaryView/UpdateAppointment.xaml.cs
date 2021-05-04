@@ -27,12 +27,12 @@ namespace Hospital_IS.SecretaryView
 
             this.DataContext = this;
 
-            if (OldDocAppointment.Type == AppointmetType.CheckUp)
+            if (OldDocAppointment.Type == AppointmentType.CheckUp)
             {
                 txtAppType.Text = "Pregled";
                 txtEndOfApp.IsEnabled = false;
             }
-            else if (OldDocAppointment.Type == AppointmetType.Operation)
+            else if (OldDocAppointment.Type == AppointmentType.Operation)
             {
                 txtAppType.Text = "Operacija";
             }
@@ -87,7 +87,7 @@ namespace Hospital_IS.SecretaryView
 
         private void txtStartOfApp_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (OldDocAppointment.Type == AppointmetType.CheckUp && !string.IsNullOrEmpty(txtStartOfApp.Text))
+            if (OldDocAppointment.Type == AppointmentType.CheckUp && !string.IsNullOrEmpty(txtStartOfApp.Text))
             {
                 DateTime appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
                 DateTime appEnd = appStart.AddMinutes(30);
@@ -108,11 +108,11 @@ namespace Hospital_IS.SecretaryView
                 DateTime appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
                 NewDocAppointment.AppointmentStart = appDate.Date.Add(appStart.TimeOfDay);
 
-                if (NewDocAppointment.Type == AppointmetType.CheckUp)
+                if (NewDocAppointment.Type == AppointmentType.CheckUp)
                 {
                     NewDocAppointment.AppointmentEnd = NewDocAppointment.AppointmentStart.AddMinutes(30);
                 }
-                else if (NewDocAppointment.Type == AppointmetType.Operation)
+                else if (NewDocAppointment.Type == AppointmentType.Operation)
                 {
                     DateTime appEnd = DateTime.ParseExact(txtEndOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
                     NewDocAppointment.AppointmentEnd = appDate.Date.Add(appEnd.TimeOfDay);
@@ -123,7 +123,7 @@ namespace Hospital_IS.SecretaryView
             {
             }
 
-            EnableAppointmentConfirmation(DoctorAppointmentController.Instance.VerifyAppointment(NewDocAppointment, null));
+            EnableAppointmentConfirmation(DoctorAppointmentController.Instance.VerifyAppointment(NewDocAppointment));
         }
 
         private void EnableAppointmentConfirmation(bool isValid)

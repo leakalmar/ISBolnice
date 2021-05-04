@@ -39,12 +39,12 @@ namespace Hospital_IS.SecretaryView
             // tip pregleda
             if (cbAppType.SelectedIndex == 0)
             {
-                DocAppointment.Type = AppointmetType.CheckUp;
+                DocAppointment.Type = AppointmentType.CheckUp;
                 DocAppointment.AppTypeText = "Pregled";
             }
             else if (cbAppType.SelectedIndex == 1)
             {
-                DocAppointment.Type = AppointmetType.Operation;
+                DocAppointment.Type = AppointmentType.Operation;
                 DocAppointment.AppTypeText = "Operacija";
             }
 
@@ -67,13 +67,13 @@ namespace Hospital_IS.SecretaryView
             if (cbAppType.SelectedIndex == 0)
             {
                 txtEndOfApp.IsEnabled = false;
-                Rooms = new ObservableCollection<Room>(RoomController.Instance.getRoomByType(RoomType.ConsultingRoom));
+                Rooms = new ObservableCollection<Room>(RoomController.Instance.GetRoomByType(RoomType.ConsultingRoom));
                 cbRoom.ItemsSource = Rooms;
             }
             else
             {
                 txtEndOfApp.IsEnabled = true;
-                Rooms = new ObservableCollection<Room>(RoomController.Instance.getRoomByType(RoomType.OperationRoom));
+                Rooms = new ObservableCollection<Room>(RoomController.Instance.GetRoomByType(RoomType.OperationRoom));
                 cbRoom.ItemsSource = Rooms;
             }
         }
@@ -127,7 +127,7 @@ namespace Hospital_IS.SecretaryView
             {
             }
 
-            EnableAppointmentConfirmation(DoctorAppointmentController.Instance.VerifyAppointment(DocAppointment, null));
+            EnableAppointmentConfirmation(DoctorAppointmentController.Instance.VerifyAppointment(DocAppointment));
         }
 
         private void EnableAppointmentConfirmation(bool isValid)

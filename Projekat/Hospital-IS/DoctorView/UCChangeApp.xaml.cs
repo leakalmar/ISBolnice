@@ -96,7 +96,7 @@ namespace Hospital_IS.DoctorView
         private void FindAppointments(Doctor doc, Room room, List<DateTime> dates)
         {
             TimeSpan duration = Appointment.AppointmentEnd - Appointment.AppointmentStart;
-            List<DoctorAppointment> list = DoctorAppointmentController.Instance.GetSuggestedAppointmentsByDoctor(dates, Appointment.IsUrgent, room, Appointment.Type, duration, Appointment.Patient, doc);
+            List<DoctorAppointment> list = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, Appointment.IsUrgent, room, Appointment.Type, duration, Appointment.Patient, doc);
             ObservableCollection<DoctorAppointment> possibleAppointments = new ObservableCollection<DoctorAppointment>(list);
             app.DataContext = possibleAppointments;
         }

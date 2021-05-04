@@ -23,7 +23,7 @@ namespace Storages
             return allCharts;
         }
 
-        public void SaveChart(List<MedicalHistory> allCharts)
+        public void SaveCharts(List<MedicalHistory> allCharts)
         {
             var file = JsonConvert.SerializeObject(allCharts, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
             using (StreamWriter writer = new StreamWriter(this.fileLocation))

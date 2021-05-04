@@ -2,6 +2,7 @@
 using Hospital_IS.DoctorView;
 using Hospital_IS.Storages;
 using Model;
+using Storages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,25 +34,11 @@ namespace Service
             UpdatePatientTrollMechanism();
         }
 
-        public void GetPatientChart(Patient patient)
-        {
-
-        }
-
-        public void AddPrescription(Patient patient,String datePrescribed, Medicine medicine)
-        {
-
-        }
-
-        public void RemovePrescription(Patient patient, string datePrescribed, Medicine medicine)
-        {
-
-        }
-
         public void AddPatient(Patient patient)
         {
+            ChartService.Instance.SaveChart(new MedicalHistory(patient.Id));
             AllPatients.Add(patient);
-
+            
             pfs.SavePatients(AllPatients);
         }
 
@@ -77,20 +64,21 @@ namespace Service
                 if (patient.Id.Equals(AllPatients[i].Id))
                 {
                     AllPatients.Remove(AllPatients[i]);
+                    ChartService.Instance.DeleteChart(patient.Id);
                 }
             }
 
             pfs.SavePatients(AllPatients);
         }
 
-        public bool CheckIfAllergicToComponent(List<MedicineComponent> composition, ObservableCollection<string> alergies)
+        public bool CheckIfAllergicToComponent(List<MedicineComponent> composition, List<String> allergies)
         {
             List<MedicineComponent> components = composition;
             foreach (MedicineComponent c in components)
             {
-                foreach (String allergie in alergies)
+                foreach (String allergie in allergies)
                 {
-                    Medicine med = MedicineService.Instance.FindMedicine(allergie);
+                    Medicine med = MedicineService.Instance.FindMedicineByName(allergie);
                     if (med != null)
                     {
                         List<MedicineComponent> allergieComponents = med.Composition;
@@ -109,9 +97,9 @@ namespace Service
             return false;
         }
 
-        public bool CheckIfAllergic(ObservableCollection<string> alergies, string name)
+        public bool CheckIfAllergicToMedicine(List<String> allergies, string name)
         {
-            foreach (String allergie in alergies)
+            foreach (String allergie in allergies)
             {
                 if (name.ToLower().Contains(allergie.ToLower()))
                 {

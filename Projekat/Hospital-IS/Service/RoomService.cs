@@ -10,7 +10,7 @@ namespace Service
     class RoomService
     {
         private RoomStorage rfs = new RoomStorage();
-        public List<Room> allRooms { get; set; }
+        public List<Room> AllRooms { get; set; }
 
         private static RoomService instance = null;
         public static RoomService Instance
@@ -27,7 +27,7 @@ namespace Service
 
         private RoomService()
         {
-            allRooms = rfs.GetAll();
+            AllRooms = rfs.GetAll();
            
         }
 
@@ -47,9 +47,9 @@ namespace Service
 
         }
 
-        public Room getRoomById(int roomId)
+        public Room GetRoomById(int roomId)
         {
-            foreach (Room r in allRooms)
+            foreach (Room r in AllRooms)
             {
                 if (r.RoomId == roomId)
                 {
@@ -62,47 +62,47 @@ namespace Service
         public void AddRoom(Room newRoom)
         {
          
-         allRooms.Add(newRoom);
+         AllRooms.Add(newRoom);
        
-         rfs.SaveRooms(allRooms);
+         rfs.SaveRooms(AllRooms);
         }
 
         public void RemoveRoom(Room room)
         {
-            foreach (Room r in allRooms)
+            foreach (Room r in AllRooms)
             {
                 if (r.RoomId == room.RoomId)
                 {
 
-                    allRooms.Remove(r);
+                    AllRooms.Remove(r);
 
                     break;
                 }
             }
 
-            rfs.SaveRooms(allRooms);
+            rfs.SaveRooms(AllRooms);
         }
 
         public void UpdateRoom(Room oldRoom)
         {
-            foreach (Room r in allRooms)
+            foreach (Room r in AllRooms)
             {
                 if (r.RoomId == oldRoom.RoomId)
                 {
-                    int index = allRooms.IndexOf(r);
-                    allRooms.Remove(r);
-                    allRooms.Insert(index, oldRoom);
+                    int index = AllRooms.IndexOf(r);
+                    AllRooms.Remove(r);
+                    AllRooms.Insert(index, oldRoom);
                     break;
                 }
             }
-            rfs.SaveRooms(allRooms);
+            rfs.SaveRooms(AllRooms);
         }
 
-        public List<Room> getRoomByType(RoomType type)
+        public List<Room> GetRoomByType(RoomType type)
         {
             List<Room> allRoomByType = new List<Room>();
 
-            foreach (Room room in allRooms)
+            foreach (Room room in AllRooms)
             {
                 if (room.Type == type)
                 {
@@ -112,33 +112,33 @@ namespace Service
             return allRoomByType;
         }
 
-        public List<Room> getAllRooms()
+        public List<Room> GetAllRooms()
         {
-            return allRooms;
+            return AllRooms;
         }
 
         public void SaveChange()
         {
-            rfs.SaveRooms(allRooms);
+            rfs.SaveRooms(AllRooms);
         }
 
         public void AddEquipment(Room room, Equipment newEquip)
         {
             room.AddEquipment(newEquip);
-            rfs.SaveRooms(allRooms);
+            rfs.SaveRooms(AllRooms);
         }
 
         public void RemoveEquipment(Room room, Equipment oldEquip)
         {
             room.RemoveEquipment(oldEquip);
-            rfs.SaveRooms(allRooms);
+            rfs.SaveRooms(AllRooms);
         }
 
       
         public void UpdateEquipment(Room room, Equipment updateEquip)
         {
             room.UpdateEquipment(updateEquip);
-            rfs.SaveRooms(allRooms);
+            rfs.SaveRooms(AllRooms);
         }
 
     }

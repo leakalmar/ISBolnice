@@ -48,5 +48,10 @@ namespace Controllers
         {
             MedicineService.Instance.AddNewMedicine(medicine);
         }
+
+        public Medicine FindMedicineByName(String name)
+        {
+            return MedicineService.Instance.FindMedicineByName(name);
+        }
     }
 }

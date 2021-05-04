@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -17,12 +18,12 @@ namespace Model
         public DateTime FileDate { get; set; }
         public String Employer { get; set; }
         public Boolean Admitted { get; set; }
-        public ObservableCollection<String> Alergies { get; set; }
+        public List<String> Alergies { get; set; }
         public AntiTroll TrollMechanism { get; set; } = new AntiTroll();
         
         public Boolean IsGuest { get; set; } = false;
 
-        public Patient(int id, string name, string surname, DateTime birthDate, string address, string email, string password, DateTime filedate, String employer, ObservableCollection<String> alergies) : base(id, name, surname, birthDate, address, email, password)
+        public Patient(int id, string name, string surname, DateTime birthDate, string address, string email, string password, DateTime filedate, String employer, List<String> alergies) : base(id, name, surname, birthDate, address, email, password)
         {
             this.FileDate = filedate;
             this.Employer = employer;

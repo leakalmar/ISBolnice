@@ -27,7 +27,7 @@ namespace Controllers
 
         }
 
-        public void AddAppointmentEvaluation(PatientAppointmentEvaluationDTO appointmentEvaluation)
+        public void AddAppointmentEvaluation(PatientAppointmentEvaluation appointmentEvaluation)
         {
             PatientAppointmentEvaluationService.Instance.AddAppointmentEvaluation(appointmentEvaluation);
         }

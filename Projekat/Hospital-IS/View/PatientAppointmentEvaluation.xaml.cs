@@ -20,11 +20,11 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class PatientAppointmentEvaluation : Window
     {
-        public PatientAppointmentEvaluationDTO AppointmentEvaluation { get; set; }
+        public global::DTOs.PatientAppointmentEvaluation AppointmentEvaluation { get; set; }
         public PatientAppointmentEvaluation(DoctorAppointment doctorAppointment)
         {
             InitializeComponent();
-            AppointmentEvaluation = new PatientAppointmentEvaluationDTO(doctorAppointment.AppointmentStart.Date, doctorAppointment.Patient.Id, doctorAppointment.Doctor.Id);
+            AppointmentEvaluation = new global::DTOs.PatientAppointmentEvaluation(doctorAppointment.AppointmentStart.Date, doctorAppointment.Patient.Id, doctorAppointment.Doctor.Id);
         }
 
         private void EvaluateAppointment(object sender, RoutedEventArgs e)

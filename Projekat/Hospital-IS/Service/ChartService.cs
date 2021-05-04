@@ -72,14 +72,14 @@ namespace Service
         {
             MedicalHistory medicalHistory = GetChartById(id);
             medicalHistory.Prescription.AddRange(prescriptions);
-            cfs.SaveChart(AllCharts);
+            cfs.SaveCharts(AllCharts);
         }
 
         public void AddReport(Report newReport, int id)
         {
             MedicalHistory medicalHistory = GetChartById(id);
             medicalHistory.Reports.Add(newReport);
-            cfs.SaveChart(AllCharts);
+            cfs.SaveCharts(AllCharts);
         }
 
         public void UpdateReport(int id, Report report)
@@ -91,7 +91,7 @@ namespace Service
                 {
                     medicalHistory.Reports.RemoveAt(i);
                     medicalHistory.Reports.Insert(i, report);
-                    cfs.SaveChart(AllCharts);
+                    cfs.SaveCharts(AllCharts);
                     return;
                 }
             }
@@ -101,6 +101,26 @@ namespace Service
         {
             MedicalHistory medicalHistory = GetChartById(id);
             return medicalHistory.Reports;
+        }
+
+        public void SaveChart(MedicalHistory medicalHistory)
+        {
+            AllCharts.Add(medicalHistory);
+            cfs.SaveCharts(AllCharts);
+        }
+
+        public void DeleteChart(int idChart)
+        {
+            foreach(MedicalHistory medicalHistory in AllCharts)
+            {
+                if (medicalHistory.Id.Equals(idChart))
+                {
+                    AllCharts.Remove(medicalHistory);
+                    cfs.SaveCharts(AllCharts);
+                    return;
+                }
+            }
+            return;
         }
     }
 }

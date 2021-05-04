@@ -23,73 +23,12 @@ namespace Storages
             return allAppointments;
         }
 
-        public List<DoctorAppointment> GetAllByPatient(int patient)
-        {
-            String text = File.ReadAllText(this.fileLocation);
-            List<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<List<DoctorAppointment>>(text);
-            List<DoctorAppointment> patientAppointments = new List<DoctorAppointment>();
-            foreach (DoctorAppointment docApp in allAppointments)
-            {
-                if (docApp.Patient.Id == patient)
-                {
-                    patientAppointments.Add(docApp);
-                }
-            }
-            return patientAppointments;
-
-        }
-
-        public List<DoctorAppointment> GetAllByDoctor(int doctor)
-        {
-            String text = File.ReadAllText(this.fileLocation);
-            List<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<List<DoctorAppointment>>(text);
-            List<DoctorAppointment> doctorAppointments = new List<DoctorAppointment>();
-            foreach (DoctorAppointment docApp in allAppointments)
-            {
-                if (docApp.Doctor.Id == doctor)
-                {
-                    doctorAppointments.Add(docApp);
-                }
-            }
-            return doctorAppointments;
-        }
-
         public void SaveAppointment(List<DoctorAppointment> allAppointments)
         {
             var file = JsonConvert.SerializeObject(allAppointments, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
             using (StreamWriter writer = new StreamWriter(this.fileLocation))
             {
                 writer.Write(file);
-            }
-        }
-
-        public List<DoctorAppointment> GetAllByRoom(int roomId)
-        {
-            String text = File.ReadAllText(this.fileLocation);
-            List<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<List<DoctorAppointment>>(text);
-            List<DoctorAppointment> roomAppointments = new List<DoctorAppointment>();
-            foreach (DoctorAppointment roomApp in allAppointments)
-            {
-                if (roomApp.Room == roomId)
-                {
-                    roomAppointments.Add(roomApp);
-                }
-            }
-            return roomAppointments;
-        }
-
-        public void UpdateAppointment(DoctorAppointment appointment)
-        {
-            List<DoctorAppointment> docApp = GetAll();
-            foreach(DoctorAppointment d in docApp)
-            {
-                if(d.AppointmentStart.Equals(appointment.AppointmentStart) & d.Doctor.Id.Equals(appointment.Doctor.Id) & d.Room.Equals(appointment.Room))
-                {
-                    docApp.Remove(d);
-                    docApp.Add(appointment);
-                    SaveAppointment(docApp);
-                    return;
-                }
             }
         }
     }

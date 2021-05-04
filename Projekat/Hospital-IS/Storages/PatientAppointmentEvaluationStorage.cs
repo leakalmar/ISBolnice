@@ -16,14 +16,14 @@ namespace Storages
             this.fileLocation = "../../../FileStorage/appointmentEvaluations.json";
         }
 
-        public List<PatientAppointmentEvaluationDTO> GetAll()
+        public List<PatientAppointmentEvaluation> GetAll()
         {
             String text = File.ReadAllText(this.fileLocation);
-            List<PatientAppointmentEvaluationDTO> allAppointmentEvaluations = JsonConvert.DeserializeObject<List<PatientAppointmentEvaluationDTO>>(text);
+            List<PatientAppointmentEvaluation> allAppointmentEvaluations = JsonConvert.DeserializeObject<List<PatientAppointmentEvaluation>>(text);
             return allAppointmentEvaluations;
         }
 
-        public void SaveAppointment(List<PatientAppointmentEvaluationDTO> allAppointmentEvaluations)
+        public void SaveAppointments(List<PatientAppointmentEvaluation> allAppointmentEvaluations)
         {
             var file = JsonConvert.SerializeObject(allAppointmentEvaluations, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
             using (StreamWriter writer = new StreamWriter(this.fileLocation))

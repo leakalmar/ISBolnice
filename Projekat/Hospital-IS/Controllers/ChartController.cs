@@ -32,19 +32,9 @@ namespace Controllers
             return ChartService.Instance.GetTherapiesByPatientId(patient.Id);
         }
 
-        public MedicalHistory GetChartByPatient(Patient patient)
-        {
-            return ChartService.Instance.GetChartById(patient.Id);
-        }
-
         public List<Report> GetReportsByPatient(Patient patient)
         {
             return ChartService.Instance.GetReportsByPatientId(patient.Id);
-        }
-
-        public List<Prescription> GetPrescriptionsByPatient(Patient patient)
-        {
-            return ChartService.Instance.GetPrescriptionsByPatientId(patient.Id);
         }
 
         public List<Prescription> GetPrescriptionsForReport(Patient patient, Report report)

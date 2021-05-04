@@ -13,10 +13,10 @@ namespace Model
 
         public String DoctorName { get; set; }
         public String DoctorSurname { get; set; }
-        public AppointmetType Type { get; set; }
+        public AppointmentType Type { get; set; }
         public String Cause { get; set; }
 
-        public Report(DateTime appointmentDate, String doctorName, String doctorSurname, AppointmetType type, String cause) {
+        public Report(DateTime appointmentDate, String doctorName, String doctorSurname, AppointmentType type, String cause) {
             this.HaveRecipe = false;
             this.HaveTest = false;
             this.ReportId = appointmentDate;

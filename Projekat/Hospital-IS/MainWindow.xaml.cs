@@ -33,7 +33,7 @@ namespace Hospital_IS
         {
             InitializeComponent();
             Doctors = DoctorController.Instance.GetAll();
-            Rooms = RoomController.Instance.getAllRooms();
+            Rooms = RoomController.Instance.GetAllRooms();
             Specialties = SpecializationController.Instance.GetAll();
             UserService.Instance.GetAllUsersIDs();
         }
@@ -47,7 +47,6 @@ namespace Hospital_IS
         private void Login(object sender, RoutedEventArgs e)
         {
             List<Patient> patients = PatientController.Instance.GetAll();
-            Hospital.Instance.allAppointments=DoctorAppointmentService.Instance.allAppointments;
 
             foreach (Patient p in patients)
             {

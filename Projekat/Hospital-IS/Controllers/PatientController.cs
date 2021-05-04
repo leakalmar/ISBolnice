@@ -32,21 +32,6 @@ namespace Controllers
             return PatientService.Instance.AllPatients;
         }
 
-        public void GetPatientChart(Patient patient)
-        {
-
-        }
-
-        public void AddPrescription(Patient patient, String datePrescribed, Medicine medicine)
-        {
-
-        }
-
-        public void RemovePrescription(Patient patient, string datePrescribed, Medicine medicine)
-        {
-
-        }
-
         public void AddPatient(Patient patient)
         {
             PatientService.Instance.AddPatient(patient);
@@ -75,9 +60,9 @@ namespace Controllers
             PatientService.Instance.ReloadPatients();
         }
 
-        public bool CheckIfAllergic(Patient patient, Medicine medicine)
+        public bool CheckIfAllergicToMedicine(Patient patient, Medicine medicine)
         {
-            return PatientService.Instance.CheckIfAllergic(patient.Alergies, medicine.Name);
+            return PatientService.Instance.CheckIfAllergicToMedicine(patient.Alergies, medicine.Name);
         }
 
         public bool CheckIfAllergicToComponent(Patient patient,Medicine medicine)

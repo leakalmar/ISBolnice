@@ -47,6 +47,19 @@ namespace Service
             return doctorAppointments;
         }
 
+        public List<DoctorAppointment> GetAllByPatient(int patientId)
+        {
+            List<DoctorAppointment> patientAppointments = new List<DoctorAppointment>();
+            foreach (DoctorAppointment docApp in allAppointments)
+            {
+                if (docApp.Patient.Id == patientId)
+                {
+                    patientAppointments.Add(docApp);
+                }
+            }
+            return patientAppointments;
+        }
+
         public void AddAppointment(DoctorAppointment doctorAppointment)
         {
             if (doctorAppointment == null)
@@ -103,7 +116,7 @@ namespace Service
             }
         }
 
-        private List<DoctorAppointment> GenerateAppointmentForDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
+        private List<DoctorAppointment> GenerateAppointmentsForDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
         {
             List<DoctorAppointment> appointmentList = new List<DoctorAppointment>();
             DateTime lastTimeCreated = DateTime.Now;
@@ -139,9 +152,9 @@ namespace Service
                 DoctorAppointment newAppointment;
                 while (lastTimeCreated.TimeOfDay < new DateTime(DateTime.Now.Date.Year, DateTime.Now.Date.Month, DateTime.Now.Date.Day, 23, 00, 00).TimeOfDay)
                 {
-                    if (tempAppointment.Type == AppointmetType.CheckUp)
+                    if (tempAppointment.Type == AppointmentType.CheckUp)
                     {
-                        newAppointment = new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, lastTimeCreated.Hour, lastTimeCreated.Minute, 0), AppointmetType.CheckUp, false, tempAppointment.Room, tempAppointment.Doctor, tempAppointment.Patient);
+                        newAppointment = new DoctorAppointment(new DateTime(d.Year, d.Month, d.Day, lastTimeCreated.Hour, lastTimeCreated.Minute, 0), AppointmentType.CheckUp, false, tempAppointment.Room, tempAppointment.Doctor, tempAppointment.Patient);
                         newAppointment.IsUrgent = tempAppointment.IsUrgent;
                         appointmentList.Add(newAppointment);
                         lastTimeCreated = lastTimeCreated.AddMinutes(15);
@@ -152,7 +165,7 @@ namespace Service
                         if (duration != 0)
                         {
                             DateTime startTime = new DateTime(d.Year, d.Month, d.Day, lastTimeCreated.Hour, lastTimeCreated.Minute, 0);
-                            newAppointment = new DoctorAppointment(startTime, AppointmetType.Operation, false, tempAppointment.Room, tempAppointment.Doctor, tempAppointment.Patient);
+                            newAppointment = new DoctorAppointment(startTime, AppointmentType.Operation, false, tempAppointment.Room, tempAppointment.Doctor, tempAppointment.Patient);
                             newAppointment.AppointmentEnd = startTime.AddMinutes(duration);
                             newAppointment.IsUrgent = tempAppointment.IsUrgent;
                             appointmentList.Add(newAppointment);
@@ -206,17 +219,17 @@ namespace Service
             }
             */
             List<DoctorAppointment> allPossibleAppointments = new List<DoctorAppointment>();
-            DoctorAppointment app1 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
+            DoctorAppointment app1 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 0, 0), AppointmentType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
             allPossibleAppointments.Add(app1);
-            DoctorAppointment app2 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
+            DoctorAppointment app2 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 30, 0), AppointmentType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
             allPossibleAppointments.Add(app2);
-            DoctorAppointment app3 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
+            DoctorAppointment app3 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 0, 0), AppointmentType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
             allPossibleAppointments.Add(app3);
-            DoctorAppointment app4 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
+            DoctorAppointment app4 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 30, 0), AppointmentType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
             allPossibleAppointments.Add(app4);
-            DoctorAppointment app5 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 0, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
+            DoctorAppointment app5 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 0, 0), AppointmentType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
             allPossibleAppointments.Add(app5);
-            DoctorAppointment app6 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 30, 0), AppointmetType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
+            DoctorAppointment app6 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 30, 0), AppointmentType.CheckUp, false, doctor.PrimaryRoom, doctor, patient);
             allPossibleAppointments.Add(app6);
 
             if (priority == true)
@@ -225,17 +238,17 @@ namespace Service
                 {
                     if (!doc.Id.Equals(doctor.Id))
                     {
-                        DoctorAppointment appTime1 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 0, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, patient);
+                        DoctorAppointment appTime1 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 0, 0), AppointmentType.CheckUp, false, doc.PrimaryRoom, doc, patient);
                         allPossibleAppointments.Add(appTime1);
-                        DoctorAppointment appTime2 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 30, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, patient);
+                        DoctorAppointment appTime2 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart, 30, 0), AppointmentType.CheckUp, false, doc.PrimaryRoom, doc, patient);
                         allPossibleAppointments.Add(appTime2);
-                        DoctorAppointment appTime3 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 0, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, patient);
+                        DoctorAppointment appTime3 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 0, 0), AppointmentType.CheckUp, false, doc.PrimaryRoom, doc, patient);
                         allPossibleAppointments.Add(appTime3);
-                        DoctorAppointment appTime4 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 30, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, patient);
+                        DoctorAppointment appTime4 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 1, 30, 0), AppointmentType.CheckUp, false, doc.PrimaryRoom, doc, patient);
                         allPossibleAppointments.Add(appTime4);
-                        DoctorAppointment appTime5 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 0, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, patient);
+                        DoctorAppointment appTime5 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 0, 0), AppointmentType.CheckUp, false, doc.PrimaryRoom, doc, patient);
                         allPossibleAppointments.Add(appTime5);
-                        DoctorAppointment appTime6 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 30, 0), AppointmetType.CheckUp, false, doc.PrimaryRoom, doc, patient);
+                        DoctorAppointment appTime6 = new DoctorAppointment(new DateTime(date.Year, date.Month, date.Day, slotStart + 2, 30, 0), AppointmentType.CheckUp, false, doc.PrimaryRoom, doc, patient);
                         allPossibleAppointments.Add(appTime6);
                     }
                 }
@@ -243,10 +256,10 @@ namespace Service
             return allPossibleAppointments;
         }
 
-        public bool VerifyAppointment(DoctorAppointment doctorAppointment, List<Appointment> roomAppointments)  //ukloniti drugi parametar (i u kontroleru)
+        public bool VerifyAppointment(DoctorAppointment doctorAppointment)
         {
             List<Appointment> docAppsByRoom = new List<Appointment>(GetAllByRoom(doctorAppointment.Room));
-            List<Appointment> classicAppsByRoom = AppointmentService.Instance.getAppByRoom(doctorAppointment.Room);
+            List<Appointment> classicAppsByRoom = AppointmentService.Instance.GetAppByRoom(doctorAppointment.Room);
             List<Appointment> appsByDoctor = new List<Appointment>(GetAllByDoctor(doctorAppointment.Doctor.Id));
 
             if (!AppointmentService.Instance.CheckAppointment(docAppsByRoom, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd))
@@ -257,24 +270,12 @@ namespace Service
                 return false;
 
             return true;
-            /*bool isFree = true;
-            foreach (DoctorAppointment hospital in allAppointments)
-            {
-                if (doctorAppointment.AppointmentStart == hospital.AppointmentStart && doctorAppointment.Doctor.Id.Equals(hospital.Doctor.Id))
-                {
-                    isFree = false;
-                    return isFree;
-                }
-            }
-
-            isFree = AppointmentService.Instance.CheckAppointment(roomAppointments, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd);
-            return isFree;*/
         }
 
         private bool VerifyAppointmentByPatient(DoctorAppointment doctorAppointment, int idPatient)
         {
             bool isFree = true;
-            foreach (DoctorAppointment patientAppointment in GetAllAppointmentsByPatient(idPatient))
+            foreach (DoctorAppointment patientAppointment in GetAllByPatient(idPatient))
             {
                 if (doctorAppointment.AppointmentStart == patientAppointment.AppointmentStart)
                 {
@@ -289,10 +290,9 @@ namespace Service
         {
             List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
             List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForPatient(timeSlot, doctor, patient, date, priority);
-            List<Appointment> roomAppointments = AppointmentService.Instance.getAppByRoom(doctor.PrimaryRoom);
             foreach (DoctorAppointment doctorAppointment in allPossibleAppointments)
             {
-                bool isFree = VerifyAppointment(doctorAppointment, roomAppointments);
+                bool isFree = VerifyAppointment(doctorAppointment);
                 if (isFree)
                 {
                     availableAppointments.Add(doctorAppointment);
@@ -314,11 +314,10 @@ namespace Service
         private List<DoctorAppointment> GetAvailableAppointmentsByDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
         {
             List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
-            List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForDoctor(dates, tempAppointment);
-            List<Appointment> roomAppointments = AppointmentService.Instance.getAppByRoom(tempAppointment.Room);
+            List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentsForDoctor(dates, tempAppointment);
             foreach (DoctorAppointment doctorAppointment in allPossibleAppointments)
             {
-                bool isFree = VerifyAppointment(doctorAppointment, roomAppointments);
+                bool isFree = VerifyAppointment(doctorAppointment);
                 if (isFree)
                 {
                     isFree = VerifyAppointmentByPatient(doctorAppointment, tempAppointment.Patient.Id);
@@ -334,7 +333,7 @@ namespace Service
         public List<DoctorAppointment> GetFutureAppointmentsByPatient(int patientId)
         {
             List<DoctorAppointment> futurePatientAppointments = new List<DoctorAppointment>();
-            List<DoctorAppointment> allPatientAppointmets = GetAllAppointmentsByPatient(patientId);
+            List<DoctorAppointment> allPatientAppointmets = GetAllByPatient(patientId);
             foreach (DoctorAppointment doctorAppointment in allPatientAppointmets)
             {
                 if (doctorAppointment.AppointmentStart.Date >= DateTime.Today)
@@ -345,18 +344,6 @@ namespace Service
             return futurePatientAppointments;
         }
 
-        public List<DoctorAppointment> GetAllAppointmentsByPatient(int patientId)
-        {
-            List<DoctorAppointment> patientAppointments = new List<DoctorAppointment>();
-            foreach (DoctorAppointment docApp in allAppointments)
-            {
-                if (docApp.Patient.Id == patientId)
-                {
-                    patientAppointments.Add(docApp);
-                }
-            }
-            return patientAppointments;
-        }
 
         public List<SuggestedEmergencyAppDTO> GenerateEmergencyAppointmentsForDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
         {
@@ -367,7 +354,7 @@ namespace Service
             foreach (Doctor doc in doctors)
             {
                 tempAppointment.Doctor = doc;
-                List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForDoctor(dates, tempAppointment);
+                List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentsForDoctor(dates, tempAppointment);
                 appointments.AddRange(allPossibleAppointments);
             }
 
@@ -428,12 +415,12 @@ namespace Service
         }
 
 
-        private DateTime RoundUp(DateTime dt, TimeSpan ts)
+        private DateTime RoundUp(DateTime date, TimeSpan time)
         {
-            return new DateTime((dt.Ticks + ts.Ticks - 1) / ts.Ticks * ts.Ticks, dt.Kind);
+            return new DateTime((date.Ticks + time.Ticks - 1) / time.Ticks * time.Ticks, date.Kind);
         }
 
-        public List<DoctorAppointment> FindConflictingAppointments(DoctorAppointment appointment)
+        private List<DoctorAppointment> FindConflictingAppointments(DoctorAppointment appointment)
         {
             List<DoctorAppointment> conflictingAppointments = new List<DoctorAppointment>();
             foreach (DoctorAppointment app in allAppointments)
@@ -456,14 +443,14 @@ namespace Service
             }
             return false;
         }
-        public bool AreAppointmentsOverlaping(DoctorAppointment newAppointment, DoctorAppointment appointment)
+        private bool AreAppointmentsOverlaping(DoctorAppointment newAppointment, DoctorAppointment appointment)
         {
             return (newAppointment.AppointmentStart >= appointment.AppointmentStart && newAppointment.AppointmentStart < appointment.AppointmentEnd)
                 || (newAppointment.AppointmentEnd > appointment.AppointmentStart && newAppointment.AppointmentEnd <= appointment.AppointmentEnd)
                 || (newAppointment.AppointmentStart <= appointment.AppointmentStart && newAppointment.AppointmentEnd >= appointment.AppointmentEnd);
         }
 
-        public List<RescheduledAppointmentDTO> FindNextFreeAppointments(List<DoctorAppointment> oldAppointments, double emergencyAppDuration)
+        private List<RescheduledAppointmentDTO> FindNextFreeAppointments(List<DoctorAppointment> oldAppointments, double emergencyAppDuration)
         {
             DateTime appointmentStart = DateTime.Now.AddMinutes(emergencyAppDuration);
             appointmentStart = RoundUp(appointmentStart, TimeSpan.FromMinutes(30));
@@ -477,10 +464,10 @@ namespace Service
                 {
                     TimeSpan appointmentDuration = oldAppointments[i].AppointmentEnd - oldAppointments[i].AppointmentStart;
                     RescheduledAppointmentDTO appointment = new RescheduledAppointmentDTO(oldAppointments[i]);
-                    appointment.DocAppointment.AppointmentStart = appointmentStart;
-                    appointment.DocAppointment.AppointmentEnd = appointmentStart.Add(appointmentDuration);
-                    if (appointment.DocAppointment.AppointmentStart.TimeOfDay >= new TimeSpan(8, 0, 0) && appointment.DocAppointment.AppointmentEnd.TimeOfDay < new TimeSpan(23, 0, 0)
-                            && VerifyAppointment(appointment.DocAppointment, null))
+                    appointment.NewDocAppointment.AppointmentStart = appointmentStart;
+                    appointment.NewDocAppointment.AppointmentEnd = appointmentStart.Add(appointmentDuration);
+                    if (appointment.NewDocAppointment.AppointmentStart.TimeOfDay >= new TimeSpan(8, 0, 0) && appointment.NewDocAppointment.AppointmentEnd.TimeOfDay < new TimeSpan(23, 0, 0)
+                            && VerifyAppointment(appointment.NewDocAppointment))
                     {
                         newAppointments.Add(appointment);
                         oldAppointments.Remove(oldAppointments[i]);
@@ -498,7 +485,7 @@ namespace Service
 
         }
 
-        public List<SuggestedEmergencyAppDTO> CheckIfConflictingIsUrgent(List<SuggestedEmergencyAppDTO> suggestedEmergencyApps)
+        private List<SuggestedEmergencyAppDTO> CheckIfConflictingIsUrgent(List<SuggestedEmergencyAppDTO> suggestedEmergencyApps)
         {
             List<SuggestedEmergencyAppDTO> validSuggestedApp = new List<SuggestedEmergencyAppDTO>();
             foreach (SuggestedEmergencyAppDTO suggested in suggestedEmergencyApps)
@@ -512,7 +499,7 @@ namespace Service
             return validSuggestedApp;
         }
 
-        public void SetConflictingIsUrgent(List<SuggestedEmergencyAppDTO> suggestedEmergencyApps)
+        private void SetConflictingIsUrgent(List<SuggestedEmergencyAppDTO> suggestedEmergencyApps)
         {
             foreach(SuggestedEmergencyAppDTO suggested in suggestedEmergencyApps)
             {
@@ -520,7 +507,7 @@ namespace Service
             }
         }
 
-        public void CheckIfConflictingIsStarted(List<SuggestedEmergencyAppDTO> suggestedEmergencyApps)
+        private void CheckIfConflictingIsStarted(List<SuggestedEmergencyAppDTO> suggestedEmergencyApps)
         { 
             for (int i = 0; i < suggestedEmergencyApps.Count; i++)
             {
@@ -532,21 +519,6 @@ namespace Service
                     }
                 }
             }
-        }
-
-        public List<DoctorAppointment> GetAllAppointmentsByRoomId(int roomId)
-        {
-            List<DoctorAppointment> roomAppointments = new List<DoctorAppointment>();
-
-            foreach (DoctorAppointment docApp in allAppointments)
-            {
-                if (docApp.Room == roomId)
-                {
-                    roomAppointments.Add(docApp);
-                }
-            }
-            return roomAppointments;
-
         }
 
         public void ReloadDoctorAppointments()

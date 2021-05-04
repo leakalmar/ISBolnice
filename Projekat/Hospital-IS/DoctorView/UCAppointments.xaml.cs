@@ -22,7 +22,7 @@ namespace Hospital_IS.DoctorView
         {
             InitializeComponent();
             rooms.DataContext = MainWindow.Rooms;
-            string[] list = Enum.GetNames(typeof(AppointmetType));
+            string[] list = Enum.GetNames(typeof(AppointmentType));
             string[] docApp = new string[2];
             docApp[0] = list[0];
             docApp[1] = list[1];

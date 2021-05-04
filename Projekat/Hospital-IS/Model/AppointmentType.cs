@@ -1,6 +1,6 @@
 namespace Model
 {
-    public enum AppointmetType
+    public enum AppointmentType
     {
         Operation,
         CheckUp,

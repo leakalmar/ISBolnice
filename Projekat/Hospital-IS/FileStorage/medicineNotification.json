@@ -3,32 +3,6 @@
     "SenderId": [
       6
     ],
-    "Title": "RE:Odobrenje Flonidan 100mg",
-    "Medicine": {
-      "Name": "Flonidan 100mg",
-      "Composition": [
-        {
-          "Component": "sve najbolje"
-        }
-      ],
-      "SideEffects": "okej",
-      "Usage": "okej",
-      "ReplaceMedicine": [
-        {
-          "Name": "svi alergijski"
-        }
-      ]
-    },
-    "RecieverIds": [
-      4
-    ],
-    "Note": null,
-    "DateSent": "2021-05-04T10:59:05.3001104+02:00"
-  },
-  {
-    "SenderId": [
-      6
-    ],
     "Title": "RE:Odobrenje Brufen 2000mg",
     "Medicine": {
       "Name": "Brufen 2000mg",

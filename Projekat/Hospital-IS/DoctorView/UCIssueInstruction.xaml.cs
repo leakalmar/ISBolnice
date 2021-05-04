@@ -136,8 +136,8 @@ namespace Hospital_IS.DoctorView
             {
                 foreach (RescheduledAppointmentDTO rescheduled in SelectedEmergencyAppointment.RescheduledAppointments)
                 {
-                    SendNotification(rescheduled.OldDocAppointment,rescheduled.DocAppointment);
-                    DoctorAppointmentController.Instance.UpdateAppointment(rescheduled.OldDocAppointment, rescheduled.DocAppointment);
+                    SendNotification(rescheduled.OldDocAppointment,rescheduled.NewDocAppointment);
+                    DoctorAppointmentController.Instance.UpdateAppointment(rescheduled.OldDocAppointment, rescheduled.NewDocAppointment);
                 }
                 DoctorAppointmentController.Instance.AddAppointment(SelectedEmergencyAppointment.SuggestedAppointment);
 

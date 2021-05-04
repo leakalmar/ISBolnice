@@ -26,41 +26,22 @@ namespace Controllers
 
         }
 
-        public List<Appointment> getAllAppByTwoRooms(int roomIdSource, int roomIdDestination)
+        public List<Appointment> GetAllAppByTwoRooms(int roomIdSource, int roomIdDestination)
         {
-            return AppointmentService.Instance.getAllAppByTwoRooms(roomIdSource, roomIdDestination);
-        }
-
-
-        public List<Appointment> GetAppointments(int roomID)
-        {
-            return AppointmentService.Instance.GetAllApointmentsByRoomId(roomID);
-        }
-
-    
-
-        public bool CheckAppointment(List<Appointment> appointments, DateTime start, DateTime end)
-        {
-            return AppointmentService.Instance.CheckAppointment(appointments, start, end);
-        }
-
+            return AppointmentService.Instance.GetAllAppByTwoRooms(roomIdSource, roomIdDestination);
+        }    
 
         public bool MakeRenovationAppointment(DateTime start, DateTime end, String description,int roomId)
         {
-            Appointment renovationAppointment = new Appointment(start, end, AppointmetType.Renovation, roomId);
+            Appointment renovationAppointment = new Appointment(start, end, AppointmentType.Renovation, roomId);
             renovationAppointment.AppointmentCause = description;
            return AppointmentService.Instance.MakeRenovationAppointment(renovationAppointment);
 
         }
 
-        public bool IsBetweenDates(DateTime end, DateTime start, Appointment appointment)
+        public List<Appointment> GetAppByRoomId(int roomId)
         {
-            throw new NotImplementedException();
-        }
-
-        public List<Appointment> getAppByRoomId(int RoomId)
-        {
-            return AppointmentService.Instance.getAppByRoom(RoomId);
+            return AppointmentService.Instance.GetAppByRoom(roomId);
         }
 
         public void AddAppointment(Appointment appointment)

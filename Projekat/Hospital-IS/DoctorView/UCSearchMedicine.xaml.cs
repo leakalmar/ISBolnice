@@ -42,6 +42,7 @@ namespace Hospital_IS.DoctorView
             }
             foreach (Medicine med in MedicineController.Instance.GetAll())
             {
+                //odvojiti
                 bool found = false;
                 foreach (Prescription p in PatientChart.ReportView.Prescriptions)
                 {
@@ -52,7 +53,7 @@ namespace Hospital_IS.DoctorView
                 }
                 if (!found)
                 {
-                    bool allergic = PatientController.Instance.CheckIfAllergic(Patient, med);
+                    bool allergic = PatientController.Instance.CheckIfAllergicToMedicine(Patient, med);
                     medicineObjects.Add(new MedicineObject(med, false, allergic));
                 }
             }

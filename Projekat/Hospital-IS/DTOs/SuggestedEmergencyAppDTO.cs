@@ -24,7 +24,7 @@ namespace Model
             if (ConflictingAppointments.Count > 0)
                 for (int i = 0; i < ConflictingAppointments.Count; i++)
                 {
-                    TimeSpan period = RescheduledAppointments[i].DocAppointment.AppointmentStart - ConflictingAppointments[i].AppointmentStart;
+                    TimeSpan period = RescheduledAppointments[i].NewDocAppointment.AppointmentStart - ConflictingAppointments[i].AppointmentStart;
                     int days = (int)period.TotalHours;
                     TotalReshedulePeriodInHours += days;
                 }
