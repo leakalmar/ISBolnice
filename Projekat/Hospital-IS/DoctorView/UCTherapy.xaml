@@ -37,7 +37,8 @@
                                         CanUserResize="False" Width="0.05*"/>
                 <DataGridTextColumn Header="Lek" Binding="{Binding Type}" 
                                         CanUserResize="False" Width="0.05*"/>
-                <DataGridTextColumn Header="Broj tableta" Binding="{Binding Cause}" CanUserResize="False" 
+                <DataGridTextColumn Header="Broj tableta"
+                        Binding="{Binding AppointmentCause}" CanUserResize="False" 
                                         Width="0.05*"/>
                 <DataGridTextColumn Header="Broj uzimanja" Binding="{Binding Doctor.Surname}" CanUserResize="False" 
                                         Width="0.05*"/>

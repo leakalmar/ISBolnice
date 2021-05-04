@@ -14,7 +14,6 @@ namespace Model
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-        public int ChartId { get; set; }
         public DateTime FileDate { get; set; }
         public String Employer { get; set; }
         public Boolean Admitted { get; set; }
@@ -33,9 +32,6 @@ namespace Model
         public Patient()
         {
         }
-
-        public MedicalHistory MedicalHistory { get; set; } = new MedicalHistory();
-
 
         public Doctor doctor { get; set; }
 

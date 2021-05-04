@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace DoctorView
+namespace Hospital_IS.DoctorView
 {
     public class MedicineComponent
     {

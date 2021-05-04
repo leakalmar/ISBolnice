@@ -78,6 +78,9 @@
                         <DataGridTextColumn Header="Vreme"
                                 Binding="{Binding AppointmentStart.TimeOfDay}"
                                 CanUserResize="False" Width="0.05*" />
+                        <DataGridTextColumn Header="Pacijent"
+                                Binding="{Binding Patient.Name}"
+                                CanUserResize="False" Width="0.05*" />
                     </DataGrid.Columns>
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">

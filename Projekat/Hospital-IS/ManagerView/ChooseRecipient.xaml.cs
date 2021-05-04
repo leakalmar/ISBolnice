@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using DoctorView;
+using Hospital_IS.DoctorView;
 using Model;
 using System;
 using System.Collections.Generic;

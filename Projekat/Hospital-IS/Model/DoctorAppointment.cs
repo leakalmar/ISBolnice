@@ -7,6 +7,7 @@ namespace Model
     {
         public String NameSurnamePatient { get; set; }
         public String AppTypeText { get; set; }
+        public bool IsUrgent { get; set; } = false;
 
 
         [JsonConstructor]
@@ -51,7 +52,7 @@ namespace Model
 
         public Doctor Doctor { get; set; }
 
-        public Model.Report Report { get; set; }
+        public bool IsFinished { get; set; }
 
     }
 }

@@ -37,7 +37,8 @@
                                         CanUserResize="False" Width="0.05*"/>
                 <DataGridTextColumn Header="Test" Binding="{Binding Type}" 
                                         CanUserResize="False" Width="0.05*"/>
-                <DataGridTextColumn Header="Broj Rezultat" Binding="{Binding Cause}" CanUserResize="False" 
+                <DataGridTextColumn Header="Broj Rezultat"
+                        Binding="{Binding AppointmentCause}" CanUserResize="False" 
                                         Width="0.05*"/>
             </DataGrid.Columns>
         </DataGrid>
