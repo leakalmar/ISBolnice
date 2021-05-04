@@ -76,7 +76,7 @@ namespace Service
             {
                 foreach (DoctorAppointment doctorApp in allAppointments)
                 {
-                    if (doctorAppointment.AppointmentStart.Equals(doctorApp.AppointmentStart))
+                    if (doctorAppointment.AppointmentStart.Equals(doctorApp.AppointmentStart) && doctorAppointment.Doctor.Id.Equals(doctorApp.Doctor.Id))
                     {
                         allAppointments.Remove(doctorApp);
                         afs.SaveAppointment(allAppointments);
@@ -150,7 +150,7 @@ namespace Service
             return appointmentList;
         }
 
-        private List<DoctorAppointment> GenerateAppointmentForPatient(String timeSlot, Doctor doctor,Patient patient, DateTime date, Boolean priority)
+        private List<DoctorAppointment> GenerateAppointmentForPatient(String timeSlot, Doctor doctor, Patient patient, DateTime date, Boolean priority)
         {
             int slotStart = 8;
             if (timeSlot.Equals("8:00-11:00"))
@@ -208,9 +208,21 @@ namespace Service
             return allPossibleAppointments;
         }
 
-        private bool VerifyAppointment(DoctorAppointment doctorAppointment, List<Appointment> roomAppointments)
+        public bool VerifyAppointment(DoctorAppointment doctorAppointment, List<Appointment> roomAppointments)  //ukloniti drugi parametar (i u kontroleru)
         {
-            bool isFree = true;
+            List<Appointment> docAppsByRoom = new List<Appointment>(GetAllByRoom(doctorAppointment.Room));
+            List<Appointment> classicAppsByRoom = AppointmentService.Instance.getAppByRoom(doctorAppointment.Room);
+            List<Appointment> appsByDoctor = new List<Appointment>(GetAllByDoctor(doctorAppointment.Doctor.Id));
+
+            if (!AppointmentService.Instance.CheckAppointment(docAppsByRoom, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd))
+                return false;
+            if (!AppointmentService.Instance.CheckAppointment(classicAppsByRoom, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd))
+                return false;
+            if (!AppointmentService.Instance.CheckAppointment(appsByDoctor, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd))
+                return false;
+
+            return true;
+            /*bool isFree = true;
             foreach (DoctorAppointment hospital in allAppointments)
             {
                 if (doctorAppointment.AppointmentStart == hospital.AppointmentStart && doctorAppointment.Doctor.Id.Equals(hospital.Doctor.Id))
@@ -221,10 +233,10 @@ namespace Service
             }
 
             isFree = AppointmentService.Instance.CheckAppointment(roomAppointments, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd);
-            return isFree;
+            return isFree;*/
         }
 
-        private bool VerifyAppointmentByPatient(DoctorAppointment doctorAppointment,int idPatient)
+        private bool VerifyAppointmentByPatient(DoctorAppointment doctorAppointment, int idPatient)
         {
             bool isFree = true;
             foreach (DoctorAppointment patientAppointment in GetAllAppointmentsByPatient(idPatient))
@@ -238,7 +250,7 @@ namespace Service
             return isFree;
         }
 
-        public List<DoctorAppointment> SuggestAppointmentsToPatient(String timeSlot, Doctor doctor,Patient patient, DateTime date, Boolean priority)
+        public List<DoctorAppointment> SuggestAppointmentsToPatient(String timeSlot, Doctor doctor, Patient patient, DateTime date, Boolean priority)
         {
             List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
             List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForPatient(timeSlot, doctor, patient, date, priority);
@@ -256,18 +268,17 @@ namespace Service
 
         public List<DoctorAppointment> SuggestAppointmetsToDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
         {
-            List<DoctorAppointment> allAppointments = new List<DoctorAppointment>();
-            List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForDoctor(dates, tempAppointment);
-            List<Appointment> roomAppointments = AppointmentService.Instance.getAppByRoom(tempAppointment.Room);
-
-            GetAvailableAppointmentsByDoctor(tempAppointment, allAppointments, allPossibleAppointments, roomAppointments);
+            List<DoctorAppointment> allAppointments = GetAvailableAppointmentsByDoctor(tempAppointment);
             allAppointments.AddRange(GetAllByDoctorAndDates(tempAppointment.Doctor.Id, dates));
 
             return allAppointments;
         }
 
-        private void GetAvailableAppointmentsByDoctor(DoctorAppointment tempAppointment, List<DoctorAppointment> availableAppointments, List<DoctorAppointment> allPossibleAppointments, List<Appointment> roomAppointments)
+        private void GetAvailableAppointmentsByDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
         {
+            List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
+            List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForDoctor(dates, tempAppointment);
+            List<Appointment> roomAppointments = AppointmentService.Instance.getAppByRoom(tempAppointment.Room);
             foreach (DoctorAppointment doctorAppointment in allPossibleAppointments)
             {
                 bool isFree = VerifyAppointment(doctorAppointment, roomAppointments);
@@ -286,7 +297,7 @@ namespace Service
         {
             List<DoctorAppointment> futurePatientAppointments = new List<DoctorAppointment>();
             List<DoctorAppointment> allPatientAppointmets = GetAllAppointmentsByPatient(patientId);
-            foreach(DoctorAppointment doctorAppointment in allPatientAppointmets)
+            foreach (DoctorAppointment doctorAppointment in allPatientAppointmets)
             {
                 if (doctorAppointment.AppointmentStart.Date >= DateTime.Today)
                 {
@@ -307,6 +318,38 @@ namespace Service
                 }
             }
             return patientAppointments;
+        }
+
+        public List<DoctorAppointment> GetAllAppointmentsByRoomId(int roomId)
+        {
+            List<DoctorAppointment> roomAppointments = new List<DoctorAppointment>();
+
+            foreach (DoctorAppointment docApp in allAppointments)
+            {
+                if (docApp.Room == roomId)
+                {
+                    roomAppointments.Add(docApp);
+                }
+            }
+            return roomAppointments;
+        }
+
+        public void ReloadDoctorAppointments()
+        {
+            allAppointments = afs.GetAll();
+        }
+
+        public List<DoctorAppointment> GetAllByRoom(int roomId)
+        {
+            List<DoctorAppointment> roomAppointments = new List<DoctorAppointment>();
+            foreach (DoctorAppointment roomApp in allAppointments)
+            {
+                if (roomApp.Room == roomId)
+                {
+                    roomAppointments.Add(roomApp);
+                }
+            }
+            return roomAppointments;
         }
 
         public List<DoctorAppointment> GetAllByDoctorAndDates(int idDoctor, List<DateTime> dates)

@@ -41,5 +41,24 @@ namespace Service
                 }
             }
         }
+
+        public void UpdateMedicineWithName(string oldName, Medicine medicine)
+        {
+            for (int i = 0; i < AllMedicines.Count; i++)
+            {
+                if (AllMedicines[i].Name.Equals(oldName))
+                {
+                    AllMedicines.Remove(AllMedicines[i]);
+                    AllMedicines.Insert(i, medicine);
+                    mfs.Save(AllMedicines);
+                }
+            }
+        }
+
+        public void AddNewMedicine(Medicine medicine)
+        {
+            AllMedicines.Add(medicine);
+            mfs.Save(AllMedicines);
+        }
     }
 }
