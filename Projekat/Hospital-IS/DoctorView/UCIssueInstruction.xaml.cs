@@ -128,7 +128,7 @@ namespace Hospital_IS.DoctorView
             if (SelectedAppointment != null)
             {
                 SelectedAppointment.AppointmentCause = cause.Text;
-
+                SendScheduledNotification(SelectedAppointment);
                 DoctorAppointmentController.Instance.AddAppointment(SelectedAppointment);
                 DoctorHomePage.Instance.DoctorAppointment.Add(SelectedAppointment);
             }
@@ -136,7 +136,7 @@ namespace Hospital_IS.DoctorView
             {
                 foreach (RescheduledAppointmentDTO rescheduled in SelectedEmergencyAppointment.RescheduledAppointments)
                 {
-                    SendNotification(rescheduled.OldDocAppointment,rescheduled.NewDocAppointment);
+                    SendRescheduleNotification(rescheduled.OldDocAppointment,rescheduled.NewDocAppointment);
                     DoctorAppointmentController.Instance.UpdateAppointment(rescheduled.OldDocAppointment, rescheduled.NewDocAppointment);
                 }
                 DoctorAppointmentController.Instance.AddAppointment(SelectedEmergencyAppointment.SuggestedAppointment);
@@ -150,7 +150,7 @@ namespace Hospital_IS.DoctorView
             DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(SchedulingAppointment.Appointment, true));
         }
 
-        private void SendNotification(DoctorAppointment oldApp, DoctorAppointment appointment)
+        private void SendRescheduleNotification(DoctorAppointment oldApp, DoctorAppointment appointment)
         {
             string title = "Pomeren pregled";
 
@@ -161,6 +161,20 @@ namespace Hospital_IS.DoctorView
             Notification notification = new Notification(title, text, DateTime.Now);
             notification.Recipients.Add(appointment.Patient.Id);
             notification.Recipients.Add(appointment.Doctor.Id);
+
+            NotificationController.Instance.AddNotification(notification);
+        }
+
+        private void SendScheduledNotification(DoctorAppointment appointment)
+        {
+            string title = "Zakazan pregled";
+
+            string text = "Zakazan Vam je novi pregled " + appointment.AppointmentStart.ToString("dd.MM.yyyy.") + " u "
+                + appointment.AppointmentStart.ToString("HH:mm") + " u " + appointment.AppointmentStart.ToString("HH:mm") + "h.";
+
+            Notification notification = new Notification(title, text, DateTime.Now);
+            notification.Recipients.Add(appointment.Patient.Id);
+            //notification.Recipients.Add(appointment.Doctor.Id);
 
             NotificationController.Instance.AddNotification(notification);
         }
