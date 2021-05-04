@@ -56,40 +56,5 @@ namespace Hospital_IS.Storages
                 writer.Write(file);
             }
         }
-        public Boolean UpdateDoctor(Doctor doctor)
-        {
-            List<Doctor> doctors = GetAll();
-
-            for (int i = 0; i < doctors.Count; i++)
-            {
-                if (doctor.Id.Equals(doctors[i].Id))
-                {
-                    doctors.Remove(doctors[i]);
-                    doctors.Insert(i, doctor);
-
-                    var file = JsonConvert.SerializeObject(doctors, Formatting.Indented);
-                    using (StreamWriter writer = new StreamWriter(this.fileLocation))
-                    {
-                        writer.Write(file);
-                    }
-
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public Model.Doctor GetByEmail(String email)
-        {
-            List<Doctor> doctors = GetAll();
-            for (int i = 0; i < doctors.Count; i++)
-            {
-                if (email.Equals(doctors[i].Email))
-                {
-                    return doctors[i];
-                }
-            }
-            return null;
-        }
     }
 }

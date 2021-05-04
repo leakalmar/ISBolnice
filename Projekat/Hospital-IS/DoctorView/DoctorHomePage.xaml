@@ -62,10 +62,10 @@
             </Ellipse.Fill>
         </Ellipse>
 
-        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" 
-                   Width="auto" HorizontalAlignment="Center" FontSize="16" FontFamily="Palatino Linotype" 
-                   Foreground="FloralWhite" FontWeight="Bold" Margin="10,0,0,0">
-            Dragana Stamenković
+        <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center" Grid.Row="2"
+                Grid.Column="2" Width="auto" HorizontalAlignment="Center" FontSize="16"
+                FontFamily="Palatino Linotype" Foreground="FloralWhite" FontWeight="Bold"
+                Margin="10,0,0,0" x:Name="nameSurname">
         </TextBlock>
 
         <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3">

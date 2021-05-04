@@ -14,15 +14,15 @@ namespace Model
        
         public DateTime AppointmentEnd { get; set; }
         
-        public AppointmetType Type { get; set; }
+        public AppointmentType Type { get; set; }
         
         public int Room { get; set; }
 
 
-        public Appointment(DateTime date, AppointmetType type, bool reserved, int room)
+        public Appointment(DateTime date, AppointmentType type, bool reserved, int room)
         {
             AppointmentStart = date;
-            if (type.Equals(AppointmetType.CheckUp))
+            if (type.Equals(AppointmentType.CheckUp))
             {
                 AppointmentEnd = AppointmentStart.AddMinutes(30);
             }
@@ -35,7 +35,7 @@ namespace Model
         {
         }
 
-        public Appointment(DateTime appointmentstart, DateTime appointmentEnd, AppointmetType type, int room)
+        public Appointment(DateTime appointmentstart, DateTime appointmentEnd, AppointmentType type, int room)
         {
             AppointmentStart = appointmentstart;
             AppointmentEnd = appointmentEnd;

@@ -27,7 +27,7 @@ namespace Hospital_IS.Controllers
 
         public List<Notification> GetAll()
         {
-            return NotificationService.Instance.allNotifications;
+            return NotificationService.Instance.AllNotifications;
         }
 
         public List<Notification> GetAllByUser(int userId)
@@ -38,6 +38,11 @@ namespace Hospital_IS.Controllers
         public void AddNotification(Notification notification)
         {
             NotificationService.Instance.AddNotification(notification);
+        }
+
+        public void ReloadNotifications()
+        {
+            NotificationService.Instance.ReloadNotifications();
         }
 
         public void UpdateNotification(Notification notification)

@@ -1,4 +1,5 @@
 ﻿using DoctorView;
+using Hospital_IS.DoctorView;
 using Model;
 using Service;
 using System;
@@ -46,6 +47,11 @@ namespace Controllers
         public void AddNewMedicine(Medicine medicine)
         {
             MedicineService.Instance.AddNewMedicine(medicine);
+        }
+
+        public Medicine FindMedicineByName(String name)
+        {
+            return MedicineService.Instance.FindMedicineByName(name);
         }
     }
 }

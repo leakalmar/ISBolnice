@@ -43,7 +43,7 @@ namespace Hospital_IS
 
             DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
 
-            Combo.DataContext = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
+            Combo.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
             DispatcherTimer dispatcherTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMinutes(1)
@@ -57,7 +57,7 @@ namespace Hospital_IS
         public void refresh()
         {
           
-            Combo.DataContext = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
+            Combo.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
            
         }
 
@@ -65,17 +65,17 @@ namespace Hospital_IS
         {
             DateTime time = DateTime.Now;
 
-            MessageBox.Show(Convert.ToString(TransferController.Instance.getAllTransfers().Count));
+            MessageBox.Show(Convert.ToString(TransferController.Instance.GetAllTransfers().Count));
            
-            foreach(Room r in RoomController.Instance.getAllRooms())
+            foreach(Room r in RoomController.Instance.GetAllRooms())
             {
-                foreach(Transfer trans in TransferController.Instance.getAllTransfers())
+                foreach(Transfer trans in TransferController.Instance.GetAllTransfers())
                 {
                    
                     if (trans.TransferEnd <= time && trans.isMade == false)
                     {
                        trans.isMade = true;
-                       TransferController.Instance.TransferStaticEquipment(trans);
+                       TransferController.Instance.ExecuteStaticTransfer(trans);
                         
                        MessageBox.Show("Uspjesan transfer");
                     
@@ -120,6 +120,8 @@ namespace Hospital_IS
 
         }
 
+
+
         private void Combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
@@ -141,6 +143,18 @@ namespace Hospital_IS
                 DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
             }
            
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            if(SearchPanel.Visibility == Visibility.Collapsed)
+            {
+                SearchPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                SearchPanel.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

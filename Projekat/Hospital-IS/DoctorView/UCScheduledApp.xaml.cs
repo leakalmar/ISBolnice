@@ -38,18 +38,19 @@ namespace Hospital_IS.DoctorView
             }
         }
         public DoctorAppointment Appointment { get; }
-        public UCScheduledApp(DoctorAppointment appointment)
+        private UCPatientChart PatientChart;
+        public UCScheduledApp(UCPatientChart patientChart)
         {
             InitializeComponent();
-
-            ICollectionView view = new CollectionViewSource{ Source = DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(appointment.Patient.Id)}.View; 
+            PatientChart = patientChart;
+            ICollectionView view = new CollectionViewSource{ Source = DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(patientChart.Patient.Id)}.View; 
             view.Filter = null;
             view.Filter = delegate (object item)
             {
-                return ((DoctorAppointment)item).Report == null && ((DoctorAppointment)item).AppointmentStart > DateTime.Now;
+                return ((DoctorAppointment)item).AppointmentStart > DateTime.Now;
             };
             dataGrid.DataContext = view;
-            Appointment = appointment;
+            Appointment = PatientChart.Appointment;
 
             if (!Started)
             {
@@ -64,7 +65,7 @@ namespace Hospital_IS.DoctorView
         private void NewApp_Click(object sender, RoutedEventArgs e)
         {
             (this.Parent as Grid).Visibility = Visibility.Collapsed;
-            DoctorHomePage.Instance.Home.Children.Add(new UCNewApp(Appointment));
+            DoctorHomePage.Instance.Home.Children.Add(new UCNewApp(PatientChart));
         }
     }
 }

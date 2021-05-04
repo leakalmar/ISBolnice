@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -14,16 +15,15 @@ namespace Model
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-        public int ChartId { get; set; }
         public DateTime FileDate { get; set; }
         public String Employer { get; set; }
         public Boolean Admitted { get; set; }
-        public ObservableCollection<String> Alergies { get; set; }
+        public List<String> Alergies { get; set; }
+        public AntiTroll TrollMechanism { get; set; } = new AntiTroll();
         
-
         public Boolean IsGuest { get; set; } = false;
 
-        public Patient(int id, string name, string surname, DateTime birthDate, string address, string email, string password, DateTime filedate, String employer, ObservableCollection<String> alergies) : base(id, name, surname, birthDate, address, email, password)
+        public Patient(int id, string name, string surname, DateTime birthDate, string address, string email, string password, DateTime filedate, String employer, List<String> alergies) : base(id, name, surname, birthDate, address, email, password)
         {
             this.FileDate = filedate;
             this.Employer = employer;
@@ -34,30 +34,7 @@ namespace Model
         {
         }
 
-        public MedicalHistory MedicalHistory { get; set; } = new MedicalHistory();
-
-
         public Doctor doctor { get; set; }
-
-        public Boolean IsAdmitted()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Boolean ReserveAppointment()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Boolean RemoveAppointment(DoctorAppointment appointment)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Boolean UpdateAppointment(Appointment appointment)
-        {
-            throw new NotImplementedException();
-        }
 
         public Doctor Doctor
         {

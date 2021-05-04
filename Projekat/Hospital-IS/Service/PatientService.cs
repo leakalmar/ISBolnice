@@ -1,7 +1,11 @@
-﻿using Hospital_IS.Storages;
+﻿using DoctorView;
+using Hospital_IS.DoctorView;
+using Hospital_IS.Storages;
 using Model;
+using Storages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Service
@@ -27,27 +31,14 @@ namespace Service
         private PatientService()
         {
             AllPatients = pfs.GetAll();
-        }
-
-        public void GetPatientChart(Patient patient)
-        {
-
-        }
-
-        public void AddPrescription(Patient patient,String datePrescribed, Medicine medicine)
-        {
-
-        }
-
-        public void RemovePrescription(Patient patient, string datePrescribed, Medicine medicine)
-        {
-
+            UpdatePatientTrollMechanism();
         }
 
         public void AddPatient(Patient patient)
         {
+            ChartService.Instance.SaveChart(new MedicalHistory(patient.Id));
             AllPatients.Add(patient);
-
+            
             pfs.SavePatients(AllPatients);
         }
 
@@ -73,10 +64,49 @@ namespace Service
                 if (patient.Id.Equals(AllPatients[i].Id))
                 {
                     AllPatients.Remove(AllPatients[i]);
+                    ChartService.Instance.DeleteChart(patient.Id);
                 }
             }
 
             pfs.SavePatients(AllPatients);
+        }
+
+        public bool CheckIfAllergicToComponent(List<MedicineComponent> composition, List<String> allergies)
+        {
+            List<MedicineComponent> components = composition;
+            foreach (MedicineComponent c in components)
+            {
+                foreach (String allergie in allergies)
+                {
+                    Medicine med = MedicineService.Instance.FindMedicineByName(allergie);
+                    if (med != null)
+                    {
+                        List<MedicineComponent> allergieComponents = med.Composition;
+                        foreach (MedicineComponent allergieComp in allergieComponents)
+                        {
+                            if (c.Component.ToLower().Equals(allergieComp.Component.ToLower()))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            return false;
+        }
+
+        public bool CheckIfAllergicToMedicine(List<String> allergies, string name)
+        {
+            foreach (String allergie in allergies)
+            {
+                if (name.ToLower().Contains(allergie.ToLower()))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public List<int> GetPatientIDs()
@@ -89,6 +119,49 @@ namespace Service
             return allPatientIDs;
         }
 
+        public bool IsPatientTroll(Patient patient, DoctorAppointment doctorAppointment)
+        {
+            int timeRange = 14;
+            int maxAppointmentsInTimeRange = 3;
+            if (doctorAppointment.AppointmentStart < patient.TrollMechanism.TrollCheckStartDate.AddDays(timeRange))
+            {
+                patient.TrollMechanism.AppointmentCounterInTimeRange++;
+                if (patient.TrollMechanism.AppointmentCounterInTimeRange >= maxAppointmentsInTimeRange)
+                {
+                    patient.TrollMechanism.IsTroll = true;
+                    patient.TrollMechanism.TrollCheckStartDate = doctorAppointment.AppointmentStart.Date;
+                    return patient.TrollMechanism.IsTroll;
+                }
+            }
+            else if (doctorAppointment.AppointmentStart >= patient.TrollMechanism.TrollCheckStartDate.AddDays(timeRange) && patient.TrollMechanism.IsTroll)
+            {
+                patient.TrollMechanism.IsTroll = false;
+                patient.TrollMechanism.TrollCheckStartDate = doctorAppointment.AppointmentStart.Date;
+                patient.TrollMechanism.AppointmentCounterInTimeRange = 1;
+            }
+            return patient.TrollMechanism.IsTroll;
+        }
+
+        private void UpdatePatientTrollMechanism()
+        {
+            int timeRange = 14;
+            int maxAppointmentsInTimeRange = 3;
+            foreach (Patient patient in AllPatients)
+            {
+                if (patient.TrollMechanism.TrollCheckStartDate.AddDays(timeRange) == DateTime.Today)
+                {
+                    patient.TrollMechanism.TrollCheckStartDate = DateTime.Today;
+                    if (DoctorAppointmentService.Instance.GetNumberOfAppointmentsInTimeRange(patient.Id, DateTime.Today, DateTime.Today.AddDays(timeRange)) > maxAppointmentsInTimeRange)
+                    {
+                        patient.TrollMechanism.IsTroll = true;
+                    }
+                    else
+                    {
+                        patient.TrollMechanism.AppointmentCounterInTimeRange = DoctorAppointmentService.Instance.GetNumberOfAppointmentsInTimeRange(patient.Id, DateTime.Today, DateTime.Today.AddDays(timeRange));
+                    }                  
+                }
+            }
+        }
         public List<Patient> GetAllRegisteredPatients()
         {
             List<Patient> registeredPatients = new List<Patient>();

@@ -36,7 +36,7 @@ namespace Hospital_IS
 
             InitializeComponent();
             
-            AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.getAllAppByTwoRooms(sourceRoom.RoomId,destinationRoom.RoomId));
+            AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(sourceRoom.RoomId,destinationRoom.RoomId));
            
             this.DataContext = this;
 
@@ -65,7 +65,7 @@ namespace Hospital_IS
             }
 
             StaticTransferAppointmentDTO staticTransfer = new StaticTransferAppointmentDTO(sourceRoom, destinationRoom, equip, quantity, dateTimeStart, dateTimeEnd, "doabar");
-           bool isSucces = TransferController.Instance.TransferEquipmentStatic(staticTransfer);
+           bool isSucces = TransferController.Instance.ScheduleStaticTransfer(staticTransfer);
 
             if (!isSucces || !corect)
             {

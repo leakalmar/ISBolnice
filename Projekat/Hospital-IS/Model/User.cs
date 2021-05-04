@@ -52,21 +52,6 @@ namespace Model
         {
         }
 
-        public Boolean LogIn()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Boolean ChangePassword()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ViewProfile()
-        {
-            throw new NotImplementedException();
-        }
-
         public Hospital hospital;
 
         public Hospital Hospital

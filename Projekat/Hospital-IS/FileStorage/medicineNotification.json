@@ -1,23 +1,28 @@
 [
   {
-    "Title": "Odobrenje Flonidan 100mg",
+    "SenderId": [
+      6
+    ],
+    "Title": "RE:Odobrenje Brufen 2000mg",
     "Medicine": {
-      "Name": "Flonidan 100mg",
+      "Name": "Brufen 2000mg",
       "Composition": [
         {
-          "Component": "sve i svasta"
+          "Component": "saSAsaSASAxza"
         }
       ],
-      "SideEffects": "Posapnost,umor",
-      "Usage": "Smanjuje alergijsku reakciju",
+      "SideEffects": "axaXZAxz",
+      "Usage": "aSSAxaX",
       "ReplaceMedicine": [
         {
-          "Name": "svi alergiijski"
+          "Name": "Asass"
         }
       ]
     },
-    "DoctorIds": [
+    "RecieverIds": [
       4
-    ]
+    ],
+    "Note": null,
+    "DateSent": "2021-05-04T11:12:56.4104807+02:00"
   }
 ]

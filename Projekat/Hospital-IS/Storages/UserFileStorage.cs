@@ -38,10 +38,5 @@ namespace Storages
             throw new NotImplementedException();
         }
 
-        public Model.User GetByEmail(String email)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

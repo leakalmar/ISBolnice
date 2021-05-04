@@ -20,6 +20,10 @@ namespace Storages
         {
             String text = File.ReadAllText(this.fileLocation);
             List<MedicineNotification> allAppointments = JsonConvert.DeserializeObject<List<MedicineNotification>>(text);
+            if(allAppointments == null)
+            {
+                allAppointments = new List<MedicineNotification>();
+            }
             return allAppointments;
         }
 

@@ -42,5 +42,65 @@
     "SideEffects": "Preosetljivost na paracetamol ili na bilo koju od pomoćnih supstanci.",
     "Usage": "Paracetamol je blag analgetik i antipiretik. Upotreba tableta se preporučuje za lečenje bolnih i febrilnih stanja kao što su glavobolja (uključujući i migrenu i tenzionu glavobolju), zubobolja, bol u leđima, reumatski bolovi i bolovi u mišićima, dismenoreja, bol u grlu, kao i za ublažavanje groznice, odnosno tegoba i bolova koji prate prehladu i grip. Lek se takođe može koristiti kao simptomatska terapija kod bolova povezanih sa osteoartritisom.",
     "ReplaceMedicine": []
+  },
+  {
+    "Name": "Flonidan 100mg",
+    "Composition": [
+      {
+        "Component": "sve najbolje"
+      }
+    ],
+    "SideEffects": "okej",
+    "Usage": "okej",
+    "ReplaceMedicine": [
+      {
+        "Name": "svi alergijski"
+      }
+    ]
+  },
+  {
+    "Name": "Pantenol 200mg",
+    "Composition": [
+      {
+        "Component": "saSAsaSASAxza"
+      }
+    ],
+    "SideEffects": "axaXZAxz",
+    "Usage": "aSSAxaX",
+    "ReplaceMedicine": [
+      {
+        "Name": "Asass"
+      }
+    ]
+  },
+  {
+    "Name": "Brufen 2000mg",
+    "Composition": [
+      {
+        "Component": "saSAsaSASAxza"
+      }
+    ],
+    "SideEffects": "axaXZAxz",
+    "Usage": "aSSAxaX",
+    "ReplaceMedicine": [
+      {
+        "Name": "Asass"
+      }
+    ]
+  },
+  {
+    "Name": "Flonidan 100mg",
+    "Composition": [
+      {
+        "Component": "sve najbolje"
+      }
+    ],
+    "SideEffects": "okej",
+    "Usage": "okej",
+    "ReplaceMedicine": [
+      {
+        "Name": "svi alergijski"
+      }
+    ]
   }
 ]

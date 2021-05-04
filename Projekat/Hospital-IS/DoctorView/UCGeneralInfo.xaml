@@ -76,7 +76,7 @@
 
             <Label Grid.Row="5" Grid.Column="0" Content="Krvna grupa:" FontSize="16" 
                    Foreground="FloralWhite" />
-            <ComboBox Grid.Row="5" Grid.Column="1" x:Name="blood" Text="{Binding name}"
+            <ComboBox Grid.Row="5" Grid.Column="1" x:Name="blood" Text="/"
                      BorderThickness="0,0,0,2" 
                      BorderBrush="FloralWhite" IsEnabled="False" Margin="0,0,0,10" 
                      FontSize="16" VerticalAlignment="Bottom"/>
@@ -97,7 +97,7 @@
 
             <Label Grid.Row="1" Grid.Column="3" Content="Država:" FontSize="16" 
                    Foreground="FloralWhite" />
-            <TextBox Grid.Row="1" Grid.Column="4" x:Name="country" Text="{Binding name}"
+            <TextBox Grid.Row="1" Grid.Column="4" x:Name="country" Text="/"
                      Background="Transparent" BorderThickness="0,0,0,2" Foreground="FloralWhite" 
                      BorderBrush="FloralWhite" IsEnabled="False" Margin="0,0,0,10" 
                      FontSize="16" VerticalAlignment="Bottom"/>

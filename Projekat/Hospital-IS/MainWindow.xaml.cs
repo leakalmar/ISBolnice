@@ -18,21 +18,23 @@ namespace Hospital_IS
     /// </summary>
     public partial class MainWindow : Window
     {
-        PatientFileStorage pfs = new PatientFileStorage();
-        AppointmentFileStorage afs = new AppointmentFileStorage();
         FSDoctor dfs = new FSDoctor();
         RoomStorage rfs = new RoomStorage();
+        PatientFileStorage pfs = new PatientFileStorage();
+        AppointmentFileStorage afs = new AppointmentFileStorage();
         public static Patient PatientUser { get; set; }
 
         //Dodala jer mi treba ista referenca svuda kako bi mogla da postavim selektovanje za combobox
         public static List<Doctor> Doctors { get; set; }
         public static List<Room> Rooms { get; set; }
+        public static List<Specialty> Specialties { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            Doctors = dfs.GetAll();
-            Rooms = rfs.GetAll();
+            Doctors = DoctorController.Instance.GetAll();
+            Rooms = RoomController.Instance.GetAllRooms();
+            Specialties = SpecializationController.Instance.GetAll();
             UserService.Instance.GetAllUsersIDs();
         }
 
@@ -44,8 +46,7 @@ namespace Hospital_IS
 
         private void Login(object sender, RoutedEventArgs e)
         {
-            List<Patient> patients = pfs.GetAll();
-            Hospital.Instance.allAppointments=afs.GetAll();
+            List<Patient> patients = PatientController.Instance.GetAll();
 
             foreach (Patient p in patients)
             {

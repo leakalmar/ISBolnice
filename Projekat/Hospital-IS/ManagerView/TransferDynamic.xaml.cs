@@ -39,7 +39,7 @@ namespace Hospital_IS
             DestinationEquip = new ObservableCollection<Equipment>();
 
 
-            SourceRoom = new ObservableCollection<Room>(RoomController.Instance.getRoomByType(RoomType.StorageRoom));
+            SourceRoom = new ObservableCollection<Room>(RoomController.Instance.GetRoomByType(RoomType.StorageRoom));
            
         }
 
@@ -77,7 +77,7 @@ namespace Hospital_IS
 
                 Equipment equip = (Equipment)DataGridSource.SelectedItem;
                 int quantity = Convert.ToInt32(QuantityBox.Text);
-                TransferController.Instance.TransferEquipment(roomSource, equip, quantity);
+                TransferController.Instance.ReduceEquipmentQuantity(roomSource, equip, quantity);
                 refreshGrid(roomSource);
                 MessageBox.Show("Uspjesan transfer");
             }

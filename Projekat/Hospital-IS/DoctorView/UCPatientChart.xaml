@@ -117,7 +117,7 @@
                 BorderBrush="FloralWhite"  HorizontalAlignment="Center" VerticalAlignment="Center" 
                 Padding="150,5,150,5" x:Name="end" Visibility="Collapsed">
             <Button Content="Završi termin" Foreground="FloralWhite" FontSize="18" 
-                    BorderThickness="0" Background="{x:Null}" Click="Button_Click"/>
+                    BorderThickness="0" Background="{x:Null}" Click="EndAppointment_Click"/>
         </Border>
 
 

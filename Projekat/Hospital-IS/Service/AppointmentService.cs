@@ -30,7 +30,7 @@ namespace Service
             allAppointments = afs.GetAll();
         }
 
-        public List<Appointment> getAllAppByTwoRooms(int roomIdSource, int roomIdDestination)
+        public List<Appointment> GetAllAppByTwoRooms(int roomIdSource, int roomIdDestination)
         {
             List<Appointment> allApointments = new List<Appointment>();
 
@@ -53,17 +53,17 @@ namespace Service
 
         }
 
-        private void GetAllClassicAppointments(int roomIdSource, List<Appointment> allApointments)
+        private void GetAllClassicAppointments(int roomId, List<Appointment> allApointments)
         {
-            foreach (Appointment ap in getAppByRoom(roomIdSource))
+            foreach (Appointment ap in GetAppByRoom(roomId))
             {
                 allApointments.Add(ap);
             }
         }
 
-        private void GetAllDoctorsAppointment(int roomIdSource, List<Appointment> allApointments)
+        private void GetAllDoctorsAppointment(int roomId, List<Appointment> allApointments)
         {
-            foreach (Appointment ap in DoctorAppointmentService.Instance.GetAllAppointmentsByRoomId(roomIdSource))
+            foreach (Appointment ap in DoctorAppointmentService.Instance.GetAllByRoom(roomId))
             {
                 allApointments.Add(ap);
             }
@@ -88,7 +88,7 @@ namespace Service
             return isPossible;
         }
 
-        public List<Appointment> getAppByRoom(int roomId)
+        public List<Appointment> GetAppByRoom(int roomId)
         {
             List<Appointment> roomAppointment = new List<Appointment>();
 
@@ -121,7 +121,7 @@ namespace Service
             return isFree;
         }
 
-        public bool IsBetweenDates(DateTime start, DateTime end, Appointment appointment)
+        private bool IsBetweenDates(DateTime start, DateTime end, Appointment appointment)
         {
             return (start > appointment.AppointmentStart && start < appointment.AppointmentEnd) || (end > appointment.AppointmentStart && end < appointment.AppointmentEnd);
         }

@@ -30,8 +30,8 @@ namespace Hospital_IS
         public TransferStatic()
         {
             InitializeComponent();
-            ComboSource.DataContext = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
-            ComboDestionation.DataContext = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
+            ComboSource.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
+            ComboDestionation.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
             DataGridSource.DataContext = new ObservableCollection<Equipment>();
             DataGridDestination.DataContext = new ObservableCollection<Equipment>();
 
