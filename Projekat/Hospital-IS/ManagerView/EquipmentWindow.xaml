@@ -188,7 +188,7 @@
         </StackPanel>
         <ComboBox x:Name="Combo"  ItemsSource="{Binding}" DisplayMemberPath="RoomIdType"   HorizontalAlignment="Left" Margin="165,86,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Combo_SelectionChanged"/>
         <TextBox HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" FontSize="15" Foreground="White" Margin="40,86,0,0"  Text="Izaberite sobu:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <StackPanel x:Name="SearchPanel" Visibility="Visible" Background="Transparent" Margin="40,162,110,563" >
+        <StackPanel x:Name="SearchPanel" Visibility="Collapsed" Background="Transparent" Margin="40,162,110,563" >
             <Grid Width="288">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
@@ -197,7 +197,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="Pretrazi:" Foreground="White" FontSize="15"/>
-                <TextBox x:Name="SearchBox" Grid.Column="2" Height="25" FontSize="15"  />
+                <TextBox x:Name="SearchBox" Text="Unesite ime kolicina" Grid.Column="2" Height="25" FontSize="14"  GotFocus="SearchBox_GotFocus" />
                 <Button x:Name="SeacrhDateGrid" BorderThickness="0" Grid.Column="3" Height="20" Width="20" HorizontalAlignment="Left" Background="Transparent" Click="SeacrhDateGrid_Click">
                     <StackPanel >
                         <Image Source="pack://application:,,,/Resources/search.png" Width="20" Height="20" />
@@ -206,8 +206,9 @@
             </Grid>
         </StackPanel>
         <TextBox HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" FontSize="15" Foreground="White" Margin="40,124,0,0"  Text="Izaberite tip:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="ComboType"   DisplayMemberPath="RoomIdType"   HorizontalAlignment="Left" Margin="165,123,0,0" VerticalAlignment="Top" Width="120" >
-            <ComboBoxItem/>
+        <ComboBox x:Name="ComboType"   HorizontalAlignment="Left" Margin="165,123,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboType_SelectionChanged" >
+            <ComboBoxItem Content="Dinamicka"/>
+            <ComboBoxItem Content="Staticka"/>
         </ComboBox>
 
 

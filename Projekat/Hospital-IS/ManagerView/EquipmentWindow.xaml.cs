@@ -124,9 +124,6 @@ namespace Hospital_IS
         private void Combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-
-          
-
             Room room = (Room)Combo.SelectedItem;
 
            
@@ -174,14 +171,7 @@ namespace Hospital_IS
         {
             String text = SearchBox.Text.ToLower();
             String[] textSplit = text.Split(" ");
-            EquiptType type = EquiptType.Null;
-            if (textSplit[0].Equals("dinamicka"))
-            {
-                type = EquiptType.Dynamic;
-            }else if (textSplit[0].Equals("staticka"))
-            {
-                type = EquiptType.Stationary;
-            }
+           
 
             Room room = (Room)Combo.SelectedItem;
             if (text.Length != 0)
@@ -190,9 +180,18 @@ namespace Hospital_IS
                 {
                     ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
                     view.Filter = null;
-                    view.Filter = delegate (object item)
+                   view.Filter = delegate (object item)
                    {
-                       return ((Equipment)item).EquipType == type;
+                       String name = ((Equipment)item).Name.ToLower();
+                       int quantity = 0;
+                       try
+                       {
+                            quantity = Convert.ToInt32(textSplit[1]);
+                       }catch(Exception e)
+                       {
+                            quantity = 0;
+                       }
+                       return name.Contains(textSplit[0]) && ((Equipment)item).Quantity >= quantity;
                    };
                     DataGridEquipment.DataContext = view;
                 }
@@ -206,6 +205,37 @@ namespace Hospital_IS
                     DataGridEquipment.DataContext = view;
                 }
             }
+        }
+
+        private void ComboType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Room room = (Room)Combo.SelectedItem;
+            EquiptType type;
+            if(ComboType.SelectedIndex == 0)
+            {
+                type = EquiptType.Dynamic;
+            }
+            else
+            {
+                type = EquiptType.Stationary;
+
+            }
+
+            if (room != null)
+            {
+                ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                view.Filter = null;
+                 view.Filter = delegate (object item)
+                {
+                    return ((Equipment)item).EquipType == type;
+                };
+                DataGridEquipment.DataContext = view;
+            }
+        }
+
+        private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            SearchBox.Text = "";
         }
     }
 }
