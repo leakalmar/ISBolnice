@@ -100,5 +100,11 @@ namespace Hospital_IS.SecretaryView
         {
             sa.Visibility = Visibility.Visible;
         }
+
+        private void SelectGuest(object sender, RoutedEventArgs e)
+        {
+            SelectGuestView sg = new SelectGuestView(this);
+            sg.Show();
+        }
     }
 }
