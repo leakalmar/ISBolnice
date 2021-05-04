@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using Model;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Controllers;
 
 namespace Hospital_IS
 {
@@ -29,16 +30,10 @@ namespace Hospital_IS
         public TransferStatic()
         {
             InitializeComponent();
-            this.DataContext = this;
-            SourceRoom = new ObservableCollection<Room>();
-            DestinationRoom = new ObservableCollection<Room>();
-            SourceEquip = new ObservableCollection<Equipment>();
-            DestinationEquip = new ObservableCollection<Equipment>();
-
-            DataGridDestination.IsEnabled = false;
-            SourceRoom = Hospital.Room;
-            DestinationRoom = Hospital.Room;
-
+            ComboSource.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
+            ComboDestionation.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
+            DataGridSource.DataContext = new ObservableCollection<Equipment>();
+            DataGridDestination.DataContext = new ObservableCollection<Equipment>();
 
         }
 
@@ -56,7 +51,7 @@ namespace Hospital_IS
                     MessageBox.Show("Nije dozvoljeno birati iste sobe");
                     ComboSource.SelectedIndex = -1;
                     room = (Room)ComboSource.SelectedItem;
-                    SourceEquip.Clear();
+                    DataGridSource.DataContext = new ObservableCollection<Equipment>();
                 }
             }
 
@@ -64,17 +59,11 @@ namespace Hospital_IS
             {
                 if (room.Equipment != null)
                 {
-                    SourceEquip.Clear();
-                    foreach (Equipment eq in room.Equipment)
-                    {
-                        if (eq.EquipType == EquiptType.Stationary)
-                            SourceEquip.Add(eq);
-                    }
-
+                    DataGridSource.DataContext = new ObservableCollection<Equipment>(room.Equipment);
                 }
                 else
                 {
-                    SourceEquip = new ObservableCollection<Equipment>();
+                    DataGridSource.DataContext = new ObservableCollection<Equipment>();
                 }
             }
             
@@ -96,24 +85,26 @@ namespace Hospital_IS
                     MessageBox.Show("Nije dozvoljeno birati iste sobe");
                     ComboDestionation.SelectedIndex = -1;
                     room = (Room)ComboDestionation.SelectedItem;
-                    DestinationEquip.Clear();
+                    DataGridDestination.DataContext = new ObservableCollection<Equipment>();
                 }
             }
+
             if(room != null)
             {
                 if (room.Equipment != null)
                 {
-                    DestinationEquip.Clear();
-                    foreach (Equipment eq in room.Equipment)
-                    {
-                        if (eq.EquipType == EquiptType.Stationary)
-                            DestinationEquip.Add(eq);
-                    }
+
+                    DataGridDestination.DataContext = new ObservableCollection<Equipment>(room.Equipment);
                 }
                 else
                 {
-                    DestinationEquip = new ObservableCollection<Equipment>();
+                    DataGridDestination.DataContext = new ObservableCollection<Equipment>();
                 }
+
+            }
+            else
+            {
+                DataGridDestination.DataContext = new ObservableCollection<Equipment>();
             }
            
            

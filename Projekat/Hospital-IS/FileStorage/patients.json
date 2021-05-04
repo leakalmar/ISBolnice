@@ -1,7 +1,7 @@
 [
   {
+    "$id": "1",
     "hospital": null,
-    "ChartId": 0,
     "FileDate": "2021-03-29T23:21:22.7048933+02:00",
     "Employer": "neki poslodavac",
     "Admitted": false,
@@ -9,41 +9,13 @@
       "Tetanus",
       "Paracetamol"
     ],
-    "IsGuest": false,
-    "MedicalHistory": {
-      "Prescription": [],
-      "Test": [],
-      "Reports": [],
-      "Hospitalization": [],
-      "Therapies": [
-        {
-          "Medicine": {
-            "Name": "Bromazepam",
-            "Composition": "1 tableta sadrži 1,5 mg, 3 mg, odnosno 6 mg bromazepama.",
-            "SideEffects": "U osetljivih bolesnika, naročito kod većih doza, može se javiti blagi umor, pospanost i vrtoglavica, a povremeno slabost mišića i ataksija. Ova neželjena dejstva mogu se izbeći prilagođavanjem doze.",
-            "Usage": "Doziranje je individualno. Prosečna doza za ambulantne pacijente je 1,5-3 mg, do 3 puta na dan. U težim oblicima bolesti, naročito kod hospitalizovanih bolesnika, daje se 6-12 mg, 2 do 3 puta na dan."
-          },
-          "Quantity": 1,
-          "TimesADay": 2,
-          "TherapyStart": "2021-04-19T00:00:00",
-          "TherapyEnd": "2021-05-01T00:00:00",
-          "FirstUsageTime": 11
-        },
-        {
-          "Medicine": {
-            "Name": "Brufen",
-            "Composition": "1 film tableta sadrži 400 mg ibuprofena 5 ml sirupa sadrži 100 mg Ibuprofena",
-            "SideEffects": "Ibuprofen se dobro podnosi, a neželjena dejstva su veoma retka i nestaju prekidom terapije. Kod manjeg broja bolesnika mogu se, javiti gastrointestinalne smetnje.",
-            "Usage": "Ibuprofen se uzima posle jela. Doziranje treba individualno uskladiti tako da se sa najmanjom mogućom dozom postigne željeni terapijski efekat."
-          },
-          "Quantity": 1,
-          "TimesADay": 3,
-          "TherapyStart": "2021-04-19T00:00:00",
-          "TherapyEnd": "2021-05-01T00:00:00",
-          "FirstUsageTime": 8
-        }
-      ]
+    "TrollMechanism": {
+      "$id": "2",
+      "TrollCheckStartDate": "2021-04-29T00:00:00",
+      "AppointmentCounterInTimeRange": 2,
+      "IsTroll": false
     },
+    "IsGuest": false,
     "doctor": null,
     "Doctor": null,
     "Education": 0,
@@ -57,12 +29,11 @@
     "Relationship": null,
     "Password": "123",
     "Address": "Petra Drapsina 8",
-    "Notifications": null,
     "Hospital": null
   },
   {
+    "$id": "3",
     "hospital": null,
-    "ChartId": 0,
     "FileDate": "2021-03-29T23:21:22.7064891+02:00",
     "Employer": "neki poslodavac",
     "Admitted": false,
@@ -70,14 +41,13 @@
       "Tetanus",
       "Paracetamol"
     ],
-    "IsGuest": false,
-    "MedicalHistory": {
-      "Prescription": [],
-      "Test": [],
-      "Reports": [],
-      "Hospitalization": [],
-      "Therapies": []
+    "TrollMechanism": {
+      "$id": "4",
+      "TrollCheckStartDate": "0001-01-01T00:00:00",
+      "AppointmentCounterInTimeRange": 0,
+      "IsTroll": false
     },
+    "IsGuest": false,
     "doctor": null,
     "Doctor": null,
     "Education": 0,
@@ -91,12 +61,11 @@
     "Relationship": null,
     "Password": "123",
     "Address": "Zelengoska 15",
-    "Notifications": null,
     "Hospital": null
   },
   {
+    "$id": "5",
     "hospital": null,
-    "ChartId": 0,
     "FileDate": "2021-03-29T23:21:22.7064923+02:00",
     "Employer": "neki poslodavac",
     "Admitted": false,
@@ -104,14 +73,13 @@
       "Tetanus",
       "Paracetamol"
     ],
-    "IsGuest": false,
-    "MedicalHistory": {
-      "Prescription": [],
-      "Test": [],
-      "Reports": [],
-      "Hospitalization": [],
-      "Therapies": []
+    "TrollMechanism": {
+      "$id": "6",
+      "TrollCheckStartDate": "0001-01-01T00:00:00",
+      "AppointmentCounterInTimeRange": 0,
+      "IsTroll": false
     },
+    "IsGuest": false,
     "doctor": null,
     "Doctor": null,
     "Education": 0,
@@ -125,7 +93,6 @@
     "Relationship": null,
     "Password": "123",
     "Address": "Dure Dakovica 10",
-    "Notifications": null,
     "Hospital": null
   }
 ]

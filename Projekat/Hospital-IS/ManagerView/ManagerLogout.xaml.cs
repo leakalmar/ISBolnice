@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Hospital_IS.ManagerView;
 using Storages;
 using Model;
 
@@ -24,8 +25,7 @@ namespace Hospital_IS
 
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
-            RoomStorage roomStorage = new RoomStorage();
-            roomStorage.SaveRooms(Hospital.Room);
+           
             this.Close();
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
@@ -34,6 +34,14 @@ namespace Hospital_IS
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             Window1.Instance.Show();
+            this.Hide();
+        }
+
+        private void Notifications_Click(object sender, RoutedEventArgs e)
+        {
+
+            ManagerNotificationView managerNotification = new ManagerNotificationView();
+            managerNotification.Show();
             this.Hide();
         }
     }

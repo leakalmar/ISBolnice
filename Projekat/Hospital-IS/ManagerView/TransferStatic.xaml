@@ -46,14 +46,14 @@
         <Button x:Name="Back" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" Foreground="White" Content="Nazad" FontSize="18" BorderBrush="White" Click="Back_Click"/>
         <TextBlock Text="Transfer opreme" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="3"  FontSize="25" Foreground="White" TextAlignment="Center"/>
         <TextBlock Text="Izaberite sobu:" Height="25" Foreground="White" FontSize="13" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" />
-        <ComboBox x:Name="ComboSource"  Grid.Column="3"  Grid.Row="3"  ItemsSource="{Binding Path= SourceRoom}" DisplayMemberPath="RoomIdType"   HorizontalAlignment="Left" Width="90" Height="22"  SelectionChanged ="ComboSource_SelectionChanged" />
+        <ComboBox x:Name="ComboSource"  Grid.Column="3"  Grid.Row="3"  ItemsSource="{Binding}" DisplayMemberPath="RoomIdType"   HorizontalAlignment="Left" Width="90" Height="22"  SelectionChanged ="ComboSource_SelectionChanged" />
         <TextBlock Text="Izaberite sobu:" Height="25" Foreground="White" FontSize="13" TextAlignment="Center" VerticalAlignment="Center" Grid.Column="5" Grid.Row="3" />
-        <ComboBox  x:Name="ComboDestionation" Grid.Column="6" Grid.ColumnSpan="3"  Grid.Row="3"  ItemsSource="{Binding Path= DestinationRoom }" DisplayMemberPath="RoomIdType"  
+        <ComboBox  x:Name="ComboDestionation" Grid.Column="6" Grid.ColumnSpan="3"  Grid.Row="3"  ItemsSource="{Binding}" DisplayMemberPath="RoomIdType"  
                    HorizontalAlignment="Left" Width="90" Height="22" VerticalAlignment="Top" SelectionChanged="ComboDestionation_SelectionChanged"/>
         <TextBlock Text="Izvor" Foreground="White" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="5" FontSize="20" TextAlignment="Center"/>
         <TextBlock Text="Odredište" Foreground="White" Grid.Column="4" Grid.ColumnSpan="3" Grid.Row="5" FontSize="20" TextAlignment="Center"/>
         <GridSplitter Background="White" Width="3" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="4" Foreground="Aqua"  Grid.RowSpan="4" />
-        <DataGrid x:Name="DataGridSource"  Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Width="160" IsReadOnly="True" ItemsSource="{Binding Path= SourceEquip}" AlternatingRowBackground="NavajoWhite"  
+        <DataGrid x:Name="DataGridSource"  Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Width="160" IsReadOnly="True" ItemsSource="{Binding}" AlternatingRowBackground="NavajoWhite"  
                   Background="#FFC5DBDF" Focusable="True" AutoGenerateColumns="False"  SelectionMode="Single">
             <DataGrid.CellStyle>
                 <Style/>
@@ -70,7 +70,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid x:Name="DataGridDestination" Grid.Row="7" Grid.Column="5" Grid.ColumnSpan="3" Width="160" IsReadOnly="True" ItemsSource="{Binding Path= DestinationEquip}" AlternatingRowBackground="NavajoWhite"  
+        <DataGrid x:Name="DataGridDestination" Grid.Row="7" Grid.Column="5" Grid.ColumnSpan="3" Width="160" IsReadOnly="True" ItemsSource="{Binding}" AlternatingRowBackground="NavajoWhite"  
                   Background="#FFC5DBDF"  AutoGenerateColumns="False"  SelectionMode="Single">
             <DataGrid.CellStyle>
                 <Style/>

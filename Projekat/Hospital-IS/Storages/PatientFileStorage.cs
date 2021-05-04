@@ -34,22 +34,6 @@ namespace Hospital_IS.Storages
             return patients;
         }
 
-        public void SavePatient(Patient patient)
-        {
-            List<Patient> patients = GetAll();
-            patients.Add(patient);
-
-            var file = JsonConvert.SerializeObject(patients, Formatting.Indented, new JsonSerializerSettings()
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects
-            });
-            using (StreamWriter writer = new StreamWriter(this.fileLocation))
-            {
-                writer.Write(file);
-            }
-        }
-
         public Boolean UpdatePatient(Patient patient)
         {
             List<Patient> patients = GetAll();
@@ -73,39 +57,17 @@ namespace Hospital_IS.Storages
             return false;
         }
 
-        public Boolean DeletePatient(Patient patient)
+        public void SavePatients(List<Patient> patients)
         {
-            List<Patient> patients = GetAll();
-
-            for (int i = 0; i < patients.Count; i++)
+            var file = JsonConvert.SerializeObject(patients, Formatting.Indented, new JsonSerializerSettings()
             {
-                if (patient.Id.Equals(patients[i].Id))
-                {
-                    patients.Remove(patients[i]);
-
-                    var file = JsonConvert.SerializeObject(patients, Formatting.Indented);
-                    using (StreamWriter writer = new StreamWriter(this.fileLocation))
-                    {
-                        writer.Write(file);
-                    }
-
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public Patient GetPatientById(int patientId)
-        {
-            List<Patient> patients = GetAll();
-            for (int i = 0; i < patients.Count; i++)
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+            });
+            using (StreamWriter writer = new StreamWriter(this.fileLocation))
             {
-                if (patientId.Equals(patients[i].Id))
-                {
-                    return patients[i];
-                }
+                writer.Write(file);
             }
-            return null;
         }
 
 

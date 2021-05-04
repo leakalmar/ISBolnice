@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,7 @@ using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for UCOldReport.xaml
-    /// </summary>
+    //Klasa nije updatovana!
     public partial class UCOldReport : UserControl
     {
         private DoctorAppointment NowAppointment;
@@ -43,8 +42,8 @@ namespace Hospital_IS.DoctorView
 
             Appointment = appointment;
             NowAppointment = nowAppointment;
-            reportDetail.Text = Appointment.Report.Amnesis;
-            medicines.DataContext = Appointment.Patient.MedicalHistory.GetPresciptionByReport(Appointment.AppointmentStart);
+            //reportDetail.Text = Appointment.Report.Anamnesis;
+            //medicines.DataContext = Appointment.Patient.MedicalHistory.GetPresciptionByReport(Appointment.AppointmentStart);
             name.Content = Appointment.Doctor.Name;
             surname.Content = Appointment.Doctor.Surname;
             date.Content = Appointment.AppointmentStart;
@@ -57,11 +56,9 @@ namespace Hospital_IS.DoctorView
             {
                 if (Started)
                 {
-                    Hospital.Instance.RemoveAppointment(Appointment);
-                    Appointment.Report.Amnesis = reportDetail.Text;
-                    Hospital.Instance.AddAppointment(Appointment);
-                    AppointmentFileStorage apf = new AppointmentFileStorage();
-                    apf.SaveAppointment(Hospital.Instance.allAppointments);
+                    DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
+                    //Appointment.Report.Anamnesis = reportDetail.Text;
+                    DoctorAppointmentController.Instance.AddAppointment(Appointment);
                 }
                 
                 DoctorHomePage.Instance.Home.Children.Clear();
@@ -72,11 +69,9 @@ namespace Hospital_IS.DoctorView
         {
             if (Started)
             {
-                Hospital.Instance.RemoveAppointment(Appointment);
-                Appointment.Report.Amnesis = reportDetail.Text;
-                Hospital.Instance.AddAppointment(Appointment);
-                AppointmentFileStorage apf = new AppointmentFileStorage();
-                apf.SaveAppointment(Hospital.Instance.allAppointments);
+                DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
+                //Appointment.Report.Anamnesis = reportDetail.Text;
+                DoctorAppointmentController.Instance.AddAppointment(Appointment);
             }
 
             DoctorHomePage.Instance.Home.Children.Clear();

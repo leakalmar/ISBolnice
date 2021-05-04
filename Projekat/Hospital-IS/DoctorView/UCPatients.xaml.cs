@@ -1,4 +1,5 @@
-﻿using Hospital_IS.Storages;
+﻿using Controllers;
+using Hospital_IS.Storages;
 using Model;
 using Storages;
 using System;
@@ -18,16 +19,13 @@ using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for UCPatients.xaml
-    /// </summary>
     public partial class UCPatients : UserControl
     {
-        PatientFileStorage pfs = new PatientFileStorage();
         public UCPatients()
         {
             InitializeComponent();
-            ICollectionView app = new CollectionViewSource { Source = pfs.GetAll()}.View;
+            ObservableCollection<Patient> allPatients = new ObservableCollection<Patient>(PatientController.Instance.GetAll());
+            ICollectionView app = new CollectionViewSource { Source = allPatients }.View;
 
             //app.Filter = delegate (object item)
             //{
@@ -40,15 +38,15 @@ namespace Hospital_IS.DoctorView
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Patient patient = (Patient)patients.SelectedItem;
-            AppointmentFileStorage afs = new AppointmentFileStorage();
-            ObservableCollection<DoctorAppointment> appointments = afs.GetAllByPatient(patient.Id);
+            List<DoctorAppointment> appointments = DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(patient.Id);
             DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(appointments[0]));
             this.Visibility = Visibility.Collapsed;
         }
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ICollectionView app = CollectionViewSource.GetDefaultView(pfs.GetAll());
+            ObservableCollection<Patient> allPatients = new ObservableCollection<Patient> (PatientController.Instance.GetAll());
+            ICollectionView app = CollectionViewSource.GetDefaultView(allPatients);
            // app.Filter = delegate (object item)
             //{
            //     return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date;

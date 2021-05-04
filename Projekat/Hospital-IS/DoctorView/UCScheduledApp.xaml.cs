@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -16,12 +17,8 @@ using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for UCScheduledApp.xaml
-    /// </summary>
     public partial class UCScheduledApp : UserControl
     {
-        AppointmentFileStorage afs = new AppointmentFileStorage();
         private bool _started;
 
         public bool Started
@@ -41,17 +38,19 @@ namespace Hospital_IS.DoctorView
             }
         }
         public DoctorAppointment Appointment { get; }
-        public UCScheduledApp(DoctorAppointment appointment)
+        private UCPatientChart PatientChart;
+        public UCScheduledApp(UCPatientChart patientChart)
         {
             InitializeComponent();
-
-            ICollectionView view = new CollectionViewSource{ Source = afs.GetAllByPatient(appointment.Patient.Id)}.View; view.Filter = null;
+            PatientChart = patientChart;
+            ICollectionView view = new CollectionViewSource{ Source = DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(patientChart.Patient.Id)}.View; 
+            view.Filter = null;
             view.Filter = delegate (object item)
             {
-                return ((DoctorAppointment)item).Report == null && ((DoctorAppointment)item).AppointmentStart > DateTime.Now;
+                return ((DoctorAppointment)item).AppointmentStart > DateTime.Now;
             };
             dataGrid.DataContext = view;
-            Appointment = appointment;
+            Appointment = PatientChart.Appointment;
 
             if (!Started)
             {
@@ -66,7 +65,7 @@ namespace Hospital_IS.DoctorView
         private void NewApp_Click(object sender, RoutedEventArgs e)
         {
             (this.Parent as Grid).Visibility = Visibility.Collapsed;
-            DoctorHomePage.Instance.Home.Children.Add(new UCNewApp(Appointment));
+            DoctorHomePage.Instance.Home.Children.Add(new UCNewApp(PatientChart));
         }
     }
 }

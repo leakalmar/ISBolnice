@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Hospital_IS.DoctorView;
+using Controllers;
+using Service;
 
 namespace Hospital_IS
 {
@@ -16,22 +18,24 @@ namespace Hospital_IS
     /// </summary>
     public partial class MainWindow : Window
     {
-        PatientFileStorage pfs = new PatientFileStorage();
-        AppointmentFileStorage afs = new AppointmentFileStorage();
         FSDoctor dfs = new FSDoctor();
         RoomStorage rfs = new RoomStorage();
+        PatientFileStorage pfs = new PatientFileStorage();
+        AppointmentFileStorage afs = new AppointmentFileStorage();
         public static Patient PatientUser { get; set; }
-        public static Doctor DoctortUser { get; set; }
 
         //Dodala jer mi treba ista referenca svuda kako bi mogla da postavim selektovanje za combobox
-        public static ObservableCollection<Doctor> Doctors { get; set; }
-        public static ObservableCollection<Room> Rooms { get; set; }
+        public static List<Doctor> Doctors { get; set; }
+        public static List<Room> Rooms { get; set; }
+        public static List<Specialty> Specialties { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            Doctors = dfs.GetAll();
-            Rooms = rfs.GetAll();
+            Doctors = DoctorController.Instance.GetAll();
+            Rooms = RoomController.Instance.GetAllRooms();
+            Specialties = SpecializationController.Instance.GetAll();
+            UserService.Instance.GetAllUsersIDs();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -42,30 +46,23 @@ namespace Hospital_IS
 
         private void Login(object sender, RoutedEventArgs e)
         {
-            List<Patient> patients = pfs.GetAll();
-            Hospital.Instance.allAppointments=afs.GetAll();
+            List<Patient> patients = PatientController.Instance.GetAll();
 
             foreach (Patient p in patients)
             {
                 if (email.Text == p.Email && password.Password.ToString() == p.Password)
                 {
                     PatientUser = p;
-                    HomePatient.Instance.DoctorAppointment = afs.GetAllByPatient(p.Id);
                     HomePatient.Instance.Show();
                     this.Close();
                 }
             }
 
-            foreach (Doctor d in Doctors)
+            foreach (Doctor doctor in Doctors)
             {
-                if (email.Text == d.Email && password.Password.ToString() == d.Password)
+                if (email.Text == doctor.Email && password.Password.ToString() == doctor.Password)
                 {
-                    DoctortUser = d;
-                    DoctorHomePage.Instance.DoctorAppointment = afs.GetAllByDoctor(d.Id);
-                    DoctorHomePage.Instance.HomePage = new UserControlHomePage();
-                    DoctorHomePage.Instance.Appointments = new UCAppointments();
-                    DoctorHomePage.Instance.Patients = new UCPatients();
-                    DoctorHomePage.Instance.Home.Children.Add(DoctorHomePage.Instance.HomePage);
+                    DoctorHomePage.Instance.ChangeDoctor(doctor);
                     DoctorHomePage.Instance.Show();
                     this.Close();
                 }

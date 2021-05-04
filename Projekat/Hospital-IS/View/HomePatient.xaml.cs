@@ -1,4 +1,6 @@
-﻿using Model;
+﻿using Controllers;
+using Hospital_IS.Storages;
+using Model;
 using Storages;
 using System;
 using System.Collections.ObjectModel;
@@ -26,13 +28,14 @@ namespace Hospital_IS.View
         }
 
         public Patient Patient { get; set; }
-        public DoctorAppointment changedApp;
+        public DoctorAppointment rescheduledApp;
         public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
-        public HomePatient()
+        private HomePatient()
         {
             InitializeComponent();
 
             Patient = MainWindow.PatientUser;
+            DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(Patient.Id));
             /*Medicine medicine = new Medicine("Bromazepam", "1 tableta sadrži 1,5 mg, 3 mg, odnosno 6 mg bromazepama.",
                 "U osetljivih bolesnika, naročito kod većih doza, može se javiti blagi umor, pospanost i vrtoglavica," +
                 " a povremeno slabost mišića i ataksija. Ova neželjena dejstva mogu se izbeći prilagođavanjem doze.", "Doziranje je individualno." +
@@ -47,6 +50,10 @@ namespace Hospital_IS.View
             t1.FirstUsageTime = 8;
             Patient.MedicalHistory.AddTherapy(t);
             Patient.MedicalHistory.AddTherapy(t1);*/
+            /*Patient.TrollMechanism.TimeRange = 14;
+            Patient.TrollMechanism.AppointmentCounterInTimeRange = 2;
+            Patient.TrollMechanism.TrollCheckStartDate = new DateTime(2021, 4, 29);
+            Patient.TrollMechanism.IsTroll = false;*/
             this.DataContext = this;
             PersonalData.DataContext = Patient;
             DispatcherTimer dispatcherTimer = new DispatcherTimer
@@ -61,12 +68,12 @@ namespace Hospital_IS.View
         {
             DateTime time= DateTime.Now;
 
-            foreach (Therapy therapy in Patient.MedicalHistory.Therapies)
+            foreach (Therapy therapy in ChartController.Instance.GetTherapiesByPatient(HomePatient.Instance.Patient))
             {
                 int usageHourDifference = (int)24/therapy.TimesADay;
                 for (int i = 0; i < therapy.TimesADay; i++)
                 {
-                    if (time.AddHours(2).Hour == (therapy.FirstUsageTime + i * usageHourDifference) && time.Minute == 38)
+                    if (time.AddHours(2).Hour == (therapy.FirstUsageTime + i * usageHourDifference) && time.Minute == 00)
                     {
                         MessageBox.Show("Za 2 sata treba da popijete lek: " + therapy.Medicine.Name);
                     }
@@ -97,31 +104,32 @@ namespace Hospital_IS.View
             this.Hide();
         }
 
-        private void deleteAppointment(object sender, RoutedEventArgs e)
+        private void CancelAppointment(object sender, RoutedEventArgs e)
         {
             DoctorAppointment doctorApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
             DateTime today = DateTime.Today;
+            int dayLimiter = 3;
             if (doctorApp == null)
             {
                 MessageBox.Show("Izaberite termin!");
             }
-            else if (doctorApp.AppointmentStart.Date < today.AddDays(3))
+            else if (doctorApp.AppointmentStart.Date < today.AddDays(dayLimiter))
             {
                 MessageBox.Show("Ne možete otkazati termin na manje od 3 dana do termina!");
             }
             else
             {
-                Hospital.Instance.RemoveAppointment(doctorApp);
+                DoctorAppointmentController.Instance.RemoveAppointment(doctorApp);
                 DoctorAppointment.Remove(doctorApp);
                 doctorApp.Reserved = false;
             }
 
         }
 
-        private void changeAppointment(object sender, RoutedEventArgs e)
+        private void RescheduleAppointment(object sender, RoutedEventArgs e)
         {
-            changedApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
-            if (changedApp == null)
+            rescheduledApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
+            if (rescheduledApp == null)
             {
                 MessageBox.Show("Izaberite termin!");
             }
@@ -129,7 +137,7 @@ namespace Hospital_IS.View
             {
                 AppointmentPatient ap = new AppointmentPatient();
                 ap.Show();
-                ap.changeAppointment(changedApp);
+                ap.RescheduleAppointment(rescheduledApp);
             }
         }
 
@@ -138,9 +146,7 @@ namespace Hospital_IS.View
             MainWindow login = new MainWindow();
             login.Show();
             this.Hide();
-            AppointmentFileStorage afs = new AppointmentFileStorage();
-            afs.SaveAppointment(Hospital.Instance.allAppointments);
-            Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
+            PatientFileStorage pfs = new PatientFileStorage();
             pfs.UpdatePatient(Patient);
         }
 

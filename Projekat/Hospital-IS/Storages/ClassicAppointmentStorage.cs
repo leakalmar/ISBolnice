@@ -19,36 +19,16 @@ namespace Storages
             this.fileLocation = "../../../FileStorage/classicAppointment.json";
         }
 
-        public ObservableCollection<Appointment> GetAll()
+        public List<Appointment> GetAll()
         {
             String text = File.ReadAllText(this.fileLocation);
-            ObservableCollection<Appointment> allAppointments = JsonConvert.DeserializeObject<ObservableCollection<Appointment>>(text);
+            List<Appointment> allAppointments = JsonConvert.DeserializeObject<List<Appointment>>(text);
             return allAppointments;
         }
 
-        public ObservableCollection<Appointment> GetAllByRoomId(int roomId )
-        {
-            ObservableCollection<Appointment> appointments = GetAll();
+       
 
-           
-
-            ObservableCollection<Appointment> roomAppointment = new ObservableCollection<Appointment>();
-
-            foreach (Appointment appointment in appointments)
-            {
-              
-                if (appointment.Room == roomId)
-                {
-                    roomAppointment.Add(appointment);
-                   
-                }
-            }
-
-            return roomAppointment;
-
-        }
-
-        public void SaveAppointment(ObservableCollection<Appointment> allAppointments)
+        public void SaveAppointment(List<Appointment> allAppointments)
         {
             var file = JsonConvert.SerializeObject(allAppointments, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
             using (StreamWriter writer = new StreamWriter(this.fileLocation))
@@ -58,22 +38,5 @@ namespace Storages
         }
 
 
-        public ObservableCollection<DoctorAppointment> GetAllDocAppointmentsById(int roomId)
-        {
-            String text = File.ReadAllText(this.fileLocation);
-            ObservableCollection<DoctorAppointment> appointments = JsonConvert.DeserializeObject<ObservableCollection<DoctorAppointment>>(text);
-
-            ObservableCollection<DoctorAppointment> roomAppointment = new ObservableCollection<DoctorAppointment>();
-
-            foreach (DoctorAppointment appointment in appointments)
-            {
-
-                if (appointment.Room == roomId)
-                {
-                    roomAppointment.Add(appointment);
-                }
-            }
-            return roomAppointment;
-        }
     }
 }

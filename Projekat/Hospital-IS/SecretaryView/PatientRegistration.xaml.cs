@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Controllers;
+using Model;
+using Service;
+using System;
 using System.Windows;
 
 namespace Hospital_IS
@@ -8,7 +11,7 @@ namespace Hospital_IS
     /// </summary>
     public partial class PatientRegistration : Window
     {
-        public Model.Patient Patient { get; set; } = new Model.Patient();
+        public Patient Patient { get; set; } = new Patient();
         public UCPatientsView ucp;
         public PatientRegistration(UCPatientsView ucp)
         {
@@ -23,6 +26,8 @@ namespace Hospital_IS
 
         private void AddPatient(object sender, RoutedEventArgs e)
         {
+            Patient.Id = UserService.Instance.GenerateUserID();
+
             if (checkBox.IsChecked == true)
                 Patient.IsGuest = true;
 
@@ -43,8 +48,7 @@ namespace Hospital_IS
             Patient.Password = passwordBox.ToString();
             ucp.Patients.Add(Patient);
 
-            Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
-            pfs.SavePatient(Patient);
+            PatientController.Instance.AddPatient(Patient);
 
             this.Close();
         }

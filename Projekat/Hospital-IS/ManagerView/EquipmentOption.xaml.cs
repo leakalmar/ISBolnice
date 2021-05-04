@@ -1,7 +1,9 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,9 +34,8 @@ namespace Hospital_IS
 
            
             InitializeComponent();
-            this.DataContext = this;
-            TempRoom = Hospital.Room;
-            TempEquip = new ObservableCollection<Equipment>();
+           
+            Combo.DataContext = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
             Combo.SelectedIndex = index;
 
             currentRoom = room;
@@ -44,10 +45,7 @@ namespace Hospital_IS
             }
             if(currentRoom.Equipment != null)
             {
-                foreach (Equipment eq in currentRoom.Equipment)
-                {
-                    TempEquip.Add(eq);
-                }
+                DataGridEquipment.DataContext = new ObservableCollection<Equipment>(currentRoom.Equipment);
             }
         }
 
@@ -55,22 +53,44 @@ namespace Hospital_IS
         {
             InitializeComponent();
             this.DataContext = this;
-            TempRoom = Hospital.Room;
-            TempEquip = new ObservableCollection<Equipment>();
+
+            Combo.DataContext = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
+            DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
+
           
         }
 
         private void Combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            currentRoom = (Room)Combo.SelectedItem;
-            
-            TempEquip.Clear();
-            foreach (Equipment eq in currentRoom.Equipment)
+            Room room = (Room)Combo.SelectedItem;
+
+           
+           
+            if (room != null)
             {
-               
-                TempEquip.Add(eq);
+                if (room.Equipment != null)
+                {
+                    ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                    view.Filter = null;
+                    DataGridEquipment.DataContext = view;
+                }
+                else
+                {
+                    room.Equipment = new List<Equipment>();
+                    ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                    view.Filter = null;
+                    DataGridEquipment.DataContext = view;
+                }
             }
+            else
+            {
+
+                ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                view.Filter = null;
+                DataGridEquipment.DataContext = view;
+            }
+           
         }
 
 
@@ -93,7 +113,17 @@ namespace Hospital_IS
           
         }
 
-
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            if (SearchPanel.Visibility == Visibility.Collapsed)
+            {
+                SearchPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                SearchPanel.Visibility = Visibility.Collapsed;
+            }
+        }
 
         private void DeleteEquipment_Click(object sender, RoutedEventArgs e)
         {
@@ -130,7 +160,8 @@ namespace Hospital_IS
         {
             if(currentRoom.Type == RoomType.StorageRoom)
             {
-                AddEquipment addEquipment = new AddEquipment(currentRoom, currentIndex);
+              
+                AddEquipment addEquipment = new AddEquipment(currentRoom, Combo.SelectedIndex);
                 addEquipment.Show();
                 this.Hide();
             }
@@ -161,6 +192,83 @@ namespace Hospital_IS
             ControlTemplate ct = this.ComboTransfer.Template;
             Popup pop = ct.FindName("PART_Popup", this.ComboTransfer) as Popup;
             pop.Placement = PlacementMode.Top;
+        }
+
+        private void DataGridEquipment_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void SeacrhDateGrid_Click(object sender, RoutedEventArgs e)
+        {
+            String text = SearchBox.Text.ToLower();
+            String[] textSplit = text.Split(" ");
+
+
+            Room room = (Room)Combo.SelectedItem;
+            if (text.Length != 0)
+            {
+                if (room != null)
+                {
+                    ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                    view.Filter = null;
+                    view.Filter = delegate (object item)
+                    {
+                        String name = ((Equipment)item).Name.ToLower();
+                        int quantity = 0;
+                        try
+                        {
+                            quantity = Convert.ToInt32(textSplit[1]);
+                        }
+                        catch (Exception e)
+                        {
+                            quantity = 0;
+                        }
+                        return name.Contains(textSplit[0]) && ((Equipment)item).Quantity >= quantity;
+                    };
+                    DataGridEquipment.DataContext = view;
+                }
+            }
+            else
+            {
+                if (room != null)
+                {
+                    ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                    view.Filter = null;
+                    DataGridEquipment.DataContext = view;
+                }
+            }
+        }
+
+        private void ComboType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Room room = (Room)Combo.SelectedItem;
+            EquiptType type;
+            if (ComboType.SelectedIndex == 0)
+            {
+                type = EquiptType.Dynamic;
+            }
+            else
+            {
+                type = EquiptType.Stationary;
+
+            }
+
+            if (room != null)
+            {
+                ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                view.Filter = null;
+                view.Filter = delegate (object item)
+                {
+                    return ((Equipment)item).EquipType == type;
+                };
+                DataGridEquipment.DataContext = view;
+            }
+        }
+
+        private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            SearchBox.Text = "";
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Model
 {
@@ -9,6 +10,7 @@ namespace Model
         public String Text { get; set; }
         public DateTime DatePosted { get; set; }
         public DateTime LastChanged { get; set; }
+        public List<int> Recipients { get; set; } = new List<int>();
 
         public Notification(string title, string text, DateTime datePosted)
         {

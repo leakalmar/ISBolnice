@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows;
 
 namespace Hospital_IS.Storages
 {
@@ -16,10 +17,10 @@ namespace Hospital_IS.Storages
             this.fileLocation = "../../../FileStorage/doctors.json";
         }
 
-        public ObservableCollection<Doctor> GetAll()
+        public List<Doctor> GetAll()
         {
             String text = File.ReadAllText(this.fileLocation);
-            ObservableCollection<Doctor> doctors = JsonConvert.DeserializeObject<ObservableCollection<Doctor>>(text);
+            List<Doctor> doctors = JsonConvert.DeserializeObject<List<Doctor>>(text);
 
 
             /*
@@ -43,7 +44,7 @@ namespace Hospital_IS.Storages
 
         public void Save(Doctor doctor)
         {
-            ObservableCollection<Doctor> doctors = GetAll();
+            List<Doctor> doctors = GetAll();
             doctors.Add(doctor);
 
             var file = JsonConvert.SerializeObject(doctors, Formatting.Indented, new JsonSerializerSettings()
@@ -54,41 +55,6 @@ namespace Hospital_IS.Storages
             {
                 writer.Write(file);
             }
-        }
-        public Boolean UpdateDoctor(Doctor doctor)
-        {
-            ObservableCollection<Doctor> doctors = GetAll();
-
-            for (int i = 0; i < doctors.Count; i++)
-            {
-                if (doctor.Id.Equals(doctors[i].Id))
-                {
-                    doctors.Remove(doctors[i]);
-                    doctors.Insert(i, doctor);
-
-                    var file = JsonConvert.SerializeObject(doctors, Formatting.Indented);
-                    using (StreamWriter writer = new StreamWriter(this.fileLocation))
-                    {
-                        writer.Write(file);
-                    }
-
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public Model.Doctor GetByEmail(String email)
-        {
-            ObservableCollection<Doctor> doctors = GetAll();
-            for (int i = 0; i < doctors.Count; i++)
-            {
-                if (email.Equals(doctors[i].Email))
-                {
-                    return doctors[i];
-                }
-            }
-            return null;
         }
     }
 }

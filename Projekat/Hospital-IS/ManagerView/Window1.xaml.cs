@@ -11,6 +11,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Storages;
 using Model;
+using System.Collections.ObjectModel;
+using Controllers;
+using Hospital_IS.ManagerView;
 
 namespace Hospital_IS
 {
@@ -32,16 +35,16 @@ namespace Hospital_IS
         }
         private Window1()
         {
-            if (Hospital.Room == null)
-            {
-                Hospital.Room = roomStorage.GetAll();
                
-            }
             InitializeComponent();
-            DataGridRooms.DataContext = Hospital.Instance;
+            DataGridRooms.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
         }
 
-      
+        
+        public void refresh()
+        {
+            DataGridRooms.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
+        }
        
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -58,6 +61,7 @@ namespace Hospital_IS
 
         private void Eqiupment_Click(object sender, RoutedEventArgs e)
         {
+            EquipmentWindow.Instance.refresh();
             EquipmentWindow.Instance.Show();
            
             this.Hide();
@@ -71,6 +75,36 @@ namespace Hospital_IS
         }
 
         private void sobe_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OtherOptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (OtherOptions.Visibility == Visibility.Visible)
+            {
+                OtherOptions.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                OtherOptions.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void CloseOptions_Click(object sender, RoutedEventArgs e)
+        {
+            OtherOptions.Visibility = Visibility.Hidden;
+        }
+
+        private void MedicineView_Click(object sender, RoutedEventArgs e)
+        {
+            MedicineView medicineView = new MedicineView();
+            OtherOptions.Visibility = Visibility.Hidden;
+            medicineView.Show();
+            this.Hide();
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
         {
 
         }

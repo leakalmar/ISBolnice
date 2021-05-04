@@ -1,0 +1,34 @@
+﻿using Hospital_IS.Model;
+using Hospital_IS.Service;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Hospital_IS.Controllers
+{
+    public class PatientHospitalEvaluationController
+    {
+        private static PatientHospitalEvaluationController instance = null;
+        public static PatientHospitalEvaluationController Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new PatientHospitalEvaluationController();
+                }
+                return instance;
+            }
+        }
+
+        private PatientHospitalEvaluationController()
+        {
+        }
+
+        public void AddAppointmentEvaluation(int grade, String comment, DateTime evaluationDate, int patientId)
+        {
+            PatientHospitalEvaluationService.Instance.AddHospitalEvaluation(new PatientHospitalEvaluation(grade,comment,evaluationDate,patientId));
+        }
+
+    }
+}

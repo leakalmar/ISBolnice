@@ -37,10 +37,12 @@ namespace Hospital_IS.DoctorView
                 }
             }
         }
-        public UCTherapy(Patient patient)
+        private UCPatientChart PatientChart;
+        public UCTherapy(UCPatientChart patientChart)
         {
             InitializeComponent();
-            dataGrid.DataContext = patient;
+            PatientChart = patientChart;
+            dataGrid.DataContext = PatientChart.Patient;
 
             if (!Started)
             {

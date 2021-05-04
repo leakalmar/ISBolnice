@@ -1,4 +1,6 @@
-﻿using Model;
+﻿using Controllers;
+using DTOs;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,7 +36,7 @@ namespace Hospital_IS
 
             InitializeComponent();
             
-            AllAppointments = Hospital.Instance.getAllAppByTwoRoom(sourceRoom.RoomId,destinationRoom.RoomId);
+            AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(sourceRoom.RoomId,destinationRoom.RoomId));
            
             this.DataContext = this;
 
@@ -62,7 +64,8 @@ namespace Hospital_IS
                 corect = false;
             }
 
-           bool isSucces = Hospital.Instance.TransferEquipmentStatic(sourceRoom, destinationRoom, equip, quantity, dateTimeStart, dateTimeEnd, "dobar termin");
+            StaticTransferAppointmentDTO staticTransfer = new StaticTransferAppointmentDTO(sourceRoom, destinationRoom, equip, quantity, dateTimeStart, dateTimeEnd, "doabar");
+           bool isSucces = TransferController.Instance.ScheduleStaticTransfer(staticTransfer);
 
             if (!isSucces || !corect)
             {

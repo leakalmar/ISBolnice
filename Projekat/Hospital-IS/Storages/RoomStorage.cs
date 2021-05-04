@@ -11,57 +11,28 @@ namespace Storages
     public class RoomStorage
     {
         private String fileLocation ;
-        private ObservableCollection<Room> allRooms = new ObservableCollection<Room>();
+        private List<Room> allRooms = new List<Room>();
 
         public RoomStorage()
         {
-            this.fileLocation = "../../../FileStorage/rooms.xml";
+            this.fileLocation = "../../../FileStorage/rooms.json";
         }
 
-        public ObservableCollection<Room>  GetAll()
+        public List<Room>  GetAll()
         {
-            
-
-
-             if (File.ReadAllText("../../../FileStorage/rooms.xml").Trim().Equals(""))
-            {
-                return allRooms;
-            }
-            else
-            {
-                FileStream filestream = File.OpenRead("../../../FileStorage/rooms.xml");
-                XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Room>));
-                allRooms = (ObservableCollection<Room>)serializer.Deserialize(filestream);
-                filestream.Close();
-                return allRooms;
-            }
-            
-
+            String text = File.ReadAllText(this.fileLocation);
+            List<Room> allRooms = JsonConvert.DeserializeObject<List<Room>>(text);
+            return allRooms;
+         
         }
 
-
-        public ObservableCollection<Room> GetRoomsByType(RoomType type)
+        public void SaveRooms(List<Room> allRooms)
         {
-            ObservableCollection<Room> allRoomByType = new ObservableCollection<Room>();
-
-            foreach(Room room in GetAll())
+            var file = JsonConvert.SerializeObject(allRooms, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+            using (StreamWriter writer = new StreamWriter(this.fileLocation))
             {
-                if(room.Type == RoomType.StorageRoom)
-                {
-                    allRoomByType.Add(room);
-                }
+                writer.Write(file);
             }
-            return allRoomByType;
-        }
-
-        public void SaveRooms(ObservableCollection<Room> allRooms)
-        {
-
-
-            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Room>));
-            TextWriter filestream = new StreamWriter("../../../FileStorage/rooms.xml");
-            serializer.Serialize(filestream, allRooms);
-            filestream.Close();
         }
 
     }

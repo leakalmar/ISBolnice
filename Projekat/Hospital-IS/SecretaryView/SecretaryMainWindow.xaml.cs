@@ -41,21 +41,6 @@ namespace Hospital_IS
             dispatcherTimer.Start();
 
             HomePage.Content = ucp;
-
-            // this.DataContext = this;
-
-            /*ObservableCollection<String> alergije = new ObservableCollection<String>();
-            alergije.Add("Tetanus");
-            alergije.Add("Paracetamol");
-            Model.Patient p1 = new Model.Patient(1111, "Marko", "Marković", new DateTime(1998, 12, 18), "markoa@gmail.com", "sifra", "Cara Dušana 4", DateTime.Now, "", alergije);
-            Model.Patient p2 = new Model.Patient(1212, "Nikolina", "Perić", new DateTime(1972, 10, 12), "nikolina@gmail.com", "sifra", "Bulevar Evrope 11", DateTime.Now, "", null);
-            Model.Patient p3 = new Model.Patient(2314, "Ana", "Zorić", new DateTime(1995, 11, 12), "ana@gmail.com", "sifra", "Bulevar Evrope 21", DateTime.Now, "", null);
-            Model.Patient p4 = new Model.Patient(1234, "Petar", "Petrović", new DateTime(2000, 12, 9), "petar@gmail.com", "sifra", "Šekspirova 18", DateTime.Now, "", null);
-            Patients.Add(p1);
-            Patients.Add(p2);
-            Patients.Add(p3);
-            Patients.Add(p4);*/
-
         }
 
 

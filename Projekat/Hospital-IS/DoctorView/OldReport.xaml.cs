@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -14,13 +15,10 @@ using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for OldReport.xaml
-    /// </summary>
     public partial class OldReport : Window
     {
         private DoctorAppointment NowAppointment;
-        private DoctorAppointment Appointment;
+        private Report Report;
         private bool _started;
 
         public bool Started
@@ -36,19 +34,19 @@ namespace Hospital_IS.DoctorView
                 }
             }
         }
-        public OldReport(DoctorAppointment appointment, DoctorAppointment nowAppointment)
+        public OldReport(Report report, DoctorAppointment nowAppointment)
         {
             InitializeComponent();
-            
 
-            Appointment = appointment;
+
+            Report = report;
             NowAppointment = nowAppointment;
-            reportDetail2.Text = Appointment.Report.Amnesis;
-            reportDetail.Text = Appointment.Report.Amnesis;
-            medicines.DataContext = Appointment.Patient.MedicalHistory.GetPresciptionByReport(Appointment.AppointmentStart);
-            name.Content = Appointment.Doctor.Name;
-            surname.Content = Appointment.Doctor.Surname;
-            date.Content = Appointment.AppointmentStart;
+            reportDetail2.Text = Report.Anamnesis;
+            reportDetail.Text = Report.Anamnesis;
+            medicines.DataContext = ChartController.Instance.GetPrescriptionsForReport(NowAppointment.Patient, Report);
+            name.Content = Report.DoctorName;
+            surname.Content = Report.DoctorSurname;
+            date.Content = Report.ReportId;
 
         }
 
@@ -58,26 +56,26 @@ namespace Hospital_IS.DoctorView
             {
                 if (Started)
                 {
-                    Hospital.Instance.RemoveAppointment(Appointment);
-                    Appointment.Report.Amnesis = reportDetail.Text;
-                    Hospital.Instance.AddAppointment(Appointment);
-                    AppointmentFileStorage apf = new AppointmentFileStorage();
-                    apf.SaveAppointment(Hospital.Instance.allAppointments);
+                    //ovde bi isao update reporta
+                    //DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
+                    //Report.Anamnesis = reportDetail.Text;
+                    //DoctorAppointmentController.Instance.AddAppointment(Appointment);
+                    ChartController.Instance.UpdateReport(NowAppointment.Patient, Report, reportDetail.Text, medicines.Items.Count);
                 }
 
                 DoctorHomePage.Instance.Home.Children.Clear();
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
             if (Started)
             {
-                Hospital.Instance.RemoveAppointment(Appointment);
-                Appointment.Report.Amnesis = reportDetail.Text;
-                Hospital.Instance.AddAppointment(Appointment);
-                AppointmentFileStorage apf = new AppointmentFileStorage();
-                apf.SaveAppointment(Hospital.Instance.allAppointments);
+                //ovde bi isao update reporta
+                //DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
+                //Appointment.Report.Anamnesis = reportDetail.Text;
+                //DoctorAppointmentController.Instance.AddAppointment(Appointment);
+                ChartController.Instance.UpdateReport(NowAppointment.Patient, Report, reportDetail.Text, medicines.Items.Count);
             }
 
             this.Close();

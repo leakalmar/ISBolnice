@@ -1,4 +1,6 @@
-﻿using Hospital_IS.Storages;
+﻿using Hospital_IS.Controllers;
+using Hospital_IS.SecretaryView;
+using Hospital_IS.Storages;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -15,13 +17,11 @@ namespace Hospital_IS
     public partial class UCNotificationsView : UserControl
     {
         public ObservableCollection<Notification> Notifications { get; set; } = new ObservableCollection<Notification>();
-        private NotificationFileStorage nfs = new NotificationFileStorage();
 
         public UCNotificationsView()
         {
             InitializeComponent();
-            List<Notification> notifications = nfs.GetAll();
-            Notifications = new ObservableCollection<Notification>(notifications);
+            Notifications = new ObservableCollection<Notification>(NotificationController.Instance.GetAll());
 
 
             if (Notifications.Count > 0)
@@ -29,10 +29,20 @@ namespace Hospital_IS
 
         }
 
+        public void RefreshList()
+        {
+            if (Notifications != null)
+                Notifications.Clear();
+
+            NotificationController.Instance.ReloadNotifications();
+            Notifications = new ObservableCollection<Notification>(NotificationController.Instance.GetAll());
+            ListViewNotifications.ItemsSource = Notifications;
+        }
+
         private void ShowNotification(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            Notification n = findNotification(Int32.Parse(button.Tag.ToString()));
+            Notification n = FindNotification(Int32.Parse(button.Tag.ToString()));
             NotificationView nv = new NotificationView(n);
             nv.Show();
 
@@ -44,7 +54,7 @@ namespace Hospital_IS
             cn.Show();
         }
 
-        private Notification findNotification(int id)
+        private Notification FindNotification(int id)
         {
             for (int i = 0; i < Notifications.Count; i++)
             {
@@ -54,5 +64,12 @@ namespace Hospital_IS
             return null;
         }
 
+        private void UpdateNotification(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Notification n = FindNotification(Int32.Parse(button.Tag.ToString()));
+            UpdateNotification un = new UpdateNotification(n, this);
+            un.Show();
+        }
     }
 }

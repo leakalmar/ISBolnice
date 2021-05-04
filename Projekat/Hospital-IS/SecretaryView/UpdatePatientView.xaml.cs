@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Controllers;
+using Model;
+using System;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
 
 namespace Hospital_IS
@@ -12,10 +12,10 @@ namespace Hospital_IS
     public partial class UpdatePatientView : Window
     {
         public ObservableCollection<String> Allergies { get; set; }
-        public Model.Patient Patient { get; set; }
+        public Patient Patient { get; set; }
         public UCPatientsView ucp;
 
-        public UpdatePatientView(Model.Patient patient, UCPatientsView ucp)
+        public UpdatePatientView(Patient patient, UCPatientsView ucp)
         {
             InitializeComponent();
             Patient = patient;
@@ -29,14 +29,15 @@ namespace Hospital_IS
                     genComboBox.SelectedIndex = 1;
             }
 
-            if (Patient.Education.Equals(Model.EducationCategory.GradeSchool))
+            if (Patient.Education.Equals(EducationCategory.GradeSchool))
                 eduComboBox.SelectedIndex = 0;
-            else if (Patient.Education.Equals(Model.EducationCategory.HighSchool))
+            else if (Patient.Education.Equals(EducationCategory.HighSchool))
                 eduComboBox.SelectedIndex = 1;
-            else if (Patient.Education.Equals(Model.EducationCategory.College))
+            else if (Patient.Education.Equals(EducationCategory.College))
                 eduComboBox.SelectedIndex = 2;
 
-            Allergies = new ObservableCollection<String>(Patient.Alergies);
+            if (Patient.Alergies != null)
+                Allergies = new ObservableCollection<String>(Patient.Alergies);
 
             this.DataContext = this;
         }
@@ -49,11 +50,11 @@ namespace Hospital_IS
                 Patient.Gender = "Muško";
 
             if (eduComboBox.SelectedIndex == 0)
-                Patient.Education = Model.EducationCategory.GradeSchool;
+                Patient.Education = EducationCategory.GradeSchool;
             else if (eduComboBox.SelectedIndex == 1)
-                Patient.Education = Model.EducationCategory.HighSchool;
+                Patient.Education = EducationCategory.HighSchool;
             else if (eduComboBox.SelectedIndex == 2)
-                Patient.Education = Model.EducationCategory.College;
+                Patient.Education = EducationCategory.College;
 
 
             try
@@ -69,8 +70,8 @@ namespace Hospital_IS
 
             ucp.dataGridPatients.ItemsSource = null;
             ucp.dataGridPatients.ItemsSource = ucp.Patients;
-            Storages.PatientFileStorage pfs = new Storages.PatientFileStorage();
-            pfs.UpdatePatient(Patient);
+
+            PatientController.Instance.UpdatePatient(Patient);
 
             this.Close();
         }

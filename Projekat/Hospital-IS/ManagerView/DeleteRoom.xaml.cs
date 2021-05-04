@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Controllers;
+using Model;
 using System.Windows;
 
 namespace Hospital_IS
@@ -17,13 +18,20 @@ namespace Hospital_IS
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Manager.Instance.RemoveRoom(roomDelete);
+            RoomController.Instance.RemoveRoom(roomDelete);
+
+         
             this.Close();
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.Show();
             this.Close();
+
         }
     }
 }

@@ -29,26 +29,7 @@ namespace Model
         }
 
 
-        public Boolean AddRoom(Room newroom)
-        {
-
-            Hospital.Instance.AddRoom(newroom);
-
-            return true;
-        }
-
-        public Boolean RemoveRoom(Room room)
-        {
-            Hospital.Instance.RemoveRoom(room);
-            return true;
-        }
-
-        public void UpdateRoom(int oldIndex, Room room)
-        {
-
-            Hospital.Instance.UpdateRoom(room);
-
-        }
+       
 
 
         public Boolean MakeAppointment(Room room)

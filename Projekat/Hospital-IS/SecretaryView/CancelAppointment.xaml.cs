@@ -1,4 +1,6 @@
-﻿using Hospital_IS.Storages;
+﻿using Controllers;
+using Hospital_IS.Controllers;
+using Hospital_IS.Storages;
 using Model;
 using Storages;
 using System;
@@ -24,10 +26,9 @@ namespace Hospital_IS.SecretaryView
 
             sendNotification(appointment);
 
-            uca.Appointments.Remove(appointment);
-            Hospital.Instance.RemoveAppointment(appointment);
-            AppointmentFileStorage afs = new AppointmentFileStorage();
-            afs.SaveAppointment(Hospital.Instance.allAppointments);
+            DoctorAppointmentController.Instance.RemoveAppointment(appointment);
+            uca.RefreshGrid();
+
             this.Close();
         }
 
@@ -39,19 +40,10 @@ namespace Hospital_IS.SecretaryView
                 + appointment.AppointmentStart.ToString("HH:mm") + "h je otkazan.";
 
             Notification notification = new Notification(title, text, DateTime.Now);
+            notification.Recipients.Add(appointment.Patient.Id);
+            notification.Recipients.Add(appointment.Doctor.Id);
 
-            NotificationFileStorage nfs = new NotificationFileStorage();
-            nfs.SaveNotification(notification);
-
-            PatientFileStorage pfs = new PatientFileStorage();
-            Patient patient = pfs.GetPatientById(appointment.Patient.Id);
-            patient.addNotification(notification.Id);
-            pfs.UpdatePatient(patient);
-
-            FSDoctor fsd = new FSDoctor();
-            Doctor doctor = fsd.GetByEmail(appointment.Doctor.Email);
-            doctor.addNotification(notification.Id);
-            fsd.UpdateDoctor(doctor);
+            NotificationController.Instance.AddNotification(notification);
         }
 
         private void Close(object sender, RoutedEventArgs e)

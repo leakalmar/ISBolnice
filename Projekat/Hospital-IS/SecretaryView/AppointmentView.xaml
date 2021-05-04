@@ -63,7 +63,7 @@
                    Name="txtDuration"/>
         <TextBlock Grid.Column="2" Grid.Row="6" Margin="20 5" Text="{Binding DocAppointment.Room}"/>
         <TextBox Grid.Column="2" Grid.Row="7" Grid.RowSpan="2"  Height="80" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                 Margin="20 5" IsEnabled="False" Text="{Binding DocAppointment.Detail}"
+                 Margin="20 5" IsEnabled="False" Text="{Binding DocAppointment.AppointmentCause}"
                  VerticalAlignment="Top" FontSize="13" TextWrapping="Wrap"/>
 
         <Button Grid.Row="8" Grid.ColumnSpan="4" Content="OK"

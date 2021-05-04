@@ -98,7 +98,7 @@
                 </Grid.ColumnDefinitions>
                 <Label Content="Izaberite datum pregleda:" Grid.Column="0"  HorizontalAlignment="Left" FontSize="18" Margin="10,0,0,127" Background="{x:Null}"/>
                 <DatePicker x:Name="Calendar" Grid.Column="1" Margin="5,0,427,127" FontSize="14" SelectedDateFormat="Short" Height="28"/>
-                <Button x:Name="showApp" Grid.Column="1" Margin="394,120,86,14" Foreground="#FFFDFDFD" Cursor="Hand" Click="showAvailableApp">
+                <Button x:Name="showApp" Grid.Column="1" Margin="394,120,86,14" Foreground="#FFFDFDFD" Cursor="Hand" Click="ShowAvailableApp">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="20,20,20,20"/>
@@ -124,7 +124,7 @@
                 <RadioButton x:Name="TimePriority" GroupName="Priority" Margin="150,121,400,0" Grid.Column="2" Content="Vreme" FontSize="18" VerticalAlignment="Top"/>
             </Grid>
 
-            <DataGrid x:Name="listOfAppointments" CanUserResizeRows="False" CanUserAddRows="False" Grid.Column="3" ItemsSource="{Binding AvailableAppoitments, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="2" Margin="110,10,100,50" AutoGenerateColumns="False" Height="233" Width="600">
+            <DataGrid x:Name="listOfAppointments" CanUserResizeRows="False" CanUserAddRows="False" Grid.Column="3" ItemsSource="{Binding AvailableAppointments, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="2" Margin="110,10,100,50" AutoGenerateColumns="False" Height="233" Width="600" RowHeaderWidth="0">
                 <DataGrid.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="0,0,20,20"/>
@@ -132,7 +132,14 @@
                 </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Vreme i datum" Width="200" Binding="{Binding AppointmentStart,StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" CanUserResize="False" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor.Surname}" Width="200"/>
+                    <DataGridTextColumn Header="Doktor"  Width="200">
+                        <DataGridTextColumn.Binding>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path=" Doctor.Name"/>
+                                <Binding Path=" Doctor.Surname"/>
+                            </MultiBinding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
                     <DataGridTextColumn Header="Soba" Binding="{Binding Room}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
@@ -151,7 +158,7 @@
                     </LinearGradientBrush>
                 </Button.Background> Zakaži
             </Button>
-            <Button x:Name="change" Grid.Column="1"  Margin="250,10,250,30" FontSize="24" Foreground="White" Cursor="Hand" Click="changeAppointmentButton" Visibility="Collapsed">
+            <Button x:Name="change" Grid.Column="1"  Margin="250,10,250,30" FontSize="24" Foreground="White" Cursor="Hand" Click="RescheduleAppointmentButton" Visibility="Collapsed">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20,20,20,20"/>

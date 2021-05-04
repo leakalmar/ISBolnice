@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Controllers;
 using Model;
 
 namespace Hospital_IS
@@ -19,8 +21,7 @@ namespace Hospital_IS
     public partial class EquipmentWindow : Window
     {
 
-        public ObservableCollection<Room> TempRoom { get; set; }
-        public ObservableCollection<Equipment> TempEquip { get; set; }
+      
         private static EquipmentWindow instance = null;
         public static EquipmentWindow Instance
         {
@@ -36,11 +37,12 @@ namespace Hospital_IS
         private EquipmentWindow()
         {
             InitializeComponent();
-            
-            this.DataContext = this;
-           
-            TempRoom = Hospital.Room;
-            TempEquip = new ObservableCollection<Equipment>();
+
+
+
+            DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
+
+            Combo.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
             DispatcherTimer dispatcherTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMinutes(1)
@@ -50,20 +52,30 @@ namespace Hospital_IS
 
         }
 
+
+        public void refresh()
+        {
+          
+            Combo.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
+           
+        }
+
         private void timer_Tick(object sender, EventArgs e)
         {
             DateTime time = DateTime.Now;
+
+            MessageBox.Show(Convert.ToString(TransferController.Instance.GetAllTransfers().Count));
            
-            foreach(Room r in Hospital.Room)
+            foreach(Room r in RoomController.Instance.GetAllRooms())
             {
-                foreach(Transfer trans in r.TransferList)
+                foreach(Transfer trans in TransferController.Instance.GetAllTransfers())
                 {
-                    MessageBox.Show(Convert.ToString(time));
+                   
                     if (trans.TransferEnd <= time && trans.isMade == false)
                     {
                        trans.isMade = true;
-                       Hospital.Instance.TransferStaticEquipment(trans.SourceRoomId, trans.DestinationRoomId, trans.Equip, trans.Quantity);
-                      
+                       TransferController.Instance.ExecuteStaticTransfer(trans);
+                        
                        MessageBox.Show("Uspjesan transfer");
                     
                         
@@ -82,20 +94,18 @@ namespace Hospital_IS
         {
             if (room != null)
             {
-                TempEquip.Clear();
-                if(room.Equipment != null)
+                if (room.Equipment != null)
                 {
-                    foreach (Equipment eq in room.Equipment)
-                    {
-
-                        TempEquip.Add(eq);
-                    }
+                    DataGridEquipment.DataContext = new ObservableCollection<Equipment>(room.Equipment);
                 }
-                
-            }
+                else
+                {
+                    DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
+                }
+            }   
             else
             {
-                TempEquip = new ObservableCollection<Equipment>();
+                DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
             }
             Combo.SelectedIndex = index;
 
@@ -109,23 +119,123 @@ namespace Hospital_IS
 
         }
 
+
+
         private void Combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
+
             Room room = (Room)Combo.SelectedItem;
-            TempEquip.Clear();
-            if(room != null)
+
+           
+           
+            if (room != null)
             {
                 if (room.Equipment != null)
                 {
-                    foreach (Equipment eq in room.Equipment)
-                    {
-
-                        TempEquip.Add(eq);
-                    }
+                    ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                    view.Filter = null;
+                    DataGridEquipment.DataContext = view;
+                }
+                else
+                {
+                    room.Equipment = new List<Equipment>();
+                    ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                    view.Filter = null;
+                    DataGridEquipment.DataContext = view;
                 }
             }
+            else
+            {
+
+                ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                view.Filter = null;
+                DataGridEquipment.DataContext = view;
+            }
            
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            if(SearchPanel.Visibility == Visibility.Collapsed)
+            {
+                SearchPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                SearchPanel.Visibility = Visibility.Collapsed;
+            }
+        }
+        
+
+        private void SeacrhDateGrid_Click(object sender, RoutedEventArgs e)
+        {
+            String text = SearchBox.Text.ToLower();
+            String[] textSplit = text.Split(" ");
+           
+
+            Room room = (Room)Combo.SelectedItem;
+            if (text.Length != 0)
+            {
+                if (room != null)
+                {
+                    ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                    view.Filter = null;
+                   view.Filter = delegate (object item)
+                   {
+                       String name = ((Equipment)item).Name.ToLower();
+                       int quantity = 0;
+                       try
+                       {
+                            quantity = Convert.ToInt32(textSplit[1]);
+                       }catch(Exception e)
+                       {
+                            quantity = 0;
+                       }
+                       return name.Contains(textSplit[0]) && ((Equipment)item).Quantity >= quantity;
+                   };
+                    DataGridEquipment.DataContext = view;
+                }
+            }
+            else
+            {
+                if (room != null)
+                {
+                    ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                    view.Filter = null;
+                    DataGridEquipment.DataContext = view;
+                }
+            }
+        }
+
+        private void ComboType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Room room = (Room)Combo.SelectedItem;
+            EquiptType type;
+            if(ComboType.SelectedIndex == 0)
+            {
+                type = EquiptType.Dynamic;
+            }
+            else
+            {
+                type = EquiptType.Stationary;
+
+            }
+
+            if (room != null)
+            {
+                ICollectionView view = new CollectionViewSource { Source = room.Equipment }.View;
+                view.Filter = null;
+                 view.Filter = delegate (object item)
+                {
+                    return ((Equipment)item).EquipType == type;
+                };
+                DataGridEquipment.DataContext = view;
+            }
+        }
+
+        private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            SearchBox.Text = "";
         }
     }
 }

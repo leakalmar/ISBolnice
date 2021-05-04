@@ -21,10 +21,10 @@
 
 
     <Grid >
-        <DataGrid x:Name="DataGridEquipment"  IsReadOnly="True" ItemsSource="{Binding Path= TempEquip}" AlternatingRowBackground="NavajoWhite"
+        <DataGrid x:Name="DataGridEquipment"  IsReadOnly="True" ItemsSource="{Binding}" AlternatingRowBackground="NavajoWhite"
                   SelectionMode="Single"
                   Height="350" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="350" Background="#FFC5DBDF" AutoGenerateColumns="False" 
-                  Margin="0,173,0,0" >
+                  Margin="0,223,0,0" >
             <DataGrid.CellStyle>
                 <Style/>
             </DataGrid.CellStyle>
@@ -122,12 +122,17 @@
             </Grid>
 
         </StackPanel>
+
         <StackPanel Height="70" Background="White" Margin="0,0,0,680" Grid.ColumnSpan="6" Grid.RowSpan="5" HorizontalAlignment="Left" Width="430">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3"/>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="5"/>
                     <ColumnDefinition Width="40"/>
                     <ColumnDefinition Width="15"/>
                 </Grid.ColumnDefinitions>
@@ -138,7 +143,7 @@
                     <RowDefinition/>
                     <RowDefinition Height="3"/>
                 </Grid.RowDefinitions>
-                <Button Grid.RowSpan="2" BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9">
+                <Button  Grid.RowSpan="2" BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -148,22 +153,64 @@
                         <Image Source="pack://application:,,,/Resources/menubar.png" Width="55" Height="64" />
                     </StackPanel>
                 </Button>
-                <TextBlock Grid.RowSpan="2"  Text="Oprema" Grid.Column="2" Grid.Row ="1" FontWeight="SemiBold" Margin="25,15,0,0" FontSize="25" VerticalAlignment="Top" Foreground="#624cfc"/>
-                <Button Grid.RowSpan="2" BorderThickness="0" Grid.Column="3" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9" Click="Button_Click" >
+                <TextBlock Grid.RowSpan="2"  Text="Sobe" Grid.Column="2" Grid.Row ="1" FontWeight="SemiBold" Margin="25,15,0,0" FontSize="25" VerticalAlignment="Top" Foreground="#624cfc"/>
+                <Button Grid.RowSpan="2" BorderThickness="0" Grid.Column="7" Grid.Row="1" Width="40" Background="White" Margin="0,0,0,9" Click="Button_Click">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
                         </Style>
                     </Button.Resources>
                     <StackPanel>
-                        <Image Source="pack://application:,,,/Resources/options.png" HorizontalAlignment="Left" Width="55" Height="64" RenderTransformOrigin="0.5,0.57" />
+                        <Image Source="pack://application:,,,/Resources/options.png" HorizontalAlignment="Left" Width="50" Height="64" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="Search" Grid.RowSpan="2" BorderThickness="0" Grid.Column="5" Grid.Row="1" Width="50" Background="White" Margin="0,0,0,9" >
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/question.png"  Width="50" Height="64" />
+                    </StackPanel>
+                </Button>
+                <Button Grid.RowSpan="2" BorderThickness="0" Grid.Column="3" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9" Click="Search_Click">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/search.png"  Width="50" Height="64" />
                     </StackPanel>
                 </Button>
             </Grid>
         </StackPanel>
-        <ComboBox x:Name="Combo"  ItemsSource="{Binding Path=TempRoom}" DisplayMemberPath="RoomIdType"   HorizontalAlignment="Left" Margin="177,128,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Combo_SelectionChanged"/>
-        <TextBox HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" FontSize="15" Foreground="White" Margin="40,128,0,0"  Text="Izaberite sobu:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        
+        <ComboBox x:Name="Combo"  ItemsSource="{Binding}" DisplayMemberPath="RoomIdType"   HorizontalAlignment="Left" Margin="165,86,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Combo_SelectionChanged"/>
+        <TextBox HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" FontSize="15" Foreground="White" Margin="40,86,0,0"  Text="Izaberite sobu:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <StackPanel x:Name="SearchPanel" Visibility="Collapsed" Background="Transparent" Margin="40,162,110,563" >
+            <Grid Width="288">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Pretrazi:" Foreground="White" FontSize="15"/>
+                <TextBox x:Name="SearchBox" Text="Unesite ime kolicina" Grid.Column="2" Height="25" FontSize="14"  GotFocus="SearchBox_GotFocus" />
+                <Button x:Name="SeacrhDateGrid" BorderThickness="0" Grid.Column="3" Height="20" Width="20" HorizontalAlignment="Left" Background="Transparent" Click="SeacrhDateGrid_Click">
+                    <StackPanel >
+                        <Image Source="pack://application:,,,/Resources/search.png" Width="20" Height="20" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </StackPanel>
+        <TextBox HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" FontSize="15" Foreground="White" Margin="40,124,0,0"  Text="Izaberite tip:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboType"   HorizontalAlignment="Left" Margin="165,123,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboType_SelectionChanged" >
+            <ComboBoxItem Content="Dinamicka"/>
+            <ComboBoxItem Content="Staticka"/>
+        </ComboBox>
+
 
     </Grid>
 </Window>

@@ -5,15 +5,13 @@ namespace Model
 {
     public class DoctorAppointment : Appointment
     {
-        public String Cause { get; set; }
-        public String Detail { get; set; }
-
         public String NameSurnamePatient { get; set; }
         public String AppTypeText { get; set; }
+        public bool IsUrgent { get; set; } = false;
 
 
         [JsonConstructor]
-        public DoctorAppointment(DateTime date, AppointmetType type, bool reserved, int room, Doctor doc, Patient patient) : base(date, type, reserved, room)
+        public DoctorAppointment(DateTime date, AppointmentType type, bool reserved, int room, Doctor doc, Patient patient) : base(date, type, reserved, room)
         {
             if (patient != null)
                 this.NameSurnamePatient = patient.Name + " " + patient.Surname;
@@ -25,11 +23,24 @@ namespace Model
         {
         }
         
-        public DoctorAppointment(DateTime dateStart, DateTime dateEnd, AppointmetType type, int room, Doctor doc, Patient patient) : base(dateStart, dateEnd, type, room)
+        public DoctorAppointment(DateTime dateStart, DateTime dateEnd, AppointmentType type, int room, Doctor doc, Patient patient) : base(dateStart, dateEnd, type, room)
         {
             this.NameSurnamePatient = patient.Name + " " + patient.Surname;
             this.Doctor = doc;
             this.Patient = patient;
+        }
+
+        public DoctorAppointment(DoctorAppointment docApp) 
+        {
+            this.Reserved = docApp.Reserved;
+            this.AppointmentCause = docApp.AppointmentCause;
+            this.AppointmentStart = docApp.AppointmentStart;
+            this.AppointmentEnd = docApp.AppointmentEnd;
+            this.Type = docApp.Type;
+            this.Room = docApp.Room;
+            this.Doctor = docApp.Doctor;
+            this.Patient = docApp.Patient;
+            this.AppTypeText = docApp.AppTypeText;
         }
 
         public void SetAdmitted(Patient patient)
@@ -41,7 +52,7 @@ namespace Model
 
         public Doctor Doctor { get; set; }
 
-        public Model.Report Report { get; set; }
+        public bool IsFinished { get; set; }
 
     }
 }
