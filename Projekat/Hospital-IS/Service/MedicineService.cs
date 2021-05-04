@@ -55,6 +55,11 @@ namespace Service
             }
         }
 
+        internal void DeleteMedicine(Medicine medicine)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddNewMedicine(Medicine medicine)
         {
             AllMedicines.Add(medicine);

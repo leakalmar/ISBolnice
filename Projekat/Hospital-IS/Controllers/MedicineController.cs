@@ -47,5 +47,10 @@ namespace Controllers
         {
             MedicineService.Instance.AddNewMedicine(medicine);
         }
+
+        internal void DeleteMedicine(Medicine medicine)
+        {
+            MedicineService.Instance.DeleteMedicine(medicine);
+        }
     }
 }
