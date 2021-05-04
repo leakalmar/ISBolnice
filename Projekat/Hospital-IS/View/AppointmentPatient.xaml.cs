@@ -130,7 +130,7 @@ namespace Hospital_IS.View
             }
             
             AvailableAppointments.Clear();
-            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.Text, doctor, HomePatient.Instance.Patient, date, false);
+            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.Text, docApp.Doctor, HomePatient.Instance.Patient, date, false);
             List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(possibleAppointment);
             foreach (DoctorAppointment doctorAppointment in docApps)
             {
