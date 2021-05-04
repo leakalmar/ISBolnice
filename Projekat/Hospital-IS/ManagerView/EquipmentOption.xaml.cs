@@ -35,7 +35,7 @@ namespace Hospital_IS
            
             InitializeComponent();
            
-            Combo.DataContext = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
+            Combo.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
             Combo.SelectedIndex = index;
 
             currentRoom = room;
@@ -54,7 +54,7 @@ namespace Hospital_IS
             InitializeComponent();
             this.DataContext = this;
 
-            Combo.DataContext = new ObservableCollection<Room>(RoomController.Instance.getAllRooms());
+            Combo.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
             DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
 
           
