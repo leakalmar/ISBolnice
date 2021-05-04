@@ -38,6 +38,7 @@ namespace Hospital_IS.DoctorView
                     }
                 }
                 calendar.SelectedDate = DateTime.Now.Date;
+                FindAppointments((Doctor)doctors.SelectedItem, (Room)rooms.SelectedItem, new List<DateTime>(calendar.SelectedDates));
             }
         }
 
@@ -88,34 +89,16 @@ namespace Hospital_IS.DoctorView
                 dates = new List<DateTime>(calendar.SelectedDates);
             }
 
+            FindAppointments(doc, room, dates);
+
+        }
+
+        private void FindAppointments(Doctor doc, Room room, List<DateTime> dates)
+        {
             TimeSpan duration = Appointment.AppointmentEnd - Appointment.AppointmentStart;
             List<DoctorAppointment> list = DoctorAppointmentController.Instance.GetSuggestedAppointmentsByDoctor(dates, Appointment.IsUrgent, room, Appointment.Type, duration, Appointment.Patient, doc);
             ObservableCollection<DoctorAppointment> possibleAppointments = new ObservableCollection<DoctorAppointment>(list);
-
-            /*ICollectionView view = new CollectionViewSource { Source = possibleAppointments }.View;
-            view.Filter = null;
-            view.Filter = delegate (object item)
-            {
-                bool found = false;
-                foreach (DoctorAppointment dapp in DoctorAppointmentController.Instance.GetAllByDoctor(doc.Id))
-                {
-                    found = ((DoctorAppointment)item).Room.Equals(room.RoomId) & ((DoctorAppointment)item).AppointmentStart.Equals(dapp.AppointmentStart);
-                }
-
-                if (!found) 
-                {
-                    foreach (Appointment app in Hospital.Instance.GetAllAppByRoom(room))
-                    {
-                        found = app.AppointmentStart > ((DoctorAppointment)item).AppointmentStart & app.AppointmentEnd < ((DoctorAppointment)item).AppointmentStart;
-                    }
-                }
-                
-
-                //ako ga je pronasao znaci da ne treba da prikazuje
-                return !found;
-            };*/
             app.DataContext = possibleAppointments;
-
         }
 
         private void ChangeApp_KeyDown(object sender, KeyEventArgs e)

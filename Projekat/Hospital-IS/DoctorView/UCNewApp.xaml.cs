@@ -288,8 +288,6 @@ namespace Hospital_IS.DoctorView
             DoctorHomePage.Instance.Home.Children.Add(PatientChart);
         }
 
-        }
-
         private void emergency_Click(object sender, RoutedEventArgs e)
         {
             if (Emergency == false)
