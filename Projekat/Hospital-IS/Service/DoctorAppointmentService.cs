@@ -552,7 +552,7 @@ namespace Service
 
         public List<DoctorAppointment> GetAllByDoctorAndDates(int idDoctor, List<DateTime> dates)
         {
-            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
+            List<DoctorAppointment> reservedAppointments = new List<DoctorAppointment>();
             List<DateTime> datesWithoutTime = new List<DateTime>();
             foreach (DateTime date in dates)
             {
@@ -562,10 +562,10 @@ namespace Service
             {
                 if (docApp.Doctor.Id == idDoctor && datesWithoutTime.Contains(docApp.AppointmentStart.Date))
                 {
-                    appointments.Add(docApp);
+                    reservedAppointments.Add(docApp);
                 }
             }
-            return appointments;
+            return reservedAppointments;
         }
     }
 }

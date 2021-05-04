@@ -99,43 +99,45 @@ namespace Hospital_IS.DoctorView
                 Specialty specialty = (Specialty)specialization.SelectedItem;
 
                 changeVisibilityOfFields(type, doctor);
-
-                if (Emergency)
-                {
-                    List<SuggestedEmergencyAppDTO> allEmergencyAppointments = DoctorAppointmentController.Instance.GetSuggestedEmergencyAppsForDoctor(dates, Emergency, room, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
-                    ICollectionView view = new CollectionViewSource { Source = allEmergencyAppointments }.View;
-                    view.GroupDescriptions.Add((new PropertyGroupDescription("SuggestedAppointment.Doctor.Surname")));
-                    if (doctor.Id != -1)
-                    {
-                        view.Filter = null;
-                        view.Filter = delegate (object item)
-                        {
-                            return ((SuggestedEmergencyAppDTO)item).SuggestedAppointment.Doctor.Id == doctor.Id;
-                        };
-                    }
-
-
-                    emergencyAppointments.DataContext = view;
-                    appointmentsGroupBox.Visibility = Visibility.Collapsed;
-                    emergencyGroupBox.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    List<DoctorAppointment> allAppointments = DoctorAppointmentController.Instance.GetSuggestedAppointmentsByDoctor(dates, Emergency, room, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
-                    ICollectionView view = new CollectionViewSource { Source = ConvertList(allAppointments) }.View;
-                    view.SortDescriptions.Clear();
-                    view.SortDescriptions.Add(new SortDescription("Appointment.AppointmentStart", ListSortDirection.Ascending));
-
-                    appointments.DataContext = view;
-                    emergencyGroupBox.Visibility = Visibility.Collapsed;
-                    appointmentsGroupBox.Visibility = Visibility.Visible;
-                }
-
+                ListAppointments(doctor, room, dates, type);
 
             }
 
         }
 
+        private void ListAppointments(Doctor doctor, Room room, List<DateTime> dates, AppointmetType type)
+        {
+            if (Emergency)
+            {
+                List<SuggestedEmergencyAppDTO> allEmergencyAppointments = DoctorAppointmentController.Instance.GetSuggestedEmergencyAppsForDoctor(dates, Emergency, room, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
+                ICollectionView view = new CollectionViewSource { Source = allEmergencyAppointments }.View;
+                view.GroupDescriptions.Add((new PropertyGroupDescription("SuggestedAppointment.Doctor.Surname")));
+                if (doctor.Id != -1)
+                {
+                    view.Filter = null;
+                    view.Filter = delegate (object item)
+                    {
+                        return ((SuggestedEmergencyAppDTO)item).SuggestedAppointment.Doctor.Id == doctor.Id;
+                    };
+                }
+
+
+                emergencyAppointments.DataContext = view;
+                appointmentsGroupBox.Visibility = Visibility.Collapsed;
+                emergencyGroupBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                List<DoctorAppointment> allAppointments = DoctorAppointmentController.Instance.GetSuggestedAppointmentsByDoctor(dates, Emergency, room, type, (TimeSpan)duration.Value, Appointment.Patient, doctor);
+                ICollectionView view = new CollectionViewSource { Source = ConvertList(allAppointments) }.View;
+                view.SortDescriptions.Clear();
+                view.SortDescriptions.Add(new SortDescription("Appointment.AppointmentStart", ListSortDirection.Ascending));
+
+                appointments.DataContext = view;
+                emergencyGroupBox.Visibility = Visibility.Collapsed;
+                appointmentsGroupBox.Visibility = Visibility.Visible;
+            }
+        }
 
         private void types_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -273,21 +275,6 @@ namespace Hospital_IS.DoctorView
             DoctorHomePage.Instance.Home.Children.Add(new UCIssueInstruction(this));
         }
 
-        private void emergencyApp_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
-            SuggestedEmergencyAppDTO selected = (SuggestedEmergencyAppDTO)emergencyAppointments.SelectedItem;
-
-            foreach (RescheduledAppointmentDTO rescheduled in selected.RescheduledAppointments)
-            {
-                DoctorAppointmentController.Instance.UpdateAppointment(rescheduled.OldDocAppointment, rescheduled.DocAppointment);  //notifikacije ???
-            }
-            DoctorAppointmentController.Instance.AddAppointment(selected.SuggestedAppointment);
-
-            DoctorHomePage.Instance.Home.Children.Remove(this);
-            DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(Appointment, true));
-        }
-
         private void emergency_Click(object sender, RoutedEventArgs e)
         {
             if (Emergency == false)
@@ -315,6 +302,12 @@ namespace Hospital_IS.DoctorView
                 Emergency = false;
             }
             filterAppointments();
+        }
+
+        private void emergencyApp_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            this.Visibility = Visibility.Collapsed;
+            DoctorHomePage.Instance.Home.Children.Add(new UCIssueInstruction(this, true));
         }
     }
 

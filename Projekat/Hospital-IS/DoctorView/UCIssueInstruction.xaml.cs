@@ -21,6 +21,8 @@ namespace Hospital_IS.DoctorView
     public partial class UCIssueInstruction : UserControl, INotifyPropertyChanged
     {
         public UCNewApp SchedulingAppointment { get; set; }
+
+        public SuggestedEmergencyAppDTO SelectedEmergencyAppointment { get; set; }
         public DoctorAppointment SelectedAppointment { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -64,7 +66,7 @@ namespace Hospital_IS.DoctorView
                 OnPropertyChanged("DocumentMessage");
             }
         }
-        public UCIssueInstruction(UCNewApp schedulingAppointment)
+        public UCIssueInstruction(UCNewApp schedulingAppointment, bool emergency = false)
         {
             InitializeComponent();
             cause.BorderBrush = Brushes.PaleVioletRed;
@@ -73,18 +75,40 @@ namespace Hospital_IS.DoctorView
             SchedulingAppointment = schedulingAppointment;
 
             SelectedAppointment = (DoctorAppointment)((AppointmentRow)SchedulingAppointment.appointments.SelectedItem).Appointment;
-            date.Content = SelectedAppointment.AppointmentStart.Date;
-            time.Content = SelectedAppointment.AppointmentStart.TimeOfDay;
-            documentSpecialty.Content = SelectedAppointment.Doctor.Specialty.Name;
+            SelectedEmergencyAppointment = ((SuggestedEmergencyAppDTO)SchedulingAppointment.emergencyAppointments.SelectedItem);
 
-            documentDoctor.Content = SelectedAppointment.Doctor.Name.ToString() + " " + ShortSurname(SelectedAppointment.Doctor);
-            thisDoctor.Content = DoctorHomePage.Instance.Doctor.Name.ToString() + " " + ShortSurname(DoctorHomePage.Instance.Doctor);
+            if(!emergency)
+            {
+                date.Content = SelectedAppointment.AppointmentStart.Date;
+                time.Content = SelectedAppointment.AppointmentStart.TimeOfDay;
+                documentSpecialty.Content = SelectedAppointment.Doctor.Specialty.Name;
+
+                documentDoctor.Content = SelectedAppointment.Doctor.Name.ToString() + " " + ShortSurname(SelectedAppointment.Doctor);
+                thisDoctor.Content = DoctorHomePage.Instance.Doctor.Name.ToString() + " " + ShortSurname(DoctorHomePage.Instance.Doctor);
+
+                if (SelectedAppointment.Doctor.Id != DoctorHomePage.Instance.Doctor.Id)
+                {
+                    save.IsEnabled = false;
+                }
+            }
+            else
+            {
+                date.Content = SelectedEmergencyAppointment.SuggestedAppointment.AppointmentStart.Date;
+                time.Content = SelectedEmergencyAppointment.SuggestedAppointment.AppointmentStart.TimeOfDay;
+                documentSpecialty.Content = SelectedEmergencyAppointment.SuggestedAppointment.Doctor.Specialty.Name;
+
+                documentDoctor.Content = SelectedEmergencyAppointment.SuggestedAppointment.Doctor.Name.ToString() + " " + ShortSurname(SelectedEmergencyAppointment.SuggestedAppointment.Doctor);
+                thisDoctor.Content = DoctorHomePage.Instance.Doctor.Name.ToString() + " " + ShortSurname(DoctorHomePage.Instance.Doctor);
+
+                if (SelectedEmergencyAppointment.SuggestedAppointment.Doctor.Id != DoctorHomePage.Instance.Doctor.Id)
+                {
+                    save.IsEnabled = false;
+                }
+            }
+            
             today.Content = DateTime.Now.Date;
 
-            if(SelectedAppointment.Doctor.Id != DoctorHomePage.Instance.Doctor.Id)
-            {
-                save.IsEnabled = false;
-            }
+            
 
             cause.Focus();
         }
@@ -101,29 +125,42 @@ namespace Hospital_IS.DoctorView
         }
         private void save_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedAppointment.Reserved == true)
+            if (SelectedAppointment != null)
             {
-                return;
-            }
-            SelectedAppointment.AppointmentCause = cause.Text;
+                SelectedAppointment.AppointmentCause = cause.Text;
 
-            sendNotification(SelectedAppointment);
-            DoctorAppointmentController.Instance.AddAppointment(SelectedAppointment);
-            DoctorHomePage.Instance.DoctorAppointment.Add(SelectedAppointment);
+                DoctorAppointmentController.Instance.AddAppointment(SelectedAppointment);
+                DoctorHomePage.Instance.DoctorAppointment.Add(SelectedAppointment);
+            }
+            else
+            {
+                foreach (RescheduledAppointmentDTO rescheduled in SelectedEmergencyAppointment.RescheduledAppointments)
+                {
+                    SendNotification(rescheduled.OldDocAppointment,rescheduled.DocAppointment);
+                    DoctorAppointmentController.Instance.UpdateAppointment(rescheduled.OldDocAppointment, rescheduled.DocAppointment);
+                }
+                DoctorAppointmentController.Instance.AddAppointment(SelectedEmergencyAppointment.SuggestedAppointment);
+
+                DoctorHomePage.Instance.Home.Children.Remove(this);
+                DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(SelectedEmergencyAppointment.SuggestedAppointment, true));
+            }
+            
 
             DoctorHomePage.Instance.Home.Children.Remove(this);
             DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(SchedulingAppointment.Appointment, true));
         }
 
-        private void sendNotification(DoctorAppointment appointment)
+        private void SendNotification(DoctorAppointment oldApp, DoctorAppointment appointment)
         {
-            string title = "Zakazan pregled";
+            string title = "Pomeren pregled";
 
-            string text = "Novi pregled Vam je zakazan " + appointment.AppointmentStart.ToString("dd.MM.yyyy.") + " u "
-                + appointment.AppointmentStart.ToString("HH:mm") + ".";
+            string text = "Pregled koji ste imali " + oldApp.AppointmentStart.ToString("dd.MM.yyyy.") + " u "
+                + oldApp.AppointmentStart.ToString("HH:mm") + "h je pomeren za "
+                + appointment.AppointmentStart.ToString("dd.MM.yyyy.") + " u " + appointment.AppointmentStart.ToString("HH:mm") + "h.";
 
             Notification notification = new Notification(title, text, DateTime.Now);
             notification.Recipients.Add(appointment.Patient.Id);
+            notification.Recipients.Add(appointment.Doctor.Id);
 
             NotificationController.Instance.AddNotification(notification);
         }
