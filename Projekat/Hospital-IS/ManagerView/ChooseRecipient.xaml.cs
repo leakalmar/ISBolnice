@@ -87,6 +87,10 @@ namespace Hospital_IS.ManagerView
         {
 
             List<int> doctorsIds = new List<int>();
+            if(NotificationInfoView.MedicineNotification == null)
+            {
+                MessageBox.Show("haloo");
+            }
 
             foreach (var doctor in DataGridDoctors.SelectedItems)
             {
@@ -102,6 +106,7 @@ namespace Hospital_IS.ManagerView
             { 
 
                 MedicineNotificationController.Instance.CreateReNotification(nameClass, sideEffectClass, therapeuticClass, medicineNamesClass, medicineComponentsClass, doctorsIds);
+                MedicineNotificationController.Instance.DeleteNotification(NotificationInfoView.MedicineNotification);
                 this.Close();
             }
         }

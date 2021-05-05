@@ -21,7 +21,7 @@ namespace Hospital_IS.ManagerView
     public partial class NotificationInfoView : Window
     {
       
-        public MedicineNotification MedicineNotification { get; set; }
+        public static MedicineNotification MedicineNotification { get; set; }
         public NotificationInfoView(MedicineNotification notification)
         {
             InitializeComponent();
