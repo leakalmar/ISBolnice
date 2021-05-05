@@ -126,8 +126,8 @@
                 <DataGridTextColumn Header="Doktor" Width="*">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{} {0} {1}">
-                            <Binding Path="DocAppointment.Doctor.Name"/>
-                            <Binding Path="DocAppointment.Doctor.Surname"/>
+                            <Binding Path="NewDocAppointment.Doctor.Name"/>
+                            <Binding Path="NewDocAppointment.Doctor.Surname"/>
                         </MultiBinding>
                     </DataGridTextColumn.Binding>
 
@@ -138,7 +138,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Datum nakon pomeranja" 
-                                    Binding="{Binding DocAppointment.AppointmentStart, StringFormat=\{0: dd.MM.yyyy. u HH:mm\\h \}}" Width="auto">
+                                    Binding="{Binding NewDocAppointment.AppointmentStart, StringFormat=\{0: dd.MM.yyyy. u HH:mm\\h \}}" Width="auto">
                     
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
