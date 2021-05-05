@@ -29,9 +29,12 @@ namespace Hospital_IS.ManagerView
         private String therapeuticClass;
         private List<ReplaceMedicineName> medicineNamesClass;
         private List<MedicineComponent> medicineComponentsClass;
-        public ChooseRecipient(string name, string sideEffect,string therapeutic, List<ReplaceMedicineName> medicineNames,List<MedicineComponent> medicineComponents,String parent )
+        public MedicineNotificationChage MedicineNotificationChage { get; set; }
+        public ChooseRecipient(string name, string sideEffect,string therapeutic, List<ReplaceMedicineName> medicineNames,
+            List<MedicineComponent> medicineComponents,String parent, MedicineNotificationChage  medicineNotification)
         {
-            nameClass = name;
+            MedicineNotificationChage = medicineNotification;
+            this.nameClass = name;
             sideEffectClass = sideEffect;
             therapeuticClass = therapeutic;
             medicineComponentsClass = medicineComponents;
@@ -107,7 +110,11 @@ namespace Hospital_IS.ManagerView
 
                 MedicineNotificationController.Instance.CreateReNotification(nameClass, sideEffectClass, therapeuticClass, medicineNamesClass, medicineComponentsClass, doctorsIds);
                 MedicineNotificationController.Instance.DeleteNotification(NotificationInfoView.MedicineNotification);
+                MedicineNotificationChage.Hide();
+                ManagerNotificationView managerNotification = new ManagerNotificationView();
+                managerNotification.Show();
                 this.Close();
+
             }
         }
     }

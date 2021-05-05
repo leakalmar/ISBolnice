@@ -46,12 +46,13 @@ namespace Hospital_IS.ManagerView
             this.Close();
         }
 
+        
        
         private void Send_Click(object sender, RoutedEventArgs e)
         {
            
          ChooseRecipient recipient = new ChooseRecipient(MedicineNotification.Medicine.Name, MedicineNotification.Medicine.SideEffects, MedicineNotification.Medicine.Usage,
-            MedicineNotification.Medicine.ReplaceMedicine, MedicineNotification.Medicine.Composition, "notification");
+            MedicineNotification.Medicine.ReplaceMedicine, MedicineNotification.Medicine.Composition, "notification",this);
 
             recipient.Show();
         }
