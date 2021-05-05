@@ -160,6 +160,8 @@ namespace Hospital_IS.DoctorView
             DoctorHomePage.Instance.Home.Children.Add(new UCAppDetail(null));
         }
 
+        //Kada se vraca u AppDetail treba da refreshuje i njega i pocetnu stranu inace se ne zakazu novo zakazani termini! Jer nisam stavila da se dodaju u onu listu
+        // koja je u HomePage.DoctorAppointments 
         private void EndAppointment_Click(object sender, RoutedEventArgs e)
         {
             DoctorAppointmentController.Instance.EndAppointment(Appointment);

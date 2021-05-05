@@ -22,6 +22,7 @@ namespace Hospital_IS.DoctorView
     {
         public UCNewApp SchedulingAppointment { get; set; }
 
+        public bool Emergency { get; set; }
         public SuggestedEmergencyAppDTO SelectedEmergencyAppointment { get; set; }
         public DoctorAppointment SelectedAppointment { get; set; }
 
@@ -105,6 +106,7 @@ namespace Hospital_IS.DoctorView
                     save.IsEnabled = false;
                 }
             }
+            Emergency = emergency;
             
             today.Content = DateTime.Now.Date;
 
@@ -125,7 +127,7 @@ namespace Hospital_IS.DoctorView
         }
         private void save_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedAppointment != null)
+            if (!Emergency)
             {
                 SelectedAppointment.AppointmentCause = cause.Text;
                 SendScheduledNotification(SelectedAppointment);
@@ -139,10 +141,8 @@ namespace Hospital_IS.DoctorView
                     SendRescheduleNotification(rescheduled.OldDocAppointment,rescheduled.NewDocAppointment);
                     DoctorAppointmentController.Instance.UpdateAppointment(rescheduled.OldDocAppointment, rescheduled.NewDocAppointment);
                 }
+                SelectedEmergencyAppointment.SuggestedAppointment.AppointmentCause = cause.Text;
                 DoctorAppointmentController.Instance.AddAppointment(SelectedEmergencyAppointment.SuggestedAppointment);
-
-                DoctorHomePage.Instance.Home.Children.Remove(this);
-                DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(SelectedEmergencyAppointment.SuggestedAppointment, true));
             }
             
 
