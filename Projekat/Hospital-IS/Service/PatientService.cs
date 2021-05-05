@@ -133,12 +133,6 @@ namespace Service
                     return patient.TrollMechanism.IsTroll;
                 }
             }
-            else if (doctorAppointment.AppointmentStart >= patient.TrollMechanism.TrollCheckStartDate.AddDays(timeRange) && patient.TrollMechanism.IsTroll)
-            {
-                patient.TrollMechanism.IsTroll = false;
-                patient.TrollMechanism.TrollCheckStartDate = doctorAppointment.AppointmentStart.Date;
-                patient.TrollMechanism.AppointmentCounterInTimeRange = 1;
-            }
             return patient.TrollMechanism.IsTroll;
         }
 
