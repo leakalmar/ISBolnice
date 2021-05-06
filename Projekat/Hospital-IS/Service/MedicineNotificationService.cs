@@ -60,6 +60,37 @@ namespace Service
             }
         }
 
+        public void AddApprovalDeleteDoctor(MedicineNotification rewiewdNotification,int activeDoctor)
+        {
+            rewiewdNotification.ApprovalCounter++;
+
+            rewiewdNotification.RecieverIds.Remove(activeDoctor);
+
+            bool isApproved =  CheckIfMedicineIsApproved(rewiewdNotification);
+
+            if (rewiewdNotification.RecieverIds.Count == 0 || isApproved)
+            {
+                DeleteMedicineNotification(rewiewdNotification);
+            }
+            else
+            {
+                UpdateMedicineNotification(rewiewdNotification);
+            }
+
+
+
+        }
+
+        private  bool CheckIfMedicineIsApproved(MedicineNotification rewiewdNotification)
+        {
+            if (rewiewdNotification.ApprovalCounter >= 2)
+            {
+                MedicineService.Instance.AddNewMedicine(rewiewdNotification.Medicine);
+                return true;
+            }
+            return false;
+        }
+
         public void DeleteMedicineNotification(MedicineNotification reviewdNotification)
         {
             for (int i = 0; i < AllNotification.Count; i++)

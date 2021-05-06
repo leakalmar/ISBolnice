@@ -102,5 +102,38 @@
         "Name": "svi alergijski"
       }
     ]
+  },
+  {
+    "Name": "xsacsacc",
+    "Composition": [
+      {
+        "Component": "sacascsac"
+      }
+    ],
+    "SideEffects": "saccsacs",
+    "Usage": "sacacsac",
+    "ReplaceMedicine": [
+      {
+        "Name": "sacsac"
+      }
+    ]
+  },
+  {
+    "Name": "dsvdsvdsv",
+    "Composition": [
+      {
+        "Component": ""
+      },
+      {
+        "Component": "dvsvdsv"
+      }
+    ],
+    "SideEffects": "dsvdsvsdvds",
+    "Usage": "vdsvdsvsdv",
+    "ReplaceMedicine": [
+      {
+        "Name": "dvsvsdvdsv"
+      }
+    ]
   }
 ]

@@ -41,6 +41,7 @@ namespace Controllers
             Medicine medicine = new Medicine(name, medicineComponents, sideEffect, usage, medicineNames);
 
             MedicineNotification medicineNotification = new MedicineNotification("Odobrenje" + " " + name, medicine, recieverIds);
+            medicineNotification.ApprovalCounter = 0;
             medicineNotification.SenderId.Add(6);
             medicineNotification.DateSent = DateTime.Now;
 
@@ -66,8 +67,7 @@ namespace Controllers
 
         public void ApproveMedicine(MedicineNotification reviewdNotification)
         {
-            MedicineService.Instance.AddNewMedicine(reviewdNotification.Medicine);
-            MedicineNotificationService.Instance.DeleteNotification(reviewdNotification);
+            MedicineNotificationService.Instance.AddApprovalDeleteDoctor(reviewdNotification, DoctorHomePage.Instance.Doctor.Id);
         }
 
         public List<MedicineNotification> GetAll()
