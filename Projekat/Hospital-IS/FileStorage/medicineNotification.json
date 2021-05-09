@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "SenderId": [
+      10
+    ],
+    "Title": "Odbijen dsvsdv",
+    "Medicine": {
+      "Name": "dsvsdv",
+      "Composition": [
+        {
+          "Component": "dsvdsvsdv"
+        }
+      ],
+      "SideEffects": "dvdsvdsvsdsvv",
+      "Usage": "dsvdsvsdvdsvvsdv",
+      "ReplaceMedicine": [
+        {
+          "Name": "dsvsdvds"
+        }
+      ]
+    },
+    "RecieverIds": [
+      6
+    ],
+    "Note": "veoma los lijek",
+    "DateSent": "2021-05-06T20:29:25.5312557+02:00",
+    "ApprovalCounter": 1
+  }
+]

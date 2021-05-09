@@ -27,11 +27,11 @@ namespace Hospital_IS
         public ObservableCollection<Room> DestinationRoom { get; set; }
 
         private static Room currentRoom;
-        private static int currentIndex;
-        public TransferDynamic(Room room, int index)
+      
+        public TransferDynamic(Room room)
         {
             InitializeComponent();
-            currentIndex = index;
+        
             currentRoom = room;
             this.DataContext = this;
             SourceRoom = new ObservableCollection<Room>();
@@ -147,9 +147,8 @@ namespace Hospital_IS
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-           
-            EquipmentOption option = new EquipmentOption(currentRoom, currentIndex);
-            option.Show();
+
+            EquipmentWindow.Instance.Show();
             this.Close();
         }
     }

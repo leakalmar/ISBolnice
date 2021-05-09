@@ -207,8 +207,8 @@ namespace Hospital_IS
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            EquipmentOption option = new EquipmentOption();
-            option.Show();
+            EquipmentWindow.Instance.Show();
+
             this.Hide();
         }
     }

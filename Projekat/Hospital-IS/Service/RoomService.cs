@@ -135,10 +135,11 @@ namespace Service
         }
 
       
-        public void UpdateEquipment(Room room, Equipment updateEquip)
+        public Boolean UpdateEquipment(Room room, Equipment updateEquip)
         {
-            room.UpdateEquipment(updateEquip);
+            bool isSucces = room.UpdateEquipment(updateEquip);
             rfs.SaveRooms(AllRooms);
+            return isSucces;
         }
 
     }

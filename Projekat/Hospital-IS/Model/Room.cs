@@ -100,7 +100,7 @@ namespace Model
             if (Equipment != null)
                 Equipment.Clear();
         }
-        public void UpdateEquipment(Equipment updateEquip)
+        public Boolean UpdateEquipment(Equipment updateEquip)
         {
 
             foreach (Equipment r in Equipment)
@@ -110,11 +110,11 @@ namespace Model
                     int index = Equipment.IndexOf(r);
                     Equipment.Remove(r);
                     Equipment.Insert(index, updateEquip);
-                    break;
+                    return true;
                 }
             }
 
-
+            return false;
         }
       
     }

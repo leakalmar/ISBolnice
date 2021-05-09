@@ -76,9 +76,6 @@ namespace Service
             {
                 UpdateMedicineNotification(rewiewdNotification);
             }
-
-
-
         }
 
         private  bool CheckIfMedicineIsApproved(MedicineNotification rewiewdNotification)
