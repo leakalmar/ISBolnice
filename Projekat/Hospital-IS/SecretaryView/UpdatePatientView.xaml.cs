@@ -39,6 +39,8 @@ namespace Hospital_IS
             if (Patient.Alergies != null)
                 Allergies = new ObservableCollection<String>(Patient.Alergies);
 
+            birthdateTxt.Text = Patient.BirthDate.ToString("dd.MM.yyyy.");
+
             this.DataContext = this;
         }
 

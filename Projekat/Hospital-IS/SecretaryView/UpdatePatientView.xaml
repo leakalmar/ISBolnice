@@ -55,7 +55,7 @@
 
         <TextBox Name="nameTxt"  Grid.Column="2" Grid.Row="1" Margin="20 10 20 5" Text="{Binding Patient.Name}"/>
         <TextBox Name="surnameTxt" Grid.Column="2" Grid.Row="2" Margin="20 5" Text="{Binding Patient.Surname}"/>
-        <TextBox Name="birthdateTxt" Grid.Column="2" Grid.Row="3" Margin="20 5" Text="{Binding Patient.BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}"/>
+        <TextBox Name="birthdateTxt" Grid.Column="2" Grid.Row="3" Margin="20 5"/>
         <TextBox Name="addressTxt"  Grid.Column="2" Grid.Row="4" Margin="20 5" Text="{Binding Patient.Address}"/>
         <TextBox Name="phoneTxt" Grid.Column="2" Grid.Row="5" Margin="20 5" Text="{Binding Patient.Phone}"/>
         <TextBox Name="emailTxt" Grid.Column="2" Grid.Row="6" Margin="20 5" Text="{Binding Patient.Email}"/>
