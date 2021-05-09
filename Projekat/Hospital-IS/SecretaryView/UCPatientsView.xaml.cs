@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using Hospital_IS.SecretaryView;
 using Model;
 using System;
 using System.Collections.ObjectModel;
@@ -38,7 +39,7 @@ namespace Hospital_IS
 
         private void AddNewPatient(object sender, RoutedEventArgs e)
         {
-            PatientRegistration pr = new PatientRegistration(this);
+            PatientRegistration pr = new PatientRegistration(this, null);
             pr.Show();
         }
 
@@ -152,6 +153,12 @@ namespace Hospital_IS
                 txtSearch.Foreground = new SolidColorBrush(Colors.Gray);
                 txtSearch.Text = "Pretraži...";
             }
+        }
+
+        private void btnGuests_Click(object sender, RoutedEventArgs e)
+        {
+            GuestsView gv = new GuestsView(this);
+            gv.Show();
         }
     }
 }

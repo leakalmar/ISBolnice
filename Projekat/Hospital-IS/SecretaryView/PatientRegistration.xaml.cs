@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using Hospital_IS.SecretaryView;
 using Model;
 using Service;
 using System;
@@ -13,9 +14,18 @@ namespace Hospital_IS
     {
         public Patient Patient { get; set; } = new Patient();
         public UCPatientsView ucp;
-        public PatientRegistration(UCPatientsView ucp)
+        public GuestsView gv;
+        public PatientRegistration(UCPatientsView ucp, GuestsView gv)
         {
             InitializeComponent();
+
+            if (gv != null)
+            {
+                Patient = (Patient)gv.dataGridGuests.SelectedItem;
+                checkBox.Visibility = Visibility.Collapsed;
+                this.gv = gv;
+            }
+
             this.DataContext = this;
             this.ucp = ucp;
         }
@@ -26,10 +36,11 @@ namespace Hospital_IS
 
         private void AddPatient(object sender, RoutedEventArgs e)
         {
-            Patient.Id = UserService.Instance.GenerateUserID();
-
             if (checkBox.IsChecked == true)
+            {
                 Patient.IsGuest = true;
+                Patient.BirthDate = DateTime.Now;
+            }
 
             if (comboBox.SelectedIndex == 0)
                 Patient.Gender = "Žensko";
@@ -46,9 +57,20 @@ namespace Hospital_IS
             }
 
             Patient.Password = passwordBox.ToString();
-            ucp.Patients.Add(Patient);
 
-            PatientController.Instance.AddPatient(Patient);
+            if (checkBox.Visibility != Visibility.Collapsed)
+            {
+                Patient.Id = UserService.Instance.GenerateUserID();
+                PatientController.Instance.AddPatient(Patient);
+            }
+            else 
+            {
+                Patient.IsGuest = false;
+                PatientController.Instance.UpdatePatient(Patient);
+                gv.RefreshGrid();
+            }
+
+            ucp.RefreshGrid();
 
             this.Close();
         }

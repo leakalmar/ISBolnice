@@ -56,9 +56,9 @@
         <PasswordBox Name="passwordBox" Grid.Column="2" Grid.Row="8" Margin="50 20"/>
         <PasswordBox Grid.Column="2" Grid.Row="9" Margin="50 0"/>
 
-        <CheckBox Name="checkBox" Grid.Column="2" Grid.Row="10" FontSize="13"
-                  Margin="0 18"
-            Content="Kreiranje privremenog guest naloga"/>
+        <CheckBox Name="checkBox" Grid.Column="2" Grid.Row="10" FontSize="14"
+                  Margin="40 18" HorizontalAlignment="Right"
+            Content="Gostujući nalog"/>
 
         <Button Grid.Column="1" Grid.Row="11" Width="120" Height="30"
                 Content="Potvrdi" Click="AddPatient"/>
