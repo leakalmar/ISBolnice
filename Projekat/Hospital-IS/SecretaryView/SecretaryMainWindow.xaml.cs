@@ -73,5 +73,6 @@ namespace Hospital_IS
         {
             HomePage.Content = uca;
         }
+
     }
 }

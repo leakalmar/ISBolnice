@@ -25,11 +25,9 @@
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   Background="Transparent" RowBackground="AliceBlue">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="Ime" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Prezime" Binding="{Binding Surname}"/>
+                <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Prezime" Binding="{Binding Surname}" Width="*"/>
                 <DataGridTextColumn Header="Datum rođenja" Binding="{Binding BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}" Width="*"/>
-                <DataGridCheckBoxColumn Header="Guest" Binding="{Binding IsGuest}"/>
             </DataGrid.Columns>
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF3558A2"/>
@@ -53,8 +51,21 @@
             <Button Width="100" Content="Registracija" Height="30" Margin="40 0 0 0 "
                 Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
                 Click="AddNewPatient"/>
-
         </StackPanel>
 
+        <StackPanel Grid.Row="0" Grid.Column="3" Grid.RowSpan="2"
+                    HorizontalAlignment="Right" Margin="10">
+            <Button x:Name="btnGuests" Width="120" Height="30" Margin="0 0 20 5" 
+                Content="Gostujući nalozi" HorizontalAlignment="Right" VerticalAlignment="Top"
+                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White" Click="btnGuests_Click"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 20 0">
+                <TextBox Name="txtSearch" Foreground="Gray" Text="Pretraži..." Margin="0 5 10 0" Width="120" VerticalAlignment="Center" Padding="4"
+                         GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
+                <Button Width="25" Background="#FF184095" Margin="0 5 0 0" Click="SearchButton_Click">
+                    <Image Source="pack://application:,,,/Resources/search.png"/>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+        
     </Grid>
 </UserControl>
