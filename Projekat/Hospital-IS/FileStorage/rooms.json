@@ -17,14 +17,7 @@
     "IsUsable": false,
     "Type": 3,
     "RoomIdType": "2 StorageRoom",
-    "Equipment": [
-      {
-        "EquipType": 1,
-        "EquiptId": 1,
-        "Name": "makaze",
-        "Quantity": 75
-      }
-    ]
+    "Equipment": []
   },
   {
     "RoomFloor": 5,
@@ -34,7 +27,7 @@
     "IsUsable": false,
     "Type": 2,
     "RoomIdType": "3 OperationRoom",
-    "Equipment": null
+    "Equipment": []
   },
   {
     "RoomFloor": 101,

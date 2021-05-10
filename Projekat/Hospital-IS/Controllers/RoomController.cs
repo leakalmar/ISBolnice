@@ -67,9 +67,9 @@ namespace Controllers
         }
 
 
-        public void UpdateEquipment(Room room, Equipment updateEquip)
+        public Boolean UpdateEquipment(Room room, Equipment updateEquip)
         {
-            RoomService.Instance.UpdateEquipment(room,updateEquip);
+            return RoomService.Instance.UpdateEquipment(room,updateEquip);
         }
     }
 }

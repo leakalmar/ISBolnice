@@ -64,7 +64,9 @@ namespace Hospital_IS.ManagerView
 
         private void Profil_Click(object sender, RoutedEventArgs e)
         {
-
+            ManagerLogout managerLogout = new ManagerLogout("medicine");
+            managerLogout.Show();
+            this.Hide();
         }
 
         private void RegistrationMedicine_Click(object sender, RoutedEventArgs e)

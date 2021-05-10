@@ -14,6 +14,8 @@ namespace Model
 
         public DateTime DateSent { get; set; }
 
+        public int ApprovalCounter { get; set; }
+
         public MedicineNotification(string title, Medicine medicine, List<int> recieverIds)
         {
             Title = title;

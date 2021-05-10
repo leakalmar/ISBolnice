@@ -62,10 +62,6 @@ namespace Hospital_IS
             RoomOptions roomOptions = new RoomOptions();
             roomOptions.Show();
             this.Close();
-
-
-           
-            
         }
 
         private int genereteId(List<Room> room)

@@ -21,11 +21,11 @@ namespace Hospital_IS
     public partial class AddEquipment : Window
     {
         private Room currentRoom;
-        private int currentIndex;
-        public AddEquipment(Room room, int index)
+     
+        public AddEquipment(Room room)
         {
             currentRoom = room;
-            currentIndex = index;
+          
             InitializeComponent();
         }
 
@@ -47,9 +47,12 @@ namespace Hospital_IS
           
 
             RoomController.Instance.AddEquipment(currentRoom, new Equipment(type1, id, name1, quantity1));
-       
-            EquipmentOption equipmentOption = new EquipmentOption(currentRoom, currentIndex);
-            equipmentOption.Show();
+
+
+            EquipmentWindow.Instance.refreshGrid(currentRoom);
+            EquipmentWindow.Instance.Show();
+
+
             this.Hide();
 
         }
@@ -107,11 +110,8 @@ namespace Hospital_IS
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            EquipmentOption equipmentOption = new EquipmentOption(currentRoom, currentIndex);
-            equipmentOption.Show();
-            this.Close();
-            
-
+            EquipmentWindow.Instance.Show();
+            this.Hide();
         }
     }
 }

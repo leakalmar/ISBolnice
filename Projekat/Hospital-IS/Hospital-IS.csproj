@@ -19,6 +19,7 @@
     <None Remove="hospital2.png" />
     <None Remove="Resources\add-row.png" />
     <None Remove="Resources\angledown.png" />
+    <None Remove="Resources\backButtonLeft.png" />
     <None Remove="Resources\bed.png" />
     <None Remove="Resources\calendar.png" />
     <None Remove="Resources\hospital.png" />
@@ -96,6 +97,7 @@
     </Resource>
     <Resource Include="Resources\add-row.png" />
     <Resource Include="Resources\angledown.png" />
+    <Resource Include="Resources\backButtonLeft.png" />
     <Resource Include="Resources\bed.png" />
     <Resource Include="Resources\addroom.png" />
     <Resource Include="Resources\backbutton.png" />

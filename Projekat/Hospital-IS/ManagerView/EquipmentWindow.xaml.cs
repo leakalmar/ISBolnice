@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Controllers;
+using Hospital_IS.ManagerView;
 using Model;
 
 namespace Hospital_IS
@@ -37,19 +39,15 @@ namespace Hospital_IS
         private EquipmentWindow()
         {
             InitializeComponent();
-
-
-
             DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
-
             Combo.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
+            DataGridEquipment.SelectedItem = null;
             DispatcherTimer dispatcherTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMinutes(1)
             };
             dispatcherTimer.Tick += timer_Tick;
             dispatcherTimer.Start();
-
         }
 
 
@@ -63,22 +61,15 @@ namespace Hospital_IS
         private void timer_Tick(object sender, EventArgs e)
         {
             DateTime time = DateTime.Now;
-
-            MessageBox.Show(Convert.ToString(TransferController.Instance.GetAllTransfers().Count));
-           
             foreach(Room r in RoomController.Instance.GetAllRooms())
             {
                 foreach(Transfer trans in TransferController.Instance.GetAllTransfers())
                 {
-                   
                     if (trans.TransferEnd <= time && trans.isMade == false)
                     {
                        trans.isMade = true;
-                       TransferController.Instance.ExecuteStaticTransfer(trans);
-                        
+                       TransferController.Instance.ExecuteStaticTransfer(trans);       
                        MessageBox.Show("Uspjesan transfer");
-                    
-                        
                     }
                 }
             }
@@ -90,7 +81,7 @@ namespace Hospital_IS
             this.Hide();
         }
 
-        public void refreshGrid(Room room,int index)
+        public void refreshGrid(Room room)
         {
             if (room != null)
             {
@@ -107,27 +98,16 @@ namespace Hospital_IS
             {
                 DataGridEquipment.DataContext = new ObservableCollection<Equipment>();
             }
-            Combo.SelectedIndex = index;
+          
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            EquipmentOption equipmentOpt = new EquipmentOption((Room)Combo.SelectedItem,Combo.SelectedIndex);
-            equipmentOpt.Show();
-            this.Hide();
-
-        }
-
+        
 
 
         private void Combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             Room room = (Room)Combo.SelectedItem;
-
-           
-           
             if (room != null)
             {
                 if (room.Equipment != null)
@@ -171,8 +151,6 @@ namespace Hospital_IS
         {
             String text = SearchBox.Text.ToLower();
             String[] textSplit = text.Split(" ");
-           
-
             Room room = (Room)Combo.SelectedItem;
             if (text.Length != 0)
             {
@@ -236,6 +214,121 @@ namespace Hospital_IS
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
         {
             SearchBox.Text = "";
+        }
+
+        private void DeleteEquipment_Click(object sender, RoutedEventArgs e)
+        {
+            Equipment equipment = (Equipment)DataGridEquipment.SelectedItem;
+            Room currentRoom = (Room)Combo.SelectedItem;
+            if (equipment == null)
+            {
+                MessageBox.Show("Izaberite opremu");
+
+            }
+            else
+            {
+
+                RoomController.Instance.RemoveEquipment(currentRoom, equipment);
+                DataGridEquipment.SelectedItem = null;
+                refreshGrid(currentRoom);
+            }
+        }
+
+        private void EditEquipment_Click(object sender, RoutedEventArgs e)
+        {
+            Equipment equipment = (Equipment)DataGridEquipment.SelectedItem;
+            Room currentRoom = (Room)Combo.SelectedItem;
+            if (equipment == null)
+            {
+                MessageBox.Show("Izaberite opremu");
+
+            }
+            else
+            {
+                EditEquipment edit = new EditEquipment(currentRoom, equipment);
+                edit.Show();
+                this.Hide();
+                DataGridEquipment.SelectedItem = null;
+            }
+        }
+
+        private void TransferEquipment_Click(object sender, RoutedEventArgs e)
+        {
+            Room currentRoom = (Room)Combo.SelectedItem;
+            if (ComboTransfer.Text.Equals("Dinamicka"))
+            {
+                TransferDynamic transfer = new TransferDynamic(currentRoom);
+                transfer.Show();
+                this.Hide();
+            }
+            else
+            {
+                TransferStatic transfer = new TransferStatic();
+                transfer.Show();
+                this.Hide();
+            }
+
+        }
+
+        private void AddEquipment_Click(object sender, RoutedEventArgs e)
+        {
+            Room currentRoom = (Room)Combo.SelectedItem;
+            if (currentRoom.Type == RoomType.StorageRoom)
+            {
+
+                AddEquipment addEquipment = new AddEquipment(currentRoom);
+                addEquipment.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Dodavanje moguce samo u magacine");
+            }
+        }
+
+        private void Options_Click(object sender, RoutedEventArgs e)
+        {
+            if(OptionsPanel.Visibility == Visibility.Collapsed)
+            {
+                OptionsPanel.Visibility = Visibility.Visible;
+              
+            }
+            else
+            {
+                OptionsPanel.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void Profile_Click(object sender, RoutedEventArgs e)
+        {
+            ManagerLogout managerLogout = new ManagerLogout("equipment");
+            managerLogout.Show();
+            this.Hide();
+        }
+
+        private void MedicineView_Click(object sender, RoutedEventArgs e)
+        {
+            MedicineView medicineView = new MedicineView();
+            OtherOptions.Visibility = Visibility.Hidden;
+            medicineView.Show();
+            this.Hide();
+        }
+
+        private void CloseOptions_Click(object sender, RoutedEventArgs e)
+        {
+            OtherOptions.Visibility = Visibility.Hidden;
+        }
+
+        private void OtherOptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (OtherOptions.Visibility == Visibility.Visible)
+            {
+                OtherOptions.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                OtherOptions.Visibility = Visibility.Visible;
+            }
         }
     }
 }

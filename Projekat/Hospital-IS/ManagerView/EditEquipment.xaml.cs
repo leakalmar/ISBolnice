@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Controllers;
 using Model;
 
 namespace Hospital_IS
@@ -19,13 +20,12 @@ namespace Hospital_IS
     public partial class EditEquipment : Window
     {
         private Equipment currentEquip;
-        private int currentIndex;
+     
         private Room currentRoom;
 
-        public EditEquipment(Room room, Equipment equipment,int index)
+        public EditEquipment(Room room, Equipment equipment)
         {
             currentEquip = equipment;
-            currentIndex = index;
             currentRoom = room;
 
 
@@ -47,33 +47,23 @@ namespace Hospital_IS
         private void Affirm_Click(object sender, RoutedEventArgs e)
         {
             String name1 = name.Text;
-            EquiptType type1;
-            if (type.Text.Equals("dinamicka"))
-            {
-                type1 = EquiptType.Dynamic;
-            }
-            else
-            {
-                type1 = EquiptType.Stationary;
-            }
             int quantity1 = Convert.ToInt32(quantity.Text);
-            int id = Convert.ToInt32(currentRoom.Equipment.Count);
-            if (quantity1 != 0)
+            bool isSucces =  RoomController.Instance.UpdateEquipment(currentRoom, new Equipment(currentEquip.EquipType, currentEquip.EquiptId, name1, quantity1));
+
+            if (isSucces)
             {
-                currentRoom.UpdateEquipment(new Equipment(type1, currentEquip.EquiptId, name1, quantity1));
+                EquipmentWindow.Instance.refreshGrid(currentRoom);
+                EquipmentWindow.Instance.Show();
+                this.Hide();
             }
-            else
-            {
-                currentRoom.RemoveEquipment(currentEquip);
-            }
-            EquipmentOption equipmentOption = new EquipmentOption(currentRoom, currentIndex);
-            equipmentOption.Show();
-            this.Hide();
+           
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
+            EquipmentWindow.Instance.Show();
 
+            this.Hide();
         }
     }
 }

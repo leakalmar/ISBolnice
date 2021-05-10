@@ -1,28 +1,29 @@
 [
   {
     "SenderId": [
-      6
+      10
     ],
-    "Title": "RE:Odobrenje Brufen 2000mg",
+    "Title": "Odbijen dsvsdv",
     "Medicine": {
-      "Name": "Brufen 2000mg",
+      "Name": "dsvsdv",
       "Composition": [
         {
-          "Component": "saSAsaSASAxza"
+          "Component": "dsvdsvsdv"
         }
       ],
-      "SideEffects": "axaXZAxz",
-      "Usage": "aSSAxaX",
+      "SideEffects": "dvdsvdsvsdsvv",
+      "Usage": "dsvdsvsdvdsvvsdv",
       "ReplaceMedicine": [
         {
-          "Name": "Asass"
+          "Name": "dsvsdvds"
         }
       ]
     },
     "RecieverIds": [
-      4
+      6
     ],
-    "Note": null,
-    "DateSent": "2021-05-04T11:12:56.4104807+02:00"
+    "Note": "veoma los lijek",
+    "DateSent": "2021-05-06T20:29:25.5312557+02:00",
+    "ApprovalCounter": 1
   }
 ]
