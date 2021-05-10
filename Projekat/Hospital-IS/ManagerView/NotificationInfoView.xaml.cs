@@ -34,8 +34,8 @@ namespace Hospital_IS.ManagerView
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            ManagerNotificationView managerNotification = new ManagerNotificationView();
-            managerNotification.Show();
+            ManagerNotificationView.Instance.Show();
+           
             this.Hide();
         }
 
@@ -57,9 +57,9 @@ namespace Hospital_IS.ManagerView
         {
 
             MedicineNotificationController.Instance.DeleteNotification(MedicineNotification);
-            
-            ManagerNotificationView managerNotification = new ManagerNotificationView();
-            managerNotification.Show();
+
+            ManagerNotificationView.Instance.ReloadGrid();
+            ManagerNotificationView.Instance.Show();
             this.Hide();
         }
     }

@@ -18,10 +18,26 @@ namespace Hospital_IS
    
     public partial class ManagerLogout : Window
     {
-        public ManagerLogout()
+        private String activeButton;
+        public ManagerLogout(string activeButton)
         {
             InitializeComponent();
+            this.activeButton = activeButton;
+            if (activeButton.Equals("room"))
+            {
+              
+                Back.Visibility = Visibility.Visible;
+            }else if (activeButton.Equals("equipment"))
+            {
+                BackEquipment.Visibility = Visibility.Visible;
+            }
+            else if(activeButton.Equals("medicine"))
+            {
+                BackMedicine.Visibility = Visibility.Visible;
+            }
+          
         }
+
 
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
@@ -34,14 +50,31 @@ namespace Hospital_IS
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             Window1.Instance.Show();
+            Back.Visibility = Visibility.Collapsed;
             this.Hide();
         }
 
         private void Notifications_Click(object sender, RoutedEventArgs e)
         {
 
-            ManagerNotificationView managerNotification = new ManagerNotificationView();
-            managerNotification.Show();
+            ManagerNotificationView.Instance.activeButton = activeButton;
+            ManagerNotificationView.Instance.Show();
+           
+            this.Hide();
+        }
+
+        private void BackMedicine_Click(object sender, RoutedEventArgs e)
+        {
+            MedicineView medicine = new MedicineView();
+            medicine.Show();
+            BackMedicine.Visibility = Visibility.Collapsed;
+            this.Hide();
+        }
+
+        private void BackEquipment_Click(object sender, RoutedEventArgs e)
+        {
+            EquipmentWindow.Instance.Show();
+            BackEquipment.Visibility = Visibility.Visible;
             this.Hide();
         }
     }

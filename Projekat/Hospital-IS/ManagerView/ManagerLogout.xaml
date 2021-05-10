@@ -145,14 +145,34 @@
                     </StackPanel>
                 </Button>
                 <TextBlock Text="  Podešavanja" Grid.Row="4" Grid.Column="3" Foreground="White" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Button x:Name="Back" BorderThickness="0" Width="60" Height="50" Grid.Column="4" Grid.Row="0"  Background="Transparent" Click="Back_Click">
+                <Button x:Name="Back" Visibility="Collapsed" BorderThickness="0" Width="60" Height="50" Grid.Column="4" Grid.Row="0"  Background="Transparent" Click="Back_Click">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
                         </Style>
                     </Button.Resources>
                     <StackPanel>
-                        <Image Source="pack://application:,,,/Resources/backbutton.png" Width="50"  Height="50" />
+                        <Image Source="pack://application:,,,/Resources/backbuttonLeft.png" Width="50"  Height="50" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BackMedicine" Visibility="Collapsed" BorderThickness="0" Width="60" Height="50" Grid.Column="4" Grid.Row="0"  Background="Transparent" Click="BackMedicine_Click">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/backbuttonLeft.png" Width="50"  Height="50" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BackEquipment" Visibility="Collapsed" BorderThickness="0" Width="60" Height="50" Grid.Column="4" Grid.Row="0"  Background="Transparent" Click="BackEquipment_Click">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/backbuttonLeft.png" Width="50"  Height="50" />
                     </StackPanel>
                 </Button>
                 <TextBlock Text="  Obavestenja i zahtevi" Grid.Row="6" Grid.Column="3" Foreground="White" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>

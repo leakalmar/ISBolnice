@@ -110,7 +110,7 @@
                     </StackPanel>
                 </Button>
                 <TextBlock Grid.Row="2" Grid.Column="9" Height="20" Text="Ostalo" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#624cfc"   />
-                <Button BorderThickness="0" Width="80" Grid.Column="9" Grid.Row="1"  Background="Transparent" >
+                <Button x:Name="OtherOptionsButton"  BorderThickness="0" Width="80" Grid.Column="9" Grid.Row="1"  Background="Transparent" Click="OtherOptionsButton_Click">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -144,7 +144,7 @@
                     <RowDefinition/>
                     <RowDefinition Height="3"/>
                 </Grid.RowDefinitions>
-                <Button  Grid.RowSpan="2" BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9" >
+                <Button x:Name="Profile" Grid.RowSpan="2" BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9" Click="Profile_Click" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -154,7 +154,7 @@
                         <Image Source="pack://application:,,,/Resources/menubar.png" Width="55" Height="64" />
                     </StackPanel>
                 </Button>
-                <TextBlock Grid.RowSpan="2"  Text="Sobe" Grid.Column="2" Grid.Row ="1" FontWeight="SemiBold" Margin="25,15,0,0" FontSize="25" VerticalAlignment="Top" Foreground="#624cfc"/>
+                <TextBlock Grid.RowSpan="2"  Text="Oprema" Grid.Column="2" Grid.Row ="1" FontWeight="SemiBold" Margin="25,15,0,0" FontSize="25" VerticalAlignment="Top" Foreground="#624cfc"/>
                 <Button x:Name="Options" Grid.RowSpan="2" BorderThickness="0" Grid.Column="7" Grid.Row="1" Width="40" Background="White" Margin="0,0,0,9" Click="Options_Click">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -330,6 +330,52 @@
                     <ComboBoxItem Content="Staticka"/>
                 </ComboBox>
 
+            </Grid>
+        </StackPanel>
+
+        <StackPanel x:Name="OtherOptions" Visibility="Hidden" Background="White" Margin="0,471,0,80" >
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="3"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="63"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="CloseOptions" BorderThickness="0"  Grid.Column="5" Grid.Row="0" Height="40"  Width="40" Background="White"  Click="CloseOptions_Click">
+
+                    <StackPanel>
+                        <Image  Source="pack://application:,,,/Resources/angledown.png" Width="40" Height="40"  />
+                    </StackPanel>
+                </Button>
+
+                <TextBlock  Text="Lekovi" Grid.Column="1" Grid.Row ="2" FontWeight="SemiBold" FontSize="18" Height="20" HorizontalAlignment="Center" Foreground="#624cfc"/>
+                <Button x:Name="MedicineView" BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="80" Background="White"  Click="MedicineView_Click">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image  Source="pack://application:,,,/Resources/lekovi.png" Width="70" Height="60" />
+                    </StackPanel>
+                </Button>
+                <Separator Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="12" Height ="6"  Background= "Black"  />
             </Grid>
         </StackPanel>
 

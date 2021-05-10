@@ -21,8 +21,25 @@ namespace Hospital_IS.ManagerView
     public partial class ManagerNotificationView : Window
     {
         public ObservableCollection<MedicineNotification> Notifications { get; set; } = new ObservableCollection<MedicineNotification>();
-        public ManagerNotificationView()
+
+        public String activeButton { get; set; }
+
+
+        private static ManagerNotificationView instance = null;
+        public static ManagerNotificationView Instance
         {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new ManagerNotificationView();
+                }
+                return instance;
+            }
+        }
+        private ManagerNotificationView()
+        {
+           
             InitializeComponent();
             Notifications = new ObservableCollection<MedicineNotification>(MedicineNotificationController.Instance.GetAllByDoctorId(6));
             
@@ -33,9 +50,18 @@ namespace Hospital_IS.ManagerView
 
         }
 
+        public void ReloadGrid()
+        {
+            Notifications = new ObservableCollection<MedicineNotification>(MedicineNotificationController.Instance.GetAllByDoctorId(6));
+
+            ListViewNotifications.Items.Clear();
+            if (Notifications.Count > 0)
+                ListViewNotifications.ItemsSource = Notifications;
+        }
+
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            ManagerLogout manager = new ManagerLogout();
+            ManagerLogout manager = new ManagerLogout(activeButton);
             manager.Show();
             this.Hide();
         }

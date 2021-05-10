@@ -111,8 +111,9 @@ namespace Hospital_IS.ManagerView
                 MedicineNotificationController.Instance.CreateReNotification(nameClass, sideEffectClass, therapeuticClass, medicineNamesClass, medicineComponentsClass, doctorsIds);
                 MedicineNotificationController.Instance.DeleteNotification(NotificationInfoView.MedicineNotification);
                 MedicineNotificationChage.Hide();
-                ManagerNotificationView managerNotification = new ManagerNotificationView();
-                managerNotification.Show();
+                ManagerNotificationView.Instance.ReloadGrid();
+                ManagerNotificationView.Instance.Show();
+              
                 this.Close();
 
             }

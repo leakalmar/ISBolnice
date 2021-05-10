@@ -69,7 +69,7 @@ namespace Hospital_IS
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            ManagerLogout managerLogout = new ManagerLogout();
+            ManagerLogout managerLogout = new ManagerLogout("room");
             managerLogout.Show();
             this.Hide();
         }

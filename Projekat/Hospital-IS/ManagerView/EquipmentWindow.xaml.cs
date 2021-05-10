@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Controllers;
+using Hospital_IS.ManagerView;
 using Model;
 
 namespace Hospital_IS
@@ -298,7 +299,36 @@ namespace Hospital_IS
             }
         }
 
-       
+        private void Profile_Click(object sender, RoutedEventArgs e)
+        {
+            ManagerLogout managerLogout = new ManagerLogout("equipment");
+            managerLogout.Show();
+            this.Hide();
+        }
 
+        private void MedicineView_Click(object sender, RoutedEventArgs e)
+        {
+            MedicineView medicineView = new MedicineView();
+            OtherOptions.Visibility = Visibility.Hidden;
+            medicineView.Show();
+            this.Hide();
+        }
+
+        private void CloseOptions_Click(object sender, RoutedEventArgs e)
+        {
+            OtherOptions.Visibility = Visibility.Hidden;
+        }
+
+        private void OtherOptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (OtherOptions.Visibility == Visibility.Visible)
+            {
+                OtherOptions.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                OtherOptions.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
