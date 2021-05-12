@@ -1,7 +1,7 @@
 [
   {
     "NameSurnamePatient": "Simona Stantic",
-    "AppTypeText": null,
+    "AppTypeText": "Pregled",
     "IsUrgent": false,
     "Patient": {
       "hospital": null,
@@ -69,11 +69,12 @@
     "AppointmentStart": "2021-04-22T09:00:00",
     "AppointmentEnd": "2021-04-22T09:30:00",
     "Type": 1,
-    "Room": 1
+    "Room": 1,
+    "Id": 1
   },
   {
     "NameSurnamePatient": "Stefan Beckovic",
-    "AppTypeText": null,
+    "AppTypeText": "Pregled",
     "IsUrgent": false,
     "Patient": {
       "hospital": null,
@@ -141,11 +142,12 @@
     "AppointmentStart": "2021-05-05T08:30:00",
     "AppointmentEnd": "2021-05-05T09:00:00",
     "Type": 1,
-    "Room": 1
+    "Room": 1,
+    "Id": 2
   },
   {
     "NameSurnamePatient": "Simona Stantic",
-    "AppTypeText": null,
+    "AppTypeText": "Pregled",
     "IsUrgent": false,
     "Patient": {
       "hospital": null,
@@ -213,11 +215,12 @@
     "AppointmentStart": "2021-04-30T09:30:00",
     "AppointmentEnd": "2021-04-30T10:00:00",
     "Type": 1,
-    "Room": 1
+    "Room": 1,
+    "Id": 3
   },
   {
     "NameSurnamePatient": "Simona Stantic",
-    "AppTypeText": null,
+    "AppTypeText": "Pregled",
     "IsUrgent": false,
     "Patient": {
       "hospital": null,
@@ -285,11 +288,12 @@
     "AppointmentStart": "2021-05-05T09:15:00",
     "AppointmentEnd": "2021-05-05T09:45:00",
     "Type": 1,
-    "Room": 1
+    "Room": 1,
+    "Id": 4
   },
   {
     "NameSurnamePatient": "Simona Stantic",
-    "AppTypeText": null,
+    "AppTypeText": "Pregled",
     "IsUrgent": false,
     "Patient": {
       "hospital": null,
@@ -357,6 +361,7 @@
     "AppointmentStart": "2021-04-24T09:30:00",
     "AppointmentEnd": "2021-04-24T10:00:00",
     "Type": 1,
-    "Room": 1
+    "Room": 1,
+    "Id": 5
   }
 ]

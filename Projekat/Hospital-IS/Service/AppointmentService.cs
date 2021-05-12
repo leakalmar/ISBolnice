@@ -12,6 +12,8 @@ namespace Service
         private ClassicAppointmentStorage afs = new ClassicAppointmentStorage();
         public List<Appointment> allAppointments { get; set; }
 
+        public int MaxId;
+
         private static AppointmentService instance = null;
         public static AppointmentService Instance
         {
@@ -128,7 +130,6 @@ namespace Service
 
         public void AddAppointment(Appointment appointment)
         {
-           
             if (appointment == null)
             {
                 return;
@@ -142,6 +143,7 @@ namespace Service
 
             if (!allAppointments.Contains(appointment))
             {
+                appointment.Id = GenerateAppointmentID();
                 allAppointments.Add(appointment);
                 afs.SaveAppointment(allAppointments);
               
@@ -158,6 +160,28 @@ namespace Service
 
         }
 
+        public void FindMaxID()
+        {
+            List<Appointment> appointments = new List<Appointment>(DoctorAppointmentService.Instance.allAppointments);
+            appointments.AddRange(allAppointments);
+            int max = 0;
+            foreach (Appointment appointment in appointments)
+            {
+                if (max < appointment.Id)
+                {
+                    max = appointment.Id;
+                }
+            }
+
+            MaxId = max;
+        }
+
+        public int GenerateAppointmentID()
+        {
+            FindMaxID();
+            ++MaxId;
+            return MaxId;
+        }
 
     }
 }

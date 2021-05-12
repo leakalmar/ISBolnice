@@ -5,7 +5,8 @@
     "AppointmentStart": "2021-04-21T10:01:54",
     "AppointmentEnd": "2021-04-21T10:03:54",
     "Type": 3,
-    "Room": 2
+    "Room": 2,
+    "Id": 6
   },
   {
     "Reserved": true,
@@ -13,7 +14,8 @@
     "AppointmentStart": "2021-04-21T10:05:29",
     "AppointmentEnd": "2021-04-21T10:07:29",
     "Type": 3,
-    "Room": 2
+    "Room": 2,
+    "Id": 7
   },
   {
     "Reserved": true,
@@ -21,6 +23,7 @@
     "AppointmentStart": "2021-05-30T00:00:00",
     "AppointmentEnd": "2021-06-01T00:00:00",
     "Type": 2,
-    "Room": 2
+    "Room": 2,
+    "Id": 8
   }
 ]

@@ -18,6 +18,8 @@ namespace Model
         
         public int Room { get; set; }
 
+        public int Id { get; set; }
+
 
         public Appointment(DateTime date, AppointmentType type, bool reserved, int room)
         {
