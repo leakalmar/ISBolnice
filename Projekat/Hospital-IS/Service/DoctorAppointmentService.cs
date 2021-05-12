@@ -108,7 +108,7 @@ namespace Service
         {
             for (int i = 0; i < allAppointments.Count; i++)
             {
-                if (oldDoctorAppointment.AppointmentStart == allAppointments[i].AppointmentStart && oldDoctorAppointment.Room == allAppointments[i].Room && oldDoctorAppointment.Doctor.Id == allAppointments[i].Doctor.Id)
+                if (newDoctorAppointment.Id == allAppointments[i].Id)
                 {
                     allAppointments.Remove(allAppointments[i]);
                     allAppointments.Insert(i, newDoctorAppointment);

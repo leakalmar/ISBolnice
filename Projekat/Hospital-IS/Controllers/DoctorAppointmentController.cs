@@ -52,6 +52,7 @@ namespace Controllers
 
         public void UpdateAppointment(DoctorAppointment oldDoctorAppointment, DoctorAppointment newDoctorAppointment)
         {
+            newDoctorAppointment.Id = oldDoctorAppointment.Id;
             DoctorAppointmentService.Instance.UpdateAppointment(oldDoctorAppointment, newDoctorAppointment);
         }
 
