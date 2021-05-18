@@ -83,8 +83,8 @@ namespace Hospital_IS.DoctorView
         {
             MedicineNotificationController.Instance.ApproveMedicine(ReviewdNotification);
 
-            DoctorHomePage.Instance.Home.Children.Remove(this);
-            DoctorHomePage.Instance.ApproveMedicine.Visibility = Visibility.Visible;
+            //DoctorHomePage.Instance.Home.Children.Remove(this);
+            DoctorMainWindow.Instance.ApproveMedicine.Visibility = Visibility.Visible;
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -97,8 +97,8 @@ namespace Hospital_IS.DoctorView
         {
             MedicineNotificationController.Instance.DisapproveMedicine(ReviewdNotification, text.Text);
 
-            DoctorHomePage.Instance.Home.Children.Remove(this);
-            DoctorHomePage.Instance.ApproveMedicine.Visibility = Visibility.Visible;
+           // DoctorHomePage.Instance.Home.Children.Remove(this);
+            DoctorMainWindow.Instance.ApproveMedicine.Visibility = Visibility.Visible;
         }
     }
 }

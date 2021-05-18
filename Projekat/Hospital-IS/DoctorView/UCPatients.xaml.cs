@@ -39,7 +39,7 @@ namespace Hospital_IS.DoctorView
         {
             Patient patient = (Patient)patients.SelectedItem;
             List<DoctorAppointment> appointments = DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(patient.Id);
-            DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(appointments[0]));
+           // DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(appointments[0]));
             this.Visibility = Visibility.Collapsed;
         }
 

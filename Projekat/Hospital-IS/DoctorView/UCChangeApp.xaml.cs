@@ -21,7 +21,7 @@ namespace Hospital_IS.DoctorView
             set
             {
                 _appointment = value;
-                foreach (Doctor d in MainWindow.Doctors)
+                foreach (Doctor d in DoctorController.Instance.GetAll())
                 {
                     if (d.Id.Equals(value.Doctor.Id))
                     {
@@ -29,7 +29,7 @@ namespace Hospital_IS.DoctorView
                         break;
                     }
                 }
-                foreach (Room r in MainWindow.Rooms)
+                foreach (Room r in RoomController.Instance.GetAllRooms())
                 {
                     if (r.RoomId.Equals(value.Room))
                     {
@@ -46,8 +46,8 @@ namespace Hospital_IS.DoctorView
         public UCChangeApp(ContentControl details)
         {
             InitializeComponent();
-            doctors.DataContext = MainWindow.Doctors;
-            rooms.DataContext = MainWindow.Rooms;
+            doctors.DataContext = DoctorController.Instance.GetAll();
+            rooms.DataContext = RoomController.Instance.GetAllRooms();
 
             panel = details;
         }
@@ -63,7 +63,7 @@ namespace Hospital_IS.DoctorView
             List<DateTime> dates = new List<DateTime>(calendar.SelectedDates);
             if (doc == null)
             {
-                foreach (Doctor d in MainWindow.Doctors)
+                foreach (Doctor d in DoctorController.Instance.GetAll())
                 {
                     if (d.Id.Equals(Appointment.Doctor.Id))
                     {
@@ -74,7 +74,7 @@ namespace Hospital_IS.DoctorView
             }
             if (room == null)
             {
-                foreach (Room r in MainWindow.Rooms)
+                foreach (Room r in RoomController.Instance.GetAllRooms())
                 {
                     if (r.RoomId.Equals(Appointment.Room))
                     {
@@ -109,8 +109,8 @@ namespace Hospital_IS.DoctorView
                 newDoctorAppointment.Reserved = true;
                 DoctorAppointmentController.Instance.UpdateAppointment(Appointment, newDoctorAppointment);
 
-                DoctorHomePage.Instance.DoctorAppointment.Remove(Appointment);
-                DoctorHomePage.Instance.DoctorAppointment.Add(newDoctorAppointment);
+                DoctorMainWindow.Instance.DoctorAppointment.Remove(Appointment);
+                DoctorMainWindow.Instance.DoctorAppointment.Add(newDoctorAppointment);
 
                 panel.Visibility = Visibility.Collapsed;
             }

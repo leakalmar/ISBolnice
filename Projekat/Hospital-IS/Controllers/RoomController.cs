@@ -56,6 +56,11 @@ namespace Controllers
             return RoomService.Instance.GetRoomByType(type);
         }
 
+        public Room GetRoomById(int roomId)
+        {
+            return RoomService.Instance.GetRoomById(roomId);
+        }
+
         public void AddEquipment(Room room, Equipment newEquip)
         {
             RoomService.Instance.AddEquipment(room,newEquip);

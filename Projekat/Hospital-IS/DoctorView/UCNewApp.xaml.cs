@@ -30,7 +30,7 @@ namespace Hospital_IS.DoctorView
 
             PatientChart = patientChart;
             Appointment = patientChart.Appointment;
-            doctors.DataContext = MainWindow.Doctors;
+            doctors.DataContext = DoctorController.Instance.GetAll();
             rooms.DataContext = Rooms;
             duration.Value = new TimeSpan(0);
 
@@ -39,7 +39,7 @@ namespace Hospital_IS.DoctorView
             docApp[0] = list[0];
             docApp[1] = list[1];
 
-            specialization.ItemsSource = MainWindow.Specialties;
+            specialization.ItemsSource = SpecializationController.Instance.GetAll();
             InitializeComoboBoxes();
 
         }
@@ -49,18 +49,18 @@ namespace Hospital_IS.DoctorView
             types.SelectedIndex = 0;
             duration.Value = new TimeSpan(0);
 
-            foreach (Specialty s in MainWindow.Specialties)
+            foreach (Specialty s in SpecializationController.Instance.GetAll())
             {
-                if (s.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name))
+                if (s.Name.Equals(DoctorMainWindow.Instance.Doctor.Specialty.Name))
                 {
                     specialization.SelectedItem = s;
                     break;
                 }
             }
 
-            foreach (Doctor d in MainWindow.Doctors)
+            foreach (Doctor d in DoctorController.Instance.GetAll())
             {
-                if (d.Id.Equals(DoctorHomePage.Instance.Doctor.Id))
+                if (d.Id.Equals(DoctorMainWindow.Instance.Doctor.Id))
                 {
                     doctors.SelectedItem = d;
                     break;
@@ -68,9 +68,9 @@ namespace Hospital_IS.DoctorView
             }
 
 
-            foreach (Room r in MainWindow.Rooms)
+            foreach (Room r in RoomController.Instance.GetAllRooms())
             {
-                if (r.RoomId.Equals(DoctorHomePage.Instance.PrimaryRoom.RoomId))
+                if (r.RoomId.Equals(DoctorMainWindow.Instance.Doctor.PrimaryRoom))
                 {
                     rooms.SelectedItem = r;
                     break;
@@ -198,11 +198,11 @@ namespace Hospital_IS.DoctorView
             }
 
 
-            if (selectedSpecialty.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name))
+            if (selectedSpecialty.Name.Equals(DoctorMainWindow.Instance.Doctor.Specialty.Name))
             {
-                foreach (Doctor doctor in MainWindow.Doctors)
+                foreach (Doctor doctor in DoctorController.Instance.GetAll())
                 {
-                    if (doctor.Id.Equals(DoctorHomePage.Instance.Doctor.Id))
+                    if (doctor.Id.Equals(DoctorMainWindow.Instance.Doctor.Id))
                     {
                         doctors.SelectedItem = doctor;
                     }
@@ -226,7 +226,7 @@ namespace Hospital_IS.DoctorView
 
         private void changeVisibilityOfFields(AppointmentType type, Doctor doctor)
         {
-            if ((doctor.Specialty.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name) && type == AppointmentType.CheckUp) || (Emergency && type == AppointmentType.CheckUp))
+            if ((doctor.Specialty.Name.Equals(DoctorMainWindow.Instance.Doctor.Specialty.Name) && type == AppointmentType.CheckUp) || (Emergency && type == AppointmentType.CheckUp))
             {
                 rooms.Visibility = Visibility.Visible;
                 types.Visibility = Visibility.Visible;
@@ -235,7 +235,7 @@ namespace Hospital_IS.DoctorView
                 lblType.Visibility = Visibility.Visible;
                 lblDuration.Visibility = Visibility.Collapsed;
             }
-            else if ((doctor.Specialty.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name) && type == AppointmentType.Operation) || Emergency)
+            else if ((doctor.Specialty.Name.Equals(DoctorMainWindow.Instance.Doctor.Specialty.Name) && type == AppointmentType.Operation) || Emergency)
             {
                 rooms.Visibility = Visibility.Visible;
                 types.Visibility = Visibility.Visible;
@@ -244,7 +244,7 @@ namespace Hospital_IS.DoctorView
                 lblType.Visibility = Visibility.Visible;
                 lblDuration.Visibility = Visibility.Visible;
             }
-            else if (!doctor.Specialty.Name.Equals(DoctorHomePage.Instance.Doctor.Specialty.Name))
+            else if (!doctor.Specialty.Name.Equals(DoctorMainWindow.Instance.Doctor.Specialty.Name))
             {
                 rooms.Visibility = Visibility.Collapsed;
                 types.Visibility = Visibility.Collapsed;
@@ -262,17 +262,17 @@ namespace Hospital_IS.DoctorView
                 DoctorAppointment selected = (DoctorAppointment)appointments.SelectedItem;
                 selected.Reserved = true;
                 DoctorAppointmentController.Instance.AddAppointment(selected);
-                DoctorHomePage.Instance.DoctorAppointment.Add(selected);
+                DoctorMainWindow.Instance.DoctorAppointment.Add(selected);
 
-                DoctorHomePage.Instance.Home.Children.Remove(this);
-                DoctorHomePage.Instance.Home.Children.Add(PatientChart);
+               // DoctorHomePage.Instance.Home.Children.Remove(this);
+                //DoctorHomePage.Instance.Home.Children.Add(PatientChart);
             }
         }
 
         private void appointments_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.Visibility = Visibility.Collapsed;
-            DoctorHomePage.Instance.Home.Children.Add(new UCIssueInstruction(this));
+           // DoctorHomePage.Instance.Home.Children.Add(new UCIssueInstruction(this));
         }
 
         private void emergency_Click(object sender, RoutedEventArgs e)
@@ -307,7 +307,7 @@ namespace Hospital_IS.DoctorView
         private void emergencyApp_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.Visibility = Visibility.Collapsed;
-            DoctorHomePage.Instance.Home.Children.Add(new UCIssueInstruction(this, true));
+            //DoctorHomePage.Instance.Home.Children.Add(new UCIssueInstruction(this, true));
         }
     }
 

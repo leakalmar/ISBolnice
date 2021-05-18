@@ -146,7 +146,7 @@ namespace Hospital_IS.DoctorView
         {
             if (patientInfo.Visibility == Visibility.Collapsed)
             {
-                DoctorHomePage.Instance.Home.Children.Remove(this);
+               // DoctorHomePage.Instance.Home.Children.Remove(this);
             }
         }
 
@@ -156,8 +156,8 @@ namespace Hospital_IS.DoctorView
             ChartController.Instance.AddReport(Appointment, ReportView.reportDetail.Text, ReportView.Prescriptions.Count, Patient);
             ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView.Prescriptions), Patient);
 
-            DoctorHomePage.Instance.Home.Children.Remove(this);
-            DoctorHomePage.Instance.Home.Children.Add(new UCAppDetail(null));
+           // DoctorHomePage.Instance.Home.Children.Remove(this);
+           // DoctorHomePage.Instance.Home.Children.Add(new UCAppDetail(null));
         }
 
         //Kada se vraca u AppDetail treba da refreshuje i njega i pocetnu stranu inace se ne zakazu novo zakazani termini! Jer nisam stavila da se dodaju u onu listu
@@ -168,17 +168,17 @@ namespace Hospital_IS.DoctorView
             ChartController.Instance.AddReport(Appointment, ReportView.reportDetail.Text, ReportView.Prescriptions.Count, Patient);
             ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView.Prescriptions), Patient);
 
-            DoctorHomePage.Instance.Home.Children.Remove(this);
+            //DoctorHomePage.Instance.Home.Children.Remove(this);
             UCAppDetail r = new UCAppDetail(null);
-            DoctorHomePage.Instance.Home.Children.Add(r);
+            //DoctorHomePage.Instance.Home.Children.Add(r);
         }
 
         private void back_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (back.IsVisible)
             {
-                DoctorHomePage.Instance.Home.Children.Remove(this);
-                DoctorHomePage.Instance.Home.Children.Add(new UCAppDetail());
+                //DoctorHomePage.Instance.Home.Children.Remove(this);
+                //DoctorHomePage.Instance.Home.Children.Add(new UCAppDetail());
 
             }
         }

@@ -63,7 +63,7 @@ namespace Hospital_IS.DoctorView
                     ChartController.Instance.UpdateReport(NowAppointment.Patient, Report, reportDetail.Text, medicines.Items.Count);
                 }
 
-                DoctorHomePage.Instance.Home.Children.Clear();
+                //DoctorHomePage.Instance.Home.Children.Clear();
             }
         }
 

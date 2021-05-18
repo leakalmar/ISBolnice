@@ -2,16 +2,10 @@
 using Model;
 using System;
 using System.ComponentModel;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorView
 {
@@ -21,26 +15,26 @@ namespace Hospital_IS.DoctorView
         public UCAppointments()
         {
             InitializeComponent();
-            rooms.DataContext = MainWindow.Rooms;
+            rooms.DataContext = RoomController.Instance.GetAllRooms();
             string[] list = Enum.GetNames(typeof(AppointmentType));
             string[] docApp = new string[2];
             docApp[0] = list[0];
             docApp[1] = list[1];
             type.ItemsSource = docApp;
-            docotrAppointments.DataContext = DoctorHomePage.Instance.DoctorAppointment;
+            doctorAppointments.DataContext = DoctorMainWindow.Instance.DoctorAppointment;
             from.SelectedDate = DateTime.Now.Date;
             to.SelectedDate = DateTime.Now.Date.AddDays(7);
             type.SelectedIndex = 1;
-            rooms.SelectedItem = DoctorHomePage.Instance.PrimaryRoom;
+            rooms.SelectedItem = RoomController.Instance.GetRoomById(DoctorMainWindow.Instance.Doctor.PrimaryRoom);
 
-            DoctorAppointment ap = (DoctorAppointment)docotrAppointments.SelectedItem;
+            DoctorAppointment ap = (DoctorAppointment)doctorAppointments.SelectedItem;
             ChangeApp = new UCChangeApp(details);
             details.Content = ChangeApp;
         }
 
         private void App_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ChangeApp.Appointment = (DoctorAppointment)docotrAppointments.SelectedItem;
+            ChangeApp.Appointment = (DoctorAppointment)doctorAppointments.SelectedItem;
             details.Visibility = Visibility.Visible;
         }
 
@@ -48,15 +42,15 @@ namespace Hospital_IS.DoctorView
         {
             if(details.Visibility == Visibility.Visible)
             {
-                docotrAppointments.Height = 195;
-                if(docotrAppointments.SelectedItem != null)
+                doctorAppointments.Height = 195;
+                if(doctorAppointments.SelectedItem != null)
                 {
-                    ChangeApp.Appointment = (DoctorAppointment)docotrAppointments.SelectedItem;
+                    ChangeApp.Appointment = (DoctorAppointment)doctorAppointments.SelectedItem;
                 }
             }
             else
             {
-                docotrAppointments.Height = 430;
+                doctorAppointments.Height = 430;
             }
         }
 
@@ -76,32 +70,32 @@ namespace Hospital_IS.DoctorView
 
             if (room == null)
             {
-                room = DoctorHomePage.Instance.PrimaryRoom;
+                room = RoomController.Instance.GetRoomById(DoctorMainWindow.Instance.Doctor.PrimaryRoom);
             }
             String selected = (String)type.SelectedItem;
 
-            ICollectionView view = new CollectionViewSource { Source = DoctorHomePage.Instance.DoctorAppointment }.View;
+            ICollectionView view = new CollectionViewSource { Source = DoctorMainWindow.Instance.DoctorAppointment }.View;
             view.Filter = null;
             view.Filter = delegate (object item)
             {
                 return ((DoctorAppointment)item).Type.ToString().Equals(selected) & ((DoctorAppointment)item).Room == room.RoomId & ((DoctorAppointment)item).AppointmentStart.Date <= endDate.Date & ((DoctorAppointment)item).AppointmentStart.Date >= startDate.Date;
             };
 
-            docotrAppointments.DataContext = view;
+            doctorAppointments.DataContext = view;
         }
 
         private void Delete_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.Key == Key.Delete)
             {
-                DoctorAppointment app = (DoctorAppointment)docotrAppointments.SelectedItem;
+                DoctorAppointment app = (DoctorAppointment)doctorAppointments.SelectedItem;
                 if(app.AppointmentStart > DateTime.Now.AddDays(1))
                 {
                     bool dialog = (bool)new ExitMess("Da li želite da otkažete termin?").ShowDialog();
                     if (dialog)
                     {
                         DoctorAppointmentController.Instance.RemoveAppointment(app);
-                        DoctorHomePage.Instance.DoctorAppointment.Remove(app);
+                        DoctorMainWindow.Instance.DoctorAppointment.Remove(app);
                         app.Reserved = false;
                     }
                 }

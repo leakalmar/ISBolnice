@@ -31,7 +31,7 @@ namespace Hospital_IS.DoctorView
         {
             this.Visibility = Visibility.Collapsed;
             Medicine medicine = (Medicine)medicines.SelectedItem;
-            DoctorHomePage.Instance.Home.Children.Add(new UCUpdateMedicine(medicine));
+           // DoctorHomePage.Instance.Home.Children.Add(new UCUpdateMedicine(medicine));
 
         }
 

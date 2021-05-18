@@ -61,7 +61,7 @@ namespace Hospital_IS.DoctorView
                     DoctorAppointmentController.Instance.AddAppointment(Appointment);
                 }
                 
-                DoctorHomePage.Instance.Home.Children.Clear();
+               // DoctorHomePage.Instance.Home.Children.Clear();
             }
         }
 
@@ -74,7 +74,7 @@ namespace Hospital_IS.DoctorView
                 DoctorAppointmentController.Instance.AddAppointment(Appointment);
             }
 
-            DoctorHomePage.Instance.Home.Children.Clear();
+           // DoctorHomePage.Instance.Home.Children.Clear();
         }
     }
 }

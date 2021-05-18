@@ -17,13 +17,13 @@ namespace Hospital_IS.DoctorView
     /// <summary>
     /// Interaction logic for UserControlHomePage.xaml
     /// </summary>
-    public partial class UserControlHomePage : UserControl
+    public partial class UCHomePage : UserControl
     {
-        public UserControlHomePage()
+        public UCHomePage()
         {
             InitializeComponent();
 
-            ICollectionView app = new CollectionViewSource { Source = DoctorHomePage.Instance.DoctorAppointment }.View;
+            ICollectionView app = new CollectionViewSource { Source = DoctorMainWindow.Instance.DoctorAppointment }.View;
             
             app.Filter = delegate (object item)
             {
@@ -37,21 +37,21 @@ namespace Hospital_IS.DoctorView
         private void Patient_Selected(object sender, KeyEventArgs e)
         {
             DoctorAppointment appointment= (DoctorAppointment)docotrAppointments.SelectedItem;
-            DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(appointment));
+            //DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(appointment));
         }
 
         public void Patient_DoubleClicked(object sender, MouseButtonEventArgs e)
         {
             this.Visibility = Visibility.Collapsed;
             DoctorAppointment ap = (DoctorAppointment)docotrAppointments.SelectedItem;
-            DoctorHomePage.Instance.Home.Children.Add(new UCAppDetail(ap));
+            //DoctorHomePage.Instance.Home.Children.Add(new UCAppDetail(ap));
 
 
         }
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ICollectionView app = CollectionViewSource.GetDefaultView(DoctorHomePage.Instance.DoctorAppointment); 
+            ICollectionView app = CollectionViewSource.GetDefaultView(DoctorMainWindow.Instance.DoctorAppointment); 
             app.Filter = delegate (object item)
             {
                 return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date;

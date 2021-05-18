@@ -65,7 +65,7 @@ namespace Hospital_IS.DoctorView
         private void NewApp_Click(object sender, RoutedEventArgs e)
         {
             (this.Parent as Grid).Visibility = Visibility.Collapsed;
-            DoctorHomePage.Instance.Home.Children.Add(new UCNewApp(PatientChart));
+            //DoctorHomePage.Instance.Home.Children.Add(new UCNewApp(PatientChart));
         }
     }
 }

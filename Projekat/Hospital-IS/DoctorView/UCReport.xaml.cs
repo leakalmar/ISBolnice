@@ -35,7 +35,7 @@ namespace Hospital_IS.DoctorView
         private void Perscription_Click(object sender, RoutedEventArgs e)
         {
             PatientChart.Visibility = Visibility.Collapsed;
-            DoctorHomePage.Instance.Home.Children.Add(new UCSearchMedicine(PatientChart));
+           // DoctorHomePage.Instance.Home.Children.Add(new UCSearchMedicine(PatientChart));
         }
 
         private void delete_(object sender, KeyEventArgs e)

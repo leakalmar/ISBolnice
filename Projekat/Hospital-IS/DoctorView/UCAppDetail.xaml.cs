@@ -23,13 +23,13 @@ namespace Hospital_IS.DoctorView
         public UCAppDetail(DoctorAppointment doctorAppointment = null)
         {
             InitializeComponent();
-            docotrAppointments.DataContext = DoctorHomePage.Instance.DoctorAppointment;
+            docotrAppointments.DataContext = DoctorMainWindow.Instance.DoctorAppointment;
             docotrAppointments.SelectedItem = doctorAppointment;
             info.DataContext = doctorAppointment;
             info2.DataContext = doctorAppointment;
 
 
-            ICollectionView view = new CollectionViewSource { Source = DoctorHomePage.Instance.DoctorAppointment }.View;
+            ICollectionView view = new CollectionViewSource { Source = DoctorMainWindow.Instance.DoctorAppointment }.View;
             view.Filter = delegate (object item)
             {
                 return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date;
@@ -43,14 +43,14 @@ namespace Hospital_IS.DoctorView
         {
             this.Visibility = Visibility.Collapsed;
             DoctorAppointment selectedAppointment = (DoctorAppointment)docotrAppointments.SelectedItem;
-            DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(selectedAppointment));
+           // DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(selectedAppointment));
         }
 
         private void StartBtnClick(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Collapsed;
             DoctorAppointment selectedAppointment = (DoctorAppointment)docotrAppointments.SelectedItem;
-            DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(selectedAppointment, true));
+           // DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(selectedAppointment, true));
         }
 
         private void docotrAppointments_SelectionChanged(object sender, SelectionChangedEventArgs e)

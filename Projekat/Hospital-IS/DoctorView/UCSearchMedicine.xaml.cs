@@ -111,7 +111,7 @@ namespace Hospital_IS.DoctorView
         {
             if (e.Key == Key.Back)
             {
-                DoctorHomePage.Instance.Home.Children.Remove(this);
+                //DoctorHomePage.Instance.Home.Children.Remove(this);
                 PatientChart.Visibility = Visibility.Visible;
             }
         }

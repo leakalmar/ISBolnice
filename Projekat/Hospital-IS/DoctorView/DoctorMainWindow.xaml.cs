@@ -1,45 +1,31 @@
-﻿using Hospital_IS.Storages;
-using Model;
-using Storages;
-using System;
-using System.Collections.Generic;
+﻿using Model;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Hospital_IS.DoctorView;
-using Service;
 using Controllers;
 
 namespace Hospital_IS.DoctorView
 {
-    public partial class DoctorHomePage : Window
+    public partial class DoctorMainWindow : Window
     {
-        private static DoctorHomePage instance = null;
-        public static DoctorHomePage Instance
+        private static DoctorMainWindow instance = null;
+        public static DoctorMainWindow Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new DoctorHomePage();
+                    instance = new DoctorMainWindow();
                 }
                 return instance;
             }
         }
         public Doctor Doctor { get; set; }
-        public Room PrimaryRoom { get; set; }
         private int Last { get; set; } = 0;
         public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
 
 
-        public UserControlHomePage HomePage;
+        public UCHomePage HomePage;
         public UCAppointments Appointments;
         public UCPatients Patients;
         public UCMedicines Medicines;
@@ -48,7 +34,7 @@ namespace Hospital_IS.DoctorView
 
 
         
-        public DoctorHomePage()
+        public DoctorMainWindow()
         {
             InitializeComponent();            
             start.IsChecked = true;
@@ -57,16 +43,8 @@ namespace Hospital_IS.DoctorView
         public void ChangeDoctor(Doctor doctor)
         {
             Doctor = doctor;
-            foreach (Room r in MainWindow.Rooms)
-            {
-                if (r.RoomId.Equals(Doctor.PrimaryRoom))
-                {
-                    PrimaryRoom = r;
-                    break;
-                }
-            }
             DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllByDoctor(Doctor.Id));
-            HomePage = new UserControlHomePage();
+            HomePage = new UCHomePage();
             Appointments = new UCAppointments();
             Patients = new UCPatients();
             Medicines = new UCMedicines();
