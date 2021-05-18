@@ -1,4 +1,4 @@
-﻿<Window x:Class="Hospital_IS.View.PatientMainWindow"
+﻿<Window x:Class="Hospital_IS.View.PatientMainWindowView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -14,19 +14,19 @@
         >
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:HomePatientViewModel}">
-            <views:HomePatient/>
+            <views:HomePatientView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:AppointmentPatientViewModel}">
-            <views:AppointmentPatient/>
+            <views:AppointmentPatientView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:AllAppointmentsViewModel}">
-            <views:AllAppointments/>
+            <views:AllAppointmentsView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:TherapyPatientViewModel}">
-            <views:TherapyPatient/>
+            <views:TherapyPatientView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:AppointmentPatientViewModel}">
-            <views:AppointmentPatient/>
+        <DataTemplate DataType="{x:Type viewModel:PatientNotificationsViewModel}">
+            <views:PatientNotificationsView/>
         </DataTemplate>
     </Window.Resources>
     <Grid Background="#FF184095">

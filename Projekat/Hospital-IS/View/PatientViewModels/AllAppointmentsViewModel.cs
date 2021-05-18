@@ -10,7 +10,19 @@ namespace Hospital_IS.View.PatientViewModels
 {
     public class AllAppointmentsViewModel : BindableBase
     {
-        public ObservableCollection<DoctorAppointment> AllAppointments { get; set; }
+        private ObservableCollection<DoctorAppointment> allAppointments;
+        public ObservableCollection<DoctorAppointment> AllAppointments
+        {
+            get { return allAppointments; }
+            set 
+            {
+                if (allAppointments != value)
+                {
+                    allAppointments = value;
+                    OnPropertyChanged("AllAppointments");
+                }
+            }
+        }
 
         private DoctorAppointment selectedDoctorAppointment;
         private bool shouldShowEvaluate = false;
@@ -36,7 +48,7 @@ namespace Hospital_IS.View.PatientViewModels
                 if (selectedDoctorAppointment != value)
                 {
                     selectedDoctorAppointment = value;
-                    OnPropertyChanged("dataGridAppointment");
+                    OnPropertyChanged("SelectedDoctorAppointment");
                     SetAppointmentInfo();
                 }
             }

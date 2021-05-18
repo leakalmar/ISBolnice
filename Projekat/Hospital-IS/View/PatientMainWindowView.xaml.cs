@@ -16,23 +16,23 @@ namespace Hospital_IS.View
     /// <summary>
     /// Interaction logic for PatientMainWindow.xaml
     /// </summary>
-    public partial class PatientMainWindow : Window
+    public partial class PatientMainWindowView : Window
     {
-        private static PatientMainWindow instance = null;
-        public static PatientMainWindow Instance
+        private static PatientMainWindowView instance = null;
+        public static PatientMainWindowView Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new PatientMainWindow();
+                    instance = new PatientMainWindowView();
                 }
                 return instance;
             }
         }
 
         public Patient Patient { get; set; }
-        private PatientMainWindow()
+        private PatientMainWindowView()
         {
             Patient = MainWindow.PatientUser;
             InitializeComponent();

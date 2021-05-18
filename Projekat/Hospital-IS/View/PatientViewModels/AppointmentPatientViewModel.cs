@@ -103,7 +103,7 @@ namespace Hospital_IS.View.PatientViewModels
         {
             AvailableAppointments.Clear();
             MessageBox.Show(TimeSlot.ToString());
-            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.ToString(), Doctor, HomePatient.Instance.Patient, date, TimePriority);
+            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.ToString(), Doctor, PatientMainWindowView.Instance.Patient, date, TimePriority);
             List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(possibleAppointment);
             MessageBox.Show(docApps.Count.ToString());
             foreach (DoctorAppointment doctorAppointment in docApps)
@@ -120,9 +120,9 @@ namespace Hospital_IS.View.PatientViewModels
             }
             else
             {
-                if (!PatientController.Instance.IsPatientTroll(HomePatient.Instance.Patient, DoctorApp))
+                if (!PatientController.Instance.IsPatientTroll(PatientMainWindowView.Instance.Patient, DoctorApp))
                 {
-                    HomePatient.Instance.DoctorAppointment.Add(DoctorApp);
+                    PatientMainWindowView.Instance.DoctorAppointment.Add(DoctorApp);
                     DoctorAppointmentController.Instance.AddAppointment(DoctorApp);
                     DoctorApp.Reserved = true;
                     AvailableAppointments.Remove(DoctorApp);

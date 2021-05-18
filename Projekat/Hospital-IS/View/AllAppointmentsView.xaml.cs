@@ -12,14 +12,14 @@ namespace Hospital_IS.View
     /// <summary>
     /// Interaction logic for AllAppointments.xaml
     /// </summary>
-    public partial class AllAppointments : UserControl
+    public partial class AllAppointmentsView : UserControl
     {
         //public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
 
-        public AllAppointments()
+        public AllAppointmentsView()
         {
             InitializeComponent();
-            this.DataContext = new AllAppointmentsViewModel();
+            //this.DataContext = new AllAppointmentsViewModel();
             
             //DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(HomePatient.Instance.Patient.Id));
             //this.DataContext = this;

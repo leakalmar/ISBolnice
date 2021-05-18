@@ -51,7 +51,8 @@ namespace Hospital_IS
                 if (email.Text == p.Email && password.Password.ToString() == p.Password)
                 {
                     PatientUser = p;
-                    HomePatient.Instance.Show();
+                    //HomePatient.Instance.Show();
+                    PatientMainWindowView.Instance.Show();
                     this.Close();
                 }
             }

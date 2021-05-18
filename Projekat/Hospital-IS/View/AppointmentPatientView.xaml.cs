@@ -8,29 +8,30 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Hospital_IS.View
 {
     /// <summary>
     /// Interaction logic for AppointmentPatient.xaml
     /// </summary>
-    public partial class AppointmentPatient : Window
+    public partial class AppointmentPatientView : UserControl
     {
         private AppointmentPatientViewModel appointmentPatientViewModel;
 
-        public AppointmentPatient()
+        public AppointmentPatientView()
         {
             InitializeComponent();
             //this.DataContext = this;
-            appointmentPatientViewModel = new AppointmentPatientViewModel();
-            this.DataContext = appointmentPatientViewModel;
+            //appointmentPatientViewModel = new AppointmentPatientViewModel();
+            //this.DataContext = appointmentPatientViewModel;
             //AvailableAppointments = new ObservableCollection<DoctorAppointment>();
             //Doctors.DataContext = Hospital.Instance.Doctors;
             //DateTime today = DateTime.Today;
             Calendar.DisplayDateStart = DateTime.Today;
             //Calendar.SelectedDate = today;
         }
-
+        /*
         private void home(object sender, RoutedEventArgs e)
         {
 
@@ -43,9 +44,9 @@ namespace Hospital_IS.View
         {/*
             AllAppointments all = new AllAppointments();
             all.Show();
-            this.Close();*/
+            this.Close();
         }
-        
+        /*
         private void showTherapy(object sender, RoutedEventArgs e)
         {
             TherapyPatient doc = new TherapyPatient();
@@ -58,7 +59,7 @@ namespace Hospital_IS.View
             PatientNotifications notifications = new PatientNotifications();
             notifications.Show();
             this.Close();
-        }/*
+        }
         //Drugi doktor je hardcode-ovan u FSDoctor klasi,samo radi pokazivanja funkcionalnosti(Samo ga otkomentarisati pri pokretanju da bi se prikazao)
         private void ShowAvailableApp(object sender, RoutedEventArgs e)
         {            
@@ -154,13 +155,13 @@ namespace Hospital_IS.View
                 }
             }          
         }
-        */
+        *//*
         private void logout(object sender, RoutedEventArgs e)
         {
             MainWindow login = new MainWindow();
             login.Show();
             this.Close();
         }
-
+    */
     }
 }

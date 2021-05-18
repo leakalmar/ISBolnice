@@ -12,18 +12,18 @@ namespace Hospital_IS.View
     /// <summary>
     /// Interaction logic for DocumentationPatient.xaml
     /// </summary>
-    public partial class TherapyPatient : Window
+    public partial class TherapyPatientView : UserControl
     {
 
         private TherapyPatientViewModel therapyPatientViewModel;
 
-        public TherapyPatient()
+        public TherapyPatientView()
         {
-            therapyPatientViewModel = new TherapyPatientViewModel();
-            this.DataContext = therapyPatientViewModel;
+            //therapyPatientViewModel = new TherapyPatientViewModel();
+            //this.DataContext = therapyPatientViewModel;
             InitializeComponent();
         }
-
+        /*
         private void home(object sender, RoutedEventArgs e)
         {
             HomePatient.Instance.Show();
@@ -41,7 +41,7 @@ namespace Hospital_IS.View
         {/*
             AllAppointments allApp = new AllAppointments();
             allApp.Show();
-            this.Close();*/
+            this.Close();
         }
         
         private void showNotifications(object sender, RoutedEventArgs e)
@@ -57,7 +57,7 @@ namespace Hospital_IS.View
             login.Show();
             this.Hide();
         }
-
+        */
         private void showRow(object sender, MouseButtonEventArgs e)
         {
             /*Therapy therapyInfo = (Therapy)dataGridTherapy.SelectedItem;

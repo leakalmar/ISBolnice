@@ -20,10 +20,10 @@ namespace Hospital_IS.View
     /// <summary>
     /// Interaction logic for PatientNotifications.xaml
     /// </summary>
-    public partial class PatientNotifications : Window
+    public partial class PatientNotificationsView : UserControl
     {
         public ObservableCollection<Notification> NotificationMessages { get; set; } = new ObservableCollection<Notification>();
-        public PatientNotifications()
+        public PatientNotificationsView()
         {
             InitializeComponent();
             List<Notification> notifications = NotificationController.Instance.GetAllByUser(HomePatient.Instance.Patient.Id);
@@ -33,7 +33,7 @@ namespace Hospital_IS.View
             if (NotificationMessages.Count > 0)
                 ListViewNotifications.ItemsSource = NotificationMessages;
         }
-
+        /*
         private void logout(object sender, RoutedEventArgs e)
         {
             MainWindow login = new MainWindow();
@@ -76,7 +76,7 @@ namespace Hospital_IS.View
             nv.Show();
 
         }
-
+        */
         private Notification findNotification(int id)
         {
             for (int i = 0; i < NotificationMessages.Count; i++)
