@@ -53,14 +53,14 @@ namespace Hospital_IS.View
             ap.Show();
             this.Close();
         }
-
+        
         private void allApp(object sender, RoutedEventArgs e)
         {
-            AllAppointments all = new AllAppointments();
-            all.Show();
-            this.Close();
+            //AllAppointments all = new AllAppointments();
+            //all.Show();
+            //this.Close();
         }
-
+        
         private void showTherapy(object sender, RoutedEventArgs e)
         {
             TherapyPatient therapy = new TherapyPatient();

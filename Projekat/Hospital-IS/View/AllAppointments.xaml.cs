@@ -5,26 +5,26 @@ using Storages;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Hospital_IS.View
 {
     /// <summary>
     /// Interaction logic for AllAppointments.xaml
     /// </summary>
-    public partial class AllAppointments : Window
+    public partial class AllAppointments : UserControl
     {
         //public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
-        AllAppointmentsViewModel allAppointmentsViewModel;
 
         public AllAppointments()
         {
-            allAppointmentsViewModel = new AllAppointmentsViewModel();
-            this.DataContext = allAppointmentsViewModel;
             InitializeComponent();
+            this.DataContext = new AllAppointmentsViewModel();
+            
             //DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(HomePatient.Instance.Patient.Id));
             //this.DataContext = this;
         }
-
+        /*
         private void home(object sender, RoutedEventArgs e)
         {
             HomePatient.Instance.Show();
@@ -59,7 +59,7 @@ namespace Hospital_IS.View
             notifications.Show();
             this.Close();
         }
-
+        */
         private void showRow(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {/*
             DoctorAppointment docApp = (DoctorAppointment)dataGridAppointment.SelectedItem;

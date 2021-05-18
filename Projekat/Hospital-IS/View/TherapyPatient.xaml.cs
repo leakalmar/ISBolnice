@@ -36,14 +36,14 @@ namespace Hospital_IS.View
             ap.Show();
             this.Close();
         }
-
+        
         private void showAll(object sender, RoutedEventArgs e)
-        {
+        {/*
             AllAppointments allApp = new AllAppointments();
             allApp.Show();
-            this.Close();
+            this.Close();*/
         }
-
+        
         private void showNotifications(object sender, RoutedEventArgs e)
         {
             PatientNotifications notifications = new PatientNotifications();

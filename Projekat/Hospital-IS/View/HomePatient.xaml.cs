@@ -30,7 +30,7 @@ namespace Hospital_IS.View
         public Patient Patient { get; set; }
         public DoctorAppointment rescheduledApp;
         public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
-        private HomePatient()
+        public HomePatient()
         {
             InitializeComponent();
 
@@ -88,15 +88,15 @@ namespace Hospital_IS.View
             ap.Show();
             this.Hide();
         }
-
+        
         private void allApp(object sender, RoutedEventArgs e)
         {
-
+            /*
             AllAppointments ap = new AllAppointments();
             ap.Show();
-            this.Hide();
+            this.Hide();*/
         }
-
+        
         private void showTherapy(object sender, RoutedEventArgs e)
         {
             TherapyPatient doc = new TherapyPatient();

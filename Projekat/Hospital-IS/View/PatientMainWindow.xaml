@@ -1,0 +1,91 @@
+﻿<Window x:Class="Hospital_IS.View.PatientMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital_IS.View" 
+        xmlns:model="clr-namespace:Model" 
+        xmlns:views="clr-namespace:Hospital_IS.View"
+        xmlns:viewModel="clr-namespace:Hospital_IS.View.PatientViewModels"
+        mc:Ignorable="d"
+        Title="PatientMainWindow" Height="720" Width="1280" WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True" Background="Transparent"
+        WindowStyle="None" ResizeMode="NoResize"
+        >
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:HomePatientViewModel}">
+            <views:HomePatient/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AppointmentPatientViewModel}">
+            <views:AppointmentPatient/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AllAppointmentsViewModel}">
+            <views:AllAppointments/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:TherapyPatientViewModel}">
+            <views:TherapyPatient/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AppointmentPatientViewModel}">
+            <views:AppointmentPatient/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid Background="#FF184095">
+        <Grid.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="0,20,0,0"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.ColumnSpan="3" Grid.RowSpan="1" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF184095" Offset="0.0"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Border Grid.ColumnSpan="1" Grid.RowSpan="11" BorderBrush="#FFF9F2F2" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF184095" Offset="0.0"/>
+                    <GradientStop Color="#FF5B317E" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Border Background="White" CornerRadius="20,0,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="10" >
+            <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="10" Background="Transparent" >
+                <ContentControl Content="{Binding CurrentViewModel}"/>
+            </Grid>
+        </Border>
+        
+
+        <Image Source="../hospital.png" Width="250" Height="250" Grid.RowSpan="5"/>
+        <Button x:Name="Logout" Click="LogoutPatient" Grid.Column="2" Grid.Row="0" Margin="450,0,0,0" Background="{x:Null}" FontSize="16" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand">Odjavi se</Button>
+
+        <Button x:Name="Home" Command="{Binding NavCommand}" CommandParameter="home" Grid.Column="0" Grid.Row="5" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Background="White" Foreground="#FF184095" Cursor="Hand" BorderThickness="1,1,0,1">Početna strana</Button>
+        <Button x:Name="ReserveApp" Command="{Binding NavCommand}" CommandParameter="reserve" Grid.Column="0" Grid.Row="6" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" >Zakaži pregled</Button>
+        <Button x:Name="AllApp" Command="{Binding NavCommand}" CommandParameter="allApp" Grid.Column="0" Grid.Row="7" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand"  >Moji pregledi</Button>
+        <Button x:Name="Therapy" Command="{Binding NavCommand}" CommandParameter="therapy" Grid.Column="0" Grid.Row="8" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand"  Content="Terapije"/>
+        <Button x:Name="Notifications" Command="{Binding NavCommand}" CommandParameter="notifications" Grid.Column="0" Grid.Row="9" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Cursor="Hand" BorderThickness="1,1,0,1" >Obaveštenja</Button>
+    </Grid>
+</Window>

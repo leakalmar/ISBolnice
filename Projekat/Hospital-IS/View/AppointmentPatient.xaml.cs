@@ -40,12 +40,12 @@ namespace Hospital_IS.View
         }
 
         private void allApp(object sender, RoutedEventArgs e)
-        {
+        {/*
             AllAppointments all = new AllAppointments();
             all.Show();
-            this.Close();
+            this.Close();*/
         }
-
+        
         private void showTherapy(object sender, RoutedEventArgs e)
         {
             TherapyPatient doc = new TherapyPatient();
