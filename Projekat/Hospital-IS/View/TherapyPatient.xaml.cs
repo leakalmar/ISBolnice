@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using Hospital_IS.View.PatientViewModels;
 using Model;
 using Storages;
 using System.Collections.ObjectModel;
@@ -14,13 +15,13 @@ namespace Hospital_IS.View
     public partial class TherapyPatient : Window
     {
 
-        public ObservableCollection<Therapy> Therapies { get; set; }
+        private TherapyPatientViewModel therapyPatientViewModel;
 
         public TherapyPatient()
         {
+            therapyPatientViewModel = new TherapyPatientViewModel();
+            this.DataContext = therapyPatientViewModel;
             InitializeComponent();
-            Therapies = new ObservableCollection<Therapy>(ChartController.Instance.GetTherapiesByPatient(HomePatient.Instance.Patient));
-            this.DataContext = this;
         }
 
         private void home(object sender, RoutedEventArgs e)
@@ -59,7 +60,7 @@ namespace Hospital_IS.View
 
         private void showRow(object sender, MouseButtonEventArgs e)
         {
-            Therapy therapyInfo = (Therapy)dataGridTherapy.SelectedItem;
+            /*Therapy therapyInfo = (Therapy)dataGridTherapy.SelectedItem;
             int usageHourDifference = (int)24 / therapyInfo.TimesADay;
             Name.Content = therapyInfo.Medicine.Name;
             Quantity.Content = therapyInfo.Quantity;
@@ -68,7 +69,7 @@ namespace Hospital_IS.View
             StartTherapy.Text = therapyInfo.TherapyStart.ToString("dd.MM.yyyy.");
             EndTherapy.Text = therapyInfo.TherapyEnd.ToString("dd.MM.yyyy.");
             Usage.Text = therapyInfo.Medicine.Usage;
-            SideEffects.Text = therapyInfo.Medicine.SideEffects;
+            SideEffects.Text = therapyInfo.Medicine.SideEffects;*/
             TherapyInfo.Visibility = Visibility.Visible;
         }
     }

@@ -9,6 +9,9 @@
         AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize"
         >
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
     <Grid Background="#FF184095">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -71,7 +74,7 @@
         <Button x:Name="Notifications" Grid.Column="0" Grid.Row="9" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Cursor="Hand" BorderThickness="1,1,0,1" Click="showNotifications">Obaveštenja</Button>
        
         <Label Content="Lista pregleda:" Grid.Row="1" Grid.Column="1" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
-        <DataGrid x:Name="dataGridAppointment"  IsReadOnly="True" CanUserAddRows="False" ItemsSource="{Binding DoctorAppointment, Mode=TwoWay}" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="2" Grid.RowSpan="8" Margin="10,10,440,0" RowHeaderWidth="0" MouseDoubleClick="showRow">
+        <DataGrid x:Name="dataGridAppointment"  IsReadOnly="True" CanUserAddRows="False" SelectedItem="{Binding SelectedDoctorAppointment}" ItemsSource="{Binding AllAppointments, Mode=TwoWay}" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="2" Grid.RowSpan="8" Margin="10,10,440,0" RowHeaderWidth="0" MouseDoubleClick="showRow">
             <DataGrid.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="0,0,20,20"/>
@@ -95,25 +98,25 @@
 
                 <Grid>
                     <Label Content="Datum pregleda:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="#FFFFFCFC" />
-                    <TextBlock x:Name="Date" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White" />
+                    <TextBlock x:Name="Date" Text="{Binding Path = Date}" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White" />
                 </Grid>
                 <Grid>
                     <Label Content="Lekar:" Width="255"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
-                    <Label x:Name="Doctor" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White"/>
+                    <Label x:Name="DoctorName" Content="{Binding Path = DoctorName}" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White"/>
                 </Grid>
                 <Grid>
                     <Label Content="Tip pregleda:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
-                    <Label x:Name="AppointmentType" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White"/>
+                    <Label x:Name="AppointmentType" Content="{Binding Path = AppointmentType}" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White"/>
                 </Grid>
                 <Grid>
                     <Label Content="Soba:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
-                    <Label x:Name="Room" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White" />
+                    <Label x:Name="RoomId" Content="{Binding Path = RoomId}" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White" />
                 </Grid>
                 <Label Content="Detalji:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
-                <TextBlock x:Name="Details" TextWrapping="Wrap" Width="320" Background="{x:Null}" Height="302" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" MinWidth="220" MinHeight="94" MaxWidth="220" MaxHeight="94" Foreground="White"/>
+                <TextBlock x:Name="Details" Text="{Binding Path = Details}" TextWrapping="Wrap" Width="320" Background="{x:Null}" Height="302" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" MinWidth="220" MinHeight="94" MaxWidth="220" MaxHeight="94" Foreground="White"/>
             </StackPanel>
         </Border>
-        <Button x:Name="evaluateApp" Visibility="Hidden" Grid.Column="2" Grid.Row="10" Margin="600,230,10,40" Foreground="#FFFDFAFA" FontSize="18" Cursor="Hand" Click="showEvaluationWindow">
+        <Button x:Name="evaluateApp" Visibility="{Binding Path=ShouldShowEvaluate, Converter={StaticResource BooleanToVisibilityConverter} }" Command="{Binding ShowEvaluationWindow}" Grid.Column="2" Grid.Row="10" Margin="600,230,10,40" Foreground="#FFFDFAFA" FontSize="18" Cursor="Hand" >
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20,20,20,20"/>

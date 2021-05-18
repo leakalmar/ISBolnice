@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using Hospital_IS.DTOs;
+using Hospital_IS.View.PatientViewModels;
 using Model;
 using Service;
 using Storages;
@@ -15,19 +16,19 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class AppointmentPatient : Window
     {
-        public ObservableCollection<DoctorAppointment> AvailableAppointments { get; set; }
-        private Doctor doctor;
-        private DateTime date;
+        private AppointmentPatientViewModel appointmentPatientViewModel;
 
         public AppointmentPatient()
         {
             InitializeComponent();
-            this.DataContext = this;
-            AvailableAppointments = new ObservableCollection<DoctorAppointment>();
-            Doctors.DataContext = Hospital.Instance.Doctors;
-            DateTime today = DateTime.Today;
-            Calendar.DisplayDateStart = today;
-            Calendar.SelectedDate = today;
+            //this.DataContext = this;
+            appointmentPatientViewModel = new AppointmentPatientViewModel();
+            this.DataContext = appointmentPatientViewModel;
+            //AvailableAppointments = new ObservableCollection<DoctorAppointment>();
+            //Doctors.DataContext = Hospital.Instance.Doctors;
+            //DateTime today = DateTime.Today;
+            Calendar.DisplayDateStart = DateTime.Today;
+            //Calendar.SelectedDate = today;
         }
 
         private void home(object sender, RoutedEventArgs e)
@@ -57,7 +58,7 @@ namespace Hospital_IS.View
             PatientNotifications notifications = new PatientNotifications();
             notifications.Show();
             this.Close();
-        }
+        }/*
         //Drugi doktor je hardcode-ovan u FSDoctor klasi,samo radi pokazivanja funkcionalnosti(Samo ga otkomentarisati pri pokretanju da bi se prikazao)
         private void ShowAvailableApp(object sender, RoutedEventArgs e)
         {            
@@ -77,7 +78,7 @@ namespace Hospital_IS.View
                 AvailableAppointments.Add(doctorAppointment);
             }
         }
-
+        
         private void reserveAppointment(object sender, RoutedEventArgs e)
         {
             DoctorAppointment docApp = (DoctorAppointment)listOfAppointments.SelectedItem;
@@ -92,7 +93,7 @@ namespace Hospital_IS.View
                     HomePatient.Instance.DoctorAppointment.Add(docApp);
                     DoctorAppointmentController.Instance.AddAppointment(docApp);
                     docApp.Reserved = true;
-                    AvailableAppointments.Remove(docApp);
+                    //AvailableAppointments.Remove(docApp);
                 }
                 else
                 {
@@ -100,15 +101,14 @@ namespace Hospital_IS.View
                 }               
             }
         }
-
+        */
         public void RescheduleAppointment(DoctorAppointment docApp)
         {
             int maximumDayDifference = 3;
-            Doctors.SelectedItem = docApp.Doctor;
-            date = docApp.AppointmentStart;
-            Calendar.SelectedDate = date;
-            Calendar.DisplayDateStart = date;
+            DateTime date = docApp.AppointmentStart.Date;
             Calendar.DisplayDateEnd = date.AddDays(maximumDayDifference);
+            Calendar.DisplayDateStart = date;
+            Calendar.SelectedDate = date;
             change.Visibility = Visibility.Visible;         //Dugme za izmenu termina pregleda
             reserve.Visibility = Visibility.Collapsed;      //Dugme za zakazivanje pregleda
             
@@ -128,17 +128,9 @@ namespace Hospital_IS.View
             {
                 TimeSlot.SelectedIndex = 3;
             }
-            
-            AvailableAppointments.Clear();
-            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.Text, docApp.Doctor, HomePatient.Instance.Patient, date, false);
-            List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(possibleAppointment);
-            foreach (DoctorAppointment doctorAppointment in docApps)
-            {
-                AvailableAppointments.Add(doctorAppointment);
-            }
-            
+            appointmentPatientViewModel.SetRescheduleAppointmentView(docApp);
         }
-
+        /*
         private void RescheduleAppointmentButton(object sender, RoutedEventArgs e)
         {
             DoctorAppointment docApp = (DoctorAppointment)listOfAppointments.SelectedItem;
@@ -154,7 +146,7 @@ namespace Hospital_IS.View
                     HomePatient.Instance.DoctorAppointment.Remove(HomePatient.Instance.rescheduledApp);
                     HomePatient.Instance.DoctorAppointment.Add(docApp);
                     docApp.Reserved = true;
-                    AvailableAppointments.Remove(docApp);
+                    //AvailableAppointments.Remove(docApp);
                 }
                 else
                 {
@@ -162,7 +154,7 @@ namespace Hospital_IS.View
                 }
             }          
         }
-
+        */
         private void logout(object sender, RoutedEventArgs e)
         {
             MainWindow login = new MainWindow();

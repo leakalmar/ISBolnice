@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital_IS.View"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="AppointmentPatient" Height="720" Width="1280" WindowStartupLocation="CenterScreen"
         AllowsTransparency="True" Background="Transparent"
@@ -76,7 +77,7 @@
                     <ColumnDefinition Width="300"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Izaberite lekara:" Grid.Column="0"  HorizontalAlignment="Left" FontSize="18" Margin="10,30,0,30" Background="{x:Null}"/>
-                <ComboBox x:Name="Doctors" IsEditable="False" ItemsSource="{Binding}"  Margin="5,33,45,33" Grid.Column="1" Height="28" SelectedIndex="0" >
+                <ComboBox x:Name="Doctors" IsEditable="False" ItemsSource="{Binding Doctors}" SelectedItem="{Binding Doctor}"  Margin="5,33,45,33" Grid.Column="1" Height="28" SelectedIndex="0" >
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock>
@@ -97,8 +98,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Izaberite datum pregleda:" Grid.Column="0"  HorizontalAlignment="Left" FontSize="18" Margin="10,0,0,127" Background="{x:Null}"/>
-                <DatePicker x:Name="Calendar" Grid.Column="1" Margin="5,0,427,127" FontSize="14" SelectedDateFormat="Short" Height="28"/>
-                <Button x:Name="showApp" Grid.Column="1" Margin="394,120,86,14" Foreground="#FFFDFDFD" Cursor="Hand" Click="ShowAvailableApp">
+                <DatePicker x:Name="Calendar" SelectedDate="{Binding Date,Mode=TwoWay}" Grid.Column="1" Margin="5,0,427,127" FontSize="14" SelectedDateFormat="Short" Height="28"/>
+                <Button x:Name="showApp" Command="{Binding ShowAvailableAppointments}" Grid.Column="1" Margin="394,120,86,14" Foreground="#FFFDFDFD" Cursor="Hand" >
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="20,20,20,20"/>
@@ -112,7 +113,7 @@
                         </LinearGradientBrush>
                     </Button.Background> Prikaži termine
                 </Button>
-                <ComboBox x:Name="TimeSlot" Grid.Column="1" Margin="5,60,427,67" FontSize="14" SelectedIndex="0" Height="28">
+                <ComboBox x:Name="TimeSlot" SelectedIndex="{Binding TimeSlot}" Grid.Column="1" Margin="5,60,427,67" FontSize="14" Height="28">
                     <ComboBoxItem Content="8:00-11:00"/>
                     <ComboBoxItem Content="11:00-14:00"/>
                     <ComboBoxItem Content="14:00-17:00"/>
@@ -121,10 +122,10 @@
                 <Label Content="Izaberite vremenski opseg:" Grid.Column="0"  HorizontalAlignment="Left" FontSize="18" Margin="10,60,0,67" Background="{x:Null}"/>
                 <Label Content="Izaberite prioritet:" Grid.Column="0"  HorizontalAlignment="Left" FontSize="18" Margin="10,120,0,0" Background="{x:Null}"/>
                 <RadioButton x:Name="DoctorPriority" GroupName="Priority" Margin="10,121,600,0" Grid.Column="2" Content="Lekar" FontSize="18" VerticalAlignment="Top"/>
-                <RadioButton x:Name="TimePriority" GroupName="Priority" Margin="150,121,400,0" Grid.Column="2" Content="Vreme" FontSize="18" VerticalAlignment="Top"/>
+                <RadioButton x:Name="TimePriority" IsChecked="{Binding TimePriority}" GroupName="Priority" Margin="150,121,400,0" Grid.Column="2" Content="Vreme" FontSize="18" VerticalAlignment="Top"/>
             </Grid>
 
-            <DataGrid x:Name="listOfAppointments" CanUserResizeRows="False" CanUserAddRows="False" Grid.Column="3" ItemsSource="{Binding AvailableAppointments, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="2" Margin="110,10,100,50" AutoGenerateColumns="False" Height="233" Width="600" RowHeaderWidth="0">
+            <DataGrid x:Name="listOfAppointments" CanUserResizeRows="False" SelectedItem="{Binding DoctorApp}" CanUserAddRows="False" Grid.Column="3" ItemsSource="{Binding AvailableAppointments, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="2" Margin="110,10,100,50" AutoGenerateColumns="False" Height="233" Width="600" RowHeaderWidth="0">
                 <DataGrid.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="0,0,20,20"/>
@@ -144,7 +145,7 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Button x:Name="reserve" Grid.Column="0"  Margin="250,10,250,30" FontSize="24" Foreground="#FFF7F6F6" Cursor="Hand" Click="reserveAppointment">
+            <Button x:Name="reserve" Command="{Binding ReserveAppointment}" Grid.Column="0"  Margin="250,10,250,30" FontSize="24" Foreground="#FFF7F6F6" Cursor="Hand" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20,20,20,20"/>
@@ -158,7 +159,7 @@
                     </LinearGradientBrush>
                 </Button.Background> Zakaži
             </Button>
-            <Button x:Name="change" Grid.Column="1"  Margin="250,10,250,30" FontSize="24" Foreground="White" Cursor="Hand" Click="RescheduleAppointmentButton" Visibility="Collapsed">
+            <Button x:Name="change" Grid.Column="1" Command="{Binding RescheduleAppointment}"  Margin="250,10,250,30" FontSize="24" Foreground="White" Cursor="Hand" Visibility="Collapsed">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20,20,20,20"/>

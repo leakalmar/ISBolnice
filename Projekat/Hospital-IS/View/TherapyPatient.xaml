@@ -73,7 +73,7 @@
         
         <Label Content="Terapije:" Grid.Row="1" Grid.Column="1" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
         <DataGrid x:Name="dataGridTherapy" RowBackground="#FF297CAC" Background="#FF297CAC" MouseDoubleClick="showRow"
-                  IsReadOnly="True" ItemsSource="{Binding Therapies, Mode=TwoWay}"  
+                  IsReadOnly="True" SelectedItem="{Binding Therapy}" ItemsSource="{Binding Therapies, Mode=TwoWay}"  
                   CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="1" 
                   Grid.Row="2" Grid.RowSpan="9" Margin="10,10,10,300" 
                   CanUserResizeColumns="False" CanUserResizeRows="False" 
@@ -137,33 +137,32 @@
 
                 <Grid>
                     <Label Content="Naziv leka:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="#FFFFFCFC" />
-                    <Label x:Name="Name" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White" />
+                    <Label x:Name="Name" Content="{Binding Path = Name}" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White" />
                 </Grid>
                 <Grid>
                     <Label Content="Količina pri svakoj konzumaciji:" Width="255"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
-                    <Label x:Name="Quantity" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White"/>
+                    <Label x:Name="Quantity" Content="{Binding Path = Quantity}" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White"/>
                 </Grid>
                 <Grid>
                     <Label Content="Koliko puta dnevno:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
-                    <Label x:Name="TimesADay" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White"/>
+                    <Label x:Name="TimesADay" Content="{Binding Path = TimesADay}" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White"/>
                 </Grid>
                 <Grid>
                     <Label Content="Na svakih:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
-                    <Label x:Name="TimeSpan" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White" />
+                    <Label x:Name="TimeSpan" Content="{Binding Path = TimeSpan}" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White" />
                 </Grid>
                 <Grid>
                     <Label Content="Datum početka terapije:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="#FFFFFBFB" />
-                    <TextBlock x:Name="StartTherapy" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5" Foreground="White"/>
+                    <TextBlock x:Name="StartTherapy" Text="{Binding Path = StartTherapy}" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5" Foreground="White"/>
                 </Grid>
                 <Grid>
                     <Label Content="Datum kraja terapije:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
-                    <TextBlock x:Name="EndTherapy"  HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White"/>
+                    <TextBlock x:Name="EndTherapy" Text="{Binding Path = EndTherapy}"  HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White"/>
                 </Grid>
                 <Label Content="Uputstvo za upotrebu:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
-                <TextBlock x:Name="Usage" TextWrapping="Wrap" Width="414" Background="{x:Null}" Height="94" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" MinWidth="414" MinHeight="94" MaxWidth="414" MaxHeight="94" Foreground="White"/>
+                <TextBlock x:Name="Usage" Text="{Binding Path = Usage}" TextWrapping="Wrap" Width="414" Background="{x:Null}" Height="94" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" MinWidth="414" MinHeight="94" MaxWidth="414" MaxHeight="94" Foreground="White"/>
                 <Label Content="Neželjena dejstva:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
-                <TextBlock x:Name="SideEffects" TextWrapping="Wrap" Width="414" Background="{x:Null}" Height="106" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MinWidth="414" MinHeight="106" MaxWidth="414" MaxHeight="106" Foreground="White"/>
-
+                <TextBlock x:Name="SideEffects" Text="{Binding Path = SideEffects}" TextWrapping="Wrap" Width="414" Background="{x:Null}" Height="106" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MinWidth="414" MinHeight="106" MaxWidth="414" MaxHeight="106" Foreground="White"/>
             </StackPanel>
         </Border>
     </Grid>
