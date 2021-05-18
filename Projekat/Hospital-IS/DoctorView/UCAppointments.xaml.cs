@@ -21,11 +21,11 @@ namespace Hospital_IS.DoctorView
             docApp[0] = list[0];
             docApp[1] = list[1];
             type.ItemsSource = docApp;
-            doctorAppointments.DataContext = DoctorMainWindow.Instance.DoctorAppointment;
+            doctorAppointments.DataContext = DoctorMainWindow.Instance._ViewModel.DoctorAppointments;
             from.SelectedDate = DateTime.Now.Date;
             to.SelectedDate = DateTime.Now.Date.AddDays(7);
             type.SelectedIndex = 1;
-            rooms.SelectedItem = RoomController.Instance.GetRoomById(DoctorMainWindow.Instance.Doctor.PrimaryRoom);
+            rooms.SelectedItem = RoomController.Instance.GetRoomById(DoctorMainWindow.Instance._ViewModel.DoctorPrimaryRoom);
 
             DoctorAppointment ap = (DoctorAppointment)doctorAppointments.SelectedItem;
             ChangeApp = new UCChangeApp(details);
@@ -70,11 +70,11 @@ namespace Hospital_IS.DoctorView
 
             if (room == null)
             {
-                room = RoomController.Instance.GetRoomById(DoctorMainWindow.Instance.Doctor.PrimaryRoom);
+                room = RoomController.Instance.GetRoomById(DoctorMainWindow.Instance._ViewModel.DoctorPrimaryRoom);
             }
             String selected = (String)type.SelectedItem;
 
-            ICollectionView view = new CollectionViewSource { Source = DoctorMainWindow.Instance.DoctorAppointment }.View;
+            ICollectionView view = new CollectionViewSource { Source = DoctorMainWindow.Instance._ViewModel.DoctorAppointments }.View;
             view.Filter = null;
             view.Filter = delegate (object item)
             {
@@ -95,7 +95,7 @@ namespace Hospital_IS.DoctorView
                     if (dialog)
                     {
                         DoctorAppointmentController.Instance.RemoveAppointment(app);
-                        DoctorMainWindow.Instance.DoctorAppointment.Remove(app);
+                        DoctorMainWindow.Instance._ViewModel.DoctorAppointments.Remove(app);
                         app.Reserved = false;
                     }
                 }

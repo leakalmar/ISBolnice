@@ -49,7 +49,7 @@ namespace Hospital_IS.DoctorView
 
                 }
 
-                if (!DoctorMainWindow.Instance.Doctor.Id.Equals(SelectedAppointment.Doctor.Id))
+                if (!DoctorMainWindow.Instance._ViewModel.DoctorId.Equals(SelectedAppointment.Doctor.Id))
                 {
                     if (value == "")
                     {
@@ -85,9 +85,9 @@ namespace Hospital_IS.DoctorView
                 documentSpecialty.Content = SelectedAppointment.Doctor.Specialty.Name;
 
                 documentDoctor.Content = SelectedAppointment.Doctor.Name.ToString() + " " + ShortSurname(SelectedAppointment.Doctor);
-                thisDoctor.Content = DoctorMainWindow.Instance.Doctor.Name.ToString() + " " + ShortSurname(DoctorMainWindow.Instance.Doctor);
+                thisDoctor.Content = DoctorMainWindow.Instance._ViewModel.DoctorNameSurname;
 
-                if (SelectedAppointment.Doctor.Id != DoctorMainWindow.Instance.Doctor.Id)
+                if (SelectedAppointment.Doctor.Id != DoctorMainWindow.Instance._ViewModel.DoctorId)
                 {
                     save.IsEnabled = false;
                 }
@@ -99,9 +99,9 @@ namespace Hospital_IS.DoctorView
                 documentSpecialty.Content = SelectedEmergencyAppointment.SuggestedAppointment.Doctor.Specialty.Name;
 
                 documentDoctor.Content = SelectedEmergencyAppointment.SuggestedAppointment.Doctor.Name.ToString() + " " + ShortSurname(SelectedEmergencyAppointment.SuggestedAppointment.Doctor);
-                thisDoctor.Content = DoctorMainWindow.Instance.Doctor.Name.ToString() + " " + ShortSurname(DoctorMainWindow.Instance.Doctor);
+                thisDoctor.Content = DoctorMainWindow.Instance._ViewModel.DoctorNameSurname;
 
-                if (SelectedEmergencyAppointment.SuggestedAppointment.Doctor.Id != DoctorMainWindow.Instance.Doctor.Id)
+                if (SelectedEmergencyAppointment.SuggestedAppointment.Doctor.Id != DoctorMainWindow.Instance._ViewModel.DoctorId)
                 {
                     save.IsEnabled = false;
                 }
@@ -132,7 +132,7 @@ namespace Hospital_IS.DoctorView
                 SelectedAppointment.AppointmentCause = cause.Text;
                 SendScheduledNotification(SelectedAppointment);
                 DoctorAppointmentController.Instance.AddAppointment(SelectedAppointment);
-                DoctorMainWindow.Instance.DoctorAppointment.Add(SelectedAppointment);
+                DoctorMainWindow.Instance._ViewModel.DoctorAppointments.Add(SelectedAppointment);
             }
             else
             {

@@ -109,8 +109,8 @@ namespace Hospital_IS.DoctorView
                 newDoctorAppointment.Reserved = true;
                 DoctorAppointmentController.Instance.UpdateAppointment(Appointment, newDoctorAppointment);
 
-                DoctorMainWindow.Instance.DoctorAppointment.Remove(Appointment);
-                DoctorMainWindow.Instance.DoctorAppointment.Add(newDoctorAppointment);
+                DoctorMainWindow.Instance._ViewModel.DoctorAppointments.Remove(Appointment);
+                DoctorMainWindow.Instance._ViewModel.DoctorAppointments.Add(newDoctorAppointment);
 
                 panel.Visibility = Visibility.Collapsed;
             }

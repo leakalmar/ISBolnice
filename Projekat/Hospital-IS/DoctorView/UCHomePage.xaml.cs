@@ -22,7 +22,7 @@ namespace Hospital_IS.DoctorView
         public UCHomePage()
         {
             InitializeComponent();
-
+            /*
             ICollectionView app = new CollectionViewSource { Source = DoctorMainWindow.Instance.DoctorAppointment }.View;
             
             app.Filter = delegate (object item)
@@ -30,7 +30,7 @@ namespace Hospital_IS.DoctorView
                 return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date;
             };
             app.SortDescriptions.Add(new SortDescription("AppointmentStart", ListSortDirection.Ascending));
-            docotrAppointments.DataContext = app;
+            docotrAppointments.DataContext = app;*/
 
         }
 
@@ -51,7 +51,7 @@ namespace Hospital_IS.DoctorView
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ICollectionView app = CollectionViewSource.GetDefaultView(DoctorMainWindow.Instance.DoctorAppointment); 
+            ICollectionView app = CollectionViewSource.GetDefaultView(DoctorMainWindow.Instance._ViewModel.DoctorAppointments); 
             app.Filter = delegate (object item)
             {
                 return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date;

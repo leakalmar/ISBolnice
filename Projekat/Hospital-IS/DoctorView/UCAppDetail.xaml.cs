@@ -23,13 +23,13 @@ namespace Hospital_IS.DoctorView
         public UCAppDetail(DoctorAppointment doctorAppointment = null)
         {
             InitializeComponent();
-            docotrAppointments.DataContext = DoctorMainWindow.Instance.DoctorAppointment;
+            docotrAppointments.DataContext = DoctorMainWindow.Instance._ViewModel.DoctorAppointments;
             docotrAppointments.SelectedItem = doctorAppointment;
             info.DataContext = doctorAppointment;
             info2.DataContext = doctorAppointment;
 
 
-            ICollectionView view = new CollectionViewSource { Source = DoctorMainWindow.Instance.DoctorAppointment }.View;
+            ICollectionView view = new CollectionViewSource { Source = DoctorMainWindow.Instance._ViewModel.DoctorAppointments }.View;
             view.Filter = delegate (object item)
             {
                 return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date;

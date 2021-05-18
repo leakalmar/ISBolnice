@@ -51,7 +51,7 @@ namespace Hospital_IS.DoctorView
 
             foreach (Specialty s in SpecializationController.Instance.GetAll())
             {
-                if (s.Name.Equals(DoctorMainWindow.Instance.Doctor.Specialty.Name))
+                if (s.Name.Equals(DoctorMainWindow.Instance._ViewModel.DoctorSpecialty))
                 {
                     specialization.SelectedItem = s;
                     break;
@@ -60,7 +60,7 @@ namespace Hospital_IS.DoctorView
 
             foreach (Doctor d in DoctorController.Instance.GetAll())
             {
-                if (d.Id.Equals(DoctorMainWindow.Instance.Doctor.Id))
+                if (d.Id.Equals(DoctorMainWindow.Instance._ViewModel.DoctorId))
                 {
                     doctors.SelectedItem = d;
                     break;
@@ -70,7 +70,7 @@ namespace Hospital_IS.DoctorView
 
             foreach (Room r in RoomController.Instance.GetAllRooms())
             {
-                if (r.RoomId.Equals(DoctorMainWindow.Instance.Doctor.PrimaryRoom))
+                if (r.RoomId.Equals(DoctorMainWindow.Instance._ViewModel.DoctorPrimaryRoom))
                 {
                     rooms.SelectedItem = r;
                     break;
@@ -198,11 +198,11 @@ namespace Hospital_IS.DoctorView
             }
 
 
-            if (selectedSpecialty.Name.Equals(DoctorMainWindow.Instance.Doctor.Specialty.Name))
+            if (selectedSpecialty.Equals(DoctorMainWindow.Instance._ViewModel.DoctorSpecialty))
             {
                 foreach (Doctor doctor in DoctorController.Instance.GetAll())
                 {
-                    if (doctor.Id.Equals(DoctorMainWindow.Instance.Doctor.Id))
+                    if (doctor.Id.Equals(DoctorMainWindow.Instance._ViewModel.DoctorId))
                     {
                         doctors.SelectedItem = doctor;
                     }
@@ -226,7 +226,7 @@ namespace Hospital_IS.DoctorView
 
         private void changeVisibilityOfFields(AppointmentType type, Doctor doctor)
         {
-            if ((doctor.Specialty.Name.Equals(DoctorMainWindow.Instance.Doctor.Specialty.Name) && type == AppointmentType.CheckUp) || (Emergency && type == AppointmentType.CheckUp))
+            if ((doctor.Specialty.Equals(DoctorMainWindow.Instance._ViewModel.DoctorSpecialty) && type == AppointmentType.CheckUp) || (Emergency && type == AppointmentType.CheckUp))
             {
                 rooms.Visibility = Visibility.Visible;
                 types.Visibility = Visibility.Visible;
@@ -235,7 +235,7 @@ namespace Hospital_IS.DoctorView
                 lblType.Visibility = Visibility.Visible;
                 lblDuration.Visibility = Visibility.Collapsed;
             }
-            else if ((doctor.Specialty.Name.Equals(DoctorMainWindow.Instance.Doctor.Specialty.Name) && type == AppointmentType.Operation) || Emergency)
+            else if ((doctor.Specialty.Equals(DoctorMainWindow.Instance._ViewModel.DoctorSpecialty) && type == AppointmentType.Operation) || Emergency)
             {
                 rooms.Visibility = Visibility.Visible;
                 types.Visibility = Visibility.Visible;
@@ -244,7 +244,7 @@ namespace Hospital_IS.DoctorView
                 lblType.Visibility = Visibility.Visible;
                 lblDuration.Visibility = Visibility.Visible;
             }
-            else if (!doctor.Specialty.Name.Equals(DoctorMainWindow.Instance.Doctor.Specialty.Name))
+            else if (!doctor.Specialty.Equals(DoctorMainWindow.Instance._ViewModel.DoctorSpecialty))
             {
                 rooms.Visibility = Visibility.Collapsed;
                 types.Visibility = Visibility.Collapsed;
@@ -262,7 +262,7 @@ namespace Hospital_IS.DoctorView
                 DoctorAppointment selected = (DoctorAppointment)appointments.SelectedItem;
                 selected.Reserved = true;
                 DoctorAppointmentController.Instance.AddAppointment(selected);
-                DoctorMainWindow.Instance.DoctorAppointment.Add(selected);
+                DoctorMainWindow.Instance._ViewModel.DoctorAppointments.Add(selected);
 
                // DoctorHomePage.Instance.Home.Children.Remove(this);
                 //DoctorHomePage.Instance.Home.Children.Add(PatientChart);

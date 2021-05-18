@@ -121,13 +121,13 @@ namespace Hospital_IS.DoctorView
 
             MedicineController.Instance.UpdateMedicine(MedicineWhichIsUpdated);
            // DoctorHomePage.Instance.Home.Children.Remove(this);
-            DoctorMainWindow.Instance.Medicines.Visibility = Visibility.Visible;
+           // DoctorMainWindow.Instance.Medicines.Visibility = Visibility.Visible;
         }
 
         private void cancle_Click(object sender, RoutedEventArgs e)
         {
            // DoctorHomePage.Instance.Home.Children.Remove(this);
-            DoctorMainWindow.Instance.Medicines.Visibility = Visibility.Visible;
+           // DoctorMainWindow.Instance.Medicines.Visibility = Visibility.Visible;
         }
 
         private void CompositionAdd_Click(object sender, RoutedEventArgs e)
