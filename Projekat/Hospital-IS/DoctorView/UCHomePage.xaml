@@ -3,8 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:Hospital_IS.DoctorView" mc:Ignorable="d"
-        IsVisibleChanged="UserControl_IsVisibleChanged">
+        xmlns:local="clr-namespace:Hospital_IS.DoctorView"
+        mc:Ignorable="d">
+    <UserControl.InputBindings>
+        <KeyBinding Key="Enter"
+                Command="{Binding Path=NavigateToDetailsCommand}" />
+    </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*" />
@@ -23,49 +27,56 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="0" Grid.Column="0">
-                <TextBlock FontSize="20" Foreground="White" HorizontalAlignment="Center"
-                        VerticalAlignment="Center" FontFamily="Eras ITC" Margin="0,15,0,0">
+                <TextBlock FontSize="20" Foreground="White"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="Eras ITC" Margin="0,15,0,0">
                     Termini
                 </TextBlock>
-                <Image Source="pack://application:,,,/Resources/calendar.png" Width="130" />
-            </StackPanel>
-            <StackPanel Grid.Row="0" Grid.Column="2">
-                <TextBlock FontSize="20" Foreground="White" HorizontalAlignment="Center"
-                        VerticalAlignment="Center" FontFamily="Eras ITC" Margin="0,15,0,0">
-                    Pacijenti
-                </TextBlock>
-                <Image Source="pack://application:,,,/Resources/bed.png" Grid.Column="1"
+                <Image Source="pack://application:,,,/Resources/calendar.png"
                         Width="130" />
             </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="2">
+                <TextBlock FontSize="20" Foreground="White"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="Eras ITC" Margin="0,15,0,0">
+                    Pacijenti
+                </TextBlock>
+                <Image Source="pack://application:,,,/Resources/bed.png"
+                        Grid.Column="1" Width="130" />
+            </StackPanel>
             <StackPanel Grid.Row="0" Grid.Column="3">
-                <Label FontSize="20" Foreground="White" HorizontalAlignment="Center"
-                        VerticalAlignment="Center" FontFamily="Eras ITC"
-                        Padding="0,-4,0,0">Izdavanje</Label>
-                <Label FontSize="20" Foreground="White" HorizontalAlignment="Center"
-                        VerticalAlignment="Center" FontFamily="Eras ITC" Padding="0,0,0,0">recepta</Label>
+                <Label FontSize="20" Foreground="White"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="Eras ITC" Padding="0,-4,0,0">Izdavanje</Label>
+                <Label FontSize="20" Foreground="White"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="Eras ITC" Padding="0,0,0,0">recepta</Label>
                 <Image Source="pack://application:,,,/Resources/treatment.png"
                         Grid.Column="2" Width="130" />
             </StackPanel>
             <StackPanel Grid.Row="0" Grid.Column="4">
-                <Label FontSize="20" Foreground="White" HorizontalAlignment="Center"
-                        VerticalAlignment="Center" FontFamily="Eras ITC"
-                        Padding="0,-4,0,0">Odobravanje</Label>
-                <Label FontSize="20" Foreground="White" HorizontalAlignment="Center"
-                        VerticalAlignment="Center" FontFamily="Eras ITC"
-                        Padding="0,-4,0,0">leka</Label>
-                <Image Source="pack://application:,,,/Resources/pill.png" Grid.Column="4"
-                        Width="130" />
+                <Label FontSize="20" Foreground="White"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="Eras ITC" Padding="0,-4,0,0">Odobravanje</Label>
+                <Label FontSize="20" Foreground="White"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="Eras ITC" Padding="0,-4,0,0">leka</Label>
+                <Image Source="pack://application:,,,/Resources/pill.png"
+                        Grid.Column="4" Width="130" />
             </StackPanel>
             <StackPanel Grid.Row="0" Grid.Column="5">
-                <Label FontSize="20" Foreground="White" HorizontalAlignment="Center"
-                        VerticalAlignment="Center" FontFamily="Eras ITC" Padding="5,5,5,5"
+                <Label FontSize="20" Foreground="White"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="Eras ITC" Padding="5,5,5,5"
                         Margin="0,10,0,0">Obaveštenja</Label>
-                <Image Source="pack://application:,,,/Resources/notification.png"
+                <Image
+                        Source="pack://application:,,,/Resources/notification.png"
                         Grid.Column="4" Width="130" />
             </StackPanel>
 
-            <Path Grid.Column="1" Stroke="White" StrokeThickness="3" Data="M0,0 V175"
-                    StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" />
+            <Path Grid.Column="1" Stroke="White" StrokeThickness="3"
+                    Data="M0,0 V175" StrokeStartLineCap="Flat"
+                    StrokeEndLineCap="Flat" />
 
         </Grid>
 
@@ -73,45 +84,54 @@
 
         <GroupBox Header="Zakazani pregledi" Grid.Row="1" Grid.Column="0"
                 BorderBrush="#FF2E3B55" Foreground="White" FontSize="16">
-            <DataGrid x:Name="docotrAppointments" ItemsSource="{Binding}"
+            <DataGrid x:Name="docotrAppointments"
+                    ItemsSource="{Binding Path=AppointmentsView}"
                     Background="Transparent" RowBackground="Transparent"
-                    Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    Foreground="White"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
                     BorderThickness="0,0,0,0" AutoGenerateColumns="False"
-                    SelectionMode="Single" IsReadOnly="True" BorderBrush="{x:Null}"
+                    SelectionMode="Single" IsReadOnly="True"
+                    BorderBrush="{x:Null}"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                    HorizontalScrollBarVisibility="Disabled" KeyDown="Patient_Selected"
+                    HorizontalScrollBarVisibility="Disabled"
+                    SelectionChanged="docotrAppointments_SelectionChanged"
                     RowHeaderWidth="0" FontSize="14" CanUserSortColumns="False">
                 <DataGrid.Resources>
-                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
+                    <Style
+                            BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
                             TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="Background" Value="#FF2E3B55" />
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Vreme"
-                            Binding="{Binding AppointmentStart.TimeOfDay}"
+                            Binding="{Binding DoctorAppointment.AppointmentStart.TimeOfDay}"
                             CanUserResize="False" Width="0.05*" />
-                    <DataGridTextColumn Header="Pacijent"
-                            CanUserResize="False" Width="0.05*">
+                    <DataGridTextColumn Header="Pacijent" CanUserResize="False"
+                            Width="0.05*">
                         <DataGridTextColumn.Binding>
                             <MultiBinding StringFormat="{}{0}  {1}">
-                                <Binding Path="Patient.Name" />
-                                <Binding Path="Patient.Surname" />
+                                <Binding Path="DoctorAppointment.Patient.Name" />
+                                <Binding
+                                        Path="DoctorAppointment.Patient.Surname" />
                             </MultiBinding>
                         </DataGridTextColumn.Binding>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Tip" Binding="{Binding Type}"
+                    <DataGridTextColumn Header="Tip"
+                            Binding="{Binding DoctorAppointment.Type}"
                             CanUserResize="False" Width="0.05*" />
-                    <DataGridTextColumn Header="Soba" Binding="{Binding Room}"
+                    <DataGridTextColumn Header="Soba"
+                            Binding="{Binding DoctorAppointment.Room}"
                             CanUserResize="False" Width="0.05*" />
                 </DataGrid.Columns>
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
-                        <EventSetter Event="MouseDoubleClick"
-                                Handler="Patient_DoubleClicked" />
+                        <EventSetter Event="KeyDown"
+                                Handler="FrameworkElement_KeyDown" />
                     </Style>
                 </DataGrid.RowStyle>
             </DataGrid>
+            
         </GroupBox>
     </Grid>
 

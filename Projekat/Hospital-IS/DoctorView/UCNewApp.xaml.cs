@@ -262,7 +262,7 @@ namespace Hospital_IS.DoctorView
                 DoctorAppointment selected = (DoctorAppointment)appointments.SelectedItem;
                 selected.Reserved = true;
                 DoctorAppointmentController.Instance.AddAppointment(selected);
-                DoctorMainWindow.Instance._ViewModel.DoctorAppointments.Add(selected);
+                //DoctorMainWindow.Instance._ViewModel.DoctorAppointments.Add(selected);
 
                // DoctorHomePage.Instance.Home.Children.Remove(this);
                 //DoctorHomePage.Instance.Home.Children.Add(PatientChart);

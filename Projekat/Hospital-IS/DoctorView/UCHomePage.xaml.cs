@@ -11,53 +11,77 @@ using System.Windows.Shapes;
 using Hospital_IS.DoctorView;
 using System.ComponentModel;
 using System.Windows.Data;
+using Hospital_IS.DoctorViewModel;
+using Microsoft.VisualBasic;
+
 
 namespace Hospital_IS.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for UserControlHomePage.xaml
-    /// </summary>
     public partial class UCHomePage : UserControl
     {
+        private HomePageViewModel viewModel;
+        public HomePageViewModel _ViewModel
+        {
+            get { return viewModel; }
+            set
+            {
+                viewModel = value;
+            }
+        }
         public UCHomePage()
         {
             InitializeComponent();
-            /*
-            ICollectionView app = new CollectionViewSource { Source = DoctorMainWindow.Instance.DoctorAppointment }.View;
-            
-            app.Filter = delegate (object item)
-            {
-                return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date;
-            };
-            app.SortDescriptions.Add(new SortDescription("AppointmentStart", ListSortDirection.Ascending));
-            docotrAppointments.DataContext = app;*/
-
+            NavigationService service = NavigationService.GetNavigationService(this);
+            this.viewModel = new HomePageViewModel(service);
+            this.DataContext = this.viewModel;
         }
 
-        private void Patient_Selected(object sender, KeyEventArgs e)
+        /*private void Patient_Selected(object sender, KeyEventArgs e)
         {
             DoctorAppointment appointment= (DoctorAppointment)docotrAppointments.SelectedItem;
             //DoctorHomePage.Instance.Home.Children.Add(new UCPatientChart(appointment));
+        }*/
+
+        private void docotrAppointments_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DoctorAppointmentViewModel selectedAppointment = (DoctorAppointmentViewModel)docotrAppointments.SelectedItem;
+            _ViewModel.SelectedAppointment = selectedAppointment;
         }
 
-        public void Patient_DoubleClicked(object sender, MouseButtonEventArgs e)
+        private void FrameworkElement_KeyDown(object sender, KeyEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
-            DoctorAppointment ap = (DoctorAppointment)docotrAppointments.SelectedItem;
+            DoctorAppointmentViewModel selectedAppointment = (DoctorAppointmentViewModel)docotrAppointments.SelectedItem;
+
+            if (e.Key == Key.Enter && selectedAppointment != null)
+            {
+                NavigationService service = NavigationService.GetNavigationService(this);
+                UCAppDetail appDetail = new UCAppDetail(selectedAppointment);
+                service.Navigate(appDetail);
+            }
+        }
+
+
+
+        /*public void Patient_DoubleClicked(object sender, MouseButtonEventArgs e)
+        {
+            DoctorAppointmentViewModel vmDoctorAppointment = (DoctorAppointmentViewModel)docotrAppointments.SelectedItem;
+            UCAppDetail appDetail = new UCAppDetail(vmDoctorAppointment);
+            
+            service.Navigate(appDetail);
             //DoctorHomePage.Instance.Home.Children.Add(new UCAppDetail(ap));
 
 
-        }
+        }*/
 
-        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        /*private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ICollectionView app = CollectionViewSource.GetDefaultView(DoctorMainWindow.Instance._ViewModel.DoctorAppointments); 
+            ICollectionView app = CollectionViewSource.GetDefaultView(_ViewModel.DoctorAppointments); 
             app.Filter = delegate (object item)
             {
                 return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date;
             };
             app.SortDescriptions.Add(new SortDescription("AppointmentStart", ListSortDirection.Ascending));
             docotrAppointments.DataContext = app;
-        }
+        }*/
     }
 }

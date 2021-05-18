@@ -21,7 +21,7 @@ namespace Hospital_IS.DoctorView
             docApp[0] = list[0];
             docApp[1] = list[1];
             type.ItemsSource = docApp;
-            doctorAppointments.DataContext = DoctorMainWindow.Instance._ViewModel.DoctorAppointments;
+            //doctorAppointments.DataContext = DoctorMainWindow.Instance._ViewModel.DoctorAppointments;
             from.SelectedDate = DateTime.Now.Date;
             to.SelectedDate = DateTime.Now.Date.AddDays(7);
             type.SelectedIndex = 1;
@@ -74,14 +74,14 @@ namespace Hospital_IS.DoctorView
             }
             String selected = (String)type.SelectedItem;
 
-            ICollectionView view = new CollectionViewSource { Source = DoctorMainWindow.Instance._ViewModel.DoctorAppointments }.View;
+           /* ICollectionView view = new CollectionViewSource { Source = DoctorMainWindow.Instance._ViewModel.DoctorAppointments }.View;
             view.Filter = null;
             view.Filter = delegate (object item)
             {
                 return ((DoctorAppointment)item).Type.ToString().Equals(selected) & ((DoctorAppointment)item).Room == room.RoomId & ((DoctorAppointment)item).AppointmentStart.Date <= endDate.Date & ((DoctorAppointment)item).AppointmentStart.Date >= startDate.Date;
             };
 
-            doctorAppointments.DataContext = view;
+            doctorAppointments.DataContext = view;*/
         }
 
         private void Delete_KeyDown(object sender, KeyEventArgs e)
@@ -95,7 +95,7 @@ namespace Hospital_IS.DoctorView
                     if (dialog)
                     {
                         DoctorAppointmentController.Instance.RemoveAppointment(app);
-                        DoctorMainWindow.Instance._ViewModel.DoctorAppointments.Remove(app);
+                       // DoctorMainWindow.Instance._ViewModel.DoctorAppointments.Remove(app);
                         app.Reserved = false;
                     }
                 }

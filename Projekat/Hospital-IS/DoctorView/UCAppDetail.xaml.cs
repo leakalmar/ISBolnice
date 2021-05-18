@@ -14,29 +14,30 @@ using System.Windows.Shapes;
 using Hospital_IS.DoctorView;
 using System.ComponentModel;
 using Controllers;
+using Hospital_IS.DoctorViewModel;
 
 namespace Hospital_IS.DoctorView
 {
     public partial class UCAppDetail : UserControl
     {
 
-        public UCAppDetail(DoctorAppointment doctorAppointment = null)
+        public UCAppDetail(DoctorAppointmentViewModel doctorAppointment = null)
         {
             InitializeComponent();
-            docotrAppointments.DataContext = DoctorMainWindow.Instance._ViewModel.DoctorAppointments;
+            //docotrAppointments.DataContext = DoctorMainWindow.Instance._ViewModel.DoctorAppointments;
             docotrAppointments.SelectedItem = doctorAppointment;
             info.DataContext = doctorAppointment;
             info2.DataContext = doctorAppointment;
 
 
-            ICollectionView view = new CollectionViewSource { Source = DoctorMainWindow.Instance._ViewModel.DoctorAppointments }.View;
+            /*ICollectionView view = new CollectionViewSource { Source = DoctorMainWindow.Instance._ViewModel.DoctorAppointments }.View;
             view.Filter = delegate (object item)
             {
                 return ((DoctorAppointment)item).AppointmentStart.Date == DateTime.Now.Date;
             };
             view.SortDescriptions.Add(new SortDescription("AppointmentStart", ListSortDirection.Ascending));
 
-            docotrAppointments.DataContext = view;
+            docotrAppointments.DataContext = view;*/
         }
 
         private void CartBtnClick(object sender, RoutedEventArgs e)

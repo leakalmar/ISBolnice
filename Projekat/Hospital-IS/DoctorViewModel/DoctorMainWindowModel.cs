@@ -17,7 +17,6 @@ namespace Hospital_IS.DoctorViewModel
         private String doctorNameSurname;
         private Specialty doctorSpecialty;
         private int doctorPrimeryRoom;
-        private ObservableCollection<DoctorAppointment> doctorAppointments;
         //slika
         private NavigationService navigationService;
 
@@ -47,15 +46,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public ObservableCollection<DoctorAppointment> DoctorAppointments
-        {
-            get { return doctorAppointments; }
-            set
-            {
-                doctorAppointments = value;
-                OnPropertyChanged();
-            }
-        }
+        
 
         public Specialty DoctorSpecialty
         {
@@ -295,7 +286,7 @@ namespace Hospital_IS.DoctorViewModel
             DoctorNameSurname = doctor.Name + " " + doctor.Surname;
             DoctorSpecialty = doctor.Specialty;
             DoctorPrimaryRoom = doctor.PrimaryRoom;
-            DoctorAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllByDoctor(doctor.Id));
+            
             // Home.Children.Add(HomePage);
         }
         #endregion

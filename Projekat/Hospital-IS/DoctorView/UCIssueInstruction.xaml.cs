@@ -132,7 +132,7 @@ namespace Hospital_IS.DoctorView
                 SelectedAppointment.AppointmentCause = cause.Text;
                 SendScheduledNotification(SelectedAppointment);
                 DoctorAppointmentController.Instance.AddAppointment(SelectedAppointment);
-                DoctorMainWindow.Instance._ViewModel.DoctorAppointments.Add(SelectedAppointment);
+                //DoctorMainWindow.Instance._ViewModel.DoctorAppointments.Add(SelectedAppointment);
             }
             else
             {
