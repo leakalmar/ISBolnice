@@ -162,7 +162,7 @@
         </Grid>
 
         <Frame x:Name="Home" Grid.Row="2" Grid.Column="3" Grid.RowSpan="3"
-                Margin="20,0,15,0" Source="{Binding Path=HomePage}"
+                Margin="20,0,15,0"
                 NavigationUIVisibility="Hidden">
         </Frame>
 

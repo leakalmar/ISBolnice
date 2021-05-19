@@ -208,7 +208,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_NavigateToHomePageCommand(object obj)
         {
 
-            this.NavigationService.Navigate(new Uri("DoctorView/UCHomePage.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(new UCHomePage(NavigationService));
         }
 
         private bool CanExecute_NavigateCommand(object obj)
@@ -288,7 +288,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_OnLoadedCommand(object obj)
         {
-            this.NavigationService.Navigate(new Uri("DoctorView/UCHomePage.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(new UCHomePage(NavigationService));
         }
 
 

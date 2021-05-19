@@ -63,7 +63,9 @@ namespace Hospital_IS.DoctorViewModel
         {
             if (SelectedAppointment != null && e.Key == Key.Enter)
             {
-                UCAppDetail appDetail = new UCAppDetail(selectedAppointment);
+                UCAppDetail appDetail = new UCAppDetail(NavigationService);
+                appDetail._ViewModel.SelectedAppointment = SelectedAppointment;
+                appDetail._ViewModel.AppointmentsView = AppointmentsView;
                 this.NavigationService.Navigate(appDetail);
             }
         }
@@ -94,7 +96,9 @@ namespace Hospital_IS.DoctorViewModel
         {
             if(selectedAppointment != null)
             {
-                UCAppDetail appDetail = new UCAppDetail(selectedAppointment);
+                UCAppDetail appDetail = new UCAppDetail(NavigationService);
+                appDetail._ViewModel.SelectedAppointment = SelectedAppointment;
+                appDetail._ViewModel.AppointmentsView = AppointmentsView;
                 this.NavigationService.Navigate(appDetail);
             }
         }
@@ -110,11 +114,11 @@ namespace Hospital_IS.DoctorViewModel
             return true;
         }
 
-        public HomePageViewModel()
+        public HomePageViewModel(NavigationService navigation)
         {
             this.NavigateToDetailsCommand = new RelayCommand(Execute_NavigateToDetailsCommand, CanExecute_NavigateCommand);
             this.SelectionChangedCommand = new RelayCommand(Execute_SelectionChangedCommand, CanExecute_NavigateCommand);
-            this.navigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
+            this.navigationService = navigation;
             List<DoctorAppointment> appointments = DoctorAppointmentController.Instance.GetAllByDoctor(DoctorMainWindow.Instance._ViewModel.DoctorId);
             DoctorAppointments = new DoctorAppointmentConverter().ConvertCollectionToViewModel(appointments);
 
@@ -124,7 +128,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 return ((DoctorAppointmentViewModel)item).DoctorAppointment.AppointmentStart.Date == DateTime.Now.Date;
             };
-            appointmentsView.SortDescriptions.Add(new SortDescription("AppointmentStart", ListSortDirection.Ascending));
+            appointmentsView.SortDescriptions.Add(new SortDescription("DoctorAppointment.AppointmentStart", ListSortDirection.Ascending));
         }
 
     }

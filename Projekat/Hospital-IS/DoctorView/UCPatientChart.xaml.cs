@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace Hospital_IS.DoctorView
 {
@@ -22,6 +23,10 @@ namespace Hospital_IS.DoctorView
         public UCTest Test { set; get; }
         public int Last { get; set; }
 
+        public UCPatientChart(NavigationService navigation)
+        {
+
+        }
 
         public UCPatientChart(DoctorAppointment appointment,bool start = false)
         {

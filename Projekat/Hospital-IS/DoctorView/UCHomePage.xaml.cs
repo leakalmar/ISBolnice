@@ -28,10 +28,10 @@ namespace Hospital_IS.DoctorView
                 viewModel = value;
             }
         }
-        public UCHomePage()
+        public UCHomePage(NavigationService navigation)
         {
             InitializeComponent();
-            this.viewModel = new HomePageViewModel();
+            this.viewModel = new HomePageViewModel(navigation);
             this.DataContext = this.viewModel;
             this.Focus();
         }
