@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hospital_IS.DoctorView" mc:Ignorable="d"
+        xmlns:local="clr-namespace:Hospital_IS.DoctorView"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors" mc:Ignorable="d"
         Title="DoctorHomePage" Height="640" Width="1024"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         Background="Transparent" AllowsTransparency="True">
@@ -28,6 +29,11 @@
         <KeyBinding Modifiers="Ctrl+Alt" Key="X"
                 Command="{Binding Path=MaximizeCommand}" />
     </Window.InputBindings>
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding Path=OnLoadedCommand}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.03*" />
@@ -156,7 +162,7 @@
         </Grid>
 
         <Frame x:Name="Home" Grid.Row="2" Grid.Column="3" Grid.RowSpan="3"
-                Margin="20,0,15,0" Source="UCHomePage.xaml"
+                Margin="20,0,15,0" Source="{Binding Path=HomePage}"
                 NavigationUIVisibility="Hidden">
         </Frame>
 

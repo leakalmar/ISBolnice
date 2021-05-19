@@ -3,12 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:Hospital_IS.DoctorView"
-        mc:Ignorable="d">
-    <UserControl.InputBindings>
-        <KeyBinding Key="Enter"
-                Command="{Binding Path=NavigateToDetailsCommand}" />
-    </UserControl.InputBindings>
+        mc:Ignorable="d" Focusable="True">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*" />
@@ -90,12 +85,17 @@
                     Foreground="White"
                     ScrollViewer.VerticalScrollBarVisibility="Auto"
                     BorderThickness="0,0,0,0" AutoGenerateColumns="False"
-                    SelectionMode="Single" IsReadOnly="True"
+                    SelectionMode="Extended" IsReadOnly="True"
                     BorderBrush="{x:Null}"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                    HorizontalScrollBarVisibility="Disabled"
-                    SelectionChanged="docotrAppointments_SelectionChanged"
-                    RowHeaderWidth="0" FontSize="14" CanUserSortColumns="False">
+                    HorizontalScrollBarVisibility="Disabled" RowHeaderWidth="0"
+                    FontSize="14" CanUserSortColumns="False"
+                    SelectedItem="{Binding Path=SelectedAppointment}" Focusable="True">
+
+                <DataGrid.InputBindings>
+                    <KeyBinding Key="Return"
+                            Command="{Binding NavigateToDetailsCommand}" />
+                </DataGrid.InputBindings>
                 <DataGrid.Resources>
                     <Style
                             BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
@@ -124,14 +124,8 @@
                             Binding="{Binding DoctorAppointment.Room}"
                             CanUserResize="False" Width="0.05*" />
                 </DataGrid.Columns>
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <EventSetter Event="KeyDown"
-                                Handler="FrameworkElement_KeyDown" />
-                    </Style>
-                </DataGrid.RowStyle>
             </DataGrid>
-            
+
         </GroupBox>
     </Grid>
 

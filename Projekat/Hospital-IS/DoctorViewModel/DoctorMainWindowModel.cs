@@ -84,6 +84,7 @@ namespace Hospital_IS.DoctorViewModel
         private RelayCommand navigateToLogInCommand;
         private RelayCommand minimizeCommand;
         private RelayCommand maximizeCommand;
+        private RelayCommand onLoadedCommand;
 
 
 
@@ -192,13 +193,22 @@ namespace Hospital_IS.DoctorViewModel
                 maximizeCommand = value;
             }
         }
+
+        public RelayCommand OnLoadedCommand
+        {
+            get { return onLoadedCommand; }
+            set
+            {
+                onLoadedCommand = value;
+            }
+        }
         #endregion
 
         #region Actions
         private void Execute_NavigateToHomePageCommand(object obj)
         {
-            this.NavigationService.Navigate(
-                new Uri("DoctorView/UCHomePage.xaml", UriKind.Relative));
+
+            this.NavigationService.Navigate(new Uri("DoctorView/UCHomePage.xaml", UriKind.Relative));
         }
 
         private bool CanExecute_NavigateCommand(object obj)
@@ -276,6 +286,11 @@ namespace Hospital_IS.DoctorViewModel
             WindowControls.DoMaximize(DoctorMainWindow.Instance, DoctorMainWindow.Instance.full);
         }
 
+        private void Execute_OnLoadedCommand(object obj)
+        {
+            this.NavigationService.Navigate(new Uri("DoctorView/UCHomePage.xaml", UriKind.Relative));
+        }
+
 
         #endregion
 
@@ -306,6 +321,7 @@ namespace Hospital_IS.DoctorViewModel
             this.NavigateToLogInCommand = new RelayCommand(Execute_NavigateToLogInCommand, CanExecute_NavigateCommand);
             this.MaximizeCommand = new RelayCommand(Execute_MaximizeCommand, CanExecute_NavigateCommand);
             this.MinimizeCommand = new RelayCommand(Execute_MinimizeCommand, CanExecute_NavigateCommand);
+            this.OnLoadedCommand = new RelayCommand(Execute_OnLoadedCommand, CanExecute_NavigateCommand);
             this.navigationService = navigationService;
         }
         #endregion

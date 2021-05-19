@@ -7,8 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Text;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.DoctorViewModel
@@ -59,9 +59,18 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
+        public void DetailsWindow(object sender, KeyEventArgs e)
+        {
+            if (SelectedAppointment != null && e.Key == Key.Enter)
+            {
+                UCAppDetail appDetail = new UCAppDetail(selectedAppointment);
+                this.NavigationService.Navigate(appDetail);
+            }
+        }
 
 
         private RelayCommand navigateToDetailsCommand;
+        private RelayCommand selectionChangedCommand;
 
         public RelayCommand NavigateToDetailsCommand
         {
@@ -69,6 +78,15 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 navigateToDetailsCommand = value;
+            }
+        }
+
+        public RelayCommand SelectionChangedCommand
+        {
+            get { return selectionChangedCommand; }
+            set
+            {
+                selectionChangedCommand = value;
             }
         }
 
@@ -81,15 +99,22 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
+        private void Execute_SelectionChangedCommand(object obj)
+        {
+            DoctorAppointmentViewModel selected = (DoctorAppointmentViewModel)obj;
+            SelectedAppointment = selected;
+        }
+
         private bool CanExecute_NavigateCommand(object obj)
         {
             return true;
         }
 
-        public HomePageViewModel(NavigationService navigationService)
+        public HomePageViewModel()
         {
             this.NavigateToDetailsCommand = new RelayCommand(Execute_NavigateToDetailsCommand, CanExecute_NavigateCommand);
-            this.navigationService = navigationService;
+            this.SelectionChangedCommand = new RelayCommand(Execute_SelectionChangedCommand, CanExecute_NavigateCommand);
+            this.navigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
             List<DoctorAppointment> appointments = DoctorAppointmentController.Instance.GetAllByDoctor(DoctorMainWindow.Instance._ViewModel.DoctorId);
             DoctorAppointments = new DoctorAppointmentConverter().ConvertCollectionToViewModel(appointments);
 
