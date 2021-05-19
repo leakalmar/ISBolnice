@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using Hospital_IS.Storages;
+using Hospital_IS.View.PatientViewModels;
 using Model;
 using Storages;
 using System;
@@ -34,9 +35,9 @@ namespace Hospital_IS.View
         public HomePatientView()
         {
             InitializeComponent();
-
-            Patient = MainWindow.PatientUser;
-            DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(Patient.Id));
+            this.DataContext = new HomePatientViewModel();
+            //Patient = PatientMainWindowViewModel.Patient;
+            //DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(Patient.Id));
             /*Medicine medicine = new Medicine("Bromazepam", "1 tableta sadrži 1,5 mg, 3 mg, odnosno 6 mg bromazepama.",
                 "U osetljivih bolesnika, naročito kod većih doza, može se javiti blagi umor, pospanost i vrtoglavica," +
                 " a povremeno slabost mišića i ataksija. Ova neželjena dejstva mogu se izbeći prilagođavanjem doze.", "Doziranje je individualno." +
@@ -54,7 +55,7 @@ namespace Hospital_IS.View
             /*Patient.TrollMechanism.TimeRange = 14;
             Patient.TrollMechanism.AppointmentCounterInTimeRange = 2;
             Patient.TrollMechanism.TrollCheckStartDate = new DateTime(2021, 4, 29);
-            Patient.TrollMechanism.IsTroll = false;*/
+            Patient.TrollMechanism.IsTroll = false;
             this.DataContext = this;
             PersonalData.DataContext = Patient;
             DispatcherTimer dispatcherTimer = new DispatcherTimer
@@ -62,9 +63,9 @@ namespace Hospital_IS.View
                 Interval = TimeSpan.FromMinutes(1)
             };
             dispatcherTimer.Tick += timer_Tick;
-            dispatcherTimer.Start();
+            dispatcherTimer.Start();*/
         }
-
+        /*
         private void timer_Tick(object sender, EventArgs e)
         {
             DateTime time= DateTime.Now;
@@ -81,7 +82,7 @@ namespace Hospital_IS.View
                 }
             }
         }
-        /*
+        
         private void reserveApp(object sender, RoutedEventArgs e)
         {
 
@@ -104,7 +105,7 @@ namespace Hospital_IS.View
             doc.Show();
             this.Hide();
         }
-    */
+    
         private void CancelAppointment(object sender, RoutedEventArgs e)
         {
             DoctorAppointment doctorApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
@@ -126,7 +127,7 @@ namespace Hospital_IS.View
             }
 
         }
-        
+    */    
         private void RescheduleAppointment(object sender, RoutedEventArgs e)
         {
           /*  rescheduledApp = (DoctorAppointment)dataGridAppointment.SelectedItem;

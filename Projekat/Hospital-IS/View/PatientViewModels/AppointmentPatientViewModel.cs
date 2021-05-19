@@ -18,6 +18,7 @@ namespace Hospital_IS.View.PatientViewModels
         private bool timePriority;
         private int timeSlot;
         private DoctorAppointment doctorApp;
+        private DoctorAppointment rescheduledApp;
 
         public MyICommand ShowAvailableAppointments { get; set; }
         public MyICommand ReserveAppointment { get; set; }
@@ -103,7 +104,7 @@ namespace Hospital_IS.View.PatientViewModels
         {
             AvailableAppointments.Clear();
             MessageBox.Show(TimeSlot.ToString());
-            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.ToString(), Doctor, PatientMainWindowView.Instance.Patient, date, TimePriority);
+            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.ToString(), Doctor, PatientMainWindowViewModel.Patient, date, TimePriority);
             List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(possibleAppointment);
             MessageBox.Show(docApps.Count.ToString());
             foreach (DoctorAppointment doctorAppointment in docApps)
@@ -120,9 +121,9 @@ namespace Hospital_IS.View.PatientViewModels
             }
             else
             {
-                if (!PatientController.Instance.IsPatientTroll(PatientMainWindowView.Instance.Patient, DoctorApp))
+                if (!PatientController.Instance.IsPatientTroll(PatientMainWindowViewModel.Patient, DoctorApp))
                 {
-                    PatientMainWindowView.Instance.DoctorAppointment.Add(DoctorApp);
+                    //PatientMainWindowView.Instance.DoctorAppointment.Add(DoctorApp);
                     DoctorAppointmentController.Instance.AddAppointment(DoctorApp);
                     DoctorApp.Reserved = true;
                     AvailableAppointments.Remove(DoctorApp);
@@ -142,11 +143,11 @@ namespace Hospital_IS.View.PatientViewModels
             }
             else
             {
-                if (!PatientController.Instance.IsPatientTroll(HomePatient.Instance.Patient, DoctorApp))
+                if (!PatientController.Instance.IsPatientTroll(PatientMainWindowViewModel.Patient, DoctorApp))
                 {
-                    DoctorAppointmentController.Instance.UpdateAppointment(HomePatient.Instance.rescheduledApp, DoctorApp);
-                    HomePatient.Instance.DoctorAppointment.Remove(HomePatient.Instance.rescheduledApp);
-                    HomePatient.Instance.DoctorAppointment.Add(DoctorApp);
+                    DoctorAppointmentController.Instance.UpdateAppointment(rescheduledApp, DoctorApp);
+                    //PatientMainWindowView.Instance.DoctorAppointment.Remove(PatientMainWindowView.Instance.rescheduledApp);
+                    //PatientMainWindowView.Instance.DoctorAppointment.Add(DoctorApp);
                     DoctorApp.Reserved = true;
                     AvailableAppointments.Remove(DoctorApp);
                 }
@@ -161,9 +162,9 @@ namespace Hospital_IS.View.PatientViewModels
         {
             Doctor = docApp.Doctor;
             Date = docApp.AppointmentStart;
-
+            rescheduledApp = docApp;
             AvailableAppointments.Clear();
-            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.ToString(), Doctor, HomePatient.Instance.Patient, Date, false);
+            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.ToString(), Doctor, PatientMainWindowViewModel.Patient, Date, false);
             List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(possibleAppointment);
             foreach (DoctorAppointment doctorAppointment in docApps)
             {

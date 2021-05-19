@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using Hospital_IS.View.PatientViewModels;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace Hospital_IS.View
             AppointmentEvaluation.Grade = Grades.SelectedIndex + 1;
             AppointmentEvaluation.Comment = Comment.Text;
             PatientAppointmentEvaluationController.Instance.AddAppointmentEvaluation(AppointmentEvaluation);
-            if (PatientAppointmentEvaluationController.Instance.ShowHospitalEvaluation(HomePatient.Instance.Patient.Id))
+            if (PatientAppointmentEvaluationController.Instance.ShowHospitalEvaluation(PatientMainWindowViewModel.Patient.Id))
             {
                 //Napraviti prozor za pitanje da li zeli da oceni bolnicu,ako zeli napravi prozor sa anketom/ocenjivanjem bolnice
                 YesNoDialogMessage yesNoDialog = new YesNoDialogMessage("Da li želite da ocenite bolnicu?");

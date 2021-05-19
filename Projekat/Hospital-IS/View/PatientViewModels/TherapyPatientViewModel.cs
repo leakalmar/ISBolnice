@@ -24,7 +24,7 @@ namespace Hospital_IS.View.PatientViewModels
 
         public TherapyPatientViewModel()
         {
-            Therapies = new ObservableCollection<Therapy>(ChartController.Instance.GetTherapiesByPatient(HomePatient.Instance.Patient));
+            Therapies = new ObservableCollection<Therapy>(ChartController.Instance.GetTherapiesByPatient(PatientMainWindowViewModel.Patient));
         }
 
         public Therapy Therapy

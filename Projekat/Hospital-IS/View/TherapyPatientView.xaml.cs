@@ -26,7 +26,7 @@ namespace Hospital_IS.View
         /*
         private void home(object sender, RoutedEventArgs e)
         {
-            HomePatient.Instance.Show();
+            PatientMainWindowView.Instance.Show();
             this.Close();
         }
 

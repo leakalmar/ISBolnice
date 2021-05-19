@@ -35,7 +35,7 @@ namespace Hospital_IS.View
         private void home(object sender, RoutedEventArgs e)
         {
 
-            HomePatient.Instance.Show();
+            PatientMainWindowView.Instance.Show();
             this.Close();
 
         }
@@ -72,7 +72,7 @@ namespace Hospital_IS.View
             }
             
             AvailableAppointments.Clear();
-            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.Text, doctor, HomePatient.Instance.Patient, date, timePriority);
+            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.Text, doctor, PatientMainWindowViewModel.Patient, date, timePriority);
             List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(possibleAppointment);
             foreach (DoctorAppointment doctorAppointment in docApps)
             {
@@ -89,9 +89,9 @@ namespace Hospital_IS.View
             }
             else
             {
-                if (!PatientController.Instance.IsPatientTroll(HomePatient.Instance.Patient, docApp))
+                if (!PatientController.Instance.IsPatientTroll(PatientMainWindowViewModel.Patient, docApp))
                 {
-                    HomePatient.Instance.DoctorAppointment.Add(docApp);
+                    PatientMainWindowView.Instance.DoctorAppointment.Add(docApp);
                     DoctorAppointmentController.Instance.AddAppointment(docApp);
                     docApp.Reserved = true;
                     //AvailableAppointments.Remove(docApp);
@@ -141,11 +141,11 @@ namespace Hospital_IS.View
             }
             else
             {
-                if (!PatientController.Instance.IsPatientTroll(HomePatient.Instance.Patient, docApp))
+                if (!PatientController.Instance.IsPatientTroll(PatientMainWindowViewModel.Patient, docApp))
                 {
-                    DoctorAppointmentController.Instance.UpdateAppointment(HomePatient.Instance.rescheduledApp, docApp);
-                    HomePatient.Instance.DoctorAppointment.Remove(HomePatient.Instance.rescheduledApp);
-                    HomePatient.Instance.DoctorAppointment.Add(docApp);
+                    DoctorAppointmentController.Instance.UpdateAppointment(PatientMainWindowView.Instance.rescheduledApp, docApp);
+                    PatientMainWindowView.Instance.DoctorAppointment.Remove(PatientMainWindowView.Instance.rescheduledApp);
+                    PatientMainWindowView.Instance.DoctorAppointment.Add(docApp);
                     docApp.Reserved = true;
                     //AvailableAppointments.Remove(docApp);
                 }

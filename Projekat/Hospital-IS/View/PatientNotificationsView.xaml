@@ -39,7 +39,7 @@
 
         <ScrollViewer  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="10" Margin="10" VerticalScrollBarVisibility="Auto" Background="#CCF1F3F8">
             <StackPanel>
-                <ItemsControl x:Name="ListViewNotifications" ItemsSource="{Binding Notification}">
+                <ItemsControl x:Name="ListViewNotifications" ItemsSource="{Binding NotificationMessages}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border Height="70" Margin="10" CornerRadius="3" BorderBrush="Black" BorderThickness="1" Background="#CCC5CFE5">

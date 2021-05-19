@@ -12,6 +12,7 @@
         AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize"
         >
+    
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:HomePatientViewModel}">
             <views:HomePatientView/>
@@ -72,17 +73,16 @@
             </Border.Background>
         </Border>
 
-        <Border Background="White" CornerRadius="20,0,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="10" >
+        <Border CornerRadius="20,0,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="10" >
             <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="10" Background="Transparent" >
-                <ContentControl Content="{Binding CurrentViewModel}"/>
+                <ContentControl Content="{Binding Path = CurrentViewModel}"/>
             </Grid>
         </Border>
-        
 
         <Image Source="../hospital.png" Width="250" Height="250" Grid.RowSpan="5"/>
         <Button x:Name="Logout" Click="LogoutPatient" Grid.Column="2" Grid.Row="0" Margin="450,0,0,0" Background="{x:Null}" FontSize="16" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand">Odjavi se</Button>
 
-        <Button x:Name="Home" Command="{Binding NavCommand}" CommandParameter="home" Grid.Column="0" Grid.Row="5" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Background="White" Foreground="#FF184095" Cursor="Hand" BorderThickness="1,1,0,1">Početna strana</Button>
+        <Button x:Name="Home" Command="{Binding NavCommand}" CommandParameter="home" Grid.Column="0" Grid.Row="5" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}"  Foreground="White" Cursor="Hand" BorderThickness="1,1,0,1" Background="{x:Null}">Početna strana</Button>
         <Button x:Name="ReserveApp" Command="{Binding NavCommand}" CommandParameter="reserve" Grid.Column="0" Grid.Row="6" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand" >Zakaži pregled</Button>
         <Button x:Name="AllApp" Command="{Binding NavCommand}" CommandParameter="allApp" Grid.Column="0" Grid.Row="7" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand"  >Moji pregledi</Button>
         <Button x:Name="Therapy" Command="{Binding NavCommand}" CommandParameter="therapy" Grid.Column="0" Grid.Row="8" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand"  Content="Terapije"/>

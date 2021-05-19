@@ -41,7 +41,7 @@ namespace Hospital_IS
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
-
+        
         private void Login(object sender, RoutedEventArgs e)
         {
             List<Patient> patients = PatientController.Instance.GetAll();
@@ -51,8 +51,8 @@ namespace Hospital_IS
                 if (email.Text == p.Email && password.Password.ToString() == p.Password)
                 {
                     PatientUser = p;
-                    //HomePatient.Instance.Show();
-                    PatientMainWindowView.Instance.Show();
+                    PatientMainWindowView patientView = new PatientMainWindowView();
+                    patientView.Show();
                     this.Close();
                 }
             }

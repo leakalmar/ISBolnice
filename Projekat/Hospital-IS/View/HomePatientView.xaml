@@ -52,7 +52,7 @@
             </Grid>
             <Grid>
                 <Label Content="Datum rođenja:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <TextBlock x:Name="Birth"  Text="{Binding Path=BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5"/>
+                <TextBlock x:Name="Birth"  Text="{Binding Path=BirthDate}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5"/>
             </Grid>
             <Grid>
                 <Label Content="Adresa:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
@@ -60,7 +60,7 @@
             </Grid>
             <Grid >
                 <Label Content="Kreiran nalog:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <TextBlock x:Name="FileDate"  Text="{Binding Path=FileDate, StringFormat=\{0:dd.MM.yyyy.\}}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5"/>
+                <TextBlock x:Name="FileDate"  Text="{Binding Path=FileDate}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5"/>
             </Grid>
             <Grid>
                 <Label Content="Poslodavac:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
@@ -73,7 +73,7 @@
         </StackPanel>
 
         <Label Content="Lista pregleda:" Grid.Row="0" Grid.Column="1" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
-        <DataGrid x:Name="dataGridAppointment"  ItemsSource="{Binding DoctorAppointment, Mode=TwoWay}" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="1" Grid.RowSpan="10" Margin="10,10,30,100" RowHeaderWidth="0">
+        <DataGrid x:Name="dataGridAppointment" SelectedItem="{Binding SelectedApp}"  ItemsSource="{Binding FutureAppointments, Mode=TwoWay}" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="1" Grid.RowSpan="10" Margin="10,10,30,100" RowHeaderWidth="0">
             <DataGrid.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="0,0,20,20"/>
@@ -106,7 +106,7 @@
                 </LinearGradientBrush>
             </Button.Background> Izmeni termin
         </Button>
-        <Button x:Name="deleteApp" Grid.Column="2" Grid.Row="11" Margin="420,230,30,40" Foreground="White" FontSize="16" Cursor="Hand" Click="CancelAppointment">
+        <Button x:Name="deleteApp" Command="{Binding CancelAppointment}" Grid.Column="2" Grid.Row="11" Margin="420,230,30,40" Foreground="White" FontSize="16" Cursor="Hand" >
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20,20,20,20"/>

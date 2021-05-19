@@ -10,19 +10,7 @@ namespace Hospital_IS.View.PatientViewModels
 {
     public class AllAppointmentsViewModel : BindableBase
     {
-        private ObservableCollection<DoctorAppointment> allAppointments;
-        public ObservableCollection<DoctorAppointment> AllAppointments
-        {
-            get { return allAppointments; }
-            set 
-            {
-                if (allAppointments != value)
-                {
-                    allAppointments = value;
-                    OnPropertyChanged("AllAppointments");
-                }
-            }
-        }
+        public ObservableCollection<DoctorAppointment> AllAppointments { get; set; }
 
         private DoctorAppointment selectedDoctorAppointment;
         private bool shouldShowEvaluate = false;
@@ -36,7 +24,7 @@ namespace Hospital_IS.View.PatientViewModels
 
         public AllAppointmentsViewModel()
         {
-            AllAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(HomePatient.Instance.Patient.Id));
+            AllAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id));
             ShowEvaluationWindow = new MyICommand(ShowEvaluation);
         }
 
@@ -140,7 +128,7 @@ namespace Hospital_IS.View.PatientViewModels
             AppointmentType = SelectedDoctorAppointment.AppTypeText;
             RoomId = SelectedDoctorAppointment.Room;
             MessageBox.Show(SelectedDoctorAppointment.Room.ToString());
-            //Details = SelectedDoctorAppointment.
+            Details = SelectedDoctorAppointment.AppointmentCause;
             if (SelectedDoctorAppointment.AppointmentStart <= DateTime.Today && !PatientAppointmentEvaluationController.Instance.IsAppointmentEvaluated(SelectedDoctorAppointment))
             {
                 ShouldShowEvaluate = true;

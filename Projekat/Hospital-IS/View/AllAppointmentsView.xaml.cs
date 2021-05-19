@@ -21,13 +21,13 @@ namespace Hospital_IS.View
             InitializeComponent();
             //this.DataContext = new AllAppointmentsViewModel();
             
-            //DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(HomePatient.Instance.Patient.Id));
+            //DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id));
             //this.DataContext = this;
         }
         /*
         private void home(object sender, RoutedEventArgs e)
         {
-            HomePatient.Instance.Show();
+            PatientMainWindowView.Instance.Show();
             this.Close();
         }
 

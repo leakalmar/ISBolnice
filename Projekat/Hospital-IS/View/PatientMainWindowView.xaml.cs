@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Hospital_IS.View.PatientViewModels;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,7 +19,7 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class PatientMainWindowView : Window
     {
-        private static PatientMainWindowView instance = null;
+        /*private static PatientMainWindowView instance = null;
         public static PatientMainWindowView Instance
         {
             get
@@ -29,12 +30,11 @@ namespace Hospital_IS.View
                 }
                 return instance;
             }
-        }
-
-        public Patient Patient { get; set; }
-        private PatientMainWindowView()
+        }*/
+        public PatientMainWindowView()
         {
-            Patient = MainWindow.PatientUser;
+            PatientMainWindowViewModel PatientMainView = new PatientMainWindowViewModel();
+            this.DataContext = PatientMainView;
             InitializeComponent();
         }
 
