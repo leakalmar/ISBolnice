@@ -83,9 +83,9 @@ namespace Hospital_IS.ManagerView
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            RoomOptions roomOptions = new RoomOptions();
-            roomOptions.Show();
-            this.Close();
+           
+            this.Hide();
+            Window1.Instance.Show();
         }
     }
 }

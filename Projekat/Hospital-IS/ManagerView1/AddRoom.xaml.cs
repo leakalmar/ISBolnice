@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital_IS.ManagerViewModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -8,25 +9,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Controllers;
-using Hospital_IS.ManagerViewModel;
-using Model;
 
-namespace Hospital_IS
+namespace Hospital_IS.ManagerView1
 {
     /// <summary>
-    /// Interaction logic for UpdateRoom.xaml
+    /// Interaction logic for AddRoom.xaml
     /// </summary>
-    public partial class UpdateRoom : Window
+    public partial class AddRoom : Page
     {
-       
-        public UpdateRoom(Room room)
+        public AddRoom(RoomViewModel roomView)
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            this.DataContext = roomView;
         }
-
-       
 
         private void RoomNumber_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -62,11 +59,6 @@ namespace Hospital_IS
                 BedNumberBox.Text = string.Empty;
             }
         }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            Window1.Instance.Show();
-            this.Hide();
-        }
     }
+
 }

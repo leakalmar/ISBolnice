@@ -14,13 +14,14 @@ using Model;
 using System.Collections.ObjectModel;
 using Controllers;
 using Hospital_IS.ManagerView;
+using Hospital_IS.ManagerViewModel;
 
 namespace Hospital_IS
 {
   
     public partial class Window1 : Window
     {
-        private RoomStorage roomStorage = new RoomStorage();
+       
         private static Window1 instance = null;
         public static Window1 Instance
         {
@@ -37,34 +38,30 @@ namespace Hospital_IS
         {
                
             InitializeComponent();
-            DataGridRooms.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
+           
         }
 
-        
-        public void refresh()
-        {
-            DataGridRooms.DataContext = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
-        }
+       
        
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+       
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            RoomOptions roomOptions = new RoomOptions();
-            roomOptions.Show();
-            this.Hide();
+            if (RoomOptions.Visibility == Visibility.Visible)
+            {
+                RoomOptions.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                RoomOptions.Visibility = Visibility.Visible;
+            }
         }
 
         private void Eqiupment_Click(object sender, RoutedEventArgs e)
         {
-            EquipmentWindow.Instance.refresh();
-            EquipmentWindow.Instance.Show();
-           
             this.Hide();
+            EquipmentWindow.Instance.Show();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -106,6 +103,45 @@ namespace Hospital_IS
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void AddRoom_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewRoom room = new AddNewRoom();
+            room.Show();
+            this.Hide();
+        }
+
+        private void EditRoom_Click(object sender, RoutedEventArgs e)
+        {
+            Room room = (Room)DataGridRooms.SelectedItem;
+            if (room == null)
+            {
+                MessageBox.Show("Izaberite sobu");
+            }
+            else
+            {
+                UpdateRoom upRoom = new UpdateRoom(room);
+                upRoom.Show();
+                this.Hide();
+            }
+        }
+
+       
+
+        private void RenovationRoom_Click(object sender, RoutedEventArgs e)
+        {
+            Room room = (Room)DataGridRooms.SelectedItem;
+            if (room == null)
+            {
+                MessageBox.Show("Izaberite sobu");
+            }
+            else
+            {
+                RenovationView renView = new RenovationView(room);
+                renView.Show();
+            }
 
         }
     }

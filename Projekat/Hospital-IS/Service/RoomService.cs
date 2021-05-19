@@ -61,10 +61,23 @@ namespace Service
 
         public void AddRoom(Room newRoom)
         {
-         
+         newRoom.RoomId = FindMax() + 1;
          AllRooms.Add(newRoom);
        
          rfs.SaveRooms(AllRooms);
+        }
+
+        private int FindMax()
+        {
+            int maxId = -1;
+            foreach(Room  r in AllRooms)
+            {
+                if(maxId < r.RoomId)
+                {
+                    maxId = r.RoomId;
+                }
+            }
+            return maxId;
         }
 
         public void RemoveRoom(Room room)
