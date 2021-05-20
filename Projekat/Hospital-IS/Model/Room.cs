@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace Model
 {
@@ -100,8 +101,10 @@ namespace Model
 
             foreach (Equipment r in Equipment)
             {
+                MessageBox.Show(r.EquiptId.ToString() + " " + updateEquip.EquiptId.ToString());
                 if (r.EquiptId == updateEquip.EquiptId)
                 {
+                    
                     int index = Equipment.IndexOf(r);
                     Equipment.Remove(r);
                     Equipment.Insert(index, updateEquip);

@@ -245,27 +245,7 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
-        private bool CanDelete()
-        {
-            return SelectedRoom != null;
-        }
-
-        private void OnDelete()
-        {
-            RoomController.Instance.RemoveRoom(SelectedRoom);
-            LoadRooms();
-        }
-
-        private bool CanUpdate()
-        {
-            return SelectedRoom != null;
-        }
-
-        private void OnUpdate()
-        {
-            RoomController.Instance.RemoveRoom(SelectedRoom);
-            LoadRooms();
-        }
+     
 
 
         public String RoomFloor

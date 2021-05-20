@@ -64,6 +64,7 @@ namespace Controllers
 
         public Boolean UpdateEquipment(Room room, Equipment updateEquip)
         {
+            MessageBox.Show("uslo u kontroler");
             return RoomService.Instance.UpdateEquipment(room,updateEquip);
         }
 

@@ -44,23 +44,27 @@ namespace Hospital_IS.ManagerView1
 
             public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
             {
-            value = Convert.ToInt32(value);
-                if (value is int)
+                value = Convert.ToInt32(value);
+            if (value is int)
+            {
+                int d = (int)value;
+                if (d < Min || d > Max)
                 {
-                    int d = (int)value;
-                    if (d < Min || d > Max)
-                    {
-                        return new ValidationResult(false, "Vrijednost izvan opsega " + "(" + Convert.ToString(Min) + "," + Convert.ToString(Max)+")");
-                    }
-                    else
-                    {
-                        return new ValidationResult(true, null);
-                    }
+                    return new ValidationResult(false, "Vrijednost izvan opsega " + "(" + Convert.ToString(Min) + "," + Convert.ToString(Max) + ")");
                 }
                 else
                 {
-                    return new ValidationResult(false, "Unknown error occured.");
+                    return new ValidationResult(true, null);
                 }
             }
+            else
+            {
+                return new ValidationResult(false, "Unknown error occured.");
+
+            }
+            }
+            
         }
+
+        
 }

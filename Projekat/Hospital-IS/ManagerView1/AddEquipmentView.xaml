@@ -1,12 +1,14 @@
-﻿<Page x:Class="Hospital_IS.ManagerView1.UpdateRoomView"
-       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Page x:Class="Hospital_IS.ManagerView1.AddEquipmentView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Hospital_IS.ManagerView1" xmlns:managerviewmodel="clr-namespace:Hospital_IS.ManagerViewModel" d:DataContext="{d:DesignInstance Type=managerviewmodel:RoomViewModel}"
+      xmlns:local="clr-namespace:Hospital_IS.ManagerView1"
+      xmlns:viewModel ="clr-namespace:Hospital_IS.ManagerViewModel" d:DataContext="{d:DesignInstance Type=viewModel:EquipmentViewModel}"
       mc:Ignorable="d" 
          Title="Dodaj sobu" Height="750" Width="430" Background="Transparent"
        >
+    
 
     <Page.Resources>
         <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
@@ -141,7 +143,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
 
-            <RowDefinition Height="80"/>
+           
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
 
@@ -168,17 +170,16 @@
                 <Image Source="pack://application:,,,/Resources/backbutton.png" Width="50" Height="50"/>
             </StackPanel>
         </Button>
-        <Label  Content="Izmena sobe" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Foreground="White" FontSize="30" FontWeight="SemiBold"
+        <Label  Content="Dodavanje opreme" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Foreground="White" FontSize="30" FontWeight="SemiBold"
                HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <Label Content="Broj sobe*" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
-        <TextBox x:Name="RoomNumberBox"  Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="4" Grid.Column="3" 
-                 Grid.ColumnSpan="2" Height="30"   FontSize="15" Padding="4" >
+        <Label Content="Naziv opreme*" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
+        <TextBox x:Name="EquipmentName"  Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="4" Grid.Column="3" 
+                 Grid.ColumnSpan="2" Height="30"   FontSize="15" Padding="4" GotFocus="EquipmentName_GotFocus" >
             <TextBox.Text>
 
-                <Binding Path="RoomNumber" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <local:StringToIntValidationRule ValidationStep="RawProposedValue"/>
-                        <local:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="1" Max="1000"/>
+                        
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -203,14 +204,13 @@
             </Validation.ErrorTemplate>
         </TextBox>
 
-        <Label Content="Sprat sobe*" Grid.Row="6" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
-        <TextBox x:Name="RoomFloorBox" Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="7" Grid.Column="3" 
-                  Grid.ColumnSpan="2" Height="30"  FontSize="15" Padding="4" >
+        <Label Content="Proizvođač*" Grid.Row="6" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
+        <TextBox x:Name="Producer" Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="7" Grid.Column="3" 
+                  Grid.ColumnSpan="2" Height="30"  FontSize="15" Padding="4" GotFocus="Producer_GotFocus" >
             <TextBox.Text>
-                <Binding Path="RoomFloor" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="ProducerName" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <local:StringToIntValidationRule ValidationStep="RawProposedValue"/>
-                        <local:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="0" Max="10"/>
+                        
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -234,11 +234,11 @@
                 </ControlTemplate>
             </Validation.ErrorTemplate>
         </TextBox>
-        <Label Content="Povrsina sobe [m^2|*" Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
-        <TextBox x:Name="SurfaceAreaBox"  Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="10" Grid.Column="3"
-                  Grid.ColumnSpan="2" Height="30" FontSize="15" Padding="4"  >
+        <Label Content="Količina*" Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
+        <TextBox x:Name="Quantity"  Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="10" Grid.Column="3"
+                  Grid.ColumnSpan="2" Height="30" FontSize="15" Padding="4" GotFocus="Quantity_GotFocus" >
             <TextBox.Text>
-                <Binding Path="SurfaceArea" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Quantity" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <local:StringToIntValidationRule ValidationStep="RawProposedValue"/>
                         <local:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="0" Max="10000"/>
@@ -265,48 +265,16 @@
                 </ControlTemplate>
             </Validation.ErrorTemplate>
         </TextBox>
-        <Label Content="Broj kreveta*" Grid.Row="12" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
-        <TextBox x:Name="BedNumberBox"  Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="13" Grid.Column="3" 
-                  Grid.ColumnSpan="2"  Height="30" FontSize="15" Padding="4" >
-            <TextBox.Text>
-                <Binding Path="BedNumber" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <local:StringToIntValidationRule ValidationStep="RawProposedValue"/>
-                        <local:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="0" Max="1000"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-            <Validation.ErrorTemplate>
-                <ControlTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+        
 
-                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-
-                        <TextBlock  Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" TextAlignment="Center" 
-                                    Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                    </Grid>
-                </ControlTemplate>
-            </Validation.ErrorTemplate>
-        </TextBox>
-
-        <Label Content="Tip sobe*" Grid.Row="15" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
-        <ComboBox x:Name="ComboBox" Template="{StaticResource ComboBoxBaseControlTemplate}" SelectedIndex="{Binding EquiptTypeIndex}" Grid.Row="16" Grid.Column="3" Grid.ColumnSpan="2" FontSize="15">
-            <ComboBoxItem Content="Soba za odmor"/>
-            <ComboBoxItem Content="Soba za preglede"/>
-            <ComboBoxItem Content="Operaciona soba"/>
-            <ComboBoxItem Content="Magacin"/>
+        <Label Content="Tip opreme*" Grid.Row="12" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
+        <ComboBox x:Name="ComboBox" Template="{StaticResource ComboBoxBaseControlTemplate}" SelectedIndex="{Binding ComboBoxItem}" Grid.Row="13" Grid.Column="3" Grid.ColumnSpan="2" FontSize="15">
+            <ComboBoxItem Content="Dinamička oprema"/>
+            <ComboBoxItem Content="Statička oprema"/>
         </ComboBox>
 
-        <Button x:Name="Submit" Content="Potvrdi" FontSize="20" Height="40" Background="White" BorderThickness="3" BorderBrush="Green" Foreground="#FF5B317E" FontWeight="SemiBold" Grid.Row="18" 
-                 Grid.Column="3" Grid.ColumnSpan="2" Width="200" Command="{Binding AddNewRoom}">
+        <Button x:Name="Submit" Content="Potvrdi" FontSize="20" Height="40" Background="White" BorderThickness="3" BorderBrush="Green" Foreground="#FF5B317E" FontWeight="SemiBold" Grid.Row="17" 
+                 Grid.Column="3" Grid.ColumnSpan="2" Width="200" Command="{Binding AddNewEquipment}" >
 
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">

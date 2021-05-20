@@ -51,6 +51,7 @@ namespace Hospital_IS.ManagerView1
 
         private void Eqiupment_Click(object sender, RoutedEventArgs e)
         {
+           
             EquipmentView equipmentView = new EquipmentView();
             this.NavigationService.Navigate(equipmentView);
         }

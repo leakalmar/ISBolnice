@@ -29,7 +29,40 @@
     "RoomId": 2,
     "Type": 3,
     "RoomIdType": "2 StorageRoom",
-    "Equipment": [],
+    "Equipment": [
+      {
+        "EquipType": 1,
+        "EquiptId": 7,
+        "Name": "10",
+        "Quantity": 50,
+        "ProducerName": "10",
+        "EquiptTypeIndex": 1
+      },
+      {
+        "EquipType": 1,
+        "EquiptId": 8,
+        "Name": "sasa",
+        "Quantity": 5000,
+        "ProducerName": "sasa",
+        "EquiptTypeIndex": 1
+      },
+      {
+        "EquipType": 1,
+        "EquiptId": 9,
+        "Name": "tat",
+        "Quantity": 60,
+        "ProducerName": "tata",
+        "EquiptTypeIndex": 1
+      },
+      {
+        "EquipType": 1,
+        "EquiptId": 10,
+        "Name": "rer",
+        "Quantity": 100,
+        "ProducerName": "erer",
+        "EquiptTypeIndex": 1
+      }
+    ],
     "isUsable": false
   },
   {
@@ -51,7 +84,24 @@
     "RoomId": 4,
     "Type": 3,
     "RoomIdType": "4 StorageRoom",
-    "Equipment": [],
+    "Equipment": [
+      {
+        "EquipType": 1,
+        "EquiptId": 1,
+        "Name": "5",
+        "Quantity": 10,
+        "ProducerName": "5",
+        "EquiptTypeIndex": 1
+      },
+      {
+        "EquipType": 1,
+        "EquiptId": 2,
+        "Name": "rar",
+        "Quantity": 100,
+        "ProducerName": "rar",
+        "EquiptTypeIndex": 1
+      }
+    ],
     "isUsable": false
   },
   {
