@@ -3,6 +3,7 @@ using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
 using Model;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Navigation;
 
@@ -61,7 +62,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 selectedAppointment = value;
                 Patient = selectedAppointment.DoctorAppointment.Patient;
-                if (SelectedAppointment.Started == Visibility.Visible)
+                if (SelectedAppointment.Started == true)
                 {
                     InsideNavigationService.Navigate(ReportView);
                 }
@@ -147,7 +148,7 @@ namespace Hospital_IS.DoctorViewModel
 
             int index = Int32.Parse(((string)obj));
 
-            if (SelectedAppointment.Started == Visibility.Visible)
+            if (SelectedAppointment.Started == true)
             {
                 Margin = new Thickness(120 * index, 0, 0, 0);
             }
@@ -162,7 +163,9 @@ namespace Hospital_IS.DoctorViewModel
                     this.InsideNavigationService.Navigate(reportView);
                     break;
                 case 1:
-                    this.InsideNavigationService.Navigate(new UCGeneralInfo());
+                    UCGeneralInfo view = new UCGeneralInfo();
+                    view._ViewModel.Started = SelectedAppointment.Started;
+                    this.InsideNavigationService.Navigate(view);
                     break;
                 case 2:
                     this.InsideNavigationService.Navigate(new UCHistory());
@@ -199,7 +202,9 @@ namespace Hospital_IS.DoctorViewModel
                     SearchMedicineView._ViewModel.Prescriptions = ReportView._ViewModel.Prescriptions;
                     MainNavigationService.Navigate(SearchMedicineView);
                     break;
-                case "something":
+                case "UCGeneralInfo":
+                    MainNavigationService.Navigate(new UCGeneralInfo());
+                    break;
                 default:
                     break;
             }

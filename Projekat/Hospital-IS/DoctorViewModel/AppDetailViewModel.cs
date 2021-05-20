@@ -81,7 +81,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_StartAppointmentCommand(object obj)
         {
-            SelectedAppointment.Started = Visibility.Visible;
+            SelectedAppointment.Started = true;
             UCPatientChart chart = new UCPatientChart();
             chart._ViewModel.MainNavigationService = NavigationService;
             chart._ViewModel.SelectedAppointment = SelectedAppointment;

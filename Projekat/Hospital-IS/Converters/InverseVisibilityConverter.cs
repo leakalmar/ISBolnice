@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace Hospital_IS.Converters
 {
-    [ValueConversion(typeof(Visibility), typeof(Visibility))]
+    [ValueConversion(typeof(bool), typeof(Visibility))]
     public class InverseVisibilityConverter : IValueConverter
     {
         #region IValueConverter Members
@@ -16,8 +16,8 @@ namespace Hospital_IS.Converters
                 throw new InvalidOperationException("The target must be a boolean");
 
             Visibility ret;
-            Visibility visibility = (Visibility)value;
-            if(visibility == Visibility.Visible)
+            bool visibility = (bool)value;
+            if(visibility)
             {
                 ret = Visibility.Collapsed;
             }

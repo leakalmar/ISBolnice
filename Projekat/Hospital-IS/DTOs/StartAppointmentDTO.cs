@@ -9,7 +9,7 @@ namespace Hospital_IS.DoctorViewModel
     public class StartAppointmentDTO : DoctorViewModelClass
     {
         private DoctorAppointment doctorAppointment;
-        private Visibility started = Visibility.Collapsed;
+        private bool started = false;
 
         public DoctorAppointment DoctorAppointment
         {
@@ -20,7 +20,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public Visibility Started
+        public bool Started
         {
             get { return started; }
             set
