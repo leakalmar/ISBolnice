@@ -21,6 +21,7 @@ namespace Hospital_IS.ManagerViewModel
         private String _bedNumber = "Unesite broj kreveta";
         private int comboBoxItem;
         private RelayCommand navigateToMEquipmentPageCommand;
+        private RelayCommand navigateToMedicinePageCommand;
         private RelayCommand addNewRoom;
         private RelayCommand deleteRoom;
         private RelayCommand updateRoom;
@@ -50,6 +51,15 @@ namespace Hospital_IS.ManagerViewModel
             set
             {
                 updateRoom = value;
+            }
+        }
+        
+        public RelayCommand NavigateToMedicinePageCommand
+        {
+            get { return navigateToMedicinePageCommand; }
+            set
+            {
+                navigateToMedicinePageCommand = value;
             }
         }
         public RelayCommand NavigateToRoomPage
@@ -137,6 +147,12 @@ namespace Hospital_IS.ManagerViewModel
                 new Uri("ManagerView1/RoomView.xaml", UriKind.Relative));
         }
 
+        private void Execute_NavigateToMedicinePageCommand(object obj)
+        {
+            this.NavService.Navigate(
+                new Uri("ManagerView1/MainMedicineView.xaml", UriKind.Relative));
+        }
+
         private void Execute_AddRoomCommand(object obj)
         {
             if (Valiadate())
@@ -204,6 +220,7 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToRoomPage = new RelayCommand(Execute_NavigateToRoomPageCommand, CanExecute_NavigateCommand);
             this.DeleteRoom = new RelayCommand(Execute_DeleteRoomCommand, CanExecute_DeleteRoomCommand);
             this.UpdateRoom = new RelayCommand(Execute_UpdateRoomCommand);
+            this.NavigateToMedicinePageCommand = new RelayCommand(Execute_NavigateToMedicinePageCommand, CanExecute_NavigateCommand);
            
         }
 

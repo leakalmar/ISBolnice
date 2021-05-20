@@ -22,7 +22,7 @@ namespace Hospital_IS.ManagerView1
         public RoomView()
         {
             InitializeComponent();
-            this.DataContext = new RoomViewModel(null);
+           
         }
 
         private void OtherOptionsButton_Click(object sender, RoutedEventArgs e)
@@ -74,6 +74,11 @@ namespace Hospital_IS.ManagerView1
                 UpdateRoomView updateRoom = new UpdateRoomView(roomViewModel);
                 this.NavigationService.Navigate(updateRoom);
             }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.DataContext = new RoomViewModel(this.NavigationService);
         }
     }
 
