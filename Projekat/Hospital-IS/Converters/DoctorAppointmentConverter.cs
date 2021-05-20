@@ -9,19 +9,19 @@ namespace Hospital_IS.Converters
 {
     public class DoctorAppointmentConverter
     {
-        public DoctorAppointmentViewModel ConvertModelToViewModel(DoctorAppointment appointemnt)
+        public StartAppointmentDTO ConvertModelToViewModel(DoctorAppointment appointemnt)
         {
-            DoctorAppointmentViewModel viewModel = new DoctorAppointmentViewModel();
+            StartAppointmentDTO viewModel = new StartAppointmentDTO();
 
             viewModel.DoctorAppointment = appointemnt;
 
             return viewModel;
         }
 
-        public ObservableCollection<DoctorAppointmentViewModel> ConvertCollectionToViewModel(List<DoctorAppointment> appointments)
+        public ObservableCollection<StartAppointmentDTO> ConvertCollectionToViewModel(List<DoctorAppointment> appointments)
         {
-            ObservableCollection<DoctorAppointmentViewModel> vmAppointments = new ObservableCollection<DoctorAppointmentViewModel>();
-            DoctorAppointmentViewModel viewModel;
+            ObservableCollection<StartAppointmentDTO> vmAppointments = new ObservableCollection<StartAppointmentDTO>();
+            StartAppointmentDTO viewModel;
             foreach (DoctorAppointment d in appointments)
             {
                 viewModel = ConvertModelToViewModel(d);

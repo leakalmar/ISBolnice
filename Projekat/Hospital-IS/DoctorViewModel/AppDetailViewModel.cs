@@ -13,7 +13,7 @@ namespace Hospital_IS.DoctorViewModel
     {
         #region Feilds
         private ICollectionView appointmentsView;
-        private DoctorAppointmentViewModel selectedAppointment;
+        private StartAppointmentDTO selectedAppointment;
         private NavigationService navigationService;
 
         public NavigationService NavigationService
@@ -24,7 +24,7 @@ namespace Hospital_IS.DoctorViewModel
                 navigationService = value;
             }
         }
-        public DoctorAppointmentViewModel SelectedAppointment
+        public StartAppointmentDTO SelectedAppointment
         {
             get { return selectedAppointment; }
             set
@@ -73,7 +73,8 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_OpenChartCommand(object obj)
         {
-            UCPatientChart chart = new UCPatientChart(NavigationService);
+            UCPatientChart chart = new UCPatientChart();
+            chart._ViewModel.MainNavigationService = NavigationService;
             chart._ViewModel.SelectedAppointment = SelectedAppointment;
             this.NavigationService.Navigate(chart);
         }
@@ -81,7 +82,8 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_StartAppointmentCommand(object obj)
         {
             SelectedAppointment.Started = Visibility.Visible;
-            UCPatientChart chart = new UCPatientChart(NavigationService);
+            UCPatientChart chart = new UCPatientChart();
+            chart._ViewModel.MainNavigationService = NavigationService;
             chart._ViewModel.SelectedAppointment = SelectedAppointment;
             this.NavigationService.Navigate(chart);
         }

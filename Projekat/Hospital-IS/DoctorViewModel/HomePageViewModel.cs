@@ -16,8 +16,8 @@ namespace Hospital_IS.DoctorViewModel
     public class HomePageViewModel : DoctorViewModelClass
     {
         private ICollectionView appointmentsView;
-        private ObservableCollection<DoctorAppointmentViewModel> doctorAppointments;
-        private DoctorAppointmentViewModel selectedAppointment;
+        private ObservableCollection<StartAppointmentDTO> doctorAppointments;
+        private StartAppointmentDTO selectedAppointment;
         private NavigationService navigationService;
 
         public NavigationService NavigationService
@@ -29,7 +29,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public ObservableCollection<DoctorAppointmentViewModel> DoctorAppointments
+        public ObservableCollection<StartAppointmentDTO> DoctorAppointments
         {
             get { return doctorAppointments; }
             set
@@ -39,7 +39,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public DoctorAppointmentViewModel SelectedAppointment
+        public StartAppointmentDTO SelectedAppointment
         {
             get { return selectedAppointment; }
             set
@@ -105,7 +105,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_SelectionChangedCommand(object obj)
         {
-            DoctorAppointmentViewModel selected = (DoctorAppointmentViewModel)obj;
+            StartAppointmentDTO selected = (StartAppointmentDTO)obj;
             SelectedAppointment = selected;
         }
 
@@ -126,7 +126,7 @@ namespace Hospital_IS.DoctorViewModel
 
             appointmentsView.Filter = delegate (object item)
             {
-                return ((DoctorAppointmentViewModel)item).DoctorAppointment.AppointmentStart.Date == DateTime.Now.Date;
+                return ((StartAppointmentDTO)item).DoctorAppointment.AppointmentStart.Date == DateTime.Now.Date;
             };
             appointmentsView.SortDescriptions.Add(new SortDescription("DoctorAppointment.AppointmentStart", ListSortDirection.Ascending));
         }

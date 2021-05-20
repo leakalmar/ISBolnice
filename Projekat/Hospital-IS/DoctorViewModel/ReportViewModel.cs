@@ -1,10 +1,7 @@
 ﻿using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
 using Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.DoctorViewModel
@@ -15,6 +12,7 @@ namespace Hospital_IS.DoctorViewModel
         private ObservableCollection<Prescription> prescriptions;
         private Prescription selectedPrescription;
         private string anemnesis;
+        private UCSearchMedicine searchMedicine;
         private NavigationService mainNavigationService;
 
         public NavigationService MainNavigationService
@@ -54,6 +52,16 @@ namespace Hospital_IS.DoctorViewModel
                 OnPropertyChanged("Anemnesis");
             }
         }
+
+        public UCSearchMedicine SearchMedicineView
+        {
+            get { return searchMedicine; }
+            set
+            {
+                searchMedicine = value;
+                OnPropertyChanged("SearchMedicine");
+            }
+        }
         #endregion
 
         #region Commands
@@ -82,12 +90,13 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_DeletePrescriptionCommand(object obj)
         {
-            Prescriptions.Remove(SelectedPrescription);
+            this.Prescriptions.Remove(SelectedPrescription);
         }
 
         private void Execute_SearchMedicineCommad(object obj)
         {
-            MainNavigationService.Navigate(new UCSearchMedicine());
+            UCPatientChart.Instance._ViewModel.SearchMedicineView._ViewModel.Prescriptions = Prescriptions;
+            MainNavigationService.Navigate(UCPatientChart.Instance._ViewModel.SearchMedicineView);
         }
 
         #endregion
@@ -95,6 +104,7 @@ namespace Hospital_IS.DoctorViewModel
         #region
         public ReportViewModel()
         {
+            Prescriptions = new ObservableCollection<Prescription>();
             this.DeletePrescriptionCommand = new RelayCommand(Execute_DeletePrescriptionCommand, CanExecute_Command);
             this.SearchMedicineCommad = new RelayCommand(Execute_SearchMedicineCommad, CanExecute_Command);
             this.MainNavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;

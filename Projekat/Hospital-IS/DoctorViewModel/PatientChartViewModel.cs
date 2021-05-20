@@ -3,10 +3,7 @@ using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
 using Model;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.DoctorViewModel
@@ -15,7 +12,8 @@ namespace Hospital_IS.DoctorViewModel
     {
         #region Feilds
         private Patient patient;
-        private DoctorAppointmentViewModel selectedAppointment;
+        private StartAppointmentDTO selectedAppointment;
+        private UCSearchMedicine searchMedicineView;
         private UCReport reportView;
         private NavigationService mainNavigationService;
         private NavigationService insideNavigationService;
@@ -36,17 +34,27 @@ namespace Hospital_IS.DoctorViewModel
             get { return insideNavigationService; }
             set
             {
-                insideNavigationService = value;               
+                insideNavigationService = value;
             }
         }
 
         public Patient Patient
         {
             get { return patient; }
-            set { patient = value; }
+            set
+            {
+                patient = value;
+
+                SearchMedicineView = new UCSearchMedicine();
+                SearchMedicineView._ViewModel.Patient = Patient;
+                SearchMedicineView._ViewModel.DatePrescribed = SelectedAppointment.DoctorAppointment.AppointmentStart;
+                SearchMedicineView._ViewModel.MainNavigationService = MainNavigationService;
+                OnPropertyChanged("Patient");
+
+            }
         }
 
-        public DoctorAppointmentViewModel SelectedAppointment
+        public StartAppointmentDTO SelectedAppointment
         {
             get { return selectedAppointment; }
             set
@@ -61,19 +69,34 @@ namespace Hospital_IS.DoctorViewModel
                 {
                     InsideNavigationService.Navigate(new UCGeneralInfo());
                 }
+                OnPropertyChanged("SelectedAppointment");
             }
         }
-
+        public UCSearchMedicine SearchMedicineView
+        {
+            get { return searchMedicineView; }
+            set 
+            { 
+                searchMedicineView = value;
+                OnPropertyChanged("SearchMedicineView");
+            }
+        }
         public UCReport ReportView
         {
             get { return reportView; }
-            set { reportView = value; }
+            set 
+            { 
+                reportView = value;
+                OnPropertyChanged("ReportView");
+            }
         }
 
         public int LastTab
         {
             get { return lastTab; }
-            set { lastTab = value;
+            set
+            {
+                lastTab = value;
                 OnPropertyChanged("LastTab");
             }
         }
@@ -92,7 +115,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Commands
         private RelayCommand endAppointmentCommand;
         private RelayCommand changeCommand;
-
+        private RelayCommand addCommand;
 
         public RelayCommand EndAppointmentCommand
         {
@@ -108,6 +131,13 @@ namespace Hospital_IS.DoctorViewModel
             get { return changeCommand; }
             set { changeCommand = value; }
         }
+
+        public RelayCommand AddCommand
+        {
+            get { return addCommand; }
+            set { addCommand = value; }
+        }
+
 
         #endregion
 
@@ -161,12 +191,28 @@ namespace Hospital_IS.DoctorViewModel
             this.MainNavigationService.Navigate(new UCAppDetail(MainNavigationService));
         }
 
+        private void Execute_AddCommand(object obj)
+        {
+            switch (InsideNavigationService.Content.GetType().Name)
+            {
+                case "UCReport":
+                    SearchMedicineView._ViewModel.Prescriptions = ReportView._ViewModel.Prescriptions;
+                    MainNavigationService.Navigate(SearchMedicineView);
+                    break;
+                case "something":
+                default:
+                    break;
+            }
+
+        }
+
         #endregion
 
         #region Constructor
         public PatientChartViewModel()
         {
             this.ReportView = new UCReport();
+            this.AddCommand = new RelayCommand(Execute_AddCommand, CanExecute_Command);
             this.ChangeCommand = new RelayCommand(Execute_ChangeCommand, CanExecute_Command);
             this.EndAppointmentCommand = new RelayCommand(Execute_EndAppointmentCommand, CanExecute_Command);
         }

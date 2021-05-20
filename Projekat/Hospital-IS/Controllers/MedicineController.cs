@@ -37,7 +37,7 @@ namespace Controllers
             MedicineService.Instance.UpdateMedicine(medicine);
         }
 
-        public void UpdateMedicineWithName(string oldName,string name, List<MedicineComponent> composition, string sideEffects, string usage, List<ReplaceMedicineName> replaceMedicine)
+        public void UpdateMedicineWithName(string oldName, string name, List<MedicineComponent> composition, string sideEffects, string usage, List<ReplaceMedicineName> replaceMedicine)
         {
             Medicine medicine = new Medicine(name, composition, sideEffects, usage, replaceMedicine);
             MedicineService.Instance.UpdateMedicineWithName(oldName, medicine);
@@ -58,7 +58,26 @@ namespace Controllers
         public Medicine FindMedicineByName(String name)
         {
             return MedicineService.Instance.FindMedicineByName(name);
-   
+
+        }
+
+        public List<MedicineDTO> GenerateListOfMedicines(Patient patient)
+        {
+            List<MedicineDTO> medicineList = new List<MedicineDTO>();
+            
+            foreach (Medicine medicine in MedicineService.Instance.AllMedicines)
+            {
+                if (PatientService.Instance.CheckIfAllergicToMedicine(patient.Alergies, medicine.Name))
+                {
+                    medicineList.Add(new MedicineDTO(medicine, false, true));
+                }
+                else
+                {
+                    medicineList.Add(new MedicineDTO(medicine, false, false));
+                }
+
+            }
+            return medicineList;
         }
     }
 }

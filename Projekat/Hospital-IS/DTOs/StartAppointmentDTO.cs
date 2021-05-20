@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace Hospital_IS.DoctorViewModel
 {
-    public class DoctorAppointmentViewModel : DoctorViewModelClass
+    public class StartAppointmentDTO : DoctorViewModelClass
     {
         private DoctorAppointment doctorAppointment;
         private Visibility started = Visibility.Collapsed;

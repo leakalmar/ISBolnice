@@ -261,6 +261,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_NavigateBackCommand(object obj)
         {
             this.NavigationService.GoBack();
+            this.NavigationService.Refresh();
         }
 
         private void Execute_NavigateToLogInCommand(object obj)

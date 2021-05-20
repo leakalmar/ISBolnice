@@ -3,8 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:b="http://schemas.microsoft.com/xaml/behaviors" mc:Ignorable="d"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:converters="clr-namespace:Hospital_IS.Converters" mc:Ignorable="d"
         d:DesignHeight="555" d:DesignWidth="783">
+    <UserControl.Resources>
+        <converters:InverseVisibilityConverter x:Key="InverseConverter" />
+    </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Key="Add" Modifiers="Ctrl" Command="{Binding AddCommand}" />
+    </UserControl.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" MinWidth="20" />
@@ -109,7 +116,8 @@
                     BorderBrush="{x:Null}">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="GotFocus">
-                        <b:InvokeCommandAction Command="{Binding ChangeCommand}" CommandParameter="1" />
+                        <b:InvokeCommandAction Command="{Binding ChangeCommand}"
+                                CommandParameter="1" />
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </Button>
@@ -163,7 +171,8 @@
         <Border Grid.Row="4" Grid.ColumnSpan="4" CornerRadius="20"
                 BorderThickness="1" Background="#FF213250"
                 BorderBrush="FloralWhite" HorizontalAlignment="Center"
-                VerticalAlignment="Center" Padding="150,5,150,5" x:Name="back">
+                VerticalAlignment="Center" Padding="150,5,150,5" x:Name="back"
+                Visibility="{Binding SelectedAppointment.Started, Converter={StaticResource InverseConverter}}">
             <Button Content="Nazad" Foreground="FloralWhite" FontSize="18"
                     BorderThickness="0" Background="{x:Null}" />
         </Border>
@@ -171,7 +180,7 @@
                 BorderThickness="1" Background="#FF213250"
                 BorderBrush="FloralWhite" HorizontalAlignment="Center"
                 VerticalAlignment="Center" Padding="150,5,150,5" x:Name="end"
-                Visibility="Collapsed">
+                Visibility="{Binding SelectedAppointment.Started}">
             <Button Content="Završi termin" Foreground="FloralWhite"
                     FontSize="18" BorderThickness="0" Background="{x:Null}" />
         </Border>
