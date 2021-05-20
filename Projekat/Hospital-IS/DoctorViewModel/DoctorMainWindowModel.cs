@@ -301,8 +301,6 @@ namespace Hospital_IS.DoctorViewModel
             DoctorNameSurname = doctor.Name + " " + doctor.Surname;
             DoctorSpecialty = doctor.Specialty;
             DoctorPrimaryRoom = doctor.PrimaryRoom;
-            
-            // Home.Children.Add(HomePage);
         }
         #endregion
 

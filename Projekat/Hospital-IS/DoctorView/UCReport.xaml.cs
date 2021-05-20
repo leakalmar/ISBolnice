@@ -22,12 +22,16 @@ namespace Hospital_IS.DoctorView
         public UCPatientChart PatientChart { get; set; }
         public ObservableCollection<Prescription> Prescriptions { get; set; }
         public Patient Patient { get; set; }
+        public UCReport()
+        {
+
+        }
         public UCReport(UCPatientChart patientChart)
         {
             InitializeComponent();
             Prescriptions = new ObservableCollection<Prescription>();
             PatientChart = patientChart;
-            Patient = patientChart.Patient;
+            //Patient = patientChart.Patient;
             medicines.DataContext = Prescriptions;
 
         }

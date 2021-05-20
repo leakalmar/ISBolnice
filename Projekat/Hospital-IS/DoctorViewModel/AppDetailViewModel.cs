@@ -4,11 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Windows;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.DoctorViewModel
 {
-    public class AppointmentDetailViewModel : DoctorViewModelClass
+    public class AppDetailViewModel : DoctorViewModelClass
     {
         #region Feilds
         private ICollectionView appointmentsView;
@@ -72,12 +73,17 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_OpenChartCommand(object obj)
         {
-            this.NavigationService.Navigate(new UCPatientChart(NavigationService));
+            UCPatientChart chart = new UCPatientChart(NavigationService);
+            chart._ViewModel.SelectedAppointment = SelectedAppointment;
+            this.NavigationService.Navigate(chart);
         }
 
         private void Execute_StartAppointmentCommand(object obj)
         {
-            this.NavigationService.Navigate(new UCPatientChart(NavigationService));
+            SelectedAppointment.Started = Visibility.Visible;
+            UCPatientChart chart = new UCPatientChart(NavigationService);
+            chart._ViewModel.SelectedAppointment = SelectedAppointment;
+            this.NavigationService.Navigate(chart);
         }
 
         private bool CanExecute_NavigateCommand(object obj)
@@ -86,9 +92,9 @@ namespace Hospital_IS.DoctorViewModel
         }
         #endregion
 
-        public AppointmentDetailViewModel(NavigationService navigationService)
+        public AppDetailViewModel(NavigationService navigationService)
         {
-            this.OpenChartCommand= new RelayCommand(Execute_OpenChartCommand, CanExecute_NavigateCommand);
+            this.OpenChartCommand = new RelayCommand(Execute_OpenChartCommand, CanExecute_NavigateCommand);
             this.StartAppointmentCommand = new RelayCommand(Execute_StartAppointmentCommand, CanExecute_NavigateCommand);
             this.NavigationService = navigationService;
         }

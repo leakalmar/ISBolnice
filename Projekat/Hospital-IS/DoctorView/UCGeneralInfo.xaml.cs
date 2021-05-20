@@ -40,10 +40,14 @@ namespace Hospital_IS.DoctorView
             }
         }
 
+        public UCGeneralInfo()
+        {
+
+        }
         public UCGeneralInfo(UCPatientChart patientChart)
         {
             InitializeComponent();
-            info.DataContext = patientChart.Patient;
+            //info.DataContext = patientChart.Patient;
 
             if (!Started)
             {

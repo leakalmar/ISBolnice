@@ -26,7 +26,7 @@ namespace Hospital_IS.DoctorView
         {
             InitializeComponent();
             PatientChart = patientChart;
-            Patient = patientChart.Patient;
+           // Patient = patientChart.Patient;
             medicines.DataContext = GenerateListOfMedicines();
             alergies.DataContext = Patient.Alergies;
             //medicines.SelectedItem = medicines.Items[0];
@@ -35,34 +35,35 @@ namespace Hospital_IS.DoctorView
 
         private object GenerateListOfMedicines()
         {
-            medicineObjects = new ObservableCollection<MedicineObject>();
-            foreach (Prescription p in PatientChart.ReportView.Prescriptions)
-            {
-                medicineObjects.Add(new MedicineObject(p.Medicine, true, false));
-            }
-            foreach (Medicine med in MedicineController.Instance.GetAll())
-            {
-                //odvojiti
-                bool found = false;
-                foreach (Prescription p in PatientChart.ReportView.Prescriptions)
-                {
-                    if (med.Name.Equals(p.Medicine.Name))
-                    {
-                        found = true;
-                    }
-                }
-                if (!found)
-                {
-                    bool allergic = PatientController.Instance.CheckIfAllergicToMedicine(Patient, med);
-                    medicineObjects.Add(new MedicineObject(med, false, allergic));
-                }
-            }
-            return medicineObjects;
+            /* medicineObjects = new ObservableCollection<MedicineObject>();
+             foreach (Prescription p in PatientChart.ReportView.Prescriptions)
+             {
+                 medicineObjects.Add(new MedicineObject(p.Medicine, true, false));
+             }
+             foreach (Medicine med in MedicineController.Instance.GetAll())
+             {
+                 //odvojiti
+                 bool found = false;
+                 foreach (Prescription p in PatientChart.ReportView.Prescriptions)
+                 {
+                     if (med.Name.Equals(p.Medicine.Name))
+                     {
+                         found = true;
+                     }
+                 }
+                 if (!found)
+                 {
+                     bool allergic = PatientController.Instance.CheckIfAllergicToMedicine(Patient, med);
+                     medicineObjects.Add(new MedicineObject(med, false, allergic));
+                 }
+             }
+             return medicineObjects;*/
+            return null;
         }
 
         private void addMedicine_KeyDown(object sender, KeyEventArgs e)
         {
-            MedicineObject med = (MedicineObject)medicines.SelectedItem;
+           /* MedicineObject med = (MedicineObject)medicines.SelectedItem;
 
             if (med.Allergic == true)
             {
@@ -104,7 +105,7 @@ namespace Hospital_IS.DoctorView
                         return;
                     }
                 }
-            }
+            }*/
         }
 
         private void back_KeyDown(object sender, KeyEventArgs e)
@@ -118,7 +119,7 @@ namespace Hospital_IS.DoctorView
 
         private void medicines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MedicineObject med = (MedicineObject)medicines.SelectedItem;
+            /*MedicineObject med = (MedicineObject)medicines.SelectedItem;
             if (PatientController.Instance.CheckIfAllergicToComponent(PatientChart.Patient, med.Medicine))
             {
                 allergieMess.Visibility = Visibility.Visible;
@@ -127,7 +128,7 @@ namespace Hospital_IS.DoctorView
             {
                 allergieMess.Visibility = Visibility.Collapsed;
             }
-            medInfo.DataContext = med.Medicine;
+            medInfo.DataContext = med.Medicine;*/
         }
 
         private void DataGridRow_Selected(object sender, RoutedEventArgs e)
@@ -138,7 +139,7 @@ namespace Hospital_IS.DoctorView
 
         private void medicines_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            MedicineObject med = (MedicineObject)medicines.SelectedItem;
+           /* MedicineObject med = (MedicineObject)medicines.SelectedItem;
 
             if (med.Allergic == true)
             {
@@ -171,7 +172,7 @@ namespace Hospital_IS.DoctorView
                 }
                 
                 
-            }
+            }*/
         }
     }
 }

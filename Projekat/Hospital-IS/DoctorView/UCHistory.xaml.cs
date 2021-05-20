@@ -31,12 +31,17 @@ namespace Hospital_IS.DoctorView
                 _started = value;
             }
         }
+
+        public UCHistory()
+        {
+
+        }
         public UCHistory(UCPatientChart patientChart)
         {
             InitializeComponent();
-            ObservableCollection<Report> reports = new ObservableCollection<Report>(ChartController.Instance.GetReportsByPatient(patientChart.Patient));
-            dataGrid.DataContext = reports;
-            Appointment = patientChart.Appointment;
+            //ObservableCollection<Report> reports = new ObservableCollection<Report>(ChartController.Instance.GetReportsByPatient(patientChart.Patient));
+            //dataGrid.DataContext = reports;
+            //Appointment = patientChart.Appointment;
         }
 
         public void Report_DoubleClicked(object sender, MouseButtonEventArgs e)

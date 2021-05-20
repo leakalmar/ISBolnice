@@ -29,7 +29,7 @@ namespace Hospital_IS.DoctorView
             Emergency = false;
 
             PatientChart = patientChart;
-            Appointment = patientChart.Appointment;
+           // Appointment = patientChart.Appointment;
             doctors.DataContext = DoctorController.Instance.GetAll();
             rooms.DataContext = Rooms;
             duration.Value = new TimeSpan(0);

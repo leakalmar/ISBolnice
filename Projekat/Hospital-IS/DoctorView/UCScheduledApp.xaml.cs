@@ -39,18 +39,23 @@ namespace Hospital_IS.DoctorView
         }
         public DoctorAppointment Appointment { get; }
         private UCPatientChart PatientChart;
+
+        public UCScheduledApp()
+        {
+
+        }
         public UCScheduledApp(UCPatientChart patientChart)
         {
             InitializeComponent();
             PatientChart = patientChart;
-            ICollectionView view = new CollectionViewSource{ Source = DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(patientChart.Patient.Id)}.View; 
+          /*  ICollectionView view = new CollectionViewSource{ Source = DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(patientChart.Patient.Id)}.View; 
             view.Filter = null;
             view.Filter = delegate (object item)
             {
                 return ((DoctorAppointment)item).AppointmentStart > DateTime.Now;
             };
-            dataGrid.DataContext = view;
-            Appointment = PatientChart.Appointment;
+            dataGrid.DataContext = view;*/
+           // Appointment = PatientChart.Appointment;
 
             if (!Started)
             {
