@@ -6,6 +6,10 @@
              xmlns:local="clr-namespace:Hospital_IS.DoctorView"
              mc:Ignorable="d" 
              d:DesignHeight="344.660194174757" d:DesignWidth="783">
+    <UserControl.InputBindings>
+        <KeyBinding Key="P" Modifiers="Ctrl"
+                Command="{Binding SearchMedicineCommad}" />
+    </UserControl.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.5*"/>
@@ -13,7 +17,7 @@
         </Grid.ColumnDefinitions>
         <GroupBox Margin="15" Header="Detalji pregleda" Foreground="FloralWhite">
             <TextBox x:Name="reportDetail" Margin="5,5,5,5" Background="Transparent" 
-                     Foreground="FloralWhite" BorderThickness="0"/>
+                     Foreground="FloralWhite" BorderThickness="0" Text="{Binding Anemnesis}"/>
         </GroupBox>
 
         <Grid Grid.Column="1" Margin="0,25,15,20">
@@ -29,9 +33,14 @@
 
             <Border Grid.Row="0" CornerRadius="20,0,0,0" BorderThickness="1,1,0,1"  Background="#FF213250" 
                 BorderBrush="FloralWhite">
-                <Button FontSize="18" BorderThickness="0" Background="{x:Null}" Content="Recept"
-                            Foreground="FloralWhite" HorizontalAlignment="Stretch"
-                        Click="Perscription_Click"/>
+                <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
+                        Content="Recept" Foreground="FloralWhite"
+                        HorizontalAlignment="Stretch">
+                    <Button.InputBindings>
+                        <KeyBinding Key="Return"
+                                Command="{Binding SearchMedicineCommad}" />
+                    </Button.InputBindings>
+                </Button>
             </Border>
             <Image Source="pack://application:,,,/Resources/add-row.png" 
                            HorizontalAlignment="Right" Margin="0,5,5,5"/>
@@ -45,13 +54,17 @@
 
             <Border Grid.Row="1" Grid.ColumnSpan="2" CornerRadius="0,0,20,20" 
                     BorderThickness="1,0,1,1" BorderBrush="FloralWhite" Margin="0,0,0,10">
-                <ListBox x:Name="medicines" ItemsSource="{Binding}" Background="Transparent"
-                         BorderThickness="0" KeyDown="delete_prescription" >
+                <ListBox x:Name="medicines" ItemsSource="{Binding Prescriptions}" Background="Transparent"
+                         BorderThickness="0">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Label Content="{Binding Medicine.Name}" Foreground="FloralWhite" FontSize="14"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
+                    <ListBox.InputBindings>
+                        <KeyBinding Key="Delete"
+                                Command="{Binding DeletePrescriptionCommand}" />
+                    </ListBox.InputBindings>
                 </ListBox>
             </Border>
 

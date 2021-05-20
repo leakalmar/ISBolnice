@@ -22,6 +22,8 @@ namespace Hospital_IS.DoctorView
         public Patient Patient { get; set; }
         public ObservableCollection<MedicineObject> medicineObjects { get; set; }
         public UCPatientChart PatientChart { get; set; }
+
+        public UCSearchMedicine() { }
         public UCSearchMedicine(UCPatientChart patientChart)
         {
             InitializeComponent();
