@@ -30,14 +30,25 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand deleteEquipment;
         private RelayCommand updateEquipment;
         private RelayCommand navigateToUpdateEquipment;
+
         private int comboBoxItem;
         private Equipment selectedEquipment;
         private Room selectedRoom;
-       
+        private RelayCommand navigateToManagerProfilePage;
+
+
+        public RelayCommand NavigateToManagerProfilePage
+        {
+            get { return navigateToManagerProfilePage; }
+            set
+            {
+                navigateToManagerProfilePage = value;
+            }
+        }
 
 
 
-         public Room SelectedRoom
+        public Room SelectedRoom
          {
             get { return selectedRoom; }
             set
@@ -281,12 +292,17 @@ namespace Hospital_IS.ManagerViewModel
             this.DeleteEquipment = new RelayCommand(Execute_DeleteEquipmentComand, CanExecute_IfEquipmentIsSelected);
             this.NavigateToUpdateEquipment = new RelayCommand(Execute_NavigateToUpdateEquipmentPageCommand, CanExecute_IfEquipmentIsSelected);
             this.UpdateEquipment = new RelayCommand(Execute_UpdateEquipmentCommand);
+            this.NavigateToManagerProfilePage = new RelayCommand(Execute_NavigateToManagerProfilePageCommand, CanExecute_NavigateCommand);
 
         }
 
-      
 
-       
+
+        private void Execute_NavigateToManagerProfilePageCommand(object obj)
+        {
+            this.NavService.Navigate(
+                new Uri("ManagerView1/ManagerProfileOptionsView.xaml", UriKind.Relative));
+        }
 
         private bool CanExecute_NavigateCommand(object obj)
         {

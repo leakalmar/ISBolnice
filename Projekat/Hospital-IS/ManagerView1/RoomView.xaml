@@ -139,7 +139,7 @@
                     <RowDefinition/>
                     <RowDefinition Height="3"/>
                 </Grid.RowDefinitions>
-                <Button  Grid.RowSpan="2" BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9" >
+                <Button  Grid.RowSpan="2" BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9" Command="{Binding NavigateToManagerProfilePage}">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>

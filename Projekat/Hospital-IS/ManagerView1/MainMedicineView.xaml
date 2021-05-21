@@ -270,7 +270,7 @@
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
-                <Button  x:Name="RegistrationMedicine" BorderThickness="0" Grid.Column="1" Grid.Row="1" Height="35" Width="45" Background="White" >
+                <Button  x:Name="RegistrationMedicine" BorderThickness="0" Grid.Column="1" Grid.Row="1" Height="35" Width="45" Background="White" Command="{Binding NavigateMedicineRegistrationPage}">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -290,17 +290,17 @@
                         <Image Source="pack://application:,,,/Resources/insight.png" HorizontalAlignment="Left" Width="40" Height="35"  />
                     </StackPanel>
                 </Button>
-                <Button x:Name="EditMedicine" BorderThickness="0" Grid.Column="1" Grid.Row="5" Height="35" Width="45" Background="White" >
+                <Button x:Name="EditMedicine" BorderThickness="0" Grid.Column="1" Grid.Row="5" Height="35" Width="45" Background="White" Command="{Binding NavigateToUpdateMedicinePage}" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
                         </Style>
                     </Button.Resources>
                     <StackPanel>
-                        <Image Source="pack://application:,,,/Resources/edit.png" HorizontalAlignment="Left" Width="40" Height="35" />
+                        <Image Source="pack://application:,,,/Resources/edit.png" HorizontalAlignment="Left" Width="40" Height="35"  />
                     </StackPanel>
                 </Button>
-                <Button x:Name="DeleteMedicine" BorderThickness="0" Grid.Column="1" Grid.Row="7" Height="35" Width="45" Background="White"  >
+                <Button x:Name="DeleteMedicine" BorderThickness="0" Grid.Column="1" Grid.Row="7" Height="35" Width="45" Background="White" Command="{Binding DeleteMedicineCommand}" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>

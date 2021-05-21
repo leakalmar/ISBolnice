@@ -1,5 +1,7 @@
 ﻿using DoctorView;
 using Hospital_IS.DoctorView;
+using Hospital_IS.DTOs;
+using Hospital_IS.ManagerViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,14 +25,16 @@ namespace Hospital_IS.ManagerView1
         public MedicineRegistrationView()
         {
             InitializeComponent();
+            this.DataContext = MedicineViewModel.Instance;
         }
 
 
 
-        private void AddMedicine_Click_1(object sender, RoutedEventArgs e)
+        private void AddMedicine_Click(object sender, RoutedEventArgs e)
         {
-            ReplaceMedicineName newMedicine = new ReplaceMedicineName("");
-            // ReplaceMedicines.Add(newMedicine);
+
+            ReplaceMedicineNameDTO newMedicine = new ReplaceMedicineNameDTO("");
+            MedicineViewModel.Instance.ReplaceMedicineNameDTOs.Add(newMedicine);
             change.Items.Refresh();
             change.Focus();
             change.SelectedItem = newMedicine;
@@ -41,16 +45,14 @@ namespace Hospital_IS.ManagerView1
             {
                 cell.Focus();
             }
+
         }
-
-
-
 
         private void AddContent_Click(object sender, RoutedEventArgs e)
         {
 
-            MedicineComponent medicineComponent = new MedicineComponent("");
-            // CompositionOfMedicine.Add(medicineComponent);
+            MedicineComponentDTO medicineComponent = new MedicineComponentDTO("");
+            MedicineViewModel.Instance.CompositionDTO.Add(medicineComponent);
             composition.Items.Refresh();
             composition.Focus();
             composition.SelectedItem = medicineComponent;

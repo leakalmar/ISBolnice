@@ -28,7 +28,17 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand navigateToRoomPage;
         private NavigationService navService;
         private Room selectedRoom;
+        private RelayCommand navigateToManagerProfilePage;
+       
 
+        public RelayCommand NavigateToManagerProfilePage
+        {
+            get { return navigateToManagerProfilePage; }
+            set
+            {
+                navigateToManagerProfilePage = value;
+            }
+        }
         public RelayCommand AddNewRoom
         {
             get { return addNewRoom; }
@@ -152,6 +162,11 @@ namespace Hospital_IS.ManagerViewModel
             this.NavService.Navigate(
                 new Uri("ManagerView1/MainMedicineView.xaml", UriKind.Relative));
         }
+        private void Execute_NavigateToManagerProfilePageCommand(object obj)
+        {
+            this.NavService.Navigate(
+                new Uri("ManagerView1/ManagerProfileOptionsView.xaml", UriKind.Relative));
+        }
 
         private void Execute_AddRoomCommand(object obj)
         {
@@ -221,6 +236,7 @@ namespace Hospital_IS.ManagerViewModel
             this.DeleteRoom = new RelayCommand(Execute_DeleteRoomCommand, CanExecute_DeleteRoomCommand);
             this.UpdateRoom = new RelayCommand(Execute_UpdateRoomCommand);
             this.NavigateToMedicinePageCommand = new RelayCommand(Execute_NavigateToMedicinePageCommand, CanExecute_NavigateCommand);
+            this.NavigateToManagerProfilePage = new RelayCommand(Execute_NavigateToManagerProfilePageCommand, CanExecute_NavigateCommand);
            
         }
 

@@ -3,9 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hospital_IS.ManagerView"
-       
-        mc:Ignorable="d"
+        xmlns:local="clr-namespace:Hospital_IS.ManagerView" xmlns:managerviewmodel="clr-namespace:Hospital_IS.ManagerViewModel" d:DataContext="{d:DesignInstance Type=managerviewmodel:MedicineViewModel}"
+      mc:Ignorable="d"
       
         Title="MedicineInfoView" Height="750" Width="430">
     <Page.Resources>
@@ -86,7 +85,7 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <Button x:Name="Back"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1"  Background="Transparent" Click="Back_Click" >
+        <Button x:Name="Back"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1"  Background="Transparent" Command="{Binding NavigateToPreviousPage}" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="15"/>
@@ -99,14 +98,14 @@
         </Button>
         <Label Grid.Row="1" Grid.Column="2" Content="Izmena leka" Grid.ColumnSpan="2" Foreground="White" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <Label Grid.Row="3" Grid.Column="1" Content="Naziv leka" Grid.ColumnSpan="2" Foreground="White" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-        <TextBox x:Name="MedicineName" Grid.Row="3" Grid.Column="3" FontSize="15" Height="25" Background="Transparent" BorderThickness="0,0,0,4" 
-                 Text="{Binding Name}" BorderBrush="White" Foreground="White" Margin="0,3,40,2" />
+        <TextBox x:Name="MedicineName" Grid.Row="3" Grid.Column="3" FontSize="15" Height="25" Padding="3,0,3,0"
+                 Text="{Binding Name}"  Background="White" Template="{StaticResource TextBoxBaseControlTemplate}"/>
         <Label Grid.Row="5" Grid.Column="1" Content="Sastav leka" Grid.ColumnSpan="2" Foreground="White" FontSize="15" VerticalAlignment="Center" HorizontalAlignment ="Left"/>
-        <Border  Grid.Row="5" Grid.Column="3" Grid.RowSpan="2" CornerRadius="10" 
+        <Border  Grid.Row="5" Grid.Column="3" Grid.RowSpan="2" CornerRadius="10" Background="White"
                     BorderThickness="1,1,1,1" BorderBrush="FloralWhite">
-            <DataGrid FontSize="13" x:Name="composition" Margin="5"
-                        Foreground="FloralWhite" HeadersVisibility="None"
-                        Background="Transparent" RowBackground="Transparent"
+            <DataGrid FontSize="13" x:Name="composition" Margin="5" ItemsSource="{Binding CompositionDTO}"
+                        HeadersVisibility="None"
+                        Background="White" RowBackground="Transparent"
                         ScrollViewer.VerticalScrollBarVisibility="Auto"
                         BorderThickness="0" AutoGenerateColumns="False"
                         BorderBrush="{x:Null}" 
@@ -121,7 +120,7 @@
         <Label Grid.Row="8" Grid.Column="1" Content="Zamenski lekovi" Grid.ColumnSpan="2" Foreground="White" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         <Border Grid.Row="8" Grid.Column="3" Grid.RowSpan="2" CornerRadius="10" Background="White"
                     BorderThickness="1,1,1,1" BorderBrush="FloralWhite">
-            <DataGrid FontSize="13" x:Name="change" Margin="5,5,5,5" 
+            <DataGrid FontSize="13" x:Name="change" Margin="5,5,5,5" ItemsSource="{Binding ReplaceMedicineNameDTOs}"
                          HeadersVisibility="None"
                         Background="White" RowBackground="Transparent"
                         ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -140,21 +139,56 @@
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="4"
                 VerticalScrollBarVisibility="Auto"  Margin="10,10,0,10">
             <TextBox Text="{Binding Usage}" TextWrapping="Wrap" FontSize="14" Template="{StaticResource TextBoxBaseControlTemplate}"
-                    x:Name="Usage" FontFamily="Verdana" Foreground="FloralWhite"
+                    x:Name="Usage" FontFamily="Verdana" Foreground="Black" Padding="5"
                     Background="White" BorderThickness="0" />
         </ScrollViewer>
         <Label Grid.Row="14" Grid.Column="1" Content="Nezeljena dejstva" Grid.ColumnSpan="3" Foreground="White" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="4"
                 VerticalScrollBarVisibility="Auto"  Margin="10,10,0,10">
             <TextBox Text="{Binding SideEffects}" TextWrapping="Wrap" FontSize="14" Template="{StaticResource TextBoxBaseControlTemplate}"
-                    x:Name="SideEffects" FontFamily="Verdana" Foreground="FloralWhite"
-                    Background="White" BorderThickness="0" />
+                    x:Name="SideEffects" FontFamily="Verdana" Foreground="Black"
+                    Background="White" BorderThickness="0"  Padding="5" />
         </ScrollViewer>
-        <Button x:Name="AddMedicine" Content="Dodaj"  BorderThickness="0" Background="Transparent" Foreground="White" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="5"
-                VerticalAlignment="Top" RenderTransformOrigin="-0.258,0.185" Margin="11,15,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2" Height="29" Width="39" Click="AddContent_Click"/>
-        <Button x:Name="AddContent"  Content="Dodaj"  BorderThickness="0" Background="Transparent" Foreground="White" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="8"
-                VerticalAlignment="Top" RenderTransformOrigin="-0.258,0.185" Margin="10,18,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2" Height="29" Width="39"  Click="AddMedicine_Click" />
-        <Button x:Name="Save" Content="Izmeni lek" Width="150" Height="30" BorderBrush="AntiqueWhite" Background="Transparent" Foreground="White" Grid.Column="3" HorizontalAlignment="Left"
-                Margin="5,43,0,0" Grid.Row="16" VerticalAlignment="Top" RenderTransformOrigin="0.653,-0.97" Click="Save_Click"/>
+        <Button x:Name="AddMedicine" Content="Dodaj"  Background="White" Foreground="Black" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="5"
+                VerticalAlignment="Center" RenderTransformOrigin="-0.258,0.185" Margin="13,0,0,0" Width="45" BorderBrush="Aquamarine" BorderThickness="3" Grid.ColumnSpan="3" Height="29"  Click="AddContent_Click">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="AddContent"  Content="Dodaj"  Background="White" Foreground="Black" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="8"
+                VerticalAlignment="Center" RenderTransformOrigin="-0.258,0.185" Margin="11,0,0,0" Grid.ColumnSpan="3" BorderBrush="Aquamarine"  BorderThickness="3" Height="30" Width="48"  Click="AddMedicine_Click" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="Save" Content="Izmeni" Background="White" Foreground="Black" Grid.Column="2" HorizontalAlignment="Left"
+                Margin="25,0,0,0" Grid.Row="16" VerticalAlignment="Center" RenderTransformOrigin="0.653,-0.97" BorderBrush="Aquamarine"
+                BorderThickness="5"  FontSize="20" Height="40" Width="250" Grid.ColumnSpan="2" Command="{Binding UpdateMedicineCommand }">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="DeleteMedicine" Content="Ukloni"  Background="White" Foreground="Black" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="6" Click="DeleteMedicine_Click"
+            VerticalAlignment="Top" RenderTransformOrigin="-0.258,0.185" Margin="12,14,0,0" BorderBrush="Aquamarine" BorderThickness="3" Grid.ColumnSpan="3" Height="29" Width="45">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="DeleteContent"  Content="Ukloni"  Background="White" Foreground="Black" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="9" Click="DeleteContent_Click"
+            VerticalAlignment="Top" RenderTransformOrigin="-0.258,0.185" Margin="12,12,0,0" Grid.ColumnSpan="3" BorderBrush="Aquamarine"  BorderThickness="3" Height="29" Width="48" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
     </Grid>
 </Page>
