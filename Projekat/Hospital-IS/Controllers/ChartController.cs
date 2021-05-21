@@ -42,13 +42,9 @@ namespace Controllers
             return ChartService.Instance.GetPrescriptionsForReport(patient.Id, report.ReportId);
         }
 
-        public void UpdateReport(Patient patient, Report report, String newAmnesis, int haveRecipe)
+        public void UpdateReport(Patient patient, Report report, String newAnamnsis)
         {
-            report.Anamnesis = newAmnesis;
-            if(haveRecipe > 0)
-            {
-                report.HaveRecipe = true;
-            }
+            report.Anamnesis = newAnamnsis;
             ChartService.Instance.UpdateReport(patient.Id, report);
         }
 

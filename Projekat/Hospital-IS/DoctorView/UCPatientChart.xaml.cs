@@ -7,7 +7,7 @@ namespace Hospital_IS.DoctorView
     public partial class UCPatientChart : UserControl
     {
         private PatientChartViewModel viewModel;
-        private static UCPatientChart instance = null;
+        private static UCPatientChart instance;
 
         public static UCPatientChart Instance
         {

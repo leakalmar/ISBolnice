@@ -1,16 +1,12 @@
-﻿using Controllers;
-using Hospital_IS.Commands;
+﻿using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
 using Model;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.DoctorViewModel
 {
-    public class DoctorMainWindowModel : DoctorViewModelClass
+    public class DoctorMainWindowModel : BindableBase
     {
         #region Feilds
         private int doctorId;
@@ -19,6 +15,7 @@ namespace Hospital_IS.DoctorViewModel
         private int doctorPrimeryRoom;
         //slika
         private NavigationService navigationService;
+        private UCPatientChart patientChartView;
 
         public NavigationService NavigationService
         {
@@ -33,7 +30,7 @@ namespace Hospital_IS.DoctorViewModel
             get { return doctorId; }
             set {
                 doctorId = value;
-                OnPropertyChanged();
+                OnPropertyChanged("DoctorId");
             }
         }
 
@@ -42,7 +39,7 @@ namespace Hospital_IS.DoctorViewModel
             get { return doctorNameSurname; }
             set {
                 doctorNameSurname = value;
-                OnPropertyChanged();
+                OnPropertyChanged("DoctorNameSurname");
             }
         }
 
@@ -54,7 +51,7 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 doctorSpecialty = value;
-                OnPropertyChanged();
+                OnPropertyChanged("DoctorSpecialty");
             }
         }
 
@@ -64,11 +61,19 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 doctorPrimeryRoom = value;
-                OnPropertyChanged();
+                OnPropertyChanged("DoctorPrimaryRoom");
             }
         }
 
-
+        public UCPatientChart PatientChartView
+        {
+            get { return patientChartView; }
+            set
+            {
+                patientChartView = value;
+                OnPropertyChanged("PatientChartView");
+            }
+        }
         #endregion
 
         #region Commands

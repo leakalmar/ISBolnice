@@ -85,6 +85,7 @@ namespace Hospital_IS.DoctorViewModel
             UCPatientChart chart = new UCPatientChart();
             chart._ViewModel.MainNavigationService = NavigationService;
             chart._ViewModel.SelectedAppointment = SelectedAppointment;
+            DoctorMainWindow.Instance._ViewModel.PatientChartView = chart;
             this.NavigationService.Navigate(chart);
         }
 

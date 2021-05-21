@@ -101,18 +101,10 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_OldReportCommand(object obj)
         {
-            if (SelectedReport.ReportId.Equals(AppointmentStart))
-            {
-                UCOldReport r = new UCOldReport();
-                r.Started = true;
-                this.InsideNavigationService.Navigate(r);
-            }
-            else
-            {
-                UCOldReport r = new UCOldReport();
-                r.Started = false;
-                this.InsideNavigationService.Navigate(r);
-            }
+
+            UCOldReport view = new UCOldReport();
+            view._ViewModel.Report = SelectedReport;
+            this.InsideNavigationService.Navigate(view);
         }
 
         #endregion
@@ -121,7 +113,7 @@ namespace Hospital_IS.DoctorViewModel
         public HistoryViewModel()
         {
             this.OldReportCommand = new RelayCommand(Execute_OldReportCommand, CanExecute_Command);
-            
+
         }
         #endregion
     }
