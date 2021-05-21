@@ -20,7 +20,7 @@ namespace Hospital_IS.DoctorView
     public partial class UCOldReport : UserControl
     {
         private DoctorAppointment NowAppointment;
-        private DoctorAppointment Appointment;
+        private Report Report;
         private bool _started;
 
         public bool Started
@@ -29,52 +29,59 @@ namespace Hospital_IS.DoctorView
             set
             {
                 _started = value;
+                if (_started)
+                {
+                    reportDetail2.Visibility = Visibility.Collapsed;
+                    group.Visibility = Visibility.Visible;
+                }
             }
         }
-        public UCOldReport(DoctorAppointment appointment,DoctorAppointment nowAppointment)
+
+        public UCOldReport() { }
+        public UCOldReport(Report report, DoctorAppointment nowAppointment)
         {
             InitializeComponent();
-            if(Started)
-            {
-                reportDetail2.Visibility = Visibility.Collapsed;
-                reportDetail.Visibility = Visibility.Visible;
-            }
 
-            Appointment = appointment;
+
+            Report = report;
             NowAppointment = nowAppointment;
-            //reportDetail.Text = Appointment.Report.Anamnesis;
-            //medicines.DataContext = Appointment.Patient.MedicalHistory.GetPresciptionByReport(Appointment.AppointmentStart);
-            name.Content = Appointment.Doctor.Name;
-            surname.Content = Appointment.Doctor.Surname;
-            date.Content = Appointment.AppointmentStart;
+            reportDetail2.Text = Report.Anamnesis;
+            reportDetail.Text = Report.Anamnesis;
+            medicines.DataContext = ChartController.Instance.GetPrescriptionsForReport(NowAppointment.Patient, Report);
+            name.Content = Report.DoctorName;
+            surname.Content = Report.DoctorSurname;
+            date.Content = Report.ReportId;
 
         }
 
         private void Grid_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Escape || e.Key == Key.Back)
+            if (e.Key == Key.Escape || e.Key == Key.Back)
             {
                 if (Started)
                 {
-                    DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
-                    //Appointment.Report.Anamnesis = reportDetail.Text;
-                    DoctorAppointmentController.Instance.AddAppointment(Appointment);
+                    //ovde bi isao update reporta
+                    //DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
+                    //Report.Anamnesis = reportDetail.Text;
+                    //DoctorAppointmentController.Instance.AddAppointment(Appointment);
+                    ChartController.Instance.UpdateReport(NowAppointment.Patient, Report, reportDetail.Text, medicines.Items.Count);
                 }
-                
-               // DoctorHomePage.Instance.Home.Children.Clear();
+
+                //DoctorHomePage.Instance.Home.Children.Clear();
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
             if (Started)
             {
-                DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
+                //ovde bi isao update reporta
+                //DoctorAppointmentController.Instance.RemoveAppointment(Appointment);
                 //Appointment.Report.Anamnesis = reportDetail.Text;
-                DoctorAppointmentController.Instance.AddAppointment(Appointment);
+                //DoctorAppointmentController.Instance.AddAppointment(Appointment);
+                ChartController.Instance.UpdateReport(NowAppointment.Patient, Report, reportDetail.Text, medicines.Items.Count);
             }
 
-           // DoctorHomePage.Instance.Home.Children.Clear();
         }
     }
 }

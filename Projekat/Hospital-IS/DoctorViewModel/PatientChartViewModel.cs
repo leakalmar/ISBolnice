@@ -14,8 +14,6 @@ namespace Hospital_IS.DoctorViewModel
         #region Feilds
         private Patient patient;
         private StartAppointmentDTO selectedAppointment;
-        private UCSearchMedicine searchMedicineView;
-        private UCReport reportView;
         private NavigationService mainNavigationService;
         private NavigationService insideNavigationService;
         private int lastTab = 0;
@@ -73,24 +71,6 @@ namespace Hospital_IS.DoctorViewModel
                 OnPropertyChanged("SelectedAppointment");
             }
         }
-        public UCSearchMedicine SearchMedicineView
-        {
-            get { return searchMedicineView; }
-            set 
-            { 
-                searchMedicineView = value;
-                OnPropertyChanged("SearchMedicineView");
-            }
-        }
-        public UCReport ReportView
-        {
-            get { return reportView; }
-            set 
-            { 
-                reportView = value;
-                OnPropertyChanged("ReportView");
-            }
-        }
 
         public int LastTab
         {
@@ -111,6 +91,31 @@ namespace Hospital_IS.DoctorViewModel
                 OnPropertyChanged("Margin");
             }
         }
+        #endregion
+
+        #region Views
+        private UCSearchMedicine searchMedicineView;
+        private UCReport reportView;
+        public UCSearchMedicine SearchMedicineView
+        {
+            get { return searchMedicineView; }
+            set
+            {
+                searchMedicineView = value;
+                OnPropertyChanged("SearchMedicineView");
+            }
+        }
+        public UCReport ReportView
+        {
+            get { return reportView; }
+            set
+            {
+                reportView = value;
+                OnPropertyChanged("ReportView");
+            }
+        }
+
+
         #endregion
 
         #region Commands
@@ -165,10 +170,15 @@ namespace Hospital_IS.DoctorViewModel
                 case 1:
                     UCGeneralInfo view = new UCGeneralInfo();
                     view._ViewModel.Started = SelectedAppointment.Started;
+                    view._ViewModel.Patient = Patient;
                     this.InsideNavigationService.Navigate(view);
                     break;
                 case 2:
-                    this.InsideNavigationService.Navigate(new UCHistory());
+                    UCHistory history = new UCHistory();
+                    history._ViewModel.InsideNavigationService = InsideNavigationService;
+                    history._ViewModel.AppointmentStart = SelectedAppointment.DoctorAppointment.AppointmentStart;
+                    history._ViewModel.Patient = Patient;
+                    this.InsideNavigationService.Navigate(history);
                     break;
                 case 3:
                     this.InsideNavigationService.Navigate(new UCScheduledApp());
@@ -201,9 +211,6 @@ namespace Hospital_IS.DoctorViewModel
                 case "UCReport":
                     SearchMedicineView._ViewModel.Prescriptions = ReportView._ViewModel.Prescriptions;
                     MainNavigationService.Navigate(SearchMedicineView);
-                    break;
-                case "UCGeneralInfo":
-                    MainNavigationService.Navigate(new UCGeneralInfo());
                     break;
                 default:
                     break;

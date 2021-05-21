@@ -1,43 +1,46 @@
 ﻿<UserControl x:Class="Hospital_IS.DoctorView.UCHistory"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Hospital_IS.DoctorView"
-             mc:Ignorable="d" 
-             d:DesignHeight="344.660194174757" d:DesignWidth="783">
-    <Grid Margin="0,25,0,0" >
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding}" 
-                      Background="Transparent" RowBackground="Transparent" Foreground="White" 
-                      ScrollViewer.VerticalScrollBarVisibility="Auto" BorderThickness="0"
-                      AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" 
-                      BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                      HorizontalScrollBarVisibility="Disabled" RowHeaderWidth="0">
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
+    <Grid Margin="0,25,0,0">
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Reports}"
+                Background="Transparent" RowBackground="Transparent"
+                Foreground="White"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                BorderThickness="0" AutoGenerateColumns="False"
+                SelectionMode="Single" IsReadOnly="True" BorderBrush="{x:Null}"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                HorizontalScrollBarVisibility="Disabled" RowHeaderWidth="0"
+                SelectedItem="{Binding SelectedReport}">
+            <DataGrid.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding OldReportCommand}" />
+            </DataGrid.InputBindings>
             <DataGrid.Resources>
-                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" 
-                           TargetType="{x:Type DataGridColumnHeader}">
+                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
+                        TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="#FF2E3B55" />
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Datum" Binding="{Binding ReportId}" 
-                                        CanUserResize="False" Width="0.05*"/>
-                <DataGridTextColumn Header="Tip pregleda" Binding="{Binding Type}" 
-                                        CanUserResize="False" Width="0.05*"/>
-                <DataGridTextColumn Header="Dijagnoza" Binding="{Binding AppointmentCause}" CanUserResize="False" 
-                                        Width="0.05*"/>
-                <DataGridTextColumn Header="Doktor" Binding="{Binding DoctorSurname}" CanUserResize="False" 
-                                        Width="0.05*"/>
-                <DataGridCheckBoxColumn Header="Recept" Binding="{Binding HaveRecipe}" CanUserResize="False" 
-                                        Width="0.02*"/>
-                <DataGridCheckBoxColumn Header="Test" Binding="{Binding HaveTest}" CanUserResize="False" 
-                                        Width="0.02*"/>
+                <DataGridTextColumn Header="Datum" Binding="{Binding ReportId}"
+                        CanUserResize="False" Width="0.05*" />
+                <DataGridTextColumn Header="Tip pregleda"
+                        Binding="{Binding Type}" CanUserResize="False"
+                        Width="0.05*" />
+                <DataGridTextColumn Header="Dijagnoza" Binding="{Binding Cause}"
+                        CanUserResize="False" Width="0.05*" />
+                <DataGridTextColumn Header="Doktor"
+                        Binding="{Binding DoctorSurname}" CanUserResize="False"
+                        Width="0.05*" />
+                <DataGridCheckBoxColumn Header="Recept"
+                        Binding="{Binding HaveRecipe}" CanUserResize="False"
+                        Width="0.02*" />
+                <DataGridCheckBoxColumn Header="Test"
+                        Binding="{Binding HaveTest}" CanUserResize="False"
+                        Width="0.02*" />
             </DataGrid.Columns>
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <EventSetter Event="MouseDoubleClick" Handler="Report_DoubleClicked"/>
-                </Style>
-            </DataGrid.RowStyle>
         </DataGrid>
     </Grid>
 </UserControl>

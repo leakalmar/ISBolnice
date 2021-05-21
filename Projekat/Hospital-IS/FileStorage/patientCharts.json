@@ -33,7 +33,7 @@
         "DoctorName": "Dragana",
         "DoctorSurname": "Vukmanov Simokov",
         "Type": 1,
-        "Cause": null
+        "Cause": "uzrok"
       }
     ],
     "Hospitalization": [],
