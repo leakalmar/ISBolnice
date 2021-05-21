@@ -18,6 +18,8 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand navigateToSelectedNotification;
         private RelayCommand navigateToPreviousPage;
         private RelayCommand deleteMedicineNotificationCommand;
+        private RelayCommand navigateToMedicineInsightPageCommmand;
+        
 
 
 
@@ -57,6 +59,15 @@ namespace Hospital_IS.ManagerViewModel
                     instance = new NotificationViewModel();
                 }
                 return instance;
+            }
+        }
+
+        public RelayCommand NavigateToMedicineInsightPageCommmand
+        {
+            get { return navigateToMedicineInsightPageCommmand; }
+            set
+            {
+                navigateToMedicineInsightPageCommmand = value;
             }
         }
 
@@ -111,8 +122,10 @@ namespace Hospital_IS.ManagerViewModel
         {
 
             Notifications = new ObservableCollection<MedicineNotification>(MedicineNotificationController.Instance.GetAllByDoctorId(6));
-            this.NavigateToSelectedNotification = new RelayCommand(Execute_NavigateToMedicineRegistrationPage,CanExecute_IfNotificationIsSelected);
-            this.DeleteMedicineNotificationCommand = new RelayCommand(Execute_NavigateToPreviousPage, CanExecute_Navigation);
+            this.NavigateToSelectedNotification = new RelayCommand(Execute_NavigateToNotificationInforamationPage, CanExecute_IfNotificationIsSelected);
+            this.DeleteMedicineNotificationCommand = new RelayCommand(Execute_DeleteMedicineNotification, CanExecute_Navigation);
+            this.NavigateToPreviousPage = new RelayCommand(Execute_NavigateToPreviousPage, CanExecute_Navigation);
+            this.NavigateToMedicineInsightPageCommmand = new RelayCommand(Execute_NavigateToMedicineInsightPage);
            
 
         }
@@ -121,6 +134,10 @@ namespace Hospital_IS.ManagerViewModel
 
         private bool CanExecute_IfNotificationIsSelected(object obj)
         {
+            if(SelectedNotification == null)
+            {
+               
+            }
             return !(SelectedNotification == null);
         }
 
@@ -129,14 +146,28 @@ namespace Hospital_IS.ManagerViewModel
             return true;
         }
 
-        private void Execute_NavigateToMedicineRegistrationPage(object obj)
+        private void Execute_NavigateToPreviousPage(object obj)
         {
+            SelectedNotification = null; 
+            this.NavService.GoBack();
+        }
 
+        private void Execute_NavigateToNotificationInforamationPage(object obj)
+        {
+            
             this.NavService.Navigate(
                    new Uri("ManagerView1/NotificationInformationView.xaml", UriKind.Relative));
         }
 
-        private void Execute_NavigateToPreviousPage(object obj)
+        private void Execute_NavigateToMedicineInsightPage(object obj)
+        {
+            MedicineViewModel.Instance.SelectedMedicine = this.SelectedNotification.Medicine;
+            MedicineViewModel.Instance.NavService = this.NavService;
+            this.NavService.Navigate(
+                   new Uri("ManagerView1/MedicineInsightView.xaml", UriKind.Relative));
+        }
+
+        private void Execute_DeleteMedicineNotification(object obj)
         {
             MedicineNotificationController.Instance.DeleteNotification(SelectedNotification);
             Notifications = new ObservableCollection<MedicineNotification>(MedicineNotificationController.Instance.GetAllByDoctorId(6));

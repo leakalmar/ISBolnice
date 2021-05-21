@@ -34,7 +34,7 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <Button x:Name="Back"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1"  Background="Transparent"  >
+        <Button x:Name="Back"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1"  Background="Transparent" Command="{Binding NavigateToPreviousPage}" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="15"/>
