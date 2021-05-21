@@ -152,7 +152,7 @@
                     </StackPanel>
                 </Button>
                 <TextBlock Text="  Obavestenja i zahtevi" Grid.Row="6" Grid.Column="3" Foreground="White" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Button x:Name="Notifications" BorderThickness="0" Width="40" Height="40" Grid.Column="1" Grid.Row="6"   Background="Transparent" >
+                <Button x:Name="Notifications" BorderThickness="0" Width="40" Height="40" Grid.Column="1" Grid.Row="6"   Background="Transparent" Command="{Binding NavigateToNotificationPageCommand}" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>

@@ -191,8 +191,12 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="Pretrazi:" Foreground="White" FontSize="15"/>
-                <TextBox x:Name="SearchBox" Text="Unesite ime kolicina" Grid.Column="2" Height="25" FontSize="14"  />
-                <Button x:Name="SeacrhDateGrid" BorderThickness="0" Grid.Column="3" Height="20" Width="20" HorizontalAlignment="Left" Background="Transparent" >
+                <TextBox x:Name="SearchBox"  Grid.Column="2" Height="25" FontSize="14">
+                    <TextBox.Text>
+                        <Binding Path=" uhihn" UpdateSourceTrigger="PropertyChanged"/>
+                    </TextBox.Text>
+                </TextBox>
+                    <Button x:Name="SeacrhDateGrid" BorderThickness="0" Grid.Column="3" Height="20" Width="20" HorizontalAlignment="Left" Background="Transparent" >
                     <StackPanel >
                         <Image Source="pack://application:,,,/Resources/search.png" Width="20" Height="20" />
                     </StackPanel>
