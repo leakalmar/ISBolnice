@@ -16,8 +16,8 @@ namespace Hospital_IS.DoctorView
 
         public UCReport()
         {
-            this._ViewModel = new ReportViewModel();
             InitializeComponent();
+            this._ViewModel = new ReportViewModel();
             this.DataContext = _ViewModel;
 
         }
