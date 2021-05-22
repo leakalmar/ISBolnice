@@ -53,7 +53,7 @@ namespace Controllers
             reviewdNotification.Note = text;
             reviewdNotification.Title = "Odbijen " + reviewdNotification.Medicine.Name;
             reviewdNotification.SenderId.Clear();
-            reviewdNotification.SenderId.Add(DoctorMainWindow.Instance._ViewModel.DoctorId);
+            reviewdNotification.SenderId.Add(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
             reviewdNotification.RecieverIds.Clear();
             reviewdNotification.RecieverIds.Add(6);
             reviewdNotification.DateSent = DateTime.Now;
@@ -67,7 +67,7 @@ namespace Controllers
 
         public void ApproveMedicine(MedicineNotification reviewdNotification)
         {
-            MedicineNotificationService.Instance.AddApprovalDeleteDoctor(reviewdNotification, DoctorMainWindow.Instance._ViewModel.DoctorId);
+            MedicineNotificationService.Instance.AddApprovalDeleteDoctor(reviewdNotification, DoctorMainWindow.Instance._ViewModel.Doctor.Id);
         }
 
         public List<MedicineNotification> GetAll()

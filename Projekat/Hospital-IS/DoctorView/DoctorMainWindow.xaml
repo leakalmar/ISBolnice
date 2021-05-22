@@ -99,8 +99,13 @@
                 Grid.Row="2" Grid.Column="2" Width="auto"
                 HorizontalAlignment="Center" FontSize="16"
                 FontFamily="Palatino Linotype" Foreground="FloralWhite"
-                FontWeight="Bold" Margin="10,0,0,0"
-                Text="{Binding Path=DoctorNameSurname}">
+                FontWeight="Bold" Margin="10,0,0,0" DataContext="{Binding Doctor}">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{} {0} {1}">
+                    <Binding Path="Name" />
+                    <Binding Path="Surname" />
+                </MultiBinding>
+            </TextBlock.Text>
         </TextBlock>
 
         <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3">

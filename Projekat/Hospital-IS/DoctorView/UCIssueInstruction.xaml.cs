@@ -49,7 +49,7 @@ namespace Hospital_IS.DoctorView
 
                 }
 
-                if (!DoctorMainWindow.Instance._ViewModel.DoctorId.Equals(SelectedAppointment.Doctor.Id))
+                if (!DoctorMainWindow.Instance._ViewModel.Doctor.Id.Equals(SelectedAppointment.Doctor.Id))
                 {
                     if (value == "")
                     {
@@ -67,6 +67,11 @@ namespace Hospital_IS.DoctorView
                 OnPropertyChanged("DocumentMessage");
             }
         }
+
+        public UCIssueInstruction()
+        {
+
+        }
         public UCIssueInstruction(UCNewApp schedulingAppointment, bool emergency = false)
         {
             InitializeComponent();
@@ -75,8 +80,8 @@ namespace Hospital_IS.DoctorView
 
             SchedulingAppointment = schedulingAppointment;
 
-            SelectedAppointment = (DoctorAppointment)((AppointmentRow)SchedulingAppointment.appointments.SelectedItem).Appointment;
-            SelectedEmergencyAppointment = ((SuggestedEmergencyAppDTO)SchedulingAppointment.emergencyAppointments.SelectedItem);
+            //SelectedAppointment = (DoctorAppointment)((AppointmentRow)SchedulingAppointment.appointments.SelectedItem).Appointment;
+            //SelectedEmergencyAppointment = ((SuggestedEmergencyAppDTO)SchedulingAppointment.emergencyAppointments.SelectedItem);
 
             if(!emergency)
             {
@@ -85,9 +90,9 @@ namespace Hospital_IS.DoctorView
                 documentSpecialty.Content = SelectedAppointment.Doctor.Specialty.Name;
 
                 documentDoctor.Content = SelectedAppointment.Doctor.Name.ToString() + " " + ShortSurname(SelectedAppointment.Doctor);
-                thisDoctor.Content = DoctorMainWindow.Instance._ViewModel.DoctorNameSurname;
+                thisDoctor.Content = DoctorMainWindow.Instance._ViewModel.Doctor.Name + " " + DoctorMainWindow.Instance._ViewModel.Doctor.Surname;
 
-                if (SelectedAppointment.Doctor.Id != DoctorMainWindow.Instance._ViewModel.DoctorId)
+                if (SelectedAppointment.Doctor.Id != DoctorMainWindow.Instance._ViewModel.Doctor.Id)
                 {
                     save.IsEnabled = false;
                 }
@@ -99,9 +104,9 @@ namespace Hospital_IS.DoctorView
                 documentSpecialty.Content = SelectedEmergencyAppointment.SuggestedAppointment.Doctor.Specialty.Name;
 
                 documentDoctor.Content = SelectedEmergencyAppointment.SuggestedAppointment.Doctor.Name.ToString() + " " + ShortSurname(SelectedEmergencyAppointment.SuggestedAppointment.Doctor);
-                thisDoctor.Content = DoctorMainWindow.Instance._ViewModel.DoctorNameSurname;
+                thisDoctor.Content = DoctorMainWindow.Instance._ViewModel.Doctor.Name + " " + DoctorMainWindow.Instance._ViewModel.Doctor.Surname;
 
-                if (SelectedEmergencyAppointment.SuggestedAppointment.Doctor.Id != DoctorMainWindow.Instance._ViewModel.DoctorId)
+                if (SelectedEmergencyAppointment.SuggestedAppointment.Doctor.Id != DoctorMainWindow.Instance._ViewModel.Doctor.Id)
                 {
                     save.IsEnabled = false;
                 }

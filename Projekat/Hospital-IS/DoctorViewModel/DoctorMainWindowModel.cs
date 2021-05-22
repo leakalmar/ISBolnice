@@ -16,6 +16,7 @@ namespace Hospital_IS.DoctorViewModel
         //slika
         private NavigationService navigationService;
         private UCPatientChart patientChartView;
+        private Doctor doctor;
 
         public NavigationService NavigationService
         {
@@ -25,43 +26,12 @@ namespace Hospital_IS.DoctorViewModel
                 navigationService = value;
             }
         }
-        public int DoctorId
+        public Doctor Doctor
         {
-            get { return doctorId; }
+            get { return doctor; }
             set {
-                doctorId = value;
-                OnPropertyChanged("DoctorId");
-            }
-        }
-
-        public String DoctorNameSurname
-        {
-            get { return doctorNameSurname; }
-            set {
-                doctorNameSurname = value;
-                OnPropertyChanged("DoctorNameSurname");
-            }
-        }
-
-        
-
-        public Specialty DoctorSpecialty
-        {
-            get { return doctorSpecialty; }
-            set
-            {
-                doctorSpecialty = value;
-                OnPropertyChanged("DoctorSpecialty");
-            }
-        }
-
-        public int DoctorPrimaryRoom
-        {
-            get { return doctorPrimeryRoom; }
-            set
-            {
-                doctorPrimeryRoom = value;
-                OnPropertyChanged("DoctorPrimaryRoom");
+                doctor = value;
+                OnPropertyChanged("Doctor");
             }
         }
 
@@ -303,10 +273,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Methods
         public void SetDoctor(Doctor doctor)
         {
-            DoctorId = doctor.Id;
-            DoctorNameSurname = doctor.Name + " " + doctor.Surname;
-            DoctorSpecialty = doctor.Specialty;
-            DoctorPrimaryRoom = doctor.PrimaryRoom;
+            Doctor = doctor;
         }
         #endregion
 

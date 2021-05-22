@@ -25,7 +25,7 @@ namespace Hospital_IS.DoctorView
             from.SelectedDate = DateTime.Now.Date;
             to.SelectedDate = DateTime.Now.Date.AddDays(7);
             type.SelectedIndex = 1;
-            rooms.SelectedItem = RoomController.Instance.GetRoomById(DoctorMainWindow.Instance._ViewModel.DoctorPrimaryRoom);
+            rooms.SelectedItem = RoomController.Instance.GetRoomById(DoctorMainWindow.Instance._ViewModel.Doctor.PrimaryRoom);
 
             DoctorAppointment ap = (DoctorAppointment)doctorAppointments.SelectedItem;
             ChangeApp = new UCChangeApp(details);
@@ -70,7 +70,7 @@ namespace Hospital_IS.DoctorView
 
             if (room == null)
             {
-                room = RoomController.Instance.GetRoomById(DoctorMainWindow.Instance._ViewModel.DoctorPrimaryRoom);
+                room = RoomController.Instance.GetRoomById(DoctorMainWindow.Instance._ViewModel.Doctor.PrimaryRoom);
             }
             String selected = (String)type.SelectedItem;
 

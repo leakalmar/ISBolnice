@@ -15,7 +15,7 @@ namespace Hospital_IS.DoctorView
         public UCApproveMedicine()
         {
             InitializeComponent();
-            MedicineNotifications = new ObservableCollection<MedicineNotification>(MedicineNotificationController.Instance.GetAllByDoctorId(DoctorMainWindow.Instance._ViewModel.DoctorId));
+            MedicineNotifications = new ObservableCollection<MedicineNotification>(MedicineNotificationController.Instance.GetAllByDoctorId(DoctorMainWindow.Instance._ViewModel.Doctor.Id));
 
 
             if (MedicineNotifications.Count > 0)
@@ -54,7 +54,7 @@ namespace Hospital_IS.DoctorView
 
         private void visibility_change(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ListViewNotifications.ItemsSource = new ObservableCollection<MedicineNotification>(MedicineNotificationController.Instance.GetAllByDoctorId(DoctorMainWindow.Instance._ViewModel.DoctorId));
+            ListViewNotifications.ItemsSource = new ObservableCollection<MedicineNotification>(MedicineNotificationController.Instance.GetAllByDoctorId(DoctorMainWindow.Instance._ViewModel.Doctor.Id));
         }
     }
 }
