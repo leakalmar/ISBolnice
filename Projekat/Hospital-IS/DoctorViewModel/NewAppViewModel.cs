@@ -39,6 +39,7 @@ namespace Hospital_IS.DoctorViewModel
         private bool emergency = false;
 
         private NavigationService mainNavigationService;
+        private UCIssueInstruction instructionView;
 
         public List<Specialty> Specializations
         {
@@ -194,6 +195,12 @@ namespace Hospital_IS.DoctorViewModel
             set { mainNavigationService = value; }
         }
 
+        public UCIssueInstruction InstructionView
+        {
+            get { return instructionView; }
+            set { instructionView = value; }
+        }
+
         public bool Emergency
         {
             get { return emergency; }
@@ -228,10 +235,27 @@ namespace Hospital_IS.DoctorViewModel
         #region Actions
         private void Execute_ChooseAppointmentCommand(object obj)
         {
-            if (SelectedAppointment != null)
+            if (Emergency)
             {
-                this.MainNavigationService.Navigate(new UCIssueInstruction());
+                if(instructionView == null)
+                {
+                    InstructionView = new UCIssueInstruction();
+                    InstructionView._ViewModel.MainNavigationService = MainNavigationService;
+                }
+                InstructionView._ViewModel.SelectedAppointment = null;
+                InstructionView._ViewModel.SelectedEmergencyAppointment = SelectedEmergencyAppointment;
             }
+            else
+            {
+                if (instructionView == null)
+                {
+                    InstructionView = new UCIssueInstruction();
+                    InstructionView._ViewModel.MainNavigationService = MainNavigationService;
+                }
+                InstructionView._ViewModel.SelectedAppointment = SelectedAppointment;
+                InstructionView._ViewModel.SelectedEmergencyAppointment = null;
+            }
+            this.MainNavigationService.Navigate(InstructionView);
         }
         private void Execute_ChangeEmergencyCommand(object obj)
         {
