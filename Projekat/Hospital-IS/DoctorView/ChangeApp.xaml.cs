@@ -42,7 +42,7 @@ namespace Hospital_IS.DoctorView
             }
         }
 
-
+        public ChangeApp() { }
         public ChangeApp(ContentControl details)
         {
             InitializeComponent();

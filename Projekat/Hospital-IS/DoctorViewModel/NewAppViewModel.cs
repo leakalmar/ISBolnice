@@ -30,14 +30,14 @@ namespace Hospital_IS.DoctorViewModel
         private ICollectionView appointments;
         private AppointmentRowDTO selectedAppointment;
 
-        public List<string> Types { get; set; } = new List<string>();
-        private string selectedType = "Pregled";
+        public List<string> Types { get; set; }
+        private string selectedType;
 
-        private DateTime fromDate = DateTime.Now;
-        private DateTime toDate = DateTime.Now.AddDays(1);
+        private DateTime fromDate;
+        private DateTime toDate;
 
-        private TimeSpan duration = new TimeSpan(0,15,0);
-        private bool emergency = false;
+        private TimeSpan duration;
+        private bool emergency;
 
         private NavigationService mainNavigationService;
         private IssueInstruction instructionView;
@@ -391,6 +391,14 @@ namespace Hospital_IS.DoctorViewModel
 
         private void InitializeFilters()
         {
+            Types = new List<string>();
+            Types.Add("Pregled");
+            Types.Add("Operacija");
+            SelectedType = "Pregled";
+            FromDate = DateTime.Now;
+            ToDate = DateTime.Now.AddDays(1);
+            Duration = new TimeSpan(0, 15, 0);
+            Emergency = false;
             this.Specializations = SpecializationController.Instance.GetAll();
             foreach (Specialty specialty in Specializations)
             {
@@ -432,8 +440,6 @@ namespace Hospital_IS.DoctorViewModel
         public NewAppViewModel()
         {
             InitializeFilters();
-            Types.Add("Pregled");
-            Types.Add("Operacija");
             this.MainNavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
             this.ChooseAppointmentCommand = new RelayCommand(Execute_ChooseAppointmentCommand, CanExecute_Command);
             this.ChangeEmergencyCommand = new RelayCommand(Execute_ChangeEmergencyCommand, CanExecute_Command);
