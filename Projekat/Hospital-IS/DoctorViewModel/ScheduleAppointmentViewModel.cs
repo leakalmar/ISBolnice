@@ -50,7 +50,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_AddNewCommand(object obj)
         {
 
-            this.MainNavigationService.Navigate(new UCNewApp());
+            this.MainNavigationService.Navigate(new NewApp());
         }
 
         private bool CanExecute_AddNewCommand(object obj)

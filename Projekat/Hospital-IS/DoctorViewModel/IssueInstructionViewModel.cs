@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using DTOs;
 using Hospital_IS.Commands;
 using Hospital_IS.Controllers;
 using Hospital_IS.DoctorView;
@@ -11,14 +12,14 @@ namespace Hospital_IS.DoctorViewModel
     public class IssueInstructionViewModel : BindableBase
     {
         #region Fields
-        private AppointmentRow selectedAppointment;
+        private AppointmentRowDTO selectedAppointment;
         private SuggestedEmergencyAppDTO selectedEmergencyAppointment;
         private string appointmentCause;
         private Doctor logedInDoctor;
 
         private NavigationService mainNavigationService;
 
-        public AppointmentRow SelectedAppointment
+        public AppointmentRowDTO SelectedAppointment
         {
             get { return selectedAppointment; }
             set
@@ -122,7 +123,7 @@ namespace Hospital_IS.DoctorViewModel
                 DoctorAppointmentController.Instance.AddAppointment(SelectedEmergencyAppointment.SuggestedAppointment);
             }
 
-            DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.InsideNavigationService.Navigate(new UCScheduledApp());
+            DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.InsideNavigationService.Navigate(new ScheduledApp());
             this.MainNavigationService.Navigate(DoctorMainWindow.Instance._ViewModel.PatientChartView);
         }
 

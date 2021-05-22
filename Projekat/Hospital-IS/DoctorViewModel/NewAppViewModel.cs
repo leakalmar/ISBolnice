@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using DTOs;
 using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
 using Model;
@@ -27,7 +28,7 @@ namespace Hospital_IS.DoctorViewModel
         private SuggestedEmergencyAppDTO selectedEmergencyAppointment;
 
         private ICollectionView appointments;
-        private AppointmentRow selectedAppointment;
+        private AppointmentRowDTO selectedAppointment;
 
         public List<string> Types { get; set; } = new List<string>();
         private string selectedType = "Pregled";
@@ -39,7 +40,7 @@ namespace Hospital_IS.DoctorViewModel
         private bool emergency = false;
 
         private NavigationService mainNavigationService;
-        private UCIssueInstruction instructionView;
+        private IssueInstruction instructionView;
 
         public List<Specialty> Specializations
         {
@@ -115,7 +116,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public AppointmentRow SelectedAppointment
+        public AppointmentRowDTO SelectedAppointment
         {
             get { return selectedAppointment; }
             set
@@ -195,7 +196,7 @@ namespace Hospital_IS.DoctorViewModel
             set { mainNavigationService = value; }
         }
 
-        public UCIssueInstruction InstructionView
+        public IssueInstruction InstructionView
         {
             get { return instructionView; }
             set { instructionView = value; }
@@ -239,7 +240,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 if(instructionView == null)
                 {
-                    InstructionView = new UCIssueInstruction();
+                    InstructionView = new IssueInstruction();
                     InstructionView._ViewModel.MainNavigationService = MainNavigationService;
                 }
                 InstructionView._ViewModel.SelectedAppointment = null;
@@ -249,7 +250,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 if (instructionView == null)
                 {
-                    InstructionView = new UCIssueInstruction();
+                    InstructionView = new IssueInstruction();
                     InstructionView._ViewModel.MainNavigationService = MainNavigationService;
                 }
                 InstructionView._ViewModel.SelectedAppointment = SelectedAppointment;
@@ -363,12 +364,12 @@ namespace Hospital_IS.DoctorViewModel
             EmergencyAppointments = view;
         }
 
-        private List<AppointmentRow> ConvertList(List<DoctorAppointment> allAppointments)
+        private List<AppointmentRowDTO> ConvertList(List<DoctorAppointment> allAppointments)
         {
-            List<AppointmentRow> list = new List<AppointmentRow>();
+            List<AppointmentRowDTO> list = new List<AppointmentRowDTO>();
             foreach (DoctorAppointment da in allAppointments)
             {
-                list.Add(new AppointmentRow(da, Emergency));
+                list.Add(new AppointmentRowDTO(da, Emergency));
             }
 
             return list;

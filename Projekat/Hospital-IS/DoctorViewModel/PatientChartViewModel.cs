@@ -44,7 +44,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 patient = value;
 
-                SearchMedicineView = new UCSearchMedicine();
+                SearchMedicineView = new SearchMedicine();
                 SearchMedicineView._ViewModel.Patient = Patient;
                 SearchMedicineView._ViewModel.DatePrescribed = SelectedAppointment.DoctorAppointment.AppointmentStart;
                 SearchMedicineView._ViewModel.MainNavigationService = MainNavigationService;
@@ -66,7 +66,7 @@ namespace Hospital_IS.DoctorViewModel
                 }
                 else
                 {
-                    InsideNavigationService.Navigate(new UCGeneralInfo());
+                    InsideNavigationService.Navigate(new GeneralInfo());
                 }
                 OnPropertyChanged("SelectedAppointment");
             }
@@ -94,9 +94,9 @@ namespace Hospital_IS.DoctorViewModel
         #endregion
 
         #region Views
-        private UCSearchMedicine searchMedicineView;
-        private UCReport reportView;
-        public UCSearchMedicine SearchMedicineView
+        private SearchMedicine searchMedicineView;
+        private DoctorView.ReportView reportView;
+        public SearchMedicine SearchMedicineView
         {
             get { return searchMedicineView; }
             set
@@ -105,7 +105,7 @@ namespace Hospital_IS.DoctorViewModel
                 OnPropertyChanged("SearchMedicineView");
             }
         }
-        public UCReport ReportView
+        public DoctorView.ReportView ReportView
         {
             get { return reportView; }
             set
@@ -168,26 +168,26 @@ namespace Hospital_IS.DoctorViewModel
                     this.InsideNavigationService.Navigate(reportView);
                     break;
                 case 1:
-                    UCGeneralInfo view = new UCGeneralInfo();
+                    GeneralInfo view = new GeneralInfo();
                     view._ViewModel.Started = SelectedAppointment.Started;
                     view._ViewModel.Patient = Patient;
                     this.InsideNavigationService.Navigate(view);
                     break;
                 case 2:
-                    UCHistory history = new UCHistory();
+                    History history = new History();
                     history._ViewModel.InsideNavigationService = InsideNavigationService;
                     history._ViewModel.AppointmentStart = SelectedAppointment.DoctorAppointment.AppointmentStart;
                     history._ViewModel.Patient = Patient;
                     this.InsideNavigationService.Navigate(history);
                     break;
                 case 3:
-                    this.InsideNavigationService.Navigate(new UCScheduledApp());
+                    this.InsideNavigationService.Navigate(new ScheduledApp());
                     break;
                 case 4:
-                    this.InsideNavigationService.Navigate(new UCTherapy());
+                    this.InsideNavigationService.Navigate(new DoctorView.Therapy());
                     break;
                 case 5:
-                    this.InsideNavigationService.Navigate(new UCTest());
+                    this.InsideNavigationService.Navigate(new DoctorView.Tests());
                     break;
             }
         }
@@ -201,7 +201,7 @@ namespace Hospital_IS.DoctorViewModel
             DoctorAppointmentController.Instance.EndAppointment(SelectedAppointment.DoctorAppointment);
             ChartController.Instance.AddReport(SelectedAppointment.DoctorAppointment, ReportView.reportDetail.Text, ReportView._ViewModel.Prescriptions.Count, SelectedAppointment.DoctorAppointment.Patient);
             ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView._ViewModel.Prescriptions), SelectedAppointment.DoctorAppointment.Patient);
-            this.MainNavigationService.Navigate(new UCAppDetail(MainNavigationService));
+            this.MainNavigationService.Navigate(new AppDetail(MainNavigationService));
         }
 
         private void Execute_AddCommand(object obj)
@@ -223,7 +223,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Constructor
         public PatientChartViewModel()
         {
-            this.ReportView = new UCReport();
+            this.ReportView = new DoctorView.ReportView();
             this.AddCommand = new RelayCommand(Execute_AddCommand, CanExecute_Command);
             this.ChangeCommand = new RelayCommand(Execute_ChangeCommand, CanExecute_Command);
             this.EndAppointmentCommand = new RelayCommand(Execute_EndAppointmentCommand, CanExecute_Command);

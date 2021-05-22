@@ -15,7 +15,7 @@ namespace Hospital_IS.DoctorViewModel
         private int doctorPrimeryRoom;
         //slika
         private NavigationService navigationService;
-        private UCPatientChart patientChartView;
+        private PatientChart patientChartView;
         private Doctor doctor;
 
         public NavigationService NavigationService
@@ -35,7 +35,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public UCPatientChart PatientChartView
+        public PatientChart PatientChartView
         {
             get { return patientChartView; }
             set
@@ -183,7 +183,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_NavigateToHomePageCommand(object obj)
         {
 
-            this.NavigationService.Navigate(new UCHomePage(NavigationService));
+            this.NavigationService.Navigate(new HomePage(NavigationService));
         }
 
         private bool CanExecute_NavigateCommand(object obj)
@@ -194,43 +194,43 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_NavigateToAppointmentsCommand(object obj)
         {
             this.NavigationService.Navigate(
-                new Uri("DoctorView/UCAppointments.xaml", UriKind.Relative));
+                new Uri("DoctorView/Appointments.xaml", UriKind.Relative));
         }
 
         private void Execute_NavigateToPatientsCommand(object obj)
         {
             this.NavigationService.Navigate(
-                new Uri("DoctorView/UCPatients.xaml", UriKind.Relative));
+                new Uri("DoctorView/Patients.xaml", UriKind.Relative));
         }
 
         private void Execute_NavigateToMedicinesCommand(object obj)
         {
             this.NavigationService.Navigate(
-                new Uri("DoctorView/UCMedicines.xaml", UriKind.Relative));
+                new Uri("DoctorView/Medicines.xaml", UriKind.Relative));
         }
 
         private void Execute_NavigateToRoomsCommand(object obj)
         {
             //this.NavigationService.Navigate(
-            //   new Uri("DoctorView/UCRooms.xaml", UriKind.Relative));
+            //   new Uri("DoctorView/Rooms.xaml", UriKind.Relative));
         }
 
         private void Execute_NavigateToPrescriptionsCommand(object obj)
         {
             // this.NavigationService.Navigate(
-            //    new Uri("DoctorView/UCAppointments.xaml", UriKind.Relative));
+            //    new Uri("DoctorView/Appointments.xaml", UriKind.Relative));
         }
 
         private void Execute_NavigateToApprovemedicineCommand(object obj)
         {
             this.NavigationService.Navigate(
-                new Uri("DoctorView/UCApproveMedicine.xaml", UriKind.Relative));
+                new Uri("DoctorView/ApproveMedicine.xaml", UriKind.Relative));
         }
 
         private void Execute_NavigateToNotificationsCommand(object obj)
         {
             this.NavigationService.Navigate(
-                new Uri("DoctorView/UCDoctorNotifications.xaml", UriKind.Relative));
+                new Uri("DoctorView/DoctorNotifications.xaml", UriKind.Relative));
         }
 
         private void Execute_NavigateBackCommand(object obj)
@@ -264,7 +264,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_OnLoadedCommand(object obj)
         {
-            this.NavigationService.Navigate(new UCHomePage(NavigationService));
+            this.NavigationService.Navigate(new HomePage(NavigationService));
         }
 
 

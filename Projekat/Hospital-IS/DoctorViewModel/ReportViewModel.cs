@@ -12,7 +12,7 @@ namespace Hospital_IS.DoctorViewModel
         private ObservableCollection<Prescription> prescriptions;
         private Prescription selectedPrescription;
         private string anemnesis;
-        private UCSearchMedicine searchMedicine;
+        private SearchMedicine searchMedicine;
         private NavigationService mainNavigationService;
 
         public NavigationService MainNavigationService
@@ -53,7 +53,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public UCSearchMedicine SearchMedicineView
+        public SearchMedicine SearchMedicineView
         {
             get { return searchMedicine; }
             set
@@ -95,8 +95,8 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_SearchMedicineCommad(object obj)
         {
-            UCPatientChart.Instance._ViewModel.SearchMedicineView._ViewModel.Prescriptions = Prescriptions;
-            MainNavigationService.Navigate(UCPatientChart.Instance._ViewModel.SearchMedicineView);
+            PatientChart.Instance._ViewModel.SearchMedicineView._ViewModel.Prescriptions = Prescriptions;
+            MainNavigationService.Navigate(PatientChart.Instance._ViewModel.SearchMedicineView);
         }
 
         #endregion

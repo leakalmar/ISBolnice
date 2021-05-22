@@ -1,6 +1,6 @@
 ﻿using Controllers;
 using Hospital_IS.Commands;
-using Hospital_IS.Converters;
+using Hospital_IS.DoctorConverters;
 using Hospital_IS.DoctorView;
 using Model;
 using System;
@@ -63,7 +63,7 @@ namespace Hospital_IS.DoctorViewModel
         {
             if (SelectedAppointment != null && e.Key == Key.Enter)
             {
-                UCAppDetail appDetail = new UCAppDetail(NavigationService);
+                AppDetail appDetail = new AppDetail(NavigationService);
                 appDetail._ViewModel.SelectedAppointment = SelectedAppointment;
                 appDetail._ViewModel.AppointmentsView = AppointmentsView;
                 this.NavigationService.Navigate(appDetail);
@@ -96,7 +96,7 @@ namespace Hospital_IS.DoctorViewModel
         {
             if(selectedAppointment != null)
             {
-                UCAppDetail appDetail = new UCAppDetail(NavigationService);
+                AppDetail appDetail = new AppDetail(NavigationService);
                 appDetail._ViewModel.SelectedAppointment = SelectedAppointment;
                 appDetail._ViewModel.AppointmentsView = AppointmentsView;
                 this.NavigationService.Navigate(appDetail);

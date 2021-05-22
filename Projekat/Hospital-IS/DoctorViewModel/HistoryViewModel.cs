@@ -102,7 +102,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_OldReportCommand(object obj)
         {
 
-            UCOldReport view = new UCOldReport();
+            OldReport view = new OldReport();
             view._ViewModel.Report = SelectedReport;
             this.InsideNavigationService.Navigate(view);
         }

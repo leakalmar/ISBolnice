@@ -73,7 +73,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_OpenChartCommand(object obj)
         {
-            UCPatientChart chart = new UCPatientChart();
+            PatientChart chart = new PatientChart();
             chart._ViewModel.MainNavigationService = NavigationService;
             chart._ViewModel.SelectedAppointment = SelectedAppointment;
             this.NavigationService.Navigate(chart);
@@ -82,7 +82,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_StartAppointmentCommand(object obj)
         {
             SelectedAppointment.Started = true;
-            UCPatientChart chart = new UCPatientChart();
+            PatientChart chart = new PatientChart();
             chart._ViewModel.MainNavigationService = NavigationService;
             chart._ViewModel.SelectedAppointment = SelectedAppointment;
             DoctorMainWindow.Instance._ViewModel.PatientChartView = chart;
