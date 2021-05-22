@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace Hospital_IS.DoctorView
 {
-    public partial class Therapys : UserControl
+    public partial class Therapies : UserControl
     {
         private TherapyViewModel viewModel;
 
@@ -12,7 +12,7 @@ namespace Hospital_IS.DoctorView
             get { return viewModel; }
             set { viewModel = value; }
         }
-        public Therapys()
+        public Therapies()
         {
             InitializeComponent();
             this._ViewModel = new TherapyViewModel();
