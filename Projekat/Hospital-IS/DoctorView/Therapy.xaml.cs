@@ -1,48 +1,23 @@
-﻿using System.Windows;
+﻿using Hospital_IS.DoctorViewModel;
 using System.Windows.Controls;
 
 namespace Hospital_IS.DoctorView
 {
-    public partial class Therapy : UserControl
+    public partial class Therapys : UserControl
     {
-        private bool _started;
+        private TherapyViewModel viewModel;
 
-        public bool Started
+        public TherapyViewModel _ViewModel
         {
-            get { return _started; }
-            set
-            {
-                _started = value;
-                if (!Started)
-                {
-                    add.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    add.Visibility = Visibility.Visible;
-                }
-            }
+            get { return viewModel; }
+            set { viewModel = value; }
         }
-        private PatientChart PatientChart;
-
-        public Therapy()
-        {
-
-        }
-        public Therapy(PatientChart patientChart)
+        public Therapys()
         {
             InitializeComponent();
-            PatientChart = patientChart;
-            //dataGrid.DataContext = PatientChart.Patient;
+            this._ViewModel = new TherapyViewModel();
+            this.DataContext = _ViewModel;
 
-            if (!Started)
-            {
-                add.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                add.Visibility = Visibility.Visible;
-            }
         }
     }
 }

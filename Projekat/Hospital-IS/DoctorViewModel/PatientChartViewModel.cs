@@ -184,7 +184,9 @@ namespace Hospital_IS.DoctorViewModel
                     this.InsideNavigationService.Navigate(new ScheduledApp());
                     break;
                 case 4:
-                    this.InsideNavigationService.Navigate(new DoctorView.Therapy());
+                    Therapys therapy = new Therapys();
+                    therapy._ViewModel.Started = SelectedAppointment.Started;
+                    this.InsideNavigationService.Navigate(therapy);
                     break;
                 case 5:
                     this.InsideNavigationService.Navigate(new DoctorView.Tests());
