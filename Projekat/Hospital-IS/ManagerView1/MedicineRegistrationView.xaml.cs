@@ -65,5 +65,6 @@ namespace Hospital_IS.ManagerView1
             }
         }
 
+       
     }
 }

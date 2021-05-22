@@ -23,6 +23,7 @@ namespace Hospital_IS.ManagerView1
         public NotificationMedicineUpdate()
         {
             InitializeComponent();
+            this.DataContext = NotificationViewModel.Instance;
         }
 
         private void AddMedicine_Click(object sender, RoutedEventArgs e)
@@ -80,5 +81,8 @@ namespace Hospital_IS.ManagerView1
 
             }
         }
+
+        
+        
     }
 }

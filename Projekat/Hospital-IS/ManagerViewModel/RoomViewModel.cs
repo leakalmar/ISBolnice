@@ -157,6 +157,12 @@ namespace Hospital_IS.ManagerViewModel
                 new Uri("ManagerView1/RoomView.xaml", UriKind.Relative));
         }
 
+        private void Execute_NavigateToEquipmentPageCommand(object obj)
+        {
+            this.NavService.Navigate(
+                new Uri("ManagerView1/EquipmentView.xaml", UriKind.Relative));
+        }
+
         private void Execute_NavigateToMedicinePageCommand(object obj)
         {
             this.NavService.Navigate(
@@ -164,6 +170,7 @@ namespace Hospital_IS.ManagerViewModel
         }
         private void Execute_NavigateToManagerProfilePageCommand(object obj)
         {
+            ManagerProfileOptionsVIewModel.Instance.PreviousMainPage = this.NavService.CurrentSource;
             this.NavService.Navigate(
                 new Uri("ManagerView1/ManagerProfileOptionsView.xaml", UriKind.Relative));
         }
@@ -237,6 +244,7 @@ namespace Hospital_IS.ManagerViewModel
             this.UpdateRoom = new RelayCommand(Execute_UpdateRoomCommand);
             this.NavigateToMedicinePageCommand = new RelayCommand(Execute_NavigateToMedicinePageCommand, CanExecute_NavigateCommand);
             this.NavigateToManagerProfilePage = new RelayCommand(Execute_NavigateToManagerProfilePageCommand, CanExecute_NavigateCommand);
+            this.NavigateToEquipmentPageCommand = new RelayCommand(Execute_NavigateToEquipmentPageCommand, CanExecute_NavigateCommand);
            
         }
 

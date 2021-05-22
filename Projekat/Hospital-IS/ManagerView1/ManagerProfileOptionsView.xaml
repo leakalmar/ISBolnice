@@ -141,7 +141,7 @@
                 </Button>
                 <TextBlock Text="  Podešavanja" Grid.Row="4" Grid.Column="3" Foreground="White" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-                <Button x:Name="BackEquipment"  BorderThickness="0" Width="60" Height="50" Grid.Column="4" Grid.Row="0"  Background="Transparent" Command="{Binding NavigateToPreviousPageCommand}" >
+                <Button x:Name="BackEquipment"  BorderThickness="0" Width="60" Height="50" Grid.Column="4" Grid.Row="0"  Background="Transparent" Command="{Binding NavigateToPreviousMainPage}" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>

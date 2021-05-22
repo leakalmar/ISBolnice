@@ -49,13 +49,7 @@ namespace Hospital_IS.ManagerView1
             }
         }
 
-        private void Eqiupment_Click(object sender, RoutedEventArgs e)
-        {
-           
-            EquipmentView equipmentView = new EquipmentView();
-            this.NavigationService.Navigate(equipmentView);
-        }
-
+       
         private void AddRoom_Click(object sender, RoutedEventArgs e)
         {
             RoomViewModel roomViewModel = new RoomViewModel(this.NavigationService);

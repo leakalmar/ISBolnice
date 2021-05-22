@@ -26,7 +26,8 @@ namespace Hospital_IS.ManagerView1
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            this.DataContext = new ManagerProfileOptionsVIewModel(this.NavigationService);
+            this.DataContext = ManagerProfileOptionsVIewModel.Instance;
+            ManagerProfileOptionsVIewModel.Instance.NavService = this.NavigationService;
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)

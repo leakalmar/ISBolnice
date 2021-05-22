@@ -2,12 +2,14 @@
 using DoctorView;
 using Hospital_IS.DoctorView;
 using Hospital_IS.DTOs;
+using Hospital_IS.ManagerView1;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.ManagerViewModel
@@ -256,7 +258,7 @@ namespace Hospital_IS.ManagerViewModel
                 {
 
                     replaceMedicines = value;
-                    OnPropertyChanged("Composition");
+                    OnPropertyChanged("ReplaceMedicines");
 
                 }
             }
@@ -297,8 +299,6 @@ namespace Hospital_IS.ManagerViewModel
             this.RegistrateNewMedicineCommand = new RelayCommand(Execute_RegistrateNewMedicine);
             this.UpdateMedicineCommand = new RelayCommand(Execute_UpdateMedicine);
             this.DeleteMedicineCommand = new RelayCommand(Execute_DeleteMedicine, CanExecute_IfMedicineIsSelected);
-
-           
 
         }
 
@@ -350,12 +350,17 @@ namespace Hospital_IS.ManagerViewModel
             ConvertMedcineComponetDTOsToList(medicineComponents,CompositionDTO);
             List<ReplaceMedicineName> replaceMedicineNames = new List<ReplaceMedicineName>();
             ConvertReplaceMedicineNameDTOsToList(replaceMedicineNames,ReplaceMedicineNameDTOs);
+            Medicine medicine = new Medicine(Name, medicineComponents, SideEffects, Usage, replaceMedicineNames);
 
-            MedicineController.Instance.AddNewMedicine(new Medicine(Name, medicineComponents, SideEffects, Usage, replaceMedicineNames));
-            Medicines = new ObservableCollection<Medicine>(MedicineController.Instance.GetAll());
+           
+           
             CompositionDTO = new ObservableCollection<MedicineComponentDTO>();
             ReplaceMedicineNameDTOs = new ObservableCollection<ReplaceMedicineNameDTO>();
-            this.NavService.GoBack();
+
+            RecipientViewModel.Instance.NotificationMedicine = medicine;
+            ChooseReciepientForNotification chooseRecipient = new ChooseReciepientForNotification();
+            chooseRecipient.SendReNotification.Visibility = Visibility.Collapsed;
+            chooseRecipient.ShowDialog();
         }
 
         private void ConvertMedcineComponetDTOsToList(List<MedicineComponent> medicineComponents,ObservableCollection<MedicineComponentDTO> medicineComponentDTOs)

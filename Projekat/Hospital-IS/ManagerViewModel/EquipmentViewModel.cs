@@ -300,6 +300,7 @@ namespace Hospital_IS.ManagerViewModel
 
         private void Execute_NavigateToManagerProfilePageCommand(object obj)
         {
+            ManagerProfileOptionsVIewModel.Instance.PreviousMainPage = this.NavService.CurrentSource;
             this.NavService.Navigate(
                 new Uri("ManagerView1/ManagerProfileOptionsView.xaml", UriKind.Relative));
         }
