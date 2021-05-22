@@ -562,5 +562,17 @@ namespace Service
             }
             return numberOfAppointments;
         }
+
+        public DoctorAppointment GetAppointmentById(int appointmentId)
+        {
+            foreach (DoctorAppointment doctorAppointment in allAppointments)
+            {
+                if (doctorAppointment.Id == appointmentId)
+                {
+                    return doctorAppointment;
+                }
+            }
+            return null;
+        }
     }
 }

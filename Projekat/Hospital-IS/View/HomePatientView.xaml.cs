@@ -16,7 +16,7 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class HomePatientView : UserControl
     {
-        private static HomePatientView instance = null;
+        /*private static HomePatientView instance = null;
         public static HomePatientView Instance
         {
             get
@@ -31,7 +31,7 @@ namespace Hospital_IS.View
 
         public Patient Patient { get; set; }
         public DoctorAppointment rescheduledApp;
-        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
+        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }*/
         public HomePatientView()
         {
             InitializeComponent();
@@ -70,7 +70,7 @@ namespace Hospital_IS.View
         {
             DateTime time= DateTime.Now;
 
-            foreach (Therapy therapy in ChartController.Instance.GetTherapiesByPatient(HomePatientView.Instance.Patient))
+            foreach (Therapy therapy in ChartController.Instance.GetTherapiesByPatient(PatientMainWindowViewModel.Patient.Patient))
             {
                 int usageHourDifference = (int)24/therapy.TimesADay;
                 for (int i = 0; i < therapy.TimesADay; i++)

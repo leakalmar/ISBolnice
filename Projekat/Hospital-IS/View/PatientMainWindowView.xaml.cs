@@ -19,7 +19,7 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class PatientMainWindowView : Window
     {
-        /*private static PatientMainWindowView instance = null;
+        private static PatientMainWindowView instance = null;
         public static PatientMainWindowView Instance
         {
             get
@@ -30,10 +30,11 @@ namespace Hospital_IS.View
                 }
                 return instance;
             }
-        }*/
-        public PatientMainWindowView()
+        }
+        public PatientMainWindowViewModel PatientMainView { get; set; }
+        private PatientMainWindowView()
         {
-            PatientMainWindowViewModel PatientMainView = new PatientMainWindowViewModel();
+            PatientMainView = new PatientMainWindowViewModel();
             this.DataContext = PatientMainView;
             InitializeComponent();
         }

@@ -129,7 +129,7 @@ namespace Hospital_IS.View.PatientViewModels
             RoomId = SelectedDoctorAppointment.Room;
             MessageBox.Show(SelectedDoctorAppointment.Room.ToString());
             Details = SelectedDoctorAppointment.AppointmentCause;
-            if (SelectedDoctorAppointment.AppointmentStart <= DateTime.Today && !PatientAppointmentEvaluationController.Instance.IsAppointmentEvaluated(SelectedDoctorAppointment))
+            if (SelectedDoctorAppointment.AppointmentStart <= DateTime.Today && !PatientAppointmentEvaluationController.Instance.IsAppointmentEvaluated(SelectedDoctorAppointment.Id))
             {
                 ShouldShowEvaluate = true;
             }
@@ -141,7 +141,8 @@ namespace Hospital_IS.View.PatientViewModels
 
         private void ShowEvaluation()
         {
-            PatientAppointmentEvaluationWindow appointmentEvaluation = new PatientAppointmentEvaluationWindow(SelectedDoctorAppointment);
+            PatientAppointmentEvaluationWindow appointmentEvaluation = new PatientAppointmentEvaluationWindow(SelectedDoctorAppointment.Id);
+            appointmentEvaluation.AppointmentEvaluation.OnRequestClose += (s, e) => appointmentEvaluation.Close();
             appointmentEvaluation.Show();
         }
     }

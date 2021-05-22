@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using Hospital_IS.DTOs;
+using Hospital_IS.View.PatientViewModels;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Windows;
 
 namespace Hospital_IS.View.PatientViewModels
 {
-    public class AppointmentPatientViewModel : BindableBase
+    public class RescheduleAppointmentViewModel : BindableBase
     {
         public ObservableCollection<DoctorAppointment> AvailableAppointments { get; set; }
         public ObservableCollection<Doctor> Doctors { get; set; }
@@ -24,15 +25,40 @@ namespace Hospital_IS.View.PatientViewModels
         public MyICommand ReserveAppointment { get; set; }
         public MyICommand RescheduleAppointment { get; set; }
 
-        public AppointmentPatientViewModel()
+        public RescheduleAppointmentViewModel()
         {
             AvailableAppointments = new ObservableCollection<DoctorAppointment>();
             Doctors = new ObservableCollection<Doctor>(DoctorController.Instance.GetAll());
             ShowAvailableAppointments = new MyICommand(ShowAvailableApp);
-            ReserveAppointment = new MyICommand(ReserveApp);
             RescheduleAppointment = new MyICommand(RescheduleApp);
+            /*rescheduledApp = doctorAppointment;
+            Date = doctorAppointment.AppointmentStart.Date;
+            Doctor = doctorAppointment.Doctor;
+            if (doctorAppointment.AppointmentStart.Hour < 11)
+            {
+                TimeSlot = 0;
+            }
+            else if (doctorAppointment.AppointmentStart.Hour < 14 && doctorAppointment.AppointmentStart.Hour >= 11)
+            {
+                TimeSlot = 1;
+            }
+            else if (doctorAppointment.AppointmentStart.Hour < 17 && doctorAppointment.AppointmentStart.Hour >= 14)
+            {
+                TimeSlot = 2;
+            }
+            else if (doctorAppointment.AppointmentStart.Hour < 20 && doctorAppointment.AppointmentStart.Hour >= 17)
+            {
+                TimeSlot = 3;
+            }
+            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.ToString(), Doctor, PatientMainWindowViewModel.Patient, Date, false);
+            List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(possibleAppointment);
+            MessageBox.Show("MMMMM");
+            foreach (DoctorAppointment doctorApp in docApps)
+            {
+                AvailableAppointments.Add(doctorApp);
+            }*/
+            Doctor = Doctors[4];
             Date = DateTime.Today.Date;
-            Doctor = Doctors[2];           
         }
 
         public Doctor Doctor
@@ -111,28 +137,6 @@ namespace Hospital_IS.View.PatientViewModels
             }
         }
 
-        private void ReserveApp()
-        {
-            if (DoctorApp == null)
-            {
-                MessageBox.Show("Izaberite termin!");
-            }
-            else
-            {
-                if (!PatientController.Instance.IsPatientTroll(PatientMainWindowViewModel.Patient, DoctorApp))
-                {
-                    //PatientMainWindowView.Instance.DoctorAppointment.Add(DoctorApp);
-                    DoctorAppointmentController.Instance.AddAppointment(DoctorApp);
-                    DoctorApp.Reserved = true;
-                    AvailableAppointments.Remove(DoctorApp);
-                }
-                else
-                {
-                    MessageBox.Show("Zbog učestalog zakazivanja ili izmene termina, ne možete zakazati termin!");
-                }
-            }
-        }
-
         private void RescheduleApp()
         {
             if (DoctorApp == null)
@@ -155,7 +159,7 @@ namespace Hospital_IS.View.PatientViewModels
                 }
             }
         }
-
+        /*
         public void SetRescheduleAppointmentView(DoctorAppointment docApp)
         {
             MessageBox.Show("USAOOOOOOOO");
@@ -195,7 +199,7 @@ namespace Hospital_IS.View.PatientViewModels
             {
                 AvailableAppointments.Add(doctorAppointment);
             }
-          
-        }
+        
+        }*/
     }
 }

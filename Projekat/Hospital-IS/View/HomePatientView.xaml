@@ -92,7 +92,7 @@
                 <DataGridTextColumn Header="Soba" Binding="{Binding Room}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="changeApp" Grid.Column="2" Grid.Row="10" Margin="250,230,200,40" Foreground="#FFFDFAFA" FontSize="16" Cursor="Hand" Click="RescheduleAppointment">
+        <Button x:Name="changeApp" Command="{Binding RescheduleAppointment}"  Grid.Column="2" Grid.Row="10" Margin="250,230,200,40" Foreground="#FFFDFAFA" FontSize="16" Cursor="Hand" Click="RescheduleAppointment">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20,20,20,20"/>

@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using Model;
+using Hospital_IS.View.PatientViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -171,9 +172,9 @@ namespace Hospital_IS.View.PatientViewModels
             }
             else
             {
+                SelectedApp.Reserved = false;
                 DoctorAppointmentController.Instance.RemoveAppointment(SelectedApp);
                 FutureAppointments.Remove(SelectedApp);
-                SelectedApp.Reserved = false;
             }
         }
 
@@ -185,7 +186,10 @@ namespace Hospital_IS.View.PatientViewModels
             }
             else
             {
-                
+                RescheduleAppointmentViewModel a = new RescheduleAppointmentViewModel();
+                //MessageBox.Show(SelectedApp.Doctor.Name);
+                PatientMainWindowView.Instance.PatientMainView.CurrentViewModel = a;
+                //PatientMainWindowView.Instance.PatientMainView.changeApp(SelectedApp);
             }
         }
     }

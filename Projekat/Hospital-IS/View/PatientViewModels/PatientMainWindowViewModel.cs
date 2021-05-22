@@ -41,7 +41,7 @@ namespace Hospital_IS.View.PatientViewModels
         {
             DateTime time = DateTime.Now;
 
-            foreach (Therapy therapy in ChartController.Instance.GetTherapiesByPatient(HomePatientView.Instance.Patient))
+            foreach (Therapy therapy in ChartController.Instance.GetTherapiesByPatient(Patient))
             {
                 int usageHourDifference = (int)24 / therapy.TimesADay;
                 for (int i = 0; i < therapy.TimesADay; i++)
@@ -84,6 +84,14 @@ namespace Hospital_IS.View.PatientViewModels
                     CurrentViewModel = notificationsViewModel;
                     break;
             }
+        }
+
+        public void changeApp(DoctorAppointment docApp)
+        {
+            MessageBox.Show("OK11111");
+            AppointmentPatientViewModel a = new AppointmentPatientViewModel();
+            a.SetRescheduleAppointmentView(docApp);
+            CurrentViewModel = a;
         }
     }
 }

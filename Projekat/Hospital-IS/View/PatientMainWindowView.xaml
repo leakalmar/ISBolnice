@@ -29,6 +29,9 @@
         <DataTemplate DataType="{x:Type viewModel:PatientNotificationsViewModel}">
             <views:PatientNotificationsView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:RescheduleAppointmentViewModel}">
+            <views:RescheduleAppointmentView/>
+        </DataTemplate>
     </Window.Resources>
     <Grid Background="#FF184095">
         <Grid.Resources>

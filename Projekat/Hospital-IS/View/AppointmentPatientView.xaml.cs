@@ -17,7 +17,6 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class AppointmentPatientView : UserControl
     {
-        private AppointmentPatientViewModel appointmentPatientViewModel;
 
         public AppointmentPatientView()
         {
@@ -129,7 +128,7 @@ namespace Hospital_IS.View
             {
                 TimeSlot.SelectedIndex = 3;
             }
-            appointmentPatientViewModel.SetRescheduleAppointmentView(docApp);
+            //appointmentPatientViewModel.SetRescheduleAppointmentView(docApp);
         }
         /*
         private void RescheduleAppointmentButton(object sender, RoutedEventArgs e)

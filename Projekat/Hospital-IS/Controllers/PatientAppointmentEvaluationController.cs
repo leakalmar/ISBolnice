@@ -32,9 +32,9 @@ namespace Controllers
             PatientAppointmentEvaluationService.Instance.AddAppointmentEvaluation(appointmentEvaluation);
         }
 
-        public Boolean IsAppointmentEvaluated(DoctorAppointment appointmentEvaluation)
+        public Boolean IsAppointmentEvaluated(int evaluatedAppointmentId)
         {
-            return PatientAppointmentEvaluationService.Instance.IsAppointmentEvaluated(appointmentEvaluation);
+            return PatientAppointmentEvaluationService.Instance.IsAppointmentEvaluated(evaluatedAppointmentId);
         }
 
         public Boolean ShowHospitalEvaluation(int patientId)
