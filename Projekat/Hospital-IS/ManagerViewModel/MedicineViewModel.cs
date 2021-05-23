@@ -315,6 +315,9 @@ namespace Hospital_IS.ManagerViewModel
         {
             Composition = new ObservableCollection<MedicineComponent>();
             ReplaceMedicines = new ObservableCollection<ReplaceMedicineName>();
+            Name = null;
+            Usage = null;
+            SideEffects = null;
             CompositionDTO = new ObservableCollection<MedicineComponentDTO>();
             ReplaceMedicineNameDTOs = new ObservableCollection<ReplaceMedicineNameDTO>();
             this.NavService.GoBack();

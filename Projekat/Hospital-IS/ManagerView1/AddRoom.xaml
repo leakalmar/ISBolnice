@@ -3,9 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Hospital_IS.ManagerView1"
-     
-        mc:Ignorable="d" 
+      xmlns:local="clr-namespace:Hospital_IS.ManagerView1" xmlns:managerviewmodel="clr-namespace:Hospital_IS.ManagerViewModel" d:DataContext="{d:DesignInstance Type=managerviewmodel:RoomViewModel}"
+      mc:Ignorable="d" 
          Title="Dodaj sobu" Height="750" Width="430" Background="Transparent"
        >
 
@@ -175,10 +174,9 @@
         <TextBox x:Name="RoomNumberBox"  Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="4" Grid.Column="3" 
                  Grid.ColumnSpan="2" Height="30"   FontSize="15" Padding="4" GotFocus="RoomNumber_GotFocus" >
             <TextBox.Text>
-
-                <Binding Path="RoomNumber" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="RoomNumber" UpdateSourceTrigger="PropertyChanged" >
                     <Binding.ValidationRules>
-                        <local:StringToIntValidationRule ValidationStep="RawProposedValue"/>
+                        <local:StringToIntValidationRule ValidationStep="UpdatedValue"  />
                         <local:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="1" Max="1000"/>
                     </Binding.ValidationRules>
                 </Binding>

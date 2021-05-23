@@ -277,12 +277,13 @@ namespace Hospital_IS.ManagerViewModel
             }
             set
             {
-                if (value != _roomNumber)
-                {
+              
                     
                     _roomNumber = value;
+                    MessageBox.Show("uslo");
+                    
                     OnPropertyChanged("RoomNumber");
-                }
+              
             }
         }
 

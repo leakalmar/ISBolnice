@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Hospital_IS.ManagerViewModel;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Hospital_IS.ManagerView1
@@ -13,13 +16,17 @@ namespace Hospital_IS.ManagerView1
             try
             {
                 var s = value as string;
+                MessageBox.Show(s);
                 int r;
                 if (int.TryParse(s, out r))
                 {
                     return new ValidationResult(true, null);
                 }
-              
+                //MessageBox.Show("uslo u validaciju");
+
+                
                 return new ValidationResult(false, "Unesite samo brojeve.");
+               
             }
             catch
             {
@@ -28,7 +35,9 @@ namespace Hospital_IS.ManagerView1
         }
 
     }
-        public class MinMaxValidationRule : ValidationRule
+
+   
+    public class MinMaxValidationRule : ValidationRule
         {
             public int Min
             {
@@ -44,7 +53,7 @@ namespace Hospital_IS.ManagerView1
 
             public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
             {
-                value = Convert.ToInt32(value);
+               /* value = Convert.ToInt32(value);
             if (value is int)
             {
                 int d = (int)value;
@@ -62,6 +71,9 @@ namespace Hospital_IS.ManagerView1
                 return new ValidationResult(false, "Unknown error occured.");
 
             }
+               */
+                return new ValidationResult(true, "Unknown error occured.");
+
             }
             
         }

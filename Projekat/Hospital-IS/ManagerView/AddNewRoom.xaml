@@ -176,9 +176,9 @@
                  Grid.ColumnSpan="2" Height="30"   FontSize="15" Padding="4" GotFocus="RoomNumber_GotFocus" >
             <TextBox.Text>
             
-            <Binding Path="RoomNumber" UpdateSourceTrigger="PropertyChanged">
+            <Binding Path="RoomNumber" >
                 <Binding.ValidationRules>
-                        <local:StringToIntValidationRule ValidationStep="RawProposedValue"/>
+                        <local:StringToIntValidationRule ValidationStep="RawProposedValue" />
                         <local:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="1" Max="1000"/>
                     </Binding.ValidationRules>
             </Binding>

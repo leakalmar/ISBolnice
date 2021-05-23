@@ -8,7 +8,18 @@
         WindowStyle="None" WindowStartupLocation="CenterScreen"
       
         Title="Upravnik" Height="750" Width="430">
+    <Window.Background>
+        
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" >
+            <GradientStop Color="Black"/>
+            <GradientStop Color="#FF184095" Offset="0.0"/>
+            <GradientStop Color="#FF5B317E" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
-        <Frame x:Name="frame" Source ="RoomView.xaml" NavigationUIVisibility="Hidden"/>
+        <Image Source="pack://application:,,,/Resources/hospital.png" />
+        <Label Content="Dobrodošli" FontSize="35" Foreground="White" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,578,0,0" VerticalAlignment="Top"  />
+        <Frame x:Name="frame" Source ="RoomView.xaml" NavigationUIVisibility="Hidden" />
+        
     </Grid>
 </Window>
