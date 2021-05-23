@@ -14,6 +14,7 @@ namespace Hospital_IS.View.PatientViewModels
 
         private DoctorAppointment selectedDoctorAppointment;
         private bool shouldShowEvaluate = false;
+        private bool shouldShowNote = false;
         private string date;
         private string doctorName;
         private string appointmentType;
@@ -21,11 +22,13 @@ namespace Hospital_IS.View.PatientViewModels
         private string details;
 
         public MyICommand ShowEvaluationWindow { get; set; }
+        public MyICommand ShowNote { get; set; }
 
         public AllAppointmentsViewModel()
         {
             AllAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id));
             ShowEvaluationWindow = new MyICommand(ShowEvaluation);
+            ShowNote = new MyICommand(ShowAppNote);
         }
 
         public DoctorAppointment SelectedDoctorAppointment
@@ -120,6 +123,19 @@ namespace Hospital_IS.View.PatientViewModels
             }
         }
 
+        public bool ShouldShowNote
+        {
+            get { return shouldShowNote; }
+            set
+            {
+                if (shouldShowNote != value)
+                {
+                    shouldShowNote = value;
+                    OnPropertyChanged("ShouldShowNote");
+                }
+            }
+        }
+
         private void SetAppointmentInfo()
         {
             Date = SelectedDoctorAppointment.AppointmentStart.ToString("dd.MM.yyyy.");
@@ -129,6 +145,7 @@ namespace Hospital_IS.View.PatientViewModels
             RoomId = SelectedDoctorAppointment.Room;
             MessageBox.Show(SelectedDoctorAppointment.Room.ToString());
             Details = SelectedDoctorAppointment.AppointmentCause;
+            ShouldShowNote = true;
             if (SelectedDoctorAppointment.AppointmentStart <= DateTime.Today && !PatientAppointmentEvaluationController.Instance.IsAppointmentEvaluated(SelectedDoctorAppointment.Id))
             {
                 ShouldShowEvaluate = true;
@@ -144,6 +161,13 @@ namespace Hospital_IS.View.PatientViewModels
             PatientAppointmentEvaluationWindow appointmentEvaluation = new PatientAppointmentEvaluationWindow(SelectedDoctorAppointment.Id);
             appointmentEvaluation.AppointmentEvaluation.OnRequestClose += (s, e) => appointmentEvaluation.Close();
             appointmentEvaluation.Show();
+        }
+
+        private void ShowAppNote()
+        {
+            PatientNoteView appointmentNote = new PatientNoteView();
+            appointmentNote.AppointmentNoteViewModel.OnRequestClose += (s, e) => appointmentNote.Close();
+            appointmentNote.Show();
         }
     }
 }

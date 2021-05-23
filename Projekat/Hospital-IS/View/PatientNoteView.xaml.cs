@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital_IS.View.PatientViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -17,8 +18,12 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class PatientNoteView : Window
     {
+        public PatientNoteViewModel AppointmentNoteViewModel { get; set; }
+               
         public PatientNoteView()
         {
+            AppointmentNoteViewModel = new PatientNoteViewModel();
+            this.DataContext = AppointmentNoteViewModel;
             InitializeComponent();
         }
     }

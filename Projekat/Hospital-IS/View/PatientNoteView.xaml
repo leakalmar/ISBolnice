@@ -24,7 +24,7 @@
             Margin="200,135,0,228" />
         <Label Content="Beleška:" Width="150" Margin="20,183,0,167" HorizontalAlignment="Left" FontSize="22" Foreground="#FF184095" FontWeight="Bold" />
         <TextBox x:Name="Comment" Text="{Binding Comment, Mode=TwoWay}" BorderBrush="#FF184095" TextWrapping="Wrap" Width="400" Background="{x:Null}" Height="100" Margin="25,232,25,68" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" Foreground="Black"/>
-        <Button x:Name="Evaluate" Command="{Binding EvaluateAppointment}" Grid.Column="1" Margin="100,350,100,20" Foreground="#FFFDFDFD" Cursor="Hand" FontSize="18" >
+        <Button x:Name="Evaluate" Command="{Binding AppointmentNote}" Grid.Column="1" Margin="100,350,100,20" Foreground="#FFFDFDFD" Cursor="Hand" FontSize="18" >
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20,20,20,20"/>
@@ -36,7 +36,7 @@
                     <GradientStop Color="#FF184095" Offset="0.0"/>
                     <GradientStop Color="#FF5B317E" Offset="1"/>
                 </LinearGradientBrush>
-            </Button.Background> Prosledi ocenu
+            </Button.Background> Sačuvaj belešku
         </Button>
     </Grid>
 </Window>

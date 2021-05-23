@@ -59,7 +59,7 @@
                 <DataGridTextColumn Header="Soba" Binding="{Binding Room}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Border x:Name="AppointmentInfo" BorderThickness="0" BorderBrush="#FF184095" Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Margin="600,10,10,100" Visibility="Hidden" CornerRadius="20,20,20,20" Background="#FF184095">
+        <Border x:Name="AppointmentInfo" BorderThickness="0" BorderBrush="#FF184095" Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Margin="600,10,10,100" Visibility="Visible" CornerRadius="20,20,20,20" Background="#FF184095">
             <StackPanel x:Name="PersonalData" Grid.RowSpan="9" Grid.Row="1" Grid.Column="2" Margin="10,10,10,10" >
 
                 <Grid>
@@ -95,6 +95,20 @@
                     <GradientStop Color="#FF5B317E" Offset="1"/>
                 </LinearGradientBrush>
             </Button.Background> Ocenite pregled
+        </Button>
+        <Button x:Name="appNote" Visibility="{Binding Path=ShouldShowNote, Converter={StaticResource BooleanToVisibilityConverter} }" Command="{Binding ShowNote}" Grid.Column="2" Grid.Row="0" Margin="850,10,10,0" Foreground="#FFFDFAFA" FontSize="18" Cursor="Hand" >
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20,20,20,20"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF184095" Offset="0.0"/>
+                    <GradientStop Color="#FF5B317E" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background> Beleška
         </Button>
     </Grid>
 </UserControl>
