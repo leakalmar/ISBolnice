@@ -206,7 +206,8 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_NavigateToViewMedicineCommand(object obj)
         {
-            ViewMedicine view = new ViewMedicine();
+            ReviewMedicine view = new ReviewMedicine();
+            view._ViewModel.MedicineNotification = (MedicineNotification)obj;
             this.NavigationService.Navigate(view);
         }
 
