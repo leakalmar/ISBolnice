@@ -9,13 +9,10 @@ namespace Hospital_IS.DoctorViewModel
     public class DoctorMainWindowModel : BindableBase
     {
         #region Feilds
-        private int doctorId;
-        private String doctorNameSurname;
-        private Specialty doctorSpecialty;
-        private int doctorPrimeryRoom;
         //slika
         private NavigationService navigationService;
         private PatientChart patientChartView;
+        private Appointments appointmentsView;
         private Doctor doctor;
 
         public NavigationService NavigationService
@@ -44,6 +41,16 @@ namespace Hospital_IS.DoctorViewModel
                 OnPropertyChanged("PatientChartView");
             }
         }
+
+        public Appointments AppointmentsView
+        {
+            get { return appointmentsView; }
+            set
+            {
+                appointmentsView = value;
+                OnPropertyChanged("AppointmentsView");
+            }
+        }
         #endregion
 
         #region Commands
@@ -60,9 +67,6 @@ namespace Hospital_IS.DoctorViewModel
         private RelayCommand minimizeCommand;
         private RelayCommand maximizeCommand;
         private RelayCommand onLoadedCommand;
-
-
-
 
         public RelayCommand NavigateToHomePageCommand
         {
@@ -193,8 +197,11 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_NavigateToAppointmentsCommand(object obj)
         {
-            this.NavigationService.Navigate(
-                new Uri("DoctorView/Appointments.xaml", UriKind.Relative));
+            if(AppointmentsView == null)
+            {
+                AppointmentsView = new Appointments();
+            }
+            this.NavigationService.Navigate(AppointmentsView);
         }
 
         private void Execute_NavigateToPatientsCommand(object obj)

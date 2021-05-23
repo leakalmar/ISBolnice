@@ -28,6 +28,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private bool showChangePanel;
         private NavigationService insideNavigation;
+        private ChangeApp changeAppView;
 
         public List<Room> Rooms
         {
@@ -67,6 +68,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 selectedAppointment = value;
                 OnPropertyChanged("SelectedAppointments");
+                ChangeAppView._ViewModel.OldAppointment = SelectedAppointment;
             }
         }
 
@@ -110,6 +112,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 showChangePanel = value;
                 OnPropertyChanged("ShowChangePanel");
+                FilterAppointments();
             }
         }
 
@@ -117,6 +120,12 @@ namespace Hospital_IS.DoctorViewModel
         {
             get { return insideNavigation; }
             set { insideNavigation = value; }
+        }
+
+        public ChangeApp ChangeAppView
+        {
+            get { return changeAppView; }
+            set { changeAppView = value; }
         }
         #endregion
 
@@ -141,9 +150,23 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_ChooseAppointmentCommand(object obj)
         {
-            InsideNavigation.Navigate(new ChangeApp());
-            ShowChangePanel = true;
-
+            if(SelectedAppointment != null)
+            {
+                if (SelectedAppointment.AppointmentStart > DateTime.Now.AddDays(3))
+                {
+                    InsideNavigation.Navigate(changeAppView);
+                    ShowChangePanel = true;
+                }
+                else
+                {
+                    new ExitMess("Termin nije moguće odložiti tri dana pre održavanja.").ShowDialog();
+                }
+            }
+            else
+            {
+                new ExitMess("Morate odabrati termin koji želite da otkažete.").ShowDialog();
+            }
+            
         }
 
         private void Execute_DeleteAppointmentCommand(object obj)
@@ -152,15 +175,22 @@ namespace Hospital_IS.DoctorViewModel
             {
                 bool dialog = (bool)new ExitMess("Morate odabrati termin koji želite da otkažete.").ShowDialog();
             }
-            if (SelectedAppointment.AppointmentStart > DateTime.Now.AddDays(1))
+            else
             {
-                bool dialog = (bool)new ExitMess("Da li želite da otkažete termin?").ShowDialog();
-                if (dialog)
+                if (SelectedAppointment.AppointmentStart > DateTime.Now.AddDays(3))
                 {
-                    SendCanceledNotification(SelectedAppointment);
-                    DoctorAppointmentController.Instance.RemoveAppointment(SelectedAppointment);
-                    //mislim da nece trebati
-                    // DoctorMainWindow.Instance._ViewModel.DoctorAppointments.Remove(app);
+                    bool dialog = (bool)new ExitMess("Da li želite da otkažete termin?").ShowDialog();
+                    if (dialog)
+                    {
+                        SendCanceledNotification(SelectedAppointment);
+                        DoctorAppointmentController.Instance.RemoveAppointment(SelectedAppointment);
+                        //mislim da nece trebati
+                        // DoctorMainWindow.Instance._ViewModel.DoctorAppointments.Remove(app);
+                    }
+                }
+                else
+                {
+                    new ExitMess("Termin nije moguće otkazati tri dana pre održavanja.").ShowDialog();
                 }
             }
         }
@@ -248,6 +278,7 @@ namespace Hospital_IS.DoctorViewModel
         public AppointmentsViewModel()
         {
             InitializeFilters();
+            ChangeAppView = new ChangeApp();
             this.ChooseAppointmentCommand = new RelayCommand(Execute_ChooseAppointmentCommand, CanExecute_Command);
             this.DeleteAppointmentCommand = new RelayCommand(Execute_DeleteAppointmentCommand, CanExecute_Command);
 

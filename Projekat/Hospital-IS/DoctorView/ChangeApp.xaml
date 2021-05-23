@@ -3,8 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:Hospital_IS.DoctorView" mc:Ignorable="d"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" mc:Ignorable="d"
         d:DesignHeight="226.694915254237" d:DesignWidth="763">
+    <UserControl.InputBindings>
+        <KeyBinding Key="Return" Command="{Binding ChangeAppointmentCommand}" />
+    </UserControl.InputBindings>
     <Grid>
         <GroupBox Header="Izmeni termin" FontSize="14" BorderBrush="#FF2E3B55"
                 Foreground="FloralWhite" Grid.Row="2" Margin="0">
@@ -22,14 +25,14 @@
                     <RowDefinition Height="0.8*" />
                 </Grid.RowDefinitions>
 
-                <Label Content="Doktor:" Foreground="FloralWhite" Grid.Column="1"
-                        VerticalAlignment="Bottom" />
+                <Label Content="Doktor:" Foreground="FloralWhite"
+                        Grid.Column="1" VerticalAlignment="Bottom" />
                 <Label Content="Soba:" Foreground="FloralWhite" Grid.Column="4"
                         VerticalAlignment="Bottom" />
-                <ComboBox x:Name="doctors" ItemsSource="{Binding}" Grid.Row="0"
-                        Grid.Column="2" Height="24.62" HorizontalAlignment="Stretch"
-                        VerticalAlignment="Bottom" Padding="1"
-                        SelectionChanged="filter_changed">
+                <ComboBox x:Name="doctors" ItemsSource="{Binding Doctors}"
+                        Grid.Row="0" Grid.Column="2" Height="24.62"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                        Padding="1" SelectedItem="{Binding SelectedDoctor}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock>
@@ -43,30 +46,40 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <ComboBox x:Name="rooms" ItemsSource="{Binding}" Grid.Row="0"
-                        Grid.Column="5" Height="24.62" HorizontalAlignment="Stretch"
-                        VerticalAlignment="Bottom" Padding="1"
-                        SelectionChanged="filter_changed">
+                <ComboBox x:Name="rooms" ItemsSource="{Binding Rooms}"
+                        Grid.Row="0" Grid.Column="5" Height="24.62"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                        Padding="1" SelectedItem="{Binding SelectedRoom}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <Label Content="{Binding RoomId}" Padding="0" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <Calendar Name="calendar" SelectionMode="MultipleRange" Grid.Column="0"
-                        HorizontalAlignment="Center" VerticalAlignment="Center"
-                        Grid.RowSpan="2" SelectedDatesChanged="filter_changed" />
+                <Calendar Name="calendar" SelectionMode="MultipleRange"
+                        Grid.Column="0" HorizontalAlignment="Center"
+                        VerticalAlignment="Center" Grid.RowSpan="2" SelectedDate="{Binding SelectedDate}">
+                </Calendar>
 
-                <DataGrid x:Name="app" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
-                        ItemsSource="{Binding}" Margin="10" Background="Transparent"
+                <DataGrid x:Name="app" Grid.Row="1" Grid.Column="1"
+                        Grid.ColumnSpan="5" ItemsSource="{Binding Appointments}"
+                        Margin="10" Background="Transparent"
                         RowBackground="Transparent" Foreground="White"
                         ScrollViewer.VerticalScrollBarVisibility="Auto"
                         BorderThickness="0,0,0,0" AutoGenerateColumns="False"
-                        SelectionMode="Single" IsReadOnly="True" BorderBrush="{x:Null}"
+                        SelectionMode="Single" IsReadOnly="True"
+                        BorderBrush="{x:Null}"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                        HorizontalScrollBarVisibility="Disabled" RowHeaderWidth="0">
+                        HorizontalScrollBarVisibility="Disabled"
+                        RowHeaderWidth="0"
+                        SelectedItem="{Binding SelectedAppointment}">
+                    <DataGrid.InputBindings>
+                        <KeyBinding Key="Return"
+                                Command="{Binding ChangeAppointmentCommand}" />
+                    </DataGrid.InputBindings>
                     <DataGrid.Resources>
-                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
+                        <Style
+                                BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
                                 TargetType="{x:Type DataGridColumnHeader}">
                             <Setter Property="Background" Value="#FF2E3B55" />
                         </Style>
@@ -82,11 +95,6 @@
                                 Binding="{Binding Patient.Name}"
                                 CanUserResize="False" Width="0.05*" />
                     </DataGrid.Columns>
-                    <DataGrid.RowStyle>
-                        <Style TargetType="DataGridRow">
-                            <EventSetter Event="KeyDown" Handler="ChangeApp_KeyDown" />
-                        </Style>
-                    </DataGrid.RowStyle>
                 </DataGrid>
             </Grid>
 

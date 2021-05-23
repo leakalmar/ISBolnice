@@ -33,6 +33,8 @@ namespace Hospital_IS.Commands
             _execute(parameter);
         }
 
+
+
         // public event EventHandler CanExecuteChanged;
     }
 }
