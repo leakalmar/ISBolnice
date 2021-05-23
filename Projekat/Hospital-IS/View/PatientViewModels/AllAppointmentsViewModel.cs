@@ -66,7 +66,7 @@ namespace Hospital_IS.View.PatientViewModels
                 if (doctorName != value)
                 {
                     doctorName = value;
-                    OnPropertyChanged("Doctor");
+                    OnPropertyChanged("DoctorName");
                 }
             }
         }
@@ -140,10 +140,8 @@ namespace Hospital_IS.View.PatientViewModels
         {
             Date = SelectedDoctorAppointment.AppointmentStart.ToString("dd.MM.yyyy.");
             DoctorName = SelectedDoctorAppointment.Doctor.Name;
-            MessageBox.Show(SelectedDoctorAppointment.Doctor.Name);
             AppointmentType = SelectedDoctorAppointment.AppTypeText;
             RoomId = SelectedDoctorAppointment.Room;
-            MessageBox.Show(SelectedDoctorAppointment.Room.ToString());
             Details = SelectedDoctorAppointment.AppointmentCause;
             ShouldShowNote = true;
             if (SelectedDoctorAppointment.AppointmentStart <= DateTime.Today && !PatientAppointmentEvaluationController.Instance.IsAppointmentEvaluated(SelectedDoctorAppointment.Id))
@@ -165,7 +163,7 @@ namespace Hospital_IS.View.PatientViewModels
 
         private void ShowAppNote()
         {
-            PatientNoteView appointmentNote = new PatientNoteView();
+            PatientNoteView appointmentNote = new PatientNoteView(SelectedDoctorAppointment.Id);
             appointmentNote.AppointmentNoteViewModel.OnRequestClose += (s, e) => appointmentNote.Close();
             appointmentNote.Show();
         }

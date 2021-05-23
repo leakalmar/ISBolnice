@@ -12,18 +12,28 @@
     <Grid>
         <Border CornerRadius="20" Background="White" BorderBrush="#FF184095" BorderThickness="5" />
         <Label Content="Vreme:" Width="150" Margin="20,36,0,328" HorizontalAlignment="Left" FontSize="22" Foreground="#FF184095" FontWeight="Bold" />
-        <ComboBox x:Name="Grades" SelectedIndex="{Binding Grade}" Background="#FF184095" Margin="200,44,150,328" FontSize="14" Height="28" Foreground="#FF020000" BorderBrush="#FF184095">
-            <ComboBoxItem Content="1"/>
-            <ComboBoxItem Content="2"/>
-            <ComboBoxItem Content="3"/>
-            <ComboBoxItem Content="4"/>
-            <ComboBoxItem Content="5"/>
+        <ComboBox x:Name="Grades" SelectedIndex="{Binding NotificationTime}" Background="#FF184095" Margin="200,44,150,328" FontSize="14" Height="28" Foreground="#FF020000" BorderBrush="#FF184095">
+            <ComboBoxItem Content="8:00h"/>
+            <ComboBoxItem Content="9:00h"/>
+            <ComboBoxItem Content="10:00h"/>
+            <ComboBoxItem Content="11:00h"/>
+            <ComboBoxItem Content="12:00h"/>
+            <ComboBoxItem Content="13:00h"/>
+            <ComboBoxItem Content="14:00h"/>
+            <ComboBoxItem Content="15:00h"/>
+            <ComboBoxItem Content="16:00h"/>
+            <ComboBoxItem Content="17:00h"/>
+            <ComboBoxItem Content="18:00h"/>
+            <ComboBoxItem Content="19:00h"/>
+            <ComboBoxItem Content="20:00h"/>
+            <ComboBoxItem Content="21:00h"/>
+            <ComboBoxItem Content="22:00h"/>
         </ComboBox>
         <Label Content="Podsetnik:" Width="150" Margin="20,120,0,228" HorizontalAlignment="Left" FontSize="22" Foreground="#FF184095" FontWeight="Bold" />
-        <CheckBox x:Name="cb1" Content="Obavesti me"
+        <CheckBox x:Name="cb1" Content="Obavesti me" IsChecked="{Binding IsNotifyChecked}"
             Margin="200,135,0,228" />
         <Label Content="Beleška:" Width="150" Margin="20,183,0,167" HorizontalAlignment="Left" FontSize="22" Foreground="#FF184095" FontWeight="Bold" />
-        <TextBox x:Name="Comment" Text="{Binding Comment, Mode=TwoWay}" BorderBrush="#FF184095" TextWrapping="Wrap" Width="400" Background="{x:Null}" Height="100" Margin="25,232,25,68" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" Foreground="Black"/>
+        <TextBox x:Name="Comment" Text="{Binding NoteContent, Mode=TwoWay}" BorderBrush="#FF184095" TextWrapping="Wrap" Width="400" Background="{x:Null}" Height="100" Margin="25,232,25,68" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" Foreground="Black"/>
         <Button x:Name="Evaluate" Command="{Binding AppointmentNote}" Grid.Column="1" Margin="100,350,100,20" Foreground="#FFFDFDFD" Cursor="Hand" FontSize="18" >
             <Button.Resources>
                 <Style TargetType="Border">

@@ -1,5 +1,6 @@
 ﻿using DoctorView;
 using Hospital_IS.DoctorView;
+using Hospital_IS.Model;
 using Hospital_IS.Storages;
 using Model;
 using Storages;
@@ -193,6 +194,31 @@ namespace Service
         public void ReloadPatients()
         {
             AllPatients = pfs.GetAll();
+        }
+
+        public PatientNote GetNoteForPatientByAppointmentId(int patientId, int appointmentId)
+        {
+            Patient patient = GetPatientByID(patientId);
+            foreach (PatientNote note in patient.PatientNotes)
+            {
+                if (note.AppointmentId.Equals(appointmentId))
+                {
+                    return note;
+                }
+            }
+            return null;
+        }
+
+        public void AddAppointmentNote(int patientId, PatientNote patientNote)
+        {
+            Patient patient = GetPatientByID(patientId);
+            patient.PatientNotes.Add(patientNote);
+            pfs.SavePatients(AllPatients);
+        }
+
+        public void SavePatients()
+        {
+            pfs.SavePatients(AllPatients);
         }
 
     }

@@ -15,6 +15,15 @@
       "AppointmentCounterInTimeRange": 2,
       "IsTroll": false
     },
+    "PatientNotes": [
+      {
+        "$id": "3",
+        "NotificationTime": 11,
+        "IsNotifyChecked": true,
+        "NoteContent": "Setaj sat vremena!!!",
+        "AppointmentId": 5
+      }
+    ],
     "IsGuest": false,
     "doctor": null,
     "Doctor": null,
@@ -32,7 +41,7 @@
     "Hospital": null
   },
   {
-    "$id": "3",
+    "$id": "4",
     "hospital": null,
     "FileDate": "2021-03-29T23:21:22.7064891+02:00",
     "Employer": "neki poslodavac",
@@ -42,11 +51,12 @@
       "Paracetamol"
     ],
     "TrollMechanism": {
-      "$id": "4",
+      "$id": "5",
       "TrollCheckStartDate": "0001-01-01T00:00:00",
       "AppointmentCounterInTimeRange": 0,
       "IsTroll": false
     },
+    "PatientNotes": [],
     "IsGuest": false,
     "doctor": null,
     "Doctor": null,
@@ -64,7 +74,7 @@
     "Hospital": null
   },
   {
-    "$id": "5",
+    "$id": "6",
     "hospital": null,
     "FileDate": "2021-03-29T23:21:22.7064923+02:00",
     "Employer": "neki poslodavac",
@@ -74,11 +84,12 @@
       "Paracetamol"
     ],
     "TrollMechanism": {
-      "$id": "6",
+      "$id": "7",
       "TrollCheckStartDate": "0001-01-01T00:00:00",
       "AppointmentCounterInTimeRange": 0,
       "IsTroll": false
     },
+    "PatientNotes": [],
     "IsGuest": false,
     "doctor": null,
     "Doctor": null,

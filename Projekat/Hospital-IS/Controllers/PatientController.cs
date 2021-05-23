@@ -1,4 +1,5 @@
 ﻿using DoctorView;
+using Hospital_IS.Model;
 using Model;
 using Service;
 using System;
@@ -78,6 +79,21 @@ namespace Controllers
         public bool IsPatientTroll(Patient patient, DoctorAppointment doctorAppointment)
         {
             return PatientService.Instance.IsPatientTroll(patient, doctorAppointment);
+        }
+
+        public PatientNote GetNoteForPatientByAppointmentId(int patientId, int appointmentId)
+        {
+            return PatientService.Instance.GetNoteForPatientByAppointmentId(patientId, appointmentId);
+        }
+
+        public void AddAppointmentNote(int patientId, PatientNote patientNote)
+        {
+            PatientService.Instance.AddAppointmentNote(patientId, patientNote);
+        }
+
+        public void SavePatients()
+        {
+            PatientService.Instance.SavePatients();
         }
     }
 }

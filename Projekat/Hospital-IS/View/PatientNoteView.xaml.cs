@@ -20,9 +20,9 @@ namespace Hospital_IS.View
     {
         public PatientNoteViewModel AppointmentNoteViewModel { get; set; }
                
-        public PatientNoteView()
+        public PatientNoteView(int appointmentId)
         {
-            AppointmentNoteViewModel = new PatientNoteViewModel();
+            AppointmentNoteViewModel = new PatientNoteViewModel(appointmentId);
             this.DataContext = AppointmentNoteViewModel;
             InitializeComponent();
         }
