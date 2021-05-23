@@ -12,6 +12,7 @@
     </UserControl.Resources>
     <UserControl.InputBindings>
         <KeyBinding Key="Add" Modifiers="Ctrl" Command="{Binding AddCommand}" />
+        <KeyBinding Key="Esc" Command="{Binding EndAppointmentCommand}" />
     </UserControl.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -183,7 +184,12 @@
                 VerticalAlignment="Center" Padding="150,5,150,5" x:Name="end"
                 Visibility="{Binding SelectedAppointment.Started, Converter={StaticResource BoolToVisibility}}">
             <Button Content="Završi termin" Foreground="FloralWhite"
-                    FontSize="18" BorderThickness="0" Background="{x:Null}" />
+                    FontSize="18" BorderThickness="0" Background="{x:Null}">
+                <Button.InputBindings>
+                    <KeyBinding Key="Return"
+                            Command="{Binding EndAppointmentCommand}" />
+                </Button.InputBindings>
+            </Button>
         </Border>
 
     </Grid>

@@ -176,7 +176,7 @@ namespace Hospital_IS.DoctorViewModel
                 case 2:
                     History history = new History();
                     history._ViewModel.InsideNavigationService = InsideNavigationService;
-                    history._ViewModel.AppointmentStart = SelectedAppointment.DoctorAppointment.AppointmentStart;
+                    
                     history._ViewModel.Patient = Patient;
                     this.InsideNavigationService.Navigate(history);
                     break;
@@ -202,10 +202,14 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_EndAppointmentCommand(object obj)
         {
-            DoctorAppointmentController.Instance.EndAppointment(SelectedAppointment.DoctorAppointment);
-            ChartController.Instance.AddReport(SelectedAppointment.DoctorAppointment, ReportView.reportDetail.Text, ReportView._ViewModel.Prescriptions.Count, SelectedAppointment.DoctorAppointment.Patient);
-            ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView._ViewModel.Prescriptions), SelectedAppointment.DoctorAppointment.Patient);
-            this.MainNavigationService.Navigate(new AppDetail(MainNavigationService));
+            bool dialog = (bool)new ExitMess("Da li želite da završite termin?").ShowDialog();
+            if (dialog)
+            {
+                DoctorAppointmentController.Instance.EndAppointment(SelectedAppointment.DoctorAppointment);
+                ChartController.Instance.AddReport(SelectedAppointment.DoctorAppointment, ReportView.reportDetail.Text, ReportView._ViewModel.Prescriptions.Count, SelectedAppointment.DoctorAppointment.Patient);
+                ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView._ViewModel.Prescriptions), SelectedAppointment.DoctorAppointment.Patient);
+                this.MainNavigationService.Navigate(new AppDetail());
+            }
         }
 
         private void Execute_AddCommand(object obj)
@@ -227,7 +231,8 @@ namespace Hospital_IS.DoctorViewModel
         #region Constructor
         public PatientChartViewModel()
         {
-            this.ReportView = new DoctorView.ReportView();
+            this.ReportView = new ReportView();
+            this.MainNavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
             this.AddCommand = new RelayCommand(Execute_AddCommand, CanExecute_Command);
             this.ChangeCommand = new RelayCommand(Execute_ChangeCommand, CanExecute_Command);
             this.EndAppointmentCommand = new RelayCommand(Execute_EndAppointmentCommand, CanExecute_Command);

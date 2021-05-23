@@ -12,8 +12,7 @@ namespace Hospital_IS.DoctorViewModel
 {
     public class HistoryViewModel : BindableBase
     {
-        #region
-        private DateTime appointmentStart;
+        #region Fields
         private bool started;
         private Patient patient;
         private ObservableCollection<Report> reports;
@@ -28,14 +27,7 @@ namespace Hospital_IS.DoctorViewModel
                 insideNavigationService = value;
             }
         }
-        public DateTime AppointmentStart
-        {
-            get { return appointmentStart; }
-            set
-            {
-                appointmentStart = value;
-            }
-        }
+
         public bool Started
         {
             get { return started; }

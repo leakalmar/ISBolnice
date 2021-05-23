@@ -61,10 +61,10 @@ namespace Controllers
 
         }
 
-        public List<MedicineDTO> GenerateListOfMedicines(Patient patient)
+        public List<MedicineDTO> GenerateListOfMedicines(Patient patient, List<Prescription> prescriptions)
         {
             List<MedicineDTO> medicineList = new List<MedicineDTO>();
-            
+
             foreach (Medicine medicine in MedicineService.Instance.AllMedicines)
             {
                 if (PatientService.Instance.CheckIfAllergicToMedicine(patient.Alergies, medicine.Name))
@@ -73,11 +73,32 @@ namespace Controllers
                 }
                 else
                 {
-                    medicineList.Add(new MedicineDTO(medicine, false, false));
+                    if (CheckIfInPrescriptions(medicine, prescriptions))
+                    {
+                        medicineList.Add(new MedicineDTO(medicine, true, false));
+                    }
+                    else
+                    {
+                        medicineList.Add(new MedicineDTO(medicine, false, false));
+                    }
                 }
 
             }
             return medicineList;
+        }
+
+        private bool CheckIfInPrescriptions(Medicine medicine, List<Prescription> prescriptions)
+        {
+            bool ret = false;
+            foreach (Prescription prescription in prescriptions)
+            {
+                if (prescription.Medicine.Name.Equals(medicine.Name))
+                {
+                    ret = true;
+                    break;
+                }
+            }
+            return ret;
         }
     }
 }

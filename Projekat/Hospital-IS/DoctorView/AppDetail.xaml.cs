@@ -16,10 +16,10 @@ namespace Hospital_IS.DoctorView
         }
 
 
-        public AppDetail(NavigationService service)
+        public AppDetail()
         {
             InitializeComponent();
-            AppDetailViewModel vm = new AppDetailViewModel(service);
+            AppDetailViewModel vm = new AppDetailViewModel();
             this._ViewModel = vm;
             this.DataContext = vm;
             

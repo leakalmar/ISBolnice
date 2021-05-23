@@ -4,6 +4,7 @@ using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
 using Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Navigation;
@@ -49,7 +50,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 prescriptions = value;
                 OnPropertyChanged("Prescriptions");
-                this.MedicineList = new ObservableCollection<MedicineDTO>(MedicineController.Instance.GenerateListOfMedicines(Patient));
+                this.MedicineList = new ObservableCollection<MedicineDTO>(MedicineController.Instance.GenerateListOfMedicines(Patient, new List<Prescription>(prescriptions)));
             }
         }
 
@@ -85,7 +86,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 patient = value;
                 OnPropertyChanged("Patient");
-                this.MedicineList = new ObservableCollection<MedicineDTO>(MedicineController.Instance.GenerateListOfMedicines(Patient));
+                //this.MedicineList = new ObservableCollection<MedicineDTO>(MedicineController.Instance.GenerateListOfMedicines(Patient));
             }
         }
 

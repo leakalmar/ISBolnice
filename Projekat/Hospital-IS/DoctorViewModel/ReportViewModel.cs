@@ -95,8 +95,8 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_SearchMedicineCommad(object obj)
         {
-            PatientChart.Instance._ViewModel.SearchMedicineView._ViewModel.Prescriptions = Prescriptions;
-            MainNavigationService.Navigate(PatientChart.Instance._ViewModel.SearchMedicineView);
+            DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.SearchMedicineView._ViewModel.Prescriptions = Prescriptions;
+            MainNavigationService.Navigate(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.SearchMedicineView);
         }
 
         #endregion

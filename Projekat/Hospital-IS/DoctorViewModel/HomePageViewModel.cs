@@ -63,7 +63,7 @@ namespace Hospital_IS.DoctorViewModel
         {
             if (SelectedAppointment != null && e.Key == Key.Enter)
             {
-                AppDetail appDetail = new AppDetail(NavigationService);
+                AppDetail appDetail = new AppDetail();
                 appDetail._ViewModel.SelectedAppointment = SelectedAppointment;
                 appDetail._ViewModel.AppointmentsView = AppointmentsView;
                 this.NavigationService.Navigate(appDetail);
@@ -96,7 +96,7 @@ namespace Hospital_IS.DoctorViewModel
         {
             if(selectedAppointment != null)
             {
-                AppDetail appDetail = new AppDetail(NavigationService);
+                AppDetail appDetail = new AppDetail();
                 appDetail._ViewModel.SelectedAppointment = SelectedAppointment;
                 appDetail._ViewModel.AppointmentsView = AppointmentsView;
                 this.NavigationService.Navigate(appDetail);

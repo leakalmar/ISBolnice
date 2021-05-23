@@ -187,7 +187,6 @@ namespace Hospital_IS.DoctorViewModel
                 duration = value;
                 OnPropertyChanged("ToDate");
                 FilterAppointments();
-                MainNavigationService.Refresh();
             }
         }
         public NavigationService MainNavigationService

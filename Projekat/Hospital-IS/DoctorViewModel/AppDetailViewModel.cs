@@ -1,10 +1,15 @@
-﻿using Hospital_IS.Commands;
+﻿using Controllers;
+using Hospital_IS.Commands;
+using Hospital_IS.DoctorConverters;
 using Hospital_IS.DoctorView;
+using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.DoctorViewModel
@@ -74,8 +79,8 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_OpenChartCommand(object obj)
         {
             PatientChart chart = new PatientChart();
-            chart._ViewModel.MainNavigationService = NavigationService;
             chart._ViewModel.SelectedAppointment = SelectedAppointment;
+            DoctorMainWindow.Instance._ViewModel.PatientChartView = chart;
             this.NavigationService.Navigate(chart);
         }
 
@@ -83,7 +88,6 @@ namespace Hospital_IS.DoctorViewModel
         {
             SelectedAppointment.Started = true;
             PatientChart chart = new PatientChart();
-            chart._ViewModel.MainNavigationService = NavigationService;
             chart._ViewModel.SelectedAppointment = SelectedAppointment;
             DoctorMainWindow.Instance._ViewModel.PatientChartView = chart;
             this.NavigationService.Navigate(chart);
@@ -95,11 +99,29 @@ namespace Hospital_IS.DoctorViewModel
         }
         #endregion
 
-        public AppDetailViewModel(NavigationService navigationService)
+        public AppDetailViewModel()
         {
             this.OpenChartCommand = new RelayCommand(Execute_OpenChartCommand, CanExecute_NavigateCommand);
             this.StartAppointmentCommand = new RelayCommand(Execute_StartAppointmentCommand, CanExecute_NavigateCommand);
-            this.NavigationService = navigationService;
+            this.NavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
+            List<DoctorAppointment> appointments = DoctorAppointmentController.Instance.GetAllByDoctor(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
+            ObservableCollection<StartAppointmentDTO> doctorAppointments = new DoctorAppointmentConverter().ConvertCollectionToViewModel(appointments);
+
+            appointmentsView = new CollectionViewSource { Source = doctorAppointments }.View;
+
+            appointmentsView.Filter = delegate (object item)
+            {
+                return ((StartAppointmentDTO)item).DoctorAppointment.AppointmentStart.Date == DateTime.Now.Date;
+            };
+            appointmentsView.SortDescriptions.Add(new SortDescription("DoctorAppointment.AppointmentStart", ListSortDirection.Ascending));
+            if(appointments.Count == 0)
+            {
+                DoctorMainWindow.Instance._ViewModel.NavigateToHomePageCommand.Execute(null);
+            }
+            else
+            {
+                SelectedAppointment = doctorAppointments[0];
+            }
         }
     }
 }

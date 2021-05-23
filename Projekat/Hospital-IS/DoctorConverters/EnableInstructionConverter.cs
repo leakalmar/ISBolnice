@@ -20,10 +20,18 @@ namespace Hospital_IS.DoctorConverters
             try
             {
                 appointmentDoctor = (Doctor)values[1];
-                emergencyAppointmentDoctor = (Doctor)values[2];
 
 #pragma warning disable CS0168 // Variable is declared but never used
                } catch(Exception e) {  }
+#pragma warning restore CS0168 // Variable is declared but never 
+
+            try
+            {
+                emergencyAppointmentDoctor = (Doctor)values[2];
+
+#pragma warning disable CS0168 // Variable is declared but never used
+            }
+            catch (Exception e) { }
 #pragma warning restore CS0168 // Variable is declared but never used
 
             if (appointmentDoctor != null)
