@@ -26,7 +26,8 @@ namespace Hospital_IS.DoctorViewModel
         public Doctor Doctor
         {
             get { return doctor; }
-            set {
+            set
+            {
                 doctor = value;
                 OnPropertyChanged("Doctor");
             }
@@ -60,6 +61,7 @@ namespace Hospital_IS.DoctorViewModel
         private RelayCommand navigateToChartCommand;
         private RelayCommand navigateToMedicinesCommand;
         private RelayCommand navigateToUpdateMedicineCommand;
+        private RelayCommand navigateToViewMedicineCommand;
         private RelayCommand navigateToRoomsCommand;
         private RelayCommand navigateToPrescriptionsCommand;
         private RelayCommand navigateToApproveMedicineCommand;
@@ -73,133 +75,94 @@ namespace Hospital_IS.DoctorViewModel
         public RelayCommand NavigateToHomePageCommand
         {
             get { return navigateToHomePageCommand; }
-            set
-            {
-                navigateToHomePageCommand = value;
-            }
+            set { navigateToHomePageCommand = value; }
         }
 
         public RelayCommand NavigateToAppointmentsCommand
         {
             get { return navigateToAppointmentsCommand; }
-            set
-            {
-                navigateToAppointmentsCommand = value;
-            }
+            set { navigateToAppointmentsCommand = value; }
         }
         public RelayCommand NavigateToPatientsCommand
         {
             get { return navigateToPatientsCommand; }
-            set
-            {
-                navigateToPatientsCommand = value;
-            }
+            set { navigateToPatientsCommand = value; }
         }
 
         public RelayCommand NavigateToChartCommand
         {
             get { return navigateToChartCommand; }
-            set
-            {
-                navigateToChartCommand = value;
-            }
+            set { navigateToChartCommand = value; }
         }
 
         public RelayCommand NavigateToMedicinesCommand
         {
             get { return navigateToMedicinesCommand; }
-            set
-            {
-                navigateToMedicinesCommand = value;
-            }
+            set { navigateToMedicinesCommand = value; }
+        }
+
+        public RelayCommand NavigateToViewMedicineCommand
+        {
+            get { return navigateToViewMedicineCommand; }
+            set { navigateToViewMedicineCommand = value; }
         }
 
         public RelayCommand NavigateToUpdateMedicineCommand
         {
             get { return navigateToUpdateMedicineCommand; }
-            set
-            {
-                navigateToUpdateMedicineCommand = value;
-            }
+            set { navigateToUpdateMedicineCommand = value; }
         }
         public RelayCommand NavigateToRoomsCommand
         {
             get { return navigateToRoomsCommand; }
-            set
-            {
-                navigateToRoomsCommand = value;
-            }
+            set { navigateToRoomsCommand = value; }
         }
 
         public RelayCommand NavigateToPrescriptionsCommand
         {
             get { return navigateToPrescriptionsCommand; }
-            set
-            {
-                navigateToPrescriptionsCommand = value;
-            }
+            set { navigateToPrescriptionsCommand = value; }
         }
         public RelayCommand NavigateToApproveMedicineCommand
         {
             get { return navigateToApproveMedicineCommand; }
-            set
-            {
-                navigateToApproveMedicineCommand = value;
-            }
+            set { navigateToApproveMedicineCommand = value; }
         }
 
         public RelayCommand NavigateToNotificationsCommand
         {
             get { return navigateToNotificationsCommand; }
-            set
-            {
-                navigateToNotificationsCommand = value;
-            }
+            set { navigateToNotificationsCommand = value; }
         }
 
         public RelayCommand NavigateBackCommand
         {
             get { return navigateBackCommand; }
-            set
-            {
-                navigateBackCommand = value;
-            }
+            set { navigateBackCommand = value; }
         }
 
         public RelayCommand NavigateToLogInCommand
         {
             get { return navigateToLogInCommand; }
-            set
-            {
-                navigateToLogInCommand = value;
-            }
+            set { navigateToLogInCommand = value; }
         }
 
         public RelayCommand MinimizeCommand
         {
             get { return minimizeCommand; }
-            set
-            {
-                minimizeCommand = value;
-            }
+            set { minimizeCommand = value; }
         }
 
         public RelayCommand MaximizeCommand
         {
             get { return maximizeCommand; }
-            set
-            {
-                maximizeCommand = value;
-            }
+            set { maximizeCommand = value; }
         }
 
         public RelayCommand OnLoadedCommand
         {
             get { return onLoadedCommand; }
-            set
-            {
-                onLoadedCommand = value;
-            }
+            set { onLoadedCommand = value; }
         }
         #endregion
 
@@ -217,7 +180,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_NavigateToAppointmentsCommand(object obj)
         {
-            if(AppointmentsView == null)
+            if (AppointmentsView == null)
             {
                 AppointmentsView = new Appointments();
             }
@@ -239,6 +202,12 @@ namespace Hospital_IS.DoctorViewModel
         {
             this.NavigationService.Navigate(
                 new Uri("DoctorView/Medicines.xaml", UriKind.Relative));
+        }
+
+        private void Execute_NavigateToViewMedicineCommand(object obj)
+        {
+            ViewMedicine view = new ViewMedicine();
+            this.NavigationService.Navigate(view);
         }
 
         private void Execute_NavigateToUpdateMedicineCommand(object obj)
@@ -317,7 +286,7 @@ namespace Hospital_IS.DoctorViewModel
         #endregion
 
         #region Constructor
-        public DoctorMainWindowModel (NavigationService navigationService)
+        public DoctorMainWindowModel(NavigationService navigationService)
         {
             this.NavigateToHomePageCommand = new RelayCommand(Execute_NavigateToHomePageCommand, CanExecute_NavigateCommand);
             this.NavigateToAppointmentsCommand = new RelayCommand(Execute_NavigateToAppointmentsCommand, CanExecute_NavigateCommand);
@@ -326,6 +295,7 @@ namespace Hospital_IS.DoctorViewModel
             this.NavigateToUpdateMedicineCommand = new RelayCommand(Execute_NavigateToUpdateMedicineCommand, CanExecute_NavigateCommand);
             this.NavigateToMedicinesCommand = new RelayCommand(Execute_NavigateToMedicinesCommand, CanExecute_NavigateCommand);
             this.NavigateToRoomsCommand = new RelayCommand(Execute_NavigateToRoomsCommand, CanExecute_NavigateCommand);
+            this.NavigateToViewMedicineCommand = new RelayCommand(Execute_NavigateToViewMedicineCommand, CanExecute_NavigateCommand);
             this.NavigateToPrescriptionsCommand = new RelayCommand(Execute_NavigateToPrescriptionsCommand, CanExecute_NavigateCommand);
             this.NavigateToApproveMedicineCommand = new RelayCommand(Execute_NavigateToApprovemedicineCommand, CanExecute_NavigateCommand);
             this.NavigateToNotificationsCommand = new RelayCommand(Execute_NavigateToNotificationsCommand, CanExecute_NavigateCommand);

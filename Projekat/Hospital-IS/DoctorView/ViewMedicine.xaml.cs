@@ -49,6 +49,7 @@ namespace Hospital_IS.DoctorView
             }
         }
         public MedicineNotification ReviewdNotification { get; set; }
+        public ViewMedicine() { }
         public ViewMedicine(MedicineNotification notification)
         {
             InitializeComponent();
