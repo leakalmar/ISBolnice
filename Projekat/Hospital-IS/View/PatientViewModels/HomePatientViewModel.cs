@@ -37,7 +37,7 @@ namespace Hospital_IS.View.PatientViewModels
 
         public MyICommand CancelAppointment { get; set; }
         public MyICommand RescheduleAppointment { get; set; }
-
+        public static DoctorAppointment SelectedAppointment { get; set; }
         public HomePatientViewModel()
         {
             patient = PatientMainWindowViewModel.Patient;
@@ -63,6 +63,7 @@ namespace Hospital_IS.View.PatientViewModels
                 {
                     selectedApp = value;
                     OnPropertyChanged("SelectedApp");
+                    SelectedAppointment = selectedApp;
                 }
             }
         }

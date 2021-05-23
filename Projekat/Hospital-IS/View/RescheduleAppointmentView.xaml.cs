@@ -26,6 +26,8 @@ namespace Hospital_IS.View
             Res = new RescheduleAppointmentViewModel();
             this.DataContext = Res;
             InitializeComponent();
+            Calendar.DisplayDateStart = Res.Date;
+            Calendar.DisplayDateEnd = Res.Date.AddDays(3);
         }
     }
 }

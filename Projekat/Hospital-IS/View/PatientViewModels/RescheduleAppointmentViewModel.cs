@@ -31,34 +31,46 @@ namespace Hospital_IS.View.PatientViewModels
             Doctors = new ObservableCollection<Doctor>(DoctorController.Instance.GetAll());
             ShowAvailableAppointments = new MyICommand(ShowAvailableApp);
             RescheduleAppointment = new MyICommand(RescheduleApp);
-            /*rescheduledApp = doctorAppointment;
-            Date = doctorAppointment.AppointmentStart.Date;
-            Doctor = doctorAppointment.Doctor;
-            if (doctorAppointment.AppointmentStart.Hour < 11)
+            RescheduledApp = HomePatientViewModel.SelectedAppointment;
+            Date = RescheduledApp.AppointmentStart.Date;
+            Doctor = RescheduledApp.Doctor;
+            if (RescheduledApp.AppointmentStart.Hour < 11)
             {
                 TimeSlot = 0;
             }
-            else if (doctorAppointment.AppointmentStart.Hour < 14 && doctorAppointment.AppointmentStart.Hour >= 11)
+            else if (RescheduledApp.AppointmentStart.Hour < 14 && RescheduledApp.AppointmentStart.Hour >= 11)
             {
                 TimeSlot = 1;
             }
-            else if (doctorAppointment.AppointmentStart.Hour < 17 && doctorAppointment.AppointmentStart.Hour >= 14)
+            else if (RescheduledApp.AppointmentStart.Hour < 17 && RescheduledApp.AppointmentStart.Hour >= 14)
             {
                 TimeSlot = 2;
             }
-            else if (doctorAppointment.AppointmentStart.Hour < 20 && doctorAppointment.AppointmentStart.Hour >= 17)
+            else if (RescheduledApp.AppointmentStart.Hour < 20 && RescheduledApp.AppointmentStart.Hour >= 17)
             {
                 TimeSlot = 3;
             }
             PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.ToString(), Doctor, PatientMainWindowViewModel.Patient, Date, false);
             List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(possibleAppointment);
-            MessageBox.Show("MMMMM");
             foreach (DoctorAppointment doctorApp in docApps)
             {
                 AvailableAppointments.Add(doctorApp);
-            }*/
+            }
+            /*
             Doctor = Doctors[4];
-            Date = DateTime.Today.Date;
+            Date = DateTime.Today.Date;*/
+        }
+
+        public DoctorAppointment RescheduledApp
+        {
+            get { return rescheduledApp; }
+            set
+            {
+                if(rescheduledApp != value)
+                {
+                    rescheduledApp = value;
+                }
+            }
         }
 
         public Doctor Doctor

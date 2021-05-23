@@ -187,10 +187,8 @@ namespace Service
         {
             int slotStart = 8;
             int slotLength = 3;
-            MessageBox.Show(possibleAppointment.TimeSlot);
             if (possibleAppointment.TimeSlot == null)
             {
-                MessageBox.Show("USAO");
                 slotStart = 8;
             }
             else if (possibleAppointment.TimeSlot.Equals("0"))
@@ -203,14 +201,12 @@ namespace Service
             }
             else if (possibleAppointment.TimeSlot.Equals("2"))
             {
-                MessageBox.Show("DA");
                 slotStart = 14;
             }
             else if (possibleAppointment.TimeSlot.Equals("3"))
             {
                 slotStart = 17;
             }
-            MessageBox.Show(slotStart.ToString());
             List<DoctorAppointment> allPossibleAppointments = new List<DoctorAppointment>();
             DateTime possibleAppointmentTime = SetPossibleAppointmentTime(possibleAppointment.Date, slotStart);           
 

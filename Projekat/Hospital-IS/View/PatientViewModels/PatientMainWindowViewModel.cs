@@ -93,5 +93,11 @@ namespace Hospital_IS.View.PatientViewModels
             a.SetRescheduleAppointmentView(docApp);
             CurrentViewModel = a;
         }
+
+        public HomePatientViewModel HomePatientViewModel
+        {
+            get { return homePatientViewModel; }
+            set { }
+        }
     }
 }
