@@ -7,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Text;
-using System.Windows;
 using System.Windows.Data;
 using System.Windows.Navigation;
 
@@ -78,6 +76,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_OpenChartCommand(object obj)
         {
+            SelectedAppointment.Started = false;
             PatientChart chart = new PatientChart();
             chart._ViewModel.SelectedAppointment = SelectedAppointment;
             DoctorMainWindow.Instance._ViewModel.PatientChartView = chart;

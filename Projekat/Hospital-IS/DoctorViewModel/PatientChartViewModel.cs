@@ -19,6 +19,8 @@ namespace Hospital_IS.DoctorViewModel
         private int lastTab = 0;
         private Thickness margin = new Thickness(0);
 
+        private bool started;
+
         public NavigationService MainNavigationService
         {
             get { return mainNavigationService; }
@@ -43,13 +45,28 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 patient = value;
-
-                SearchMedicineView = new SearchMedicine();
-                SearchMedicineView._ViewModel.Patient = Patient;
-                SearchMedicineView._ViewModel.DatePrescribed = SelectedAppointment.DoctorAppointment.AppointmentStart;
-                SearchMedicineView._ViewModel.MainNavigationService = MainNavigationService;
+                if (SelectedAppointment == null)
+                {
+                    GeneralInfo view = new GeneralInfo();
+                    view._ViewModel.Started = Started;
+                    view._ViewModel.Patient = Patient;
+                    InsideNavigationService.Navigate(view);
+                }
+                else
+                {
+                    if (SelectedAppointment.Started == true)
+                    {
+                        InsideNavigationService.Navigate(ReportView);
+                    }
+                    else
+                    {
+                        GeneralInfo view = new GeneralInfo();
+                        view._ViewModel.Started = Started;
+                        view._ViewModel.Patient = Patient;
+                        InsideNavigationService.Navigate(view);
+                    }
+                }
                 OnPropertyChanged("Patient");
-
             }
         }
 
@@ -60,14 +77,11 @@ namespace Hospital_IS.DoctorViewModel
             {
                 selectedAppointment = value;
                 Patient = selectedAppointment.DoctorAppointment.Patient;
-                if (SelectedAppointment.Started == true)
-                {
-                    InsideNavigationService.Navigate(ReportView);
-                }
-                else
-                {
-                    InsideNavigationService.Navigate(new GeneralInfo());
-                }
+                SearchMedicineView = new SearchMedicine();
+                SearchMedicineView._ViewModel.Patient = Patient;
+                SearchMedicineView._ViewModel.DatePrescribed = SelectedAppointment.DoctorAppointment.AppointmentStart;
+                SearchMedicineView._ViewModel.MainNavigationService = MainNavigationService;
+                Started = SelectedAppointment.Started;
                 OnPropertyChanged("SelectedAppointment");
             }
         }
@@ -89,6 +103,16 @@ namespace Hospital_IS.DoctorViewModel
             {
                 margin = value;
                 OnPropertyChanged("Margin");
+            }
+        }
+
+        public bool Started
+        {
+            get { return started; }
+            set
+            {
+                started = value;                
+                OnPropertyChanged("Started");
             }
         }
         #endregion
@@ -153,13 +177,23 @@ namespace Hospital_IS.DoctorViewModel
 
             int index = Int32.Parse(((string)obj));
 
-            if (SelectedAppointment.Started == true)
+            Started = false;
+            if (SelectedAppointment == null)
             {
-                Margin = new Thickness(120 * index, 0, 0, 0);
+                Margin = new Thickness(120 * index - 120, 0, 0, 0);
             }
             else
             {
-                Margin = new Thickness(120 * index - 120, 0, 0, 0);
+
+                if (SelectedAppointment.Started == true)
+                {
+                    Started = true;
+                    Margin = new Thickness(120 * index, 0, 0, 0);
+                }
+                else if (SelectedAppointment.Started == false)
+                {
+                    Margin = new Thickness(120 * index - 120, 0, 0, 0);
+                }
             }
 
             switch (index)
@@ -169,14 +203,13 @@ namespace Hospital_IS.DoctorViewModel
                     break;
                 case 1:
                     GeneralInfo view = new GeneralInfo();
-                    view._ViewModel.Started = SelectedAppointment.Started;
+                    view._ViewModel.Started = Started;
                     view._ViewModel.Patient = Patient;
                     this.InsideNavigationService.Navigate(view);
                     break;
                 case 2:
                     History history = new History();
                     history._ViewModel.InsideNavigationService = InsideNavigationService;
-                    
                     history._ViewModel.Patient = Patient;
                     this.InsideNavigationService.Navigate(history);
                     break;
@@ -185,12 +218,12 @@ namespace Hospital_IS.DoctorViewModel
                     break;
                 case 4:
                     Therapies therapy = new Therapies();
-                    therapy._ViewModel.Started = SelectedAppointment.Started;
+                    therapy._ViewModel.Started = Started;
                     this.InsideNavigationService.Navigate(therapy);
                     break;
                 case 5:
                     Tests tests = new Tests();
-                    tests._ViewModel.Started = SelectedAppointment.Started;
+                    tests._ViewModel.Started = Started;
                     this.InsideNavigationService.Navigate(tests);
                     break;
             }
@@ -232,6 +265,7 @@ namespace Hospital_IS.DoctorViewModel
         public PatientChartViewModel()
         {
             this.ReportView = new ReportView();
+            Started = false;
             this.MainNavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
             this.AddCommand = new RelayCommand(Execute_AddCommand, CanExecute_Command);
             this.ChangeCommand = new RelayCommand(Execute_ChangeCommand, CanExecute_Command);

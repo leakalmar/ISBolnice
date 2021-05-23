@@ -95,9 +95,15 @@
                 <DataGridTextColumn Header="Datum i Vreme"
                         Binding="{Binding AppointmentStart}"
                         CanUserResize="False" Width="0.05*" />
-                <DataGridTextColumn Header="Pacijent"
-                        Binding="{Binding NameSurnamePatient}"
-                        CanUserResize="False" Width="0.05*" />
+                <DataGridTextColumn Header="Pacijent" CanUserResize="False"
+                        Width="0.05*">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Path=" Patient.Name" />
+                            <Binding Path=" Patient.Surname" />
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Doktor"
                         Binding="{Binding Doctor.Surname}" CanUserResize="False"
                         Width="0.05*" />
