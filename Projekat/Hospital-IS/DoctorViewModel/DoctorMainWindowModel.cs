@@ -244,7 +244,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_NavigateToUpdateMedicineCommand(object obj)
         {
             UpdateMedicine updateMedicine = new UpdateMedicine();
-           //updateMedicine._ViewModel.
+            updateMedicine._ViewModel.MedicineWhichIsUpdated = (Medicine)obj;
             this.NavigationService.Navigate(updateMedicine);
         }
 

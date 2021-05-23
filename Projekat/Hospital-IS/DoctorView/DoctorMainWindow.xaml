@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hospital_IS.DoctorView"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors" mc:Ignorable="d"
         Title="DoctorHomePage" Height="640" Width="1024"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
@@ -99,7 +98,8 @@
                 Grid.Row="2" Grid.Column="2" Width="auto"
                 HorizontalAlignment="Center" FontSize="16"
                 FontFamily="Palatino Linotype" Foreground="FloralWhite"
-                FontWeight="Bold" Margin="10,0,0,0" DataContext="{Binding Doctor}">
+                FontWeight="Bold" Margin="10,0,0,0"
+                DataContext="{Binding Doctor}">
             <TextBlock.Text>
                 <MultiBinding StringFormat="{} {0} {1}">
                     <Binding Path="Name" />
@@ -155,8 +155,9 @@
                     Padding="10,0,10,0">
                 <Button Content="Odjavi se" Foreground="FloralWhite"
                         Background="#FF213250" BorderThickness="0"
-                        Command="{Binding Path=NavigateToLogInCommand}" FontSize="16"
-                        HorizontalAlignment="Center" VerticalAlignment="Center">
+                        Command="{Binding Path=NavigateToLogInCommand}"
+                        FontSize="16" HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
                 </Button>
             </Border>
 
@@ -167,8 +168,7 @@
         </Grid>
 
         <Frame x:Name="Home" Grid.Row="2" Grid.Column="3" Grid.RowSpan="3"
-                Margin="20,0,15,0"
-                NavigationUIVisibility="Hidden">
+                Margin="20,0,15,0" NavigationUIVisibility="Hidden">
         </Frame>
 
     </Grid>

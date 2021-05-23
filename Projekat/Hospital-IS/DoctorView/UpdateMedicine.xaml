@@ -5,7 +5,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Hospital_IS.DoctorView" mc:Ignorable="d"
         d:DesignHeight="575.84" d:DesignWidth="783.487394957983">
-
+    <UserControl.InputBindings>
+        <KeyBinding Key="S" Modifiers="Ctrl"
+                Command="{Binding SaveChangesCommand}" />
+    </UserControl.InputBindings>
     <Grid x:Name="medInfo">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -23,7 +26,7 @@
             <RowDefinition Height="0.3*" />
         </Grid.RowDefinitions>
 
-        <Label Content="{Binding Name}" Grid.ColumnSpan="2" FontSize="18"
+        <Label Content="{Binding MedicineWhichIsUpdated.Name}" Grid.ColumnSpan="2" FontSize="18"
                 FontFamily="Verdana" Foreground="FloralWhite" Margin="0,0,20,10"
                 VerticalAlignment="Center" HorizontalAlignment="Center" />
 
@@ -31,11 +34,12 @@
                 TextWrapping="Wrap" TextAlignment="Center"
                 Text="Neki sastojci leka se poklapaju sa lekovima na koje je pacijent alergičan!"
                 FontSize="14" FontFamily="Verdana" Foreground="IndianRed"
-                VerticalAlignment="Center" Margin="5,0,5,0" Visibility="Collapsed" />
+                VerticalAlignment="Center" Margin="5,0,5,0"
+                Visibility="Collapsed" />
 
         <Label Content="Sastav" FontSize="14" Grid.Row="1" FontFamily="Verdana"
-                Foreground="FloralWhite" Padding="150,0,0,0" BorderThickness="0,0,0,2"
-                BorderBrush="Gray" Margin="20,0,20,0" />
+                Foreground="FloralWhite" Padding="150,0,0,0"
+                BorderThickness="0,0,0,2" BorderBrush="Gray" Margin="20,0,20,0" />
 
         <Grid Grid.Row="2" Margin="20,5,20,20">
             <Grid.RowDefinitions>
@@ -46,11 +50,19 @@
                 <ColumnDefinition Width="0.9*" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <Border Grid.Row="0" CornerRadius="20,20,0,0" BorderThickness="1,1,0,1"
-                    Background="#FF213250" BorderBrush="FloralWhite">
+            <Border Grid.Row="0" CornerRadius="20,20,0,0"
+                    BorderThickness="1,1,0,1" Background="#FF213250"
+                    BorderBrush="FloralWhite">
                 <Button FontSize="14" BorderThickness="0" Background="{x:Null}"
-                        Content="Dodaj" Foreground="FloralWhite" x:Name="compositionAdd"
-                        HorizontalAlignment="Stretch" Click="CompositionAdd_Click">
+                        Content="Dodaj" Foreground="FloralWhite"
+                        x:Name="compositionAdd" HorizontalAlignment="Stretch">
+                    <Button.InputBindings>
+                        <KeyBinding Key="Return"
+                                Command="{Binding AddCompositionCommand}" />
+
+                        <KeyBinding Key="Add" Modifiers="Ctrl"
+                                Command="{Binding AddCompositionCommand}" />
+                    </Button.InputBindings>
                 </Button>
             </Border>
             <Image Source="pack://application:,,,/Resources/add-row.png"
@@ -58,17 +70,20 @@
                     VerticalAlignment="Top" />
             <Border Grid.Row="1" Grid.ColumnSpan="2" CornerRadius="0,0,20,20"
                     BorderThickness="1,0,1,1" BorderBrush="FloralWhite">
-                <DataGrid FontSize="14" x:Name="composition" FontFamily="Verdana"
+                <DataGrid ItemsSource="{Binding CompositionOfMedicine}"
+                        SelectedItem="{Binding SelectedComponent}" FontSize="14"
+                        x:Name="composition" FontFamily="Verdana"
                         Foreground="FloralWhite" HeadersVisibility="None"
                         Background="Transparent" RowBackground="Transparent"
                         ScrollViewer.VerticalScrollBarVisibility="Auto"
                         BorderThickness="0" AutoGenerateColumns="False"
                         BorderBrush="{x:Null}" CanUserDeleteRows="True"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                        HorizontalScrollBarVisibility="Disabled" RowHeaderWidth="0"
-                        CanUserSortColumns="False">
+                        HorizontalScrollBarVisibility="Disabled"
+                        RowHeaderWidth="0" CanUserSortColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Path=Component}" Width="*" />
+                        <DataGridTextColumn Binding="{Binding Path=Component}"
+                                Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Border>
@@ -76,8 +91,9 @@
         </Grid>
 
         <Label Content="Zamena" Grid.Row="1" Grid.Column="1" FontSize="14"
-                FontFamily="Verdana" Foreground="FloralWhite" BorderThickness="0,0,0,2"
-                Margin="20,0,20,0" BorderBrush="Gray" Padding="150,0,0,0" />
+                FontFamily="Verdana" Foreground="FloralWhite"
+                BorderThickness="0,0,0,2" Margin="20,0,20,0" BorderBrush="Gray"
+                Padding="150,0,0,0" />
 
         <Grid Grid.Row="2" Grid.Column="1" Margin="20,5,20,20">
             <Grid.RowDefinitions>
@@ -88,67 +104,89 @@
                 <ColumnDefinition Width="0.9*" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <Border Grid.Row="0" CornerRadius="20,20,0,0" BorderThickness="1,1,0,1"
-                    Background="#FF213250" BorderBrush="FloralWhite">
+            <Border Grid.Row="0" CornerRadius="20,20,0,0"
+                    BorderThickness="1,1,0,1" Background="#FF213250"
+                    BorderBrush="FloralWhite">
                 <Button FontSize="14" BorderThickness="0" Background="{x:Null}"
                         Content="Dodaj" Foreground="FloralWhite"
-                        HorizontalAlignment="Stretch" Click="ChangeAdd_Click" />
+                        HorizontalAlignment="Stretch">
+                    <Button.InputBindings>
+                        <KeyBinding Key="Return"
+                                Command="{Binding AddReplaceCommand}" />
+
+                        <KeyBinding Key="Add" Modifiers="Ctrl"
+                                Command="{Binding AddReplaceCommand}" />
+                    </Button.InputBindings>
+                </Button>
             </Border>
             <Image Source="pack://application:,,,/Resources/add-row.png"
                     Margin="290,0,0,0" Grid.ColumnSpan="2" Height="20"
                     VerticalAlignment="Top" />
             <Border Grid.Row="1" Grid.ColumnSpan="2" CornerRadius="0,0,20,20"
                     BorderThickness="1,0,1,1" BorderBrush="FloralWhite">
-                <DataGrid FontSize="14" x:Name="change" FontFamily="Verdana"
+                <DataGrid ItemsSource="{Binding ReplaceMedicines}"
+                        SelectedItem="{Binding SelectedReplace}" FontSize="14"
+                        x:Name="change" FontFamily="Verdana"
                         Foreground="FloralWhite" HeadersVisibility="None"
                         Background="Transparent" RowBackground="Transparent"
                         ScrollViewer.VerticalScrollBarVisibility="Auto"
                         BorderThickness="0" AutoGenerateColumns="False"
                         BorderBrush="{x:Null}"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                        HorizontalScrollBarVisibility="Disabled" RowHeaderWidth="0"
-                        CanUserSortColumns="False">
+                        HorizontalScrollBarVisibility="Disabled"
+                        RowHeaderWidth="0" CanUserSortColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Path=Name}" Width="*" />
+                        <DataGridTextColumn Binding="{Binding Path=Name}"
+                                Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Border>
 
         </Grid>
 
-        <Label Content="Terapijske indikacije" FontSize="14" FontFamily="Verdana"
-                Foreground="FloralWhite" Grid.Row="4" Padding="20,0,0,0"
-                Margin="20,0,20,0" BorderThickness="0,0,0,2" BorderBrush="Gray"
-                Grid.ColumnSpan="2" />
+        <Label Content="Terapijske indikacije" FontSize="14"
+                FontFamily="Verdana" Foreground="FloralWhite" Grid.Row="4"
+                Padding="20,0,0,0" Margin="20,0,20,0" BorderThickness="0,0,0,2"
+                BorderBrush="Gray" Grid.ColumnSpan="2" />
         <Label Content="Neželjena dejstva" FontSize="14" FontFamily="Verdana"
                 Foreground="FloralWhite" Grid.Row="6" Padding="20,0,0,0"
                 Margin="20,0,20,0" BorderThickness="0,0,0,2" BorderBrush="Gray"
                 Grid.ColumnSpan="2" />
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" Grid.ColumnSpan="2"
-                VerticalScrollBarVisibility="Auto" Grid.Row="5" Margin="20,0,20,20">
-            <TextBox TextWrapping="Wrap" FontSize="14"
-                    x:Name="usage" FontFamily="Verdana" Foreground="FloralWhite"
-                    Background="Transparent" BorderThickness="0" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto"
+                Grid.Row="5" Margin="20,0,20,20">
+            <TextBox TextWrapping="Wrap" FontSize="14" x:Name="usage"
+                    FontFamily="Verdana" Foreground="FloralWhite"
+                    Background="Transparent" BorderThickness="0"
+                    Text="{Binding NewUsage, UpdateSourceTrigger=PropertyChanged}"/>
         </ScrollViewer>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                VerticalScrollBarVisibility="Auto" Grid.Row="7" Grid.ColumnSpan="2"
-                Margin="20,0,20,20">
-            <TextBox TextWrapping="Wrap" FontSize="14"
-                    x:Name="sideEff" BorderThickness="0" FontFamily="Verdana"
-                    Foreground="FloralWhite" Background="{x:Null}" />
+                VerticalScrollBarVisibility="Auto" Grid.Row="7"
+                Grid.ColumnSpan="2" Margin="20,0,20,20">
+            <TextBox TextWrapping="Wrap" FontSize="14" x:Name="sideEff"
+                    BorderThickness="0" FontFamily="Verdana"
+                    Foreground="FloralWhite" Background="{x:Null}"
+                    Text="{Binding NewSideEffects, UpdateSourceTrigger=PropertyChanged}" />
         </ScrollViewer>
 
-        <Border Grid.Row="8" CornerRadius="20" BorderThickness="1" Background="#FF213250"
-                BorderBrush="FloralWhite" Margin="50,0,50,10">
+        <Border Grid.Row="8" CornerRadius="20" BorderThickness="1"
+                Background="#FF213250" BorderBrush="FloralWhite"
+                Margin="50,0,50,10">
             <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
                     Content="Sačuvaj" Foreground="FloralWhite"
-                    HorizontalAlignment="Stretch" Click="save_Click" x:Name="save" />
+                    HorizontalAlignment="Stretch" x:Name="save">
+                <Button.InputBindings>
+                    <KeyBinding Key="S" Modifiers="Ctrl"
+                            Command="{Binding SaveChangesCommand}" />
+                </Button.InputBindings>
+            </Button>
         </Border>
-        <Border Grid.Row="8" CornerRadius="20" BorderThickness="1" Grid.Column="1"
-                Background="#FF213250" BorderBrush="FloralWhite" Margin="50,0,50,10">
+        <Border Grid.Row="8" CornerRadius="20" BorderThickness="1"
+                Grid.Column="1" Background="#FF213250" BorderBrush="FloralWhite"
+                Margin="50,0,50,10">
             <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
                     Content="Odustani" Foreground="FloralWhite"
-                    HorizontalAlignment="Stretch" Click="cancle_Click" x:Name="cancle" />
+                    HorizontalAlignment="Stretch" x:Name="cancle" />
         </Border>
 
     </Grid>
