@@ -3,9 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:Hospital_IS.DoctorView" mc:Ignorable="d"
-        d:DesignHeight="575.84" d:DesignWidth="783.487394957983"
-        IsVisibleChanged="UserControl_IsVisibleChanged">
+        mc:Ignorable="d" d:DesignHeight="575.84"
+        d:DesignWidth="783.487394957983">
+    <UserControl.InputBindings>
+        <KeyBinding Key="Return" Command="{Binding ViewMedicineCommand}" />
+    </UserControl.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
@@ -15,55 +17,66 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Label Content="Lekovi" FontSize="20" BorderThickness="0" Foreground="FloralWhite"
-                HorizontalAlignment="Center" Grid.ColumnSpan="3" FontWeight="Bold"
-                VerticalAlignment="Center" />
+        <Label Content="Lekovi" FontSize="20" BorderThickness="0"
+                Foreground="FloralWhite" HorizontalAlignment="Center"
+                Grid.ColumnSpan="3" FontWeight="Bold" VerticalAlignment="Center" />
 
         <Border Grid.ColumnSpan="3" Grid.Row="1" Margin="10" CornerRadius="15"
                 BorderThickness="1" BorderBrush="FloralWhite">
-            <TextBox x:Name="search" Background="Transparent" Padding="10,0,10,0"
-                    Text="Pretraži po nazivu ili sastavu.." Foreground="White"
-                    FontWeight="Light" FontSize="16" BorderThickness="0" Opacity="0.7" />
+            <TextBox x:Name="search" Background="Transparent"
+                    Padding="10,0,10,0" Text="Pretraži po nazivu ili sastavu.."
+                    Foreground="White" FontWeight="Light" FontSize="16"
+                    BorderThickness="0" Opacity="0.7" />
         </Border>
 
         <GroupBox Header="Rezultati pretrage" FontSize="16" Grid.Row="2"
                 Grid.ColumnSpan="2" BorderBrush="#FF2E3B55" Foreground="White"
                 Margin="0,0,0,10">
-            <DataGrid x:Name="medicines" ItemsSource="{Binding}" Margin="10"
+            <DataGrid x:Name="medicines" ItemsSource="{Binding Medicines}"
+                    SelectedItem="{Binding SelectedMedicine}" Margin="10"
                     Background="Transparent" RowBackground="Transparent"
-                    Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    Foreground="White"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
                     BorderThickness="0,0,0,0" AutoGenerateColumns="False"
-                    SelectionMode="Single" IsReadOnly="True" BorderBrush="{x:Null}"
+                    SelectionMode="Single" IsReadOnly="True"
+                    BorderBrush="{x:Null}"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     HorizontalScrollBarVisibility="Disabled" FontSize="14"
-                    RowHeaderWidth="0" CanUserSortColumns="False"
-                    MouseDoubleClick="medicines_MouseDoubleClick">
+                    RowHeaderWidth="0" CanUserSortColumns="False">
+                <DataGrid.InputBindings>
+                    <KeyBinding Key="Return"
+                            Command="{Binding ViewMedicineCommand}" />
+                </DataGrid.InputBindings>
                 <DataGrid.Resources>
-                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
+                    <Style
+                            BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
                             TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="Background" Value="#FF2E3B55" />
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Naziv leka" Binding="{Binding Name}"
-                            CanUserResize="False" Width="0.05*" SortDirection="Ascending" />
-                    <DataGridTemplateColumn Header="Sastav" CanUserResize="False"
-                            Width="0.05*">
+                    <DataGridTextColumn Header="Naziv leka"
+                            Binding="{Binding Name}" CanUserResize="False"
+                            Width="0.05*" SortDirection="Ascending" />
+                    <DataGridTemplateColumn Header="Sastav"
+                            CanUserResize="False" Width="0.05*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ItemsControl ItemsSource="{Binding Composition}">
-                                        <ItemsControl.ItemsPanel>
+                                <ItemsControl
+                                        ItemsSource="{Binding Composition}">
+                                    <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <StackPanel Orientation="Horizontal" />
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Label Padding="0,0,5,0" Foreground="FloralWhite"
+                                            <Label Padding="0,0,5,0"
+                                                    Foreground="FloralWhite"
                                                     Content="{Binding Component}" />
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
+                                </ItemsControl>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

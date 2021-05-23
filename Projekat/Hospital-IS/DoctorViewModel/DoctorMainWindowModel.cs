@@ -59,6 +59,7 @@ namespace Hospital_IS.DoctorViewModel
         private RelayCommand navigateToPatientsCommand;
         private RelayCommand navigateToChartCommand;
         private RelayCommand navigateToMedicinesCommand;
+        private RelayCommand navigateToUpdateMedicineCommand;
         private RelayCommand navigateToRoomsCommand;
         private RelayCommand navigateToPrescriptionsCommand;
         private RelayCommand navigateToApproveMedicineCommand;
@@ -110,6 +111,15 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 navigateToMedicinesCommand = value;
+            }
+        }
+
+        public RelayCommand NavigateToUpdateMedicineCommand
+        {
+            get { return navigateToUpdateMedicineCommand; }
+            set
+            {
+                navigateToUpdateMedicineCommand = value;
             }
         }
         public RelayCommand NavigateToRoomsCommand
@@ -231,6 +241,13 @@ namespace Hospital_IS.DoctorViewModel
                 new Uri("DoctorView/Medicines.xaml", UriKind.Relative));
         }
 
+        private void Execute_NavigateToUpdateMedicineCommand(object obj)
+        {
+            UpdateMedicine updateMedicine = new UpdateMedicine();
+           //updateMedicine._ViewModel.
+            this.NavigationService.Navigate(updateMedicine);
+        }
+
         private void Execute_NavigateToRoomsCommand(object obj)
         {
             //this.NavigationService.Navigate(
@@ -306,6 +323,7 @@ namespace Hospital_IS.DoctorViewModel
             this.NavigateToAppointmentsCommand = new RelayCommand(Execute_NavigateToAppointmentsCommand, CanExecute_NavigateCommand);
             this.NavigateToPatientsCommand = new RelayCommand(Execute_NavigateToPatientsCommand, CanExecute_NavigateCommand);
             this.NavigateToChartCommand = new RelayCommand(Execute_NavigateToChartCommand, CanExecute_NavigateCommand);
+            this.NavigateToUpdateMedicineCommand = new RelayCommand(Execute_NavigateToUpdateMedicineCommand, CanExecute_NavigateCommand);
             this.NavigateToMedicinesCommand = new RelayCommand(Execute_NavigateToMedicinesCommand, CanExecute_NavigateCommand);
             this.NavigateToRoomsCommand = new RelayCommand(Execute_NavigateToRoomsCommand, CanExecute_NavigateCommand);
             this.NavigateToPrescriptionsCommand = new RelayCommand(Execute_NavigateToPrescriptionsCommand, CanExecute_NavigateCommand);

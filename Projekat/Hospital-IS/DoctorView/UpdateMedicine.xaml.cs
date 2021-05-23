@@ -16,6 +16,7 @@ namespace Hospital_IS.DoctorView
         public String newUsage { get; set; }
         public String NewSideEffects { get; set; }
         public Medicine MedicineWhichIsUpdated { get; set; }
+        public UpdateMedicine() { }
         public UpdateMedicine(Medicine medicine)
         {
             InitializeComponent();
