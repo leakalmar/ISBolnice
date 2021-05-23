@@ -221,5 +221,10 @@ namespace Service
             pfs.SavePatients(AllPatients);
         }
 
+        public List<PatientNote> GetNotesByPatient(int patientId)
+        {
+            Patient patient = GetPatientByID(patientId);
+            return patient.PatientNotes;
+        }
     }
 }

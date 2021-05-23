@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using Hospital_IS.Model;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,14 @@ namespace Hospital_IS.View.PatientViewModels
                     {
                         MessageBox.Show("Za 2 sata treba da popijete lek: " + therapy.Medicine.Name);
                     }
+                }
+            }
+
+            foreach (PatientNote note in PatientController.Instance.GetNotesByPatient(Patient.Id))
+            {
+                if (time.Hour == note.NotificationTime && time.Minute == 00 && note.IsNotifyChecked)
+                {
+                    MessageBox.Show("Podsetnik: " + note.NoteContent);
                 }
             }
         }

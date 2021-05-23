@@ -95,5 +95,10 @@ namespace Controllers
         {
             PatientService.Instance.SavePatients();
         }
+
+        public List<PatientNote> GetNotesByPatient(int patientId)
+        {
+            return PatientService.Instance.GetNotesByPatient(patientId);
+        }
     }
 }
