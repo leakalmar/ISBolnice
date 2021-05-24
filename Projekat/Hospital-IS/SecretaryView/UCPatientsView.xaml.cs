@@ -1,5 +1,5 @@
 ﻿using Controllers;
-using Hospital_IS.SecretaryView;
+using Hospital_IS.SecretaryView.SecretaryViewModel;
 using Model;
 using System;
 using System.Collections.ObjectModel;
@@ -9,41 +9,40 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace Hospital_IS
+namespace Hospital_IS.SecretaryView
 {
     /// <summary>
     /// Interaction logic for UCPatientsView.xaml
     /// </summary>
     public partial class UCPatientsView : UserControl
     {
-        public ObservableCollection<Patient> Patients { get; set; }
+        //public ObservableCollection<Patient> Patients { get; set; }
 
         public UCPatientsView()
         {
             InitializeComponent();
             RefreshGrid();
-
-            this.DataContext = this;
+            //this.DataContext = this;
         }
 
-
+        
         public void RefreshGrid()
         {
-            if (Patients != null)
+            /*if (Patients != null)
                 Patients.Clear();
 
             PatientController.Instance.ReloadPatients();
             Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAllRegisteredPatients());
-            dataGridPatients.ItemsSource = Patients;
+            dataGridPatients.ItemsSource = Patients;*/
         }
-
+        
         private void AddNewPatient(object sender, RoutedEventArgs e)
         {
-            PatientRegistration pr = new PatientRegistration(this, null);
-            pr.Show();
+        //    PatientRegistrationView pr = new PatientRegistrationView(this, null);
+          //  pr.Show();
         }
 
-        private void ShowPatient(object sender, RoutedEventArgs e)
+        /*private void ShowPatient(object sender, RoutedEventArgs e)
         {
             if ((Patient)dataGridPatients.SelectedItem != null)
             {
@@ -51,26 +50,25 @@ namespace Hospital_IS
                 PatientView pv = new PatientView(patient);
                 pv.Show();
             }
-        }
+        }*/
 
         private void UpdatePatient(object sender, RoutedEventArgs e)
         {
-            if ((Patient)dataGridPatients.SelectedItem != null)
+           /* if ((Patient)dataGridPatients.SelectedItem != null)
             {
                 Patient patient = (Patient)dataGridPatients.SelectedItem;
                 UpdatePatientView upv = new UpdatePatientView(patient, this);
                 upv.Show();
-            }
+            }*/
         }
 
         private void DeletePatient(object sender, RoutedEventArgs e)
-        {
-            if ((Patient)dataGridPatients.SelectedItem != null)
+        {/*if ((Patient)dataGridPatients.SelectedItem != null)
             {
                 Patient patient = (Patient)dataGridPatients.SelectedItem;
                 Patients.Remove(patient);
                 PatientController.Instance.DeletePatient(patient);
-            }
+            }*/
         }
 
 
@@ -86,13 +84,13 @@ namespace Hospital_IS
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            ICollectionView view = new CollectionViewSource { Source = Patients }.View;
+            /*ICollectionView view = new CollectionViewSource { Source = Patients }.View;
             view.Filter = delegate (object item)
             {
                 Patient patient = item as Patient;
                 return CheckIfPatientMeetsSearchCriteria(patient);
             };
-            dataGridPatients.ItemsSource = view;
+            dataGridPatients.ItemsSource = view;*/
         }
 
         private bool CheckIfPatientMeetsSearchCriteria(Patient patient)
@@ -139,26 +137,27 @@ namespace Hospital_IS
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (txtSearch.Text.Equals("Pretraži..."))
+            /*if (txtSearch.Text.Equals("Pretraži..."))
             {
                 txtSearch.Text = string.Empty;
                 txtSearch.Foreground = new SolidColorBrush(Colors.Black);
-            }
+            }*/
         }
 
         private void SearchBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(txtSearch.Text))
+            /*if (string.IsNullOrEmpty(txtSearch.Text))
             {
                 txtSearch.Foreground = new SolidColorBrush(Colors.Gray);
                 txtSearch.Text = "Pretraži...";
-            }
+            }*/
         }
 
         private void btnGuests_Click(object sender, RoutedEventArgs e)
         {
-            GuestsView gv = new GuestsView(this);
-            gv.Show();
+         //   GuestsView gv = new GuestsView(this);
+           // gv.Show();
         }
+
     }
 }

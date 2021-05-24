@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using Hospital_IS.SecretaryView;
 using Model;
 using System;
 using System.Collections.ObjectModel;
@@ -71,7 +72,7 @@ namespace Hospital_IS
 
 
             ucp.dataGridPatients.ItemsSource = null;
-            ucp.dataGridPatients.ItemsSource = ucp.Patients;
+            //ucp.dataGridPatients.ItemsSource = ucp.Patients;
 
             PatientController.Instance.UpdatePatient(Patient);
 
@@ -80,13 +81,13 @@ namespace Hospital_IS
 
         private void Close(object sender, RoutedEventArgs e)
         {
-            ucp.RefreshGrid();
+            //ucp.RefreshGrid();
             this.Close();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            ucp.RefreshGrid();
+            //ucp.RefreshGrid();
         }
 
         private void AddNewAllergy(object sender, RoutedEventArgs e)

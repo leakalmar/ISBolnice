@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Hospital_IS.DoctorView;
 using Controllers;
 using Service;
+using Hospital_IS.SecretaryView;
 
 namespace Hospital_IS
 {
@@ -73,7 +74,7 @@ namespace Hospital_IS
             }
             else if (email.Text == "sekretar@gmail.com" && password.Password.ToString() == "sekretar")
             {
-                SecretaryMainWindow.Instance.Show();
+                SecretaryMainWindowView.Instance.Show();
 
                 this.Close();
             }

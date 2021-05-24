@@ -46,7 +46,7 @@ namespace Hospital_IS.SecretaryView
             if ((Patient)dataGridGuests.SelectedItem != null)
             {
                 Patient guest = (Patient)dataGridGuests.SelectedItem;
-                PatientRegistration pr = new PatientRegistration(ucp, this);
+                PatientRegistrationView pr = new PatientRegistrationView(ucp, this);
                 pr.Show();
             }
         }

@@ -1,40 +1,35 @@
-﻿using Controllers;
-using Hospital_IS.SecretaryView;
-using Model;
-using Service;
+﻿using Model;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 
-namespace Hospital_IS
+namespace Hospital_IS.SecretaryView.SecretaryViewModel
 {
-    /// <summary>
-    /// Interaction logic for PatientRegistration.xaml
-    /// </summary>
-    public partial class PatientRegistration : Window
+    class PatientRegistrationViewModel : BindableBase
     {
         public Patient Patient { get; set; } = new Patient();
-        public UCPatientsView ucp;
-        public GuestsView gv;
-        public PatientRegistration(UCPatientsView ucp, GuestsView gv)
-        {
-            InitializeComponent();
 
-            if (gv != null)
+        private string birthDate;
+        public string BirthDate
+        {
+            get { return birthDate; }
+            set
             {
-                Patient = (Patient)gv.dataGridGuests.SelectedItem;
-                checkBox.Visibility = Visibility.Collapsed;
-                this.gv = gv;
+                if (birthDate != value)
+                {
+                    birthDate = value;
+                    OnPropertyChanged("BirthDate");
+                }
             }
-
-            this.DataContext = this;
-            this.ucp = ucp;
         }
-        private void Close(object sender, RoutedEventArgs e)
+        public MyICommand AddPatient { get; set; }
+        public PatientRegistrationViewModel()
         {
-            this.Close();
+            AddPatient = new MyICommand(RegisterPatient);
         }
 
-        private void AddPatient(object sender, RoutedEventArgs e)
+        private void RegisterPatient()
         {
             if (checkBox.IsChecked == true)
             {
@@ -63,7 +58,7 @@ namespace Hospital_IS
                 Patient.Id = UserService.Instance.GenerateUserID();
                 PatientController.Instance.AddPatient(Patient);
             }
-            else 
+            else
             {
                 Patient.IsGuest = false;
                 PatientController.Instance.UpdatePatient(Patient);

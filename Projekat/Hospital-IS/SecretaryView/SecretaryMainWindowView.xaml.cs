@@ -1,35 +1,39 @@
-﻿using Hospital_IS.SecretaryView;
+﻿using Hospital_IS.SecretaryView.SecretaryViewModel;
 using System;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace Hospital_IS
+namespace Hospital_IS.SecretaryView
 {
     /// <summary>
-    /// Interaction logic for SecretaryMainWindow.xaml
+    /// Interaction logic for SecretaryMainWindowView.xaml
     /// </summary>
-    public partial class SecretaryMainWindow : Window
+    public partial class SecretaryMainWindowView : Window
     {
         UCPatientsView ucp = new UCPatientsView();
         UCNotificationsView ucn = new UCNotificationsView();
         UCAppointmentsView uca = new UCAppointmentsView();
 
-        private static SecretaryMainWindow instance = null;
+        private static SecretaryMainWindowView instance = null;
 
-        public static SecretaryMainWindow Instance
+        public static SecretaryMainWindowView Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new SecretaryMainWindow();
+                    instance = new SecretaryMainWindowView();
                 }
                 return instance;
             }
         }
 
-        public SecretaryMainWindow()
+        public SecretaryMainWindowViewModel SecretaryMainView { get; set; }
+
+        public SecretaryMainWindowView()
         {
+            SecretaryMainView = new SecretaryMainWindowViewModel();
+            this.DataContext = SecretaryMainView;
             InitializeComponent();
 
             CurrentTimeLabel.Content = DateTime.Now.ToString("HH:mm  dd.MM.yyyy.");
@@ -40,7 +44,7 @@ namespace Hospital_IS
             dispatcherTimer.Tick += timer_Tick;
             dispatcherTimer.Start();
 
-            HomePage.Content = ucp;
+            //HomePage.Content = ucp;
         }
 
 
@@ -61,17 +65,17 @@ namespace Hospital_IS
 
         private void btnPatients_Click(object sender, RoutedEventArgs e)
         {
-            HomePage.Content = ucp;
+            //HomePage.Content = ucp;
         }
 
         private void btnNotifications_Click(object sender, RoutedEventArgs e)
         {
-            HomePage.Content = ucn;
+            //HomePage.Content = ucn;
         }
 
         private void btnAppointments_Click(object sender, RoutedEventArgs e)
         {
-            HomePage.Content = uca;
+            //HomePage.Content = uca;
         }
 
     }
