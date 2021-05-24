@@ -1,7 +1,4 @@
 ﻿using Hospital_IS.DoctorView;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Hospital_IS.DoctorViewModel
 {
