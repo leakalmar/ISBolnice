@@ -32,6 +32,11 @@ namespace Controllers
             return MedicineService.Instance.AllMedicines;
         }
 
+        public Medicine GetByName(string medicineName)
+        {
+            return MedicineService.Instance.GetByName(medicineName);
+        }
+
         public void UpdateMedicine(Medicine medicine)
         {
             MedicineService.Instance.UpdateMedicine(medicine);
@@ -69,17 +74,17 @@ namespace Controllers
             {
                 if (PatientService.Instance.CheckIfAllergicToMedicine(patient.Alergies, medicine.Name))
                 {
-                    medicineList.Add(new MedicineDTO(medicine, false, true));
+                    medicineList.Add(new MedicineDTO(medicine.Composition,medicine.SideEffects,medicine.Usage,medicine.ReplaceMedicine, medicine.Name, false, true));
                 }
                 else
                 {
                     if (CheckIfInPrescriptions(medicine, prescriptions))
                     {
-                        medicineList.Add(new MedicineDTO(medicine, true, false));
+                        medicineList.Add(new MedicineDTO(medicine.Composition, medicine.SideEffects, medicine.Usage, medicine.ReplaceMedicine, medicine.Name, true, false));
                     }
                     else
                     {
-                        medicineList.Add(new MedicineDTO(medicine, false, false));
+                        medicineList.Add(new MedicineDTO(medicine.Composition, medicine.SideEffects, medicine.Usage, medicine.ReplaceMedicine, medicine.Name, false, false));
                     }
                 }
 

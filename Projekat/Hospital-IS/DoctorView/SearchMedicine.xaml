@@ -62,7 +62,7 @@
                 </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Naziv leka"
-                            Binding="{Binding Medicine.Name}"
+                            Binding="{Binding Name}"
                             CanUserResize="False" Width="0.05*"
                             SortDirection="Ascending" />
                     <DataGridCheckBoxColumn Header="Dodato"
@@ -103,7 +103,7 @@
                     <RowDefinition Height="0.3*" />
                 </Grid.RowDefinitions>
 
-                <Label Content="{Binding SelectedMedicine.Medicine.Name}"
+                <Label Content="{Binding SelectedMedicine.Name}"
                         Grid.ColumnSpan="2" FontSize="18" FontFamily="Verdana"
                         Foreground="FloralWhite" Margin="0,0,20,10"
                         VerticalAlignment="Center" HorizontalAlignment="Center" />
@@ -125,7 +125,7 @@
                         VerticalScrollBarVisibility="Auto" Grid.Row="2"
                         Margin="20,5,20,10">
                     <ListBox
-                            ItemsSource="{Binding SelectedMedicine.Medicine.Composition}"
+                            ItemsSource="{Binding SelectedMedicine.Composition}"
                             FontSize="14" FontFamily="Verdana"
                             Foreground="FloralWhite" Background="{x:Null}"
                             BorderThickness="0">
@@ -146,7 +146,7 @@
                         VerticalScrollBarVisibility="Auto" Grid.Row="4"
                         Margin="20,5,20,10">
                     <ListBox
-                            ItemsSource="{Binding SelectedMedicine.Medicine.ReplaceMedicine}"
+                            ItemsSource="{Binding SelectedMedicine.ReplaceMedicine}"
                             FontSize="14" FontFamily="Verdana"
                             Foreground="FloralWhite" Background="{x:Null}"
                             BorderThickness="0">
@@ -171,7 +171,7 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                         Grid.Column="1" VerticalScrollBarVisibility="Auto"
                         Grid.Row="2" Margin="20,0,10,10">
-                    <TextBlock Text="{Binding SelectedMedicine.Medicine.Usage}"
+                    <TextBlock Text="{Binding SelectedMedicine.Usage}"
                             TextWrapping="Wrap" FontSize="14"
                             FontFamily="Verdana" Foreground="FloralWhite" />
                 </ScrollViewer>
@@ -179,7 +179,7 @@
                         VerticalScrollBarVisibility="Auto" Grid.Row="4"
                         Grid.Column="1" Margin="20,0,10,10">
                     <TextBlock
-                            Text="{Binding SelectedMedicine.Medicine.SideEffects}" TextWrapping="Wrap"
+                            Text="{Binding SelectedMedicine.SideEffects}" TextWrapping="Wrap"
                             FontSize="14" FontFamily="Verdana"
                             Foreground="FloralWhite" Background="{x:Null}" />
                 </ScrollViewer>

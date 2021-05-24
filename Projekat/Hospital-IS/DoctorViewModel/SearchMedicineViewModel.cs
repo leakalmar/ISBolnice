@@ -64,7 +64,7 @@ namespace Hospital_IS.DoctorViewModel
                 OnPropertyChanged("SelectedMedicine");
                 if(value != null)
                 {
-                    PotentiallyAllergicMassage = PatientController.Instance.CheckIfAllergicToComponent(patient, SelectedMedicine.Medicine);
+                    PotentiallyAllergicMassage = PatientController.Instance.CheckIfAllergicToComponent(patient, SelectedMedicine.Name);
                 }
             }
         }
@@ -149,7 +149,7 @@ namespace Hospital_IS.DoctorViewModel
         {
             foreach(Prescription p in Prescriptions)
             {
-                if (p.Medicine.Equals(SelectedMedicine.Medicine))
+                if (p.Medicine.Name.Equals(SelectedMedicine.Name))
                 {
                     Prescriptions.Remove(p);
                     break;
@@ -168,7 +168,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void AddPrescription()
         { 
-            Prescriptions.Add(new Prescription(SelectedMedicine.Medicine, DatePrescribed));
+            Prescriptions.Add(new Prescription(MedicineController.Instance.GetByName(SelectedMedicine.Name), DatePrescribed));
             foreach (MedicineDTO medicine in medicineList)
             {
                 if (medicine.Equals(SelectedMedicine))
