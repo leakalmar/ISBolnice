@@ -5,8 +5,6 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Data;
 
 namespace Hospital_IS.DoctorViewModel
 {
@@ -48,14 +46,7 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 hospitalized = value;
-                if(hospitalized == true && NewHospitalization == false)
-                {
-                    Hospitalization hospitalization = ChartController.Instance.GetActivHospitalization(Patient);
-                    AddmissionDate = hospitalization.AdmissionDate;
-                    ReleaseDate = hospitalization.ReleaseDate;
-                    SelectedRoom = hospitalization.Room;
-                    Doctor = hospitalization.Doctor;
-                }
+                SetFeilds();
                 OnPropertyChanged("Hospitalized");
             }
         }
@@ -138,15 +129,7 @@ namespace Hospital_IS.DoctorViewModel
             get { return beds; }
             set
             {
-                List<Bed> listBeds = new List<Bed>();
-                foreach(Bed bed in value)
-                {
-                    if (bed.Taken.Equals(false))
-                    {
-                        listBeds.Add(bed);
-                    }
-                }
-                beds = listBeds;
+                beds = CheckIfTaken(value);
 
                 if (beds.Count != 0)
                 {
@@ -220,7 +203,6 @@ namespace Hospital_IS.DoctorViewModel
             AddmissionDate = DateTime.Now;
             ReleaseDate = DateTime.Now.AddDays(3);
             Doctor = DoctorMainWindow.Instance._ViewModel.Doctor.Name + " " + ShortSurname(DoctorMainWindow.Instance._ViewModel.Doctor);
-            //Krevet
         }
 
         private void Execute_EndCreatingHospitalizationCommand(object obj)
@@ -261,6 +243,33 @@ namespace Hospital_IS.DoctorViewModel
                 newSurname = surnames[0].ToCharArray()[0].ToString() + ". " + surnames[1];
             }
             return newSurname;
+        }
+
+        private static List<Bed> CheckIfTaken(List<Bed> value)
+        {
+            List<Bed> listBeds = new List<Bed>();
+            foreach (Bed bed in value)
+            {
+                if (bed.Taken.Equals(false))
+                {
+                    listBeds.Add(bed);
+                }
+            }
+
+            return listBeds;
+        }
+
+
+        private void SetFeilds()
+        {
+            if (hospitalized == true && NewHospitalization == false)
+            {
+                Hospitalization hospitalization = ChartController.Instance.GetActivHospitalization(Patient);
+                AddmissionDate = hospitalization.AdmissionDate;
+                ReleaseDate = hospitalization.ReleaseDate;
+                SelectedRoom = hospitalization.Room;
+                Doctor = hospitalization.Doctor;
+            }
         }
         #endregion
 
