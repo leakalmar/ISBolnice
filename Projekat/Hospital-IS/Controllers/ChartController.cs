@@ -80,9 +80,9 @@ namespace Controllers
             ChartService.Instance.AddPrescriptions(prescriptions,patient.Id);
         }
 
-        public void AddHospitalization(DateTime AddmissionDate, DateTime ReleaseDate,string Doctor, Room SelectedRoom, string Details, Patient patient)
+        public void AddHospitalization(DateTime addmissionDate, DateTime releaseDate,string doctor, Room selectedRoom, Bed selectedBed, string details, Patient patient)
         {
-            Hospitalization newHospitalization = new Hospitalization(AddmissionDate, ReleaseDate, Doctor, SelectedRoom, Details);
+            Hospitalization newHospitalization = new Hospitalization(addmissionDate, releaseDate, doctor, selectedRoom, selectedBed, details);
             ChartService.Instance.AddHospitalization(newHospitalization, patient.Id);
         }
     }

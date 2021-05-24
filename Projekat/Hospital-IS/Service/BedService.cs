@@ -107,5 +107,18 @@ namespace Service
                 }
             }
         }
+
+        public List<Bed> GetByRoomId(int roomId)
+        {
+            List<Bed> beds = new List<Bed>();
+            foreach(Bed bed in AllBeds)
+            {
+                if (bed.RoomId.Equals(roomId))
+                {
+                    beds.Add(bed);
+                }
+            }
+            return beds;
+        }
     }
 }

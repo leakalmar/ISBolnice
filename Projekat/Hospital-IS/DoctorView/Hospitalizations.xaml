@@ -143,9 +143,16 @@
 
             <Label Grid.Row="5" Content="Krevet:" Foreground="FloralWhite"
                     VerticalAlignment="Center" FontSize="14" />
-            <ComboBox Grid.Row="5" Grid.Column="1" ItemsSource="{Binding }"
-                    IsEnabled="{Binding NewHospitalization}"
-                     Margin="10,2" FontSize="14" />
+            <ComboBox Grid.Row="5" Grid.Column="1" ItemsSource="{Binding Beds}"
+                    SelectedItem="{Binding SelectedBed}"
+                    IsEnabled="{Binding NewHospitalization}" Margin="10,2"
+                    FontSize="14">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding BedId}" Padding="0" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
 
             <StackPanel Orientation="Vertical" Grid.Row="6" Grid.ColumnSpan="2">
                 <Label  Content="Detalji:" Foreground="FloralWhite"

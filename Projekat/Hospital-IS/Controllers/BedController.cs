@@ -1,5 +1,6 @@
 ﻿using Model;
 using Service;
+using System.Collections.Generic;
 
 namespace Controllers
 {
@@ -36,6 +37,11 @@ namespace Controllers
         public void UpdateBed(Bed bed)
         {
             BedService.Instance.UpdateBed(bed);
+        }
+
+        public List<Bed> GetByRoomId(int roomId)
+        {
+            return BedService.Instance.GetByRoomId(roomId);
         }
     }
 }

@@ -5,6 +5,8 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace Hospital_IS.DoctorViewModel
 {
@@ -20,6 +22,9 @@ namespace Hospital_IS.DoctorViewModel
 
         private List<Room> rooms;
         private Room selectedRoom;
+
+        private List<Bed> beds;
+        private Bed selectedBed;
 
         private string doctor;
         private string details;
@@ -123,7 +128,42 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 selectedRoom = value;
+                Beds = BedController.Instance.GetByRoomId(selectedRoom.RoomId);
                 OnPropertyChanged("SelectedRoom");
+            }
+        }
+
+        public List<Bed> Beds
+        {
+            get { return beds; }
+            set
+            {
+                List<Bed> listBeds = new List<Bed>();
+                foreach(Bed bed in value)
+                {
+                    if (bed.Taken.Equals(false))
+                    {
+                        listBeds.Add(bed);
+                    }
+                }
+                beds = listBeds;
+
+                if (beds.Count != 0)
+                {
+                    SelectedBed = beds[0];
+                }
+                OnPropertyChanged("Beds");
+            }
+        }
+
+        public Bed SelectedBed
+        {
+            get { return selectedBed; }
+            set
+            {
+                selectedBed = value;
+
+                OnPropertyChanged("SelectedBed");
             }
         }
 
@@ -189,7 +229,9 @@ namespace Hospital_IS.DoctorViewModel
             NewHospitalization = false;
             Patient.Admitted = true;
             PatientController.Instance.UpdatePatient(Patient);
-            ChartController.Instance.AddHospitalization(AddmissionDate, ReleaseDate, Doctor, SelectedRoom, Details,Patient);
+            SelectedBed.Taken = true;
+            BedController.Instance.UpdateBed(SelectedBed);
+            ChartController.Instance.AddHospitalization(AddmissionDate, ReleaseDate, Doctor, SelectedRoom, SelectedBed, Details,Patient);
             this.Hospitalizations = new ObservableCollection<Hospitalization>(ChartController.Instance.GetHospitalizationsByPatient(Patient));
         }
 
@@ -198,6 +240,8 @@ namespace Hospital_IS.DoctorViewModel
             Hospitalized = false;
             Patient.Admitted = false;
             PatientController.Instance.UpdatePatient(Patient);
+            SelectedBed.Taken = false;
+            BedController.Instance.UpdateBed(SelectedBed);
             ChartController.Instance.ReleasePatient(Patient);
         }
 
