@@ -31,7 +31,6 @@ namespace Model
 
         public int RoomId { get; set; }
 
-       
         public RoomType Type
         {
             get; set;
@@ -41,8 +40,6 @@ namespace Model
         {
             get { return RoomId + " " + Type; }
         }
-
-      
 
         public List<Equipment> Equipment { get; set; } = new List<Equipment>();
 

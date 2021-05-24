@@ -59,6 +59,8 @@ namespace Hospital_IS.ManagerView1
                 BedNumberBox.Text = string.Empty;
             }
         }
+
+       
     }
 
 }

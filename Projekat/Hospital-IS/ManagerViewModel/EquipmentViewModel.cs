@@ -17,7 +17,7 @@ namespace Hospital_IS.ManagerViewModel
 
         private ObservableCollection<Room> _rooms { get; set; }
         private ObservableCollection<String> roomTypes { get; set; }
-
+        private int selectedTransferOption = -1;
         private ICollectionView  _equipments { get; set; }
         private string _name= "Unesite ime opreme";
         private string _quantity = "Unesite kolicinu";
@@ -30,12 +30,21 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand deleteEquipment;
         private RelayCommand updateEquipment;
         private RelayCommand navigateToUpdateEquipment;
-
         private int comboBoxItem;
         private Equipment selectedEquipment;
         private Room selectedRoom;
         private RelayCommand navigateToManagerProfilePage;
+        private RelayCommand navigateToTransferOptions;
 
+
+        public RelayCommand NavigateToTransferOptions
+        {
+            get { return navigateToTransferOptions; }
+            set
+            {
+                navigateToTransferOptions = value;
+            }
+        }
 
         public RelayCommand NavigateToManagerProfilePage
         {
@@ -46,7 +55,21 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
+      
 
+        public int SelectedTransferOption
+        {
+            get { return selectedTransferOption; }
+            set
+            {
+                if (value != selectedTransferOption)
+                {
+                   
+                    selectedTransferOption = value;
+                    OnPropertyChanged("SelectedTransferOption");
+                }
+            }
+        }
 
         public Room SelectedRoom
          {
@@ -293,10 +316,30 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToUpdateEquipment = new RelayCommand(Execute_NavigateToUpdateEquipmentPageCommand, CanExecute_IfEquipmentIsSelected);
             this.UpdateEquipment = new RelayCommand(Execute_UpdateEquipmentCommand);
             this.NavigateToManagerProfilePage = new RelayCommand(Execute_NavigateToManagerProfilePageCommand, CanExecute_NavigateCommand);
+            this.NavigateToTransferOptions = new RelayCommand(Execute_NavigateToTransferEquipmentPageCommand, CanExecute_NavigateToTransferViewCommand);
 
         }
 
 
+        private void Execute_NavigateToTransferEquipmentPageCommand(object obj)
+        {
+            
+            if (SelectedTransferOption == 0)
+            {
+                EquipmentTransferViewModel.Instance.NavService = this.NavService;
+                this.NavService.Navigate(
+               new Uri("ManagerView1/EquipmentTransferDynamicView.xaml", UriKind.Relative));
+            }else if(SelectedTransferOption == 1)
+            {
+                this.NavService.Navigate(
+              new Uri("ManagerView1/EquipmentStaticTransferView.xaml", UriKind.Relative));
+            }
+        }
+
+        private bool CanExecute_NavigateToTransferViewCommand(object obj)
+        {
+            return !(SelectedTransferOption == -1);
+        }
 
         private void Execute_NavigateToManagerProfilePageCommand(object obj)
         {
@@ -316,10 +359,7 @@ namespace Hospital_IS.ManagerViewModel
             
             Rooms = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
         }
-        private void LoadEquipment()
-        {
-
-        }
+       
 
         private void Execute_NavigateToRoomPageCommand(object obj)
         {

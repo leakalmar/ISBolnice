@@ -58,7 +58,7 @@
                 <TextBox Name="PART_EditableTextBox"
                                  Style="{StaticResource ComboBoxTextBoxStyle}"
                                  Padding="5,0,0,0"
-                                 Height="{TemplateBinding Height}"/>
+                                 Height="{TemplateBinding Height}" />
                 <ToggleButton Grid.Column="1" Margin="0"
                                      Height="{TemplateBinding Height}"
                                    
