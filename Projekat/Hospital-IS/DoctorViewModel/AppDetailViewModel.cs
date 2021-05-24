@@ -98,11 +98,9 @@ namespace Hospital_IS.DoctorViewModel
         }
         #endregion
 
-        public AppDetailViewModel()
+        #region Methods
+        private void SetAppointmentFeilds()
         {
-            this.OpenChartCommand = new RelayCommand(Execute_OpenChartCommand, CanExecute_NavigateCommand);
-            this.StartAppointmentCommand = new RelayCommand(Execute_StartAppointmentCommand, CanExecute_NavigateCommand);
-            this.NavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
             List<DoctorAppointment> appointments = DoctorAppointmentController.Instance.GetAllByDoctor(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
             ObservableCollection<StartAppointmentDTO> doctorAppointments = new DoctorAppointmentConverter().ConvertCollectionToViewModel(appointments);
 
@@ -115,7 +113,7 @@ namespace Hospital_IS.DoctorViewModel
             appointmentsView.SortDescriptions.Add(new SortDescription("DoctorAppointment.AppointmentStart", ListSortDirection.Ascending));
 
             AppointmentsView = appointmentsView;
-            if(appointments.Count == 0)
+            if (appointments.Count == 0)
             {
                 DoctorMainWindow.Instance._ViewModel.NavigateToHomePageCommand.Execute(null);
             }
@@ -124,5 +122,18 @@ namespace Hospital_IS.DoctorViewModel
                 SelectedAppointment = doctorAppointments[0];
             }
         }
+        #endregion
+
+        #region Constructor
+        public AppDetailViewModel()
+        {
+            this.OpenChartCommand = new RelayCommand(Execute_OpenChartCommand, CanExecute_NavigateCommand);
+            this.StartAppointmentCommand = new RelayCommand(Execute_StartAppointmentCommand, CanExecute_NavigateCommand);
+            this.NavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
+            SetAppointmentFeilds();
+        }
+        #endregion
+
+
     }
 }
