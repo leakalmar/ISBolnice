@@ -46,11 +46,11 @@
     "Surname": "Bjelobaba",
     "BirthDate": "1990-04-15T00:00:00",
     "Phone": null,
-    "Email": "sekretar",
+    "Email": "sekretar@gmail.com",
     "Gender": null,
     "Relationship": null,
-    "Password": "Bulevar Evrope 25, Novi Sad",
-    "Address": "sekretar@gmail.com",
+    "Password": "sekretar",
+    "Address": "Bulevar Evrope 25, Novi Sad",
     "Hospital": null
   },
   {
@@ -100,11 +100,11 @@
     "Surname": "Matijević",
     "BirthDate": "1970-04-11T00:00:00",
     "Phone": null,
-    "Email": "manager",
+    "Email": "manager@gmail.com",
     "Gender": null,
     "Relationship": null,
-    "Password": "Laze Kostića 14, Novi Sad",
-    "Address": "manager@gmail.com",
+    "Password": "manager",
+    "Address": "Laze Kostića 14, Novi Sad",
     "Hospital": null
   }
 ]
