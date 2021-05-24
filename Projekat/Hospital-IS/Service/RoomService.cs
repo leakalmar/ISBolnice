@@ -61,10 +61,23 @@ namespace Service
 
         public void AddRoom(Room newRoom)
         {
-         
+         newRoom.RoomId = FindMax() + 1;
          AllRooms.Add(newRoom);
        
          rfs.SaveRooms(AllRooms);
+        }
+
+        private int FindMax()
+        {
+            int maxId = -1;
+            foreach(Room  r in AllRooms)
+            {
+                if(maxId < r.RoomId)
+                {
+                    maxId = r.RoomId;
+                }
+            }
+            return maxId;
         }
 
         public void RemoveRoom(Room room)
@@ -124,8 +137,60 @@ namespace Service
 
         public void AddEquipment(Room room, Equipment newEquip)
         {
+            newEquip.EquiptId = genereteId(room.Equipment);
             room.AddEquipment(newEquip);
             rfs.SaveRooms(AllRooms);
+        }
+
+        private int genereteId(List<Equipment> equipList)
+        {
+            if (equipList != null)
+            {
+
+                int id = 0;
+                foreach (Equipment eq in equipList)
+                {
+                    if (eq.EquiptId > id)
+                    {
+                        id = eq.EquiptId;
+                    }
+
+                }
+
+
+                bool isUnique = CheckIfUnique(id);
+
+                while (!isUnique)
+                {
+                    ++id;
+                    isUnique = CheckIfUnique(id);
+                }
+
+                return id;
+            }
+            else
+            {
+                return 1;
+            }
+
+        }
+
+        private bool CheckIfUnique(int id)
+        {
+            foreach (Room room in AllRooms)
+            {
+                if (room.Equipment != null)
+                {
+                    foreach (Equipment eq in room.Equipment)
+                    {
+                        if (eq.EquiptId == id)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         public void RemoveEquipment(Room room, Equipment oldEquip)
@@ -137,6 +202,7 @@ namespace Service
       
         public Boolean UpdateEquipment(Room room, Equipment updateEquip)
         {
+            MessageBox.Show("uslo u kontroler");
             bool isSucces = room.UpdateEquipment(updateEquip);
             rfs.SaveRooms(AllRooms);
             return isSucces;

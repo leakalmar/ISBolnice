@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Hospital_IS.DoctorView;
 using Controllers;
 using Service;
+using Hospital_IS.ManagerView1;
 
 namespace Hospital_IS
 {
@@ -57,7 +58,8 @@ namespace Hospital_IS
 
             if (email.Text == "manager@gmail.com" && password.Password.ToString() == "manager")
             {
-                Window1.Instance.Show();
+                ManagerMainView managerMainView = new ManagerMainView();
+                managerMainView.Show();
                 this.Close();
             }
             else if (email.Text == "sekretar@gmail.com" && password.Password.ToString() == "sekretar")

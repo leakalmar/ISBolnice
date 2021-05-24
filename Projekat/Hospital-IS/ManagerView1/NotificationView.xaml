@@ -1,0 +1,113 @@
+﻿<Page x:Class="Hospital_IS.ManagerView1.NotificationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+       
+      Title="Upravnik" Height="750" Width="430" x:Name="Root"
+      Loaded="Page_Loaded">
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="15"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="7"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+        <Border  Grid.ColumnSpan="20" Grid.RowSpan="20" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF213868" Offset="0.0"/>
+                    <GradientStop Color="#FF5B317E" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Button x:Name="Back"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1"  Background="Transparent" Command="{Binding NavigateToPreviousPage}" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+
+            <StackPanel>
+                <Image Source="pack://application:,,,/Resources/backbutton.png" Width="50" Height="50"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="Edit"  BorderThickness="0" Width="50" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="1"  Background="Transparent" Height="50" VerticalAlignment="Top"  >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+
+            <StackPanel>
+                <Image Source="pack://application:,,,/Resources/edit.png" Width="50" Height="50"/>
+            </StackPanel>
+        </Button>
+
+
+        <Label Grid.Row="3" Grid.Column="1" Content="Obavestenja i zahtevi" HorizontalAlignment="Left" Grid.ColumnSpan="3" Foreground="White" FontSize="28" VerticalAlignment="Center" />
+
+
+
+        <ListView x:Name="ListViewNotifications" ItemsSource="{Binding Notifications}" SelectedItem="{Binding SelectedNotification}" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="5" Grid.RowSpan="1" Margin="7"  
+                  Background="#CCF1F3F8" >>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Height="80"  Margin="5" CornerRadius="3"  BorderBrush="Black" BorderThickness="1" Background="#CCC5CFE5">
+                        <Grid >
+                            <Grid.InputBindings >
+                                <MouseBinding Gesture="LeftClick" Command="{Binding  ElementName=Root, Path=DataContext.NavigateToSelectedNotification }"/>
+                            </Grid.InputBindings>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="110"/>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="10"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Grid.RowSpan="2" Content="Od:" Grid.Column="2"/>
+                            <ComboBox Grid.Row="0" Grid.Column="3"  Grid.RowSpan="2" Margin="5"/>
+                            <Label Grid.Row="0" Grid.RowSpan="2" Grid.Column="4" Content="Datum prijema" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                            <TextBlock Text ="{Binding DateSent, StringFormat={}{0:dd.MM.yyyy}}" HorizontalAlignment="Right" Grid.Column="5" Grid.Row="0" Grid.RowSpan="2"  VerticalAlignment="Center"/>
+                            <Label Content= "{Binding Title}" Grid.Row="2" Grid.RowSpan="3"  Grid.Column="2" Grid.ColumnSpan="3" FontSize="18"  VerticalAlignment="Top" HorizontalAlignment="Left" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <Label x:Name="medicine"
+                Content="{Binding ElementName=ListViewNotifications,Path= SelectedItem}"
+                Visibility="Collapsed" />
+
+
+    </Grid>
+</Page>

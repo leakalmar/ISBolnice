@@ -1,0 +1,194 @@
+﻿<Page x:Class="Hospital_IS.ManagerView1.NotificationMedicineUpdate"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:managerviewmodel="clr-namespace:Hospital_IS.ManagerViewModel" d:DataContext="{d:DesignInstance Type=managerviewmodel:NotificationViewModel}"
+      mc:Ignorable="d"
+      
+        Title="MedicineInfoView" Height="750" Width="430">
+    <Page.Resources>
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style x:Key="ComboBoxTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Border CornerRadius="5,0,0,5"
+                            BorderThickness="1"
+                            Background="{TemplateBinding Background}"
+                                BorderBrush="Black">
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid x:Name="MedicalInformation">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="15"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+        <Border Grid.RowSpan="20" Grid.ColumnSpan="20" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF213868" Offset="0.0"/>
+                    <GradientStop Color="#FF5B317E" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+          
+        <Button x:Name="Back"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1"  Background="Transparent" Command="{Binding NavigateToSelectedNotification }" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+
+            <StackPanel>
+                <Image Source="pack://application:,,,/Resources/backbutton.png" Width="50" Height="50"/>
+            </StackPanel>
+        </Button>
+        <Label Grid.Row="1" Grid.Column="2" Content="Izmena leka" Grid.ColumnSpan="2" Foreground="White" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label Grid.Row="3" Grid.Column="1" Content="Naziv leka" Grid.ColumnSpan="2" Foreground="White" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBox x:Name="MedicineName" Grid.Row="3" Grid.Column="3" FontSize="15" Height="25" Padding="3,0,3,0"
+                 Text="{Binding Name}"  Background="White" Template="{StaticResource TextBoxBaseControlTemplate}"/>
+        <Label Grid.Row="5" Grid.Column="1" Content="Sastav leka" Grid.ColumnSpan="2" Foreground="White" FontSize="15" VerticalAlignment="Center" HorizontalAlignment ="Left"/>
+        <Border  Grid.Row="5" Grid.Column="3" Grid.RowSpan="2" CornerRadius="10" Background="White"
+                    BorderThickness="1,1,1,1" BorderBrush="FloralWhite">
+            <DataGrid FontSize="13" x:Name="composition" Margin="5" ItemsSource="{Binding CompositionDTO}"
+                        HeadersVisibility="None"
+                        Background="White" RowBackground="Transparent"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        BorderThickness="0" AutoGenerateColumns="False"
+                        BorderBrush="{x:Null}" 
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        HorizontalScrollBarVisibility="Disabled" RowHeaderWidth="0"
+                        CanUserSortColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=Component}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <Label Grid.Row="8" Grid.Column="1" Content="Zamenski lekovi" Grid.ColumnSpan="2" Foreground="White" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <Border Grid.Row="8" Grid.Column="3" Grid.RowSpan="2" CornerRadius="10" Background="White"
+                    BorderThickness="1,1,1,1" BorderBrush="FloralWhite">
+            <DataGrid FontSize="13" x:Name="change" Margin="5,5,5,5" ItemsSource="{Binding ReplaceMedicineNameDTOs}"
+                         HeadersVisibility="None"
+                        Background="White" RowBackground="Transparent"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        BorderThickness="0" AutoGenerateColumns="False"
+                        BorderBrush="{x:Null}" 
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        HorizontalScrollBarVisibility="Disabled" RowHeaderWidth="0"
+                        CanUserSortColumns="False" HorizontalAlignment="Left" Width="215" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=Name}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <Label Grid.Row="11" Grid.Column="1" Content="Terapijske indikacije" Grid.ColumnSpan="3" Foreground="White" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="4"
+                VerticalScrollBarVisibility="Auto"  Margin="10,10,0,10">
+            <TextBox Text="{Binding Usage}" TextWrapping="Wrap" FontSize="14" Template="{StaticResource TextBoxBaseControlTemplate}"
+                    x:Name="Usage" FontFamily="Verdana" Foreground="Black" Padding="5"
+                    Background="White" BorderThickness="0"  />
+        </ScrollViewer>
+        <Label Grid.Row="14" Grid.Column="1" Content="Nezeljena dejstva" Grid.ColumnSpan="3" Foreground="White" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="4"
+                VerticalScrollBarVisibility="Auto"  Margin="10,10,0,10">
+            <TextBox Text="{Binding SideEffects}" TextWrapping="Wrap" FontSize="14" Template="{StaticResource TextBoxBaseControlTemplate}"
+                    x:Name="SideEffects" FontFamily="Verdana" Foreground="Black"
+                    Background="White" BorderThickness="0"  Padding="5" />
+        </ScrollViewer>
+        <Button x:Name="AddMedicine" Content="Dodaj"  Background="White" Foreground="Black" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="5"
+                VerticalAlignment="Center" RenderTransformOrigin="-0.258,0.185" Margin="13,0,0,0" Width="45" BorderBrush="Aquamarine" BorderThickness="3" Grid.ColumnSpan="3" Height="29"  Click="AddContent_Click">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="AddContent"  Content="Dodaj"  Background="White" Foreground="Black" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="8"
+                VerticalAlignment="Center" RenderTransformOrigin="-0.258,0.185" Margin="11,0,0,0" Grid.ColumnSpan="3" BorderBrush="Aquamarine"  BorderThickness="3" Height="30" Width="48"  Click="AddMedicine_Click" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="Save" Content="Izaberi doktora" Background="White" Foreground="Black" Grid.Column="2" HorizontalAlignment="Left" Command="{Binding NavigateToChooseRecipientWindow}"
+                Margin="25,0,0,0" Grid.Row="16" VerticalAlignment="Center" RenderTransformOrigin="0.653,-0.97" BorderBrush="Aquamarine"
+                BorderThickness="5"  FontSize="20" Height="40" Width="250" Grid.ColumnSpan="2"  >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="DeleteMedicine" Content="Ukloni"  Background="White" Foreground="Black" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="6" Click="DeleteMedicine_Click"
+            VerticalAlignment="Top" RenderTransformOrigin="-0.258,0.185" Margin="12,14,0,0" BorderBrush="Aquamarine" BorderThickness="3" Grid.ColumnSpan="3" Height="29" Width="45">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="DeleteContent"  Content="Ukloni"  Background="White" Foreground="Black" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="9" Click="DeleteContent_Click"
+            VerticalAlignment="Top" RenderTransformOrigin="-0.258,0.185" Margin="12,12,0,0" Grid.ColumnSpan="3" BorderBrush="Aquamarine"  BorderThickness="3" Height="29" Width="48" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</Page>

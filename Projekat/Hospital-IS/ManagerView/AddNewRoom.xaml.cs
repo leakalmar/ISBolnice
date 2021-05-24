@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Controllers;
+using Hospital_IS.ManagerViewModel;
 using Model;
 
 
@@ -24,66 +26,57 @@ namespace Hospital_IS
         public AddNewRoom()
         {
             InitializeComponent();
-        }
-
-        
-
-
-        private void potvrdi_Click(object sender, RoutedEventArgs e)
-        {
             
-            int roomNumber = Convert.ToInt32(text1.Text);
-            bool zauzeto = (bool)check1.IsChecked;
-            bool renoviranje = (bool)check2.IsChecked;
-            int roomFloor = Convert.ToInt32(FloorId.Text);
-            RoomType tip;
-            if (combo1.Text.Equals("Soba za odmor"))
-            {
-                tip = RoomType.RecoveryRoom;
-            }
-            else if (combo1.Text.Equals("Operaciona soba"))
-            {
-                tip = RoomType.OperationRoom;
-            }
-            else if (combo1.Text.Equals("Magacin"))
-            {
-                tip = RoomType.StorageRoom;
-            }
-            else
-            {
-                tip = RoomType.ConsultingRoom;
-            }
-
-            int id = genereteId(RoomController.Instance.GetAllRooms());
-            Room newRoom = new Room(roomFloor, roomNumber, id, zauzeto, renoviranje, tip);
-
-            RoomController.Instance.AddRoom(newRoom);
-
-            RoomOptions roomOptions = new RoomOptions();
-            roomOptions.Show();
-            this.Close();
+           
+           
         }
 
-        private int genereteId(List<Room> room)
-        {
-            int id = -1;
-            foreach(Room r in room)
-            {
-                if(r.RoomId > id)
-                {
-                    id = r.RoomId;
-                }
-            }
 
-            return ++id;
+       
+
+       
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            Window1.Instance.Show();
+            this.Hide();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+      
+
+        private void RoomNumber_GotFocus(object sender, RoutedEventArgs e)
         {
-            RoomOptions roomOptions = new RoomOptions();
-            roomOptions.Show();
-            this.Close();
-            
+           if(RoomNumberBox.Text.Equals("Unesite broj sobe"))
+            {
+                RoomNumberBox.Text = string.Empty;
+            }
+        }
+
+        private void RoomFloor_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+            if (RoomFloorBox.Text.Equals("Unesite sprat sobe"))
+            {
+                RoomFloorBox.Text = string.Empty;
+            }
+        }
+
+        private void SurfaceArea_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+            if (SurfaceAreaBox.Text.Equals("Unesite površinu sobe"))
+            {
+                SurfaceAreaBox.Text = string.Empty;
+            }
+        }
+
+        private void BedNumber_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+            if (BedNumberBox.Text.Equals("Unesite broj kreveta"))
+            {
+                BedNumberBox.Text = string.Empty;
+            }
         }
     }
 }

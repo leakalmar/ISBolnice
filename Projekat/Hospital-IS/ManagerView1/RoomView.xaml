@@ -1,29 +1,25 @@
-﻿<Window x:Class="Hospital_IS.RoomOptions"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Page x:Class="Hospital_IS.ManagerView1.RoomView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hospital_IS" 
-        AllowsTransparency="True"
-        mc:Ignorable="d"
-        WindowStyle="None" WindowStartupLocation="CenterScreen"
+        xmlns:viewModel="clr-namespace:Hospital_IS.ManagerViewModel" d:DataContext="{d:DesignInstance Type=viewModel:RoomViewModel}"
+      mc:Ignorable="d"
+        Loaded="Page_Loaded"
       
         Title="Upravnik" Height="750" Width="430">
-    <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" >
-            <GradientStop Color="Black"/>
-            <GradientStop Color="#FF184095" Offset="0.0"/>
-            <GradientStop Color="#FF5B317E" Offset="1"/>
-        </LinearGradientBrush>
-    </Window.Background>
-
-
-
-
-    <Grid >
-
-        <DataGrid x:Name="DataGridRooms1"  IsReadOnly="True" ItemsSource="{Binding}" AlternatingRowBackground="NavajoWhite"
-                  SelectionMode="Single"
+   
+   <Grid >
+        <Border  >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF213868" Offset="0.0"/>
+                    <GradientStop Color="#FF5B317E" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <DataGrid x:Name="DataGridRooms"  IsReadOnly="True" ItemsSource="{Binding Rooms}" AlternatingRowBackground="NavajoWhite"
+                  SelectionMode="Single"  SelectedItem="{Binding SelectedRoom}"
                   Height="430" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="350" Margin="40,145,40,0" Background="#FFC5DBDF" AutoGenerateColumns="False" >
             <DataGrid.CellStyle>
                 <Style/>
@@ -38,7 +34,7 @@
                 <DataGridTextColumn Header="Broj" Width="70" Binding = "{Binding RoomNumber}"/>
                 <DataGridTextColumn Header="Sprat" Width="70" Binding="{Binding RoomFloor}"/>
                 <DataGridTextColumn Header="Vrsta" Width="70" Binding="{Binding Type}"/>
-                <DataGridCheckBoxColumn Header="Zauzetost" Width="70" Binding="{Binding IsFree}"/>
+
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel  Height="90" Background="White"  Margin="0,670,0,0"   >
@@ -72,7 +68,7 @@
                     </Button.Resources>
 
                     <StackPanel>
-                        <Image Source="Resources/room.png" Width="70" Height="60"/>
+                        <Image Source="pack://application:,,,/Resources/room.png" Width="70" Height="60"/>
                     </StackPanel>
                 </Button>
                 <TextBlock Grid.Row="2" Grid.Column="3" Height="20" Text="RADNICI" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#624cfc"   />
@@ -83,7 +79,7 @@
                         </Style>
                     </Button.Resources>
                     <StackPanel>
-                        <Image Source="Resources/worker.png" Width="70"  Height="60" />
+                        <Image Source="pack://application:,,,/Resources/worker.png" Width="70"  Height="60" />
                     </StackPanel>
                 </Button>
                 <TextBlock Grid.Row="2" Grid.Column="5" Height="20" Text="FILIJALE" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#624cfc"   />
@@ -94,29 +90,29 @@
                         </Style>
                     </Button.Resources>
                     <StackPanel>
-                        <Image Source="Resources/filijale.png" Width="70"  Height="60" />
+                        <Image Source="pack://application:,,,/Resources/filijale.png" Width="70"  Height="60" />
                     </StackPanel>
                 </Button>
                 <TextBlock Grid.Row="2" Grid.Column="7" Height="20" Text="OPREMA" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#624cfc"   />
-                <Button BorderThickness="0" Width="80" Grid.Column="7" Grid.Row="1"  Background="Transparent" >
+                <Button x:Name="Eqiupment" BorderThickness="0" Width="80" Grid.Column="7" Grid.Row="1"  Background="Transparent" Command="{Binding NavigateToEquipmentPageCommand}" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
                         </Style>
                     </Button.Resources>
                     <StackPanel>
-                        <Image Source="Resources/hospitalroom.png" Width="70"  Height="60" />
+                        <Image Source="pack://application:,,,/Resources/hospitalroom.png" Width="70"  Height="60" />
                     </StackPanel>
                 </Button>
-                <TextBlock Grid.Row="2" Grid.Column="9" Height="20" Text="Ostalo" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#624cfc"   />
-                <Button BorderThickness="0" Width="80" Grid.Column="9" Grid.Row="1"  Background="Transparent" >
+                <TextBlock Grid.Row="2" Grid.Column="9" Height="20" Text="Ostalo" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#624cfc"  />
+                <Button x:Name="OtherOptionsButton" BorderThickness="0" Width="80" Grid.Column="9" Grid.Row="1"  Background="Transparent" Click="OtherOptionsButton_Click" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
                         </Style>
                     </Button.Resources>
                     <StackPanel>
-                        <Image Source="Resources/toolbar.png" Width="70"  Height="60" />
+                        <Image Source="pack://application:,,,/Resources/toolbar.png" Width="70"  Height="60" />
                     </StackPanel>
                 </Button>
             </Grid>
@@ -128,6 +124,10 @@
                     <ColumnDefinition Width="3"/>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="5"/>
                     <ColumnDefinition Width="40"/>
                     <ColumnDefinition Width="15"/>
                 </Grid.ColumnDefinitions>
@@ -138,7 +138,7 @@
                     <RowDefinition/>
                     <RowDefinition Height="3"/>
                 </Grid.RowDefinitions>
-                <Button Grid.RowSpan="2" BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9">
+                <Button  Grid.RowSpan="2" BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9" Command="{Binding NavigateToManagerProfilePage}">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -149,19 +149,91 @@
                     </StackPanel>
                 </Button>
                 <TextBlock Grid.RowSpan="2"  Text="Sobe" Grid.Column="2" Grid.Row ="1" FontWeight="SemiBold" Margin="25,15,0,0" FontSize="25" VerticalAlignment="Top" Foreground="#624cfc"/>
-                <Button Grid.RowSpan="2" BorderThickness="0" Grid.Column="3" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9" Grid.ColumnSpan="2" HorizontalAlignment="Left" Click="Button_Click" >
+                <Button  Grid.RowSpan="2" BorderThickness="0" Grid.Column="7" Grid.Row="1" Width="40" Background="White" Margin="0,0,0,9"
+                        HorizontalAlignment="Right" Click="RoomOptions_Click" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
                         </Style>
                     </Button.Resources>
                     <StackPanel>
-                        <Image Source="pack://application:,,,/Resources/options.png" HorizontalAlignment="Left" Width="55" Height="64" />
+                        <Image Source="pack://application:,,,/Resources/options.png" HorizontalAlignment="Left" Width="50" Height="64" />
+                    </StackPanel>
+                </Button>
+                <Button Grid.RowSpan="2" BorderThickness="0" Grid.Column="5" Grid.Row="1" Width="50" Background="White" Margin="0,0,0,9" >
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/question.png"  Width="50" Height="64" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="Search" Grid.RowSpan="2" BorderThickness="0" Grid.Column="3" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/search.png"  Width="50" Height="64" />
                     </StackPanel>
                 </Button>
             </Grid>
         </StackPanel>
-        <StackPanel Background="White" Margin="0,555,0,0" >
+        <StackPanel x:Name="OtherOptions" Visibility="Hidden" Background="White" Margin="0,471,0,80" >
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="7"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="3"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="63"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="CloseOptions" BorderThickness="0"  Grid.Column="5" Grid.Row="0" Height="40"  Width="40" Background="White"  >
+
+                    <StackPanel>
+                        <Image  Source="pack://application:,,,/Resources/angledown.png" Width="40" Height="40"  />
+                    </StackPanel>
+                </Button>
+
+                <TextBlock  Text="Lekovi" Grid.Column="1" Grid.Row ="2" FontWeight="SemiBold" FontSize="18" Height="20" HorizontalAlignment="Center" Foreground="#624cfc"/>
+                <Button x:Name="MedicineView" BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="80" Background="White" Command="{Binding NavigateToMedicinePageCommand}" >
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image  Source="pack://application:,,,/Resources/lekovi.png" Width="70" Height="60" />
+                    </StackPanel>
+                </Button>
+                <Separator Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="12" Height ="6"  Background= "Black"  />
+            </Grid>
+
+
+        </StackPanel>
+
+
+
+
+        <StackPanel x:Name="RoomOptions" Visibility="Collapsed" Background="White" Margin="0,555,0,0" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
@@ -182,7 +254,7 @@
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
-                <Button  x:Name="AddRoom" BorderThickness="0" Grid.Column="1" Grid.Row="1" Height="35" Width="45" Background="White" Click="AddRoom_Click"  >
+                <Button  x:Name="AddRoomButton" BorderThickness="0" Grid.Column="1" Grid.Row="1" Height="35" Width="45" Background="White" Click="AddRoom_Click">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -202,7 +274,7 @@
                         <Image Source="pack://application:,,,/Resources/edit.png" HorizontalAlignment="Left" Width="40" Height="35" />
                     </StackPanel>
                 </Button>
-                <Button x:Name="DeleteRoom" BorderThickness="0" Grid.Column="1" Grid.Row="5" Height="35" Width="45" Background="White" Click="DeleteRoom_Click" >
+                <Button x:Name="DeleteRoom" BorderThickness="0" Grid.Column="1" Grid.Row="5" Height="35" Width="45" Background="White" Command="{Binding DeleteRoom}" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -212,7 +284,7 @@
                         <Image Source="pack://application:,,,/Resources/deleteroom.png" HorizontalAlignment="Left" Width="40" Height="35" />
                     </StackPanel>
                 </Button>
-                <Button x:Name="RenovationRoom" BorderThickness="0" Grid.Column="1" Grid.Row="7" Height="35" Width="45" Background="White" Click="RenovationRoom_Click" >
+                <Button x:Name="RenovationRoom" BorderThickness="0" Grid.Column="1" Grid.Row="7" Height="35" Width="45" Background="White" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -230,11 +302,7 @@
         </StackPanel>
 
 
-
-
-
-
-
-
     </Grid>
-</Window>
+
+    
+</Page>

@@ -1,0 +1,143 @@
+﻿<Page x:Class="Hospital_IS.ManagerView1.NotificationInformationView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital_IS.ManagerView1" xmlns:managerviewmodel="clr-namespace:Hospital_IS.ManagerViewModel" d:DataContext="{d:DesignInstance Type=managerviewmodel:NotificationViewModel}"
+      mc:Ignorable="d" 
+      x:Name="Root"
+      Title="NotificationInformationView" Height="750" Width="430" >
+
+    <Page.Resources>
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Page.Resources>
+    <Grid x:Name="NotificationInformation" DataContext="{Binding SelectedNotification}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="15"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Border  Grid.ColumnSpan="20" Grid.RowSpan="20" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF213868" Offset="0.0"/>
+                    <GradientStop Color="#FF5B317E" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Button x:Name="Back"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1"  Background="Transparent"  Command= "{Binding  ElementName=Root, Path=DataContext.NavigateToPreviousPage}" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+
+            <StackPanel>
+                <Image Source="pack://application:,,,/Resources/backbutton.png" Width="50" Height="50"/>
+            </StackPanel>
+        </Button>
+        <Label Grid.Row="1" Grid.Column="2" Content="Obaveštenje" Grid.ColumnSpan="4" Foreground="White" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button x:Name="Delete"  BorderThickness="0" Width="50" Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="1"  Background="Transparent"   >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+
+            <StackPanel>
+                <Image Source="pack://application:,,,/Resources/deleteroom.png" Width="50" Height="50"/>
+            </StackPanel>
+        </Button>
+
+        <Label Content="Naslov:" Grid.Row="3" Grid.Column="1" Foreground="White" FontSize="15" Grid.ColumnSpan="2"/>
+        <TextBox Background="White"  TextWrapping="Wrap" Grid.Row="4" Grid.Column="1" Padding="3,0,3,0" IsEnabled="False"
+                 Grid.ColumnSpan="7" Margin="10" Text="{Binding Title}" FontSize="18" Foreground="Black" Template="{StaticResource TextBoxBaseControlTemplate}" >
+
+        </TextBox>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="7"
+                VerticalScrollBarVisibility="Auto"  Margin="10,10,10,10">
+            <TextBox Text="{Binding Note}" TextWrapping="Wrap" FontSize="15" Padding="4"
+                    x:Name="Usage" FontFamily="Verdana" Foreground="Black" Template="{StaticResource TextBoxBaseControlTemplate}"
+                    Background="White" BorderThickness="1"  IsEnabled="False" />
+        </ScrollViewer>
+        <Label Grid.Row="5" Grid.Column="2" Foreground="White" Content="{Binding  ElementName=Root, Path=DataContext.DoctorName }" 
+               HorizontalAlignment="Left" FontSize="15" Grid.ColumnSpan="2" />
+        <TextBlock Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="3" Foreground="White"  FontSize="15" HorizontalAlignment="Center"
+               VerticalAlignment="Center"  Text ="{Binding DateSent, StringFormat={}{0:dd.MM.yyyy}}" />
+        <Label Grid.Row="5" Grid.Column="1" Content="Od:" Foreground="White" FontSize="15"/>
+        <Label Grid.Row="5" Grid.Column="4" Content="Datum:" Foreground="White" FontSize="15" HorizontalAlignment="Center" />
+        <Label  x:Name="DateLabel"  Grid.Row="5" Grid.Column="5"  Grid.ColumnSpan="3" HorizontalAlignment="Right"  Foreground="White" FontSize="15"/>
+        <StackPanel Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="7">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="130"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="MedicineInsight" Grid.Column="0" Grid.Row="1" BorderBrush="Aquamarine" BorderThickness="3" Height="30" Width="100" Content="Uvid u lek" FontSize="15" Command="{Binding  ElementName=Root, Path=DataContext.NavigateToMedicineInsightPageCommmand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="MedicineChange" Grid.Column="1" Grid.Row="1" Height="30" BorderBrush="Aquamarine" BorderThickness="3" Width="100" Content="Izmeni lek" FontSize="15" Command="{Binding ElementName=Root, Path=DataContext.NavigateToMedicineUpdatePageCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="MedicineDelete" Grid.Column="2" Grid.Row="1" Height="30" BorderBrush="Aquamarine" BorderThickness="3" Width="100" Content="Odustani" FontSize="15" Command="{Binding  ElementName=Root, Path=DataContext.DeleteMedicineNotificationCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Page>

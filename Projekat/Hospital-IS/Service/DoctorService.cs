@@ -56,6 +56,18 @@ namespace Service
             return doctors;
         }
 
+        public string GetDoctorNameAndSurname(int senderId)
+        {
+            foreach (Doctor doctor in AllDoctors)
+            {
+                if (senderId == doctor.Id)
+                {
+                    return doctor.Name + " " + doctor.Surname;
+                }
+            }
+            return null;
+        }
+
         public List<Doctor> GetDoctorsBySpecialty(string specialtyName)
         {
             List<Doctor> doctors = new List<Doctor>();

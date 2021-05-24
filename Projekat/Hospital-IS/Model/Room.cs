@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace Model
 {
@@ -10,7 +11,7 @@ namespace Model
 
         public Room()
         {
-
+            
         }
 
 
@@ -25,18 +26,12 @@ namespace Model
             get; set;
         }
 
+        public int SurfaceArea { get; set; }
+        public int BedNumber { get; set; }
+
         public int RoomId { get; set; }
 
-        public Boolean IsFree
-        {
-            get; set;
-        }
-
-        public Boolean IsUsable
-        {
-            get; set;
-        }
-
+       
         public RoomType Type
         {
             get; set;
@@ -47,19 +42,20 @@ namespace Model
             get { return RoomId + " " + Type; }
         }
 
-        public Room(int roomFloor, int roomNumber, int roomId, bool isFree, bool isUsable, RoomType type)
-        {
-            RoomFloor = roomFloor;
-            RoomNumber = roomNumber;
-            RoomId = roomId;
-            IsFree = isFree;
-            IsUsable = isUsable;
-            Type = type;
-        }
+      
 
         public List<Equipment> Equipment { get; set; } = new List<Equipment>();
 
+        public Boolean isUsable { get; set; }
 
+        public Room(int roomFloor, int roomNumber, int surfaceArea, int bedNumber,RoomType type)
+        {
+            RoomFloor = roomFloor;
+            RoomNumber = roomNumber;
+            SurfaceArea = surfaceArea;
+            BedNumber = bedNumber;
+            Type = type;
+        }
 
         public void AddEquipment(Equipment newEquip)
         {
@@ -105,8 +101,10 @@ namespace Model
 
             foreach (Equipment r in Equipment)
             {
+                MessageBox.Show(r.EquiptId.ToString() + " " + updateEquip.EquiptId.ToString());
                 if (r.EquiptId == updateEquip.EquiptId)
                 {
+                    
                     int index = Equipment.IndexOf(r);
                     Equipment.Remove(r);
                     Equipment.Insert(index, updateEquip);

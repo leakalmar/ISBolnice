@@ -5,19 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital_IS.ManagerView"
         ResizeMode="NoResize"
-        AllowsTransparency="True"
+        Background="Transparent"
         mc:Ignorable="d"
        
         WindowStyle="None" WindowStartupLocation="CenterScreen"
-        Title="MedicineInfoView" Height="300" Width="300">
-    <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" >
-            <GradientStop Color="Black"/>
-            <GradientStop Color="#FF184095" Offset="0.0"/>
-            <GradientStop Color="#FF5B317E" Offset="1"/>
-        </LinearGradientBrush>
-    </Window.Background>
+        Title="MedicineInfoView" Height="350" Width="350">
+    
     <Grid>
+       
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="120"/>
@@ -32,12 +27,20 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="1" Grid.Column="1" Content="Izaberite primaoca:"   Foreground="White"/>
-        <ComboBox Grid.Row="2" Grid.Column="1" Height="20"/>
-        <DataGrid x:Name="DataGridDoctors"  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Width="220" Margin="10" ItemsSource="{Binding}"  IsReadOnly="True"  AlternatingRowBackground="NavajoWhite"
+        <Border  Grid.ColumnSpan="20" Grid.RowSpan="20" CornerRadius="20" BorderBrush="White" BorderThickness="3" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF213868" Offset="0.0"/>
+                    <GradientStop Color="#FF5B317E" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" FontWeight="SemiBold" Content="Izaberite primaoca:"   Foreground="White"/>
+        
+        <DataGrid x:Name="DataGridDoctors"  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" ItemsSource="{Binding}"  IsReadOnly="True"  AlternatingRowBackground="NavajoWhite"
                   SelectionMode="Extended" Background="#FFC5DBDF" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Ime i prezime" Width="120">
+                <DataGridTextColumn Header="Ime i prezime" Width="150">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{}{0} {1}">
                             <Binding Path="Name"/>
@@ -45,24 +48,26 @@
                         </MultiBinding>
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Specijalnost" Width="100" Binding="{Binding Specialty.Name}"/>
+                <DataGridTextColumn Header="Specijalnost" Width="*" Binding="{Binding Specialty.Name}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="Send" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Width="100" Background="Transparent" BorderBrush="White" 
-                BorderThickness="1" Height="20" Content="Posalji" Foreground="White" Click="Send_Click"/>
-        <Button x:Name="SendReNotification" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Width="100" Background="Transparent" BorderBrush="White" 
-                BorderThickness="1" Height="20" Content="Posalji" Foreground="White" Click="SendReNotification_Click"/>
-        <Button x:Name="Close" Background="Transparent" Grid.Column="2" HorizontalAlignment="Left" Margin="96,0,0,0" Grid.RowSpan="2" 
-                Grid.Row="1" VerticalAlignment="Top" Height="40" Width="40" Click="Close_Click">
-            <StackPanel>
-                    <Image Source="pack://application:,,,/Resources/deleteroom.png" Width="40" Height="40" />
-                </StackPanel>
+        <Button x:Name="Send" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Width="120" Foreground="Black"
+                BorderThickness="1" Height="25" Content="Posalji"  Background="White"  Click="Send_Click">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
         </Button>
-        <Button x:Name="CloseNotification" Background="Transparent" Grid.Column="2" HorizontalAlignment="Left" Margin="96,0,0,0" Grid.RowSpan="2" 
-                Grid.Row="1" VerticalAlignment="Top" Height="40" Width="40" Click="CloseNotification_Click" BorderThickness="0">
-            <StackPanel>
-                <Image Source="pack://application:,,,/Resources/deleteroom.png" Width="40" Height="40" />
-            </StackPanel>
+        <Button x:Name="SendReNotification" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Width="120" Foreground="Black"
+                BorderThickness="1" Height="25" Content="Posalji"  Background="White"  Click="Send_Click">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
         </Button>
+
+
     </Grid>
 </Window>

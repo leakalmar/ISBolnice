@@ -71,6 +71,9 @@
                 <DataTemplate>
                     <Border Height="80"  Margin="5" CornerRadius="3"  BorderBrush="Black" BorderThickness="1" Background="#CCC5CFE5">
                         <Grid>
+                            <Grid.InputBindings>
+                                <MouseBinding Command="{Binding }"/>
+                            </Grid.InputBindings>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="10"/>
                                 <ColumnDefinition Width="40"/>
