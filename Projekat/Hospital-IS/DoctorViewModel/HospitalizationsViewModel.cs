@@ -1,0 +1,235 @@
+﻿using Controllers;
+using Hospital_IS.Commands;
+using Hospital_IS.DoctorView;
+using Model;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
+namespace Hospital_IS.DoctorViewModel
+{
+    public class HospitalizationsViewModel : BindableBase
+    {
+        #region Fields
+        private bool newHospitalization;
+        private bool hospitalized;
+        private Patient patient;
+
+        private DateTime addmissionDate;
+        private DateTime releaseDate;
+
+        private List<Room> rooms;
+        private Room selectedRoom;
+
+        private string doctor;
+        private string details;
+
+        private ObservableCollection<Hospitalization> hospitalizations;
+        private Hospitalization selectedHospitalization;
+
+        public bool NewHospitalization
+        {
+            get { return newHospitalization; }
+            set 
+            { 
+                newHospitalization = value;
+                OnPropertyChanged("NewHospitalization");
+            }
+        }
+
+        public bool Hospitalized
+        {
+            get { return hospitalized; }
+            set
+            {
+                hospitalized = value;
+                if(hospitalized == true && NewHospitalization == false)
+                {
+                    Hospitalization hospitalization = ChartController.Instance.GetActivHospitalization(Patient);
+                    AddmissionDate = hospitalization.AdmissionDate;
+                    ReleaseDate = hospitalization.ReleaseDate;
+                    SelectedRoom = hospitalization.Room;
+                    Doctor = hospitalization.Doctor;
+                }
+                OnPropertyChanged("Hospitalized");
+            }
+        }
+
+        public Patient Patient
+        {
+            get { return patient; }
+            set
+            {
+                patient = value;
+                this.Hospitalizations = new ObservableCollection<Hospitalization>(ChartController.Instance.GetHospitalizationsByPatient(Patient));
+                this.Hospitalized = patient.Admitted;
+                OnPropertyChanged("Patient");
+            }
+        }
+
+        public ObservableCollection<Hospitalization> Hospitalizations
+        {
+            get { return hospitalizations; }
+            set
+            {
+                hospitalizations = value;
+                OnPropertyChanged("Hospitalizations");
+            }
+        }
+
+        public Hospitalization SelectedHospitalization
+        {
+            get { return selectedHospitalization; }
+            set
+            {
+                selectedHospitalization = value;
+                OnPropertyChanged("SelectedHospitalization");
+            }
+        }
+
+        public DateTime AddmissionDate
+        {
+            get { return addmissionDate; }
+            set
+            {
+                addmissionDate = value;
+                OnPropertyChanged("AddmissionDate");
+            }
+        }
+
+        public DateTime ReleaseDate
+        {
+            get { return releaseDate; }
+            set
+            {
+                releaseDate = value;
+                OnPropertyChanged("ReleaseDate");
+            }
+        }
+
+        public List<Room> Rooms
+        {
+            get { return rooms; }
+            set
+            {
+                rooms = value;
+                OnPropertyChanged("Rooms");
+            }
+        }
+
+        public Room SelectedRoom
+        {
+            get { return selectedRoom; }
+            set
+            {
+                selectedRoom = value;
+                OnPropertyChanged("SelectedRoom");
+            }
+        }
+
+        public string Doctor
+        {
+            get { return doctor; }
+            set
+            {
+                doctor = value;
+                OnPropertyChanged("Doctor");
+            }
+        }
+
+        public string Details
+        {
+            get { return details; }
+            set
+            {
+                details = value;
+                OnPropertyChanged("Details");
+            }
+        }
+
+        #endregion
+
+        #region Commands
+        private RelayCommand hospitalizePatientCommand;
+        private RelayCommand endCreatingHospitalizationCommand;
+        private RelayCommand releasePatientCommand;
+
+        public RelayCommand HospitalizePatientCommand
+        {
+            get { return hospitalizePatientCommand; }
+            set { hospitalizePatientCommand = value; }
+        }
+        public RelayCommand EndCreatingHospitalizationCommand
+        {
+            get { return endCreatingHospitalizationCommand; }
+            set { endCreatingHospitalizationCommand = value; }
+        }
+        public RelayCommand ReleasePatientCommand
+        {
+            get { return releasePatientCommand; }
+            set { releasePatientCommand = value; }
+        }
+        #endregion
+
+        #region Actions
+        private void Execute_HospitalizePatientCommand(object obj)
+        {
+            NewHospitalization = true;
+            Hospitalized = true;
+            SelectedRoom = Rooms[0];
+            AddmissionDate = DateTime.Now;
+            ReleaseDate = DateTime.Now.AddDays(3);
+            Doctor = DoctorMainWindow.Instance._ViewModel.Doctor.Name + " " + ShortSurname(DoctorMainWindow.Instance._ViewModel.Doctor);
+            //Krevet
+        }
+
+        private void Execute_EndCreatingHospitalizationCommand(object obj)
+        {
+            Hospitalized = true;
+            NewHospitalization = false;
+            Patient.Admitted = true;
+            PatientController.Instance.UpdatePatient(Patient);
+            ChartController.Instance.AddHospitalization(AddmissionDate, ReleaseDate, Doctor, SelectedRoom, Details,Patient);
+            this.Hospitalizations = new ObservableCollection<Hospitalization>(ChartController.Instance.GetHospitalizationsByPatient(Patient));
+        }
+
+        private void Execute_ReleasePatientCommand(object obj)
+        {
+            Hospitalized = false;
+            Patient.Admitted = false;
+            PatientController.Instance.UpdatePatient(Patient);
+            ChartController.Instance.ReleasePatient(Patient);
+        }
+
+        private bool CanExecute_Command(object obj)
+        {
+            return true;
+        }
+        #endregion
+
+        #region Methods
+        private string ShortSurname(Doctor doctor)
+        {
+            String newSurname = doctor.Surname;
+            if (doctor.Surname.Length > 12)
+            {
+                String[] surnames = doctor.Surname.Split(" ");
+                newSurname = surnames[0].ToCharArray()[0].ToString() + ". " + surnames[1];
+            }
+            return newSurname;
+        }
+        #endregion
+
+        #region Constructor
+        public HospitalizationsViewModel()
+        {
+            this.HospitalizePatientCommand = new RelayCommand(Execute_HospitalizePatientCommand,CanExecute_Command);
+            this.EndCreatingHospitalizationCommand = new RelayCommand(Execute_EndCreatingHospitalizationCommand, CanExecute_Command);
+            this.ReleasePatientCommand = new RelayCommand(Execute_ReleasePatientCommand, CanExecute_Command);
+            this.Rooms = RoomController.Instance.GetRoomByType(RoomType.RecoveryRoom);
+            this.Patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
+            this.NewHospitalization = false;
+        }
+        #endregion
+    }
+}

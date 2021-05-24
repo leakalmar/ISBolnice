@@ -180,7 +180,7 @@ namespace Hospital_IS.DoctorViewModel
             Started = false;
             if (SelectedAppointment == null)
             {
-                Margin = new Thickness(120 * index - 120, 0, 0, 0);
+                Margin = new Thickness(110 * index - 110, 0, 0, 0);
             }
             else
             {
@@ -188,11 +188,11 @@ namespace Hospital_IS.DoctorViewModel
                 if (SelectedAppointment.Started == true)
                 {
                     Started = true;
-                    Margin = new Thickness(120 * index, 0, 0, 0);
+                    Margin = new Thickness(110 * index, 0, 0, 0);
                 }
                 else if (SelectedAppointment.Started == false)
                 {
-                    Margin = new Thickness(120 * index - 120, 0, 0, 0);
+                    Margin = new Thickness(110 * index - 110, 0, 0, 0);
                 }
             }
 
@@ -225,6 +225,10 @@ namespace Hospital_IS.DoctorViewModel
                     Tests tests = new Tests();
                     tests._ViewModel.Started = Started;
                     this.InsideNavigationService.Navigate(tests);
+                    break;
+                case 6:
+                    Hospitalizations hospitalizations = new Hospitalizations();
+                    this.InsideNavigationService.Navigate(hospitalizations);
                     break;
             }
         }

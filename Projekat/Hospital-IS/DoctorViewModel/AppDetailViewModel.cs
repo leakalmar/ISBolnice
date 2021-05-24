@@ -113,6 +113,8 @@ namespace Hospital_IS.DoctorViewModel
                 return ((StartAppointmentDTO)item).DoctorAppointment.AppointmentStart.Date == DateTime.Now.Date;
             };
             appointmentsView.SortDescriptions.Add(new SortDescription("DoctorAppointment.AppointmentStart", ListSortDirection.Ascending));
+
+            AppointmentsView = appointmentsView;
             if(appointments.Count == 0)
             {
                 DoctorMainWindow.Instance._ViewModel.NavigateToHomePageCommand.Execute(null);

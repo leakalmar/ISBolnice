@@ -37,9 +37,24 @@ namespace Controllers
             return ChartService.Instance.GetReportsByPatientId(patient.Id);
         }
 
+        public List<Hospitalization> GetHospitalizationsByPatient(Patient patient)
+        {
+            return ChartService.Instance.GetHospitalizationsByPatientId(patient.Id);
+        }
+        
         public List<Prescription> GetPrescriptionsForReport(Patient patient, Report report)
         {
             return ChartService.Instance.GetPrescriptionsForReport(patient.Id, report.ReportId);
+        }
+
+        public Hospitalization GetActivHospitalization(Patient patient)
+        {
+            return ChartService.Instance.GetActivHospitalization(patient.Id);
+        }
+
+        public void ReleasePatient(Patient patient)
+        {
+            ChartService.Instance.ReleasePatient(patient.Id);
         }
 
         public void UpdateReport(Patient patient, Report report, String newAnamnsis)
@@ -63,6 +78,12 @@ namespace Controllers
         public void AddPrescriptions(List<Prescription> prescriptions, Patient patient)
         {
             ChartService.Instance.AddPrescriptions(prescriptions,patient.Id);
+        }
+
+        public void AddHospitalization(DateTime AddmissionDate, DateTime ReleaseDate,string Doctor, Room SelectedRoom, string Details, Patient patient)
+        {
+            Hospitalization newHospitalization = new Hospitalization(AddmissionDate, ReleaseDate, Doctor, SelectedRoom, Details);
+            ChartService.Instance.AddHospitalization(newHospitalization, patient.Id);
         }
     }
 }

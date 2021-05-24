@@ -19,7 +19,7 @@
         <GroupBox Header="Današnji termini" FontSize="16"
                 BorderBrush="#FF2E3B55" Foreground="White">
             <DataGrid x:Name="doctorAppointments"
-                    ItemsSource="{Binding Path=AppointmentsView}" Margin="10"
+                    ItemsSource="{Binding Path=AppointmentsView, UpdateSourceTrigger=PropertyChanged}" Margin="10"
                     Background="Transparent" RowBackground="Transparent"
                     Foreground="White"
                     ScrollViewer.VerticalScrollBarVisibility="Auto"
