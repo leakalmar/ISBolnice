@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.ManagerViewModel
@@ -81,8 +82,26 @@ namespace Hospital_IS.ManagerViewModel
                 {
 
                     selectedRoomFirst = value;
-                    EquipmentsFirstRoom = new ObservableCollection<Equipment>(SelectedRoomFirst.Equipment);
-                    OnPropertyChanged("SelectedRoomFirst");
+                    if(SelectedRoomSecond != null)
+                    {
+                        if (SelectedEquipmentFirst.EquiptId == SelectedRoomSecond.RoomId)
+                        {
+                            MessageBox.Show("Izabrali ste istu sobu");
+                        }
+                        else
+                        {
+                            EquipmentSecondRoom = new ObservableCollection<Equipment>(SelectedRoomSecond.Equipment);
+                            OnPropertyChanged("SelectedRoomFirst");
+                        }
+                    }
+                    else
+                    {
+                        EquipmentSecondRoom = new ObservableCollection<Equipment>(SelectedRoomSecond.Equipment);
+                        OnPropertyChanged("SelectedRoomFirst");
+                    }
+                  
+                   
+                   
 
                 }
             }

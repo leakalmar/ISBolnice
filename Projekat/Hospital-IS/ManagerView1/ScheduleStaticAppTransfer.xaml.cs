@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital_IS.ManagerViewModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -14,13 +15,15 @@ using System.Windows.Shapes;
 namespace Hospital_IS.ManagerView1
 {
     /// <summary>
-    /// Interaction logic for EquipmentTransferStaticView.xaml
+    /// Interaction logic for ScheduleStaticAppTransfer.xaml
     /// </summary>
-    public partial class EquipmentTransferStaticView : Page
+    public partial class ScheduleStaticAppTransfer : Page
     {
-        public EquipmentTransferStaticView()
+
+        public ScheduleStaticAppTransfer()
         {
             InitializeComponent();
+            this.DataContext = ScheduleStaticTransferViewModel.Instance;
         }
     }
 }
