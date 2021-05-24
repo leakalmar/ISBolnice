@@ -68,5 +68,10 @@ namespace Controllers
         {
             ChartService.Instance.AddPrescriptions(prescriptions,patient.Id);
         }
+
+        public int GetNumberOfTherapiesByMonth(int patientId, string month)
+        {
+            return ChartService.Instance.GetNumberOfTherapiesByMonth(patientId, month);
+        }
     }
 }

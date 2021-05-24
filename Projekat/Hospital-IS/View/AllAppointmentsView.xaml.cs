@@ -3,9 +3,11 @@ using Hospital_IS.View.PatientViewModels;
 using Model;
 using Storages;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.DataVisualization.Charting;
 
 namespace Hospital_IS.View
 {
@@ -20,10 +22,11 @@ namespace Hospital_IS.View
         {
             InitializeComponent();
             //this.DataContext = new AllAppointmentsViewModel();
-            
+
             //DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id));
             //this.DataContext = this;
         }
+
         /*
         private void home(object sender, RoutedEventArgs e)
         {

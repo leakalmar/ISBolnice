@@ -114,5 +114,9 @@ namespace Controllers
             return DoctorAppointmentService.Instance.GetAllByDoctorAndDates(idDoctor, dates);
         }
 
+        public int GetNumberOfAppointmentsByMonth(int patientId, string month)
+        {
+            return DoctorAppointmentService.Instance.GetNumberOfAppointmentsByMonth(patientId, month);
+        }
     }
 }

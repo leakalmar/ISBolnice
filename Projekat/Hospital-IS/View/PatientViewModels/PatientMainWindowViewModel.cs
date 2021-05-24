@@ -30,6 +30,7 @@ namespace Hospital_IS.View.PatientViewModels
             therapyPatientViewModel = new TherapyPatientViewModel();
             notificationsViewModel = new PatientNotificationsViewModel();
             CurrentViewModel = homePatientViewModel;
+            CheckDailyNotifications();
             DispatcherTimer dispatcherTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMinutes(1)
@@ -59,6 +60,31 @@ namespace Hospital_IS.View.PatientViewModels
                 if (time.Hour == note.NotificationTime && time.Minute == 00 && note.IsNotifyChecked)
                 {
                     MessageBox.Show("Podsetnik: " + note.NoteContent);
+                }
+            }
+        }
+
+        private  void CheckDailyNotifications()
+        {
+            DateTime time = DateTime.Now;
+
+            foreach (Therapy therapy in ChartController.Instance.GetTherapiesByPatient(Patient))
+            {
+                int usageHourDifference = (int)24 / therapy.TimesADay;
+                for (int i = 0; i < therapy.TimesADay; i++)
+                {
+                    if (time.Hour >= (therapy.FirstUsageTime + i * usageHourDifference))
+                    {
+                        MessageBox.Show("Trebalo je da popijete lek " + therapy.Medicine.Name + " u " + (therapy.FirstUsageTime + i * usageHourDifference) + "h.");
+                    }
+                }
+            }
+
+            foreach (PatientNote note in PatientController.Instance.GetNotesByPatient(Patient.Id))
+            {
+                if (time.Hour >= note.NotificationTime && note.IsNotifyChecked)
+                {
+                    MessageBox.Show("Podsetnik podešen za " + note.NotificationTime + "h: " + note.NoteContent);
                 }
             }
         }
@@ -93,14 +119,6 @@ namespace Hospital_IS.View.PatientViewModels
                     CurrentViewModel = notificationsViewModel;
                     break;
             }
-        }
-
-        public void changeApp(DoctorAppointment docApp)
-        {
-            MessageBox.Show("OK11111");
-            AppointmentPatientViewModel a = new AppointmentPatientViewModel();
-            a.SetRescheduleAppointmentView(docApp);
-            CurrentViewModel = a;
         }
 
         public HomePatientViewModel HomePatientViewModel

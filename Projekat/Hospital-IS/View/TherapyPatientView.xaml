@@ -6,11 +6,17 @@
         xmlns:local="clr-namespace:Hospital_IS.View" 
         xmlns:viewModel="clr-namespace:Hospital_IS.View.PatientViewModels"
         xmlns:vml="clr-namespace:Hospital_IS.View.VML"
+        xmlns:dvc="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         vml:ViewModelLocator.AutoHookedUpViewModel="True"
         mc:Ignorable="d"
         d:Height="660" d:Width="980" 
         Background="Transparent"  
         >
+    <UserControl.Resources>
+        <Style x:Key="ChartColor" TargetType="{x:Type Grid}">
+            <Setter Property="Background" Value="CadetBlue"/>
+        </Style>
+    </UserControl.Resources>
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -41,7 +47,7 @@
         <DataGrid x:Name="dataGridTherapy" RowBackground="#FF297CAC" Background="#FF297CAC" MouseDoubleClick="showRow"
                   IsReadOnly="True" SelectedItem="{Binding Therapy}" ItemsSource="{Binding Therapies, Mode=TwoWay}"  
                   CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="0" 
-                  Grid.Row="1" Grid.RowSpan="9" Margin="10,10,10,300" 
+                  Grid.Row="1" Grid.RowSpan="9" Margin="10,0,10,310" 
                   CanUserResizeColumns="False" CanUserResizeRows="False" 
                   Foreground="White" HorizontalGridLinesBrush="White" 
                   VerticalGridLinesBrush="#FFFFFEFE" CanUserDeleteRows="False" 
@@ -98,7 +104,7 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Border x:Name="TherapyInfo" BorderThickness="0" BorderBrush="#FF184095" Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Margin="10,10,10,100" Visibility="Hidden" CornerRadius="20,20,20,20" Background="#FF184095">
+        <Border x:Name="TherapyInfo" BorderThickness="0" BorderBrush="#FF184095" Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Margin="10,0,10,20" Visibility="Visible" CornerRadius="20,20,20,20" Background="#FF184095">
             <StackPanel x:Name="PersonalData" Grid.RowSpan="9" Grid.Row="1" Grid.Column="2" Margin="10,10,10,10" >
 
                 <Grid>
@@ -130,6 +136,29 @@
                 <Label Content="Neželjena dejstva:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
                 <TextBlock x:Name="SideEffects" Text="{Binding Path = SideEffects}" TextWrapping="Wrap" Width="414" Background="{x:Null}" Height="106" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MinWidth="414" MinHeight="106" MaxWidth="414" MaxHeight="106" Foreground="White"/>
             </StackPanel>
+        </Border>
+        <Border Background="CadetBlue" CornerRadius="20,20,20,20" Grid.Row="9" Margin="10,5,10,20">
+            <dvc:Chart Canvas.Left="10" Name="therapyChart"  
+                Width="500" Height="250"  
+                Background="Transparent"  
+                Title="Prikaz lekova po mesecima"  
+                LegendTitle="Broj lekova" BorderBrush="{x:Null}" PlotAreaStyle="{StaticResource ChartColor}">
+                <dvc:Chart.Series>
+                    <dvc:AreaSeries  
+                    Title="Area Chart"  
+                    Background="CadetBlue"
+                    IndependentValuePath="Key"  
+                    DependentValuePath="Value"
+                    ItemsSource="{Binding ChartData}">
+                        <dvc:AreaSeries.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black"/>
+                                <GradientStop Color="#FF190000" Offset="1"/>
+                            </LinearGradientBrush>
+                        </dvc:AreaSeries.Foreground>
+                    </dvc:AreaSeries>
+                </dvc:Chart.Series>
+            </dvc:Chart>
         </Border>
     </Grid>
 </UserControl>

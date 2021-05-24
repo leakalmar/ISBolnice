@@ -17,6 +17,7 @@
         "AppointmentCounterInTimeRange": 0,
         "IsTroll": false
       },
+      "PatientNotes": [],
       "IsGuest": false,
       "doctor": null,
       "Doctor": null,
@@ -90,6 +91,7 @@
         "AppointmentCounterInTimeRange": 0,
         "IsTroll": false
       },
+      "PatientNotes": [],
       "IsGuest": false,
       "doctor": null,
       "Doctor": null,
@@ -163,6 +165,7 @@
         "AppointmentCounterInTimeRange": 0,
         "IsTroll": false
       },
+      "PatientNotes": [],
       "IsGuest": false,
       "doctor": null,
       "Doctor": null,
@@ -236,6 +239,7 @@
         "AppointmentCounterInTimeRange": 0,
         "IsTroll": false
       },
+      "PatientNotes": [],
       "IsGuest": false,
       "doctor": null,
       "Doctor": null,
@@ -309,6 +313,7 @@
         "AppointmentCounterInTimeRange": 0,
         "IsTroll": false
       },
+      "PatientNotes": [],
       "IsGuest": false,
       "doctor": null,
       "Doctor": null,
@@ -382,6 +387,14 @@
         "AppointmentCounterInTimeRange": 2,
         "IsTroll": false
       },
+      "PatientNotes": [
+        {
+          "NotificationTime": 11,
+          "IsNotifyChecked": true,
+          "NoteContent": "Setaj sat vremena!!!",
+          "AppointmentId": 5
+        }
+      ],
       "IsGuest": false,
       "doctor": null,
       "Doctor": null,
@@ -431,8 +444,8 @@
     "IsFinished": false,
     "Reserved": false,
     "AppointmentCause": null,
-    "AppointmentStart": "2021-05-26T16:00:00",
-    "AppointmentEnd": "2021-05-26T16:30:00",
+    "AppointmentStart": "2021-05-29T16:00:00",
+    "AppointmentEnd": "2021-05-29T16:30:00",
     "Type": 1,
     "Room": 1,
     "Id": 9

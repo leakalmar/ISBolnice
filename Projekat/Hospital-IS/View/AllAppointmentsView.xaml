@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Hospital_IS.View" 
         xmlns:viewModel="clr-namespace:Hospital_IS.View.PatientViewModels"
         xmlns:vml="clr-namespace:Hospital_IS.View.VML"
+        xmlns:dvc="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         vml:ViewModelLocator.AutoHookedUpViewModel="True"
         mc:Ignorable="d"
         d:Height="660" d:Width="980" 
@@ -13,6 +14,9 @@
         >
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Style x:Key="ChartColor" TargetType="{x:Type Grid}">
+            <Setter Property="Background" Value="CadetBlue"/>
+        </Style>
     </UserControl.Resources>
     <Grid >
         <Grid.RowDefinitions>
@@ -38,7 +42,7 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-       
+
         <Label Content="Lista pregleda:" Grid.Row="0" Grid.Column="1" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
         <DataGrid x:Name="dataGridAppointment"  IsReadOnly="True" CanUserAddRows="False" SelectedItem="{Binding SelectedDoctorAppointment}" ItemsSource="{Binding AllAppointments, Mode=TwoWay}" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="1" Grid.RowSpan="8" Margin="10,10,440,0" RowHeaderWidth="0" MouseDoubleClick="showRow">
             <DataGrid.Resources>
@@ -59,7 +63,7 @@
                 <DataGridTextColumn Header="Soba" Binding="{Binding Room}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Border x:Name="AppointmentInfo" BorderThickness="0" BorderBrush="#FF184095" Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Margin="600,10,10,100" Visibility="Visible" CornerRadius="20,20,20,20" Background="#FF184095">
+        <Border x:Name="AppointmentInfo" BorderThickness="0" BorderBrush="#FF184095" Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Margin="600,10,10,100" Visibility="Hidden" CornerRadius="20,20,20,20" Background="#FF184095">
             <StackPanel x:Name="PersonalData" Grid.RowSpan="9" Grid.Row="1" Grid.Column="2" Margin="10,10,10,10" >
 
                 <Grid>
@@ -110,6 +114,29 @@
                 </LinearGradientBrush>
             </Button.Background> Beleška
         </Button>
+        <Border Background="CadetBlue" CornerRadius="20,20,20,20" Grid.Row="9" Margin="10,10,440,40">
+            <dvc:Chart Canvas.Left="10" Name="appointmentsChart"  
+                Width="500" Height="250"  
+                Background="Transparent"  
+                Title="Prikaz pregleda po mesecima"  
+                LegendTitle="Broj pregleda" BorderBrush="{x:Null}" PlotAreaStyle="{StaticResource ChartColor}">
+                <dvc:Chart.Series>
+                    <dvc:AreaSeries  
+                    Title="Area Chart"  
+                    Background="CadetBlue"
+                    IndependentValuePath="Key"  
+                    DependentValuePath="Value"
+                    ItemsSource="{Binding ChartData}">
+                        <dvc:AreaSeries.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black"/>
+                                <GradientStop Color="#FF190000" Offset="1"/>
+                            </LinearGradientBrush>
+                        </dvc:AreaSeries.Foreground>
+                    </dvc:AreaSeries>
+                </dvc:Chart.Series>
+            </dvc:Chart>
+        </Border>
     </Grid>
 </UserControl>
 
