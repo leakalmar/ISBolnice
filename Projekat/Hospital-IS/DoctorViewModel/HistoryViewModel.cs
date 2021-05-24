@@ -2,10 +2,7 @@
 using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
 using Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.DoctorViewModel

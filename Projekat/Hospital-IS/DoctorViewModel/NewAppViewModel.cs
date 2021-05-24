@@ -58,6 +58,7 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 selectedSpecialty = value;
+                SetDoctors();
                 SetSelectedDoctor();
                 OnPropertyChanged("SelectedSpecialty");
                 FilterAppointments();
@@ -237,26 +238,19 @@ namespace Hospital_IS.DoctorViewModel
         {
             if (Emergency)
             {
-                if(instructionView == null)
-                {
-                    InstructionView = new IssueInstruction();
-                    InstructionView._ViewModel.MainNavigationService = MainNavigationService;
-                }
+                SetInstructionView();
                 InstructionView._ViewModel.SelectedAppointment = null;
                 InstructionView._ViewModel.SelectedEmergencyAppointment = SelectedEmergencyAppointment;
             }
             else
             {
-                if (instructionView == null)
-                {
-                    InstructionView = new IssueInstruction();
-                    InstructionView._ViewModel.MainNavigationService = MainNavigationService;
-                }
+                SetInstructionView();
                 InstructionView._ViewModel.SelectedAppointment = SelectedAppointment;
                 InstructionView._ViewModel.SelectedEmergencyAppointment = null;
             }
             this.MainNavigationService.Navigate(InstructionView);
         }
+
         private void Execute_ChangeEmergencyCommand(object obj)
         {
             this.Emergency = !this.Emergency;
@@ -270,21 +264,17 @@ namespace Hospital_IS.DoctorViewModel
         #endregion
 
         #region Methods
+
+        private void SetInstructionView()
+        {
+            if (instructionView == null)
+            {
+                InstructionView = new IssueInstruction();
+                InstructionView._ViewModel.MainNavigationService = MainNavigationService;
+            }
+        }
         private void SetSelectedDoctor()
         {
-            if (Emergency)
-            {
-                List<Doctor> doctorList = new List<Doctor>();
-                doctorList.Add(new Doctor(-1, "Svi", "doktori", DateTime.Now, null, null, null, 0, DateTime.Now, null, selectedSpecialty, 0));
-                doctorList.AddRange(DoctorController.Instance.GetDoctorsBySpecilty(SelectedSpecialty));
-                Doctors = doctorList;
-            }
-            else
-            {
-                Doctors = DoctorController.Instance.GetDoctorsBySpecilty(SelectedSpecialty);
-            }
-
-
             if (SelectedSpecialty.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.Specialty))
             {
                 foreach (Doctor doctor in Doctors)
@@ -304,6 +294,22 @@ namespace Hospital_IS.DoctorViewModel
                 SelectedType = "Pregled";
             }
         }
+
+        private void SetDoctors()
+        {
+            if (Emergency)
+            {
+                List<Doctor> doctorList = new List<Doctor>();
+                doctorList.Add(new Doctor(-1, "Svi", "doktori", DateTime.Now, null, null, null, 0, DateTime.Now, null, selectedSpecialty, 0));
+                doctorList.AddRange(DoctorController.Instance.GetDoctorsBySpecilty(SelectedSpecialty));
+                Doctors = doctorList;
+            }
+            else
+            {
+                Doctors = DoctorController.Instance.GetDoctorsBySpecilty(SelectedSpecialty);
+            }
+        }
+
         private AppointmentType FindType()
         {
             AppointmentType type;

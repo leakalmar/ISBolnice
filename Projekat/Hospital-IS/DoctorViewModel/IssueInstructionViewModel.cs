@@ -104,24 +104,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_IssueInstructionCommand(object obj)
         {
-            if (SelectedEmergencyAppointment == null)
-            {
-                SelectedAppointment.Appointment.AppointmentCause = AppointmentCause;
-                SendScheduledNotification(SelectedAppointment.Appointment);
-                DoctorAppointmentController.Instance.AddAppointment(SelectedAppointment.Appointment);
-                //DoctorMainWindow.Instance._ViewModel.DoctorAppointments.Add(SelectedAppointment);
-                // mislim da nece trebati
-            }
-            else
-            {
-                foreach (RescheduledAppointmentDTO rescheduled in SelectedEmergencyAppointment.RescheduledAppointments)
-                {
-                    SendRescheduleNotification(rescheduled.OldDocAppointment, rescheduled.NewDocAppointment);
-                    DoctorAppointmentController.Instance.UpdateAppointment(rescheduled.OldDocAppointment, rescheduled.NewDocAppointment);
-                }
-                SelectedEmergencyAppointment.SuggestedAppointment.AppointmentCause = AppointmentCause;
-                DoctorAppointmentController.Instance.AddAppointment(SelectedEmergencyAppointment.SuggestedAppointment);
-            }
+            ScheduleAppointment();
 
             DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.InsideNavigationService.Navigate(new ScheduledApp());
             this.MainNavigationService.Navigate(DoctorMainWindow.Instance._ViewModel.PatientChartView);
@@ -162,6 +145,26 @@ namespace Hospital_IS.DoctorViewModel
             //notification.Recipients.Add(appointment.Doctor.Id);
 
             NotificationController.Instance.AddNotification(notification);
+        }
+
+        private void ScheduleAppointment()
+        {
+            if (SelectedEmergencyAppointment == null)
+            {
+                SelectedAppointment.Appointment.AppointmentCause = AppointmentCause;
+                SendScheduledNotification(SelectedAppointment.Appointment);
+                DoctorAppointmentController.Instance.AddAppointment(SelectedAppointment.Appointment);
+            }
+            else
+            {
+                foreach (RescheduledAppointmentDTO rescheduled in SelectedEmergencyAppointment.RescheduledAppointments)
+                {
+                    SendRescheduleNotification(rescheduled.OldDocAppointment, rescheduled.NewDocAppointment);
+                    DoctorAppointmentController.Instance.UpdateAppointment(rescheduled.OldDocAppointment, rescheduled.NewDocAppointment);
+                }
+                SelectedEmergencyAppointment.SuggestedAppointment.AppointmentCause = AppointmentCause;
+                DoctorAppointmentController.Instance.AddAppointment(SelectedEmergencyAppointment.SuggestedAppointment);
+            }
         }
 
         #endregion

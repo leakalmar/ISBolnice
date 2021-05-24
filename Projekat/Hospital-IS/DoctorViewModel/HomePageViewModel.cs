@@ -13,8 +13,9 @@ using System.Windows.Navigation;
 
 namespace Hospital_IS.DoctorViewModel
 {
-    public class HomePageViewModel : DoctorViewModelClass
+    public class HomePageViewModel : BindableBase
     {
+        #region Feilds
         private ICollectionView appointmentsView;
         private ObservableCollection<StartAppointmentDTO> doctorAppointments;
         private StartAppointmentDTO selectedAppointment;
@@ -35,7 +36,7 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 doctorAppointments = value;
-                OnPropertyChanged();
+                OnPropertyChanged("DoctorAppointments");
             }
         }
 
@@ -45,7 +46,7 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 selectedAppointment = value;
-                OnPropertyChanged();
+                OnPropertyChanged("SelectedAppointment");
             }
         }
 
@@ -55,22 +56,12 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 appointmentsView = value;
-                OnPropertyChanged();
+                OnPropertyChanged("AppointmentsView");
             }
         }
+        #endregion
 
-        public void DetailsWindow(object sender, KeyEventArgs e)
-        {
-            if (SelectedAppointment != null && e.Key == Key.Enter)
-            {
-                AppDetail appDetail = new AppDetail();
-                appDetail._ViewModel.SelectedAppointment = SelectedAppointment;
-                appDetail._ViewModel.AppointmentsView = AppointmentsView;
-                this.NavigationService.Navigate(appDetail);
-            }
-        }
-
-
+        #region Commands
         private RelayCommand navigateToDetailsCommand;
         private RelayCommand selectionChangedCommand;
 
@@ -91,7 +82,9 @@ namespace Hospital_IS.DoctorViewModel
                 selectionChangedCommand = value;
             }
         }
+        #endregion
 
+        #region Actions
         private void Execute_NavigateToDetailsCommand(object obj)
         {
             if(selectedAppointment != null)
@@ -113,7 +106,9 @@ namespace Hospital_IS.DoctorViewModel
         {
             return true;
         }
+        #endregion
 
+        #region Constructor
         public HomePageViewModel(NavigationService navigation)
         {
             this.NavigateToDetailsCommand = new RelayCommand(Execute_NavigateToDetailsCommand, CanExecute_NavigateCommand);
@@ -130,6 +125,6 @@ namespace Hospital_IS.DoctorViewModel
             };
             appointmentsView.SortDescriptions.Add(new SortDescription("DoctorAppointment.AppointmentStart", ListSortDirection.Ascending));
         }
-
+        #endregion
     }
 }

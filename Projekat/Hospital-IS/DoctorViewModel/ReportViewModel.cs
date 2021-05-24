@@ -101,7 +101,7 @@ namespace Hospital_IS.DoctorViewModel
 
         #endregion
 
-        #region
+        #region Constructor
         public ReportViewModel()
         {
             Prescriptions = new ObservableCollection<Prescription>();

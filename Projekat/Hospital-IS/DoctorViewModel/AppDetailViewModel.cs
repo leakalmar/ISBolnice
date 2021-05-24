@@ -12,7 +12,7 @@ using System.Windows.Navigation;
 
 namespace Hospital_IS.DoctorViewModel
 {
-    public class AppDetailViewModel : DoctorViewModelClass
+    public class AppDetailViewModel : BindableBae
     {
         #region Feilds
         private ICollectionView appointmentsView;

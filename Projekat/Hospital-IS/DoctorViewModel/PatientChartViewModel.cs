@@ -45,27 +45,7 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 patient = value;
-                if (SelectedAppointment == null)
-                {
-                    GeneralInfo view = new GeneralInfo();
-                    view._ViewModel.Started = Started;
-                    view._ViewModel.Patient = Patient;
-                    InsideNavigationService.Navigate(view);
-                }
-                else
-                {
-                    if (SelectedAppointment.Started == true)
-                    {
-                        InsideNavigationService.Navigate(ReportView);
-                    }
-                    else
-                    {
-                        GeneralInfo view = new GeneralInfo();
-                        view._ViewModel.Started = Started;
-                        view._ViewModel.Patient = Patient;
-                        InsideNavigationService.Navigate(view);
-                    }
-                }
+                SetFirstPageNavigation();
                 OnPropertyChanged("Patient");
             }
         }
@@ -76,15 +56,10 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 selectedAppointment = value;
-                Patient = selectedAppointment.DoctorAppointment.Patient;
-                SearchMedicineView = new SearchMedicine();
-                SearchMedicineView._ViewModel.Patient = Patient;
-                SearchMedicineView._ViewModel.DatePrescribed = SelectedAppointment.DoctorAppointment.AppointmentStart;
-                SearchMedicineView._ViewModel.MainNavigationService = MainNavigationService;
-                Started = SelectedAppointment.Started;
+                SetFields();
                 OnPropertyChanged("SelectedAppointment");
             }
-        }
+        } 
 
         public int LastTab
         {
@@ -119,7 +94,7 @@ namespace Hospital_IS.DoctorViewModel
 
         #region Views
         private SearchMedicine searchMedicineView;
-        private DoctorView.ReportView reportView;
+        private ReportView reportView;
         public SearchMedicine SearchMedicineView
         {
             get { return searchMedicineView; }
@@ -129,7 +104,7 @@ namespace Hospital_IS.DoctorViewModel
                 OnPropertyChanged("SearchMedicineView");
             }
         }
-        public DoctorView.ReportView ReportView
+        public ReportView ReportView
         {
             get { return reportView; }
             set
@@ -263,6 +238,43 @@ namespace Hospital_IS.DoctorViewModel
 
         }
 
+        #endregion
+
+        #region Methods
+        private void SetFirstPageNavigation()
+        {
+            if (SelectedAppointment == null)
+            {
+                GeneralInfo view = new GeneralInfo();
+                view._ViewModel.Started = Started;
+                view._ViewModel.Patient = Patient;
+                InsideNavigationService.Navigate(view);
+            }
+            else
+            {
+                if (SelectedAppointment.Started == true)
+                {
+                    InsideNavigationService.Navigate(ReportView);
+                }
+                else
+                {
+                    GeneralInfo view = new GeneralInfo();
+                    view._ViewModel.Started = Started;
+                    view._ViewModel.Patient = Patient;
+                    InsideNavigationService.Navigate(view);
+                }
+            }
+        }
+
+        private void SetFields()
+        {
+            Patient = selectedAppointment.DoctorAppointment.Patient;
+            SearchMedicineView = new SearchMedicine();
+            SearchMedicineView._ViewModel.Patient = Patient;
+            SearchMedicineView._ViewModel.DatePrescribed = SelectedAppointment.DoctorAppointment.AppointmentStart;
+            SearchMedicineView._ViewModel.MainNavigationService = MainNavigationService;
+            Started = SelectedAppointment.Started;
+        }
         #endregion
 
         #region Constructor

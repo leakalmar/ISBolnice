@@ -1,12 +1,8 @@
 ﻿using Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
 
 namespace Hospital_IS.DoctorViewModel
 {
-    public class StartAppointmentDTO : DoctorViewModelClass
+    public class StartAppointmentDTO
     {
         private DoctorAppointment doctorAppointment;
         private bool started = false;

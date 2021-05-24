@@ -188,7 +188,6 @@ namespace Hospital_IS.DoctorViewModel
         }
         #endregion
 
-
         #region Constructior
         public SearchMedicineViewModel()
         {

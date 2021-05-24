@@ -4,6 +4,7 @@ namespace Hospital_IS.DoctorViewModel
 {
     public class TestsViewModel : BindableBase
     {
+        #region Feilds
         private bool started;
         public bool Started
         {
@@ -14,5 +15,6 @@ namespace Hospital_IS.DoctorViewModel
                 OnPropertyChanged("Started");
             }
         }
+        #endregion
     }
 }

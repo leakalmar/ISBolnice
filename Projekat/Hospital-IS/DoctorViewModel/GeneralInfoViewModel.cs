@@ -5,6 +5,7 @@ namespace Hospital_IS.DoctorViewModel
 {
     public class GeneralInfoViewModel : BindableBase
     {
+        #region Feilds
         private Patient patient;
         private bool started;
 
@@ -27,7 +28,8 @@ namespace Hospital_IS.DoctorViewModel
                 OnPropertyChanged("Started");
             }
         }
+        #endregion
     }
 
-    
+
 }
