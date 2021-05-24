@@ -44,6 +44,16 @@
         "DoctorSurname": "Vukmanov Simokov",
         "Type": 1,
         "Cause": "uzrok"
+      },
+      {
+        "Anamnesis": "",
+        "HaveRecipe": false,
+        "HaveTest": false,
+        "ReportId": "2021-05-25T08:00:00",
+        "DoctorName": "Dragana",
+        "DoctorSurname": "Vukmanov Simokov",
+        "Type": 1,
+        "Cause": null
       }
     ],
     "Hospitalization": [],

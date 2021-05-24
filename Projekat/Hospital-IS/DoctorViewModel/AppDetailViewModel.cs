@@ -12,7 +12,7 @@ using System.Windows.Navigation;
 
 namespace Hospital_IS.DoctorViewModel
 {
-    public class AppDetailViewModel : BindableBae
+    public class AppDetailViewModel : BindableBase
     {
         #region Feilds
         private ICollectionView appointmentsView;
@@ -33,7 +33,7 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 selectedAppointment = value;
-                OnPropertyChanged();
+                OnPropertyChanged("SelectedAppointment");
             }
         }
 
@@ -43,7 +43,7 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 appointmentsView = value;
-                OnPropertyChanged();
+                OnPropertyChanged("AppointmentsView");
             }
         }
         #endregion
