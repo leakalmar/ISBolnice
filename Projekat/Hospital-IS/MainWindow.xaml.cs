@@ -1,14 +1,14 @@
-﻿using Hospital_IS.Storages;
+﻿using Controllers;
+using Hospital_IS.DoctorView;
+using Hospital_IS.ManagerView1;
+using Hospital_IS.Storages;
 using Hospital_IS.View;
 using Model;
+using Service;
 using Storages;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using Hospital_IS.DoctorView;
-using Controllers;
-using Service;
-using Hospital_IS.ManagerView1;
 
 namespace Hospital_IS
 {

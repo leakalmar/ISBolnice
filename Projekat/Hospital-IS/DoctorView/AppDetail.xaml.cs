@@ -1,7 +1,5 @@
-﻿using Model;
+﻿using Hospital_IS.DoctorViewModel;
 using System.Windows.Controls;
-using Hospital_IS.DoctorViewModel;
-using System.Windows.Navigation;
 
 namespace Hospital_IS.DoctorView
 {

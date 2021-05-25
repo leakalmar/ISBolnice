@@ -1,10 +1,5 @@
-﻿using Controllers;
-using Hospital_IS.DoctorViewModel;
-using Model;
-using System;
-using System.Windows;
+﻿using Hospital_IS.DoctorViewModel;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace Hospital_IS.DoctorView
 {

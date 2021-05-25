@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Enums;
+using Model;
 
 namespace Hospital_IS.DTOs
 {

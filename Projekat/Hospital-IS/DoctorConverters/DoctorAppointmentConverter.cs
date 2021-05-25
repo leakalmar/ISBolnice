@@ -1,10 +1,7 @@
 ﻿using DTOs;
-using Hospital_IS.DoctorViewModel;
 using Model;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 
 namespace Hospital_IS.DoctorConverters
 {

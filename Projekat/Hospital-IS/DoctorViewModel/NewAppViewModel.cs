@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using DTOs;
+using Enums;
 using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
 using Model;

@@ -1,6 +1,4 @@
-﻿using Model;
-
-namespace DTOs
+﻿namespace DTOs
 {
     public class AppointmentRowDTO
     {

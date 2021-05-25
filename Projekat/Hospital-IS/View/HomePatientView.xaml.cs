@@ -1,13 +1,6 @@
-﻿using Controllers;
-using Hospital_IS.Storages;
-using Hospital_IS.View.PatientViewModels;
-using Model;
-using Storages;
-using System;
-using System.Collections.ObjectModel;
+﻿using Hospital_IS.View.PatientViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Threading;
 
 namespace Hospital_IS.View
 {

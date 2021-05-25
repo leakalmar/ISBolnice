@@ -1,6 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using Hospital_IS.DoctorViewModel;
+using System.Windows.Controls;
 using System.Windows.Navigation;
-using Hospital_IS.DoctorViewModel;
 
 
 namespace Hospital_IS.DoctorView

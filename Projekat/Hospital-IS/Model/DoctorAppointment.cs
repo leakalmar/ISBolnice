@@ -1,4 +1,5 @@
 using DTOs;
+using Enums;
 using Newtonsoft.Json;
 using System;
 

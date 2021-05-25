@@ -2,7 +2,6 @@
 using Hospital_IS.Controllers;
 using Hospital_IS.DoctorView;
 using Hospital_IS.DTOs.SecretaryDTOs;
-using Model;
 using System.Collections.Generic;
 
 namespace Hospital_IS.DoctorViewModel

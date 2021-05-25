@@ -1,4 +1,5 @@
-﻿using Hospital_IS.DTOs;
+﻿using Enums;
+using Hospital_IS.DTOs;
 using Model;
 using Storages;
 using System;

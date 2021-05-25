@@ -1,5 +1,4 @@
-﻿using Controllers;
-using Hospital_IS.DoctorViewModel;
+﻿using Hospital_IS.DoctorViewModel;
 using System.Windows.Controls;
 
 namespace Hospital_IS.DoctorView

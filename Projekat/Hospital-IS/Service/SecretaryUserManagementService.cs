@@ -1,7 +1,6 @@
 ﻿using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using Service;
-using System;
 using System.Collections.Generic;
 namespace Hospital_IS.Service
 {

@@ -1,11 +1,4 @@
-﻿using Controllers;
-using DoctorView;
-using Hospital_IS.DoctorViewModel;
-using Model;
-using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows;
+﻿using Hospital_IS.DoctorViewModel;
 using System.Windows.Controls;
 
 namespace Hospital_IS.DoctorView

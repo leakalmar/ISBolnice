@@ -1,13 +1,5 @@
-﻿using Controllers;
-using Hospital_IS.View.PatientViewModels;
-using Model;
-using Storages;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.DataVisualization.Charting;
 
 namespace Hospital_IS.View
 {

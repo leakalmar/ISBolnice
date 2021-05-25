@@ -1,8 +1,5 @@
 ﻿using Hospital_IS.Controllers;
-using Hospital_IS.Model;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Hospital_IS.View.PatientViewModels
 {

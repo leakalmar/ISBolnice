@@ -1,9 +1,7 @@
 ﻿using Controllers;
 using Hospital_IS.Controllers;
 using Hospital_IS.DTOs.SecretaryDTOs;
-using Hospital_IS.Storages;
 using Model;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 

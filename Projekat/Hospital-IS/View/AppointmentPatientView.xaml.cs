@@ -1,12 +1,5 @@
-﻿using Controllers;
-using Hospital_IS.DTOs;
-using Hospital_IS.View.PatientViewModels;
-using Model;
-using Service;
-using Storages;
+﻿using Model;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 

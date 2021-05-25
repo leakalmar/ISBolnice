@@ -1,12 +1,8 @@
 ﻿using Controllers;
 using Model;
-using Service;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.ManagerViewModel

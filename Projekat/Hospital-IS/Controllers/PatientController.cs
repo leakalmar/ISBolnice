@@ -1,10 +1,7 @@
-﻿using DoctorView;
-using Hospital_IS.Model;
+﻿using Hospital_IS.Model;
 using Model;
 using Service;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Controllers
 {

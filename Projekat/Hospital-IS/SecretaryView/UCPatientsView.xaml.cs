@@ -1,7 +1,6 @@
 ﻿using Hospital_IS.Controllers;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using Hospital_IS.SecretaryView;
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;

@@ -1,6 +1,5 @@
-using Service;
+using Enums;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Model

@@ -1,13 +1,9 @@
-﻿using DoctorView;
-using Hospital_IS.DoctorView;
+﻿using Hospital_IS.DoctorView;
 using Hospital_IS.Model;
 using Hospital_IS.Storages;
 using Model;
-using Storages;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
 
 namespace Service
 {

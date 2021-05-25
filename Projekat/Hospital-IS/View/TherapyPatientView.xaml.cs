@@ -1,8 +1,4 @@
-﻿using Controllers;
-using Hospital_IS.View.PatientViewModels;
-using Model;
-using Storages;
-using System.Collections.ObjectModel;
+﻿using Hospital_IS.View.PatientViewModels;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

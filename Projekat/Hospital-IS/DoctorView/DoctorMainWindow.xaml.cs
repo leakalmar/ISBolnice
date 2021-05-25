@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using Hospital_IS.DoctorViewModel;
+﻿using Hospital_IS.DoctorViewModel;
+using System.Windows;
 
 namespace Hospital_IS.DoctorView
 {

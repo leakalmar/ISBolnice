@@ -1,9 +1,7 @@
-﻿using DTOs;
-using Model;
+﻿using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service
 {

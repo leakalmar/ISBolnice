@@ -1,4 +1,4 @@
-namespace Model
+namespace Enums
 {
     public enum AppointmentType
     {

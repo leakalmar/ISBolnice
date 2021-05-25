@@ -1,12 +1,10 @@
 ﻿using DTOs;
+using Enums;
 using Hospital_IS.DTOs;
 using Model;
 using Service;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Windows.Controls;
 
 namespace Controllers
 {

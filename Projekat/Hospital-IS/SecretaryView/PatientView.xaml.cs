@@ -1,5 +1,5 @@
-﻿using Hospital_IS.DTOs.SecretaryDTOs;
-using Model;
+﻿using Enums;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using System.Windows;
 
 namespace Hospital_IS

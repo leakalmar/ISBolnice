@@ -1,7 +1,7 @@
 ﻿using DTOs;
+using Enums;
 using Newtonsoft.Json;
 using System;
-using System.Collections.ObjectModel;
 
 namespace Model
 {

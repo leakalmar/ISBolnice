@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Hospital_IS.Model
+﻿namespace Hospital_IS.Model
 {
     public class PatientNote
     {

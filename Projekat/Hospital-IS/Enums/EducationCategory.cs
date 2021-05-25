@@ -1,5 +1,5 @@
 
-namespace Model
+namespace Enums
 {
     public enum EducationCategory
     {
