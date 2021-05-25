@@ -32,7 +32,7 @@ namespace Service
             Medicine ret = null;
             foreach(Medicine medicine in AllMedicines)
             {
-                if (medicine.Name.Equals(medicineName))
+                if (medicine.Name.ToLower().Contains(medicineName.ToLower()))
                 {
                     ret = medicine;
                     break;

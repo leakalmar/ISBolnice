@@ -191,7 +191,7 @@
                                         <Condition
                                                 Binding="{Binding Appointment.Reserved}"
                                                 Value="True" />
-                                        <Condition Binding="{Binding Enabled}"
+                                        <Condition Binding="{Binding IsEnabled}"
                                                 Value="False" />
                                     </MultiDataTrigger.Conditions>
                                     <MultiDataTrigger.Setters>

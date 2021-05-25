@@ -10,7 +10,7 @@ namespace DTOs
         public int RoomID { get; set; }
         public int BedID { get; set; }
         public string Doctor { get; set; }
-        public bool Released { get; set; }
+        public bool IsReleased { get; set; }
 
         public HospitalizationDTO(DateTime admissionDate, DateTime releaseDate, string detail, int roomID, int bedID, string doctor, bool released)
         {
@@ -20,7 +20,7 @@ namespace DTOs
             RoomID = roomID;
             BedID = bedID;
             Doctor = doctor;
-            Released = released;
+            IsReleased = released;
         }
     }
 }

@@ -39,14 +39,14 @@ namespace Controllers
             BedService.Instance.UpdateBed(bed);
         }
 
-        public List<Bed> GetByRoomId(int roomId)
+        public List<Bed> GetBedsByRoomId(int roomId)
         {
-            return BedService.Instance.GetByRoomId(roomId);
+            return BedService.Instance.GetBedsByRoomId(roomId);
         }
 
-        public Bed GetByBedId(int bedId)
+        public Bed GetBedById(int bedId)
         {
-            return BedService.Instance.GetByBedId(bedId);
+            return BedService.Instance.GetBedById(bedId);
         }
     }
 }

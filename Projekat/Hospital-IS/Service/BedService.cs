@@ -108,7 +108,7 @@ namespace Service
             }
         }
 
-        public List<Bed> GetByRoomId(int roomId)
+        public List<Bed> GetBedsByRoomId(int roomId)
         {
             List<Bed> beds = new List<Bed>();
             foreach(Bed bed in AllBeds)
@@ -121,7 +121,7 @@ namespace Service
             return beds;
         }
 
-        public Bed GetByBedId(int bedId)
+        public Bed GetBedById(int bedId)
         {
             Bed ret = null;
             foreach (Bed bed in AllBeds)

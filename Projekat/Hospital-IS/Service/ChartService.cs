@@ -72,7 +72,7 @@ namespace Service
             List<Hospitalization> allHospitalizations = GetHospitalizationsByPatientId(id);
             foreach (Hospitalization hospitalization in allHospitalizations)
             {
-                if (hospitalization.Released == false)
+                if (hospitalization.IsReleased == false)
                 {
                     ret = hospitalization;
                 }
@@ -85,9 +85,9 @@ namespace Service
             MedicalHistory medicalHistory = GetChartById(id);
             for (int i = 0; i < medicalHistory.Hospitalization.Count; i++)
             {
-                if (medicalHistory.Hospitalization[i].Released == false)
+                if (medicalHistory.Hospitalization[i].IsReleased == false)
                 {
-                    medicalHistory.Hospitalization[i].Released = true;
+                    medicalHistory.Hospitalization[i].IsReleased = true;
                     cfs.SaveCharts(AllCharts);
                     return;
                 }

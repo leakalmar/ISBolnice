@@ -77,7 +77,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_OpenChartCommand(object obj)
         {
-            SelectedAppointment.Started = false;
+            SelectedAppointment.IsStarted = false;
             PatientChart chart = new PatientChart();
             chart._ViewModel.SelectedAppointment = SelectedAppointment;
             DoctorMainWindow.Instance._ViewModel.PatientChartView = chart;
@@ -86,7 +86,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_StartAppointmentCommand(object obj)
         {
-            SelectedAppointment.Started = true;
+            SelectedAppointment.IsStarted = true;
             PatientChart chart = new PatientChart();
             chart._ViewModel.SelectedAppointment = SelectedAppointment;
             DoctorMainWindow.Instance._ViewModel.PatientChartView = chart;

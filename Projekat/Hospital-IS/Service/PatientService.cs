@@ -75,10 +75,10 @@ namespace Service
             {
                 foreach (String allergie in allergies)
                 {
-                    Medicine med = MedicineService.Instance.FindMedicineByName(allergie);
-                    if (med != null)
+                    Medicine medicine = MedicineService.Instance.GetByName(allergie);
+                    if (medicine != null)
                     {
-                        List<MedicineComponent> allergieComponents = med.Composition;
+                        List<MedicineComponent> allergieComponents = medicine.Composition;
                         foreach (MedicineComponent allergieComp in allergieComponents)
                         {
                             if (c.Component.ToLower().Equals(allergieComp.Component.ToLower()))

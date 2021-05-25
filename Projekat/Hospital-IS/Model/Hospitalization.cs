@@ -13,12 +13,12 @@ namespace Model
         public Room Room { get; set; }
         public Bed Bed { get; set; }
         public string Doctor { get; set; }
-        public bool Released { get; set; }
+        public bool IsReleased { get; set; }
 
         [JsonConstructor]
         public Hospitalization(DateTime admissionDate, DateTime releaseDate, string doctor, Room room, Bed bed, string details)
         {
-            Released = false;
+            IsReleased = false;
             Doctor = doctor;
             AdmissionDate = admissionDate;
             ReleaseDate = releaseDate;
@@ -29,7 +29,7 @@ namespace Model
 
         public Hospitalization(HospitalizationDTO hospitalizationDTO, Room room, Bed bed)
         {
-            Released = hospitalizationDTO.Released;
+            IsReleased = hospitalizationDTO.IsReleased;
             Doctor = hospitalizationDTO.Doctor;
             AdmissionDate = hospitalizationDTO.AdmissionDate;
             ReleaseDate = hospitalizationDTO.ReleaseDate;

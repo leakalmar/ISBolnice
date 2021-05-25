@@ -97,7 +97,7 @@ namespace Controllers
         public void AddHospitalization(HospitalizationDTO hospitalizationDTO, Patient patient)
         {
             Room room = RoomController.Instance.GetRoomById(hospitalizationDTO.RoomID);
-            Bed bed = BedController.Instance.GetByBedId(hospitalizationDTO.BedID);
+            Bed bed = BedController.Instance.GetBedById(hospitalizationDTO.BedID);
             Hospitalization newHospitalization = new Hospitalization(hospitalizationDTO, room, bed);
             ChartService.Instance.AddHospitalization(newHospitalization, patient.Id);
         }

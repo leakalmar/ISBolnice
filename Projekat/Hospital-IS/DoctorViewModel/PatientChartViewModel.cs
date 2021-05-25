@@ -161,12 +161,12 @@ namespace Hospital_IS.DoctorViewModel
             else
             {
 
-                if (SelectedAppointment.Started == true)
+                if (SelectedAppointment.IsStarted == true)
                 {
                     Started = true;
                     Margin = new Thickness(110 * index, 0, 0, 0);
                 }
-                else if (SelectedAppointment.Started == false)
+                else if (SelectedAppointment.IsStarted == false)
                 {
                     Margin = new Thickness(110 * index - 110, 0, 0, 0);
                 }
@@ -258,7 +258,7 @@ namespace Hospital_IS.DoctorViewModel
             }
             else
             {
-                if (SelectedAppointment.Started == true)
+                if (SelectedAppointment.IsStarted == true)
                 {
                     InsideNavigationService.Navigate(ReportView);
                 }
@@ -279,7 +279,7 @@ namespace Hospital_IS.DoctorViewModel
             SearchMedicineView._ViewModel.Patient = Patient;
             SearchMedicineView._ViewModel.DatePrescribed = SelectedAppointment.Appointment.AppointmentStart;
             SearchMedicineView._ViewModel.MainNavigationService = MainNavigationService;
-            Started = SelectedAppointment.Started;
+            Started = SelectedAppointment.IsStarted;
         }
         #endregion
 

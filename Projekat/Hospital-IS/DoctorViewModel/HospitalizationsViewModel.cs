@@ -132,7 +132,7 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 selectedRoom = value;
-                Beds = BedController.Instance.GetByRoomId(selectedRoom.RoomId);
+                Beds = BedController.Instance.GetBedsByRoomId(selectedRoom.RoomId);
                 OnPropertyChanged("SelectedRoom");
             }
         }
