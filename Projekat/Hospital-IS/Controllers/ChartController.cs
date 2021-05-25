@@ -1,4 +1,6 @@
-﻿using Model;
+﻿using DTOs;
+using Hospital_IS.DTOs;
+using Model;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -32,9 +34,19 @@ namespace Controllers
             return ChartService.Instance.GetTherapiesByPatientId(patient.Id);
         }
 
-        public List<Report> GetReportsByPatient(Patient patient)
+        public List<ReportDTO> GetReportsByPatient(Patient patient)
         {
-            return ChartService.Instance.GetReportsByPatientId(patient.Id);
+            return ConvertToReportDTO(ChartService.Instance.GetReportsByPatientId(patient.Id));
+        }
+
+        private List<ReportDTO> ConvertToReportDTO(List<Report> reports)
+        {
+            List<ReportDTO> reportDTOs = new List<ReportDTO>();
+            foreach (Report report in reports)
+            {
+                reportDTOs.Add(new ReportDTO(report));
+            }
+            return reportDTOs;
         }
 
         public List<Hospitalization> GetHospitalizationsByPatient(Patient patient)
@@ -42,9 +54,9 @@ namespace Controllers
             return ChartService.Instance.GetHospitalizationsByPatientId(patient.Id);
         }
         
-        public List<Prescription> GetPrescriptionsForReport(Patient patient, Report report)
+        public List<Prescription> GetPrescriptionsForReport(Patient patient, DateTime reportDate)
         {
-            return ChartService.Instance.GetPrescriptionsForReport(patient.Id, report.ReportId);
+            return ChartService.Instance.GetPrescriptionsForReport(patient.Id, reportDate);
         }
 
         public Hospitalization GetActivHospitalization(Patient patient)
@@ -57,22 +69,21 @@ namespace Controllers
             ChartService.Instance.ReleasePatient(patient.Id);
         }
 
-        public void UpdateReport(Patient patient, Report report, String newAnamnsis)
+        public void UpdateReport(Patient patient, ReportDTO report)
         {
-            report.Anamnesis = newAnamnsis;
-            ChartService.Instance.UpdateReport(patient.Id, report);
+            ChartService.Instance.UpdateReport(patient.Id, new Report(report));
         }
 
-        public void AddReport(DoctorAppointment appointment, String anemnesis, int countPresciption, Patient patient)
+        public void AddReport(ReportDTO reportDTO)
         {
-            Report newReport = new Report(appointment.AppointmentStart,appointment.Doctor.Name,appointment.Doctor.Surname,appointment.Type,appointment.AppointmentCause);
-            newReport.Anamnesis = anemnesis;
-            if(countPresciption > 0)
+            Report newReport = new Report(reportDTO.AppointmentStart, reportDTO.DoctorName, reportDTO.DoctorSurname, reportDTO.Type, reportDTO.AppointmentCause);
+            newReport.Anamnesis = reportDTO.Anemnesis;
+            if(reportDTO.CountPresciption > 0)
             {
                 newReport.HaveRecipe = true;
             }
             
-            ChartService.Instance.AddReport(newReport, patient.Id);
+            ChartService.Instance.AddReport(newReport, reportDTO.PatientID);
         }
 
         public void AddPrescriptions(List<Prescription> prescriptions, Patient patient)
@@ -80,9 +91,11 @@ namespace Controllers
             ChartService.Instance.AddPrescriptions(prescriptions,patient.Id);
         }
 
-        public void AddHospitalization(DateTime addmissionDate, DateTime releaseDate,string doctor, Room selectedRoom, Bed selectedBed, string details, Patient patient)
+        public void AddHospitalization(HospitalizationDTO hospitalizationDTO, Patient patient)
         {
-            Hospitalization newHospitalization = new Hospitalization(addmissionDate, releaseDate, doctor, selectedRoom, selectedBed, details);
+            Room room = RoomController.Instance.GetRoomById(hospitalizationDTO.RoomID);
+            Bed bed = BedController.Instance.GetByBedId(hospitalizationDTO.BedID);
+            Hospitalization newHospitalization = new Hospitalization(hospitalizationDTO, room, bed);
             ChartService.Instance.AddHospitalization(newHospitalization, patient.Id);
         }
     }

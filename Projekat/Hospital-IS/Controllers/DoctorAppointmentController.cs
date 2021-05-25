@@ -1,4 +1,5 @@
-﻿using Hospital_IS.DTOs;
+﻿using DTOs;
+using Hospital_IS.DTOs;
 using Model;
 using Service;
 using System;
@@ -60,6 +61,13 @@ namespace Controllers
         {
             doctorAppointment.IsFinished = true;
             DoctorAppointmentService.Instance.UpdateAppointment(doctorAppointment,doctorAppointment);
+        }
+
+        public void EndAppointment(DoctorAppointmentDTO doctorAppointment)
+        {
+            DoctorAppointment endingAppoitnment = new DoctorAppointment(doctorAppointment);
+            endingAppoitnment.IsFinished = true;
+            DoctorAppointmentService.Instance.UpdateAppointment(endingAppoitnment, endingAppoitnment);
         }
 
         public List<DoctorAppointment> SuggestAppointmentsToPatient(PossibleAppointmentForPatientDTO possibleAppointment)

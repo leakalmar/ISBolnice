@@ -43,5 +43,10 @@ namespace Controllers
         {
             return BedService.Instance.GetByRoomId(roomId);
         }
+
+        public Bed GetByBedId(int bedId)
+        {
+            return BedService.Instance.GetByBedId(bedId);
+        }
     }
 }

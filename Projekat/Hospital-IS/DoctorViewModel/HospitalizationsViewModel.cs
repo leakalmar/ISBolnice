@@ -1,6 +1,8 @@
 ﻿using Controllers;
+using DTOs;
 using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
+using Hospital_IS.DTOs;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -213,7 +215,8 @@ namespace Hospital_IS.DoctorViewModel
             PatientController.Instance.UpdatePatient(Patient);
             SelectedBed.Taken = true;
             BedController.Instance.UpdateBed(SelectedBed);
-            ChartController.Instance.AddHospitalization(AddmissionDate, ReleaseDate, Doctor, SelectedRoom, SelectedBed, Details,Patient);
+            HospitalizationDTO hospitalizationDTO = new HospitalizationDTO(AddmissionDate, ReleaseDate, Details, SelectedRoom.RoomId, SelectedBed.BedId,  Doctor, false);
+            ChartController.Instance.AddHospitalization(hospitalizationDTO ,Patient);
             this.Hospitalizations = new ObservableCollection<Hospitalization>(ChartController.Instance.GetHospitalizationsByPatient(Patient));
         }
 
@@ -280,7 +283,7 @@ namespace Hospital_IS.DoctorViewModel
             this.EndCreatingHospitalizationCommand = new RelayCommand(Execute_EndCreatingHospitalizationCommand, CanExecute_Command);
             this.ReleasePatientCommand = new RelayCommand(Execute_ReleasePatientCommand, CanExecute_Command);
             this.Rooms = RoomController.Instance.GetRoomByType(RoomType.RecoveryRoom);
-            this.Patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
+            this.Patient = PatientController.Instance.GetPatientByID(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient.Id);
             this.NewHospitalization = false;
         }
         #endregion

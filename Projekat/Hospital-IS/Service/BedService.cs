@@ -120,5 +120,19 @@ namespace Service
             }
             return beds;
         }
+
+        public Bed GetByBedId(int bedId)
+        {
+            Bed ret = null;
+            foreach (Bed bed in AllBeds)
+            {
+                if (bed.BedId.Equals(bedId))
+                {
+                    ret = bed;
+                    break;
+                }
+            }
+            return ret;
+        }
     }
 }

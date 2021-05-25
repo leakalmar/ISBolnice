@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using DTOs;
 using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
 using Model;
@@ -12,8 +13,8 @@ namespace Hospital_IS.DoctorViewModel
         #region Fields
         private bool started;
         private Patient patient;
-        private ObservableCollection<Report> reports;
-        private Report selectedReport;
+        private ObservableCollection<ReportDTO> reports;
+        private ReportDTO selectedReport;
         private NavigationService insideNavigationService;
 
         public NavigationService InsideNavigationService
@@ -41,12 +42,12 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 patient = value;
-                this.Reports = new ObservableCollection<Report>(ChartController.Instance.GetReportsByPatient(Patient));
+                this.Reports = new ObservableCollection<ReportDTO>(ChartController.Instance.GetReportsByPatient(Patient));
                 OnPropertyChanged("Patient");
 
             }
         }
-        public ObservableCollection<Report> Reports
+        public ObservableCollection<ReportDTO> Reports
         {
             get { return reports; }
             set
@@ -56,7 +57,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public Report SelectedReport
+        public ReportDTO SelectedReport
         {
             get { return selectedReport; }
             set

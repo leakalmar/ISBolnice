@@ -218,9 +218,11 @@ namespace Hospital_IS.DoctorViewModel
             bool dialog = (bool)new ExitMess("Da li želite da završite termin?").ShowDialog();
             if (dialog)
             {
-                DoctorAppointmentController.Instance.EndAppointment(new DoctorAppointment(SelectedAppointment.Appointment));
-                ChartController.Instance.AddReport(new DoctorAppointment(SelectedAppointment.Appointment), ReportView.reportDetail.Text, ReportView._ViewModel.Prescriptions.Count, SelectedAppointment.Appointment.Patient);
-                ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView._ViewModel.Prescriptions), SelectedAppointment.Appointment.Patient);
+                DoctorAppointmentDTO selectedAppointment = SelectedAppointment.Appointment;
+                DoctorAppointmentController.Instance.EndAppointment(selectedAppointment);
+                ReportDTO reportDTO = new ReportDTO(selectedAppointment.AppointmentStart, selectedAppointment.Doctor.Name, selectedAppointment.Doctor.Surname, selectedAppointment.Type, selectedAppointment.AppointmentCause, ReportView.reportDetail.Text, ReportView._ViewModel.Prescriptions.Count, selectedAppointment.Patient.Id);
+                ChartController.Instance.AddReport(reportDTO);
+                ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView._ViewModel.Prescriptions), selectedAppointment.Patient);
                 this.MainNavigationService.Navigate(new AppDetail());
             }
         }

@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using DTOs;
 using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
 using Model;
@@ -10,7 +11,7 @@ namespace Hospital_IS.DoctorViewModel
     {
         #region Fields
         private string anamnesis;
-        private Report report;
+        private ReportDTO report;
         private List<Prescription> prescriptions;
         private List<Test> tests;
 
@@ -25,13 +26,13 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public Report Report
+        public ReportDTO Report
         {
             get { return report; }
             set { 
                 report = value;
-                Anamnesis = report.Anamnesis;
-                Prescriptions = ChartController.Instance.GetPrescriptionsForReport(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient, Report);
+                Anamnesis = report.Anemnesis;
+                Prescriptions = ChartController.Instance.GetPrescriptionsForReport(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient, report.AppointmentStart);
                 //isto zaa testove kada budes pravila
                 OnPropertyChanged("Report");
             }
@@ -76,7 +77,8 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_SaveCommand(object obj)
         {
-            ChartController.Instance.UpdateReport(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient, Report, Anamnesis);
+            this.Report.Anemnesis = this.Anamnesis;
+            ChartController.Instance.UpdateReport(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient, Report);
         }
         #endregion
 

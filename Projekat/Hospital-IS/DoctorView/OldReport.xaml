@@ -27,7 +27,7 @@
             <TextBox x:Name="reportDetail" Margin="5,5,5,5"
                     Background="Transparent" Foreground="FloralWhite"
                     BorderThickness="0"
-                    IsEnabled="{Binding Report.ReportId, Converter={StaticResource IsTodayAppointment}}">
+                    IsEnabled="{Binding Report.AppointmentStart, Converter={StaticResource IsTodayAppointment}}">
                 <TextBox.InputBindings>
                     <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding SaveCommand}" />
                 </TextBox.InputBindings>
@@ -74,7 +74,7 @@
                     <Label Content="{Binding Report.DoctorSurname}"
                             Foreground="FloralWhite" FontSize="14" />
                     <Label
-                            Content="{Binding Report.ReportId,StringFormat=\{0:dd.MM.yyyy\}}"
+                            Content="{Binding Report.AppointmentStart,StringFormat=\{0:dd.MM.yyyy\}}"
                             Foreground="FloralWhite" FontSize="12" />
                 </StackPanel>
             </Label.Content>
