@@ -79,6 +79,15 @@ namespace Service
             }
             return doctors;
         }
+        public Doctor GetDoctorByID(int id)
+        {
+            foreach (Doctor doctor in AllDoctors)
+            {
+                if (doctor.Id.Equals(id))
+                    return doctor;
+            }
+            return null;
+        }
 
     }
 }

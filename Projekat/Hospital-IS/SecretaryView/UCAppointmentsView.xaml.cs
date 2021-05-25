@@ -1,5 +1,7 @@
 ﻿using Controllers;
+using DTOs;
 using Enums;
+using Hospital_IS.Controllers;
 using Model;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -12,7 +14,7 @@ namespace Hospital_IS.SecretaryView
     /// </summary>
     public partial class UCAppointmentsView : UserControl
     {
-        public ObservableCollection<DoctorAppointment> Appointments { get; set; }
+        public ObservableCollection<DoctorAppointmentDTO> Appointments { get; set; }
 
         public UCAppointmentsView()
         {
@@ -28,10 +30,10 @@ namespace Hospital_IS.SecretaryView
             if (Appointments != null)
                 Appointments.Clear();
 
-            DoctorAppointmentController.Instance.ReloadDoctorAppointments();
-            Appointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAll());
+            DoctorAppointmentManagementController.Instance.ReloadAppointments();
+            Appointments = new ObservableCollection<DoctorAppointmentDTO>(DoctorAppointmentManagementController.Instance.GetAll());
 
-            foreach (DoctorAppointment appointment in Appointments)
+            /*foreach (DoctorAppointment appointment in Appointments)
             {
                 if (string.IsNullOrEmpty(appointment.AppTypeText))
                 {
@@ -40,16 +42,16 @@ namespace Hospital_IS.SecretaryView
                     else if (appointment.Type == AppointmentType.Operation)
                         appointment.AppTypeText = "Operacija";
                 }
-            }
+            }*/
 
             dataGridAppointments.ItemsSource = Appointments;
         }
 
         private void ShowAppointment(object sender, RoutedEventArgs e)
         {
-            if ((DoctorAppointment)dataGridAppointments.SelectedItem != null)
+            if ((DoctorAppointmentDTO)dataGridAppointments.SelectedItem != null)
             {
-                DoctorAppointment appointment = (DoctorAppointment)dataGridAppointments.SelectedItem;
+                DoctorAppointmentDTO appointment = (DoctorAppointmentDTO)dataGridAppointments.SelectedItem;
                 AppointmentView av = new AppointmentView(appointment);
                 av.Show();
             }
@@ -57,9 +59,9 @@ namespace Hospital_IS.SecretaryView
 
         private void UpdateAppointment(object sender, RoutedEventArgs e)
         {
-            if ((DoctorAppointment)dataGridAppointments.SelectedItem != null)
+            if ((DoctorAppointmentDTO)dataGridAppointments.SelectedItem != null)
             {
-                DoctorAppointment appointment = (DoctorAppointment)dataGridAppointments.SelectedItem;
+                DoctorAppointmentDTO appointment = (DoctorAppointmentDTO)dataGridAppointments.SelectedItem;
                 UpdateAppointment ua = new UpdateAppointment(appointment, this);
                 ua.Show();
             }

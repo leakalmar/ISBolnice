@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using DTOs;
+using Enums;
 using Model;
 using System;
 using System.Windows;
@@ -10,9 +11,9 @@ namespace Hospital_IS.SecretaryView
     /// </summary>
     public partial class AppointmentView : Window
     {
-        public DoctorAppointment DocAppointment { get; set; }
+        public DoctorAppointmentDTO DocAppointment { get; set; }
         public string Duration { get; set; }
-        public AppointmentView(DoctorAppointment appointment)
+        public AppointmentView(DoctorAppointmentDTO appointment)
         {
             InitializeComponent();
             this.DocAppointment = appointment;

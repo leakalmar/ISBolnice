@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Hospital_IS.DTOs
 {
-    class DoctorDTO
+    public class DoctorDTO
     {
         public int Id { get; set; }
         public String Name { get; set; }
@@ -18,5 +18,20 @@ namespace Hospital_IS.DTOs
         public String Specialty { get; set; }
         public int PrimaryRoom { get; set; }
 
+        public DoctorDTO(int id, string name, string surname, DateTime birthDate, string phone, 
+            string email, string gender, string password, string address, string specialty, int primaryRoom)
+        {
+            Id = id;
+            Name = name;
+            Surname = surname;
+            BirthDate = birthDate;
+            Phone = phone;
+            Email = email;
+            Gender = gender;
+            Password = password;
+            Address = address;
+            Specialty = specialty;
+            PrimaryRoom = primaryRoom;
+        }
     }
 }

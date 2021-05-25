@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using DTOs;
 using Enums;
 using Hospital_IS.Controllers;
 using Model;
@@ -14,13 +15,13 @@ namespace Hospital_IS.SecretaryView
     /// </summary>
     public partial class UpdateAppointment : Window
     {
-        public DoctorAppointment OldDocAppointment { get; set; }
+        public DoctorAppointmentDTO OldDocAppointment { get; set; }
 
-        public DoctorAppointment NewDocAppointment { get; set; }
+        public DoctorAppointmentDTO NewDocAppointment { get; set; }
 
         UCAppointmentsView uca;
 
-        public UpdateAppointment(DoctorAppointment appointment, UCAppointmentsView uca)
+        public UpdateAppointment(DoctorAppointmentDTO appointment, UCAppointmentsView uca)
         {
             InitializeComponent();
             OldDocAppointment = appointment;
@@ -42,14 +43,14 @@ namespace Hospital_IS.SecretaryView
             txtStartOfApp.Text = OldDocAppointment.AppointmentStart.ToString("HH:mm");
             txtEndOfApp.Text = OldDocAppointment.AppointmentEnd.ToString("HH:mm");
 
-            NewDocAppointment = new DoctorAppointment(OldDocAppointment);
+            //NewDocAppointment = new DoctorAppointment(OldDocAppointment);
         }
 
         private void ChangeAppointment(object sender, RoutedEventArgs e)
         {
-            SendNotification(OldDocAppointment, NewDocAppointment);
+            //SendNotification(OldDocAppointment, NewDocAppointment);
 
-            DoctorAppointmentController.Instance.UpdateAppointment(OldDocAppointment, NewDocAppointment);
+            //DoctorAppointmentController.Instance.UpdateAppointment(OldDocAppointment, NewDocAppointment);
             uca.RefreshGrid();
             this.Close();
         }
@@ -124,7 +125,7 @@ namespace Hospital_IS.SecretaryView
             {
             }
 
-            EnableAppointmentConfirmation(DoctorAppointmentController.Instance.VerifyAppointment(NewDocAppointment));
+            //EnableAppointmentConfirmation(DoctorAppointmentController.Instance.VerifyAppointment(NewDocAppointment));
         }
 
         private void EnableAppointmentConfirmation(bool isValid)
