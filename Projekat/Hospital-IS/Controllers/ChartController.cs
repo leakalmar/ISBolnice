@@ -68,7 +68,7 @@ namespace Controllers
 
         public void UpdateReport(Patient patient, ReportDTO report)
         {
-            ChartService.Instance.UpdateReport(patient.Id, new Report(report));
+            ChartService.Instance.UpdateReport(patient.Id, new Report(report.AppointmentStart,report.DoctorName,report.DoctorSurname,report.Type,report.AppointmentCause));
         }
 
         public void AddReport(ReportDTO reportDTO)
@@ -98,7 +98,7 @@ namespace Controllers
         {
             Room room = RoomController.Instance.GetRoomById(hospitalizationDTO.RoomID);
             Bed bed = BedController.Instance.GetBedById(hospitalizationDTO.BedID);
-            Hospitalization newHospitalization = new Hospitalization(hospitalizationDTO, room, bed);
+            Hospitalization newHospitalization = new Hospitalization(hospitalizationDTO.AdmissionDate,hospitalizationDTO.ReleaseDate,hospitalizationDTO.Detail,hospitalizationDTO.Doctor,hospitalizationDTO.IsReleased, room, bed);
             ChartService.Instance.AddHospitalization(newHospitalization, patient.Id);
         }
     }

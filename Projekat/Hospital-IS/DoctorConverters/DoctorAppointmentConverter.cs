@@ -7,20 +7,21 @@ namespace Hospital_IS.DoctorConverters
 {
     public class DoctorAppointmentConverter
     {
-        public AppointmentRowDTO ConvertModelToViewModel(DoctorAppointment appointemnt)
+        public AppointmentRowDTO ConvertModelToDTO(DoctorAppointment appointemnt)
         {
-            AppointmentRowDTO viewModel = new AppointmentRowDTO(new DoctorAppointmentDTO(appointemnt),true);
+            DoctorAppointmentDTO doctorAppointmentDTO = new DoctorAppointmentDTO(appointemnt.Reserved, appointemnt.AppointmentCause, appointemnt.AppointmentStart, appointemnt.AppointmentEnd, appointemnt.Type, appointemnt.Room, appointemnt.Id, appointemnt.NameSurnamePatient, appointemnt.AppTypeText, appointemnt.IsUrgent, appointemnt.Patient, appointemnt.Doctor, appointemnt.IsFinished);
+            AppointmentRowDTO appointmentRowDTO = new AppointmentRowDTO(doctorAppointmentDTO, false);
 
-            return viewModel;
+            return appointmentRowDTO;
         }
 
-        public ObservableCollection<AppointmentRowDTO> ConvertCollectionToViewModel(List<DoctorAppointment> appointments)
+        public ObservableCollection<AppointmentRowDTO> ConvertCollectionToDTO(List<DoctorAppointment> appointments)
         {
             ObservableCollection<AppointmentRowDTO> vmAppointments = new ObservableCollection<AppointmentRowDTO>();
             AppointmentRowDTO viewModel;
             foreach (DoctorAppointment d in appointments)
             {
-                viewModel = ConvertModelToViewModel(d);
+                viewModel = ConvertModelToDTO(d);
                 vmAppointments.Add(viewModel);
             }
             return vmAppointments;

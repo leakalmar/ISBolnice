@@ -20,21 +20,21 @@ namespace DTOs
         public Doctor Doctor { get; set; }
         public bool IsFinished { get; set; } = false;
 
-        public DoctorAppointmentDTO(DoctorAppointment doctorAppointment)
+        public DoctorAppointmentDTO(bool reserved, string appointmentCause, DateTime appointmentStart, DateTime appointmentEnd, AppointmentType type, int room, int id, string nameSurnamePatient, string appTypeText, bool isUrgent, Patient patient, Doctor doctor, bool isFinished)
         {
-            Reserved = doctorAppointment.Reserved;
-            AppointmentCause = doctorAppointment.AppointmentCause;
-            AppointmentStart = doctorAppointment.AppointmentStart;
-            AppointmentEnd = doctorAppointment.AppointmentEnd;
-            Type = doctorAppointment.Type;
-            Room = doctorAppointment.Room;
-            Id = doctorAppointment.Id;
-            NameSurnamePatient = doctorAppointment.NameSurnamePatient;
-            AppTypeText = doctorAppointment.AppTypeText;
-            IsUrgent = doctorAppointment.IsUrgent;
-            Patient = doctorAppointment.Patient;
-            Doctor = doctorAppointment.Doctor;
-            IsFinished = doctorAppointment.IsFinished;
+            Reserved = reserved;
+            AppointmentCause = appointmentCause;
+            AppointmentStart = appointmentStart;
+            AppointmentEnd = appointmentEnd;
+            Type = type;
+            Room = room;
+            Id = id;
+            NameSurnamePatient = nameSurnamePatient;
+            AppTypeText = appTypeText;
+            IsUrgent = isUrgent;
+            Patient = patient;
+            Doctor = doctor;
+            IsFinished = isFinished;
         }
     }
 }

@@ -103,7 +103,7 @@ namespace Hospital_IS.DoctorViewModel
         private void SetAppointmentFeilds()
         {
             List<DoctorAppointment> appointments = DoctorAppointmentController.Instance.GetAllByDoctor(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
-            ObservableCollection<AppointmentRowDTO> doctorAppointments = new DoctorAppointmentConverter().ConvertCollectionToViewModel(appointments);
+            ObservableCollection<AppointmentRowDTO> doctorAppointments = new DoctorAppointmentConverter().ConvertCollectionToDTO(appointments);
 
             appointmentsView = new CollectionViewSource { Source = doctorAppointments }.View;
 

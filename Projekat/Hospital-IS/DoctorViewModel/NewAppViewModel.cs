@@ -2,6 +2,7 @@
 using DTOs;
 using Enums;
 using Hospital_IS.Commands;
+using Hospital_IS.DoctorConverters;
 using Hospital_IS.DoctorView;
 using Model;
 using System;
@@ -345,8 +346,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void GetAppointments(List<DateTime> dates, Doctor doctor, Patient patient)
         {
-            List<DoctorAppointment> allAppointments = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, Emergency, SelectedRoom, FindType(), Duration, patient, doctor);
-            ICollectionView view = new CollectionViewSource { Source = ConvertList(allAppointments) }.View;
+            ICollectionView view = new CollectionViewSource { Source = new DoctorAppointmentConverter().ConvertCollectionToDTO(DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, Emergency, SelectedRoom, FindType(), Duration, patient, doctor)) }.View;
             view.SortDescriptions.Clear();
             view.SortDescriptions.Add(new SortDescription("Appointment.AppointmentStart", ListSortDirection.Ascending));
             Appointments = view;
@@ -368,17 +368,6 @@ namespace Hospital_IS.DoctorViewModel
             view.GroupDescriptions.Add((new PropertyGroupDescription("SuggestedAppointment.Doctor.Surname")));
             
             EmergencyAppointments = view;
-        }
-
-        private List<AppointmentRowDTO> ConvertList(List<DoctorAppointment> allAppointments)
-        {
-            List<AppointmentRowDTO> list = new List<AppointmentRowDTO>();
-            foreach (DoctorAppointment da in allAppointments)
-            {
-                list.Add(new AppointmentRowDTO(new DoctorAppointmentDTO(da), Emergency));
-            }
-
-            return list;
         }
 
         private List<DateTime> GenerateDates()

@@ -29,10 +29,10 @@ namespace Model
             this.Cause = cause;
         }
 
-        public Report(ReportDTO reportDTO)
+        public Report(DateTime appointmentStart, string doctorName, string doctorSurname, AppointmentType type, string appointmentCause, string anemnesis, int countPresciption, int countTests)
         {
-            this.Anamnesis = reportDTO.Anemnesis;
-            if(reportDTO.CountPresciption > 0)
+            this.Anamnesis = anemnesis;
+            if(countPresciption > 0)
             {
                 this.HaveRecipe = true;
             }
@@ -40,7 +40,7 @@ namespace Model
             {
                 this.HaveRecipe = false;
             }
-            if (reportDTO.CountTests > 0)
+            if (countTests > 0)
             {
                 this.HaveTest = true;
             }
@@ -48,11 +48,11 @@ namespace Model
             {
                 this.HaveTest = false;
             }
-            this.ReportId = reportDTO.AppointmentStart;
-            this.DoctorName = reportDTO.DoctorName;
-            this.DoctorSurname = reportDTO.DoctorSurname;
-            this.Type = reportDTO.Type;
-            this.Cause = reportDTO.AppointmentCause;
+            this.ReportId = appointmentStart;
+            this.DoctorName = doctorName;
+            this.DoctorSurname = doctorSurname;
+            this.Type = type;
+            this.Cause = appointmentCause;
         }
 
 

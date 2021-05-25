@@ -131,10 +131,10 @@
         "Bed": {
           "BedId": 0,
           "RoomId": 15,
-          "Taken": true
+          "Taken": false
         },
         "Doctor": "Dragana V. Simokov",
-        "Released": false
+        "IsReleased": true
       }
     ],
     "Therapies": []

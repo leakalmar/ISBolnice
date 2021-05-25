@@ -282,6 +282,7 @@ namespace Hospital_IS.DoctorViewModel
                 AddmissionDate = hospitalization.AdmissionDate;
                 ReleaseDate = hospitalization.ReleaseDate;
                 SelectedRoom = hospitalization.Room;
+                SelectedBed = hospitalization.Bed;
                 Doctor = hospitalization.Doctor;
             }
         }

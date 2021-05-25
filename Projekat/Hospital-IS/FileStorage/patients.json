@@ -78,7 +78,7 @@
     "hospital": null,
     "FileDate": "2021-03-29T23:21:22.7064923+02:00",
     "Employer": "neki poslodavac",
-    "Admitted": true,
+    "Admitted": false,
     "Alergies": [
       "Tetanus",
       "Paracetamol"

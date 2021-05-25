@@ -115,7 +115,7 @@ namespace Hospital_IS.DoctorViewModel
             this.SelectionChangedCommand = new RelayCommand(Execute_SelectionChangedCommand, CanExecute_NavigateCommand);
             this.navigationService = navigation;
             List<DoctorAppointment> appointments = DoctorAppointmentController.Instance.GetAllByDoctor(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
-            DoctorAppointments = new DoctorAppointmentConverter().ConvertCollectionToViewModel(appointments);
+            DoctorAppointments = new DoctorAppointmentConverter().ConvertCollectionToDTO(appointments);
 
             appointmentsView = new CollectionViewSource { Source = DoctorAppointments }.View;
 

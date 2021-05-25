@@ -27,13 +27,13 @@ namespace Model
             this.Bed = bed;
         }
 
-        public Hospitalization(HospitalizationDTO hospitalizationDTO, Room room, Bed bed)
+        public Hospitalization(DateTime admissionDate, DateTime releaseDate, string detail, string doctor, bool released, Room room, Bed bed)
         {
-            IsReleased = hospitalizationDTO.IsReleased;
-            Doctor = hospitalizationDTO.Doctor;
-            AdmissionDate = hospitalizationDTO.AdmissionDate;
-            ReleaseDate = hospitalizationDTO.ReleaseDate;
-            Detail = hospitalizationDTO.Detail;
+            IsReleased = released;
+            Doctor = doctor;
+            AdmissionDate = admissionDate;
+            ReleaseDate = releaseDate;
+            Detail = detail;
             Room = room;
             this.Bed = bed;
         }
