@@ -1,12 +1,14 @@
 ﻿using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using Service;
+using System;
 using System.Collections.Generic;
 namespace Hospital_IS.Service
 {
     class SecretaryService
     {
         public List<PatientDTO> AllPatients { get; set; } = new List<PatientDTO>();
+        public List<NotificationDTO> AllNotifications { get; set; } = new List<NotificationDTO>();
 
         private static SecretaryService instance = null;
         public static SecretaryService Instance
@@ -24,6 +26,7 @@ namespace Hospital_IS.Service
         private SecretaryService()
         {
             LoadPatients();
+            LoadNotifications();
         }
 
         private void LoadPatients()
@@ -108,6 +111,71 @@ namespace Hospital_IS.Service
                     return patientDTO;
             }
             return null;
+        }
+        private void LoadNotifications()
+        {
+            foreach (Notification notification in NotificationService.Instance.AllNotifications)
+                AllNotifications.Add(new NotificationDTO(notification.Id, notification.Title, notification.Text,
+                    notification.DatePosted, notification.LastChanged, notification.Recipients));
+        }
+
+        public void ReloadNotifications()
+        {
+            AllNotifications.Clear();
+            LoadNotifications();
+        }
+
+        public void AddNotification(NotificationDTO notificationDTO)
+        {
+            NotificationService.Instance.AddNotification(new Notification(notificationDTO.Title, notificationDTO.Text, 
+                notificationDTO.DatePosted, notificationDTO.LastChanged, notificationDTO.Recipients, notificationDTO.Id));
+            ReloadNotifications();
+        }
+
+        public void UpdateNotification(NotificationDTO notificationDTO)
+        {
+            for (int i = 0; i < AllNotifications.Count; i++)
+            {
+                if (notificationDTO.Id.Equals(AllNotifications[i].Id))
+                {
+                    AllNotifications.Remove(AllNotifications[i]);
+                    AllNotifications.Insert(i, notificationDTO);
+
+                    NotificationService.Instance.UpdateNotification(new Notification(notificationDTO.Title, notificationDTO.Text,
+                notificationDTO.DatePosted, notificationDTO.LastChanged, notificationDTO.Recipients, notificationDTO.Id));
+                }
+            }
+
+        }
+
+        public void DeleteNotification(NotificationDTO notificationDTO)
+        {
+            for (int i = 0; i < AllNotifications.Count; i++)
+            {
+                if (notificationDTO.Id.Equals(AllNotifications[i].Id))
+                {
+                    AllNotifications.Remove(AllNotifications[i]);
+
+                    NotificationService.Instance.DeleteNotification(new Notification(notificationDTO.Title, notificationDTO.Text,
+                notificationDTO.DatePosted, notificationDTO.LastChanged, notificationDTO.Recipients, notificationDTO.Id));
+                }
+            }
+        }
+
+        public List<NotificationDTO> GetAllByUser(int userId)
+        {
+            List<NotificationDTO> userNotifications = new List<NotificationDTO>();
+
+            foreach (NotificationDTO notif in AllNotifications)
+            {
+                foreach (int id in notif.Recipients)
+                {
+                    if (userId == id)
+                        userNotifications.Add(notif);
+                }
+            }
+
+            return userNotifications;
         }
     }
 }

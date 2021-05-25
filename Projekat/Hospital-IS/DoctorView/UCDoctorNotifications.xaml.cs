@@ -1,4 +1,5 @@
 ﻿using Hospital_IS.Controllers;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -18,12 +19,12 @@ namespace Hospital_IS.DoctorView
 {
     public partial class UCDoctorNotifications : UserControl
     {
-        public ObservableCollection<Notification> Notifications { get; set; } = new ObservableCollection<Notification>();
+        public ObservableCollection<NotificationDTO> Notifications { get; set; } = new ObservableCollection<NotificationDTO>();
 
         public UCDoctorNotifications()
         {
             InitializeComponent();
-            Notifications = new ObservableCollection<Notification>(NotificationController.Instance.GetAll());
+            Notifications = new ObservableCollection<NotificationDTO>(SecretaryController.Instance.GetAllNotifications());
             //Notifications = new ObservableCollection<Notification>(NotificationController.Instance.GetAllByUser(DoctorHomePage.Instance.Doctor.Id));
 
 
@@ -35,13 +36,13 @@ namespace Hospital_IS.DoctorView
         private void ShowNotification(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            Notification n = findNotification(Int32.Parse(button.Tag.ToString()));
+            NotificationDTO n = findNotification(Int32.Parse(button.Tag.ToString()));
             NotificationView nv = new NotificationView(n);
             nv.Show();
 
         }
 
-        private Notification findNotification(int id)
+        private NotificationDTO findNotification(int id)
         {
             for (int i = 0; i < Notifications.Count; i++)
             {
@@ -56,7 +57,7 @@ namespace Hospital_IS.DoctorView
             if(e.Key == Key.Enter)
             {
                 int idNotification = Int32.Parse(id.Text);
-                Notification n = findNotification(idNotification);
+                NotificationDTO n = findNotification(idNotification);
                 NotificationView nv = new NotificationView(n);
                 nv.Show();
             }

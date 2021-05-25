@@ -1,5 +1,5 @@
 ﻿using Hospital_IS.Controllers;
-using Model;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using System.Windows;
 
 namespace Hospital_IS.SecretaryView
@@ -9,9 +9,9 @@ namespace Hospital_IS.SecretaryView
     /// </summary>
     public partial class DeleteNotification : Window
     {
-        public Notification Notification { get; set; }
+        public NotificationDTO Notification { get; set; }
         public UpdateNotification un;
-        public DeleteNotification(Notification notification, UpdateNotification un)
+        public DeleteNotification(NotificationDTO notification, UpdateNotification un)
         {
             InitializeComponent();
             this.Notification = notification;
@@ -22,7 +22,7 @@ namespace Hospital_IS.SecretaryView
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            NotificationController.Instance.DeleteNotification(Notification);
+            SecretaryController.Instance.DeleteNotification(Notification);
             un.ucn.RefreshList();
             this.Close();
             un.Close();

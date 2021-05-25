@@ -1,4 +1,5 @@
 ﻿using Hospital_IS.Controllers;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Hospital_IS.SecretaryView;
 using Hospital_IS.Storages;
 using Model;
@@ -16,12 +17,12 @@ namespace Hospital_IS
     /// </summary>
     public partial class UCNotificationsView : UserControl
     {
-        public ObservableCollection<Notification> Notifications { get; set; } = new ObservableCollection<Notification>();
+        public ObservableCollection<NotificationDTO> Notifications { get; set; } = new ObservableCollection<NotificationDTO>();
 
         public UCNotificationsView()
         {
             InitializeComponent();
-            Notifications = new ObservableCollection<Notification>(NotificationController.Instance.GetAll());
+            Notifications = new ObservableCollection<NotificationDTO>(SecretaryController.Instance.GetAllNotifications());
 
 
             if (Notifications.Count > 0)
@@ -34,15 +35,15 @@ namespace Hospital_IS
             if (Notifications != null)
                 Notifications.Clear();
 
-            NotificationController.Instance.ReloadNotifications();
-            Notifications = new ObservableCollection<Notification>(NotificationController.Instance.GetAll());
+            SecretaryController.Instance.ReloadNotifications();
+            Notifications = new ObservableCollection<NotificationDTO>(SecretaryController.Instance.GetAllNotifications());
             ListViewNotifications.ItemsSource = Notifications;
         }
 
         private void ShowNotification(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            Notification n = FindNotification(Int32.Parse(button.Tag.ToString()));
+            NotificationDTO n = FindNotification(Int32.Parse(button.Tag.ToString()));
             NotificationView nv = new NotificationView(n);
             nv.Show();
 
@@ -54,7 +55,7 @@ namespace Hospital_IS
             cn.Show();
         }
 
-        private Notification FindNotification(int id)
+        private NotificationDTO FindNotification(int id)
         {
             for (int i = 0; i < Notifications.Count; i++)
             {
@@ -67,7 +68,7 @@ namespace Hospital_IS
         private void UpdateNotification(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            Notification n = FindNotification(Int32.Parse(button.Tag.ToString()));
+            NotificationDTO n = FindNotification(Int32.Parse(button.Tag.ToString()));
             UpdateNotification un = new UpdateNotification(n, this);
             un.Show();
         }

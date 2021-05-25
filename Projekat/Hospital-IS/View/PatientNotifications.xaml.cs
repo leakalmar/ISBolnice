@@ -1,4 +1,5 @@
 ﻿using Hospital_IS.Controllers;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Hospital_IS.Storages;
 using Model;
 using Storages;
@@ -22,12 +23,12 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class PatientNotifications : Window
     {
-        public ObservableCollection<Notification> NotificationMessages { get; set; } = new ObservableCollection<Notification>();
+        public ObservableCollection<NotificationDTO> NotificationMessages { get; set; } = new ObservableCollection<NotificationDTO>();
         public PatientNotifications()
         {
             InitializeComponent();
-            List<Notification> notifications = NotificationController.Instance.GetAllByUser(HomePatient.Instance.Patient.Id);
-            NotificationMessages = new ObservableCollection<Notification>(notifications);
+            List<NotificationDTO> notifications = SecretaryController.Instance.GetAllByUser(HomePatient.Instance.Patient.Id);
+            NotificationMessages = new ObservableCollection<NotificationDTO>(notifications);
 
 
             if (NotificationMessages.Count > 0)
@@ -71,13 +72,13 @@ namespace Hospital_IS.View
         private void ShowNotification(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            Notification n = findNotification(Int32.Parse(button.Tag.ToString()));
+            NotificationDTO n = findNotification(Int32.Parse(button.Tag.ToString()));
             NotificationView nv = new NotificationView(n);
             nv.Show();
 
         }
 
-        private Notification findNotification(int id)
+        private NotificationDTO findNotification(int id)
         {
             for (int i = 0; i < NotificationMessages.Count; i++)
             {

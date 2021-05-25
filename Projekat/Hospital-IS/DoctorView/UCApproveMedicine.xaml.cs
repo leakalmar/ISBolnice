@@ -27,8 +27,8 @@ namespace Hospital_IS.DoctorView
         {
             Button button = sender as Button;
             Notification n = findNotification(Int32.Parse(button.Tag.ToString()));
-            NotificationView nv = new NotificationView(n);
-            nv.Show();
+            //NotificationView nv = new NotificationView(n);
+            //nv.Show();
 
         }
 

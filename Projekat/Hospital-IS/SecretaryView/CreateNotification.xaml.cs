@@ -1,9 +1,8 @@
 ﻿using Controllers;
 using Hospital_IS.Controllers;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Hospital_IS.SecretaryView;
-using Hospital_IS.Storages;
 using Model;
-using Service;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -16,7 +15,7 @@ namespace Hospital_IS
     /// </summary>
     public partial class CreateNotification : Window
     {
-        public Notification Notification { get; set; } = new Notification();
+        public NotificationDTO Notification { get; set; } = new NotificationDTO();
 
         public List<int> Ids { get; set; } = new List<int>();
 
@@ -47,7 +46,7 @@ namespace Hospital_IS
             }
             else if (rbSelectAll.IsChecked == true)
             {
-                foreach (Patient patient in PatientController.Instance.GetAllRegisteredPatients())
+                foreach (PatientDTO patient in SecretaryController.Instance.GetAllRegisteredPatients())
                     Notification.Recipients.Add(patient.Id);
 
                 foreach (Doctor doctor in DoctorController.Instance.GetAll())
@@ -56,7 +55,7 @@ namespace Hospital_IS
 
             ucn.Notifications.Insert(0, Notification);
 
-            NotificationController.Instance.AddNotification(Notification);
+            SecretaryController.Instance.AddNotification(Notification);
 
             ucn.RefreshList();
 

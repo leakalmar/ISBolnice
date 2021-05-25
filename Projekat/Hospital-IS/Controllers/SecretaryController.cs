@@ -59,6 +59,35 @@ namespace Hospital_IS.Controllers
             return SecretaryService.Instance.GetPatientByID(id);
         }
 
+        public List<NotificationDTO> GetAllNotifications()
+        {
+            return SecretaryService.Instance.AllNotifications;
+        }
+
+        public void ReloadNotifications()
+        {
+            SecretaryService.Instance.ReloadNotifications();
+        }
+
+        public void AddNotification(NotificationDTO notificationDTO)
+        {
+            SecretaryService.Instance.AddNotification(notificationDTO);
+        }
+
+        public void UpdateNotification(NotificationDTO notificationDTO)
+        {
+            SecretaryService.Instance.UpdateNotification(notificationDTO);
+        }
+
+        public void DeleteNotification(NotificationDTO notificationDTO)
+        {
+            SecretaryService.Instance.DeleteNotification(notificationDTO);
+        }
+
+        public List<NotificationDTO> GetAllByUser(int userId)
+        {
+            return SecretaryService.Instance.GetAllByUser(userId);
+        }
 
     }
 }
