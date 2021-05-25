@@ -20,6 +20,7 @@ namespace Hospital_IS.View.PatientViewModels
         private string usage;
         private string sideEffects;
         private bool showTherapyInfo = false;
+        private bool chooseItem = true;
 
         public TherapyPatientViewModel()
         {
@@ -158,6 +159,19 @@ namespace Hospital_IS.View.PatientViewModels
             }
         }
 
+        public bool ChooseItem
+        {
+            get { return chooseItem; }
+            set
+            {
+                if (chooseItem != value)
+                {
+                    chooseItem = value;
+                    OnPropertyChanged("ChooseItem");
+                }
+            }
+        }
+
         private void SetTherapyInfo()
         {
             int usageHourDifference = (int)24 / Therapy.TimesADay;
@@ -169,6 +183,7 @@ namespace Hospital_IS.View.PatientViewModels
             EndTherapy = Therapy.TherapyEnd.ToString("dd.MM.yyyy.");
             Usage = Therapy.Medicine.Usage;
             SideEffects = Therapy.Medicine.SideEffects;
+            ChooseItem = false;
             ShowTherapyInfo = true;
         }
 

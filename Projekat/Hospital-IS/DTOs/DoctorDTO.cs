@@ -19,4 +19,5 @@ namespace Hospital_IS.DTOs
         public int PrimaryRoom { get; set; }
 
     }
+
 }
