@@ -74,7 +74,7 @@ namespace Hospital_IS
             ucp.dataGridPatients.ItemsSource = null;
             ucp.dataGridPatients.ItemsSource = ucp.Patients;
 
-            SecretaryController.Instance.UpdatePatient(Patient);
+            SecretaryManagementController.Instance.UpdatePatient(Patient);
 
             this.Close();
         }

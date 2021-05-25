@@ -24,7 +24,7 @@ namespace Hospital_IS.DoctorView
         public UCDoctorNotifications()
         {
             InitializeComponent();
-            Notifications = new ObservableCollection<NotificationDTO>(SecretaryController.Instance.GetAllNotifications());
+            Notifications = new ObservableCollection<NotificationDTO>(SecretaryManagementController.Instance.GetAllNotifications());
             //Notifications = new ObservableCollection<Notification>(NotificationController.Instance.GetAllByUser(DoctorHomePage.Instance.Doctor.Id));
 
 

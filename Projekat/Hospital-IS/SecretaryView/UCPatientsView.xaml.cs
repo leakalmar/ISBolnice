@@ -32,8 +32,8 @@ namespace Hospital_IS
             if (Patients != null)
                 Patients.Clear();
 
-            SecretaryController.Instance.ReloadPatients();
-            Patients = new ObservableCollection<PatientDTO>(SecretaryController.Instance.GetAllRegisteredPatients());
+            SecretaryManagementController.Instance.ReloadPatients();
+            Patients = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllRegisteredPatients());
             dataGridPatients.ItemsSource = Patients;
         }
 
@@ -69,7 +69,7 @@ namespace Hospital_IS
             {
                 PatientDTO patient = (PatientDTO)dataGridPatients.SelectedItem;
                 Patients.Remove(patient);
-                SecretaryController.Instance.DeletePatient(patient);
+                SecretaryManagementController.Instance.DeletePatient(patient);
             }
         }
 

@@ -46,7 +46,7 @@ namespace Hospital_IS
             }
             else if (rbSelectAll.IsChecked == true)
             {
-                foreach (PatientDTO patient in SecretaryController.Instance.GetAllRegisteredPatients())
+                foreach (PatientDTO patient in SecretaryManagementController.Instance.GetAllRegisteredPatients())
                     Notification.Recipients.Add(patient.Id);
 
                 foreach (Doctor doctor in DoctorController.Instance.GetAll())
@@ -55,7 +55,7 @@ namespace Hospital_IS
 
             ucn.Notifications.Insert(0, Notification);
 
-            SecretaryController.Instance.AddNotification(Notification);
+            SecretaryManagementController.Instance.AddNotification(Notification);
 
             ucn.RefreshList();
 

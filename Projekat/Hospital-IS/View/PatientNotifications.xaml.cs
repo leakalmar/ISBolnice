@@ -27,7 +27,7 @@ namespace Hospital_IS.View
         public PatientNotifications()
         {
             InitializeComponent();
-            List<NotificationDTO> notifications = SecretaryController.Instance.GetAllByUser(HomePatient.Instance.Patient.Id);
+            List<NotificationDTO> notifications = SecretaryManagementController.Instance.GetAllByUser(HomePatient.Instance.Patient.Id);
             NotificationMessages = new ObservableCollection<NotificationDTO>(notifications);
 
 

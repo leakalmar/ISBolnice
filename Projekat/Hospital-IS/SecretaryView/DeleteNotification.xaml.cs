@@ -22,7 +22,7 @@ namespace Hospital_IS.SecretaryView
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            SecretaryController.Instance.DeleteNotification(Notification);
+            SecretaryManagementController.Instance.DeleteNotification(Notification);
             un.ucn.RefreshList();
             this.Close();
             un.Close();

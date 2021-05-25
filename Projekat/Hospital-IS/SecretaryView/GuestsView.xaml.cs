@@ -29,7 +29,7 @@ namespace Hospital_IS.SecretaryView
                 Guests.Clear();
 
             PatientController.Instance.ReloadPatients();
-            Guests = new ObservableCollection<PatientDTO>(SecretaryController.Instance.GetAllGuests());
+            Guests = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllGuests());
             dataGridGuests.ItemsSource = Guests;
         }
         private void RegisterPatient(object sender, RoutedEventArgs e)

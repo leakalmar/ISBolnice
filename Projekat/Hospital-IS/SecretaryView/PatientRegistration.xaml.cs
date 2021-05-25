@@ -61,12 +61,12 @@ namespace Hospital_IS
             if (checkBox.Visibility != Visibility.Collapsed)
             {
                 Patient.Id = UserService.Instance.GenerateUserID();
-                SecretaryController.Instance.AddPatient(Patient);
+                SecretaryManagementController.Instance.AddPatient(Patient);
             }
             else 
             {
                 Patient.IsGuest = false;
-                SecretaryController.Instance.UpdatePatient(Patient);
+                SecretaryManagementController.Instance.UpdatePatient(Patient);
                 gv.RefreshGrid();
             }
 

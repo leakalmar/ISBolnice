@@ -25,7 +25,7 @@ namespace Hospital_IS.SecretaryView
 
         public void RefreshGrid()
         {
-            Guests = new ObservableCollection<PatientDTO>(SecretaryController.Instance.GetAllGuests());
+            Guests = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllGuests());
             dataGridGuests.ItemsSource = Guests;
         }
 
@@ -35,7 +35,7 @@ namespace Hospital_IS.SecretaryView
             patient.Id = UserService.Instance.GenerateUserID();
             patient.IsGuest = true;
             patient.BirthDate = DateTime.Now;
-            SecretaryController.Instance.AddPatient(patient);
+            SecretaryManagementController.Instance.AddPatient(patient);
 
             RefreshGrid();
         }

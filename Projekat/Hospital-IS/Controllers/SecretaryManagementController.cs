@@ -4,89 +4,89 @@ using System.Collections.Generic;
 
 namespace Hospital_IS.Controllers
 {
-    class SecretaryController
+    class SecretaryManagementController
     {
-        private static SecretaryController instance = null;
-        public static SecretaryController Instance
+        private static SecretaryManagementController instance = null;
+        public static SecretaryManagementController Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new SecretaryController();
+                    instance = new SecretaryManagementController();
                 }
                 return instance;
             }
         }
 
-        private SecretaryController()
+        private SecretaryManagementController()
         {
 
         }
 
         public void AddPatient(PatientDTO patientDTO)
         {
-            SecretaryService.Instance.AddPatient(patientDTO);
+            SecretaryUserManagementService.Instance.AddPatient(patientDTO);
         }
 
         public void UpdatePatient(PatientDTO patientDTO)
         {
-            SecretaryService.Instance.UpdatePatient(patientDTO);
+            SecretaryUserManagementService.Instance.UpdatePatient(patientDTO);
         }
 
         public void ReloadPatients()
         {
-            SecretaryService.Instance.ReloadPatients();
+            SecretaryUserManagementService.Instance.ReloadPatients();
         }
 
         public void DeletePatient(PatientDTO patientDTO)
         {
-            SecretaryService.Instance.DeletePatient(patientDTO);
+            SecretaryUserManagementService.Instance.DeletePatient(patientDTO);
         }
 
         public List<PatientDTO> GetAllRegisteredPatients()
         {
-            return SecretaryService.Instance.GetAllRegisteredPatients();
+            return SecretaryUserManagementService.Instance.GetAllRegisteredPatients();
         }
 
         public List<PatientDTO> GetAllGuests()
         {
-            return SecretaryService.Instance.GetAllGuests();
+            return SecretaryUserManagementService.Instance.GetAllGuests();
         }
 
         public PatientDTO GetPatientByID(int id)
         {
-            return SecretaryService.Instance.GetPatientByID(id);
+            return SecretaryUserManagementService.Instance.GetPatientByID(id);
         }
 
         public List<NotificationDTO> GetAllNotifications()
         {
-            return SecretaryService.Instance.AllNotifications;
+            return SecretaryUserManagementService.Instance.AllNotifications;
         }
 
         public void ReloadNotifications()
         {
-            SecretaryService.Instance.ReloadNotifications();
+            SecretaryUserManagementService.Instance.ReloadNotifications();
         }
 
         public void AddNotification(NotificationDTO notificationDTO)
         {
-            SecretaryService.Instance.AddNotification(notificationDTO);
+            SecretaryUserManagementService.Instance.AddNotification(notificationDTO);
         }
 
         public void UpdateNotification(NotificationDTO notificationDTO)
         {
-            SecretaryService.Instance.UpdateNotification(notificationDTO);
+            SecretaryUserManagementService.Instance.UpdateNotification(notificationDTO);
         }
 
         public void DeleteNotification(NotificationDTO notificationDTO)
         {
-            SecretaryService.Instance.DeleteNotification(notificationDTO);
+            SecretaryUserManagementService.Instance.DeleteNotification(notificationDTO);
         }
 
         public List<NotificationDTO> GetAllByUser(int userId)
         {
-            return SecretaryService.Instance.GetAllByUser(userId);
+            return SecretaryUserManagementService.Instance.GetAllByUser(userId);
         }
 
     }

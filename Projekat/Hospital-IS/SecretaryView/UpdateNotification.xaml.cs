@@ -30,7 +30,7 @@ namespace Hospital_IS.SecretaryView
         private void EditNotification(object sender, RoutedEventArgs e)
         {
             Notification.LastChanged = DateTime.Now;
-            SecretaryController.Instance.UpdateNotification(Notification);
+            SecretaryManagementController.Instance.UpdateNotification(Notification);
             this.Close();
         }
 

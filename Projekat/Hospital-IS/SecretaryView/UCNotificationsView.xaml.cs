@@ -22,7 +22,7 @@ namespace Hospital_IS
         public UCNotificationsView()
         {
             InitializeComponent();
-            Notifications = new ObservableCollection<NotificationDTO>(SecretaryController.Instance.GetAllNotifications());
+            Notifications = new ObservableCollection<NotificationDTO>(SecretaryManagementController.Instance.GetAllNotifications());
 
 
             if (Notifications.Count > 0)
@@ -35,8 +35,8 @@ namespace Hospital_IS
             if (Notifications != null)
                 Notifications.Clear();
 
-            SecretaryController.Instance.ReloadNotifications();
-            Notifications = new ObservableCollection<NotificationDTO>(SecretaryController.Instance.GetAllNotifications());
+            SecretaryManagementController.Instance.ReloadNotifications();
+            Notifications = new ObservableCollection<NotificationDTO>(SecretaryManagementController.Instance.GetAllNotifications());
             ListViewNotifications.ItemsSource = Notifications;
         }
 

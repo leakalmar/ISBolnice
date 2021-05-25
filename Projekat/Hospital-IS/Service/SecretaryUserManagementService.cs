@@ -5,25 +5,25 @@ using System;
 using System.Collections.Generic;
 namespace Hospital_IS.Service
 {
-    class SecretaryService
+    class SecretaryUserManagementService
     {
         public List<PatientDTO> AllPatients { get; set; } = new List<PatientDTO>();
         public List<NotificationDTO> AllNotifications { get; set; } = new List<NotificationDTO>();
 
-        private static SecretaryService instance = null;
-        public static SecretaryService Instance
+        private static SecretaryUserManagementService instance = null;
+        public static SecretaryUserManagementService Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new SecretaryService();
+                    instance = new SecretaryUserManagementService();
                 }
                 return instance;
             }
         }
 
-        private SecretaryService()
+        private SecretaryUserManagementService()
         {
             LoadPatients();
             LoadNotifications();
