@@ -73,7 +73,7 @@ namespace Hospital_IS.View.PatientViewModels
                 int usageHourDifference = (int)24 / therapy.TimesADay;
                 for (int i = 0; i < therapy.TimesADay; i++)
                 {
-                    if (time.Hour >= (therapy.FirstUsageTime + i * usageHourDifference))
+                    if (time.Hour >= (therapy.FirstUsageTime + i * usageHourDifference) && time.Hour <= (therapy.FirstUsageTime + i * usageHourDifference) + 2)
                     {
                         MessageBox.Show("Trebalo je da popijete lek " + therapy.Medicine.Name + " u " + (therapy.FirstUsageTime + i * usageHourDifference) + "h.");
                     }
@@ -82,7 +82,7 @@ namespace Hospital_IS.View.PatientViewModels
 
             foreach (PatientNote note in PatientController.Instance.GetNotesByPatient(Patient.Id))
             {
-                if (time.Hour >= note.NotificationTime && note.IsNotifyChecked)
+                if (time.Hour >= note.NotificationTime && time.Hour <= note.NotificationTime + 2 && note.IsNotifyChecked)
                 {
                     MessageBox.Show("Podsetnik podešen za " + note.NotificationTime + "h: " + note.NoteContent);
                 }

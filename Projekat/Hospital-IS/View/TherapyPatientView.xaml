@@ -104,7 +104,7 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Border x:Name="TherapyInfo" BorderThickness="0" BorderBrush="#FF184095" Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Margin="10,0,10,20" Visibility="Visible" CornerRadius="20,20,20,20" Background="#FF184095">
+        <Border x:Name="TherapyInfo" BorderThickness="0" BorderBrush="DeepSkyBlue" Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Margin="10,0,10,20" Visibility="Visible" CornerRadius="20,20,20,20" Background="#FF058D91">
             <StackPanel x:Name="PersonalData" Grid.RowSpan="9" Grid.Row="1" Grid.Column="2" Margin="10,10,10,10" >
 
                 <Grid>

@@ -122,7 +122,7 @@ namespace Service
 
         public bool IsPatientTroll(Patient patient, DoctorAppointment doctorAppointment)
         {
-            int timeRange = 14;
+            int timeRange = 10;
             int maxAppointmentsInTimeRange = 3;
             if (doctorAppointment.AppointmentStart < patient.TrollMechanism.TrollCheckStartDate.AddDays(timeRange))
             {
@@ -139,26 +139,32 @@ namespace Service
 
         private void UpdatePatientTrollMechanism()
         {
-            int timeRange = 14;
+            int timeRange = 10;
             int maxAppointmentsInTimeRange = 3;
             foreach (Patient patient in AllPatients)
             {
                 if (patient.TrollMechanism.TrollCheckStartDate.AddDays(timeRange) == DateTime.Today)
                 {
                     patient.TrollMechanism.TrollCheckStartDate = DateTime.Today;
-                    if (DoctorAppointmentService.Instance.GetNumberOfAppointmentsInTimeRange(patient.Id, DateTime.Today, DateTime.Today.AddDays(timeRange)) > maxAppointmentsInTimeRange)
-                    {
-                        patient.TrollMechanism.IsTroll = true;
-                        patient.TrollMechanism.AppointmentCounterInTimeRange = DoctorAppointmentService.Instance.GetNumberOfAppointmentsInTimeRange(patient.Id, DateTime.Today, DateTime.Today.AddDays(timeRange));
-                    }
-                    else
-                    {
-                        patient.TrollMechanism.IsTroll = false;
-                        patient.TrollMechanism.AppointmentCounterInTimeRange = DoctorAppointmentService.Instance.GetNumberOfAppointmentsInTimeRange(patient.Id, DateTime.Today, DateTime.Today.AddDays(timeRange));
-                    }                  
+                    SetPatientTrollMechanism(patient, timeRange, maxAppointmentsInTimeRange);                  
                 }
             }
         }
+
+        private void SetPatientTrollMechanism(Patient patient,int timeRange, int maxAppointmentsInTimeRange)
+        {
+            if (DoctorAppointmentService.Instance.GetNumberOfAppointmentsInTimeRange(patient.Id, DateTime.Today, DateTime.Today.AddDays(timeRange)) > maxAppointmentsInTimeRange)
+            {
+                patient.TrollMechanism.IsTroll = true;
+                patient.TrollMechanism.AppointmentCounterInTimeRange = DoctorAppointmentService.Instance.GetNumberOfAppointmentsInTimeRange(patient.Id, DateTime.Today, DateTime.Today.AddDays(timeRange));
+            }
+            else
+            {
+                patient.TrollMechanism.IsTroll = false;
+                patient.TrollMechanism.AppointmentCounterInTimeRange = DoctorAppointmentService.Instance.GetNumberOfAppointmentsInTimeRange(patient.Id, DateTime.Today, DateTime.Today.AddDays(timeRange));
+            }
+        }
+
         public List<Patient> GetAllRegisteredPatients()
         {
             List<Patient> registeredPatients = new List<Patient>();
