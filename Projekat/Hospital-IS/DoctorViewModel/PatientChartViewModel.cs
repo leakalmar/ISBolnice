@@ -206,6 +206,7 @@ namespace Hospital_IS.DoctorViewModel
                     break;
                 case 6:
                     Hospitalizations hospitalizations = new Hospitalizations();
+                    hospitalizations._ViewModel.Started = Started;
                     this.InsideNavigationService.Navigate(hospitalizations);
                     break;
             }

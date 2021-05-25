@@ -59,7 +59,8 @@
                     HorizontalAlignment="Center" Grid.ColumnSpan="3"
                     Margin="0,5" TextWrapping="Wrap" VerticalAlignment="Center" />
             <Border CornerRadius="20" BorderThickness="1" Background="#FF213250"
-                    BorderBrush="FloralWhite" Margin="15" Grid.Row="5">
+                    BorderBrush="FloralWhite" Margin="15" Grid.Row="5"
+                    Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}">
                 <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
                         Content="Primi pacijenta" Foreground="FloralWhite"
                         HorizontalAlignment="Stretch">

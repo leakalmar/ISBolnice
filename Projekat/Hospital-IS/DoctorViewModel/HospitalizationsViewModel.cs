@@ -31,12 +31,23 @@ namespace Hospital_IS.DoctorViewModel
 
         private ObservableCollection<Hospitalization> hospitalizations;
         private Hospitalization selectedHospitalization;
+        private bool started;
+
+        public bool Started
+        {
+            get { return started; }
+            set
+            {
+                started = value;
+                OnPropertyChanged("Started");
+            }
+        }
 
         public bool NewHospitalization
         {
             get { return newHospitalization; }
-            set 
-            { 
+            set
+            {
                 newHospitalization = value;
                 OnPropertyChanged("NewHospitalization");
             }
@@ -215,8 +226,8 @@ namespace Hospital_IS.DoctorViewModel
             PatientController.Instance.UpdatePatient(Patient);
             SelectedBed.Taken = true;
             BedController.Instance.UpdateBed(SelectedBed);
-            HospitalizationDTO hospitalizationDTO = new HospitalizationDTO(AddmissionDate, ReleaseDate, Details, SelectedRoom.RoomId, SelectedBed.BedId,  Doctor, false);
-            ChartController.Instance.AddHospitalization(hospitalizationDTO ,Patient);
+            HospitalizationDTO hospitalizationDTO = new HospitalizationDTO(AddmissionDate, ReleaseDate, Details, SelectedRoom.RoomId, SelectedBed.BedId, Doctor, false);
+            ChartController.Instance.AddHospitalization(hospitalizationDTO, Patient);
             this.Hospitalizations = new ObservableCollection<Hospitalization>(ChartController.Instance.GetHospitalizationsByPatient(Patient));
         }
 
@@ -279,7 +290,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Constructor
         public HospitalizationsViewModel()
         {
-            this.HospitalizePatientCommand = new RelayCommand(Execute_HospitalizePatientCommand,CanExecute_Command);
+            this.HospitalizePatientCommand = new RelayCommand(Execute_HospitalizePatientCommand, CanExecute_Command);
             this.EndCreatingHospitalizationCommand = new RelayCommand(Execute_EndCreatingHospitalizationCommand, CanExecute_Command);
             this.ReleasePatientCommand = new RelayCommand(Execute_ReleasePatientCommand, CanExecute_Command);
             this.Rooms = RoomController.Instance.GetRoomByType(RoomType.RecoveryRoom);
