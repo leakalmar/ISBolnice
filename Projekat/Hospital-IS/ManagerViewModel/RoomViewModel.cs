@@ -19,6 +19,7 @@ namespace Hospital_IS.ManagerViewModel
         private String _roomFloor = "Unesite sprat sobe";
         private String _surfaceArea = "Unesite površinu sobe";
         private String _bedNumber = "Unesite broj kreveta";
+        private int selectedRenovationOption = -1;
         private int comboBoxItem;
         private RelayCommand navigateToMEquipmentPageCommand;
         private RelayCommand navigateToMedicinePageCommand;
@@ -27,12 +28,20 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand updateRoom;
         private RelayCommand navigateToRoomPage;
         private RelayCommand navigateToRoomRenovation;
+        private RelayCommand navigateAdvancedRoomRenovation;
         private NavigationService navService;
         private Room selectedRoom;
         private RelayCommand navigateToManagerProfilePage;
 
 
-
+        public RelayCommand NavigateAdvancedRoomRenovation
+        {
+            get { return navigateAdvancedRoomRenovation; }
+            set
+            {
+                navigateAdvancedRoomRenovation = value;
+            }
+        }
         public RelayCommand NavigateToRoomRenovation
         {
             get { return navigateToRoomRenovation; }
@@ -149,6 +158,22 @@ namespace Hospital_IS.ManagerViewModel
                 }
             }
         }
+        
+        public int SelectedRenovationOption
+        {
+            get
+            {
+                return selectedRenovationOption;
+            }
+            set
+            {
+                if (value != selectedRenovationOption)
+                {
+                    selectedRenovationOption = value;
+                    OnPropertyChanged("SelectedRenovationOption");
+                }
+            }
+        }
         public Room SelectedRoom
         {
             get { return selectedRoom; }
@@ -255,7 +280,8 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToMedicinePageCommand = new RelayCommand(Execute_NavigateToMedicinePageCommand, CanExecute_NavigateCommand);
             this.NavigateToManagerProfilePage = new RelayCommand(Execute_NavigateToManagerProfilePageCommand, CanExecute_NavigateCommand);
             this.NavigateToEquipmentPageCommand = new RelayCommand(Execute_NavigateToEquipmentPageCommand, CanExecute_NavigateCommand);
-            this.NavigateToRoomRenovation = new RelayCommand(Execute_RenovationRoomCommand, CanExecute_RenovationRoomCommand);           
+            this.NavigateToRoomRenovation = new RelayCommand(Execute_RenovationRoomCommand, CanExecute_RenovationRoomCommand);
+            this.NavigateAdvancedRoomRenovation = new RelayCommand(Execute_AdvancedRenovationRoomCommand);
         }
 
         public void SetFields(object selectedRoom)
@@ -272,6 +298,14 @@ namespace Hospital_IS.ManagerViewModel
 
         }
 
+
+        private void Execute_AdvancedRenovationRoomCommand(object obj)
+        {
+            //RoomRenovationViewModel.Instance.SetAppointmnetForRoom(SelectedRoom.RoomId);
+            //RoomRenovationViewModel.Instance.FirstRoom = SelectedRoom;
+            this.NavService.Navigate(
+                    new Uri("ManagerView1/AdvancedRoomOptionsView.xaml", UriKind.Relative));
+        }
         private void Execute_RenovationRoomCommand(object obj)
         {
             RoomRenovationViewModel.Instance.SetAppointmnetForRoom(SelectedRoom.RoomId);

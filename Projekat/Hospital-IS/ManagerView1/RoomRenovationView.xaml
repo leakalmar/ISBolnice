@@ -78,6 +78,6 @@
         <Label Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="2"  Content="Unesite opis:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
         <TextBox x:Name="DescriptionField" Grid.Row="13" Grid.Column="4" Grid.RowSpan="2" Margin="30,0,0,0" Text="{Binding Note}"/>
         <Button x:Name="AffirmRenovation" Grid.Column="3" Grid.Row="16" Grid.ColumnSpan="2" Width="100" Height="30" Content="Potvrdi" FontSize="18" Background="Transparent"
-                Foreground="White" BorderBrush="White"  />
+                Foreground="White" BorderBrush="White" CommandParameter="{Binding ElementName=RenovationStart}" Command="{Binding TransferStaticEquipmentCommand}" />
     </Grid>
 </Page>

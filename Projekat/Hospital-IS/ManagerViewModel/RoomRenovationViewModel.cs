@@ -179,18 +179,14 @@ namespace Hospital_IS.ManagerViewModel
         }
         private RoomRenovationViewModel()
         {
-
+            this.TransferStaticEquipmentCommand = new RelayCommand(Execute_RoomRenovation, CanExecute_IfEveryhingIsCorecct);
         }
 
 
         public void SetAppointmentsForRooms(int roomIdSource, int roomIdDestination)
         {
-
             Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(roomIdSource, roomIdDestination));
-           
-
             this.TransferStaticEquipmentCommand = new RelayCommand(Execute_RoomRenovation, CanExecute_IfEveryhingIsCorecct);
-
         }
 
         public void SetAppointmnetForRoom(int roomIdSource)
@@ -201,22 +197,17 @@ namespace Hospital_IS.ManagerViewModel
         private bool CanExecute_IfEveryhingIsCorecct(object obj)
         {
             DateTimePicker dateTimePicker = (DateTimePicker)obj;
-
-
             if (DateStart < DateTime.Now || DateEnd < DateTime.Now || DateStart >= DateEnd || dateTimePicker.Text.Length == 0)
             {
-
                 return false;
             }
-
             return true;
         }
+
         private void Execute_RoomRenovation(object obj)
         {
-
             bool isSuccces = AppointmentController.Instance.MakeRenovationAppointment(DateStart, dateEnd, Note,FirstRoom.RoomId);
             Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(FirstRoom.RoomId));
-
             if (!isSuccces)
             {
                 System.Windows.MessageBox.Show("Niste uspjeli da zakazete termin");
@@ -224,7 +215,6 @@ namespace Hospital_IS.ManagerViewModel
             else
             {
                 System.Windows.MessageBox.Show("Uspjesno zakazivanje termina");
-
             }
 
         }
