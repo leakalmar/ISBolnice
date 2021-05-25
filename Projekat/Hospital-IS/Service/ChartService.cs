@@ -68,6 +68,34 @@ namespace Service
             return reportPrescriptions;
         }
 
+        public Hospitalization GetActivHospitalization(int id)
+        {
+            Hospitalization ret = null;
+            List<Hospitalization> allHospitalizations = GetHospitalizationsByPatientId(id);
+            foreach (Hospitalization hospitalization in allHospitalizations)
+            {
+                if (hospitalization.Released == false)
+                {
+                    ret = hospitalization;
+                }
+            }
+            return ret;
+        }
+
+        public void ReleasePatient(int id)
+        {
+            MedicalHistory medicalHistory = GetChartById(id);
+            for (int i = 0; i < medicalHistory.Hospitalization.Count; i++)
+            {
+                if (medicalHistory.Hospitalization[i].Released == false)
+                {
+                    medicalHistory.Hospitalization[i].Released = true;
+                    cfs.SaveCharts(AllCharts);
+                    return;
+                }
+            }
+        }
+
         public void AddPrescriptions(List<Prescription> prescriptions, int id)
         {
             MedicalHistory medicalHistory = GetChartById(id);
@@ -79,6 +107,13 @@ namespace Service
         {
             MedicalHistory medicalHistory = GetChartById(id);
             medicalHistory.Reports.Add(newReport);
+            cfs.SaveCharts(AllCharts);
+        }
+
+        public void AddHospitalization(Hospitalization newHospitalization, int id)
+        {
+            MedicalHistory medicalHistory = GetChartById(id);
+            medicalHistory.Hospitalization.Add(newHospitalization);
             cfs.SaveCharts(AllCharts);
         }
 
@@ -101,6 +136,12 @@ namespace Service
         {
             MedicalHistory medicalHistory = GetChartById(id);
             return medicalHistory.Reports;
+        }
+
+        public List<Hospitalization> GetHospitalizationsByPatientId(int id)
+        {
+            MedicalHistory medicalHistory = GetChartById(id);
+            return medicalHistory.Hospitalization;
         }
 
         public void SaveChart(MedicalHistory medicalHistory)

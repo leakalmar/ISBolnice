@@ -72,9 +72,9 @@ namespace Service
             pfs.SavePatients(AllPatients);
         }
 
-        public bool CheckIfAllergicToComponent(List<MedicineComponent> composition, List<String> allergies)
+        public bool CheckIfAllergicToComponent(string medicineName, List<String> allergies)
         {
-            List<MedicineComponent> components = composition;
+            List<MedicineComponent> components = MedicineService.Instance.GetByName(medicineName).Composition;
             foreach (MedicineComponent c in components)
             {
                 foreach (String allergie in allergies)

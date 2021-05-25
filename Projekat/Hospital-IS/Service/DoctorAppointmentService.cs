@@ -1,14 +1,8 @@
-﻿using Controllers;
-using Hospital_IS.DoctorView;
-using Hospital_IS.DTOs;
+﻿using Hospital_IS.DTOs;
 using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace Service
 {
@@ -38,7 +32,7 @@ namespace Service
         public List<DoctorAppointment> GetAllByDoctor(int doctorId)
         {
             List<DoctorAppointment> doctorAppointments = new List<DoctorAppointment>();
-            foreach (DoctorAppointment docApp in allAppointments)
+                foreach (DoctorAppointment docApp in allAppointments)
             {
                 if (docApp.Doctor.Id == doctorId)
                 {
@@ -349,7 +343,6 @@ namespace Service
 
             int durationInMinutes = (int)(tempAppointment.AppointmentEnd - tempAppointment.AppointmentStart).TotalMinutes;
             List<SuggestedEmergencyAppDTO> suggestedAppointments = FormEmergencyAppDTOs(appointments, durationInMinutes);
-            suggestedAppointments.Sort((x, y) => x.ConflictingAppointments.Count.CompareTo(y.ConflictingAppointments.Count));
             SetConflictingIsUrgent(suggestedAppointments);
             CheckIfConflictingIsStarted(suggestedAppointments);
 

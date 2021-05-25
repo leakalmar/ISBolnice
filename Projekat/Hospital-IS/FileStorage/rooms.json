@@ -153,5 +153,16 @@
     "RoomIdType": "14 RecoveryRoom",
     "Equipment": [],
     "isUsable": false
+  },
+  {
+    "RoomFloor": 2,
+    "RoomNumber": 26,
+    "SurfaceArea": 20,
+    "BedNumber": 6,
+    "RoomId": 15,
+    "Type": 0,
+    "RoomIdType": "15 RecoveryRoom",
+    "Equipment": [],
+    "isUsable": false
   }
 ]
