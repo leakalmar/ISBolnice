@@ -122,5 +122,63 @@ namespace Service
             }
             return;
         }
+
+        public int GetNumberOfTherapiesByMonth(int patientId, string month)
+        {
+            int numberOfTherapiesForMonth = 0;
+            switch (month)
+            {
+                case "Jan":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 1);
+                    break;
+                case "Feb":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 2);
+                    break;
+                case "Mar":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 3);
+                    break;
+                case "Apr":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 4);
+                    break;
+                case "May":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 5);
+                    break;
+                case "June":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 6);
+                    break;
+                case "July":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 7);
+                    break;
+                case "Aug":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 8);
+                    break;
+                case "Sep":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 9);
+                    break;
+                case "Oct":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 10);
+                    break;
+                case "Nov":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 11);
+                    break;
+                case "Dec":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 12);
+                    break;
+            }
+            return numberOfTherapiesForMonth;
+        }
+
+        private int CheckMonth(int patientId, int month)
+        {
+            int counter = 0;
+            foreach (Therapy therapy in GetTherapiesByPatientId(patientId))
+            {
+                if (therapy.TherapyStart.Month == month)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
     }
 }

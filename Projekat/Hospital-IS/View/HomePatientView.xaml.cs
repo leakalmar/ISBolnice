@@ -1,10 +1,12 @@
 ﻿using Controllers;
 using Hospital_IS.Storages;
+using Hospital_IS.View.PatientViewModels;
 using Model;
 using Storages;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace Hospital_IS.View
@@ -12,16 +14,16 @@ namespace Hospital_IS.View
     /// <summary>
     /// Interaction logic for HomePatient.xaml
     /// </summary>
-    public partial class HomePatient : Window
+    public partial class HomePatientView : UserControl
     {
-        private static HomePatient instance = null;
-        public static HomePatient Instance
+        /*private static HomePatientView instance = null;
+        public static HomePatientView Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new HomePatient();
+                    instance = new HomePatientView();
                 }
                 return instance;
             }
@@ -29,13 +31,13 @@ namespace Hospital_IS.View
 
         public Patient Patient { get; set; }
         public DoctorAppointment rescheduledApp;
-        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
-        private HomePatient()
+        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }*/
+        public HomePatientView()
         {
             InitializeComponent();
-
-            Patient = MainWindow.PatientUser;
-            DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(Patient.Id));
+            this.DataContext = new HomePatientViewModel();
+            //Patient = PatientMainWindowViewModel.Patient;
+            //DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(Patient.Id));
             /*Medicine medicine = new Medicine("Bromazepam", "1 tableta sadrži 1,5 mg, 3 mg, odnosno 6 mg bromazepama.",
                 "U osetljivih bolesnika, naročito kod većih doza, može se javiti blagi umor, pospanost i vrtoglavica," +
                 " a povremeno slabost mišića i ataksija. Ova neželjena dejstva mogu se izbeći prilagođavanjem doze.", "Doziranje je individualno." +
@@ -53,7 +55,7 @@ namespace Hospital_IS.View
             /*Patient.TrollMechanism.TimeRange = 14;
             Patient.TrollMechanism.AppointmentCounterInTimeRange = 2;
             Patient.TrollMechanism.TrollCheckStartDate = new DateTime(2021, 4, 29);
-            Patient.TrollMechanism.IsTroll = false;*/
+            Patient.TrollMechanism.IsTroll = false;
             this.DataContext = this;
             PersonalData.DataContext = Patient;
             DispatcherTimer dispatcherTimer = new DispatcherTimer
@@ -61,14 +63,14 @@ namespace Hospital_IS.View
                 Interval = TimeSpan.FromMinutes(1)
             };
             dispatcherTimer.Tick += timer_Tick;
-            dispatcherTimer.Start();
+            dispatcherTimer.Start();*/
         }
-
+        /*
         private void timer_Tick(object sender, EventArgs e)
         {
             DateTime time= DateTime.Now;
 
-            foreach (Therapy therapy in ChartController.Instance.GetTherapiesByPatient(HomePatient.Instance.Patient))
+            foreach (Therapy therapy in ChartController.Instance.GetTherapiesByPatient(PatientMainWindowViewModel.Patient.Patient))
             {
                 int usageHourDifference = (int)24/therapy.TimesADay;
                 for (int i = 0; i < therapy.TimesADay; i++)
@@ -80,7 +82,7 @@ namespace Hospital_IS.View
                 }
             }
         }
-
+        
         private void reserveApp(object sender, RoutedEventArgs e)
         {
 
@@ -88,22 +90,22 @@ namespace Hospital_IS.View
             ap.Show();
             this.Hide();
         }
-
+        
         private void allApp(object sender, RoutedEventArgs e)
         {
-
+            /*
             AllAppointments ap = new AllAppointments();
             ap.Show();
             this.Hide();
         }
-
+        
         private void showTherapy(object sender, RoutedEventArgs e)
         {
             TherapyPatient doc = new TherapyPatient();
             doc.Show();
             this.Hide();
         }
-
+    
         private void CancelAppointment(object sender, RoutedEventArgs e)
         {
             DoctorAppointment doctorApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
@@ -125,10 +127,10 @@ namespace Hospital_IS.View
             }
 
         }
-
+    */    
         private void RescheduleAppointment(object sender, RoutedEventArgs e)
         {
-            rescheduledApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
+          /*  rescheduledApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
             if (rescheduledApp == null)
             {
                 MessageBox.Show("Izaberite termin!");
@@ -138,9 +140,9 @@ namespace Hospital_IS.View
                 AppointmentPatient ap = new AppointmentPatient();
                 ap.Show();
                 ap.RescheduleAppointment(rescheduledApp);
-            }
+            }*/
         }
-
+        /*
         private void logout(object sender, RoutedEventArgs e)
         {
             MainWindow login = new MainWindow();
@@ -155,6 +157,6 @@ namespace Hospital_IS.View
             PatientNotifications notifications = new PatientNotifications();
             notifications.Show();
             this.Hide();
-        }
+        }*/
     }
 }

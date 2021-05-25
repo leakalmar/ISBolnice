@@ -20,20 +20,20 @@ namespace Hospital_IS.View
     /// <summary>
     /// Interaction logic for PatientNotifications.xaml
     /// </summary>
-    public partial class PatientNotifications : Window
+    public partial class PatientNotificationsView : UserControl
     {
         public ObservableCollection<Notification> NotificationMessages { get; set; } = new ObservableCollection<Notification>();
-        public PatientNotifications()
+        public PatientNotificationsView()
         {
             InitializeComponent();
-            List<Notification> notifications = NotificationController.Instance.GetAllByUser(HomePatient.Instance.Patient.Id);
+            /*List<Notification> notifications = NotificationController.Instance.GetAllByUser(PatientMainWindowViewModel.Patient.Id);
             NotificationMessages = new ObservableCollection<Notification>(notifications);
 
 
             if (NotificationMessages.Count > 0)
-                ListViewNotifications.ItemsSource = NotificationMessages;
+                ListViewNotifications.ItemsSource = NotificationMessages;*/
         }
-
+        /*
         private void logout(object sender, RoutedEventArgs e)
         {
             MainWindow login = new MainWindow();
@@ -43,7 +43,7 @@ namespace Hospital_IS.View
 
         private void home(object sender, RoutedEventArgs e)
         {
-            HomePatient.Instance.Show();
+            PatientMainWindowView.Instance.Show();
             this.Close();
         }
 
@@ -53,21 +53,21 @@ namespace Hospital_IS.View
             ap.Show();
             this.Close();
         }
-
+        
         private void allApp(object sender, RoutedEventArgs e)
         {
-            AllAppointments all = new AllAppointments();
-            all.Show();
-            this.Close();
+            //AllAppointments all = new AllAppointments();
+            //all.Show();
+            //this.Close();
         }
-
+        
         private void showTherapy(object sender, RoutedEventArgs e)
         {
             TherapyPatient therapy = new TherapyPatient();
             therapy.Show();
             this.Close();
         }
-
+        */
         private void ShowNotification(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -76,7 +76,7 @@ namespace Hospital_IS.View
             nv.Show();
 
         }
-
+        
         private Notification findNotification(int id)
         {
             for (int i = 0; i < NotificationMessages.Count; i++)

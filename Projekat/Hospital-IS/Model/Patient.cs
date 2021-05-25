@@ -1,3 +1,4 @@
+using Hospital_IS.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,6 +21,7 @@ namespace Model
         public Boolean Admitted { get; set; }
         public List<String> Alergies { get; set; }
         public AntiTroll TrollMechanism { get; set; } = new AntiTroll();
+        public List<PatientNote> PatientNotes { get; set; } = new List<PatientNote>();
         
         public Boolean IsGuest { get; set; } = false;
 

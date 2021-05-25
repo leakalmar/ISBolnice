@@ -187,23 +187,26 @@ namespace Service
         {
             int slotStart = 8;
             int slotLength = 3;
-            if (possibleAppointment.TimeSlot.Equals("8:00-11:00"))
+            if (possibleAppointment.TimeSlot == null)
             {
                 slotStart = 8;
             }
-            else if (possibleAppointment.TimeSlot.Equals("11:00-14:00"))
+            else if (possibleAppointment.TimeSlot.Equals("0"))
+            {
+                slotStart = 8;
+            }
+            else if (possibleAppointment.TimeSlot.Equals("1"))
             {
                 slotStart = 11;
             }
-            else if (possibleAppointment.TimeSlot.Equals("14:00-17:00"))
+            else if (possibleAppointment.TimeSlot.Equals("2"))
             {
                 slotStart = 14;
             }
-            else if (possibleAppointment.TimeSlot.Equals("17:00-20:00"))
+            else if (possibleAppointment.TimeSlot.Equals("3"))
             {
                 slotStart = 17;
             }
-            
             List<DoctorAppointment> allPossibleAppointments = new List<DoctorAppointment>();
             DateTime possibleAppointmentTime = SetPossibleAppointmentTime(possibleAppointment.Date, slotStart);           
 
@@ -554,6 +557,76 @@ namespace Service
                 }
             }
             return numberOfAppointments;
+        }
+
+        public DoctorAppointment GetAppointmentById(int appointmentId)
+        {
+            foreach (DoctorAppointment doctorAppointment in allAppointments)
+            {
+                if (doctorAppointment.Id == appointmentId)
+                {
+                    return doctorAppointment;
+                }
+            }
+            return null;
+        }
+
+        public int GetNumberOfAppointmentsByMonth(int patientId, string month)
+        {
+            int numberOfAppointmentsForMonth = 0;
+            switch (month)
+            {
+                case "Jan":
+                    numberOfAppointmentsForMonth = CheckMonth(patientId, 1);
+                    break;
+                case "Feb":
+                    numberOfAppointmentsForMonth = CheckMonth(patientId, 2);
+                    break;
+                case "Mar":
+                    numberOfAppointmentsForMonth = CheckMonth(patientId, 3);
+                    break;
+                case "Apr":
+                    numberOfAppointmentsForMonth = CheckMonth(patientId, 4);
+                    break;
+                case "May":
+                    numberOfAppointmentsForMonth = CheckMonth(patientId, 5);
+                    break;
+                case "June":
+                    numberOfAppointmentsForMonth = CheckMonth(patientId, 6);
+                    break;
+                case "July":
+                    numberOfAppointmentsForMonth = CheckMonth(patientId, 7);
+                    break;
+                case "Aug":
+                    numberOfAppointmentsForMonth = CheckMonth(patientId, 8);
+                    break;
+                case "Sep":
+                    numberOfAppointmentsForMonth = CheckMonth(patientId, 9);
+                    break;
+                case "Oct":
+                    numberOfAppointmentsForMonth = CheckMonth(patientId, 10);
+                    break;
+                case "Nov":
+                    numberOfAppointmentsForMonth = CheckMonth(patientId, 11);
+                    break;
+                case "Dec":
+                    numberOfAppointmentsForMonth = CheckMonth(patientId, 12);
+                    break;
+            }           
+            return numberOfAppointmentsForMonth;
+        }
+
+        private int CheckMonth(int patientId,int month)
+        {
+            int counter = 0;
+            foreach (DoctorAppointment appointment in GetAllByPatient(patientId))
+            {
+                if (appointment.AppointmentStart.Month == month)
+                {
+                    counter++;
+                }
+            }
+            return counter;
         }
     }
 }

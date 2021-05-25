@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using Hospital_IS.View.PatientViewModels;
 using Model;
 using Storages;
 using System.Collections.ObjectModel;
@@ -11,21 +12,21 @@ namespace Hospital_IS.View
     /// <summary>
     /// Interaction logic for DocumentationPatient.xaml
     /// </summary>
-    public partial class TherapyPatient : Window
+    public partial class TherapyPatientView : UserControl
     {
 
-        public ObservableCollection<Therapy> Therapies { get; set; }
+        private TherapyPatientViewModel therapyPatientViewModel;
 
-        public TherapyPatient()
+        public TherapyPatientView()
         {
+            //therapyPatientViewModel = new TherapyPatientViewModel();
+            //this.DataContext = therapyPatientViewModel;
             InitializeComponent();
-            Therapies = new ObservableCollection<Therapy>(ChartController.Instance.GetTherapiesByPatient(HomePatient.Instance.Patient));
-            this.DataContext = this;
         }
-
+        /*
         private void home(object sender, RoutedEventArgs e)
         {
-            HomePatient.Instance.Show();
+            PatientMainWindowView.Instance.Show();
             this.Close();
         }
 
@@ -35,14 +36,14 @@ namespace Hospital_IS.View
             ap.Show();
             this.Close();
         }
-
+        
         private void showAll(object sender, RoutedEventArgs e)
-        {
+        {/*
             AllAppointments allApp = new AllAppointments();
             allApp.Show();
             this.Close();
         }
-
+        
         private void showNotifications(object sender, RoutedEventArgs e)
         {
             PatientNotifications notifications = new PatientNotifications();
@@ -56,10 +57,10 @@ namespace Hospital_IS.View
             login.Show();
             this.Hide();
         }
-
+        */
         private void showRow(object sender, MouseButtonEventArgs e)
         {
-            Therapy therapyInfo = (Therapy)dataGridTherapy.SelectedItem;
+            /*Therapy therapyInfo = (Therapy)dataGridTherapy.SelectedItem;
             int usageHourDifference = (int)24 / therapyInfo.TimesADay;
             Name.Content = therapyInfo.Medicine.Name;
             Quantity.Content = therapyInfo.Quantity;
@@ -68,7 +69,7 @@ namespace Hospital_IS.View
             StartTherapy.Text = therapyInfo.TherapyStart.ToString("dd.MM.yyyy.");
             EndTherapy.Text = therapyInfo.TherapyEnd.ToString("dd.MM.yyyy.");
             Usage.Text = therapyInfo.Medicine.Usage;
-            SideEffects.Text = therapyInfo.Medicine.SideEffects;
+            SideEffects.Text = therapyInfo.Medicine.SideEffects;*/
             TherapyInfo.Visibility = Visibility.Visible;
         }
     }

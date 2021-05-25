@@ -1,29 +1,36 @@
 ﻿using Controllers;
+using Hospital_IS.View.PatientViewModels;
 using Model;
 using Storages;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.DataVisualization.Charting;
 
 namespace Hospital_IS.View
 {
     /// <summary>
     /// Interaction logic for AllAppointments.xaml
     /// </summary>
-    public partial class AllAppointments : Window
+    public partial class AllAppointmentsView : UserControl
     {
-        public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
+        //public ObservableCollection<DoctorAppointment> DoctorAppointment { get; set; }
 
-        public AllAppointments()
+        public AllAppointmentsView()
         {
             InitializeComponent();
-            DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(HomePatient.Instance.Patient.Id));
-            this.DataContext = this;
+            //this.DataContext = new AllAppointmentsViewModel();
+
+            //DoctorAppointment = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id));
+            //this.DataContext = this;
         }
 
+        /*
         private void home(object sender, RoutedEventArgs e)
         {
-            HomePatient.Instance.Show();
+            PatientMainWindowView.Instance.Show();
             this.Close();
         }
 
@@ -55,24 +62,24 @@ namespace Hospital_IS.View
             notifications.Show();
             this.Close();
         }
-
+        */
         private void showRow(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
+        {/*
             DoctorAppointment docApp = (DoctorAppointment)dataGridAppointment.SelectedItem;
             Date.Text = docApp.AppointmentStart.ToString("dd.MM.yyyy.");
-            Doctor.Content = docApp.Doctor.Name + docApp.Doctor.Surname;
+            Doctor.Content = docApp.Doctor.Name;
             AppointmentType.Content = docApp.AppTypeText;
             Room.Content = docApp.Room;
-            //Details.Text = 
+            Details.Text = 
             //Evaluation.Content = 
             //Comment.Text=
             if (docApp.AppointmentStart <= DateTime.Today)
             {
                 evaluateApp.Visibility = Visibility.Visible;
-            }
+            }*/
             AppointmentInfo.Visibility = Visibility.Visible;
         }
-
+        /*
         private void showEvaluationWindow(object sender, RoutedEventArgs e)
         {
             if (PatientAppointmentEvaluationController.Instance.IsAppointmentEvaluated((DoctorAppointment)dataGridAppointment.SelectedItem))
@@ -85,6 +92,6 @@ namespace Hospital_IS.View
                 appointmentEvaluation.Show();
             }
            
-        }
+        }*/
     }
 }
