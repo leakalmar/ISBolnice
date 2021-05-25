@@ -1,6 +1,7 @@
 ﻿using Hospital_IS.Controllers;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using Hospital_IS.Storages;
+using Hospital_IS.View.PatientViewModels;
 using Model;
 using Storages;
 using System;
@@ -24,10 +25,12 @@ namespace Hospital_IS.View
     public partial class PatientNotificationsView : UserControl
     {
         public ObservableCollection<NotificationDTO> NotificationMessages { get; set; } = new ObservableCollection<NotificationDTO>();
-        public PatientNotifications()
+        public PatientNotificationsView()
         {
+            List<NotificationDTO> notifications = SecretaryManagementController.Instance.GetAllByUser(PatientMainWindowViewModel.Patient.Id);
+            NotificationMessages = new ObservableCollection<NotificationDTO>(notifications);
             InitializeComponent();
-            List<NotificationDTO> notifications = SecretaryManagementController.Instance.GetAllByUser(HomePatient.Instance.Patient.Id);
+            /*List<NotificationDTO> notifications = SecretaryManagementController.Instance.GetAllByUser(HomePatient.Instance.Patient.Id);
             NotificationMessages = new ObservableCollection<NotificationDTO>(notifications);
 
 

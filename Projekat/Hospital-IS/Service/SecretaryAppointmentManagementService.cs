@@ -1,4 +1,5 @@
-﻿using Hospital_IS.DTOs;
+﻿using DTOs;
+using Hospital_IS.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;

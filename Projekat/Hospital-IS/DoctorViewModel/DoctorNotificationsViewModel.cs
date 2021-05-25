@@ -1,6 +1,7 @@
 ﻿using Hospital_IS.Commands;
 using Hospital_IS.Controllers;
 using Hospital_IS.DoctorView;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using System.Collections.Generic;
 
@@ -9,10 +10,10 @@ namespace Hospital_IS.DoctorViewModel
     public class DoctorNotificationsViewModel : BindableBase
     {
         #region Fields
-        private List<Notification> notifications;
-        private Notification selectedNotification;
+        private List<NotificationDTO> notifications;
+        private NotificationDTO selectedNotification;
 
-        public List<Notification> Notifications
+        public List<NotificationDTO> Notifications
         {
             get { return notifications; }
             set
@@ -22,7 +23,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public Notification SelectedNotification
+        public NotificationDTO SelectedNotification
         {
             get { return selectedNotification; }
             set
@@ -63,7 +64,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Constructor
         public DoctorNotificationsViewModel()
         {
-            this.Notifications = NotificationController.Instance.GetAll();
+            this.Notifications = SecretaryManagementController.Instance.GetAllNotifications();
             //Notifications = NotificationController.Instance.GetAllByUser(DoctorHomePage.Instance.Doctor.Id);
             this.ShowNotificationCommand = new RelayCommand(Execute_ShowNotificationCommand, CanExecute_NavigateCommand);
         }
