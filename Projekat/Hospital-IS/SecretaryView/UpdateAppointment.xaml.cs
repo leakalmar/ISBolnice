@@ -43,19 +43,19 @@ namespace Hospital_IS.SecretaryView
             txtStartOfApp.Text = OldDocAppointment.AppointmentStart.ToString("HH:mm");
             txtEndOfApp.Text = OldDocAppointment.AppointmentEnd.ToString("HH:mm");
 
-            //NewDocAppointment = new DoctorAppointment(OldDocAppointment);
+            NewDocAppointment = new DoctorAppointmentDTO(OldDocAppointment);
         }
 
         private void ChangeAppointment(object sender, RoutedEventArgs e)
         {
-            //SendNotification(OldDocAppointment, NewDocAppointment);
+            SendNotification(OldDocAppointment, NewDocAppointment);
 
-            //DoctorAppointmentController.Instance.UpdateAppointment(OldDocAppointment, NewDocAppointment);
+            DoctorAppointmentManagementController.Instance.UpdateAppointment(OldDocAppointment, NewDocAppointment);
             uca.RefreshGrid();
             this.Close();
         }
 
-        private void SendNotification(DoctorAppointment oldApp, DoctorAppointment appointment)
+        private void SendNotification(DoctorAppointmentDTO oldApp, DoctorAppointmentDTO appointment)
         {
             string title = "Pomeren pregled";
 
@@ -125,7 +125,7 @@ namespace Hospital_IS.SecretaryView
             {
             }
 
-            //EnableAppointmentConfirmation(DoctorAppointmentController.Instance.VerifyAppointment(NewDocAppointment));
+            EnableAppointmentConfirmation(DoctorAppointmentManagementController.Instance.VerifyAppointment(NewDocAppointment));
         }
 
         private void EnableAppointmentConfirmation(bool isValid)

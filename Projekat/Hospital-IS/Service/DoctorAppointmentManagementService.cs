@@ -3,6 +3,7 @@ using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using Service;
+using System;
 using System.Collections.Generic;
 
 namespace Hospital_IS.Service
@@ -114,6 +115,15 @@ namespace Hospital_IS.Service
                     return;
                 }
             }
+        }
+
+        public bool VerifyAppointment(DoctorAppointmentDTO doctorAppointmentDTO)
+        {
+            Patient patient = PatientService.Instance.GetPatientByID(doctorAppointmentDTO.Patient.Id);
+            Doctor doctor = DoctorService.Instance.GetDoctorByID(doctorAppointmentDTO.Doctor.Id);
+            return DoctorAppointmentService.Instance.VerifyAppointment(new DoctorAppointment(doctorAppointmentDTO.Reserved, doctorAppointmentDTO.AppointmentCause,
+                        doctorAppointmentDTO.AppointmentStart, doctorAppointmentDTO.AppointmentEnd, doctorAppointmentDTO.Type, doctorAppointmentDTO.Room,
+                        doctorAppointmentDTO.Id, doctorAppointmentDTO.IsUrgent, patient, doctor, doctorAppointmentDTO.IsFinished));
         }
     }
 }

@@ -60,5 +60,21 @@ namespace DTOs
             else if (Type.Equals(AppointmentType.Operation))
                 AppTypeText = "Operacija";
         }
+        public DoctorAppointmentDTO(DoctorAppointmentDTO docAppointmentDTO)
+        {
+            Reserved = docAppointmentDTO.Reserved;
+            AppointmentCause = docAppointmentDTO.AppointmentCause;
+            AppointmentStart = docAppointmentDTO.AppointmentStart;
+            AppointmentEnd = docAppointmentDTO.AppointmentEnd;
+            Type = docAppointmentDTO.Type;
+            Room = docAppointmentDTO.Room;
+            Id = docAppointmentDTO.Id;
+            NameSurnamePatient = docAppointmentDTO.NameSurnamePatient;
+            AppTypeText = docAppointmentDTO.AppTypeText;
+            IsUrgent = docAppointmentDTO.IsUrgent;
+            Patient = docAppointmentDTO.Patient;
+            Doctor = docAppointmentDTO.Doctor;
+            IsFinished = docAppointmentDTO.IsFinished;
+        }
     }
 }

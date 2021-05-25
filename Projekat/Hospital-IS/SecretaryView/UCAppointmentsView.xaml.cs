@@ -69,7 +69,7 @@ namespace Hospital_IS.SecretaryView
 
         private void DeleteAppointment(object sender, RoutedEventArgs e)
         {
-            if ((DoctorAppointment)dataGridAppointments.SelectedItem != null)
+            if ((DoctorAppointmentDTO)dataGridAppointments.SelectedItem != null)
             {
                 CancelAppointment ca = new CancelAppointment(this);
                 ca.Show();

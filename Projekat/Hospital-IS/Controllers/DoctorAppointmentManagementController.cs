@@ -49,5 +49,9 @@ namespace Hospital_IS.Controllers
         {
             DoctorAppointmentManagementService.Instance.ReloadAppointments();
         }
+        public bool VerifyAppointment(DoctorAppointmentDTO doctorAppointmentDTO)
+        {
+            return DoctorAppointmentManagementService.Instance.VerifyAppointment(doctorAppointmentDTO);
+        }
     }
 }

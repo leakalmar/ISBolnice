@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using DTOs;
 using Hospital_IS.Controllers;
 using Model;
 using System;
@@ -20,17 +21,17 @@ namespace Hospital_IS.SecretaryView
 
         private void DeleteAppointment(object sender, RoutedEventArgs e)
         {
-            DoctorAppointment appointment = (DoctorAppointment)uca.dataGridAppointments.SelectedItem;
+            DoctorAppointmentDTO appointment = (DoctorAppointmentDTO)uca.dataGridAppointments.SelectedItem;
 
             sendNotification(appointment);
 
-            DoctorAppointmentController.Instance.RemoveAppointment(appointment);
+            DoctorAppointmentManagementController.Instance.RemoveAppointment(appointment);
             uca.RefreshGrid();
 
             this.Close();
         }
 
-        private void sendNotification(DoctorAppointment appointment)
+        private void sendNotification(DoctorAppointmentDTO appointment)
         {
             string title = "Otkazan pregled";
 
