@@ -27,7 +27,6 @@ namespace Model
             this.Quantity = quantity;
           
         }
-
         public Equipment(EquiptType equipType, string name, int quantity, string producerName)
         {
             EquipType = equipType;
@@ -35,8 +34,6 @@ namespace Model
             Quantity = quantity;
             ProducerName = producerName;
         }
-
-
         public Equipment()
         {
 

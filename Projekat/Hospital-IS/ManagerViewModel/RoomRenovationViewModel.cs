@@ -189,7 +189,7 @@ namespace Hospital_IS.ManagerViewModel
             Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(roomIdSource, roomIdDestination));
            
 
-            this.TransferStaticEquipmentCommand = new RelayCommand(Execute_TransferStaticEquipment, CanExecute_IfEveryhingIsCorecct);
+            this.TransferStaticEquipmentCommand = new RelayCommand(Execute_RoomRenovation, CanExecute_IfEveryhingIsCorecct);
 
         }
 
@@ -210,9 +210,8 @@ namespace Hospital_IS.ManagerViewModel
             }
 
             return true;
-
         }
-        private void Execute_TransferStaticEquipment(object obj)
+        private void Execute_RoomRenovation(object obj)
         {
 
             bool isSuccces = AppointmentController.Instance.MakeRenovationAppointment(DateStart, dateEnd, Note,FirstRoom.RoomId);
