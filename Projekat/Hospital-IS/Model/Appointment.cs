@@ -45,7 +45,15 @@ namespace Model
             Room = room;
         }
 
-
-
+        public Appointment(bool reserved, string appointmentCause, DateTime appointmentStart, DateTime appointmentEnd, AppointmentType type, int room, int id)
+        {
+            Reserved = reserved;
+            AppointmentCause = appointmentCause;
+            AppointmentStart = appointmentStart;
+            AppointmentEnd = appointmentEnd;
+            Type = type;
+            Room = room;
+            Id = id;
+        }
     }
 }

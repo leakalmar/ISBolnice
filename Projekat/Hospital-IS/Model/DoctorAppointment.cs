@@ -48,9 +48,18 @@ namespace Model
         public DoctorAppointment(DoctorAppointmentDTO doctorAppointment) : base(doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd, doctorAppointment.Type, doctorAppointment.Room)
         {
             this.NameSurnamePatient = doctorAppointment.Patient.Name + " " + doctorAppointment.Patient.Surname;
-            this.Doctor = doctorAppointment.Doctor;
-            this.Patient = doctorAppointment.Patient;
+            //this.Doctor = doctorAppointment.Doctor;
+            //this.Patient = doctorAppointment.Patient;
             this.Id = doctorAppointment.Id;
+        }
+
+        public DoctorAppointment(bool reserved, string appointmentCause, DateTime appointmentStart, DateTime appointmentEnd, 
+            AppointmentType type, int room, int id, bool isUrgent, Patient patient, Doctor doctor, bool isFinished) : base(reserved, appointmentCause, appointmentStart, appointmentEnd, type, room, id)
+        {
+            IsUrgent = isUrgent;
+            Patient = patient;
+            Doctor = doctor;
+            IsFinished = isFinished;
         }
 
         public void SetAdmitted(Patient patient)

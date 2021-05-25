@@ -1,4 +1,5 @@
-﻿using Hospital_IS.DTOs.SecretaryDTOs;
+﻿using Hospital_IS.DTOs;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using Service;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ namespace Hospital_IS.Service
     class SecretaryUserManagementService
     {
         public List<PatientDTO> AllPatients { get; set; } = new List<PatientDTO>();
+        public List<DoctorDTO> AllDoctors { get; set; } = new List<DoctorDTO>();
         public List<NotificationDTO> AllNotifications { get; set; } = new List<NotificationDTO>();
 
         private static SecretaryUserManagementService instance = null;
@@ -25,6 +27,7 @@ namespace Hospital_IS.Service
         private SecretaryUserManagementService()
         {
             LoadPatients();
+            LoadDoctors();
             LoadNotifications();
         }
 
@@ -175,6 +178,30 @@ namespace Hospital_IS.Service
             }
 
             return userNotifications;
+        }
+
+        private void LoadDoctors()
+        {
+            foreach (Doctor doctor in DoctorService.Instance.AllDoctors)
+                AllDoctors.Add(new DoctorDTO(doctor.Id, doctor.Name, doctor.Surname, doctor.BirthDate, doctor.Phone, doctor.Email, doctor.Gender,
+                    doctor.Password, doctor.Address, doctor.Specialty.Name, doctor.PrimaryRoom));
+        }
+
+        public void ReloadDoctors()
+        {
+            AllDoctors.Clear();
+            LoadDoctors();
+
+        }
+
+        public DoctorDTO GetDoctorByID(int id)
+        {
+            foreach (DoctorDTO doctorDTO in AllDoctors)
+            {
+                if (doctorDTO.Id.Equals(id))
+                    return doctorDTO;
+            }
+            return null;
         }
     }
 }
