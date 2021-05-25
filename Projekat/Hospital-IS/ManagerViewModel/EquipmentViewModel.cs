@@ -331,6 +331,7 @@ namespace Hospital_IS.ManagerViewModel
                new Uri("ManagerView1/EquipmentTransferDynamicView.xaml", UriKind.Relative));
             }else if(SelectedTransferOption == 1)
             {
+                EquipmentTransferStaticViewModel.Instance.NavService = this.NavService;
                 this.NavService.Navigate(
               new Uri("ManagerView1/EquipmentStaticTransferView.xaml", UriKind.Relative));
             }

@@ -26,11 +26,21 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand deleteRoom;
         private RelayCommand updateRoom;
         private RelayCommand navigateToRoomPage;
+        private RelayCommand navigateToRoomRenovation;
         private NavigationService navService;
         private Room selectedRoom;
         private RelayCommand navigateToManagerProfilePage;
-       
 
+
+
+        public RelayCommand NavigateToRoomRenovation
+        {
+            get { return navigateToRoomRenovation; }
+            set
+            {
+                navigateToRoomRenovation = value;
+            }
+        }
         public RelayCommand NavigateToManagerProfilePage
         {
             get { return navigateToManagerProfilePage; }
@@ -245,7 +255,7 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToMedicinePageCommand = new RelayCommand(Execute_NavigateToMedicinePageCommand, CanExecute_NavigateCommand);
             this.NavigateToManagerProfilePage = new RelayCommand(Execute_NavigateToManagerProfilePageCommand, CanExecute_NavigateCommand);
             this.NavigateToEquipmentPageCommand = new RelayCommand(Execute_NavigateToEquipmentPageCommand, CanExecute_NavigateCommand);
-           
+            this.NavigateToRoomRenovation = new RelayCommand(Execute_RenovationRoomCommand, CanExecute_RenovationRoomCommand);           
         }
 
         public void SetFields(object selectedRoom)
@@ -261,6 +271,23 @@ namespace Hospital_IS.ManagerViewModel
 
 
         }
+
+        private void Execute_RenovationRoomCommand(object obj)
+        {
+            RoomRenovationViewModel.Instance.SetAppointmnetForRoom(SelectedRoom.RoomId);
+            RoomRenovationViewModel.Instance.FirstRoom = SelectedRoom;
+            this.NavService.Navigate(
+                    new Uri("ManagerView1/RoomRenovationView.xaml", UriKind.Relative));
+        }
+
+
+        
+        private bool CanExecute_RenovationRoomCommand(object obj)
+        {
+            return !(SelectedRoom == null);
+        }
+
+
 
         private void LoadRooms()
         { 

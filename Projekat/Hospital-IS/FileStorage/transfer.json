@@ -6,10 +6,28 @@
       "EquipType": 1,
       "EquiptId": 1,
       "Name": "makaze",
-      "Quantity": 125
+      "Quantity": 125,
+      "ProducerName": null,
+      "EquiptTypeIndex": 1
     },
     "Quantity": 50,
     "TransferEnd": "2021-04-26T15:54:42",
     "isMade": true
+  },
+  {
+    "SourceRoomId": 2,
+    "DestinationRoomId": 8,
+    "Equip": null,
+    "Quantity": 50,
+    "TransferEnd": "2021-05-27T00:00:00",
+    "isMade": false
+  },
+  {
+    "SourceRoomId": 2,
+    "DestinationRoomId": 8,
+    "Equip": null,
+    "Quantity": 50,
+    "TransferEnd": "2021-12-02T00:00:00",
+    "isMade": false
   }
 ]

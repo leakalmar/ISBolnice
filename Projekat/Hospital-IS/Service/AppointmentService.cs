@@ -10,7 +10,7 @@ namespace Service
     public class AppointmentService
     {
         private ClassicAppointmentStorage afs = new ClassicAppointmentStorage();
-        public List<Appointment> allAppointments { get; set; }
+        public List<Appointment> AllAppointments { get; set; }
 
         public int MaxId;
 
@@ -29,16 +29,16 @@ namespace Service
 
         private AppointmentService()
         {
-            allAppointments = afs.GetAll();
+            AllAppointments = afs.GetAll();
         }
 
         public List<Appointment> GetAllAppByTwoRooms(int roomIdSource, int roomIdDestination)
         {
             List<Appointment> allApointments = new List<Appointment>();
 
-            allAppointments = GetAllApointmentsByRoomId(roomIdSource);
+            allApointments = GetAllApointmentsByRoomId(roomIdSource);
 
-            allAppointments.AddRange(GetAllApointmentsByRoomId(roomIdDestination));
+            allApointments.AddRange(GetAllApointmentsByRoomId(roomIdDestination));
 
             return allApointments;
 
@@ -57,6 +57,7 @@ namespace Service
 
         private void GetAllClassicAppointments(int roomId, List<Appointment> allApointments)
         {
+           
             foreach (Appointment ap in GetAppByRoom(roomId))
             {
                 allApointments.Add(ap);
@@ -94,9 +95,11 @@ namespace Service
         {
             List<Appointment> roomAppointment = new List<Appointment>();
 
-            foreach (Appointment appointment in allAppointments)
-            {
 
+           
+            foreach (Appointment appointment in AllAppointments)
+            {
+                
                 if (appointment.Room == roomId)
                 {
                     roomAppointment.Add(appointment);
@@ -135,17 +138,17 @@ namespace Service
                 return;
             }
 
-            if (allAppointments == null)
+            if (AllAppointments == null)
             {
-                allAppointments = new List<Appointment>();
+                AllAppointments = new List<Appointment>();
 
             }
 
-            if (!allAppointments.Contains(appointment))
+            if (!AllAppointments.Contains(appointment))
             {
                 appointment.Id = GenerateAppointmentID();
-                allAppointments.Add(appointment);
-                afs.SaveAppointment(allAppointments);
+                AllAppointments.Add(appointment);
+                afs.SaveAppointment(AllAppointments);
               
             }
         }
@@ -163,7 +166,7 @@ namespace Service
         public void FindMaxID()
         {
             List<Appointment> appointments = new List<Appointment>(DoctorAppointmentService.Instance.allAppointments);
-            appointments.AddRange(allAppointments);
+            appointments.AddRange(AllAppointments);
             int max = 0;
             foreach (Appointment appointment in appointments)
             {

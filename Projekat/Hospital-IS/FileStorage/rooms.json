@@ -4,7 +4,7 @@
     "RoomNumber": 11,
     "SurfaceArea": 11,
     "BedNumber": 111,
-    "RoomId": 0,
+    "RoomId": 1,
     "Type": 1,
     "RoomIdType": "0 ConsultingRoom",
     "Equipment": [],
@@ -15,7 +15,7 @@
     "RoomNumber": 21,
     "SurfaceArea": 20,
     "BedNumber": 11,
-    "RoomId": 1,
+    "RoomId": 0,
     "Type": 3,
     "RoomIdType": "1 StorageRoom",
     "Equipment": [],
@@ -65,67 +65,7 @@
     ],
     "isUsable": false
   },
-  {
-    "RoomFloor": 5,
-    "RoomNumber": 10,
-    "SurfaceArea": 100,
-    "BedNumber": 50,
-    "RoomId": 3,
-    "Type": 3,
-    "RoomIdType": "3 StorageRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 1,
-    "RoomNumber": 125,
-    "SurfaceArea": 2,
-    "BedNumber": 1,
-    "RoomId": 4,
-    "Type": 3,
-    "RoomIdType": "4 StorageRoom",
-    "Equipment": [
-      {
-        "EquipType": 1,
-        "EquiptId": 1,
-        "Name": "5",
-        "Quantity": 10,
-        "ProducerName": "5",
-        "EquiptTypeIndex": 1
-      },
-      {
-        "EquipType": 1,
-        "EquiptId": 2,
-        "Name": "rar",
-        "Quantity": 100,
-        "ProducerName": "rar",
-        "EquiptTypeIndex": 1
-      }
-    ],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 10,
-    "RoomNumber": 10,
-    "SurfaceArea": 10,
-    "BedNumber": 10,
-    "RoomId": 5,
-    "Type": 3,
-    "RoomIdType": "5 StorageRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 10,
-    "RoomNumber": 10,
-    "SurfaceArea": 10,
-    "BedNumber": 10,
-    "RoomId": 6,
-    "Type": 3,
-    "RoomIdType": "6 StorageRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
+  
   {
     "RoomFloor": 10,
     "RoomNumber": 10,

@@ -17,12 +17,15 @@ namespace Hospital_IS.ManagerViewModel
         private Equipment selectedEquipmentFirst;
         private ObservableCollection<Room> roomsStaticTransferFirstBox;
         private ObservableCollection<Room> roomsStaticTransferSecondBox;
-        private RelayCommand transferDynamicEquipmentCommand;
+        private RelayCommand transferStaticEquipmentCommand;
         private Room selectedRoomFirst;
         private Room selectedRoomSecond;
+        private string selectedRoomText;
+        private int selectedRoomIndexFirst = -1;
+        private int selectedRoomIndexSecond = -1;
         private string transferAmount;
         private NavigationService navService;
-
+      
 
 
         public string TransferAmount
@@ -43,12 +46,12 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
-        public RelayCommand TransferDynamicEquipmentCommand
+        public RelayCommand TransferStaticEquipmentCommand
         {
-            get { return transferDynamicEquipmentCommand; }
+            get { return transferStaticEquipmentCommand; }
             set
             {
-                transferDynamicEquipmentCommand = value;
+                transferStaticEquipmentCommand = value;
             }
         }
 
@@ -64,12 +67,43 @@ namespace Hospital_IS.ManagerViewModel
                 {
 
                     selectedRoomSecond = value;
-                    EquipmentSecondRoom = new ObservableCollection<Equipment>(SelectedRoomSecond.Equipment);
                     OnPropertyChanged("SelectedRoomSecond");
+                    if (SelectedRoomFirst != null)
+                    {
+                        if (SelectedRoomFirst.RoomId == SelectedRoomSecond.RoomId)
+                        {
+                            MessageBox.Show("Izabrali ste istu sobu");
+                            EquipmentSecondRoom = new ObservableCollection<Equipment>();
+                            return;
+                         
+                        }
+                        else
+                        {
 
+                            EquipmentSecondRoom = new ObservableCollection<Equipment>(SelectedRoomSecond.Equipment);
+                           
+                        }
+                    }
+                    else
+                    {
+                        
+                        if (SelectedRoomSecond == null)
+                        {
+                          
+                            EquipmentSecondRoom = new ObservableCollection<Equipment>();
+                        }
+                        else
+                        {
+                            EquipmentSecondRoom = new ObservableCollection<Equipment>(SelectedRoomSecond.Equipment);
+                        }
+                        
+                    }
                 }
             }
         }
+
+
+
         public Room SelectedRoomFirst
         {
             get
@@ -82,22 +116,36 @@ namespace Hospital_IS.ManagerViewModel
                 {
 
                     selectedRoomFirst = value;
-                    if(SelectedRoomSecond != null)
+
+                    if(SelectedRoomSecond != null && SelectedRoomFirst != null)
                     {
-                        if (SelectedEquipmentFirst.EquiptId == SelectedRoomSecond.RoomId)
+                        if (SelectedRoomFirst.RoomId == SelectedRoomSecond.RoomId)
                         {
                             MessageBox.Show("Izabrali ste istu sobu");
+                            EquipmentsFirstRoom = new ObservableCollection<Equipment>();
+                            SelectedRoomFirst = null;
+                            OnPropertyChanged("SelectedRoomFirst");
                         }
                         else
                         {
-                            EquipmentSecondRoom = new ObservableCollection<Equipment>(SelectedRoomSecond.Equipment);
+
+                            EquipmentsFirstRoom = new ObservableCollection<Equipment>(SelectedRoomFirst.Equipment);
                             OnPropertyChanged("SelectedRoomFirst");
                         }
                     }
                     else
                     {
-                        EquipmentSecondRoom = new ObservableCollection<Equipment>(SelectedRoomSecond.Equipment);
-                        OnPropertyChanged("SelectedRoomFirst");
+                        if (SelectedRoomFirst == null)
+                        {
+
+                            EquipmentsFirstRoom = new ObservableCollection<Equipment>();
+                        }
+                        else
+                        {
+                            EquipmentsFirstRoom = new ObservableCollection<Equipment>(SelectedRoomFirst.Equipment);
+                        }
+                       
+                        
                     }
                   
                    
@@ -222,23 +270,33 @@ namespace Hospital_IS.ManagerViewModel
         {
             RoomsStaticTransferFirstBox = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
             RoomsStaticTransferSecondBox = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
-            this.TransferDynamicEquipmentCommand = new RelayCommand(Execute_TransferDynamicEquipment, CanExecute_NavigateToTransferViewCommand);
+            this.TransferStaticEquipmentCommand = new RelayCommand(Execute_TransferStaticEquipment, CanExecute_NavigateToChooseAppViewCommand);
         }
 
-        private void Execute_TransferDynamicEquipment(object obj)
+        private void Execute_TransferStaticEquipment(object obj)
         {
 
             if (RoomController.Instance.CheckQuantity(SelectedRoomFirst, SelectedEquipmentFirst, Convert.ToInt32(TransferAmount))) ;
             {
-                TransferController.Instance.ReduceEquipmentQuantity(SelectedRoomFirst, SelectedEquipmentFirst, Convert.ToInt32(TransferAmount));
-                EquipmentsFirstRoom = new ObservableCollection<Equipment>(SelectedRoomFirst.Equipment);
+                ScheduleStaticTransferViewModel.Instance.SetAppointmentsForRoom(SelectedRoomFirst.RoomId, SelectedRoomSecond.RoomId);
+                ScheduleStaticTransferViewModel.Instance.SourceRoom = SelectedRoomFirst;
+                ScheduleStaticTransferViewModel.Instance.DestinationRoom = SelectedRoomSecond;
+                ScheduleStaticTransferViewModel.Instance.Quantity = Convert.ToInt32(TransferAmount);
+                ScheduleStaticTransferViewModel.Instance.NavService = NavService;
+                this.NavService.Navigate(
+                   new Uri("ManagerView1/ScheduleStaticAppTransfer.xaml", UriKind.Relative));
+
+                EquipmentsFirstRoom = new ObservableCollection<Equipment>();
+                EquipmentSecondRoom = new ObservableCollection<Equipment>();
+                SelectedRoomFirst = null;
+                SelectedRoomSecond = null;
             }
         }
 
-        private bool CanExecute_NavigateToTransferViewCommand(object obj)
+        private bool CanExecute_NavigateToChooseAppViewCommand(object obj)
         {
 
-            return isNumberIsGraterThanZero() && SelectedEquipmentFirst != null;
+            return isNumberIsGraterThanZero() && SelectedEquipmentFirst != null && SelectedRoomSecond!= null && (SelectedRoomSecond.RoomId != SelectedRoomFirst.RoomId);
         }
 
         private bool isNumberIsGraterThanZero()

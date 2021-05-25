@@ -60,7 +60,7 @@
                 <Image Source="pack://application:,,,/Resources/backbutton.png" Width="50" Height="50"/>
             </StackPanel>
         </Button>
-        <DataGrid Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="3" ItemsSource="{Binding AllAppointments}" CanUserAddRows="False">
+        <DataGrid Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="3" ItemsSource="{Binding Appointments}" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vrsta" Width="85" Binding="{Binding Type}"/>
                 <DataGridTextColumn Header="Vrijeme pocetka" Width="120" Binding="{Binding  AppointmentStart,StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" CanUserResize="False" IsReadOnly="True"/>
@@ -70,17 +70,17 @@
         <Label Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Content="Lista zakazanih termina" Foreground="White" FontSize="18" VerticalAlignment="Center"/>
         <Label Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" Content="Termin transfera" Foreground="White" FontSize="18" VerticalAlignment="Center"/>
         <Label Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="2" Content="Pocetak transfera:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
-        <wpfx:DateTimePicker x:Name="TransferStart" Grid.Column="4" Grid.Row="9" Height="25" Margin="30,0,0,0" >
-            <wpfx:DateTimePicker.Text>
-                <Binding Path="DateStart" UpdateSourceTrigger="PropertyChanged"/>
-            </wpfx:DateTimePicker.Text>
+        <wpfx:DateTimePicker x:Name="TransferStart" Grid.Column="4" Grid.Row="9" Height="25" Margin="30,0,0,0"  Value="{Binding DateStart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+           
         </wpfx:DateTimePicker>
             <Label Grid.Row="11" Grid.Column="2" Grid.ColumnSpan="2" Content="Kraj transfera:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
-        <wpfx:DateTimePicker x:Name="TransferEnd" Grid.Column="4" Grid.Row="11" Height="25" Margin="30,0,0,0" />
+        <wpfx:DateTimePicker x:Name="TransferEnd" Grid.Column="4" Grid.Row="11" Height="25" Margin="30,0,0,0" Value="{Binding DateEnd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  >
+           
+        </wpfx:DateTimePicker>
         <Label Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="2" Width="150" Content="Unesite opis:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="13" Grid.Column="4" Grid.RowSpan="2" Margin="30,0,0,0"/>
+        <TextBox Grid.Row="13" Grid.Column="4" Grid.RowSpan="2" Margin="30,0,0,0" Text="{Binding Note}"/>
         <Button x:Name="AffirmTransfer" Grid.Column="3" Grid.Row="16" Grid.ColumnSpan="2" Width="100" Height="30" Content="Potvrdi" FontSize="18" Background="Transparent"
-                Foreground="White" BorderBrush="White" />
+                Foreground="White" BorderBrush="White" CommandParameter="{Binding ElementName=TransferStart}" Command="{ Binding TransferStaticEquipmentCommand}"/>
     </Grid>
 
     
