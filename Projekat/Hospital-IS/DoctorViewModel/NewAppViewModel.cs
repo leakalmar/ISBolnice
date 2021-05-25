@@ -374,7 +374,7 @@ namespace Hospital_IS.DoctorViewModel
             List<AppointmentRowDTO> list = new List<AppointmentRowDTO>();
             foreach (DoctorAppointment da in allAppointments)
             {
-                list.Add(new AppointmentRowDTO(da, Emergency));
+                list.Add(new AppointmentRowDTO(new DoctorAppointmentDTO(da), Emergency));
             }
 
             return list;

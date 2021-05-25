@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using DTOs;
 using Hospital_IS.Commands;
 using Hospital_IS.DoctorConverters;
 using Hospital_IS.DoctorView;
@@ -16,8 +17,8 @@ namespace Hospital_IS.DoctorViewModel
     {
         #region Feilds
         private ICollectionView appointmentsView;
-        private ObservableCollection<StartAppointmentDTO> doctorAppointments;
-        private StartAppointmentDTO selectedAppointment;
+        private ObservableCollection<AppointmentRowDTO> doctorAppointments;
+        private AppointmentRowDTO selectedAppointment;
         private NavigationService navigationService;
 
         public NavigationService NavigationService
@@ -29,7 +30,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public ObservableCollection<StartAppointmentDTO> DoctorAppointments
+        public ObservableCollection<AppointmentRowDTO> DoctorAppointments
         {
             get { return doctorAppointments; }
             set
@@ -39,7 +40,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public StartAppointmentDTO SelectedAppointment
+        public AppointmentRowDTO SelectedAppointment
         {
             get { return selectedAppointment; }
             set
@@ -97,7 +98,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_SelectionChangedCommand(object obj)
         {
-            StartAppointmentDTO selected = (StartAppointmentDTO)obj;
+            AppointmentRowDTO selected = (AppointmentRowDTO)obj;
             SelectedAppointment = selected;
         }
 
@@ -120,9 +121,9 @@ namespace Hospital_IS.DoctorViewModel
 
             appointmentsView.Filter = delegate (object item)
             {
-                return ((StartAppointmentDTO)item).DoctorAppointment.AppointmentStart.Date == DateTime.Now.Date;
+                return ((AppointmentRowDTO)item).Appointment.AppointmentStart.Date == DateTime.Now.Date;
             };
-            appointmentsView.SortDescriptions.Add(new SortDescription("DoctorAppointment.AppointmentStart", ListSortDirection.Ascending));
+            appointmentsView.SortDescriptions.Add(new SortDescription("Appointment.AppointmentStart", ListSortDirection.Ascending));
         }
         #endregion
     }

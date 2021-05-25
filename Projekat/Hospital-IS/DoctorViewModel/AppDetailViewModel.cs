@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using DTOs;
 using Hospital_IS.Commands;
 using Hospital_IS.DoctorConverters;
 using Hospital_IS.DoctorView;
@@ -16,7 +17,7 @@ namespace Hospital_IS.DoctorViewModel
     {
         #region Feilds
         private ICollectionView appointmentsView;
-        private StartAppointmentDTO selectedAppointment;
+        private AppointmentRowDTO selectedAppointment;
         private NavigationService navigationService;
 
         public NavigationService NavigationService
@@ -27,7 +28,7 @@ namespace Hospital_IS.DoctorViewModel
                 navigationService = value;
             }
         }
-        public StartAppointmentDTO SelectedAppointment
+        public AppointmentRowDTO SelectedAppointment
         {
             get { return selectedAppointment; }
             set
@@ -102,15 +103,15 @@ namespace Hospital_IS.DoctorViewModel
         private void SetAppointmentFeilds()
         {
             List<DoctorAppointment> appointments = DoctorAppointmentController.Instance.GetAllByDoctor(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
-            ObservableCollection<StartAppointmentDTO> doctorAppointments = new DoctorAppointmentConverter().ConvertCollectionToViewModel(appointments);
+            ObservableCollection<AppointmentRowDTO> doctorAppointments = new DoctorAppointmentConverter().ConvertCollectionToViewModel(appointments);
 
             appointmentsView = new CollectionViewSource { Source = doctorAppointments }.View;
 
             appointmentsView.Filter = delegate (object item)
             {
-                return ((StartAppointmentDTO)item).DoctorAppointment.AppointmentStart.Date == DateTime.Now.Date;
+                return ((AppointmentRowDTO)item).Appointment.AppointmentStart.Date == DateTime.Now.Date;
             };
-            appointmentsView.SortDescriptions.Add(new SortDescription("DoctorAppointment.AppointmentStart", ListSortDirection.Ascending));
+            appointmentsView.SortDescriptions.Add(new SortDescription("Appointment.AppointmentStart", ListSortDirection.Ascending));
 
             AppointmentsView = appointmentsView;
             if (appointments.Count == 0)

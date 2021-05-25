@@ -1,4 +1,5 @@
-﻿using Hospital_IS.DoctorViewModel;
+﻿using DTOs;
+using Hospital_IS.DoctorViewModel;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -9,19 +10,17 @@ namespace Hospital_IS.DoctorConverters
 {
     public class DoctorAppointmentConverter
     {
-        public StartAppointmentDTO ConvertModelToViewModel(DoctorAppointment appointemnt)
+        public AppointmentRowDTO ConvertModelToViewModel(DoctorAppointment appointemnt)
         {
-            StartAppointmentDTO viewModel = new StartAppointmentDTO();
-
-            viewModel.DoctorAppointment = appointemnt;
+            AppointmentRowDTO viewModel = new AppointmentRowDTO(new DoctorAppointmentDTO(appointemnt),true);
 
             return viewModel;
         }
 
-        public ObservableCollection<StartAppointmentDTO> ConvertCollectionToViewModel(List<DoctorAppointment> appointments)
+        public ObservableCollection<AppointmentRowDTO> ConvertCollectionToViewModel(List<DoctorAppointment> appointments)
         {
-            ObservableCollection<StartAppointmentDTO> vmAppointments = new ObservableCollection<StartAppointmentDTO>();
-            StartAppointmentDTO viewModel;
+            ObservableCollection<AppointmentRowDTO> vmAppointments = new ObservableCollection<AppointmentRowDTO>();
+            AppointmentRowDTO viewModel;
             foreach (DoctorAppointment d in appointments)
             {
                 viewModel = ConvertModelToViewModel(d);

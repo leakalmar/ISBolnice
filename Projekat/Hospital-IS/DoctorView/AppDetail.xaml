@@ -39,16 +39,16 @@
                 </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Vreme"
-                            Binding="{Binding DoctorAppointment.AppointmentStart.TimeOfDay}"
+                            Binding="{Binding Appointment.AppointmentStart.TimeOfDay}"
                             CanUserResize="False" Width="0.05*"
                             SortDirection="Ascending" />
                     <DataGridTextColumn Header="Pacijent" CanUserResize="False"
                             Width="0.05*">
                         <DataGridTextColumn.Binding>
                             <MultiBinding StringFormat="{}{0}  {1}">
-                                <Binding Path="DoctorAppointment.Patient.Name" />
+                                <Binding Path="Appointment.Patient.Name" />
                                 <Binding
-                                        Path="DoctorAppointment.Patient.Surname" />
+                                        Path="Appointment.Patient.Surname" />
                             </MultiBinding>
                         </DataGridTextColumn.Binding>
                     </DataGridTextColumn>
@@ -70,7 +70,7 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Column="0" Margin="10" x:Name="info" Grid.RowSpan="2"
-                        DataContext="{Binding Path=SelectedAppointment.DoctorAppointment}">
+                        DataContext="{Binding Path=SelectedAppointment.Appointment}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
@@ -129,7 +129,7 @@
                 </Grid>
 
                 <Grid Grid.Column="1" Margin="10" x:Name="info2"
-                        DataContext="{Binding Path=SelectedAppointment.DoctorAppointment}">
+                        DataContext="{Binding Path=SelectedAppointment.Appointment}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
@@ -198,7 +198,7 @@
                             BorderThickness="1" Grid.ColumnSpan="2"
                             Background="#FF213250" BorderBrush="FloralWhite"
                             Margin="15"
-                            Visibility="{Binding Path=SelectedAppointment.DoctorAppointment.IsFinished, Converter={StaticResource saConverter}}">
+                            Visibility="{Binding Path=SelectedAppointment.Appointment.IsFinished, Converter={StaticResource saConverter}, UpdateSourceTrigger=PropertyChanged}">
                         <Button FontSize="18" BorderThickness="0"
                                 Background="{x:Null}" Content="Započni pregled"
                                 Foreground="FloralWhite"

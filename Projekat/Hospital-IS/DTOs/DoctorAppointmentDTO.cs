@@ -3,7 +3,7 @@ using System;
 
 namespace DTOs
 {
-    class DoctorAppointmentDTO
+    public class DoctorAppointmentDTO
     {
         public Boolean Reserved { get; set; }
         public String AppointmentCause { get; set; }
@@ -15,8 +15,25 @@ namespace DTOs
         public String NameSurnamePatient { get; set; }
         public String AppTypeText { get; set; }
         public bool IsUrgent { get; set; } = false;
-        public int PatientID { get; set; }
-        public int DoctorID { get; set; }
-        public bool IsFinished { get; set; }
+        public Patient Patient { get; set; }
+        public Doctor Doctor { get; set; }
+        public bool IsFinished { get; set; } = false;
+
+        public DoctorAppointmentDTO(DoctorAppointment doctorAppointment)
+        {
+            Reserved = doctorAppointment.Reserved;
+            AppointmentCause = doctorAppointment.AppointmentCause;
+            AppointmentStart = doctorAppointment.AppointmentStart;
+            AppointmentEnd = doctorAppointment.AppointmentEnd;
+            Type = doctorAppointment.Type;
+            Room = doctorAppointment.Room;
+            Id = doctorAppointment.Id;
+            NameSurnamePatient = doctorAppointment.NameSurnamePatient;
+            AppTypeText = doctorAppointment.AppTypeText;
+            IsUrgent = doctorAppointment.IsUrgent;
+            Patient = doctorAppointment.Patient;
+            Doctor = doctorAppointment.Doctor;
+            IsFinished = doctorAppointment.IsFinished;
+        }
     }
 }

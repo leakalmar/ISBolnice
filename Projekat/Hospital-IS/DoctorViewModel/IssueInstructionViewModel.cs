@@ -152,8 +152,8 @@ namespace Hospital_IS.DoctorViewModel
             if (SelectedEmergencyAppointment == null)
             {
                 SelectedAppointment.Appointment.AppointmentCause = AppointmentCause;
-                SendScheduledNotification(SelectedAppointment.Appointment);
-                DoctorAppointmentController.Instance.AddAppointment(SelectedAppointment.Appointment);
+                SendScheduledNotification(new DoctorAppointment(SelectedAppointment.Appointment));
+                DoctorAppointmentController.Instance.AddAppointment(new DoctorAppointment(SelectedAppointment.Appointment));
             }
             else
             {

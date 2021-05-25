@@ -105,23 +105,23 @@
                 </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Vreme"
-                            Binding="{Binding DoctorAppointment.AppointmentStart.TimeOfDay}"
+                            Binding="{Binding Appointment.AppointmentStart.TimeOfDay}"
                             CanUserResize="False" Width="0.05*" />
                     <DataGridTextColumn Header="Pacijent" CanUserResize="False"
                             Width="0.05*">
                         <DataGridTextColumn.Binding>
                             <MultiBinding StringFormat="{}{0}  {1}">
-                                <Binding Path="DoctorAppointment.Patient.Name" />
+                                <Binding Path="Appointment.Patient.Name" />
                                 <Binding
-                                        Path="DoctorAppointment.Patient.Surname" />
+                                        Path="Appointment.Patient.Surname" />
                             </MultiBinding>
                         </DataGridTextColumn.Binding>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Tip"
-                            Binding="{Binding DoctorAppointment.Type}"
+                            Binding="{Binding Appointment.Type}"
                             CanUserResize="False" Width="0.05*" />
                     <DataGridTextColumn Header="Soba"
-                            Binding="{Binding DoctorAppointment.Room}"
+                            Binding="{Binding Appointment.Room}"
                             CanUserResize="False" Width="0.05*" />
                 </DataGrid.Columns>
             </DataGrid>

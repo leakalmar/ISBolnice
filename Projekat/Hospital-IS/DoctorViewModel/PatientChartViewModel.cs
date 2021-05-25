@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using DTOs;
 using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
 using Model;
@@ -13,7 +14,7 @@ namespace Hospital_IS.DoctorViewModel
     {
         #region Feilds
         private Patient patient;
-        private StartAppointmentDTO selectedAppointment;
+        private AppointmentRowDTO selectedAppointment;
         private NavigationService mainNavigationService;
         private NavigationService insideNavigationService;
         private int lastTab = 0;
@@ -50,7 +51,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public StartAppointmentDTO SelectedAppointment
+        public AppointmentRowDTO SelectedAppointment
         {
             get { return selectedAppointment; }
             set
@@ -217,9 +218,9 @@ namespace Hospital_IS.DoctorViewModel
             bool dialog = (bool)new ExitMess("Da li želite da završite termin?").ShowDialog();
             if (dialog)
             {
-                DoctorAppointmentController.Instance.EndAppointment(SelectedAppointment.DoctorAppointment);
-                ChartController.Instance.AddReport(SelectedAppointment.DoctorAppointment, ReportView.reportDetail.Text, ReportView._ViewModel.Prescriptions.Count, SelectedAppointment.DoctorAppointment.Patient);
-                ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView._ViewModel.Prescriptions), SelectedAppointment.DoctorAppointment.Patient);
+                DoctorAppointmentController.Instance.EndAppointment(new DoctorAppointment(SelectedAppointment.Appointment));
+                ChartController.Instance.AddReport(new DoctorAppointment(SelectedAppointment.Appointment), ReportView.reportDetail.Text, ReportView._ViewModel.Prescriptions.Count, SelectedAppointment.Appointment.Patient);
+                ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView._ViewModel.Prescriptions), SelectedAppointment.Appointment.Patient);
                 this.MainNavigationService.Navigate(new AppDetail());
             }
         }
@@ -268,10 +269,10 @@ namespace Hospital_IS.DoctorViewModel
 
         private void SetFields()
         {
-            Patient = selectedAppointment.DoctorAppointment.Patient;
+            Patient = selectedAppointment.Appointment.Patient;
             SearchMedicineView = new SearchMedicine();
             SearchMedicineView._ViewModel.Patient = Patient;
-            SearchMedicineView._ViewModel.DatePrescribed = SelectedAppointment.DoctorAppointment.AppointmentStart;
+            SearchMedicineView._ViewModel.DatePrescribed = SelectedAppointment.Appointment.AppointmentStart;
             SearchMedicineView._ViewModel.MainNavigationService = MainNavigationService;
             Started = SelectedAppointment.Started;
         }

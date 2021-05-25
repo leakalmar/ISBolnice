@@ -32,7 +32,7 @@ namespace Service
         public List<DoctorAppointment> GetAllByDoctor(int doctorId)
         {
             List<DoctorAppointment> doctorAppointments = new List<DoctorAppointment>();
-            foreach (DoctorAppointment docApp in allAppointments)
+                foreach (DoctorAppointment docApp in allAppointments)
             {
                 if (docApp.Doctor.Id == doctorId)
                 {
