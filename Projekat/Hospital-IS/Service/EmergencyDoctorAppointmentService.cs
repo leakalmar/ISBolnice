@@ -1,4 +1,5 @@
-﻿using Hospital_IS.DTOs;
+﻿using DTOs;
+using Hospital_IS.DTOs;
 using Model;
 using Service;
 using System;
@@ -45,7 +46,7 @@ namespace Hospital_IS.Service
         {
             List<DoctorAppointment> appointments = new List<DoctorAppointment>();
 
-            List<Doctor> doctors = DoctorService.Instance.GetDoctorsBySpecialty(emerAppointmentDTO.Specialty.Name);
+            List<Doctor> doctors = DoctorService.Instance.GetDoctorsBySpecialty(emerAppointmentDTO.Specialty);
 
             foreach (Doctor doc in doctors)
             {
@@ -53,7 +54,7 @@ namespace Hospital_IS.Service
                 for (int i = 0; i < 4; i++)
                 {
                     appointments.Add(new DoctorAppointment(appointmentStart, appointmentStart.AddMinutes(emerAppointmentDTO.DurationInMinutes), emerAppointmentDTO.AppointmetType,
-                        emerAppointmentDTO.Room.RoomId, doc, emerAppointmentDTO.Patient));
+                        emerAppointmentDTO.Room.RoomId, doc, PatientService.Instance.GetPatientByID(emerAppointmentDTO.Patient.Id)));
                     appointmentStart = appointmentStart.AddMinutes(15);
                 }
             }
@@ -71,10 +72,10 @@ namespace Hospital_IS.Service
             List<SuggestedEmergencyAppDTO> suggestedAppointments = new List<SuggestedEmergencyAppDTO>();
             foreach (DoctorAppointment appointment in appointments)
             {
-                SuggestedEmergencyAppDTO appDTO = new SuggestedEmergencyAppDTO(appointment);
+                SuggestedEmergencyAppDTO appDTO = new SuggestedEmergencyAppDTO(DoctorAppointmentManagementService.Instance.FormDoctorAppointmentDTO(appointment));
 
-                List<DoctorAppointment> ca = FindConflictingAppointments(appointment);
-                foreach (DoctorAppointment da in ca)
+                List<DoctorAppointmentDTO> ca = FindConflictingAppointments(appointment);
+                foreach (DoctorAppointmentDTO da in ca)
                     appDTO.ConflictingAppointments.Add(da);
                 List<RescheduledAppointmentDTO> ra = FindNextFreeAppointments(FindConflictingAppointments(appointment), durationInMinutes);
                 foreach (RescheduledAppointmentDTO da in ra)
@@ -94,15 +95,15 @@ namespace Hospital_IS.Service
             return new DateTime((date.Ticks + time.Ticks - 1) / time.Ticks * time.Ticks, date.Kind);
         }
 
-        private List<DoctorAppointment> FindConflictingAppointments(DoctorAppointment appointment)
+        private List<DoctorAppointmentDTO> FindConflictingAppointments(DoctorAppointment appointment)
         {
-            List<DoctorAppointment> conflictingAppointments = new List<DoctorAppointment>();
+            List<DoctorAppointmentDTO> conflictingAppointments = new List<DoctorAppointmentDTO>();
             foreach (DoctorAppointment app in DoctorAppointmentService.Instance.allAppointments)
             {
                 if ((appointment.Doctor.Id.Equals(app.Doctor.Id) || appointment.Room.Equals(app.Room)))
                 {
                     if (CheckAppointmentDates(appointment, app))
-                        conflictingAppointments.Add(app);
+                        conflictingAppointments.Add(DoctorAppointmentManagementService.Instance.FormDoctorAppointmentDTO(app));
                 }
             }
 
@@ -124,7 +125,7 @@ namespace Hospital_IS.Service
                 || (newAppointment.AppointmentStart <= appointment.AppointmentStart && newAppointment.AppointmentEnd >= appointment.AppointmentEnd);
         }
 
-        private List<RescheduledAppointmentDTO> FindNextFreeAppointments(List<DoctorAppointment> oldAppointments, double emergencyAppDuration)
+        private List<RescheduledAppointmentDTO> FindNextFreeAppointments(List<DoctorAppointmentDTO> oldAppointments, double emergencyAppDuration)
         {
             DateTime appointmentStart = DateTime.Now.AddMinutes(emergencyAppDuration);
             appointmentStart = RoundUp(appointmentStart, TimeSpan.FromMinutes(30));
@@ -141,7 +142,7 @@ namespace Hospital_IS.Service
                     appointment.NewDocAppointment.AppointmentStart = appointmentStart;
                     appointment.NewDocAppointment.AppointmentEnd = appointmentStart.Add(appointmentDuration);
                     if (appointment.NewDocAppointment.AppointmentStart.TimeOfDay >= new TimeSpan(8, 0, 0) && appointment.NewDocAppointment.AppointmentEnd.TimeOfDay < new TimeSpan(20, 0, 0)
-                            && DoctorAppointmentService.Instance.VerifyAppointment(appointment.NewDocAppointment))
+                            && DoctorAppointmentManagementService.Instance.VerifyAppointment(appointment.NewDocAppointment))
                     {
                         newAppointments.Add(appointment);
                         oldAppointments.Remove(oldAppointments[i]);
@@ -185,7 +186,7 @@ namespace Hospital_IS.Service
         {
             for (int i = 0; i < suggestedEmergencyApps.Count; i++)
             {
-                foreach (DoctorAppointment conflicting in suggestedEmergencyApps[i].ConflictingAppointments)
+                foreach (DoctorAppointmentDTO conflicting in suggestedEmergencyApps[i].ConflictingAppointments)
                 {
                     if (conflicting.AppointmentStart < DateTime.Now)
                     {

@@ -31,5 +31,13 @@ namespace Service
         {
             return AllSpecialties;
         }
+
+        public List<string> GetAllNames()
+        {
+            List<string> specialties = new List<string>();
+            foreach (Specialty specialty in AllSpecialties)
+                specialties.Add(specialty.Name);
+            return specialties;
+        }
     }
 }

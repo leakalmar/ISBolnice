@@ -118,7 +118,7 @@ namespace Hospital_IS.DoctorViewModel
         #endregion
 
         #region Methods
-        private void SendRescheduleNotification(DoctorAppointment oldApp, DoctorAppointment appointment)
+        private void SendRescheduleNotification(DoctorAppointmentDTO oldApp, DoctorAppointmentDTO appointment)
         {
             string title = "Pomeren pregled";
 
@@ -160,10 +160,10 @@ namespace Hospital_IS.DoctorViewModel
                 foreach (RescheduledAppointmentDTO rescheduled in SelectedEmergencyAppointment.RescheduledAppointments)
                 {
                     SendRescheduleNotification(rescheduled.OldDocAppointment, rescheduled.NewDocAppointment);
-                    DoctorAppointmentController.Instance.UpdateAppointment(rescheduled.OldDocAppointment, rescheduled.NewDocAppointment);
+                    DoctorAppointmentManagementController.Instance.UpdateAppointment(rescheduled.OldDocAppointment, rescheduled.NewDocAppointment);
                 }
                 SelectedEmergencyAppointment.SuggestedAppointment.AppointmentCause = AppointmentCause;
-                DoctorAppointmentController.Instance.AddAppointment(SelectedEmergencyAppointment.SuggestedAppointment);
+                DoctorAppointmentManagementController.Instance.AddAppointment(SelectedEmergencyAppointment.SuggestedAppointment);
             }
         }
 

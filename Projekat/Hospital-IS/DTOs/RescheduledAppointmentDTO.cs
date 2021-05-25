@@ -1,11 +1,13 @@
-﻿namespace Model
+﻿using DTOs;
+
+namespace Model
 {
     public class RescheduledAppointmentDTO
     {
-        public DoctorAppointment NewDocAppointment { get; set; } = new DoctorAppointment();
-        public DoctorAppointment OldDocAppointment { get; set; } = new DoctorAppointment();
+        public DoctorAppointmentDTO NewDocAppointment { get; set; } = new DoctorAppointmentDTO();
+        public DoctorAppointmentDTO OldDocAppointment { get; set; } = new DoctorAppointmentDTO();
 
-        public RescheduledAppointmentDTO(DoctorAppointment doctorAppointment)
+        public RescheduledAppointmentDTO(DoctorAppointmentDTO doctorAppointment)
         {
             NewDocAppointment.Reserved = doctorAppointment.Reserved;
             NewDocAppointment.AppointmentCause = doctorAppointment.AppointmentCause;
@@ -17,7 +19,7 @@
             NewDocAppointment.Patient = doctorAppointment.Patient;
             NewDocAppointment.AppTypeText = doctorAppointment.AppTypeText;
 
-            OldDocAppointment = new DoctorAppointment(NewDocAppointment);
+            OldDocAppointment = new DoctorAppointmentDTO(NewDocAppointment);
         }
     }
 }

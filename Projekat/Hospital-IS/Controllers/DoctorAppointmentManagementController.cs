@@ -1,5 +1,7 @@
 ﻿
 using DTOs;
+using Enums;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Hospital_IS.Service;
 using System.Collections.Generic;
 
@@ -32,6 +34,7 @@ namespace Hospital_IS.Controllers
 
         public void AddAppointment(DoctorAppointmentDTO docAppointmentDTO)
         {
+            docAppointmentDTO.Reserved = true;
             DoctorAppointmentManagementService.Instance.AddAppointment(docAppointmentDTO);
         }
 
@@ -42,6 +45,7 @@ namespace Hospital_IS.Controllers
 
         public void UpdateAppointment(DoctorAppointmentDTO oldDoctorAppointmentDTO, DoctorAppointmentDTO newDoctorAppointmentDTO)
         {
+            newDoctorAppointmentDTO.Id = oldDoctorAppointmentDTO.Id;
             DoctorAppointmentManagementService.Instance.UpdateAppointment(oldDoctorAppointmentDTO, newDoctorAppointmentDTO);
         }
 
@@ -62,6 +66,15 @@ namespace Hospital_IS.Controllers
         public bool VerifyAppointment(DoctorAppointmentDTO doctorAppointmentDTO)
         {
             return DoctorAppointmentManagementService.Instance.VerifyAppointment(doctorAppointmentDTO);
+        }
+
+        public List<RoomDTO> GetAllRooms()
+        {
+            return DoctorAppointmentManagementService.Instance.AllRooms;
+        }
+        public List<RoomDTO> GetRoomByType(RoomType type)
+        {
+            return DoctorAppointmentManagementService.Instance.GetRoomByType(type);
         }
     }
 }
