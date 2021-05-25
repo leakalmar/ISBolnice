@@ -7,6 +7,7 @@
         xmlns:viewModel="clr-namespace:Hospital_IS.View.PatientViewModels"
         xmlns:vml="clr-namespace:Hospital_IS.View.VML"
         xmlns:dvc="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        xmlns:dv="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         vml:ViewModelLocator.AutoHookedUpViewModel="True"
         mc:Ignorable="d"
         d:Height="660" d:Width="980" 
@@ -44,14 +45,36 @@
         </Border>
 
         <Label Content="Lista pregleda:" Grid.Row="0" Grid.Column="1" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
-        <DataGrid x:Name="dataGridAppointment"  IsReadOnly="True" CanUserAddRows="False" SelectedItem="{Binding SelectedDoctorAppointment}" ItemsSource="{Binding AllAppointments, Mode=TwoWay}" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="1" Grid.RowSpan="8" Margin="10,10,440,0" RowHeaderWidth="0" MouseDoubleClick="showRow">
+        <DataGrid x:Name="dataGridAppointment"  IsReadOnly="True" CanUserAddRows="False" SelectedItem="{Binding SelectedDoctorAppointment}" ItemsSource="{Binding AllAppointments, Mode=TwoWay}"
+                  AutoGenerateColumns="False" Grid.Column="1" Grid.Row="1" Grid.RowSpan="8"
+                  Margin="10,10,440,0"
+                  CanUserResizeColumns="False" CanUserResizeRows="False" 
+                  Foreground="White" HorizontalGridLinesBrush="White" 
+                  VerticalGridLinesBrush="#FFFFFEFE" CanUserDeleteRows="False" 
+                  SelectionMode="Single" HorizontalScrollBarVisibility="Disabled" RowHeaderWidth="0" 
+                  GridLinesVisibility="Horizontal" RowBackground="#FF297CAC" Background="#FF297CAC">
             <DataGrid.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="0,0,20,20"/>
                 </Style>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="Background" Value="White" />
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="BorderBrush" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Vreme i datum" Width="200" Binding="{Binding AppointmentStart,StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" CanUserResize="False" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Vreme i datum" Width="200" Binding="{Binding AppointmentStart,StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" CanUserResize="False" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#FF297CAC"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Doktor"  Width="200">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{}{0} {1}">
@@ -59,11 +82,22 @@
                             <Binding Path=" Doctor.Surname"/>
                         </MultiBinding>
                     </DataGridTextColumn.Binding>
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#FF297CAC"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Soba" Binding="{Binding Room}" Width="*"/>
+                <DataGridTextColumn Header="Soba" Binding="{Binding Room}" Width="*">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#FF297CAC"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Border x:Name="AppointmentInfo" BorderThickness="0" BorderBrush="#FF184095" Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Margin="600,10,10,100" Visibility="Hidden" CornerRadius="20,20,20,20" Background="#FF184095">
+        <Border x:Name="AppointmentInfo" BorderThickness="0" BorderBrush="DeepSkyBlue" Grid.Row="1" Grid.RowSpan="9" Margin="563,10,10,80" Visibility="{Binding Path=ShouldShowNote, Converter={StaticResource BooleanToVisibilityConverter} }"  CornerRadius="20,20,20,20" Background="#FF058D91">
             <StackPanel x:Name="PersonalData" Grid.RowSpan="9" Grid.Row="1" Grid.Column="2" Margin="10,10,10,10" >
 
                 <Grid>
@@ -86,7 +120,7 @@
                 <TextBlock x:Name="Details" Text="{Binding Path = Details}" TextWrapping="Wrap" Width="320" Background="{x:Null}" Height="302" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" MinWidth="220" MinHeight="94" MaxWidth="220" MaxHeight="94" Foreground="White"/>
             </StackPanel>
         </Border>
-        <Button x:Name="evaluateApp" Visibility="{Binding Path=ShouldShowEvaluate, Converter={StaticResource BooleanToVisibilityConverter} }" Command="{Binding ShowEvaluationWindow}" Grid.Column="2" Grid.Row="10" Margin="600,230,10,40" Foreground="#FFFDFAFA" FontSize="18" Cursor="Hand" >
+        <Button x:Name="evaluateApp" Visibility="{Binding Path=ShouldShowEvaluate, Converter={StaticResource BooleanToVisibilityConverter} }" Command="{Binding ShowEvaluationWindow}" Grid.Row="9" Margin="563,230,10,40" Foreground="#FFFDFAFA" FontSize="18" Cursor="Hand" >
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20,20,20,20"/>
@@ -96,7 +130,7 @@
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
                     <GradientStop Color="#FF184095" Offset="0.0"/>
-                    <GradientStop Color="#FF5B317E" Offset="1"/>
+                    <GradientStop Color="CadetBlue" Offset="1.5"/>
                 </LinearGradientBrush>
             </Button.Background> Ocenite pregled
         </Button>
@@ -110,7 +144,7 @@
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
                     <GradientStop Color="#FF184095" Offset="0.0"/>
-                    <GradientStop Color="#FF5B317E" Offset="1"/>
+                    <GradientStop Color="CadetBlue" Offset="1.5"/>
                 </LinearGradientBrush>
             </Button.Background> Beleška
         </Button>
@@ -118,11 +152,14 @@
             <dvc:Chart Canvas.Left="10" Name="appointmentsChart"  
                 Width="500" Height="250"  
                 Background="Transparent"  
-                Title="Prikaz pregleda po mesecima"  
-                LegendTitle="Broj pregleda" BorderBrush="{x:Null}" PlotAreaStyle="{StaticResource ChartColor}">
+                Title="Prikaz pregleda po mesecima" BorderBrush="{x:Null}" PlotAreaStyle="{StaticResource ChartColor}">
+                <dvc:Chart.LegendStyle>
+                    <Style TargetType="dv:Legend">
+                        <Setter Property="Width" Value="0"></Setter>
+                    </Style>
+                </dvc:Chart.LegendStyle>
                 <dvc:Chart.Series>
-                    <dvc:AreaSeries  
-                    Title="Area Chart"  
+                    <dvc:AreaSeries   
                     Background="CadetBlue"
                     IndependentValuePath="Key"  
                     DependentValuePath="Value"

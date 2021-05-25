@@ -54,9 +54,6 @@ namespace Hospital_IS.View.PatientViewModels
             {
                 AvailableAppointments.Add(doctorApp);
             }
-            /*
-            Doctor = Doctors[4];
-            Date = DateTime.Today.Date;*/
         }
 
         public DoctorAppointment RescheduledApp
@@ -158,8 +155,6 @@ namespace Hospital_IS.View.PatientViewModels
                 if (!PatientController.Instance.IsPatientTroll(PatientMainWindowViewModel.Patient, DoctorApp))
                 {
                     DoctorAppointmentController.Instance.UpdateAppointment(rescheduledApp, DoctorApp);
-                    //PatientMainWindowView.Instance.DoctorAppointment.Remove(PatientMainWindowView.Instance.rescheduledApp);
-                    //PatientMainWindowView.Instance.DoctorAppointment.Add(DoctorApp);
                     DoctorApp.Reserved = true;
                     AvailableAppointments.Remove(DoctorApp);
                 }
@@ -169,47 +164,5 @@ namespace Hospital_IS.View.PatientViewModels
                 }
             }
         }
-        /*
-        public void SetRescheduleAppointmentView(DoctorAppointment docApp)
-        {
-            MessageBox.Show("USAOOOOOOOO");
-            foreach (Doctor doc in Doctors)
-            {
-                if (doc.Id.Equals(docApp.Doctor.Id))
-                {
-                    this.Doctor = doc;
-                }
-            }
-            MessageBox.Show(Doctor.Name);
-            this.Date = docApp.AppointmentStart.Date;
-            MessageBox.Show(Date.ToString());
-            rescheduledApp = docApp;
-            if (docApp.AppointmentStart.Hour < 11)
-            {
-                TimeSlot = 0;
-            }
-            else if (docApp.AppointmentStart.Hour < 14 && docApp.AppointmentStart.Hour >= 11)
-            {
-                TimeSlot = 1;
-            }
-            else if (docApp.AppointmentStart.Hour < 17 && docApp.AppointmentStart.Hour >= 14)
-            {
-                TimeSlot = 2;
-            }
-            else if (docApp.AppointmentStart.Hour < 20 && docApp.AppointmentStart.Hour >= 17)
-            {
-                TimeSlot = 3;
-            }
-            MessageBox.Show(TimeSlot.ToString());
-            AvailableAppointments.Clear();
-            PossibleAppointmentForPatientDTO possibleAppointment = new PossibleAppointmentForPatientDTO(TimeSlot.ToString(), Doctor, PatientMainWindowViewModel.Patient, Date, false);
-            List<DoctorAppointment> docApps = DoctorAppointmentController.Instance.SuggestAppointmentsToPatient(possibleAppointment);
-            MessageBox.Show("MMMMM");
-            foreach (DoctorAppointment doctorAppointment in docApps)
-            {
-                AvailableAppointments.Add(doctorAppointment);
-            }
-        
-        }*/
     }
 }

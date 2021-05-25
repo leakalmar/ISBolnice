@@ -184,10 +184,8 @@ namespace Hospital_IS.View.PatientViewModels
             }
             else
             {
-                RescheduleAppointmentViewModel a = new RescheduleAppointmentViewModel();
-                //MessageBox.Show(SelectedApp.Doctor.Name);
-                PatientMainWindowView.Instance.PatientMainView.CurrentViewModel = a;
-                //PatientMainWindowView.Instance.PatientMainView.changeApp(SelectedApp);
+                RescheduleAppointmentViewModel rescheduleAppointmentViewModel = new RescheduleAppointmentViewModel();
+                PatientMainWindowView.Instance.PatientMainView.CurrentViewModel = rescheduleAppointmentViewModel;
             }
         }
     }

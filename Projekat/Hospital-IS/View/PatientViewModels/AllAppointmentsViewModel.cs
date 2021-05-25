@@ -176,8 +176,8 @@ namespace Hospital_IS.View.PatientViewModels
                 new KeyValuePair<string,int>("Feb", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "Feb")),
                 new KeyValuePair<string,int>("Mar", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "Mar")),
                 new KeyValuePair<string,int>("Apr", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "Apr")),
-                new KeyValuePair<string,int>("May", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "May")),
-                new KeyValuePair<string,int>("June", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "June"))
+                new KeyValuePair<string,int>("Maj", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "May")),
+                new KeyValuePair<string,int>("Jun", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "June"))
             };
         }
     }
