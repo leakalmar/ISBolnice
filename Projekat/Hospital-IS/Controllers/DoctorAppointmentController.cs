@@ -71,7 +71,7 @@ namespace Controllers
 
         public List<DoctorAppointment> SuggestAppointmentsToPatient(PossibleAppointmentForPatientDTO possibleAppointment)
         {
-            return DoctorAppointmentService.Instance.SuggestAppointmentsToPatient(possibleAppointment);
+            return SuggestedAppointmentService.Instance.SuggestAppointmentsToPatient(possibleAppointment);
         }
 
         public List<DoctorAppointment> SuggestAppointmetsToDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmentType type, TimeSpan duration, Patient patient, Doctor doctor)
@@ -80,7 +80,7 @@ namespace Controllers
             DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, room.RoomId, doctor, patient);
             tempAppointment.AppointmentEnd = dates[0].Add(duration);
             tempAppointment.IsUrgent = isUrgent;
-            return DoctorAppointmentService.Instance.SuggestAppointmetsToDoctor(dates, tempAppointment);
+            return SuggestedAppointmentService.Instance.SuggestAppointmetsToDoctor(dates, tempAppointment);
         }
 
         public List<SuggestedEmergencyAppDTO> SuggestEmergencyAppsToDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmentType type, TimeSpan duration, Patient patient, Doctor doctor)

@@ -29,7 +29,7 @@ namespace Hospital_IS.Service
             foreach (Doctor doc in doctors)
             {
                 tempAppointment.Doctor = doc;
-                List<DoctorAppointment> allPossibleAppointments = DoctorAppointmentService.Instance.GenerateAppointmentsForDoctor(dates, tempAppointment);
+                List<DoctorAppointment> allPossibleAppointments = SuggestedAppointmentService.Instance.GenerateAppointmentsForDoctor(dates, tempAppointment);
                 appointments.AddRange(allPossibleAppointments);
             }
 
