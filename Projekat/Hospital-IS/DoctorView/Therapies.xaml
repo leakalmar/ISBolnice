@@ -16,11 +16,11 @@
         </Grid.RowDefinitions>
 
         <Border CornerRadius="20" BorderThickness="1" Background="#FF213250"
-                BorderBrush="FloralWhite" Margin="250,5,250,5" x:Name="add">
+                BorderBrush="FloralWhite" Margin="250,5,250,5" x:Name="add"
+                Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}">
             <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
                     Content="Nova terapija" Foreground="FloralWhite"
-                    HorizontalAlignment="Stretch"
-                    Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}" />
+                    HorizontalAlignment="Stretch" />
         </Border>
 
         <DataGrid x:Name="dataGrid" ItemsSource="{Binding}" Grid.Row="2"

@@ -3,7 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:converters="clr-namespace:Hospital_IS.DoctorConverters"
         mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+    </UserControl.Resources>
     <UserControl.InputBindings>
         <KeyBinding Key="Add" Modifiers="Ctrl" Command="{Binding AddNewCommand}" />
     </UserControl.InputBindings>
@@ -15,7 +19,8 @@
         </Grid.RowDefinitions>
 
         <Border CornerRadius="20" BorderThickness="1" Background="#FF213250"
-                BorderBrush="FloralWhite" Margin="250,5,250,5" x:Name="add">
+                BorderBrush="FloralWhite" Margin="250,5,250,5" x:Name="add"
+                Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}">
             <Border.InputBindings>
                 <KeyBinding Key="Add" Modifiers="Ctrl"
                         Command="{Binding AddNewCommand}" />

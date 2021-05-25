@@ -10,8 +10,19 @@ namespace Hospital_IS.DoctorViewModel
     public class ScheduleAppointmentViewModel : BindableBase
     {
         #region Fields
-        private ObservableCollection<DoctorAppointment> scheduledAppointments; 
+        private ObservableCollection<DoctorAppointment> scheduledAppointments;
         private NavigationService mainNavigationService;
+        private bool started;
+
+        public bool Started
+        {
+            get { return started; }
+            set
+            {
+                started = value;
+                OnPropertyChanged("Started");
+            }
+        }
 
         public NavigationService MainNavigationService
         {
@@ -25,7 +36,8 @@ namespace Hospital_IS.DoctorViewModel
         public ObservableCollection<DoctorAppointment> ScheduledAppointments
         {
             get { return scheduledAppointments; }
-            set { 
+            set
+            {
                 scheduledAppointments = value;
                 OnPropertyChanged("ScheduledAppointment");
             }
@@ -55,7 +67,7 @@ namespace Hospital_IS.DoctorViewModel
             return true;
         }
         #endregion
-        
+
         #region Constructor
         public ScheduleAppointmentViewModel()
         {

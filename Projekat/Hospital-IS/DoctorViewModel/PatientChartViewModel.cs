@@ -60,7 +60,7 @@ namespace Hospital_IS.DoctorViewModel
                 SetFields();
                 OnPropertyChanged("SelectedAppointment");
             }
-        } 
+        }
 
         public int LastTab
         {
@@ -87,7 +87,7 @@ namespace Hospital_IS.DoctorViewModel
             get { return started; }
             set
             {
-                started = value;                
+                started = value;
                 OnPropertyChanged("Started");
             }
         }
@@ -190,7 +190,9 @@ namespace Hospital_IS.DoctorViewModel
                     this.InsideNavigationService.Navigate(history);
                     break;
                 case 3:
-                    this.InsideNavigationService.Navigate(new ScheduledApp());
+                    ScheduledApp scheduledApp = new ScheduledApp();
+                    scheduledApp._ViewModel.Started = Started;
+                    this.InsideNavigationService.Navigate(scheduledApp);
                     break;
                 case 4:
                     Therapies therapy = new Therapies();
