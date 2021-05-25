@@ -1,6 +1,4 @@
 ﻿using Controllers;
-using DoctorView;
-using Hospital_IS.DoctorView;
 using Hospital_IS.DTOs;
 using Hospital_IS.ManagerView1;
 using Model;

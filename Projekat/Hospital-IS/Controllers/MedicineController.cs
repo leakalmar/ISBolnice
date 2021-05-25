@@ -1,6 +1,5 @@
-﻿using DoctorView;
-using DTOs;
-using Hospital_IS.DoctorView;
+﻿using DTOs;
+using Hospital_IS.DTOs;
 using Model;
 using Service;
 using System;
@@ -74,22 +73,42 @@ namespace Controllers
             {
                 if (PatientService.Instance.CheckIfAllergicToMedicine(patient.Alergies, medicine.Name))
                 {
-                    medicineList.Add(new MedicineDTO(medicine.Composition,medicine.SideEffects,medicine.Usage,medicine.ReplaceMedicine, medicine.Name, false, true));
+                    medicineList.Add(new MedicineDTO(ConvertToMedicineComponentDTO(medicine.Composition), medicine.SideEffects,medicine.Usage, ConvertToReplaceMedicineNameDTO(medicine.ReplaceMedicine), medicine.Name, false, true));
                 }
                 else
                 {
                     if (CheckIfInPrescriptions(medicine, prescriptions))
                     {
-                        medicineList.Add(new MedicineDTO(medicine.Composition, medicine.SideEffects, medicine.Usage, medicine.ReplaceMedicine, medicine.Name, true, false));
+                        medicineList.Add(new MedicineDTO(ConvertToMedicineComponentDTO(medicine.Composition), medicine.SideEffects, medicine.Usage, ConvertToReplaceMedicineNameDTO(medicine.ReplaceMedicine), medicine.Name, true, false));
                     }
                     else
                     {
-                        medicineList.Add(new MedicineDTO(medicine.Composition, medicine.SideEffects, medicine.Usage, medicine.ReplaceMedicine, medicine.Name, false, false));
+                        medicineList.Add(new MedicineDTO(ConvertToMedicineComponentDTO(medicine.Composition), medicine.SideEffects, medicine.Usage, ConvertToReplaceMedicineNameDTO(medicine.ReplaceMedicine), medicine.Name, false, false));
                     }
                 }
 
             }
             return medicineList;
+        }
+
+        public List<MedicineComponentDTO> ConvertToMedicineComponentDTO(List<MedicineComponent> medicineComponents)
+        {
+            List<MedicineComponentDTO> medicineComponentDTOs = new List<MedicineComponentDTO>();
+            foreach(MedicineComponent component in medicineComponents)
+            {
+                medicineComponentDTOs.Add(new MedicineComponentDTO(component.Component));
+            }
+            return medicineComponentDTOs;
+        }
+
+        public List<ReplaceMedicineNameDTO> ConvertToReplaceMedicineNameDTO(List<ReplaceMedicineName> replaceMedicineNames)
+        {
+            List<ReplaceMedicineNameDTO> replaceMedicineNameDTOs = new List<ReplaceMedicineNameDTO>();
+            foreach (ReplaceMedicineName replace in replaceMedicineNames)
+            {
+                replaceMedicineNameDTOs.Add(new ReplaceMedicineNameDTO(replace.Name));
+            }
+            return replaceMedicineNameDTOs;
         }
 
         private bool CheckIfInPrescriptions(Medicine medicine, List<Prescription> prescriptions)

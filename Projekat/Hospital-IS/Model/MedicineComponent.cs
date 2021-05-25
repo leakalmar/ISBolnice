@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hospital_IS.DoctorView
+namespace Model
 {
     public class MedicineComponent
     {

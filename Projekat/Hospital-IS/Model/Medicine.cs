@@ -1,6 +1,4 @@
-﻿using DoctorView;
-using Hospital_IS.DoctorView;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Model
