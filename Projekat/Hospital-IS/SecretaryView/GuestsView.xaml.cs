@@ -1,17 +1,8 @@
 ﻿using Controllers;
-using Model;
-using System;
-using System.Collections.Generic;
+using Hospital_IS.Controllers;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Hospital_IS.SecretaryView
 {
@@ -20,7 +11,7 @@ namespace Hospital_IS.SecretaryView
     /// </summary>
     public partial class GuestsView : Window
     {
-        public ObservableCollection<Patient> Guests { get; set; }
+        public ObservableCollection<PatientDTO> Guests { get; set; }
         public UCPatientsView ucp;
         public GuestsView(UCPatientsView ucp)
         {
@@ -38,14 +29,14 @@ namespace Hospital_IS.SecretaryView
                 Guests.Clear();
 
             PatientController.Instance.ReloadPatients();
-            Guests = new ObservableCollection<Patient>(PatientController.Instance.GetAllGuests());
+            Guests = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllGuests());
             dataGridGuests.ItemsSource = Guests;
         }
         private void RegisterPatient(object sender, RoutedEventArgs e)
         {
-            if ((Patient)dataGridGuests.SelectedItem != null)
+            if ((PatientDTO)dataGridGuests.SelectedItem != null)
             {
-                Patient guest = (Patient)dataGridGuests.SelectedItem;
+                PatientDTO guest = (PatientDTO)dataGridGuests.SelectedItem;
                 PatientRegistration pr = new PatientRegistration(ucp, this);
                 pr.Show();
             }

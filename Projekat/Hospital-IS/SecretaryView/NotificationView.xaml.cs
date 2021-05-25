@@ -1,4 +1,4 @@
-﻿using Model;
+﻿using Hospital_IS.DTOs.SecretaryDTOs;
 using System.Windows;
 
 
@@ -9,8 +9,8 @@ namespace Hospital_IS
     /// </summary>
     public partial class NotificationView : Window
     {
-        public Notification Notification { get; set; }
-        public NotificationView(Notification notification)
+        public NotificationDTO Notification { get; set; }
+        public NotificationView(NotificationDTO notification)
         {
             InitializeComponent();
             Notification = notification;

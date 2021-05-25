@@ -1,8 +1,7 @@
-﻿using Controllers;
-using Model;
+﻿using Hospital_IS.Controllers;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Service;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 namespace Hospital_IS.SecretaryView
@@ -12,7 +11,7 @@ namespace Hospital_IS.SecretaryView
     /// </summary>
     public partial class SelectGuestView : Window
     {
-        public ObservableCollection<Patient> Guests { get; set; }
+        public ObservableCollection<PatientDTO> Guests { get; set; }
 
         public ScheduleEmergencyAppointment sea;
         public SelectGuestView(ScheduleEmergencyAppointment sea)
@@ -26,24 +25,24 @@ namespace Hospital_IS.SecretaryView
 
         public void RefreshGrid()
         {
-            Guests = new ObservableCollection<Patient>(PatientController.Instance.GetAllGuests());
+            Guests = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllGuests());
             dataGridGuests.ItemsSource = Guests;
         }
 
         private void AddNewGuest(object sender, RoutedEventArgs e)
         {
-            Patient patient = new Patient();                    //prebaciti u servis
+            PatientDTO patient = new PatientDTO();
             patient.Id = UserService.Instance.GenerateUserID();
             patient.IsGuest = true;
             patient.BirthDate = DateTime.Now;
-            PatientController.Instance.AddPatient(patient);
+            SecretaryManagementController.Instance.AddPatient(patient);
 
             RefreshGrid();
         }
 
         private void Select(object sender, RoutedEventArgs e)
         {
-            Patient patient = (Patient)dataGridGuests.SelectedItem;
+            PatientDTO patient = (PatientDTO)dataGridGuests.SelectedItem;
             sea.txtGuest.Text = patient.Id.ToString();
 
             sea.txtGuest.Visibility = Visibility.Visible;

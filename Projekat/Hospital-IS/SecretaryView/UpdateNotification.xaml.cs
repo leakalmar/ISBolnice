@@ -1,5 +1,5 @@
 ﻿using Hospital_IS.Controllers;
-using Model;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using System;
 using System.Windows;
 
@@ -10,9 +10,9 @@ namespace Hospital_IS.SecretaryView
     /// </summary>
     public partial class UpdateNotification : Window
     {
-        public Notification Notification { get; set; }
+        public NotificationDTO Notification { get; set; }
         public UCNotificationsView ucn;
-        public UpdateNotification(Notification notification, UCNotificationsView ucn)
+        public UpdateNotification(NotificationDTO notification, UCNotificationsView ucn)
         {
             InitializeComponent();
             this.Notification = notification;
@@ -30,7 +30,7 @@ namespace Hospital_IS.SecretaryView
         private void EditNotification(object sender, RoutedEventArgs e)
         {
             Notification.LastChanged = DateTime.Now;
-            NotificationController.Instance.UpdateNotification(Notification);
+            SecretaryManagementController.Instance.UpdateNotification(Notification);
             this.Close();
         }
 

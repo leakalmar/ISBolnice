@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace Model
+namespace Hospital_IS.DTOs.SecretaryDTOs
 {
-    public class Notification
+    public class NotificationDTO
     {
         public int Id { get; set; }
         public String Title { get; set; }
@@ -12,37 +13,25 @@ namespace Model
         public DateTime LastChanged { get; set; }
         public List<int> Recipients { get; set; } = new List<int>();
 
-        public Notification(string title, string text, DateTime datePosted)
+        public NotificationDTO(int id, string title, string text, DateTime datePosted, DateTime lastChanged, List<int> recipients)
         {
+            Id = id;
             Title = title;
             Text = text;
             DatePosted = datePosted;
-            LastChanged = datePosted;
-            generateId();
-        }
-        public Notification(string title, string text, DateTime datePosted, DateTime lastChanged) : this(title, text, datePosted)
-        {
-            LastChanged = lastChanged;
-            generateId();
-        }
-
-        public Notification(string title, string text, DateTime datePosted, DateTime lastChanged, List<int> recipients, int id) : this(title, text, datePosted)
-        {
             LastChanged = lastChanged;
             Recipients = recipients;
-            Id = id;
         }
 
-        public Notification()
+        public NotificationDTO()
         {
             generateId();
         }
 
-        private void generateId() 
+        private void generateId()
         {
             Random rand = new Random();
             this.Id = rand.Next(1, 100000);
         }
-
     }
 }
