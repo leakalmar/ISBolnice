@@ -1,4 +1,5 @@
-﻿using Controllers;
+﻿using Hospital_IS.Controllers;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using System;
 using System.Collections.ObjectModel;
@@ -12,10 +13,10 @@ namespace Hospital_IS
     public partial class UpdatePatientView : Window
     {
         public ObservableCollection<String> Allergies { get; set; }
-        public Patient Patient { get; set; }
+        public PatientDTO Patient { get; set; }
         public UCPatientsView ucp;
 
-        public UpdatePatientView(Patient patient, UCPatientsView ucp)
+        public UpdatePatientView(PatientDTO patient, UCPatientsView ucp)
         {
             InitializeComponent();
             Patient = patient;
@@ -73,7 +74,7 @@ namespace Hospital_IS
             ucp.dataGridPatients.ItemsSource = null;
             ucp.dataGridPatients.ItemsSource = ucp.Patients;
 
-            PatientController.Instance.UpdatePatient(Patient);
+            SecretaryController.Instance.UpdatePatient(Patient);
 
             this.Close();
         }

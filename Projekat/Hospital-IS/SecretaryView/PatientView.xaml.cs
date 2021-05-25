@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Hospital_IS.DTOs.SecretaryDTOs;
+using Model;
 using System.Windows;
 
 namespace Hospital_IS
@@ -8,8 +9,8 @@ namespace Hospital_IS
     /// </summary>
     public partial class PatientView : Window
     {
-        public Patient Patient { get; set; }
-        public PatientView(Patient patient)
+        public PatientDTO Patient { get; set; }
+        public PatientView(PatientDTO patient)
         {
             InitializeComponent();
             Patient = patient;
