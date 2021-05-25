@@ -73,23 +73,12 @@ namespace Hospital_IS
             }
         }
 
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value != null && value is DateTime && (DateTime)value < new DateTime(2, 1, 1))
-            {
-                return "";
-            }
-            else
-                return value;
-        }
-
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             ICollectionView view = new CollectionViewSource { Source = Patients }.View;
             view.Filter = delegate (object item)
             {
-                PatientDTO patient = new PatientDTO();
+                PatientDTO patient = item as PatientDTO;
                 return CheckIfPatientMeetsSearchCriteria(patient);
             };
             dataGridPatients.ItemsSource = view;
