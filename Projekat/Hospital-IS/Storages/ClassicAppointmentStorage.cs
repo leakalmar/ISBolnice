@@ -21,8 +21,9 @@ namespace Storages
 
         public List<Appointment> GetAll()
         {
-            String text = File.ReadAllText(this.fileLocation);
+             String text = File.ReadAllText(this.fileLocation);
             List<Appointment> allAppointments = JsonConvert.DeserializeObject<List<Appointment>>(text);
+          
             return allAppointments;
         }
 

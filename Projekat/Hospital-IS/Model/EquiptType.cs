@@ -5,6 +5,6 @@ namespace Model
     {
         Stationary,
         Dynamic,
-        Null
+       
     }
 }

@@ -1,12 +1,15 @@
 [
   {
     "SenderId": [
-      10
+      6
     ],
-    "Title": "Odbijen dsvsdv",
+    "Title": "RE:Odobrenje dsvsdvvdvv",
     "Medicine": {
-      "Name": "dsvsdv",
+      "Name": "dsvsdvvdvv",
       "Composition": [
+        {
+          "Component": "dsvdsvsdv"
+        },
         {
           "Component": "dsvdsvsdv"
         }
@@ -16,14 +19,19 @@
       "ReplaceMedicine": [
         {
           "Name": "dsvsdvds"
+        },
+        {
+          "Name": "dsvsdvds"
         }
       ]
     },
     "RecieverIds": [
-      6
+      4,
+      10,
+      11
     ],
-    "Note": "veoma los lijek",
-    "DateSent": "2021-05-06T20:29:25.5312557+02:00",
-    "ApprovalCounter": 1
+    "Note": null,
+    "DateSent": "2021-05-22T15:03:27.0529265+02:00",
+    "ApprovalCounter": 0
   }
 ]

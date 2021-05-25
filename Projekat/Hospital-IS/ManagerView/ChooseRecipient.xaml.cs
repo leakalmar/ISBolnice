@@ -40,16 +40,7 @@ namespace Hospital_IS.ManagerView
             medicineComponentsClass = medicineComponents;
             medicineNamesClass = medicineNames;
             InitializeComponent();
-            if (parent.Equals("notification"))
-            {
-                Close.Visibility = Visibility.Collapsed;
-                Send.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                CloseNotification.Visibility = Visibility.Collapsed;
-                SendReNotification.Visibility = Visibility.Collapsed;
-            }
+           
             DataGridDoctors.DataContext = new ObservableCollection<Doctor>(DoctorController.Instance.GetAll());
 
         }

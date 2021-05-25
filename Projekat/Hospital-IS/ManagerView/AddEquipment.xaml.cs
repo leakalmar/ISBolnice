@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Controllers;
+using Hospital_IS.ManagerViewModel;
 using Model;
 
 namespace Hospital_IS
@@ -27,6 +28,10 @@ namespace Hospital_IS
             currentRoom = room;
           
             InitializeComponent();
+        }
+
+        public AddEquipment(EquipmentViewModel eqiupmentViewModel)
+        {
         }
 
         private void Affirm_Click(object sender, RoutedEventArgs e)

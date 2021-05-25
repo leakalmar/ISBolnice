@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hospital_IS" 
+        xmlns:viewModel="clr-namespace:Hospital_IS.ManagerViewModel"
         AllowsTransparency="True"
         mc:Ignorable="d"
         WindowStyle="None" WindowStartupLocation="CenterScreen"
@@ -22,8 +22,8 @@
 
     <Grid >
 
-        <DataGrid x:Name="DataGridRooms"  IsReadOnly="True" ItemsSource="{Binding}" AlternatingRowBackground="NavajoWhite"
-                  SelectionMode="Single"
+        <DataGrid x:Name="DataGridRooms"  IsReadOnly="True" ItemsSource="{Binding Rooms}" AlternatingRowBackground="NavajoWhite"
+                  SelectionMode="Single"  SelectedItem="{Binding SelectedRoom}"
                   Height="430" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="350" Margin="40,145,40,0" Background="#FFC5DBDF" AutoGenerateColumns="False" >
             <DataGrid.CellStyle>
                 <Style/>
@@ -38,7 +38,7 @@
                 <DataGridTextColumn Header="Broj" Width="70" Binding = "{Binding RoomNumber}"/>
                 <DataGridTextColumn Header="Sprat" Width="70" Binding="{Binding RoomFloor}"/>
                 <DataGridTextColumn Header="Vrsta" Width="70" Binding="{Binding Type}"/>
-                <DataGridCheckBoxColumn Header="Zauzetost" Width="70" Binding="{Binding IsFree}"/>
+                
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel  Height="90" Background="White"  Margin="0,670,0,0"   >
@@ -232,5 +232,79 @@
 
 
         </StackPanel>
+        
+        
+   
+
+    <StackPanel x:Name="RoomOptions" Visibility="Collapsed" Background="White" Margin="0,555,0,0" >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="35"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Button  x:Name="AddRoom" BorderThickness="0" Grid.Column="1" Grid.Row="1" Height="35" Width="45" Background="White" Click="AddRoom_Click"  >
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </Button.Resources>
+                <StackPanel>
+                    <Image Source="pack://application:,,,/Resources/addroom.png" HorizontalAlignment="Left" Width="40" Height="35" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="EditRoom" BorderThickness="0" Grid.Column="1" Grid.Row="3" Height="35" Width="45" Background="White" Click="EditRoom_Click" >
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </Button.Resources>
+                <StackPanel>
+                    <Image Source="pack://application:,,,/Resources/edit.png" HorizontalAlignment="Left" Width="40" Height="35" />
+                </StackPanel>
+            </Button>
+                <Button x:Name="DeleteRoom" BorderThickness="0" Grid.Column="1" Grid.Row="5" Height="35" Width="45" Background="White" Command="{Binding DeleteCommand}" >
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </Button.Resources>
+                <StackPanel>
+                    <Image Source="pack://application:,,,/Resources/deleteroom.png" HorizontalAlignment="Left" Width="40" Height="35" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="RenovationRoom" BorderThickness="0" Grid.Column="1" Grid.Row="7" Height="35" Width="45" Background="White" Click="RenovationRoom_Click" >
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </Button.Resources>
+                <StackPanel>
+                    <Image Source="pack://application:,,,/Resources/renovation.png" HorizontalAlignment="Left" Width="40" Height="35" />
+                </StackPanel>
+            </Button>
+            <TextBlock Grid.Row="1" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text ="Dodaj sobu" Foreground="#624cfc"  />
+            <TextBlock Grid.Row="3" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text ="Izmeni sobu" Foreground="#624cfc"  />
+            <TextBlock Grid.Row="5" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text = "Obriši sobu" Foreground="#624cfc"  />
+            <TextBlock Grid.Row="7" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text = "Renoviranje" Foreground="#624cfc"  />
+        </Grid>
+    </StackPanel>
+
+
     </Grid>
+
 </Window>

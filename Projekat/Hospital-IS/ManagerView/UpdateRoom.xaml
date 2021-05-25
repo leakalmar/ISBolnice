@@ -3,42 +3,320 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:val="clr-namespace:Hospital_IS.ManagerView"
         xmlns:local="clr-namespace:Hospital_IS"
-        mc:Ignorable="d"
-         Title="Dodaj sobu" Height="750" Width="430"
+        mc:Ignorable="d" ResizeMode="NoResize"   AllowsTransparency="True"
+         Title="Dodaj sobu" Height="750" Width="430" Background="Transparent"
         WindowStyle="None" WindowStartupLocation="CenterScreen">
 
-    <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="Black"/>
-            <GradientStop Color="#FF184095" Offset="0.0"/>
-            <GradientStop Color="#FF5B317E" Offset="1"/>
-        </LinearGradientBrush>
-    </Window.Background>
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style x:Key="ComboBoxTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Border CornerRadius="5,0,0,5"
+                            BorderThickness="1"
+                            Background="{TemplateBinding Background}"
+                                BorderBrush="Black">
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+        <ControlTemplate  x:Key="ComboBoxBaseControlTemplate" TargetType="{x:Type ComboBox}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition MaxWidth="18"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Name="PART_EditableTextBox"
+                                 Style="{StaticResource ComboBoxTextBoxStyle}"
+                                 Padding="5,0,0,0"
+                                 Height="{TemplateBinding Height}"/>
+                <ToggleButton Grid.Column="1" Margin="0"
+                                     Height="{TemplateBinding Height}"
+                                   
+                                     Focusable="False"
+                                     IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                      ClickMode="Press">
+                    <Path Grid.Column="1"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Data="M 0 0 L 4 4 L 8 0 Z"
+                                  Fill="DodgerBlue" />
+                </ToggleButton>
+                <ContentPresenter Name="ContentSite"
+                                      Content="{TemplateBinding SelectionBoxItem}"
+                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"
+                                      Margin="5,0,0,0"/>
+                <Popup Name="Popup"
+                               Placement="Bottom"
+                               IsOpen="{TemplateBinding IsDropDownOpen}"
+                               AllowsTransparency="True" 
+                               Focusable="False"
+                               PopupAnimation="Slide">
+                    <Grid Name="DropDown"
+                                  SnapsToDevicePixels="True"                
+                                  MinWidth="{TemplateBinding ActualWidth}"
+                                  MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                        <Border 
+                                    x:Name="DropDownBorder"
+                                    BorderThickness="1"
+                                    CornerRadius="10"
+                                    Background="Azure"
+                                    BorderBrush="Black"/>
+                        <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                        </ScrollViewer>
+                    </Grid>
+                </Popup>
+            </Grid>
+        </ControlTemplate>
+
+
+
+    </Window.Resources>
+
+
     <Grid>
-        <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="70,161,0,0" Text="Broj sobe" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox x:Name="textbox2"   HorizontalAlignment="Left" Margin="250,161,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="70,214,0,0" Text="Zauzetost" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.542,2.143" />
 
 
-        <CheckBox x:Name="check1"  HorizontalAlignment="Left" Margin="250,214,0,0" VerticalAlignment="Top"/>
-        <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="70,320,0,0" Text="Tip sobe" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <ComboBox x:Name="combo1" HorizontalAlignment="Left" Margin="250,320,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="130"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="15"/>
+
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+
+
+        </Grid.RowDefinitions>
+
+        <Border CornerRadius="20" Grid.ColumnSpan="9" Grid.RowSpan="20"  >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF213868" Offset="0.0"/>
+                    <GradientStop Color="#FF5B317E" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Button x:Name="Back"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" Click="Back_Click"  >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+
+            <StackPanel>
+                <Image Source="pack://application:,,,/Resources/backbutton.png" Width="50" Height="50"/>
+            </StackPanel>
+        </Button>
+        <Label  Content="Izmena sobe" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Foreground="White"  FontSize="30" FontWeight="SemiBold"
+               HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Label Content="Broj sobe*" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
+        <TextBox x:Name="RoomNumberBox"  Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="4" Grid.Column="3" 
+                 Grid.ColumnSpan="2" Height="30"   FontSize="15" Padding="4" GotFocus="RoomNumber_GotFocus" >
+            <TextBox.Text>
+
+                <Binding Path="RoomNumber" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringToIntValidationRule ValidationStep="RawProposedValue"/>
+                        <local:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="1" Max="1000"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+
+                        <TextBlock  Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" TextAlignment="Center" 
+                                    Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+
+        <Label Content="Sprat sobe*" Grid.Row="6" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
+        <TextBox x:Name="RoomFloorBox" Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="7" Grid.Column="3" 
+                  Grid.ColumnSpan="2" Height="30"  FontSize="15" Padding="4" GotFocus="RoomFloor_GotFocus" >
+            <TextBox.Text>
+                <Binding Path="RoomFloor" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringToIntValidationRule ValidationStep="RawProposedValue"/>
+                        <local:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="0" Max="10"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+
+                        <TextBlock  Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" TextAlignment="Center" 
+                                    Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <Label Content="Povrsina sobe [m^2|*" Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
+        <TextBox x:Name="SurfaceAreaBox"  Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="10" Grid.Column="3"
+                  Grid.ColumnSpan="2" Height="30" FontSize="15" Padding="4" GotFocus="SurfaceArea_GotFocus" >
+            <TextBox.Text>
+                <Binding Path="SurfaceArea" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringToIntValidationRule ValidationStep="RawProposedValue"/>
+                        <local:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="0" Max="10000"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+
+                        <TextBlock  Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" TextAlignment="Center" 
+                                    Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <Label Content="Broj kreveta*" Grid.Row="12" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
+        <TextBox x:Name="BedNumberBox"  Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="13" Grid.Column="3" 
+                  Grid.ColumnSpan="2"  Height="30" FontSize="15" Padding="4" GotFocus="BedNumber_GotFocus">
+            <TextBox.Text>
+                <Binding Path="BedNumber" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringToIntValidationRule ValidationStep="RawProposedValue"/>
+                        <local:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="0" Max="1000"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+
+                        <TextBlock  Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" TextAlignment="Center" 
+                                    Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+
+        <Label Content="Tip sobe*" Grid.Row="15" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
+        <ComboBox x:Name="ComboBox" Template="{StaticResource ComboBoxBaseControlTemplate}" Grid.Row="16" Grid.Column="3" Grid.ColumnSpan="2" FontSize="15">
             <ComboBoxItem Content="Soba za odmor"/>
+            <ComboBoxItem Content="Soba za preglede"/>
             <ComboBoxItem Content="Operaciona soba"/>
-            <ComboBoxItem Content="Soba za pregled"/>
             <ComboBoxItem Content="Magacin"/>
         </ComboBox>
-        <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="70,267,0,0" Text="Renoviranje" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <CheckBox x:Name ="check2"   HorizontalAlignment="Left" Margin="250,267,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="potvrdi"   Content="Potvrdi"  HorizontalAlignment="Left" Margin="92,419,0,0" VerticalAlignment="Top" Width="75" Height="20" FontSize="13" Click="potvrdi_Click"/>
-        <Button Content="Odustani" HorizontalAlignment="Left" Margin="250,419,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.356,0.408" Width="75" Height="20" FontSize="13" Click="Button_Click"/>
-        <Button  BorderThickness="0" Foreground="White" Background="Transparent" Content="NAZAD" HorizontalAlignment="Left" Margin="33,52,0,0" VerticalAlignment="Top" Width="97" Height="21"/>
-        <TextBlock HorizontalAlignment="Left" Margin="68,108,0,0" Foreground="White"  Text="Sprat " TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox x:Name="textbox1" HorizontalAlignment="Left" Margin="250,108,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+        <Button x:Name="Submit" Content="Potvrdi" FontSize="20" Height="40" Background="White" BorderThickness="3" BorderBrush="Red" Foreground="#FF5B317E" FontWeight="SemiBold" Grid.Row="18" 
+                 Grid.Column="3" Grid.ColumnSpan="2" Width="200" Command="{Binding AddCommand}">
+
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
 
 
 
     </Grid>
 </Window>
-

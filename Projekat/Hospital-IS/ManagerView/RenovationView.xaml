@@ -24,10 +24,10 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="15"/>
             <ColumnDefinition Width="25"/>
-            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="180"/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="15"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -73,6 +73,9 @@
         <Label Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" Content="Termin renoviranja" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="2" Content="Pocetak renoviranja:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
         <wpfx:DateTimePicker x:Name="RenovationStart" Grid.Column="4" Grid.Row="9" Height="25" Margin="30,0,0,0" >
+            <wpfx:DateTimePicker.Text>
+                <Binding Path="" UpdateSourceTrigger="PropertyChanged"/>
+            </wpfx:DateTimePicker.Text>
         </wpfx:DateTimePicker>
         <Label Grid.Row="11" Grid.Column="2" Grid.ColumnSpan="2" Content="Kraj renoviranja:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
         <wpfx:DateTimePicker x:Name="RenovationEnd" Grid.Column="4" Grid.Row="11" Height="25" Margin="30,0,0,0" />

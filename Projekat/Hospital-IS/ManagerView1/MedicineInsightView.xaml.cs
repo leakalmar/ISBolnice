@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital_IS.ManagerViewModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -11,16 +12,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Hospital_IS.ManagerView
+namespace Hospital_IS.ManagerView1
 {
     /// <summary>
-    /// Interaction logic for UCOtherOptions.xaml
+    /// Interaction logic for MedicineInsightView.xaml
     /// </summary>
-    public partial class UCOtherOptions : UserControl
+    public partial class MedicineInsightView : Page
     {
-        public UCOtherOptions()
+        public MedicineInsightView()
         {
             InitializeComponent();
+            this.DataContext = MedicineViewModel.Instance;
+            Back.DataContext = MedicineViewModel.Instance;
+
         }
+
+        
     }
 }
