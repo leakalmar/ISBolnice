@@ -1,5 +1,5 @@
-﻿using DoctorView;
-using Hospital_IS.DoctorView;
+﻿using Hospital_IS.DoctorView;
+using Hospital_IS.DTOs;
 using System.Collections.Generic;
 
 namespace DTOs
@@ -7,10 +7,10 @@ namespace DTOs
     public class MedicineDTO : BindableBase
     {
         private string name;
-        public List<MedicineComponent> Composition { get; set; }
+        public List<MedicineComponentDTO> Composition { get; set; }
         public string SideEffects { get; set; }
         public string Usage { get; set; }
-        public List<ReplaceMedicineName> ReplaceMedicine { get; set; }
+        public List<ReplaceMedicineNameDTO> ReplaceMedicine { get; set; }
         private bool check;
         private bool allergic;
 
@@ -44,7 +44,7 @@ namespace DTOs
             }
         }
 
-        public MedicineDTO(List<MedicineComponent> composition, string sideEffects, string usage, List<ReplaceMedicineName> replaceMedicine, string name, bool check, bool allergic)
+        public MedicineDTO(List<MedicineComponentDTO> composition, string sideEffects, string usage, List<ReplaceMedicineNameDTO> replaceMedicine, string name, bool check, bool allergic)
         {
             Composition = composition;
             SideEffects = sideEffects;

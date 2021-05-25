@@ -34,6 +34,9 @@
       },
       {
         "Component": "magnezijum-stearat"
+      },
+      {
+        "Component": "novi sastav"
       }
     ],
     "SideEffects": "Preosetljivost na paracetamol ili na bilo koju od pomoćnih supstanci.",

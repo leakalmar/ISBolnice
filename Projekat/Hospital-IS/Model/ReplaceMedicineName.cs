@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DoctorView
+namespace Model
 {
     public class ReplaceMedicineName
     {
