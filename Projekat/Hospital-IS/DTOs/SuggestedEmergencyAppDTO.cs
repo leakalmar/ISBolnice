@@ -1,20 +1,21 @@
-﻿using System;
+﻿using DTOs;
+using System;
 using System.Collections.Generic;
 
 namespace Model
 {
     public class SuggestedEmergencyAppDTO
     {
-        public DoctorAppointment SuggestedAppointment { get; set; }
-        public List<DoctorAppointment> ConflictingAppointments { get; set; } 
+        public DoctorAppointmentDTO SuggestedAppointment { get; set; }
+        public List<DoctorAppointmentDTO> ConflictingAppointments { get; set; } 
         public List<RescheduledAppointmentDTO> RescheduledAppointments { get; set; }
         public int TotalReshedulePeriodInHours { get; set; }
         public bool ConflictingIsUrgent { get; set; }
 
-        public SuggestedEmergencyAppDTO(DoctorAppointment appointment)
+        public SuggestedEmergencyAppDTO(DoctorAppointmentDTO appointment)
         {
             SuggestedAppointment = appointment;
-            ConflictingAppointments = new List<DoctorAppointment>();
+            ConflictingAppointments = new List<DoctorAppointmentDTO>();
             RescheduledAppointments = new List<RescheduledAppointmentDTO>();
         }
 
@@ -33,7 +34,7 @@ namespace Model
         public void CheckIfConflictingIsUrgent()
         {
             bool valueSet = false;
-            foreach(DoctorAppointment conflictiong in ConflictingAppointments)
+            foreach(DoctorAppointmentDTO conflictiong in ConflictingAppointments)
             {
                 if (conflictiong.IsUrgent)
                 {

@@ -1,6 +1,9 @@
 ﻿using Controllers;
 using Enums;
+using Hospital_IS.Controllers;
 using Hospital_IS.DTOs;
+using Hospital_IS.DTOs.SecretaryDTOs;
+using Hospital_IS.Service;
 using Model;
 using System;
 using System.Collections.ObjectModel;
@@ -14,9 +17,9 @@ namespace Hospital_IS.SecretaryView
     /// </summary>
     public partial class ScheduleEmergencyAppointment : Window
     {
-        public ObservableCollection<Patient> Patients { get; set; } = new ObservableCollection<Patient>();
-        public ObservableCollection<Specialty> Specializations { get; set; } = new ObservableCollection<Specialty>();
-        public ObservableCollection<Room> Rooms { get; set; } = new ObservableCollection<Room>();
+        public ObservableCollection<PatientDTO> Patients { get; set; } = new ObservableCollection<PatientDTO>();
+        public ObservableCollection<string> Specializations { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<RoomDTO> Rooms { get; set; } = new ObservableCollection<RoomDTO>();
         public ObservableCollection<SuggestedEmergencyAppDTO> SuggestedAppointments { get; set; }
         public ObservableCollection<RescheduledAppointmentDTO> RescheduledAppointments { get; set; }
 
@@ -26,8 +29,8 @@ namespace Hospital_IS.SecretaryView
             InitializeComponent();
             this.sa = sa;
 
-            Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAllRegisteredPatients());
-            Specializations = new ObservableCollection<Specialty>(SpecializationController.Instance.GetAll());
+            Patients = new ObservableCollection<PatientDTO>(SecretaryUserManagementService.Instance.GetAllRegisteredPatients());
+            Specializations = new ObservableCollection<string>(SpecializationController.Instance.GetAllNames());
 
             this.DataContext = this;
 
@@ -37,9 +40,9 @@ namespace Hospital_IS.SecretaryView
         {
             foreach (RescheduledAppointmentDTO raDTO in RescheduledAppointments)
             {
-                DoctorAppointmentController.Instance.UpdateAppointment(raDTO.OldDocAppointment, raDTO.NewDocAppointment);  //notifikacije ???
+                DoctorAppointmentManagementController.Instance.UpdateAppointment(raDTO.OldDocAppointment, raDTO.NewDocAppointment);  //notifikacije ???
             }
-            DoctorAppointmentController.Instance.AddAppointment(SuggestedAppointments[dgSuggestedAppointments.SelectedIndex].SuggestedAppointment);
+            DoctorAppointmentManagementController.Instance.AddAppointment(SuggestedAppointments[dgSuggestedAppointments.SelectedIndex].SuggestedAppointment);
 
             sa.uca.RefreshGrid();
 
@@ -52,13 +55,13 @@ namespace Hospital_IS.SecretaryView
             if (cbAppType.SelectedIndex == 0)
             {
                 cbSpecialty.IsEnabled = false;
-                Rooms = new ObservableCollection<Room>(RoomController.Instance.GetRoomByType(RoomType.ConsultingRoom));
+                Rooms = new ObservableCollection<RoomDTO>(DoctorAppointmentManagementService.Instance.GetRoomByType(RoomType.ConsultingRoom));
                 cbRoom.ItemsSource = Rooms;
             }
             else
             {
                 cbSpecialty.IsEnabled = true;
-                Rooms = new ObservableCollection<Room>(RoomController.Instance.GetRoomByType(RoomType.OperationRoom));
+                Rooms = new ObservableCollection<RoomDTO>(DoctorAppointmentManagementService.Instance.GetRoomByType(RoomType.OperationRoom));
                 cbRoom.ItemsSource = Rooms;
             }
         }
@@ -76,7 +79,7 @@ namespace Hospital_IS.SecretaryView
             if (cbPatient.IsEnabled)
                 emerAppointmentDTO.Patient = Patients[cbPatient.SelectedIndex];
             else
-                emerAppointmentDTO.Patient = PatientController.Instance.GetPatientByID(Int32.Parse(txtGuest.Text));
+                emerAppointmentDTO.Patient = SecretaryUserManagementService.Instance.GetPatientByID(Int32.Parse(txtGuest.Text));
             emerAppointmentDTO.Room = Rooms[cbRoom.SelectedIndex];
             emerAppointmentDTO.DurationInMinutes = Int32.Parse(txtAppDuration.Text);
 

@@ -76,5 +76,9 @@ namespace DTOs
             Doctor = docAppointmentDTO.Doctor;
             IsFinished = docAppointmentDTO.IsFinished;
         }
+
+        public DoctorAppointmentDTO()
+        { 
+        }
     }
 }

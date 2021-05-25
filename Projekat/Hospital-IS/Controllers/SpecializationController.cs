@@ -27,6 +27,10 @@ namespace Controllers
         {
             return SpecializationService.Instance.GetAll();
         }
+        public List<string> GetAllNames()
+        {
+            return SpecializationService.Instance.GetAllNames();
+        }
 
     }
 }

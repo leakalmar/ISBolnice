@@ -54,6 +54,14 @@ namespace Model
             Type = type;
         }
 
+        public Room(int roomId, RoomType type, int roomNumber, int bedNumber)
+        {
+            RoomId = roomId;
+            Type = type;
+            RoomNumber = roomNumber;
+            BedNumber = bedNumber;
+        }
+
         public void AddEquipment(Equipment newEquip)
         {
             if (newEquip == null)
