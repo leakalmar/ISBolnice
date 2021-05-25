@@ -15,11 +15,5 @@ namespace Hospital_IS.View
             this.DataContext = HospitalEvaluationViewModel;
             InitializeComponent();
         }
-        /*
-        private void EvaluateHospital(object sender, RoutedEventArgs e)
-        {
-            PatientHospitalEvaluationController.Instance.AddAppointmentEvaluation(Grades.SelectedIndex+1, Comment.Text, DateTime.Today, PatientMainWindowViewModel.Patient.Id);
-            this.Close();
-        }*/
     }
 }

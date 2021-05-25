@@ -19,6 +19,8 @@ namespace Hospital_IS.View.PatientViewModels
         private string endTherapy;
         private string usage;
         private string sideEffects;
+        private bool showTherapyInfo = false;
+        private bool chooseItem = true;
 
         public TherapyPatientViewModel()
         {
@@ -144,6 +146,32 @@ namespace Hospital_IS.View.PatientViewModels
             }
         }
 
+        public bool ShowTherapyInfo
+        {
+            get { return showTherapyInfo; }
+            set
+            {
+                if (showTherapyInfo != value)
+                {
+                    showTherapyInfo = value;
+                    OnPropertyChanged("ShowTherapyInfo");
+                }
+            }
+        }
+
+        public bool ChooseItem
+        {
+            get { return chooseItem; }
+            set
+            {
+                if (chooseItem != value)
+                {
+                    chooseItem = value;
+                    OnPropertyChanged("ChooseItem");
+                }
+            }
+        }
+
         private void SetTherapyInfo()
         {
             int usageHourDifference = (int)24 / Therapy.TimesADay;
@@ -155,6 +183,8 @@ namespace Hospital_IS.View.PatientViewModels
             EndTherapy = Therapy.TherapyEnd.ToString("dd.MM.yyyy.");
             Usage = Therapy.Medicine.Usage;
             SideEffects = Therapy.Medicine.SideEffects;
+            ChooseItem = false;
+            ShowTherapyInfo = true;
         }
 
         private void LoadTherapyChartData()
@@ -164,8 +194,8 @@ namespace Hospital_IS.View.PatientViewModels
                 new KeyValuePair<string,int>("Feb", ChartController.Instance.GetNumberOfTherapiesByMonth(PatientMainWindowViewModel.Patient.Id, "Feb")),
                 new KeyValuePair<string,int>("Mar", ChartController.Instance.GetNumberOfTherapiesByMonth(PatientMainWindowViewModel.Patient.Id, "Mar")),
                 new KeyValuePair<string,int>("Apr", ChartController.Instance.GetNumberOfTherapiesByMonth(PatientMainWindowViewModel.Patient.Id, "Apr")),
-                new KeyValuePair<string,int>("May", ChartController.Instance.GetNumberOfTherapiesByMonth(PatientMainWindowViewModel.Patient.Id, "May")),
-                new KeyValuePair<string,int>("June", ChartController.Instance.GetNumberOfTherapiesByMonth(PatientMainWindowViewModel.Patient.Id, "June"))
+                new KeyValuePair<string,int>("Maj", ChartController.Instance.GetNumberOfTherapiesByMonth(PatientMainWindowViewModel.Patient.Id, "May")),
+                new KeyValuePair<string,int>("Jun", ChartController.Instance.GetNumberOfTherapiesByMonth(PatientMainWindowViewModel.Patient.Id, "June"))
             };
         }
     }

@@ -34,4 +34,5 @@ namespace Hospital_IS.DTOs
             PrimaryRoom = primaryRoom;
         }
     }
+
 }
