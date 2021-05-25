@@ -1,4 +1,5 @@
 ﻿using DTOs;
+using Hospital_IS.Controllers;
 using Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +10,7 @@ namespace Hospital_IS.DoctorConverters
     {
         public AppointmentRowDTO ConvertModelToDTO(DoctorAppointment appointemnt)
         {
-            DoctorAppointmentDTO doctorAppointmentDTO = new DoctorAppointmentDTO(appointemnt.Reserved, appointemnt.AppointmentCause, appointemnt.AppointmentStart, appointemnt.AppointmentEnd, appointemnt.Type, appointemnt.Room, appointemnt.Id, appointemnt.NameSurnamePatient, appointemnt.AppTypeText, appointemnt.IsUrgent, appointemnt.Patient, appointemnt.Doctor, appointemnt.IsFinished);
+            DoctorAppointmentDTO doctorAppointmentDTO = DoctorAppointmentManagementController.Instance.GetAppointmentById(appointemnt.Id);
             AppointmentRowDTO appointmentRowDTO = new AppointmentRowDTO(doctorAppointmentDTO, false);
 
             return appointmentRowDTO;

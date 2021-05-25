@@ -1,6 +1,7 @@
 ﻿using Controllers;
 using DTOs;
 using Hospital_IS.Commands;
+using Hospital_IS.Controllers;
 using Hospital_IS.DoctorView;
 using Model;
 using System;
@@ -223,9 +224,11 @@ namespace Hospital_IS.DoctorViewModel
             {
                 DoctorAppointmentDTO selectedAppointment = SelectedAppointment.Appointment;
                 DoctorAppointmentController.Instance.EndAppointment(selectedAppointment);
+                DoctorAppointmentManagementController.Instance.EndAppointment(selectedAppointment);
                 ReportDTO reportDTO = new ReportDTO(selectedAppointment.AppointmentStart, selectedAppointment.Doctor.Name, selectedAppointment.Doctor.Surname, selectedAppointment.Type, selectedAppointment.AppointmentCause, ReportView.reportDetail.Text, ReportView._ViewModel.Prescriptions.Count, selectedAppointment.Patient.Id);
                 ChartController.Instance.AddReport(reportDTO);
                 //ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView._ViewModel.Prescriptions), selectedAppointment.Patient);
+                ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView._ViewModel.Prescriptions), PatientController.Instance.GetPatientByID(SelectedAppointment.Appointment.Patient.Id));
                 this.MainNavigationService.Navigate(new AppDetail());
             }
         }
@@ -274,7 +277,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void SetFields()
         {
-            //Patient = selectedAppointment.Appointment.Patient;
+            Patient = PatientController.Instance.GetPatientByID(selectedAppointment.Appointment.Patient.Id);
             SearchMedicineView = new SearchMedicine();
             SearchMedicineView._ViewModel.Patient = Patient;
             SearchMedicineView._ViewModel.DatePrescribed = SelectedAppointment.Appointment.AppointmentStart;

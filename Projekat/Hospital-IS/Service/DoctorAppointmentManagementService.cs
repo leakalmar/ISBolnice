@@ -107,13 +107,30 @@ namespace Hospital_IS.Service
 
                     Patient patient = PatientService.Instance.GetPatientByID(newDoctorAppointmentDTO.Patient.Id);
                     Doctor doctor = DoctorService.Instance.GetDoctorByID(newDoctorAppointmentDTO.Doctor.Id);
-                    DoctorAppointmentService.Instance.RemoveAppointment(new DoctorAppointment(newDoctorAppointmentDTO.Reserved, newDoctorAppointmentDTO.AppointmentCause,
-                        newDoctorAppointmentDTO.AppointmentStart, newDoctorAppointmentDTO.AppointmentEnd, newDoctorAppointmentDTO.Type, newDoctorAppointmentDTO.Room,
-                        newDoctorAppointmentDTO.Id, newDoctorAppointmentDTO.IsUrgent, patient, doctor, newDoctorAppointmentDTO.IsFinished));
+                    DoctorAppointment oldDoctorAppointment = new DoctorAppointment(oldDoctorAppointmentDTO.Reserved, oldDoctorAppointmentDTO.AppointmentCause,
+                        oldDoctorAppointmentDTO.AppointmentStart, oldDoctorAppointmentDTO.AppointmentEnd, oldDoctorAppointmentDTO.Type, oldDoctorAppointmentDTO.Room,
+                        oldDoctorAppointmentDTO.Id, oldDoctorAppointmentDTO.IsUrgent, patient, doctor, oldDoctorAppointmentDTO.IsFinished);
+                    DoctorAppointment newDoctorAppointment = new DoctorAppointment(oldDoctorAppointmentDTO.Reserved, oldDoctorAppointmentDTO.AppointmentCause,
+                        oldDoctorAppointmentDTO.AppointmentStart, oldDoctorAppointmentDTO.AppointmentEnd, oldDoctorAppointmentDTO.Type, oldDoctorAppointmentDTO.Room,
+                        oldDoctorAppointmentDTO.Id, oldDoctorAppointmentDTO.IsUrgent, patient, doctor, oldDoctorAppointmentDTO.IsFinished);
+                    DoctorAppointmentService.Instance.UpdateAppointment(oldDoctorAppointment, newDoctorAppointment);
 
                     return;
                 }
             }
+        }
+
+        public DoctorAppointmentDTO GetAppointmentById(int id)
+        {
+            DoctorAppointmentDTO foundAppointment = null;
+            foreach (DoctorAppointmentDTO appointment in AllAppointments)
+            {
+                if (appointment.Id.Equals(id))
+                {
+                    foundAppointment = appointment;
+                }
+            }
+            return foundAppointment;
         }
     }
 }

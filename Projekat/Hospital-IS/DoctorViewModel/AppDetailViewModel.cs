@@ -102,8 +102,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Methods
         private void SetAppointmentFeilds()
         {
-            List<DoctorAppointment> appointments = DoctorAppointmentController.Instance.GetAllByDoctor(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
-            ObservableCollection<AppointmentRowDTO> doctorAppointments = new DoctorAppointmentConverter().ConvertCollectionToDTO(appointments);
+            ObservableCollection<AppointmentRowDTO> doctorAppointments = new DoctorAppointmentConverter().ConvertCollectionToDTO(DoctorAppointmentController.Instance.GetAllByDoctor(DoctorMainWindow.Instance._ViewModel.Doctor.Id));
 
             appointmentsView = new CollectionViewSource { Source = doctorAppointments }.View;
 
@@ -114,7 +113,7 @@ namespace Hospital_IS.DoctorViewModel
             appointmentsView.SortDescriptions.Add(new SortDescription("Appointment.AppointmentStart", ListSortDirection.Ascending));
 
             AppointmentsView = appointmentsView;
-            if (appointments.Count == 0)
+            if (doctorAppointments.Count == 0)
             {
                 DoctorMainWindow.Instance._ViewModel.NavigateToHomePageCommand.Execute(null);
             }
