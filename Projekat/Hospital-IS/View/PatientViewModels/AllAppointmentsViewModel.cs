@@ -3,17 +3,21 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace Hospital_IS.View.PatientViewModels
 {
     public class AllAppointmentsViewModel : BindableBase
     {
         public ObservableCollection<DoctorAppointment> AllAppointments { get; set; }
+        //private ICollectionView allApps;
         public KeyValuePair<string, int>[] ChartData { get; set; }
 
         private DoctorAppointment selectedDoctorAppointment;
         private bool shouldShowEvaluate = false;
         private bool shouldShowNote = false;
+        private bool chooseItem = true;
         private string date;
         private string doctorName;
         private string appointmentType;
@@ -26,11 +30,24 @@ namespace Hospital_IS.View.PatientViewModels
 
         public AllAppointmentsViewModel()
         {
+            /*
+            ObservableCollection<DoctorAppointment>  allAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id));
+            AllAppointments = new CollectionViewSource { Source = allAppointments }.View;*/
             AllAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id));
             ShowEvaluationWindow = new MyICommand(ShowEvaluation);
             ShowNote = new MyICommand(ShowAppNote);
             LoadAppointmentChartData();
         }
+        /*
+        public ICollectionView AllAppointments
+        {
+            get { return allApps; }
+            set
+            {
+                allApps = value;
+                OnPropertyChanged("Patients");
+            }
+        }*/
 
         public DoctorAppointment SelectedDoctorAppointment
         {
@@ -137,6 +154,19 @@ namespace Hospital_IS.View.PatientViewModels
             }
         }
 
+        public bool ChooseItem
+        {
+            get { return chooseItem; }
+            set
+            {
+                if (chooseItem != value)
+                {
+                    chooseItem = value;
+                    OnPropertyChanged("ChooseItem");
+                }
+            }
+        }
+
         private void SetAppointmentInfo()
         {
             Date = SelectedDoctorAppointment.AppointmentStart.ToString("dd.MM.yyyy.");
@@ -144,6 +174,7 @@ namespace Hospital_IS.View.PatientViewModels
             AppointmentType = SelectedDoctorAppointment.AppTypeText;
             RoomId = SelectedDoctorAppointment.Room;
             Details = SelectedDoctorAppointment.AppointmentCause;
+            ChooseItem = false;
             ShouldShowNote = true;
             if (SelectedDoctorAppointment.AppointmentStart <= DateTime.Today && !PatientAppointmentEvaluationController.Instance.IsAppointmentEvaluated(SelectedDoctorAppointment.Id))
             {
@@ -176,8 +207,8 @@ namespace Hospital_IS.View.PatientViewModels
                 new KeyValuePair<string,int>("Feb", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "Feb")),
                 new KeyValuePair<string,int>("Mar", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "Mar")),
                 new KeyValuePair<string,int>("Apr", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "Apr")),
-                new KeyValuePair<string,int>("May", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "May")),
-                new KeyValuePair<string,int>("June", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "June"))
+                new KeyValuePair<string,int>("Maj", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "May")),
+                new KeyValuePair<string,int>("Jun", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "June"))
             };
         }
     }

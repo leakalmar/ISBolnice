@@ -27,41 +27,6 @@ namespace Hospital_IS.View
             if (NotificationMessages.Count > 0)
                 ListViewNotifications.ItemsSource = NotificationMessages;*/
         }
-        /*
-        private void logout(object sender, RoutedEventArgs e)
-        {
-            MainWindow login = new MainWindow();
-            login.Show();
-            this.Hide();
-        }
-
-        private void home(object sender, RoutedEventArgs e)
-        {
-            PatientMainWindowView.Instance.Show();
-            this.Close();
-        }
-
-        private void reserveApp(object sender, RoutedEventArgs e)
-        {
-            AppointmentPatient ap = new AppointmentPatient();
-            ap.Show();
-            this.Close();
-        }
-        
-        private void allApp(object sender, RoutedEventArgs e)
-        {
-            //AllAppointments all = new AllAppointments();
-            //all.Show();
-            //this.Close();
-        }
-        
-        private void showTherapy(object sender, RoutedEventArgs e)
-        {
-            TherapyPatient therapy = new TherapyPatient();
-            therapy.Show();
-            this.Close();
-        }
-        */
         private void ShowNotification(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;

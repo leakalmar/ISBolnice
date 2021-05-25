@@ -81,7 +81,7 @@
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="Black"/>
                             <GradientStop Color="#FF184095" Offset="0.0"/>
-                            <GradientStop Color="#FF5B317E" Offset="1"/>
+                            <GradientStop Color="CadetBlue" Offset="1.5"/>
                         </LinearGradientBrush>
                     </Button.Background> Prikaži termine
                 </Button>
@@ -127,23 +127,9 @@
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
                         <GradientStop Color="#FF184095" Offset="0.0"/>
-                        <GradientStop Color="#FF5B317E" Offset="1"/>
+                        <GradientStop Color="CadetBlue" Offset="1.5"/>
                     </LinearGradientBrush>
                 </Button.Background> Zakaži
-            </Button>
-            <Button x:Name="change" Grid.Column="1" Command="{Binding RescheduleAppointment}"  Margin="250,10,250,30" FontSize="24" Foreground="White" Cursor="Hand" Visibility="Collapsed">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="20,20,20,20"/>
-                    </Style>
-                </Button.Resources>
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="#FF184095" Offset="0.0"/>
-                        <GradientStop Color="#FF5B317E" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background> Izmeni
             </Button>
         </StackPanel>
     </Grid>

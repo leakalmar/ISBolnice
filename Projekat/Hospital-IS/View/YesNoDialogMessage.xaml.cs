@@ -16,19 +16,6 @@ namespace Hospital_IS.View
             this.DataContext = DialogMessageViewModel;
             InitializeComponent();           
         }
-        /*
-        private void EvaluateHospital(object sender, RoutedEventArgs e)
-        {
-            PatientHospitalEvaluationWindow hospitalEvaluation = new PatientHospitalEvaluationWindow();
-            hospitalEvaluation.HospitalEvaluationViewModel.OnRequestClose += (s, e) => hospitalEvaluation.Close();
-            hospitalEvaluation.Show();
-            this.Close();
-        }
-
-        private void NegativeAnswer(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }*/
     }
 }
 

@@ -32,7 +32,6 @@ namespace Hospital_IS.Controllers
 
         public void AddAppointment(DoctorAppointmentDTO docAppointmentDTO)
         {
-            docAppointmentDTO.Reserved = true;
             DoctorAppointmentManagementService.Instance.AddAppointment(docAppointmentDTO);
         }
 
@@ -43,7 +42,6 @@ namespace Hospital_IS.Controllers
 
         public void UpdateAppointment(DoctorAppointmentDTO oldDoctorAppointmentDTO, DoctorAppointmentDTO newDoctorAppointmentDTO)
         {
-            newDoctorAppointmentDTO.Id = oldDoctorAppointmentDTO.Id;
             DoctorAppointmentManagementService.Instance.UpdateAppointment(oldDoctorAppointmentDTO, newDoctorAppointmentDTO);
         }
 
@@ -60,6 +58,10 @@ namespace Hospital_IS.Controllers
         {
             docAppointmentDTO.IsFinished = true;
             DoctorAppointmentManagementService.Instance.UpdateAppointment(docAppointmentDTO, docAppointmentDTO);
+        }
+        public bool VerifyAppointment(DoctorAppointmentDTO doctorAppointmentDTO)
+        {
+            return DoctorAppointmentManagementService.Instance.VerifyAppointment(doctorAppointmentDTO);
         }
     }
 }
