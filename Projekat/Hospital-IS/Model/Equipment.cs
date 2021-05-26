@@ -18,7 +18,6 @@ namespace Model
             get { return (int)EquipType; }
         }
 
-
         public Equipment(EquiptType equipType, int equiptId, string name, int quantity)
         {
             this.EquipType = equipType;

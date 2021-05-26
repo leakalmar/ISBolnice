@@ -61,6 +61,14 @@ namespace Model
             RoomNumber = roomNumber;
             BedNumber = bedNumber;
         }
+        public Room(int roomFloor, int roomNumber, int surfaceArea, RoomType type, List<Equipment> equipment)
+        {
+            RoomFloor = roomFloor;
+            RoomNumber = roomNumber;
+            SurfaceArea = surfaceArea;
+            Type = type;
+            Equipment = equipment;
+        }
 
         public void AddEquipment(Equipment newEquip)
         {
