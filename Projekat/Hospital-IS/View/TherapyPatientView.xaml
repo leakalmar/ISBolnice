@@ -1,0 +1,165 @@
+﻿<UserControl x:Class="Hospital_IS.View.TherapyPatientView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital_IS.View" 
+        xmlns:viewModel="clr-namespace:Hospital_IS.View.PatientViewModels"
+        xmlns:vml="clr-namespace:Hospital_IS.View.VML"
+        xmlns:dvc="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        vml:ViewModelLocator.AutoHookedUpViewModel="True"
+        mc:Ignorable="d"
+        d:Height="660" d:Width="980" 
+        Background="Transparent"  
+        >
+    <UserControl.Resources>
+        <Style x:Key="ChartColor" TargetType="{x:Type Grid}">
+            <Setter Property="Background" Value="CadetBlue"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border CornerRadius="20,0,0,0" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="11" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+       
+        <Label Content="Terapije:" Grid.Row="0" Grid.Column="0" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
+        <DataGrid x:Name="dataGridTherapy" RowBackground="#FF297CAC" Background="#FF297CAC" MouseDoubleClick="showRow"
+                  IsReadOnly="True" SelectedItem="{Binding Therapy}" ItemsSource="{Binding Therapies, Mode=TwoWay}"  
+                  CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="0" 
+                  Grid.Row="1" Grid.RowSpan="9" Margin="10,0,10,310" 
+                  CanUserResizeColumns="False" CanUserResizeRows="False" 
+                  Foreground="White" HorizontalGridLinesBrush="White" 
+                  VerticalGridLinesBrush="#FFFFFEFE" CanUserDeleteRows="False" 
+                  SelectionMode="Single" HorizontalScrollBarVisibility="Disabled" RowHeaderWidth="0" GridLinesVisibility="Horizontal">
+            <DataGrid.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="0,0,20,20"/>
+                </Style>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="Background" Value="White" />
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="BorderBrush" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Vreme"  Width="100" Binding="{Binding FirstUsageTime, StringFormat=\{0:0h\}}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#FF297CAC"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Lek"  Width="100" Binding="{Binding Medicine.Name}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#FF297CAC"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Količina"  Width="50" Binding="{Binding Quantity}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#FF297CAC"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Početak terapije"  Width="*" Binding="{Binding TherapyStart, StringFormat=\{0:dd.MM.yyyy.\}}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#FF297CAC"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Kraj terapije"  Width="*" Binding="{Binding TherapyEnd, StringFormat=\{0:dd.MM.yyyy.\}}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#FF297CAC"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border x:Name="TherapyInfo" BorderThickness="0" BorderBrush="DeepSkyBlue" Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Margin="10,0,10,20" Visibility="Visible" CornerRadius="20,20,20,20" Background="#FF058D91">
+            <StackPanel x:Name="PersonalData" Grid.RowSpan="9" Grid.Row="1" Grid.Column="2" Margin="10,10,10,10" >
+
+                <Grid>
+                    <Label Content="Naziv leka:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="#FFFFFCFC" />
+                    <Label x:Name="Name" Content="{Binding Path = Name}" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White" />
+                </Grid>
+                <Grid>
+                    <Label Content="Količina pri svakoj konzumaciji:" Width="255"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
+                    <Label x:Name="Quantity" Content="{Binding Path = Quantity}" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White"/>
+                </Grid>
+                <Grid>
+                    <Label Content="Koliko puta dnevno:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
+                    <Label x:Name="TimesADay" Content="{Binding Path = TimesADay}" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White"/>
+                </Grid>
+                <Grid>
+                    <Label Content="Na svakih:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
+                    <Label x:Name="TimeSpan" Content="{Binding Path = TimeSpan}" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White" />
+                </Grid>
+                <Grid>
+                    <Label Content="Datum početka terapije:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="#FFFFFBFB" />
+                    <TextBlock x:Name="StartTherapy" Text="{Binding Path = StartTherapy}" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5" Foreground="White"/>
+                </Grid>
+                <Grid>
+                    <Label Content="Datum kraja terapije:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
+                    <TextBlock x:Name="EndTherapy" Text="{Binding Path = EndTherapy}"  HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White"/>
+                </Grid>
+                <Label Content="Uputstvo za upotrebu:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
+                <TextBlock x:Name="Usage" Text="{Binding Path = Usage}" TextWrapping="Wrap" Width="414" Background="{x:Null}" Height="94" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" MinWidth="414" MinHeight="94" MaxWidth="414" MaxHeight="94" Foreground="White"/>
+                <Label Content="Neželjena dejstva:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
+                <TextBlock x:Name="SideEffects" Text="{Binding Path = SideEffects}" TextWrapping="Wrap" Width="414" Background="{x:Null}" Height="106" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MinWidth="414" MinHeight="106" MaxWidth="414" MaxHeight="106" Foreground="White"/>
+            </StackPanel>
+        </Border>
+        <Border Background="CadetBlue" CornerRadius="20,20,20,20" Grid.Row="9" Margin="10,5,10,20">
+            <dvc:Chart Canvas.Left="10" Name="therapyChart"  
+                Width="500" Height="250"  
+                Background="Transparent"  
+                Title="Prikaz lekova po mesecima"  
+                LegendTitle="Broj lekova" BorderBrush="{x:Null}" PlotAreaStyle="{StaticResource ChartColor}">
+                <dvc:Chart.Series>
+                    <dvc:AreaSeries  
+                    Title="Area Chart"  
+                    Background="CadetBlue"
+                    IndependentValuePath="Key"  
+                    DependentValuePath="Value"
+                    ItemsSource="{Binding ChartData}">
+                        <dvc:AreaSeries.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black"/>
+                                <GradientStop Color="#FF190000" Offset="1"/>
+                            </LinearGradientBrush>
+                        </dvc:AreaSeries.Foreground>
+                    </dvc:AreaSeries>
+                </dvc:Chart.Series>
+            </dvc:Chart>
+        </Border>
+    </Grid>
+</UserControl>
+

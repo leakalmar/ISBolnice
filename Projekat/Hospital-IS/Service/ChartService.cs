@@ -2,8 +2,6 @@
 using Storages;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
 
 namespace Service
 {
@@ -68,6 +66,34 @@ namespace Service
             return reportPrescriptions;
         }
 
+        public Hospitalization GetActivHospitalization(int id)
+        {
+            Hospitalization ret = null;
+            List<Hospitalization> allHospitalizations = GetHospitalizationsByPatientId(id);
+            foreach (Hospitalization hospitalization in allHospitalizations)
+            {
+                if (hospitalization.Released == false)
+                {
+                    ret = hospitalization;
+                }
+            }
+            return ret;
+        }
+
+        public void ReleasePatient(int id)
+        {
+            MedicalHistory medicalHistory = GetChartById(id);
+            for (int i = 0; i < medicalHistory.Hospitalization.Count; i++)
+            {
+                if (medicalHistory.Hospitalization[i].Released == false)
+                {
+                    medicalHistory.Hospitalization[i].Released = true;
+                    cfs.SaveCharts(AllCharts);
+                    return;
+                }
+            }
+        }
+
         public void AddPrescriptions(List<Prescription> prescriptions, int id)
         {
             MedicalHistory medicalHistory = GetChartById(id);
@@ -79,6 +105,13 @@ namespace Service
         {
             MedicalHistory medicalHistory = GetChartById(id);
             medicalHistory.Reports.Add(newReport);
+            cfs.SaveCharts(AllCharts);
+        }
+
+        public void AddHospitalization(Hospitalization newHospitalization, int id)
+        {
+            MedicalHistory medicalHistory = GetChartById(id);
+            medicalHistory.Hospitalization.Add(newHospitalization);
             cfs.SaveCharts(AllCharts);
         }
 
@@ -103,6 +136,12 @@ namespace Service
             return medicalHistory.Reports;
         }
 
+        public List<Hospitalization> GetHospitalizationsByPatientId(int id)
+        {
+            MedicalHistory medicalHistory = GetChartById(id);
+            return medicalHistory.Hospitalization;
+        }
+
         public void SaveChart(MedicalHistory medicalHistory)
         {
             AllCharts.Add(medicalHistory);
@@ -121,6 +160,64 @@ namespace Service
                 }
             }
             return;
+        }
+
+        public int GetNumberOfTherapiesByMonth(int patientId, string month)
+        {
+            int numberOfTherapiesForMonth = 0;
+            switch (month)
+            {
+                case "Jan":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 1);
+                    break;
+                case "Feb":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 2);
+                    break;
+                case "Mar":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 3);
+                    break;
+                case "Apr":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 4);
+                    break;
+                case "May":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 5);
+                    break;
+                case "June":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 6);
+                    break;
+                case "July":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 7);
+                    break;
+                case "Aug":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 8);
+                    break;
+                case "Sep":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 9);
+                    break;
+                case "Oct":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 10);
+                    break;
+                case "Nov":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 11);
+                    break;
+                case "Dec":
+                    numberOfTherapiesForMonth = CheckMonth(patientId, 12);
+                    break;
+            }
+            return numberOfTherapiesForMonth;
+        }
+
+        private int CheckMonth(int patientId, int month)
+        {
+            int counter = 0;
+            foreach (Therapy therapy in GetTherapiesByPatientId(patientId))
+            {
+                if (therapy.TherapyStart.Month == month)
+                {
+                    counter++;
+                }
+            }
+            return counter;
         }
     }
 }

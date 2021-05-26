@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using Enums;
 using System;
 
 namespace Model

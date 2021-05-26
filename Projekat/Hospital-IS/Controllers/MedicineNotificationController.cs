@@ -4,7 +4,6 @@ using Model;
 using Service;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Controllers
 {
@@ -53,7 +52,7 @@ namespace Controllers
             reviewdNotification.Note = text;
             reviewdNotification.Title = "Odbijen " + reviewdNotification.Medicine.Name;
             reviewdNotification.SenderId.Clear();
-            reviewdNotification.SenderId.Add(DoctorHomePage.Instance.Doctor.Id);
+            reviewdNotification.SenderId.Add(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
             reviewdNotification.RecieverIds.Clear();
             reviewdNotification.RecieverIds.Add(6);
             reviewdNotification.DateSent = DateTime.Now;
@@ -67,7 +66,7 @@ namespace Controllers
 
         public void ApproveMedicine(MedicineNotification reviewdNotification)
         {
-            MedicineNotificationService.Instance.AddApprovalDeleteDoctor(reviewdNotification, DoctorHomePage.Instance.Doctor.Id);
+            MedicineNotificationService.Instance.AddApprovalDeleteDoctor(reviewdNotification, DoctorMainWindow.Instance._ViewModel.Doctor.Id);
         }
 
         public List<MedicineNotification> GetAll()

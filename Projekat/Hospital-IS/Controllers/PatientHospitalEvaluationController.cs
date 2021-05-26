@@ -1,8 +1,6 @@
 ﻿using Hospital_IS.Model;
 using Hospital_IS.Service;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Hospital_IS.Controllers
 {

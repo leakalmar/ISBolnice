@@ -1,3 +1,5 @@
+using DTOs;
+using Enums;
 using Newtonsoft.Json;
 using System;
 
@@ -43,6 +45,14 @@ namespace Model
             this.AppTypeText = docApp.AppTypeText;
         }
 
+        public DoctorAppointment(DoctorAppointmentDTO doctorAppointment) : base(doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd, doctorAppointment.Type, doctorAppointment.Room)
+        {
+            this.NameSurnamePatient = doctorAppointment.Patient.Name + " " + doctorAppointment.Patient.Surname;
+            this.Doctor = doctorAppointment.Doctor;
+            this.Patient = doctorAppointment.Patient;
+            this.Id = doctorAppointment.Id;
+        }
+
         public void SetAdmitted(Patient patient)
         {
             throw new NotImplementedException();
@@ -52,7 +62,7 @@ namespace Model
 
         public Doctor Doctor { get; set; }
 
-        public bool IsFinished { get; set; }
+        public bool IsFinished { get; set; } = false;
 
     }
 }

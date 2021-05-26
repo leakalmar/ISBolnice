@@ -1,16 +1,17 @@
 [
   {
     "Grade": 5,
-    "Comment": "Sjajan lekar!",
-    "DoctorAppointmentDate": "2021-04-24T00:00:00",
-    "PatientId": 1,
-    "DoctorId": 4
+    "Comment": "Odlican lekar!",
+    "DoctorAppointmentId": 5
+  },
+  {
+    "Grade": 4,
+    "Comment": "Jako dobar lekar, bas je fina",
+    "DoctorAppointmentId": 4
   },
   {
     "Grade": 5,
-    "Comment": "Jako prijatna i veoma stručna doktora.",
-    "DoctorAppointmentDate": "2021-04-22T00:00:00",
-    "PatientId": 1,
-    "DoctorId": 4
+    "Comment": "Doktorka Dragana je moja omiljena doktorka!!!",
+    "DoctorAppointmentId": 1
   }
 ]

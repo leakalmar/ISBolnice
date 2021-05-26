@@ -1,0 +1,131 @@
+﻿<UserControl  x:Class="Hospital_IS.View.RescheduleAppointmentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital_IS.View" 
+        xmlns:views="clr-namespace:Hospital_IS.View"
+        xmlns:viewModel="clr-namespace:Hospital_IS.View.PatientViewModels"
+        xmlns:vml="clr-namespace:Hospital_IS.View.VML"       
+        mc:Ignorable="d"
+        d:Height="660" d:Width="980" 
+        Background="Transparent"  
+       >
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border CornerRadius="20,0,0,0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="10" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <StackPanel Grid.RowSpan="10" Grid.Row="0" Grid.Column="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Izaberite lekara:" Grid.Column="0"  HorizontalAlignment="Left" FontSize="18" Margin="10,30,0,30" Background="{x:Null}"/>
+                <ComboBox x:Name="Doctors" IsEditable="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding Path=Doctors}" SelectedItem="{Binding Path=Doctor, Mode=TwoWay}"  Margin="5,33,45,33" Grid.Column="1" Height="28" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{} {0} {1}">
+                                        <Binding Path="Name"/>
+                                        <Binding Path="Surname"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
+            <Grid Height="161">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Izaberite datum pregleda:" Grid.Column="0"  HorizontalAlignment="Left" FontSize="18" Margin="10,0,0,127" Background="{x:Null}"/>
+                <DatePicker x:Name="Calendar" SelectedDate="{Binding Date,Mode=TwoWay}" Grid.Column="1" Margin="5,0,427,127" FontSize="14" SelectedDateFormat="Short" Height="28"/>
+                <Button x:Name="showApp" Command="{Binding ShowAvailableAppointments}" Grid.Column="1" Margin="394,120,86,14" Foreground="#FFFDFDFD" Cursor="Hand" >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="20,20,20,20"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black"/>
+                            <GradientStop Color="#FF184095" Offset="0.0"/>
+                            <GradientStop Color="#FF5B317E" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background> Prikaži termine
+                </Button>
+                <ComboBox x:Name="TimeSlot" SelectedIndex="{Binding TimeSlot,Mode=TwoWay}" Grid.Column="1" Margin="5,60,427,67" FontSize="14" Height="28">
+                    <ComboBoxItem Content="8:00-11:00"/>
+                    <ComboBoxItem Content="11:00-14:00"/>
+                    <ComboBoxItem Content="14:00-17:00"/>
+                    <ComboBoxItem Content="17:00-20:00"/>
+                </ComboBox>
+                <Label Content="Izaberite vremenski opseg:" Grid.Column="0"  HorizontalAlignment="Left" FontSize="18" Margin="10,60,0,67" Background="{x:Null}"/>
+                <Label Content="Izaberite prioritet:" Grid.Column="0"  HorizontalAlignment="Left" FontSize="18" Margin="10,120,0,0" Background="{x:Null}"/>
+                <RadioButton x:Name="DoctorPriority" GroupName="Priority" Margin="10,121,600,0" Grid.Column="2" Content="Lekar" FontSize="18" VerticalAlignment="Top"/>
+                <RadioButton x:Name="TimePriority" IsChecked="{Binding TimePriority}" GroupName="Priority" Margin="150,121,400,0" Grid.Column="2" Content="Vreme" FontSize="18" VerticalAlignment="Top"/>
+            </Grid>
+
+            <DataGrid x:Name="listOfAppointments" CanUserResizeRows="False" SelectedItem="{Binding DoctorApp}" CanUserAddRows="False" Grid.Column="3" ItemsSource="{Binding AvailableAppointments, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="2" Margin="110,10,100,50" AutoGenerateColumns="False" Height="233" Width="600" RowHeaderWidth="0">
+                <DataGrid.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="0,0,20,20"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Vreme i datum" Width="200" Binding="{Binding AppointmentStart,StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" CanUserResize="False" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Doktor"  Width="200">
+                        <DataGridTextColumn.Binding>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path=" Doctor.Name"/>
+                                <Binding Path=" Doctor.Surname"/>
+                            </MultiBinding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Soba" Binding="{Binding Room}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Button x:Name="change" Grid.Column="1" Command="{Binding RescheduleAppointment}"  Margin="250,10,250,30" FontSize="24" Foreground="White" Cursor="Hand" Visibility="Visible">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="20,20,20,20"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF184095" Offset="0.0"/>
+                        <GradientStop Color="#FF5B317E" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background> Izmeni
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

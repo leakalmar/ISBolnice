@@ -1,12 +1,9 @@
-﻿using DoctorView;
-using Hospital_IS.DoctorView;
+﻿using Hospital_IS.DoctorView;
+using Hospital_IS.Model;
 using Hospital_IS.Storages;
 using Model;
-using Storages;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
 
 namespace Service
 {
@@ -71,9 +68,9 @@ namespace Service
             pfs.SavePatients(AllPatients);
         }
 
-        public bool CheckIfAllergicToComponent(List<MedicineComponent> composition, List<String> allergies)
+        public bool CheckIfAllergicToComponent(string medicineName, List<String> allergies)
         {
-            List<MedicineComponent> components = composition;
+            List<MedicineComponent> components = MedicineService.Instance.GetByName(medicineName).Composition;
             foreach (MedicineComponent c in components)
             {
                 foreach (String allergie in allergies)
@@ -121,7 +118,7 @@ namespace Service
 
         public bool IsPatientTroll(Patient patient, DoctorAppointment doctorAppointment)
         {
-            int timeRange = 14;
+            int timeRange = 10;
             int maxAppointmentsInTimeRange = 3;
             if (doctorAppointment.AppointmentStart < patient.TrollMechanism.TrollCheckStartDate.AddDays(timeRange))
             {
@@ -138,26 +135,32 @@ namespace Service
 
         private void UpdatePatientTrollMechanism()
         {
-            int timeRange = 14;
+            int timeRange = 10;
             int maxAppointmentsInTimeRange = 3;
             foreach (Patient patient in AllPatients)
             {
                 if (patient.TrollMechanism.TrollCheckStartDate.AddDays(timeRange) == DateTime.Today)
                 {
                     patient.TrollMechanism.TrollCheckStartDate = DateTime.Today;
-                    if (DoctorAppointmentService.Instance.GetNumberOfAppointmentsInTimeRange(patient.Id, DateTime.Today, DateTime.Today.AddDays(timeRange)) > maxAppointmentsInTimeRange)
-                    {
-                        patient.TrollMechanism.IsTroll = true;
-                        patient.TrollMechanism.AppointmentCounterInTimeRange = DoctorAppointmentService.Instance.GetNumberOfAppointmentsInTimeRange(patient.Id, DateTime.Today, DateTime.Today.AddDays(timeRange));
-                    }
-                    else
-                    {
-                        patient.TrollMechanism.IsTroll = false;
-                        patient.TrollMechanism.AppointmentCounterInTimeRange = DoctorAppointmentService.Instance.GetNumberOfAppointmentsInTimeRange(patient.Id, DateTime.Today, DateTime.Today.AddDays(timeRange));
-                    }                  
+                    SetPatientTrollMechanism(patient, timeRange, maxAppointmentsInTimeRange);                  
                 }
             }
         }
+
+        private void SetPatientTrollMechanism(Patient patient,int timeRange, int maxAppointmentsInTimeRange)
+        {
+            if (DoctorAppointmentService.Instance.GetNumberOfAppointmentsInTimeRange(patient.Id, DateTime.Today, DateTime.Today.AddDays(timeRange)) > maxAppointmentsInTimeRange)
+            {
+                patient.TrollMechanism.IsTroll = true;
+                patient.TrollMechanism.AppointmentCounterInTimeRange = DoctorAppointmentService.Instance.GetNumberOfAppointmentsInTimeRange(patient.Id, DateTime.Today, DateTime.Today.AddDays(timeRange));
+            }
+            else
+            {
+                patient.TrollMechanism.IsTroll = false;
+                patient.TrollMechanism.AppointmentCounterInTimeRange = DoctorAppointmentService.Instance.GetNumberOfAppointmentsInTimeRange(patient.Id, DateTime.Today, DateTime.Today.AddDays(timeRange));
+            }
+        }
+
         public List<Patient> GetAllRegisteredPatients()
         {
             List<Patient> registeredPatients = new List<Patient>();
@@ -195,5 +198,35 @@ namespace Service
             AllPatients = pfs.GetAll();
         }
 
+        public PatientNote GetNoteForPatientByAppointmentId(int patientId, int appointmentId)
+        {
+            Patient patient = GetPatientByID(patientId);
+            foreach (PatientNote note in patient.PatientNotes)
+            {
+                if (note.AppointmentId.Equals(appointmentId))
+                {
+                    return note;
+                }
+            }
+            return null;
+        }
+
+        public void AddAppointmentNote(int patientId, PatientNote patientNote)
+        {
+            Patient patient = GetPatientByID(patientId);
+            patient.PatientNotes.Add(patientNote);
+            pfs.SavePatients(AllPatients);
+        }
+
+        public void SavePatients()
+        {
+            pfs.SavePatients(AllPatients);
+        }
+
+        public List<PatientNote> GetNotesByPatient(int patientId)
+        {
+            Patient patient = GetPatientByID(patientId);
+            return patient.PatientNotes;
+        }
     }
 }

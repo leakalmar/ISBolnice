@@ -1,7 +1,6 @@
-﻿using Controllers;
+﻿using Hospital_IS.Controllers;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Hospital_IS.SecretaryView;
-using Model;
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
@@ -16,7 +15,7 @@ namespace Hospital_IS
     /// </summary>
     public partial class UCPatientsView : UserControl
     {
-        public ObservableCollection<Patient> Patients { get; set; }
+        public ObservableCollection<PatientDTO> Patients { get; set; }
 
         public UCPatientsView()
         {
@@ -32,8 +31,8 @@ namespace Hospital_IS
             if (Patients != null)
                 Patients.Clear();
 
-            PatientController.Instance.ReloadPatients();
-            Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAllRegisteredPatients());
+            SecretaryManagementController.Instance.ReloadPatients();
+            Patients = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllRegisteredPatients());
             dataGridPatients.ItemsSource = Patients;
         }
 
@@ -45,9 +44,9 @@ namespace Hospital_IS
 
         private void ShowPatient(object sender, RoutedEventArgs e)
         {
-            if ((Patient)dataGridPatients.SelectedItem != null)
+            if ((PatientDTO)dataGridPatients.SelectedItem != null)
             {
-                Patient patient = (Patient)dataGridPatients.SelectedItem;
+                PatientDTO patient = (PatientDTO)dataGridPatients.SelectedItem;
                 PatientView pv = new PatientView(patient);
                 pv.Show();
             }
@@ -55,9 +54,9 @@ namespace Hospital_IS
 
         private void UpdatePatient(object sender, RoutedEventArgs e)
         {
-            if ((Patient)dataGridPatients.SelectedItem != null)
+            if ((PatientDTO)dataGridPatients.SelectedItem != null)
             {
-                Patient patient = (Patient)dataGridPatients.SelectedItem;
+                PatientDTO patient = (PatientDTO)dataGridPatients.SelectedItem;
                 UpdatePatientView upv = new UpdatePatientView(patient, this);
                 upv.Show();
             }
@@ -65,23 +64,12 @@ namespace Hospital_IS
 
         private void DeletePatient(object sender, RoutedEventArgs e)
         {
-            if ((Patient)dataGridPatients.SelectedItem != null)
+            if ((PatientDTO)dataGridPatients.SelectedItem != null)
             {
-                Patient patient = (Patient)dataGridPatients.SelectedItem;
+                PatientDTO patient = (PatientDTO)dataGridPatients.SelectedItem;
                 Patients.Remove(patient);
-                PatientController.Instance.DeletePatient(patient);
+                SecretaryManagementController.Instance.DeletePatient(patient);
             }
-        }
-
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value != null && value is DateTime && (DateTime)value < new DateTime(2, 1, 1))
-            {
-                return "";
-            }
-            else
-                return value;
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -89,13 +77,13 @@ namespace Hospital_IS
             ICollectionView view = new CollectionViewSource { Source = Patients }.View;
             view.Filter = delegate (object item)
             {
-                Patient patient = item as Patient;
+                PatientDTO patient = item as PatientDTO;
                 return CheckIfPatientMeetsSearchCriteria(patient);
             };
             dataGridPatients.ItemsSource = view;
         }
 
-        private bool CheckIfPatientMeetsSearchCriteria(Patient patient)
+        private bool CheckIfPatientMeetsSearchCriteria(PatientDTO patient)
         {
             string[] search = txtSearch.Text.ToLower().Split(" ");
             if (txtSearch.Text.Equals("Pretraži..."))

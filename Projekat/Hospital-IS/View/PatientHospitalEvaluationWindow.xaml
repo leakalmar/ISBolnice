@@ -12,7 +12,7 @@
     <Grid>
         <Border CornerRadius="20" Background="White" BorderBrush="#FF184095" BorderThickness="5" />
         <Label Content="Ocena:" Width="150" Margin="20,36,0,218" HorizontalAlignment="Left" FontSize="22" Foreground="#FF184095" FontWeight="Bold" />
-        <ComboBox x:Name="Grades" Background="#FF184095" Margin="200,44,150,228" FontSize="14" SelectedIndex="0" Height="28" Foreground="#FF020000" BorderBrush="#FF184095">
+        <ComboBox x:Name="Grades" SelectedIndex="{Binding Grade}" Background="#FF184095" Margin="200,44,150,228" FontSize="14" Height="28" Foreground="#FF020000" BorderBrush="#FF184095">
             <ComboBoxItem Content="1"/>
             <ComboBoxItem Content="2"/>
             <ComboBoxItem Content="3"/>
@@ -20,8 +20,8 @@
             <ComboBoxItem Content="5"/>
         </ComboBox>
         <Label Content="Komentar:" Width="150" Margin="20,83,0,167" HorizontalAlignment="Left" FontSize="22" Foreground="#FF184095" FontWeight="Bold" />
-        <TextBox x:Name="Comment" BorderBrush="#FF184095" TextWrapping="Wrap" Width="400" Background="{x:Null}" Height="100" Margin="25,132,25,68" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" Foreground="Black"/>
-        <Button x:Name="Evaluate" Visibility="Visible" Grid.Column="1" Margin="100,250,100,20" Foreground="#FFFDFDFD" Cursor="Hand" FontSize="18" Click="EvaluateHospital">
+        <TextBox x:Name="Comment" Text="{Binding Comment}" BorderBrush="#FF184095" TextWrapping="Wrap" Width="400" Background="{x:Null}" Height="100" Margin="25,132,25,68" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" Foreground="Black"/>
+        <Button x:Name="Evaluate" Command="{Binding EvaluateHospital}" Visibility="Visible" Grid.Column="1" Margin="100,250,100,20" Foreground="#FFFDFDFD" Cursor="Hand" FontSize="18">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20,20,20,20"/>

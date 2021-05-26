@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="Hospital_IS.View.HomePatientView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital_IS.View" 
+        xmlns:viewModel="clr-namespace:Hospital_IS.View.PatientViewModels"
+        xmlns:vml="clr-namespace:Hospital_IS.View.VML"
+        vml:ViewModelLocator.AutoHookedUpViewModel="True"
+        mc:Ignorable="d"
+        d:Height="660" d:Width="980" 
+        Background="Transparent"  
+        >
+    <Grid>
+        <!--Grid.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="0,20,0,0"/>
+            </Style>
+        </-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border CornerRadius="20,0,0,0" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="11" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <StackPanel x:Name="PersonalData" Grid.RowSpan="8" Grid.Row="1" Grid.Column="0">
+            <Grid>
+                <Label Content="Ime:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
+                <Label x:Name="Name" Content="{Binding Path=Name}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+            </Grid>
+            <Grid>
+                <Label Content="Prezime:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
+                <Label x:Name="Surname" Content="{Binding Path=Surname}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+            </Grid>
+            <Grid>
+                <Label Content="Datum rođenja:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
+                <TextBlock x:Name="Birth"  Text="{Binding Path=BirthDate}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5"/>
+            </Grid>
+            <Grid>
+                <Label Content="Adresa:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
+                <Label x:Name="Address"  Content="{Binding Path=Address}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+            </Grid>
+            <Grid >
+                <Label Content="Kreiran nalog:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
+                <TextBlock x:Name="FileDate"  Text="{Binding Path=FileDate}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5"/>
+            </Grid>
+            <Grid>
+                <Label Content="Poslodavac:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
+                <Label x:Name="Employer" Content="{Binding Path=Employer}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+            </Grid>
+            <Grid>
+                <Label Content="Email:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
+                <Label x:Name="Email" Content="{Binding Path=Email}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+            </Grid>
+        </StackPanel>
+
+        <Label Content="Lista pregleda:" Grid.Row="0" Grid.Column="1" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
+        <DataGrid x:Name="dataGridAppointment" SelectedItem="{Binding SelectedApp}"  ItemsSource="{Binding FutureAppointments, Mode=TwoWay}" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="1" Grid.RowSpan="10" Margin="10,10,30,100" RowHeaderWidth="0">
+            <DataGrid.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="0,0,20,20"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Datum i vreme" Binding="{Binding AppointmentStart, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" Width="200"/>
+                <DataGridTextColumn Header="Doktor"  Width="200">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Path=" Doctor.Name"/>
+                            <Binding Path=" Doctor.Surname"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Soba" Binding="{Binding Room}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="changeApp" Command="{Binding RescheduleAppointment}"  Grid.Column="2" Grid.Row="10" Margin="250,230,200,40" Foreground="#FFFDFAFA" FontSize="16" Cursor="Hand" Click="RescheduleAppointment">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20,20,20,20"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF184095" Offset="0.0"/>
+                    <GradientStop Color="#FF5B317E" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background> Izmeni termin
+        </Button>
+        <Button x:Name="deleteApp" Command="{Binding CancelAppointment}" Grid.Column="2" Grid.Row="11" Margin="420,230,30,40" Foreground="White" FontSize="16" Cursor="Hand" >
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20,20,20,20"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF184095" Offset="0.0"/>
+                    <GradientStop Color="#FF5B317E" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background> Otkaži termin
+        </Button>
+    </Grid>
+</UserControl>

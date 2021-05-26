@@ -1,12 +1,7 @@
-using Hospital_IS.DoctorView;
 using Hospital_IS.Storages;
-using Service;
 using Storages;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace Model
 {

@@ -1,11 +1,4 @@
-﻿using Hospital_IS.ManagerViewModel;
-using Model;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-
-namespace Hospital_IS.ManagerConverter
+﻿namespace Hospital_IS.ManagerConverter
 {
     public class RoomConverter
     {

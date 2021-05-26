@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using Enums;
 using Hospital_IS.DTOs;
 using Model;
 using System;

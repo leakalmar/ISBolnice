@@ -1,8 +1,6 @@
 ﻿using Controllers;
 using Hospital_IS.Controllers;
-using Hospital_IS.Storages;
 using Model;
-using Storages;
 using System;
 using System.Windows;
 

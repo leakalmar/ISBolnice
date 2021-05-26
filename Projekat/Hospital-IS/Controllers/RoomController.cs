@@ -1,8 +1,8 @@
-﻿using Model;
+﻿using Enums;
+using Model;
 using Service;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 
 namespace Controllers
@@ -49,6 +49,11 @@ namespace Controllers
         public List<Room> GetRoomByType(RoomType type)
         {
             return RoomService.Instance.GetRoomByType(type);
+        }
+
+        public Room GetRoomById(int roomId)
+        {
+            return RoomService.Instance.GetRoomById(roomId);
         }
 
         public void AddEquipment(Room room, Equipment newEquip)

@@ -1,9 +1,7 @@
-﻿using DoctorView;
+﻿using Hospital_IS.Model;
 using Model;
 using Service;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Controllers
 {
@@ -70,14 +68,34 @@ namespace Controllers
             return PatientService.Instance.CheckIfAllergicToMedicine(patient.Alergies, medicine.Name);
         }
 
-        public bool CheckIfAllergicToComponent(Patient patient,Medicine medicine)
+        public bool CheckIfAllergicToComponent(Patient patient,string medicineName)
         {
-            return PatientService.Instance.CheckIfAllergicToComponent(medicine.Composition, patient.Alergies);
+            return PatientService.Instance.CheckIfAllergicToComponent(medicineName, patient.Alergies);
         }
 
         public bool IsPatientTroll(Patient patient, DoctorAppointment doctorAppointment)
         {
             return PatientService.Instance.IsPatientTroll(patient, doctorAppointment);
+        }
+
+        public PatientNote GetNoteForPatientByAppointmentId(int patientId, int appointmentId)
+        {
+            return PatientService.Instance.GetNoteForPatientByAppointmentId(patientId, appointmentId);
+        }
+
+        public void AddAppointmentNote(int patientId, PatientNote patientNote)
+        {
+            PatientService.Instance.AddAppointmentNote(patientId, patientNote);
+        }
+
+        public void SavePatients()
+        {
+            PatientService.Instance.SavePatients();
+        }
+
+        public List<PatientNote> GetNotesByPatient(int patientId)
+        {
+            return PatientService.Instance.GetNotesByPatient(patientId);
         }
     }
 }

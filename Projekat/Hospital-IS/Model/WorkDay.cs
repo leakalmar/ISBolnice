@@ -1,3 +1,4 @@
+using Enums;
 using System;
 
 namespace Model

@@ -11,8 +11,8 @@
         >
     <Grid>
         <Border CornerRadius="20" Background="White" BorderBrush="#FF184095" BorderThickness="5" />
-        <TextBlock x:Name="Message" TextAlignment="Center" TextWrapping="Wrap" Width="400" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" Foreground="Black" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" Height="46" Margin="0,54,0,0"/>
-        <Button x:Name="No" Visibility="Visible" Grid.Column="1" Margin="250,130,50,30" Foreground="#FFFDFDFD" Cursor="Hand" FontSize="18" Click="NegativeAnswer">
+        <TextBlock x:Name="Message" Text="{Binding Message}" TextAlignment="Center" TextWrapping="Wrap" Width="400" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" Foreground="Black" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" Height="46" Margin="0,54,0,0"/>
+        <Button x:Name="No" Command="{Binding NegativeAnswer}" Visibility="Visible" Grid.Column="1" Margin="250,130,50,30" Foreground="#FFFDFDFD" Cursor="Hand" FontSize="18">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20,20,20,20"/>
@@ -26,7 +26,7 @@
                 </LinearGradientBrush>
             </Button.Background> Ne
         </Button>
-        <Button x:Name="Yes" Visibility="Visible" Grid.Column="1" Margin="50,130,250,30" Foreground="#FFFDFDFD" Cursor="Hand" FontSize="18" Click="EvaluateHospital">
+        <Button x:Name="Yes" Command="{Binding PositiveAnswer}" Visibility="Visible" Grid.Column="1" Margin="50,130,250,30" Foreground="#FFFDFDFD" Cursor="Hand" FontSize="18" >
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20,20,20,20"/>

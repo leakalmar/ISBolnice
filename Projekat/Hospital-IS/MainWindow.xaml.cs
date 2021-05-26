@@ -1,20 +1,17 @@
-﻿using Hospital_IS.Storages;
+﻿using Controllers;
+using Hospital_IS.DoctorView;
+using Hospital_IS.ManagerView1;
+using Hospital_IS.Storages;
 using Hospital_IS.View;
 using Model;
+using Service;
 using Storages;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using Hospital_IS.DoctorView;
-using Controllers;
-using Service;
-using Hospital_IS.ManagerView1;
 
 namespace Hospital_IS
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         FSDoctor dfs = new FSDoctor();
@@ -23,17 +20,9 @@ namespace Hospital_IS
         AppointmentFileStorage afs = new AppointmentFileStorage();
         public static Patient PatientUser { get; set; }
 
-        //Dodala jer mi treba ista referenca svuda kako bi mogla da postavim selektovanje za combobox
-        public static List<Doctor> Doctors { get; set; }
-        public static List<Room> Rooms { get; set; }
-        public static List<Specialty> Specialties { get; set; }
-
         public MainWindow()
         {
             InitializeComponent();
-            Doctors = DoctorController.Instance.GetAll();
-            Rooms = RoomController.Instance.GetAllRooms();
-            Specialties = SpecializationController.Instance.GetAll();
             UserService.Instance.GetAllUsersIDs();
         }
 
@@ -42,7 +31,7 @@ namespace Hospital_IS
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
-
+        
         private void Login(object sender, RoutedEventArgs e)
         {
             List<Patient> patients = PatientController.Instance.GetAll();
@@ -52,22 +41,24 @@ namespace Hospital_IS
                 if (email.Text == p.Email && password.Password.ToString() == p.Password)
                 {
                     PatientUser = p;
-                    HomePatient.Instance.Show();
+                    //PatientMainWindowView patientView = new PatientMainWindowView();
+                    //patientView.Show();
+                    PatientMainWindowView.Instance.Show();
                     this.Close();
                 }
             }
 
-            foreach (Doctor doctor in Doctors)
+            foreach (Doctor doctor in DoctorController.Instance.GetAll())
             {
                 if (email.Text == doctor.Email && password.Password.ToString() == doctor.Password)
                 {
-                    DoctorHomePage.Instance.ChangeDoctor(doctor);
-                    DoctorHomePage.Instance.Show();
+                    DoctorMainWindow.Instance._ViewModel.SetDoctor(doctor);
+                    DoctorMainWindow.Instance.Show();
                     this.Close();
                 }
             }
 
-            if (email.Text == "upravnik@gmail.com" && password.Password.ToString() == "upravnik")
+            if (email.Text == "manager@gmail.com" && password.Password.ToString() == "manager")
             {
                 ManagerMainView managerMainView = new ManagerMainView();
                 managerMainView.Show();

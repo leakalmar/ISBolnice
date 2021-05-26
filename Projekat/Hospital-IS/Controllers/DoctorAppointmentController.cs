@@ -1,11 +1,10 @@
-﻿using Hospital_IS.DTOs;
+﻿using DTOs;
+using Enums;
+using Hospital_IS.DTOs;
 using Model;
 using Service;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Windows.Controls;
 
 namespace Controllers
 {
@@ -62,6 +61,13 @@ namespace Controllers
             DoctorAppointmentService.Instance.UpdateAppointment(doctorAppointment,doctorAppointment);
         }
 
+        public void EndAppointment(DoctorAppointmentDTO doctorAppointment)
+        {
+            DoctorAppointment endingAppoitnment = new DoctorAppointment(doctorAppointment);
+            endingAppoitnment.IsFinished = true;
+            DoctorAppointmentService.Instance.UpdateAppointment(endingAppoitnment, endingAppoitnment);
+        }
+
         public List<DoctorAppointment> SuggestAppointmentsToPatient(PossibleAppointmentForPatientDTO possibleAppointment)
         {
             return DoctorAppointmentService.Instance.SuggestAppointmentsToPatient(possibleAppointment);
@@ -114,5 +120,9 @@ namespace Controllers
             return DoctorAppointmentService.Instance.GetAllByDoctorAndDates(idDoctor, dates);
         }
 
+        public int GetNumberOfAppointmentsByMonth(int patientId, string month)
+        {
+            return DoctorAppointmentService.Instance.GetNumberOfAppointmentsByMonth(patientId, month);
+        }
     }
 }

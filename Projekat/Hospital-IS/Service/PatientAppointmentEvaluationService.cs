@@ -1,9 +1,7 @@
-﻿using DTOs;
-using Model;
+﻿using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service
 {
@@ -56,11 +54,11 @@ namespace Service
             }
         }
 
-        public Boolean IsAppointmentEvaluated(DoctorAppointment appointmentEvaluation)
+        public Boolean IsAppointmentEvaluated(int evaluatedAppointmentId)
         {
             foreach (PatientAppointmentEvaluation appointment in AllAppointmentEvaluations)
             {
-                if(appointment.DoctorAppointmentDate == appointmentEvaluation.AppointmentStart.Date && appointment.DoctorId == appointmentEvaluation.Doctor.Id && appointment.PatientId == appointmentEvaluation.Patient.Id)
+                if(appointment.DoctorAppointmentId == evaluatedAppointmentId)
                 {
                     return true;
                 }
@@ -74,7 +72,8 @@ namespace Service
             int hospitalEvaluation = 3;
             foreach (PatientAppointmentEvaluation appointment in AllAppointmentEvaluations)
             {
-                if (appointment.PatientId == patientId)
+                DoctorAppointment doctorAppointment = DoctorAppointmentService.Instance.GetAppointmentById(appointment.DoctorAppointmentId);
+                if (doctorAppointment.Patient.Id == patientId)
                 {
                     appointmentCounter++;
                 }

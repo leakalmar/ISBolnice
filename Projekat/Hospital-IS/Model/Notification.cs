@@ -26,6 +26,13 @@ namespace Model
             generateId();
         }
 
+        public Notification(string title, string text, DateTime datePosted, DateTime lastChanged, List<int> recipients, int id) : this(title, text, datePosted)
+        {
+            LastChanged = lastChanged;
+            Recipients = recipients;
+            Id = id;
+        }
+
         public Notification()
         {
             generateId();

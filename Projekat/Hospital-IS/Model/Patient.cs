@@ -1,6 +1,6 @@
+using Hospital_IS.Model;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace Model
@@ -20,6 +20,7 @@ namespace Model
         public Boolean Admitted { get; set; }
         public List<String> Alergies { get; set; }
         public AntiTroll TrollMechanism { get; set; } = new AntiTroll();
+        public List<PatientNote> PatientNotes { get; set; } = new List<PatientNote>();
         
         public Boolean IsGuest { get; set; } = false;
 
@@ -28,6 +29,14 @@ namespace Model
             this.FileDate = filedate;
             this.Employer = employer;
             this.Alergies = alergies;
+        }
+
+        public Patient(int id, string name, string surname, DateTime birthDate, string address, string email, string password, DateTime filedate, String employer, List<String> alergies, Boolean isGuest) : base(id, name, surname, birthDate, address, email, password)
+        {
+            this.FileDate = filedate;
+            this.Employer = employer;
+            this.Alergies = alergies;
+            this.IsGuest = isGuest;
         }
 
         public Patient()

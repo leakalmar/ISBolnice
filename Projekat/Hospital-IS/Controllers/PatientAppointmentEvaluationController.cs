@@ -1,9 +1,6 @@
-﻿using DTOs;
-using Model;
+﻿using Model;
 using Service;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Controllers
 {
@@ -32,9 +29,9 @@ namespace Controllers
             PatientAppointmentEvaluationService.Instance.AddAppointmentEvaluation(appointmentEvaluation);
         }
 
-        public Boolean IsAppointmentEvaluated(DoctorAppointment appointmentEvaluation)
+        public Boolean IsAppointmentEvaluated(int evaluatedAppointmentId)
         {
-            return PatientAppointmentEvaluationService.Instance.IsAppointmentEvaluated(appointmentEvaluation);
+            return PatientAppointmentEvaluationService.Instance.IsAppointmentEvaluated(evaluatedAppointmentId);
         }
 
         public Boolean ShowHospitalEvaluation(int patientId)

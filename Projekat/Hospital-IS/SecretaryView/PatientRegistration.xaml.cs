@@ -1,6 +1,6 @@
-﻿using Controllers;
+﻿using Hospital_IS.Controllers;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Hospital_IS.SecretaryView;
-using Model;
 using Service;
 using System;
 using System.Windows;
@@ -12,7 +12,7 @@ namespace Hospital_IS
     /// </summary>
     public partial class PatientRegistration : Window
     {
-        public Patient Patient { get; set; } = new Patient();
+        public PatientDTO Patient { get; set; } = new PatientDTO();
         public UCPatientsView ucp;
         public GuestsView gv;
         public PatientRegistration(UCPatientsView ucp, GuestsView gv)
@@ -21,7 +21,7 @@ namespace Hospital_IS
 
             if (gv != null)
             {
-                Patient = (Patient)gv.dataGridGuests.SelectedItem;
+                Patient = (PatientDTO)gv.dataGridGuests.SelectedItem;
                 checkBox.Visibility = Visibility.Collapsed;
                 this.gv = gv;
             }
@@ -61,12 +61,12 @@ namespace Hospital_IS
             if (checkBox.Visibility != Visibility.Collapsed)
             {
                 Patient.Id = UserService.Instance.GenerateUserID();
-                PatientController.Instance.AddPatient(Patient);
+                SecretaryManagementController.Instance.AddPatient(Patient);
             }
             else 
             {
                 Patient.IsGuest = false;
-                PatientController.Instance.UpdatePatient(Patient);
+                SecretaryManagementController.Instance.UpdatePatient(Patient);
                 gv.RefreshGrid();
             }
 

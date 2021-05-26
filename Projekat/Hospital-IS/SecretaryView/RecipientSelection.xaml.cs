@@ -1,7 +1,7 @@
 ﻿using Controllers;
-using Hospital_IS.Storages;
+using Hospital_IS.Controllers;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -12,7 +12,7 @@ namespace Hospital_IS.SecretaryView
     /// </summary>
     public partial class RecipientSelection : Window
     {
-        public ObservableCollection<Patient> Patients { get; set; }
+        public ObservableCollection<PatientDTO> Patients { get; set; }
         public ObservableCollection<Doctor> Doctors { get; set; }
 
         CreateNotification cn;
@@ -23,13 +23,11 @@ namespace Hospital_IS.SecretaryView
 
             this.cn = cn;
 
-            Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAll());
+            Patients = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllRegisteredPatients());
             Doctors = new ObservableCollection<Doctor>(DoctorController.Instance.GetAll());
 
             this.DataContext = this;
         }
-
-
 
 
 

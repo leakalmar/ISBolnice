@@ -1,13 +1,9 @@
 ﻿using Controllers;
 using Hospital_IS.Controllers;
 using Model;
-using Service;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 

@@ -1,8 +1,6 @@
 ﻿using Hospital_IS.Storages;
 using Model;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service
 {
@@ -29,6 +27,19 @@ namespace Service
             AllMedicines = mfs.GetAll();
         }
 
+        public Medicine GetByName(string medicineName)
+        {
+            Medicine ret = null;
+            foreach(Medicine medicine in AllMedicines)
+            {
+                if (medicine.Name.Equals(medicineName))
+                {
+                    ret = medicine;
+                    break;
+                }
+            }
+            return ret;
+        }
         public void UpdateMedicine(Medicine medicine)
         {
             for(int i = 0; i < AllMedicines.Count; i++)
