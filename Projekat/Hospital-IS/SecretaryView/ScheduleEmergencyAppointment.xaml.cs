@@ -3,7 +3,6 @@ using Enums;
 using Hospital_IS.Controllers;
 using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
-using Hospital_IS.Service;
 using Model;
 using System;
 using System.Collections.ObjectModel;
@@ -79,7 +78,7 @@ namespace Hospital_IS.SecretaryView
             if (cbPatient.IsEnabled)
                 emerAppointmentDTO.Patient = Patients[cbPatient.SelectedIndex];
             else
-                emerAppointmentDTO.Patient = SecretaryUserManagementService.Instance.GetPatientByID(Int32.Parse(txtGuest.Text));
+                emerAppointmentDTO.Patient = SecretaryManagementController.Instance.GetPatientByID(Int32.Parse(txtGuest.Text));
             emerAppointmentDTO.Room = Rooms[cbRoom.SelectedIndex];
             emerAppointmentDTO.DurationInMinutes = Int32.Parse(txtAppDuration.Text);
 
