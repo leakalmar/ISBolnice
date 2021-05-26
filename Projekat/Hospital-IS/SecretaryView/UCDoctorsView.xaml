@@ -48,6 +48,10 @@
             <Button Width="55" Content="Obriši" Height="30" Margin="10 0 40 0"
                 Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
                 HorizontalAlignment="Right" Click="DeleteDoctor"/>
+
+            <Button Width="100" Content="Registracija" Height="30" Margin="40 0 0 0 "
+                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
+                Click="AddNewDoctor"/>
         </StackPanel>
 
     </Grid>

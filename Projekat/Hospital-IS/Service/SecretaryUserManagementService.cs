@@ -183,8 +183,14 @@ namespace Hospital_IS.Service
         private void LoadDoctors()
         {
             foreach (Doctor doctor in DoctorService.Instance.AllDoctors)
+            {
+                string specialtyName = "";
+                if (doctor.Specialty != null)
+                    specialtyName = doctor.Specialty.Name;
+
                 AllDoctors.Add(new DoctorDTO(doctor.Id, doctor.Name, doctor.Surname, doctor.BirthDate, doctor.Phone, doctor.Email, doctor.Gender,
-                    doctor.Password, doctor.Address, doctor.Specialty.Name, doctor.PrimaryRoom));
+                    doctor.Password, doctor.Address, specialtyName, doctor.PrimaryRoom));
+            }
         }
 
         public void ReloadDoctors()

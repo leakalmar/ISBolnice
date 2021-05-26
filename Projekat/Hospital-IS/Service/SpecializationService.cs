@@ -39,5 +39,15 @@ namespace Service
                 specialties.Add(specialty.Name);
             return specialties;
         }
+
+        public Specialty GetSpecialtyByName(string specialtyName)
+        {
+            foreach (Specialty specialty in AllSpecialties)
+            {
+                if (specialty.Name.Equals(specialtyName))
+                    return specialty;
+            }
+            return null;
+        }
     }
 }

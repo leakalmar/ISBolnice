@@ -31,6 +31,12 @@ namespace Hospital_IS.SecretaryView
             dataGridDoctors.ItemsSource = Doctors;
         }
 
+        private void AddNewDoctor(object sender, RoutedEventArgs e)
+        {
+            DoctorRegistration dr = new DoctorRegistration(this);
+            dr.Show();
+        }
+
         private void ShowDoctor(object sender, RoutedEventArgs e)
         {
             if ((DoctorDTO)dataGridDoctors.SelectedItem != null)

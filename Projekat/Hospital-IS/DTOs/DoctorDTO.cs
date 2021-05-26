@@ -33,6 +33,10 @@ namespace Hospital_IS.DTOs
             Specialty = specialty;
             PrimaryRoom = primaryRoom;
         }
+
+        public DoctorDTO()
+        { 
+        }
     }
 
 }

@@ -45,8 +45,10 @@ namespace Controllers
             return DoctorService.Instance.GetDoctorNameAndSurname(senderId);
         }
 
-        public void AddDoctor(Doctor doctor)
+        public void AddDoctor(DoctorDTO doctorDTO)
         {
+            Doctor doctor = new Doctor(doctorDTO.Id, doctorDTO.Name, doctorDTO.Surname, doctorDTO.BirthDate, doctorDTO.Email, 
+                doctorDTO.Password, doctorDTO.Address, 80000.0, DateTime.Now, null, SpecializationService.Instance.GetSpecialtyByName(doctorDTO.Specialty), 0);
             DoctorService.Instance.AddDoctor(doctor);
         }
 
