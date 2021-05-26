@@ -1,4 +1,5 @@
-﻿using Hospital_IS.DTOs.SecretaryDTOs;
+﻿using Hospital_IS.DTOs;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Hospital_IS.Service;
 using System.Collections.Generic;
 
@@ -87,6 +88,11 @@ namespace Hospital_IS.Controllers
         public List<NotificationDTO> GetAllByUser(int userId)
         {
             return SecretaryUserManagementService.Instance.GetAllByUser(userId);
+        }
+
+        public List<DoctorDTO> GetAllDoctors()
+        {
+            return SecretaryUserManagementService.Instance.AllDoctors;
         }
 
     }

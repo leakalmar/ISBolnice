@@ -4,6 +4,7 @@ using Enums;
 using Hospital_IS.Commands;
 using Hospital_IS.DoctorConverters;
 using Hospital_IS.DoctorView;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -303,12 +304,12 @@ namespace Hospital_IS.DoctorViewModel
             {
                 List<Doctor> doctorList = new List<Doctor>();
                 doctorList.Add(new Doctor(-1, "Svi", "doktori", DateTime.Now, null, null, null, 0, DateTime.Now, null, selectedSpecialty, 0));
-                doctorList.AddRange(DoctorController.Instance.GetDoctorsBySpecilty(SelectedSpecialty));
+                doctorList.AddRange(DoctorController.Instance.GetDoctorsBySpecilty(SelectedSpecialty.Name));
                 Doctors = doctorList;
             }
             else
             {
-                Doctors = DoctorController.Instance.GetDoctorsBySpecilty(SelectedSpecialty);
+                Doctors = DoctorController.Instance.GetDoctorsBySpecilty(SelectedSpecialty.Name);
             }
         }
 
@@ -331,31 +332,30 @@ namespace Hospital_IS.DoctorViewModel
             if (SelectedType != null && SelectedSpecialty != null && SelectedRoom != null && SelectedDoctor != null)
             {
                 List<DateTime> dates = GenerateDates();
-                //Patient patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
+                PatientDTO patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
 
                 if (Emergency)
                 {
-                    //GetEmergencyAppointments(dates, SelectedDoctor, patient);
+                    GetEmergencyAppointments(dates, SelectedDoctor, patient.Id);
                 }
                 else
                 {
-                    //GetAppointments(dates, SelectedDoctor, patient);
+                    GetAppointments(dates, SelectedDoctor, patient.Id);
                 }
             }
         }
 
-        private void GetAppointments(List<DateTime> dates, Doctor doctor, Patient patient)
+        private void GetAppointments(List<DateTime> dates, Doctor doctor, int patientId)
         {
-           // DoctorAppointmentDTO tempDTO = new DoctorAppointmentDTO(false, null, dates[0], dates[0].Add(Duration), FindType(), SelectedRoom.RoomId, -1, Emergency, patient, doctor, false);
-            ICollectionView view = new CollectionViewSource { Source = new DoctorAppointmentConverter().ConvertExistingAppointmentsToDTO(DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, Emergency, SelectedRoom, FindType(), Duration, patient, doctor)) }.View;
+            ICollectionView view = new CollectionViewSource { Source = new DoctorAppointmentConverter().ConvertExistingAppointmentsToDTO(DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, Emergency, SelectedRoom, FindType(), Duration, patientId, doctor)) }.View;
             view.SortDescriptions.Clear();
             view.SortDescriptions.Add(new SortDescription("Appointment.AppointmentStart", ListSortDirection.Ascending));
             Appointments = view;
         }
 
-        private void GetEmergencyAppointments(List<DateTime> dates, Doctor doctor, Patient patient)
+        private void GetEmergencyAppointments(List<DateTime> dates, Doctor doctor, int patientId)
         {
-            List<SuggestedEmergencyAppDTO> allEmergencyAppointments = DoctorAppointmentController.Instance.SuggestEmergencyAppsToDoctor(dates, Emergency, SelectedRoom, FindType(), Duration, patient, doctor);
+            List<SuggestedEmergencyAppDTO> allEmergencyAppointments = DoctorAppointmentController.Instance.SuggestEmergencyAppsToDoctor(dates, Emergency, SelectedRoom, FindType(), Duration, patientId, doctor);
             ICollectionView view = new CollectionViewSource { Source = allEmergencyAppointments }.View;
             if (doctor.Id != -1)
             {
@@ -398,13 +398,13 @@ namespace Hospital_IS.DoctorViewModel
             this.Specializations = SpecializationController.Instance.GetAll();
             foreach (Specialty specialty in Specializations)
             {
-                if (specialty.Name.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.Specialty.Name))
+                if (specialty.Name.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.Specialty))
                 {
                     this.SelectedSpecialty = specialty;
                 }
             }
 
-            this.Doctors = DoctorController.Instance.GetDoctorsBySpecilty(selectedSpecialty);
+            this.Doctors = DoctorController.Instance.GetDoctorsBySpecilty(selectedSpecialty.Name);
             foreach (Doctor doctor in Doctors)
             {
                 if (doctor.Id.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.Id))

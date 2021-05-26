@@ -78,7 +78,11 @@
   },
   {
     "Name": "Flonidan 10000mg",
-    "Composition": [],
+    "Composition": [
+      {
+        "Component": ""
+      }
+    ],
     "SideEffects": "sve okej",
     "Usage": "Ima ih dosta",
     "ReplaceMedicine": [

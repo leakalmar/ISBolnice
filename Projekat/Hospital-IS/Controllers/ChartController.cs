@@ -32,9 +32,9 @@ namespace Controllers
             return ChartService.Instance.GetTherapiesByPatientId(patient.Id);
         }
 
-        public List<ReportDTO> GetReportsByPatient(Patient patient)
+        public List<ReportDTO> GetReportsByPatient(int patientId)
         {
-            return ConvertToReportDTO(ChartService.Instance.GetReportsByPatientId(patient.Id));
+            return ConvertToReportDTO(ChartService.Instance.GetReportsByPatientId(patientId));
         }
 
         private List<ReportDTO> ConvertToReportDTO(List<Report> reports)
@@ -52,9 +52,9 @@ namespace Controllers
             return ChartService.Instance.GetHospitalizationsByPatientId(patient.Id);
         }
 
-        public List<Prescription> GetPrescriptionsForReport(Patient patient, DateTime reportDate)
+        public List<PrescriptionDTO> GetPrescriptionsForReport(int patientId, DateTime reportDate)
         {
-            return ChartService.Instance.GetPrescriptionsForReport(patient.Id, reportDate);
+            return ConvertPrescriptionToDTO(ChartService.Instance.GetPrescriptionsForReport(patientId, reportDate));
         }
 
         public Hospitalization GetActivHospitalization(Patient patient)
@@ -67,9 +67,9 @@ namespace Controllers
             ChartService.Instance.ReleasePatient(patient.Id);
         }
 
-        public void UpdateReport(Patient patient, ReportDTO report)
+        public void UpdateReport(int patientId, ReportDTO report)
         {
-            ChartService.Instance.UpdateReport(patient.Id, new Report(report.AppointmentStart,report.DoctorName,report.DoctorSurname,report.Type,report.AppointmentCause));
+            ChartService.Instance.UpdateReport(patientId, new Report(report.AppointmentStart,report.DoctorName,report.DoctorSurname,report.Type,report.AppointmentCause));
         }
 
         public void AddReport(ReportDTO reportDTO)
@@ -98,6 +98,17 @@ namespace Controllers
                 prescriptions.Add(new Prescription(medicine,prescriptionDTO.DatePrescribed));
             }
             return prescriptions;
+        }
+
+        private List<PrescriptionDTO> ConvertPrescriptionToDTO(List<Prescription> prescriptions)
+        {
+            List<PrescriptionDTO> prescriptionDTOs = new List<PrescriptionDTO>();
+            foreach (Prescription prescription in prescriptions)
+            {
+                MedicineDTO medicine = MedicineController.Instance.ConvertMedicineToDTO(prescription.Medicine);
+                prescriptionDTOs.Add(new PrescriptionDTO(medicine, prescription.DatePrescribed));
+            }
+            return prescriptionDTOs;
         }
 
 

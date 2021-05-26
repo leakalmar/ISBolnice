@@ -3,7 +3,6 @@ using DTOs;
 using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
 using Hospital_IS.DTOs.SecretaryDTOs;
-using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -87,7 +86,6 @@ namespace Hospital_IS.DoctorViewModel
             {
                 patient = value;
                 OnPropertyChanged("Patient");
-                //this.MedicineList = new ObservableCollection<MedicineDTO>(MedicineController.Instance.GenerateListOfMedicines(Patient));
             }
         }
 

@@ -1,7 +1,9 @@
 ﻿using Controllers;
+using DTOs;
 using Hospital_IS.Commands;
+using Hospital_IS.DoctorConverters;
 using Hospital_IS.DoctorView;
-using Model;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using System.Collections.ObjectModel;
 using System.Windows.Navigation;
 
@@ -10,7 +12,7 @@ namespace Hospital_IS.DoctorViewModel
     public class ScheduleAppointmentViewModel : BindableBase
     {
         #region Fields
-        private ObservableCollection<DoctorAppointment> scheduledAppointments;
+        private ObservableCollection<DoctorAppointmentDTO> scheduledAppointments;
         private NavigationService mainNavigationService;
         private bool started;
 
@@ -33,7 +35,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public ObservableCollection<DoctorAppointment> ScheduledAppointments
+        public ObservableCollection<DoctorAppointmentDTO> ScheduledAppointments
         {
             get { return scheduledAppointments; }
             set
@@ -72,8 +74,8 @@ namespace Hospital_IS.DoctorViewModel
         public ScheduleAppointmentViewModel()
         {
             this.AddNewCommand = new RelayCommand(Execute_AddNewCommand, CanExecute_AddNewCommand);
-            //Patient patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
-            //this.ScheduledAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(patient.Id));
+            PatientDTO patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
+            this.ScheduledAppointments = new DoctorAppointmentConverter().ConvertAppointmentsToDTO(DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(patient.Id));
             this.MainNavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
         }
         #endregion

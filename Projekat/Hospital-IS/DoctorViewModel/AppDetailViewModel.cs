@@ -1,10 +1,8 @@
-﻿using Controllers;
-using DTOs;
+﻿using DTOs;
 using Hospital_IS.Commands;
 using Hospital_IS.Controllers;
 using Hospital_IS.DoctorConverters;
 using Hospital_IS.DoctorView;
-using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

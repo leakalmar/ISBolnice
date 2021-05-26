@@ -1,5 +1,6 @@
 ﻿using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
+using Hospital_IS.DTOs;
 using Model;
 using System;
 using System.Windows.Navigation;
@@ -13,7 +14,7 @@ namespace Hospital_IS.DoctorViewModel
         private NavigationService navigationService;
         private PatientChart patientChartView;
         private Appointments appointmentsView;
-        private Doctor doctor;
+        private DoctorDTO doctor;
 
         public NavigationService NavigationService
         {
@@ -23,7 +24,7 @@ namespace Hospital_IS.DoctorViewModel
                 navigationService = value;
             }
         }
-        public Doctor Doctor
+        public DoctorDTO Doctor
         {
             get { return doctor; }
             set
@@ -280,7 +281,7 @@ namespace Hospital_IS.DoctorViewModel
         #endregion
 
         #region Methods
-        public void SetDoctor(Doctor doctor)
+        public void SetDoctor(DoctorDTO doctor)
         {
             Doctor = doctor;
         }

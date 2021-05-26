@@ -4,7 +4,6 @@ using Hospital_IS.Commands;
 using Hospital_IS.Controllers;
 using Hospital_IS.DoctorView;
 using Hospital_IS.DTOs.SecretaryDTOs;
-using Model;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -182,13 +181,13 @@ namespace Hospital_IS.DoctorViewModel
                 case 1:
                     GeneralInfo view = new GeneralInfo();
                     view._ViewModel.Started = Started;
-                    //view._ViewModel.Patient = Patient;
+                    view._ViewModel.Patient = Patient;
                     this.InsideNavigationService.Navigate(view);
                     break;
                 case 2:
                     History history = new History();
                     history._ViewModel.InsideNavigationService = InsideNavigationService;
-                    //history._ViewModel.Patient = Patient;
+                    history._ViewModel.Patient = Patient;
                     this.InsideNavigationService.Navigate(history);
                     break;
                 case 3:
@@ -256,7 +255,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 GeneralInfo view = new GeneralInfo();
                 view._ViewModel.Started = Started;
-                //view._ViewModel.Patient = Patient;
+                view._ViewModel.Patient = Patient;
                 InsideNavigationService.Navigate(view);
             }
             else
@@ -269,7 +268,7 @@ namespace Hospital_IS.DoctorViewModel
                 {
                     GeneralInfo view = new GeneralInfo();
                     view._ViewModel.Started = Started;
-                    //view._ViewModel.Patient = Patient;
+                    view._ViewModel.Patient = Patient;
                     InsideNavigationService.Navigate(view);
                 }
             }

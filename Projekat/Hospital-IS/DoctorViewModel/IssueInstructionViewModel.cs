@@ -3,6 +3,7 @@ using DTOs;
 using Hospital_IS.Commands;
 using Hospital_IS.Controllers;
 using Hospital_IS.DoctorView;
+using Hospital_IS.DTOs;
 using Model;
 using System;
 using System.Windows.Navigation;
@@ -15,7 +16,7 @@ namespace Hospital_IS.DoctorViewModel
         private AppointmentRowDTO selectedAppointment;
         private SuggestedEmergencyAppDTO selectedEmergencyAppointment;
         private string appointmentCause;
-        private Doctor logedInDoctor;
+        private DoctorDTO logedInDoctor;
 
         private NavigationService mainNavigationService;
 
@@ -49,7 +50,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public Doctor LogedInDoctor
+        public DoctorDTO LogedInDoctor
         {
             get { return logedInDoctor; }
             set

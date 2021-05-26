@@ -3,6 +3,7 @@ using DTOs;
 using Enums;
 using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
+using Hospital_IS.DTOs;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -248,7 +249,7 @@ namespace Hospital_IS.DoctorViewModel
         #endregion
 
         #region Methods
-        private string ShortSurname(Doctor doctor)
+        private string ShortSurname(DoctorDTO doctor)
         {
             String newSurname = doctor.Surname;
             if (doctor.Surname.Length > 12)

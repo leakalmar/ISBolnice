@@ -19,7 +19,7 @@ namespace Hospital_IS.DoctorConverters
 
             Visibility ret;
             Specialty specialty = (Specialty)value;
-            if (specialty.Name.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.Specialty.Name))
+            if (specialty.Name.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.Specialty))
             {
                 ret = Visibility.Visible;
             }

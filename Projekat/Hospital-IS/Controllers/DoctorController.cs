@@ -34,9 +34,9 @@ namespace Controllers
             return DoctorService.Instance.GetAll();
         }
 
-        public List<Doctor> GetDoctorsBySpecilty(Specialty specialty)
+        public List<Doctor> GetDoctorsBySpecilty(string name)
         {
-            return DoctorService.Instance.GetDoctorsBySpecialty(specialty.Name);
+            return DoctorService.Instance.GetDoctorsBySpecialty(name);
         }
 
         public String GetDoctorsNameAndSurname(int senderId)

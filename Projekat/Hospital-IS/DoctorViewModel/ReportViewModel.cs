@@ -1,7 +1,6 @@
 ﻿using DTOs;
 using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
-using Model;
 using System.Collections.ObjectModel;
 using System.Windows.Navigation;
 

@@ -55,7 +55,7 @@
 
         <GroupBox Grid.Row="1" Grid.Column="1" Header="Testovi" Margin="5"
                 Foreground="FloralWhite">
-            <ListBox x:Name="tests" ItemsSource="{Binding Tests}"
+            <ListBox x:Name="tests" ItemsSource="{Binding }"
                     Background="Transparent" BorderThickness="0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

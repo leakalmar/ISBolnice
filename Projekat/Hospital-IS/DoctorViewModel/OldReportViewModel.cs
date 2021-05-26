@@ -2,7 +2,6 @@
 using DTOs;
 using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
-using Model;
 using System.Collections.Generic;
 
 namespace Hospital_IS.DoctorViewModel
@@ -12,8 +11,8 @@ namespace Hospital_IS.DoctorViewModel
         #region Fields
         private string anamnesis;
         private ReportDTO report;
-        private List<Prescription> prescriptions;
-        private List<Test> tests;
+        private List<PrescriptionDTO> prescriptions;
+        //private List<Test> tests;
 
         
         public string Anamnesis
@@ -32,13 +31,13 @@ namespace Hospital_IS.DoctorViewModel
             set { 
                 report = value;
                 Anamnesis = report.Anemnesis;
-                //Prescriptions = ChartController.Instance.GetPrescriptionsForReport(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient, report.AppointmentStart);
+                Prescriptions = ChartController.Instance.GetPrescriptionsForReport(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient.Id, report.AppointmentStart);
                 //isto zaa testove kada budes pravila
                 OnPropertyChanged("Report");
             }
         }
 
-        public List<Prescription> Prescriptions
+        public List<PrescriptionDTO> Prescriptions
         {
             get { return prescriptions; }
             set
@@ -48,7 +47,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public List<Test> Tests
+       /* public List<Test> Tests
         {
             get { return tests; }
             set
@@ -56,7 +55,7 @@ namespace Hospital_IS.DoctorViewModel
                 tests = value;
                 OnPropertyChanged("Tests");
             }
-        }
+        }*/
         #endregion
 
         #region Commands
@@ -78,7 +77,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_SaveCommand(object obj)
         {
             this.Report.Anemnesis = this.Anamnesis;
-            //ChartController.Instance.UpdateReport(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient, Report);
+            ChartController.Instance.UpdateReport(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient.Id, Report);
         }
         #endregion
 

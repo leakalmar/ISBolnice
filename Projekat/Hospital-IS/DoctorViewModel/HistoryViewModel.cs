@@ -2,7 +2,7 @@
 using DTOs;
 using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
-using Model;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using System.Collections.ObjectModel;
 using System.Windows.Navigation;
 
@@ -12,7 +12,7 @@ namespace Hospital_IS.DoctorViewModel
     {
         #region Fields
         private bool started;
-        private Patient patient;
+        private PatientDTO patient;
         private ObservableCollection<ReportDTO> reports;
         private ReportDTO selectedReport;
         private NavigationService insideNavigationService;
@@ -36,13 +36,13 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public Patient Patient
+        public PatientDTO Patient
         {
             get { return patient; }
             set
             {
                 patient = value;
-                this.Reports = new ObservableCollection<ReportDTO>(ChartController.Instance.GetReportsByPatient(Patient));
+                this.Reports = new ObservableCollection<ReportDTO>(ChartController.Instance.GetReportsByPatient(Patient.Id));
                 OnPropertyChanged("Patient");
 
             }

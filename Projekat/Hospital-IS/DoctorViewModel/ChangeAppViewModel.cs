@@ -153,7 +153,7 @@ namespace Hospital_IS.DoctorViewModel
                 TimeSpan duration = OldAppointment.AppointmentEnd - OldAppointment.AppointmentStart;
                 List<DateTime> dates = new List<DateTime>();
                 dates.Add(SelectedDate);
-                List<DoctorAppointment> list = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, OldAppointment.IsUrgent, SelectedRoom, OldAppointment.Type, duration, OldAppointment.Patient, SelectedDoctor);
+                List<DoctorAppointment> list = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, OldAppointment.IsUrgent, SelectedRoom, OldAppointment.Type, duration, OldAppointment.Patient.Id, SelectedDoctor);
                 Appointments = list;
             }
         }

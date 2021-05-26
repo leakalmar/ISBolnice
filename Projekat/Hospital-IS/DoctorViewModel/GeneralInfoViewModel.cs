@@ -1,15 +1,15 @@
 ﻿using Hospital_IS.DoctorView;
-using Model;
+using Hospital_IS.DTOs.SecretaryDTOs;
 
 namespace Hospital_IS.DoctorViewModel
 {
     public class GeneralInfoViewModel : BindableBase
     {
         #region Feilds
-        private Patient patient;
+        private PatientDTO patient;
         private bool started;
 
-        public Patient Patient
+        public PatientDTO Patient
         {
             get { return patient; }
             set

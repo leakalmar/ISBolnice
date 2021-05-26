@@ -1,5 +1,7 @@
 ﻿using Controllers;
+using Hospital_IS.Controllers;
 using Hospital_IS.DoctorView;
+using Hospital_IS.DTOs;
 using Hospital_IS.ManagerView1;
 using Hospital_IS.Storages;
 using Hospital_IS.View;
@@ -48,7 +50,7 @@ namespace Hospital_IS
                 }
             }
 
-            foreach (Doctor doctor in DoctorController.Instance.GetAll())
+            foreach (DoctorDTO doctor in SecretaryManagementController.Instance.GetAllDoctors())
             {
                 if (email.Text == doctor.Email && password.Password.ToString() == doctor.Password)
                 {

@@ -1,6 +1,7 @@
 ﻿using DTOs;
 using Enums;
 using Hospital_IS.DTOs;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Hospital_IS.Service;
 using Model;
 using Service;
@@ -74,18 +75,19 @@ namespace Controllers
             return SuggestedAppointmentService.Instance.SuggestAppointmentsToPatient(possibleAppointment);
         }
 
-        public List<DoctorAppointment> SuggestAppointmetsToDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmentType type, TimeSpan duration, Patient patient, Doctor doctor)
+        public List<DoctorAppointment> SuggestAppointmetsToDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmentType type, TimeSpan duration, int patientId, Doctor doctor)
         {
 
-            DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, room.RoomId, doctor, patient);
+            DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, room.RoomId, doctor, PatientController.Instance.GetPatientByID(patientId));
             tempAppointment.AppointmentEnd = dates[0].Add(duration);
             tempAppointment.IsUrgent = isUrgent;
             return SuggestedAppointmentService.Instance.SuggestAppointmetsToDoctor(dates, tempAppointment);
         }
 
-        public List<SuggestedEmergencyAppDTO> SuggestEmergencyAppsToDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmentType type, TimeSpan duration, Patient patient, Doctor doctor)
+        public List<SuggestedEmergencyAppDTO> SuggestEmergencyAppsToDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmentType type, TimeSpan duration, int patientId, Doctor doctor)
         {
-            DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, room.RoomId, doctor, patient);
+            
+            DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, room.RoomId, doctor, PatientController.Instance.GetPatientByID(patientId));
             tempAppointment.AppointmentEnd = dates[0].Add(duration);
             tempAppointment.IsUrgent = isUrgent;
             return EmergencyDoctorAppointmentService.Instance.GenerateEmergencyAppointmentsForDoctor(dates, tempAppointment);
