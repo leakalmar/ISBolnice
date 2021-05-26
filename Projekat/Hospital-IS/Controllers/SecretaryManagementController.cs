@@ -98,10 +98,5 @@ namespace Hospital_IS.Controllers
             return SecretaryUserManagementService.Instance.AllDoctors;
         }
 
-        public List<DoctorDTO> GetAllDoctors()
-        {
-            return SecretaryUserManagementService.Instance.AllDoctors;
-        }
-
     }
 }
