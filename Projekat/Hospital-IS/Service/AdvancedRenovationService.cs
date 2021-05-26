@@ -10,7 +10,7 @@ namespace Service
     public class AdvancedRenovationService
     {
         private AdvancedRenovationStorage afs = new AdvancedRenovationStorage();
-        public List<AdvancedRenovation> AllAdvancedTransfers { get; set; }
+        public List<AdvancedRenovation> AllAdvancedRenovations { get; set; }
 
         private static AdvancedRenovationService instance = null;
         public static AdvancedRenovationService Instance
@@ -27,21 +27,21 @@ namespace Service
 
         private AdvancedRenovationService()
         {
-            AllAdvancedTransfers = afs.GetAll();
+            AllAdvancedRenovations = afs.GetAll();
         }
 
         public void AddNewAdvancedRenovation(AdvancedRenovation advancedRenovation)
         {
-            AllAdvancedTransfers.Add(advancedRenovation);
-            afs.Save(AllAdvancedTransfers);
+            AllAdvancedRenovations.Add(advancedRenovation);
+            afs.Save(AllAdvancedRenovations);
         }
 
         
         public void RemoveAdvancedRenovation(AdvancedRenovation advancedRenovation)
         {
-            
-            AllAdvancedTransfers.Remove(advancedRenovation);
-            afs.Save(AllAdvancedTransfers);
+
+            AllAdvancedRenovations.Remove(advancedRenovation);
+            afs.Save(AllAdvancedRenovations);
         }
     }
 }

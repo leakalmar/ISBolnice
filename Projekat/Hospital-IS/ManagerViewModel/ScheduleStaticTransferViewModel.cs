@@ -208,7 +208,7 @@ namespace Hospital_IS.ManagerViewModel
         private void Execute_TransferStaticEquipment(object obj)
         {
 
-            StaticTransferAppointmentDTO staticTransfer = new StaticTransferAppointmentDTO(SourceRoom, DestinationRoom, Equipment, Quantity, DateStart, DateEnd, Note);
+            StaticTransferAppointmentDTO staticTransfer = new StaticTransferAppointmentDTO(SourceRoom.RoomId, DestinationRoom.RoomId, Equipment.EquiptId, Quantity, DateStart, DateEnd, Note);
             bool isSucces = TransferController.Instance.ScheduleStaticTransfer(staticTransfer);
             Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(SourceRoom.RoomId, DestinationRoom.RoomId));
 
