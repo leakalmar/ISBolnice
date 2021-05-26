@@ -183,27 +183,43 @@
         </StackPanel>
         <ComboBox x:Name="Combo"   DisplayMemberPath="RoomIdType" ItemsSource="{Binding Rooms}" SelectedItem="{Binding SelectedRoom}" HorizontalAlignment="Left" Margin="165,86,0,0" VerticalAlignment="Top" Width="120"  />
         <TextBox HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" FontSize="15" Foreground="White" Margin="40,86,0,0"  Text="Izaberite sobu:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <StackPanel x:Name="SearchPanel" Visibility="Collapsed" Background="Transparent" Margin="40,162,110,563" >
-            <Grid Width="288">
+        <StackPanel x:Name="SearchPanel" Visibility="Visible" Background="Transparent" Margin="40,162,15,563" >
+            <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="25"/>
                     <ColumnDefinition Width="120"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="25"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Content="Pretrazi:" Foreground="White" FontSize="15"/>
-                <TextBox x:Name="SearchBox"  Grid.Column="2" Height="25" FontSize="14">
+                <Label Grid.Column="0" Content="Pretrazi:" Foreground="White" FontSize="15" />
+                <TextBox x:Name="SearchBox"  Grid.Column="2" Height="25" FontSize="14" >
+                    <TextBox.Text>
+                        <Binding Path="SearchBox" UpdateSourceTrigger="PropertyChanged"></Binding>
+                    </TextBox.Text>
                     
                 </TextBox>
-                    <Button x:Name="SeacrhDateGrid" BorderThickness="0" Grid.Column="3" Height="20" Width="20" HorizontalAlignment="Left" Background="Transparent" >
-                    <StackPanel >
-                        <Image Source="pack://application:,,,/Resources/search.png" Width="20" Height="20" />
-                    </StackPanel>
-                </Button>
+                <ComboBox Grid.Column="3" Height="25" FontSize="14" SelectedIndex="{Binding SelectedCondition}" Width="90">
+                    <ComboBoxItem Content="jednako"/>
+                    <ComboBoxItem Content="vise od"/>
+                    <ComboBoxItem Content="manje od"/>
+                </ComboBox>
+
+                <Button Grid.Column="4" Command="{Binding SearchCommnd}" >
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+                <StackPanel>
+                    <Image Source="pack://application:,,,/Resources/search.png"  />
+                </StackPanel>
+            </Button>
             </Grid>
         </StackPanel>
         <TextBox HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" FontSize="15" Foreground="White" Margin="40,124,0,0"  Text="Izaberite tip:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="ComboType"   HorizontalAlignment="Left" Margin="165,123,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding RoomTypes}" />
+        <ComboBox x:Name="ComboType"   HorizontalAlignment="Left" Margin="165,123,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding RoomTypes}" 
+                  SelectedIndex="{Binding SelectedTypeIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
 
 

@@ -1,9 +1,11 @@
 ﻿using Controllers;
+using Hospital_IS.Controllers;
 using Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Navigation;
+using System.Windows.Threading;
 
 namespace Hospital_IS.ManagerViewModel
 {
@@ -15,6 +17,7 @@ namespace Hospital_IS.ManagerViewModel
         private String _roomFloor = "Unesite sprat sobe";
         private String _surfaceArea = "Unesite površinu sobe";
         private String _bedNumber = "Unesite broj kreveta";
+        private int selectedRenovationOption = -1;
         private int comboBoxItem;
         private RelayCommand navigateToMEquipmentPageCommand;
         private RelayCommand navigateToMedicinePageCommand;
@@ -23,12 +26,20 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand updateRoom;
         private RelayCommand navigateToRoomPage;
         private RelayCommand navigateToRoomRenovation;
+        private RelayCommand navigateAdvancedRoomRenovation;
         private NavigationService navService;
         private Room selectedRoom;
         private RelayCommand navigateToManagerProfilePage;
 
 
-
+        public RelayCommand NavigateAdvancedRoomRenovation
+        {
+            get { return navigateAdvancedRoomRenovation; }
+            set
+            {
+                navigateAdvancedRoomRenovation = value;
+            }
+        }
         public RelayCommand NavigateToRoomRenovation
         {
             get { return navigateToRoomRenovation; }
@@ -145,6 +156,22 @@ namespace Hospital_IS.ManagerViewModel
                 }
             }
         }
+        
+        public int SelectedRenovationOption
+        {
+            get
+            {
+                return selectedRenovationOption;
+            }
+            set
+            {
+                if (value != selectedRenovationOption)
+                {
+                    selectedRenovationOption = value;
+                    OnPropertyChanged("SelectedRenovationOption");
+                }
+            }
+        }
         public Room SelectedRoom
         {
             get { return selectedRoom; }
@@ -251,7 +278,68 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToMedicinePageCommand = new RelayCommand(Execute_NavigateToMedicinePageCommand, CanExecute_NavigateCommand);
             this.NavigateToManagerProfilePage = new RelayCommand(Execute_NavigateToManagerProfilePageCommand, CanExecute_NavigateCommand);
             this.NavigateToEquipmentPageCommand = new RelayCommand(Execute_NavigateToEquipmentPageCommand, CanExecute_NavigateCommand);
-            this.NavigateToRoomRenovation = new RelayCommand(Execute_RenovationRoomCommand, CanExecute_RenovationRoomCommand);           
+            this.NavigateToRoomRenovation = new RelayCommand(Execute_RenovationRoomCommand, CanExecute_RenovationRoomCommand);
+            this.NavigateAdvancedRoomRenovation = new RelayCommand(Execute_AdvancedRenovationRoomCommand);
+            DispatcherTimer dispatcherTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMinutes(1)
+            };
+            dispatcherTimer.Tick += timer_Tick;
+            dispatcherTimer.Start();
+        }
+
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+          
+            DateTime time = DateTime.Now;
+            foreach (AdvancedRenovation renovation in AdvancedRenovationController.Instance.GetAll())
+            {
+               
+                if (renovation.RenovationEnd <= time && renovation.isMade == false)
+                {
+                        if(renovation.IsSplit == true)
+                        {
+                        MessageBox.Show("Uspjesna podijela soba");
+                            SplitOneRoomIntoTwo(renovation);
+                        AdvancedRenovationController.Instance.RemoveAdvancedRenovation(renovation);
+                        break;
+                        }else if (renovation.IsMerge == true)
+                        {
+                        MergeTwoRoomInOne(renovation);
+                        MessageBox.Show("Uspjesno spajanje soba");
+                        AdvancedRenovationController.Instance.RemoveAdvancedRenovation(renovation);
+                        break;
+                    }
+                                                        
+                }
+                
+               
+            }
+        }
+
+        private  void MergeTwoRoomInOne(AdvancedRenovation renovation)
+        {
+            RoomController.Instance.RemoveRoom(renovation.RoomFirst);
+            RoomController.Instance.RemoveRoom(renovation.RoomSecond);
+            RoomController.Instance.AddRoom(renovation.RenovationResultRoom.RoomNumber, renovation.RenovationResultRoom.RoomFloor, renovation.RenovationResultRoom.SurfaceArea,
+                0, (int)renovation.RenovationResultRoom.Type);
+           
+
+            LoadRooms();
+
+        }
+
+        private void SplitOneRoomIntoTwo(AdvancedRenovation renovation)
+        {
+            renovation.RoomFirst.SurfaceArea = renovation.RoomFirst.SurfaceArea / 2;
+            RoomController.Instance.UpdateRoom(renovation.RoomFirst.RoomId, renovation.RoomFirst.RoomFloor, renovation.RoomFirst.SurfaceArea / 2,
+                renovation.RoomFirst.BedNumber, (int)renovation.RoomFirst.Type);
+            RoomController.Instance.AddRoom(renovation.RenovationResultRoom.RoomNumber, renovation.RenovationResultRoom.RoomFloor, renovation.RenovationResultRoom.SurfaceArea,
+                0, (int)renovation.RenovationResultRoom.Type);
+            
+
+            LoadRooms();
         }
 
         public void SetFields(object selectedRoom)
@@ -268,6 +356,15 @@ namespace Hospital_IS.ManagerViewModel
 
         }
 
+
+        private void Execute_AdvancedRenovationRoomCommand(object obj)
+        {
+            //RoomRenovationViewModel.Instance.SetAppointmnetForRoom(SelectedRoom.RoomId);
+            //RoomRenovationViewModel.Instance.FirstRoom = SelectedRoom;
+            AdvancedRoomRenovationViewModel.Instance.NavService = NavService;
+            this.NavService.Navigate(
+                    new Uri("ManagerView1/AdvancedRoomOptionsView.xaml", UriKind.Relative));
+        }
         private void Execute_RenovationRoomCommand(object obj)
         {
             RoomRenovationViewModel.Instance.SetAppointmnetForRoom(SelectedRoom.RoomId);

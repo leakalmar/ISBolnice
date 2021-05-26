@@ -1,0 +1,73 @@
+﻿<Window x:Class="Hospital_IS.ManagerView1.RenovationWindow"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital_IS.ManagerView1" xmlns:managerviewmodel="clr-namespace:Hospital_IS.ManagerViewModel" d:DataContext="{d:DesignInstance Type=managerviewmodel:AdvancedRoomRenovationViewModel}"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        mc:Ignorable="d"
+       
+        WindowStyle="None" WindowStartupLocation="CenterScreen"
+        Title="MedicineInfoView" Height="250" Width="350">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="155"/>
+            <ColumnDefinition Width="155"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Border  Grid.ColumnSpan="20" Grid.RowSpan="20" CornerRadius="20" BorderBrush="White" BorderThickness="3" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF213868" Offset="0.0"/>
+                    <GradientStop Color="#FF5B317E" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Label Content="Broj sobe" Grid.Row="3" Grid.Column="1" FontSize="15" Foreground="White"/>
+        <Label Content="Tip sobe" Grid.Row="5" Grid.Column="1" FontSize="15" Foreground="White"/>
+        <TextBox Grid.Row="3" Grid.Column="2" Height="30" Text="{Binding RoomNumber}" FontSize="15"/>
+        <ComboBox Grid.Row="5" Grid.Column="2" Height="30" SelectedIndex="{Binding SelectedRoomTypeIndex}" FontSize="15">
+            <ComboBoxItem Content="Soba za operacije"/>
+            <ComboBoxItem Content="Soba preglede"/>
+            <ComboBoxItem Content="Soba za odmor"/>
+        </ComboBox>
+            
+            
+            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" FontWeight="SemiBold" Content="Unesite broj i tip nove sobe"   Foreground="White"/>
+        <Button x:Name="Send" Grid.Column="1" Grid.Row="7"  Width="120" Foreground="Black" Click="Send_Click"
+                BorderThickness="1" Height="25" Content="Zakazi"  Background="White" Command="{Binding MakeAdvacedRenovation}" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+     
+
+        <Button x:Name="BackButton" Grid.Column="2" Grid.Row="7"  Width="120" Foreground="Black"
+                BorderThickness="1" Height="25" Content="Odustani"  Background="White" Click="BackButton_Click" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+
+    </Grid>
+</Window>
