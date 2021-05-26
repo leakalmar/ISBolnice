@@ -52,9 +52,14 @@ namespace Controllers
             DoctorService.Instance.AddDoctor(doctor);
         }
 
-        public void UpdateDoctort(Doctor doctor)
+        public void UpdateDoctor(DoctorDTO doctorDTO)
         {
-            DoctorService.Instance.UpdateDoctort(doctor);
+            Doctor doctor = new Doctor(doctorDTO.Id, doctorDTO.Name, doctorDTO.Surname, doctorDTO.BirthDate, doctorDTO.Email,
+               doctorDTO.Password, doctorDTO.Address, 80000.0, DateTime.Now, null, SpecializationService.Instance.GetSpecialtyByName(doctorDTO.Specialty), 0);
+            doctor.WorkShift = doctorDTO.WorkShift;
+            doctor.VacationTimeStart = doctorDTO.VacationTimeStart;
+            //doctor.DaysOff.AddRange(doctorDTO.DaysOff);
+            DoctorService.Instance.UpdateDoctor(doctor);
         }
 
         public void DeleteDoctor(DoctorDTO doctorDTO)

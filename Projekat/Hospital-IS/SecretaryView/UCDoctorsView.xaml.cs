@@ -49,7 +49,12 @@ namespace Hospital_IS.SecretaryView
 
         private void UpdateDoctor(object sender, RoutedEventArgs e)
         {
-           
+            if ((DoctorDTO)dataGridDoctors.SelectedItem != null)
+            {
+                DoctorDTO doctor = (DoctorDTO)dataGridDoctors.SelectedItem;
+                UpdateDoctorView upv = new UpdateDoctorView(doctor, this);
+                upv.Show();
+            }
         }
 
         private void DeleteDoctor(object sender, RoutedEventArgs e)

@@ -1,3 +1,4 @@
+using Hospital_IS.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -5,9 +6,12 @@ namespace Model
 {
     public class Doctor : Employee
     {
-
+        public DateTime VacationTimeStart { get; set; }
+        public WorkDayShift WorkShift { get; set; } 
 
         public Specialty Specialty { get; set; }
+
+        public List<DateTime> DaysOff { get; set; } = new List<DateTime>();
 
         public Doctor(int id, string name, string surname, DateTime birthDate, string email, string password, string address,
             double salary, DateTime employmentDate, List<WorkDay> workDays, Specialty spec, int primaryRoom) : base(id, name, surname, birthDate, address, email, password, salary, employmentDate, workDays)
@@ -15,6 +19,15 @@ namespace Model
             this.Specialty = spec;
             this.PrimaryRoom = primaryRoom;
         }
+
+        /*public Doctor(int id, string name, string surname, DateTime birthDate, string email, string password, string address,
+            double salary, DateTime employmentDate, List<WorkDay> workDays, Specialty spec, int primaryRoom, DateTime vacationTimeStart, WorkDayShift shift) : base(id, name, surname, birthDate, address, email, password, salary, employmentDate, workDays)
+        {
+            this.Specialty = spec;
+            this.PrimaryRoom = primaryRoom;
+            //this.VacationTimeStart = vacationTimeStart;
+            //this.WorkShift = shift;
+        }*/
 
         public int PrimaryRoom { get; set; }
 

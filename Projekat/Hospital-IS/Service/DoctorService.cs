@@ -96,7 +96,7 @@ namespace Service
             dfs.SaveDoctors(AllDoctors);
         }
 
-        public void UpdateDoctort(Doctor doctor)
+        public void UpdateDoctor(Doctor doctor)
         {
             for (int i = 0; i < AllDoctors.Count; i++)
             {

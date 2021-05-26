@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital_IS.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -17,6 +18,9 @@ namespace Hospital_IS.DTOs
         public String Address { get; set; }
         public String Specialty { get; set; }
         public int PrimaryRoom { get; set; }
+        public DateTime VacationTimeStart { get; set; }
+        public WorkDayShift WorkShift { get; set; }
+        public List<DateTime> DaysOff { get; set; } = new List<DateTime>();
 
         public DoctorDTO(int id, string name, string surname, DateTime birthDate, string phone, 
             string email, string gender, string password, string address, string specialty, int primaryRoom)
@@ -32,6 +36,25 @@ namespace Hospital_IS.DTOs
             Address = address;
             Specialty = specialty;
             PrimaryRoom = primaryRoom;
+        }
+
+        public DoctorDTO(int id, string name, string surname, DateTime birthDate, string phone,
+           string email, string gender, string password, string address, string specialty, int primaryRoom, DateTime vacationTimeStart, WorkDayShift workShift, List<DateTime> daysOff)
+        {
+            Id = id;
+            Name = name;
+            Surname = surname;
+            BirthDate = birthDate;
+            Phone = phone;
+            Email = email;
+            Gender = gender;
+            Password = password;
+            Address = address;
+            Specialty = specialty;
+            PrimaryRoom = primaryRoom;
+            VacationTimeStart = vacationTimeStart;
+            WorkShift = workShift;
+            DaysOff.AddRange(daysOff);
         }
 
         public DoctorDTO()

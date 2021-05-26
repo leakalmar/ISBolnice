@@ -189,7 +189,7 @@ namespace Hospital_IS.Service
                     specialtyName = doctor.Specialty.Name;
 
                 AllDoctors.Add(new DoctorDTO(doctor.Id, doctor.Name, doctor.Surname, doctor.BirthDate, doctor.Phone, doctor.Email, doctor.Gender,
-                    doctor.Password, doctor.Address, specialtyName, doctor.PrimaryRoom));
+                    doctor.Password, doctor.Address, specialtyName, doctor.PrimaryRoom, doctor.VacationTimeStart, doctor.WorkShift, doctor.DaysOff));
             }
         }
 
