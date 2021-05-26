@@ -50,7 +50,6 @@ namespace Hospital_IS
             dispatcherTimer.Start();
         }
 
-
         public void refresh()
         {
           

@@ -21,9 +21,14 @@ namespace Controllers
             }
         }
 
-        public AppointmentController()
+        private AppointmentController()
         {
 
+        }
+
+        public Boolean MakeRenovationAppointmentForRoomMerge(Appointment appointmentFirstRoom,Appointment appointmentSecondRoom)
+        {
+            return AppointmentService.Instance.MakeRenovationAppointmentForRoomMerge(appointmentFirstRoom, appointmentSecondRoom);
         }
 
         public List<Appointment> GetAllAppByTwoRooms(int roomIdSource, int roomIdDestination)

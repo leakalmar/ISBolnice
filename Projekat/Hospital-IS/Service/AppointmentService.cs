@@ -91,6 +91,39 @@ namespace Service
             return isPossible;
         }
 
+
+        public bool MakeRenovationAppointmentForRoomMerge(Appointment firstRoomAppointment,Appointment secondRoomAppointment)
+        {
+            bool isPossibleForFirstRoom = CheckIfPossibilityForRenovation(firstRoomAppointment);
+
+            bool isPossibleForSecondRoom = CheckIfPossibilityForRenovation(secondRoomAppointment);
+
+            if (isPossibleForFirstRoom && isPossibleForSecondRoom)
+            {
+                AddRenovationAppointment(firstRoomAppointment);
+                AddRenovationAppointment(secondRoomAppointment);
+
+            }
+
+            return isPossibleForFirstRoom && isPossibleForSecondRoom;
+        }
+
+        private void AddRenovationAppointment(Appointment appointment)
+        {
+            appointment.Reserved = true;
+            AddAppointment(appointment);
+        }
+
+        private bool CheckIfPossibilityForRenovation(Appointment firstRoomAppointment)
+        {
+            List<Appointment> appointments = new List<Appointment>();
+
+            appointments = GetAllApointmentsByRoomId(firstRoomAppointment.Room);
+
+            bool isPossible = CheckAppointment(appointments, firstRoomAppointment.AppointmentStart, firstRoomAppointment.AppointmentEnd);
+            return isPossible;
+        }
+
         public List<Appointment> GetAppByRoom(int roomId)
         {
             List<Appointment> roomAppointment = new List<Appointment>();

@@ -18,6 +18,7 @@ namespace Hospital_IS.ManagerViewModel
         private ObservableCollection<Room> _rooms { get; set; }
         private ObservableCollection<String> roomTypes { get; set; }
         private int selectedTransferOption = -1;
+        private int selectedTypeIndex = -1;
         private ICollectionView  _equipments { get; set; }
         private string _name= "Unesite ime opreme";
         private string _quantity = "Unesite kolicinu";
@@ -35,7 +36,87 @@ namespace Hospital_IS.ManagerViewModel
         private Room selectedRoom;
         private RelayCommand navigateToManagerProfilePage;
         private RelayCommand navigateToTransferOptions;
+        private RelayCommand searchCommnd;
+        private string searchBox;
+        private int selectedCondition =0;
 
+
+
+        public int SelectedCondition
+        {
+            get { return selectedCondition; }
+            set
+            {
+                if (value != selectedCondition)
+                {
+
+                    selectedCondition = value;
+                    OnPropertyChanged("SelectedCondition");
+                }
+            }
+        }
+
+        public String SearchBox
+        {
+            get { return searchBox; }
+            set
+            {
+                searchBox = value;
+               
+                OnPropertyChanged("SelectedRoom");
+            }
+        }
+
+
+        public int SelectedTypeIndex
+        {
+            get { return selectedTypeIndex; }
+            set
+            {
+                if (value != selectedTypeIndex)
+                {
+                    
+                    selectedTypeIndex = value;
+                    OnPropertyChanged("SelectedTypeIndex");
+
+                    if (selectedTypeIndex != 2)
+                    {
+                        ICollectionView view = new CollectionViewSource { Source = SelectedRoom.Equipment }.View;
+                        view.Filter = null;
+                        view.Filter = delegate (object item)
+                        {
+                            EquiptType type = ((Equipment)item).EquipType;
+                            EquiptType equiptType = EquiptType.Dynamic;
+                            if (selectedTypeIndex == 0)
+                            {
+                                equiptType = EquiptType.Stationary;
+                            }
+                            else if (selectedTypeIndex == 1)
+                            {
+                                equiptType = EquiptType.Dynamic;
+                            }
+
+                            return type == equiptType;
+                        };
+                        
+                        Equipments = view;
+                    }
+                    else
+                    {
+                        Equipments = new CollectionViewSource { Source = SelectedRoom.Equipment }.View;
+                    }
+                }
+            }
+        }
+
+        public RelayCommand SearchCommnd
+        {
+            get { return searchCommnd; }
+            set
+            {
+                searchCommnd = value;
+            }
+        }
 
         public RelayCommand NavigateToTransferOptions
         {
@@ -55,7 +136,7 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
-      
+        
 
         public int SelectedTransferOption
         {
@@ -80,6 +161,7 @@ namespace Hospital_IS.ManagerViewModel
                     if(selectedRoom != null)
                 {
                     Equipments = new CollectionViewSource { Source = selectedRoom.Equipment }.View;
+                    SelectedTypeIndex = 2;
                     SelectedEquipment = null;
                 }
                    
@@ -317,7 +399,111 @@ namespace Hospital_IS.ManagerViewModel
             this.UpdateEquipment = new RelayCommand(Execute_UpdateEquipmentCommand);
             this.NavigateToManagerProfilePage = new RelayCommand(Execute_NavigateToManagerProfilePageCommand, CanExecute_NavigateCommand);
             this.NavigateToTransferOptions = new RelayCommand(Execute_NavigateToTransferEquipmentPageCommand, CanExecute_NavigateToTransferViewCommand);
+            this.SearchCommnd = new RelayCommand(Execute_SearchCommand);
 
+        }
+
+        private void Execute_SearchCommand(object obj)
+        {
+
+            if (SelectedTypeIndex != 2)
+            {
+                ICollectionView view = new CollectionViewSource { Source = SelectedRoom.Equipment }.View;
+                view.Filter = null;
+                view.Filter = delegate (object item)
+                {
+                    EquiptType type = ((Equipment)item).EquipType;
+                    EquiptType equiptType = EquiptType.Dynamic;
+                    if (SelectedTypeIndex == 0)
+                    {
+                        equiptType = EquiptType.Stationary;
+                    }
+                    else if (SelectedTypeIndex == 1)
+                    {
+                        equiptType = EquiptType.Dynamic;
+                    }
+
+
+
+                    String equipName = ((Equipment)item).Name;
+                    int amaount = ((Equipment)item).Quantity;
+                    String producerName = ((Equipment)item).ProducerName;
+                    if (int.TryParse(SearchBox, out int number)){
+
+                        if(SelectedCondition == 0)
+                        {
+                            return type == equiptType && number == amaount;
+                        }else if(SelectedCondition == 1){
+                            return type == equiptType && number < amaount;
+                        }else if(SelectedCondition == 2)
+                        {
+                            return type == equiptType && number > amaount;
+                        }
+                       
+                    }else
+                    {
+                        String[] searchItems = SearchBox.Split(",");
+                        if(searchItems.Length == 1)
+                        {
+                            return type == equiptType && equipName.Contains(searchItems[0]);
+                        }
+                        else
+                        {
+                            return type == equiptType && equipName.Contains(searchItems[0]) && producerName.Contains(searchItems[1]);
+                        }
+                        
+                    }
+
+                    return type == equiptType;
+                   
+                };
+
+                Equipments = view;
+            }
+            else
+            {
+                ICollectionView view = new CollectionViewSource { Source = SelectedRoom.Equipment }.View;
+                view.Filter = null;
+                view.Filter = delegate (object item)
+                {
+                    String equipName = ((Equipment)item).Name;
+                    int amaount = ((Equipment)item).Quantity;
+                    String producerName = ((Equipment)item).ProducerName;
+                    if (int.TryParse(SearchBox, out int number))
+                    {
+
+                        if (SelectedCondition == 0)
+                        {
+                            return number == amaount;
+                        }
+                        else if (SelectedCondition == 1)
+                        {
+                            return number < amaount;
+                        }
+                        else if (SelectedCondition == 2)
+                        {
+                            return number > amaount;
+                        }
+
+                    }
+                    else
+                    {
+                        String[] searchItems = SearchBox.Split(",");
+                        if (searchItems.Length == 1)
+                        {
+                            return equipName.Contains(searchItems[0]);
+                        }
+                        else
+                        {
+                            return equipName.Contains(searchItems[0]) && producerName.Contains(searchItems[1]);
+                        }
+
+                    }
+                    return true;
+                };
+
+                Equipments = view;
+            }
         }
 
 
