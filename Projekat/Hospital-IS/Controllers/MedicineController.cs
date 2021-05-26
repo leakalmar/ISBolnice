@@ -31,9 +31,39 @@ namespace Controllers
             return MedicineService.Instance.AllMedicines;
         }
 
-        public Medicine GetByName(string medicineName)
+        public MedicineDTO GetByName(string medicineName)
         {
-            return MedicineService.Instance.GetByName(medicineName);
+            return ConvertMedicineToDTO(MedicineService.Instance.GetByName(medicineName));
+        }
+
+        public MedicineDTO ConvertMedicineToDTO(Medicine medicine)
+        {
+            List<MedicineComponentDTO> componentDTOs = new List<MedicineComponentDTO>();
+            List<ReplaceMedicineNameDTO> replacmentDTOs = new List<ReplaceMedicineNameDTO>();
+            foreach (MedicineComponent component in medicine.Composition)
+            {
+                componentDTOs.Add(new MedicineComponentDTO(component.Component));
+            }
+            foreach (ReplaceMedicineName replace in medicine.ReplaceMedicine)
+            {
+                replacmentDTOs.Add(new ReplaceMedicineNameDTO(replace.Name));
+            }
+            return new MedicineDTO(componentDTOs, medicine.SideEffects, medicine.Usage, replacmentDTOs, medicine.Name, false, false);
+        }
+
+        public Medicine ConvertDTOToMedicine(MedicineDTO medicineDTO)
+        {
+            List<MedicineComponent> components = new List<MedicineComponent>();
+            List<ReplaceMedicineName> replacements = new List<ReplaceMedicineName>();
+            foreach (MedicineComponentDTO componentDTO in medicineDTO.Composition)
+            {
+                components.Add(new MedicineComponent(componentDTO.Component));
+            }
+            foreach (ReplaceMedicineNameDTO replaceDTO in medicineDTO.ReplaceMedicine)
+            {
+                replacements.Add(new ReplaceMedicineName(replaceDTO.Name));
+            }
+            return new Medicine(medicineDTO.Name, components, medicineDTO.SideEffects, medicineDTO.Usage, replacements);
         }
 
         public void UpdateMedicine(Medicine medicine)
@@ -65,13 +95,13 @@ namespace Controllers
 
         }
 
-        public List<MedicineDTO> GenerateListOfMedicines(Patient patient, List<Prescription> prescriptions)
+        public List<MedicineDTO> GenerateListOfMedicines(List<string> allergies, List<PrescriptionDTO> prescriptions)
         {
             List<MedicineDTO> medicineList = new List<MedicineDTO>();
 
             foreach (Medicine medicine in MedicineService.Instance.AllMedicines)
             {
-                if (PatientService.Instance.CheckIfAllergicToMedicine(patient.Alergies, medicine.Name))
+                if (PatientService.Instance.CheckIfAllergicToMedicine(allergies, medicine.Name))
                 {
                     medicineList.Add(new MedicineDTO(ConvertToMedicineComponentDTO(medicine.Composition), medicine.SideEffects,medicine.Usage, ConvertToReplaceMedicineNameDTO(medicine.ReplaceMedicine), medicine.Name, false, true));
                 }
@@ -111,10 +141,10 @@ namespace Controllers
             return replaceMedicineNameDTOs;
         }
 
-        private bool CheckIfInPrescriptions(Medicine medicine, List<Prescription> prescriptions)
+        private bool CheckIfInPrescriptions(Medicine medicine, List<PrescriptionDTO> prescriptions)
         {
             bool ret = false;
-            foreach (Prescription prescription in prescriptions)
+            foreach (PrescriptionDTO prescription in prescriptions)
             {
                 if (prescription.Medicine.Name.Equals(medicine.Name))
                 {

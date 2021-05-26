@@ -3,6 +3,7 @@ using DTOs;
 using Hospital_IS.Commands;
 using Hospital_IS.Controllers;
 using Hospital_IS.DoctorView;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Hospital_IS.DoctorViewModel
     public class PatientChartViewModel : BindableBase
     {
         #region Feilds
-        private Patient patient;
+        private PatientDTO patient;
         private AppointmentRowDTO selectedAppointment;
         private NavigationService mainNavigationService;
         private NavigationService insideNavigationService;
@@ -41,7 +42,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public Patient Patient
+        public PatientDTO Patient
         {
             get { return patient; }
             set
@@ -181,13 +182,13 @@ namespace Hospital_IS.DoctorViewModel
                 case 1:
                     GeneralInfo view = new GeneralInfo();
                     view._ViewModel.Started = Started;
-                    view._ViewModel.Patient = Patient;
+                    //view._ViewModel.Patient = Patient;
                     this.InsideNavigationService.Navigate(view);
                     break;
                 case 2:
                     History history = new History();
                     history._ViewModel.InsideNavigationService = InsideNavigationService;
-                    history._ViewModel.Patient = Patient;
+                    //history._ViewModel.Patient = Patient;
                     this.InsideNavigationService.Navigate(history);
                     break;
                 case 3:
@@ -227,8 +228,7 @@ namespace Hospital_IS.DoctorViewModel
                 DoctorAppointmentManagementController.Instance.EndAppointment(selectedAppointment);
                 ReportDTO reportDTO = new ReportDTO(selectedAppointment.AppointmentStart, selectedAppointment.Doctor.Name, selectedAppointment.Doctor.Surname, selectedAppointment.Type, selectedAppointment.AppointmentCause, ReportView.reportDetail.Text, ReportView._ViewModel.Prescriptions.Count, selectedAppointment.Patient.Id);
                 ChartController.Instance.AddReport(reportDTO);
-                //ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView._ViewModel.Prescriptions), selectedAppointment.Patient);
-                ChartController.Instance.AddPrescriptions(new List<Prescription>(ReportView._ViewModel.Prescriptions), PatientController.Instance.GetPatientByID(SelectedAppointment.Appointment.Patient.Id));
+                ChartController.Instance.AddPrescriptions(new List<PrescriptionDTO>(ReportView._ViewModel.Prescriptions), SelectedAppointment.Appointment.Patient);
                 this.MainNavigationService.Navigate(new AppDetail());
             }
         }
@@ -256,7 +256,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 GeneralInfo view = new GeneralInfo();
                 view._ViewModel.Started = Started;
-                view._ViewModel.Patient = Patient;
+                //view._ViewModel.Patient = Patient;
                 InsideNavigationService.Navigate(view);
             }
             else
@@ -269,7 +269,7 @@ namespace Hospital_IS.DoctorViewModel
                 {
                     GeneralInfo view = new GeneralInfo();
                     view._ViewModel.Started = Started;
-                    view._ViewModel.Patient = Patient;
+                    //view._ViewModel.Patient = Patient;
                     InsideNavigationService.Navigate(view);
                 }
             }
@@ -277,7 +277,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void SetFields()
         {
-            Patient = PatientController.Instance.GetPatientByID(selectedAppointment.Appointment.Patient.Id);
+            Patient = SelectedAppointment.Appointment.Patient;
             SearchMedicineView = new SearchMedicine();
             SearchMedicineView._ViewModel.Patient = Patient;
             SearchMedicineView._ViewModel.DatePrescribed = SelectedAppointment.Appointment.AppointmentStart;

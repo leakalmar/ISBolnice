@@ -60,7 +60,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_OpenChartCommand(object obj)
         {
             PatientChart view = new PatientChart();
-            view._ViewModel.Patient = SelectedPatient;
+            //view._ViewModel.Patient = SelectedPatient;
             DoctorMainWindow.Instance._ViewModel.PatientChartView = view;
             DoctorMainWindow.Instance._ViewModel.NavigateToChartCommand.Execute(obj);
         }

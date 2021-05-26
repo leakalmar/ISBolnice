@@ -1,4 +1,5 @@
-﻿using Hospital_IS.Storages;
+﻿using DTOs;
+using Hospital_IS.Storages;
 using Model;
 using System.Collections.Generic;
 

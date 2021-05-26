@@ -1,4 +1,5 @@
-﻿using Hospital_IS.Commands;
+﻿using DTOs;
+using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
 using Model;
 using System.Collections.ObjectModel;
@@ -9,8 +10,8 @@ namespace Hospital_IS.DoctorViewModel
     public class ReportViewModel : BindableBase
     {
         #region Feilds
-        private ObservableCollection<Prescription> prescriptions;
-        private Prescription selectedPrescription;
+        private ObservableCollection<PrescriptionDTO> prescriptions;
+        private PrescriptionDTO selectedPrescription;
         private string anemnesis;
         private SearchMedicine searchMedicine;
         private NavigationService mainNavigationService;
@@ -24,7 +25,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public ObservableCollection<Prescription> Prescriptions
+        public ObservableCollection<PrescriptionDTO> Prescriptions
         {
             get { return prescriptions; }
             set
@@ -33,7 +34,7 @@ namespace Hospital_IS.DoctorViewModel
                 OnPropertyChanged("Prescriptions");
             }
         }
-        public Prescription SelectedPrescription
+        public PrescriptionDTO SelectedPrescription
         {
             get { return selectedPrescription; }
             set
@@ -104,7 +105,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Constructor
         public ReportViewModel()
         {
-            Prescriptions = new ObservableCollection<Prescription>();
+            Prescriptions = new ObservableCollection<PrescriptionDTO>();
             this.DeletePrescriptionCommand = new RelayCommand(Execute_DeletePrescriptionCommand, CanExecute_Command);
             this.SearchMedicineCommad = new RelayCommand(Execute_SearchMedicineCommad, CanExecute_Command);
             this.MainNavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;

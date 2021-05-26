@@ -68,9 +68,9 @@ namespace Controllers
             return PatientService.Instance.CheckIfAllergicToMedicine(patient.Alergies, medicine.Name);
         }
 
-        public bool CheckIfAllergicToComponent(Patient patient,string medicineName)
+        public bool CheckIfAllergicToComponent(List<string> allergies, string medicineName)
         {
-            return PatientService.Instance.CheckIfAllergicToComponent(medicineName, patient.Alergies);
+            return PatientService.Instance.CheckIfAllergicToComponent(medicineName, allergies);
         }
 
         public bool IsPatientTroll(Patient patient, DoctorAppointment doctorAppointment)

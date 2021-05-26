@@ -1,4 +1,5 @@
 ﻿using DTOs;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using Service;
 using System;
@@ -83,9 +84,20 @@ namespace Controllers
             ChartService.Instance.AddReport(newReport, reportDTO.PatientID);
         }
 
-        public void AddPrescriptions(List<Prescription> prescriptions, Patient patient)
+        public void AddPrescriptions(List<PrescriptionDTO> prescriptions, PatientDTO patient)
         {
-            ChartService.Instance.AddPrescriptions(prescriptions,patient.Id);
+            ChartService.Instance.AddPrescriptions(ConvertDTOToPrescription(prescriptions) ,patient.Id);
+        }
+
+        private List<Prescription> ConvertDTOToPrescription(List<PrescriptionDTO> prescriptionDTOs)
+        {
+            List<Prescription> prescriptions = new List<Prescription>();
+            foreach (PrescriptionDTO prescriptionDTO in prescriptionDTOs)
+            {
+                Medicine medicine = MedicineController.Instance.ConvertDTOToMedicine(prescriptionDTO.Medicine);
+                prescriptions.Add(new Prescription(medicine,prescriptionDTO.DatePrescribed));
+            }
+            return prescriptions;
         }
 
 

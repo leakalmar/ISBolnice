@@ -6,10 +6,9 @@
         public bool IsEnabled { get; set; }
         public bool IsStarted { get; set; } =  false;
 
-        public AppointmentRowDTO(DoctorAppointmentDTO appointment, bool enabled)
+        public AppointmentRowDTO(DoctorAppointmentDTO appointment)
         {
             Appointment = appointment;
-            IsEnabled = enabled;
         }
     }
 }

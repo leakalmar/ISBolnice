@@ -72,8 +72,8 @@ namespace Hospital_IS.DoctorViewModel
         public ScheduleAppointmentViewModel()
         {
             this.AddNewCommand = new RelayCommand(Execute_AddNewCommand, CanExecute_AddNewCommand);
-            Patient patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
-            this.ScheduledAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(patient.Id));
+            //Patient patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
+            //this.ScheduledAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(patient.Id));
             this.MainNavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
         }
         #endregion

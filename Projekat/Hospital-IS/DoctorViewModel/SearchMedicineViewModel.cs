@@ -2,6 +2,7 @@
 using DTOs;
 using Hospital_IS.Commands;
 using Hospital_IS.DoctorView;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,9 @@ namespace Hospital_IS.DoctorViewModel
     public class SearchMedicineViewModel : BindableBase
     {
         #region Feilds
-        private Patient patient;
+        private PatientDTO patient;
         private ObservableCollection<MedicineDTO> medicineList;
-        private ObservableCollection<Prescription> prescriptions;
+        private ObservableCollection<PrescriptionDTO> prescriptions;
         private MedicineDTO selectedMedicine;
         private NavigationService mainNavigationService;
         private DateTime datePrescribed;
@@ -42,7 +43,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public ObservableCollection<Prescription> Prescriptions
+        public ObservableCollection<PrescriptionDTO> Prescriptions
 
         {
             get { return prescriptions; }
@@ -50,7 +51,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 prescriptions = value;
                 OnPropertyChanged("Prescriptions");
-                this.MedicineList = new ObservableCollection<MedicineDTO>(MedicineController.Instance.GenerateListOfMedicines(Patient, new List<Prescription>(prescriptions)));
+                this.MedicineList = new ObservableCollection<MedicineDTO>(MedicineController.Instance.GenerateListOfMedicines(Patient.Alergies, new List<PrescriptionDTO>(prescriptions)));
             }
         }
 
@@ -64,7 +65,7 @@ namespace Hospital_IS.DoctorViewModel
                 OnPropertyChanged("SelectedMedicine");
                 if(value != null)
                 {
-                    PotentiallyAllergicMassage = PatientController.Instance.CheckIfAllergicToComponent(patient, SelectedMedicine.Name);
+                    PotentiallyAllergicMassage = PatientController.Instance.CheckIfAllergicToComponent(Patient.Alergies, SelectedMedicine.Name);
                 }
             }
         }
@@ -79,7 +80,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public Patient Patient
+        public PatientDTO Patient
         {
             get { return patient; }
             set
@@ -147,7 +148,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Methods
         private void RemovePrescription()
         {
-            foreach(Prescription p in Prescriptions)
+            foreach(PrescriptionDTO p in Prescriptions)
             {
                 if (p.Medicine.Name.Equals(SelectedMedicine.Name))
                 {
@@ -168,7 +169,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void AddPrescription()
         { 
-            Prescriptions.Add(new Prescription(MedicineController.Instance.GetByName(SelectedMedicine.Name), DatePrescribed));
+            Prescriptions.Add(new PrescriptionDTO(MedicineController.Instance.GetByName(SelectedMedicine.Name), DatePrescribed));
             foreach (MedicineDTO medicine in medicineList)
             {
                 if (medicine.Equals(SelectedMedicine))

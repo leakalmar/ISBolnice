@@ -173,5 +173,18 @@ namespace Hospital_IS.Service
             return new DoctorAppointmentDTO(docAppointment.Reserved, docAppointment.AppointmentCause, docAppointment.AppointmentStart, docAppointment.AppointmentEnd,
                     docAppointment.Type, docAppointment.Room, docAppointment.Id, docAppointment.IsUrgent, patientDTO, doctorDTO, docAppointment.IsFinished);
         }
+
+        public List<DoctorAppointmentDTO> GetAppointmentByDoctorId(int doctorId)
+        {
+            List<DoctorAppointmentDTO> doctorAppointmentDTOs = new List<DoctorAppointmentDTO>();
+            foreach (DoctorAppointmentDTO appointment in AllAppointments)
+            {
+                if (appointment.Doctor.Id.Equals(doctorId))
+                {
+                    doctorAppointmentDTOs.Add(appointment);
+                }
+            }
+            return doctorAppointmentDTOs;
+        }
     }
 }

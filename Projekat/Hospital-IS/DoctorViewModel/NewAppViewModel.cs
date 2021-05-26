@@ -331,22 +331,23 @@ namespace Hospital_IS.DoctorViewModel
             if (SelectedType != null && SelectedSpecialty != null && SelectedRoom != null && SelectedDoctor != null)
             {
                 List<DateTime> dates = GenerateDates();
-                Patient patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
+                //Patient patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
 
                 if (Emergency)
                 {
-                    GetEmergencyAppointments(dates, SelectedDoctor, patient);
+                    //GetEmergencyAppointments(dates, SelectedDoctor, patient);
                 }
                 else
                 {
-                    GetAppointments(dates, SelectedDoctor, patient);
+                    //GetAppointments(dates, SelectedDoctor, patient);
                 }
             }
         }
 
         private void GetAppointments(List<DateTime> dates, Doctor doctor, Patient patient)
         {
-            ICollectionView view = new CollectionViewSource { Source = new DoctorAppointmentConverter().ConvertCollectionToDTO(DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, Emergency, SelectedRoom, FindType(), Duration, patient, doctor)) }.View;
+           // DoctorAppointmentDTO tempDTO = new DoctorAppointmentDTO(false, null, dates[0], dates[0].Add(Duration), FindType(), SelectedRoom.RoomId, -1, Emergency, patient, doctor, false);
+            ICollectionView view = new CollectionViewSource { Source = new DoctorAppointmentConverter().ConvertExistingAppointmentsToDTO(DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, Emergency, SelectedRoom, FindType(), Duration, patient, doctor)) }.View;
             view.SortDescriptions.Clear();
             view.SortDescriptions.Add(new SortDescription("Appointment.AppointmentStart", ListSortDirection.Ascending));
             Appointments = view;

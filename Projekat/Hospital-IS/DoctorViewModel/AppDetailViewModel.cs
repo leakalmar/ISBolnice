@@ -1,6 +1,7 @@
 ﻿using Controllers;
 using DTOs;
 using Hospital_IS.Commands;
+using Hospital_IS.Controllers;
 using Hospital_IS.DoctorConverters;
 using Hospital_IS.DoctorView;
 using Model;
@@ -102,7 +103,8 @@ namespace Hospital_IS.DoctorViewModel
         #region Methods
         private void SetAppointmentFeilds()
         {
-            ObservableCollection<AppointmentRowDTO> doctorAppointments = new DoctorAppointmentConverter().ConvertCollectionToDTO(DoctorAppointmentController.Instance.GetAllByDoctor(DoctorMainWindow.Instance._ViewModel.Doctor.Id));
+            List<DoctorAppointmentDTO> appointmentDTOs = DoctorAppointmentManagementController.Instance.GetAppointmentByDoctorId(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
+            ObservableCollection<AppointmentRowDTO> doctorAppointments = new DoctorAppointmentConverter().ConvertNewAppointmentsToDTO(appointmentDTOs);
 
             appointmentsView = new CollectionViewSource { Source = doctorAppointments }.View;
 

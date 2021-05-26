@@ -32,7 +32,7 @@ namespace Hospital_IS.DoctorViewModel
             set { 
                 report = value;
                 Anamnesis = report.Anemnesis;
-                Prescriptions = ChartController.Instance.GetPrescriptionsForReport(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient, report.AppointmentStart);
+                //Prescriptions = ChartController.Instance.GetPrescriptionsForReport(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient, report.AppointmentStart);
                 //isto zaa testove kada budes pravila
                 OnPropertyChanged("Report");
             }
@@ -78,7 +78,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_SaveCommand(object obj)
         {
             this.Report.Anemnesis = this.Anamnesis;
-            ChartController.Instance.UpdateReport(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient, Report);
+            //ChartController.Instance.UpdateReport(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient, Report);
         }
         #endregion
 

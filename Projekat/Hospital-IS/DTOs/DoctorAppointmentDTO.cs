@@ -1,7 +1,6 @@
 ﻿using Enums;
 using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
-using Model;
 using System;
 
 namespace DTOs
@@ -21,23 +20,6 @@ namespace DTOs
         public PatientDTO Patient { get; set; }
         public DoctorDTO Doctor { get; set; }
         public bool IsFinished { get; set; } = false;
-
-        public DoctorAppointmentDTO(DoctorAppointment doctorAppointment)
-        {
-            Reserved = doctorAppointment.Reserved;
-            AppointmentCause = doctorAppointment.AppointmentCause;
-            AppointmentStart = doctorAppointment.AppointmentStart;
-            AppointmentEnd = doctorAppointment.AppointmentEnd;
-            Type = doctorAppointment.Type;
-            Room = doctorAppointment.Room;
-            Id = doctorAppointment.Id;
-            NameSurnamePatient = doctorAppointment.NameSurnamePatient;
-            AppTypeText = doctorAppointment.AppTypeText;
-            IsUrgent = doctorAppointment.IsUrgent;
-            //Patient = doctorAppointment.Patient;
-            //Doctor = doctorAppointment.Doctor;
-            IsFinished = doctorAppointment.IsFinished;
-        }
 
         public DoctorAppointmentDTO(bool reserved, string appointmentCause, DateTime appointmentStart, 
             DateTime appointmentEnd, AppointmentType type, int room, int id, bool isUrgent, PatientDTO patient, DoctorDTO doctor, bool isFinished)
