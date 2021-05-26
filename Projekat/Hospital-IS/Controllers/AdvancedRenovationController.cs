@@ -30,7 +30,7 @@ namespace Hospital_IS.Controllers
 
         public List<AdvancedRenovation> GetAll()
         {
-            return AdvancedRenovationService.Instance.AllAdvancedTransfers;
+            return AdvancedRenovationService.Instance.AllAdvancedRenovations;
         }
 
         public void MakeAdvancedRenovation(AdvancedRenovation advancedRenovation)
