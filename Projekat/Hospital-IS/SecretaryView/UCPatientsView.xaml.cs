@@ -25,7 +25,6 @@ namespace Hospital_IS
             this.DataContext = this;
         }
 
-
         public void RefreshGrid()
         {
             if (Patients != null)

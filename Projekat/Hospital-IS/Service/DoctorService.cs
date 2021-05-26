@@ -89,5 +89,38 @@ namespace Service
             return null;
         }
 
+        public void AddDoctor(Doctor doctor)
+        {
+            AllDoctors.Add(doctor);
+
+            dfs.SaveDoctors(AllDoctors);
+        }
+
+        public void UpdateDoctor(Doctor doctor)
+        {
+            for (int i = 0; i < AllDoctors.Count; i++)
+            {
+                if (doctor.Id.Equals(AllDoctors[i].Id))
+                {
+                    AllDoctors.Remove(AllDoctors[i]);
+                    AllDoctors.Insert(i, doctor);
+                }
+            }
+            dfs.SaveDoctors(AllDoctors);
+        }
+
+        public void DeleteDoctor(Doctor doctor)
+        {
+            for (int i = 0; i < AllDoctors.Count; i++)
+            {
+                if (doctor.Id.Equals(AllDoctors[i].Id))
+                {
+                    AllDoctors.Remove(AllDoctors[i]);
+                }
+            }
+
+            dfs.SaveDoctors(AllDoctors);
+        }
+
     }
 }
