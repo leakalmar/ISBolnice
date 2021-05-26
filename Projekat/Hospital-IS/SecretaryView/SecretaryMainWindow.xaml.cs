@@ -13,6 +13,7 @@ namespace Hospital_IS
         UCPatientsView ucp = new UCPatientsView();
         UCNotificationsView ucn = new UCNotificationsView();
         UCAppointmentsView uca = new UCAppointmentsView();
+        UCDoctorsView ucd = new UCDoctorsView();
 
         private static SecretaryMainWindow instance = null;
 
@@ -74,5 +75,9 @@ namespace Hospital_IS
             HomePage.Content = uca;
         }
 
+        private void btnDoctors_Click(object sender, RoutedEventArgs e)
+        {
+            HomePage.Content = ucd;
+        }
     }
 }

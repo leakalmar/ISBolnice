@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Hospital_IS.DTOs;
+using Model;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,22 @@ namespace Controllers
         public String GetDoctorsNameAndSurname(int senderId)
         {
             return DoctorService.Instance.GetDoctorNameAndSurname(senderId);
+        }
+
+        public void AddDoctor(Doctor doctor)
+        {
+            DoctorService.Instance.AddDoctor(doctor);
+        }
+
+        public void UpdateDoctort(Doctor doctor)
+        {
+            DoctorService.Instance.UpdateDoctort(doctor);
+        }
+
+        public void DeleteDoctor(DoctorDTO doctorDTO)
+        {
+            Doctor doctor = DoctorService.Instance.GetDoctorByID(doctorDTO.Id);
+            DoctorService.Instance.DeleteDoctor(doctor);
         }
     }
 }
