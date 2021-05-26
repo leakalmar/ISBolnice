@@ -198,6 +198,7 @@ namespace Hospital_IS.ManagerViewModel
 
         private void Execute_NavigateToMedicinePageCommand(object obj)
         {
+            MedicineViewModel.Instance.Medicines = new ObservableCollection<Medicine>(MedicineController.Instance.GetAll());
             this.NavService.Navigate(
                 new Uri("ManagerView1/MainMedicineView.xaml", UriKind.Relative));
         }
