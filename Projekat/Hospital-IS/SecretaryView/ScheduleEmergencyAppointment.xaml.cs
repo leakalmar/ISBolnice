@@ -29,7 +29,7 @@ namespace Hospital_IS.SecretaryView
             InitializeComponent();
             this.sa = sa;
 
-            Patients = new ObservableCollection<PatientDTO>(SecretaryUserManagementService.Instance.GetAllRegisteredPatients());
+            Patients = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllRegisteredPatients());
             Specializations = new ObservableCollection<string>(SpecializationController.Instance.GetAllNames());
 
             this.DataContext = this;
@@ -55,13 +55,13 @@ namespace Hospital_IS.SecretaryView
             if (cbAppType.SelectedIndex == 0)
             {
                 cbSpecialty.IsEnabled = false;
-                Rooms = new ObservableCollection<RoomDTO>(DoctorAppointmentManagementService.Instance.GetRoomByType(RoomType.ConsultingRoom));
+                Rooms = new ObservableCollection<RoomDTO>(DoctorAppointmentManagementController.Instance.GetRoomByType(RoomType.ConsultingRoom));
                 cbRoom.ItemsSource = Rooms;
             }
             else
             {
                 cbSpecialty.IsEnabled = true;
-                Rooms = new ObservableCollection<RoomDTO>(DoctorAppointmentManagementService.Instance.GetRoomByType(RoomType.OperationRoom));
+                Rooms = new ObservableCollection<RoomDTO>(DoctorAppointmentManagementController.Instance.GetRoomByType(RoomType.OperationRoom));
                 cbRoom.ItemsSource = Rooms;
             }
         }
