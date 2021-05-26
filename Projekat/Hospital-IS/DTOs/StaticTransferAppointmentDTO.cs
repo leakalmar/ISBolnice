@@ -5,19 +5,19 @@ namespace DTOs
 {
     public class StaticTransferAppointmentDTO
     {
-        public Room SourceRoom { get; set; }
-        public Room DestinationRoom { get; set; }
-        public Equipment Equip { get; set; }
+        public int SourceRoomId { get; set; }
+        public int DestinationRoomId { get; set; }
+        public int EquipId { get; set; }
         public int Quantity { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public String Description { get; set; }
 
-        public StaticTransferAppointmentDTO(Room sourceRoom, Room destinationRoom, Equipment equip, int quantity, DateTime startDate, DateTime endDate, string description)
+        public StaticTransferAppointmentDTO(int sourceRoomId, int destinationRoomId, int equipId, int quantity, DateTime startDate, DateTime endDate, string description)
         {
-            SourceRoom = sourceRoom;
-            DestinationRoom = destinationRoom;
-            Equip = equip;
+            SourceRoomId = sourceRoomId;
+            DestinationRoomId = destinationRoomId;
+            EquipId = equipId;
             Quantity = quantity;
             StartDate = startDate;
             EndDate = endDate;

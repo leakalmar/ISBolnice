@@ -18,9 +18,6 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand transferStaticEquipmentCommand;
         private Room selectedRoomFirst;
         private Room selectedRoomSecond;
-        private string selectedRoomText;
-        private int selectedRoomIndexFirst = -1;
-        private int selectedRoomIndexSecond = -1;
         private string transferAmount;
         private NavigationService navService;
       
