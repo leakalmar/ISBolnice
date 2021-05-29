@@ -1,6 +1,6 @@
 ﻿using Controllers;
 using Hospital_IS.Controllers;
-using Hospital_IS.DoctorView;
+using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DTOs;
 using Hospital_IS.ManagerView1;
 using Hospital_IS.Storages;

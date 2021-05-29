@@ -1,4 +1,4 @@
-﻿using Hospital_IS.DoctorView;
+﻿using Hospital_IS.DoctorRole.DoctorView;
 using Model;
 using Service;
 using System;

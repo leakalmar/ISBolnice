@@ -29,7 +29,6 @@ namespace Hospital_IS.Service
 
             foreach (DateTime d in dates)
             {
-                //Set date from witch could start appointments
                 if (d.Date == DateTime.Now.Date)
                 {
                     if (DateTime.Now.Minute < 15)

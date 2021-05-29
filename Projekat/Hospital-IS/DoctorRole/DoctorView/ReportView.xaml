@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="Hospital_IS.DoctorRole.DoctorView.ReportView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
+    <UserControl.InputBindings>
+        <KeyBinding Key="Add" Modifiers="Ctrl" Command="{Binding SearchMedicineCommad}" />
+    </UserControl.InputBindings>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <GroupBox Margin="15" Header="Detalji pregleda" Foreground="FloralWhite">
+            <TextBox x:Name="reportDetail" Margin="5,5,5,5"
+                    Background="Transparent" Foreground="FloralWhite"
+                    BorderThickness="0" Text="{Binding Anemnesis}" />
+        </GroupBox>
+
+        <Grid Grid.Column="1" Margin="0,25,15,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.9*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Row="0" CornerRadius="20,0,0,0"
+                    BorderThickness="1,1,0,1" Background="#FF213250"
+                    BorderBrush="FloralWhite">
+                <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
+                        Content="Recept" Foreground="FloralWhite"
+                        HorizontalAlignment="Stretch">
+                    <Button.InputBindings>
+                        <KeyBinding Key="Return"
+                                Command="{Binding SearchMedicineCommad}" />
+                    </Button.InputBindings>
+                </Button>
+            </Border>
+            <Image Source="pack://application:,,,/Resources/add-row.png"
+                    HorizontalAlignment="Right" Margin="0,5,5,5" />
+            <Border Grid.Row="0" Grid.Column="1" CornerRadius="0,20,0,0"
+                    BorderThickness="1" Background="#FF213250"
+                    BorderBrush="FloralWhite">
+                <Button Foreground="FloralWhite" FontSize="18"
+                        BorderThickness="0" Background="{x:Null}">
+                    <Image Source="pack://application:,,,/Resources/print.png"
+                            Margin="5" />
+                </Button>
+            </Border>
+
+            <Border Grid.Row="1" Grid.ColumnSpan="2" CornerRadius="0,0,20,20"
+                    BorderThickness="1,0,1,1" BorderBrush="FloralWhite"
+                    Margin="0,0,0,10">
+                <ListBox x:Name="medicines"
+                        ItemsSource="{Binding Prescriptions,UpdateSourceTrigger=PropertyChanged}"
+                        Background="Transparent" BorderThickness="0"
+                        SelectedItem="{Binding SelectedPrescription}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Medicine.Name}"
+                                    Foreground="FloralWhite" FontSize="14" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.InputBindings>
+                        <KeyBinding Key="Delete"
+                                Command="{Binding DeletePrescriptionCommand}" />
+                    </ListBox.InputBindings>
+                </ListBox>
+            </Border>
+
+            <Border Grid.Row="2" CornerRadius="20" Grid.ColumnSpan="2"
+                    BorderThickness="1" Background="#FF213250"
+                    BorderBrush="FloralWhite">
+                <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
+                        Content="Oprema" Foreground="FloralWhite"
+                        HorizontalAlignment="Stretch" />
+            </Border>
+            <Image Source="pack://application:,,,/Resources/add-row.png"
+                    Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right"
+                    Margin="0,5,10,5" />
+
+        </Grid>
+    </Grid>
+</UserControl>

@@ -43,5 +43,10 @@ namespace Controllers
         {
             return DoctorService.Instance.GetDoctorNameAndSurname(senderId);
         }
+
+        public Doctor GetDoctorById(int doctorId)
+        {
+            return DoctorService.Instance.GetDoctorByID(doctorId);
+        }
     }
 }

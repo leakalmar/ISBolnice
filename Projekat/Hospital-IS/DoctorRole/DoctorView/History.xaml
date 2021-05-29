@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="Hospital_IS.DoctorRole.DoctorView.History"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
+    <Grid Margin="0,25,0,0">
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Reports}"
+                Style="{StaticResource CustomDataGrid}"
+                SelectedItem="{Binding SelectedReport}">
+            <DataGrid.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding OldReportCommand}" />
+            </DataGrid.InputBindings>
+            <DataGrid.Resources>
+                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
+                        TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#FF2E3B55" />
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Datum"
+                        Binding="{Binding AppointmentStart}"
+                        CanUserResize="False" Width="0.05*" />
+                <DataGridTextColumn Header="Tip pregleda"
+                        Binding="{Binding Type}" CanUserResize="False"
+                        Width="0.05*" />
+                <DataGridTextColumn Header="Dijagnoza"
+                        Binding="{Binding AppointmentCause}"
+                        CanUserResize="False" Width="0.05*" />
+                <DataGridTextColumn Header="Doktor"
+                        Binding="{Binding DoctorSurname}" CanUserResize="False"
+                        Width="0.05*" />
+                <DataGridCheckBoxColumn Header="Recept"
+                        Binding="{Binding CountPresciption}" CanUserResize="False"
+                        Width="0.02*" />
+                <DataGridCheckBoxColumn Header="Test"
+                        Binding="{Binding CountTests}"
+                        CanUserResize="False"
+                        Width="0.02*" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

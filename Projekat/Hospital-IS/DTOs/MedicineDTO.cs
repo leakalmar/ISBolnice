@@ -1,4 +1,4 @@
-﻿using Hospital_IS.DoctorView;
+﻿using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DTOs;
 using System.Collections.Generic;
 
