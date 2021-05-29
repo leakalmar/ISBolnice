@@ -181,7 +181,7 @@ namespace Hospital_IS.DoctorViewModel
                 case 1:
                     GeneralInfo view = new GeneralInfo();
                     view._ViewModel.Started = Started;
-                    view._ViewModel.Patient = Patient;
+                    //view._ViewModel.Patient = Patient;
                     this.InsideNavigationService.Navigate(view);
                     break;
                 case 2:

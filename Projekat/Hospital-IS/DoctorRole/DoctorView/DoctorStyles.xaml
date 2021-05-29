@@ -124,6 +124,7 @@
     <Style x:Key="CustomLabel" TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="White" />
         <Setter Property="FontSize" Value="16" />
+        <Setter Property="VerticalContentAlignment" Value="Bottom" />
     </Style>
 
     <Style x:Key="CustomGroupBox" TargetType="{x:Type GroupBox}">
@@ -137,7 +138,7 @@
         <Setter Property="BorderThickness" Value="0,0,0,2" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="BorderBrush" Value="White" />
-        <Setter Property="Margin" Value="0,0,0,10" />
+        <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
     </Style>
@@ -148,7 +149,21 @@
         <Setter Property="BorderThickness" Value="0,0,0,2" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
-        <Setter Property="Margin" Value="0,0,0,10" />
+        <Setter Property="Margin" Value="0,0,0,0" />
     </Style>
 
+    <Style x:Key="ButtonBorder" TargetType="{x:Type Border}">
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Background" Value="#FF213250" />
+        <Setter Property="BorderBrush" Value="White" />
+    </Style>
+
+    <Style x:Key="CustomButton" TargetType="{x:Type Button}">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="{x:Null}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
 </ResourceDictionary>
