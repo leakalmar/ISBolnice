@@ -35,10 +35,72 @@
                 Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
                 HorizontalAlignment="Left" Click="DeleteAppointment"/>
 
-            <Button Width="110" Content="Zakaži novi termin" Height="30" Margin="40 0 0 0 "
+            <Button Width="110" Content="Zakaži novi termin" Height="30" Margin="110 0 0 0 "
                 Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
                 Click="ScheduleAppointment"/>
+        </StackPanel>
 
+        <StackPanel Margin="10 0" Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Background="#FFC3D5E8">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Doktor" Grid.Row="0" Grid.Column="0" FontSize="14" 
+                       Foreground="Black" FontWeight="Light" VerticalAlignment="Center" Margin="5 0"/>
+                <Label Content="Soba" Grid.Row="1" Grid.Column="0" FontSize="14" Margin="5 0" 
+                       Foreground="Black" FontWeight="Light" VerticalAlignment="Top"/>
+                
+                <ComboBox x:Name="cbDoctor" ItemsSource="{Binding Doctors}" Grid.Row="0" Grid.Column="1" Margin="5 0"
+                          Height="24.62" Width="140" VerticalAlignment="Center" Padding="1" SelectionChanged="filter_changed" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Padding="4">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{} {0} {1}">
+                                        <Binding Path="Name"/>
+                                        <Binding Path="Surname"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                
+                <ComboBox x:Name="cbRoom" ItemsSource="{Binding Rooms}" Grid.Row="1" Grid.Column="1" Margin="5 0"
+                          Height="24.62" Width="140" VerticalAlignment="Center" Padding="1" SelectionChanged="filter_changed" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Padding="4">
+                                <TextBlock.Text>
+                                    <Binding Path="RoomId"/>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <Label Content="Od:" Grid.Row="0" Grid.Column="3" FontSize="14" Margin="5 5"
+                       Foreground="Black" FontWeight="Light" VerticalAlignment="Bottom"/>
+                <Label Content="Do:" Grid.Row="1" Grid.Column="3" FontSize="14" Margin="5 0"
+                       Foreground="Black" FontWeight="Light" VerticalAlignment="Bottom"/>
+
+                <Label Content="Datum" Grid.Row="0" Grid.Column="2" FontSize="14" Margin="8 0 5 0"
+                       Foreground="Black" FontWeight="Light" VerticalAlignment="Top"/>
+
+                <DatePicker Grid.Row="0" Grid.Column="4" FontSize="14" BorderThickness="0" Margin="5 2"
+                            Width="130" VerticalAlignment="Center" x:Name="dpFrom" SelectedDateChanged="filter_changed"/>
+                <DatePicker Grid.Row="1" Grid.Column="4" FontSize="14" BorderThickness="0" Margin="5 0"
+                            Width="130" VerticalAlignment="Center" x:Name="dpTo" SelectedDateChanged="filter_changed" />
+            </Grid>
         </StackPanel>
 
         <DataGrid x:Name="dataGridAppointments" ItemsSource="{Binding Appointments}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"

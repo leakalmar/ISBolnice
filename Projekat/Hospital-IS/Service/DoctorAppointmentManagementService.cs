@@ -149,7 +149,19 @@ namespace Hospital_IS.Service
         private void LoadRooms()
         {
             foreach (Room room in RoomService.Instance.AllRooms)
-                AllRooms.Add(new RoomDTO(room.RoomNumber, room.BedNumber, room.RoomId, room.Type));
+            {
+                List<EquipmentDTO> equipment = LoadRoomEquipment(room);
+                AllRooms.Add(new RoomDTO(room.RoomNumber, room.BedNumber, room.RoomId, room.Type, equipment, room.RoomFloor, room.isUsable));
+            }
+        }
+
+        private List<EquipmentDTO> LoadRoomEquipment(Room room)
+        {
+            List<EquipmentDTO> equipment = new List<EquipmentDTO>();
+            foreach (Equipment equip in room.Equipment)
+                equipment.Add(new EquipmentDTO(equip.EquipType, equip.EquiptId, equip.Name, equip.Quantity, equip.ProducerName));
+
+            return equipment;
         }
 
         public List<RoomDTO> GetRoomByType(RoomType type)
