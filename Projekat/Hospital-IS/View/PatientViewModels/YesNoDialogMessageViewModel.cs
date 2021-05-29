@@ -8,12 +8,13 @@ namespace Hospital_IS.View.PatientViewModels
         public MyICommand PositiveAnswer { get; set; }
         public MyICommand NegativeAnswer { get; set; }
         public EventHandler OnRequestClose;
-
+        private readonly MyWindowFactory windowFactory;
         public YesNoDialogMessageViewModel(string message)
         {
             Message = message;
             PositiveAnswer = new MyICommand(PosAnswer);
             NegativeAnswer = new MyICommand(NegAnswer);
+            windowFactory = new WindowProductionFactory();
         }
 
         public string Message
@@ -36,9 +37,7 @@ namespace Hospital_IS.View.PatientViewModels
 
         private void PosAnswer()
         {
-            PatientHospitalEvaluationWindow hospitalEvaluation = new PatientHospitalEvaluationWindow();
-            hospitalEvaluation.HospitalEvaluationViewModel.OnRequestClose += (s, e) => hospitalEvaluation.Close();
-            hospitalEvaluation.Show();
+            windowFactory.CreateHospitalEvaluationWindow();
             OnRequestClose(this, new EventArgs());
         }
     }

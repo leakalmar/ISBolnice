@@ -35,7 +35,7 @@ namespace Hospital_IS.View
             nv.Show();
 
         }
-
+        
         private NotificationDTO findNotification(int id)
         {
             for (int i = 0; i < NotificationMessages.Count; i++)

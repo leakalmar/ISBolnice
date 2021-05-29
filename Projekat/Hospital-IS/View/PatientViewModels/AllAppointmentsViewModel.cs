@@ -27,6 +27,7 @@ namespace Hospital_IS.View.PatientViewModels
 
         public MyICommand ShowEvaluationWindow { get; set; }
         public MyICommand ShowNote { get; set; }
+        private readonly MyWindowFactory windowFactory;
 
         public AllAppointmentsViewModel()
         {
@@ -34,6 +35,7 @@ namespace Hospital_IS.View.PatientViewModels
             ObservableCollection<DoctorAppointment>  allAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id));
             AllAppointments = new CollectionViewSource { Source = allAppointments }.View;*/
             AllAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id));
+            windowFactory = new WindowProductionFactory();
             ShowEvaluationWindow = new MyICommand(ShowEvaluation);
             ShowNote = new MyICommand(ShowAppNote);
             LoadAppointmentChartData();
@@ -188,16 +190,12 @@ namespace Hospital_IS.View.PatientViewModels
 
         private void ShowEvaluation()
         {
-            PatientAppointmentEvaluationWindow appointmentEvaluation = new PatientAppointmentEvaluationWindow(SelectedDoctorAppointment.Id);
-            appointmentEvaluation.AppointmentEvaluation.OnRequestClose += (s, e) => appointmentEvaluation.Close();
-            appointmentEvaluation.Show();
+            windowFactory.CreateAppointmentEvaluationWindow(SelectedDoctorAppointment.Id);
         }
 
         private void ShowAppNote()
         {
-            PatientNoteView appointmentNote = new PatientNoteView(SelectedDoctorAppointment.Id);
-            appointmentNote.AppointmentNoteViewModel.OnRequestClose += (s, e) => appointmentNote.Close();
-            appointmentNote.Show();
+            windowFactory.CreateNoteWindow(SelectedDoctorAppointment.Id);
         }
 
         private void LoadAppointmentChartData()
