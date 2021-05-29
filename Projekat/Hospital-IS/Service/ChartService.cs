@@ -115,6 +115,13 @@ namespace Service
             cfs.SaveCharts(AllCharts);
         }
 
+        public void AddTherapy(Therapy newTherapy, int id)
+        {
+            MedicalHistory medicalHistory = GetChartById(id);
+            medicalHistory.Therapies.Add(newTherapy);
+            cfs.SaveCharts(AllCharts);
+        }
+
         public void UpdateReport(int id, Report report)
         {
             MedicalHistory medicalHistory = GetChartById(id);

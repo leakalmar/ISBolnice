@@ -20,7 +20,11 @@
                 Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}">
             <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
                     Content="Nova terapija" Foreground="FloralWhite"
-                    HorizontalAlignment="Stretch" />
+                    HorizontalAlignment="Stretch">
+                <Button.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding NewTherapyCommand}" />
+                </Button.InputBindings>
+            </Button>
         </Border>
 
         <DataGrid x:Name="dataGrid" ItemsSource="{Binding}" Grid.Row="2"

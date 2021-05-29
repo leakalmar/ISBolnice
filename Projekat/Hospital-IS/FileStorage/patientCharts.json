@@ -85,6 +85,14 @@
         "TherapyStart": "2021-04-19T00:00:00",
         "TherapyEnd": "2021-05-01T00:00:00",
         "FirstUsageTime": 8
+      },
+      {
+        "Medicine": null,
+        "Quantity": 1,
+        "TimesADay": 1,
+        "TherapyStart": "2021-05-29T22:41:11.9381986+02:00",
+        "TherapyEnd": "2021-06-26T00:00:00",
+        "FirstUsageTime": 0
       }
     ]
   },

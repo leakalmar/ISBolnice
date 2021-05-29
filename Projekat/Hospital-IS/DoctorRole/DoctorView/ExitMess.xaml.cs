@@ -17,7 +17,7 @@ namespace Hospital_IS.DoctorRole.DoctorView
 
         public void BtnClickOdustani(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            //this.DialogResult = false;
             this.Close();
         }
 

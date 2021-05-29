@@ -124,5 +124,10 @@ namespace Controllers
             Hospitalization newHospitalization = new Hospitalization(hospitalizationDTO.AdmissionDate,hospitalizationDTO.ReleaseDate,hospitalizationDTO.Detail,hospitalizationDTO.Doctor,hospitalizationDTO.IsReleased, room, bed);
             ChartService.Instance.AddHospitalization(newHospitalization, patient.Id);
         }
+
+        public void AddTherapy(Therapy newTherapy, PatientDTO patient)
+        {
+            ChartService.Instance.AddTherapy(newTherapy, patient.Id);
+        }
     }
 }
