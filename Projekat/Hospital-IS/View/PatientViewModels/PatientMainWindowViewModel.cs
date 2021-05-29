@@ -15,6 +15,7 @@ namespace Hospital_IS.View.PatientViewModels
         private AllAppointmentsViewModel allAppointmentsViewModel;
         private TherapyPatientViewModel therapyPatientViewModel;
         private PatientNotificationsViewModel notificationsViewModel;
+        private PatientUpdateProfileViewModel updateProfileViewModel;
         private BindableBase currentViewModel;
         public static Patient Patient{ get; set;}
 
@@ -27,6 +28,7 @@ namespace Hospital_IS.View.PatientViewModels
             allAppointmentsViewModel = new AllAppointmentsViewModel();
             therapyPatientViewModel = new TherapyPatientViewModel();
             notificationsViewModel = new PatientNotificationsViewModel();
+            updateProfileViewModel = new PatientUpdateProfileViewModel();
             CurrentViewModel = homePatientViewModel;
             CheckDailyNotifications();
             DispatcherTimer dispatcherTimer = new DispatcherTimer
@@ -116,13 +118,11 @@ namespace Hospital_IS.View.PatientViewModels
                 case "notifications":
                     CurrentViewModel = notificationsViewModel;
                     break;
+                case "updateProfile":
+                    CurrentViewModel = updateProfileViewModel;
+                    break;
             }
         }
 
-        public HomePatientViewModel HomePatientViewModel
-        {
-            get { return homePatientViewModel; }
-            set { }
-        }
     }
 }

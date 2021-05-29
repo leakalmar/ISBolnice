@@ -21,6 +21,7 @@ namespace Hospital_IS.View.PatientViewModels
         private string sideEffects;
         private bool showTherapyInfo = false;
         private bool chooseItem = true;
+        private bool shouldShowRecipe = false;
 
         public TherapyPatientViewModel()
         {
@@ -172,6 +173,19 @@ namespace Hospital_IS.View.PatientViewModels
             }
         }
 
+        public bool ShouldShowRecipe
+        {
+            get { return shouldShowRecipe; }
+            set
+            {
+                if (shouldShowRecipe != value)
+                {
+                    shouldShowRecipe = value;
+                    OnPropertyChanged("ShouldShowRecipe");
+                }
+            }
+        }
+
         private void SetTherapyInfo()
         {
             int usageHourDifference = (int)24 / Therapy.TimesADay;
@@ -185,6 +199,7 @@ namespace Hospital_IS.View.PatientViewModels
             SideEffects = Therapy.Medicine.SideEffects;
             ChooseItem = false;
             ShowTherapyInfo = true;
+            ShouldShowRecipe = true;
         }
 
         private void LoadTherapyChartData()

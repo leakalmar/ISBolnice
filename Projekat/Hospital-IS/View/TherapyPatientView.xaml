@@ -106,7 +106,7 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Border x:Name="TherapyInfo" BorderThickness="0" BorderBrush="DeepSkyBlue" Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Margin="10,0,10,20" Visibility="{Binding Path=ShowTherapyInfo, Converter={StaticResource BooleanToVisibilityConverter} }"  CornerRadius="20,20,20,20" Background="#FF058D91">
+        <Border x:Name="TherapyInfo" BorderThickness="0" BorderBrush="DeepSkyBlue" Grid.Column="2" Grid.Row="1" Grid.RowSpan="9" Margin="10,0,10,60" Visibility="{Binding Path=ShowTherapyInfo, Converter={StaticResource BooleanToVisibilityConverter} }"  CornerRadius="20,20,20,20" Background="#FF058D91">
             <StackPanel x:Name="PersonalData" Grid.RowSpan="9" Grid.Row="1" Grid.Column="2" Margin="10,10,10,10" >
 
                 <Grid>
@@ -145,6 +145,20 @@
                 <Label Content="Izaberite terapiju iz tabele." Margin="0,20,0,0" Foreground="White" HorizontalAlignment="Center" FontSize="22"/>
             </StackPanel>
         </Border>
+        <Button x:Name="askForRecipe" Visibility="{Binding Path=ShouldShowRecipe, Converter={StaticResource BooleanToVisibilityConverter} }" Grid.Column="1" Grid.Row="9" Margin="10,250,10,20" Foreground="#FFFDFAFA" FontSize="18" Cursor="Hand" >
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20,20,20,20"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF184095" Offset="0.0"/>
+                    <GradientStop Color="CadetBlue" Offset="1.5"/>
+                </LinearGradientBrush>
+            </Button.Background> Traži recept
+        </Button>
         <Border Background="CadetBlue" CornerRadius="20,20,20,20" Grid.Row="9" Margin="10,5,10,20">
             <dvc:Chart Canvas.Left="10" Name="therapyChart"  
                 Width="500" Height="250"  
