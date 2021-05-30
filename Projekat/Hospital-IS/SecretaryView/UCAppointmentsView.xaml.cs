@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace Hospital_IS.SecretaryView
 {
@@ -123,8 +124,79 @@ namespace Hospital_IS.SecretaryView
             };
 
             dataGridAppointments.ItemsSource = view;
+        }
 
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            ICollectionView view = new CollectionViewSource { Source = Appointments }.View;
+            view.Filter = delegate (object item)
+            {
+                DoctorAppointmentDTO docAppointmemt = item as DoctorAppointmentDTO;
+                return CheckIfAppointmentMeetsSearchCriteria(docAppointmemt);
+            };
+            dataGridAppointments.ItemsSource = view;
+        }
 
+        private bool CheckIfAppointmentMeetsSearchCriteria(DoctorAppointmentDTO docAppointmemt)
+        {
+            string[] search = txtSearch.Text.ToLower().Split(" ");
+            if (txtSearch.Text.Equals("Pretraži..."))
+                search[0] = string.Empty;
+
+            if (search.Length <= 1 && docAppointmemt != null)
+                return docAppointmemt.Patient.Name.ToLower().Contains(search[0]) | docAppointmemt.Patient.Surname.ToLower().Contains(search[0]) |
+                    docAppointmemt.AppTypeText.ToLower().Contains(search[0]);
+            else
+            {
+                bool firstName = true;
+                bool lastName = true;
+                bool appType = true;
+                int cnt = 0;
+
+                if (docAppointmemt != null)
+                    for (int i = 0; i < search.Length; i++)
+                    {
+                        if (docAppointmemt.Patient.Name.ToLower().Contains(search[i]) && firstName)
+                        {
+                            firstName = false;
+                            cnt++;
+                            continue;
+                        }
+                        if (docAppointmemt.Patient.Surname.ToLower().Contains(search[i]) && lastName)
+                        {
+                            lastName = false;
+                            cnt++;
+                            continue;
+                        }
+                        if (docAppointmemt.AppTypeText.ToLower().Contains(search[i]) && appType)
+                        {
+                            appType = false;
+                            cnt++;
+                            continue;
+                        }
+                    }
+
+                return cnt == search.Length;
+            }
+
+        }
+
+        private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtSearch.Text.Equals("Pretraži..."))
+            {
+                txtSearch.Text = string.Empty;
+                txtSearch.Foreground = new SolidColorBrush(Colors.Black);
+            }
+        }
+
+        private void SearchBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtSearch.Text))
+            {
+                txtSearch.Foreground = new SolidColorBrush(Colors.Gray);
+                txtSearch.Text = "Pretraži...";
+            }
         }
     }
 }

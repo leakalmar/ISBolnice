@@ -41,12 +41,12 @@ namespace Hospital_IS.SecretaryView
             view.Filter = delegate (object item)
             {
                 RoomDTO room = item as RoomDTO;
-                return CheckIfPatientMeetsSearchCriteria(room);
+                return CheckIfRoomMeetsSearchCriteria(room);
             };
             dataGridRooms.ItemsSource = view;
         }
 
-        private bool CheckIfPatientMeetsSearchCriteria(RoomDTO room)
+        private bool CheckIfRoomMeetsSearchCriteria(RoomDTO room)
         {
             string[] search = txtSearch.Text.ToLower().Split(" ");
             bool found = false;
@@ -54,18 +54,11 @@ namespace Hospital_IS.SecretaryView
                 search[0] = string.Empty;
 
             if (search.Length <= 1)
-                if ("magacin".Contains(search[0].ToLower()) && room.Type.Equals(RoomType.StorageRoom))
-                    found = true;
-                else if ("operaciona sala".Contains(search[0].ToLower()) && room.Type.Equals(RoomType.OperationRoom))
-                    found = true;
-                else if ("konsultacije".Contains(search[0].ToLower()) && room.Type.Equals(RoomType.ConsultingRoom))
-                    found = true;
-                else if ("za oporavak".Contains(search[0].ToLower()) && room.Type.Equals(RoomType.RecoveryRoom))
-                    found = true;
+                if (room.RoomTypeText.ToLower().Contains(search[0]))
+                        found = true;
                 else if (room.RoomId.ToString().Contains(search[0]))
                     found = true;
-                else
-                    found = false;
+
 
             return found;
         }
