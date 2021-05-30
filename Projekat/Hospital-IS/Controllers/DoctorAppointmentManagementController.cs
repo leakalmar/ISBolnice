@@ -58,6 +58,11 @@ namespace Hospital_IS.Controllers
             return DoctorAppointmentManagementService.Instance.GetAppointmentById(id);
         }
 
+        public List<DoctorAppointmentDTO> GetAppointmentsByPatientId(int patientId)
+        {
+            return DoctorAppointmentManagementService.Instance.GetAppointmentsByPatientId(patientId);
+        }
+
         public void EndAppointment(DoctorAppointmentDTO docAppointmentDTO)
         {
             docAppointmentDTO.IsFinished = true;

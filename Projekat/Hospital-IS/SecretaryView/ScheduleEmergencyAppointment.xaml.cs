@@ -34,6 +34,20 @@ namespace Hospital_IS.SecretaryView
             this.DataContext = this;
 
         }
+        public ScheduleEmergencyAppointment(ScheduleAppointment sa, PatientDTO patient)
+        {
+            InitializeComponent();
+            this.sa = sa;
+
+            Patients = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllRegisteredPatients());
+            Specializations = new ObservableCollection<string>(SpecializationController.Instance.GetAllNames());
+
+            cbPatient.SelectedItem = patient;
+            cbPatient.IsEnabled = false;
+
+            this.DataContext = this;
+
+        }
 
         private void AddNewEmergencyAppointment(object sender, RoutedEventArgs e)
         {

@@ -74,6 +74,17 @@ namespace Hospital_IS.Service
             }
         }
 
+        public List<DoctorAppointmentDTO> GetAppointmentsByPatientId(int patientId)
+        {
+            List<DoctorAppointmentDTO> appointments = new List<DoctorAppointmentDTO>();
+            foreach (DoctorAppointmentDTO docApp in AllAppointments)
+            {
+                if (docApp.Patient.Id.Equals(patientId))
+                    appointments.Add(docApp);
+            }
+            return appointments;
+        }
+
         public void RemoveAppointment(DoctorAppointmentDTO doctorAppointmentDTO)
         {
             if (doctorAppointmentDTO == null)

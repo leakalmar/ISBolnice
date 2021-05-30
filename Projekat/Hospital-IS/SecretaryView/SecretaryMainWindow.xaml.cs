@@ -14,9 +14,9 @@ namespace Hospital_IS.SecretaryView
     {
         UCPatientsView ucp = new UCPatientsView();
         UCNotificationsView ucn = new UCNotificationsView();
-        UCAppointmentsView uca = new UCAppointmentsView();
         UCDoctorsView ucd = new UCDoctorsView();
         UCRoomsView ucr = new UCRoomsView();
+        public UCAppointmentsView uca = new UCAppointmentsView();
 
         private static SecretaryMainWindow instance = null;
 

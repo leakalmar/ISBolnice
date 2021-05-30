@@ -24,12 +24,13 @@ namespace Hospital_IS.SecretaryView
         public UCAppointmentsView()
         {
             InitializeComponent();
-            RefreshGrid();
+            Appointments = new ObservableCollection<DoctorAppointmentDTO>(DoctorAppointmentManagementController.Instance.GetAll());
+            dataGridAppointments.ItemsSource = Appointments;
             Rooms = new ObservableCollection<RoomDTO>(DoctorAppointmentManagementController.Instance.GetAllRooms());
             Doctors = new ObservableCollection<DoctorDTO>(SecretaryManagementController.Instance.GetAllDoctors());
             dpFrom.SelectedDate = DateTime.Now.Date;
             dpTo.SelectedDate = DateTime.Now.Date.AddDays(7);
-
+            RefreshGrid();
 
             this.DataContext = this;
 
@@ -54,7 +55,13 @@ namespace Hospital_IS.SecretaryView
                 }
             }*/
 
-            dataGridAppointments.ItemsSource = Appointments;
+            ICollectionView view = new CollectionViewSource { Source = Appointments }.View;
+            view.Filter = delegate (object item)
+            {
+                return CheckAppointment((DoctorAppointmentDTO)item);
+            };
+
+            dataGridAppointments.ItemsSource = view;
         }
 
         private void ShowAppointment(object sender, RoutedEventArgs e)

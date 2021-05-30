@@ -41,6 +41,9 @@ namespace DTOs
                 AppTypeText = "Pregled";
             else if (Type.Equals(AppointmentType.Operation))
                 AppTypeText = "Operacija";
+
+            if (appointmentEnd < DateTime.Now)
+                IsFinished = true;
         }
         public DoctorAppointmentDTO(DoctorAppointmentDTO docAppointmentDTO)
         {

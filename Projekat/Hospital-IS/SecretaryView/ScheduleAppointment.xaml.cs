@@ -25,6 +25,11 @@ namespace Hospital_IS.SecretaryView
 
         public UCAppointmentsView uca;
 
+        public PatientDTO patient = null;
+        public PatientView pv;
+        public DoctorDTO doctor = null;
+        public DoctorView dv;
+
         public ScheduleAppointment(UCAppointmentsView uca)
         {
             InitializeComponent();
@@ -32,6 +37,35 @@ namespace Hospital_IS.SecretaryView
 
             Patients = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllRegisteredPatients());
             Doctors = new ObservableCollection<DoctorDTO>(SecretaryManagementController.Instance.GetAllDoctors());
+
+            this.DataContext = this;
+        }
+        public ScheduleAppointment(UCAppointmentsView uca, PatientDTO patient, PatientView pv)
+        {
+            InitializeComponent();
+            this.uca = uca;
+            this.patient = patient;
+            this.pv = pv;
+            Patients = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllRegisteredPatients());
+            Doctors = new ObservableCollection<DoctorDTO>(SecretaryManagementController.Instance.GetAllDoctors());
+
+            cbPatient.SelectedItem = patient;
+            cbPatient.IsEnabled = false;
+
+            this.DataContext = this;
+        }
+
+        public ScheduleAppointment(UCAppointmentsView uca, DoctorDTO doctor, DoctorView dv)
+        {
+            InitializeComponent();
+            this.uca = uca;
+            this.doctor = doctor;
+            this.dv = dv;
+            Patients = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllRegisteredPatients());
+            Doctors = new ObservableCollection<DoctorDTO>(SecretaryManagementController.Instance.GetAllDoctors());
+
+            cbDoctor.SelectedItem = doctor;
+            cbDoctor.IsEnabled = false;
 
             this.DataContext = this;
         }
@@ -58,6 +92,9 @@ namespace Hospital_IS.SecretaryView
             DoctorAppointmentManagementController.Instance.AddAppointment(DocAppointment);
 
             uca.RefreshGrid();
+
+            if (patient != null)
+                pv.RefreshGrid();
 
             this.Close();
         }
@@ -156,14 +193,19 @@ namespace Hospital_IS.SecretaryView
 
         private void btnEmergency_Click(object sender, RoutedEventArgs e)
         {
-            ScheduleEmergencyAppointment sea = new ScheduleEmergencyAppointment(this);
+            ScheduleEmergencyAppointment sea;
+            if (patient == null)
+            {
+                sea = new ScheduleEmergencyAppointment(this);
+            }
+            else 
+            {
+                sea = new ScheduleEmergencyAppointment(this, patient);
+            }
             sea.Show();
             this.Visibility = Visibility.Collapsed;
         }
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }
