@@ -94,6 +94,18 @@ namespace Hospital_IS.SecretaryView
 
         private void filter_changed(object sender, SelectionChangedEventArgs e)
         {
+
+            ICollectionView view = new CollectionViewSource { Source = Appointments }.View;
+            view.Filter = delegate (object item)
+            {
+                return CheckAppointment((DoctorAppointmentDTO)item);
+            };
+
+            dataGridAppointments.ItemsSource = view;
+        }
+
+        private bool CheckAppointment(DoctorAppointmentDTO docAppointment)
+        {
             DoctorDTO doctor = (DoctorDTO)cbDoctor.SelectedItem;
             RoomDTO room = (RoomDTO)cbRoom.SelectedItem;
             DateTime startDate = (DateTime)dpFrom.SelectedDate;
@@ -107,23 +119,17 @@ namespace Hospital_IS.SecretaryView
                 endDate = (DateTime)dpTo.SelectedDate;
             }
 
-            ICollectionView view = new CollectionViewSource { Source = Appointments }.View;
-            view.Filter = delegate (object item)
-            {
-                if (room == null && doctor == null)
-                    return ((DoctorAppointmentDTO)item).AppointmentStart.Date <= endDate.Date & ((DoctorAppointmentDTO)item).AppointmentStart.Date >= startDate.Date;
-                else if (room == null && doctor != null)
-                    return ((DoctorAppointmentDTO)item).Doctor.Id == doctor.Id &
-                    ((DoctorAppointmentDTO)item).AppointmentStart.Date <= endDate.Date & ((DoctorAppointmentDTO)item).AppointmentStart.Date >= startDate.Date;
-                else if (doctor == null && room != null)
-                    return ((DoctorAppointmentDTO)item).Room == room.RoomId &
-                    ((DoctorAppointmentDTO)item).AppointmentStart.Date <= endDate.Date & ((DoctorAppointmentDTO)item).AppointmentStart.Date >= startDate.Date;
-                else
-                    return ((DoctorAppointmentDTO)item).Doctor.Id == doctor.Id & ((DoctorAppointmentDTO)item).Room == room.RoomId &
-                    ((DoctorAppointmentDTO)item).AppointmentStart.Date <= endDate.Date & ((DoctorAppointmentDTO)item).AppointmentStart.Date >= startDate.Date;
-            };
-
-            dataGridAppointments.ItemsSource = view;
+            if (room == null && doctor == null)
+                return docAppointment.AppointmentStart.Date <= endDate.Date & docAppointment.AppointmentStart.Date >= startDate.Date;
+            else if (room == null && doctor != null)
+                return docAppointment.Doctor.Id == doctor.Id &
+                docAppointment.AppointmentStart.Date <= endDate.Date & docAppointment.AppointmentStart.Date >= startDate.Date;
+            else if (doctor == null && room != null)
+                return docAppointment.Room == room.RoomId &
+                docAppointment.AppointmentStart.Date <= endDate.Date & docAppointment.AppointmentStart.Date >= startDate.Date;
+            else
+                return docAppointment.Doctor.Id == doctor.Id & docAppointment.Room == room.RoomId &
+                docAppointment.AppointmentStart.Date <= endDate.Date & docAppointment.AppointmentStart.Date >= startDate.Date;
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -132,7 +138,7 @@ namespace Hospital_IS.SecretaryView
             view.Filter = delegate (object item)
             {
                 DoctorAppointmentDTO docAppointmemt = item as DoctorAppointmentDTO;
-                return CheckIfAppointmentMeetsSearchCriteria(docAppointmemt);
+                return CheckIfAppointmentMeetsSearchCriteria(docAppointmemt) & CheckAppointment(docAppointmemt);
             };
             dataGridAppointments.ItemsSource = view;
         }
@@ -197,6 +203,15 @@ namespace Hospital_IS.SecretaryView
                 txtSearch.Foreground = new SolidColorBrush(Colors.Gray);
                 txtSearch.Text = "Pretraži...";
             }
+        }
+
+        private void ResetFillters(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            if (button.Name.ToString().Equals("btnResetDoctors"))
+                cbDoctor.SelectedItem = null;
+            else
+                cbRoom.SelectedItem = null;
         }
     }
 }
