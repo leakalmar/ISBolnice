@@ -95,6 +95,8 @@ namespace Hospital_IS.SecretaryView
 
             if (patient != null)
                 pv.RefreshGrid();
+            if (doctor != null)
+                dv.RefreshGrid();
 
             this.Close();
         }

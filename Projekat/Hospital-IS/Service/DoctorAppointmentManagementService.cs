@@ -85,6 +85,30 @@ namespace Hospital_IS.Service
             return appointments;
         }
 
+        public List<DoctorAppointmentDTO> GetFutureAppointmentsForDoctor(int doctorId)
+        {
+            List<DoctorAppointmentDTO> appointments = new List<DoctorAppointmentDTO>();
+            foreach (DoctorAppointmentDTO appointment in AllAppointments)
+            {
+                if (appointment.AppointmentStart > DateTime.Now)
+                    appointments.Add(appointment);
+            }
+
+            return appointments;
+        }
+
+        public List<DoctorAppointmentDTO> GetPreviousAppointmentsForDoctor(int doctorId)
+        {
+            List<DoctorAppointmentDTO> appointments = new List<DoctorAppointmentDTO>();
+            foreach (DoctorAppointmentDTO appointment in AllAppointments)
+            {
+                if (appointment.AppointmentEnd < DateTime.Now)
+                    appointments.Add(appointment);
+            }
+
+            return appointments;
+        }
+
         public void RemoveAppointment(DoctorAppointmentDTO doctorAppointmentDTO)
         {
             if (doctorAppointmentDTO == null)

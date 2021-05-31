@@ -115,6 +115,8 @@ namespace Hospital_IS.SecretaryView
         {
             DoctorDTO doctor = (DoctorDTO)cbDoctor.SelectedItem;
             RoomDTO room = (RoomDTO)cbRoom.SelectedItem;
+            if (dpFrom.SelectedDate == null)
+                dpFrom.SelectedDate = DateTime.Now;
             DateTime startDate = (DateTime)dpFrom.SelectedDate;
             DateTime endDate;
             if (dpTo.SelectedDate == null)

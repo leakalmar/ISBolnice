@@ -30,9 +30,9 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Broj sobe:" Margin="20 10 20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="Sprat:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Tip sobe" Margin="20 5"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="Broj sobe:" Margin="80 10 20 5"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="Sprat:" Margin="80 5 20 5"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Tip sobe" Margin="80 5 20 5"/>
 
         <TextBlock Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4" Margin="0 20 0 10"
                    Text="Oprema sobe" FontSize="15" HorizontalAlignment="Center"/>
@@ -45,10 +45,10 @@
         <DataGrid x:Name="dataGridEquipment" ItemsSource="{Binding Room.Equipment}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
                   Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5" Grid.RowSpan="2" Margin="80 10 80 10" RowHeaderWidth="0"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  Background="Transparent" RowBackground="AliceBlue" FontSize="9">
+                  Background="Transparent" RowBackground="AliceBlue" FontSize="12">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="Količina opreme" Binding="{Binding Quantity}" Width="*"/>
+                <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" Width="auto"/>
+                <DataGridTextColumn Header="Količina opreme" Binding="{Binding Quantity}" Width="auto"/>
                 <DataGridTextColumn Header="Tip opreme" Binding="{Binding EquipTypeText}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>

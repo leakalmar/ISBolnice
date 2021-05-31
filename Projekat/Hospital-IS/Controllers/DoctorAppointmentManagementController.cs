@@ -86,5 +86,16 @@ namespace Hospital_IS.Controllers
         {
             return DoctorAppointmentManagementService.Instance.GetAppointmentByDoctorId(doctorId);
         }
+
+        public List<DoctorAppointmentDTO> GetFutureAppointmentsForDoctor(int doctorId)
+        {
+            return DoctorAppointmentManagementService.Instance.GetFutureAppointmentsForDoctor(doctorId);
+        }
+
+        public List<DoctorAppointmentDTO> GetPreviousAppointmentsForDoctor(int doctorId)
+        {
+            return DoctorAppointmentManagementService.Instance.GetPreviousAppointmentsForDoctor(doctorId);
+        }
+
     }
 }
