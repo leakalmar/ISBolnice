@@ -178,7 +178,7 @@
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </RadioButton>
-            <!--<RadioButton Content="Oprema" Uid="5"
+            <RadioButton Content="Oprema" Uid="5"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="6"
                     Command="{Binding NavigateToEquipmentCommand}">
                 <b:Interaction.Triggers>
@@ -187,7 +187,7 @@
                                 Command="{Binding NavigateToEquipmentCommand}" />
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
-            </RadioButton>-->
+            </RadioButton>
             <RadioButton Content="Izdavanje recepta" Uid="6"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="7"
                     Command="{Binding NavigateToPrescriptionsCommand}">

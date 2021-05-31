@@ -84,7 +84,8 @@ namespace Hospital_IS.DoctorViewModel
         private RelayCommand minimizeCommand;
         private RelayCommand maximizeCommand;
         private RelayCommand onLoadedCommand;
-        private RelayCommand navigateBackWithoutCheckCommand;
+        private RelayCommand navigateBackWithoutCheckCommand; 
+        private RelayCommand navigateToEquipmentCommand;
 
         public RelayCommand NavigateToHomePageCommand
         {
@@ -178,11 +179,16 @@ namespace Hospital_IS.DoctorViewModel
             get { return onLoadedCommand; }
             set { onLoadedCommand = value; }
         }
-
+        
         public RelayCommand NavigateBackWithoutCheckCommand
         {
             get { return navigateBackWithoutCheckCommand; }
             set { navigateBackWithoutCheckCommand = value; }
+        }
+        public RelayCommand NavigateToEquipmentCommand
+        {
+            get { return navigateToEquipmentCommand; }
+            set { navigateToEquipmentCommand = value; }
         }
         #endregion
 
@@ -243,6 +249,11 @@ namespace Hospital_IS.DoctorViewModel
         {
             this.NavigationService.Navigate(
                new Uri("DoctorRole/DoctorView/Rooms.xaml", UriKind.Relative));
+        }
+        private void Execute_NavigateToEquipmentCommand(object obj)
+        {
+            this.NavigationService.Navigate(
+               new Uri("DoctorRole/DoctorView/EquipmentUse.xaml", UriKind.Relative));
         }
 
         private void Execute_NavigateToPrescriptionsCommand(object obj)
@@ -345,6 +356,7 @@ namespace Hospital_IS.DoctorViewModel
             this.MinimizeCommand = new RelayCommand(Execute_MinimizeCommand, CanExecute_NavigateCommand);
             this.OnLoadedCommand = new RelayCommand(Execute_OnLoadedCommand, CanExecute_NavigateCommand);
             this.NavigateBackWithoutCheckCommand = new RelayCommand(Execute_NavigateBackWithoutCheckCommand, CanExecute_NavigateCommand);
+            this.NavigateToEquipmentCommand = new RelayCommand(Execute_NavigateToEquipmentCommand, CanExecute_NavigateCommand);
             this.navigationService = navigationService;
         }
         #endregion
