@@ -98,7 +98,7 @@
         <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center"
                 Grid.Row="2" Grid.Column="2" Width="auto"
                 HorizontalAlignment="Center" FontSize="16"
-                FontFamily="Palatino Linotype" Foreground="FloralWhite"
+                FontFamily="Cambria Math" Foreground="FloralWhite"
                 FontWeight="Bold" Margin="10,0,0,0"
                 DataContext="{Binding Doctor}">
             <TextBlock.Text>
@@ -225,8 +225,12 @@
             </Button>
 
             <Button Grid.Row="12" Content="Podešavanja" Foreground="FloralWhite"
-                    Background="{x:Null}" VerticalAlignment="Top"
-                    FontWeight="Normal" />
+                    Background="{x:Null}" VerticalAlignment="Top" Margin="30,0">
+                <Button.InputBindings>
+                    <KeyBinding Key="Return"
+                            Command="{Binding NavigateToSettingsCommand}" />
+                </Button.InputBindings>
+            </Button>
 
         </Grid>
 

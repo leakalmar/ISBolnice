@@ -41,6 +41,8 @@
     <None Remove="Resources\shoppingcart.png" />
     <None Remove="Resources\redsiren.png" />
     <None Remove="Resources\siren.png" />
+    <None Remove="Resources\star-doctor.png" />
+    <None Remove="Resources\star-filled-doctor.png" />
     <None Remove="Resources\treatment.png" />
     <None Remove="other_facilities.png" />
     <None Remove="request.png" />
@@ -145,6 +147,8 @@
     <Resource Include="Resources\shoppingcart.png" />
     <Resource Include="Resources\simona.jpg" />
     <Resource Include="Resources\siren.png" />
+    <Resource Include="Resources\star-doctor.png" />
+    <Resource Include="Resources\star-filled-doctor.png" />
     <Resource Include="Resources\treatment.png" />
     <Resource Include="Resources\toolbar.png" />
     <Resource Include="Resources\transfer.png" />

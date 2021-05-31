@@ -192,6 +192,34 @@
         <Setter Property="VerticalAlignment" Value="Bottom" />
     </Style>
 
+    <Style x:Key="CustomPasswordBox" TargetType="{x:Type PasswordBox}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0,0,0,2" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderBrush" Value="White" />
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+    </Style>
+
+    <Style x:Key="TitleLabel" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="23" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontFamily" Value="Cambria Math" />
+    </Style>
+
+    <Style x:Key="TitleTextBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="23" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontFamily" Value="Cambria Math" />
+    </Style>
+
     <Style x:Key="CustomComboBox" TargetType="{x:Type ComboBox}">
         <Setter Property="Background" Value="#FF213250" />
         <Setter Property="BorderBrush" Value="#FF213250" />

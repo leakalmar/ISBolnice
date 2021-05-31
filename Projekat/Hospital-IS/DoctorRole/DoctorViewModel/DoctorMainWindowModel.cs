@@ -86,6 +86,7 @@ namespace Hospital_IS.DoctorViewModel
         private RelayCommand onLoadedCommand;
         private RelayCommand navigateBackWithoutCheckCommand; 
         private RelayCommand navigateToEquipmentCommand;
+        private RelayCommand navigateToSettingsCommand;
 
         public RelayCommand NavigateToHomePageCommand
         {
@@ -189,6 +190,12 @@ namespace Hospital_IS.DoctorViewModel
         {
             get { return navigateToEquipmentCommand; }
             set { navigateToEquipmentCommand = value; }
+        }
+
+        public RelayCommand NavigateToSettingsCommand
+        {
+            get { return navigateToSettingsCommand; }
+            set { navigateToSettingsCommand = value; }
         }
         #endregion
 
@@ -325,6 +332,13 @@ namespace Hospital_IS.DoctorViewModel
             this.NavigationService.Navigate(new HomePage());
         }
 
+        private void Execute_NavigateToSettingsCommand(object obj)
+        {
+
+            this.NavigationService.Navigate(
+                new Uri("DoctorRole/DoctorView/Settings.xaml", UriKind.Relative));
+        }
+
 
         #endregion
 
@@ -357,6 +371,7 @@ namespace Hospital_IS.DoctorViewModel
             this.OnLoadedCommand = new RelayCommand(Execute_OnLoadedCommand, CanExecute_NavigateCommand);
             this.NavigateBackWithoutCheckCommand = new RelayCommand(Execute_NavigateBackWithoutCheckCommand, CanExecute_NavigateCommand);
             this.NavigateToEquipmentCommand = new RelayCommand(Execute_NavigateToEquipmentCommand, CanExecute_NavigateCommand);
+            this.NavigateToSettingsCommand = new RelayCommand(Execute_NavigateToSettingsCommand, CanExecute_NavigateCommand);
             this.navigationService = navigationService;
         }
         #endregion

@@ -17,9 +17,8 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Label Content="Lekovi" FontSize="20" BorderThickness="0"
-                Foreground="FloralWhite" HorizontalAlignment="Center"
-                Grid.ColumnSpan="3" FontWeight="Bold" VerticalAlignment="Center" />
+        <Label Content="Lekovi" Style="{StaticResource TitleLabel}"
+                Grid.ColumnSpan="3"/>
 
         <Border Grid.ColumnSpan="3" Grid.Row="1" Margin="10" CornerRadius="15"
                 BorderThickness="1" BorderBrush="FloralWhite">
