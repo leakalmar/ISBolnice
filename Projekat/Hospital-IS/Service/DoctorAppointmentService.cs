@@ -140,12 +140,12 @@ namespace Service
 
             if (doctor.WorkShift.Equals(WorkDayShift.FirstShift))
             {
-                if (appointmentStart.TimeOfDay > new TimeSpan(8, 0, 0) && appointmentEnd.TimeOfDay < new TimeSpan(14, 0, 0))
+                if (appointmentStart.TimeOfDay >= new TimeSpan(8, 0, 0) && appointmentEnd.TimeOfDay <= new TimeSpan(14, 0, 0))
                     return true;
             }
             else 
             {
-                if (appointmentStart.TimeOfDay > new TimeSpan(14, 0, 0) && appointmentEnd.TimeOfDay < new TimeSpan(20, 0, 0))
+                if (appointmentStart.TimeOfDay >= new TimeSpan(14, 0, 0) && appointmentEnd.TimeOfDay <= new TimeSpan(20, 0, 0))
                     return true;
             }
             return false;
