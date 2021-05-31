@@ -33,7 +33,6 @@ namespace Hospital_IS.DoctorRole.DoctorView
             InitializeComponent();
             this.viewModel = new DoctorMainWindowModel(this.Home.NavigationService);
             this.DataContext = this.viewModel;
-            HomePageSelected.IsChecked = true;
         }
 
     }

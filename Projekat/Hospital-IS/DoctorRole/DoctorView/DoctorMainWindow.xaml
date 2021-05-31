@@ -6,7 +6,8 @@
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors" mc:Ignorable="d"
         Title="DoctorHomePage" Height="640" Width="1024"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
-        Background="Transparent" AllowsTransparency="True">
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+        Background="Transparent" AllowsTransparency="True" Focusable="False">
 
     <Window.InputBindings>
         <KeyBinding Key="F1" Command="{Binding Path=NavigateToHomePageCommand}" />
@@ -67,20 +68,20 @@
             <Button x:Name="min" Height="20" Width="20" Opacity="0.6"
                     BorderThickness="0" Command="{Binding Path=MinimizeCommand}"
                     Background="{x:Null}" Foreground="White"
-                    BorderBrush="{x:Null}" FontSize="14">
+                    BorderBrush="{x:Null}" FontSize="14" Focusable="False">
                 _
             </Button>
             <Button x:Name="full" Height="20" Width="20" Opacity="0.6"
                     BorderThickness="0" Command="{Binding Path=MaximizeCommand}"
                     Background="{x:Null}" Foreground="White"
-                    BorderBrush="{x:Null}" FontSize="14">
+                    BorderBrush="{x:Null}" FontSize="14" Focusable="False">
                 ⛶
             </Button>
             <Button x:Name="exit" Height="20" Width="20" Opacity="0.6"
                     BorderThickness="0"
                     Command="{Binding Path=NavigateToLogInCommand}"
                     Background="{x:Null}" Foreground="White"
-                    BorderBrush="{x:Null}" FontSize="14">
+                    BorderBrush="{x:Null}" FontSize="14" Focusable="False">
                 X
             </Button>
 
@@ -124,30 +125,88 @@
                 <RowDefinition Height="0.5*" />
 
             </Grid.RowDefinitions>
-            <RadioButton Content="Početna" Name="HomePageSelected" Uid="0"
+
+            <RadioButton Content="Početna" Uid="0"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="1"
-                    Command="{Binding NavigateToHomePageCommand}" />
+                    commands:FocusExtension.IsFocused="{Binding Focused}"
+                    Command="{Binding NavigateToHomePageCommand}">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="GotFocus">
+                        <b:InvokeCommandAction
+                                Command="{Binding NavigateToHomePageCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </RadioButton>
             <RadioButton Content="Termini" Uid="1"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="2"
-                    Command="{Binding NavigateToAppointmentsCommand}" />
+                    Command="{Binding NavigateToAppointmentsCommand}">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="GotFocus">
+                        <b:InvokeCommandAction
+                                Command="{Binding NavigateToAppointmentsCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </RadioButton>
             <RadioButton Content="Pacijenti" Uid="2"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="3"
-                    Command="{Binding NavigateToPatientsCommand}" />
+                    Command="{Binding NavigateToPatientsCommand}">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="GotFocus">
+                        <b:InvokeCommandAction
+                                Command="{Binding NavigateToPatientsCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </RadioButton>
             <RadioButton Content="Lekovi" Uid="3"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="4"
-                    Command="{Binding NavigateToMedicinesCommand}" />
+                    Command="{Binding NavigateToMedicinesCommand}">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="GotFocus">
+                        <b:InvokeCommandAction
+                                Command="{Binding NavigateToMedicinesCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </RadioButton>
             <RadioButton Content="Sobe" Uid="4"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="5"
-                    Command="{Binding NavigateToRoomsCommand}" />
+                    Command="{Binding NavigateToRoomsCommand}">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="GotFocus">
+                        <b:InvokeCommandAction
+                                Command="{Binding NavigateToRoomsCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </RadioButton>
             <RadioButton Content="Izdavanje recepta" Uid="5"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="6"
-                    Command="{Binding NavigateToPrescriptionsCommand}" />
+                    Command="{Binding NavigateToPrescriptionsCommand}">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="GotFocus">
+                        <b:InvokeCommandAction
+                                Command="{Binding NavigateToPrescriptionsCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </RadioButton>
             <RadioButton Content="Odobravanje leka" Uid="6"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="7"
-                    Command="{Binding NavigateToApproveMedicineCommand}" />
+                    Command="{Binding NavigateToApproveMedicineCommand}">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="GotFocus">
+                        <b:InvokeCommandAction
+                                Command="{Binding NavigateToApproveMedicineCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </RadioButton>
             <RadioButton Content="Obaveštenja" Uid="7"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="8"
-                    Command="{Binding NavigateToNotificationsCommand}" />
+                    Command="{Binding NavigateToNotificationsCommand}">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="GotFocus">
+                        <b:InvokeCommandAction
+                                Command="{Binding NavigateToNotificationsCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </RadioButton>
 
             <Button Content="Odjavi se" Style="{StaticResource CustomButton}"
                     Grid.Row="10" Padding="10,0,10,0" Margin="15,5,15,5"
@@ -161,7 +220,8 @@
         </Grid>
 
         <Frame x:Name="Home" Grid.Row="2" Grid.Column="3" Grid.RowSpan="3"
-                Margin="20,0,15,0" NavigationUIVisibility="Hidden">
+                Margin="20,0,15,0" NavigationUIVisibility="Hidden"
+                Focusable="False">
         </Frame>
 
     </Grid>

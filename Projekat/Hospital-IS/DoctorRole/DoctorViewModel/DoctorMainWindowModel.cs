@@ -16,6 +16,17 @@ namespace Hospital_IS.DoctorViewModel
         private PatientChart patientChartView;
         private Appointments appointmentsView;
         private DoctorDTO doctor;
+        private bool focused;
+
+        public bool Focused
+        {
+            get { return focused; }
+            set
+            {
+                focused = value;
+                OnPropertyChanged("Focused");
+            }
+        }
 
         public NavigationService NavigationService
         {
@@ -179,7 +190,8 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_NavigateToHomePageCommand(object obj)
         {
 
-            this.NavigationService.Navigate(new HomePage(NavigationService));
+            this.NavigationService.Navigate(
+                new Uri("DoctorRole/DoctorView/HomePage.xaml", UriKind.Relative));
         }
 
         private bool CanExecute_NavigateCommand(object obj)
@@ -299,7 +311,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_OnLoadedCommand(object obj)
         {
-            this.NavigationService.Navigate(new HomePage(NavigationService));
+            this.NavigationService.Navigate(new HomePage());
         }
 
 
@@ -315,6 +327,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Constructor
         public DoctorMainWindowModel(NavigationService navigationService)
         {
+            this.Focused = true;
             this.NavigateToHomePageCommand = new RelayCommand(Execute_NavigateToHomePageCommand, CanExecute_NavigateCommand);
             this.NavigateToAppointmentsCommand = new RelayCommand(Execute_NavigateToAppointmentsCommand, CanExecute_NavigateCommand);
             this.NavigateToPatientsCommand = new RelayCommand(Execute_NavigateToPatientsCommand, CanExecute_NavigateCommand);

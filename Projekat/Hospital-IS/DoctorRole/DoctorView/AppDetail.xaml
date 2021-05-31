@@ -19,7 +19,6 @@
         <GroupBox Header="Današnji termini"
                 Style="{StaticResource CustomGroupBox}">
             <DataGrid x:Name="doctorAppointments"
-                    commands:FocusExtension.IsFocused="{Binding Focused}"
                     Style="{StaticResource CustomDataGrid}"
                     ItemsSource="{Binding Path=AppointmentsView, UpdateSourceTrigger=PropertyChanged}"
                     Margin="10" CanUserSortColumns="False"
@@ -179,6 +178,7 @@
 
                     <Button Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"
                             Content="Započni pregled" Margin="15"
+                            commands:FocusExtension.IsFocused="{Binding Focused}"
                             Visibility="{Binding Path=SelectedAppointment.Appointment.IsFinished, Converter={StaticResource saConverter}, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource CustomButton}">
                         <Button.InputBindings>

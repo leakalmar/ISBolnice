@@ -1,6 +1,28 @@
 ﻿<ResourceDictionary
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Style x:Key="CustomFocusVisualStyle">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border BorderThickness="1" BorderBrush="White"
+                            CornerRadius="20" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MainButtonFocusVisualStyle">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border BorderThickness="0,0,0,1" BorderBrush="White" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
             TargetType="{x:Type RadioButton}" x:Key="MenuButtonTheme">
         <Style.Setters>
@@ -20,13 +42,20 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-
+            <Setter Property="KeyboardNavigation.AcceptsReturn" Value="True" />
+            <Setter Property="FocusVisualStyle"
+                    Value="{StaticResource MainButtonFocusVisualStyle}" />
             <Setter Property="BorderThickness" Value="2,2,2,2" />
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="Background" Value="Transparent" />
         </Style.Setters>
 
         <Style.Triggers>
+            <DataTrigger
+                    Binding="{Binding Path=IsFocused, RelativeSource={RelativeSource Self}}"
+                    Value="True">
+                <Setter Property="IsChecked" Value="True" />
+            </DataTrigger>
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Background">
                     <Setter.Value>
@@ -103,7 +132,16 @@
         <Setter Property="FontSize" Value="16" />
     </Style>
 
+    <Style x:Key="CustomCellStyle" TargetType="{x:Type DataGridCell}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    </Style>
+
+
     <Style x:Key="CustomDataGrid" TargetType="{x:Type DataGrid}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsTabStop" Value="True" />
+        <Setter Property="CellStyle" Value="{StaticResource CustomCellStyle}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="RowBackground" Value="Transparent" />
         <Setter Property="Foreground" Value="White" />
@@ -163,17 +201,6 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Background" Value="#FF213250" />
         <Setter Property="BorderBrush" Value="White" />
-    </Style>
-
-    <Style x:Key="CustomFocusVisualStyle">
-        <Setter Property="Control.Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Border BorderThickness="1" BorderBrush="White"
-                            CornerRadius="20" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 
     <Style x:Key="CustomButton" TargetType="{x:Type Button}">

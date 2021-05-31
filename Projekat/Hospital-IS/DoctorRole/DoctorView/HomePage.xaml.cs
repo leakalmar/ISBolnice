@@ -1,6 +1,5 @@
 ﻿using Hospital_IS.DoctorViewModel;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 
 
 namespace Hospital_IS.DoctorRole.DoctorView
@@ -16,10 +15,10 @@ namespace Hospital_IS.DoctorRole.DoctorView
                 viewModel = value;
             }
         }
-        public HomePage(NavigationService navigation)
+        public HomePage()
         {
             InitializeComponent();
-            this.viewModel = new HomePageViewModel(navigation);
+            this.viewModel = new HomePageViewModel();
             this.DataContext = this.viewModel;
         }
     }
