@@ -21,7 +21,6 @@ namespace Hospital_IS.DoctorRole.DoctorView
             InitializeComponent();
             this.viewModel = new HomePageViewModel(navigation);
             this.DataContext = this.viewModel;
-            this.Focus();
         }
     }
 }

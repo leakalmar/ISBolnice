@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
         mc:Ignorable="d" Focusable="True">
     <Grid>
         <Grid.RowDefinitions>
@@ -80,7 +81,8 @@
         <GroupBox Header="Zakazani pregledi" Grid.Row="1" Grid.Column="0"
                 BorderBrush="#FF2E3B55" Foreground="White" FontSize="16">
             <DataGrid x:Name="docotrAppointments"
-                    ItemsSource="{Binding Path=AppointmentsView}"
+                    commands:FocusExtension.IsFocused="{Binding Focused}"
+                ItemsSource="{Binding Path=AppointmentsView}"
                     Style="{StaticResource CustomDataGrid}"
                     SelectedItem="{Binding Path=SelectedAppointment}" Focusable="True">
 
@@ -88,13 +90,6 @@
                     <KeyBinding Key="Return"
                             Command="{Binding NavigateToDetailsCommand}" />
                 </DataGrid.InputBindings>
-                <DataGrid.Resources>
-                    <Style
-                            BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
-                            TargetType="{x:Type DataGridColumnHeader}">
-                        <Setter Property="Background" Value="#FF2E3B55" />
-                    </Style>
-                </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Vreme"
                             Binding="{Binding Appointment.AppointmentStart.TimeOfDay}"
@@ -104,8 +99,7 @@
                         <DataGridTextColumn.Binding>
                             <MultiBinding StringFormat="{}{0}  {1}">
                                 <Binding Path="Appointment.Patient.Name" />
-                                <Binding
-                                        Path="Appointment.Patient.Surname" />
+                                <Binding Path="Appointment.Patient.Surname" />
                             </MultiBinding>
                         </DataGridTextColumn.Binding>
                     </DataGridTextColumn>

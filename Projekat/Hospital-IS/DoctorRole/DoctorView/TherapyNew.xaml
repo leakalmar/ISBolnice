@@ -18,7 +18,6 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        
         <Grid Grid.ColumnSpan="2" Grid.Row="1" Margin="50,20,50,50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*" />
@@ -35,15 +34,13 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-           
-
             <StackPanel Orientation="Horizontal" Grid.Row="0"
                     Grid.ColumnSpan="4" HorizontalAlignment="Center">
                 <Label Content="Lek:" Style="{StaticResource CustomLabel}" />
                 <ComboBox Style="{StaticResource CustomComboBox}"
                         Margin="5,0,0,0" ItemsSource="{Binding Medicines}"
                         commands:FocusExtension.IsFocused="{Binding Focused}"
-                          SelectedItem="{Binding SelectedMedicine}"
+                        SelectedItem="{Binding SelectedMedicine}"
                         HorizontalAlignment="Stretch" IsTextSearchEnabled="True"
                         TextSearch.TextPath="Name" MinWidth="250">
                     <ComboBox.ItemTemplate>
@@ -83,22 +80,19 @@
                     Value="{Binding Takings}" />
         </Grid>
 
-        <Border Style="{StaticResource ButtonBorder}" Margin="150,5,50,5">
-            <Button Style="{StaticResource CustomButton}" Content="Potvrdi">
-                <Button.InputBindings>
-                    <KeyBinding Key="Return" Command="{Binding SaveCommand}" />
-                </Button.InputBindings>
-            </Button>
-        </Border>
+        <Button Style="{StaticResource CustomButton}" Content="Potvrdi"
+                Margin="150,5,50,5">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding SaveCommand}" />
+            </Button.InputBindings>
+        </Button>
 
-        <Border Style="{StaticResource ButtonBorder}" Grid.Column="1"
-                Margin="50,5,150,5" Grid.ColumnSpan="2">
-            <Button Style="{StaticResource CustomButton}" Content="Odustani">
-                <Button.InputBindings>
-                    <KeyBinding Key="Return" Command="{Binding CancelCommand}" />
-                </Button.InputBindings>
-            </Button>
-        </Border>
+        <Button Style="{StaticResource CustomButton}" Content="Odustani"
+                Grid.Column="1" Margin="50,5,150,5" Grid.ColumnSpan="2">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding CancelCommand}" />
+            </Button.InputBindings>
+        </Button>
 
     </Grid>
 </UserControl>

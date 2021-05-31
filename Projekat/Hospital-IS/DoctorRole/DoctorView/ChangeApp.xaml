@@ -70,13 +70,6 @@
                         <KeyBinding Key="Return"
                                 Command="{Binding ChangeAppointmentCommand}" />
                     </DataGrid.InputBindings>
-                    <DataGrid.Resources>
-                        <Style
-                                BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
-                                TargetType="{x:Type DataGridColumnHeader}">
-                            <Setter Property="Background" Value="#FF2E3B55" />
-                        </Style>
-                    </DataGrid.Resources>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Datum"
                                 Binding="{Binding AppointmentStart.Date, StringFormat=\{0:MM/dd/yyyy\}}"

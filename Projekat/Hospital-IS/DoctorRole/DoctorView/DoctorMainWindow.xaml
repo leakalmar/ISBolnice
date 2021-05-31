@@ -149,17 +149,10 @@
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="8"
                     Command="{Binding NavigateToNotificationsCommand}" />
 
-            <Border CornerRadius="10" BorderThickness="1"
-                    BorderBrush="FloralWhite" Grid.Row="10"
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Padding="10,0,10,0">
-                <Button Content="Odjavi se" Foreground="FloralWhite"
-                        Background="#FF213250" BorderThickness="0"
-                        Command="{Binding Path=NavigateToLogInCommand}"
-                        FontSize="16" HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
-                </Button>
-            </Border>
+            <Button Content="Odjavi se" Style="{StaticResource CustomButton}"
+                    Grid.Row="10" Padding="10,0,10,0" Margin="15,5,15,5"
+                    Command="{Binding Path=NavigateToLogInCommand}">
+            </Button>
 
             <Button Grid.Row="11" Content="Podešavanja" Foreground="FloralWhite"
                     Background="{x:Null}" VerticalAlignment="Top"

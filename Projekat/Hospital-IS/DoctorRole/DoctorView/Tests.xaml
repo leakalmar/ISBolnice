@@ -16,30 +16,20 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Border CornerRadius="20" BorderThickness="1" Background="#FF213250"
-                BorderBrush="FloralWhite" Margin="250,5,250,5" x:Name="add"
-                Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}">
-            <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
-                    Content="Novi test" Foreground="FloralWhite"
-                    HorizontalAlignment="Stretch">
-                <Button.InputBindings>
-                    <KeyBinding Key="Return" Command="{Binding NewTestCommand}" />
-                </Button.InputBindings>
-            </Button>
-        </Border>
+        <Button Margin="250,5,250,5" Style="{StaticResource CustomButton}"
+                Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}"
+                Content="Novi test">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding NewTestCommand}" />
+            </Button.InputBindings>
+        </Button>
 
         <DataGrid x:Name="dataGrid" ItemsSource="{Binding Tests}" Grid.Row="2"
-                Style="{StaticResource CustomDataGrid}" >
-            <DataGrid.Resources>
-                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
-                        TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="Background" Value="#FF2E3B55" />
-                </Style>
-            </DataGrid.Resources>
+                Style="{StaticResource CustomDataGrid}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Datum"
-                        Binding="{Binding SampleDate}"
-                        CanUserResize="False" Width="auto" />
+                        Binding="{Binding SampleDate}" CanUserResize="False"
+                        Width="auto" />
                 <DataGridTextColumn Header="Test" Binding="{Binding Name}"
                         CanUserResize="False" Width="auto" />
                 <DataGridTextColumn Header="Broj Rezultat"

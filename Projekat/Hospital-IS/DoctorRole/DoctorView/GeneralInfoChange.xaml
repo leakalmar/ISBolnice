@@ -23,22 +23,19 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Border Style="{StaticResource ButtonBorder}" Margin="150,5,50,5">
-            <Button Style="{StaticResource CustomButton}" Content="Sačuvaj">
-                <Button.InputBindings>
-                    <KeyBinding Key="Return" Command="{Binding SaveCommand}" />
-                </Button.InputBindings>
-            </Button>
-        </Border>
+        <Button Style="{StaticResource CustomButton}" Margin="150,5,50,5"
+                Content="Sačuvaj">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding SaveCommand}" />
+            </Button.InputBindings>
+        </Button>
 
-        <Border Style="{StaticResource ButtonBorder}" Grid.Column="1"
-                Margin="50,5,150,5">
-            <Button Style="{StaticResource CustomButton}" Content="Odustani">
-                <Button.InputBindings>
-                    <KeyBinding Key="Return" Command="{Binding CancelCommand}" />
-                </Button.InputBindings>
-            </Button>
-        </Border>
+        <Button Style="{StaticResource CustomButton}" Margin="50,5,150,5"
+                Grid.Column="1" Content="Odustani">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding CancelCommand}" />
+            </Button.InputBindings>
+        </Button>
 
         <Grid Grid.Row="1" Margin="5,10,5,50" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -60,16 +57,17 @@
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="0" Grid.Column="1" x:Name="name"
                     commands:FocusExtension.IsFocused="{Binding Focused}"
-                    Text="{Binding Patient.Name}" Style="{StaticResource LineTextBox}" />
+                    Text="{Binding Patient.Name}"
+                    Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="1" Grid.Column="0" Content="Prezime:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="1" Grid.Column="1" x:Name="surname"
                     Text="{Binding Patient.Surname}"
                     Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="2" Grid.Column="0" Content="Pol:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <ComboBox Grid.Row="2" Grid.Column="1" x:Name="gender"
                     Text="{Binding Patient.Gender}"
                     Style="{StaticResource CustomComboBox}">
@@ -78,13 +76,13 @@
             </ComboBox>
 
             <Label Grid.Row="3" Grid.Column="0" Content="Datum rođenja:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="3" Grid.Column="1" x:Name="birth"
                     Text="{Binding Patient.BirthDate}"
                     Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="4" Grid.Column="0" Content="Krvna grupa:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <ComboBox Grid.Row="4" Grid.Column="1" x:Name="blood" Text="/"
                     Style="{StaticResource CustomComboBox}">
                 <ComboBoxItem Content="A" />
@@ -94,28 +92,30 @@
             </ComboBox>
 
             <Label Grid.Row="0" Grid.Column="3" Content="Kontakt telefon"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="0" Grid.Column="4" x:Name="phone"
-                    Text="{Binding Patient.Phone}" Style="{StaticResource LineTextBox}" />
+                    Text="{Binding Patient.Phone}"
+                    Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="1" Grid.Column="3" Content="Email:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="1" Grid.Column="4" x:Name="email"
-                    Text="{Binding Patient.Email}" Style="{StaticResource LineTextBox}" />
+                    Text="{Binding Patient.Email}"
+                    Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="2" Grid.Column="3" Content="Zaposlen:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="2" Grid.Column="4" x:Name="city"
                     Text="{Binding Patient.Employer}"
                     Style="{StaticResource LineTextBox}" />
-            
+
             <Label Grid.Row="3" Grid.Column="3" Content="Država:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="3" Grid.Column="4" x:Name="country" Text="/"
                     Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="4" Grid.Column="3" Content="Adresa:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="4" Grid.Column="4" x:Name="address"
                     Text="{Binding Patient.Address}"
                     Style="{StaticResource LineTextBox}" />

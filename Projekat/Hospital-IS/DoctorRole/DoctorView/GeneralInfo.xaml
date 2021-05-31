@@ -14,18 +14,13 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Border CornerRadius="20" Grid.ColumnSpan="2" BorderThickness="1"
-                Background="#FF213250" BorderBrush="FloralWhite"
-                Margin="250,5,250,5"
-                Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}">
-            <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
-                    Content="Izmeni" Foreground="FloralWhite"
-                    HorizontalAlignment="Stretch">
-                <Button.InputBindings>
-                    <KeyBinding Key="Return" Command="{Binding ChangeInfoCommand}" />
-                </Button.InputBindings>
-            </Button>
-        </Border>
+        <Button Grid.ColumnSpan="2" Margin="250,5,250,5"
+                Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}"
+                Content="Izmeni" Style="{StaticResource CustomButton}">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding ChangeInfoCommand}" />
+            </Button.InputBindings>
+        </Button>
 
         <Grid Grid.Row="1" Margin="5,10,5,50" DataContext="{Binding Patient}">
             <Grid.ColumnDefinitions>
@@ -44,19 +39,19 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Content="Ime:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="0" Grid.Column="1" x:Name="name"
                     Text="{Binding Name}" IsEnabled="False"
                     Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="1" Grid.Column="0" Content="Prezime:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="1" Grid.Column="1" x:Name="surname"
                     Text="{Binding Surname}" IsEnabled="False"
                     Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="2" Grid.Column="0" Content="Pol:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <ComboBox Grid.Row="2" Grid.Column="1" x:Name="gender"
                     Text="{Binding Gender}"
                     Style="{StaticResource CustomComboBox}" IsEnabled="False">
@@ -65,13 +60,13 @@
             </ComboBox>
 
             <Label Grid.Row="3" Grid.Column="0" Content="Datum rođenja:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="3" Grid.Column="1" x:Name="birth"
                     Text="{Binding BirthDate}" IsEnabled="False"
                     Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="4" Grid.Column="0" Content="Krvna grupa:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <ComboBox Grid.Row="4" Grid.Column="1" x:Name="blood" Text="/"
                     Style="{StaticResource CustomComboBox}" IsEnabled="False">
                 <ComboBoxItem Content="A" />
@@ -81,30 +76,30 @@
             </ComboBox>
 
             <Label Grid.Row="0" Grid.Column="3" Content="Kontakt telefon"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="0" Grid.Column="4" x:Name="phone"
                     Text="{Binding Phone}" IsEnabled="False"
                     Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="1" Grid.Column="3" Content="Email:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="1" Grid.Column="4" x:Name="email"
                     Text="{Binding Email}" IsEnabled="False"
                     Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="2" Grid.Column="3" Content="Zaposlen:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="2" Grid.Column="4" x:Name="city"
                     Text="{Binding Employer}" IsEnabled="False"
                     Style="{StaticResource LineTextBox}" />
-            
+
             <Label Grid.Row="3" Grid.Column="3" Content="Država:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="3" Grid.Column="4" x:Name="country" Text="/"
                     IsEnabled="False" Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="4" Grid.Column="3" Content="Adresa:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
+                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="4" Grid.Column="4" x:Name="address"
                     Text="{Binding Address}" IsEnabled="False"
                     Style="{StaticResource LineTextBox}" />

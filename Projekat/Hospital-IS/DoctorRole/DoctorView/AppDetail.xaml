@@ -24,13 +24,6 @@
                     ItemsSource="{Binding Path=AppointmentsView, UpdateSourceTrigger=PropertyChanged}"
                     Margin="10" CanUserSortColumns="False"
                     SelectedItem="{Binding Path=SelectedAppointment}">
-                <DataGrid.Resources>
-                    <Style
-                            BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
-                            TargetType="{x:Type DataGridColumnHeader}">
-                        <Setter Property="Background" Value="#FF2E3B55" />
-                    </Style>
-                </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Vreme"
                             Binding="{Binding Appointment.AppointmentStart.TimeOfDay}"
@@ -50,8 +43,7 @@
         </GroupBox>
 
         <GroupBox Header="Informacije o terminu"
-                Style="{StaticResource CustomGroupBox}" Grid.Row="2"
-                Margin="0">
+                Style="{StaticResource CustomGroupBox}" Grid.Row="2" Margin="0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -176,34 +168,25 @@
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <Border CornerRadius="20" BorderThickness="1"
-                            Background="#FF213250" BorderBrush="FloralWhite"
-                            Margin="15">
-                        <Button FontSize="18" BorderThickness="0"
-                                Background="{x:Null}" Content="Karton pacijenta"
-                                Foreground="FloralWhite"
-                                HorizontalAlignment="Stretch">
-                            <Button.InputBindings>
-                                <KeyBinding Key="Return"
-                                        Command="{Binding OpenChartCommand}" />
-                            </Button.InputBindings>
-                        </Button>
-                    </Border>
-                    <Border Grid.Row="6" Grid.Column="1" CornerRadius="20"
-                            BorderThickness="1" Grid.ColumnSpan="2"
-                            Background="#FF213250" BorderBrush="FloralWhite"
-                            Margin="15"
-                            Visibility="{Binding Path=SelectedAppointment.Appointment.IsFinished, Converter={StaticResource saConverter}, UpdateSourceTrigger=PropertyChanged}">
-                        <Button FontSize="18" BorderThickness="0"
-                                Background="{x:Null}" Content="Započni pregled"
-                                Foreground="FloralWhite"
-                                HorizontalAlignment="Stretch" x:Name="start">
-                            <Button.InputBindings>
-                                <KeyBinding Key="Return"
-                                        Command="{Binding StartAppointmentCommand}" />
-                            </Button.InputBindings>
-                        </Button>
-                    </Border>
+
+                    <Button Style="{StaticResource CustomButton}" Margin="15"
+                            Content="Karton pacijenta">
+                        <Button.InputBindings>
+                            <KeyBinding Key="Return"
+                                    Command="{Binding OpenChartCommand}" />
+                        </Button.InputBindings>
+                    </Button>
+
+                    <Button Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"
+                            Content="Započni pregled" Margin="15"
+                            Visibility="{Binding Path=SelectedAppointment.Appointment.IsFinished, Converter={StaticResource saConverter}, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource CustomButton}">
+                        <Button.InputBindings>
+                            <KeyBinding Key="Return"
+                                    Command="{Binding StartAppointmentCommand}" />
+                        </Button.InputBindings>
+                    </Button>
+
                 </Grid>
             </Grid>
         </GroupBox>

@@ -171,25 +171,16 @@
                     Text="{Binding NewSideEffects, UpdateSourceTrigger=PropertyChanged}" />
         </ScrollViewer>
 
-        <Border Grid.Row="8" CornerRadius="20" BorderThickness="1"
-                Background="#FF213250" BorderBrush="FloralWhite"
-                Margin="50,0,50,10">
-            <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
-                    Content="Sačuvaj" Foreground="FloralWhite"
-                    HorizontalAlignment="Stretch" x:Name="save">
-                <Button.InputBindings>
-                    <KeyBinding Key="S" Modifiers="Ctrl"
-                            Command="{Binding SaveChangesCommand}" />
-                </Button.InputBindings>
-            </Button>
-        </Border>
-        <Border Grid.Row="8" CornerRadius="20" BorderThickness="1"
-                Grid.Column="1" Background="#FF213250" BorderBrush="FloralWhite"
-                Margin="50,0,50,10">
-            <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
-                    Content="Odustani" Foreground="FloralWhite"
-                    HorizontalAlignment="Stretch" x:Name="cancle" />
-        </Border>
+        <Button Grid.Row="8" Margin="50,0,50,10" Content="Sačuvaj"
+                Style="{StaticResource CustomButton}">
+            <Button.InputBindings>
+                <KeyBinding Key="S" Modifiers="Ctrl"
+                        Command="{Binding SaveChangesCommand}" />
+            </Button.InputBindings>
+        </Button>
+
+        <Button Grid.Row="8" Grid.Column="1" Margin="50,0,50,10"
+                Content="Odustani" Style="{StaticResource CustomButton}" />
 
     </Grid>
 </UserControl>

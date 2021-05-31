@@ -132,39 +132,31 @@
                 ContentStringFormat="dd.MM.yyyy HH:mm" Grid.ColumnSpan="2"
                 HorizontalAlignment="Right" x:Name="today" FontSize="16" />
 
-        <Border Grid.Row="9" CornerRadius="20" BorderThickness="1"
-                Grid.Column="1" Background="#FF213250" BorderBrush="FloralWhite"
-                Margin="90,0,90,10" Grid.ColumnSpan="2">
-            <Button FontSize="16" BorderThickness="0" Background="{x:Null}"
-                    Content="Potvrdi" Foreground="FloralWhite"
-                    HorizontalAlignment="Stretch">
-                <Button.IsEnabled>
-                    <MultiBinding Converter="{StaticResource EnableInstruction}">
-                        <Binding Path="LogedInDoctor" />
-                        <Binding Path="SelectedAppointment.Appointment.Doctor" />
-                        <Binding
-                                Path="SelectedEmergencyAppointment.SuggestedAppointment.Doctor" />
-                        <Binding Path="AppointmentCause"
-                                UpdateSourceTrigger="PropertyChanged" />
-                    </MultiBinding>
-                </Button.IsEnabled>
-                <Button.InputBindings>
-                    <KeyBinding Key="Return"
-                            Command="{Binding IssueInstructionCommand}" />
-                </Button.InputBindings>
-            </Button>
-        </Border>
-        <Border Grid.Row="9" CornerRadius="20" BorderThickness="1"
-                Grid.Column="0" Background="#FF213250" BorderBrush="FloralWhite"
-                Margin="90,0,90,10">
-            <Button FontSize="16" BorderThickness="0" Background="{x:Null}"
-                    Content="Nazad" Foreground="FloralWhite"
-                    HorizontalAlignment="Stretch">
-                <Button.InputBindings>
-                    <KeyBinding Key="Return" Command="{Binding BackCommand}" />
-                </Button.InputBindings>
-            </Button>
-        </Border>
+        <Button Grid.Row="9" Grid.Column="1" Margin="90,0,90,10"
+                Grid.ColumnSpan="2" Content="Potvrdi"
+                Style="{StaticResource CustomButton}">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource EnableInstruction}">
+                    <Binding Path="LogedInDoctor" />
+                    <Binding Path="SelectedAppointment.Appointment.Doctor" />
+                    <Binding
+                            Path="SelectedEmergencyAppointment.SuggestedAppointment.Doctor" />
+                    <Binding Path="AppointmentCause"
+                            UpdateSourceTrigger="PropertyChanged" />
+                </MultiBinding>
+            </Button.IsEnabled>
+            <Button.InputBindings>
+                <KeyBinding Key="Return"
+                        Command="{Binding IssueInstructionCommand}" />
+            </Button.InputBindings>
+        </Button>
+
+        <Button Grid.Row="9" Margin="90,0,90,10" Content="Nazad"
+                Style="{StaticResource CustomButton}">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding BackCommand}" />
+            </Button.InputBindings>
+        </Button>
 
     </Grid>
 </UserControl>

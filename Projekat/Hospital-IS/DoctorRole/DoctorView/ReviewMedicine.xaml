@@ -29,8 +29,9 @@
             <RowDefinition Height="auto" x:Name="column" />
         </Grid.RowDefinitions>
 
-        <Label Content="{Binding MedicineNotification.Medicine.Name}" Grid.ColumnSpan="2" FontSize="18"
-                FontFamily="Verdana" Foreground="FloralWhite" Margin="0,0,20,10"
+        <Label Content="{Binding MedicineNotification.Medicine.Name}"
+                Grid.ColumnSpan="2" FontSize="18" FontFamily="Verdana"
+                Foreground="FloralWhite" Margin="0,0,20,10"
                 VerticalAlignment="Center" HorizontalAlignment="Center" />
 
         <TextBlock x:Name="allergieMess" Grid.Row="5" Grid.ColumnSpan="2"
@@ -115,31 +116,21 @@
                     Background="{x:Null}" MaxHeight="133" Padding="5" />
         </ScrollViewer>
 
-        <Border Grid.Row="8" CornerRadius="20" BorderThickness="1"
-                Background="#FF213250" BorderBrush="FloralWhite"
-                Margin="50,0,50,10" x:Name="borderDisapprove"
+        <Button Grid.Row="8" Margin="50,0,50,10" Content="Odobri"
+                Style="{StaticResource CustomButton}"
                 Visibility="{Binding ShowDisapproveNote, Converter={StaticResource InverseConverter}}">
-            <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
-                    Content="Odobri" Foreground="FloralWhite"
-                    HorizontalAlignment="Stretch" x:Name="approve">
-                <Button.InputBindings>
-                    <KeyBinding Key="Return" Command="{Binding ApproveCommand}" />
-                </Button.InputBindings>
-            </Button>
-        </Border>
-        <Border Grid.Row="8" CornerRadius="20" BorderThickness="1"
-                Grid.Column="1" Background="#FF213250" BorderBrush="FloralWhite"
-                Margin="50,0,50,10" x:Name="borderApprove"
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding ApproveCommand}" />
+            </Button.InputBindings>
+        </Button>
+
+        <Button Grid.Row="8" Grid.Column="1" Margin="50,0,50,10" Content="Odbij"
+                Style="{StaticResource CustomButton}"
                 Visibility="{Binding ShowDisapproveNote, Converter={StaticResource InverseConverter}}">
-            <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
-                    Content="Odbij" Foreground="FloralWhite"
-                    HorizontalAlignment="Stretch" x:Name="disapprove">
-                <Button.InputBindings>
-                    <KeyBinding Key="Return"
-                            Command="{Binding DisapproveCommand}" />
-                </Button.InputBindings>
-            </Button>
-        </Border>
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding DisapproveCommand}" />
+            </Button.InputBindings>
+        </Button>
 
         <Label Content="Beleške" FontSize="14" FontFamily="Verdana"
                 Foreground="FloralWhite" Grid.Row="8" Padding="20,0,0,0"
@@ -156,8 +147,8 @@
                     Margin="20,0,20,0" Height="71">
                 <TextBox TextWrapping="Wrap" FontSize="14" BorderThickness="0"
                         FontFamily="Verdana" Foreground="FloralWhite"
-                        Background="{x:Null}" 
-                        x:Name="text" Style="{StaticResource WaterMarkStyle}"
+                        Background="{x:Null}" x:Name="text"
+                        Style="{StaticResource WaterMarkStyle}"
                         Tag="Unesire razlog odbijanja leka." Padding="5">
                     <TextBox.Text>
                         <Binding Path="Note"

@@ -184,27 +184,19 @@
         <Frame x:Name="patientInfo" Grid.Row="3" Grid.ColumnSpan="4" />
 
         <Separator Grid.Row="3" Grid.ColumnSpan="4" VerticalAlignment="Bottom" />
-        <Border Grid.Row="4" Grid.ColumnSpan="4" CornerRadius="20"
-                BorderThickness="1" Background="#FF213250"
-                BorderBrush="FloralWhite" HorizontalAlignment="Center"
-                VerticalAlignment="Center" Padding="150,5,150,5" x:Name="back"
-                Visibility="{Binding Started, Converter={StaticResource InverseConverter}}">
-            <Button Content="Nazad" Foreground="FloralWhite" FontSize="18"
-                    BorderThickness="0" Background="{x:Null}" />
-        </Border>
-        <Border Grid.Row="4" Grid.ColumnSpan="4" CornerRadius="20"
-                BorderThickness="1" Background="#FF213250"
-                BorderBrush="FloralWhite" HorizontalAlignment="Center"
-                VerticalAlignment="Center" Padding="150,5,150,5" x:Name="end"
+
+        <Button Grid.Row="4" Grid.ColumnSpan="4" Content="Nazad"
+                Margin="150,5,150,5" Style="{StaticResource CustomButton}"
+                Visibility="{Binding Started, Converter={StaticResource InverseConverter}}" />
+
+        <Button Grid.Row="4" Grid.ColumnSpan="4" Content="Završi termin"
+                Margin="150,5,150,5" Style="{StaticResource CustomButton}"
                 Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}">
-            <Button Content="Završi termin" Foreground="FloralWhite"
-                    FontSize="18" BorderThickness="0" Background="{x:Null}">
-                <Button.InputBindings>
-                    <KeyBinding Key="Return"
-                            Command="{Binding EndAppointmentCommand}" />
-                </Button.InputBindings>
-            </Button>
-        </Border>
+            <Button.InputBindings>
+                <KeyBinding Key="Return"
+                        Command="{Binding EndAppointmentCommand}" />
+            </Button.InputBindings>
+        </Button>
 
     </Grid>
 </UserControl>

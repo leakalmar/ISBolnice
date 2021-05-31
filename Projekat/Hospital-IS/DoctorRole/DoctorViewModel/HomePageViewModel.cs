@@ -20,6 +20,17 @@ namespace Hospital_IS.DoctorViewModel
         private ObservableCollection<AppointmentRowDTO> doctorAppointments;
         private AppointmentRowDTO selectedAppointment;
         private NavigationService navigationService;
+        private bool focused;
+
+        public bool Focused
+        {
+            get { return focused; }
+            set
+            {
+                focused = value;
+                OnPropertyChanged("Focused");
+            }
+        }
 
         public NavigationService NavigationService
         {
@@ -111,6 +122,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Constructor
         public HomePageViewModel(NavigationService navigation)
         {
+            this.Focused = true;
             this.NavigateToDetailsCommand = new RelayCommand(Execute_NavigateToDetailsCommand, CanExecute_NavigateCommand);
             this.SelectionChangedCommand = new RelayCommand(Execute_SelectionChangedCommand, CanExecute_NavigateCommand);
             this.navigationService = navigation;

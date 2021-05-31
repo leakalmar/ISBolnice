@@ -58,22 +58,19 @@
 
         </Grid>
 
-        <Border Style="{StaticResource ButtonBorder}" Margin="150,5,50,5">
-            <Button Style="{StaticResource CustomButton}" Content="Potvrdi">
-                <Button.InputBindings>
-                    <KeyBinding Key="Return" Command="{Binding SaveCommand}" />
-                </Button.InputBindings>
-            </Button>
-        </Border>
+        <Button Style="{StaticResource CustomButton}" Margin="150,5,50,5"
+                Content="Potvrdi">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding SaveCommand}" />
+            </Button.InputBindings>
+        </Button>
 
-        <Border Style="{StaticResource ButtonBorder}" Grid.Column="1"
-                Margin="50,5,150,5" Grid.ColumnSpan="2">
-            <Button Style="{StaticResource CustomButton}" Content="Odustani">
-                <Button.InputBindings>
-                    <KeyBinding Key="Return" Command="{Binding CancelCommand}" />
-                </Button.InputBindings>
-            </Button>
-        </Border>
-        
+        <Button Style="{StaticResource CustomButton}" Grid.Column="1"
+                Margin="50,5,150,5" Grid.ColumnSpan="2" Content="Odustani">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding CancelCommand}" />
+            </Button.InputBindings>
+        </Button>
+
     </Grid>
 </UserControl>

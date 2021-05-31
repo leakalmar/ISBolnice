@@ -102,7 +102,7 @@
         </Setter>
         <Setter Property="FontSize" Value="16" />
     </Style>
-    
+
     <Style x:Key="CustomDataGrid" TargetType="{x:Type DataGrid}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="RowBackground" Value="Transparent" />
@@ -119,6 +119,12 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="RowHeaderWidth" Value="0" />
         <Setter Property="VerticalAlignment" Value="Top" />
+        <Style.Resources>
+            <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
+                    TargetType="{x:Type DataGridColumnHeader}">
+                <Setter Property="Background" Value="#FF2E3B55" />
+            </Style>
+        </Style.Resources>
     </Style>
 
     <Style x:Key="CustomLabel" TargetType="{x:Type Label}">
@@ -159,16 +165,77 @@
         <Setter Property="BorderBrush" Value="White" />
     </Style>
 
+    <Style x:Key="CustomFocusVisualStyle">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border BorderThickness="1" BorderBrush="White"
+                            CornerRadius="20" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="CustomButton" TargetType="{x:Type Button}">
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="20" />
+            </Style>
+        </Style.Resources>
+        <Setter Property="FocusVisualStyle"
+                Value="{StaticResource CustomFocusVisualStyle}" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Background" Value="{x:Null}" />
+        <Setter Property="Background" Value="#FF2E3B55" />
+        <Setter Property="BorderBrush" Value="White" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
-        </Style>
+    </Style>
 
     <Style x:Key="CustomTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="White" />
+    </Style>
+
+    <Style x:Key="MyFocusVisualStyle">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="-2" StrokeThickness="2" RadiusX="2"
+                            RadiusY="2">
+                        <Rectangle.Stroke>
+                            <SolidColorBrush Color="Red"
+                                    x:Name="RectangleStroke" />
+                        </Rectangle.Stroke>
+                        <Rectangle.Triggers>
+                            <EventTrigger RoutedEvent="Rectangle.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation From="Red" To="Orange"
+                                                Duration="0:0:0.5"
+                                                RepeatBehavior="Forever"
+                                                Storyboard.TargetName="RectangleStroke"
+                                                Storyboard.TargetProperty="Color" />
+                                        <DoubleAnimation To="3"
+                                                Duration="0:0:0.5"
+                                                RepeatBehavior="Forever"
+                                                Storyboard.TargetProperty="StrokeDashOffset" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Rectangle.Triggers>
+                    </Rectangle>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle"
+                Value="{StaticResource MyFocusVisualStyle}" />
+    </Style>
+    <Style TargetType="{x:Type TextBox}">
+        <Setter Property="FocusVisualStyle"
+                Value="{StaticResource MyFocusVisualStyle}" />
     </Style>
 </ResourceDictionary>

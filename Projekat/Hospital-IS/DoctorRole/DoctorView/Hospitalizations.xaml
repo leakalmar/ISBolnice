@@ -15,18 +15,13 @@
             <ColumnDefinition Width="0.02*" />
             <ColumnDefinition Width="0.3*" />
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Hospitalizations,UpdateSourceTrigger=PropertyChanged}"
+        <DataGrid x:Name="dataGrid"
+                ItemsSource="{Binding Hospitalizations,UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding SelectedHospitalization}"
                 Style="{StaticResource CustomDataGrid}">
             <!--<DataGrid.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding ViewHospitalization}" />
             </DataGrid.InputBindings>-->
-            <DataGrid.Resources>
-                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
-                        TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="Background" Value="#FF2E3B55" />
-                </Style>
-            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Datum prijema"
                         Binding="{Binding AdmissionDate}" CanUserResize="False"
@@ -52,18 +47,17 @@
                     FontSize="20" Foreground="FloralWhite"
                     HorizontalAlignment="Center" Grid.ColumnSpan="3"
                     Margin="0,5" TextWrapping="Wrap" VerticalAlignment="Center" />
-            <Border CornerRadius="20" BorderThickness="1" Background="#FF213250"
-                    BorderBrush="FloralWhite" Margin="15" Grid.Row="5"
-                    Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}">
-                <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
-                        Content="Primi pacijenta" Foreground="FloralWhite"
-                        HorizontalAlignment="Stretch">
-                    <Button.InputBindings>
-                        <KeyBinding Key="Return"
-                                Command="{Binding HospitalizePatientCommand}" />
-                    </Button.InputBindings>
-                </Button>
-            </Border>
+
+            <Button Margin="15" Grid.Row="5"
+                    Style="{StaticResource CustomButton}"
+                    Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}"
+                    Content="Primi pacijenta" Foreground="FloralWhite"
+                    HorizontalAlignment="Stretch">
+                <Button.InputBindings>
+                    <KeyBinding Key="Return"
+                            Command="{Binding HospitalizePatientCommand}" />
+                </Button.InputBindings>
+            </Button>
         </StackPanel>
 
         <Grid Grid.Column="2" Margin="5"
@@ -79,7 +73,7 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="0.3*" />
                 <ColumnDefinition Width="0.7*" />
             </Grid.ColumnDefinitions>
 
@@ -89,7 +83,7 @@
                     VerticalAlignment="Center"
                     Visibility="{Binding NewHospitalization,Converter={StaticResource InverseConverter}}" />
 
-            <Label Content="Hospitalizacija pacijenta" FontSize="20" 
+            <Label Content="Hospitalizacija pacijenta" FontSize="20"
                     BorderThickness="0" Foreground="FloralWhite"
                     HorizontalAlignment="Center" Grid.ColumnSpan="2"
                     FontWeight="Bold" Margin="0,5" VerticalAlignment="Center"
@@ -110,10 +104,9 @@
                 <Label Content="Datum otpusta:" Foreground="FloralWhite"
                         VerticalAlignment="Center" FontSize="14" />
                 <DatePicker Margin="10,0,0,0"
-                        SelectedDate="{Binding ReleaseDate, UpdateSourceTrigger=PropertyChanged}" Width="100"
-                        VerticalAlignment="Center" FontSize="14"/>
+                        SelectedDate="{Binding ReleaseDate, UpdateSourceTrigger=PropertyChanged}"
+                        Width="100" VerticalAlignment="Center" FontSize="14" />
             </StackPanel>
-            
 
             <Label Grid.Row="3" Content="Doktor:" Foreground="FloralWhite"
                     VerticalAlignment="Center" FontSize="14" />
@@ -150,42 +143,35 @@
             </ComboBox>
 
             <StackPanel Orientation="Vertical" Grid.Row="6" Grid.ColumnSpan="2">
-                <Label  Content="Detalji:" Foreground="FloralWhite"
+                <Label Content="Detalji:" Foreground="FloralWhite"
                         VerticalAlignment="Center" FontSize="14" />
-                <TextBox Margin="5,0" Foreground="FloralWhite" AcceptsReturn="True" CaretBrush="White" MaxLines="3"
-                        Background="Transparent" FontSize="14" TextWrapping="Wrap" BorderThickness="0"
-                         Text="{Binding Details}" FontWeight="Light"
+                <TextBox Margin="5,0" Foreground="FloralWhite"
+                        AcceptsReturn="True" CaretBrush="White" MaxLines="3"
+                        Background="Transparent" FontSize="14"
+                        TextWrapping="Wrap" BorderThickness="0"
+                        Text="{Binding Details}" FontWeight="Light"
                         IsEnabled="{Binding NewHospitalization}" />
             </StackPanel>
-            
 
-            <Border CornerRadius="20" BorderThickness="1" Background="#FF213250"
-                    BorderBrush="FloralWhite" Margin="15" Grid.Row="7"
-                    Grid.ColumnSpan="2"
-                    Visibility="{Binding NewHospitalization,Converter={StaticResource InverseConverter}}">
-                <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
-                        Content="Otpusti pacijenta" Foreground="FloralWhite"
-                        HorizontalAlignment="Stretch">
-                    <Button.InputBindings>
-                        <KeyBinding Key="Return"
-                                Command="{Binding ReleasePatientCommand}" />
-                    </Button.InputBindings>
-                </Button>
-            </Border>
+            <Button Margin="15" Grid.Row="7" Grid.ColumnSpan="2"
+                    Visibility="{Binding NewHospitalization,Converter={StaticResource InverseConverter}}"
+                    Content="Otpusti pacijenta"
+                    Style="{StaticResource CustomButton}">
+                <Button.InputBindings>
+                    <KeyBinding Key="Return"
+                            Command="{Binding ReleasePatientCommand}" />
+                </Button.InputBindings>
+            </Button>
 
-            <Border CornerRadius="20" BorderThickness="1" Background="#FF213250"
-                    BorderBrush="FloralWhite" Margin="15" Grid.Row="7"
-                    Grid.ColumnSpan="2"
-                    Visibility="{Binding NewHospitalization,Converter={StaticResource BoolToVisibility}}">
-                <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
-                        Content="Završi prijem" Foreground="FloralWhite"
-                        HorizontalAlignment="Stretch">
-                    <Button.InputBindings>
-                        <KeyBinding Key="Return"
-                                Command="{Binding EndCreatingHospitalizationCommand}" />
-                    </Button.InputBindings>
-                </Button>
-            </Border>
+            <Button Margin="15" Grid.Row="7" Grid.ColumnSpan="2"
+                    Visibility="{Binding NewHospitalization,Converter={StaticResource BoolToVisibility}}"
+                    Content="Završi prijem"
+                    Style="{StaticResource CustomButton}">
+                <Button.InputBindings>
+                    <KeyBinding Key="Return"
+                            Command="{Binding EndCreatingHospitalizationCommand}" />
+                </Button.InputBindings>
+            </Button>
 
         </Grid>
     </Grid>

@@ -45,13 +45,6 @@
                     <KeyBinding Key="Return"
                             Command="{Binding AddRemoveMedicineCommand}" />
                 </DataGrid.InputBindings>
-                <DataGrid.Resources>
-                    <Style
-                            BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
-                            TargetType="{x:Type DataGridColumnHeader}">
-                        <Setter Property="Background" Value="#FF2E3B55" />
-                    </Style>
-                </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Naziv leka"
                             Binding="{Binding Name}" CanUserResize="False"

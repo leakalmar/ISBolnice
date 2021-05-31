@@ -39,12 +39,6 @@
             <DataGrid.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding OpenChartCommand}" />
             </DataGrid.InputBindings>
-            <DataGrid.Resources>
-                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
-                        TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="Background" Value="#FF2E3B55" />
-                </Style>
-            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Ime" Binding="{Binding Name}"
                         CanUserResize="False" Width="0.05*" />
