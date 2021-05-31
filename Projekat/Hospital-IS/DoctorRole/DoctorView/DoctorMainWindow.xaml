@@ -111,6 +111,7 @@
 
         <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3">
             <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*" />
                 <RowDefinition Height="0.5*" />
                 <RowDefinition Height="0.5*" />
                 <RowDefinition Height="0.5*" />
@@ -177,8 +178,18 @@
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </RadioButton>
-            <RadioButton Content="Izdavanje recepta" Uid="5"
+            <!--<RadioButton Content="Oprema" Uid="5"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="6"
+                    Command="{Binding NavigateToEquipmentCommand}">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="GotFocus">
+                        <b:InvokeCommandAction
+                                Command="{Binding NavigateToEquipmentCommand}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </RadioButton>-->
+            <RadioButton Content="Izdavanje recepta" Uid="6"
+                    Style="{StaticResource MenuButtonTheme}" Grid.Row="7"
                     Command="{Binding NavigateToPrescriptionsCommand}">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="GotFocus">
@@ -187,8 +198,8 @@
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </RadioButton>
-            <RadioButton Content="Odobravanje leka" Uid="6"
-                    Style="{StaticResource MenuButtonTheme}" Grid.Row="7"
+            <RadioButton Content="Odobravanje leka" Uid="7"
+                    Style="{StaticResource MenuButtonTheme}" Grid.Row="8"
                     Command="{Binding NavigateToApproveMedicineCommand}">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="GotFocus">
@@ -197,8 +208,8 @@
                     </b:EventTrigger>
                 </b:Interaction.Triggers>
             </RadioButton>
-            <RadioButton Content="Obaveštenja" Uid="7"
-                    Style="{StaticResource MenuButtonTheme}" Grid.Row="8"
+            <RadioButton Content="Obaveštenja" Uid="8"
+                    Style="{StaticResource MenuButtonTheme}" Grid.Row="9"
                     Command="{Binding NavigateToNotificationsCommand}">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="GotFocus">
@@ -209,11 +220,11 @@
             </RadioButton>
 
             <Button Content="Odjavi se" Style="{StaticResource CustomButton}"
-                    Grid.Row="10" Padding="10,0,10,0" Margin="15,5,15,5"
+                    Grid.Row="11" Padding="10,0,10,0" Margin="15,5,15,5"
                     Command="{Binding Path=NavigateToLogInCommand}">
             </Button>
 
-            <Button Grid.Row="11" Content="Podešavanja" Foreground="FloralWhite"
+            <Button Grid.Row="12" Content="Podešavanja" Foreground="FloralWhite"
                     Background="{x:Null}" VerticalAlignment="Top"
                     FontWeight="Normal" />
 

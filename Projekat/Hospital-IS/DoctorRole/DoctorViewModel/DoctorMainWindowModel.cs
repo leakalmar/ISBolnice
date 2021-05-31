@@ -241,8 +241,8 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_NavigateToRoomsCommand(object obj)
         {
-            //this.NavigationService.Navigate(
-            //   new Uri("DoctorView/Rooms.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(
+               new Uri("DoctorRole/DoctorView/Rooms.xaml", UriKind.Relative));
         }
 
         private void Execute_NavigateToPrescriptionsCommand(object obj)

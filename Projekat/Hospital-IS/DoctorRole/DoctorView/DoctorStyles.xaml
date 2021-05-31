@@ -171,6 +171,11 @@
         <Setter Property="VerticalContentAlignment" Value="Bottom" />
     </Style>
 
+    <Style x:Key="CustomTextBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
     <Style x:Key="CustomGroupBox" TargetType="{x:Type GroupBox}">
         <Setter Property="BorderBrush" Value="#FF2E3B55" />
         <Setter Property="Foreground" Value="White" />

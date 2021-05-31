@@ -46,6 +46,11 @@ namespace Controllers
             return RoomService.Instance.GetAllRooms();
         }
 
+        public List<int> GetAllFloors()
+        {
+            return RoomService.Instance.GetAllFloors();
+        }
+
         public List<Room> GetRoomByType(RoomType type)
         {
             return RoomService.Instance.GetRoomByType(type);
@@ -54,6 +59,11 @@ namespace Controllers
         public Room GetRoomById(int roomId)
         {
             return RoomService.Instance.GetRoomById(roomId);
+        }
+
+        public List<Room> GetRoomByNumber(string roomNumber)
+        {
+            return RoomService.Instance.GetRoomByNumber(roomNumber);
         }
 
         public void AddEquipment(Room room, Equipment newEquip)
@@ -116,6 +126,5 @@ namespace Controllers
             return roomType;
         }
 
-      
     }
 }

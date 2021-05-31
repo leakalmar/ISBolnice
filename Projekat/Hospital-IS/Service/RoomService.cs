@@ -59,6 +59,19 @@ namespace Service
             return null;
         }
 
+        public List<int> GetAllFloors()
+        {
+            List<int> floors = new List<int>();
+            foreach (Room r in AllRooms)
+            {
+                if (!floors.Contains(r.RoomFloor))
+                {
+                    floors.Add(r.RoomFloor);
+                }
+            }
+            return floors;
+        }
+
         public void AddRoom(Room newRoom)
         {
          newRoom.RoomId = FindMax() + 1;
@@ -123,6 +136,20 @@ namespace Service
                 }
             }
             return allRoomByType;
+        }
+
+        public List<Room> GetRoomByNumber(string roomNumber)
+        {
+            List<Room> allRoomByNumber = new List<Room>();
+
+            foreach (Room room in AllRooms)
+            {
+                if (Int32.Parse(roomNumber) > room.RoomNumber )
+                {
+                    allRoomByNumber.Add(room);
+                }
+            }
+            return allRoomByNumber;
         }
 
         public List<Room> GetAllRooms()
