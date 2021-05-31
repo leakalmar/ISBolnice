@@ -85,5 +85,19 @@ namespace Hospital_IS.Service
         }
 
 
+        public List<Notification> GetPrescriptionNotification(int doctorId)
+        {
+            List<Notification> notifications = new List<Notification>();
+            foreach (Notification notification in AllNotifications)
+            {
+                if (notification.Recipients.Contains(doctorId) && notification.Title.Contains("Izdavanje recepta"))
+                {
+                    notifications.Add(notification);
+                }
+            }
+
+            return notifications;
+        }
+
     }
 }

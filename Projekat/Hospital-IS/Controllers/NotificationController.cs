@@ -53,5 +53,10 @@ namespace Hospital_IS.Controllers
             NotificationService.Instance.DeleteNotification(notification);
         }
 
+        
+        public List<Notification> GetPrescriptionNotification(int doctorId)
+        {
+            return NotificationService.Instance.GetPrescriptionNotification(doctorId);
+        }
     }
 }

@@ -185,13 +185,36 @@
 
         <Separator Grid.Row="3" Grid.ColumnSpan="4" VerticalAlignment="Bottom" />
 
+        <Grid Grid.Row="4" Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Content="Odobri"
+                    Margin="100,5,60,5" Style="{StaticResource CustomButton}"
+                    Visibility="{Binding PrescriptionReview,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility}}">
+                <Button.InputBindings>
+                    <KeyBinding Key="Return"
+                            Command="{Binding PrescriptionReviewCommand}" />
+                </Button.InputBindings>
+            </Button>
+            <Button  Grid.Column="1" Content="Odbij"
+                    Margin="60,5,100,5" Style="{StaticResource CustomButton}"
+                    Visibility="{Binding PrescriptionReview,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility}}">
+                <Button.InputBindings>
+                    <KeyBinding Key="Return"
+                            Command="{Binding PrescriptionReviewCommand}" />
+                </Button.InputBindings>
+            </Button>
+        </Grid>
+        
         <Button Grid.Row="4" Grid.ColumnSpan="4" Content="Nazad"
                 Margin="150,5,150,5" Style="{StaticResource CustomButton}"
-                Visibility="{Binding Started, Converter={StaticResource InverseConverter}}" />
+                Visibility="{Binding BackButton,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility}}" />
 
         <Button Grid.Row="4" Grid.ColumnSpan="4" Content="Završi termin"
                 Margin="150,5,150,5" Style="{StaticResource CustomButton}"
-                Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}">
+                Visibility="{Binding Started,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility}}">
             <Button.InputBindings>
                 <KeyBinding Key="Return"
                         Command="{Binding EndAppointmentCommand}" />

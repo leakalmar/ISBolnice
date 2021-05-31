@@ -21,7 +21,9 @@ namespace Hospital_IS.DoctorViewModel
         private Thickness margin = new Thickness(0);
         private bool reportFocused;
         private bool generalFocused;
+        private bool backButton;
         private bool started;
+        private bool prescriptionReview;
 
         public bool ReportFocused
         {
@@ -95,13 +97,40 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
+        public bool BackButton
+        {
+            get { return backButton; }
+            set
+            {
+                backButton = value;
+                OnPropertyChanged("BackButton");
+            }
+        }
+
         public bool Started
         {
             get { return started; }
             set
             {
                 started = value;
+                BackButton = !value;
+                PrescriptionReview = false;
+
                 OnPropertyChanged("Started");
+            }
+        }
+
+        public bool PrescriptionReview
+        {
+            get { return prescriptionReview; }
+            set
+            {
+                prescriptionReview = value;
+                if (value)
+                {
+                    BackButton = false;
+                }
+                OnPropertyChanged("PrescriptionReview");
             }
         }
 
@@ -137,6 +166,7 @@ namespace Hospital_IS.DoctorViewModel
         private RelayCommand changeCommand;
         private RelayCommand addCommand;
         private RelayCommand navigateBackCommand;
+        private RelayCommand prescriptionReviewCommand;
 
         public RelayCommand EndAppointmentCommand
         {
@@ -165,6 +195,12 @@ namespace Hospital_IS.DoctorViewModel
             set { navigateBackCommand = value; }
         }
 
+        public RelayCommand PrescriptionReviewCommand
+        {
+            get { return prescriptionReviewCommand; }
+            set { prescriptionReviewCommand = value; }
+        }
+
 
         #endregion
 
@@ -174,7 +210,7 @@ namespace Hospital_IS.DoctorViewModel
 
             int index = Int32.Parse(((string)obj));
 
-            Started = false;
+            bool tempStarted = false;
             if (SelectedAppointment == null)
             {
                 Margin = new Thickness(110 * index - 110, 0, 0, 0);
@@ -184,7 +220,7 @@ namespace Hospital_IS.DoctorViewModel
 
                 if (SelectedAppointment.IsStarted == true)
                 {
-                    Started = true;
+                    tempStarted = true;
                     Margin = new Thickness(110 * index, 0, 0, 0);
                 }
                 else if (SelectedAppointment.IsStarted == false)
@@ -204,7 +240,7 @@ namespace Hospital_IS.DoctorViewModel
                 case 1:
                     GeneralFocused = true;
                     GeneralInfo view = new GeneralInfo();
-                    view._ViewModel.Started = Started;
+                    view._ViewModel.Started = tempStarted;
                     view._ViewModel.Patient = Patient;
                     this.InsideNavigationService.Navigate(view);
                     break;
@@ -216,22 +252,22 @@ namespace Hospital_IS.DoctorViewModel
                     break;
                 case 3:
                     ScheduledApp scheduledApp = new ScheduledApp();
-                    scheduledApp._ViewModel.Started = Started;
+                    scheduledApp._ViewModel.Started = tempStarted;
                     this.InsideNavigationService.Navigate(scheduledApp);
                     break;
                 case 4:
                     Therapies therapy = new Therapies();
-                    therapy._ViewModel.Started = Started;
+                    therapy._ViewModel.Started = tempStarted;
                     this.InsideNavigationService.Navigate(therapy);
                     break;
                 case 5:
                     Tests tests = new Tests();
-                    tests._ViewModel.Started = Started;
+                    tests._ViewModel.Started = tempStarted;
                     this.InsideNavigationService.Navigate(tests);
                     break;
                 case 6:
                     Hospitalizations hospitalizations = new Hospitalizations();
-                    hospitalizations._ViewModel.Started = Started;
+                    hospitalizations._ViewModel.Started = tempStarted;
                     this.InsideNavigationService.Navigate(hospitalizations);
                     break;
             }
@@ -255,6 +291,11 @@ namespace Hospital_IS.DoctorViewModel
                 DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(new AppDetail());
                 this.Started = false;
             }
+        }
+
+        private void Execute_PrescriptionReviewCommand(object obj)
+        {
+            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(new IssuePrescription(false));
         }
 
         private void Execute_AddCommand(object obj)
@@ -345,6 +386,7 @@ namespace Hospital_IS.DoctorViewModel
             this.AddCommand = new RelayCommand(Execute_AddCommand, CanExecute_Command);
             this.ChangeCommand = new RelayCommand(Execute_ChangeCommand, CanExecute_Command);
             this.EndAppointmentCommand = new RelayCommand(Execute_EndAppointmentCommand, CanExecute_Command);
+            this.PrescriptionReviewCommand = new RelayCommand(Execute_PrescriptionReviewCommand, CanExecute_Command);
         }
         #endregion
 

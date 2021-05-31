@@ -247,8 +247,8 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_NavigateToPrescriptionsCommand(object obj)
         {
-            // this.NavigationService.Navigate(
-            //    new Uri("DoctorView/Appointments.xaml", UriKind.Relative));
+
+             this.NavigationService.Navigate(new IssuePrescription(true));
         }
 
         private void Execute_NavigateToApprovemedicineCommand(object obj)
