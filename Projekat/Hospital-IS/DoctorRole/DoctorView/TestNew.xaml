@@ -4,8 +4,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Hospital_IS.DoctorRole.DoctorView"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d"
-        d:DesignHeight="344.660194174757" d:DesignWidth="783">
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
     <Grid Margin="0,25,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -15,23 +16,6 @@
             <RowDefinition Height="40" />
             <RowDefinition />
         </Grid.RowDefinitions>
-
-        <Border Style="{StaticResource ButtonBorder}" Margin="150,5,50,5">
-            <Button Style="{StaticResource CustomButton}" Content="Potvrdi">
-                <Button.InputBindings>
-                    <KeyBinding Key="Return" Command="{Binding SaveCommand}" />
-                </Button.InputBindings>
-            </Button>
-        </Border>
-
-        <Border Style="{StaticResource ButtonBorder}" Grid.Column="1"
-                Margin="50,5,150,5" Grid.ColumnSpan="2">
-            <Button Style="{StaticResource CustomButton}" Content="Odustani">
-                <Button.InputBindings>
-                    <KeyBinding Key="Return" Command="{Binding CancelCommand}" />
-                </Button.InputBindings>
-            </Button>
-        </Border>
 
         <Grid Grid.ColumnSpan="2" Grid.Row="1" Margin="50,20,50,50">
             <Grid.ColumnDefinitions>
@@ -60,6 +44,7 @@
             <Label Content="Naziv testa:" Style="{StaticResource CustomLabel}"
                     Grid.Row="3" />
             <TextBox Style="{StaticResource CustomTextBox}"
+                    commands:FocusExtension.IsFocused="{Binding Focused}"
                     Text="{Binding TestName}" Grid.Row="4" Margin="5,0,0,0"
                     BorderBrush="White" BorderThickness="0,0,0,2" />
 
@@ -68,9 +53,27 @@
 
             <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
                     Grid.RowSpan="5" Style="{StaticResource CustomTextBox}"
-                    VerticalScrollBarVisibility="Auto" Text="{Binding TestResults}"/>
+                    VerticalScrollBarVisibility="Auto"
+                    Text="{Binding TestResults}" />
 
         </Grid>
 
+        <Border Style="{StaticResource ButtonBorder}" Margin="150,5,50,5">
+            <Button Style="{StaticResource CustomButton}" Content="Potvrdi">
+                <Button.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding SaveCommand}" />
+                </Button.InputBindings>
+            </Button>
+        </Border>
+
+        <Border Style="{StaticResource ButtonBorder}" Grid.Column="1"
+                Margin="50,5,150,5" Grid.ColumnSpan="2">
+            <Button Style="{StaticResource CustomButton}" Content="Odustani">
+                <Button.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding CancelCommand}" />
+                </Button.InputBindings>
+            </Button>
+        </Border>
+        
     </Grid>
 </UserControl>

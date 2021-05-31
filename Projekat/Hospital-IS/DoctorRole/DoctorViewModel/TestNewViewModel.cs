@@ -11,6 +11,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         #region Fields
         private string testName;
         private string testResults;
+        private bool focused;
 
         public string TestName
         {
@@ -29,6 +30,16 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             {
                 testResults = value;
                 OnPropertyChanged("TestResults");
+            }
+        }
+
+        public bool Focused
+        {
+            get { return focused; }
+            set
+            {
+                focused = value;
+                OnPropertyChanged("Focused");
             }
         }
         #endregion
@@ -79,6 +90,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         #region Constructor
         public TestNewViewModel()
         {
+            this.Focused = true;
             this.CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecute_Command);
             this.SaveCommand = new RelayCommand(Execute_SaveCommand, CanExecute_Command);
         }

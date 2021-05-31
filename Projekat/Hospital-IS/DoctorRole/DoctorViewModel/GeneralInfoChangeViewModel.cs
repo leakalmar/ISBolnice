@@ -9,6 +9,17 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
     {
         #region Feilds
         private PatientDTO patient;
+        private bool focused;
+
+        public bool Focused
+        {
+            get { return focused; }
+            set
+            {
+                focused = value;
+                OnPropertyChanged("Focused");
+            }
+        }
 
         public PatientDTO Patient
         {
@@ -67,6 +78,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         #region Constructor
         public GeneralInfoChangeViewModel()
         {
+            this.Focused = true;
             this.SaveCommand = new RelayCommand(Execute_SaveCommand, CanExecute_NavigateCommand);
             this.CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecute_NavigateCommand);
             Patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;

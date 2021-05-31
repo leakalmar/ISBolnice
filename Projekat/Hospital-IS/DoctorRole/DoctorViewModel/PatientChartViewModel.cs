@@ -16,21 +16,33 @@ namespace Hospital_IS.DoctorViewModel
         #region Feilds
         private PatientDTO patient;
         private AppointmentRowDTO selectedAppointment;
-        private NavigationService mainNavigationService;
         private NavigationService insideNavigationService;
         private int lastTab = 0;
         private Thickness margin = new Thickness(0);
-
+        private bool reportFocused;
+        private bool generalFocused;
         private bool started;
 
-        public NavigationService MainNavigationService
+        public bool ReportFocused
         {
-            get { return mainNavigationService; }
+            get { return reportFocused; }
             set
             {
-                mainNavigationService = value;
+                reportFocused = value;
+                OnPropertyChanged("ReportFocused");
             }
         }
+
+        public bool GeneralFocused
+        {
+            get { return generalFocused; }
+            set
+            {
+                generalFocused = value;
+                OnPropertyChanged("GeneralFocused");
+            }
+        }
+
 
         public NavigationService InsideNavigationService
         {
@@ -92,6 +104,7 @@ namespace Hospital_IS.DoctorViewModel
                 OnPropertyChanged("Started");
             }
         }
+
         #endregion
 
         #region Views
@@ -123,6 +136,7 @@ namespace Hospital_IS.DoctorViewModel
         private RelayCommand endAppointmentCommand;
         private RelayCommand changeCommand;
         private RelayCommand addCommand;
+        private RelayCommand navigateBackCommand;
 
         public RelayCommand EndAppointmentCommand
         {
@@ -143,6 +157,12 @@ namespace Hospital_IS.DoctorViewModel
         {
             get { return addCommand; }
             set { addCommand = value; }
+        }
+
+        public RelayCommand NavigateBackCommand
+        {
+            get { return navigateBackCommand; }
+            set { navigateBackCommand = value; }
         }
 
 
@@ -172,13 +192,17 @@ namespace Hospital_IS.DoctorViewModel
                     Margin = new Thickness(110 * index - 110, 0, 0, 0);
                 }
             }
+            GeneralFocused = false;
+            ReportFocused = false;
 
             switch (index)
             {
                 case 0:
+                    ReportFocused = true;
                     this.InsideNavigationService.Navigate(reportView);
                     break;
                 case 1:
+                    GeneralFocused = true;
                     GeneralInfo view = new GeneralInfo();
                     view._ViewModel.Started = Started;
                     view._ViewModel.Patient = Patient;
@@ -228,7 +252,8 @@ namespace Hospital_IS.DoctorViewModel
                 ReportDTO reportDTO = new ReportDTO(selectedAppointment.AppointmentStart, selectedAppointment.Doctor.Name, selectedAppointment.Doctor.Surname, selectedAppointment.Type, selectedAppointment.AppointmentCause, ReportView.reportDetail.Text, ReportView._ViewModel.Prescriptions.Count, selectedAppointment.Patient.Id);
                 ChartController.Instance.AddReport(reportDTO);
                 ChartController.Instance.AddPrescriptions(new List<PrescriptionDTO>(ReportView._ViewModel.Prescriptions), SelectedAppointment.Appointment.Patient);
-                this.MainNavigationService.Navigate(new AppDetail());
+                DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(new AppDetail());
+                this.Started = false;
             }
         }
 
@@ -236,11 +261,31 @@ namespace Hospital_IS.DoctorViewModel
         {
             switch (InsideNavigationService.Content.GetType().Name)
             {
-                case "UCReport":
+                case "Report":
                     SearchMedicineView._ViewModel.Prescriptions = ReportView._ViewModel.Prescriptions;
-                    MainNavigationService.Navigate(SearchMedicineView);
+                    DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(SearchMedicineView);
                     break;
                 default:
+                    break;
+            }
+
+        }
+
+        private void Execute_NavigateBackCommand(object obj)
+        {
+            switch (InsideNavigationService.Content.GetType().Name)
+            {
+                case "Report":
+                case "GeneralInfo":
+                case "History":
+                case "ScheduledApp":
+                case "Therapies":
+                case "Tests":
+                case "Hospitalizations":
+                    DoctorMainWindow.Instance._ViewModel.NavigateBackCommand.Execute(obj);
+                    break;
+                default:
+                    this.InsideNavigationService.GoBack();
                     break;
             }
 
@@ -253,6 +298,8 @@ namespace Hospital_IS.DoctorViewModel
         {
             if (SelectedAppointment == null)
             {
+                GeneralFocused = true;
+                ReportFocused = false;
                 GeneralInfo view = new GeneralInfo();
                 view._ViewModel.Started = Started;
                 view._ViewModel.Patient = Patient;
@@ -262,10 +309,14 @@ namespace Hospital_IS.DoctorViewModel
             {
                 if (SelectedAppointment.IsStarted == true)
                 {
+                    GeneralFocused = false;
+                    ReportFocused = true;
                     InsideNavigationService.Navigate(ReportView);
                 }
                 else
                 {
+                    GeneralFocused = true;
+                    ReportFocused = false;
                     GeneralInfo view = new GeneralInfo();
                     view._ViewModel.Started = Started;
                     view._ViewModel.Patient = Patient;
@@ -280,7 +331,7 @@ namespace Hospital_IS.DoctorViewModel
             SearchMedicineView = new SearchMedicine();
             SearchMedicineView._ViewModel.Patient = Patient;
             SearchMedicineView._ViewModel.DatePrescribed = SelectedAppointment.Appointment.AppointmentStart;
-            SearchMedicineView._ViewModel.MainNavigationService = MainNavigationService;
+            SearchMedicineView._ViewModel.MainNavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
             Started = SelectedAppointment.IsStarted;
         }
         #endregion
@@ -290,7 +341,7 @@ namespace Hospital_IS.DoctorViewModel
         {
             this.ReportView = new ReportView();
             Started = false;
-            this.MainNavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
+            this.NavigateBackCommand = new RelayCommand(Execute_NavigateBackCommand, CanExecute_Command);
             this.AddCommand = new RelayCommand(Execute_AddCommand, CanExecute_Command);
             this.ChangeCommand = new RelayCommand(Execute_ChangeCommand, CanExecute_Command);
             this.EndAppointmentCommand = new RelayCommand(Execute_EndAppointmentCommand, CanExecute_Command);

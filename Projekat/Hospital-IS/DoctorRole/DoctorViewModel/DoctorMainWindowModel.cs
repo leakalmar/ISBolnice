@@ -3,6 +3,7 @@ using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DTOs;
 using Model;
 using System;
+using System.Windows;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.DoctorViewModel
@@ -72,6 +73,7 @@ namespace Hospital_IS.DoctorViewModel
         private RelayCommand minimizeCommand;
         private RelayCommand maximizeCommand;
         private RelayCommand onLoadedCommand;
+        private RelayCommand navigateBackWithoutCheckCommand;
 
         public RelayCommand NavigateToHomePageCommand
         {
@@ -165,6 +167,12 @@ namespace Hospital_IS.DoctorViewModel
             get { return onLoadedCommand; }
             set { onLoadedCommand = value; }
         }
+
+        public RelayCommand NavigateBackWithoutCheckCommand
+        {
+            get { return navigateBackWithoutCheckCommand; }
+            set { navigateBackWithoutCheckCommand = value; }
+        }
         #endregion
 
         #region Actions
@@ -245,8 +253,25 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_NavigateBackCommand(object obj)
         {
+            if (NavigationService.Content.ToString().Contains("PatientChart") && PatientChartView._ViewModel.Started == true)
+            {
+
+                PatientChartView._ViewModel.EndAppointmentCommand.Execute(null);
+
+            }
+            else
+            {
+                this.NavigationService.GoBack();
+                this.NavigationService.Refresh();
+            }
+        }
+
+        private void Execute_NavigateBackWithoutCheckCommand(object obj)
+        {
+
             this.NavigationService.GoBack();
             this.NavigationService.Refresh();
+
         }
 
         private void Execute_NavigateToLogInCommand(object obj)
@@ -306,6 +331,7 @@ namespace Hospital_IS.DoctorViewModel
             this.MaximizeCommand = new RelayCommand(Execute_MaximizeCommand, CanExecute_NavigateCommand);
             this.MinimizeCommand = new RelayCommand(Execute_MinimizeCommand, CanExecute_NavigateCommand);
             this.OnLoadedCommand = new RelayCommand(Execute_OnLoadedCommand, CanExecute_NavigateCommand);
+            this.NavigateBackWithoutCheckCommand = new RelayCommand(Execute_NavigateBackWithoutCheckCommand, CanExecute_NavigateCommand);
             this.navigationService = navigationService;
         }
         #endregion

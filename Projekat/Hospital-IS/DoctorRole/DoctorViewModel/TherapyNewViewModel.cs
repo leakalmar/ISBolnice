@@ -15,6 +15,17 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         private int pills;
         private int takings;
         private string therapyEnd;
+        private bool focused;
+
+        public bool Focused
+        {
+            get { return focused; }
+            set
+            {
+                focused = value;
+                OnPropertyChanged("Focused");
+            }
+        }
 
         public List<Medicine> Medicines
         {
@@ -134,6 +145,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         {
             this.Takings = 1;
             this.Pills = 1;
+            this.Focused = true;
             this.SaveCommand = new RelayCommand(Execute_SaveCommand, CanExecute_Command);
             this.CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecute_Command);
             this.Medicines = MedicineController.Instance.GetAll();

@@ -5,7 +5,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
     <UserControl.InputBindings>
-        <KeyBinding Key="Add" Modifiers="Ctrl" Command="{Binding SearchMedicineCommad}" />
+        <KeyBinding Key="Add" Modifiers="Ctrl"
+                Command="{Binding SearchMedicineCommad}" />
+        <KeyBinding Key="Backspace" Command="{Binding NavigateBackCommad}" />
     </UserControl.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -14,8 +16,8 @@
         </Grid.ColumnDefinitions>
         <GroupBox Margin="15" Header="Detalji pregleda" Foreground="FloralWhite">
             <TextBox x:Name="reportDetail" Margin="5,5,5,5"
-                    Style="{StaticResource CustomTextBox}"
-                    BorderThickness="0" Text="{Binding Anemnesis}" />
+                    Style="{StaticResource CustomTextBox}" BorderThickness="0"
+                    Text="{Binding Anemnesis}" />
         </GroupBox>
 
         <Grid Grid.Column="1" Margin="0,25,15,20">

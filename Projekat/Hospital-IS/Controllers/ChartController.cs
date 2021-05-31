@@ -67,6 +67,11 @@ namespace Controllers
             return ConvertPrescriptionToDTO(ChartService.Instance.GetPrescriptionsForReport(patientId, reportDate));
         }
 
+        public List<Test> GetTestsForReport(int patientId, DateTime reportDate)
+        {
+            return ChartService.Instance.GetTestsForReport(patientId, reportDate);
+        }
+
         public Hospitalization GetActivHospitalization(Patient patient)
         {
             return ChartService.Instance.GetActivHospitalization(patient.Id);

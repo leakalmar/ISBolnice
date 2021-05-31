@@ -18,11 +18,11 @@ namespace Hospital_IS.DoctorRole.DoctorConverters
             DateTime date = (DateTime)value;
             if (date.Date.Equals(DateTime.Today))
             {
-                ret = true;
+                ret = false;
             }
             else
             {
-                ret = false;
+                ret = true;
             }
 
             return ret;

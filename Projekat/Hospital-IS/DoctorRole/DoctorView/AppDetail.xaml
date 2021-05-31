@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
         mc:Ignorable="d" d:DesignHeight="555" d:DesignWidth="783">
     <UserControl.Resources>
         <converters:StartedAppointmentConverter x:Key="saConverter" />
@@ -18,6 +19,7 @@
         <GroupBox Header="Današnji termini"
                 Style="{StaticResource CustomGroupBox}">
             <DataGrid x:Name="doctorAppointments"
+                    commands:FocusExtension.IsFocused="{Binding Focused}"
                     Style="{StaticResource CustomDataGrid}"
                     ItemsSource="{Binding Path=AppointmentsView, UpdateSourceTrigger=PropertyChanged}"
                     Margin="10" CanUserSortColumns="False"

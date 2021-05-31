@@ -72,6 +72,20 @@ namespace Service
             return reportPrescriptions;
         }
 
+        public List<Test> GetTestsForReport(int id, DateTime reportId)
+        {
+            List<Test> allTests = GetTestsByPatientId(id);
+            List<Test> reportTests = new List<Test>();
+            foreach (Test test in allTests)
+            {
+                if (test.SampleDate.Equals(reportId))
+                {
+                    reportTests.Add(test);
+                }
+            }
+            return reportTests;
+        }
+
         public Hospitalization GetActivHospitalization(int id)
         {
             Hospitalization ret = null;

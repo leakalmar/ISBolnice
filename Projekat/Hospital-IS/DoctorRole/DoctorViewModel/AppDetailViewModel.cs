@@ -19,6 +19,17 @@ namespace Hospital_IS.DoctorViewModel
         private ICollectionView appointmentsView;
         private AppointmentRowDTO selectedAppointment;
         private NavigationService navigationService;
+        private bool focused;
+
+        public bool Focused
+        {
+            get { return focused; }
+            set
+            {
+                focused = value;
+                OnPropertyChanged("Focused");
+            }
+        }
 
         public NavigationService NavigationService
         {
@@ -128,6 +139,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Constructor
         public AppDetailViewModel()
         {
+            this.Focused = true;
             this.OpenChartCommand = new RelayCommand(Execute_OpenChartCommand, CanExecute_NavigateCommand);
             this.StartAppointmentCommand = new RelayCommand(Execute_StartAppointmentCommand, CanExecute_NavigateCommand);
             this.NavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;

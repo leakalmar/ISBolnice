@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
         mc:Ignorable="d" d:DesignHeight="555" d:DesignWidth="783">
     <UserControl.Resources>
         <converters:InverseVisibilityConverter x:Key="InverseConverter" />
@@ -13,6 +14,7 @@
     <UserControl.InputBindings>
         <KeyBinding Key="Add" Modifiers="Ctrl" Command="{Binding AddCommand}" />
         <KeyBinding Key="Esc" Command="{Binding EndAppointmentCommand}" />
+        <KeyBinding Key="Backspace" Command="{Binding NavigateBackCommand}" />
     </UserControl.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -104,6 +106,7 @@
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="4">
             <Button Uid="0" x:Name="reportBtn" Content="Izveštaj" Width="110"
                     FontSize="18" Background="Transparent"
+                    commands:FocusExtension.IsFocused="{Binding ReportFocused}"
                     Foreground="FloralWhite" BorderBrush="{x:Null}"
                     Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}">
                 <b:Interaction.Triggers>
@@ -115,7 +118,8 @@
             </Button>
             <Button Uid="1" Content="Opšti podaci" Width="110" FontSize="18"
                     Background="Transparent" Foreground="FloralWhite"
-                    BorderBrush="{x:Null}">
+                    BorderBrush="{x:Null}"
+                    commands:FocusExtension.IsFocused="{Binding GeneralFocused}">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="GotFocus">
                         <b:InvokeCommandAction Command="{Binding ChangeCommand}"

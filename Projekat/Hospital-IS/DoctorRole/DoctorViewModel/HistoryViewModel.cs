@@ -103,7 +103,6 @@ namespace Hospital_IS.DoctorViewModel
         public HistoryViewModel()
         {
             this.OldReportCommand = new RelayCommand(Execute_OldReportCommand, CanExecute_Command);
-
         }
         #endregion
     }

@@ -29,7 +29,7 @@
         </Border>
 
         <DataGrid x:Name="dataGrid" ItemsSource="{Binding Tests}" Grid.Row="2"
-                Style="{StaticResource CustomDataGrid}">
+                Style="{StaticResource CustomDataGrid}" >
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
                         TargetType="{x:Type DataGridColumnHeader}">

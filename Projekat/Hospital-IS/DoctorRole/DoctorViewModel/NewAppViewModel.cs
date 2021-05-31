@@ -45,6 +45,17 @@ namespace Hospital_IS.DoctorViewModel
 
         private NavigationService mainNavigationService;
         private IssueInstruction instructionView;
+        private bool focused;
+
+        public bool Focused
+        {
+            get { return focused; }
+            set
+            {
+                focused = value;
+                OnPropertyChanged("Focused");
+            }
+        }
 
         public List<Specialty> Specializations
         {
@@ -437,6 +448,7 @@ namespace Hospital_IS.DoctorViewModel
         public NewAppViewModel()
         {
             InitializeFilters();
+            this.Focused = true;
             this.MainNavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
             this.ChooseAppointmentCommand = new RelayCommand(Execute_ChooseAppointmentCommand, CanExecute_Command);
             this.ChangeEmergencyCommand = new RelayCommand(Execute_ChangeEmergencyCommand, CanExecute_Command);

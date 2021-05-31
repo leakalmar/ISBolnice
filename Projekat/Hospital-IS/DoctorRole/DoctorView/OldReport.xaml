@@ -4,12 +4,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
-        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783"
+        >
     <UserControl.Resources>
         <converters:IsTodayAppointmentConverter x:Key="IsTodayAppointment" />
     </UserControl.Resources>
     <UserControl.InputBindings>
         <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding SaveCommand}" />
+        <KeyBinding Key="Backspace" Command="{Binding NavigateBackCommand}" />
     </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -27,7 +30,8 @@
             <TextBox x:Name="reportDetail" Margin="5,5,5,5"
                     Background="Transparent" Foreground="FloralWhite"
                     BorderThickness="0"
-                    IsEnabled="{Binding Report.AppointmentStart, Converter={StaticResource IsTodayAppointment}}">
+                    commands:FocusExtension.IsFocused="{Binding Focused}"
+                    IsReadOnly="{Binding Report.AppointmentStart, Converter={StaticResource IsTodayAppointment}}">
                 <TextBox.InputBindings>
                     <KeyBinding Key="S" Modifiers="Ctrl"
                             Command="{Binding SaveCommand}" />
@@ -56,7 +60,7 @@
 
         <GroupBox Grid.Row="1" Grid.Column="1" Header="Testovi" Margin="5"
                 Foreground="FloralWhite">
-            <ListBox x:Name="tests" ItemsSource="{Binding }"
+            <ListBox x:Name="tests" ItemsSource="{Binding Tests}"
                     Background="Transparent" BorderThickness="0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

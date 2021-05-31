@@ -67,6 +67,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Commands
         private RelayCommand deletePrescriptionCommad;
         private RelayCommand searchMedicineCommad;
+        private RelayCommand navigateBackCommand;
 
         public RelayCommand DeletePrescriptionCommand
         {
@@ -79,6 +80,12 @@ namespace Hospital_IS.DoctorViewModel
             get { return searchMedicineCommad; }
             set { searchMedicineCommad = value; }
         }
+        public RelayCommand NavigateBackCommand
+        {
+            get { return navigateBackCommand; }
+            set { navigateBackCommand = value; }
+        }
+
 
         #endregion
 
@@ -105,6 +112,7 @@ namespace Hospital_IS.DoctorViewModel
         public ReportViewModel()
         {
             Prescriptions = new ObservableCollection<PrescriptionDTO>();
+            this.NavigateBackCommand = DoctorMainWindow.Instance._ViewModel.NavigateBackCommand;
             this.DeletePrescriptionCommand = new RelayCommand(Execute_DeletePrescriptionCommand, CanExecute_Command);
             this.SearchMedicineCommad = new RelayCommand(Execute_SearchMedicineCommad, CanExecute_Command);
             this.MainNavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
