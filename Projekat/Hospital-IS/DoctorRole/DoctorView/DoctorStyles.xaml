@@ -133,7 +133,7 @@
         <Setter Property="FontSize" Value="16" />
     </Style>
 
-    <Style x:Key="CustomTextBox" TargetType="{x:Type TextBox}">
+    <Style x:Key="LineTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0,0,0,2" />
         <Setter Property="Foreground" Value="White" />
@@ -166,4 +166,9 @@
         <Setter Property="Foreground" Value="White" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         </Style>
+
+    <Style x:Key="CustomTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
 </ResourceDictionary>

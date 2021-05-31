@@ -27,7 +27,7 @@
             </Button>
         </Border>
 
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding}" Grid.Row="2"
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Therapies}" Grid.Row="2"
                 Style="{StaticResource CustomDataGrid}">
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
@@ -37,25 +37,22 @@
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Datum početka"
-                        Binding="{Binding AppointmentStart}"
-                        CanUserResize="False" Width="0.05*" />
-                <DataGridTextColumn Header="Lek" Binding="{Binding Type}"
-                        CanUserResize="False" Width="0.05*" />
+                        Binding="{Binding TherapyStart}" CanUserResize="False"
+                        Width="auto" />
+                <DataGridTextColumn Header="Lek" Binding="{Binding Medicine.Name}" CanUserResize="False"
+                        Width="*" />
                 <DataGridTextColumn Header="Broj tableta"
-                        Binding="{Binding AppointmentCause}"
-                        CanUserResize="False" Width="0.05*" />
+                        Binding="{Binding Quantity}" CanUserResize="False"
+                        Width="auto" />
                 <DataGridTextColumn Header="Broj uzimanja"
-                        Binding="{Binding Doctor.Surname}" CanUserResize="False"
-                        Width="0.05*" />
-                <DataGridTextColumn Header="Dodatno"
-                        Binding="{Binding Doctor.Surname}" CanUserResize="False"
-                        Width="0.05*" />
+                        Binding="{Binding TimesADay}" CanUserResize="False"
+                        Width="auto" />
                 <DataGridTextColumn Header="Recept"
-                        Binding="{Binding Doctor.Surname}" CanUserResize="False"
-                        Width="0.05*" />
+                        Binding="{Binding LastTimeIssued}" CanUserResize="False"
+                        Width="auto" />
                 <DataGridCheckBoxColumn Header="Završena"
-                        Binding="{Binding Doctor.Surname}" CanUserResize="False"
-                        Width="0.03*" />
+                         CanUserResize="False"
+                        Width="auto" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

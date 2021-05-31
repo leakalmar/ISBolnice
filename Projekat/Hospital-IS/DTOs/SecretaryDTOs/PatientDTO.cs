@@ -21,8 +21,9 @@ namespace Hospital_IS.DTOs.SecretaryDTOs
         public List<String> Alergies { get; set; }
         public DateTime FileDate { get; set; }
         public Boolean IsGuest { get; set; }
+        public Boolean IsAdmitted { get; set; }
 
-        public PatientDTO(int id, string name, string surname, string gender, DateTime birthDate, string phone, string email, EducationCategory education, string relationship, string employer, string password, string address, List<string> alergies, Boolean isGuest)
+        public PatientDTO(int id, string name, string surname, string gender, DateTime birthDate, string phone, string email, EducationCategory education, string relationship, string employer, string password, string address, List<string> alergies, Boolean isGuest, Boolean isAdmitted)
         {
             Id = id;
             Name = name;
@@ -38,6 +39,7 @@ namespace Hospital_IS.DTOs.SecretaryDTOs
             Address = address;
             Alergies = alergies;
             IsGuest = isGuest;
+            IsAdmitted = isAdmitted;
         }
 
         public PatientDTO()

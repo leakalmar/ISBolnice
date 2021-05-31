@@ -51,7 +51,7 @@
                 <DataGridTextColumn Header="Prezime" Binding="{Binding Surname}"
                         CanUserResize="False" Width="0.05*" />
                 <DataGridTextColumn Header="Primljen"
-                        Binding="{Binding Admitted}" CanUserResize="False"
+                        Binding="{Binding IsAdmitted}" CanUserResize="False"
                         Width="0.05*" />
             </DataGrid.Columns>
         </DataGrid>

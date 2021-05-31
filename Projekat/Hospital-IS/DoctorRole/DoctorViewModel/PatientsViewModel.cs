@@ -1,6 +1,8 @@
 ﻿using Controllers;
+using Hospital_IS.Controllers;
 using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorView;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -12,7 +14,7 @@ namespace Hospital_IS.DoctorViewModel
     {
         #region Fields
         private ICollectionView patients;
-        private Patient selectedPatient;
+        private PatientDTO selectedPatient;
         private string searchText;
 
         public ICollectionView Patients
@@ -35,7 +37,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public Patient SelectedPatient
+        public PatientDTO SelectedPatient
         {
             get { return selectedPatient; }
             set
@@ -60,7 +62,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_OpenChartCommand(object obj)
         {
             PatientChart view = new PatientChart();
-            //view._ViewModel.Patient = SelectedPatient;
+            view._ViewModel.Patient = SelectedPatient;
             DoctorMainWindow.Instance._ViewModel.PatientChartView = view;
             DoctorMainWindow.Instance._ViewModel.NavigateToChartCommand.Execute(obj);
         }
@@ -76,7 +78,7 @@ namespace Hospital_IS.DoctorViewModel
         public PatientsViewModel()
         {
             this.OpenChartCommand = new RelayCommand(Execute_OpenChartCommand, CanExecute_Command);
-            ObservableCollection<Patient> allPatients = new ObservableCollection<Patient>(PatientController.Instance.GetAll());
+            ObservableCollection<PatientDTO> allPatients = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllRegisteredPatients());
             Patients = new CollectionViewSource { Source = allPatients }.View;
         }
         #endregion

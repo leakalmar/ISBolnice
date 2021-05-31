@@ -34,6 +34,12 @@ namespace Service
             return medicalHistory.Therapies;
         }
 
+        public List<Test> GetTestsByPatientId(int id)
+        {
+            MedicalHistory medicalHistory = GetChartById(id);
+            return medicalHistory.Test;
+        }
+
         public MedicalHistory GetChartById(int id)
         {
             foreach(MedicalHistory medicalHistory in AllCharts)
@@ -119,6 +125,13 @@ namespace Service
         {
             MedicalHistory medicalHistory = GetChartById(id);
             medicalHistory.Therapies.Add(newTherapy);
+            cfs.SaveCharts(AllCharts);
+        }
+
+        public void AddTest(Test newTest, int id)
+        {
+            MedicalHistory medicalHistory = GetChartById(id);
+            medicalHistory.Test.Add(newTest);
             cfs.SaveCharts(AllCharts);
         }
 

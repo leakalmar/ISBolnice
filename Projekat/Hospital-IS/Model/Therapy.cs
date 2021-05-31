@@ -10,6 +10,7 @@ namespace Model
         public DateTime TherapyStart { get; set; }
         public DateTime TherapyEnd { get; set; }
         public int FirstUsageTime { get; set; }
+        public DateTime LastTimeIssued { get; set; }
 
         public Therapy(Medicine medicine, int quantity, int timesADay, DateTime start, DateTime end)
         {
@@ -18,6 +19,7 @@ namespace Model
             TimesADay = timesADay;
             TherapyStart = start;
             TherapyEnd = end;
+            LastTimeIssued = start;
         }
     }
 }

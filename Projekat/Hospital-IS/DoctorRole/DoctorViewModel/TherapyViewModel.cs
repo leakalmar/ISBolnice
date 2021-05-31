@@ -1,5 +1,8 @@
-﻿using Hospital_IS.DoctorRole.Commands;
+﻿using Controllers;
+using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorView;
+using Model;
+using System.Collections.ObjectModel;
 
 namespace Hospital_IS.DoctorViewModel
 {
@@ -7,6 +10,7 @@ namespace Hospital_IS.DoctorViewModel
     {
         #region Fields
         private bool started;
+        private ObservableCollection<Therapy> therapies;
         public bool Started
         {
             get { return started; }
@@ -14,6 +18,16 @@ namespace Hospital_IS.DoctorViewModel
             {
                 started = value;
                 OnPropertyChanged("Started");
+            }
+        }
+
+        public ObservableCollection<Therapy> Therapies
+        {
+            get { return therapies; }
+            set
+            {
+                therapies = value;
+                OnPropertyChanged("Therapies");
             }
         }
         #endregion
@@ -48,6 +62,7 @@ namespace Hospital_IS.DoctorViewModel
         public TherapyViewModel()
         {
             this.NewTherapyCommand = new RelayCommand(Execute_NewTherapyCommand, CanExecute_NavigateCommand);
+            this.Therapies = new ObservableCollection<Therapy>(ChartController.Instance.GetTherapiesByPatient(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient));
         }
         #endregion
     }

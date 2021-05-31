@@ -109,7 +109,6 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
                     Therapy newTherapy = new Therapy(SelectedMedicine, Pills, Takings, DateTime.Now, endDate);
                     ChartController.Instance.AddTherapy(newTherapy, DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient);
                     DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.ChangeCommand.Execute("4");
-                    DoctorMainWindow.Instance._ViewModel.NavigateToChartCommand.Execute(null);
                 }
                 catch
                 {
@@ -121,7 +120,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
 
         private void Execute_CancelCommand(object obj)
         {
-            DoctorMainWindow.Instance._ViewModel.NavigateToChartCommand.Execute(null);
+            DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.ChangeCommand.Execute("4");
         }
 
         private bool CanExecute_Command(object obj)

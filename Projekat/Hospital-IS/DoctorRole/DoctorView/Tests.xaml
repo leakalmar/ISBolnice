@@ -21,10 +21,14 @@
                 Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}">
             <Button FontSize="18" BorderThickness="0" Background="{x:Null}"
                     Content="Novi test" Foreground="FloralWhite"
-                    HorizontalAlignment="Stretch" />
+                    HorizontalAlignment="Stretch">
+                <Button.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding NewTestCommand}" />
+                </Button.InputBindings>
+            </Button>
         </Border>
 
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding}" Grid.Row="2"
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Tests}" Grid.Row="2"
                 Style="{StaticResource CustomDataGrid}">
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
@@ -34,13 +38,13 @@
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Datum"
-                        Binding="{Binding AppointmentStart}"
-                        CanUserResize="False" Width="0.05*" />
-                <DataGridTextColumn Header="Test" Binding="{Binding Type}"
-                        CanUserResize="False" Width="0.05*" />
+                        Binding="{Binding SampleDate}"
+                        CanUserResize="False" Width="auto" />
+                <DataGridTextColumn Header="Test" Binding="{Binding Name}"
+                        CanUserResize="False" Width="auto" />
                 <DataGridTextColumn Header="Broj Rezultat"
-                        Binding="{Binding AppointmentCause}"
-                        CanUserResize="False" Width="0.05*" />
+                        Binding="{Binding Result}" CanUserResize="False"
+                        Width="*" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

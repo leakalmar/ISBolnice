@@ -60,13 +60,13 @@
             <Label Grid.Row="0" Grid.Column="0" Content="Ime:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="0" Grid.Column="1" x:Name="name"
-                    Text="{Binding Name}" Style="{StaticResource CustomTextBox}" />
+                    Text="{Binding Name}" Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="1" Grid.Column="0" Content="Prezime:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
             <TextBox Grid.Row="1" Grid.Column="1" x:Name="surname"
                     Text="{Binding Surname}"
-                    Style="{StaticResource CustomTextBox}" />
+                    Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="2" Grid.Column="0" Content="Pol:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
@@ -81,7 +81,7 @@
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
             <TextBox Grid.Row="3" Grid.Column="1" x:Name="birth"
                     Text="{Binding BirthDate}"
-                    Style="{StaticResource CustomTextBox}" />
+                    Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="4" Grid.Column="0" Content="Krvna grupa:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
@@ -96,31 +96,29 @@
             <Label Grid.Row="0" Grid.Column="3" Content="Kontakt telefon"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
             <TextBox Grid.Row="0" Grid.Column="4" x:Name="phone"
-                    Text="{Binding Phone}"
-                    Style="{StaticResource CustomTextBox}" />
+                    Text="{Binding Phone}" Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="1" Grid.Column="3" Content="Email:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
             <TextBox Grid.Row="1" Grid.Column="4" x:Name="email"
-                    Text="{Binding Email}"
-                    Style="{StaticResource CustomTextBox}" />
+                    Text="{Binding Email}" Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="2" Grid.Column="3" Content="Zaposlen:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
             <TextBox Grid.Row="2" Grid.Column="4" x:Name="city"
                     Text="{Binding Employer}"
-                    Style="{StaticResource CustomTextBox}" />
+                    Style="{StaticResource LineTextBox}" />
             
             <Label Grid.Row="3" Grid.Column="3" Content="Država:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
             <TextBox Grid.Row="3" Grid.Column="4" x:Name="country" Text="/"
-                    Style="{StaticResource CustomTextBox}" />
+                    Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="4" Grid.Column="3" Content="Adresa:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0"/>
             <TextBox Grid.Row="4" Grid.Column="4" x:Name="address"
                     Text="{Binding Address}"
-                    Style="{StaticResource CustomTextBox}" />
+                    Style="{StaticResource LineTextBox}" />
         </Grid>
 
     </Grid>

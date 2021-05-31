@@ -32,6 +32,16 @@ namespace Controllers
             return ChartService.Instance.GetTherapiesByPatientId(patient.Id);
         }
 
+        public List<Therapy> GetTherapiesByPatient(PatientDTO patient)
+        {
+            return ChartService.Instance.GetTherapiesByPatientId(patient.Id);
+        }
+
+        public List<Test> GetTestsByPatient(PatientDTO patient)
+        {
+            return ChartService.Instance.GetTestsByPatientId(patient.Id);
+        }
+
         public List<ReportDTO> GetReportsByPatient(int patientId)
         {
             return ConvertToReportDTO(ChartService.Instance.GetReportsByPatientId(patientId));
@@ -128,6 +138,11 @@ namespace Controllers
         public void AddTherapy(Therapy newTherapy, PatientDTO patient)
         {
             ChartService.Instance.AddTherapy(newTherapy, patient.Id);
+        }
+
+        public void AddTest(Test newTest, PatientDTO patient)
+        {
+            ChartService.Instance.AddTest(newTest, patient.Id);
         }
     }
 }

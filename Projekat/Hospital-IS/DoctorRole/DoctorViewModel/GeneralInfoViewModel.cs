@@ -61,7 +61,7 @@ namespace Hospital_IS.DoctorViewModel
         public GeneralInfoViewModel()
         {
             this.ChangeInfoCommand = new RelayCommand(Execute_ChangeInfoCommand, CanExecute_NavigateCommand);
-            Patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
+            //Patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
         }
         #endregion
 

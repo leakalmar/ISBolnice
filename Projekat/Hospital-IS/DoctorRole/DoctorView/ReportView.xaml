@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <GroupBox Margin="15" Header="Detalji pregleda" Foreground="FloralWhite">
             <TextBox x:Name="reportDetail" Margin="5,5,5,5"
-                    Background="Transparent" Foreground="FloralWhite"
+                    Style="{StaticResource CustomTextBox}"
                     BorderThickness="0" Text="{Binding Anemnesis}" />
         </GroupBox>
 
