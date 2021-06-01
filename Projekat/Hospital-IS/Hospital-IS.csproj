@@ -37,6 +37,7 @@
     <None Remove="Resources\registration.png" />
     <None Remove="Resources\renovation.png" />
     <None Remove="Resources\search.png" />
+    <None Remove="Resources\SearchSecretary.png" />
     <None Remove="Resources\shoppingcart.png" />
     <None Remove="Resources\redsiren.png" />
     <None Remove="Resources\siren.png" />
@@ -139,6 +140,7 @@
     <Resource Include="Resources\room.png" />
     <Resource Include="Resources\room1.png" />
     <Resource Include="Resources\search.png" />
+    <Resource Include="Resources\SearchSecretary.png" />
     <Resource Include="Resources\settings.png" />
     <Resource Include="Resources\shoppingcart.png" />
     <Resource Include="Resources\simona.jpg" />

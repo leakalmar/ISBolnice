@@ -50,8 +50,10 @@
                 <TextBlock Grid.Column="2" Grid.Row="6" Margin="40 5 10 10" Text="{Binding Doctor.Email}"/>
                 <TextBlock Grid.Column="2" Grid.Row="7" Margin="40 5 10 10" Text="{Binding Doctor.Specialty}"/>
 
-                <Button Grid.Row="8" Grid.ColumnSpan="4" Grid.RowSpan="2" Content="OK" Margin="0 20 0 0"
-                Width="55" Click="Close"/>
+                <Button Grid.Row="8" Grid.ColumnSpan="4" Grid.RowSpan="2" 
+                        Style="{DynamicResource ResourceKey=RegularButton}"
+                        Content="OK" Margin="0 20 0 0"
+                        Width="55" Click="Close"/>
             </Grid>
         </TabItem>
         <TabItem Header="Istorija pregleda">
@@ -76,7 +78,9 @@
                 <DataGrid x:Name="dataGridAppointments" ItemsSource="{Binding Appointments}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
                   Grid.Column="1" Grid.Row="2" Grid.RowSpan="1" Margin="0 10" RowHeaderWidth="0"
                   ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="12" 
-                  Background="Transparent" RowBackground="AliceBlue">
+                  Style="{DynamicResource ResourceKey=DataGrid}"
+                  ColumnHeaderStyle="{DynamicResource ResourceKey=ColumHeader}"
+                  RowStyle="{DynamicResource ResourceKey=GridRow}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Datum" 
                                     Binding="{Binding AppointmentStart, StringFormat=\{0: dd.MM.yyyy. \}}" Width="auto"/>
@@ -102,9 +106,11 @@
                 </DataGrid>
 
                 <Button Content="Prikaži" Grid.Row="3" Grid.Column="1" FontSize="15"
+                        Style="{DynamicResource ResourceKey=RegularButton}"
                         Margin="40 0 0 70" Width="60" HorizontalAlignment="Left" Click="ShowAppointment"/>
                
-                <Button Content="OK" Width="55" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Click="Close"/>
+                <Button Content="OK" Width="55" Style="{DynamicResource ResourceKey=RegularButton}"
+                        Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Click="Close"/>
 
             </Grid>
         </TabItem>
@@ -130,7 +136,9 @@
                 <DataGrid x:Name="dataGridFutureAppointments" ItemsSource="{Binding FutureAppointments}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
                   Grid.Column="1" Grid.Row="2" Grid.RowSpan="1" Margin="0 10" RowHeaderWidth="0"
                   ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="12" 
-                  Background="Transparent" RowBackground="AliceBlue">
+                  Style="{DynamicResource ResourceKey=DataGrid}"
+                  ColumnHeaderStyle="{DynamicResource ResourceKey=ColumHeader}"
+                  RowStyle="{DynamicResource ResourceKey=GridRow}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Datum" 
                                     Binding="{Binding AppointmentStart, StringFormat=\{0: dd.MM.yyyy. \}}" Width="auto"/>
@@ -156,11 +164,14 @@
                 </DataGrid>
 
                 <Button Content="Prikaži" Grid.Row="3" Grid.Column="1" FontSize="15"
+                        Style="{DynamicResource ResourceKey=RegularButton}"
                         Margin="40 0 0 70" Width="60" HorizontalAlignment="Left" Click="ShowAppointment"/>
                 <Button Content="Zakaži novi termin" Grid.Row="3" Grid.Column="1" FontSize="15"
+                        Style="{DynamicResource ResourceKey=RegularButton}"
                         Margin="0 0 0 70" Width="130" HorizontalAlignment="Right" Click="ScheduleNewAppointment"/>
 
-                <Button Content="OK" Width="55" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Click="Close"/>
+                <Button Content="OK" Width="55" Style="{DynamicResource ResourceKey=RegularButton}"
+                        Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Click="Close"/>
 
             </Grid>
         </TabItem>

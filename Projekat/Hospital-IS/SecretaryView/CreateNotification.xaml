@@ -40,14 +40,20 @@
             <RadioButton x:Name="rbSelectAll" Content="Prosledi svima" IsChecked="True" Margin="0 3" Click="rbSelectAll_Click"/>
             <StackPanel Orientation="Horizontal">
                 <RadioButton x:Name="rbSelectSome" Content="Prosledi određenim osobama" Margin="0 3 13 3"/>
-                <Button x:Name="btnSelect" Content="Izaberi" Click="btnSelect_Click"/>
+                <Button x:Name="btnSelect" Content="Izaberi" Width="55"
+                        Style="{DynamicResource ResourceKey=RegularButton}"
+                        Click="btnSelect_Click"/>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Margin="0 15 0 0"
                     Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2">
-            <Button Content="Potvrdi" FontSize="15" Margin="10 0" Click="postNotification"/>
-            <Button Content="Odustani" FontSize="15" Margin="10 0" Click="Close"/>
+            <Button Content="Potvrdi" FontSize="15" Margin="10 0" Click="postNotification" 
+                    Width="80"
+                    Style="{DynamicResource ResourceKey=RegularButton}"/>
+            <Button Content="Odustani" FontSize="15" Margin="10 0" Click="Close"
+                    Width="80"
+                    Style="{DynamicResource ResourceKey=RegularButton}"/>
         </StackPanel>
 
     </Grid>

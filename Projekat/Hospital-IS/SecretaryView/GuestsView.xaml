@@ -27,7 +27,9 @@
         <DataGrid x:Name="dataGridGuests" ItemsSource="{Binding Guests}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
                   Grid.Column="1" Grid.Row="1" Margin="10" RowHeaderWidth="0"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  Background="Transparent" RowBackground="AliceBlue">
+                  Style="{DynamicResource ResourceKey=DataGrid}"
+                  ColumnHeaderStyle="{DynamicResource ResourceKey=ColumHeader}"
+                  RowStyle="{DynamicResource ResourceKey=GridRow}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID korisnika" Binding="{Binding Id}" Width="auto"/>
                 <DataGridTextColumn Header="Datum kreiranja naloga" Binding="{Binding BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}" Width="*"/>
@@ -38,8 +40,10 @@
         </DataGrid>
 
         <Button Grid.Row="2" Grid.Column="1" Content="Napravi trajni nalog" Margin="10 0"
+                Style="{DynamicResource ResourceKey=RegularButton}"
                 HorizontalAlignment="Right" Width="150" FontSize="15" Click="RegisterPatient"/>
         <Button Grid.Row="3" Grid.Column="1" Content="OK" Margin="0 10 0 0"
+                Style="{DynamicResource ResourceKey=RegularButton}"
                 HorizontalAlignment="Center" Width="50" FontSize="15" Click="Close"/>
 
     </Grid>

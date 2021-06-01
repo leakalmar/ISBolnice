@@ -23,7 +23,9 @@
         <DataGrid x:Name="dataGridDoctors" ItemsSource="{Binding Doctors}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
                   Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" Grid.RowSpan="1" Margin="10" RowHeaderWidth="0"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  Background="Transparent" RowBackground="AliceBlue">
+                  Style="{DynamicResource ResourceKey=DataGrid}"
+                  ColumnHeaderStyle="{DynamicResource ResourceKey=ColumHeader}"
+                  RowStyle="{DynamicResource ResourceKey=GridRow}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Prezime" Binding="{Binding Surname}" Width="*"/>
@@ -37,20 +39,19 @@
 
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-            <Button Width="55" Content="Prikaži" Height="30" Margin="10 10 10 10"
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
+            <Button Width="55" Content="Prikaži" Height="30" Margin="10 10 10 10" Style="{DynamicResource ResourceKey=RegularButton}"
                 HorizontalAlignment="Right" Click="ShowDoctor"/>
 
             <Button Width="55" Content="Izmeni" Height="30" Margin="10 0 10 0"
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
-                HorizontalAlignment="Left" Click="UpdateDoctor"/>
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    HorizontalAlignment="Left" Click="UpdateDoctor"/>
 
             <Button Width="55" Content="Obriši" Height="30" Margin="10 0 40 0"
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
-                HorizontalAlignment="Right" Click="DeleteDoctor"/>
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    HorizontalAlignment="Right" Click="DeleteDoctor"/>
 
             <Button Width="100" Content="Registracija" Height="30" Margin="40 0 0 0 "
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
+                    Style="{DynamicResource ResourceKey=RegularButton}"
                 Click="AddNewDoctor"/>
         </StackPanel>
 
@@ -58,8 +59,8 @@
                     HorizontalAlignment="Right" Margin="0 10 20 0">
             <TextBox Name="txtSearch" Foreground="Gray" Text="Pretraži..." Margin="0 5 10 0" Width="120" VerticalAlignment="Center" Padding="4"
                          GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
-            <Button Width="25" Height="25" Background="#FF184095" Margin="0 5 0 0" Click="SearchButton_Click">
-                <Image Source="pack://application:,,,/Resources/search.png"/>
+            <Button Style="{DynamicResource ResourceKey=SearchButton}" Margin="0 5 0 0" Click="SearchButton_Click">
+                <Image Source="pack://application:,,,/Resources/SearchSecretary.png"/>
             </Button>
         </StackPanel>
         

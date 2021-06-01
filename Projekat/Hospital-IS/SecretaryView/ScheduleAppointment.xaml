@@ -93,12 +93,15 @@
         <TextBox Grid.Column="2" Grid.Row="9" Height="80" Margin="50 20"
                  ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="{Binding DocAppointment.AppointmentCause}"/>
 
-        <Button Name="btnConfirm" Grid.Column="1" Grid.Row="12" Width="120" Height="30"
+        <Button Name="btnConfirm" Grid.Column="1" Grid.Row="12" Width="120" 
+                Style="{DynamicResource ResourceKey=RegularButton}"
                 Content="Potvrdi" Click="NewAppointment"/>
-        <Button Grid.Column="2" Grid.Row="12" Width="120" Height="30"
+        <Button Grid.Column="2" Grid.Row="12" Width="120" 
+                Style="{DynamicResource ResourceKey=RegularButton}"
                 Content="Odustani" Click="Close"/>
 
         <Button Name="btnEmergency" Content="Hitan pregled?" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                Style="{DynamicResource ResourceKey=RegularButton}"
                 Width="130" HorizontalAlignment="Right" Margin="0 20 50 0" Click="btnEmergency_Click"/>
     </Grid>
 </Window>

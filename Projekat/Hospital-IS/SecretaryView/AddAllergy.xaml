@@ -31,10 +31,12 @@
                  ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
         
         <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="4" HorizontalAlignment="Center">
-            <Button Content="Potvrdi" Width="55" Height="20" 
+            <Button Content="Potvrdi" Width="55" 
+                    Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="5 5 15 5"
                     Click="AddAllergies"/>
-            <Button Content="Odustani" Width="55" Height="20" 
+            <Button Content="Odustani" Width="55" 
+                    Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="15 5 5 5"
                     Click="Close"/>
         </StackPanel>

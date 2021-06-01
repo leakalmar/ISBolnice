@@ -61,10 +61,12 @@
         <TextBox Grid.Column="2" Grid.Row="10" Margin="40 5 10 5" IsEnabled="False"  Name="vacationEndTxt"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center">
-            <Button Grid.Column="1" Grid.Row="11" Width="80" Height="25" Margin="0 20 25 0"
-                Content="Potvrdi" Click="UpdateDoctor"/>
-            <Button Grid.Column="2" Grid.Row="11" Width="80" Height="25" Margin="25 20 0 0 "
-                Content="Odustani" Click="Close"/>
+            <Button Grid.Column="1" Grid.Row="11" Width="80" Style="{DynamicResource ResourceKey=RegularButton}"
+                    Margin="0 20 25 0"
+                    Content="Potvrdi" Click="UpdateDoctor"/>
+            <Button Grid.Column="2" Grid.Row="11" Width="80" Style="{DynamicResource ResourceKey=RegularButton}" 
+                    Margin="25 20 0 0 "
+                    Content="Odustani" Click="Close"/>
 
         </StackPanel>
 

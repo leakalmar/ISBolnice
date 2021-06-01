@@ -24,7 +24,9 @@
         <DataGrid x:Name="dataGridGuests" ItemsSource="{Binding Guests}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
                   Grid.Row="1" Grid.Column="1" Margin="0 10" RowHeaderWidth="0"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  Background="Transparent" RowBackground="AliceBlue">
+                  Style="{DynamicResource ResourceKey=DataGrid}"
+                  ColumnHeaderStyle="{DynamicResource ResourceKey=ColumHeader}"
+                  RowStyle="{DynamicResource ResourceKey=GridRow}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID korisnika" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Datum kreiranja naloga" Binding="{Binding BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}" Width="*"/>
@@ -34,13 +36,16 @@
             </DataGrid.Resources>
         </DataGrid>
 
-        <Button Content="Dodaj novog korisnika" Width="130" HorizontalAlignment="Left"
+        <Button Content="Dodaj novog korisnika" Width="130" 
+                HorizontalAlignment="Left" Style="{DynamicResource ResourceKey=RegularButton}"
                 Grid.Row="2" Grid.Column="1" Click="AddNewGuest"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" 
                     HorizontalAlignment="Center">
-            <Button Content="Izaberi" Width="60" Margin="0 10 20 0" Click="Select"/>
-            <Button Content="Odustani" Width="60" Margin="20 10 0 0" Click="Close"/>
+            <Button Content="Izaberi" Width="60" Margin="0 10 20 0" Style="{DynamicResource ResourceKey=RegularButton}"
+                    Click="Select"/>
+            <Button Content="Odustani" Width="60" Margin="20 10 0 0" Style="{DynamicResource ResourceKey=RegularButton}"
+                    Click="Close"/>
         </StackPanel>
 
     </Grid>

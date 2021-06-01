@@ -33,8 +33,8 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0 10 0 0">
             <TextBox Name="txtSearchPatients"  Margin="0 5 10 0" Width="120" VerticalAlignment="Center" Padding="4"/>
-            <Button Name="btnSearchPatients" Width="25" Height="25" Background="#FF184095" Margin="0 5 0 0" Click="SearchButtonPatoents_Click">
-                <Image Source="pack://application:,,,/Resources/search.png"/>
+            <Button Name="btnSearchPatients" Width="25" Style="{DynamicResource ResourceKey=SearchButton}" Margin="0 5 0 0" Click="SearchButtonPatoents_Click">
+                <Image Source="pack://application:,,,/Resources/SearchSecretary.png"/>
             </Button>
         </StackPanel>
 
@@ -61,8 +61,8 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" Margin="0 10 0 0">
             <TextBox Name="txtSearchEmployees" Margin="0 5 10 0" Width="120" VerticalAlignment="Center" Padding="4"/>
-            <Button Name="btnSearchDoctors" Width="25" Height="25" Background="#FF184095" Margin="0 5 0 0" Click="SearchButtonDoctors_Click">
-                <Image Source="pack://application:,,,/Resources/search.png"/>
+            <Button Name="btnSearchDoctors" Style="{DynamicResource ResourceKey=SearchButton}" Margin="0 5 0 0" Click="SearchButtonDoctors_Click">
+                <Image Source="pack://application:,,,/Resources/SearchSecretary.png"/>
             </Button>
         </StackPanel>
 
@@ -84,21 +84,29 @@
 
         <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Margin="0 15 0 0"
                     Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3">
-            <Button x:Name="btnConfirm" Content="Potvrdi" FontSize="15" Margin="10 0" Click="btnConfirm_Click"/>
-            <Button Content="Odustani" FontSize="15" Margin="10 0" Click="Close"/>
+            <Button x:Name="btnConfirm" Content="Potvrdi" FontSize="15" Width="80"
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    Margin="10 0" Click="btnConfirm_Click"/>
+            <Button Content="Odustani" FontSize="15" Width="80"
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    Margin="10 0" Click="Close"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="3">
-            <Button Name="btnSelectAllPatients" Content="Selektuj sve pacijente" HorizontalAlignment="Left" 
+            <Button Name="btnSelectAllPatients" Content="Selektuj sve pacijente" HorizontalAlignment="Left"
+                    Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="30 15 0 20" Width="150" Click="SelectAll"/>
             <Button Name="btnDeselectAllPatients" Content="Deselektuj sve pacijente" HorizontalAlignment="Left" 
+                    Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="30 0 0 20" Width="150" Click="DeselectAll"/>
         </StackPanel>
 
         <StackPanel Grid.Row="6" Grid.Column="3">
             <Button Name="btnSelectAllEpmloyees" Content="Selektuj sve zaposlene" HorizontalAlignment="Left" 
+                    Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="30 15 0 20" Width="150" Click="SelectAll"/>
             <Button Name="btnDeselectAllEpmloyees" Content="Deselektuj sve zaposlene" HorizontalAlignment="Left" 
+                    Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="30 0 0 20" Width="150" Click="DeselectAll"/>
         </StackPanel>
 

@@ -36,9 +36,9 @@
                    Text=""/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="4" HorizontalAlignment="Center">
-            <Button Content="Potvrdi" Width="60" Height="20" Margin="5 5 25 5"
+            <Button Content="Potvrdi" Width="60"  Margin="5 5 25 5" Style="{DynamicResource ResourceKey=RegularButton}"
                     FontSize="13" Click="ChangeAllergy"/>
-            <Button Content="Odustani" Width="60" Height="20" Margin="25 5 5 5"
+            <Button Content="Odustani" Width="60" Margin="25 5 5 5" Style="{DynamicResource ResourceKey=RegularButton}"
                     FontSize="13" Click="Close"/>
         </StackPanel>
 
