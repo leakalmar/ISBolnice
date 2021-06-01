@@ -125,7 +125,7 @@ namespace Hospital_IS.SecretaryView
         private void SelectGuest(object sender, RoutedEventArgs e)
         {
             SelectGuestView sg = new SelectGuestView(this);
-            sg.Show();
+            sg.ShowDialog();
         }
     }
 }

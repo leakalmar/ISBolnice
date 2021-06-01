@@ -80,7 +80,7 @@ namespace Hospital_IS.SecretaryView
             {
                 DoctorAppointmentDTO appointment = (DoctorAppointmentDTO)dataGridAppointments.SelectedItem;
                 UpdateAppointment ua = new UpdateAppointment(appointment, this);
-                ua.Show();
+                ua.ShowDialog();
             }
         }
 
@@ -89,14 +89,14 @@ namespace Hospital_IS.SecretaryView
             if ((DoctorAppointmentDTO)dataGridAppointments.SelectedItem != null)
             {
                 CancelAppointment ca = new CancelAppointment(this);
-                ca.Show();
+                ca.ShowDialog();
             }
         }
 
         private void ScheduleAppointment(object sender, RoutedEventArgs e)
         {
             ScheduleAppointment sa = new ScheduleAppointment(this);
-            sa.Show();
+            sa.ShowDialog();
         }
 
         private void filter_changed(object sender, SelectionChangedEventArgs e)

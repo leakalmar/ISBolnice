@@ -37,7 +37,7 @@ namespace Hospital_IS.SecretaryView
         private void AddNewDoctor(object sender, RoutedEventArgs e)
         {
             DoctorRegistration dr = new DoctorRegistration(this);
-            dr.Show();
+            dr.ShowDialog();
         }
 
         private void ShowDoctor(object sender, RoutedEventArgs e)
@@ -56,7 +56,7 @@ namespace Hospital_IS.SecretaryView
             {
                 DoctorDTO doctor = (DoctorDTO)dataGridDoctors.SelectedItem;
                 UpdateDoctorView upv = new UpdateDoctorView(doctor, this);
-                upv.Show();
+                upv.ShowDialog();
             }
         }
 

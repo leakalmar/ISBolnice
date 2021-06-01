@@ -55,7 +55,7 @@ namespace Hospital_IS.SecretaryView
         private void ScheduleNewAppointment(object sender, RoutedEventArgs e)
         {
             ScheduleAppointment sa = new ScheduleAppointment(SecretaryMainWindow.Instance.uca, Doctor, this);
-            sa.Show();
+            sa.ShowDialog();
         }
 
         public void RefreshGrid()

@@ -38,7 +38,7 @@ namespace Hospital_IS.SecretaryView
             {
                 PatientDTO guest = (PatientDTO)dataGridGuests.SelectedItem;
                 PatientRegistration pr = new PatientRegistration(ucp, this);
-                pr.Show();
+                pr.ShowDialog();
             }
         }
 

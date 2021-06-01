@@ -204,7 +204,7 @@ namespace Hospital_IS.SecretaryView
             {
                 sea = new ScheduleEmergencyAppointment(this, patient);
             }
-            sea.Show();
+            sea.ShowDialog();
             this.Visibility = Visibility.Collapsed;
         }
 
