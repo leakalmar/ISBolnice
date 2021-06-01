@@ -8,9 +8,8 @@
         Title="Zakazivanje hitnog termina" Height="520" Width="640"
         WindowStartupLocation="CenterScreen"
         FontSize="18"
-        FontWeight="Light"
-        Background="#CCC5CFE5">
-    <Grid>
+        FontWeight="Light">
+    <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
@@ -30,15 +29,15 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Grid.Column="1"
+        <TextBlock Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                    Text="Tip pregleda:" Margin="70 0 0 20"/>
-        <TextBlock Grid.Row="2" Grid.Column="1"
+        <TextBlock Grid.Row="2" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                    Text="Pacijent" Margin="70 0 0 20"/>
-        <TextBlock Grid.Row="3" Grid.Column="1"
+        <TextBlock Grid.Row="3" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                    Text="Specijalizacija" Margin="70 0 0 20"/>
-        <TextBlock Grid.Row="4" Grid.Column="1"
+        <TextBlock Grid.Row="4" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                    Text="Soba" Margin="70 0 0 20"/>
-        <TextBlock Grid.Row="5" Grid.Column="1"
+        <TextBlock Grid.Row="5" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                    Text="Trajanje(min)" Margin="70 0 0 20"/>
 
         <ComboBox Name="cbAppType" Grid.Row="1" Grid.Column="2" Margin="20 0 70 20"
@@ -80,11 +79,13 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <TextBox x:Name="txtAppDuration" Grid.Row="5" Grid.Column="2" Margin="20 0 70 20" LostFocus="txtAppDuration_LostFocus"/>
+        <TextBox x:Name="txtAppDuration" Grid.Row="5" Grid.Column="2" Margin="20 0 70 20" 
+                 LostFocus="txtAppDuration_LostFocus"
+                 Style="{DynamicResource ResourceKey=RegularTextBox}"/>
 
-        <TextBlock Text="Mogući termini:" Grid.Row="6" Grid.Column="1"
+        <TextBlock Text="Mogući termini:" Grid.Row="6" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                    FontSize="14" Margin="10 0 0 0"/>
-        <TextBlock Text="Termini koje je potrebno pomeriti:" Grid.Row="6" Grid.Column="2"
+        <TextBlock Text="Termini koje je potrebno pomeriti:" Grid.Row="6" Grid.Column="2" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                    FontSize="14" Margin="10 0 0 0"/>
 
         <DataGrid x:Name="dgSuggestedAppointments" ItemsSource="{Binding SuggestedAppointments}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"

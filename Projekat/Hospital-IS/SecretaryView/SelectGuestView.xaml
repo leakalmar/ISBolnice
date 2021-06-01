@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Gostujući korisnici" Height="420" Width="380"
         WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>

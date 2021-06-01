@@ -3,6 +3,7 @@ using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace Hospital_IS.SecretaryView
@@ -206,6 +207,21 @@ namespace Hospital_IS.SecretaryView
         {
             ScheduleAppointment sa = new ScheduleAppointment(uca);
             sa.Show();
+        }
+
+        private void ChangeTheme(object sender, RoutedEventArgs e)
+        {
+            var app = (App)Application.Current;
+
+            MenuItem mi = (MenuItem)sender;
+            if (mi.Name.ToString().Equals("miLight"))
+            {
+                app.ChangeTheme(new Uri("SecretaryView/Themes/LightTheme.xaml", UriKind.Relative));
+            }
+            else 
+            {
+                app.ChangeTheme(new Uri("SecretaryView/Themes/DarkTheme.xaml", UriKind.Relative));
+            }
         }
     }
 }

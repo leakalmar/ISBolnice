@@ -9,9 +9,8 @@
         Title="Izmeni pacijenta" Height="560" Width="480"
         WindowStartupLocation="CenterScreen"
         FontSize="14"
-        FontWeight="Light"
-        Background="#CCC5CFE5">
-    <Grid>
+        FontWeight="Light">
+    <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="auto"/>
@@ -39,33 +38,33 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Ime:" Margin="20 10 20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="Prezime:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Datum rođenja:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="Adresa:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="Telefon:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="6" Text="Email:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="7" Text="Pol:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="8" Text="Bračni status:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="9" Text="Nivo obrazovanja:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="10" Text="Poslodavac:" Margin="20 5"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="Ime:" Margin="20 10 20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="Prezime:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Datum rođenja:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="Adresa:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="5" Text="Telefon:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="6" Text="Email:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="7" Text="Pol:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="8" Text="Bračni status:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="9" Text="Nivo obrazovanja:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="10" Text="Poslodavac:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
         <!--<TextBlock Grid.Column="1" Grid.Row="11" Text="Broj za hitne slučajeve:" Margin="20 5"/>-->
 
 
 
-        <TextBox Name="nameTxt"  Grid.Column="2" Grid.Row="1" Margin="20 10 20 5" Text="{Binding Patient.Name}"/>
-        <TextBox Name="surnameTxt" Grid.Column="2" Grid.Row="2" Margin="20 5" Text="{Binding Patient.Surname}"/>
-        <TextBox Name="birthdateTxt" Grid.Column="2" Grid.Row="3" Margin="20 5"/>
-        <TextBox Name="addressTxt"  Grid.Column="2" Grid.Row="4" Margin="20 5" Text="{Binding Patient.Address}"/>
-        <TextBox Name="phoneTxt" Grid.Column="2" Grid.Row="5" Margin="20 5" Text="{Binding Patient.Phone}"/>
-        <TextBox Name="emailTxt" Grid.Column="2" Grid.Row="6" Margin="20 5" Text="{Binding Patient.Email}"/>
+        <TextBox Name="nameTxt"  Grid.Column="2" Grid.Row="1" Margin="20 10 20 5" Text="{Binding Patient.Name}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Name="surnameTxt" Grid.Column="2" Grid.Row="2" Margin="20 5" Text="{Binding Patient.Surname}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Name="birthdateTxt" Grid.Column="2" Grid.Row="3" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Name="addressTxt"  Grid.Column="2" Grid.Row="4" Margin="20 5" Text="{Binding Patient.Address}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Name="phoneTxt" Grid.Column="2" Grid.Row="5" Margin="20 5" Text="{Binding Patient.Phone}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Name="emailTxt" Grid.Column="2" Grid.Row="6" Margin="20 5" Text="{Binding Patient.Email}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
 
         <ComboBox Name="genComboBox" Grid.Column="2" Grid.Row="7" Margin="20 5">
             <ComboBoxItem Content="Žensko"/>
             <ComboBoxItem Content="Muško"/>
         </ComboBox>
-        
-        <TextBox Name="relationshipTxt" Grid.Column="2" Grid.Row="8" Margin="20 5" Text="{Binding Patient.Relationship}"/>
+
+        <TextBox Name="relationshipTxt" Grid.Column="2" Grid.Row="8" Margin="20 5" Text="{Binding Patient.Relationship}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
 
         <ComboBox Name="eduComboBox" SelectedValuePath="Content" Grid.Column="2" Grid.Row="9" Margin="20 5">
             <ComboBoxItem Content="Osnovna škola"/>
@@ -73,7 +72,7 @@
             <ComboBoxItem Content="Fakultet"/>
         </ComboBox>
 
-        <TextBox Name="employerTxt" Grid.Column="2" Grid.Row="10" Margin="20 5" Text="{Binding Patient.Employer}"/>
+        <TextBox Name="employerTxt" Grid.Column="2" Grid.Row="10" Margin="20 5" Text="{Binding Patient.Employer}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
         <!--<TextBox Name="emerContactTxt" Grid.Column="2" Grid.Row="11" Margin="20 5" Text="{Binding Patient.Guarantor}"/>-->
 
         <StackPanel Grid.Column="1" Grid.Row="12" Grid.RowSpan="3" 

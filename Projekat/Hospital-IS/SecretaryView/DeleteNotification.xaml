@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Brisanje obaveštenja" WindowStartupLocation="CenterScreen"
         Height="180" Width="400" FontSize="14">
-    <Grid>
+    <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
@@ -20,7 +20,7 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Grid.Column="1" Name="txtConfirmation"
+        <TextBlock Grid.Row="1" Grid.Column="1" Name="txtConfirmation" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                    FontSize="19" TextWrapping="Wrap" 
                    Text="Da li ste sigurni da želite da obrišete obaveštenje?"/>
 

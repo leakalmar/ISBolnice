@@ -10,9 +10,9 @@
         FontSize="17"
         FontWeight="Light"
         Background="#CCC5CFE5">
-    <TabControl Name="tab" Grid.Row="0" Grid.ColumnSpan="4">
-        <TabItem Header="Opste informacije">
-            <Grid>
+    <TabControl Name="tab" Grid.Row="0" Grid.ColumnSpan="4" Style="{DynamicResource ResourceKey=TabControl}">
+        <TabItem Header="Opste informacije" Style="{DynamicResource ResourceKey=TabItem}">
+            <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="auto"/>
@@ -33,22 +33,22 @@
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="1" Grid.Row="1" Text="Ime:" Margin="20 10 20 10"/>
-                <TextBlock Grid.Column="1" Grid.Row="2" Text="Prezime:" Margin="20 10"/>
-                <TextBlock Grid.Column="1" Grid.Row="3" Text="Datum rođenja:" Margin="20 10"/>
-                <TextBlock Grid.Column="1" Grid.Row="4" Text="Adresa:" Margin="20 10"/>
-                <TextBlock Grid.Column="1" Grid.Row="5" Text="Telefon:" Margin="20 10"/>
-                <TextBlock Grid.Column="1" Grid.Row="6" Text="Email:" Margin="20 10"/>
-                <TextBlock Grid.Column="1" Grid.Row="7" Text="Specijalizacija:" Margin="20 10"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="Ime:" Margin="20 10 20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="Prezime:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="Datum rođenja:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="1" Grid.Row="4" Text="Adresa:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="1" Grid.Row="5" Text="Telefon:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="1" Grid.Row="6" Text="Email:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="1" Grid.Row="7" Text="Specijalizacija:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
 
-                <TextBlock Grid.Column="2" Grid.Row="1" Margin="40 10 20 10" Text="{Binding Doctor.Name}" VerticalAlignment="Center"/>
-                <TextBlock Grid.Column="2" Grid.Row="2" Margin="40 5 10 10" Text="{Binding Doctor.Surname}"/>
-                <TextBlock Grid.Column="2" Grid.Row="3" Margin="40 5 10 10" Text="{Binding Doctor.BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}"/>
-                <TextBlock Grid.Column="2" Grid.Row="4" Margin="40 5 10 10" Text="{Binding Doctor.Address}"/>
-                <TextBlock Grid.Column="2" Grid.Row="5" Margin="40 5 10 10" Text="{Binding Doctor.Phone}"/>
-                <TextBlock Grid.Column="2" Grid.Row="6" Margin="40 5 10 10" Text="{Binding Doctor.Email}"/>
-                <TextBlock Grid.Column="2" Grid.Row="7" Margin="40 5 10 10" Text="{Binding Doctor.Specialty}"/>
+                <TextBlock Grid.Column="2" Grid.Row="1" Margin="40 10 20 10" Text="{Binding Doctor.Name}" VerticalAlignment="Center" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="2" Margin="40 5 10 10" Text="{Binding Doctor.Surname}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="3" Margin="40 5 10 10" Text="{Binding Doctor.BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="4" Margin="40 5 10 10" Text="{Binding Doctor.Address}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="5" Margin="40 5 10 10" Text="{Binding Doctor.Phone}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="6" Margin="40 5 10 10" Text="{Binding Doctor.Email}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="7" Margin="40 5 10 10" Text="{Binding Doctor.Specialty}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
                 <Button Grid.Row="8" Grid.ColumnSpan="4" Grid.RowSpan="2" 
                         Style="{DynamicResource ResourceKey=RegularButton}"
@@ -56,8 +56,8 @@
                         Width="55" Click="Close"/>
             </Grid>
         </TabItem>
-        <TabItem Header="Istorija pregleda">
-            <Grid>
+        <TabItem Header="Istorija pregleda" Style="{DynamicResource ResourceKey=TabItem}">
+            <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="*"/>
@@ -72,7 +72,7 @@
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Pregledi" Grid.Row="1" Grid.Column="1"
+                <TextBlock Text="Pregledi" Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                            FontSize="17"/>
 
                 <DataGrid x:Name="dataGridAppointments" ItemsSource="{Binding Appointments}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
@@ -114,8 +114,8 @@
 
             </Grid>
         </TabItem>
-        <TabItem Header="Zakazani pregledi">
-            <Grid>
+        <TabItem Header="Zakazani pregledi" Style="{DynamicResource ResourceKey=TabItem}">
+            <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="*"/>
@@ -130,7 +130,7 @@
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Zakazani pregledi" Grid.Row="1" Grid.Column="1"
+                <TextBlock Text="Zakazani pregledi" Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                            FontSize="17"/>
 
                 <DataGrid x:Name="dataGridFutureAppointments" ItemsSource="{Binding FutureAppointments}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"

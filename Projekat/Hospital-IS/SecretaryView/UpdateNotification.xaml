@@ -8,7 +8,7 @@
         Title="Izmena obaveštenja" 
         WindowStartupLocation="CenterScreen"
         Height="450" Width="450">
-    <Grid Background="#CCF1F3F8">
+    <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
@@ -26,10 +26,11 @@
         <Button Name="btnDelete" FontWeight="Light" Foreground="White" Width="110"
                 Grid.Row="1" Grid.Column="1" Content="Obriši obaveštenje"  Click="DeleteNotification"
                 HorizontalAlignment="Right" Margin="0 0 10 0" Background="#C63913"/>
-        <TextBox Grid.Row="2" Grid.Column="1" FontSize="20" Margin="10 10 10 0"
+        <TextBox Grid.Row="2" Grid.Column="1" FontSize="20" Margin="10 10 10 0" Style="{DynamicResource ResourceKey=RegularTextBox}"
                  Text="{Binding Notification.Title}"/>
         <TextBox Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                FontSize="14" Margin="10" Text="{Binding Notification.Text}"/>
+                 Style="{DynamicResource ResourceKey=RegularTextBox}"
+                 FontSize="14" Margin="10" Text="{Binding Notification.Text}"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center">
             <Button Content="Potvrdi" FontSize="14" Width="65" Style="{DynamicResource ResourceKey=RegularButton}"

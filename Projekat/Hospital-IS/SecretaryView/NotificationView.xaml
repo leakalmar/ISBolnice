@@ -8,7 +8,7 @@
         Title="Prikaz obaveštenja" 
         WindowStartupLocation="CenterScreen"
         Height="450" Width="450">
-    <Grid Background="#CCF1F3F8">
+    <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
@@ -22,12 +22,13 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Notification.Title}" 
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Notification.Title}" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                    FontSize="22" Margin="10"/>
         <ScrollViewer Grid.Column="1" Grid.Row="2" VerticalScrollBarVisibility="Auto">
             <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Notification.Text}"
-                   TextWrapping="Wrap"
-                   FontSize="14" Margin="10"/>
+                       Style="{DynamicResource ResourceKey=RegularTextBlock}"
+                       TextWrapping="Wrap"
+                       FontSize="14" Margin="10"/>
         </ScrollViewer>
 
         <Button Grid.Row="3" Grid.ColumnSpan="3" Content="OK" FontSize="15"

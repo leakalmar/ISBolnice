@@ -8,9 +8,8 @@
         Title="Izmena doktora" Height="470" Width="450"
         WindowStartupLocation="CenterScreen"
         FontSize="15"
-        FontWeight="Light"
-        Background="#CCC5CFE5">
-    <Grid>
+        FontWeight="Light">
+    <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="auto"/>
@@ -33,32 +32,32 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Ime:" Margin="20 10 20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="Prezime:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Datum rođenja:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="Adresa:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="Telefon:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="6" Text="Specijalizacija:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="7" Text="Email:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="8" Text="Smena:" Margin="20 20 20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="9" Text="Poćetak godišnjeg odmora:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="10" Text="Kraj godišnjeg odmora:" Margin="20 5"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="Ime:" Margin="20 10 20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="Prezime:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Datum rođenja:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="Adresa:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="5" Text="Telefon:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="6" Text="Specijalizacija:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="7" Text="Email:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="8" Text="Smena:" Margin="20 20 20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="9" Text="Poćetak godišnjeg odmora:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="10" Text="Kraj godišnjeg odmora:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
 
-        <TextBox Grid.Column="2" Grid.Row="1" Margin="40 10 10 5" Text="{Binding Doctor.Name}"/>
-        <TextBox Grid.Column="2" Grid.Row="2" Margin="40 5 10 5" Text="{Binding Doctor.Surname}"/>
-        <TextBox Grid.Column="2" Grid.Row="3" Margin="40 5 10 5" Name="birthdateTxt"/>
-        <TextBox Grid.Column="2" Grid.Row="4" Margin="40 5 10 5" Text="{Binding Doctor.Address}"/>
-        <TextBox Grid.Column="2" Grid.Row="5" Margin="40 5 10 5" Text="{Binding Doctor.Phone}"/>
+        <TextBox Grid.Column="2" Grid.Row="1" Margin="40 10 10 5" Text="{Binding Doctor.Name}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Grid.Column="2" Grid.Row="2" Margin="40 5 10 5" Text="{Binding Doctor.Surname}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Grid.Column="2" Grid.Row="3" Margin="40 5 10 5" Name="birthdateTxt" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Grid.Column="2" Grid.Row="4" Margin="40 5 10 5" Text="{Binding Doctor.Address}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Grid.Column="2" Grid.Row="5" Margin="40 5 10 5" Text="{Binding Doctor.Phone}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
         <ComboBox Name="cbSpecialty" Grid.Column="2" Grid.Row="6" Margin="40 5 10 5" ItemsSource="{Binding Specialties}">
         </ComboBox>
-        <TextBox Grid.Column="2" Grid.Row="7" Margin="40 5 10 5" Text="{Binding Doctor.Email}"/>
+        <TextBox Grid.Column="2" Grid.Row="7" Margin="40 5 10 5" Text="{Binding Doctor.Email}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
         <ComboBox Name="shiftComboBox" Grid.Column="2" Grid.Row="8" Margin="40 20 10 5">
             <ComboBoxItem Content="Prva"/>
             <ComboBoxItem Content="Druga"/>
         </ComboBox>
-        <TextBox Grid.Column="2" Grid.Row="9" Margin="40 5 10 5" Name="vacationStartTxt" LostFocus="vacationStartTxt_LostFocus"/>
-        <TextBox Grid.Column="2" Grid.Row="10" Margin="40 5 10 5" IsEnabled="False"  Name="vacationEndTxt"/>
+        <TextBox Grid.Column="2" Grid.Row="9" Margin="40 5 10 5" Name="vacationStartTxt" LostFocus="vacationStartTxt_LostFocus" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Grid.Column="2" Grid.Row="10" Margin="40 5 10 5" IsEnabled="False"  Name="vacationEndTxt" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center">
             <Button Grid.Column="1" Grid.Row="11" Width="80" Style="{DynamicResource ResourceKey=RegularButton}"

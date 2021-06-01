@@ -6,10 +6,8 @@
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
         Title="Gostujući korisnici" Height="400" Width="500"
-        WindowStartupLocation="CenterScreen"
-        Background="#CCC5CFE5">
-    
-    <Grid>
+        WindowStartupLocation="CenterScreen">
+    <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Izbor primalaca obaveštenja" Height="580" Width="550">
-    <Grid Background="#CCF1F3F8">
+    <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
@@ -28,18 +28,22 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Grid.Column="1"  FontSize="17"
+        <TextBlock Grid.Row="1" Grid.Column="1"  FontSize="17" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                    Text="Pacijenti"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0 10 0 0">
-            <TextBox Name="txtSearchPatients"  Margin="0 5 10 0" Width="120" VerticalAlignment="Center" Padding="4"/>
+            <TextBox Name="txtSearchPatients"  Margin="0 5 10 0" Width="120" 
+                     Style="{DynamicResource ResourceKey=RegularTextBox}"
+                     VerticalAlignment="Center" Padding="4"/>
             <Button Name="btnSearchPatients" Width="25" Style="{DynamicResource ResourceKey=SearchButton}" Margin="0 5 0 0" Click="SearchButtonPatoents_Click">
                 <Image Source="pack://application:,,,/Resources/SearchSecretary.png"/>
             </Button>
         </StackPanel>
 
         <ListBox x:Name="lbPatients" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" 
-                 Margin="0 10" ItemsSource="{Binding Patients}"
+                 Style="{DynamicResource ResourceKey=ListBox}" ItemContainerStyle="{DynamicResource ResourceKey=ListBoxItem}"
+                 Margin="0 10" 
+                 ItemsSource="{Binding Patients}" 
                  SelectionMode="Multiple"
                  ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListBox.ItemTemplate>
@@ -55,18 +59,21 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <TextBlock Grid.Row="4" Grid.Column="1"  FontSize="17"
+        <TextBlock Grid.Row="4" Grid.Column="1"  FontSize="17" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                    Text="Zaposleni"/>
 
 
         <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" Margin="0 10 0 0">
-            <TextBox Name="txtSearchEmployees" Margin="0 5 10 0" Width="120" VerticalAlignment="Center" Padding="4"/>
+            <TextBox Name="txtSearchEmployees" Margin="0 5 10 0" Width="120" 
+                     Style="{DynamicResource ResourceKey=RegularTextBox}"
+                     VerticalAlignment="Center" Padding="4"/>
             <Button Name="btnSearchDoctors" Style="{DynamicResource ResourceKey=SearchButton}" Margin="0 5 0 0" Click="SearchButtonDoctors_Click">
                 <Image Source="pack://application:,,,/Resources/SearchSecretary.png"/>
             </Button>
         </StackPanel>
 
         <ListBox x:Name="lbDoctors" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"
+                 Style="{DynamicResource ResourceKey=ListBox}" ItemContainerStyle="{DynamicResource ResourceKey=ListBoxItem}"
                  Margin="0 10"  ItemsSource="{Binding Doctors}" SelectionMode="Multiple"
                  ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListBox.ItemTemplate>
@@ -94,19 +101,19 @@
 
         <StackPanel Grid.Row="3" Grid.Column="3">
             <Button Name="btnSelectAllPatients" Content="Selektuj sve pacijente" HorizontalAlignment="Left"
-                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    Style="{DynamicResource ResourceKey=SecondaryButton}"
                     Margin="30 15 0 20" Width="150" Click="SelectAll"/>
             <Button Name="btnDeselectAllPatients" Content="Deselektuj sve pacijente" HorizontalAlignment="Left" 
-                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    Style="{DynamicResource ResourceKey=SecondaryButton}"
                     Margin="30 0 0 20" Width="150" Click="DeselectAll"/>
         </StackPanel>
 
         <StackPanel Grid.Row="6" Grid.Column="3">
             <Button Name="btnSelectAllEpmloyees" Content="Selektuj sve zaposlene" HorizontalAlignment="Left" 
-                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    Style="{DynamicResource ResourceKey=SecondaryButton}"
                     Margin="30 15 0 20" Width="150" Click="SelectAll"/>
             <Button Name="btnDeselectAllEpmloyees" Content="Deselektuj sve zaposlene" HorizontalAlignment="Left" 
-                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    Style="{DynamicResource ResourceKey=SecondaryButton}"
                     Margin="30 0 0 20" Width="150" Click="DeselectAll"/>
         </StackPanel>
 
