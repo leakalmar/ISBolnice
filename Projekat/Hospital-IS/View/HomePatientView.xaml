@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital_IS.View" 
         xmlns:viewModel="clr-namespace:Hospital_IS.View.PatientViewModels"
+        xmlns:calendar ="clr-namespace:MyCalendar.Calendar;assembly=MyCalendar.Calendar"
         xmlns:vml="clr-namespace:Hospital_IS.View.VML"
         vml:ViewModelLocator.AutoHookedUpViewModel="True"
         mc:Ignorable="d"
@@ -71,6 +72,7 @@
                 <Label x:Name="Email" Content="{Binding Path=Email}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
             </Grid>
         </StackPanel>
+        <!--calendar:Calendar x:Name="Calendar" Margin="10,10,10,10" Grid.Column="0" Grid.Row="10"/-->
 
         <Label Content="Lista pregleda:" Grid.Row="0" Grid.Column="1" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
         <DataGrid x:Name="dataGridAppointment" SelectedItem="{Binding SelectedApp}"  ItemsSource="{Binding FutureAppointments, Mode=TwoWay}" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="1" Grid.RowSpan="10" Margin="10,10,30,100" RowHeaderWidth="0">

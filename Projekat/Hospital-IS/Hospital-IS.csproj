@@ -87,6 +87,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\Downloads\MyCalendar-master\MyCalendar-master\JarlooCalendar\Jarloo.Calendar\Jarloo.Calendar\MyCalendar.Calendar.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Properties.Resources.Designer.cs">
       <HintPath>..\..\..\..\..\Downloads\DateTimePickerSample\DateTimePickerSample\obj\x86\Debug\TempPE\Properties.Resources.Designer.cs.dll</HintPath>
     </Reference>

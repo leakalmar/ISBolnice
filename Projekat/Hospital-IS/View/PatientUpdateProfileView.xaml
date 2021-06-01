@@ -34,43 +34,47 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border CornerRadius="20,0,0,0" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="11" >
+        <Border CornerRadius="20,0,0,0" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="10" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <StackPanel x:Name="PersonalData" Grid.RowSpan="8" Grid.Row="1" Grid.Column="0">
-            <Grid>
+        <StackPanel x:Name="PersonalData" Grid.RowSpan="10" Grid.Row="1" Grid.Column="1" Margin="0,2,0,200">
+            <Grid Margin="10,10,0,0">
                 <Label Content="Ime:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <TextBox x:Name="Name" Text="{Binding Path=Name}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+                <TextBox x:Name="Name" Text="{Binding Path=Name}" IsEnabled="False" HorizontalAlignment="Left" Width="200" Background="{x:Null}" FontSize="18" Margin="190,3,0,5" Height="25.94"/>
             </Grid>
-            <Grid>
+            <Grid Margin="10,20,0,0">
                 <Label Content="Prezime:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <TextBox x:Name="Surname" Text="{Binding Path=Surname}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+                <TextBox x:Name="Surname" Text="{Binding Path=Surname}" IsEnabled="False" HorizontalAlignment="Left" Width="200" Background="{x:Null}" FontSize="18" Margin="190,3,0,5" Height="25.94"/>
             </Grid>
-            <Grid>
+            <Grid Margin="10,20,0,0">
                 <Label Content="Datum rođenja:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <TextBox x:Name="Birth" Text="{Binding Path=BirthDate}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5"/>
+                <TextBox x:Name="Birth" Text="{Binding Path=BirthDate}" IsEnabled="False" HorizontalAlignment="Left" Width="200" Background="{x:Null}" FontSize="18" Margin="190,3,0,5" Height="25.94"/>
             </Grid>
-            <Grid>
+            <Grid Margin="10,20,0,0">
                 <Label Content="Adresa:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <TextBox x:Name="Address" Text="{Binding Path=Address}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+                <TextBox x:Name="Address" Text="{Binding Path=Address}" HorizontalAlignment="Left" Width="200" Background="{x:Null}" FontSize="18" Margin="190,3,0,5" Height="25.94"/>
             </Grid>
-            <Grid >
+            <Grid Margin="10,20,0,0">
                 <Label Content="Kreiran nalog:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <TextBox x:Name="FileDate"  Text="{Binding Path=FileDate}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18" Margin="0,5,0,-5"/>
+                <TextBox x:Name="FileDate"  Text="{Binding Path=FileDate}" IsEnabled="False" HorizontalAlignment="Left" Width="200" Background="{x:Null}" FontSize="18" Margin="190,3,0,5" Height="25.94"/>
             </Grid>
-            <Grid>
-                <Label Content="Poslodavac:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <TextBox x:Name="Employer" Text="{Binding Path=Employer}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+            <Grid Margin="10,20,0,0">
+                <Label Content="Poslodavac:" Width="200"  HorizontalAlignment="Left" FontSize="18" Margin="0,0,0,10" />
+                <TextBox x:Name="Employer" Text="{Binding Path=Employer}" HorizontalAlignment="Left" Width="200" Background="{x:Null}" FontSize="18" Margin="190,4,0,14" Height="25.94"/>
             </Grid>
-            <Grid>
-                <Label Content="Email:" Width="200"  HorizontalAlignment="Left" FontSize="18" />
-                <TextBox x:Name="Email" Text="{Binding Path=Email}" HorizontalAlignment="Right" Width="200" Background="{x:Null}" FontSize="18"/>
+            <Grid Margin="10,20,0,0">
+                <Label Content="Email:" Width="200"  HorizontalAlignment="Left" FontSize="18" Margin="0,0,0,194" />
+                <TextBox x:Name="Email" Text="{Binding Path=Email}" HorizontalAlignment="Left" Width="200" Background="{x:Null}" FontSize="18" Margin="190,3,0,196"/>
             </Grid>
         </StackPanel>
+
+        <Border x:Name="picture" Grid.Column="0" Grid.Row="1" Grid.RowSpan="10" Margin="20,10,20,300" Background="White">
+            <Image Source="/Resources/simona.jpg" Width="360"  Height="310" Stretch="Uniform" />
+        </Border>
 
         <Button x:Name="updateProfile" Command="{Binding UpdateProfile}"  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10" Margin="300,230,250,40" Foreground="#FFFDFAFA" FontSize="16" Cursor="Hand">
             <Button.Resources>

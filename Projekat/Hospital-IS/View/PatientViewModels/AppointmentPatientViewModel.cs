@@ -31,7 +31,7 @@ namespace Hospital_IS.View.PatientViewModels
             ReserveAppointment = new MyICommand(ReserveApp);
             RescheduleAppointment = new MyICommand(RescheduleApp);
             Date = DateTime.Today.Date;
-            Doctor = Doctors[2];           
+            Doctor = Doctors[0];           
         }
 
         public Doctor Doctor
