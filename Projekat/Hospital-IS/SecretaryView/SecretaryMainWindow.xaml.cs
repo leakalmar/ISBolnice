@@ -217,10 +217,14 @@ namespace Hospital_IS.SecretaryView
             if (mi.Name.ToString().Equals("miLight"))
             {
                 app.ChangeTheme(new Uri("SecretaryView/Themes/LightTheme.xaml", UriKind.Relative));
+                miLight.IsChecked = true;
+                miDark.IsChecked = false;
             }
             else 
             {
                 app.ChangeTheme(new Uri("SecretaryView/Themes/DarkTheme.xaml", UriKind.Relative));
+                miLight.IsChecked = false;
+                miDark.IsChecked = true;
             }
         }
     }

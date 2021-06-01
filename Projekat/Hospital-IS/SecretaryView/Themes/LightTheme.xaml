@@ -3,9 +3,9 @@
 
     <Style TargetType="Button" x:Key="RegularButton">
         <Setter Property="TextElement.FontFamily" Value="Tahoma"/>
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="Background" Value="#5680e9"/>
         <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -21,16 +21,16 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FF1A3E6E"/>
+                <Setter Property="Background" Value="#4160AF"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style TargetType="Button" x:Key="SecondaryButton">
         <Setter Property="TextElement.FontFamily" Value="Tahoma"/>
-        <Setter Property="Background" Value="#275351"/>
+        <Setter Property="Background" Value="#5ab9ea"/>
         <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -46,7 +46,7 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#224746"/>
+                <Setter Property="Background" Value="#4FA2CD"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -57,11 +57,11 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FF1A3E6E"/>
+                <Setter Property="Background" Value="#5680e9"/>
                 <Setter Property="Opacity" Value="0.5"/>
                 <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="BorderThickness" Value="1"/>
@@ -72,7 +72,7 @@
     <Style TargetType="Button" x:Key="SearchButton">
         <Setter Property="Width" Value="25"/>
         <Setter Property="Height" Value="25"/>
-        <Setter Property="Background" Value="#265077"/>
+        <Setter Property="Background" Value="#5680e9"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -87,7 +87,7 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FF1A3E6E"/>
+                <Setter Property="Background" Value="#4160AF"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -96,40 +96,40 @@
         <Setter Property="Background">
             <Setter.Value>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#022140" Offset="0.0"/>
-                    <GradientStop Color="#1e4258" Offset="1"/>
+                    <GradientStop Color="#8860d0" Offset="0.0"/>
+                    <GradientStop Color="#5ab9ea" Offset="1"/>
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
     </Style>
 
     <Style TargetType="Rectangle" x:Key="StatusBar">
-        <Setter Property="Fill" Value="#494b68"/>
+        <Setter Property="Fill" Value="#ABC0F4"/>
     </Style>
 
     <Style TargetType="Border" x:Key="SecretaryMainWindowBorder">
-        <Setter Property="Background" Value="#022140"/>
+        <Setter Property="Background" Value="#c1c8e4"/>
     </Style>
 
     <Style TargetType="DataGrid" x:Key="DataGrid">
-        <Setter Property="Background" Value="#494b68"/>
+        <Setter Property="Background" Value="#ABC0F4"/>
     </Style>
 
     <Style TargetType="DataGridColumnHeader" x:Key="ColumHeader">
-        <Setter Property="Background" Value="#265077"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="#5680e9"/>
+        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="TextElement.FontFamily" Value="Arial"/>
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="Height" Value="20"/>
     </Style>
 
     <Style TargetType="DataGridRow" x:Key="GridRow">
-        <Setter Property="Background" Value="#93A8BB"/>
+        <Setter Property="Background" Value="#D5DFF9"/>
     </Style>
 
     <Style TargetType="Button" x:Key="NotificationButton">
         <Setter Property="TextElement.FontFamily" Value="Tahoma"/>
-        <Setter Property="Background" Value="#265077"/>
+        <Setter Property="Background" Value="#5680e9"/>
         <Setter Property="FontWeight" Value="Light"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -147,34 +147,38 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FF1A3E6E"/>
+                <Setter Property="Background" Value="#4160AF"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style TargetType="ScrollViewer" x:Key="NotificationViewer">
-        <Setter Property="Background" Value="#494b68"/>
+        <Setter Property="Background" Value="#4B70CC"/>
     </Style>
 
     <Style TargetType="Border" x:Key="NotificationBorder">
-        <Setter Property="Background" Value="#93A8BB"/>
+        <Setter Property="Background" Value="#C0CFF7"/>
     </Style>
 
 
     <Style TargetType="Grid" x:Key="WindowGrid">
-        <Setter Property="Background" Value="#022140"/>
+        <Setter Property="Background" Value="#c1c8e4"/>
     </Style>
 
     <Style TargetType="TextBox" x:Key="RegularTextBox">
-        <Setter Property="Background" Value="#AEBDCC"/>
+        <Setter Property="Background" Value="White"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="Label">
+        <Setter Property="Foreground" Value="Black"/>
     </Style>
 
     <Style TargetType="TextBlock" x:Key="RegularTextBlock">
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
     </Style>
 
     <Style TargetType="RadioButton" x:Key="RadioButton">
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
     </Style>
 
     <!--<Style TargetType="ComboBox">
@@ -191,33 +195,58 @@
     </Style>-->
 
     <Style TargetType="PasswordBox" x:Key="PasswordBox">
-        <Setter Property="Background" Value="#AEBDCC"/>
+        <Setter Property="Background" Value="White"/>
     </Style>
 
 
     <Style TargetType="TabControl" x:Key="TabControl">
-        <Setter Property="Background" Value="#022140"/>
-        <Setter Property="BorderBrush" Value="#265077"/>
+        <Setter Property="Background" Value="#c1c8e4"/>
+        <Setter Property="BorderBrush" Value="#84ceeb"/>
     </Style>
 
     <Style TargetType="TabItem" x:Key="TabItem">
-        <Setter Property="Background" Value="#AEBDCC"/>
+        <Setter Property="Background" Value="#D5DFF9"/>
 
     </Style>
 
     <Style TargetType="ListBox" x:Key="ListBox">
-        <Setter Property="Background" Value="#494b68"/>
+        <Setter Property="Background" Value="#ABC0F4"/>
     </Style>
 
     <Style TargetType="ListBoxItem" x:Key="ListBoxItem">
-        <Setter Property="Background" Value="#93A8BB"/>
+        <Setter Property="Background" Value="#D5DFF9"/>
     </Style>
 
+    <Style TargetType="Button" x:Key="LogoutButton">
+        <Setter Property="TextElement.FontFamily" Value="Tahoma"/>
+        <Setter Property="Background" Value="#9774D6"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Height="30" CornerRadius="12"
+                                Background="{TemplateBinding Background}">
+
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#7754B6"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 
     <Style TargetType="CheckBox" x:Key="CheckBox">
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CheckBox}">

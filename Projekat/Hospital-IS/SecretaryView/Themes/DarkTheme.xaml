@@ -169,6 +169,10 @@
         <Setter Property="Background" Value="#AEBDCC"/>
     </Style>
 
+    <Style TargetType="Label" x:Key="Label">
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
     <Style TargetType="TextBlock" x:Key="RegularTextBlock">
         <Setter Property="Foreground" Value="White"/>
     </Style>
@@ -211,6 +215,31 @@
 
     <Style TargetType="ListBoxItem" x:Key="ListBoxItem">
         <Setter Property="Background" Value="#93A8BB"/>
+    </Style>
+
+    <Style TargetType="Button" x:Key="LogoutButton">
+        <Setter Property="TextElement.FontFamily" Value="Tahoma"/>
+        <Setter Property="Background" Value="#4D2677"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Height="30" CornerRadius="12"
+                                Background="{TemplateBinding Background}">
+
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#432168"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 
