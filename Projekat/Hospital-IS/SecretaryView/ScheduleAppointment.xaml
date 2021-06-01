@@ -101,6 +101,6 @@
 
         <Button Name="btnEmergency" Content="Hitan pregled?" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
                 Style="{DynamicResource ResourceKey=RegularButton}"
-                Width="130" HorizontalAlignment="Right" Margin="0 20 50 0" Click="btnEmergency_Click"/>
+                Width="140" HorizontalAlignment="Right" Margin="0 20 50 0" Click="btnEmergency_Click"/>
     </Grid>
 </Window>

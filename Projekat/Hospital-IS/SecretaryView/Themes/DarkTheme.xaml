@@ -121,6 +121,8 @@
         <Setter Property="TextElement.FontFamily" Value="Arial"/>
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="Height" Value="20"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="SeparatorVisibility" Value="Visible"/>
     </Style>
 
     <Style TargetType="DataGridRow" x:Key="GridRow">

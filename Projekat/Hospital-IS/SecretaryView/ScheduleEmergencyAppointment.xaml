@@ -148,7 +148,7 @@
         </DataGrid>
 
         <Button Content="Gost" Grid.Row="2" Grid.Column="2" FontSize="17" VerticalAlignment="Top" HorizontalAlignment="Right"
-                    Style="{DynamicResource ResourceKey=RegularButton}" Width="45" Margin="0 0 0 0" Click="SelectGuest"/>
+                    Style="{DynamicResource ResourceKey=RegularButton}" Width="55" Margin="0 0 0 0" Click="SelectGuest"/>
 
         <Button Name="btnConfirm" Grid.Column="1" Grid.Row="8" Width="110"
                 Style="{DynamicResource ResourceKey=RegularButton}"
