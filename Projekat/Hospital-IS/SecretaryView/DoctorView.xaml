@@ -168,7 +168,7 @@
                         Margin="40 0 0 70" Width="60" HorizontalAlignment="Left" Click="ShowAppointment"/>
                 <Button Content="Zakaži novi termin" Grid.Row="3" Grid.Column="1" FontSize="15"
                         Style="{DynamicResource ResourceKey=RegularButton}"
-                        Margin="0 0 0 70" Width="130" HorizontalAlignment="Right" Click="ScheduleNewAppointment"/>
+                        Margin="0 0 0 70" Width="140" HorizontalAlignment="Right" Click="ScheduleNewAppointment"/>
 
                 <Button Content="OK" Width="55" Style="{DynamicResource ResourceKey=RegularButton}"
                         Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Click="Close"/>
