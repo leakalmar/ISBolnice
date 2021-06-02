@@ -185,6 +185,20 @@
                 </dvc:Chart.Series>
             </dvc:Chart>
         </Border>
+        <Button x:Name="generateReport" Visibility="Visible" Command="{Binding GenerateReport}" Grid.Column="1" Grid.Row="0" Margin="330,5,10,5" Foreground="#FFFDFAFA" FontSize="18" Cursor="Hand" >
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20,20,20,20"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF184095" Offset="0.0"/>
+                    <GradientStop Color="CadetBlue" Offset="1.5"/>
+                </LinearGradientBrush>
+            </Button.Background> Izveštaj
+        </Button>
     </Grid>
 </UserControl>
 

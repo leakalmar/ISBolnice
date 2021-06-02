@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -9,6 +10,7 @@ namespace Hospital_IS.View.PatientViewModels
     {
         public ObservableCollection<Therapy> Therapies { get; set; }
         public KeyValuePair<string, int>[] ChartData { get; set; }
+        public MyICommand GenerateReport { get; set; }
 
         private Therapy therapy;
         private string name;
@@ -26,6 +28,7 @@ namespace Hospital_IS.View.PatientViewModels
         public TherapyPatientViewModel()
         {
             Therapies = new ObservableCollection<Therapy>(ChartController.Instance.GetTherapiesByPatient(PatientMainWindowViewModel.Patient));
+            GenerateReport = new MyICommand(GenerateRep);
             LoadTherapyChartData();
         }
 
@@ -212,6 +215,11 @@ namespace Hospital_IS.View.PatientViewModels
                 new KeyValuePair<string,int>("Maj", ChartController.Instance.GetNumberOfTherapiesByMonth(PatientMainWindowViewModel.Patient.Id, "May")),
                 new KeyValuePair<string,int>("Jun", ChartController.Instance.GetNumberOfTherapiesByMonth(PatientMainWindowViewModel.Patient.Id, "June"))
             };
+        }
+
+        private void GenerateRep()
+        {
+
         }
     }
 }

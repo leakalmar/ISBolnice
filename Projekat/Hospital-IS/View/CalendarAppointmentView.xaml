@@ -17,14 +17,8 @@
     </UserControl.Resources>
 
     <Grid>
-       <Border Background="CadetBlue"                           
-                            CornerRadius="20,0,0,0">
-
-            <DockPanel>
-                <Grid Height="30" DockPanel.Dock="Top">
-
-                </Grid>
-
+        <Border Background="White" CornerRadius="20,0,0,0">
+            <DockPanel Margin="30,60,30,30" Background="CadetBlue">
                 <ItemsControl ItemsSource="{Binding DayNames}" DockPanel.Dock="Top">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -89,5 +83,19 @@
                 </ItemsControl>
             </DockPanel>
         </Border>
+        <Button x:Name="calendar" Command="{Binding ShowHome}"  Margin="810,10,30,620" Foreground="#FFFDFAFA" FontSize="16" Cursor="Hand">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20,20,20,20"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF184095" Offset="0.0"/>
+                    <GradientStop Color="CadetBlue" Offset="1.5"/>
+                </LinearGradientBrush>
+            </Button.Background> Prikaži početnu
+        </Button>
     </Grid>
 </UserControl>

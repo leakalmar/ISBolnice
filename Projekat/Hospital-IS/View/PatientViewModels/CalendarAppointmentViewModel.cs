@@ -15,15 +15,13 @@ namespace Hospital_IS.View.PatientViewModels
         private List<DoctorAppointment> FutureAppointments { get; set; }
         public ObservableCollection<CalendarDaysDTO> Days { get; set; }
         public ObservableCollection<string> DayNames { get; set; }
-        //public static readonly DependencyProperty CurrentDateProperty = DependencyProperty.Register("CurrentDate", typeof(DateTime), typeof(Calendar));
-
+        public MyICommand ShowHome { get; set; }
         public CalendarAppointmentViewModel()
         {
             FutureAppointments = DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id);
-
-            DayNames = new ObservableCollection<string> { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
-
+            DayNames = new ObservableCollection<string> { "Ponedeljak", "Utorak", "Sreda", "Četvrtak", "Petak", "Subota", "Nedelja" };
             Days = new ObservableCollection<CalendarDaysDTO>();
+            ShowHome = new MyICommand(Home);
             BuildCalendar(DateTime.Today);
         }
 
@@ -35,7 +33,7 @@ namespace Hospital_IS.View.PatientViewModels
             //offset so we can fill in any boxes before that.
             DateTime d = new DateTime(targetDate.Year, targetDate.Month, 1);
             int offset = DayOfWeekNumber(d.DayOfWeek);
-            if (offset != 1) d = d.AddDays(-offset);
+            if (offset != 1) d = d.AddDays(-offset+1);
 
             //Show 6 weeks each with 7 days = 42
             for (int box = 1; box <= 42; box++)
@@ -64,11 +62,11 @@ namespace Hospital_IS.View.PatientViewModels
         {
             return Convert.ToInt32(dow.ToString("D"));
         }
-        /*
-        public DateTime CurrentDate
+
+        private void Home()
         {
-            get { return (DateTime)GetValue(CurrentDateProperty); }
-            set { SetValue(CurrentDateProperty, value); }
-        }*/
+            HomePatientViewModel homeViewModel = new HomePatientViewModel();
+            PatientMainWindowView.Instance.PatientMainView.CurrentViewModel = homeViewModel;
+        }
     }
 }
