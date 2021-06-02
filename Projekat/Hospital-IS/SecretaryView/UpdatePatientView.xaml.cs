@@ -3,6 +3,7 @@ using Hospital_IS.Controllers;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using Hospital_IS.SecretaryView;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -22,7 +23,20 @@ namespace Hospital_IS
             InitializeComponent();
             Patient = patient;
             this.ucp = ucp;
+            SetPatientInfo();
 
+            this.DataContext = this;
+        }
+
+        private void SetPatientInfo()
+        {
+            nameTxt.Text = Patient.Name;
+            surnameTxt.Text = Patient.Surname;
+            addressTxt.Text = Patient.Address;
+            phoneTxt.Text = Patient.Phone;
+            emailTxt.Text = Patient.Email;
+            relationshipTxt.Text = Patient.Relationship;
+            employerTxt.Text = Patient.Employer;
             if (Patient.Gender != null)
             {
                 if (Patient.Gender.Equals("Žensko"))
@@ -42,40 +56,49 @@ namespace Hospital_IS
                 Allergies = new ObservableCollection<String>(Patient.Alergies);
 
             birthdateTxt.Text = Patient.BirthDate.ToString("dd.MM.yyyy.");
-
-            this.DataContext = this;
         }
 
         private void UpdatePatient(object sender, RoutedEventArgs e)
         {
+            string name = nameTxt.Text;
+            string surname = surnameTxt.Text;
+            string address = addressTxt.Text;
+            string phone = phoneTxt.Text;
+            string email = emailTxt.Text;
+            string relationship = relationshipTxt.Text;
+            string employer = employerTxt.Text;
+            string gender = "";
+            DateTime birthDate = Patient.BirthDate;
+            EducationCategory education;
+
             if (genComboBox.SelectedIndex == 0)
-                Patient.Gender = "Žensko";
+                gender = "Žensko";
             else if (genComboBox.SelectedIndex == 1)
-                Patient.Gender = "Muško";
+                gender = "Muško";
 
             if (eduComboBox.SelectedIndex == 0)
-                Patient.Education = EducationCategory.GradeSchool;
+                education = EducationCategory.GradeSchool;
             else if (eduComboBox.SelectedIndex == 1)
-                Patient.Education = EducationCategory.HighSchool;
-            else if (eduComboBox.SelectedIndex == 2)
-                Patient.Education = EducationCategory.College;
+                education = EducationCategory.HighSchool;
+            else
+                education = EducationCategory.College;
 
 
             try
             {
-                DateTime birthDate = DateTime.ParseExact(birthdateTxt.Text, "dd.MM.yyyy.", System.Globalization.CultureInfo.InvariantCulture);
-                Patient.BirthDate = birthDate;
+                birthDate = DateTime.ParseExact(birthdateTxt.Text, "dd.MM.yyyy.", System.Globalization.CultureInfo.InvariantCulture);
             }
             catch (Exception ex)
             {
             }
 
-
+            List<String> allergies = new List<string>(Allergies);
+            PatientDTO updatedPatient = new PatientDTO(Patient.Id, name, surname, gender, birthDate, phone, email, education, relationship, employer, Patient.Password, address, allergies, Patient.IsGuest);
 
             ucp.dataGridPatients.ItemsSource = null;
             ucp.dataGridPatients.ItemsSource = ucp.Patients;
 
-            SecretaryManagementController.Instance.UpdatePatient(Patient);
+            SecretaryManagementController.Instance.UpdatePatient(updatedPatient);
 
             this.Close();
         }
@@ -123,7 +146,10 @@ namespace Hospital_IS
 
         private void UndoAllChanges(object sender, RoutedEventArgs e)
         {
-            
+            ucp.RefreshGrid();
+            Patient = SecretaryManagementController.Instance.GetPatientByID(Patient.Id);
+            SetPatientInfo();
+            this.DataContext = this;
         }
     }
 }
