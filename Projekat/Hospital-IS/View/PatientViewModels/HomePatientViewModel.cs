@@ -34,6 +34,7 @@ namespace Hospital_IS.View.PatientViewModels
 
         public MyICommand CancelAppointment { get; set; }
         public MyICommand RescheduleAppointment { get; set; }
+        public MyICommand ShowCalendar { get; set; }
         public static DoctorAppointment SelectedAppointment { get; set; }
         public HomePatientViewModel()
         {
@@ -49,6 +50,7 @@ namespace Hospital_IS.View.PatientViewModels
 
             CancelAppointment = new MyICommand(CancelApp);
             RescheduleAppointment = new MyICommand(RescheduleApp);
+            ShowCalendar = new MyICommand(ShowCal);
         }
 
         public DoctorAppointment SelectedApp
@@ -187,6 +189,12 @@ namespace Hospital_IS.View.PatientViewModels
                 RescheduleAppointmentViewModel rescheduleAppointmentViewModel = new RescheduleAppointmentViewModel();
                 PatientMainWindowView.Instance.PatientMainView.CurrentViewModel = rescheduleAppointmentViewModel;
             }
+        }
+
+        private void ShowCal()
+        {
+            CalendarAppointmentViewModel calendarViewModel = new CalendarAppointmentViewModel();
+            PatientMainWindowView.Instance.PatientMainView.CurrentViewModel = calendarViewModel;
         }
     }
 }

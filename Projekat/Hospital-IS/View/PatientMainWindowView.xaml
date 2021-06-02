@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hospital_IS.View" 
         xmlns:model="clr-namespace:Model" 
         xmlns:views="clr-namespace:Hospital_IS.View"
         xmlns:viewModel="clr-namespace:Hospital_IS.View.PatientViewModels"
@@ -34,6 +33,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:PatientUpdateProfileViewModel}">
             <views:PatientUpdateProfileView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:CalendarAppointmentViewModel}">
+            <views:CalendarAppointmentView/>
         </DataTemplate>
     </Window.Resources>
     <Grid Background="#FF184095">

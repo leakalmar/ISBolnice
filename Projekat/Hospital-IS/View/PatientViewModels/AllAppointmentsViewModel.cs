@@ -31,25 +31,12 @@ namespace Hospital_IS.View.PatientViewModels
 
         public AllAppointmentsViewModel()
         {
-            /*
-            ObservableCollection<DoctorAppointment>  allAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id));
-            AllAppointments = new CollectionViewSource { Source = allAppointments }.View;*/
             AllAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id));
             windowFactory = new WindowProductionFactory();
             ShowEvaluationWindow = new MyICommand(ShowEvaluation);
             ShowNote = new MyICommand(ShowAppNote);
             LoadAppointmentChartData();
         }
-        /*
-        public ICollectionView AllAppointments
-        {
-            get { return allApps; }
-            set
-            {
-                allApps = value;
-                OnPropertyChanged("Patients");
-            }
-        }*/
 
         public DoctorAppointment SelectedDoctorAppointment
         {
