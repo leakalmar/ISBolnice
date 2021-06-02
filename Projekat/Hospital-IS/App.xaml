@@ -10,5 +10,6 @@
                 <ResourceDictionary Source="DoctorRole/DoctorView/DoctorStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

@@ -70,9 +70,6 @@
                         Grid.Column="4" Width="130" />
             </StackPanel>
 
-            <Path Grid.Column="1" Stroke="White" StrokeThickness="3"
-                    Data="M0,0 V175" StrokeStartLineCap="Flat"
-                    StrokeEndLineCap="Flat" />
 
         </Grid>
 

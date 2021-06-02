@@ -54,6 +54,16 @@
         "DoctorSurname": "Vukmanov Simokov",
         "Type": 1,
         "Cause": null
+      },
+      {
+        "Anamnesis": "",
+        "HaveRecipe": false,
+        "HaveTest": false,
+        "ReportId": "2021-06-02T12:00:00",
+        "DoctorName": "Dragana",
+        "DoctorSurname": "Vukmanov Simokov",
+        "Type": 1,
+        "Cause": null
       }
     ],
     "Hospitalization": [],
@@ -70,7 +80,8 @@
         "TimesADay": 2,
         "TherapyStart": "2021-04-19T00:00:00",
         "TherapyEnd": "2021-05-01T00:00:00",
-        "FirstUsageTime": 11
+        "FirstUsageTime": 11,
+        "LastTimeIssued": "0001-01-01T00:00:00"
       },
       {
         "Medicine": {
@@ -84,7 +95,8 @@
         "TimesADay": 3,
         "TherapyStart": "2021-04-19T00:00:00",
         "TherapyEnd": "2021-05-01T00:00:00",
-        "FirstUsageTime": 8
+        "FirstUsageTime": 8,
+        "LastTimeIssued": "0001-01-01T00:00:00"
       },
       {
         "Medicine": null,
@@ -92,7 +104,8 @@
         "TimesADay": 1,
         "TherapyStart": "2021-05-29T22:41:11.9381986+02:00",
         "TherapyEnd": "2021-06-26T00:00:00",
-        "FirstUsageTime": 0
+        "FirstUsageTime": 0,
+        "LastTimeIssued": "0001-01-01T00:00:00"
       }
     ]
   },

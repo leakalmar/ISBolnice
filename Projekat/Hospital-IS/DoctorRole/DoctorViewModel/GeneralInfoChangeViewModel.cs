@@ -10,7 +10,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         #region Feilds
         private PatientDTO patient;
         private bool focused;
-
+       
         public bool Focused
         {
             get { return focused; }
@@ -54,6 +54,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
                 cancelCommand = value;
             }
         }
+
         #endregion
 
         #region Actions

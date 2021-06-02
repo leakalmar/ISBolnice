@@ -5,7 +5,39 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
     <Grid Margin="0,25,0,0">
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Reports}"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Od:" Style="{StaticResource CustomLabel}"
+                    VerticalAlignment="Center" />
+            <DatePicker Width="160" FontSize="14" BorderThickness="0"
+                    VerticalAlignment="Center" Margin="0,0,20,0"
+                    SelectedDate="{Binding FromDate}" />
+            <Label Content="Do:" Style="{StaticResource CustomLabel}"
+                    VerticalAlignment="Center" />
+            <DatePicker Width="160" FontSize="14" BorderThickness="0"
+                    VerticalAlignment="Center" Margin="0,0,160,0"
+                    SelectedDate="{Binding ToDate}" />
+            <Button Style="{StaticResource CustomButton}" Width="200" Margin="10">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Stampaj" Margin="0,0,20,0" FontSize="20"
+                                Style="{StaticResource CustomTextBlock}" VerticalAlignment="Center"/>
+                        <Image 
+                                Source="pack://application:,,,/Resources/print.png" />
+                    </StackPanel>
+                </Button.Content>
+                <Button.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding PrintCommand}" />
+                    <KeyBinding Key="P" Modifiers="Ctrl" Command="{Binding PrintCommand}" />
+                </Button.InputBindings>
+            </Button>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Reports}"
                 Style="{StaticResource CustomDataGrid}"
                 SelectedItem="{Binding SelectedReport}">
             <DataGrid.InputBindings>
@@ -25,11 +57,10 @@
                         Binding="{Binding DoctorSurname}" CanUserResize="False"
                         Width="0.05*" />
                 <DataGridCheckBoxColumn Header="Recept"
-                        Binding="{Binding CountPresciption}" CanUserResize="False"
-                        Width="0.02*" />
+                        Binding="{Binding CountPresciption}"
+                        CanUserResize="False" Width="0.02*" />
                 <DataGridCheckBoxColumn Header="Test"
-                        Binding="{Binding CountTests}"
-                        CanUserResize="False"
+                        Binding="{Binding CountTests}" CanUserResize="False"
                         Width="0.02*" />
             </DataGrid.Columns>
         </DataGrid>

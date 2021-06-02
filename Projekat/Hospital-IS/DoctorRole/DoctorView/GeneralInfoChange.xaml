@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
         xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        xmlns:validationrules="clr-namespace:Hospital_IS.DoctorRole.ValidationRules"
         mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
     <UserControl.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
@@ -57,14 +58,36 @@
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="0" Grid.Column="1" x:Name="name"
                     commands:FocusExtension.IsFocused="{Binding Focused}"
-                    Text="{Binding Patient.Name}"
-                    Style="{StaticResource LineTextBox}" />
+                    Style="{StaticResource LineTextBox}"
+                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                <TextBox.Text>
+                    <Binding Path="Patient.Name" ValidatesOnDataErrors="True"
+                            UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validationrules:EmptyRule />
+                            <validationrules:NumbersInString />
+                            <validationrules:PunctuationMarks />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
 
             <Label Grid.Row="1" Grid.Column="0" Content="Prezime:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="1" Grid.Column="1" x:Name="surname"
-                    Text="{Binding Patient.Surname}"
-                    Style="{StaticResource LineTextBox}" />
+                    Style="{StaticResource LineTextBox}"
+                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                <TextBox.Text>
+                    <Binding Path="Patient.Surname" ValidatesOnDataErrors="True"
+                            UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validationrules:EmptyRule />
+                            <validationrules:NumbersInString />
+                            <validationrules:PunctuationMarks />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
 
             <Label Grid.Row="2" Grid.Column="0" Content="Pol:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
@@ -77,9 +100,21 @@
 
             <Label Grid.Row="3" Grid.Column="0" Content="Datum rođenja:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
-            <TextBox Grid.Row="3" Grid.Column="1" x:Name="birth"
-                    Text="{Binding Patient.BirthDate}"
-                    Style="{StaticResource LineTextBox}" />
+            <TextBox Grid.Row="3" Grid.Column="1"
+                    Style="{StaticResource LineTextBox}"
+                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                <TextBox.Text>
+                    <Binding Path="Patient.BirthDate"
+                            ValidatesOnDataErrors="True"
+                            UpdateSourceTrigger="PropertyChanged"
+                            StringFormat="\{0:dd.MM.yyyy\}">
+                        <Binding.ValidationRules>
+                            <validationrules:EmptyRule />
+                            <validationrules:DateFormat />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
 
             <Label Grid.Row="4" Grid.Column="0" Content="Krvna grupa:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
@@ -94,8 +129,18 @@
             <Label Grid.Row="0" Grid.Column="3" Content="Kontakt telefon"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="0" Grid.Column="4" x:Name="phone"
-                    Text="{Binding Patient.Phone}"
-                    Style="{StaticResource LineTextBox}" />
+                    Style="{StaticResource LineTextBox}"
+                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                <TextBox.Text>
+                    <Binding Path="Patient.Phone"
+                            ValidatesOnDataErrors="True"
+                            UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validationrules:PunctuationMarks />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
 
             <Label Grid.Row="1" Grid.Column="3" Content="Email:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
