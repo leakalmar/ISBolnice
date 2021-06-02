@@ -27,10 +27,30 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand navigateToRoomPage;
         private RelayCommand navigateToRoomRenovation;
         private RelayCommand navigateAdvancedRoomRenovation;
+        private RelayCommand navigateToEmployeerPage;
+        private RelayCommand navigateToBranchPage;
         private NavigationService navService;
         private Room selectedRoom;
         private RelayCommand navigateToManagerProfilePage;
 
+
+
+        public RelayCommand NavigateToBranchPage
+        {
+            get { return navigateToBranchPage; }
+            set
+            {
+                navigateToBranchPage = value;
+            }
+        }
+        public RelayCommand NavigateToEmployeerPage
+        {
+            get { return navigateToEmployeerPage; }
+            set
+            {
+                navigateToEmployeerPage = value;
+            }
+        }
 
         public RelayCommand NavigateAdvancedRoomRenovation
         {
@@ -184,6 +204,19 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
+        private void Execute_NavigateToBranchPageCommand(object obj)
+        {
+            this.NavService.Navigate(
+                new Uri("ManagerView1/BranchView.xaml", UriKind.Relative));
+        }
+
+        private void Execute_NavigateToEmployeerPageCommand(object obj)
+        {
+            this.NavService.Navigate(
+                new Uri("ManagerView1/EmployeersView.xaml", UriKind.Relative));
+        }
+
+
         private void Execute_NavigateToRoomPageCommand(object obj)
         {
             this.NavService.Navigate(
@@ -281,6 +314,8 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToEquipmentPageCommand = new RelayCommand(Execute_NavigateToEquipmentPageCommand, CanExecute_NavigateCommand);
             this.NavigateToRoomRenovation = new RelayCommand(Execute_RenovationRoomCommand, CanExecute_RenovationRoomCommand);
             this.NavigateAdvancedRoomRenovation = new RelayCommand(Execute_AdvancedRenovationRoomCommand);
+            this.NavigateToEmployeerPage = new RelayCommand(Execute_NavigateToEmployeerPageCommand);
+            this.NavigateToBranchPage = new RelayCommand(Execute_NavigateToBranchPageCommand);
             DispatcherTimer dispatcherTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMinutes(1)
