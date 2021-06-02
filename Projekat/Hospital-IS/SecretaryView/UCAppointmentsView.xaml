@@ -31,11 +31,11 @@
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     HorizontalAlignment="Left" Click="UpdateAppointment"/>
 
-            <Button Width="55" Content="Otkaži" Height="30" Margin="10 0 10 0"
+            <!--<Button Width="55" Content="Otkaži" Height="30" Margin="10 0 10 0"
                     Style="{DynamicResource ResourceKey=RegularButton}"
-                    HorizontalAlignment="Left" Click="DeleteAppointment"/>
+                    HorizontalAlignment="Left" Click="DeleteAppointment"/>-->
 
-            <Button Width="120" Content="Zakaži novi termin" Height="30" Margin="110 0 0 0 "
+            <Button Width="120" Content="Zakaži novi termin" Height="30" Margin="70 0 0 0 "
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     Click="ScheduleAppointment"/>
         </StackPanel>

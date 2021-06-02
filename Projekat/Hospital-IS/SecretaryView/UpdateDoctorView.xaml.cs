@@ -86,5 +86,11 @@ namespace Hospital_IS.SecretaryView
                 vacationEndTxt.Text = vacationEnd.ToString("dd.MM.yyyy.");
             }
         }
+
+        private void DeleteDoctor(object sender, RoutedEventArgs e)
+        {
+            DeleteDoctorView ddv = new DeleteDoctorView(Doctor, this);
+            ddv.ShowDialog();
+        }
     }
 }

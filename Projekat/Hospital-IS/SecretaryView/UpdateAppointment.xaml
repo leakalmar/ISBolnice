@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
-        Title="Pomeranje termina" Height="600" Width="640"
+        Title="Pomeranje termina" Height="570" Width="550"
         WindowStartupLocation="CenterScreen"
-        FontSize="18"
+        FontSize="15"
         FontWeight="Light">
     <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
@@ -17,6 +17,7 @@
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -32,17 +33,17 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Tip pregleda:" Margin="50 20 50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="Pacijent:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Doktor:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="Soba:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="Datum pregleda:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="6" Text="Početak pregleda:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="7" Text="Kraj pregleda:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="8" Text="Opis:" Margin="50 20" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="Tip pregleda:" Margin="50 20 50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Pacijent:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="Doktor:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="5" Text="Soba:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="6" Text="Datum pregleda:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="7" Text="Početak pregleda:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="8" Text="Kraj pregleda:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="9" Text="Opis:" Margin="50 20" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
-        <TextBlock Name="txtAppType" Grid.Column="2" Grid.Row="1" Margin="50 20 50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Name="txtPatient" Grid.Column="2" Grid.Row="2" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}">
+        <TextBlock Name="txtAppType" Grid.Column="2" Grid.Row="2" Margin="50 20 50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="txtPatient" Grid.Column="2" Grid.Row="3" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}">
             <TextBlock.Text>
                 <MultiBinding StringFormat="{}{0} {1}">
                     <Binding Path="NewDocAppointment.Patient.Name"/>
@@ -50,7 +51,7 @@
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
-        <TextBlock Name="txtDoctor" Grid.Column="2" Grid.Row="3" Margin="50 10" FontSize="17" Style="{DynamicResource ResourceKey=RegularTextBlock}">
+        <TextBlock Name="txtDoctor" Grid.Column="2" Grid.Row="4" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}">
             <TextBlock.Text>
                 <MultiBinding StringFormat="{}{0} {1}">
                     <Binding Path="NewDocAppointment.Doctor.Name"/>
@@ -58,22 +59,34 @@
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
-        <TextBlock Name="txtRoom" Grid.Column="2" Grid.Row="4" Margin="50 10" Text="{Binding NewDocAppointment.Room}"
+        <TextBlock Name="txtRoom" Grid.Column="2" Grid.Row="5" Margin="50 10" Text="{Binding NewDocAppointment.Room}"
                    Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
-        <TextBox Name="txtAppDate"  Grid.Column="2" Grid.Row="5" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <TextBox Name="txtStartOfApp" Grid.Column="2" Grid.Row="6" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBox}"
+        <TextBox Name="txtAppDate"  Grid.Column="2" Grid.Row="6" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Name="txtStartOfApp" Grid.Column="2" Grid.Row="7" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBox}"
                  LostFocus="txtStartOfApp_LostFocus"/>
-        <TextBox Name="txtEndOfApp" Grid.Column="2" Grid.Row="7" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBox}"
+        <TextBox Name="txtEndOfApp" Grid.Column="2" Grid.Row="8" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBox}"
                  LostFocus="txtEndOfApp_LostFocus"/>
 
-        <TextBox Grid.Column="2" Grid.Row="8" Height="80" Margin="50 20" Style="{DynamicResource ResourceKey=RegularTextBox}"
+        <TextBox Grid.Column="2" Grid.Row="9" Height="80" Margin="50 20" Style="{DynamicResource ResourceKey=RegularTextBox}"
                  ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="{Binding NewDocAppointment.AppointmentCause}"/>
 
-        <Button Name="btnConfirm" Grid.Column="1" Grid.Row="11" Width="120" Style="{DynamicResource ResourceKey=RegularButton}"
-                Content="Potvrdi" Click="ChangeAppointment"/>
-        <Button Grid.Column="2" Grid.Row="11" Width="120" Style="{DynamicResource ResourceKey=RegularButton}"
-                Content="Odustani" Click="Close"/>
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="4" Grid.Row="12" HorizontalAlignment="Center">
+            <Button Name="btnConfirm" Width="120" Margin="0 0 50 0"
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    Content="Potvrdi" Click="ChangeAppointment"/>
+            <Button Width="120" Margin="50 0 0 0"
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    Content="Odustani" Click="Close"/>
+        </StackPanel>
+
+
+        <Button Grid.Column="1" Grid.Row="1" Content="Poništi sve izmene" HorizontalAlignment="Left" 
+                Margin="0 0 0 10" Width="140"
+                Style="{DynamicResource ResourceKey=SecondaryButton}"/>
+        <Button Grid.Column="2" Grid.Row="1" Content="Otkaži termin" HorizontalAlignment="Right" 
+                Margin="0 0 0 10" Width="120"
+                Style="{DynamicResource ResourceKey=DeleteButton}" Click="CancelAppointment"/>
 
     </Grid>
 </Window>

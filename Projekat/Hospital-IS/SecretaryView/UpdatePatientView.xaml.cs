@@ -1,6 +1,7 @@
 ﻿using Enums;
 using Hospital_IS.Controllers;
 using Hospital_IS.DTOs.SecretaryDTOs;
+using Hospital_IS.SecretaryView;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -112,6 +113,17 @@ namespace Hospital_IS
                 RemoveAllergy ra = new RemoveAllergy(this);
                 ra.ShowDialog();
             }
+        }
+
+        private void DeletePatient(object sender, RoutedEventArgs e)
+        {
+            DeletePatientView dpv = new DeletePatientView(Patient, this);
+            dpv.ShowDialog();
+        }
+
+        private void UndoAllChanges(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

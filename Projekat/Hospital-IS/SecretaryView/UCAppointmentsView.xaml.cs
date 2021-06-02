@@ -84,14 +84,14 @@ namespace Hospital_IS.SecretaryView
             }
         }
 
-        private void DeleteAppointment(object sender, RoutedEventArgs e)
-        {
-            if ((DoctorAppointmentDTO)dataGridAppointments.SelectedItem != null)
-            {
-                CancelAppointment ca = new CancelAppointment(this);
-                ca.ShowDialog();
-            }
-        }
+        //private void DeleteAppointment(object sender, RoutedEventArgs e)
+        //{
+        //    if ((DoctorAppointmentDTO)dataGridAppointments.SelectedItem != null)
+        //    {
+        //        CancelAppointment ca = new CancelAppointment(this);
+        //        ca.ShowDialog();
+        //    }
+        //}
 
         private void ScheduleAppointment(object sender, RoutedEventArgs e)
         {

@@ -19,7 +19,7 @@ namespace Hospital_IS.SecretaryView
 
         public DoctorAppointmentDTO NewDocAppointment { get; set; }
 
-        UCAppointmentsView uca;
+        public UCAppointmentsView uca;
 
         public UpdateAppointment(DoctorAppointmentDTO appointment, UCAppointmentsView uca)
         {
@@ -142,6 +142,12 @@ namespace Hospital_IS.SecretaryView
                 txtEndOfApp.Background = new SolidColorBrush(Colors.Red);
                 btnConfirm.IsEnabled = false;
             }
+        }
+
+        private void CancelAppointment(object sender, RoutedEventArgs e)
+        {
+            DeleteAppointmentView dav = new DeleteAppointmentView(OldDocAppointment, this);
+            dav.ShowDialog();
         }
 
     }

@@ -23,9 +23,9 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <Button Name="btnDelete" FontWeight="Light" Foreground="White" Width="110"
+        <Button Name="btnDelete" Width="110" Style="{DynamicResource ResourceKey=DeleteButton}"
                 Grid.Row="1" Grid.Column="1" Content="Obriši obaveštenje"  Click="DeleteNotification"
-                HorizontalAlignment="Right" Margin="0 0 10 0" Background="#C63913"/>
+                HorizontalAlignment="Right" Margin="0 0 10 0"/>
         <TextBox Grid.Row="2" Grid.Column="1" FontSize="20" Margin="10 10 10 0" Style="{DynamicResource ResourceKey=RegularTextBox}"
                  Text="{Binding Notification.Title}"/>
         <TextBox Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"

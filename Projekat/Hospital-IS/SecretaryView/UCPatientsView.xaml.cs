@@ -61,15 +61,15 @@ namespace Hospital_IS
             }
         }
 
-        private void DeletePatient(object sender, RoutedEventArgs e)
-        {
-            if ((PatientDTO)dataGridPatients.SelectedItem != null)
-            {
-                PatientDTO patient = (PatientDTO)dataGridPatients.SelectedItem;
-                Patients.Remove(patient);
-                SecretaryManagementController.Instance.DeletePatient(patient);
-            }
-        }
+        //private void DeletePatient(object sender, RoutedEventArgs e)
+        //{
+        //    if ((PatientDTO)dataGridPatients.SelectedItem != null)
+        //    {
+        //        PatientDTO patient = (PatientDTO)dataGridPatients.SelectedItem;
+        //        Patients.Remove(patient);
+        //        SecretaryManagementController.Instance.DeletePatient(patient);
+        //    }
+        //}
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {

@@ -46,11 +46,11 @@
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     HorizontalAlignment="Left" Click="UpdatePatient"/>
 
-            <Button Width="55" Content="Obriši" Height="30" Margin="10 0 40 0"
+            <!--<Button Width="55" Content="Obriši" Height="30" Margin="10 0 40 0"
                     Style="{DynamicResource ResourceKey=RegularButton}"
-                    HorizontalAlignment="Right" Click="DeletePatient"/>
+                    HorizontalAlignment="Right" Click="DeletePatient"/>-->
 
-            <Button Width="100" Content="Registracija" Height="30" Margin="40 0 0 0 "
+            <Button Width="100" Content="Registracija" Height="30" Margin="70 0 0 0 "
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     Click="AddNewPatient"/>
         </StackPanel>

@@ -82,7 +82,7 @@
                     FontSize="12" Click="AddNewAllergy"/>
             <Button Content="Izmeni" Width="55" Margin="20 0 20 10" Style="{DynamicResource ResourceKey=RegularButton}"
                     FontSize="12" Click="ChangeAllergy"/>
-            <Button Content="Obrisi" Width="55" Margin="20 0 20 10" 
+            <Button Content="Obriši" Width="55" Margin="20 0 20 10"
                     FontSize="12" Click="DeleteAllergy" Style="{DynamicResource ResourceKey=RegularButton}"/>
         </StackPanel>
 
@@ -110,10 +110,10 @@
         </StackPanel>
 
         <Button Grid.Column="1" Grid.Row="1" Content="Poništi sve izmene" HorizontalAlignment="Left" 
-                Margin="0 0 0 10" Width="130"
+                Margin="0 0 0 10" Width="130" Click="UndoAllChanges"
                 Style="{DynamicResource ResourceKey=SecondaryButton}"/>
         <Button Grid.Column="2" Grid.Row="1" Content="Obriši pacijenta" HorizontalAlignment="Right" 
                 Margin="0 0 0 10" Width="110"
-                Style="{DynamicResource ResourceKey=DeleteButton}"/>
+                Style="{DynamicResource ResourceKey=DeleteButton}" Click="DeletePatient"/>
     </Grid>
 </Window>
