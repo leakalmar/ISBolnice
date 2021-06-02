@@ -35,7 +35,6 @@ namespace Service
         {
             ChartService.Instance.SaveChart(new MedicalHistory(patient.Id));
             AllPatients.Add(patient);
-            
             pfs.SavePatients(AllPatients);
         }
 
@@ -49,8 +48,6 @@ namespace Service
                     AllPatients.Insert(i, patient);
                 }
             }
-
-
             pfs.SavePatients(AllPatients);
         }
 

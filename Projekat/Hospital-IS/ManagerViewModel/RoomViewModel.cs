@@ -401,7 +401,7 @@ namespace Hospital_IS.ManagerViewModel
               
                     
                     _roomNumber = value;
-                    MessageBox.Show("uslo");
+                 
                     
                     OnPropertyChanged("RoomNumber");
               
