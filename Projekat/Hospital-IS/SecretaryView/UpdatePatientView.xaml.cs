@@ -149,6 +149,7 @@ namespace Hospital_IS
             ucp.RefreshGrid();
             Patient = SecretaryManagementController.Instance.GetPatientByID(Patient.Id);
             SetPatientInfo();
+            dataGridAllergies.ItemsSource = Allergies;
             this.DataContext = this;
         }
     }
