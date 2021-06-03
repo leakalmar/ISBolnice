@@ -112,7 +112,7 @@
                 </LinearGradientBrush>
             </Button.Background>
             <StackPanel>
-                <Image Source="pack://application:,,,/Resources/leftArrow.png" Width="20"  Height="20" />
+                <Image Source="pack://application:,,,/Resources/right.png" Width="20"  Height="20" />
             </StackPanel>
         </Button>
         <Button x:Name="previousMonth" Command="{Binding PreviousMonth}"  Margin="190,10,740,620" Foreground="#FFFDFAFA" FontSize="24" Cursor="Hand" FontWeight="Bold">
@@ -129,7 +129,7 @@
                 </LinearGradientBrush>
             </Button.Background>
             <StackPanel>
-                <Image Source="pack://application:,,,/Resources/leftArrow.png" Width="20"  Height="20" />
+                <Image Source="pack://application:,,,/Resources/left.png" Width="20"  Height="20" />
             </StackPanel>
         </Button>
     </Grid>
