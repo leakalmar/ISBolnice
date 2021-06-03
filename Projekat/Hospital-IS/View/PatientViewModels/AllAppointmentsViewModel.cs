@@ -11,7 +11,6 @@ namespace Hospital_IS.View.PatientViewModels
     public class AllAppointmentsViewModel : BindableBase
     {
         public ObservableCollection<DoctorAppointment> AllAppointments { get; set; }
-        //private ICollectionView allApps;
         public KeyValuePair<string, int>[] ChartData { get; set; }
 
         private DoctorAppointment selectedDoctorAppointment;

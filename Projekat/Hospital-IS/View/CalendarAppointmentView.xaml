@@ -83,6 +83,7 @@
                 </ItemsControl>
             </DockPanel>
         </Border>
+        <Label Content="{Binding Month}" Margin="30,10,800,610" FontSize="18"/>
         <Button x:Name="calendar" Command="{Binding ShowHome}"  Margin="810,10,30,620" Foreground="#FFFDFAFA" FontSize="16" Cursor="Hand">
             <Button.Resources>
                 <Style TargetType="Border">
@@ -96,6 +97,40 @@
                     <GradientStop Color="CadetBlue" Offset="1.5"/>
                 </LinearGradientBrush>
             </Button.Background> Prikaži početnu
+        </Button>
+        <Button x:Name="nextMonth" Command="{Binding NextMonth}"  Margin="250,10,680,620" Foreground="#FFFDFAFA" FontSize="24" Cursor="Hand" FontWeight="Bold">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20,20,20,20"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF184095" Offset="0.0"/>
+                    <GradientStop Color="CadetBlue" Offset="1.5"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <StackPanel>
+                <Image Source="pack://application:,,,/Resources/leftArrow.png" Width="20"  Height="20" />
+            </StackPanel>
+        </Button>
+        <Button x:Name="previousMonth" Command="{Binding PreviousMonth}"  Margin="190,10,740,620" Foreground="#FFFDFAFA" FontSize="24" Cursor="Hand" FontWeight="Bold">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20,20,20,20"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF184095" Offset="0.0"/>
+                    <GradientStop Color="CadetBlue" Offset="1.5"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <StackPanel>
+                <Image Source="pack://application:,,,/Resources/leftArrow.png" Width="20"  Height="20" />
+            </StackPanel>
         </Button>
     </Grid>
 </UserControl>
