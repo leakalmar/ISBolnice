@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using Hospital_IS.Controllers;
+using Hospital_IS.ManagerView1;
 using Model;
 using System;
 using System.Collections.ObjectModel;
@@ -29,11 +30,20 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand navigateAdvancedRoomRenovation;
         private RelayCommand navigateToEmployeerPage;
         private RelayCommand navigateToBranchPage;
+        private RelayCommand navigateToRenovationReport;
         private NavigationService navService;
         private Room selectedRoom;
         private RelayCommand navigateToManagerProfilePage;
 
 
+        public RelayCommand NavigateToRenovationReport
+        {
+            get { return navigateToRenovationReport; }
+            set
+            {
+                navigateToRenovationReport = value;
+            }
+        }
 
         public RelayCommand NavigateToBranchPage
         {
@@ -316,12 +326,20 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateAdvancedRoomRenovation = new RelayCommand(Execute_AdvancedRenovationRoomCommand);
             this.NavigateToEmployeerPage = new RelayCommand(Execute_NavigateToEmployeerPageCommand);
             this.NavigateToBranchPage = new RelayCommand(Execute_NavigateToBranchPageCommand);
+            this.NavigateToRenovationReport = new RelayCommand(Execute_NavigateToRoomRenovationReport);
             DispatcherTimer dispatcherTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMinutes(1)
             };
             dispatcherTimer.Tick += timer_Tick;
             dispatcherTimer.Start();
+        }
+
+        private void Execute_NavigateToRoomRenovationReport(object obj)
+        {
+            RenovationReportVIewModel.Instance.NavService = this.NavService;
+            ReportRenovationWindow reportRenovation = new ReportRenovationWindow();
+            reportRenovation.ShowDialog();
         }
 
 

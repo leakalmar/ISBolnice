@@ -208,5 +208,17 @@ namespace Service
             return isSucces;
         }
 
+        public int GetRoomNumber(int roomId)
+        {
+            foreach (Room r in AllRooms)
+            {
+                if(r.RoomId == roomId)
+                {
+                    return r.RoomNumber;
+                }
+            }
+            return 0;
+        }
+
     }
 }

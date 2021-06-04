@@ -6,7 +6,7 @@
     "BedNumber": 111,
     "RoomId": 1,
     "Type": 1,
-    "RoomIdType": "0 ConsultingRoom",
+    "RoomIdType": "1 ConsultingRoom",
     "Equipment": [],
     "isUsable": false
   },
@@ -17,7 +17,7 @@
     "BedNumber": 11,
     "RoomId": 0,
     "Type": 3,
-    "RoomIdType": "1 StorageRoom",
+    "RoomIdType": "0 StorageRoom",
     "Equipment": [],
     "isUsable": false
   },
@@ -65,7 +65,6 @@
     ],
     "isUsable": false
   },
-  
   {
     "RoomFloor": 10,
     "RoomNumber": 10,

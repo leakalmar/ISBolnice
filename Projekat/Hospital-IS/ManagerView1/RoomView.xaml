@@ -230,7 +230,7 @@
 
         </StackPanel>
 
-        <StackPanel x:Name="RoomOptions" Visibility="Collapsed" Background="White" Margin="0,510,0,0" >
+        <StackPanel x:Name="RoomOptions" Visibility="Collapsed" Background="White" Margin="0,465,0,0" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
@@ -242,6 +242,8 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="15"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="10"/>
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="10"/>
                     <RowDefinition Height="35"/>
@@ -304,6 +306,16 @@
                         <Image Source="pack://application:,,,/Resources/renovation.png" HorizontalAlignment="Left" Width="40" Height="35" />
                     </StackPanel>
                 </Button>
+                <Button  BorderThickness="0" Grid.Column="1" Grid.Row="11" Height="35" Width="45" Background="White" Command="{Binding NavigateToRenovationReport}" >
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/reportren.png" HorizontalAlignment="Left" Width="40" Height="35" />
+                    </StackPanel>
+                </Button>
 
 
                 <TextBlock Grid.Row="1" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text ="Dodaj sobu" Foreground="#624cfc"  />
@@ -311,6 +323,7 @@
                 <TextBlock Grid.Row="5" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text = "Obriši sobu" Foreground="#624cfc"  />
                 <TextBlock Grid.Row="7" Grid.Column="3"  TextAlignment="Justify" FontSize="20" Height="35" Width="150" Text = "Renoviranje" Foreground="#624cfc"  />
                 <TextBlock Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Left"   FontSize="20" Height="35" Width="209" Text = "Napredno renoviranje" Foreground="#624cfc"  />
+                <TextBlock Grid.Row="11" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Left"   FontSize="20" Height="35" Width="209" Text = "Izvjestaj o renoviranju" Foreground="#624cfc"  />
             </Grid>
         </StackPanel>
 
