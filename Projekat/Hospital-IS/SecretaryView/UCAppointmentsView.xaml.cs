@@ -1,4 +1,5 @@
-﻿using DTOs;
+﻿using Controllers;
+using DTOs;
 using Hospital_IS.Controllers;
 using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
@@ -41,6 +42,7 @@ namespace Hospital_IS.SecretaryView
             if (Appointments != null)
                 Appointments.Clear();
 
+            DoctorAppointmentController.Instance.ReloadDoctorAppointments();
             DoctorAppointmentManagementController.Instance.ReloadAppointments();
             Appointments = new ObservableCollection<DoctorAppointmentDTO>(DoctorAppointmentManagementController.Instance.GetAll());
 
