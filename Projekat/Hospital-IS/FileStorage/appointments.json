@@ -1400,5 +1400,949 @@
     "Type": 1,
     "Room": 1,
     "Id": 23
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": "Pregled",
+    "IsUrgent": false,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "2021-04-29T00:00:00",
+        "AppointmentCounterInTimeRange": 2,
+        "IsTroll": false
+      },
+      "PatientNotes": [
+        {
+          "NotificationTime": 11,
+          "IsNotifyChecked": true,
+          "NoteContent": "Setaj sat vremena!!!",
+          "AppointmentId": 5
+        },
+        {
+          "NotificationTime": 8,
+          "IsNotifyChecked": false,
+          "NoteContent": "Doktorka je rekla da zakazem pregled po potrebi",
+          "AppointmentId": 1
+        }
+      ],
+      "IsGuest": false,
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-30T22:00:00",
+    "AppointmentEnd": "2021-06-30T22:30:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 24
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": "Pregled",
+    "IsUrgent": false,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7064891+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [],
+      "IsGuest": false,
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 2,
+      "Name": "Stefan",
+      "Surname": "Beckovic",
+      "BirthDate": "2021-03-29T23:21:22.7064868+02:00",
+      "Phone": null,
+      "Email": "stefan@gmail.com",
+      "Gender": "Muško",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Zelengoska 15",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-30T15:00:00",
+    "AppointmentEnd": "2021-06-30T15:30:00",
+    "Type": 1,
+    "Room": 7,
+    "Id": 25
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": "Pregled",
+    "IsUrgent": false,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "2021-04-29T00:00:00",
+        "AppointmentCounterInTimeRange": 2,
+        "IsTroll": false
+      },
+      "PatientNotes": [
+        {
+          "NotificationTime": 11,
+          "IsNotifyChecked": true,
+          "NoteContent": "Setaj sat vremena!!!",
+          "AppointmentId": 5
+        },
+        {
+          "NotificationTime": 8,
+          "IsNotifyChecked": false,
+          "NoteContent": "Doktorka je rekla da zakazem pregled po potrebi",
+          "AppointmentId": 1
+        }
+      ],
+      "IsGuest": false,
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-30T15:30:00",
+    "AppointmentEnd": "2021-06-30T16:00:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 26
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": "Pregled",
+    "IsUrgent": false,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "2021-04-29T00:00:00",
+        "AppointmentCounterInTimeRange": 2,
+        "IsTroll": false
+      },
+      "PatientNotes": [
+        {
+          "NotificationTime": 11,
+          "IsNotifyChecked": true,
+          "NoteContent": "Setaj sat vremena!!!",
+          "AppointmentId": 5
+        },
+        {
+          "NotificationTime": 8,
+          "IsNotifyChecked": false,
+          "NoteContent": "Doktorka je rekla da zakazem pregled po potrebi",
+          "AppointmentId": 1
+        }
+      ],
+      "IsGuest": false,
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-30T16:00:00",
+    "AppointmentEnd": "2021-06-30T16:30:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 27
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": "Pregled",
+    "IsUrgent": false,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "2021-04-29T00:00:00",
+        "AppointmentCounterInTimeRange": 2,
+        "IsTroll": false
+      },
+      "PatientNotes": [
+        {
+          "NotificationTime": 11,
+          "IsNotifyChecked": true,
+          "NoteContent": "Setaj sat vremena!!!",
+          "AppointmentId": 5
+        },
+        {
+          "NotificationTime": 8,
+          "IsNotifyChecked": false,
+          "NoteContent": "Doktorka je rekla da zakazem pregled po potrebi",
+          "AppointmentId": 1
+        }
+      ],
+      "IsGuest": false,
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-30T16:30:00",
+    "AppointmentEnd": "2021-06-30T17:00:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 28
+  },
+  {
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "2021-04-29T00:00:00",
+        "AppointmentCounterInTimeRange": 2,
+        "IsTroll": false
+      },
+      "PatientNotes": [
+        {
+          "NotificationTime": 11,
+          "IsNotifyChecked": true,
+          "NoteContent": "Setaj sat vremena!!!",
+          "AppointmentId": 5
+        },
+        {
+          "NotificationTime": 8,
+          "IsNotifyChecked": false,
+          "NoteContent": "Doktorka je rekla da zakazem pregled po potrebi",
+          "AppointmentId": 1
+        }
+      ],
+      "IsGuest": false,
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-26T08:45:00",
+    "AppointmentEnd": "2021-06-26T09:15:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 29
+  },
+  {
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "2021-04-29T00:00:00",
+        "AppointmentCounterInTimeRange": 2,
+        "IsTroll": false
+      },
+      "PatientNotes": [
+        {
+          "NotificationTime": 11,
+          "IsNotifyChecked": true,
+          "NoteContent": "Setaj sat vremena!!!",
+          "AppointmentId": 5
+        },
+        {
+          "NotificationTime": 8,
+          "IsNotifyChecked": false,
+          "NoteContent": "Doktorka je rekla da zakazem pregled po potrebi",
+          "AppointmentId": 1
+        }
+      ],
+      "IsGuest": false,
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-07-17T08:45:00",
+    "AppointmentEnd": "2021-07-17T09:15:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 30
+  },
+  {
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "2021-04-29T00:00:00",
+        "AppointmentCounterInTimeRange": 2,
+        "IsTroll": false
+      },
+      "PatientNotes": [
+        {
+          "NotificationTime": 11,
+          "IsNotifyChecked": true,
+          "NoteContent": "Setaj sat vremena!!!",
+          "AppointmentId": 5
+        },
+        {
+          "NotificationTime": 8,
+          "IsNotifyChecked": false,
+          "NoteContent": "Doktorka je rekla da zakazem pregled po potrebi",
+          "AppointmentId": 1
+        }
+      ],
+      "IsGuest": false,
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-05T12:45:00",
+    "AppointmentEnd": "2021-06-05T13:15:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 31
+  },
+  {
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "2021-04-29T00:00:00",
+        "AppointmentCounterInTimeRange": 2,
+        "IsTroll": false
+      },
+      "PatientNotes": [
+        {
+          "NotificationTime": 11,
+          "IsNotifyChecked": true,
+          "NoteContent": "Setaj sat vremena!!!",
+          "AppointmentId": 5
+        },
+        {
+          "NotificationTime": 8,
+          "IsNotifyChecked": false,
+          "NoteContent": "Doktorka je rekla da zakazem pregled po potrebi",
+          "AppointmentId": 1
+        }
+      ],
+      "IsGuest": false,
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-19T08:30:00",
+    "AppointmentEnd": "2021-06-19T09:00:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 32
+  },
+  {
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "2021-04-29T00:00:00",
+        "AppointmentCounterInTimeRange": 2,
+        "IsTroll": false
+      },
+      "PatientNotes": [
+        {
+          "NotificationTime": 11,
+          "IsNotifyChecked": true,
+          "NoteContent": "Setaj sat vremena!!!",
+          "AppointmentId": 5
+        },
+        {
+          "NotificationTime": 8,
+          "IsNotifyChecked": false,
+          "NoteContent": "Doktorka je rekla da zakazem pregled po potrebi",
+          "AppointmentId": 1
+        }
+      ],
+      "IsGuest": false,
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-19T09:15:00",
+    "AppointmentEnd": "2021-06-19T09:45:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 33
+  },
+  {
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "hospital": null,
+      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "2021-04-29T00:00:00",
+        "AppointmentCounterInTimeRange": 2,
+        "IsTroll": false
+      },
+      "PatientNotes": [
+        {
+          "NotificationTime": 11,
+          "IsNotifyChecked": true,
+          "NoteContent": "Setaj sat vremena!!!",
+          "AppointmentId": 5
+        },
+        {
+          "NotificationTime": 8,
+          "IsNotifyChecked": false,
+          "NoteContent": "Doktorka je rekla da zakazem pregled po potrebi",
+          "AppointmentId": 1
+        }
+      ],
+      "IsGuest": false,
+      "doctor": null,
+      "Doctor": null,
+      "Education": 0,
+      "Id": 1,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "2021-03-29T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "Hospital": null
+    },
+    "Doctor": {
+      "patient": [],
+      "hospital": null,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Education": 0,
+      "Id": 4,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Hospital": null
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-07-10T08:45:00",
+    "AppointmentEnd": "2021-07-10T09:15:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 34
   }
 ]

@@ -17,10 +17,12 @@
         <KeyBinding Key="F4" Command="{Binding Path=NavigateToMedicinesCommand}" />
         <KeyBinding Key="F5" Command="{Binding Path=NavigateToRoomsCommand}" />
         <KeyBinding Key="F6"
-                Command="{Binding Path=NavigateToPrescriptionsCommand}" />
+                Command="{Binding Path=NavigateToEquipCommand}" />
         <KeyBinding Key="F7"
-                Command="{Binding Path=NavigateToApproveMedicineCommand}" />
+                Command="{Binding Path=NavigateToPrescriptionsCommand}" />
         <KeyBinding Key="F8"
+                Command="{Binding Path=NavigateToApproveMedicineCommand}" />
+        <KeyBinding Key="F9"
                 Command="{Binding Path=NavigateToNotificationsCommand}" />
         <KeyBinding Key="Backspace" Command="{Binding Path=NavigateBackCommand}" />
         <KeyBinding Key="Esc" Command="{Binding Path=NavigateToLogInCommand}" />
@@ -109,7 +111,8 @@
             </TextBlock.Text>
         </TextBlock>
 
-        <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3">
+        <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3"
+                KeyboardNavigation.TabNavigation="Cycle">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.3*" />
                 <RowDefinition Height="0.5*" />
@@ -127,104 +130,61 @@
 
             </Grid.RowDefinitions>
 
-            <RadioButton Content="Početna" Uid="0"
+            <RadioButton Content="Početna" x:Name="home"
+                    KeyboardNavigation.TabNavigation="Continue"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="1"
-                    commands:FocusExtension.IsFocused="{Binding Focused}"
                     Command="{Binding NavigateToHomePageCommand}">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="GotFocus">
-                        <b:InvokeCommandAction
-                                Command="{Binding NavigateToHomePageCommand}" />
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
             </RadioButton>
-            <RadioButton Content="Termini" Uid="1"
+            <RadioButton Content="Termini" x:Name="appointments"
+                    KeyboardNavigation.TabNavigation="Continue"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="2"
                     Command="{Binding NavigateToAppointmentsCommand}">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="GotFocus">
-                        <b:InvokeCommandAction
-                                Command="{Binding NavigateToAppointmentsCommand}" />
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
             </RadioButton>
-            <RadioButton Content="Pacijenti" Uid="2"
+            <RadioButton Content="Pacijenti" x:Name="patients"
+                    KeyboardNavigation.TabNavigation="Continue"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="3"
                     Command="{Binding NavigateToPatientsCommand}">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="GotFocus">
-                        <b:InvokeCommandAction
-                                Command="{Binding NavigateToPatientsCommand}" />
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
             </RadioButton>
-            <RadioButton Content="Lekovi" Uid="3"
+            <RadioButton Content="Lekovi" x:Name="medicines"
+                    KeyboardNavigation.TabNavigation="Continue"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="4"
                     Command="{Binding NavigateToMedicinesCommand}">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="GotFocus">
-                        <b:InvokeCommandAction
-                                Command="{Binding NavigateToMedicinesCommand}" />
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
             </RadioButton>
-            <RadioButton Content="Sobe" Uid="4"
+            <RadioButton Content="Sobe" x:Name="rooms"
+                    KeyboardNavigation.TabNavigation="Continue"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="5"
                     Command="{Binding NavigateToRoomsCommand}">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="GotFocus">
-                        <b:InvokeCommandAction
-                                Command="{Binding NavigateToRoomsCommand}" />
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
             </RadioButton>
-            <RadioButton Content="Oprema" Uid="5"
+            <RadioButton Content="Oprema" x:Name="equip"
+                    KeyboardNavigation.TabNavigation="Continue"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="6"
                     Command="{Binding NavigateToEquipmentCommand}">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="GotFocus">
-                        <b:InvokeCommandAction
-                                Command="{Binding NavigateToEquipmentCommand}" />
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
             </RadioButton>
-            <RadioButton Content="Izdavanje recepta" Uid="6"
+            <RadioButton Content="Izdavanje recepta" x:Name="prescriptions"
+                    KeyboardNavigation.TabNavigation="Continue"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="7"
                     Command="{Binding NavigateToPrescriptionsCommand}">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="GotFocus">
-                        <b:InvokeCommandAction
-                                Command="{Binding NavigateToPrescriptionsCommand}" />
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
             </RadioButton>
-            <RadioButton Content="Odobravanje leka" Uid="7"
+            <RadioButton Content="Odobravanje leka" x:Name="approve"
+                    KeyboardNavigation.TabNavigation="Continue"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="8"
                     Command="{Binding NavigateToApproveMedicineCommand}">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="GotFocus">
-                        <b:InvokeCommandAction
-                                Command="{Binding NavigateToApproveMedicineCommand}" />
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
             </RadioButton>
-            <RadioButton Content="Obaveštenja" Uid="8"
+            <RadioButton Content="Obaveštenja" x:Name="notifications"
+                    KeyboardNavigation.TabNavigation="Continue"
                     Style="{StaticResource MenuButtonTheme}" Grid.Row="9"
                     Command="{Binding NavigateToNotificationsCommand}">
-                <b:Interaction.Triggers>
-                    <b:EventTrigger EventName="GotFocus">
-                        <b:InvokeCommandAction
-                                Command="{Binding NavigateToNotificationsCommand}" />
-                    </b:EventTrigger>
-                </b:Interaction.Triggers>
             </RadioButton>
 
             <Button Content="Odjavi se" Style="{StaticResource CustomButton}"
-                    Grid.Row="11" Padding="10,0,10,0" Margin="15,5,15,5"
+                    KeyboardNavigation.TabNavigation="Continue" Grid.Row="11"
+                    Padding="10,0,10,0" Margin="15,5,15,5"
                     Command="{Binding Path=NavigateToLogInCommand}">
             </Button>
 
-            <Button Grid.Row="12" Content="Podešavanja" Foreground="FloralWhite"
+            <Button Grid.Row="12" Content="Podešavanja"
+                    KeyboardNavigation.TabNavigation="Continue"
+                    Foreground="FloralWhite"
                     Background="{x:Null}" VerticalAlignment="Top" Margin="30,0">
                 <Button.InputBindings>
                     <KeyBinding Key="Return"
@@ -236,8 +196,7 @@
 
         <Frame x:Name="Home" Grid.Row="2" Grid.Column="3" Grid.RowSpan="3"
                 Margin="20,0,15,0" NavigationUIVisibility="Hidden"
-                Focusable="False">
-        </Frame>
+                Focusable="False" />
 
     </Grid>
 </Window>

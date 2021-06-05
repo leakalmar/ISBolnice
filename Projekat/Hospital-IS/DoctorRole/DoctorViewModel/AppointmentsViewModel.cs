@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.DoctorViewModel
@@ -69,7 +70,6 @@ namespace Hospital_IS.DoctorViewModel
             {
                 selectedAppointment = value;
                 OnPropertyChanged("SelectedAppointments");
-                ChangeAppView._ViewModel.OldAppointment = SelectedAppointment;
             }
         }
 
@@ -90,6 +90,7 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 fromDate = value;
+                ToDate = fromDate.AddDays(7);
                 OnPropertyChanged("FromDate");
                 FilterAppointments();
             }
@@ -111,6 +112,15 @@ namespace Hospital_IS.DoctorViewModel
             get { return showChangePanel; }
             set
             {
+                if (ShowChangePanel == true && value == false)
+                {
+                    Appointments newApp= new Appointments();
+                    newApp._ViewModel.FromDate = FromDate;
+                    newApp._ViewModel.SelectedRoom = SelectedRoom;
+                    newApp._ViewModel.SelectedType = SelectedType;
+                    DoctorMainWindow.Instance._ViewModel.AppointmentsView = newApp;
+                    DoctorMainWindow.Instance._ViewModel.NavigateToAppointmentsCommand.Execute(null);
+                }
                 showChangePanel = value;
                 OnPropertyChanged("ShowChangePanel");
                 FilterAppointments();
@@ -155,8 +165,13 @@ namespace Hospital_IS.DoctorViewModel
             {
                 if (SelectedAppointment.AppointmentStart > DateTime.Now.AddDays(3))
                 {
+                    changeAppView._ViewModel.OldAppointment = SelectedAppointment;
                     InsideNavigation.Navigate(changeAppView);
                     ShowChangePanel = true;
+                }
+                else if (SelectedAppointment.AppointmentStart < DateTime.Now)
+                {
+                    new ExitMess("Odabrali ste termin koji je završen.").ShowDialog();
                 }
                 else
                 {
@@ -189,6 +204,10 @@ namespace Hospital_IS.DoctorViewModel
                         // DoctorMainWindow.Instance._ViewModel.DoctorAppointments.Remove(app);
                     }
                 }
+                else if(SelectedAppointment.AppointmentStart < DateTime.Now)
+                {
+                    new ExitMess("Odabrali ste termin koji je završen.").ShowDialog();
+                }
                 else
                 {
                     new ExitMess("Termin nije moguće otkazati tri dana pre održavanja.").ShowDialog();
@@ -219,7 +238,7 @@ namespace Hospital_IS.DoctorViewModel
         }
         private void FilterAppointments()
         {
-            if (SelectedType != null && SelectedRoom != null && FromDate != null && ToDate != null)
+            if (SelectedType != null && SelectedRoom != null && FromDate != null && ToDate != null && ShowChangePanel == false)
             {
                 List<DoctorAppointment> app = DoctorAppointmentController.Instance.GetAllByDoctor(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
                 ICollectionView view = new CollectionViewSource { Source = app }.View;

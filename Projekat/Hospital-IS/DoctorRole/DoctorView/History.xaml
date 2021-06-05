@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
+        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783"
+        KeyboardNavigation.ControlTabNavigation="Contained"
+        KeyboardNavigation.TabNavigation="Continue">
     <Grid Margin="0,25,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*" />
@@ -15,31 +17,43 @@
                     VerticalAlignment="Center" />
             <DatePicker Width="160" FontSize="14" BorderThickness="0"
                     VerticalAlignment="Center" Margin="0,0,20,0"
-                    SelectedDate="{Binding FromDate}" />
+                    SelectedDate="{Binding FromDate}" Focusable="True"
+                    KeyboardNavigation.TabIndex="1" KeyboardNavigation.TabNavigation="Continue"
+                    KeyboardNavigation.IsTabStop="True" />
             <Label Content="Do:" Style="{StaticResource CustomLabel}"
                     VerticalAlignment="Center" />
             <DatePicker Width="160" FontSize="14" BorderThickness="0"
                     VerticalAlignment="Center" Margin="0,0,160,0"
-                    SelectedDate="{Binding ToDate}" />
-            <Button Style="{StaticResource CustomButton}" Width="200" Margin="10">
+                    SelectedDate="{Binding ToDate}" Focusable="True"
+                    KeyboardNavigation.TabIndex="2"
+                    KeyboardNavigation.TabNavigation="Continue"
+                    KeyboardNavigation.IsTabStop="True" />
+            <Button Style="{StaticResource CustomButton}" Width="200"
+                    Margin="10" KeyboardNavigation.TabIndex="3"
+                    KeyboardNavigation.IsTabStop="True"
+                    KeyboardNavigation.TabNavigation="Continue">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Stampaj" Margin="0,0,20,0" FontSize="20"
-                                Style="{StaticResource CustomTextBlock}" VerticalAlignment="Center"/>
-                        <Image 
+                        <TextBlock Text="Stampaj" Margin="0,0,20,0"
+                                FontSize="20"
+                                Style="{StaticResource CustomTextBlock}"
+                                VerticalAlignment="Center" />
+                        <Image
                                 Source="pack://application:,,,/Resources/print.png" />
                     </StackPanel>
                 </Button.Content>
                 <Button.InputBindings>
                     <KeyBinding Key="Return" Command="{Binding PrintCommand}" />
-                    <KeyBinding Key="P" Modifiers="Ctrl" Command="{Binding PrintCommand}" />
+                    <KeyBinding Key="P" Modifiers="Ctrl"
+                            Command="{Binding PrintCommand}" />
                 </Button.InputBindings>
             </Button>
         </StackPanel>
 
         <DataGrid Grid.Row="1" ItemsSource="{Binding Reports}"
                 Style="{StaticResource CustomDataGrid}"
-                SelectedItem="{Binding SelectedReport}">
+                SelectedItem="{Binding SelectedReport}"
+                KeyboardNavigation.TabNavigation="Continue">
             <DataGrid.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding OldReportCommand}" />
             </DataGrid.InputBindings>

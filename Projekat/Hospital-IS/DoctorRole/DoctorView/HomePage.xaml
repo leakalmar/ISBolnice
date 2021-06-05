@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+             FocusManager.FocusedElement="{Binding ElementName=docotrAppointments}"
         mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
@@ -77,8 +78,7 @@
 
         <GroupBox Header="Zakazani pregledi" Grid.Row="1" Grid.Column="0"
                 BorderBrush="#FF2E3B55" Foreground="White" FontSize="16">
-            <DataGrid x:Name="docotrAppointments"
-                    commands:FocusExtension.IsFocused="{Binding Focused}"
+            <DataGrid x:Name="docotrAppointments" KeyboardNavigation.DirectionalNavigation="Continue"
                 ItemsSource="{Binding Path=AppointmentsView}"
                     Style="{StaticResource CustomDataGrid}"
                     SelectedItem="{Binding Path=SelectedAppointment}" Focusable="True">

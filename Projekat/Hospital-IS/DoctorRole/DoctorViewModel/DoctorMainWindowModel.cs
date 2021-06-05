@@ -87,6 +87,7 @@ namespace Hospital_IS.DoctorViewModel
         private RelayCommand navigateBackWithoutCheckCommand; 
         private RelayCommand navigateToEquipmentCommand;
         private RelayCommand navigateToSettingsCommand;
+        private RelayCommand navigateToEquipCommand;
 
         public RelayCommand NavigateToHomePageCommand
         {
@@ -197,14 +198,34 @@ namespace Hospital_IS.DoctorViewModel
             get { return navigateToSettingsCommand; }
             set { navigateToSettingsCommand = value; }
         }
+
+        public RelayCommand NavigateToEquipCommand
+        {
+            get { return navigateToEquipCommand; }
+            set { navigateToEquipCommand = value; }
+        }
         #endregion
 
         #region Actions
         private void Execute_NavigateToHomePageCommand(object obj)
         {
-
-            this.NavigationService.Navigate(
-                new Uri("DoctorRole/DoctorView/HomePage.xaml", UriKind.Relative));
+            if (PatientChartView != null)
+            {
+                if (PatientChartView._ViewModel.Started)
+                {
+                    this.NavigationService.Navigate(PatientChartView);
+                }
+                else
+                {
+                    this.NavigationService.Navigate(
+                        new Uri("DoctorRole/DoctorView/HomePage.xaml", UriKind.Relative));
+                }
+            }
+            else
+            {
+                this.NavigationService.Navigate(
+                    new Uri("DoctorRole/DoctorView/HomePage.xaml", UriKind.Relative));
+            }
         }
 
         private bool CanExecute_NavigateCommand(object obj)
@@ -306,15 +327,39 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_NavigateToLogInCommand(object obj)
         {
-            bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da se odjavite?").ShowDialog();
-            if (dialog)
+            if (PatientChartView != null)
             {
-                //DoctorController.Instance..UpdateDoctor(Doctor);
-                MainWindow login = new MainWindow();
-                login.Show();
-                DoctorMainWindow.Instance.Hide();
+                if (PatientChartView._ViewModel.Started)
+                {
+                    new ExitMess("Termin nije završen! Molimo vas završite termin pre odjave.").ShowDialog();
+                    return;
+                }
+                else
+                {
+                    bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da se odjavite?").ShowDialog();
+                    if (dialog)
+                    {
+                        //DoctorController.Instance..UpdateDoctor(Doctor);
+                        MainWindow login = new MainWindow();
+                        login.Show();
+                        DoctorMainWindow.Instance.Hide();
 
+                    }
+                }
             }
+            else
+            {
+                bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da se odjavite?").ShowDialog();
+                if (dialog)
+                {
+                    //DoctorController.Instance..UpdateDoctor(Doctor);
+                    MainWindow login = new MainWindow();
+                    login.Show();
+                    DoctorMainWindow.Instance.Hide();
+
+                }
+            }
+            
         }
 
         private void Execute_MinimizeCommand(object obj)
@@ -338,7 +383,12 @@ namespace Hospital_IS.DoctorViewModel
             this.NavigationService.Navigate(
                 new Uri("DoctorRole/DoctorView/Settings.xaml", UriKind.Relative));
         }
+        private void Execute_NavigateToEquipCommand(object obj)
+        {
 
+            this.NavigationService.Navigate(
+                new Uri("DoctorRole/DoctorView/EquipmentUse.xaml", UriKind.Relative));
+        }
 
         #endregion
 
@@ -372,6 +422,7 @@ namespace Hospital_IS.DoctorViewModel
             this.NavigateBackWithoutCheckCommand = new RelayCommand(Execute_NavigateBackWithoutCheckCommand, CanExecute_NavigateCommand);
             this.NavigateToEquipmentCommand = new RelayCommand(Execute_NavigateToEquipmentCommand, CanExecute_NavigateCommand);
             this.NavigateToSettingsCommand = new RelayCommand(Execute_NavigateToSettingsCommand, CanExecute_NavigateCommand);
+            this.NavigateToEquipCommand = new RelayCommand(Execute_NavigateToEquipCommand, CanExecute_NavigateCommand);
             this.navigationService = navigationService;
         }
         #endregion

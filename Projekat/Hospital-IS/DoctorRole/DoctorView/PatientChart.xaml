@@ -16,7 +16,7 @@
         <KeyBinding Key="Esc" Command="{Binding EndAppointmentCommand}" />
         <KeyBinding Key="Backspace" Command="{Binding NavigateBackCommand}" />
     </UserControl.InputBindings>
-    <Grid>
+    <Grid KeyboardNavigation.TabNavigation="Local">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" MinWidth="20" />
             <ColumnDefinition Width="100" />
@@ -103,7 +103,8 @@
 
         <Separator Grid.Row="2" Grid.ColumnSpan="4" VerticalAlignment="Top" />
         <Separator Grid.Row="2" Grid.ColumnSpan="4" VerticalAlignment="Bottom" />
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="4">
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="4"
+                KeyboardNavigation.TabNavigation="Cycle">
             <Button Uid="0" x:Name="reportBtn" Content="Izveštaj" Width="110"
                     FontSize="18" Background="Transparent"
                     commands:FocusExtension.IsFocused="{Binding ReportFocused}"
@@ -190,16 +191,16 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Content="Odobri"
-                    Margin="100,5,60,5" Style="{StaticResource CustomButton}"
+            <Button Content="Odobri" Margin="100,5,60,5"
+                    Style="{StaticResource CustomButton}"
                     Visibility="{Binding PrescriptionReview,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility}}">
                 <Button.InputBindings>
                     <KeyBinding Key="Return"
                             Command="{Binding PrescriptionReviewCommand}" />
                 </Button.InputBindings>
             </Button>
-            <Button  Grid.Column="1" Content="Odbij"
-                    Margin="60,5,100,5" Style="{StaticResource CustomButton}"
+            <Button Grid.Column="1" Content="Odbij" Margin="60,5,100,5"
+                    Style="{StaticResource CustomButton}"
                     Visibility="{Binding PrescriptionReview,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility}}">
                 <Button.InputBindings>
                     <KeyBinding Key="Return"
@@ -207,12 +208,13 @@
                 </Button.InputBindings>
             </Button>
         </Grid>
-        
+
         <Button Grid.Row="4" Grid.ColumnSpan="4" Content="Nazad"
                 Margin="150,5,150,5" Style="{StaticResource CustomButton}"
                 Visibility="{Binding BackButton,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility}}" />
 
         <Button Grid.Row="4" Grid.ColumnSpan="4" Content="Završi termin"
+                KeyboardNavigation.TabNavigation="Contained"
                 Margin="150,5,150,5" Style="{StaticResource CustomButton}"
                 Visibility="{Binding Started,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility}}">
             <Button.InputBindings>

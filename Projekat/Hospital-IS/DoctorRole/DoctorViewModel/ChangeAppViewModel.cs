@@ -112,11 +112,17 @@ namespace Hospital_IS.DoctorViewModel
 
         #region Commands
         private RelayCommand changeAppointmentCommand;
+        private RelayCommand backCommand;
 
         public RelayCommand ChangeAppointmentCommand
         {
             get { return changeAppointmentCommand; }
             set { changeAppointmentCommand = value; }
+        }
+        public RelayCommand BackCommand
+        {
+            get { return backCommand; }
+            set { backCommand = value; }
         }
         #endregion
 
@@ -138,6 +144,11 @@ namespace Hospital_IS.DoctorViewModel
 
         }
 
+        private void Execute_BackCommand(object obj)
+        {
+            DoctorMainWindow.Instance._ViewModel.AppointmentsView._ViewModel.ShowChangePanel = false;
+        }
+
         private bool CanExecute_Command(object obj)
         {
             return true;
@@ -148,8 +159,9 @@ namespace Hospital_IS.DoctorViewModel
 
         private void FilterAppointments()
         {
-            if (SelectedDate != null && SelectedDoctor != null && SelectedRoom != null)
+            if (SelectedDate != null && SelectedDoctor != null && SelectedRoom != null && OldAppointment != null)
             {
+                DoctorMainWindow.Instance._ViewModel.AppointmentsView._ViewModel.SelectedAppointment = OldAppointment;
                 TimeSpan duration = OldAppointment.AppointmentEnd - OldAppointment.AppointmentStart;
                 List<DateTime> dates = new List<DateTime>();
                 dates.Add(SelectedDate);
@@ -173,21 +185,25 @@ namespace Hospital_IS.DoctorViewModel
 
         private void SetRooms()
         {
-            if (OldAppointment.Type == AppointmentType.CheckUp)
+            if(OldAppointment != null)
             {
-                Rooms = RoomController.Instance.GetRoomByType(RoomType.ConsultingRoom);
-            }
-            else
-            {
-                Rooms = RoomController.Instance.GetRoomByType(RoomType.OperationRoom);
-            }
-            foreach (Room room in Rooms)
-            {
-                if (room.RoomId.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.PrimaryRoom))
+                if (OldAppointment.Type == AppointmentType.CheckUp)
                 {
-                    this.SelectedRoom = room;
+                    Rooms = RoomController.Instance.GetRoomByType(RoomType.ConsultingRoom);
+                }
+                else
+                {
+                    Rooms = RoomController.Instance.GetRoomByType(RoomType.OperationRoom);
+                }
+                foreach (Room room in Rooms)
+                {
+                    if (room.RoomId.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.PrimaryRoom))
+                    {
+                        this.SelectedRoom = room;
+                    }
                 }
             }
+            
         }
         #endregion
 
@@ -196,6 +212,7 @@ namespace Hospital_IS.DoctorViewModel
         {
             InitializeFilters();
             this.ChangeAppointmentCommand = new RelayCommand(Execute_ChangeAppointmentCommand, CanExecute_Command);
+            this.BackCommand = new RelayCommand(Execute_BackCommand, CanExecute_Command);
         }
         #endregion
     }

@@ -3,25 +3,40 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        mc:Ignorable="d" d:DesignHeight="555" d:DesignWidth="783">
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+        mc:Ignorable="d" d:DesignHeight="555" d:DesignWidth="783"
+        KeyboardNavigation.TabNavigation="Cycle"
+        KeyboardNavigation.DirectionalNavigation="Cycle"
+        FocusManager.FocusedElement="{Binding ElementName=focusedPicker}">
+    <UserControl.Triggers>
+
+    </UserControl.Triggers>
     <UserControl.InputBindings>
         <KeyBinding Key="Return" Command="{Binding ChooseAppointmentCommand}" />
         <KeyBinding Key="Delete" Command="{Binding DeleteAppointmentCommand}" />
     </UserControl.InputBindings>
     <UserControl.Resources>
     </UserControl.Resources>
-    <Grid Margin="10">
+    <Grid Margin="10" KeyboardNavigation.DirectionalNavigation="Local"
+            KeyboardNavigation.TabNavigation="Local"
+            FocusManager.IsFocusScope="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="649*" />
             <ColumnDefinition Width="114*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
             <RowDefinition Height="0.18*" />
             <RowDefinition Height="0.5*" />
             <RowDefinition Height="0.5*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.ColumnSpan="2" Margin="0,0,0,226" Grid.RowSpan="2">
+        <Label Content="Termini" Style="{StaticResource TitleLabel}"
+                Grid.ColumnSpan="3" />
+
+        <Grid x:Name="focusedGrid" Grid.ColumnSpan="2" Margin="0,0,0,226"
+                Grid.Row="1" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*" />
                 <ColumnDefinition Width="1*" />
@@ -38,24 +53,31 @@
             </Grid.RowDefinitions>
 
             <Label Content="Od:" Grid.Row="0" Grid.Column="0" FontSize="14"
-                    Style="{StaticResource CustomLabel}" VerticalAlignment="Bottom" />
+                    Style="{StaticResource CustomLabel}"
+                    VerticalAlignment="Bottom" />
             <Label Content="Do:" Grid.Row="1" Grid.Column="0" FontSize="14"
-                    Style="{StaticResource CustomLabel}" VerticalAlignment="Bottom" />
+                    Style="{StaticResource CustomLabel}"
+                    VerticalAlignment="Bottom" />
             <Label Content="Soba:" Grid.Row="0" Grid.Column="3" FontSize="14"
-                    Style="{StaticResource CustomLabel}" VerticalAlignment="Bottom" />
+                    Style="{StaticResource CustomLabel}"
+                    VerticalAlignment="Bottom" />
             <Label Content="Tip:" Grid.Row="0" Grid.Column="6" FontSize="14"
-                    Style="{StaticResource CustomLabel}" VerticalAlignment="Bottom" />
+                    Style="{StaticResource CustomLabel}"
+                    VerticalAlignment="Bottom" />
 
-            <DatePicker Grid.Row="0" Grid.Column="1" FontSize="14"
-                    BorderThickness="0" VerticalAlignment="Bottom"
-                    SelectedDate="{Binding FromDate}" />
+            <DatePicker Name="focusedPicker" Grid.Row="0" Grid.Column="1"
+                    FontSize="14" BorderThickness="0" VerticalAlignment="Bottom"
+                    SelectedDate="{Binding FromDate}"
+                    KeyboardNavigation.TabIndex="1" />
             <DatePicker Grid.Row="1" Grid.Column="1" FontSize="14"
-                    BorderThickness="0" VerticalAlignment="Bottom"
-                    SelectedDate="{Binding ToDate}" />
+                    DisplayDateStart="{Binding FromDate}" BorderThickness="0"
+                    VerticalAlignment="Bottom" SelectedDate="{Binding ToDate}"
+                    KeyboardNavigation.TabIndex="2" />
             <ComboBox ItemsSource="{Binding Rooms}" Grid.Row="0"
                     SelectedItem="{Binding SelectedRoom}" Grid.Column="4"
                     Height="24.62" HorizontalAlignment="Stretch" MinWidth="160"
-                    VerticalAlignment="Bottom" Padding="1">
+                    VerticalAlignment="Bottom" Padding="1"
+                    KeyboardNavigation.TabIndex="3">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Label Content="{Binding RoomId}" Padding="0" />
@@ -66,12 +88,21 @@
                     HorizontalAlignment="Center" MinHeight="24.62"
                     MinWidth="160" VerticalAlignment="Bottom"
                     ItemsSource="{Binding Types}"
-                    SelectedItem="{Binding SelectedType}" />
+                    SelectedItem="{Binding SelectedType}"
+                    KeyboardNavigation.TabIndex="4"
+                    KeyboardNavigation.TabNavigation="Local" />
         </Grid>
 
         <DataGrid ItemsSource="{Binding Appointments}"
-                SelectedItem="{Binding SelectedAppointment}" Grid.Row="1"
-                Margin="0,20,0,0" Grid.ColumnSpan="2">
+                FocusManager.IsFocusScope="True"
+                ScrollViewer.ScrollChanged="DataGrid_ScrollChanged"
+                x:Name="grid"
+                SelectedItem="{Binding SelectedAppointment,UpdateSourceTrigger=PropertyChanged}"
+                Grid.Row="2" Margin="0,20,0,0" Grid.ColumnSpan="2"
+                Grid.RowSpan="2" KeyboardNavigation.TabIndex="4">
+            <i:Interaction.Behaviors>
+                <commands:TabBehaviour />
+            </i:Interaction.Behaviors>
             <DataGrid.InputBindings>
                 <KeyBinding Key="Return"
                         Command="{Binding ChooseAppointmentCommand}" />
@@ -107,7 +138,7 @@
             </DataGrid.Columns>
             <DataGrid.Style>
                 <Style TargetType="DataGrid">
-                    <Setter Property="Height" Value="430" />
+                    <Setter Property="Height" Value="400" />
                     <Setter Property="Background" Value="Transparent" />
                     <Setter Property="RowBackground" Value="Transparent" />
                     <Setter Property="Foreground" Value="White" />
@@ -135,7 +166,7 @@
                                     <Storyboard>
                                         <DoubleAnimation Duration="0:0:0.15"
                                                 Storyboard.TargetProperty="Height"
-                                                From="430" To="195" />
+                                                From="400" To="195" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.EnterActions>
@@ -144,7 +175,7 @@
                                     <Storyboard>
                                         <DoubleAnimation Duration="0:0:0.15"
                                                 Storyboard.TargetProperty="Height"
-                                                From="195" To="430" />
+                                                From="195" To="400" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.ExitActions>
@@ -155,20 +186,22 @@
 
         </DataGrid>
 
-        <Frame Grid.Row="1" Grid.ColumnSpan="2" Margin="0,226,0,0"
+        <Frame Grid.Row="2" Grid.ColumnSpan="2" Margin="0,226,0,0"
                 VerticalAlignment="Bottom" Grid.RowSpan="2" x:Name="frame"
-                Height="0">
+                Height="0" >
             <Frame.Style>
                 <Style TargetType="Frame">
                     <Setter Property="Height" Value="0" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding ShowChangePanel, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                        <DataTrigger
+                                Binding="{Binding ShowChangePanel, UpdateSourceTrigger=PropertyChanged}"
+                                Value="true">
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation Duration="0:0:0.15"
                                                 Storyboard.TargetProperty="Height"
-                                                From="0" To="220"/>
+                                                From="0" To="220" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.EnterActions>

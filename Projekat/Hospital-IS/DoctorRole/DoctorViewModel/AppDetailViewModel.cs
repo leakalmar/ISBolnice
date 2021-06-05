@@ -63,6 +63,8 @@ namespace Hospital_IS.DoctorViewModel
         #region Commands
         private RelayCommand openChartCommand;
         private RelayCommand startAppointmentCommand;
+        private RelayCommand setFocusCommand;
+        private RelayCommand lostFocusCommand;
 
         public RelayCommand OpenChartCommand
         {
@@ -81,7 +83,22 @@ namespace Hospital_IS.DoctorViewModel
                 startAppointmentCommand = value;
             }
         }
-
+        public RelayCommand SetFocusCommand
+        {
+            get { return setFocusCommand; }
+            set
+            {
+                setFocusCommand = value;
+            }
+        }
+        public RelayCommand LostFocusCommand
+        {
+            get { return lostFocusCommand; }
+            set
+            {
+                lostFocusCommand = value;
+            }
+        }
         #endregion
 
         #region Actions
@@ -102,6 +119,16 @@ namespace Hospital_IS.DoctorViewModel
             chart._ViewModel.SelectedAppointment = SelectedAppointment;
             DoctorMainWindow.Instance._ViewModel.PatientChartView = chart;
             this.NavigationService.Navigate(chart);
+        }
+        private void Execute_SetFocusCommand(object obj)
+        {
+            Focused = true;
+            OnPropertyChanged("Focused");
+        }
+        private void Execute_LostFocusCommand(object obj)
+        {
+            Focused = false;
+            OnPropertyChanged("Focused");
         }
 
         private bool CanExecute_NavigateCommand(object obj)
@@ -142,6 +169,8 @@ namespace Hospital_IS.DoctorViewModel
             this.Focused = true;
             this.OpenChartCommand = new RelayCommand(Execute_OpenChartCommand, CanExecute_NavigateCommand);
             this.StartAppointmentCommand = new RelayCommand(Execute_StartAppointmentCommand, CanExecute_NavigateCommand);
+            this.SetFocusCommand = new RelayCommand(Execute_SetFocusCommand, CanExecute_NavigateCommand);
+            this.LostFocusCommand = new RelayCommand(Execute_LostFocusCommand, CanExecute_NavigateCommand);
             this.NavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
             SetAppointmentFeilds();
         }

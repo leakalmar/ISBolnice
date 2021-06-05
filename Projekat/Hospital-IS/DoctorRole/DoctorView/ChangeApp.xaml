@@ -3,10 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" mc:Ignorable="d"
-        d:DesignHeight="226.694915254237" d:DesignWidth="763">
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+        mc:Ignorable="d"
+        d:DesignHeight="226.694915254237" d:DesignWidth="763"
+        KeyboardNavigation.DirectionalNavigation="Cycle"
+        KeyboardNavigation.TabNavigation="Cycle"
+        FocusManager.FocusedElement="{Binding ElementName=calendar}">
     <UserControl.InputBindings>
         <KeyBinding Key="Return" Command="{Binding ChangeAppointmentCommand}" />
+        <KeyBinding Key="Backspace" Command="{Binding BackCommand}" />
     </UserControl.InputBindings>
     <Grid>
         <GroupBox Header="Izmeni termin" FontSize="14" BorderBrush="#FF2E3B55"
@@ -25,14 +31,23 @@
                     <RowDefinition Height="0.8*" />
                 </Grid.RowDefinitions>
 
+                <Calendar Name="calendar" SelectionMode="MultipleRange"
+                        Grid.Column="0" HorizontalAlignment="Center"
+                        VerticalAlignment="Center" Grid.RowSpan="2"
+                        SelectedDate="{Binding SelectedDate}"
+                          KeyboardNavigation.TabIndex="1"
+                        KeyboardNavigation.TabNavigation="Local">
+                </Calendar>
                 <Label Content="Doktor:" Style="{StaticResource CustomLabel}"
                         Grid.Column="1" VerticalAlignment="Bottom" />
-                <Label Content="Soba:" Style="{StaticResource CustomLabel}" Grid.Column="4"
-                        VerticalAlignment="Bottom" />
+                <Label Content="Soba:" Style="{StaticResource CustomLabel}"
+                        Grid.Column="4" VerticalAlignment="Bottom" />
                 <ComboBox x:Name="doctors" ItemsSource="{Binding Doctors}"
                         Grid.Row="0" Grid.Column="2" Height="24.62"
                         HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
-                        Padding="1" SelectedItem="{Binding SelectedDoctor}">
+                        KeyboardNavigation.TabNavigation="Local"
+                        KeyboardNavigation.TabIndex="1" Padding="2"
+                        SelectedItem="{Binding SelectedDoctor}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock>
@@ -49,23 +64,26 @@
                 <ComboBox x:Name="rooms" ItemsSource="{Binding Rooms}"
                         Grid.Row="0" Grid.Column="5" Height="24.62"
                         HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
-                        Padding="1" SelectedItem="{Binding SelectedRoom}">
+                        Padding="1" SelectedItem="{Binding SelectedRoom}"
+                        KeyboardNavigation.TabNavigation="Local"
+                        KeyboardNavigation.TabIndex="3">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <Label Content="{Binding RoomId}" Padding="0" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <Calendar Name="calendar" SelectionMode="MultipleRange"
-                        Grid.Column="0" HorizontalAlignment="Center"
-                        VerticalAlignment="Center" Grid.RowSpan="2"
-                        SelectedDate="{Binding SelectedDate}">
-                </Calendar>
+                
 
                 <DataGrid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
                         ItemsSource="{Binding Appointments}" Margin="10"
                         Style="{StaticResource CustomDataGrid}"
+                        KeyboardNavigation.TabIndex="4"
+                        KeyboardNavigation.TabNavigation="Local"
                         SelectedItem="{Binding SelectedAppointment}">
+                    <i:Interaction.Behaviors>
+                        <commands:TabBehaviour />
+                    </i:Interaction.Behaviors>
                     <DataGrid.InputBindings>
                         <KeyBinding Key="Return"
                                 Command="{Binding ChangeAppointmentCommand}" />

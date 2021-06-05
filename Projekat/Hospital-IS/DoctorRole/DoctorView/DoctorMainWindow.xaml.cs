@@ -34,6 +34,5 @@ namespace Hospital_IS.DoctorRole.DoctorView
             this.viewModel = new DoctorMainWindowModel(this.Home.NavigationService);
             this.DataContext = this.viewModel;
         }
-
     }
 }

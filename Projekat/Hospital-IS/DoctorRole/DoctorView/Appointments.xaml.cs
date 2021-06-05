@@ -1,4 +1,5 @@
 ﻿using Hospital_IS.DoctorViewModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Hospital_IS.DoctorRole.DoctorView
@@ -19,6 +20,14 @@ namespace Hospital_IS.DoctorRole.DoctorView
             InitializeComponent();
             _ViewModel.InsideNavigation = this.frame.NavigationService;
             this.DataContext = _ViewModel;
+        }
+
+        private void DataGrid_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            if(grid.SelectedItem != null)
+            {
+                grid.ScrollIntoView(grid.SelectedItem);
+            }
         }
     }
 }
