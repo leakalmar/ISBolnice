@@ -37,7 +37,7 @@ namespace Hospital_IS.SecretaryView
         private void DeleteNotification(object sender, RoutedEventArgs e)
         {
             DeleteNotification dn = new DeleteNotification(Notification, this);
-            dn.Show();
+            dn.ShowDialog();
         }
     }
 }

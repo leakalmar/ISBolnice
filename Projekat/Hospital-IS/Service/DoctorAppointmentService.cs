@@ -120,17 +120,18 @@ namespace Service
             List<Appointment> docAppsByRoom = new List<Appointment>(GetAllByRoom(doctorAppointment.Room));
             List<Appointment> classicAppsByRoom = AppointmentService.Instance.GetAppByRoom(doctorAppointment.Room);
             List<Appointment> appsByDoctor = new List<Appointment>(GetAllByDoctor(doctorAppointment.Doctor.Id));
+            Boolean isVerified = true;
 
             if (!AppointmentService.Instance.CheckAppointment(docAppsByRoom, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd))
-                return false;
-            if (!AppointmentService.Instance.CheckAppointment(classicAppsByRoom, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd))
-                return false;
-            if (!AppointmentService.Instance.CheckAppointment(appsByDoctor, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd))
-                return false;
-            if (!IsDoctorWorking(doctorAppointment.Doctor, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd))
-                return false;
+                isVerified = false;
+            if (!AppointmentService.Instance.CheckAppointment(classicAppsByRoom, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd) && isVerified == true)
+                isVerified = false;
+            if (!AppointmentService.Instance.CheckAppointment(appsByDoctor, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd) && isVerified == true)
+                isVerified = false;
+            if (!IsDoctorWorking(doctorAppointment.Doctor, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd) && isVerified == true)
+                isVerified = false;
 
-            return true;
+            return isVerified;
         }
 
         private bool IsDoctorWorking(Doctor doctor, DateTime appointmentStart, DateTime appointmentEnd)
@@ -140,12 +141,12 @@ namespace Service
 
             if (doctor.WorkShift.Equals(WorkDayShift.FirstShift))
             {
-                if (appointmentStart.TimeOfDay > new TimeSpan(8, 0, 0) && appointmentEnd.TimeOfDay < new TimeSpan(14, 0, 0))
+                if (appointmentStart.TimeOfDay >= new TimeSpan(8, 0, 0) && appointmentEnd.TimeOfDay <= new TimeSpan(14, 0, 0))
                     return true;
             }
             else 
             {
-                if (appointmentStart.TimeOfDay > new TimeSpan(14, 0, 0) && appointmentEnd.TimeOfDay < new TimeSpan(20, 0, 0))
+                if (appointmentStart.TimeOfDay >= new TimeSpan(14, 0, 0) && appointmentEnd.TimeOfDay <= new TimeSpan(20, 0, 0))
                     return true;
             }
             return false;

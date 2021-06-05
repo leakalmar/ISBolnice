@@ -65,7 +65,7 @@ namespace Hospital_IS
         private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
             RecipientSelection rp = new RecipientSelection(this);
-            rp.Show();
+            rp.ShowDialog();
         }
 
         private void rbSelectAll_Click(object sender, RoutedEventArgs e)

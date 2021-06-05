@@ -49,7 +49,7 @@ namespace Hospital_IS
         private void CreateNotification(object sender, RoutedEventArgs e)
         {
             CreateNotification cn = new CreateNotification(this);
-            cn.Show();
+            cn.ShowDialog();
         }
 
         private NotificationDTO FindNotification(int id)
@@ -67,7 +67,7 @@ namespace Hospital_IS
             Button button = sender as Button;
             NotificationDTO n = FindNotification(Int32.Parse(button.Tag.ToString()));
             UpdateNotification un = new UpdateNotification(n, this);
-            un.Show();
+            un.ShowDialog();
         }
     }
 }

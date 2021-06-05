@@ -23,7 +23,9 @@
         <DataGrid x:Name="dataGridPatients" ItemsSource="{Binding Patients}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
                   Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" Grid.RowSpan="1" Margin="10" RowHeaderWidth="0"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  Background="Transparent" RowBackground="AliceBlue">
+                  Style="{DynamicResource ResourceKey=DataGrid}"
+                  ColumnHeaderStyle="{DynamicResource ResourceKey=ColumHeader}"
+                  RowStyle="{DynamicResource ResourceKey=GridRow}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Prezime" Binding="{Binding Surname}" Width="*"/>
@@ -37,32 +39,33 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
             <Button Width="55" Content="Prikaži" Height="30" Margin="10 10 10 10"
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
-                HorizontalAlignment="Right" Click="ShowPatient"/>
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    HorizontalAlignment="Right" Click="ShowPatient"/>
 
             <Button Width="55" Content="Izmeni" Height="30" Margin="10 0 10 0"
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
-                HorizontalAlignment="Left" Click="UpdatePatient"/>
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    HorizontalAlignment="Left" Click="UpdatePatient"/>
 
             <Button Width="55" Content="Obriši" Height="30" Margin="10 0 40 0"
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
-                HorizontalAlignment="Right" Click="DeletePatient"/>
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    HorizontalAlignment="Right" Click="DeletePatient"/>
 
             <Button Width="100" Content="Registracija" Height="30" Margin="40 0 0 0 "
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
-                Click="AddNewPatient"/>
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    Click="AddNewPatient"/>
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="3" Grid.RowSpan="2"
                     HorizontalAlignment="Right" Margin="10">
-            <Button x:Name="btnGuests" Width="120" Height="30" Margin="0 0 20 5" 
-                Content="Gostujući nalozi" HorizontalAlignment="Right" VerticalAlignment="Top"
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White" Click="btnGuests_Click"/>
+            <Button x:Name="btnGuests" Width="120" Margin="0 0 20 5" 
+                    Content="Gostujući nalozi" HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Style="{DynamicResource ResourceKey=RegularButton}" Click="btnGuests_Click"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 20 0">
-                <TextBox Name="txtSearch" Foreground="Gray" Text="Pretraži..." Margin="0 5 10 0" Width="120" VerticalAlignment="Center" Padding="4"
+                <TextBox Name="txtSearch" Foreground="DarkSlateGray" Text="Pretraži..." Margin="0 5 10 0" Width="120" VerticalAlignment="Center" Padding="4"
+                         Style="{DynamicResource ResourceKey=RegularTextBox}"
                          GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
-                <Button Width="25" Background="#FF184095" Margin="0 5 0 0" Click="SearchButton_Click">
-                    <Image Source="pack://application:,,,/Resources/search.png"/>
+                <Button Style="{DynamicResource ResourceKey=SearchButton}" Margin="0 5 0 0" Click="SearchButton_Click">
+                    <Image Source="pack://application:,,,/Resources/SearchSecretary.png"/>
                 </Button>
             </StackPanel>
         </StackPanel>

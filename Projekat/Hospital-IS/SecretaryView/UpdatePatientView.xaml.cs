@@ -93,7 +93,7 @@ namespace Hospital_IS
         private void AddNewAllergy(object sender, RoutedEventArgs e)
         {
             AddAllergy aa = new AddAllergy(this);
-            aa.Show();
+            aa.ShowDialog();
         }
 
         private void ChangeAllergy(object sender, RoutedEventArgs e)
@@ -101,7 +101,7 @@ namespace Hospital_IS
             if ((string)dataGridAllergies.SelectedItem != null)
             {
                 UpdateAllergy ua = new UpdateAllergy(this);
-                ua.Show();
+                ua.ShowDialog();
             }
         }
 
@@ -110,7 +110,7 @@ namespace Hospital_IS
             if ((string)dataGridAllergies.SelectedItem != null)
             {
                 RemoveAllergy ra = new RemoveAllergy(this);
-                ra.Show();
+                ra.ShowDialog();
             }
         }
     }

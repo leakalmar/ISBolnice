@@ -5,52 +5,175 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
-        Title="Prikaz doktora" Height="350" Width="410"
+        Title="Prikaz doktora" Height="450" Width="500"
         WindowStartupLocation="CenterScreen"
         FontSize="17"
         FontWeight="Light"
         Background="#CCC5CFE5">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="20"/>
-        </Grid.RowDefinitions>
+    <TabControl Name="tab" Grid.Row="0" Grid.ColumnSpan="4" Style="{DynamicResource ResourceKey=TabControl}">
+        <TabItem Header="Opste informacije" Style="{DynamicResource ResourceKey=TabItem}">
+            <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Ime:" Margin="20 10 20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="Prezime:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Datum rođenja:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="Adresa:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="Telefon:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="6" Text="Email:" Margin="20 5"/>
-        <TextBlock Grid.Column="1" Grid.Row="7" Text="Specijalizacija:" Margin="20 5"/>
-
-
-        <TextBlock Grid.Column="2" Grid.Row="1" Margin="40 10 20 5" Text="{Binding Doctor.Name}"/>
-        <TextBlock Grid.Column="2" Grid.Row="2" Margin="40 5 10 5" Text="{Binding Doctor.Surname}"/>
-        <TextBlock Grid.Column="2" Grid.Row="3" Margin="40 5 10 5" Text="{Binding Doctor.BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}"/>
-        <TextBlock Grid.Column="2" Grid.Row="4" Margin="40 5 10 5" Text="{Binding Doctor.Address}"/>
-        <TextBlock Grid.Column="2" Grid.Row="5" Margin="40 5 10 5" Text="{Binding Doctor.Phone}"/>
-        <TextBlock Grid.Column="2" Grid.Row="6" Margin="40 5 10 5" Text="{Binding Doctor.Email}"/>
-        <TextBlock Grid.Column="2" Grid.Row="7" Margin="40 5 10 5" Text="{Binding Doctor.Specialty}"/>
-      
-        <Button Grid.Row="8" Grid.ColumnSpan="4" Grid.RowSpan="2" Content="OK" Margin="0 20 0 0"
-                Width="55" Click="Close"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="Ime:" Margin="20 10 20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="Prezime:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="Datum rođenja:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="1" Grid.Row="4" Text="Adresa:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="1" Grid.Row="5" Text="Telefon:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="1" Grid.Row="6" Text="Email:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="1" Grid.Row="7" Text="Specijalizacija:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
 
-    </Grid>
+                <TextBlock Grid.Column="2" Grid.Row="1" Margin="40 10 20 10" Text="{Binding Doctor.Name}" VerticalAlignment="Center" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="2" Margin="40 5 10 10" Text="{Binding Doctor.Surname}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="3" Margin="40 5 10 10" Text="{Binding Doctor.BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="4" Margin="40 5 10 10" Text="{Binding Doctor.Address}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="5" Margin="40 5 10 10" Text="{Binding Doctor.Phone}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="6" Margin="40 5 10 10" Text="{Binding Doctor.Email}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="7" Margin="40 5 10 10" Text="{Binding Doctor.Specialty}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+
+                <Button Grid.Row="8" Grid.ColumnSpan="4" Grid.RowSpan="2" 
+                        Style="{DynamicResource ResourceKey=RegularButton}"
+                        Content="OK" Margin="0 20 0 0"
+                        Width="55" Click="Close"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Istorija pregleda" Style="{DynamicResource ResourceKey=TabItem}">
+            <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Pregledi" Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
+                           FontSize="17"/>
+
+                <DataGrid x:Name="dataGridAppointments" ItemsSource="{Binding Appointments}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
+                  Grid.Column="1" Grid.Row="2" Grid.RowSpan="1" Margin="0 10" RowHeaderWidth="0"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="12" 
+                  Style="{DynamicResource ResourceKey=DataGrid}"
+                  ColumnHeaderStyle="{DynamicResource ResourceKey=ColumHeader}"
+                  RowStyle="{DynamicResource ResourceKey=GridRow}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Datum" 
+                                    Binding="{Binding AppointmentStart, StringFormat=\{0: dd.MM.yyyy. \}}" Width="auto"/>
+                        <DataGridTextColumn Header="Vreme" 
+                                    Binding="{Binding AppointmentStart, StringFormat=\{0: HH:mm \}}" Width="auto"/>
+                        <DataGridTextColumn Header="Pacijent" Width="*">
+                            <DataGridTextColumn.Binding>
+                                <MultiBinding StringFormat="{} {0} {1}">
+                                    <Binding Path="Patient.Name"/>
+                                    <Binding Path="Patient.Surname"/>
+                                </MultiBinding>
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Tip pregleda" 
+                                    Binding="{Binding AppTypeText}" Width="auto"/>
+                        <DataGridTextColumn Header="Soba" 
+                                    Binding="{Binding Room}" Width="*"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF3558A2"/>
+                    </DataGrid.Resources>
+
+                </DataGrid>
+
+                <Button Content="Prikaži" Grid.Row="3" Grid.Column="1" FontSize="15"
+                        Style="{DynamicResource ResourceKey=RegularButton}"
+                        Margin="40 0 0 70" Width="60" HorizontalAlignment="Left" Click="ShowAppointment"/>
+               
+                <Button Content="OK" Width="55" Style="{DynamicResource ResourceKey=RegularButton}"
+                        Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Click="Close"/>
+
+            </Grid>
+        </TabItem>
+        <TabItem Header="Zakazani pregledi" Style="{DynamicResource ResourceKey=TabItem}">
+            <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Zakazani pregledi" Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
+                           FontSize="17"/>
+
+                <DataGrid x:Name="dataGridFutureAppointments" ItemsSource="{Binding FutureAppointments}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
+                  Grid.Column="1" Grid.Row="2" Grid.RowSpan="1" Margin="0 10" RowHeaderWidth="0"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="12" 
+                  Style="{DynamicResource ResourceKey=DataGrid}"
+                  ColumnHeaderStyle="{DynamicResource ResourceKey=ColumHeader}"
+                  RowStyle="{DynamicResource ResourceKey=GridRow}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Datum" 
+                                    Binding="{Binding AppointmentStart, StringFormat=\{0: dd.MM.yyyy. \}}" Width="auto"/>
+                        <DataGridTextColumn Header="Vreme" 
+                                    Binding="{Binding AppointmentStart, StringFormat=\{0: HH:mm \}}" Width="auto"/>
+                        <DataGridTextColumn Header="Pacijent" Width="*">
+                            <DataGridTextColumn.Binding>
+                                <MultiBinding StringFormat="{} {0} {1}">
+                                    <Binding Path="Patient.Name"/>
+                                    <Binding Path="Patient.Surname"/>
+                                </MultiBinding>
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Tip pregleda" 
+                                    Binding="{Binding AppTypeText}" Width="auto"/>
+                        <DataGridTextColumn Header="Soba" 
+                                    Binding="{Binding Room}" Width="*"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF3558A2"/>
+                    </DataGrid.Resources>
+
+                </DataGrid>
+
+                <Button Content="Prikaži" Grid.Row="3" Grid.Column="1" FontSize="15"
+                        Style="{DynamicResource ResourceKey=RegularButton}"
+                        Margin="40 0 0 70" Width="60" HorizontalAlignment="Left" Click="ShowAppointment"/>
+                <Button Content="Zakaži novi termin" Grid.Row="3" Grid.Column="1" FontSize="15"
+                        Style="{DynamicResource ResourceKey=RegularButton}"
+                        Margin="0 0 0 70" Width="140" HorizontalAlignment="Right" Click="ScheduleNewAppointment"/>
+
+                <Button Content="OK" Width="55" Style="{DynamicResource ResourceKey=RegularButton}"
+                        Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Click="Close"/>
+
+            </Grid>
+        </TabItem>
+    </TabControl>
 </Window>
