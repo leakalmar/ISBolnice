@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital_IS.View.PatientViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -17,8 +18,11 @@ namespace Hospital_IS.View
     /// </summary>
     public partial class FeedbackView : Window
     {
+        public FeedbackViewModel FeedbackViewModel { get; set; }
         public FeedbackView()
         {
+            FeedbackViewModel = new FeedbackViewModel();
+            this.DataContext = FeedbackViewModel;
             InitializeComponent();
         }
     }

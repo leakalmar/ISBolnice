@@ -9,7 +9,6 @@ namespace Hospital_IS.View.PatientViewModels
 {
     public class FeedbackViewModel : BindableBase
     {
-        private int grade;
         private string comment;
 
         public MyICommand SendFeedback { get; set; }
@@ -17,7 +16,7 @@ namespace Hospital_IS.View.PatientViewModels
         public EventHandler OnRequestClose;
         private readonly MyWindowFactory windowFactory;
 
-        public FeedbackViewModel(int doctorAppointmentId)
+        public FeedbackViewModel()
         {
             SendFeedback = new MyICommand(Send);
             CloseFeedback = new MyICommand(Close);
