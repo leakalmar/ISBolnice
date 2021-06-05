@@ -11,6 +11,7 @@ namespace Hospital_IS.View.PatientViewModels
         public PatientAppointmentEvaluation AppointmentEvaluation { get; set; }
 
         public MyICommand EvaluateAppointment { get; set; }
+        public MyICommand CloseEvaluate { get; set; }
         public EventHandler OnRequestClose;
         private readonly MyWindowFactory windowFactory;
 
@@ -18,6 +19,7 @@ namespace Hospital_IS.View.PatientViewModels
         {
             AppointmentEvaluation = new PatientAppointmentEvaluation(doctorAppointmentId);
             EvaluateAppointment = new MyICommand(EvaluateApp);
+            CloseEvaluate = new MyICommand(Close);
             windowFactory = new WindowProductionFactory();
             Grade = 0;
             Comment = "";
@@ -63,5 +65,9 @@ namespace Hospital_IS.View.PatientViewModels
             OnRequestClose(this, new EventArgs());
         }
 
+        private void Close()
+        {
+            OnRequestClose(this, new EventArgs());
+        }
     }
 }
