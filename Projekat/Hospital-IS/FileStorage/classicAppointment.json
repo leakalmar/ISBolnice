@@ -2,82 +2,37 @@
   {
     "Reserved": true,
     "AppointmentCause": null,
-    "AppointmentStart": "2021-04-21T10:01:54",
-    "AppointmentEnd": "2021-04-21T10:03:54",
+    "AppointmentStart": "2021-06-17T00:00:00",
+    "AppointmentEnd": "2021-06-18T00:00:00",
     "Type": 3,
     "Room": 8,
-    "Id": 6
+    "Id": 16
   },
   {
     "Reserved": true,
     "AppointmentCause": null,
-    "AppointmentStart": "2021-04-21T10:05:29",
-    "AppointmentEnd": "2021-04-21T10:07:29",
+    "AppointmentStart": "2021-07-15T00:00:00",
+    "AppointmentEnd": "2021-07-17T00:00:00",
     "Type": 3,
-    "Room": 8,
-    "Id": 7
-  },
-  {
-    "Reserved": true,
-    "AppointmentCause": null,
-    "AppointmentStart": "2021-06-03T00:00:00",
-    "AppointmentEnd": "2021-06-05T00:00:00",
-    "Type": 2,
-    "Room": 11,
-    "Id": 8
+    "Room": 7,
+    "Id": 17
   },
   {
     "Reserved": true,
     "AppointmentCause": null,
     "AppointmentStart": "2021-06-17T00:00:00",
-    "AppointmentEnd": "2021-07-10T00:00:00",
-    "Type": 2,
-    "Room": 11,
-    "Id": 9
+    "AppointmentEnd": "2021-07-03T00:00:00",
+    "Type": 3,
+    "Room": 9,
+    "Id": 18
   },
   {
     "Reserved": true,
     "AppointmentCause": null,
-    "AppointmentStart": "2021-05-27T00:00:00",
-    "AppointmentEnd": "2021-05-29T00:00:00",
+    "AppointmentStart": "2021-06-19T00:00:00",
+    "AppointmentEnd": "2021-06-26T00:00:00",
     "Type": 2,
-    "Room": 13,
-    "Id": 10
-  },
-  {
-    "Reserved": true,
-    "AppointmentCause": null,
-    "AppointmentStart": "2021-05-27T00:00:00",
-    "AppointmentEnd": "2021-05-29T00:00:00",
-    "Type": 2,
-    "Room": 14,
-    "Id": 11
-  },
-  {
-    "Reserved": true,
-    "AppointmentCause": null,
-    "AppointmentStart": "2021-05-25T23:22:25",
-    "AppointmentEnd": "2021-05-25T23:25:25",
-    "Type": 2,
-    "Room": 10,
-    "Id": 12
-  },
-  {
-    "Reserved": true,
-    "AppointmentCause": null,
-    "AppointmentStart": "2021-05-25T23:22:25",
-    "AppointmentEnd": "2021-05-25T23:25:25",
-    "Type": 2,
-    "Room": 11,
-    "Id": 13
-  },
-  {
-    "Reserved": true,
-    "AppointmentCause": null,
-    "AppointmentStart": "2021-05-26T00:23:28",
-    "AppointmentEnd": "2021-05-26T00:24:28",
-    "Type": 2,
-    "Room": 14,
-    "Id": 14
+    "Room": 8,
+    "Id": 19
   }
 ]

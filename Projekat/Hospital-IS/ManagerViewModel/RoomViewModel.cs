@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using Hospital_IS.Controllers;
+using Hospital_IS.ManagerView1;
 using Model;
 using System;
 using System.Collections.ObjectModel;
@@ -27,10 +28,49 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand navigateToRoomPage;
         private RelayCommand navigateToRoomRenovation;
         private RelayCommand navigateAdvancedRoomRenovation;
+        private RelayCommand navigateToEmployeerPage;
+        private RelayCommand navigateToBranchPage;
+        private RelayCommand navigateToRenovationReport;
+        private RelayCommand navigateToAddRoom;
         private NavigationService navService;
         private Room selectedRoom;
         private RelayCommand navigateToManagerProfilePage;
 
+
+        public RelayCommand NavigateToAddRoom
+        {
+            get { return navigateToAddRoom; }
+            set
+            {
+                navigateToAddRoom = value;
+            }
+        }
+
+        public RelayCommand NavigateToRenovationReport
+        {
+            get { return navigateToRenovationReport; }
+            set
+            {
+                navigateToRenovationReport = value;
+            }
+        }
+
+        public RelayCommand NavigateToBranchPage
+        {
+            get { return navigateToBranchPage; }
+            set
+            {
+                navigateToBranchPage = value;
+            }
+        }
+        public RelayCommand NavigateToEmployeerPage
+        {
+            get { return navigateToEmployeerPage; }
+            set
+            {
+                navigateToEmployeerPage = value;
+            }
+        }
 
         public RelayCommand NavigateAdvancedRoomRenovation
         {
@@ -184,6 +224,19 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
+        private void Execute_NavigateToBranchPageCommand(object obj)
+        {
+            this.NavService.Navigate(
+                new Uri("ManagerView1/BranchView.xaml", UriKind.Relative));
+        }
+
+        private void Execute_NavigateToEmployeerPageCommand(object obj)
+        {
+            this.NavService.Navigate(
+                new Uri("ManagerView1/EmployeersView.xaml", UriKind.Relative));
+        }
+
+
         private void Execute_NavigateToRoomPageCommand(object obj)
         {
             this.NavService.Navigate(
@@ -281,12 +334,31 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToEquipmentPageCommand = new RelayCommand(Execute_NavigateToEquipmentPageCommand, CanExecute_NavigateCommand);
             this.NavigateToRoomRenovation = new RelayCommand(Execute_RenovationRoomCommand, CanExecute_RenovationRoomCommand);
             this.NavigateAdvancedRoomRenovation = new RelayCommand(Execute_AdvancedRenovationRoomCommand);
+            this.NavigateToEmployeerPage = new RelayCommand(Execute_NavigateToEmployeerPageCommand);
+            this.NavigateToBranchPage = new RelayCommand(Execute_NavigateToBranchPageCommand);
+            this.NavigateToRenovationReport = new RelayCommand(Execute_NavigateToRoomRenovationReport);
+            this.NavigateToAddRoom = new RelayCommand(Execute_NavigateToAddRoomPage);
             DispatcherTimer dispatcherTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMinutes(1)
             };
             dispatcherTimer.Tick += timer_Tick;
             dispatcherTimer.Start();
+        }
+
+        private void Execute_NavigateToAddRoomPage(object obj)
+        {
+
+            AddRoomViewModel.Instance.NavService = this.NavService;
+            this.NavService.Navigate(
+                    new Uri("ManagerView1/AddRoom.xaml", UriKind.Relative));
+        }
+
+        private void Execute_NavigateToRoomRenovationReport(object obj)
+        {
+            RenovationReportVIewModel.Instance.NavService = this.NavService;
+            ReportRenovationWindow reportRenovation = new ReportRenovationWindow();
+            reportRenovation.ShowDialog();
         }
 
 

@@ -1,9 +1,10 @@
-﻿<Page x:Class="Hospital_IS.ManagerView1.AddRoom"
+﻿<Page x:Class="Hospital_IS.ManagerView1.EmployeerDetailsView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:managerviewmodel="clr-namespace:Hospital_IS.ManagerViewModel" d:DataContext="{d:DesignInstance Type=managerviewmodel:AddRoomViewModel}"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:managerviewmodel="clr-namespace:Hospital_IS.ManagerViewModel" d:DataContext="{d:DesignInstance Type=managerviewmodel:EmployeersViewModel}"
       mc:Ignorable="d" 
+      Loaded="Page_Loaded"
          Title="Dodaj sobu" Height="750" Width="430" Background="Transparent"
        >
 
@@ -113,41 +114,50 @@
             <ColumnDefinition Width="15"/>
             <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="25"/>
-            <ColumnDefinition Width="180"/>
-            <ColumnDefinition Width="130"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="105"/>
             <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="15"/>
+
 
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
 
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
 
 
         </Grid.RowDefinitions>
 
-        <Border  Grid.ColumnSpan="9" Grid.RowSpan="20"  >
+        <Border  Grid.ColumnSpan="9" Grid.RowSpan="30"  >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF213868" Offset="0.0"/>
@@ -156,7 +166,7 @@
             </Border.Background>
         </Border>
 
-        <Button x:Name="Back"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" Command="{Binding NavigateToPreviousPage}" >
+        <Button x:Name="Back"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" Command="{Binding NavigateToPreviousPage}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="15"/>
@@ -167,55 +177,70 @@
                 <Image Source="pack://application:,,,/Resources/backbutton.png" Width="50" Height="50"/>
             </StackPanel>
         </Button>
-        <Label  Content="Dodavanje sobe" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Foreground="White" FontSize="30" FontWeight="SemiBold"
+        <Label  Content="Detaljne informacije o " Grid.Column="3" Grid.Row="1"  Grid.ColumnSpan="4" Foreground="White" FontSize="30" FontWeight="SemiBold"
                HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <Label Content="Broj sobe*" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
-        <TextBox x:Name="RoomNumberBox"  Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="4" Grid.Column="3" 
-                 Grid.ColumnSpan="2" Height="30"   FontSize="15" Padding="4" GotFocus="RoomNumber_GotFocus" Text="{Binding RoomVallidationDTO.RoomNumber,Mode=TwoWay}">
-          
-        </TextBox>
-        <TextBlock Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2" Text="{Binding RoomVallidationDTO.ValidationErrors[RoomNumber]}" Grid.RowSpan="2" Foreground="Red"/>
+        <Label  Content="zaposlenom " Grid.Column="3" Grid.Row="1"  Grid.ColumnSpan="3" Foreground="White" FontSize="30" FontWeight="SemiBold"
+               HorizontalAlignment="Left" Margin="74,39,0,0" Grid.RowSpan="2"  />
+        <Label Content="Godisnji odmor" Grid.Row="4" Grid.Column="3" FontSize="15" Foreground="White"/>
+        <Calendar Grid.Row="5" Grid.RowSpan="9" Grid.Column="3" Height="185"/>
+        <Label Content="Pocetak" Grid.Row="4" FontSize="15" Foreground="White" Grid.Column="5" Margin="0,20,0,10" Grid.RowSpan="2" />
+        <TextBox Grid.Row="5" Grid.Column="5" Margin="0,20,0,15" Grid.RowSpan="3" Template="{StaticResource TextBoxBaseControlTemplate}"
+                 Padding="4" FontSize="15" />
+        <Label Content="Kraj" Grid.Row="7" FontSize="15" Foreground="White" Grid.Column="5" Margin="0,20,0,10" Grid.RowSpan="3" />
+        <TextBox Grid.Row="9" Grid.Column="5" Margin="0,20,0,15" Grid.RowSpan="3" Template="{StaticResource TextBoxBaseControlTemplate}"
+                   Padding="4" FontSize="15"/>
+        <Button Grid.Row="12" Grid.Column="5" Content="Izmeni" FontSize="15" Margin="0,0,0,15" Grid.RowSpan="2"/>
+        <Label Content="Radno vrijeme" Grid.Row="15" Grid.Column="3" FontSize="15" Foreground="White"/>
+        <DataGrid Grid.Row="17" Grid.Column="3" Grid.ColumnSpan="3" ItemsSource="{Binding WorkWeeks}" AutoGenerateColumns="False" CanUserReorderColumns="False" 
+                  CanUserDeleteRows="False"  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Pon" Width="50" Binding = "{Binding Monday}"/>
+                <DataGridTextColumn Header="Uto" Width="50" Binding="{Binding Tuesday}"/>
+                <DataGridTextColumn Header="Sri" Width="50" Binding="{Binding Wednesday}"/>
+                <DataGridTextColumn Header="Cet" Width="50" Binding = "{Binding Thursday}"/>
+                <DataGridTextColumn Header="Pet" Width="50" Binding="{Binding Friday}"/>
+                <DataGridTextColumn Header="Sub" Width="*" Binding="{Binding Saturday}"/>
 
-        <Label Content="Sprat sobe*" Grid.Row="6" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
-        <TextBox x:Name="RoomFloorBox" Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="7" Grid.Column="3" 
-                  Grid.ColumnSpan="2" Height="30"  FontSize="15" Padding="4" GotFocus="RoomFloor_GotFocus" Text="{Binding RoomVallidationDTO.RoomFloor , Mode=TwoWay}" >
-           
-        </TextBox>
-        <TextBlock Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="2" Text="{Binding RoomVallidationDTO.ValidationErrors[RoomFloor]}" Grid.RowSpan="2" Foreground="Red"/>
 
-        <Label Content="Povrsina sobe [m^2|*" Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
-        <TextBox x:Name="SurfaceAreaBox"  Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="10" Grid.Column="3"
-                  Grid.ColumnSpan="2" Height="30" FontSize="15" Padding="4" GotFocus="SurfaceArea_GotFocus" Text="{Binding RoomVallidationDTO.SurfaceArea  ,Mode=TwoWay}" >
-            
-        </TextBox>
-        <TextBlock Grid.Row="11" Grid.Column="3" Grid.ColumnSpan="2" Text="{Binding RoomVallidationDTO.ValidationErrors[SurfaceArea]}" Grid.RowSpan="2" Foreground="Red"/>
 
-        <Label Content="Broj kreveta*" Grid.Row="12" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
-        <TextBox x:Name="BedNumberBox"  Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="13" Grid.Column="3" 
-                  Grid.ColumnSpan="2"  Height="30" FontSize="15" Padding="4" GotFocus="BedNumber_GotFocus" Text="{Binding RoomVallidationDTO.BedNumber, Mode=TwoWay}">
-
-        </TextBox>
-        <TextBlock Grid.Row="14" Grid.Column="3" Grid.ColumnSpan="2" Text="{Binding RoomVallidationDTO.ValidationErrors[BedNumber]}" Grid.RowSpan="2" Foreground="Red"/>
-
-        <Label Content="Tip sobe*" Grid.Row="15" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
-        <ComboBox x:Name="ComboBox" Template="{StaticResource ComboBoxBaseControlTemplate}" SelectedIndex="{Binding SelectedEnumIndex}" Grid.Row="16" Grid.Column="3" Grid.ColumnSpan="2" FontSize="15">
-            <ComboBoxItem Content="Soba za odmor"/>
-            <ComboBoxItem Content="Soba za preglede"/>
-            <ComboBoxItem Content="Operaciona soba"/>
-            <ComboBoxItem Content="Magacin"/>
-        </ComboBox>
-
-        <Button x:Name="Submit" Content="Potvrdi" FontSize="20" Height="40" Background="White" BorderThickness="3" BorderBrush="Green" Foreground="#FF5B317E" FontWeight="SemiBold" Grid.Row="18" 
-                 Grid.Column="3" Grid.ColumnSpan="2" Width="200" Command="{Binding AddRoomCommand}" >
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="Submit" Content="Izvjestaj" FontSize="15" Height="30" Background="White" BorderThickness="3" BorderBrush="Green" Foreground="#FF5B317E" FontWeight="SemiBold" Grid.Row="19" 
+                 Grid.Column="2" Width="100" Margin="24,0,71,0" Grid.ColumnSpan="2" >
 
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="15"/>
+                    <Setter Property="CornerRadius" Value="5,30,30,5"/>
                 </Style>
             </Button.Resources>
         </Button>
+        <Button Content="Izmeni" FontSize="15" Height="30" Background="White" BorderThickness="3" BorderBrush="Green" Foreground="#FF5B317E" FontWeight="SemiBold" Grid.Row="19" 
+                 Grid.Column="5" Width="100"  Grid.ColumnSpan="2" Margin="7,0,23,0" >
 
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Label Content="Ocene" Grid.Row="21" Grid.Column="3" FontSize="15" Foreground="White"/>
+        <ListView Grid.Row ="22" Grid.Column="3" SelectedIndex="0" Margin="0,0,20,0"  >
+            <ListViewItem Content="Termin1" FontSize="15"/>
+            <ListViewItem Content="Termin2" FontSize="15"/>
+            <ListViewItem Content="Termin3" FontSize="15"/>
+            <ListViewItem Content="Termin4" FontSize="15"/>
+            <ListViewItem Content="Termin4" FontSize="15"/>
+        </ListView>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" Grid.Row="22" Grid.Column="4" Grid.ColumnSpan="2"
+                VerticalScrollBarVisibility="Auto" >
+            <TextBox Text="Ocena 5.0 Komentar: Sve najbolje je bilo, odlicna usluga" TextWrapping="Wrap" FontSize="14" Template="{StaticResource TextBoxBaseControlTemplate}"
+                    x:Name="Usage" Padding="5" FontFamily="Verdana" Foreground="Black"
+                    Background="White" BorderThickness="0" IsReadOnly="True" />
+        </ScrollViewer>
+        <Label Content="Plata" Grid.Row="24" Grid.Column="3" FontSize="15" Foreground="White"/>
+        <TextBox  Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="25" Grid.Column="3" 
+                  Grid.ColumnSpan="3" Text="150000"  Height="30" FontSize="15" Padding="4" IsReadOnly="True" >
 
-
+        </TextBox>
     </Grid>
 </Page>

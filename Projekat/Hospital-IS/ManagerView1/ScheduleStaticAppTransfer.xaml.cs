@@ -20,7 +20,18 @@ namespace Hospital_IS.ManagerView1
         private void TransferStart_Error(object sender, ValidationErrorEventArgs e)
         {
             AffirmTransfer.IsEnabled = false;
-            MessageBox.Show("uslo");
+          
+        }
+
+        private void AffirmTransfer_Click(object sender, RoutedEventArgs e)
+        {
+            if(TransferEnd.Text.Length == 0 || TransferStart.Text.Length == 0)
+            {
+                MessageBox.Show("Unesite datume u validnom obliku");
+            }
+            else{
+                ScheduleStaticTransferViewModel.Instance.TransferStaticExecute();
+            }
         }
     }
 }

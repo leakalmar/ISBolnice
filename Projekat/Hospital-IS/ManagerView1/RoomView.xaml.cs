@@ -45,7 +45,7 @@ namespace Hospital_IS.ManagerView1
         private void AddRoom_Click(object sender, RoutedEventArgs e)
         {
             RoomViewModel roomViewModel = new RoomViewModel(this.NavigationService);
-            AddRoom addRoom = new AddRoom(roomViewModel);
+            AddRoom addRoom = new AddRoom();
             this.NavigationService.Navigate(addRoom);
         }
 

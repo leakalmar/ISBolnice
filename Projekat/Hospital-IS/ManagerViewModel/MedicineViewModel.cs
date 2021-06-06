@@ -29,7 +29,12 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand registrateNewMedicineCommand;
         private RelayCommand updateMedicineCommand;
         private RelayCommand deleteMedicineCommand;
+        private RelayCommand navigateToEmployeePage;
+        private RelayCommand navigateToBranchPage;
+        private RelayCommand navigateToManagerProfilePage;
+        private RelayCommand navigateToEquipmentPage;
         private Medicine selectedMedicine;
+
 
         public Medicine SelectedMedicine
         {
@@ -46,6 +51,44 @@ namespace Hospital_IS.ManagerViewModel
                     OnPropertyChanged("SelectedMedicine");
 
                 }
+            }
+        }
+
+        public RelayCommand NavigateToBranchPage
+        {
+            get { return navigateToBranchPage; }
+            set
+            {
+                navigateToBranchPage = value;
+            }
+        }
+
+        public RelayCommand NavigateToEquipmentPage
+        {
+            get { return navigateToEquipmentPage; }
+            set
+            {
+                navigateToEquipmentPage = value;
+            }
+        }
+
+      
+
+        public RelayCommand NavigateToEmployeePage
+        {
+            get { return navigateToEmployeePage; }
+            set
+            {
+                navigateToEmployeePage = value;
+            }
+        }
+
+        public RelayCommand NavigateToManagerProfilePage
+        {
+            get { return navigateToManagerProfilePage; }
+            set
+            {
+                navigateToManagerProfilePage = value;
             }
         }
 
@@ -295,8 +338,42 @@ namespace Hospital_IS.ManagerViewModel
             this.RegistrateNewMedicineCommand = new RelayCommand(Execute_RegistrateNewMedicine);
             this.UpdateMedicineCommand = new RelayCommand(Execute_UpdateMedicine);
             this.DeleteMedicineCommand = new RelayCommand(Execute_DeleteMedicine, CanExecute_IfMedicineIsSelected);
+            this.NavigateToEquipmentPage = new RelayCommand(Execute_NavigateToEquipmentPageCommand);
+            this.NavigateToManagerProfilePage = new RelayCommand(Execute_NavigateToManagerProfilePageCommand);
+            this.NavigateToEmployeePage = new RelayCommand(Execute_NavigateToEmployeePageCommand);
+            this.NavigateToBranchPage = new RelayCommand(Execute_NavigateToBranchPageCommand);
 
         }
+
+
+        private void Execute_NavigateToBranchPageCommand(object obj)
+        {
+            MedicineViewModel.Instance.NavService = this.NavService;
+            this.NavService.Navigate(
+                new Uri("ManagerView1/BranchView.xaml", UriKind.Relative));
+        }
+
+        private void Execute_NavigateToEquipmentPageCommand(object obj)
+        {
+            EquipmentViewModel.Instance.NavService = this.NavService;
+            this.NavService.Navigate(
+                new Uri("ManagerView1/EquipmentView.xaml", UriKind.Relative));
+        }
+      
+        private void Execute_NavigateToEmployeePageCommand(object obj)
+        {
+            this.NavService.Navigate(
+                new Uri("ManagerView1/EmployeersView.xaml", UriKind.Relative));
+        }
+
+
+        private void Execute_NavigateToManagerProfilePageCommand(object obj)
+        {
+            ManagerProfileOptionsVIewModel.Instance.PreviousMainPage = this.NavService.CurrentSource;
+            this.NavService.Navigate(
+                new Uri("ManagerView1/ManagerProfileOptionsView.xaml", UriKind.Relative));
+        }
+
 
         private bool CanExecute_NavigateCommand(object obj)
         {
