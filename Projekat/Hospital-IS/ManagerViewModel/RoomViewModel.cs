@@ -31,10 +31,20 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand navigateToEmployeerPage;
         private RelayCommand navigateToBranchPage;
         private RelayCommand navigateToRenovationReport;
+        private RelayCommand navigateToAddRoom;
         private NavigationService navService;
         private Room selectedRoom;
         private RelayCommand navigateToManagerProfilePage;
 
+
+        public RelayCommand NavigateToAddRoom
+        {
+            get { return navigateToAddRoom; }
+            set
+            {
+                navigateToAddRoom = value;
+            }
+        }
 
         public RelayCommand NavigateToRenovationReport
         {
@@ -327,12 +337,21 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToEmployeerPage = new RelayCommand(Execute_NavigateToEmployeerPageCommand);
             this.NavigateToBranchPage = new RelayCommand(Execute_NavigateToBranchPageCommand);
             this.NavigateToRenovationReport = new RelayCommand(Execute_NavigateToRoomRenovationReport);
+            this.NavigateToAddRoom = new RelayCommand(Execute_NavigateToAddRoomPage);
             DispatcherTimer dispatcherTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMinutes(1)
             };
             dispatcherTimer.Tick += timer_Tick;
             dispatcherTimer.Start();
+        }
+
+        private void Execute_NavigateToAddRoomPage(object obj)
+        {
+
+            AddRoomViewModel.Instance.NavService = this.NavService;
+            this.NavService.Navigate(
+                    new Uri("ManagerView1/AddRoom.xaml", UriKind.Relative));
         }
 
         private void Execute_NavigateToRoomRenovationReport(object obj)

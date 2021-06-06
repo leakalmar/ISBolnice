@@ -125,6 +125,21 @@ namespace Service
             return allRoomByType;
         }
 
+        public bool CheckIfRoomNumberIsUnique(int roomNumber)
+        {
+           foreach(Room room in AllRooms)
+           {
+                if(room.RoomNumber == roomNumber)
+                {
+                  
+                    return false;
+                }
+           }
+
+            return true;
+        }
+
+       
         public List<Room> GetAllRooms()
         {
             return AllRooms;

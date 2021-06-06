@@ -76,17 +76,7 @@
     "Equipment": [],
     "isUsable": false
   },
-  {
-    "RoomFloor": 10,
-    "RoomNumber": 10,
-    "SurfaceArea": 10,
-    "BedNumber": 10,
-    "RoomId": 8,
-    "Type": 2,
-    "RoomIdType": "8 OperationRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
+  
   {
     "RoomFloor": 5,
     "RoomNumber": 5,
@@ -98,50 +88,8 @@
     "Equipment": [],
     "isUsable": false
   },
-  {
-    "RoomFloor": 10,
-    "RoomNumber": 1,
-    "SurfaceArea": 10,
-    "BedNumber": 10,
-    "RoomId": 10,
-    "Type": 1,
-    "RoomIdType": "10 ConsultingRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 10,
-    "RoomNumber": 1,
-    "SurfaceArea": 10,
-    "BedNumber": 10,
-    "RoomId": 11,
-    "Type": 0,
-    "RoomIdType": "11 RecoveryRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 10,
-    "RoomNumber": 10,
-    "SurfaceArea": 10,
-    "BedNumber": 5,
-    "RoomId": 12,
-    "Type": 0,
-    "RoomIdType": "12 RecoveryRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 10,
-    "RoomNumber": 9,
-    "SurfaceArea": 10,
-    "BedNumber": 10,
-    "RoomId": 13,
-    "Type": 0,
-    "RoomIdType": "13 RecoveryRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
+  
+  
   {
     "RoomFloor": 1,
     "RoomNumber": 1,

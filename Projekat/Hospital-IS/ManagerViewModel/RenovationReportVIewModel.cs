@@ -98,8 +98,6 @@ namespace Hospital_IS.ManagerViewModel
         private void Execute_MakeReportCommand(object obj)
         {
 
-          
-
                 var pdfDoc = new Document(PageSize.LETTER, 40f, 40f, 60f, 60f);
                 string path = $"..//..//..//Reports//IzvestajRenovacija.pdf";
                 PdfWriter.GetInstance(pdfDoc, new FileStream(path, FileMode.OpenOrCreate));
@@ -140,14 +138,10 @@ namespace Hospital_IS.ManagerViewModel
                         HorizontalAlignment = 1,
                         MinimumHeight = 3
                     };
-
                     pdfTableRenovation.AddCell(zaglavlje);
-
                     pdfTableRenovation.AddCell("Broj sobe");
                     pdfTableRenovation.AddCell("Vreme pocetka");
                     pdfTableRenovation.AddCell("Vreme kraja");
-                   
-
                     foreach (RenovationReportDTO renovationReportDTO in renovationReports)
                     {
                         pdfTableRenovation.AddCell(renovationReportDTO.RoomNumber.ToString());
