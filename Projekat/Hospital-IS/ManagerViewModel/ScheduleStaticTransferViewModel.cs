@@ -18,6 +18,7 @@ namespace Hospital_IS.ManagerViewModel
         private NavigationService navService;
         private ObservableCollection<Appointment> appointments;
         private RelayCommand transferStaticEquipmentCommand;
+        private RelayCommand navigateToPreviousPage;
         private Room sourceRoom;
         private Room destinationRoom;
         private Equipment equipment;
@@ -81,7 +82,14 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
-
+        public RelayCommand NavigateToPreviousPage
+        {
+            get { return navigateToPreviousPage; }
+            set
+            {
+                navigateToPreviousPage = value;
+            }
+        }
 
         public RelayCommand TransferStaticEquipmentCommand
         {
@@ -187,7 +195,8 @@ namespace Hospital_IS.ManagerViewModel
             Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(roomIdSource, roomIdDestination));
             List<Appointment> appointments = AppointmentController.Instance.GetAllAppByTwoRooms(roomIdSource, roomIdDestination);
            
-            this.TransferStaticEquipmentCommand = new RelayCommand(Execute_TransferStaticEquipment, CanExecute_IfEveryhingIsCorecct);
+            this.TransferStaticEquipmentCommand = new RelayCommand(Execute_TransferStaticEquipment,CanExecute_IfEveryhingIsCorecct);
+            this.NavigateToPreviousPage = new RelayCommand(Execute_NavigateToPreviousPage);
 
         }
 
@@ -205,9 +214,20 @@ namespace Hospital_IS.ManagerViewModel
             return true;
 
         }
+
+        private void Execute_NavigateToPreviousPage(object obj)
+        {
+            this.NavService.GoBack();
+        }
+
         private void Execute_TransferStaticEquipment(object obj)
         {
 
+           
+        }
+        
+        public void TransferStaticExecute()
+        {
             StaticTransferAppointmentDTO staticTransfer = new StaticTransferAppointmentDTO(SourceRoom.RoomId, DestinationRoom.RoomId, Equipment.EquiptId, Quantity, DateStart, DateEnd, Note);
             bool isSucces = TransferController.Instance.ScheduleStaticTransfer(staticTransfer);
             Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(SourceRoom.RoomId, DestinationRoom.RoomId));
@@ -219,10 +239,14 @@ namespace Hospital_IS.ManagerViewModel
             else
             {
                 System.Windows.MessageBox.Show("Uspjesno zakazivanje termina");
-              
+                
+                this.NavService.GoBack();
+                DateEnd = DateTime.Now;
+                DateStart = DateTime.Now;
+                
             }
-
         }
+
 
     }
 }

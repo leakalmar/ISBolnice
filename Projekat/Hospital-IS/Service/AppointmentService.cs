@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Hospital_IS.DTOs;
+using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -89,6 +90,28 @@ namespace Service
             return isPossible;
         }
 
+        public List<RenovationReportDTO> FindAllRenovationAppBetweeenDates(RenovationDTO renovationDTO)
+        {
+            List<RenovationReportDTO> renovationReports = new List<RenovationReportDTO>();
+
+            foreach (Appointment app in AllAppointments)
+            {
+                if (app.Type == renovationDTO.AppType && app.AppointmentStart >= renovationDTO.DateStart && app.AppointmentStart <= renovationDTO.DateEnd)
+                {
+                    AddRenovationReport(renovationReports, app);
+                }
+                  
+            }
+
+            return renovationReports;
+        }
+
+        private static void AddRenovationReport(List<RenovationReportDTO> renovationReports, Appointment app)
+        {
+            int roomNumber = RoomService.Instance.GetRoomNumber(app.Room);
+            RenovationReportDTO renovationReportDTO = new RenovationReportDTO(app.AppointmentStart, app.AppointmentEnd, roomNumber, app.AppointmentCause);
+            renovationReports.Add(renovationReportDTO);
+        }
 
         public bool MakeRenovationAppointmentForRoomMerge(Appointment firstRoomAppointment,Appointment secondRoomAppointment)
         {

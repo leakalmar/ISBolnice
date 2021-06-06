@@ -34,10 +34,40 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand navigateToManagerProfilePage;
         private RelayCommand navigateToTransferOptions;
         private RelayCommand searchCommnd;
+        private RelayCommand navigateToMedicinePage;
+        private RelayCommand navigateToEmployeePage;
+        private RelayCommand navigateToBranchPage;
         private string searchBox;
         private int selectedCondition =0;
 
 
+
+
+        public RelayCommand NavigateToBranchPage
+        {
+            get { return navigateToBranchPage; }
+            set
+            {
+                navigateToBranchPage = value;
+            }
+        }
+        public RelayCommand NavigateToMedicinePage
+        {
+            get { return navigateToMedicinePage; }
+            set
+            {
+                navigateToMedicinePage = value;
+            }
+        }
+
+        public RelayCommand NavigateToEmployeePage
+        {
+            get { return navigateToEmployeePage; }
+            set
+            {
+                navigateToEmployeePage = value;
+            }
+        }
 
         public int SelectedCondition
         {
@@ -397,7 +427,31 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToManagerProfilePage = new RelayCommand(Execute_NavigateToManagerProfilePageCommand, CanExecute_NavigateCommand);
             this.NavigateToTransferOptions = new RelayCommand(Execute_NavigateToTransferEquipmentPageCommand, CanExecute_NavigateToTransferViewCommand);
             this.SearchCommnd = new RelayCommand(Execute_SearchCommand);
+            this.NavigateToMedicinePage = new RelayCommand(Execute_NavigateToMedicinePageCommand);
+            this.NavigateToEmployeePage = new RelayCommand(Execute_NavigateToEmployeePageCommand);
+            this.NavigateToBranchPage = new RelayCommand(Execute_NavigateToBranchPageCommand);
 
+        }
+
+
+        private void Execute_NavigateToBranchPageCommand(object obj)
+        {
+            MedicineViewModel.Instance.NavService = this.NavService;
+            this.NavService.Navigate(
+                new Uri("ManagerView1/BranchView.xaml", UriKind.Relative));
+        }
+
+        private void Execute_NavigateToMedicinePageCommand(object obj)
+        {
+            MedicineViewModel.Instance.NavService = this.NavService;
+            this.NavService.Navigate(
+                new Uri("ManagerView1/MainMedicineView.xaml", UriKind.Relative));
+        }
+
+        private void Execute_NavigateToEmployeePageCommand(object obj)
+        {
+            this.NavService.Navigate(
+                new Uri("ManagerView1/EmployeersView.xaml", UriKind.Relative));
         }
 
         private void Execute_SearchCommand(object obj)
@@ -503,7 +557,6 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
-
         private void Execute_NavigateToTransferEquipmentPageCommand(object obj)
         {
             
@@ -512,11 +565,13 @@ namespace Hospital_IS.ManagerViewModel
                 EquipmentTransferViewModel.Instance.NavService = this.NavService;
                 this.NavService.Navigate(
                new Uri("ManagerView1/EquipmentTransferDynamicView.xaml", UriKind.Relative));
+                SelectedTransferOption = -1;
             }else if(SelectedTransferOption == 1)
             {
                 EquipmentTransferStaticViewModel.Instance.NavService = this.NavService;
                 this.NavService.Navigate(
               new Uri("ManagerView1/EquipmentStaticTransferView.xaml", UriKind.Relative));
+                SelectedTransferOption = -1;
             }
         }
 
