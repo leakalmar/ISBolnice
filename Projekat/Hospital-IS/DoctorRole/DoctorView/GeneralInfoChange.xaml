@@ -9,12 +9,13 @@
         mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
     <UserControl.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+        <converters:DateConverter x:Key="DateConverter" />
     </UserControl.Resources>
     <UserControl.InputBindings>
         <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding SaveCommand}" />
         <KeyBinding Key="Backspace" Command="{Binding CancelCommand}" />
     </UserControl.InputBindings>
-    <Grid Margin="0,25,0,0">
+    <Grid Margin="0,25,0,0" KeyboardNavigation.TabNavigation="Cycle">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition />
@@ -105,9 +106,9 @@
                     Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                 <TextBox.Text>
                     <Binding Path="Patient.BirthDate"
+                            Converter="{StaticResource DateConverter}"
                             ValidatesOnDataErrors="True"
-                            UpdateSourceTrigger="PropertyChanged"
-                            StringFormat="\{0:dd.MM.yyyy\}">
+                            UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <validationrules:EmptyRule />
                             <validationrules:DateFormat />
@@ -137,6 +138,7 @@
                             UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <validationrules:PunctuationMarks />
+                            <validationrules:NotAllowedLetters />
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
@@ -151,19 +153,34 @@
             <Label Grid.Row="2" Grid.Column="3" Content="Zaposlen:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="2" Grid.Column="4" x:Name="city"
-                    Text="{Binding Patient.Employer}"
-                    Style="{StaticResource LineTextBox}" />
+                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
+                    Style="{StaticResource LineTextBox}">
+                <TextBox.Text>
+                    <Binding Path="Patient.Employer"
+                            ValidatesOnDataErrors="True"
+                            UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validationrules:NumbersInString />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
 
-            <Label Grid.Row="3" Grid.Column="3" Content="Država:"
+            <Label Grid.Row="3" Grid.Column="3" Content="Adresa:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
-            <TextBox Grid.Row="3" Grid.Column="4" x:Name="country" Text="/"
-                    Style="{StaticResource LineTextBox}" />
-
-            <Label Grid.Row="4" Grid.Column="3" Content="Adresa:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
-            <TextBox Grid.Row="4" Grid.Column="4" x:Name="address"
-                    Text="{Binding Patient.Address}"
-                    Style="{StaticResource LineTextBox}" />
+            <TextBox Grid.Row="3" Grid.Column="4" x:Name="address"
+                    Style="{StaticResource LineTextBox}"
+                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                <TextBox.Text>
+                    <Binding Path="Patient.Address"
+                            ValidatesOnDataErrors="True"
+                            UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validationrules:PunctuationMarks />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
         </Grid>
 
     </Grid>

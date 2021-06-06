@@ -11,7 +11,7 @@ namespace Hospital_IS.DoctorRole.ValidationRules
             string charString = value as string;
             if (!charString.All(char.IsLetter))
             {
-                return new ValidationResult(false, $"Polje mora sadržati slova.");
+                return new ValidationResult(false, $"Polje mora sadržati isključivo slova.");
             }
             return new ValidationResult(true, null);
         }

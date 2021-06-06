@@ -2,11 +2,14 @@
 using DTOs;
 using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorView;
+using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.DoctorViewModel
@@ -15,12 +18,13 @@ namespace Hospital_IS.DoctorViewModel
     {
         #region Feilds
         private PatientDTO patient;
-        private ObservableCollection<MedicineDTO> medicineList;
+        private ICollectionView medicineList;
         private ObservableCollection<PrescriptionDTO> prescriptions;
         private MedicineDTO selectedMedicine;
         private NavigationService mainNavigationService;
         private DateTime datePrescribed;
         private bool potentiallyAllergicMassage;
+        private String searchText;
 
         public NavigationService MainNavigationService
         {
@@ -31,7 +35,7 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public ObservableCollection<MedicineDTO> MedicineList
+        public ICollectionView MedicineList
 
         {
             get { return medicineList; }
@@ -50,7 +54,9 @@ namespace Hospital_IS.DoctorViewModel
             {
                 prescriptions = value;
                 OnPropertyChanged("Prescriptions");
-                this.MedicineList = new ObservableCollection<MedicineDTO>(MedicineController.Instance.GenerateListOfMedicines(Patient.Alergies, new List<PrescriptionDTO>(prescriptions)));
+                List<MedicineDTO> list = MedicineController.Instance.GenerateListOfMedicines(Patient.Alergies, new List<PrescriptionDTO>(prescriptions));
+                this.MedicineList = new CollectionViewSource { Source = list }.View;
+
             }
         }
 
@@ -62,7 +68,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 selectedMedicine = value;
                 OnPropertyChanged("SelectedMedicine");
-                if(value != null)
+                if (value != null)
                 {
                     PotentiallyAllergicMassage = PatientController.Instance.CheckIfAllergicToComponent(Patient.Alergies, SelectedMedicine.Name);
                 }
@@ -98,19 +104,39 @@ namespace Hospital_IS.DoctorViewModel
                 OnPropertyChanged("DatePrescribed");
             }
         }
+
+        public String SearchText
+        {
+            get { return searchText; }
+            set
+            {
+                searchText = value;
+                OnPropertyChanged("SearchText");
+                FilterMedicines();
+            }
+        }
         #endregion
 
         #region Commands
         private RelayCommand addRemoveMedicineCommand;
+        private RelayCommand gotFocusCommand;
+        private RelayCommand lostFocusCommand;
 
 
         public RelayCommand AddRemoveMedicineCommand
         {
             get { return addRemoveMedicineCommand; }
-            set
-            {
-                addRemoveMedicineCommand = value;
-            }
+            set { addRemoveMedicineCommand = value; }
+        }
+        public RelayCommand GotFocusCommand
+        {
+            get { return gotFocusCommand; }
+            set { gotFocusCommand = value; }
+        }
+        public RelayCommand LostFocusCommand
+        {
+            get { return lostFocusCommand; }
+            set { lostFocusCommand = value; }
         }
         #endregion
 
@@ -121,7 +147,7 @@ namespace Hospital_IS.DoctorViewModel
         }
 
         private void Execute_AddRemoveMedicineCommand(object obj)
-        
+
         {
             if (SelectedMedicine.Allergic == true)
             {
@@ -141,12 +167,26 @@ namespace Hospital_IS.DoctorViewModel
 
             OnPropertyChanged("Prescriptions");
         }
+        private void Execute_GotFocusCommand(object obj)
+        {
+            if (SearchText.Equals("Pretraži po nazivu ili sastavu.."))
+            {
+                SearchText = string.Empty;
+            }
+        }
+        private void Execute_LostFocusCommand(object obj)
+        {
+            if (string.IsNullOrEmpty(SearchText))
+            {
+                SearchText = "Pretraži po nazivu ili sastavu..";
+            }
+        }
         #endregion
 
         #region Methods
         private void RemovePrescription()
         {
-            foreach(PrescriptionDTO p in Prescriptions)
+            foreach (PrescriptionDTO p in Prescriptions)
             {
                 if (p.Medicine.Name.Equals(SelectedMedicine.Name))
                 {
@@ -154,7 +194,7 @@ namespace Hospital_IS.DoctorViewModel
                     break;
                 }
             }
-            
+
             foreach (MedicineDTO medicine in medicineList)
             {
                 if (medicine.Equals(SelectedMedicine))
@@ -165,8 +205,28 @@ namespace Hospital_IS.DoctorViewModel
             PatientChart.Instance._ViewModel.ReportView._ViewModel.Prescriptions = Prescriptions;
         }
 
+        private void FilterMedicines()
+        {
+            if (MedicineList != null)
+            {
+                List<MedicineDTO> list = MedicineController.Instance.GenerateListOfMedicines(Patient.Alergies, new List<PrescriptionDTO>(prescriptions));
+                ICollectionView view = new CollectionViewSource { Source = list }.View;
+                view.Filter = null;
+                if(SearchText != null && SearchText != "")
+                {
+                    view.Filter = delegate (object item)
+                    {
+                        MedicineDTO medicine = item as MedicineDTO;
+
+                        return CheckIfMedicineMeetsSearchCriteria(medicine);
+                    };
+                }
+                MedicineList = view;
+                SelectedMedicine = list[0];
+            }
+        }
         private void AddPrescription()
-        { 
+        {
             Prescriptions.Add(new PrescriptionDTO(MedicineController.Instance.GetByName(SelectedMedicine.Name), DatePrescribed));
             foreach (MedicineDTO medicine in medicineList)
             {
@@ -185,12 +245,39 @@ namespace Hospital_IS.DoctorViewModel
             mess.btnOk.Content = "U redu";
             mess.ShowDialog();
         }
+
+        private bool CheckIfMedicineMeetsSearchCriteria(MedicineDTO medicine)
+        {
+            if (!SearchText.Equals("Pretraži po nazivu ili sastavu.."))
+            {
+                return medicine.Name.ToLower().Contains(SearchText) || CompositionCriteria(medicine);
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private bool CompositionCriteria(MedicineDTO medicine)
+        {
+            foreach (MedicineComponentDTO c in medicine.Composition)
+            {
+                if (c.Component.Contains(SearchText))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         #endregion
 
         #region Constructior
         public SearchMedicineViewModel()
         {
+            SearchText = "Pretraži po nazivu ili sastavu..";
             this.AddRemoveMedicineCommand = new RelayCommand(Execute_AddRemoveMedicineCommand, CanExecute_Command);
+            this.GotFocusCommand = new RelayCommand(Execute_GotFocusCommand, CanExecute_Command);
+            this.LostFocusCommand = new RelayCommand(Execute_LostFocusCommand, CanExecute_Command);
         }
         #endregion
     }

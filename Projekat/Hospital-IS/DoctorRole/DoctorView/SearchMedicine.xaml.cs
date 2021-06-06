@@ -1,5 +1,6 @@
 ﻿using Hospital_IS.DoctorViewModel;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Hospital_IS.DoctorRole.DoctorView
 {
@@ -23,5 +24,12 @@ namespace Hospital_IS.DoctorRole.DoctorView
             this.DataContext = this.viewModel;
         }
 
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                grid.ScrollIntoView(grid.SelectedItem);
+            }
+        }
     }
 }

@@ -10,8 +10,8 @@ namespace Hospital_IS.DoctorRole.ValidationRules
         {
             string charString = value as string;
             DateTime dummy;
-           CultureInfo enUS = new CultureInfo("en-US");
-            if(DateTime.TryParseExact(charString, "dd.MM.yyyy", enUS,
+            CultureInfo sr = new CultureInfo("sr-Latn-RS");
+            if(DateTime.TryParseExact(charString, "dd/M/yyyy", sr,
                                  DateTimeStyles.None, out dummy))
             {
                 return new ValidationResult(true, null);
@@ -19,7 +19,7 @@ namespace Hospital_IS.DoctorRole.ValidationRules
             }
             else
             {
-                return new ValidationResult(false, $"Neispravan format datuma.");
+                return new ValidationResult(false, $"Format datuma je dd.M.yyyy");
             }
         }
     }

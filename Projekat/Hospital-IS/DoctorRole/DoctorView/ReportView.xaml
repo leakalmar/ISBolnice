@@ -31,35 +31,38 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <Button FontSize="18" Background="#FF213250"
-                    BorderBrush="FloralWhite" BorderThickness="1,1,0,1"
-                    Content="Recept" Foreground="FloralWhite"
-                    HorizontalAlignment="Stretch">
+            <Button Content="Recept"
+                    Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="20,0,0,0" />
+                        <Setter Property="CornerRadius" Value="20,20,0,0" />
                     </Style>
                 </Button.Resources>
                 <Button.InputBindings>
                     <KeyBinding Key="Return"
                             Command="{Binding SearchMedicineCommad}" />
                 </Button.InputBindings>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="20" />
+                            </Style>
+                        </Style.Resources>
+                        <Setter Property="FocusVisualStyle"
+                                Value="{StaticResource PrescriptionFocusVisualStyle}" />
+                        <Setter Property="FontSize" Value="18" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Background" Value="#FF2E3B55" />
+                        <Setter Property="BorderBrush" Value="White" />
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    </Style>
+                </Button.Style>
             </Button>
 
             <Image Source="pack://application:,,,/Resources/add-row.png"
-                    HorizontalAlignment="Right" Margin="0,5,5,5" />
-
-            <Button Grid.Column="1" Foreground="FloralWhite" FontSize="18"
-                    BorderThickness="1" Background="#FF213250"
-                    BorderBrush="FloralWhite">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="0,20,0,0" />
-                    </Style>
-                </Button.Resources>
-                <Image Source="pack://application:,,,/Resources/print.png"
-                        Margin="5" />
-            </Button>
+                    Grid.Column="1"  Margin="0,0,0,10" />
 
             <Border Grid.Row="1" Grid.ColumnSpan="2" CornerRadius="0,0,20,20"
                     BorderThickness="1,0,1,1" BorderBrush="FloralWhite"

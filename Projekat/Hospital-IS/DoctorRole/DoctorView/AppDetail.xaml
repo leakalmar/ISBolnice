@@ -5,7 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
         xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
-        xmlns:b="http://schemas.microsoft.com/xaml/behaviors" mc:Ignorable="d" d:DesignHeight="555" d:DesignWidth="783">
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors" mc:Ignorable="d"
+        d:DesignHeight="555" d:DesignWidth="783">
     <UserControl.Resources>
         <converters:StartedAppointmentConverter x:Key="saConverter" />
     </UserControl.Resources>
@@ -26,8 +27,7 @@
                     SelectedItem="{Binding Path=SelectedAppointment}"
                     Focusable="True">
                 <DataGrid.InputBindings>
-                    <KeyBinding Key="Return" 
-                            Command="{Binding SetFocusCommand}" />
+                    <KeyBinding Key="Return" Command="{Binding SetFocusCommand}" />
                 </DataGrid.InputBindings>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Vreme"
@@ -174,7 +174,8 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Button x:Name="focusButton" Style="{StaticResource CustomButton}" Margin="15"
+                    <Button x:Name="focusButton"
+                            Style="{StaticResource CustomButton}" Margin="15"
                             Content="Karton pacijenta"
                             commands:FocusExtension.IsFocused="{Binding Focused,UpdateSourceTrigger=PropertyChanged}">
                         <b:Interaction.Triggers>
@@ -193,7 +194,7 @@
                             Content="Započni pregled" Margin="15"
                             Visibility="{Binding Path=SelectedAppointment.Appointment.IsFinished, Converter={StaticResource saConverter}, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource CustomButton}">
-                        
+
                         <Button.InputBindings>
                             <KeyBinding Key="Return"
                                     Command="{Binding StartAppointmentCommand}" />

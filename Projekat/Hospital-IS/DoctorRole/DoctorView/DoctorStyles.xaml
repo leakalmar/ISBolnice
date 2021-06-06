@@ -3,22 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="ErrorTemplate">
-        <Border BorderBrush="Red" BorderThickness="1">
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+            <Border BorderBrush="Red" BorderThickness="1">
                 <AdornedElementPlaceholder />
-                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"
+            </Border>
+            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"
                         VerticalAlignment="Center" HorizontalAlignment="Right"
-                        Margin="0,0,4,0" />
+                        Margin="0,0,4,0" Grid.Row="1"/>
             </Grid>
-        </Border>
     </ControlTemplate>
 
     <Style x:Key="CustomFocusVisualStyle">
         <Setter Property="Control.Template">
             <Setter.Value>
-                <ControlTemplate TargetType="RadioButton">
+                <ControlTemplate>
                     <Border BorderThickness="1" BorderBrush="White"
                             CornerRadius="20" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PrescriptionFocusVisualStyle">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border BorderThickness="1" BorderBrush="White"
+                            CornerRadius="20,20,0,0" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -189,6 +205,7 @@
     </Style>
 
     <Style x:Key="LineTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="CaretBrush" Value="White" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0,0,0,2" />
         <Setter Property="Foreground" Value="White" />
@@ -259,8 +276,10 @@
     </Style>
 
     <Style x:Key="CustomTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="CaretBrush" Value="White" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="White" />
+        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <Style x:Key="MyFocusVisualStyle">

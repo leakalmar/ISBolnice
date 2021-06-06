@@ -2,7 +2,7 @@
   {
     "$id": "1",
     "hospital": null,
-    "FileDate": "2021-03-29T23:21:22.7048933+02:00",
+    "FileDate": "0001-01-01T00:00:00",
     "Employer": "neki poslodavac",
     "Admitted": false,
     "Alergies": [
@@ -11,26 +11,11 @@
     ],
     "TrollMechanism": {
       "$id": "2",
-      "TrollCheckStartDate": "2021-04-29T00:00:00",
-      "AppointmentCounterInTimeRange": 2,
+      "TrollCheckStartDate": "0001-01-01T00:00:00",
+      "AppointmentCounterInTimeRange": 0,
       "IsTroll": false
     },
-    "PatientNotes": [
-      {
-        "$id": "3",
-        "NotificationTime": 11,
-        "IsNotifyChecked": true,
-        "NoteContent": "Setaj sat vremena!!!",
-        "AppointmentId": 5
-      },
-      {
-        "$id": "4",
-        "NotificationTime": 8,
-        "IsNotifyChecked": false,
-        "NoteContent": "Doktorka je rekla da zakazem pregled po potrebi",
-        "AppointmentId": 1
-      }
-    ],
+    "PatientNotes": [],
     "IsGuest": false,
     "doctor": null,
     "Doctor": null,
@@ -38,17 +23,17 @@
     "Id": 1,
     "Name": "Simona",
     "Surname": "Stantic",
-    "BirthDate": "2021-03-29T00:00:00",
+    "BirthDate": "1999-03-13T00:00:00",
     "Phone": null,
     "Email": "simona@gmail.com",
-    "Gender": "Žensko",
+    "Gender": null,
     "Relationship": null,
     "Password": "123",
     "Address": "Petra Drapsina 8",
     "Hospital": null
   },
   {
-    "$id": "5",
+    "$id": "3",
     "hospital": null,
     "FileDate": "2021-03-29T23:21:22.7064891+02:00",
     "Employer": "neki poslodavac",
@@ -58,7 +43,7 @@
       "Paracetamol"
     ],
     "TrollMechanism": {
-      "$id": "6",
+      "$id": "4",
       "TrollCheckStartDate": "0001-01-01T00:00:00",
       "AppointmentCounterInTimeRange": 0,
       "IsTroll": false
@@ -81,7 +66,7 @@
     "Hospital": null
   },
   {
-    "$id": "7",
+    "$id": "5",
     "hospital": null,
     "FileDate": "2021-03-29T23:21:22.7064923+02:00",
     "Employer": "neki poslodavac",
@@ -91,7 +76,7 @@
       "Paracetamol"
     ],
     "TrollMechanism": {
-      "$id": "8",
+      "$id": "6",
       "TrollCheckStartDate": "0001-01-01T00:00:00",
       "AppointmentCounterInTimeRange": 0,
       "IsTroll": false
