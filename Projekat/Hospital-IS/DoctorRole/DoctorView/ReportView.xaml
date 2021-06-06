@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
     <UserControl.InputBindings>
-        <KeyBinding Key="Add" Modifiers="Ctrl"
+        <KeyBinding Key="Add"
                 Command="{Binding SearchMedicineCommad}" />
         <KeyBinding Key="Backspace" Command="{Binding NavigateBackCommad}" />
     </UserControl.InputBindings>
@@ -40,6 +40,8 @@
                 </Button.Resources>
                 <Button.InputBindings>
                     <KeyBinding Key="Return"
+                            Command="{Binding SearchMedicineCommad}" />
+                    <KeyBinding Key="Space"
                             Command="{Binding SearchMedicineCommad}" />
                 </Button.InputBindings>
                 <Button.Style>

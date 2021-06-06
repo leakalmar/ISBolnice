@@ -7,9 +7,10 @@
         mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
     <UserControl.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+        <converters:AppTypeToString x:Key="AppTypeToString" />
     </UserControl.Resources>
     <UserControl.InputBindings>
-        <KeyBinding Key="Add" Modifiers="Ctrl" Command="{Binding AddNewCommand}" />
+        <KeyBinding Key="Add" Command="{Binding AddNewCommand}" />
     </UserControl.InputBindings>
     <Grid Margin="0,25,0,0">
         <Grid.RowDefinitions>
@@ -24,18 +25,20 @@
             <Button.InputBindings>
                 <KeyBinding Key="Add" Modifiers="Ctrl"
                         Command="{Binding AddNewCommand}" />
+                <KeyBinding Key="Space" 
+                        Command="{Binding AddNewCommand}" />
             </Button.InputBindings>
         </Button>
 
-        <DataGrid x:Name="dataGrid"
+        <DataGrid x:Name="dataGrid" KeyboardNavigation.TabNavigation="None"
                 ItemsSource="{Binding  ScheduledAppointments}" Grid.Row="2"
                 Style="{StaticResource CustomDataGrid}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Datum i vreme"
-                        Binding="{Binding AppointmentStart}"
+                        Binding="{Binding AppointmentStart,StringFormat=\{0:dd.MM.yyyy.\}}"
                         CanUserResize="False" Width="0.05*" />
                 <DataGridTextColumn Header="Tip pregleda"
-                        Binding="{Binding Type}" CanUserResize="False"
+                        Binding="{Binding Type, Converter={StaticResource AppTypeToString}}" CanUserResize="False"
                         Width="0.05*" />
                 <DataGridTextColumn Header="Uzrok"
                         Binding="{Binding AppointmentCause}"

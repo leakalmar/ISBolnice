@@ -5,7 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
-        mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
+        mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
+        FocusManager.FocusedElement="{Binding ElementName=cause}">
     <UserControl.Resources>
         <converters:RedConverter x:Key="RedConverter" />
         <converters:EnableInstructionConverter x:Key="EnableInstruction" />
@@ -16,7 +17,7 @@
                 Command="{Binding IssueInstructionCommand}" />
     </UserControl.InputBindings>
 
-    <Grid>
+    <Grid KeyboardNavigation.TabNavigation="Cycle">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="0.35*" />
@@ -148,6 +149,8 @@
             <Button.InputBindings>
                 <KeyBinding Key="Return"
                         Command="{Binding IssueInstructionCommand}" />
+                <KeyBinding Key="Space"
+                        Command="{Binding IssueInstructionCommand}" />
             </Button.InputBindings>
         </Button>
 
@@ -155,6 +158,7 @@
                 Style="{StaticResource CustomButton}">
             <Button.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding BackCommand}" />
+                <KeyBinding Key="Space" Command="{Binding BackCommand}" />
             </Button.InputBindings>
         </Button>
 

@@ -3,10 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        mc:Ignorable="d" d:DesignHeight="575.84"
-        d:DesignWidth="783.487394957983">
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" mc:Ignorable="d"
+        d:DesignHeight="575.84" d:DesignWidth="783.487394957983"
+        FocusManager.FocusedElement="{Binding ElementName=search}">
     <UserControl.InputBindings>
         <KeyBinding Key="Return" Command="{Binding ViewMedicineCommand}" />
+        <KeyBinding Key="Space" Command="{Binding ViewMedicineCommand}" />
     </UserControl.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -18,14 +20,25 @@
         </Grid.RowDefinitions>
 
         <Label Content="Lekovi" Style="{StaticResource TitleLabel}"
-                Grid.ColumnSpan="3"/>
+                Grid.ColumnSpan="3" />
 
         <Border Grid.ColumnSpan="3" Grid.Row="1" Margin="10" CornerRadius="15"
                 BorderThickness="1" BorderBrush="FloralWhite">
-            <TextBox x:Name="search" Background="Transparent"
-                    Padding="10,0,10,0" Text="Pretraži po nazivu ili sastavu.."
+            <TextBox x:Name="search" Background="Transparent" CaretBrush="White"
+                    Padding="10,0,10,0" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}"
                     Foreground="White" FontWeight="Light" FontSize="16"
-                    BorderThickness="0" Opacity="0.7" />
+                    BorderThickness="0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="GotFocus">
+                        <i:InvokeCommandAction
+                                Command="{Binding GotFocusCommand}" />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="LostFocus">
+                        <i:InvokeCommandAction
+                                Command="{Binding LostFocusCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
         </Border>
 
         <GroupBox Header="Rezultati pretrage" FontSize="16" Grid.Row="2"
@@ -34,8 +47,13 @@
             <DataGrid x:Name="medicines" ItemsSource="{Binding Medicines}"
                     SelectedItem="{Binding SelectedMedicine}" Margin="10"
                     Style="{StaticResource CustomDataGrid}">
+                <i:Interaction.Behaviors>
+                    <commands:TabLast />
+                </i:Interaction.Behaviors>
                 <DataGrid.InputBindings>
                     <KeyBinding Key="Return"
+                            Command="{Binding ViewMedicineCommand}" />
+                    <KeyBinding Key="Space"
                             Command="{Binding ViewMedicineCommand}" />
                 </DataGrid.InputBindings>
                 <DataGrid.Columns>

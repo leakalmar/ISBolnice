@@ -5,9 +5,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Hospital_IS.DoctorRole.DoctorView"
         mc:Ignorable="d" d:DesignHeight="575.84"
-        d:DesignWidth="783.487394957983">
+        d:DesignWidth="783.487394957983"
+        FocusManager.FocusedElement="{Binding ElementName=button}">
     <UserControl.InputBindings>
-        <KeyBinding Key="Return" Command="{Binding ShowNotificationCommand}" />
+        <KeyBinding Key="Return" Command="{Binding BackCommand}" />
+        <KeyBinding Key="Space" Command="{Binding BackCommand}" />
     </UserControl.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -88,7 +90,8 @@
                     <Label Grid.Row="0" HorizontalAlignment="Center"
                             Style="{StaticResource TitleLabel}"
                             Content="{Binding SelectedNotification.Title}" />
-                    <TextBlock Text="{Binding SelectedNotification.Text}" TextWrapping="Wrap"
+                    <TextBlock Text="{Binding SelectedNotification.Text}"
+                            TextWrapping="Wrap"
                             Style="{StaticResource CustomTextBlock}"
                             Grid.Row="1" />
                     <Label Grid.Row="2" HorizontalAlignment="Right"
@@ -101,9 +104,11 @@
                             ContentStringFormat="HH:mm" />
                     <Button Grid.Row="4" Content="U redu"
                             Style="{StaticResource CustomButton}"
-                            Margin="200,10">
+                            Margin="200,10" x:Name="button">
                         <Button.InputBindings>
                             <KeyBinding Key="Return"
+                                    Command="{Binding BackCommand}" />
+                            <KeyBinding Key="Space"
                                     Command="{Binding BackCommand}" />
                         </Button.InputBindings>
                     </Button>

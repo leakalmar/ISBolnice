@@ -7,6 +7,7 @@
         d:DesignWidth="783.487394957983">
     <UserControl.InputBindings>
         <KeyBinding Key="Return" Command="{Binding ShowNotificationCommand}" />
+        <KeyBinding Key="Space" Command="{Binding ShowNotificationCommand}" />
     </UserControl.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -75,6 +76,8 @@
                     Margin="10" Background="Transparent" BorderThickness="0">
                 <ListView.InputBindings>
                     <KeyBinding Key="Return"
+                            Command="{Binding ShowNotificationCommand}" />
+                    <KeyBinding Key="Space"
                             Command="{Binding ShowNotificationCommand}" />
                 </ListView.InputBindings>
 

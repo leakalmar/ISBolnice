@@ -74,6 +74,8 @@
                     <Button.InputBindings>
                         <KeyBinding Key="Return"
                                 Command="{Binding ChangePasswordCommand}" />
+                        <KeyBinding Key="Space"
+                                Command="{Binding ChangePasswordCommand}" />
                     </Button.InputBindings>
                 </Button>
 

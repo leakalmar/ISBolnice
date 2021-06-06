@@ -12,6 +12,7 @@
         FocusManager.FocusedElement="{Binding ElementName=calendar}">
     <UserControl.InputBindings>
         <KeyBinding Key="Return" Command="{Binding ChangeAppointmentCommand}" />
+        <KeyBinding Key="Space" Command="{Binding ChangeAppointmentCommand}" />
         <KeyBinding Key="Backspace" Command="{Binding BackCommand}" />
     </UserControl.InputBindings>
     <Grid>
@@ -86,6 +87,8 @@
                     </i:Interaction.Behaviors>
                     <DataGrid.InputBindings>
                         <KeyBinding Key="Return"
+                                Command="{Binding ChangeAppointmentCommand}" />
+                        <KeyBinding Key="Space"
                                 Command="{Binding ChangeAppointmentCommand}" />
                     </DataGrid.InputBindings>
                     <DataGrid.Columns>

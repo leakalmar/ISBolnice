@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:b="http://schemas.microsoft.com/xaml/behaviors" mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors" mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
+             FocusManager.FocusedElement="{Binding ElementName=search}">
     <UserControl.InputBindings>
         <KeyBinding Key="Return" Command="{Binding OpenChartCommand}" />
     </UserControl.InputBindings>
@@ -16,15 +17,18 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Border Margin="10" CornerRadius="15" BorderThickness="1" Grid.Row="0"
+        <Label Content="Pacijenti" Style="{StaticResource TitleLabel}" Grid.ColumnSpan="3"/>
+
+        <Border Margin="10" CornerRadius="15" BorderThickness="1" Grid.Row="1"
                 BorderBrush="White">
             <StackPanel Orientation="Horizontal" Height="22">
                 <Image Margin="10,0,0,0"
                         Source="pack://application:,,,/Resources/doctor-search.png" />
                 <TextBox x:Name="search" Background="Transparent"
-                        Padding="10,0,10,0"
+                        Padding="10,0,10,0" CaretBrush="White"
                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                         Foreground="White" FontWeight="Light" FontSize="16"
                         BorderThickness="0" Opacity="0.7">
@@ -40,21 +44,22 @@
                 </TextBox>
             </StackPanel>
         </Border>
-        <Label Style="{StaticResource CustomLabel}" Content="Pol:"
+        <Label Style="{StaticResource CustomLabel}" Content="Pol:" Grid.Row="1"
                 Grid.Column="1" VerticalAlignment="Center" />
 
         <ComboBox Grid.Column="1" ItemsSource="{Binding Genders}"
                 SelectedItem="{Binding SelectedGender}" FontSize="14"
                 HorizontalAlignment="Right" MinHeight="24.62" MinWidth="160"
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center" Grid.Row="1"/>
 
         <CheckBox Content="Primljen" IsChecked="{Binding IsAdmitted}" Grid.Column="2"
-                Foreground="White" FontSize="16" VerticalAlignment="Center"
-                HorizontalAlignment="Center"  />
-        <DataGrid Grid.Row="1" Grid.ColumnSpan="3" x:Name="patients"
+                Foreground="White" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"
+                Grid.Row="1" />
+        <DataGrid Grid.Row="2" Grid.ColumnSpan="3" x:Name="patients"
                 SelectedItem="{Binding SelectedPatient}"
                 ItemsSource="{Binding Patients}"
-                Style="{StaticResource CustomDataGrid}">
+                Style="{StaticResource CustomDataGrid}"
+                KeyboardNavigation.TabNavigation="None">
             <DataGrid.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding OpenChartCommand}" />
             </DataGrid.InputBindings>
@@ -63,7 +68,7 @@
                         CanUserResize="False" Width="0.05*" />
                 <DataGridTextColumn Header="Prezime" Binding="{Binding Surname}"
                         CanUserResize="False" Width="0.05*" />
-                <DataGridTextColumn Header="Primljen"
+                <DataGridCheckBoxColumn Header="Primljen"
                         Binding="{Binding IsAdmitted}" CanUserResize="False"
                         Width="0.05*" />
             </DataGrid.Columns>

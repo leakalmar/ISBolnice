@@ -6,9 +6,15 @@
         xmlns:local="clr-namespace:Hospital_IS.DoctorRole.DoctorView"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:validationrules="clr-namespace:Hospital_IS.DoctorRole.ValidationRules"
+        xmlns:doctorconverters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        mc:Ignorable="d"
         d:DesignHeight="344.660194174757" d:DesignWidth="783">
-    <Grid Margin="0,25,0,0">
+    <UserControl.Resources>
+        <doctorconverters:DateConverter x:Key="DateConverter"/>
+    </UserControl.Resources>
+    <Grid Margin="0,25,0,0" KeyboardNavigation.TabNavigation="Cycle">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
@@ -62,7 +68,19 @@
             <Label Content="Datum kraja terapije:"
                     Style="{StaticResource CustomLabel}" Grid.Row="4" />
             <TextBox Style="{StaticResource LineTextBox}"
-                    Text="{Binding TherapyEnd}" Grid.Row="5" Margin="5,0,0,0" />
+                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
+                    Grid.Row="5" Margin="5,0,0,0">
+                <TextBox.Text>
+                    <Binding Path="TherapyEnd" ValidatesOnDataErrors="True"
+                            UpdateSourceTrigger="PropertyChanged"
+                            Converter="{StaticResource DateConverter}">
+                        <Binding.ValidationRules>
+                            <validationrules:EmptyRule />
+                            <validationrules:DateFormat />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
 
             <Label Content="Broj tableta (po uzimanju):" Grid.Column="2"
                     Style="{StaticResource CustomLabel}" Grid.Row="2"
@@ -84,6 +102,7 @@
                 Margin="150,5,50,5">
             <Button.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding SaveCommand}" />
+                <KeyBinding Key="Space" Command="{Binding SaveCommand}" />
             </Button.InputBindings>
         </Button>
 
@@ -91,6 +110,7 @@
                 Grid.Column="1" Margin="50,5,150,5" Grid.ColumnSpan="2">
             <Button.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding CancelCommand}" />
+                <KeyBinding Key="Space" Command="{Binding CancelCommand}" />
             </Button.InputBindings>
         </Button>
 

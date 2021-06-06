@@ -5,22 +5,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+        xmlns:doctorconverters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
         mc:Ignorable="d" d:DesignHeight="555" d:DesignWidth="783"
-        KeyboardNavigation.TabNavigation="Cycle"
-        KeyboardNavigation.DirectionalNavigation="Cycle"
         FocusManager.FocusedElement="{Binding ElementName=focusedPicker}">
-    <UserControl.Triggers>
-
-    </UserControl.Triggers>
     <UserControl.InputBindings>
+        <KeyBinding Key="Space" Command="{Binding ChooseAppointmentCommand}" />
         <KeyBinding Key="Return" Command="{Binding ChooseAppointmentCommand}" />
         <KeyBinding Key="Delete" Command="{Binding DeleteAppointmentCommand}" />
     </UserControl.InputBindings>
     <UserControl.Resources>
+        <doctorconverters:AppTypeToString x:Key="AppTypeToString"/>
     </UserControl.Resources>
-    <Grid Margin="10" KeyboardNavigation.DirectionalNavigation="Local"
-            KeyboardNavigation.TabNavigation="Local"
-            FocusManager.IsFocusScope="True">
+    <Grid Margin="10" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="649*" />
             <ColumnDefinition Width="114*" />
@@ -36,7 +32,10 @@
                 Grid.ColumnSpan="3" />
 
         <Grid x:Name="focusedGrid" Grid.ColumnSpan="2" Margin="0,0,0,226"
-                Grid.Row="1" Grid.RowSpan="2">
+                Grid.Row="1" Grid.RowSpan="2"
+                KeyboardNavigation.DirectionalNavigation="Continue"
+                KeyboardNavigation.TabNavigation="Local"
+                FocusManager.IsFocusScope="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*" />
                 <ColumnDefinition Width="1*" />
@@ -93,17 +92,19 @@
                     KeyboardNavigation.TabNavigation="Local" />
         </Grid>
 
-        <DataGrid ItemsSource="{Binding Appointments}"
-                FocusManager.IsFocusScope="True"
+        <DataGrid ItemsSource="{Binding Appointments}" HorizontalScrollBarVisibility="Auto"
+                FocusManager.IsFocusScope="True" VerticalScrollBarVisibility="Disabled"
                 ScrollViewer.ScrollChanged="DataGrid_ScrollChanged"
                 x:Name="grid"
                 SelectedItem="{Binding SelectedAppointment,UpdateSourceTrigger=PropertyChanged}"
                 Grid.Row="2" Margin="0,20,0,0" Grid.ColumnSpan="2"
-                Grid.RowSpan="2" KeyboardNavigation.TabIndex="4">
+                Grid.RowSpan="2" KeyboardNavigation.TabIndex="4" KeyboardNavigation.TabNavigation="Continue">
             <i:Interaction.Behaviors>
-                <commands:TabBehaviour />
+                <commands:TabLast />
             </i:Interaction.Behaviors>
             <DataGrid.InputBindings>
+                <KeyBinding Key="Space"
+                        Command="{Binding ChooseAppointmentCommand}" />
                 <KeyBinding Key="Return"
                         Command="{Binding ChooseAppointmentCommand}" />
                 <KeyBinding Key="Delete"
@@ -117,7 +118,7 @@
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Datum i Vreme"
-                        Binding="{Binding AppointmentStart}"
+                        Binding="{Binding AppointmentStart,StringFormat=\{0:dd.MM.yyyy. HH:mm\}}"
                         CanUserResize="False" Width="0.05*" />
                 <DataGridTextColumn Header="Pacijent" CanUserResize="False"
                         Width="0.05*">
@@ -131,7 +132,8 @@
                 <DataGridTextColumn Header="Doktor"
                         Binding="{Binding Doctor.Surname}" CanUserResize="False"
                         Width="0.05*" />
-                <DataGridTextColumn Header="Tip" Binding="{Binding Type}"
+                <DataGridTextColumn Header="Tip"
+                        Binding="{Binding Type,Converter={StaticResource AppTypeToString}}"
                         CanUserResize="False" Width="0.05*" />
                 <DataGridTextColumn Header="Soba" Binding="{Binding Room}"
                         CanUserResize="False" Width="0.05*" />

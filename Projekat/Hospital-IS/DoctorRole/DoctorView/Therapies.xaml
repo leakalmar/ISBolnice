@@ -8,6 +8,9 @@
     <UserControl.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
     </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Key="Add" Command="{Binding NewTherapyCommand}" />
+    </UserControl.InputBindings>
     <Grid Margin="0,25,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -20,14 +23,16 @@
                 Content="Nova terapija" >
             <Button.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding NewTherapyCommand}" />
+                <KeyBinding Key="Space" Command="{Binding NewTherapyCommand}" />
             </Button.InputBindings>
         </Button>
 
         <DataGrid x:Name="dataGrid" ItemsSource="{Binding Therapies}"
-                Grid.Row="2" Style="{StaticResource CustomDataGrid}">
+                Grid.Row="2" Style="{StaticResource CustomDataGrid}"
+                  KeyboardNavigation.TabNavigation="None">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Datum početka"
-                        Binding="{Binding TherapyStart}" CanUserResize="False"
+                        Binding="{Binding TherapyStart,StringFormat=\{0:dd.MM.yyyy.\}}" CanUserResize="False"
                         Width="auto" />
                 <DataGridTextColumn Header="Lek"
                         Binding="{Binding Medicine.Name}" CanUserResize="False"
@@ -39,7 +44,7 @@
                         Binding="{Binding TimesADay}" CanUserResize="False"
                         Width="auto" />
                 <DataGridTextColumn Header="Recept"
-                        Binding="{Binding LastTimeIssued}" CanUserResize="False"
+                        Binding="{Binding LastTimeIssued,StringFormat=\{0:dd.MM.yyyy.\}}" CanUserResize="False"
                         Width="auto" />
                 <DataGridCheckBoxColumn Header="Završena" CanUserResize="False"
                         Width="auto" />

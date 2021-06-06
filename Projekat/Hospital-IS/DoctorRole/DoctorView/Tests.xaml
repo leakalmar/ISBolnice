@@ -9,6 +9,9 @@
     <UserControl.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
     </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Key="Add" Command="{Binding NewTestCommand}" />
+    </UserControl.InputBindings>
     <Grid Margin="0,25,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -21,14 +24,16 @@
                 Content="Novi test">
             <Button.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding NewTestCommand}" />
+                <KeyBinding Key="Space" Command="{Binding NewTestCommand}" />
             </Button.InputBindings>
         </Button>
 
         <DataGrid x:Name="dataGrid" ItemsSource="{Binding Tests}" Grid.Row="2"
-                Style="{StaticResource CustomDataGrid}">
+                Style="{StaticResource CustomDataGrid}"
+                KeyboardNavigation.TabNavigation="None">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Datum"
-                        Binding="{Binding SampleDate}" CanUserResize="False"
+                        Binding="{Binding SampleDate,StringFormat=\{0:dd.MM.yyyy.\}}" CanUserResize="False"
                         Width="auto" />
                 <DataGridTextColumn Header="Test" Binding="{Binding Name}"
                         CanUserResize="False" Width="auto" />

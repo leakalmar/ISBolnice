@@ -9,6 +9,7 @@
         d:DesignHeight="555" d:DesignWidth="783">
     <UserControl.Resources>
         <converters:StartedAppointmentConverter x:Key="saConverter" />
+        <converters:AppTypeToString x:Key="AppTypeToString" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -28,10 +29,11 @@
                     Focusable="True">
                 <DataGrid.InputBindings>
                     <KeyBinding Key="Return" Command="{Binding SetFocusCommand}" />
+                    <KeyBinding Key="Space" Command="{Binding SetFocusCommand}" />
                 </DataGrid.InputBindings>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Vreme"
-                            Binding="{Binding Appointment.AppointmentStart.TimeOfDay}"
+                            Binding="{Binding Appointment.AppointmentStart,StringFormat=\{0: HH:mm\}}"
                             CanUserResize="False" Width="0.05*"
                             SortDirection="Ascending" />
                     <DataGridTextColumn Header="Pacijent" CanUserResize="False"
@@ -154,8 +156,8 @@
                     </StackPanel>
                     <Label Grid.Row="1" Grid.Column="1" Content="{Binding Room}"
                             Style="{StaticResource CustomLabel}" />
-                    <Label Grid.Row="2" Grid.Column="1" Content="{Binding Type}"
-                            Style="{StaticResource CustomLabel}" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Type,Converter={StaticResource AppTypeToString}}"
+                            Style="{StaticResource CustomTextBlock}" />
 
                     <Label Grid.Row="4" Grid.Column="0" Content="Kratak opis:"
                             Style="{StaticResource CustomLabel}" />
@@ -187,6 +189,8 @@
                         <Button.InputBindings>
                             <KeyBinding Key="Return"
                                     Command="{Binding OpenChartCommand}" />
+                            <KeyBinding Key="Space"
+                                    Command="{Binding OpenChartCommand}" />
                         </Button.InputBindings>
                     </Button>
 
@@ -197,6 +201,8 @@
 
                         <Button.InputBindings>
                             <KeyBinding Key="Return"
+                                    Command="{Binding StartAppointmentCommand}" />
+                            <KeyBinding Key="Space"
                                     Command="{Binding StartAppointmentCommand}" />
                         </Button.InputBindings>
                     </Button>

@@ -3,35 +3,39 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783"
-        KeyboardNavigation.ControlTabNavigation="Contained"
-        KeyboardNavigation.TabNavigation="Continue">
-    <Grid Margin="0,25,0,0">
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+        xmlns:doctorconverters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
+    <UserControl.Resources>
+        <doctorconverters:AppTypeToString x:Key="AppTypeToString" />
+    </UserControl.Resources>
+    <Grid Margin="0,25,0,0" KeyboardNavigation.TabNavigation="Continue">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" KeyboardNavigation.TabNavigation="Continue">
             <Label Content="Od:" Style="{StaticResource CustomLabel}"
                     VerticalAlignment="Center" />
             <DatePicker Width="160" FontSize="14" BorderThickness="0"
                     VerticalAlignment="Center" Margin="0,0,20,0"
                     SelectedDate="{Binding FromDate}" Focusable="True"
-                    KeyboardNavigation.TabIndex="1" KeyboardNavigation.TabNavigation="Continue"
-                    KeyboardNavigation.IsTabStop="True" />
+                    KeyboardNavigation.TabIndex="1"
+                    DisplayDateEnd="{x:Static sys:DateTime.Today}"
+                     />
             <Label Content="Do:" Style="{StaticResource CustomLabel}"
                     VerticalAlignment="Center" />
             <DatePicker Width="160" FontSize="14" BorderThickness="0"
                     VerticalAlignment="Center" Margin="0,0,160,0"
                     SelectedDate="{Binding ToDate}" Focusable="True"
                     KeyboardNavigation.TabIndex="2"
-                    KeyboardNavigation.TabNavigation="Continue"
-                    KeyboardNavigation.IsTabStop="True" />
+                    DisplayDateEnd="{x:Static sys:DateTime.Today}" />
+            
             <Button Style="{StaticResource CustomButton}" Width="200"
-                    Margin="10" KeyboardNavigation.TabIndex="3"
-                    KeyboardNavigation.IsTabStop="True"
-                    KeyboardNavigation.TabNavigation="Continue">
+                    Margin="10" KeyboardNavigation.TabIndex="3" >
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Stampaj" Margin="0,0,20,0"
@@ -44,6 +48,7 @@
                 </Button.Content>
                 <Button.InputBindings>
                     <KeyBinding Key="Return" Command="{Binding PrintCommand}" />
+                    <KeyBinding Key="Space" Command="{Binding PrintCommand}" />
                     <KeyBinding Key="P" Modifiers="Ctrl"
                             Command="{Binding PrintCommand}" />
                 </Button.InputBindings>
@@ -53,16 +58,17 @@
         <DataGrid Grid.Row="1" ItemsSource="{Binding Reports}"
                 Style="{StaticResource CustomDataGrid}"
                 SelectedItem="{Binding SelectedReport}"
-                KeyboardNavigation.TabNavigation="Continue">
+                KeyboardNavigation.TabNavigation="None">
             <DataGrid.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding OldReportCommand}" />
+                <KeyBinding Key="Space" Command="{Binding OldReportCommand}" />
             </DataGrid.InputBindings>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Datum"
-                        Binding="{Binding AppointmentStart}"
+                        Binding="{Binding AppointmentStart,StringFormat=\{0:dd.MM.yyyy.\}}"
                         CanUserResize="False" Width="0.05*" />
                 <DataGridTextColumn Header="Tip pregleda"
-                        Binding="{Binding Type}" CanUserResize="False"
+                        Binding="{Binding Type,Converter={StaticResource AppTypeToString}}" CanUserResize="False"
                         Width="0.05*" />
                 <DataGridTextColumn Header="Dijagnoza"
                         Binding="{Binding AppointmentCause}"
@@ -78,5 +84,6 @@
                         Width="0.02*" />
             </DataGrid.Columns>
         </DataGrid>
+
     </Grid>
 </UserControl>

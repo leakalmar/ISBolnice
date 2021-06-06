@@ -6,6 +6,7 @@
         mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.InputBindings>
         <KeyBinding Key="Return" Command="{Binding ShowNotificationCommand}" />
+        <KeyBinding Key="Space" Command="{Binding ShowNotificationCommand}" />
     </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -29,6 +30,8 @@
                 BorderThickness="0">
             <ListView.InputBindings>
                 <KeyBinding Key="Return"
+                        Command="{Binding ShowNotificationCommand}" />
+                <KeyBinding Key="Space"
                         Command="{Binding ShowNotificationCommand}" />
             </ListView.InputBindings>
 

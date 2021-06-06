@@ -4,8 +4,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
-             FocusManager.FocusedElement="{Binding ElementName=docotrAppointments}"
+        xmlns:doctorconverters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        FocusManager.FocusedElement="{Binding ElementName=docotrAppointments}"
         mc:Ignorable="d">
+    <UserControl.Resources>
+        <doctorconverters:AppTypeToString x:Key="AppTypeToString"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*" />
@@ -86,10 +90,12 @@
                 <DataGrid.InputBindings>
                     <KeyBinding Key="Return"
                             Command="{Binding NavigateToDetailsCommand}" />
+                    <KeyBinding Key="Space"
+                            Command="{Binding NavigateToDetailsCommand}" />
                 </DataGrid.InputBindings>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Vreme"
-                            Binding="{Binding Appointment.AppointmentStart.TimeOfDay}"
+                            Binding="{Binding Appointment.AppointmentStart,StringFormat=\{0: HH:mm\}}"
                             CanUserResize="False" Width="0.05*" />
                     <DataGridTextColumn Header="Pacijent" CanUserResize="False"
                             Width="0.05*">
@@ -101,7 +107,7 @@
                         </DataGridTextColumn.Binding>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Tip"
-                            Binding="{Binding Appointment.Type}"
+                            Binding="{Binding Appointment.Type,Converter={StaticResource AppTypeToString}}"
                             CanUserResize="False" Width="0.05*" />
                     <DataGridTextColumn Header="Soba"
                             Binding="{Binding Appointment.Room}"

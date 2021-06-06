@@ -4,7 +4,7 @@
     "hospital": null,
     "FileDate": "0001-01-01T00:00:00",
     "Employer": "neki poslodavac",
-    "Admitted": false,
+    "Admitted": true,
     "Alergies": [
       "Tetanus",
       "Paracetamol"

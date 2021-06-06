@@ -35,12 +35,22 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         #endregion
 
         #region Actions
+        private void Execute_BackCommand(object obj)
+        {
+            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(new DoctorNotifications());
+        }
+
+
+        private bool CanExecute_Command(object obj)
+        {
+            return true;
+        }
         #endregion
 
         #region Constructor
         public NotificationDisplayViewModel()
         {
-            this.BackCommand = DoctorMainWindow.Instance._ViewModel.NavigateBackCommand;
+            this.BackCommand = new RelayCommand(Execute_BackCommand, CanExecute_Command);
         }
         #endregion
     }

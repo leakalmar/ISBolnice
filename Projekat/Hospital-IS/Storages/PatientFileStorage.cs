@@ -28,10 +28,6 @@ namespace Hospital_IS.Storages
             };
             String text = File.ReadAllText(this.fileLocation, Encoding.UTF8);
             List<Patient> patients = JsonConvert.DeserializeObject<List<Patient>>(text);
-            foreach (Patient p in patients)
-            {
-                Debug.WriteLine(p.Gender.ToString());
-            }
 
             /*ObservableCollection<String> alergije = new ObservableCollection<String>();
             alergije.Add("Tetanus");

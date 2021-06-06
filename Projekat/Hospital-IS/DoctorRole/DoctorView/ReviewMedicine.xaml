@@ -121,6 +121,7 @@
                 Visibility="{Binding ShowDisapproveNote, Converter={StaticResource InverseConverter}}">
             <Button.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding ApproveCommand}" />
+                <KeyBinding Key="Space" Command="{Binding ApproveCommand}" />
             </Button.InputBindings>
         </Button>
 
@@ -129,6 +130,7 @@
                 Visibility="{Binding ShowDisapproveNote, Converter={StaticResource InverseConverter}}">
             <Button.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding DisapproveCommand}" />
+                <KeyBinding Key="Space" Command="{Binding DisapproveCommand}" />
             </Button.InputBindings>
         </Button>
 
@@ -163,6 +165,8 @@
                         BorderThickness="0" Background="{x:Null}">
                     <Button.InputBindings>
                         <KeyBinding Key="Return"
+                                Command="{Binding SendNoteCommand}" />
+                        <KeyBinding Key="Space"
                                 Command="{Binding SendNoteCommand}" />
                     </Button.InputBindings>
                 </Button>

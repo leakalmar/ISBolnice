@@ -155,6 +155,10 @@ namespace Hospital_IS.DoctorViewModel
                 view.Filter = delegate (object item)
                 {
                     PatientDTO patient = item as PatientDTO;
+                    if(patient.Gender == null)
+                    {
+                        return true;
+                    }
                     if(SelectedGender != null && SelectedGender != "")
                     {
                         return CheckIfPatientMeetsSearchCriteria(patient) && patient.Gender.Equals(SelectedGender) && patient.IsAdmitted == IsAdmitted;

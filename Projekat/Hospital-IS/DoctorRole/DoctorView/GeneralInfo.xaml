@@ -19,6 +19,7 @@
                 Content="Izmeni" Style="{StaticResource CustomButton}">
             <Button.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding ChangeInfoCommand}" />
+                <KeyBinding Key="Space" Command="{Binding ChangeInfoCommand}" />
             </Button.InputBindings>
         </Button>
 
@@ -62,7 +63,7 @@
             <Label Grid.Row="3" Grid.Column="0" Content="Datum rođenja:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="3" Grid.Column="1" x:Name="birth"
-                    Text="{Binding BirthDate}" IsEnabled="False"
+                    Text="{Binding BirthDate,StringFormat=\{0:dd.MM.yyyy.\}}" IsEnabled="False"
                     Style="{StaticResource LineTextBox}" />
 
             <Label Grid.Row="4" Grid.Column="0" Content="Krvna grupa:"

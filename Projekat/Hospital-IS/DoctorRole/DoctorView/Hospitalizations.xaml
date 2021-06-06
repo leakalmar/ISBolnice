@@ -24,10 +24,10 @@
             </DataGrid.InputBindings>-->
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Datum prijema"
-                        Binding="{Binding AdmissionDate}" CanUserResize="False"
+                        Binding="{Binding AdmissionDate,StringFormat=\{0:dd.MM.yyyy.\}}" CanUserResize="False"
                         Width="0.05*" />
                 <DataGridTextColumn Header="Datum otpusta"
-                        Binding="{Binding ReleaseDate}" CanUserResize="False"
+                        Binding="{Binding ReleaseDate,StringFormat=\{0:dd.MM.yyyy.\}}" CanUserResize="False"
                         Width="0.05*" />
                 <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor}"
                         CanUserResize="False" Width="0.05*" />

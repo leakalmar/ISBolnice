@@ -110,73 +110,115 @@
                     commands:FocusExtension.IsFocused="{Binding ReportFocused}"
                     Foreground="FloralWhite" BorderBrush="{x:Null}"
                     Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}">
-                <b:Interaction.Triggers>
+                <Button.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding ChangeCommand}"
+                            CommandParameter="0" />
+                    <KeyBinding Key="Space" Command="{Binding ChangeCommand}"
+                            CommandParameter="0" />
+                </Button.InputBindings>
+                <!--<b:Interaction.Triggers>
                     <b:EventTrigger EventName="GotFocus">
                         <b:InvokeCommandAction Command="{Binding ChangeCommand}"
                                 CommandParameter="0" />
                     </b:EventTrigger>
-                </b:Interaction.Triggers>
+                </b:Interaction.Triggers>-->
             </Button>
             <Button Uid="1" Content="Opšti podaci" Width="110" FontSize="18"
                     Background="Transparent" Foreground="FloralWhite"
                     BorderBrush="{x:Null}"
                     commands:FocusExtension.IsFocused="{Binding GeneralFocused}">
-                <b:Interaction.Triggers>
+                <Button.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding ChangeCommand}"
+                            CommandParameter="1" />
+                    <KeyBinding Key="Space" Command="{Binding ChangeCommand}"
+                            CommandParameter="1" />
+                </Button.InputBindings>
+                <!--<b:Interaction.Triggers>
                     <b:EventTrigger EventName="GotFocus">
                         <b:InvokeCommandAction Command="{Binding ChangeCommand}"
                                 CommandParameter="1" />
                     </b:EventTrigger>
-                </b:Interaction.Triggers>
+                </b:Interaction.Triggers>-->
             </Button>
             <Button Uid="2" Content="Istorija" Width="110" FontSize="18"
                     Background="Transparent" Foreground="FloralWhite"
                     BorderBrush="{x:Null}">
-                <b:Interaction.Triggers>
+                <Button.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding ChangeCommand}"
+                            CommandParameter="2" />
+                    <KeyBinding Key="Space" Command="{Binding ChangeCommand}"
+                            CommandParameter="2" />
+                </Button.InputBindings>
+                <!--<b:Interaction.Triggers>
                     <b:EventTrigger EventName="GotFocus">
                         <b:InvokeCommandAction Command="{Binding ChangeCommand}"
                                 CommandParameter="2" />
                     </b:EventTrigger>
-                </b:Interaction.Triggers>
+                </b:Interaction.Triggers>-->
             </Button>
             <Button Uid="3" Content="Termin" Width="110" FontSize="18"
                     Background="Transparent" Foreground="FloralWhite"
                     BorderBrush="{x:Null}">
-                <b:Interaction.Triggers>
+                <Button.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding ChangeCommand}"
+                            CommandParameter="3" />
+                    <KeyBinding Key="Space" Command="{Binding ChangeCommand}"
+                            CommandParameter="3" />
+                </Button.InputBindings>
+                <!--<b:Interaction.Triggers>
                     <b:EventTrigger EventName="GotFocus">
                         <b:InvokeCommandAction Command="{Binding ChangeCommand}"
                                 CommandParameter="3" />
                     </b:EventTrigger>
-                </b:Interaction.Triggers>
+                </b:Interaction.Triggers>-->
             </Button>
             <Button Uid="4" Content="Terapija" Width="110" FontSize="18"
                     Background="Transparent" Foreground="FloralWhite"
                     BorderBrush="{x:Null}">
-                <b:Interaction.Triggers>
+                <Button.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding ChangeCommand}"
+                            CommandParameter="4" />
+                    <KeyBinding Key="Space" Command="{Binding ChangeCommand}"
+                            CommandParameter="4" />
+                </Button.InputBindings>
+                <!--<b:Interaction.Triggers>
                     <b:EventTrigger EventName="GotFocus">
                         <b:InvokeCommandAction Command="{Binding ChangeCommand}"
                                 CommandParameter="4" />
                     </b:EventTrigger>
-                </b:Interaction.Triggers>
+                </b:Interaction.Triggers>-->
             </Button>
             <Button Uid="5" Content="Testovi" Width="110" FontSize="18"
                     Background="Transparent" Foreground="FloralWhite"
                     BorderBrush="{x:Null}">
-                <b:Interaction.Triggers>
+                <Button.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding ChangeCommand}"
+                            CommandParameter="5" />
+                    <KeyBinding Key="Space" Command="{Binding ChangeCommand}"
+                            CommandParameter="5" />
+                </Button.InputBindings>
+                <!--<b:Interaction.Triggers>
                     <b:EventTrigger EventName="GotFocus">
                         <b:InvokeCommandAction Command="{Binding ChangeCommand}"
                                 CommandParameter="5" />
                     </b:EventTrigger>
-                </b:Interaction.Triggers>
+                </b:Interaction.Triggers>-->
             </Button>
             <Button Uid="6" Content="Hospitalizacija" Width="120" FontSize="18"
                     Background="Transparent" Foreground="FloralWhite"
                     BorderBrush="{x:Null}">
-                <b:Interaction.Triggers>
+                <Button.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding ChangeCommand}"
+                            CommandParameter="6" />
+                    <KeyBinding Key="Space" Command="{Binding ChangeCommand}"
+                            CommandParameter="6" />
+                </Button.InputBindings>
+                <!--<b:Interaction.Triggers>
                     <b:EventTrigger EventName="GotFocus">
                         <b:InvokeCommandAction Command="{Binding ChangeCommand}"
                                 CommandParameter="6" />
                     </b:EventTrigger>
-                </b:Interaction.Triggers>
+                </b:Interaction.Triggers>-->
             </Button>
         </StackPanel>
         <Rectangle Name="marker" HorizontalAlignment="Left"
@@ -197,6 +239,8 @@
                 <Button.InputBindings>
                     <KeyBinding Key="Return"
                             Command="{Binding PrescriptionReviewCommand}" />
+                    <KeyBinding Key="Space"
+                            Command="{Binding PrescriptionReviewCommand}" />
                 </Button.InputBindings>
             </Button>
             <Button Grid.Column="1" Content="Odbij" Margin="60,5,100,5"
@@ -205,13 +249,20 @@
                 <Button.InputBindings>
                     <KeyBinding Key="Return"
                             Command="{Binding PrescriptionReviewCommand}" />
+                    <KeyBinding Key="Space"
+                            Command="{Binding PrescriptionReviewCommand}" />
                 </Button.InputBindings>
             </Button>
         </Grid>
 
         <Button Grid.Row="4" Grid.ColumnSpan="4" Content="Nazad"
                 Margin="150,5,150,5" Style="{StaticResource CustomButton}"
-                Visibility="{Binding BackButton,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility}}" />
+                Visibility="{Binding BackButton,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility}}">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding NavigateBackCommand}" />
+                <KeyBinding Key="Space" Command="{Binding NavigateBackCommand}" />
+            </Button.InputBindings>
+        </Button>
 
         <Button Grid.Row="4" Grid.ColumnSpan="4" Content="Završi termin"
                 KeyboardNavigation.TabNavigation="Contained"
@@ -219,6 +270,8 @@
                 Visibility="{Binding Started,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibility}}">
             <Button.InputBindings>
                 <KeyBinding Key="Return"
+                        Command="{Binding EndAppointmentCommand}" />
+                <KeyBinding Key="Space"
                         Command="{Binding EndAppointmentCommand}" />
             </Button.InputBindings>
         </Button>

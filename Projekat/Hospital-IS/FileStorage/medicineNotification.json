@@ -26,12 +26,11 @@
       ]
     },
     "RecieverIds": [
-      4,
       10,
       11
     ],
     "Note": null,
     "DateSent": "2021-05-22T15:03:27.0529265+02:00",
-    "ApprovalCounter": 0
+    "ApprovalCounter": 1
   }
 ]

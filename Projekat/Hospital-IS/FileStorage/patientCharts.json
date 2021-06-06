@@ -66,7 +66,31 @@
         "Cause": null
       }
     ],
-    "Hospitalization": [],
+    "Hospitalization": [
+      {
+        "AdmissionDate": "2021-06-06T20:08:40.2949979+02:00",
+        "ReleaseDate": "2021-07-02T00:00:00",
+        "Detail": null,
+        "Room": {
+          "RoomFloor": 2,
+          "RoomNumber": 26,
+          "SurfaceArea": 20,
+          "BedNumber": 6,
+          "RoomId": 15,
+          "Type": 0,
+          "RoomIdType": "15 RecoveryRoom",
+          "Equipment": [],
+          "isUsable": false
+        },
+        "Bed": {
+          "BedId": 0,
+          "RoomId": 15,
+          "Taken": true
+        },
+        "Doctor": "Dragana V. Simokov",
+        "IsReleased": false
+      }
+    ],
     "Therapies": [
       {
         "Medicine": {

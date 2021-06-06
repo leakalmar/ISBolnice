@@ -29,6 +29,7 @@
                 Content="Sačuvaj">
             <Button.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding SaveCommand}" />
+                <KeyBinding Key="Space" Command="{Binding SaveCommand}" />
             </Button.InputBindings>
         </Button>
 
@@ -36,6 +37,7 @@
                 Grid.Column="1" Content="Odustani">
             <Button.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding CancelCommand}" />
+                <KeyBinding Key="Space" Command="{Binding CancelCommand}" />
             </Button.InputBindings>
         </Button>
 

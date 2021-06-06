@@ -7,7 +7,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
         mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
-    <Grid Margin="0,25,0,0">
+    <Grid Margin="0,25,0,0" KeyboardNavigation.TabNavigation="Cycle">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
@@ -62,6 +62,7 @@
                 Content="Potvrdi">
             <Button.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding SaveCommand}" />
+                <KeyBinding Key="Space" Command="{Binding SaveCommand}" />
             </Button.InputBindings>
         </Button>
 
@@ -69,6 +70,7 @@
                 Margin="50,5,150,5" Grid.ColumnSpan="2" Content="Odustani">
             <Button.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding CancelCommand}" />
+                <KeyBinding Key="Space" Command="{Binding CancelCommand}" />
             </Button.InputBindings>
         </Button>
 

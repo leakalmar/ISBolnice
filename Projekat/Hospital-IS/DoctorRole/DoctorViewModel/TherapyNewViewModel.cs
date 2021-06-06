@@ -14,7 +14,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         private Medicine selectedMedicine;
         private int pills;
         private int takings;
-        private string therapyEnd;
+        private DateTime therapyEnd;
         private bool focused;
 
         public bool Focused
@@ -67,7 +67,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             }
         }
 
-        public string TherapyEnd
+        public DateTime TherapyEnd
         {
             get { return therapyEnd; }
             set
@@ -106,27 +106,20 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         #region Actions
         private void Execute_SaveCommand(object obj)
         {
-            DateTime endDate = DateTime.Now;
-            string[] parts = TherapyEnd.Split('.');
-            if (parts.Length != 4)
+            //bool da = Validator.IsValid(this);
+            try
+            {
+                //endDate = new DateTime(Int32.Parse(parts[2]), Int32.Parse(parts[1]), Int32.Parse(parts[0]));
+                //Therapy newTherapy = new Therapy(SelectedMedicine, Pills, Takings, DateTime.Now, endDate);
+                //ChartController.Instance.AddTherapy(newTherapy, DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient);
+                DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.ChangeCommand.Execute("4");
+            }
+            catch
             {
                 new ExitMess("Nispravan datum završetka terapije. Unesite datum u obliku dd.mm.yyyy.").Show();
             }
-            else
-            {
-                try
-                {
-                    endDate = new DateTime(Int32.Parse(parts[2]), Int32.Parse(parts[1]), Int32.Parse(parts[0]));
-                    Therapy newTherapy = new Therapy(SelectedMedicine, Pills, Takings, DateTime.Now, endDate);
-                    ChartController.Instance.AddTherapy(newTherapy, DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient);
-                    DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.ChangeCommand.Execute("4");
-                }
-                catch
-                {
-                    new ExitMess("Nispravan datum završetka terapije. Unesite datum u obliku dd.mm.yyyy.").Show();
-                }
-            }
-           
+
+
         }
 
         private void Execute_CancelCommand(object obj)
@@ -146,6 +139,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             this.Takings = 1;
             this.Pills = 1;
             this.Focused = true;
+            this.TherapyEnd = DateTime.Now;
             this.SaveCommand = new RelayCommand(Execute_SaveCommand, CanExecute_Command);
             this.CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecute_Command);
             this.Medicines = MedicineController.Instance.GetAll();
