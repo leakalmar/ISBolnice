@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Hospital_IS.DTOs;
+using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -218,6 +219,20 @@ namespace Service
                 }
             }
             return counter;
+        }
+
+        public List<Therapy> FindTherapiesInTimeRange(TherapyReportDTO therapyReportDTO)
+        {
+            List<Therapy> patientTherapies = GetTherapiesByPatientId(therapyReportDTO.PatientId);
+            List<Therapy> therapiesInTimeRange = new List<Therapy>();
+            foreach (Therapy therapy in patientTherapies)
+            {
+                if(therapy.TherapyStart.Date >= therapyReportDTO.ReportStart.Date && therapy.TherapyStart.Date <= therapyReportDTO.ReportEnd.Date)
+                {
+                    therapiesInTimeRange.Add(therapy);
+                }
+            }
+            return therapiesInTimeRange;
         }
     }
 }

@@ -3,6 +3,13 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Reflection.Metadata;
+using System.Windows.Documents;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
+using System.Windows;
+using Hospital_IS.DTOs;
 
 namespace Hospital_IS.View.PatientViewModels
 {
@@ -11,6 +18,7 @@ namespace Hospital_IS.View.PatientViewModels
         public ObservableCollection<Therapy> Therapies { get; set; }
         public KeyValuePair<string, int>[] ChartData { get; set; }
         public MyICommand GenerateReport { get; set; }
+        public MyICommand ShowReport { get; set; }
 
         private Therapy therapy;
         private string name;
@@ -24,11 +32,17 @@ namespace Hospital_IS.View.PatientViewModels
         private bool showTherapyInfo = false;
         private bool chooseItem = true;
         private bool shouldShowRecipe = false;
+        private bool report = false;
+        private DateTime reportStart;
+        private DateTime reportEnd;
 
         public TherapyPatientViewModel()
         {
             Therapies = new ObservableCollection<Therapy>(ChartController.Instance.GetTherapiesByPatient(PatientMainWindowViewModel.Patient));
             GenerateReport = new MyICommand(GenerateRep);
+            ShowReport = new MyICommand(ShowRep);
+            ReportStart = DateTime.Today.Date;
+            ReportEnd = DateTime.Today.Date.AddDays(7);
             LoadTherapyChartData();
         }
 
@@ -189,6 +203,45 @@ namespace Hospital_IS.View.PatientViewModels
             }
         }
 
+        public bool Report
+        {
+            get { return report; }
+            set
+            {
+                if (report != value)
+                {
+                    report = value;
+                    OnPropertyChanged("Report");
+                }
+            }
+        }
+
+        public DateTime ReportStart
+        {
+            get { return reportStart; }
+            set
+            {
+                if (reportStart != value)
+                {
+                    reportStart = value;
+                    OnPropertyChanged("ReportStart");
+                }
+            }
+        }
+
+        public DateTime ReportEnd
+        {
+            get { return reportEnd; }
+            set
+            {
+                if (reportEnd != value)
+                {
+                    reportEnd = value;
+                    OnPropertyChanged("ReportEnd");
+                }
+            }
+        }
+
         private void SetTherapyInfo()
         {
             int usageHourDifference = (int)24 / Therapy.TimesADay;
@@ -201,8 +254,8 @@ namespace Hospital_IS.View.PatientViewModels
             Usage = Therapy.Medicine.Usage;
             SideEffects = Therapy.Medicine.SideEffects;
             ChooseItem = false;
+            Report = false;
             ShowTherapyInfo = true;
-            ShouldShowRecipe = true;
         }
 
         private void LoadTherapyChartData()
@@ -219,7 +272,85 @@ namespace Hospital_IS.View.PatientViewModels
 
         private void GenerateRep()
         {
+            var pdfDoc = new iTextSharp.text.Document(PageSize.LETTER, 40f, 40f, 60f, 60f);
+            string path = $"..//..//..//Reports//IzvestajTerapija.pdf";
+            PdfWriter.GetInstance(pdfDoc, new FileStream(path, FileMode.OpenOrCreate));
+            pdfDoc.Open();
 
+            var spacer = new iTextSharp.text.Paragraph("")
+            {
+                SpacingBefore = 10f,
+                SpacingAfter = 10f,
+            };
+
+            pdfDoc.Add(spacer);
+
+            var DocumentDescription = new PdfPTable(new[] { .75f, 1f }) { };
+            DocumentDescription.AddCell("Datum: ");
+            DocumentDescription.AddCell(DateTime.Now.ToString("dd.MM.yyyy"));
+            DocumentDescription.AddCell("Vreme: ");
+            DocumentDescription.AddCell(DateTime.Now.Hour + ":" + DateTime.Now.Minute);
+            DocumentDescription.AddCell("Opis dokumenta: ");
+            DocumentDescription.AddCell("Izveštaj o uzimanju terapije");
+            DocumentDescription.AddCell("Datum početka vremenskog opsega: " + ReportStart.Date.ToString("dd.MM.yyyy"));
+            DocumentDescription.AddCell("Datum kraja vremenskog opsega: " + ReportEnd.Date.ToString("dd.MM.yyyy"));
+
+            pdfDoc.Add(DocumentDescription);
+            pdfDoc.Add(spacer);
+            pdfDoc.Add(spacer);
+
+            var columnWidth = new[] { 0.75f, 1.5f, 1.5f };
+            TherapyReportDTO therapyReportDTO = new TherapyReportDTO(PatientMainWindowViewModel.Patient.Id, ReportStart, ReportEnd);
+            List<Therapy> reportTherapies = ChartController.Instance.FindTherapiesInTimeRange(therapyReportDTO);
+            if (reportTherapies.Count != 0)
+            {
+                var pdfTableTherapy = new PdfPTable(columnWidth) { };
+                var head = new PdfPCell(new Phrase("Uzimanje terapije"))
+                {
+                    Colspan = 4,
+                    HorizontalAlignment = 1,
+                    MinimumHeight = 3
+                };
+
+                pdfTableTherapy.AddCell(head);
+                pdfTableTherapy.AddCell("Naziv leka");
+                pdfTableTherapy.AddCell("Koliko puta dnevno");
+                pdfTableTherapy.AddCell("Vreme početka");
+                pdfTableTherapy.AddCell("Vreme kraja");
+
+
+                foreach (Therapy therapy in reportTherapies)
+                {
+                    pdfTableTherapy.AddCell(therapy.Medicine.Name);
+                    pdfTableTherapy.AddCell(therapy.TimesADay.ToString());
+                    pdfTableTherapy.AddCell(therapy.TherapyStart.Date.ToString("dd.MM.yyyy"));
+                    pdfTableTherapy.AddCell(therapy.TherapyEnd.Date.ToString("dd.MM.yyyy"));
+
+                }
+
+                pdfDoc.Add(pdfTableTherapy);
+            }
+            else
+            {
+                var noTherapies = new iTextSharp.text.Paragraph("Nema terapija u izabranom vremenskom opsegu!")
+                {
+                    SpacingBefore = 10f,
+                    SpacingAfter = 10f,
+                };
+
+                pdfDoc.Add(noTherapies);
+            }
+            pdfDoc.Add(spacer);
+            pdfDoc.Add(spacer);
+            pdfDoc.Close();
+            MessageBox.Show("PDF fajl je uspešno izgenerisan!");
+        }
+
+        private void ShowRep()
+        {
+            Report = true;
+            ChooseItem = false;
+            ShowTherapyInfo = false;
         }
     }
 }
