@@ -12,11 +12,6 @@
         Background="Transparent"  
         >
     <Grid>
-        <!--Grid.Resources>
-            <Style TargetType="Border">
-                <Setter Property="CornerRadius" Value="0,20,0,0"/>
-            </Style>
-        </-->
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
@@ -89,6 +84,20 @@
                     <GradientStop Color="CadetBlue" Offset="1.5"/>
                 </LinearGradientBrush>
             </Button.Background> Sačuvaj izmene
+        </Button>
+        <Button x:Name="calendar" Command="{Binding ShowFeedback}"  Grid.Column="2" Grid.Row="0" Margin="400,10,30,0" Foreground="#FFFDFAFA" FontSize="16" Cursor="Hand">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20,20,20,20"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF184095" Offset="0.0"/>
+                    <GradientStop Color="CadetBlue" Offset="1.5"/>
+                </LinearGradientBrush>
+            </Button.Background> Povratna informacija
         </Button>
     </Grid>
 </UserControl>

@@ -16,6 +16,8 @@ namespace Hospital_IS.View.PatientViewModels
         private string employer;
         private string email;
         public MyICommand UpdateProfile { get; set; }
+        public MyICommand ShowFeedback { get; set; }
+        private readonly MyWindowFactory windowFactory;
 
         public PatientUpdateProfileViewModel()
         {
@@ -29,6 +31,8 @@ namespace Hospital_IS.View.PatientViewModels
             Email = patient.Email;
 
             UpdateProfile = new MyICommand(SaveChange);
+            ShowFeedback = new MyICommand(Feedback);
+            windowFactory = new WindowProductionFactory();
         }
 
         public string Name
@@ -125,6 +129,11 @@ namespace Hospital_IS.View.PatientViewModels
         private void SaveChange()
         {
 
+        }
+
+        private void Feedback()
+        {
+            windowFactory.CreateFeedbackWindow();
         }
     }
 }
