@@ -8,6 +8,7 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand navigateToPreviuosPageCommand;
         private RelayCommand navigateToNotificationPageCommand;
         private RelayCommand navigateToPreviousMainPage;
+        private RelayCommand navigateToFeedbackCommand;
         private Uri previousMainPage;
         private NavigationService navService;
 
@@ -26,6 +27,14 @@ namespace Hospital_IS.ManagerViewModel
                     OnPropertyChanged("PreviousMainPage");
 
                 }
+            }
+        }
+        public RelayCommand NavigateToFeedbackCommand
+        {
+            get { return navigateToFeedbackCommand; }
+            set
+            {
+                navigateToFeedbackCommand = value;
             }
         }
         public RelayCommand NavigateToPreviousMainPage
@@ -81,9 +90,18 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToPreviousPageCommand = new RelayCommand(Execute_NavigateToPreviousPageCommand);
             this.NavigateToNotificationPageCommand = new RelayCommand(Execute_NavigateToNotificationPageCommand);
             this.NavigateToPreviousMainPage = new RelayCommand(Execute_NavigateToPreviousMainPage);
+            this.NavigateToFeedbackCommand = new RelayCommand(Execute_NavigateToFeedbackCommand);
 
 
         }
+
+        private void Execute_NavigateToFeedbackCommand(object obj)
+        {
+            FeedbackViewModel.Instance.NavService = this.NavService;
+            this.NavService.Navigate(
+                new Uri("ManagerView1/FeedbackView.xaml", UriKind.Relative));
+        }
+
 
         private void Execute_NavigateToPreviousMainPage(object obj)
         {

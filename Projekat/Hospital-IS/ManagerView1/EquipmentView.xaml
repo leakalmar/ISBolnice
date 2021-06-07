@@ -3,8 +3,7 @@
      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        
+      
       Title="Upravnik" Height="750" Width="430" Loaded="Page_Loaded" >
     <Grid >
         <Border  >
@@ -29,10 +28,9 @@
                 <DropShadowEffect/>
             </DataGrid.Effect>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Width="70" Binding = "{Binding EquiptId}"/>
-                <DataGridTextColumn Header="Naziv" Width="70" Binding = "{Binding Name}"/>
-                <DataGridTextColumn Header="Kolicina" Width="70" Binding="{Binding Quantity}"/>
-                <DataGridTextColumn Header="Vrsta" Width="70" Binding="{Binding EquipType}"/>
+                <DataGridTextColumn Header="Naziv" Width="*" Binding = "{Binding Name}"/>
+                <DataGridTextColumn Header="Kolicina" Width="100" Binding="{Binding Quantity}"/>
+                <DataGridTextColumn Header="Vrsta" Width="80" Binding="{Binding EquipType}"/>
 
             </DataGrid.Columns>
         </DataGrid>
@@ -244,7 +242,7 @@
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
-                <Button  x:Name="AddEquipment" BorderThickness="0" Grid.Column="1" Grid.Row="1" Height="35" Width="45" Background="White" Click="AddEquipment_Click"  >
+                <Button  x:Name="AddEquipment" BorderThickness="0" Grid.Column="1" Grid.Row="1" Height="35" Width="45" Background="White" Command="{Binding NavigateToAddEquipment}"  >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>

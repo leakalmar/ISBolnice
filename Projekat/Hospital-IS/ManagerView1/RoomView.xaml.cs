@@ -42,25 +42,10 @@ namespace Hospital_IS.ManagerView1
         }
 
        
-        private void AddRoom_Click(object sender, RoutedEventArgs e)
-        {
-            RoomViewModel roomViewModel = new RoomViewModel(this.NavigationService);
-            AddRoom addRoom = new AddRoom();
-            this.NavigationService.Navigate(addRoom);
-        }
-
+    
        
 
-        private void EditRoom_Click(object sender, RoutedEventArgs e)
-        {
-            if (DataGridRooms.SelectedItem != null)
-            {
-                RoomViewModel roomViewModel = new RoomViewModel(this.NavigationService);
-                roomViewModel.SetFields(DataGridRooms.SelectedItem);
-                UpdateRoomView updateRoom = new UpdateRoomView(roomViewModel);
-                this.NavigationService.Navigate(updateRoom);
-            }
-        }
+       
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {

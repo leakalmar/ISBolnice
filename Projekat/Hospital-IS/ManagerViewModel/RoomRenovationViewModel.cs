@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using Enums;
 using Microsoft.Windows.Controls;
 using Model;
 using System;
@@ -61,26 +62,7 @@ namespace Hospital_IS.ManagerViewModel
                 }
             }
         }
-        /*
-        public Room SourceRoom
-        {
-            get
-            {
-                return sourceRoom;
-            }
-            set
-            {
-                if (value != sourceRoom)
-                {
-
-                    sourceRoom = value;
-                    OnPropertyChanged("SourceRoom");
-
-                }
-            }
-        }
-
-        */
+      
 
         public RelayCommand TransferStaticEquipmentCommand
         {
@@ -203,7 +185,8 @@ namespace Hospital_IS.ManagerViewModel
 
         private void Execute_RoomRenovation(object obj)
         {
-            bool isSuccces = AppointmentController.Instance.MakeRenovationAppointment(DateStart, dateEnd, Note,FirstRoom.RoomId);
+            Appointment renovationAppointment = new Appointment(true, Note, DateStart, DateEnd, AppointmentType.Renovation,FirstRoom.RoomId);
+            bool isSuccces = AppointmentController.Instance.MakeRenovationAppointment(renovationAppointment);
             Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(FirstRoom.RoomId));
             if (!isSuccces)
             {

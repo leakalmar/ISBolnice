@@ -5,18 +5,19 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.ManagerViewModel
 {
-    public class AddRoomViewModel:ViewModel
+    public class UpdateRoomViewModel:ViewModel
     {
         private RoomVallidationDTO roomVallidationDTO = new RoomVallidationDTO();
         private NavigationService navService;
-        private RelayCommand addRoomCommand;
+        private RelayCommand updateRoomCommand;
         private RelayCommand navigateToPreviousPage;
-        private int selectedEnumIndex =0;
+        private Room room;
+        private int selectedEnumIndex = 0;
+
 
 
         public RelayCommand NavigateToPreviousPage
@@ -62,12 +63,12 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
-        public RelayCommand AddRoomCommand
+        public RelayCommand UpdateRoomCommand
         {
-            get { return addRoomCommand; }
+            get { return updateRoomCommand; }
             set
             {
-                addRoomCommand = value;
+                updateRoomCommand = value;
             }
         }
 
@@ -80,38 +81,51 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
-        private static AddRoomViewModel instance = null;
-        public static AddRoomViewModel Instance
+        private static UpdateRoomViewModel instance = null;
+        public static UpdateRoomViewModel Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new AddRoomViewModel();
+                    instance = new UpdateRoomViewModel();
                 }
                 return instance;
             }
         }
-        private AddRoomViewModel()
+        private UpdateRoomViewModel()
         {
-            this.AddRoomCommand = new RelayCommand(Execute_AddRoomCommand);
+            this.UpdateRoomCommand = new RelayCommand(Execute_UpdateRoomCommand);
             this.NavigateToPreviousPage = new RelayCommand(Execute_NavigateToPreviousPage);
 
         }
 
-        private void Execute_AddRoomCommand(object obj)
+        public void SetRoom(Room room)
         {
+            RoomVallidationDTO.RoomNumber = room.RoomNumber.ToString();
+            RoomVallidationDTO.RoomFloor = room.RoomFloor.ToString();
+            RoomVallidationDTO.BedNumber = room.BedNumber.ToString();
+            RoomVallidationDTO.SurfaceArea = room.SurfaceArea.ToString();
+            SelectedEnumIndex = (int)room.Type;
+            this.room = room;
+        }
+
+
+        private void Execute_UpdateRoomCommand(object obj)
+        {
+            RoomVallidationDTO.OldNumber = this.room.RoomNumber;
             RoomVallidationDTO.Validate();
             if (RoomVallidationDTO.IsValid)
             {
-              
+
                 RoomType type = (RoomType)SelectedEnumIndex;
                 int roomNumber = Convert.ToInt32(RoomVallidationDTO.RoomNumber);
                 int roomFloor = Convert.ToInt32(RoomVallidationDTO.RoomFloor);
                 int bedNumber = Convert.ToInt32(RoomVallidationDTO.BedNumber);
                 int surfaceArea = Convert.ToInt32(RoomVallidationDTO.SurfaceArea);
-                RoomController.Instance.AddRoom(new Room(roomFloor,roomNumber,surfaceArea,bedNumber,type));
-               
+           
+                Room updateRoom = new Room(roomFloor, roomNumber, surfaceArea, bedNumber, this.room.RoomId, type);
+                RoomController.Instance.UpdateRoom(updateRoom);
                 this.NavService.GoBack();
                 this.RoomVallidationDTO = new RoomVallidationDTO();
             }
@@ -121,14 +135,6 @@ namespace Hospital_IS.ManagerViewModel
         {
             this.NavService.GoBack();
         }
-
-
-
-
-
-
-
-
 
     }
 }

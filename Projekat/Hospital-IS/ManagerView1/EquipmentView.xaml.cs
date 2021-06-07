@@ -52,19 +52,7 @@ namespace Hospital_IS.ManagerView1
             }
         }
 
-        private void AddEquipment_Click(object sender, RoutedEventArgs e)
-        {
-           
-            if (Combo.SelectedItem != null)
-            {
-
-
-                EquipmentViewModel.Instance.SetSelectedRoom(Combo.SelectedItem);
-                AddEquipmentView equipmentView = new AddEquipmentView(EquipmentViewModel.Instance);
-                this.NavigationService.Navigate(equipmentView);
-               
-            }
-        }
+       
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {

@@ -49,18 +49,18 @@
       {
         "EquipType": 1,
         "EquiptId": 9,
-        "Name": "tat",
+        "Name": "tatoio",
         "Quantity": 60,
         "ProducerName": "tata",
         "EquiptTypeIndex": 1
       },
       {
-        "EquipType": 1,
+        "EquipType": 0,
         "EquiptId": 10,
-        "Name": "rer",
-        "Quantity": 100,
-        "ProducerName": "erer",
-        "EquiptTypeIndex": 1
+        "Name": "nhnbgfbb",
+        "Quantity": 454,
+        "ProducerName": "gbgb",
+        "EquiptTypeIndex": 0
       }
     ],
     "isUsable": false
@@ -76,7 +76,6 @@
     "Equipment": [],
     "isUsable": false
   },
-  
   {
     "RoomFloor": 5,
     "RoomNumber": 5,
@@ -88,8 +87,6 @@
     "Equipment": [],
     "isUsable": false
   },
-  
-  
   {
     "RoomFloor": 1,
     "RoomNumber": 1,
@@ -109,6 +106,17 @@
     "RoomId": 15,
     "Type": 0,
     "RoomIdType": "15 RecoveryRoom",
+    "Equipment": [],
+    "isUsable": false
+  },
+  {
+    "RoomFloor": 7,
+    "RoomNumber": 582,
+    "SurfaceArea": 55,
+    "BedNumber": 0,
+    "RoomId": 16,
+    "Type": 0,
+    "RoomIdType": "16 RecoveryRoom",
     "Equipment": [],
     "isUsable": false
   }

@@ -33,5 +33,25 @@
     "Note": null,
     "DateSent": "2021-05-22T15:03:27.0529265+02:00",
     "ApprovalCounter": 0
+  },
+  {
+    "SenderId": [
+      6
+    ],
+    "Title": "Odobrenje brufen 100",
+    "Medicine": {
+      "Name": "brufen 100",
+      "Composition": [],
+      "SideEffects": null,
+      "Usage": null,
+      "ReplaceMedicine": []
+    },
+    "RecieverIds": [
+      11,
+      10
+    ],
+    "Note": null,
+    "DateSent": "2021-06-07T15:08:46.6772233+02:00",
+    "ApprovalCounter": 1
   }
 ]

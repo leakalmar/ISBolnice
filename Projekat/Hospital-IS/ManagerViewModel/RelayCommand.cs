@@ -33,6 +33,6 @@ namespace Hospital_IS.ManagerViewModel
             _execute(parameter);
         }
 
-       // public event EventHandler CanExecuteChanged;
+       
     }
 }

@@ -54,13 +54,16 @@ namespace Model
             Type = type;
         }
 
-        public Room(int roomId, RoomType type, int roomNumber, int bedNumber)
+        public Room(int roomFloor, int roomNumber, int surfaceArea, int bedNumber, int roomId, RoomType type)
         {
+            RoomFloor = roomFloor;
+            RoomNumber = roomNumber;
+            SurfaceArea = surfaceArea;
+            BedNumber = bedNumber;
             RoomId = roomId;
             Type = type;
-            RoomNumber = roomNumber;
-            BedNumber = bedNumber;
         }
+
         public Room(int roomFloor, int roomNumber, int surfaceArea, RoomType type, List<Equipment> equipment)
         {
             RoomFloor = roomFloor;
@@ -111,10 +114,8 @@ namespace Model
         }
         public Boolean UpdateEquipment(Equipment updateEquip)
         {
-
             foreach (Equipment r in Equipment)
             {
-                MessageBox.Show(r.EquiptId.ToString() + " " + updateEquip.EquiptId.ToString());
                 if (r.EquiptId == updateEquip.EquiptId)
                 {
                     
@@ -124,9 +125,8 @@ namespace Model
                     return true;
                 }
             }
-
             return false;
         }
-      
+   
     }
 }

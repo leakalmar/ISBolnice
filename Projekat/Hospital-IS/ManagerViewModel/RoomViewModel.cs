@@ -24,7 +24,7 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand navigateToMedicinePageCommand;
         private RelayCommand addNewRoom;
         private RelayCommand deleteRoom;
-        private RelayCommand updateRoom;
+        private RelayCommand naviagteToUpdateRoom;
         private RelayCommand navigateToRoomPage;
         private RelayCommand navigateToRoomRenovation;
         private RelayCommand navigateAdvancedRoomRenovation;
@@ -112,12 +112,12 @@ namespace Hospital_IS.ManagerViewModel
                 deleteRoom = value;
             }
         }
-        public RelayCommand UpdateRoom
+        public RelayCommand NaviagteToUpdateRoom
         {
-            get { return updateRoom; }
+            get { return naviagteToUpdateRoom; }
             set
             {
-                updateRoom = value;
+                naviagteToUpdateRoom = value;
             }
         }
         
@@ -262,54 +262,16 @@ namespace Hospital_IS.ManagerViewModel
                 new Uri("ManagerView1/ManagerProfileOptionsView.xaml", UriKind.Relative));
         }
 
-        private void Execute_AddRoomCommand(object obj)
-        {
-            if (Valiadate())
-            {
-                RoomController.Instance.AddRoom(Convert.ToInt32(RoomNumber), Convert.ToInt32(RoomFloor), Convert.ToInt32(SurfaceArea),
-                    Convert.ToInt32(BedNumber), ComboBoxItem);
-                LoadRooms();
+     
 
-                this.NavService.Navigate(
-                    new Uri("ManagerView1/RoomView.xaml", UriKind.Relative));
-            }
-        }
-
-        private bool Valiadate()
-        {
-            bool firstCheck = false;
-
-            if (int.TryParse(RoomNumber, out int number) && int.TryParse(RoomFloor, out int floor) && int.TryParse(SurfaceArea, out int area)
-               && int.TryParse(BedNumber, out int bed) && !string.IsNullOrEmpty(RoomNumber) && !string.IsNullOrEmpty(RoomFloor) && !string.IsNullOrEmpty(SurfaceArea) &&
-               !string.IsNullOrEmpty(BedNumber))
-            {
-               
-                if ((number > 0 && number < 1000) && (floor >= 0 && floor <= 10) && (area > 0 && area <= 10000) && bed >= 0)
-                {
-                    firstCheck = true;
-                }
-            }
-
-            return firstCheck;
-        }
-
+       
         private void Execute_DeleteRoomCommand(object obj)
         {
             RoomController.Instance.RemoveRoom(SelectedRoom);
             LoadRooms();
         }
 
-        private void Execute_UpdateRoomCommand(object obj)
-        {
-            if (Valiadate())
-            {
-                RoomController.Instance.UpdateRoom(Convert.ToInt32(RoomNumber), Convert.ToInt32(RoomFloor), Convert.ToInt32(SurfaceArea),
-                    Convert.ToInt32(BedNumber), ComboBoxItem);
-                LoadRooms();
-            }
-              
-            
-        }
+      
         private bool CanExecute_DeleteRoomCommand(object obj)
         {
             return !(SelectedRoom == null);
@@ -325,10 +287,9 @@ namespace Hospital_IS.ManagerViewModel
         {
             this.navService = navigationService;
             LoadRooms();
-            this.AddNewRoom = new RelayCommand(Execute_AddRoomCommand);
+           
             this.NavigateToRoomPage = new RelayCommand(Execute_NavigateToRoomPageCommand, CanExecute_NavigateCommand);
             this.DeleteRoom = new RelayCommand(Execute_DeleteRoomCommand, CanExecute_DeleteRoomCommand);
-            this.UpdateRoom = new RelayCommand(Execute_UpdateRoomCommand);
             this.NavigateToMedicinePageCommand = new RelayCommand(Execute_NavigateToMedicinePageCommand, CanExecute_NavigateCommand);
             this.NavigateToManagerProfilePage = new RelayCommand(Execute_NavigateToManagerProfilePageCommand, CanExecute_NavigateCommand);
             this.NavigateToEquipmentPageCommand = new RelayCommand(Execute_NavigateToEquipmentPageCommand, CanExecute_NavigateCommand);
@@ -338,12 +299,22 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToBranchPage = new RelayCommand(Execute_NavigateToBranchPageCommand);
             this.NavigateToRenovationReport = new RelayCommand(Execute_NavigateToRoomRenovationReport);
             this.NavigateToAddRoom = new RelayCommand(Execute_NavigateToAddRoomPage);
+            this.NaviagteToUpdateRoom = new RelayCommand(Execute_NavigateToUpdateRoomPage, CanExecute_DeleteRoomCommand);
             DispatcherTimer dispatcherTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMinutes(1)
             };
             dispatcherTimer.Tick += timer_Tick;
             dispatcherTimer.Start();
+        }
+
+        private void Execute_NavigateToUpdateRoomPage(object obj)
+        {
+
+            UpdateRoomViewModel.Instance.SetRoom(SelectedRoom);
+            UpdateRoomViewModel.Instance.NavService = this.NavService;
+            this.NavService.Navigate(
+                    new Uri("ManagerView1/UpdateRoomVIew.xaml", UriKind.Relative));
         }
 
         private void Execute_NavigateToAddRoomPage(object obj)
@@ -395,23 +366,21 @@ namespace Hospital_IS.ManagerViewModel
         {
             RoomController.Instance.RemoveRoom(renovation.RoomFirst);
             RoomController.Instance.RemoveRoom(renovation.RoomSecond);
-            RoomController.Instance.AddRoom(renovation.RenovationResultRoom.RoomNumber, renovation.RenovationResultRoom.RoomFloor, renovation.RenovationResultRoom.SurfaceArea,
-                0, (int)renovation.RenovationResultRoom.Type);
-           
-
+            Room room = new Room(renovation.RenovationResultRoom.RoomNumber, renovation.RenovationResultRoom.RoomFloor, renovation.RenovationResultRoom.SurfaceArea,
+                0, renovation.RenovationResultRoom.Type);
+            RoomController.Instance.AddRoom(room);           
             LoadRooms();
-
         }
 
         private void SplitOneRoomIntoTwo(AdvancedRenovation renovation)
         {
             renovation.RoomFirst.SurfaceArea = renovation.RoomFirst.SurfaceArea / 2;
-            RoomController.Instance.UpdateRoom(renovation.RoomFirst.RoomId, renovation.RoomFirst.RoomFloor, renovation.RoomFirst.SurfaceArea / 2,
-                renovation.RoomFirst.BedNumber, (int)renovation.RoomFirst.Type);
-            RoomController.Instance.AddRoom(renovation.RenovationResultRoom.RoomNumber, renovation.RenovationResultRoom.RoomFloor, renovation.RenovationResultRoom.SurfaceArea,
-                0, (int)renovation.RenovationResultRoom.Type);
-            
-
+            Room updateRoom = new Room(renovation.RoomFirst.RoomId, renovation.RoomFirst.RoomFloor, renovation.RoomFirst.SurfaceArea / 2,
+                renovation.RoomFirst.BedNumber, renovation.RoomFirst.Type);
+            RoomController.Instance.UpdateRoom(updateRoom);
+            Room room = new Room(renovation.RenovationResultRoom.RoomNumber, renovation.RenovationResultRoom.RoomFloor, renovation.RenovationResultRoom.SurfaceArea,
+                 0, renovation.RenovationResultRoom.Type);
+            RoomController.Instance.AddRoom(room);
             LoadRooms();
         }
 
@@ -432,8 +401,6 @@ namespace Hospital_IS.ManagerViewModel
 
         private void Execute_AdvancedRenovationRoomCommand(object obj)
         {
-            //RoomRenovationViewModel.Instance.SetAppointmnetForRoom(SelectedRoom.RoomId);
-            //RoomRenovationViewModel.Instance.FirstRoom = SelectedRoom;
             AdvancedRoomRenovationViewModel.Instance.NavService = NavService;
             this.NavService.Navigate(
                     new Uri("ManagerView1/AdvancedRoomOptionsView.xaml", UriKind.Relative));
@@ -470,12 +437,8 @@ namespace Hospital_IS.ManagerViewModel
             }
             set
             {
-              
-                    
-                    _roomNumber = value;
-                 
-                    
-                    OnPropertyChanged("RoomNumber");
+                _roomNumber = value;                
+                OnPropertyChanged("RoomNumber");
               
             }
         }

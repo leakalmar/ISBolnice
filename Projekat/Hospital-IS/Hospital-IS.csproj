@@ -24,6 +24,7 @@
     <None Remove="Resources\calendar.png" />
     <None Remove="Resources\chooseFromTable.png" />
     <None Remove="Resources\doctor-search.png" />
+    <None Remove="Resources\feedback.png" />
     <None Remove="Resources\hospital.png" />
     <None Remove="Resources\hospitalCroped.png" />
     <None Remove="Resources\insight.png" />
@@ -116,6 +117,7 @@
     <Resource Include="Resources\doctor-search.png" />
     <Resource Include="Resources\doctor.jpg" />
     <Resource Include="Resources\edit.png" />
+    <Resource Include="Resources\feedback.png" />
     <Resource Include="Resources\filijale.png" />
     <Resource Include="Resources\hospital.png" />
     <Resource Include="Resources\hospitalCroped.png" />

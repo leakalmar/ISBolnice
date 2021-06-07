@@ -266,7 +266,7 @@
                         <Image Source="pack://application:,,,/Resources/addroom.png" HorizontalAlignment="Left" Width="40" Height="35" />
                     </StackPanel>
                 </Button>
-                <Button x:Name="EditRoom" BorderThickness="0" Grid.Column="1" Grid.Row="3" Height="35" Width="45" Background="White" Click="EditRoom_Click" >
+                <Button x:Name="EditRoom" BorderThickness="0" Grid.Column="1" Grid.Row="3" Height="35" Width="45" Background="White" Command="{Binding NaviagteToUpdateRoom}" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>

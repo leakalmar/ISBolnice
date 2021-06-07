@@ -368,8 +368,8 @@ namespace Hospital_IS.ManagerViewModel
         {
             if (IsSplit == true)
             {
-                bool isSuccess = AppointmentController.Instance.MakeRenovationAppointment(DateStart, DateEnd, Note, SelectedRoomFirst.RoomId);
-                
+                Appointment renovationAppointment = new Appointment(true, Note, DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomFirst.RoomId);
+                bool isSuccess = AppointmentController.Instance.MakeRenovationAppointment(renovationAppointment);              
                 if (isSuccess)
                 {
                     MessageBox.Show("Dodavanje uspjesno");

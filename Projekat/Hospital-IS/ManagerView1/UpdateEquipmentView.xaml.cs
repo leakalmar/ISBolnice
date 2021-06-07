@@ -11,7 +11,7 @@ namespace Hospital_IS.ManagerView1
         public UpdateEquipmentView()
         {
             InitializeComponent();
-            this.DataContext = EquipmentViewModel.Instance;
+            this.DataContext = UpdateEquipmentViewModel.Instance;
         
             
         }
