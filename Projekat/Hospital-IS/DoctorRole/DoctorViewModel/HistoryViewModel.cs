@@ -3,13 +3,20 @@ using DTOs;
 using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DTOs.SecretaryDTOs;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
+using System.Reflection.Metadata;
 using System.Windows.Data;
 using System.Windows.Navigation;
+using System.Windows.Input;
+using System.Linq;
+using Enums;
 
 namespace Hospital_IS.DoctorViewModel
 {
@@ -132,6 +139,86 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_PrintCommand(object obj)
         {
+
+            var pdfDoc = new iTextSharp.text.Document(PageSize.LETTER, 40f, 40f, 60f, 60f);
+            string path = $"..//..//..//Reports//" + Patient.Name + Patient.Surname + DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + ".pdf";
+            PdfWriter.GetInstance(pdfDoc, new FileStream(path, FileMode.OpenOrCreate));
+            pdfDoc.Open();
+
+            var spacer = new Paragraph("")
+            {
+                SpacingBefore = 10f,
+                SpacingAfter = 10f,
+            };
+
+            pdfDoc.Add(spacer);
+
+            var DocumentDescription = new PdfPTable(new[] { .75f, 1f }) { };
+            DocumentDescription.AddCell("Datum: ");
+            DocumentDescription.AddCell(DateTime.Now.ToString("dd.MM.yyyy"));
+            DocumentDescription.AddCell("Vreme: ");
+            DocumentDescription.AddCell(DateTime.Now.Hour + ":" + DateTime.Now.Minute);
+            DocumentDescription.AddCell("Opis dokumenta: ");
+            DocumentDescription.AddCell("Izveštaj o pregledu stanja pacijenta");
+            DocumentDescription.AddCell("Period za koji se izveštaj kreira:");
+            DocumentDescription.AddCell(FromDate.ToString("dd.MM.yyyy.") + " - " + ToDate.ToString("dd.MM.yyyy."));
+            DocumentDescription.AddCell("Ime i prezime pacijenta:");
+            DocumentDescription.AddCell(Patient.Name + " " + Patient.Surname + ", " + Patient.BirthDate.ToString("dd.MM.yyyy."));
+
+            pdfDoc.Add(DocumentDescription);
+            pdfDoc.Add(spacer);
+            pdfDoc.Add(spacer);
+
+            var columnWidth = new[] { 0.85f, 1.5f, 0.6f , 2f };
+
+            if (reports.Cast<object>().Count() != 0)
+            {
+                var pdfTable = new PdfPTable(columnWidth) { };
+                var zaglavlje = new PdfPCell(new Phrase("Istorija pacijenta"))
+                {
+                    Colspan = 5,
+                    HorizontalAlignment = 1,
+                    MinimumHeight = 3
+                };
+                pdfTable.AddCell(zaglavlje);
+                pdfTable.AddCell("Datum održavanja");
+                pdfTable.AddCell("Doktor");
+                pdfTable.AddCell("Tip");
+                pdfTable.AddCell("Razlog održavanja");
+                
+                foreach (ReportDTO report in Reports)
+                {
+                    pdfTable.AddCell(report.AppointmentStart.ToString("dd.MM.yyyy."));
+                    pdfTable.AddCell(report.DoctorName + " " + report.DoctorSurname);
+                    if (report.Type == AppointmentType.CheckUp)
+                    {
+                        pdfTable.AddCell("Pregled");
+                    }
+                    else
+                    {
+                        pdfTable.AddCell("Operacija");
+                    }
+                    pdfTable.AddCell(report.AppointmentCause);
+                    
+
+                }
+
+                pdfDoc.Add(pdfTable);
+            }
+            else
+            {
+                var empty = new Paragraph("    Nema istorije za izabrane datume")
+                {
+                    SpacingBefore = 10f,
+                    SpacingAfter = 10f,
+                };
+
+                pdfDoc.Add(empty);
+            }
+            pdfDoc.Add(spacer);
+            pdfDoc.Add(spacer);
+            pdfDoc.Close();
+            new ExitMess("PDF fajl je uspešno kreiran!").ShowDialog();
         }
         #endregion
 
