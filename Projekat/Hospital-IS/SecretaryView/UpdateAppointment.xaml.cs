@@ -96,7 +96,7 @@ namespace Hospital_IS.SecretaryView
             uca.RefreshGrid();
             this.Close();
         }
-
+        
         private void SendNotification(DoctorAppointmentDTO oldApp, DoctorAppointmentDTO appointment)
         {
             string title = "Pomeren pregled";
@@ -114,12 +114,11 @@ namespace Hospital_IS.SecretaryView
 
         private void Close(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(dpAppDate.SelectedDate.ToString());
             uca.RefreshGrid();
             this.Close();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             uca.RefreshGrid();
         }
@@ -208,6 +207,11 @@ namespace Hospital_IS.SecretaryView
             }
 
             return sameDay;
+        }
+
+        private void UndoAllChanges(object sender, RoutedEventArgs e)
+        {
+            SetDoctorAppointmentInfo();
         }
     }
 }

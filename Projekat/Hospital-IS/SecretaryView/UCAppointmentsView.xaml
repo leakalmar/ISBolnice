@@ -40,7 +40,8 @@
                     Click="ScheduleAppointment"/>
         </StackPanel>
 
-        <StackPanel Margin="10 0" Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Background="#FFC3D5E8">
+        <StackPanel Margin="10 0" Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                    Style="{DynamicResource ResourceKey=AppointmentFilterStackPanel}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>

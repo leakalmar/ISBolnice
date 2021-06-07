@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
         Title="Pomeranje termina" Height="700" Width="580"
@@ -64,7 +65,8 @@
         <TextBlock Name="txtRoom" Grid.Column="2" Grid.Row="5" Margin="50 10" Text="{Binding NewDocAppointment.Room}"
                    Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
-        <DatePicker Name="dpAppDate"  Grid.Column="2" Grid.Row="6" Margin="50 10" LostFocus="VerifyAppointment" SelectedDateChanged="ShowScheduledAppointments"/>
+        <DatePicker Name="dpAppDate"  Grid.Column="2" Grid.Row="6" Margin="50 10" DisplayDateStart="{x:Static sys:DateTime.Today}"
+                    LostFocus="VerifyAppointment" SelectedDateChanged="ShowScheduledAppointments"/>
 
         <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="7" Margin="50 10">
             <ComboBox Name="cbHours" MinWidth="70" ItemsSource="{Binding Hours}" LostFocus="VerifyAppointment"/>
@@ -99,7 +101,7 @@
 
 
         <Button Grid.Column="1" Grid.Row="1" Content="Poništi sve izmene" HorizontalAlignment="Left" 
-                Margin="0 0 0 10" Width="140"
+                Margin="0 0 0 10" Width="140" Click="UndoAllChanges"
                 Style="{DynamicResource ResourceKey=SecondaryButton}"/>
         <Button Grid.Column="2" Grid.Row="1" Content="Otkaži termin" HorizontalAlignment="Right" 
                 Margin="0 0 0 10" Width="120"
