@@ -41,7 +41,7 @@
                    Text="Trajanje(min)" Margin="70 0 0 20"/>
 
         <ComboBox Name="cbAppType" Grid.Row="1" Grid.Column="2" Margin="20 0 70 20"
-                LostFocus="cbAppType_LostFocus" FontSize="15">
+                  SelectionChanged="cbAppType_SelectionChanged" FontSize="15">
             <ComboBoxItem Content="Pregled" />
             <ComboBoxItem Content="Operacija" />
         </ComboBox>

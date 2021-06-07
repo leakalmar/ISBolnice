@@ -63,22 +63,6 @@ namespace Hospital_IS.SecretaryView
             this.Close();
         }
 
-        private void cbAppType_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (cbAppType.SelectedIndex == 0)
-            {
-                cbSpecialty.IsEnabled = false;
-                Rooms = new ObservableCollection<RoomDTO>(DoctorAppointmentManagementController.Instance.GetRoomByType(RoomType.ConsultingRoom));
-                cbRoom.ItemsSource = Rooms;
-            }
-            else
-            {
-                cbSpecialty.IsEnabled = true;
-                Rooms = new ObservableCollection<RoomDTO>(DoctorAppointmentManagementController.Instance.GetRoomByType(RoomType.OperationRoom));
-                cbRoom.ItemsSource = Rooms;
-            }
-        }
-
         private void txtAppDuration_LostFocus(object sender, RoutedEventArgs e)
         {
 
@@ -88,7 +72,11 @@ namespace Hospital_IS.SecretaryView
             else if (cbAppType.SelectedIndex == 1)
                 emerAppointmentDTO.AppointmetType = AppointmentType.Operation;
 
-            emerAppointmentDTO.Specialty = Specializations[cbSpecialty.SelectedIndex];
+            if (cbSpecialty.SelectedIndex == -1)
+                emerAppointmentDTO.Specialty = Specializations[0];
+            else
+                emerAppointmentDTO.Specialty = Specializations[cbSpecialty.SelectedIndex];
+                
             if (cbPatient.IsEnabled)
                 emerAppointmentDTO.Patient = Patients[cbPatient.SelectedIndex];
             else
@@ -126,6 +114,23 @@ namespace Hospital_IS.SecretaryView
         {
             SelectGuestView sg = new SelectGuestView(this);
             sg.ShowDialog();
+        }
+
+        private void cbAppType_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (cbAppType.SelectedIndex == 0)
+            {
+                cbSpecialty.IsEnabled = false;
+                cbSpecialty.SelectedIndex = 0;
+                Rooms = new ObservableCollection<RoomDTO>(DoctorAppointmentManagementController.Instance.GetRoomByType(RoomType.ConsultingRoom));
+                cbRoom.ItemsSource = Rooms;
+            }
+            else
+            {
+                cbSpecialty.IsEnabled = true;
+                Rooms = new ObservableCollection<RoomDTO>(DoctorAppointmentManagementController.Instance.GetRoomByType(RoomType.OperationRoom));
+                cbRoom.ItemsSource = Rooms;
+            }
         }
     }
 }

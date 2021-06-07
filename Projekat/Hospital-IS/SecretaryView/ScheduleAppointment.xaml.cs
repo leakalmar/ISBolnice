@@ -1,19 +1,15 @@
-﻿using Controllers;
-using DTOs;
+﻿using DTOs;
 using Enums;
 using Hospital_IS.Controllers;
 using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using Hospital_IS.Enums;
-using Model;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace Hospital_IS.SecretaryView
 {
@@ -192,7 +188,7 @@ namespace Hospital_IS.SecretaryView
             this.Visibility = Visibility.Collapsed;
         }
 
-        private void cbAppType_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void cbAppType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAppType.SelectedIndex == 0)
             {
@@ -212,7 +208,7 @@ namespace Hospital_IS.SecretaryView
             }
         }
 
-        private void cbDoctor_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void cbDoctor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ScheduledAppointments = new ObservableCollection<DoctorAppointmentDTO>(DoctorAppointmentManagementController.Instance.GetFutureAppointmentsForDoctor(Doctors[cbDoctor.SelectedIndex].Id));
             GenerateAppointmentTimes(Doctors[cbDoctor.SelectedIndex]);

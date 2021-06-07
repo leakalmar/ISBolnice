@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
-        Title="Izmena doktora" Height="520" Width="450"
+        Title="Izmena doktora" Height="540" Width="500"
         WindowStartupLocation="CenterScreen"
-        FontSize="14"
+        FontSize="15"
         FontWeight="Light">
     <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
@@ -45,14 +45,14 @@
         <TextBlock Grid.Column="1" Grid.Row="11" Text="Kraj godišnjeg odmora:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
 
-        <TextBox Grid.Column="2" Grid.Row="2" Margin="40 10 10 5" Text="{Binding Doctor.Name}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <TextBox Grid.Column="2" Grid.Row="3" Margin="40 5 10 5" Text="{Binding Doctor.Surname}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <TextBox Grid.Column="2" Grid.Row="4" Margin="40 5 10 5" Name="birthdateTxt" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <TextBox Grid.Column="2" Grid.Row="5" Margin="40 5 10 5" Text="{Binding Doctor.Address}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <TextBox Grid.Column="2" Grid.Row="6" Margin="40 5 10 5" Text="{Binding Doctor.Phone}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Name="txtName" Grid.Column="2" Grid.Row="2" Margin="40 10 10 5" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Name="txtSurname" Grid.Column="2" Grid.Row="3" Margin="40 5 10 5" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Name="txtBirthDate" Grid.Column="2" Grid.Row="4" Margin="40 5 10 5" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Name="txtAddress" Grid.Column="2" Grid.Row="5" Margin="40 5 10 5" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Name="txtTelephone" Grid.Column="2" Grid.Row="6" Margin="40 5 10 5" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
         <ComboBox Name="cbSpecialty" Grid.Column="2" Grid.Row="7" Margin="40 5 10 5" ItemsSource="{Binding Specialties}">
         </ComboBox>
-        <TextBox Grid.Column="2" Grid.Row="8" Margin="40 5 10 5" Text="{Binding Doctor.Email}" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <TextBox Name="txtEmail" Grid.Column="2" Grid.Row="8" Margin="40 5 10 5" Style="{DynamicResource ResourceKey=RegularTextBox}"/>
         <ComboBox Name="shiftComboBox" Grid.Column="2" Grid.Row="9" Margin="40 20 10 5">
             <ComboBoxItem Content="Prva"/>
             <ComboBoxItem Content="Druga"/>
@@ -71,10 +71,10 @@
         </StackPanel>
 
         <Button Grid.Column="1" Grid.Row="1" Content="Poništi sve izmene" HorizontalAlignment="Left" 
-                Margin="0 0 0 10" Width="130"
+                Margin="0 0 0 10" Width="140" Click="UndoAllChanges"
                 Style="{DynamicResource ResourceKey=SecondaryButton}"/>
         <Button Grid.Column="2" Grid.Row="1" Content="Obriši doktora" HorizontalAlignment="Right" 
-                Margin="0 0 0 10" Width="110"
+                Margin="0 0 0 10" Width="120"
                 Style="{DynamicResource ResourceKey=DeleteButton}" Click="DeleteDoctor"/>
 
 
