@@ -42,7 +42,7 @@
             <RadioButton x:Name="rbSelectAll" Content="Prosledi svima" IsChecked="True" Style="{DynamicResource ResourceKey=RadioButton}" Margin="0 3" Click="rbSelectAll_Click"/>
             <StackPanel Orientation="Horizontal">
                 <RadioButton x:Name="rbSelectSome" Content="Prosledi određenim osobama" Style="{DynamicResource ResourceKey=RadioButton}" Margin="0 3 13 3"/>
-                <Button x:Name="btnSelect" Width="75"
+                <Button x:Name="btnSelect" Width="80"
                         Style="{DynamicResource ResourceKey=SecondaryButton}"
                         Click="btnSelect_Click">
                     <StackPanel Orientation="Horizontal">
