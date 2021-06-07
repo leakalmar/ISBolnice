@@ -16,7 +16,8 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         #region Fields
         private List<MedicineDTO> medicines;
         private MedicineDTO selectedMedicine;
-        private TherapyDTO therapy; 
+        private TherapyDTO therapy;
+        private DateTime date;
         private bool focused;
 
         public bool Focused
@@ -44,6 +45,22 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             set
             {
                 therapy = value;
+                OnPropertyChanged("Therapy");
+            }
+        }
+        public DateTime Date
+        {
+            get { return date; }
+            set
+            {
+                if(value < DateTime.Now)
+                {
+                    date = DateTime.Now;
+                }
+                else
+                {
+                    date = value;
+                }
                 OnPropertyChanged("Therapy");
             }
         }
@@ -104,6 +121,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             this.Therapy.Takings = 1;
             this.Therapy.Pills = 1;
             this.Focused = true;
+            this.Date = DateTime.Now;
             this.Therapy.TherapyEnd = DateTime.Now.ToString("dd.MM.yyyy.");
             this.SaveCommand = new RelayCommand(Execute_SaveCommand, CanExecute_Command);
             this.CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecute_Command);

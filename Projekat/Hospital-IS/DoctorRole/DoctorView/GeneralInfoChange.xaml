@@ -9,7 +9,6 @@
         mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
     <UserControl.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
-        <converters:DateConverter x:Key="DateConverter" />
     </UserControl.Resources>
     <UserControl.InputBindings>
         <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding SaveCommand}" />
@@ -50,11 +49,17 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Content="Ime:"
@@ -62,126 +67,90 @@
             <TextBox Grid.Row="0" Grid.Column="1" x:Name="name"
                     commands:FocusExtension.IsFocused="{Binding Focused}"
                     Style="{StaticResource LineTextBox}"
-                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-                <TextBox.Text>
-                    <Binding Path="Patient.Name" ValidatesOnDataErrors="True"
-                            UpdateSourceTrigger="PropertyChanged">
-                        <Binding.ValidationRules>
-                            <validationrules:EmptyRule />
-                            <validationrules:NumbersInString />
-                            <validationrules:PunctuationMarks />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
+                    Text="{Binding Patient.Name}">
             </TextBox>
+            <TextBlock Grid.Row="1" Grid.Column="1"
+                    Text="{Binding Patient.ValidationErrors[Name]}"
+                               Foreground="Red"/>
 
-            <Label Grid.Row="1" Grid.Column="0" Content="Prezime:"
+            <Label Grid.Row="2" Grid.Column="0" Content="Prezime:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name="surname"
+            <TextBox Grid.Row="2" Grid.Column="1" x:Name="surname"
                     Style="{StaticResource LineTextBox}"
-                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-                <TextBox.Text>
-                    <Binding Path="Patient.Surname" ValidatesOnDataErrors="True"
-                            UpdateSourceTrigger="PropertyChanged">
-                        <Binding.ValidationRules>
-                            <validationrules:EmptyRule />
-                            <validationrules:NumbersInString />
-                            <validationrules:PunctuationMarks />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
+                    Text="{Binding Patient.Surname}">
             </TextBox>
+            <TextBlock Grid.Row="3" Grid.Column="1"
+                    Text="{Binding Patient.ValidationErrors[Surname]}"
+                    Foreground="Red" />
 
-            <Label Grid.Row="2" Grid.Column="0" Content="Pol:"
+            <Label Grid.Row="4" Grid.Column="0" Content="Pol:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
-            <ComboBox Grid.Row="2" Grid.Column="1" x:Name="gender"
+            <ComboBox Grid.Row="4" Grid.Column="1" x:Name="gender"
                     Text="{Binding Patient.Gender}"
                     Style="{StaticResource CustomComboBox}">
                 <ComboBoxItem Content="Žensko" />
                 <ComboBoxItem Content="Muško" />
             </ComboBox>
+            <TextBlock Grid.Row="5" Grid.Column="1"
+                    Text="{Binding Patient.ValidationErrors[Gender]}"
+                    Foreground="Red" />
 
-            <Label Grid.Row="3" Grid.Column="0" Content="Datum rođenja:"
+            <Label Grid.Row="6" Grid.Column="0" Content="Datum rođenja:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
-            <TextBox Grid.Row="3" Grid.Column="1"
-                    Style="{StaticResource LineTextBox}"
-                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-                <TextBox.Text>
-                    <Binding Path="Patient.BirthDate"
-                            Converter="{StaticResource DateConverter}"
-                            ValidatesOnDataErrors="True"
-                            UpdateSourceTrigger="PropertyChanged">
-                        <Binding.ValidationRules>
-                            <validationrules:EmptyRule />
-                            <validationrules:DateFormat />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+            <DatePicker Grid.Row="6" Grid.Column="1"
+                    SelectedDate="{Binding Patient.BirthDate}" 
+                    Style="{StaticResource CustomDatePicker}">
+                <DatePicker.Resources>
+                    <Style TargetType="DatePickerTextBox">
+                        <Setter Property="Focusable" Value="True" />
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
+            <TextBlock Grid.Row="7" Grid.Column="1"
+                    Text="{Binding Patient.ValidationErrors[BirthDate]}"
+                    Foreground="Red" />
 
-            <Label Grid.Row="4" Grid.Column="0" Content="Krvna grupa:"
+            <Label Grid.Row="8" Grid.Column="0" Content="Krvna grupa:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
-            <ComboBox Grid.Row="4" Grid.Column="1" x:Name="blood" Text="/"
+            <ComboBox Grid.Row="8" Grid.Column="1" x:Name="blood" Text="{Binding Patient.BloodType}"
                     Style="{StaticResource CustomComboBox}">
                 <ComboBoxItem Content="A" />
                 <ComboBoxItem Content="B" />
                 <ComboBoxItem Content="AB" />
                 <ComboBoxItem Content="0" />
             </ComboBox>
+            <TextBlock Grid.Row="9" Grid.Column="1"
+                    Text="{Binding Patient.ValidationErrors[BloodType]}"
+                    Foreground="Red" />
 
             <Label Grid.Row="0" Grid.Column="3" Content="Kontakt telefon"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
             <TextBox Grid.Row="0" Grid.Column="4" x:Name="phone"
                     Style="{StaticResource LineTextBox}"
-                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-                <TextBox.Text>
-                    <Binding Path="Patient.Phone"
-                            ValidatesOnDataErrors="True"
-                            UpdateSourceTrigger="PropertyChanged">
-                        <Binding.ValidationRules>
-                            <validationrules:PunctuationMarks />
-                            <validationrules:NotAllowedLetters />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
+                    Text="{Binding Patient.Phone}">
             </TextBox>
+            <TextBlock Grid.Row="1" Grid.Column="4"
+                    Text="{Binding Patient.ValidationErrors[Phone]}"
+                    Foreground="Red" />
 
-            <Label Grid.Row="1" Grid.Column="3" Content="Email:"
+            <Label Grid.Row="2" Grid.Column="3" Content="Email:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
-            <TextBox Grid.Row="1" Grid.Column="4" x:Name="email"
+            <TextBox Grid.Row="2" Grid.Column="4" x:Name="email"
                     Text="{Binding Patient.Email}"
                     Style="{StaticResource LineTextBox}" />
 
-            <Label Grid.Row="2" Grid.Column="3" Content="Zaposlen:"
+            <Label Grid.Row="4" Grid.Column="3" Content="Zaposlen:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
-            <TextBox Grid.Row="2" Grid.Column="4" x:Name="city"
-                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
+            <TextBox Grid.Row="4" Grid.Column="4" x:Name="city"
+                    Text="{Binding Patient.Employer}"
                     Style="{StaticResource LineTextBox}">
-                <TextBox.Text>
-                    <Binding Path="Patient.Employer"
-                            ValidatesOnDataErrors="True"
-                            UpdateSourceTrigger="PropertyChanged">
-                        <Binding.ValidationRules>
-                            <validationrules:NumbersInString />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
             </TextBox>
 
-            <Label Grid.Row="3" Grid.Column="3" Content="Adresa:"
+            <Label Grid.Row="6" Grid.Column="3" Content="Adresa:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
-            <TextBox Grid.Row="3" Grid.Column="4" x:Name="address"
+            <TextBox Grid.Row="6" Grid.Column="4" x:Name="address"
                     Style="{StaticResource LineTextBox}"
-                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-                <TextBox.Text>
-                    <Binding Path="Patient.Address"
-                            ValidatesOnDataErrors="True"
-                            UpdateSourceTrigger="PropertyChanged">
-                        <Binding.ValidationRules>
-                            <validationrules:PunctuationMarks />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
+                    Text="{Binding Patient.Address}">
             </TextBox>
         </Grid>
 

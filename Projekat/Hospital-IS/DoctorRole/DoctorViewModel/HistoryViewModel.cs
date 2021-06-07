@@ -86,7 +86,14 @@ namespace Hospital_IS.DoctorViewModel
             get { return fromDate; }
             set
             {
-                fromDate = value;
+                if (value > ToDate)
+                {
+                    fromDate = ToDate;
+                }
+                else
+                {
+                    fromDate = value;
+                }
                 FilterHistory();
                 OnPropertyChanged("FromDate");
             }
@@ -96,8 +103,14 @@ namespace Hospital_IS.DoctorViewModel
         {
             get { return toDate; }
             set
-            {
-                toDate = value;
+            {   if(value < FromDate || value>DateTime.Now)
+                {
+                    toDate = DateTime.Now;
+                }
+                else
+                {
+                    toDate = value;
+                }
                 FilterHistory();
                 OnPropertyChanged("ToDate");
             }

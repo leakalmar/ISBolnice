@@ -10,7 +10,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         #region Feilds
         private PatientDTO patient;
         private bool focused;
-       
+
         public bool Focused
         {
             get { return focused; }
@@ -61,8 +61,12 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
 
         private void Execute_SaveCommand(object obj)
         {
-            SecretaryManagementController.Instance.UpdatePatient(Patient);
-            DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.ChangeCommand.Execute("1");
+            patient.Validate();
+            if (patient.IsValid)
+            {
+                SecretaryManagementController.Instance.UpdatePatient(Patient);
+                DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.ChangeCommand.Execute("1");
+            }
         }
         private void Execute_CancelCommand(object obj)
         {

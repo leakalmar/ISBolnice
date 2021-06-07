@@ -38,10 +38,8 @@
             </Ellipse.Fill>
         </Ellipse>
 
-        <Grid Name="PersonalData" Grid.Row="0" Grid.Column="3"
-                DataContext="{Binding Path=Patient}">
+        <Grid Name="PersonalData" Grid.Row="0" Grid.Column="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -54,39 +52,38 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                     Orientation="Horizontal" HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-                <Label Name="name" Content="{Binding Path=Name}" FontSize="18"
-                        FontFamily="Verdana" Foreground="FloralWhite"></Label>
-                <Label Name="surname" Content="{Binding Path=Surname}"
-                        Grid.ColumnSpan="4" FontSize="18" FontFamily="Verdana"
-                        Foreground="FloralWhite"></Label>
+                <Label Name="name" Content="{Binding Patient.Name}" Style="{StaticResource TitleLabel}"></Label>
+                <Label Name="surname" Content="{Binding Patient.Surname}"
+                        Grid.ColumnSpan="4" Style="{StaticResource TitleLabel}"></Label>
             </StackPanel>
 
-            <Label Padding="0" Grid.Row="2" Grid.Column="0" FontSize="12"
-                    FontFamily="Verdana" Foreground="FloralWhite">Pol:</Label>
-            <Label Padding="0" Grid.Row="2" Grid.Column="1" Width="auto"
-                    Name="birthDate" Content="{Binding Path=Gender}"
-                    FontSize="12" FontFamily="Verdana" Foreground="FloralWhite"></Label>
+            <Label Padding="0" Grid.Row="1" Grid.Column="0" FontSize="14" HorizontalAlignment="Right"
+                  Margin="0,0,50,0"  FontFamily="Verdana" Foreground="FloralWhite">Pol:</Label>
+            <Label Padding="0" Grid.Row="1" Grid.Column="1" Width="auto"
+                    Name="birthDate" Content="{Binding Patient.Gender}"
+                    FontSize="14" FontFamily="Verdana" Foreground="FloralWhite"></Label>
 
-            <Label Padding="0" Grid.Row="3" Grid.Column="0" FontSize="12"
-                    FontFamily="Verdana" Foreground="FloralWhite">Godine:</Label>
+            <Label Padding="0" Grid.Row="3" Grid.Column="0" FontSize="14"
+                    Margin="0,0,50,0" HorizontalAlignment="Right" FontFamily="Verdana" Foreground="FloralWhite">Godine:</Label>
             <Label Padding="0" Grid.Row="3" Grid.Column="1" Width="auto"
-                    Name="employer" Content="Nije povezano" FontSize="12"
+                    Name="employer" Content="{Binding PatientYears}" FontSize="14"
                     FontFamily="Verdana" Foreground="FloralWhite"></Label>
 
-            <Label Padding="0" Grid.Row="4" Grid.Column="0" FontSize="12"
-                    FontFamily="Verdana" Foreground="FloralWhite">Zaposlen:</Label>
+            <Label Padding="0" Grid.Row="4" Grid.Column="0" FontSize="14"
+                    Margin="0,0,50,0" HorizontalAlignment="Right" FontFamily="Verdana" Foreground="FloralWhite">Zaposlen:</Label>
             <Label Padding="0" Grid.Row="4" Grid.Column="1" Width="auto"
-                    Name="email" Content="{Binding Path=Employer}" FontSize="12"
+                    Name="email" Content="{Binding Patient.Employer}" FontSize="14"
                     FontFamily="Verdana" Foreground="FloralWhite"></Label>
 
             <Label Padding="0" Grid.Row="1" Grid.Column="3" Width="auto"
                     Content="Alergeni" FontSize="18" FontFamily="Verdana"
                     Foreground="FloralWhite" HorizontalAlignment="Center"
                     VerticalAlignment="Center"></Label>
-            <ItemsControl x:Name="alergiesGrid" ItemsSource="{Binding Alergies}"
+            <ItemsControl x:Name="alergiesGrid"
+                    ItemsSource="{Binding Patient.Alergies}"
                     Grid.Row="2" Grid.Column="3" Grid.RowSpan="3"
                     Background="Transparent" Foreground="White"
                     HorizontalAlignment="Center"

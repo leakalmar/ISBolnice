@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Hospital_IS.DoctorRole.DoctorView"
         mc:Ignorable="d"
         xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         d:DesignHeight="555" d:DesignWidth="783">
@@ -140,7 +141,13 @@
                         Style="{StaticResource CustomDatePicker}"
                         VerticalAlignment="Center" Width="150"
                         SelectedDate="{Binding FromDate}"
-                        FirstDayOfWeek="Monday">
+                        FirstDayOfWeek="Monday"
+                        DisplayDateStart="{x:Static sys:DateTime.Today}">
+                    <DatePicker.Resources>
+                        <Style TargetType="DatePickerTextBox">
+                            <Setter Property="Focusable" Value="True" />
+                        </Style>
+                    </DatePicker.Resources>
                 </DatePicker>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="3"
@@ -150,7 +157,14 @@
                 <DatePicker Grid.Column="0" HorizontalAlignment="Center"
                         Style="{StaticResource CustomDatePicker}"
                         VerticalAlignment="Center" Width="150"
-                        SelectedDate="{Binding ToDate}" FirstDayOfWeek="Monday" />
+                        DisplayDateStart="{x:Static sys:DateTime.Today}"
+                        SelectedDate="{Binding ToDate}" FirstDayOfWeek="Monday">
+                    <DatePicker.Resources>
+                        <Style TargetType="DatePickerTextBox">
+                            <Setter Property="Focusable" Value="True"/>
+                        </Style>
+                    </DatePicker.Resources>
+                </DatePicker>
             </StackPanel>
 
             

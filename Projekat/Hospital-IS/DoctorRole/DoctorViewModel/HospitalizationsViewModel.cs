@@ -112,7 +112,14 @@ namespace Hospital_IS.DoctorViewModel
             get { return releaseDate; }
             set
             {
-                releaseDate = value;
+                if(value <= DateTime.Now)
+                {
+                    releaseDate = DateTime.Now.AddDays(1);
+                }
+                else
+                {
+                    releaseDate = value;
+                }
                 OnPropertyChanged("ReleaseDate");
             }
         }
@@ -143,12 +150,20 @@ namespace Hospital_IS.DoctorViewModel
             get { return beds; }
             set
             {
-                beds = CheckIfTaken(value);
-
-                if (beds.Count != 0)
+                if (!NewHospitalization)
                 {
-                    SelectedBed = beds[0];
+                    beds = BedController.Instance.GetBedsByRoomId(SelectedRoom.RoomId);
                 }
+                else
+                {
+                    beds = CheckIfTaken(value);
+
+                    if (beds.Count != 0)
+                    {
+                        SelectedBed = beds[0];
+                    }
+                }
+                
                 OnPropertyChanged("Beds");
             }
         }
@@ -282,8 +297,8 @@ namespace Hospital_IS.DoctorViewModel
                 Hospitalization hospitalization = ChartController.Instance.GetActivHospitalization(Patient);
                 AddmissionDate = hospitalization.AdmissionDate;
                 ReleaseDate = hospitalization.ReleaseDate;
-                SelectedRoom = hospitalization.Room;
-                SelectedBed = hospitalization.Bed;
+                SelectedRoom = RoomController.Instance.GetRoomById(hospitalization.Room.RoomId);
+                SelectedBed = BedController.Instance.GetBedById(hospitalization.Bed.BedId);
                 Doctor = hospitalization.Doctor;
             }
         }

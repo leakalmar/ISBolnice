@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        mc:Ignorable="d" d:DesignHeight="555" d:DesignWidth="783">
+        mc:Ignorable="d" d:DesignHeight="555" d:DesignWidth="783"
+        FocusManager.FocusedElement="{Binding ElementName=search}">
     <UserControl.InputBindings>
         <KeyBinding Key="Return" Command="{Binding ChooseRoomCommand}" />
     </UserControl.InputBindings>
@@ -15,12 +16,14 @@
             <ColumnDefinition Width="114*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
             <RowDefinition Height="0.1*" />
             <RowDefinition Height="0.5*" />
             <RowDefinition Height="0.5*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.ColumnSpan="2">
+        <Label Content="Sobe" Style="{StaticResource TitleLabel}" Grid.ColumnSpan="2" />
+        <Grid Grid.ColumnSpan="2" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*" />
                 <ColumnDefinition Width="1*" />
@@ -32,9 +35,15 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <Label Content="Soba:" Grid.Row="0" Grid.Column="0" FontSize="14"
-                    Style="{StaticResource CustomLabel}"
-                    VerticalAlignment="Bottom" />
+            <TextBlock Text="Broj sobe veci od:" Grid.Row="0" Grid.Column="0"
+                    FontSize="14" TextWrapping="Wrap" VerticalAlignment="Bottom">
+                <TextBlock.Resources>
+                    <Style TargetType="TextBlock"
+                            BasedOn="{StaticResource CustomTextBlock}">
+                    </Style>
+                    
+                </TextBlock.Resources>
+            </TextBlock>
             <Label Content="Sprat:" Grid.Row="0" Grid.Column="3" FontSize="14"
                     Style="{StaticResource CustomLabel}"
                     VerticalAlignment="Bottom" />
@@ -42,7 +51,7 @@
                     FontSize="14" Style="{StaticResource CustomLabel}"
                     VerticalAlignment="Bottom" />
 
-            <TextBox Grid.Row="0" Style="{StaticResource LineTextBox}"
+            <TextBox Grid.Row="0" Style="{StaticResource LineTextBox}" x:Name="search"
                     Text="{Binding EnteredNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1">
             </TextBox>
             <ComboBox ItemsSource="{Binding Floors}" Grid.Row="0"
@@ -59,8 +68,8 @@
         </Grid>
 
         <DataGrid ItemsSource="{Binding FilterdRooms}"
-                SelectedItem="{Binding SelectedRoom}" Grid.Row="1"
-                Margin="0,20,0,0" Grid.ColumnSpan="2">
+                SelectedItem="{Binding SelectedRoom}" Grid.Row="2"
+                Margin="0,20,0,0" Grid.ColumnSpan="2" KeyboardNavigation.TabNavigation="None">
             <DataGrid.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding ChooseRoomCommand}" />
             </DataGrid.InputBindings>
@@ -132,7 +141,7 @@
 
         </DataGrid>
 
-        <Frame Grid.Row="1" Grid.ColumnSpan="2" Margin="0,226,0,0"
+        <Frame Grid.Row="2" Grid.ColumnSpan="2" Margin="0,226,0,0"
                 VerticalAlignment="Bottom" Grid.RowSpan="2" x:Name="frame"
                 Height="0">
             <Frame.Style>

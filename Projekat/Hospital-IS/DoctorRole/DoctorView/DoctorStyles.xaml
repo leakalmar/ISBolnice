@@ -21,6 +21,7 @@
     <Style x:Key="CustomDatePicker" TargetType="{x:Type DatePicker}">
         <Style.Resources>
             <Style TargetType="{x:Type DatePickerTextBox}">
+                <Setter Property="Focusable" Value="True" />
                 <Setter Property="Control.Template">
                     <Setter.Value>
                         <ControlTemplate>

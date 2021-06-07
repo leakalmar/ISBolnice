@@ -72,7 +72,14 @@
             <Label Content="Datum kraja terapije:"
                     Style="{StaticResource CustomLabel}" Grid.Row="4" />
             <DatePicker Grid.Row="5" Style="{StaticResource CustomDatePicker}"
-                    SelectedDate="{Binding Path=Therapy.TherapyEnd}" />
+                    SelectedDate="{Binding Path=Date}"
+                    DisplayDateStart="{x:Static sys:DateTime.Today}">
+                <DatePicker.Resources>
+                    <Style TargetType="DatePickerTextBox">
+                        <Setter Property="Focusable" Value="True" />
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
             <TextBlock Grid.Row="6" Text="{Binding Therapy.ValidationErrors[Date]}"
                     Foreground="Red" />
 

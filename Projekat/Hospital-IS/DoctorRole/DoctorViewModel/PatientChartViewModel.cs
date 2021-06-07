@@ -24,6 +24,7 @@ namespace Hospital_IS.DoctorViewModel
         private bool backButton;
         private bool started;
         private bool prescriptionReview;
+        private int patientYears;
 
         public bool ReportFocused
         {
@@ -61,6 +62,7 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 patient = value;
+                PatientYears = (new DateTime(1, 1, 1).Add(DateTime.Now - Patient.BirthDate)).Year - 1;
                 SetFirstPageNavigation();
                 OnPropertyChanged("Patient");
             }
@@ -133,7 +135,15 @@ namespace Hospital_IS.DoctorViewModel
                 OnPropertyChanged("PrescriptionReview");
             }
         }
-
+        public int PatientYears
+        {
+            get { return patientYears; }
+            set
+            {
+                patientYears = value;
+                OnPropertyChanged("PatientYears");
+            }
+        }
         #endregion
 
         #region Views

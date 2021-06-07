@@ -41,22 +41,26 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         #region Methods
         public void SetType()
         {
-            if (selectedRoom.Type.Equals(RoomType.ConsultingRoom))
+            if(SelectedRoom != null)
             {
-                Type = "Soba za konsultacije";
+                if (selectedRoom.Type.Equals(RoomType.ConsultingRoom))
+                {
+                    Type = "Soba za konsultacije";
+                }
+                else if (selectedRoom.Type.Equals(RoomType.OperationRoom))
+                {
+                    Type = "Operaciona sala";
+                }
+                else if (selectedRoom.Type.Equals(RoomType.RecoveryRoom))
+                {
+                    Type = "Soba za oporavak";
+                }
+                else if (selectedRoom.Type.Equals(RoomType.StorageRoom))
+                {
+                    Type = "Magacin";
+                }
             }
-            else if(selectedRoom.Type.Equals(RoomType.OperationRoom))
-            {
-                Type = "Operaciona sala";
-            }
-            else if (selectedRoom.Type.Equals(RoomType.RecoveryRoom))
-            {
-                Type = "Soba za oporavak";
-            }
-            else if (selectedRoom.Type.Equals(RoomType.StorageRoom))
-            {
-                Type = "Magacin";
-            }
+            
         }
         #endregion
 

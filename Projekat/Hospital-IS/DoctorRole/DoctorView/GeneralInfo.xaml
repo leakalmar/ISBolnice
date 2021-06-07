@@ -94,14 +94,9 @@
                     Text="{Binding Employer}" IsEnabled="False"
                     Style="{StaticResource LineTextBox}" />
 
-            <Label Grid.Row="3" Grid.Column="3" Content="Država:"
+            <Label Grid.Row="3" Grid.Column="3" Content="Adresa:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
-            <TextBox Grid.Row="3" Grid.Column="4" x:Name="country" Text="/"
-                    IsEnabled="False" Style="{StaticResource LineTextBox}" />
-
-            <Label Grid.Row="4" Grid.Column="3" Content="Adresa:"
-                    Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
-            <TextBox Grid.Row="4" Grid.Column="4" x:Name="address"
+            <TextBox Grid.Row="3" Grid.Column="4" x:Name="address"
                     Text="{Binding Address}" IsEnabled="False"
                     Style="{StaticResource LineTextBox}" />
 

@@ -67,7 +67,7 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="50" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
@@ -96,30 +96,21 @@
 
                     <Label Grid.Row="3" Grid.Column="0" Content="Pol:"
                             Style="{StaticResource CustomLabel}" />
-                    <Label Grid.Row="4" Grid.Column="0" Content="Starost:"
+                    <Label Grid.Row="4" Grid.Column="0" Content="Email:"
                             Style="{StaticResource CustomLabel}" />
                     <Label Grid.Row="5" Grid.Column="0"
                             Content="Kontakt telefon:"
-                            Style="{StaticResource CustomLabel}" />
-                    <Label Grid.Row="6" Grid.Column="0"
-                            Content="Izabrani lekar:"
                             Style="{StaticResource CustomLabel}" />
 
                     <Label Grid.Row="3" Grid.Column="1"
                             Content="{Binding Patient.Gender}"
                             Style="{StaticResource CustomLabel}" />
-                    <Label Grid.Row="4" Grid.Column="1" Content="nije povezano"
+                    <Label Grid.Row="4" Grid.Column="1"
+                            Content="{Binding Patient.Email}"
                             Style="{StaticResource CustomLabel}" />
                     <Label Grid.Row="5" Grid.Column="1"
                             Content="{Binding Patient.Phone}"
                             Style="{StaticResource CustomLabel}" />
-                    <StackPanel Grid.Row="6" Grid.Column="1"
-                            Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Label Content="{Binding Patient.Doctor.Name}"
-                                Style="{StaticResource CustomLabel}" />
-                        <Label Content="{Binding Patient.Doctor.Surname}"
-                                Style="{StaticResource CustomLabel}" />
-                    </StackPanel>
                 </Grid>
 
                 <Grid Grid.Column="1" Margin="10" x:Name="info2"

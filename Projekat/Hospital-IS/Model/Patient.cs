@@ -21,6 +21,7 @@ namespace Model
         public List<String> Alergies { get; set; }
         public AntiTroll TrollMechanism { get; set; } = new AntiTroll();
         public List<PatientNote> PatientNotes { get; set; } = new List<PatientNote>();
+        public String BloodType { get; set; }
         
         public Boolean IsGuest { get; set; } = false;
 

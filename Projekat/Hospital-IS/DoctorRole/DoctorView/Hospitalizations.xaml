@@ -4,7 +4,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
-        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
+        xmlns:sys="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d"
+        d:DesignHeight="344.660194174757" d:DesignWidth="783">
     <UserControl.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
         <converters:InverseVisibilityConverter x:Key="InverseConverter" />
@@ -24,11 +25,11 @@
             </DataGrid.InputBindings>-->
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Datum prijema"
-                        Binding="{Binding AdmissionDate,StringFormat=\{0:dd.MM.yyyy.\}}" CanUserResize="False"
-                        Width="0.05*" />
+                        Binding="{Binding AdmissionDate,StringFormat=\{0:dd.MM.yyyy.\}}"
+                        CanUserResize="False" Width="0.05*" />
                 <DataGridTextColumn Header="Datum otpusta"
-                        Binding="{Binding ReleaseDate,StringFormat=\{0:dd.MM.yyyy.\}}" CanUserResize="False"
-                        Width="0.05*" />
+                        Binding="{Binding ReleaseDate,StringFormat=\{0:dd.MM.yyyy.\}}"
+                        CanUserResize="False" Width="0.05*" />
                 <DataGridTextColumn Header="Doktor" Binding="{Binding Doctor}"
                         CanUserResize="False" Width="0.05*" />
                 <DataGridTextColumn Header="Razlog" Binding="{Binding Detail}"
@@ -104,9 +105,16 @@
                 <Label Content="Datum otpusta:" Foreground="FloralWhite"
                         VerticalAlignment="Center" FontSize="14" />
                 <DatePicker Margin="10,0,0,0"
+                        DisplayDateStart="{x:Static sys:DateTime.Today}"
                         Style="{StaticResource CustomDatePicker}"
                         SelectedDate="{Binding ReleaseDate, UpdateSourceTrigger=PropertyChanged}"
-                        Width="120" VerticalAlignment="Center" FontSize="14" />
+                        Width="120" VerticalAlignment="Center" FontSize="14">
+                    <DatePicker.Resources>
+                        <Style TargetType="DatePickerTextBox">
+                            <Setter Property="Focusable" Value="True" />
+                        </Style>
+                    </DatePicker.Resources>
+                </DatePicker>
             </StackPanel>
 
             <Label Grid.Row="3" Content="Doktor:" Foreground="FloralWhite"

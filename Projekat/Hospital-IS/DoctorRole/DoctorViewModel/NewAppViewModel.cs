@@ -178,7 +178,15 @@ namespace Hospital_IS.DoctorViewModel
             get { return fromDate; }
             set
             {
-                fromDate = value;
+                if(value < DateTime.Now)
+                {
+                    fromDate = DateTime.Now;
+                }
+                else
+                {
+                    fromDate = value;
+                }
+                ToDate = value;
                 OnPropertyChanged("FromDate");
                 FilterAppointments();
             }
@@ -190,6 +198,7 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 toDate = value;
+                toDate = FromDate.AddDays(1);
                 OnPropertyChanged("ToDate");
                 FilterAppointments();
             }

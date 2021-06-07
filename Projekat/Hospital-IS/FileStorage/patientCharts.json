@@ -23,7 +23,13 @@
         "DatePrescribed": "2021-05-02T00:00:00"
       }
     ],
-    "Test": [],
+    "Test": [
+      {
+        "Name": "fsd",
+        "SampleDate": "2021-06-07T10:41:09.6727235+02:00",
+        "Result": "fsd"
+      }
+    ],
     "Reports": [
       {
         "Anamnesis": "dsgsdsetewed",
@@ -88,7 +94,7 @@
           "Taken": true
         },
         "Doctor": "Dragana V. Simokov",
-        "IsReleased": false
+        "IsReleased": true
       }
     ],
     "Therapies": [
