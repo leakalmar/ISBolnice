@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Hospital_IS.DoctorRole.DoctorView"
         xmlns:doctorconverters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
         mc:Ignorable="d" d:DesignHeight="575.84"
-        d:DesignWidth="783.487394957983">
+        d:DesignWidth="783.487394957983"
+        FocusManager.FocusedElement="{Binding ElementName=composition}" KeyboardNavigation.TabNavigation="Cycle">
     <UserControl.Resources>
         <doctorconverters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
         <doctorconverters:InverseVisibilityConverter x:Key="InverseConverter" />
@@ -101,19 +102,22 @@
         <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                 Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto"
                 Grid.Row="5" Margin="20,0,20,20">
-            <TextBlock Text="{Binding MedicineNotification.Medicine.Usage}"
+            <TextBox Text="{Binding MedicineNotification.Medicine.Usage}"
                     TextWrapping="Wrap" FontSize="14" x:Name="usage"
-                    FontFamily="Verdana" Foreground="FloralWhite"
+                    IsReadOnlyCaretVisible="True" FontFamily="Verdana"
+                    Foreground="FloralWhite" BorderThickness="0"
+                    CaretBrush="White" IsReadOnly="True"
                     Background="Transparent" MaxHeight="133" Padding="5" />
         </ScrollViewer>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                 VerticalScrollBarVisibility="Auto" Grid.Row="7"
                 Grid.ColumnSpan="2" Margin="20,0,20,20">
-            <TextBlock
-                    Text="{Binding MedicineNotification.Medicine.SideEffects}"
+            <TextBox Text="{Binding MedicineNotification.Medicine.SideEffects}"
                     TextWrapping="Wrap" FontSize="14" x:Name="sideEff"
+                    IsReadOnlyCaretVisible="True" BorderThickness="0"
                     FontFamily="Verdana" Foreground="FloralWhite"
-                    Background="{x:Null}" MaxHeight="133" Padding="5" />
+                    CaretBrush="White" IsReadOnly="True" Background="{x:Null}"
+                    MaxHeight="133" Padding="5" />
         </ScrollViewer>
 
         <Button Grid.Row="8" Margin="50,0,50,10" Content="Odobri"
@@ -143,15 +147,16 @@
         <!--BorderThickness="{Binding Note,Converter={StaticResource RedConverter}}"-->
         <StackPanel Grid.Row="9" Grid.ColumnSpan="2"
                 Visibility="{Binding ShowDisapproveNote, Converter={StaticResource BoolToVisibility}}"
-                x:Name="notes">
+                x:Name="notes" >
             <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                     x:Name="txtNotes" VerticalScrollBarVisibility="Auto"
                     Margin="20,0,20,0" Height="71">
                 <TextBox TextWrapping="Wrap" FontSize="14" BorderThickness="0"
                         FontFamily="Verdana" Foreground="FloralWhite"
-                        Background="{x:Null}" x:Name="text"
+                        Background="{x:Null}" x:Name="text" CaretBrush="White"
                         Style="{StaticResource WaterMarkStyle}"
-                        Tag="Unesire razlog odbijanja leka." Padding="5">
+                        IsVisibleChanged="notes_IsVisibleChanged"
+                        Tag="Unesite razlog odbijanja leka." Padding="5">
                     <TextBox.Text>
                         <Binding Path="Note"
                                 UpdateSourceTrigger="PropertyChanged">
@@ -159,18 +164,13 @@
                     </TextBox.Text>
                 </TextBox>
             </ScrollViewer>
-            <Border CornerRadius="5" BorderThickness="1" Background="#FF213250"
-                    BorderBrush="FloralWhite" Margin="20,0,20,20" x:Name="send">
-                <Button Content="Pošalji" FontSize="18" Foreground="FloralWhite"
-                        BorderThickness="0" Background="{x:Null}">
-                    <Button.InputBindings>
-                        <KeyBinding Key="Return"
-                                Command="{Binding SendNoteCommand}" />
-                        <KeyBinding Key="Space"
-                                Command="{Binding SendNoteCommand}" />
-                    </Button.InputBindings>
-                </Button>
-            </Border>
+
+            <Button Content="Pošalji" Style="{StaticResource CustomButton}" Margin="150,0,150,0">
+                <Button.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding SendNoteCommand}" />
+                    <KeyBinding Key="Space" Command="{Binding SendNoteCommand}" />
+                </Button.InputBindings>
+            </Button>
         </StackPanel>
 
     </Grid>

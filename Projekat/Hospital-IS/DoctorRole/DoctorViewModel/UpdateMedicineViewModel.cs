@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using Hospital_IS.DoctorRole.Commands;
+using Hospital_IS.DoctorRole.DoctorView;
 using Model;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -97,6 +98,7 @@ namespace Hospital_IS.DoctorViewModel
         private RelayCommand saveChangesCommand;
         private RelayCommand addCompositionCommand;
         private RelayCommand addReplaceCommand;
+        private RelayCommand backCommand;
 
         public RelayCommand SaveChangesCommand
         {
@@ -114,6 +116,12 @@ namespace Hospital_IS.DoctorViewModel
         {
             get { return addReplaceCommand; }
             set { addReplaceCommand = value; }
+        }
+
+        public RelayCommand BackCommand
+        {
+            get { return backCommand; }
+            set { backCommand = value; }
         }
         #endregion
 
@@ -142,6 +150,11 @@ namespace Hospital_IS.DoctorViewModel
             SelectedReplace = newMedicine;
         }
 
+        private void Execute_BackCommand(object obj)
+        {
+            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(new Medicines());
+        }
+
         private bool CanExecute_Command(object obj)
         {
             return true;
@@ -155,6 +168,7 @@ namespace Hospital_IS.DoctorViewModel
             this.SaveChangesCommand = new RelayCommand(Execute_SaveChangesCommand, CanExecute_Command);
             this.AddCompositionCommand = new RelayCommand(Execute_AddCompositionCommand, CanExecute_Command);
             this.AddReplaceCommand = new RelayCommand(Execute_AddReplaceCommand, CanExecute_Command);
+            this.BackCommand = new RelayCommand(Execute_BackCommand, CanExecute_Command);
         }
 
         #endregion

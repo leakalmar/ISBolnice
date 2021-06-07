@@ -7,7 +7,7 @@
     <UserControl.InputBindings>
         <KeyBinding Key="Add"
                 Command="{Binding SearchMedicineCommad}" />
-        <KeyBinding Key="Backspace" Command="{Binding NavigateBackCommad}" />
+        <KeyBinding Key="Backspace" Command="{Binding NavigateBackCommand}" />
     </UserControl.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>

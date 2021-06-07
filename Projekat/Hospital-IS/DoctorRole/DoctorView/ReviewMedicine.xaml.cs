@@ -1,5 +1,6 @@
 ﻿using Hospital_IS.DoctorViewModel;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Hospital_IS.DoctorRole.DoctorView
 {
@@ -19,6 +20,14 @@ namespace Hospital_IS.DoctorRole.DoctorView
             this._ViewModel = new ReviewMedicineViewModel();
             this.DataContext = _ViewModel;
 
+        }
+
+        private void notes_IsVisibleChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+        {
+            if(notes.Visibility == System.Windows.Visibility.Visible)
+            {
+                Keyboard.Focus(text);
+            }
         }
     }
 }

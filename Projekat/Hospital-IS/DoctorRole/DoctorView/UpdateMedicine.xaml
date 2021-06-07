@@ -5,10 +5,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Hospital_IS.DoctorRole.DoctorView"
         mc:Ignorable="d" d:DesignHeight="575.84"
-        d:DesignWidth="783.487394957983">
+        d:DesignWidth="783.487394957983" FocusManager.FocusedElement="{Binding ElementName=compositionAdd}">
     <UserControl.InputBindings>
         <KeyBinding Key="S" Modifiers="Ctrl"
                 Command="{Binding SaveChangesCommand}" />
+        <KeyBinding Key="Backspace"
+                Command="{Binding BackCommand}" />
     </UserControl.InputBindings>
     <Grid x:Name="medInfo">
         <Grid.ColumnDefinitions>
@@ -39,11 +41,7 @@
                 VerticalAlignment="Center" Margin="5,0,5,0"
                 Visibility="Collapsed" />
 
-        <Label Content="Sastav" FontSize="14" Grid.Row="1" FontFamily="Verdana"
-                Foreground="FloralWhite" Padding="150,0,0,0"
-                BorderThickness="0,0,0,2" BorderBrush="Gray" Margin="20,0,20,0" />
-
-        <Grid Grid.Row="2" Margin="20,5,20,20">
+        <Grid Grid.Row="1" Grid.RowSpan="2" Margin="20,5,20,20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20" />
                 <RowDefinition />
@@ -52,21 +50,40 @@
                 <ColumnDefinition Width="0.9*" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <Border Grid.Row="0" CornerRadius="20,20,0,0"
-                    BorderThickness="1,1,0,1" Background="#FF213250"
-                    BorderBrush="FloralWhite">
-                <Button FontSize="14" BorderThickness="0" Background="{x:Null}"
-                        Content="Dodaj" Foreground="FloralWhite"
-                        x:Name="compositionAdd" HorizontalAlignment="Stretch">
-                    <Button.InputBindings>
-                        <KeyBinding Key="Return"
-                                Command="{Binding AddCompositionCommand}" />
 
-                        <KeyBinding Key="Add" Modifiers="Ctrl"
-                                Command="{Binding AddCompositionCommand}" />
-                    </Button.InputBindings>
-                </Button>
-            </Border>
+            <Button Content="Sastav" x:Name="compositionAdd">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20,20,0,0" />
+                    </Style>
+                </Button.Resources>
+                <Button.InputBindings>
+                    <KeyBinding Key="Return"
+                            Command="{Binding AddCompositionCommand}" />
+                    <KeyBinding Key="Add"
+                            Command="{Binding AddCompositionCommand}" />
+                    <KeyBinding Key="Space"
+                            Command="{Binding AddCompositionCommand}" />
+                </Button.InputBindings>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="20" />
+                            </Style>
+                        </Style.Resources>
+                        <Setter Property="FocusVisualStyle"
+                                Value="{StaticResource PrescriptionFocusVisualStyle}" />
+                        <Setter Property="FontSize" Value="15" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Background" Value="#FF2E3B55" />
+                        <Setter Property="BorderBrush" Value="White" />
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    </Style>
+                </Button.Style>
+            </Button>
+
             <Image Source="pack://application:,,,/Resources/add-row.png"
                     Margin="290,0,0,0" Grid.ColumnSpan="2" Height="20"
                     VerticalAlignment="Top" />
@@ -92,11 +109,6 @@
 
         </Grid>
 
-        <Label Content="Zamena" Grid.Row="1" Grid.Column="1" FontSize="14"
-                FontFamily="Verdana" Foreground="FloralWhite"
-                BorderThickness="0,0,0,2" Margin="20,0,20,0" BorderBrush="Gray"
-                Padding="150,0,0,0" />
-
         <Grid Grid.Row="2" Grid.Column="1" Margin="20,5,20,20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20" />
@@ -106,21 +118,39 @@
                 <ColumnDefinition Width="0.9*" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <Border Grid.Row="0" CornerRadius="20,20,0,0"
-                    BorderThickness="1,1,0,1" Background="#FF213250"
-                    BorderBrush="FloralWhite">
-                <Button FontSize="14" BorderThickness="0" Background="{x:Null}"
-                        Content="Dodaj" Foreground="FloralWhite"
-                        HorizontalAlignment="Stretch">
-                    <Button.InputBindings>
-                        <KeyBinding Key="Return"
-                                Command="{Binding AddReplaceCommand}" />
+            <Button Content="Zamena">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20,20,0,0" />
+                    </Style>
+                </Button.Resources>
+                <Button.InputBindings>
+                    <KeyBinding Key="Return"
+                            Command="{Binding AddReplaceCommand}" />
+                    <KeyBinding Key="Space"
+                            Command="{Binding AddReplaceCommand}" />
+                    <KeyBinding Key="Add"
+                            Command="{Binding AddReplaceCommand}" />
+                </Button.InputBindings>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="20" />
+                            </Style>
+                        </Style.Resources>
+                        <Setter Property="FocusVisualStyle"
+                                Value="{StaticResource PrescriptionFocusVisualStyle}" />
+                        <Setter Property="FontSize" Value="15" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Background" Value="#FF2E3B55" />
+                        <Setter Property="BorderBrush" Value="White" />
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    </Style>
+                </Button.Style>
+            </Button>
 
-                        <KeyBinding Key="Add" Modifiers="Ctrl"
-                                Command="{Binding AddReplaceCommand}" />
-                    </Button.InputBindings>
-                </Button>
-            </Border>
             <Image Source="pack://application:,,,/Resources/add-row.png"
                     Margin="290,0,0,0" Grid.ColumnSpan="2" Height="20"
                     VerticalAlignment="Top" />
@@ -159,14 +189,14 @@
                 Grid.Row="5" Margin="20,0,20,20">
             <TextBox TextWrapping="Wrap" FontSize="14" x:Name="usage"
                     FontFamily="Verdana" Foreground="FloralWhite"
-                    Background="Transparent" BorderThickness="0"
+                    Background="Transparent" BorderThickness="0" CaretBrush="White"
                     Text="{Binding NewUsage, UpdateSourceTrigger=PropertyChanged}" />
         </ScrollViewer>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                 VerticalScrollBarVisibility="Auto" Grid.Row="7"
                 Grid.ColumnSpan="2" Margin="20,0,20,20">
             <TextBox TextWrapping="Wrap" FontSize="14" x:Name="sideEff"
-                    BorderThickness="0" FontFamily="Verdana"
+                    BorderThickness="0" FontFamily="Verdana" CaretBrush="White"
                     Foreground="FloralWhite" Background="{x:Null}"
                     Text="{Binding NewSideEffects, UpdateSourceTrigger=PropertyChanged}" />
         </ScrollViewer>
@@ -176,11 +206,20 @@
             <Button.InputBindings>
                 <KeyBinding Key="S" Modifiers="Ctrl"
                         Command="{Binding SaveChangesCommand}" />
+                <KeyBinding Key="Space" Command="{Binding SaveChangesCommand}" />
+                <KeyBinding Key="Return" Command="{Binding SaveChangesCommand}" />
             </Button.InputBindings>
         </Button>
 
         <Button Grid.Row="8" Grid.Column="1" Margin="50,0,50,10"
-                Content="Odustani" Style="{StaticResource CustomButton}" />
+                Content="Odustani" Style="{StaticResource CustomButton}">
+            <Button.InputBindings>
+                <KeyBinding Key="S" Modifiers="Ctrl"
+                        Command="{Binding SaveChangesCommand}" />
+                <KeyBinding Key="Space" Command="{Binding BackCommand}" />
+                <KeyBinding Key="Return" Command="{Binding BackCommand}" />
+            </Button.InputBindings>
+        </Button>
 
     </Grid>
 </UserControl>
