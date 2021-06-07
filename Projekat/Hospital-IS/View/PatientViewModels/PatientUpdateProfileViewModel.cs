@@ -133,7 +133,7 @@ namespace Hospital_IS.View.PatientViewModels
 
         private void Feedback()
         {
-            windowFactory.CreateFeedbackWindow();
+            windowFactory.CreateFeedback();
         }
     }
 }

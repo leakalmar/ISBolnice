@@ -23,7 +23,6 @@ namespace Hospital_IS.View.PatientViewModels
         private int roomId;
         private string details;
 
-
         public MyICommand ShowEvaluationWindow { get; set; }
         public MyICommand ShowNote { get; set; }
         private readonly MyWindowFactory windowFactory;

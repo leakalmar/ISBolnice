@@ -10,10 +10,6 @@ namespace Hospital_IS.View.PatientViewModels
         void CreateAppointmentEvaluation(int appointmentId);
         void CreateNote(int appointmentId);
         void CreateYesNo(string message);
-        void CreateHospitalEvaluationWindow();
-        void CreateAppointmentEvaluationWindow(int appointmentId);
-        void CreateNoteWindow(int appointmentId);
-        void CreateYesNoDialog(string message);
-        void CreateFeedbackWindow();
+        void CreateFeedback();
     }
 }

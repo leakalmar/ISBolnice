@@ -34,7 +34,7 @@ namespace Hospital_IS.View.PatientViewModels
             yesNoDialog.Show();
         }
 
-        public void CreateFeedbackWindow()
+        public void CreateFeedback()
         {
             FeedbackView feedbackView = new FeedbackView();
             feedbackView.FeedbackViewModel.OnRequestClose += (s, e) => feedbackView.Close();

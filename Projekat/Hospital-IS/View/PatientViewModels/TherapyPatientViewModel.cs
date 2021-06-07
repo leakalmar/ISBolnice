@@ -292,14 +292,16 @@ namespace Hospital_IS.View.PatientViewModels
             DocumentDescription.AddCell(DateTime.Now.Hour + ":" + DateTime.Now.Minute);
             DocumentDescription.AddCell("Opis dokumenta: ");
             DocumentDescription.AddCell("Izveštaj o uzimanju terapije");
-            DocumentDescription.AddCell("Datum početka vremenskog opsega: " + ReportStart.Date.ToString("dd.MM.yyyy"));
-            DocumentDescription.AddCell("Datum kraja vremenskog opsega: " + ReportEnd.Date.ToString("dd.MM.yyyy"));
+            DocumentDescription.AddCell("Datum pocetka vremenskog opsega: ");
+            DocumentDescription.AddCell(ReportStart.Date.ToString("dd.MM.yyyy"));
+            DocumentDescription.AddCell("Datum kraja vremenskog opsega: ");
+            DocumentDescription.AddCell(ReportEnd.Date.ToString("dd.MM.yyyy"));
 
             pdfDoc.Add(DocumentDescription);
             pdfDoc.Add(spacer);
             pdfDoc.Add(spacer);
 
-            var columnWidth = new[] { 0.75f, 1.5f, 1.5f };
+            var columnWidth = new[] { 1f, 1f, 1f, 1f };
             TherapyReportDTO therapyReportDTO = new TherapyReportDTO(PatientMainWindowViewModel.Patient.Id, ReportStart, ReportEnd);
             List<Therapy> reportTherapies = ChartController.Instance.FindTherapiesInTimeRange(therapyReportDTO);
             if (reportTherapies.Count != 0)
@@ -315,8 +317,8 @@ namespace Hospital_IS.View.PatientViewModels
                 pdfTableTherapy.AddCell(head);
                 pdfTableTherapy.AddCell("Naziv leka");
                 pdfTableTherapy.AddCell("Koliko puta dnevno");
-                pdfTableTherapy.AddCell("Vreme početka");
-                pdfTableTherapy.AddCell("Vreme kraja");
+                pdfTableTherapy.AddCell("Datum pocetka");
+                pdfTableTherapy.AddCell("Datum kraja");
 
 
                 foreach (Therapy therapy in reportTherapies)
