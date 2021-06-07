@@ -160,7 +160,6 @@
                     <DataGrid.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF3558A2"/>
                     </DataGrid.Resources>
-
                 </DataGrid>
 
                 <Button Content="Prikaži" Grid.Row="3" Grid.Column="1" FontSize="15"
