@@ -67,8 +67,10 @@
             <DatePicker Name="focusedPicker" Grid.Row="0" Grid.Column="1"
                     FontSize="14" BorderThickness="0" VerticalAlignment="Bottom"
                     SelectedDate="{Binding FromDate}"
+                    Style="{StaticResource CustomDatePicker}"
                     KeyboardNavigation.TabIndex="1" />
             <DatePicker Grid.Row="1" Grid.Column="1" FontSize="14"
+                    Style="{StaticResource CustomDatePicker}"
                     DisplayDateStart="{Binding FromDate}" BorderThickness="0"
                     VerticalAlignment="Bottom" SelectedDate="{Binding ToDate}"
                     KeyboardNavigation.TabIndex="2" />

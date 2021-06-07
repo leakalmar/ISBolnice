@@ -137,6 +137,7 @@
                 <Label Content="Od:" Foreground="White"
                         HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <DatePicker Grid.Column="0" HorizontalAlignment="Center"
+                        Style="{StaticResource CustomDatePicker}"
                         VerticalAlignment="Center" Width="150"
                         SelectedDate="{Binding FromDate}"
                         FirstDayOfWeek="Monday">
@@ -147,6 +148,7 @@
                 <Label Content="Do:" Foreground="White"
                         HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <DatePicker Grid.Column="0" HorizontalAlignment="Center"
+                        Style="{StaticResource CustomDatePicker}"
                         VerticalAlignment="Center" Width="150"
                         SelectedDate="{Binding ToDate}" FirstDayOfWeek="Monday" />
             </StackPanel>

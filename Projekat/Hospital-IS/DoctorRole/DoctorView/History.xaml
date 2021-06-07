@@ -24,6 +24,7 @@
                     VerticalAlignment="Center" Margin="0,0,20,0"
                     SelectedDate="{Binding FromDate}" Focusable="True"
                     KeyboardNavigation.TabIndex="1"
+                    Style="{StaticResource CustomDatePicker}"
                     DisplayDateEnd="{x:Static sys:DateTime.Today}"
                      />
             <Label Content="Do:" Style="{StaticResource CustomLabel}"
@@ -32,6 +33,7 @@
                     VerticalAlignment="Center" Margin="0,0,160,0"
                     SelectedDate="{Binding ToDate}" Focusable="True"
                     KeyboardNavigation.TabIndex="2"
+                    Style="{StaticResource CustomDatePicker}"
                     DisplayDateEnd="{x:Static sys:DateTime.Today}" />
             
             <Button Style="{StaticResource CustomButton}" Width="200"

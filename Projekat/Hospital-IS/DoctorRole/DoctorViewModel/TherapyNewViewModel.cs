@@ -1,20 +1,22 @@
 ﻿using Controllers;
+using DTOs;
 using Hospital_IS.DoctorRole.Commands;
+using Hospital_IS.DoctorRole.DoctorConverters;
 using Hospital_IS.DoctorRole.DoctorView;
+using Hospital_IS.DTOs;
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Hospital_IS.DoctorRole.DoctorViewModel
 {
     public class TherapyNewViewModel : BindableBase
     {
         #region Fields
-        private List<Medicine> medicines;
-        private Medicine selectedMedicine;
-        private int pills;
-        private int takings;
-        private DateTime therapyEnd;
+        private List<MedicineDTO> medicines;
+        private MedicineDTO selectedMedicine;
+        private TherapyDTO therapy; 
         private bool focused;
 
         public bool Focused
@@ -27,7 +29,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             }
         }
 
-        public List<Medicine> Medicines
+        public List<MedicineDTO> Medicines
         {
             get { return medicines; }
             set
@@ -36,44 +38,13 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
                 OnPropertyChanged("Medicines");
             }
         }
-        public Medicine SelectedMedicine
+        public TherapyDTO Therapy
         {
-            get { return selectedMedicine; }
+            get { return therapy; }
             set
             {
-                selectedMedicine = value;
-                OnPropertyChanged("SelectedMedicine");
-            }
-        }
-
-
-        public int Pills
-        {
-            get { return pills; }
-            set
-            {
-                pills = value;
-                OnPropertyChanged("Pills");
-            }
-        }
-
-        public int Takings
-        {
-            get { return takings; }
-            set
-            {
-                takings = value;
-                OnPropertyChanged("Takings");
-            }
-        }
-
-        public DateTime TherapyEnd
-        {
-            get { return therapyEnd; }
-            set
-            {
-                therapyEnd = value;
-                OnPropertyChanged("TherapyEnd");
+                therapy = value;
+                OnPropertyChanged("Therapy");
             }
         }
         #endregion
@@ -106,20 +77,13 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         #region Actions
         private void Execute_SaveCommand(object obj)
         {
-            //bool da = Validator.IsValid(this);
-            try
+            Therapy.Validate();
+            if (Therapy.IsValid)
             {
-                //endDate = new DateTime(Int32.Parse(parts[2]), Int32.Parse(parts[1]), Int32.Parse(parts[0]));
-                //Therapy newTherapy = new Therapy(SelectedMedicine, Pills, Takings, DateTime.Now, endDate);
-                //ChartController.Instance.AddTherapy(newTherapy, DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient);
+                Therapy newTherapy = new Therapy(MedicineController.Instance.ConvertDTOToMedicine(Therapy.SelectedMedicine), Therapy.Pills, Therapy.Takings, DateTime.Now, (DateTime)new DateConverter().ConvertBack(Therapy.TherapyEnd, null, null, CultureInfo.CurrentCulture));
+                ChartController.Instance.AddTherapy(newTherapy, DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient);
                 DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.ChangeCommand.Execute("4");
             }
-            catch
-            {
-                new ExitMess("Nispravan datum završetka terapije. Unesite datum u obliku dd.mm.yyyy.").Show();
-            }
-
-
         }
 
         private void Execute_CancelCommand(object obj)
@@ -136,13 +100,15 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         #region Constructor
         public TherapyNewViewModel()
         {
-            this.Takings = 1;
-            this.Pills = 1;
+            this.Therapy = new TherapyDTO();
+            this.Therapy.Takings = 1;
+            this.Therapy.Pills = 1;
             this.Focused = true;
-            this.TherapyEnd = DateTime.Now;
+            this.Therapy.TherapyEnd = DateTime.Now.ToString("dd.MM.yyyy.");
             this.SaveCommand = new RelayCommand(Execute_SaveCommand, CanExecute_Command);
             this.CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecute_Command);
-            this.Medicines = MedicineController.Instance.GetAll();
+            this.Medicines = MedicineController.Instance.ConvertMedicineToDTO(MedicineController.Instance.GetAll());
+            ;
         }
         #endregion
     }

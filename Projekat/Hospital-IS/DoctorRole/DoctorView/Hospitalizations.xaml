@@ -104,8 +104,9 @@
                 <Label Content="Datum otpusta:" Foreground="FloralWhite"
                         VerticalAlignment="Center" FontSize="14" />
                 <DatePicker Margin="10,0,0,0"
+                        Style="{StaticResource CustomDatePicker}"
                         SelectedDate="{Binding ReleaseDate, UpdateSourceTrigger=PropertyChanged}"
-                        Width="100" VerticalAlignment="Center" FontSize="14" />
+                        Width="120" VerticalAlignment="Center" FontSize="14" />
             </StackPanel>
 
             <Label Grid.Row="3" Content="Doktor:" Foreground="FloralWhite"

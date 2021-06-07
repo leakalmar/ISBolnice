@@ -9,10 +9,9 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:validationrules="clr-namespace:Hospital_IS.DoctorRole.ValidationRules"
         xmlns:doctorconverters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
-        mc:Ignorable="d"
-        d:DesignHeight="344.660194174757" d:DesignWidth="783">
+        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
     <UserControl.Resources>
-        <doctorconverters:DateConverter x:Key="DateConverter"/>
+        <doctorconverters:DateConverter x:Key="DateConverter" />
     </UserControl.Resources>
     <Grid Margin="0,25,0,0" KeyboardNavigation.TabNavigation="Cycle">
         <Grid.ColumnDefinitions>
@@ -38,6 +37,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition />
                 <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal" Grid.Row="0"
@@ -46,7 +46,7 @@
                 <ComboBox Style="{StaticResource CustomComboBox}"
                         Margin="5,0,0,0" ItemsSource="{Binding Medicines}"
                         commands:FocusExtension.IsFocused="{Binding Focused}"
-                        SelectedItem="{Binding SelectedMedicine}"
+                        SelectedItem="{Binding Therapy.SelectedMedicine}"
                         HorizontalAlignment="Stretch" IsTextSearchEnabled="True"
                         TextSearch.TextPath="Name" MinWidth="250">
                     <ComboBox.ItemTemplate>
@@ -56,6 +56,10 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
+            <TextBlock Grid.Row="1" Grid.ColumnSpan="4"
+                    HorizontalAlignment="Center"
+                    Text="{Binding Therapy.ValidationErrors[Medicine]}"
+                    Foreground="Red" />
 
             <Label Content="Datum početka terapije:"
                     Style="{StaticResource CustomLabel}" Grid.Row="2" />
@@ -67,38 +71,29 @@
 
             <Label Content="Datum kraja terapije:"
                     Style="{StaticResource CustomLabel}" Grid.Row="4" />
-            <TextBox Style="{StaticResource LineTextBox}"
-                    Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
-                    Grid.Row="5" Margin="5,0,0,0">
-                <TextBox.Text>
-                    <Binding Path="TherapyEnd" ValidatesOnDataErrors="True"
-                            UpdateSourceTrigger="PropertyChanged"
-                            Converter="{StaticResource DateConverter}">
-                        <Binding.ValidationRules>
-                            <validationrules:EmptyRule />
-                            <validationrules:DateFormat />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+            <DatePicker Grid.Row="5" Style="{StaticResource CustomDatePicker}"
+                    SelectedDate="{Binding Path=Therapy.TherapyEnd}" />
+            <TextBlock Grid.Row="6" Text="{Binding Therapy.ValidationErrors[Date]}"
+                    Foreground="Red" />
 
-            <Label Content="Broj tableta (po uzimanju):" Grid.Column="2"
-                    Style="{StaticResource CustomLabel}" Grid.Row="2"
-                    Grid.RowSpan="2" />
-            <xctk:IntegerUpDown Grid.Column="3" Grid.Row="2" Grid.RowSpan="2"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                    Width="60" Height="25" Maximum="5" Minimum="1"
-                    Value="{Binding Pills}" />
-            <Label Content="Broj uzimanja (po danu):" Grid.Column="2"
-                    Style="{StaticResource CustomLabel}" Grid.Row="4"
-                    Grid.RowSpan="2" />
-            <xctk:IntegerUpDown Grid.Column="3" Grid.Row="4" Grid.RowSpan="2"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                    Width="60" Height="25" Maximum="5" Minimum="1"
-                    Value="{Binding Takings}" />
+                <Label Content="Broj tableta (po uzimanju):" Grid.Column="2"
+                        Style="{StaticResource CustomLabel}" Grid.Row="2"
+                        Grid.RowSpan="2" />
+                <xctk:IntegerUpDown Grid.Column="3" Grid.Row="2"
+                        Grid.RowSpan="2" VerticalAlignment="Bottom"
+                        HorizontalAlignment="Left" Width="60" Height="25"
+                        Maximum="5" Minimum="1" Value="{Binding Therapy.Pills}" />
+                <Label Content="Broj uzimanja (po danu):" Grid.Column="2"
+                        Style="{StaticResource CustomLabel}" Grid.Row="4"
+                        Grid.RowSpan="2" />
+                <xctk:IntegerUpDown Grid.Column="3" Grid.Row="4"
+                        Grid.RowSpan="2" VerticalAlignment="Bottom"
+                        HorizontalAlignment="Left" Width="60" Height="25"
+                        Maximum="5" Minimum="1"
+                        Value="{Binding Therapy.Takings}" />
         </Grid>
 
-        <Button Style="{StaticResource CustomButton}" Content="Potvrdi"
+        <Button Content="Potvrdi" Style="{StaticResource CustomButton}"
                 Margin="150,5,50,5">
             <Button.InputBindings>
                 <KeyBinding Key="Return" Command="{Binding SaveCommand}" />
