@@ -152,6 +152,21 @@ namespace Service
             return allRoomByNumber;
         }
 
+        public bool CheckIfRoomNumberIsUnique(int roomNumber)
+        {
+           foreach(Room room in AllRooms)
+           {
+                if(room.RoomNumber == roomNumber)
+                {
+                  
+                    return false;
+                }
+           }
+
+            return true;
+        }
+
+       
         public List<Room> GetAllRooms()
         {
             return AllRooms;
@@ -233,6 +248,18 @@ namespace Service
             bool isSucces = room.UpdateEquipment(updateEquip);
             rfs.SaveRooms(AllRooms);
             return isSucces;
+        }
+
+        public int GetRoomNumber(int roomId)
+        {
+            foreach (Room r in AllRooms)
+            {
+                if(r.RoomId == roomId)
+                {
+                    return r.RoomNumber;
+                }
+            }
+            return 0;
         }
 
     }

@@ -138,7 +138,7 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <Button x:Name="Back"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1"  Background="Transparent" >
+        <Button x:Name="Back"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1"  Background="Transparent" Command="{Binding NavigateToPreviousPage}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="15"/>
@@ -152,16 +152,12 @@
         <TextBlock Text="Transfer opreme" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="5" FontWeight="SemiBold" FontSize="30" Foreground="White" TextAlignment="Center"/>
 
         <ComboBox x:Name="ComboSource"  Grid.Column="1"  Grid.Row="3"  ItemsSource="{Binding RoomsStaticTransferFirstBox}" DisplayMemberPath="RoomIdType"  Grid.ColumnSpan="3" HorizontalAlignment="Center" 
-                  Width="150" Height="30" Template="{StaticResource ComboBoxBaseControlTemplate}" SelectedItem="{Binding SelectedRoomFirst}" SelectedIndex="{Binding SelectedRoomIndexFirst}" />
+                  Width="150" Height="30" Template="{StaticResource ComboBoxBaseControlTemplate}" SelectedItem="{Binding SelectedRoomFirst}" />
 
         <ComboBox  x:Name="ComboDestionation" Grid.Column="5" Grid.ColumnSpan="3" HorizontalAlignment="Center" Grid.Row="3"  ItemsSource="{Binding RoomsStaticTransferSecondBox}" DisplayMemberPath="RoomIdType"  
                    Width="150" Height="30" VerticalAlignment="Top"  Template="{StaticResource ComboBoxBaseControlTemplate}" SelectedItem="{Binding SelectedRoomSecond}"
-                  Text="{Binding SelectedRoomText}" IsSynchronizedWithCurrentItem="True">
-            <ComboBox.SelectedIndex>
-                <Binding Path="SelectedRoomIndexSecond" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                    
-                </Binding>
-            </ComboBox.SelectedIndex>
+                   IsSynchronizedWithCurrentItem="True">
+         
         </ComboBox>
             <Label Content="Izvor" Foreground="White" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="5" FontSize="20" Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 

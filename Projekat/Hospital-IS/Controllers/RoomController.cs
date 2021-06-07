@@ -101,7 +101,11 @@ namespace Controllers
             RoomService.Instance.AddRoom(room);
         }
 
-      
+        public bool CheckIfRoomNumberIsUnique(int roomNumber)
+        {
+            return RoomService.Instance.CheckIfRoomNumberIsUnique(roomNumber);
+        }
+
         private static RoomType CheckRoomType(int roomTypeIndex, RoomType roomType)
         {
             if (roomTypeIndex == 0)
@@ -126,5 +130,9 @@ namespace Controllers
             return roomType;
         }
 
+        internal void AddRoom(Room room)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

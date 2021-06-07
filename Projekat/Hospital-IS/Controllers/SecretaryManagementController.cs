@@ -89,7 +89,10 @@ namespace Hospital_IS.Controllers
         {
             return SecretaryUserManagementService.Instance.GetAllByUser(userId);
         }
-
+        public void ReloadDoctors()
+        {
+            SecretaryUserManagementService.Instance.ReloadDoctors();
+        }
         public List<DoctorDTO> GetAllDoctors()
         {
             return SecretaryUserManagementService.Instance.AllDoctors;

@@ -1,5 +1,9 @@
 ﻿using Controllers;
+using DTOs;
 using Enums;
+using Hospital_IS.Controllers;
+using Hospital_IS.DTOs;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using System;
 using System.Collections.ObjectModel;
@@ -14,20 +18,54 @@ namespace Hospital_IS.SecretaryView
     /// </summary>
     public partial class ScheduleAppointment : Window
     {
-        public DoctorAppointment DocAppointment { get; set; } = new DoctorAppointment();
-        public ObservableCollection<Patient> Patients { get; set; } = new ObservableCollection<Patient>();
-        public ObservableCollection<Doctor> Doctors { get; set; } = new ObservableCollection<Doctor>();
-        public ObservableCollection<Room> Rooms { get; set; } = new ObservableCollection<Room>();
+        public DoctorAppointmentDTO DocAppointment { get; set; } = new DoctorAppointmentDTO();
+        public ObservableCollection<PatientDTO> Patients { get; set; } = new ObservableCollection<PatientDTO>();
+        public ObservableCollection<DoctorDTO> Doctors { get; set; } = new ObservableCollection<DoctorDTO>();
+        public ObservableCollection<RoomDTO> Rooms { get; set; } = new ObservableCollection<RoomDTO>();
 
         public UCAppointmentsView uca;
+
+        public PatientDTO patient = null;
+        public PatientView pv;
+        public DoctorDTO doctor = null;
+        public DoctorView dv;
 
         public ScheduleAppointment(UCAppointmentsView uca)
         {
             InitializeComponent();
             this.uca = uca;
 
-            Patients = new ObservableCollection<Patient>(PatientController.Instance.GetAllRegisteredPatients());
-            Doctors = new ObservableCollection<Doctor>(DoctorController.Instance.GetAll());
+            Patients = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllRegisteredPatients());
+            Doctors = new ObservableCollection<DoctorDTO>(SecretaryManagementController.Instance.GetAllDoctors());
+
+            this.DataContext = this;
+        }
+        public ScheduleAppointment(UCAppointmentsView uca, PatientDTO patient, PatientView pv)
+        {
+            InitializeComponent();
+            this.uca = uca;
+            this.patient = patient;
+            this.pv = pv;
+            Patients = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllRegisteredPatients());
+            Doctors = new ObservableCollection<DoctorDTO>(SecretaryManagementController.Instance.GetAllDoctors());
+
+            cbPatient.SelectedItem = patient;
+            cbPatient.IsEnabled = false;
+
+            this.DataContext = this;
+        }
+
+        public ScheduleAppointment(UCAppointmentsView uca, DoctorDTO doctor, DoctorView dv)
+        {
+            InitializeComponent();
+            this.uca = uca;
+            this.doctor = doctor;
+            this.dv = dv;
+            Patients = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllRegisteredPatients());
+            Doctors = new ObservableCollection<DoctorDTO>(SecretaryManagementController.Instance.GetAllDoctors());
+
+            cbDoctor.SelectedItem = doctor;
+            cbDoctor.IsEnabled = false;
 
             this.DataContext = this;
         }
@@ -51,9 +89,14 @@ namespace Hospital_IS.SecretaryView
 
             DocAppointment.Reserved = true;
 
-            DoctorAppointmentController.Instance.AddAppointment(DocAppointment);
+            DoctorAppointmentManagementController.Instance.AddAppointment(DocAppointment);
 
             uca.RefreshGrid();
+
+            if (patient != null)
+                pv.RefreshGrid();
+            if (doctor != null)
+                dv.RefreshGrid();
 
             this.Close();
         }
@@ -68,13 +111,13 @@ namespace Hospital_IS.SecretaryView
             if (cbAppType.SelectedIndex == 0)
             {
                 txtEndOfApp.IsEnabled = false;
-                Rooms = new ObservableCollection<Room>(RoomController.Instance.GetRoomByType(RoomType.ConsultingRoom));
+                Rooms = new ObservableCollection<RoomDTO>(DoctorAppointmentManagementController.Instance.GetRoomByType(RoomType.ConsultingRoom));
                 cbRoom.ItemsSource = Rooms;
             }
             else
             {
                 txtEndOfApp.IsEnabled = true;
-                Rooms = new ObservableCollection<Room>(RoomController.Instance.GetRoomByType(RoomType.OperationRoom));
+                Rooms = new ObservableCollection<RoomDTO>(DoctorAppointmentManagementController.Instance.GetRoomByType(RoomType.OperationRoom));
                 cbRoom.ItemsSource = Rooms;
             }
         }
@@ -104,6 +147,9 @@ namespace Hospital_IS.SecretaryView
             // soba
             DocAppointment.Room = Rooms[cbRoom.SelectedIndex].RoomId;
 
+            //pacijent
+            DocAppointment.Patient = Patients[cbPatient.SelectedIndex];
+
             // datum, vreme i trajanje pregleda
             try
             {
@@ -128,7 +174,7 @@ namespace Hospital_IS.SecretaryView
             {
             }
 
-            EnableAppointmentConfirmation(DoctorAppointmentController.Instance.VerifyAppointment(DocAppointment));
+            EnableAppointmentConfirmation(DoctorAppointmentManagementController.Instance.VerifyAppointment(DocAppointment));
         }
 
         private void EnableAppointmentConfirmation(bool isValid)
@@ -149,14 +195,19 @@ namespace Hospital_IS.SecretaryView
 
         private void btnEmergency_Click(object sender, RoutedEventArgs e)
         {
-            ScheduleEmergencyAppointment sea = new ScheduleEmergencyAppointment(this);
-            sea.Show();
+            ScheduleEmergencyAppointment sea;
+            if (patient == null)
+            {
+                sea = new ScheduleEmergencyAppointment(this);
+            }
+            else 
+            {
+                sea = new ScheduleEmergencyAppointment(this, patient);
+            }
+            sea.ShowDialog();
             this.Visibility = Visibility.Collapsed;
         }
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }

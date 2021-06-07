@@ -9,10 +9,10 @@ namespace Hospital_IS.ManagerView1
     /// </summary>
     public partial class AddRoom : Page
     {
-        public AddRoom(RoomViewModel roomView)
+        public AddRoom()
         {
             InitializeComponent();
-            this.DataContext = roomView;
+            this.DataContext = AddRoomViewModel.Instance;
         }
 
         private void RoomNumber_GotFocus(object sender, RoutedEventArgs e)

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Otkazivanje termina" WindowStartupLocation="CenterScreen"
         Height="150" Width="380">
-    <Grid>
+    <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="auto"/>
@@ -24,12 +24,12 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Name="txtConfirmation"
-                   FontSize="17" TextWrapping="Wrap" 
+                   FontSize="17" TextWrapping="Wrap"  Style="{DynamicResource ResourceKey=RegularTextBlock}"
                    Text="Da li ste sigurni da želite da otkažete termin?"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <Button Content="Da" Width="40" Height="20" Margin="5 5 25 5" Click="DeleteAppointment"/>
-            <Button Content="Ne" Width="40" Height="20" Margin="25 5 5 5" Click="Close"/>
+            <Button Content="Da" Width="40" Style="{DynamicResource ResourceKey=RegularButton}" Margin="5 5 25 5" Click="DeleteAppointment"/>
+            <Button Content="Ne" Width="40" Style="{DynamicResource ResourceKey=RegularButton}" Margin="25 5 5 5" Click="Close"/>
         </StackPanel>
 
     </Grid>

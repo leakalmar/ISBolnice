@@ -1,4 +1,5 @@
 ﻿using Enums;
+using Hospital_IS.DTOs;
 using Model;
 using Service;
 using System;
@@ -62,6 +63,11 @@ namespace Controllers
         public void UpdateAppointment(Appointment appointment)
         {
 
+        }
+
+        public List<RenovationReportDTO> FindAllRenovationAppBetweeenDates(RenovationDTO renovationDTO)
+        {
+            return AppointmentService.Instance.FindAllRenovationAppBetweeenDates(renovationDTO);
         }
     }
 }

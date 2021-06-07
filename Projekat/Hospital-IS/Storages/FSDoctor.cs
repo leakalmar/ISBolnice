@@ -40,14 +40,12 @@ namespace Hospital_IS.Storages
             return doctors;
         }
 
-        public void Save(Doctor doctor)
+        public void SaveDoctors(List<Doctor> doctors)
         {
-            List<Doctor> doctors = GetAll();
-            doctors.Add(doctor);
-
             var file = JsonConvert.SerializeObject(doctors, Formatting.Indented, new JsonSerializerSettings()
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects
             });
             using (StreamWriter writer = new StreamWriter(this.fileLocation))
             {

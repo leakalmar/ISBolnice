@@ -1,5 +1,6 @@
 ﻿using Enums;
 using Hospital_IS.DTOs;
+using Hospital_IS.Enums;
 using Hospital_IS.Service;
 using Model;
 using Storages;
@@ -119,15 +120,49 @@ namespace Service
             List<Appointment> docAppsByRoom = new List<Appointment>(GetAllByRoom(doctorAppointment.Room));
             List<Appointment> classicAppsByRoom = AppointmentService.Instance.GetAppByRoom(doctorAppointment.Room);
             List<Appointment> appsByDoctor = new List<Appointment>(GetAllByDoctor(doctorAppointment.Doctor.Id));
+            Boolean isVerified = true;
 
             if (!AppointmentService.Instance.CheckAppointment(docAppsByRoom, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd))
-                return false;
-            if (!AppointmentService.Instance.CheckAppointment(classicAppsByRoom, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd))
-                return false;
-            if (!AppointmentService.Instance.CheckAppointment(appsByDoctor, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd))
+                isVerified = false;
+            if (!AppointmentService.Instance.CheckAppointment(classicAppsByRoom, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd) && isVerified == true)
+                isVerified = false;
+            if (!AppointmentService.Instance.CheckAppointment(appsByDoctor, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd) && isVerified == true)
+                isVerified = false;
+            if (!IsDoctorWorking(doctorAppointment.Doctor, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd) && isVerified == true)
+                isVerified = false;
+
+            return isVerified;
+        }
+
+        private bool IsDoctorWorking(Doctor doctor, DateTime appointmentStart, DateTime appointmentEnd)
+        {
+            if (IsDoctorOnVacation(doctor, appointmentStart, appointmentEnd))
                 return false;
 
-            return true;
+            if (doctor.WorkShift.Equals(WorkDayShift.FirstShift))
+            {
+                if (appointmentStart.TimeOfDay >= new TimeSpan(8, 0, 0) && appointmentEnd.TimeOfDay <= new TimeSpan(14, 0, 0))
+                    return true;
+            }
+            else 
+            {
+                if (appointmentStart.TimeOfDay >= new TimeSpan(14, 0, 0) && appointmentEnd.TimeOfDay <= new TimeSpan(20, 0, 0))
+                    return true;
+            }
+            return false;
+        }
+
+        private bool IsDoctorOnVacation(Doctor doctor, DateTime appointmentStart, DateTime appointmentEnd)
+        {
+            DateTime VacationTimeEnd = doctor.VacationTimeStart.AddDays(14);
+            if (appointmentStart > doctor.VacationTimeStart && appointmentStart < VacationTimeEnd)
+                return true;
+            if (appointmentEnd > doctor.VacationTimeStart && appointmentEnd < VacationTimeEnd)
+                return true;
+            if (appointmentStart < doctor.VacationTimeStart && appointmentEnd > VacationTimeEnd)
+                return true;
+
+            return false;
         }
 
         public List<DoctorAppointment> GetAvailableAppointmentsByDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)

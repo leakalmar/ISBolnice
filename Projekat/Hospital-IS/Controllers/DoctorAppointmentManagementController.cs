@@ -58,6 +58,11 @@ namespace Hospital_IS.Controllers
             return DoctorAppointmentManagementService.Instance.GetAppointmentById(id);
         }
 
+        public List<DoctorAppointmentDTO> GetAppointmentsByPatientId(int patientId)
+        {
+            return DoctorAppointmentManagementService.Instance.GetAppointmentsByPatientId(patientId);
+        }
+
         public void EndAppointment(DoctorAppointmentDTO docAppointmentDTO)
         {
             docAppointmentDTO.IsFinished = true;
@@ -81,5 +86,16 @@ namespace Hospital_IS.Controllers
         {
             return DoctorAppointmentManagementService.Instance.GetAppointmentByDoctorId(doctorId);
         }
+
+        public List<DoctorAppointmentDTO> GetFutureAppointmentsForDoctor(int doctorId)
+        {
+            return DoctorAppointmentManagementService.Instance.GetFutureAppointmentsForDoctor(doctorId);
+        }
+
+        public List<DoctorAppointmentDTO> GetPreviousAppointmentsForDoctor(int doctorId)
+        {
+            return DoctorAppointmentManagementService.Instance.GetPreviousAppointmentsForDoctor(doctorId);
+        }
+
     }
 }

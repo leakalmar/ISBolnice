@@ -71,7 +71,7 @@
                     </StackPanel>
                 </Button>
                 <TextBlock Grid.Row="2" Grid.Column="3" Height="20" Text="RADNICI" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#624cfc"   />
-                <Button  BorderThickness="0" Width="80" Grid.Column="3" Grid.Row="1"  Background="Transparent"  >
+                <Button  BorderThickness="0" Width="80" Grid.Column="3" Grid.Row="1"  Background="Transparent" Command="{Binding NavigateToEmployeePage}" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -82,7 +82,7 @@
                     </StackPanel>
                 </Button>
                 <TextBlock Grid.Row="2" Grid.Column="5" Height="20" Text="FILIJALE" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#624cfc"   />
-                <Button BorderThickness="0" Width="80" Grid.Column="5" Grid.Row="1"  Background="Transparent" >
+                <Button BorderThickness="0" Width="80" Grid.Column="5" Grid.Row="1"  Background="Transparent" Command="{Binding NavigateToBranchPage}" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -197,7 +197,7 @@
                     <TextBox.Text>
                         <Binding Path="SearchBox" UpdateSourceTrigger="PropertyChanged"></Binding>
                     </TextBox.Text>
-                    
+
                 </TextBox>
                 <ComboBox Grid.Column="3" Height="25" FontSize="14" SelectedIndex="{Binding SelectedCondition}" Width="90">
                     <ComboBoxItem Content="jednako"/>
@@ -206,15 +206,15 @@
                 </ComboBox>
 
                 <Button Grid.Column="4" Command="{Binding SearchCommnd}" >
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="20"/>
-                    </Style>
-                </Button.Resources>
-                <StackPanel>
-                    <Image Source="pack://application:,,,/Resources/search.png"  />
-                </StackPanel>
-            </Button>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="20"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/search.png"  />
+                    </StackPanel>
+                </Button>
             </Grid>
         </StackPanel>
         <TextBox HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" FontSize="15" Foreground="White" Margin="40,124,0,0"  Text="Izaberite tip:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -376,7 +376,7 @@
                 </Button>
 
                 <TextBlock  Text="Lekovi" Grid.Column="1" Grid.Row ="2" FontWeight="SemiBold" FontSize="18" Height="20" HorizontalAlignment="Center" Foreground="#624cfc"/>
-                <Button x:Name="MedicineView" BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="80" Background="White"  >
+                <Button x:Name="MedicineView" BorderThickness="0" Grid.Row="1" Width="80" Background="White" Command="{Binding NavigateToMedicinePage}" Grid.ColumnSpan="2" Margin="-13,0,16,0" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -392,5 +392,5 @@
 
 
     </Grid>
-   
+
 </Page>

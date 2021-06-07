@@ -25,7 +25,6 @@ namespace Hospital_IS
             this.DataContext = this;
         }
 
-
         public void RefreshGrid()
         {
             if (Patients != null)
@@ -39,7 +38,7 @@ namespace Hospital_IS
         private void AddNewPatient(object sender, RoutedEventArgs e)
         {
             PatientRegistration pr = new PatientRegistration(this, null);
-            pr.Show();
+            pr.ShowDialog();
         }
 
         private void ShowPatient(object sender, RoutedEventArgs e)
@@ -58,7 +57,7 @@ namespace Hospital_IS
             {
                 PatientDTO patient = (PatientDTO)dataGridPatients.SelectedItem;
                 UpdatePatientView upv = new UpdatePatientView(patient, this);
-                upv.Show();
+                upv.ShowDialog();
             }
         }
 
@@ -146,7 +145,7 @@ namespace Hospital_IS
         private void btnGuests_Click(object sender, RoutedEventArgs e)
         {
             GuestsView gv = new GuestsView(this);
-            gv.Show();
+            gv.ShowDialog();
         }
     }
 }
