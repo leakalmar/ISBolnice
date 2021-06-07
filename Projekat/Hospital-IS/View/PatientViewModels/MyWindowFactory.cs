@@ -6,9 +6,9 @@ namespace Hospital_IS.View.PatientViewModels
 {
     public interface MyWindowFactory
     {
-        void CreateHospitalEvaluationWindow();
-        void CreateAppointmentEvaluationWindow(int appointmentId);
-        void CreateNoteWindow(int appointmentId);
-        void CreateYesNoDialog(string message);
+        void CreateHospitalEvaluation();
+        void CreateAppointmentEvaluation(int appointmentId);
+        void CreateNote(int appointmentId);
+        void CreateYesNo(string message);
     }
 }

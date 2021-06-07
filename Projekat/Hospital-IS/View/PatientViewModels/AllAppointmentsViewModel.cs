@@ -176,12 +176,12 @@ namespace Hospital_IS.View.PatientViewModels
 
         private void ShowEvaluation()
         {
-            windowFactory.CreateAppointmentEvaluationWindow(SelectedDoctorAppointment.Id);
+            windowFactory.CreateAppointmentEvaluation(SelectedDoctorAppointment.Id);
         }
 
         private void ShowAppNote()
         {
-            windowFactory.CreateNoteWindow(SelectedDoctorAppointment.Id);
+            windowFactory.CreateNote(SelectedDoctorAppointment.Id);
         }
 
         private void LoadAppointmentChartData()

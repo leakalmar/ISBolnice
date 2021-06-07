@@ -6,28 +6,28 @@ namespace Hospital_IS.View.PatientViewModels
 {
     public class WindowProductionFactory : MyWindowFactory
     {
-        public void CreateAppointmentEvaluationWindow(int appointmentId)
+        public void CreateAppointmentEvaluation(int appointmentId)
         {
             PatientAppointmentEvaluationWindow appointmentEvaluation = new PatientAppointmentEvaluationWindow(appointmentId);
             appointmentEvaluation.AppointmentEvaluation.OnRequestClose += (s, e) => appointmentEvaluation.Close();
             appointmentEvaluation.Show();
         }
 
-        public void CreateHospitalEvaluationWindow()
+        public void CreateHospitalEvaluation()
         {
             PatientHospitalEvaluationWindow hospitalEvaluation = new PatientHospitalEvaluationWindow();
             hospitalEvaluation.HospitalEvaluationViewModel.OnRequestClose += (s, e) => hospitalEvaluation.Close();
             hospitalEvaluation.Show();
         }
 
-        public void CreateNoteWindow(int appointmentId)
+        public void CreateNote(int appointmentId)
         {
             PatientNoteView appointmentNote = new PatientNoteView(appointmentId);
             appointmentNote.AppointmentNoteViewModel.OnRequestClose += (s, e) => appointmentNote.Close();
             appointmentNote.Show();
         }
 
-        public void CreateYesNoDialog(string message)
+        public void CreateYesNo(string message)
         {
             YesNoDialogMessage yesNoDialog = new YesNoDialogMessage(message);
             yesNoDialog.DialogMessageViewModel.OnRequestClose += (s, e) => yesNoDialog.Close();

@@ -59,7 +59,7 @@ namespace Hospital_IS.View.PatientViewModels
             if (PatientAppointmentEvaluationController.Instance.ShowHospitalEvaluation(PatientMainWindowViewModel.Patient.Id))
             {
                 //Napraviti prozor za pitanje da li zeli da oceni bolnicu,ako zeli napravi prozor sa anketom/ocenjivanjem bolnice
-                windowFactory.CreateYesNoDialog("Da li želite da ocenite bolnicu?");
+                windowFactory.CreateYesNo("Da li želite da ocenite bolnicu?");
                 OnRequestClose(this, new EventArgs());
             }
             OnRequestClose(this, new EventArgs());

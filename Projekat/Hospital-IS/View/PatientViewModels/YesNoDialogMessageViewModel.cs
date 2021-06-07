@@ -37,7 +37,7 @@ namespace Hospital_IS.View.PatientViewModels
 
         private void PosAnswer()
         {
-            windowFactory.CreateHospitalEvaluationWindow();
+            windowFactory.CreateHospitalEvaluation();
             OnRequestClose(this, new EventArgs());
         }
     }
