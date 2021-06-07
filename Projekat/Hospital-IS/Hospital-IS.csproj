@@ -18,12 +18,15 @@
     <None Remove="hospital.png" />
     <None Remove="hospital2.png" />
     <None Remove="Resources\add-row.png" />
+    <None Remove="Resources\add.png" />
     <None Remove="Resources\angledown.png" />
     <None Remove="Resources\backButtonLeft.png" />
     <None Remove="Resources\bed.png" />
     <None Remove="Resources\calendar.png" />
     <None Remove="Resources\chooseFromTable.png" />
     <None Remove="Resources\doctor-search.png" />
+    <None Remove="Resources\eye.png" />
+    <None Remove="Resources\guests.png" />
     <None Remove="Resources\hospital.png" />
     <None Remove="Resources\hospitalCroped.png" />
     <None Remove="Resources\insight.png" />
@@ -31,13 +34,17 @@
     <None Remove="Resources\notification.png" />
     <None Remove="Resources\notification1.png" />
     <None Remove="Resources\obavest.png" />
+    <None Remove="Resources\pen.png" />
     <None Remove="Resources\pill-hand.png" />
+    <None Remove="Resources\plus.png" />
     <None Remove="Resources\print.png" />
     <None Remove="Resources\question.png" />
+    <None Remove="Resources\register.png" />
     <None Remove="Resources\registration.png" />
     <None Remove="Resources\renovation.png" />
     <None Remove="Resources\search.png" />
     <None Remove="Resources\SearchSecretary.png" />
+    <None Remove="Resources\secretaryReport.png" />
     <None Remove="Resources\shoppingcart.png" />
     <None Remove="Resources\redsiren.png" />
     <None Remove="Resources\siren.png" />
@@ -101,6 +108,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\add-row.png" />
+    <Resource Include="Resources\add.png" />
     <Resource Include="Resources\angledown.png" />
     <Resource Include="Resources\backButtonLeft.png" />
     <Resource Include="Resources\bed.png" />
@@ -114,7 +122,9 @@
     <Resource Include="Resources\doctor-search.png" />
     <Resource Include="Resources\doctor.jpg" />
     <Resource Include="Resources\edit.png" />
+    <Resource Include="Resources\eye.png" />
     <Resource Include="Resources\filijale.png" />
+    <Resource Include="Resources\guests.png" />
     <Resource Include="Resources\hospital.png" />
     <Resource Include="Resources\hospitalCroped.png" />
     <Resource Include="Resources\hospitalroom.png" />
@@ -128,11 +138,14 @@
     <Resource Include="Resources\notification.png" />
     <Resource Include="Resources\notification1.png" />
     <Resource Include="Resources\obavest.png" />
+    <Resource Include="Resources\pen.png" />
     <Resource Include="Resources\pill-hand.png" />
     <Resource Include="Resources\options.png" />
     <Resource Include="Resources\pill.png" />
+    <Resource Include="Resources\plus.png" />
     <Resource Include="Resources\print.png" />
     <Resource Include="Resources\question.png" />
+    <Resource Include="Resources\register.png" />
     <Resource Include="Resources\registration.png" />
     <Resource Include="Resources\renovation.png" />
     <Resource Include="Resources\redsiren.png" />
@@ -141,6 +154,7 @@
     <Resource Include="Resources\room1.png" />
     <Resource Include="Resources\search.png" />
     <Resource Include="Resources\SearchSecretary.png" />
+    <Resource Include="Resources\secretaryReport.png" />
     <Resource Include="Resources\settings.png" />
     <Resource Include="Resources\shoppingcart.png" />
     <Resource Include="Resources\simona.jpg" />
