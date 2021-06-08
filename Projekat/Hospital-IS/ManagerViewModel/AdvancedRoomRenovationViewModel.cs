@@ -30,6 +30,7 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand makeAdvacedRenovation;
         private RelayCommand openRenovationWindow;
         private RelayCommand navigateToPreviousPage;
+        private Room selectedValue;
         private int roomNumber;
         private NavigationService navService;
 
@@ -109,7 +110,7 @@ namespace Hospital_IS.ManagerViewModel
                 {
 
                     allAppointments = value;
-                    OnPropertyChanged("RoomsComboFirst");
+                    OnPropertyChanged("AllAppointments");
                 }
             }
         }
@@ -167,6 +168,25 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
+        public Room SelectedValue
+        {
+            get
+            {
+                return selectedValue;
+            }
+            set
+            {
+                if (value != selectedValue)
+                {
+
+                    selectedValue = value;
+                    OnPropertyChanged("SelectedValue");
+                }
+            }
+        }
+
+
+
         public Room SelectedRoomFirst
         {
             get
@@ -177,8 +197,33 @@ namespace Hospital_IS.ManagerViewModel
             {
                 if (value != selectedRoomFirst)
                 {
-
+                    
                     selectedRoomFirst = value;
+                    if(SelectedRoomSecond != null)
+                    {
+                        MessageBox.Show(SelectedRoomSecond.RoomId.ToString());
+                    }
+                    
+                    if (selectedRoomFirst != null)
+                    {
+                        if (SelectedRoomSecond != null && SelectedRoomFirst != null)
+                        {
+                            if (SelectedRoomSecond.RoomId == SelectedRoomFirst.RoomId)
+                            {
+                                MessageBox.Show("Izabrali ste istu sobu");
+                                return;
+                            }
+                        }
+                        if (isMerge == true && SelectedRoomSecond != null)
+                        {
+                            AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(selectedRoomFirst.RoomId, SelectedRoomSecond.RoomId));
+                        }
+                        else
+                        {
+                            AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(selectedRoomFirst.RoomId));
+
+                        }
+                    }
                     OnPropertyChanged("SelectedRoomFirst");
                 }
             }
@@ -192,13 +237,46 @@ namespace Hospital_IS.ManagerViewModel
             }
             set
             {
+                
                 if (value != selectedRoomSecond)
                 {
+                    selectedRoomSecond = value;               
+                    if (selectedRoomSecond != null)
+                    {
+                        MessageBox.Show("usloo");
+                        if (SelectedRoomSecond != null && SelectedRoomFirst != null)
+                        {
+                            if (SelectedRoomSecond.RoomId == SelectedRoomFirst.RoomId)
+                            {
+                                MessageBox.Show("Izabrali ste istu sobu");
+                                ChangeValue();
+                                return;
+                                
+                               
+                            }
+                        }
 
-                    selectedRoomSecond = value;
+
+                        if (SelectedRoomFirst != null)
+                        {
+                            AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(SelectedRoomFirst.RoomId, selectedRoomSecond.RoomId));
+                            MessageBox.Show(AllAppointments.Count.ToString());
+                        }
+                        else
+                        {
+                            AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(selectedRoomSecond.RoomId));
+                        }
+                    }
+                 
+                      
+                    
                     OnPropertyChanged("SelectedRoomSecond");
                 }
             }
+        }
+
+        public void ChangeValue() {
+            SelectedRoomSecond = null;
         }
 
         public Boolean IsMerge
@@ -212,22 +290,32 @@ namespace Hospital_IS.ManagerViewModel
                 if (value != isMerge)
                 {               
                     isMerge = value;
+                  
                     if(isMerge == true)
                     {
                         IsSplit = false;
                         IsComboEnabledTwo = true;
+                      
 
                         IsComboEnabledOne = true;
+                        SelectedRoomFirst = null;
+                        SelectedRoomSecond = null;
+                        AllAppointments = new ObservableCollection<Appointment>();
+                        OnPropertyChanged("isMerge");
                     }
-                    else if (IsMerge = false && IsSplit == false)
+                    else if (IsMerge == false && IsSplit == false)
                     {
                         IsComboEnabledTwo = false;
 
                         IsComboEnabledOne = false;
+                        SelectedRoomFirst = null;
+                        SelectedRoomSecond = null;
+                        AllAppointments = new ObservableCollection<Appointment>();
+                        OnPropertyChanged("isMerge");
                     }
-                   
+
                     OnPropertyChanged("isMerge");
-                  
+
                 }
             }
         }
@@ -244,17 +332,25 @@ namespace Hospital_IS.ManagerViewModel
                     isSplit = value;
 
 
-                    IsMerge = false;
                     if (isSplit == true)
                     {
+                        IsMerge = false;
                         IsComboEnabledOne = true;
                         IsComboEnabledTwo = false;
+                        SelectedRoomFirst = null;
+                        SelectedRoomSecond = null;
+                        AllAppointments = new ObservableCollection<Appointment>();
+                        OnPropertyChanged("isSplit");
                     }
-                    else if (IsMerge = false && IsSplit == false)
+                    else if (IsMerge == false && IsSplit == false)
                     {
                         IsComboEnabledTwo = false;
 
                         IsComboEnabledOne = false;
+                        SelectedRoomFirst = null;
+                        SelectedRoomSecond = null;
+                        AllAppointments = new ObservableCollection<Appointment>();
+                        OnPropertyChanged("isSplit");
                     }
                     OnPropertyChanged("isSplit");
 

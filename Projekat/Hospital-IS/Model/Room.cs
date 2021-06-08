@@ -8,12 +8,10 @@ namespace Model
     public class Room
     {
 
-
         public Room()
         {
             
         }
-
 
         public int RoomFloor
         {

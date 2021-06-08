@@ -6,7 +6,7 @@
     "BedNumber": 111,
     "RoomId": 1,
     "Type": 1,
-    "RoomIdType": "1 ConsultingRoom",
+    "RoomIdType": "11 ConsultingRoom",
     "Equipment": [],
     "isUsable": false
   },
@@ -17,7 +17,7 @@
     "BedNumber": 11,
     "RoomId": 0,
     "Type": 3,
-    "RoomIdType": "0 StorageRoom",
+    "RoomIdType": "21 StorageRoom",
     "Equipment": [],
     "isUsable": false
   },
@@ -28,7 +28,7 @@
     "BedNumber": 1,
     "RoomId": 2,
     "Type": 3,
-    "RoomIdType": "2 StorageRoom",
+    "RoomIdType": "12 StorageRoom",
     "Equipment": [
       {
         "EquipType": 1,
@@ -72,18 +72,7 @@
     "BedNumber": 10,
     "RoomId": 7,
     "Type": 1,
-    "RoomIdType": "7 ConsultingRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 5,
-    "RoomNumber": 5,
-    "SurfaceArea": 5,
-    "BedNumber": 5,
-    "RoomId": 9,
-    "Type": 0,
-    "RoomIdType": "9 RecoveryRoom",
+    "RoomIdType": "10 ConsultingRoom",
     "Equipment": [],
     "isUsable": false
   },
@@ -94,7 +83,7 @@
     "BedNumber": 1,
     "RoomId": 14,
     "Type": 0,
-    "RoomIdType": "14 RecoveryRoom",
+    "RoomIdType": "1 RecoveryRoom",
     "Equipment": [],
     "isUsable": false
   },
@@ -105,7 +94,7 @@
     "BedNumber": 6,
     "RoomId": 15,
     "Type": 0,
-    "RoomIdType": "15 RecoveryRoom",
+    "RoomIdType": "26 RecoveryRoom",
     "Equipment": [],
     "isUsable": false
   },
@@ -116,7 +105,7 @@
     "BedNumber": 0,
     "RoomId": 16,
     "Type": 0,
-    "RoomIdType": "16 RecoveryRoom",
+    "RoomIdType": "582 RecoveryRoom",
     "Equipment": [],
     "isUsable": false
   }

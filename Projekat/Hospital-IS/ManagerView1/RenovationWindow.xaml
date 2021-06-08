@@ -38,9 +38,9 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <Label Content="Broj sobe" Grid.Row="3" Grid.Column="1" FontSize="15" Foreground="White"/>
+        <Label Content="Broj sobe" Grid.Row="3" Grid.Column="1"  FontSize="15" Foreground="White"/>
         <Label Content="Tip sobe" Grid.Row="5" Grid.Column="1" FontSize="15" Foreground="White"/>
-        <TextBox Grid.Row="3" Grid.Column="2" Height="30" Text="{Binding RoomNumber}" FontSize="15"/>
+        <TextBox Grid.Row="3" Grid.Column="2" Height="30" Padding="2" Text="{Binding RoomNumber}" FontSize="15"/>
         <ComboBox Grid.Row="5" Grid.Column="2" Height="30" SelectedIndex="{Binding SelectedRoomTypeIndex}" FontSize="15">
             <ComboBoxItem Content="Soba za operacije"/>
             <ComboBoxItem Content="Soba preglede"/>

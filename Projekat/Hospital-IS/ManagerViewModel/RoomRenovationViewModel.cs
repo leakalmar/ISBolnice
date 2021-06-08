@@ -18,6 +18,7 @@ namespace Hospital_IS.ManagerViewModel
         private NavigationService navService;
         private ObservableCollection<Appointment> appointments;
         private RelayCommand transferStaticEquipmentCommand;
+        private RelayCommand navigateToPreviousPage;
         private Room firstRoom;
         private Room fecondRoom;
         private Equipment equipment;
@@ -62,7 +63,15 @@ namespace Hospital_IS.ManagerViewModel
                 }
             }
         }
-      
+
+        public RelayCommand NavigateToPreviousPagel
+        {
+            get { return navigateToPreviousPage; }
+            set
+            {
+                navigateToPreviousPage = value;
+            }
+        }
 
         public RelayCommand TransferStaticEquipmentCommand
         {
@@ -159,13 +168,12 @@ namespace Hospital_IS.ManagerViewModel
         private RoomRenovationViewModel()
         {
             this.TransferStaticEquipmentCommand = new RelayCommand(Execute_RoomRenovation, CanExecute_IfEveryhingIsCorecct);
+            this.NavigateToPreviousPagel = new RelayCommand(Execute_NavigateToPreviousPage);
         }
 
-
-        public void SetAppointmentsForRooms(int roomIdSource, int roomIdDestination)
+        private void Execute_NavigateToPreviousPage(object obj)
         {
-            Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(roomIdSource, roomIdDestination));
-            this.TransferStaticEquipmentCommand = new RelayCommand(Execute_RoomRenovation, CanExecute_IfEveryhingIsCorecct);
+            this.NavService.GoBack();
         }
 
         public void SetAppointmnetForRoom(int roomIdSource)

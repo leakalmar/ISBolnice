@@ -38,9 +38,12 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand navigateToRenovationReport;
         private RelayCommand navigateToAddRoom;
         private RelayCommand showHelpDialog;
+        private RelayCommand deleteRoomCoomand;
+        private RelayCommand closeWindowCoomand;
         private NavigationService navService;
         private Room selectedRoom = null;
         private RelayCommand navigateToManagerProfilePage;
+        private DeleteRoomWindow deleteRoomWindow = new DeleteRoomWindow();
 
 
         public RelayCommand NavigateToAddRoom
@@ -158,6 +161,24 @@ namespace Hospital_IS.ManagerViewModel
             set
             {
                 showHelpDialog = value;
+            }
+        }
+
+        public RelayCommand DeleteRoomCoomand
+        {
+            get { return deleteRoomCoomand; }
+            set
+            {
+                deleteRoomCoomand = value;
+            }
+        }
+
+        public RelayCommand CloseWindowCoomand
+        {
+            get { return closeWindowCoomand; }
+            set
+            {
+                closeWindowCoomand = value;
             }
         }
 
@@ -363,12 +384,7 @@ namespace Hospital_IS.ManagerViewModel
 
 
 
-        private void Execute_DeleteRoomCommand(object obj)
-        {
-            RoomController.Instance.RemoveRoom(SelectedRoom);
-            LoadRooms();
-        }
-
+       
 
         private bool CanExecute_DeleteRoomCommand(object obj)
         {
@@ -399,6 +415,8 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToAddRoom = new RelayCommand(Execute_NavigateToAddRoomPage);
             this.NaviagteToUpdateRoom = new RelayCommand(Execute_NavigateToUpdateRoomPage, CanExecute_DeleteRoomCommand);
             this.ShowHelpDialogCommand = new RelayCommand(Execute_ShowHelpMessage);
+            this.DeleteRoomCoomand = new RelayCommand(Execute_DeleteRoomByWindowCommand);
+            this.CloseWindowCoomand = new RelayCommand(Execute_CloseWindowInCommand);
 
             DispatcherTimer dispatcherTimer = new DispatcherTimer
             {
@@ -415,11 +433,28 @@ namespace Hospital_IS.ManagerViewModel
 
         }
 
-        public void OpenHelpDialog()
+        private void Execute_DeleteRoomCommand(object obj)
         {
            
+            this.deleteRoomWindow.DataContext = this;
+            this.deleteRoomWindow.ShowDialog();
+         
         }
 
+        private void Execute_DeleteRoomByWindowCommand(object obj)
+        {
+            RoomController.Instance.RemoveRoom(SelectedRoom);
+            LoadRooms();
+            this.deleteRoomWindow.Hide();
+            SelectedRoom = null;
+            MessageBox.Show("Uspjesno brisanje");
+        }
+
+        private void Execute_CloseWindowInCommand(object obj)
+        {
+            this.deleteRoomWindow.Hide();
+            SelectedRoom = null;
+        }
 
         private void Execute_NavigateToUpdateRoomPage(object obj)
         {
@@ -523,6 +558,7 @@ namespace Hospital_IS.ManagerViewModel
         {
             RoomRenovationViewModel.Instance.SetAppointmnetForRoom(SelectedRoom.RoomId);
             RoomRenovationViewModel.Instance.FirstRoom = SelectedRoom;
+            RoomRenovationViewModel.Instance.NavService = this.NavService;
             this.NavService.Navigate(
                     new Uri("ManagerView1/RoomRenovationView.xaml", UriKind.Relative));
         }

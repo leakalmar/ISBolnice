@@ -9,6 +9,30 @@
       d:DesignHeight="750" d:DesignWidth="430"
       Title="RoomRenovationView">
 
+    <Page.Resources>
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Page.Resources>
+
+
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="15"/>
@@ -49,7 +73,7 @@
             </Border.Background>
         </Border>
         <TextBlock Text="Renoviranje" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" FontSize="30" TextAlignment="Center" Foreground="White"/>
-        <Button x:Name="Back"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent"   >
+        <Button x:Name="Back"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" Command="{Binding NavigateToPreviousPagel}"  >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="15"/>
@@ -76,8 +100,14 @@
         <Label Grid.Row="11" Grid.Column="2" Grid.ColumnSpan="2" Content="Kraj renoviranja:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
         <wpfx:DateTimePicker x:Name="RenovationEnd" Grid.Column="4" Grid.Row="11" Height="25" Margin="30,0,0,0" Value="{Binding DateEnd}" />
         <Label Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="2"  Content="Unesite opis:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
-        <TextBox x:Name="DescriptionField" Grid.Row="13" Grid.Column="4" Grid.RowSpan="2" Margin="30,0,0,0" Text="{Binding Note}"/>
-        <Button x:Name="AffirmRenovation" Grid.Column="3" Grid.Row="16" Grid.ColumnSpan="2" Width="100" Height="30" Content="Potvrdi" FontSize="18" Background="Transparent"
-                Foreground="White" BorderBrush="White" CommandParameter="{Binding ElementName=RenovationStart}" Command="{Binding TransferStaticEquipmentCommand}" />
+        <TextBox x:Name="DescriptionField" Grid.Row="13" Grid.Column="4" Grid.RowSpan="2" Margin="30,0,0,0" Text="{Binding Note}" Padding="2" Template="{StaticResource TextBoxBaseControlTemplate}"/>
+        <Button x:Name="AffirmRenovation" Grid.Column="3" Grid.Row="16" Grid.ColumnSpan="2" Width="200" Content="Potvrdi" FontSize="20" Background="White"
+                 Height="40" BorderThickness="3" BorderBrush="Green"  CommandParameter="{Binding ElementName=RenovationStart}" Command="{Binding TransferStaticEquipmentCommand}" >
+            <Button.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="15"/>
+            </Style>
+            </Button.Resources>
+        </Button>
     </Grid>
 </Page>
