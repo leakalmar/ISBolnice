@@ -1,9 +1,8 @@
 ﻿using DTOs;
 using Hospital_IS.DoctorRole.Commands;
-using Hospital_IS.DoctorRole.DoctorView;
 using System.Collections.ObjectModel;
-using System.Windows.Navigation;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class ReportViewModel : BindableBase
@@ -12,17 +11,6 @@ namespace Hospital_IS.DoctorViewModel
         private ObservableCollection<PrescriptionDTO> prescriptions;
         private PrescriptionDTO selectedPrescription;
         private string anemnesis;
-        private SearchMedicine searchMedicine;
-        private NavigationService mainNavigationService;
-
-        public NavigationService MainNavigationService
-        {
-            get { return mainNavigationService; }
-            set
-            {
-                mainNavigationService = value;
-            }
-        }
 
         public ObservableCollection<PrescriptionDTO> Prescriptions
         {
@@ -50,16 +38,6 @@ namespace Hospital_IS.DoctorViewModel
             {
                 anemnesis = value;
                 OnPropertyChanged("Anemnesis");
-            }
-        }
-
-        public SearchMedicine SearchMedicineView
-        {
-            get { return searchMedicine; }
-            set
-            {
-                searchMedicine = value;
-                OnPropertyChanged("SearchMedicine");
             }
         }
         #endregion
@@ -102,11 +80,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_SearchMedicineCommad(object obj)
         {
-            SearchMedicine view = new SearchMedicine();
-            view._ViewModel.Patient = PatientChartViewModel.Instance.Patient;
-            view._ViewModel.Prescriptions = Prescriptions;
-            PatientChartViewModel.Instance.SearchMedicineView._ViewModel.Prescriptions = Prescriptions;
-            DoctorMainWindowModel.Instance.NavigationService.Navigate(view);
+            DoctorNavigationController.Instance.NavigateToSearchMedicineCommand(this);
         }
 
         #endregion

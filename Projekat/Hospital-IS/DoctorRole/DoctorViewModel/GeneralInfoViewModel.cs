@@ -3,6 +3,7 @@ using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DTOs.SecretaryDTOs;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class GeneralInfoViewModel : BindableBase

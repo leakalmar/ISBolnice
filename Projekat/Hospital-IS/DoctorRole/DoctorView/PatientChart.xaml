@@ -34,7 +34,7 @@
         <Ellipse Height="auto" Width="auto" Grid.Row="0" Grid.Column="1">
             <Ellipse.Fill>
                 <ImageBrush
-                        ImageSource="pack://application:,,,/Resources/simona.jpg" />
+                        ImageSource="pack://application:,,,/Resources/user.png" />
             </Ellipse.Fill>
         </Ellipse>
 

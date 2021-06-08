@@ -1,10 +1,10 @@
 ﻿using Controllers;
 using Hospital_IS.DoctorRole.Commands;
-using Hospital_IS.DoctorRole.DoctorView;
 using Model;
 using System.Collections.ObjectModel;
 using System.Linq;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class UpdateMedicineViewModel : BindableBase
@@ -153,7 +153,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_BackCommand(object obj)
         {
-            DoctorMainWindowModel.Instance.NavigationService.Navigate(new Medicines());
+            DoctorNavigationController.Instance.NavigateToMedicinesCommand();
         }
 
         private bool CanExecute_Command(object obj)

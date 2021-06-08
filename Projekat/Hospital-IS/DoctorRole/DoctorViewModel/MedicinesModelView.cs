@@ -1,13 +1,12 @@
 ﻿using Controllers;
-using DTOs;
 using Hospital_IS.DoctorRole.Commands;
-using Hospital_IS.DoctorRole.DoctorView;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Data;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class MedicinesModelView : BindableBase

@@ -1,12 +1,11 @@
 ﻿using DTOs;
 using Hospital_IS.Controllers;
 using Hospital_IS.DoctorRole.Commands;
-using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DTOs;
 using Model;
 using System;
-using System.Windows.Navigation;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class IssueInstructionViewModel : BindableBase
@@ -99,7 +98,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_NavigateToPatientChartCommand(object obj)
         {
-            DoctorMainWindowModel.Instance.NavigateToChartCommand.Execute(null);
+            DoctorNavigationController.Instance.NavigateToChartCommand();
         }
 
         #endregion
@@ -125,7 +124,7 @@ namespace Hospital_IS.DoctorViewModel
             string title = "Zakazan pregled";
 
             string text = "Zakazan Vam je novi pregled " + appointment.AppointmentStart.ToString("dd.MM.yyyy.") + " u "
-                + appointment.AppointmentStart.ToString("HH:mm") + " u " + appointment.AppointmentStart.ToString("HH:mm") + "h.";
+                + appointment.AppointmentStart.ToString("HH:mm") + " do " + appointment.AppointmentStart.ToString("HH:mm") + "h.";
 
             Notification notification = new Notification(title, text, DateTime.Now);
             notification.Recipients.Add(appointment.Patient.Id);

@@ -3,16 +3,14 @@ using DTOs;
 using Enums;
 using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorConverters;
-using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows;
 using System.Windows.Data;
-using System.Windows.Navigation;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class NewAppViewModel : BindableBase
@@ -43,7 +41,6 @@ namespace Hospital_IS.DoctorViewModel
         private TimeSpan duration;
         private bool emergency;
 
-        private IssueInstruction instructionView;
         private bool focused;
 
         public bool Focused
@@ -214,12 +211,6 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public IssueInstruction InstructionView
-        {
-            get { return instructionView; }
-            set { instructionView = value; }
-        }
-
         public bool Emergency
         {
             get { return emergency; }
@@ -254,19 +245,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Actions
         private void Execute_ChooseAppointmentCommand(object obj)
         {
-            if (Emergency)
-            {
-                SetInstructionView();
-                InstructionView._ViewModel.SelectedAppointment = null;
-                InstructionView._ViewModel.SelectedEmergencyAppointment = SelectedEmergencyAppointment;
-            }
-            else
-            {
-                SetInstructionView();
-                InstructionView._ViewModel.SelectedAppointment = SelectedAppointment;
-                InstructionView._ViewModel.SelectedEmergencyAppointment = null;
-            }
-            DoctorMainWindowModel.Instance.NavigationService.Navigate(InstructionView);
+            DoctorNavigationController.Instance.NavigateToInstructionCommand(this);
         }
 
         private void Execute_ChangeEmergencyCommand(object obj)
@@ -282,14 +261,6 @@ namespace Hospital_IS.DoctorViewModel
         #endregion
 
         #region Methods
-
-        private void SetInstructionView()
-        {
-            if (instructionView == null)
-            {
-                InstructionView = new IssueInstruction();
-            }
-        }
         private void SetSelectedDoctor()
         {
             if (SelectedSpecialty.Equals(DoctorMainWindowModel.Instance.Doctor.Specialty))

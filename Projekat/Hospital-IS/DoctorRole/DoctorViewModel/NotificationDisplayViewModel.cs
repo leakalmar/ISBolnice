@@ -1,12 +1,7 @@
 ﻿using Hospital_IS.DoctorRole.Commands;
-using Hospital_IS.DoctorRole.DoctorView;
-using Hospital_IS.DoctorViewModel;
 using Hospital_IS.DTOs.SecretaryDTOs;
-using Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
+//MVVM
 namespace Hospital_IS.DoctorRole.DoctorViewModel
 {
     public class NotificationDisplayViewModel : BindableBase
@@ -38,7 +33,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         #region Actions
         private void Execute_BackCommand(object obj)
         {
-            DoctorMainWindowModel.Instance.NavigationService.Navigate(new DoctorNotifications());
+            DoctorNavigationController.Instance.NavigateToNotificationsCommand();
         }
 
 

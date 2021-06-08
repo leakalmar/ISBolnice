@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+//MVVM
 namespace Hospital_IS.DoctorRole.DoctorViewModel
 {
     public class FeedbackViewModel : BindableBase
@@ -39,7 +40,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         private void Execute_SaveCommand(object obj)
         {
             FeedbackMessageController.Instance.AddFeedbackMessage(new DTOs.FeedbackMessageDTO(Text, DateTime.Now));
-            DoctorMainWindowModel.Instance.NavigateToSettingsCommand.Execute(null);
+            DoctorNavigationController.Instance.NavigateToSettingsCommand();
         }
 
         private void Execute_ChangePasswordCommand(object obj)

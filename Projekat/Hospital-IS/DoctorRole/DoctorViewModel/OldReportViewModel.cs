@@ -1,10 +1,10 @@
 ﻿using Controllers;
 using DTOs;
 using Hospital_IS.DoctorRole.Commands;
-using Hospital_IS.DoctorRole.DoctorView;
 using Model;
 using System.Collections.Generic;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class OldReportViewModel : BindableBase
@@ -98,6 +98,11 @@ namespace Hospital_IS.DoctorViewModel
             this.Report.Anemnesis = this.Anamnesis;
             ChartController.Instance.UpdateReport(PatientChartViewModel.Instance.Patient.Id, Report);
         }
+
+        private void Execute_NavigateBackCommand(object obj)
+        {
+            DoctorNavigationController.Instance.NavigateBackWithoutCheckCommand();
+        }
         #endregion
 
         #region Constructor
@@ -105,7 +110,7 @@ namespace Hospital_IS.DoctorViewModel
         {
             this.Focused = true;
             this.SaveCommand = new RelayCommand(Execute_SaveCommand,CanExecute_Command);
-            this.NavigateBackCommand = DoctorMainWindowModel.Instance.NavigateBackWithoutCheckCommand;
+            this.NavigateBackCommand = new RelayCommand(Execute_NavigateBackCommand, CanExecute_Command);
         }
         #endregion
     }

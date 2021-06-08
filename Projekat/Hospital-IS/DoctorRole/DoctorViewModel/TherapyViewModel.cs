@@ -4,6 +4,7 @@ using Hospital_IS.DoctorRole.DoctorView;
 using Model;
 using System.Collections.ObjectModel;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class TherapyViewModel : BindableBase

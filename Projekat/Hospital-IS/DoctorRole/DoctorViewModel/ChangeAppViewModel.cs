@@ -6,6 +6,7 @@ using Model;
 using System;
 using System.Collections.Generic;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class ChangeAppViewModel : BindableBase
@@ -136,6 +137,7 @@ namespace Hospital_IS.DoctorViewModel
                 newDoctorAppointment.Reserved = true;
                 DoctorAppointmentController.Instance.UpdateAppointment(OldAppointment, newDoctorAppointment);
                 AppointmentsViewModel.Instance.ShowChangePanel = false;
+                new ExitMess("Termin je uspešno odložen.", "info").ShowDialog();
             }
             else
             {

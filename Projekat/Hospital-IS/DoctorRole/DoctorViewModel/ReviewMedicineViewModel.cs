@@ -1,8 +1,8 @@
 ﻿using Controllers;
 using Hospital_IS.DoctorRole.Commands;
-using Hospital_IS.DoctorRole.DoctorView;
 using Model;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class ReviewMedicineViewModel : BindableBase

@@ -1,10 +1,10 @@
 ﻿using Controllers;
 using Hospital_IS.DoctorRole.Commands;
-using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DoctorViewModel;
 using Model;
 using System;
 
+//MVVM
 namespace Hospital_IS.DoctorRole.DoctorViewModel
 {
     public class TestNewViewModel : BindableBase
@@ -44,6 +44,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             }
         }
         #endregion
+
         #region Commands
         private RelayCommand saveCommand;
         private RelayCommand cancelCommand;

@@ -2,15 +2,13 @@
 using Hospital_IS.Controllers;
 using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorConverters;
-using Hospital_IS.DoctorRole.DoctorView;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows;
 using System.Windows.Data;
-using System.Windows.Navigation;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class AppDetailViewModel : BindableBase
@@ -97,10 +95,6 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_OpenChartCommand(object obj)
         {
             SelectedAppointment.IsStarted = false;
-            //PatientChart chart = new PatientChart();
-            // chart._ViewModel.SelectedAppointment = SelectedAppointment;
-            //DoctorMainWindowModel.Instance.PatientChartView = chart;
-            // DoctorMainWindowModel.Instance.NavigationService.Navigate(chart);
             DoctorNavigationController.Instance.NavigateToChartCommand();
             PatientChartViewModel.Instance.SelectedAppointment = SelectedAppointment;
         }
@@ -108,11 +102,8 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_StartAppointmentCommand(object obj)
         {
             SelectedAppointment.IsStarted = true;
-            // PatientChartViewModel.Instance.SelectedAppointment = SelectedAppointment;
-            //DoctorMainWindowModel.Instance.PatientChartView = chart;
             DoctorNavigationController.Instance.NavigateToChartCommand();
             PatientChartViewModel.Instance.SelectedAppointment = SelectedAppointment;
-            // DoctorMainWindowModel.Instance.NavigationService.Navigate(chart);
         }
         private void Execute_SetFocusCommand(object obj)
         {

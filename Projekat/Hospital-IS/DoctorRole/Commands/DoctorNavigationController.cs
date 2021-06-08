@@ -50,7 +50,7 @@ namespace Hospital_IS.DoctorRole.Commands
 
         public override void NavigateBackWithoutCheckCommand()
         {
-            throw new NotImplementedException();
+            this.NavigationService.GoBack();
         }
 
         public override void NavigateToAppointmentsCommand()
@@ -79,11 +79,6 @@ namespace Hospital_IS.DoctorRole.Commands
         {
             this.NavigationService.Navigate(
                     new Uri("DoctorRole/DoctorView/HomePage.xaml", UriKind.Relative));
-        }
-
-        public override void NavigateToLogInCommand()
-        {
-            throw new NotImplementedException();
         }
 
         public override void NavigateToMedicinesCommand()
@@ -134,6 +129,44 @@ namespace Hospital_IS.DoctorRole.Commands
             ReviewMedicine view = new ReviewMedicine();
             view._ViewModel.MedicineNotification = medicineNotification;
             this.NavigationService.Navigate(view);
+        }
+
+        public override void NavigateToAppDetailCommand(HomePageViewModel homePageViewModel)
+        {
+            AppDetail appDetail = new AppDetail();
+            appDetail._ViewModel.SelectedAppointment = homePageViewModel.SelectedAppointment;
+            appDetail._ViewModel.AppointmentsView = homePageViewModel.AppointmentsView;
+            this.NavigationService.Navigate(appDetail);
+        }
+
+        public override void NavigateToInstructionCommand(NewAppViewModel newAppViewModel)
+        {
+            IssueInstruction issueInstruction = new IssueInstruction();
+            if (newAppViewModel.Emergency)
+            {
+                issueInstruction._ViewModel.SelectedAppointment = null;
+                issueInstruction._ViewModel.SelectedEmergencyAppointment = newAppViewModel.SelectedEmergencyAppointment;
+            }
+            else
+            {
+                issueInstruction._ViewModel.SelectedAppointment = newAppViewModel.SelectedAppointment;
+                issueInstruction._ViewModel.SelectedEmergencyAppointment = null;
+            }
+            this.navigaitonService.Navigate(issueInstruction);
+        }
+
+        public override void NavigateToSearchMedicineCommand(ReportViewModel reportViewModel)
+        {
+            SearchMedicine view = new SearchMedicine();
+            view._ViewModel.Patient = PatientChartViewModel.Instance.Patient;
+            view._ViewModel.Prescriptions = reportViewModel.Prescriptions;
+            PatientChartViewModel.Instance.SearchMedicineView._ViewModel.Prescriptions = reportViewModel.Prescriptions;
+            this.NavigationService.Navigate(view);
+        }
+
+        public override void NavigateToNewAppointment()
+        {
+            this.NavigationService.Navigate(new NewApp());
         }
     }
 }

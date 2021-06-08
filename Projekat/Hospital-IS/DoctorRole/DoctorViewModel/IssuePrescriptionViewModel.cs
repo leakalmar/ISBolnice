@@ -1,12 +1,11 @@
-﻿using Controllers;
-using Hospital_IS.Controllers;
+﻿using Hospital_IS.Controllers;
 using Hospital_IS.DoctorRole.Commands;
-using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DoctorViewModel;
 using Model;
 using System;
 using System.Collections.Generic;
 
+//MVVM
 namespace Hospital_IS.DoctorRole.DoctorViewModel
 {
     public class IssuePrescriptionViewModel : BindableBase
@@ -50,11 +49,9 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         private void Execute_OpenChartCommand(object obj)
         {
             //zakucana vrendnost
-            //PatientChartViewModel viewModel = new PatientChartViewModel();
             DoctorNavigationController.Instance.NavigateToChartCommand();
             PatientChartViewModel.Instance.Patient = SecretaryManagementController.Instance.GetPatientByID(1);
             PatientChartViewModel.Instance.PrescriptionReview = true;
-            // DoctorMainWindowModel.Instance.NavigateToChartCommand.Execute(obj);
         }
 
         private bool CanExecute_Command(object obj)

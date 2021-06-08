@@ -26,7 +26,6 @@
                 Command="{Binding Path=NavigateToNotificationsCommand}" />
         <KeyBinding Key="F10" Command="{Binding Path=NavigateToSettingsCommand}" />
         <KeyBinding Key="Backspace" Command="{Binding Path=NavigateBackCommand}" />
-        <KeyBinding Key="Esc" Command="{Binding Path=NavigateToLogInCommand}" />
         <!--<KeyBinding Modifiers="Ctrl+Alt" Key="N"
                 Command="{Binding Path=MinimizeCommand}" />
         <KeyBinding Modifiers="Ctrl+Alt" Key="X"
@@ -69,20 +68,19 @@
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                 HorizontalAlignment="Right" Grid.Row="0" Grid.Column="3">
             <Button x:Name="min" Height="20" Width="20" Opacity="0.6"
-                    BorderThickness="0" Command="{Binding Path=MinimizeCommand}"
+                    BorderThickness="0" 
                     Background="{x:Null}" Foreground="White"
                     BorderBrush="{x:Null}" FontSize="14" Focusable="False">
                 _
             </Button>
             <Button x:Name="full" Height="20" Width="20" Opacity="0.6"
-                    BorderThickness="0" Command="{Binding Path=MaximizeCommand}"
+                    BorderThickness="0" 
                     Background="{x:Null}" Foreground="White"
                     BorderBrush="{x:Null}" FontSize="14" Focusable="False">
                 ⛶
             </Button>
             <Button x:Name="exit" Height="20" Width="20" Opacity="0.6"
                     BorderThickness="0"
-                    Command="{Binding Path=NavigateToLogInCommand}"
                     Background="{x:Null}" Foreground="White"
                     BorderBrush="{x:Null}" FontSize="14" Focusable="False">
                 X
@@ -179,8 +177,7 @@
 
             <Button Content="Odjavi se" Style="{StaticResource CustomButton}"
                     KeyboardNavigation.TabNavigation="Continue" Grid.Row="11"
-                    Padding="10,0,10,0" Margin="15,5,15,5"
-                    Command="{Binding Path=NavigateToLogInCommand}">
+                    Padding="10,0,10,0" Margin="15,5,15,5" Click="Button_Click">
             </Button>
 
             <Button Grid.Row="12" Content="Podešavanja"

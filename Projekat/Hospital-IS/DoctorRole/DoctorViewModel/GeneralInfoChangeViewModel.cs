@@ -4,6 +4,7 @@ using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DoctorViewModel;
 using Hospital_IS.DTOs.SecretaryDTOs;
 
+//MVVM
 namespace Hospital_IS.DoctorRole.DoctorViewModel
 {
     public class GeneralInfoChangeViewModel : BindableBase

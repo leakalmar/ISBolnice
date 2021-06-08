@@ -63,6 +63,7 @@
     <None Remove="Resources\settings.png" />
     <None Remove="Resources\toolbar.png" />
     <None Remove="Resources\transfer.png" />
+    <None Remove="Resources\user.png" />
     <None Remove="Resources\worker.png" />
     <None Remove="room_icon.jpg" />
     <None Remove="thredots.png" />
@@ -160,6 +161,7 @@
     <Resource Include="Resources\toolbar.png" />
     <Resource Include="Resources\transfer.png" />
     <Resource Include="Resources\tube.png" />
+    <Resource Include="Resources\user.png" />
     <Resource Include="Resources\worker.png" />
     <Resource Include="Resources\x-icon.png" />
   </ItemGroup>

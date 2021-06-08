@@ -90,7 +90,7 @@
                             Width="100" Height="100">
                         <Ellipse.Fill>
                             <ImageBrush
-                                    ImageSource="pack://application:,,,/Resources/simona.jpg" />
+                                    ImageSource="pack://application:,,,/Resources/user.png" />
                         </Ellipse.Fill>
                     </Ellipse>
 

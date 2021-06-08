@@ -2,11 +2,10 @@
 using DTOs;
 using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorConverters;
-using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using System.Collections.ObjectModel;
-using System.Windows.Navigation;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class ScheduleAppointmentViewModel : BindableBase
@@ -50,8 +49,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_AddNewCommand(object obj)
         {
-
-            DoctorMainWindowModel.Instance.NavigationService.Navigate(new NewApp());
+            DoctorNavigationController.Instance.NavigateToNewAppointment();
         }
 
         private bool CanExecute_AddNewCommand(object obj)

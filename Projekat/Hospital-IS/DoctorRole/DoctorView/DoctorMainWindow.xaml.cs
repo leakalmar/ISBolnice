@@ -326,5 +326,24 @@ namespace Hospital_IS.DoctorRole.DoctorView
             };
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (PatientChartViewModel.Instance.Started)
+            {
+                new ExitMess("Termin nije završen! Molimo vas završite termin pre odjave.", "info").ShowDialog();
+                return;
+            }
+            else
+            {
+                bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da se odjavite?", "yesNo").ShowDialog();
+                if (dialog)
+                {
+                    MainWindow login = new MainWindow();
+                    login.Show();
+                    this.Hide();
+                }
+            }
+        }
     }
 }

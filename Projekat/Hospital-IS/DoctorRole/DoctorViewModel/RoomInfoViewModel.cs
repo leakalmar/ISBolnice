@@ -2,6 +2,7 @@
 using Hospital_IS.DoctorRole.Commands;
 using Model;
 
+//MVVM
 namespace Hospital_IS.DoctorRole.DoctorViewModel
 {
     public class RoomInfoViewModel : BindableBase

@@ -6,7 +6,7 @@
         xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
         xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
         mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783"
-        >
+        FocusManager.FocusedElement="{Binding ElementName=group}">
     <UserControl.Resources>
         <converters:IsTodayAppointmentConverter x:Key="IsTodayAppointment" />
     </UserControl.Resources>
@@ -26,7 +26,7 @@
         </Grid.ColumnDefinitions>
 
         <GroupBox x:Name="group" Margin="10" Header="Detalji pregleda"
-                Foreground="FloralWhite" Grid.ColumnSpan="3">
+                Foreground="FloralWhite" Grid.ColumnSpan="3" Focusable="True">
             <TextBox x:Name="reportDetail" Margin="5,5,5,5"
                     Background="Transparent" Foreground="FloralWhite"
                     BorderThickness="0"

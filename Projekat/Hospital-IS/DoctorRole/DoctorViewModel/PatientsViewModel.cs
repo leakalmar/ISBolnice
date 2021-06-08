@@ -3,13 +3,12 @@ using Hospital_IS.Controllers;
 using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DTOs.SecretaryDTOs;
-using Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows;
 using System.Windows.Data;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class PatientsViewModel : BindableBase
@@ -111,10 +110,6 @@ namespace Hospital_IS.DoctorViewModel
         #region Actions
         private void Execute_OpenChartCommand(object obj)
         {
-            //if (PatientChartViewModel.Instance.Started)
-            //{
-            //    OpenChart(obj);
-            //}
             if (PatientChartViewModel.Instance.Started)
             {
                 new ExitMess("Termin je trenutno u toku! Molimo vas završite termin pre otvaranja kartona drugog pacijenta.", "info").ShowDialog();
@@ -129,9 +124,6 @@ namespace Hospital_IS.DoctorViewModel
 
         private void OpenChart(object obj)
         {
-            //patientChartViewModel.Patient = SelectedPatient;
-            //DoctorMainWindowModel.Instance.PatientChartViewModel = patientChartViewModel;
-            //DoctorMainWindowModel.Instance.NavigateToChartCommand.Execute(obj);
             DoctorNavigationController.Instance.NavigateToChartCommand();
             PatientChartViewModel.Instance.Patient = SelectedPatient;
             PatientChartViewModel.Instance.Started = false;

@@ -3,6 +3,7 @@ using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DoctorViewModel;
 using Hospital_IS.DTOs;
 
+//MVVM
 namespace Hospital_IS.DoctorRole.DoctorViewModel
 {
     public class SettingsViewModel : BindableBase

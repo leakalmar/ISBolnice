@@ -4,6 +4,7 @@ using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using System.Collections.Generic;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class DoctorNotificationsViewModel : BindableBase

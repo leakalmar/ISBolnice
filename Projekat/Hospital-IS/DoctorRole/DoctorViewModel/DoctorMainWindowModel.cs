@@ -70,7 +70,6 @@ namespace Hospital_IS.DoctorViewModel
         private RelayCommand navigateToApproveMedicineCommand;
         private RelayCommand navigateToNotificationsCommand;
         private RelayCommand navigateBackCommand;
-        private RelayCommand navigateToLogInCommand;
         private RelayCommand onLoadedCommand;
         private RelayCommand navigateBackWithoutCheckCommand;
         private RelayCommand navigateToEquipmentCommand;
@@ -133,13 +132,6 @@ namespace Hospital_IS.DoctorViewModel
             get { return navigateBackCommand; }
             set { navigateBackCommand = value; }
         }
-
-        public RelayCommand NavigateToLogInCommand
-        {
-            get { return navigateToLogInCommand; }
-            set { navigateToLogInCommand = value; }
-        }
-
         public RelayCommand OnLoadedCommand
         {
             get { return onLoadedCommand; }
@@ -244,43 +236,6 @@ namespace Hospital_IS.DoctorViewModel
 
         }
 
-        private void Execute_NavigateToLogInCommand(object obj)
-        {
-            //if (PatientChartViewModel != null)
-            //{
-                if (PatientChartViewModel.Instance.Started)
-                {
-                    new ExitMess("Termin nije završen! Molimo vas završite termin pre odjave.", "info").ShowDialog();
-                    return;
-                }
-                else
-                {
-                    bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da se odjavite?", "yesNo").ShowDialog();
-                    if (dialog)
-                    {
-                        //DoctorController.Instance..UpdateDoctor(Doctor);
-                        MainWindow login = new MainWindow();
-                        login.Show();
-                        //DoctorMainWindow.Instance.Hide();
-
-                    }
-                }
-            //}
-           // else
-           // {
-              //  bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da se odjavite?", "yesNo").ShowDialog();
-              //  if (dialog)
-              //  {
-                    //DoctorController.Instance..UpdateDoctor(Doctor);
-                 //   MainWindow login = new MainWindow();
-                //    login.Show();
-                    //DoctorMainWindow.Instance.Hide();
-
-               // }
-          //  }
-
-        }
-
         private void Execute_OnLoadedCommand(object obj)
         {
             DoctorNavigationController.Instance.NavigateToHomeCommand();
@@ -315,7 +270,6 @@ namespace Hospital_IS.DoctorViewModel
             this.NavigateToApproveMedicineCommand = new RelayCommand(Execute_NavigateToApprovemedicineCommand, CanExecute_NavigateCommand);
             this.NavigateToNotificationsCommand = new RelayCommand(Execute_NavigateToNotificationsCommand, CanExecute_NavigateCommand);
             this.NavigateBackCommand = new RelayCommand(Execute_NavigateBackCommand, CanExecute_NavigateCommand);
-            this.NavigateToLogInCommand = new RelayCommand(Execute_NavigateToLogInCommand, CanExecute_NavigateCommand);
             this.OnLoadedCommand = new RelayCommand(Execute_OnLoadedCommand, CanExecute_NavigateCommand);
             this.NavigateBackWithoutCheckCommand = new RelayCommand(Execute_NavigateBackWithoutCheckCommand, CanExecute_NavigateCommand);
             this.NavigateToEquipmentCommand = new RelayCommand(Execute_NavigateToEquipmentCommand, CanExecute_NavigateCommand);
