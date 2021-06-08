@@ -55,8 +55,7 @@ namespace Hospital_IS
             {
                 if (email.Text == doctor.Email && password.Password.ToString() == doctor.Password)
                 {
-                    DoctorMainWindow.Instance._ViewModel.SetDoctor(doctor);
-                    DoctorMainWindow.Instance.Show();
+                    new DoctorMainWindow(doctor).Show();
                     this.Close();
                 }
             }

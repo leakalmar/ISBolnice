@@ -51,7 +51,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 NotificationDisplay display = new NotificationDisplay();
                 display._ViewModel.SelectedNotification = SelectedNotification;
-                DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(display);
+                DoctorMainWindowModel.Instance.NavigationService.Navigate(display);
             }
         }
 

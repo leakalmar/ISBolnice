@@ -43,8 +43,8 @@ namespace Hospital_IS.DoctorViewModel
             set { 
                 report = value;
                 Anamnesis = report.Anemnesis;
-                Prescriptions = ChartController.Instance.GetPrescriptionsForReport(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient.Id, report.AppointmentStart);
-                Tests = ChartController.Instance.GetTestsForReport(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient.Id, report.AppointmentStart);
+                Prescriptions = ChartController.Instance.GetPrescriptionsForReport(PatientChartViewModel.Instance.Patient.Id, report.AppointmentStart);
+                Tests = ChartController.Instance.GetTestsForReport(PatientChartViewModel.Instance.Patient.Id, report.AppointmentStart);
                 OnPropertyChanged("Report");
             }
         }
@@ -96,7 +96,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_SaveCommand(object obj)
         {
             this.Report.Anemnesis = this.Anamnesis;
-            ChartController.Instance.UpdateReport(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient.Id, Report);
+            ChartController.Instance.UpdateReport(PatientChartViewModel.Instance.Patient.Id, Report);
         }
         #endregion
 
@@ -105,7 +105,7 @@ namespace Hospital_IS.DoctorViewModel
         {
             this.Focused = true;
             this.SaveCommand = new RelayCommand(Execute_SaveCommand,CanExecute_Command);
-            this.NavigateBackCommand = DoctorMainWindow.Instance._ViewModel.NavigateBackWithoutCheckCommand;
+            this.NavigateBackCommand = DoctorMainWindowModel.Instance.NavigateBackWithoutCheckCommand;
         }
         #endregion
     }

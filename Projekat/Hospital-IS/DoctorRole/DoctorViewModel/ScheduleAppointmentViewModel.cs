@@ -51,7 +51,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_AddNewCommand(object obj)
         {
 
-            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(new NewApp());
+            DoctorMainWindowModel.Instance.NavigationService.Navigate(new NewApp());
         }
 
         private bool CanExecute_AddNewCommand(object obj)
@@ -65,7 +65,7 @@ namespace Hospital_IS.DoctorViewModel
         
         {
             this.AddNewCommand = new RelayCommand(Execute_AddNewCommand, CanExecute_AddNewCommand);
-            PatientDTO patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
+            PatientDTO patient = PatientChartViewModel.Instance.Patient;
             this.ScheduledAppointments = new DoctorAppointmentConverter().ConvertAppointmentsToDTO(DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(patient.Id));
         }
         #endregion

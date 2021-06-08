@@ -118,8 +118,8 @@ namespace Hospital_IS.DoctorViewModel
                     newApp._ViewModel.FromDate = FromDate;
                     newApp._ViewModel.SelectedRoom = SelectedRoom;
                     newApp._ViewModel.SelectedType = SelectedType;
-                    DoctorMainWindow.Instance._ViewModel.AppointmentsView = newApp;
-                    DoctorMainWindow.Instance._ViewModel.NavigateToAppointmentsCommand.Execute(null);
+                    DoctorMainWindowModel.Instance.AppointmentsView = newApp;
+                    DoctorMainWindowModel.Instance.NavigateToAppointmentsCommand.Execute(null);
                 }
                 showChangePanel = value;
                 OnPropertyChanged("ShowChangePanel");
@@ -201,7 +201,7 @@ namespace Hospital_IS.DoctorViewModel
                         SendCanceledNotification(SelectedAppointment);
                         DoctorAppointmentController.Instance.RemoveAppointment(SelectedAppointment);
                         //mislim da nece trebati
-                        // DoctorMainWindow.Instance._ViewModel.DoctorAppointments.Remove(app);
+                        // DoctorMainWindowModel.Instance.DoctorAppointments.Remove(app);
                     }
                 }
                 else if(SelectedAppointment.AppointmentStart < DateTime.Now)
@@ -240,7 +240,7 @@ namespace Hospital_IS.DoctorViewModel
         {
             if (SelectedType != null && SelectedRoom != null && FromDate != null && ToDate != null && ShowChangePanel == false)
             {
-                List<DoctorAppointment> app = DoctorAppointmentController.Instance.GetAllByDoctor(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
+                List<DoctorAppointment> app = DoctorAppointmentController.Instance.GetAllByDoctor(DoctorMainWindowModel.Instance.Doctor.Id);
                 ICollectionView view = new CollectionViewSource { Source = app }.View;
                 view.Filter = null;
                 view.Filter = delegate (object item)
@@ -271,7 +271,7 @@ namespace Hospital_IS.DoctorViewModel
             }
             foreach (Room room in Rooms)
             {
-                if (room.RoomId.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.PrimaryRoom))
+                if (room.RoomId.Equals(DoctorMainWindowModel.Instance.Doctor.PrimaryRoom))
                 {
                     this.SelectedRoom = room;
                 }

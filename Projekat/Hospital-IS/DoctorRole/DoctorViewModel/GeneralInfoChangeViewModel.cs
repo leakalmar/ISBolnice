@@ -1,6 +1,7 @@
 ﻿using Hospital_IS.Controllers;
 using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorView;
+using Hospital_IS.DoctorViewModel;
 using Hospital_IS.DTOs.SecretaryDTOs;
 
 namespace Hospital_IS.DoctorRole.DoctorViewModel
@@ -65,12 +66,12 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             if (patient.IsValid)
             {
                 SecretaryManagementController.Instance.UpdatePatient(Patient);
-                DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.ChangeCommand.Execute("1");
+                PatientChartViewModel.Instance.ChangeCommand.Execute("1");
             }
         }
         private void Execute_CancelCommand(object obj)
         {
-            DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.ChangeCommand.Execute("1");
+            PatientChartViewModel.Instance.ChangeCommand.Execute("1");
         }
 
 
@@ -86,7 +87,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             this.Focused = true;
             this.SaveCommand = new RelayCommand(Execute_SaveCommand, CanExecute_NavigateCommand);
             this.CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecute_NavigateCommand);
-            Patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
+            Patient = PatientChartViewModel.Instance.Patient;
         }
         #endregion
     }

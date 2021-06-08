@@ -48,7 +48,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Actions
         private void Execute_NewTestCommand(object obj)
         {
-            DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.InsideNavigationService.Navigate(new TestNew());
+            PatientChartViewModel.Instance.InsideNavigationService.Navigate(new TestNew());
         }
 
         private bool CanExecute_Command(object obj)
@@ -61,7 +61,7 @@ namespace Hospital_IS.DoctorViewModel
         public TestsViewModel()
         {
             this.NewTestCommand = new RelayCommand(Execute_NewTestCommand, CanExecute_Command);
-            this.Tests = new ObservableCollection<Test>(ChartController.Instance.GetTestsByPatient(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient));
+            this.Tests = new ObservableCollection<Test>(ChartController.Instance.GetTestsByPatient(PatientChartViewModel.Instance.Patient));
         }
         #endregion
     }

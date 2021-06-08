@@ -49,7 +49,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Actions
         private void Execute_NewTherapyCommand(object obj)
         {
-            DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.InsideNavigationService.Navigate(new TherapyNew());
+            PatientChartViewModel.Instance.InsideNavigationService.Navigate(new TherapyNew());
         }
 
         private bool CanExecute_NavigateCommand(object obj)
@@ -62,7 +62,7 @@ namespace Hospital_IS.DoctorViewModel
         public TherapyViewModel()
         {
             this.NewTherapyCommand = new RelayCommand(Execute_NewTherapyCommand, CanExecute_NavigateCommand);
-            this.Therapies = new ObservableCollection<Therapy>(ChartController.Instance.GetTherapiesByPatient(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient));
+            this.Therapies = new ObservableCollection<Therapy>(ChartController.Instance.GetTherapiesByPatient(PatientChartViewModel.Instance.Patient));
         }
         #endregion
     }

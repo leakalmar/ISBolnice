@@ -1,6 +1,7 @@
 ﻿using Controllers;
 using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorView;
+using Hospital_IS.DoctorViewModel;
 using Model;
 using System;
 
@@ -72,13 +73,13 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         private void Execute_SaveCommand(object obj)
         {
             Test newTest = new Test(TestName, DateTime.Now, TestResults);
-            ChartController.Instance.AddTest(newTest, DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient);
-            DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.ChangeCommand.Execute("5");
+            ChartController.Instance.AddTest(newTest, PatientChartViewModel.Instance.Patient);
+            PatientChartViewModel.Instance.ChangeCommand.Execute("5");
         }
 
         private void Execute_CancelCommand(object obj)
         {
-            DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.ChangeCommand.Execute("5");
+            PatientChartViewModel.Instance.ChangeCommand.Execute("5");
         }
 
         private bool CanExecute_Command(object obj)

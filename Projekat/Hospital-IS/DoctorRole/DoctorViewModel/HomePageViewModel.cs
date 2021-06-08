@@ -94,7 +94,7 @@ namespace Hospital_IS.DoctorViewModel
                 AppDetail appDetail = new AppDetail();
                 appDetail._ViewModel.SelectedAppointment = SelectedAppointment;
                 appDetail._ViewModel.AppointmentsView = AppointmentsView;
-                DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(appDetail);
+                DoctorMainWindowModel.Instance.NavigationService.Navigate(appDetail);
             }
         }
 
@@ -116,7 +116,7 @@ namespace Hospital_IS.DoctorViewModel
             this.Focused = true;
             this.NavigateToDetailsCommand = new RelayCommand(Execute_NavigateToDetailsCommand, CanExecute_NavigateCommand);
             this.SelectionChangedCommand = new RelayCommand(Execute_SelectionChangedCommand, CanExecute_NavigateCommand);
-            List<DoctorAppointmentDTO> appointmentDTOs = DoctorAppointmentManagementController.Instance.GetAppointmentByDoctorId(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
+            List<DoctorAppointmentDTO> appointmentDTOs = DoctorAppointmentManagementController.Instance.GetAppointmentByDoctorId(DoctorMainWindowModel.Instance.Doctor.Id);
             ObservableCollection<AppointmentRowDTO> doctorAppointments = new DoctorAppointmentConverter().ConvertNewAppointmentsToDTO(appointmentDTOs);
 
             appointmentsView = new CollectionViewSource { Source = doctorAppointments }.View;

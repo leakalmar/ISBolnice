@@ -5,33 +5,11 @@ namespace Hospital_IS.DoctorRole.DoctorView
 {
     public partial class PatientChart : UserControl
     {
-        private PatientChartViewModel viewModel;
-        private static PatientChart instance;
-
-        public static PatientChart Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new PatientChart();
-                }
-                return instance;
-            }
-        }
-
-        public PatientChartViewModel _ViewModel
-        {
-            get { return viewModel; }
-            set { viewModel = value; }
-        }
-        public PatientChart()
+        public PatientChart(PatientChartViewModel patientChartViewModel)
         {
             InitializeComponent();
-            PatientChartViewModel vm = new PatientChartViewModel();
-            vm.InsideNavigationService = this.patientInfo.NavigationService;
-            this._ViewModel = vm;
-            this.DataContext = vm;
+            patientChartViewModel.InsideNavigationService = this.patientInfo.NavigationService;
+            this.DataContext = patientChartViewModel;
         }
 
     }

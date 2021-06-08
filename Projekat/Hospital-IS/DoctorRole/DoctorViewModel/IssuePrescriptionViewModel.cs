@@ -2,6 +2,7 @@
 using Hospital_IS.Controllers;
 using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorView;
+using Hospital_IS.DoctorViewModel;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -48,11 +49,12 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         #region Actions
         private void Execute_OpenChartCommand(object obj)
         {
-            PatientChart view = new PatientChart();
-            view._ViewModel.Patient = SecretaryManagementController.Instance.GetPatientByID(1);
-            view._ViewModel.PrescriptionReview = true;
-            DoctorMainWindow.Instance._ViewModel.PatientChartView = view;
-            DoctorMainWindow.Instance._ViewModel.NavigateToChartCommand.Execute(obj);
+            //zakucana vrendnost
+            //PatientChartViewModel viewModel = new PatientChartViewModel();
+            PatientChartViewModel.Instance.Patient = SecretaryManagementController.Instance.GetPatientByID(1);
+            PatientChartViewModel.Instance.PrescriptionReview = true;
+            // DoctorMainWindowModel.Instance.NavigateToChartCommand.Execute(obj);
+            DoctorNavigationController.Instance.NavigateToChartCommand();
         }
 
         private bool CanExecute_Command(object obj)
@@ -66,7 +68,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         public IssuePrescriptionViewModel(bool show)
         {
             this.OpenChartCommand = new RelayCommand(Execute_OpenChartCommand, CanExecute_Command);
-            this.Notifications = NotificationController.Instance.GetPrescriptionNotification(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
+            this.Notifications = NotificationController.Instance.GetPrescriptionNotification(DoctorMainWindowModel.Instance.Doctor.Id);
             if (show)
             {
                 this.Notifications = new List<Notification>();

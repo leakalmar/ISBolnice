@@ -152,7 +152,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_BackCommand(object obj)
         {
-            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(new Medicines());
+            DoctorMainWindowModel.Instance.NavigationService.Navigate(new Medicines());
         }
 
         private bool CanExecute_Command(object obj)

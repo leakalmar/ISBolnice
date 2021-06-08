@@ -1,6 +1,7 @@
 ﻿using DTOs;
 using Hospital_IS.Controllers;
 using Hospital_IS.DoctorRole.DoctorView;
+using Hospital_IS.DoctorViewModel;
 using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
@@ -13,8 +14,8 @@ namespace Hospital_IS.DoctorRole.DoctorConverters
     {
         private AppointmentRowDTO ConvertExistingAppointmentToDTO(DoctorAppointment appointemnt)
         {
-            PatientDTO patientDTO = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
-            DoctorDTO doctorDTO = DoctorMainWindow.Instance._ViewModel.Doctor;
+            PatientDTO patientDTO = PatientChartViewModel.Instance.Patient;
+            DoctorDTO doctorDTO = DoctorMainWindowModel.Instance.Doctor;
             DoctorAppointmentDTO doctorAppointmentDTO = new DoctorAppointmentDTO(appointemnt.Reserved, appointemnt.AppointmentCause, appointemnt.AppointmentStart, appointemnt.AppointmentEnd,
                     appointemnt.Type, appointemnt.Room, appointemnt.Id, appointemnt.IsUrgent, patientDTO, doctorDTO, appointemnt.IsFinished);
             AppointmentRowDTO appointmentRowDTO = new AppointmentRowDTO(doctorAppointmentDTO);

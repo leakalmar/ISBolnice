@@ -3,6 +3,7 @@ using DTOs;
 using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorConverters;
 using Hospital_IS.DoctorRole.DoctorView;
+using Hospital_IS.DoctorViewModel;
 using Hospital_IS.DTOs;
 using Model;
 using System;
@@ -108,14 +109,14 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
                 {
                     newTherapy = new Therapy(MedicineController.Instance.ConvertDTOToMedicine(med), Therapy.Pills, Therapy.Takings, DateTime.Now, (DateTime)new DateConverter().ConvertBack(Therapy.TherapyEnd, null, null, CultureInfo.CurrentCulture));
                 }
-                ChartController.Instance.AddTherapy(newTherapy, DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient);
-                DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.ChangeCommand.Execute("4");
+                ChartController.Instance.AddTherapy(newTherapy, PatientChartViewModel.Instance.Patient);
+                PatientChartViewModel.Instance.ChangeCommand.Execute("4");
             }
         }
 
         private void Execute_CancelCommand(object obj)
         {
-            DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.ChangeCommand.Execute("4");
+            PatientChartViewModel.Instance.ChangeCommand.Execute("4");
         }
 
         private bool CanExecute_Command(object obj)

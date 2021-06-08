@@ -1,5 +1,6 @@
 ﻿using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorView;
+using Hospital_IS.DoctorViewModel;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using System;
@@ -37,7 +38,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         #region Actions
         private void Execute_BackCommand(object obj)
         {
-            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(new DoctorNotifications());
+            DoctorMainWindowModel.Instance.NavigationService.Navigate(new DoctorNotifications());
         }
 
 

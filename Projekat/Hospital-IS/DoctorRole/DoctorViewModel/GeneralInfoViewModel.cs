@@ -50,7 +50,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_ChangeInfoCommand(object obj)
         {
 
-            DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.InsideNavigationService.Navigate(new GeneralInfoChange());
+            PatientChartViewModel.Instance.InsideNavigationService.Navigate(new GeneralInfoChange());
         }
 
         private bool CanExecute_NavigateCommand(object obj)

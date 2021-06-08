@@ -1,6 +1,7 @@
 ﻿using Hospital_IS.Controllers;
 using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorView;
+using Hospital_IS.DoctorViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,7 +32,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         private void Execute_SaveCommand(object obj)
         {
             FeedbackMessageController.Instance.AddFeedbackMessage(new DTOs.FeedbackMessageDTO(Text, DateTime.Now));
-            DoctorMainWindow.Instance._ViewModel.NavigateToSettingsCommand.Execute(null);
+            DoctorMainWindowModel.Instance.NavigateToSettingsCommand.Execute(null);
         }
 
         private bool CanExecute_Command(object obj)

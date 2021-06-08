@@ -103,10 +103,10 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_SearchMedicineCommad(object obj)
         {
             SearchMedicine view = new SearchMedicine();
-            view._ViewModel.Patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
+            view._ViewModel.Patient = PatientChartViewModel.Instance.Patient;
             view._ViewModel.Prescriptions = Prescriptions;
-            DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.SearchMedicineView._ViewModel.Prescriptions = Prescriptions;
-            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(view);
+            PatientChartViewModel.Instance.SearchMedicineView._ViewModel.Prescriptions = Prescriptions;
+            DoctorMainWindowModel.Instance.NavigationService.Navigate(view);
         }
 
         #endregion
@@ -115,7 +115,7 @@ namespace Hospital_IS.DoctorViewModel
         public ReportViewModel()
         {
             Prescriptions = new ObservableCollection<PrescriptionDTO>();
-            this.NavigateBackCommand = DoctorMainWindow.Instance._ViewModel.NavigateBackCommand;
+            this.NavigateBackCommand = DoctorMainWindowModel.Instance.NavigateBackCommand;
             this.DeletePrescriptionCommand = new RelayCommand(Execute_DeletePrescriptionCommand, CanExecute_Command);
             this.SearchMedicineCommad = new RelayCommand(Execute_SearchMedicineCommad, CanExecute_Command);
         }

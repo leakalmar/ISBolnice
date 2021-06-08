@@ -1,5 +1,6 @@
 ﻿using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorView;
+using Hospital_IS.DoctorViewModel;
 using Hospital_IS.DTOs;
 
 namespace Hospital_IS.DoctorRole.DoctorViewModel
@@ -110,7 +111,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         }
         private void Execute_FeedBackCommand(object obj)
         {
-            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(new FeedbackView());
+            DoctorMainWindowModel.Instance.NavigationService.Navigate(new FeedbackView());
         }
         private bool CanExecute_Command(object obj)
         {
@@ -125,7 +126,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             this.NewPassword = "";
             this.OldPassword = "";
             this.NewAgainPassword = "";
-            this.Doctor = DoctorMainWindow.Instance._ViewModel.Doctor;
+            this.Doctor = DoctorMainWindowModel.Instance.Doctor;
             this.CancelPasswordCommand = new RelayCommand(Execute_CancelPasswordCommand, CanExecute_Command);
             this.ChangePasswordCommand = new RelayCommand(Execute_ChangePasswordCommand, CanExecute_Command);
             this.SavePasswordCommand = new RelayCommand(Execute_SavePasswordCommand, CanExecute_Command);

@@ -2,7 +2,9 @@
 using DTOs;
 using Enums;
 using Hospital_IS.Controllers;
+using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorViewModel;
+using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using System;
@@ -20,35 +22,12 @@ namespace Hospital_IS.DoctorRole.DoctorView
 {
     public partial class DoctorMainWindow : Window
     {
-        private static DoctorMainWindow instance = null;
-        private DoctorMainWindowModel viewModel;
         private DispatcherTimer dispatcherTimer = new DispatcherTimer
         {
             Interval = TimeSpan.FromSeconds(1)
         };
 
-        public static DoctorMainWindow Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new DoctorMainWindow();
-                }
-                return instance;
-            }
-        }
-
-        public DoctorMainWindowModel _ViewModel
-        {
-            get { return viewModel; }
-            set
-            {
-                viewModel = value;
-            }
-        }
-
-        public DoctorMainWindow()
+        public DoctorMainWindow(DoctorDTO doctor)
         {
             InitializeComponent();
             CommandBinding removeBinding = null;
@@ -65,23 +44,25 @@ namespace Hospital_IS.DoctorRole.DoctorView
                 }
 
             }
-            this.viewModel = new DoctorMainWindowModel(this.Home.NavigationService);
-            this.DataContext = this.viewModel;
+            DoctorNavigationController.Instance.NavigationService = this.Home.NavigationService;
+            DoctorMainWindowModel.Instance.SetDoctor(doctor);
+            this.DataContext = DoctorMainWindowModel.Instance;
         }
 
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (dispatcherTimer.IsEnabled)
             {
-                _ViewModel.DemoRunning = false;
+                DoctorMainWindowModel.Instance.DemoRunning = false;
                 this.Home.BorderBrush = Brushes.Transparent;
                 this.demoLabel.Visibility = Visibility.Collapsed;
                 dispatcherTimer.Stop();
-                _ViewModel.PatientChartView._ViewModel.Started = false;
-                _ViewModel.NavigateToHomePageCommand.Execute(null);
+                PatientChartViewModel.Instance.Started = false;
+                DoctorMainWindowModel.Instance.NavigateToHomePageCommand.Execute(null);
                 PatientDTO patient = new PatientDTO();
                 patient.Id = -1;
                 SecretaryManagementController.Instance.DeletePatient(patient);
+                PatientChartViewModel.Instance.Started = false;
 
 
                 new ExitMess("Demo uspešno prekinut.", "info").ShowDialog();
@@ -94,7 +75,7 @@ namespace Hospital_IS.DoctorRole.DoctorView
                 bool dialog = (bool)new ExitMess("Da li želite da pokrenete demo zakazivanja pregleda?", "yesNo").ShowDialog();
                 if (dialog)
                 {
-                    _ViewModel.DemoRunning = true;
+                    DoctorMainWindowModel.Instance.DemoRunning = true;
                     this.demoLabel.Visibility = Visibility.Visible;
                     this.Home.BorderBrush = new SolidColorBrush(Color.FromArgb(0x7F, 0x5B, 0x31, 0x7E));
                     Demo();
@@ -113,8 +94,8 @@ namespace Hospital_IS.DoctorRole.DoctorView
 
             SecretaryManagementController.Instance.AddPatient(patient1);
 
-            AppointmentRowDTO appointmentRowDTO1 = new AppointmentRowDTO(new DoctorAppointmentDTO(true, "Pregled nakon operacije.", DateTime.Now.AddHours(1), DateTime.Now.AddHours(1).AddMinutes(30), AppointmentType.CheckUp, _ViewModel.Doctor.PrimaryRoom, -1, false, patient1, _ViewModel.Doctor, false));
-            AppointmentRowDTO appointmentRowDTO2 = new AppointmentRowDTO(new DoctorAppointmentDTO(true, "Bolovi u stomaku", DateTime.Now.AddMinutes(30), DateTime.Now.AddHours(1), AppointmentType.CheckUp, _ViewModel.Doctor.PrimaryRoom, -1, false, patient2, _ViewModel.Doctor, false));
+            AppointmentRowDTO appointmentRowDTO1 = new AppointmentRowDTO(new DoctorAppointmentDTO(true, "Pregled nakon operacije.", DateTime.Now.AddHours(1), DateTime.Now.AddHours(1).AddMinutes(30), AppointmentType.CheckUp, DoctorMainWindowModel.Instance.Doctor.PrimaryRoom, -1, false, patient1, DoctorMainWindowModel.Instance.Doctor, false));
+            AppointmentRowDTO appointmentRowDTO2 = new AppointmentRowDTO(new DoctorAppointmentDTO(true, "Bolovi u stomaku", DateTime.Now.AddMinutes(30), DateTime.Now.AddHours(1), AppointmentType.CheckUp, DoctorMainWindowModel.Instance.Doctor.PrimaryRoom, -1, false, patient2, DoctorMainWindowModel.Instance.Doctor, false));
 
             list.Add(appointmentRowDTO1);
             list.Add(appointmentRowDTO2);
@@ -126,11 +107,10 @@ namespace Hospital_IS.DoctorRole.DoctorView
             AppDetail appDetail = new AppDetail();
             appDetail._ViewModel.AppointmentsView = collectionView;
 
-            PatientChart patientChart = new PatientChart();
             list[0].Appointment.IsFinished = false;
             list[0].IsStarted = true;
-            patientChart._ViewModel.SelectedAppointment = list[0];
-            _ViewModel.PatientChartView = patientChart;
+            PatientChartViewModel.Instance.SelectedAppointment = list[0];
+            PatientChartViewModel.Instance.Started = true;
 
             ScheduledApp scheduledApp = new ScheduledApp();
             scheduledApp._ViewModel.Started = true;
@@ -143,8 +123,8 @@ namespace Hospital_IS.DoctorRole.DoctorView
 
             List<AppointmentRowDTO> newAppointments = new List<AppointmentRowDTO>();
 
-            AppointmentRowDTO appointmentRowDTO3 = new AppointmentRowDTO(new DoctorAppointmentDTO(false, "", DateTime.Now.Date.AddHours(19).AddMinutes(30), DateTime.Now.Date.AddHours(20), AppointmentType.CheckUp, _ViewModel.Doctor.PrimaryRoom, -1, false, patient1, _ViewModel.Doctor, false));
-            AppointmentRowDTO appointmentRowDTO4 = new AppointmentRowDTO(new DoctorAppointmentDTO(false, "", DateTime.Now.Date.AddHours(19), DateTime.Now.Date.AddHours(19).AddMinutes(30), AppointmentType.CheckUp, _ViewModel.Doctor.PrimaryRoom, -1, false, patient1, _ViewModel.Doctor, false));
+            AppointmentRowDTO appointmentRowDTO3 = new AppointmentRowDTO(new DoctorAppointmentDTO(false, "", DateTime.Now.Date.AddHours(19).AddMinutes(30), DateTime.Now.Date.AddHours(20), AppointmentType.CheckUp, DoctorMainWindowModel.Instance.Doctor.PrimaryRoom, -1, false, patient1, DoctorMainWindowModel.Instance.Doctor, false));
+            AppointmentRowDTO appointmentRowDTO4 = new AppointmentRowDTO(new DoctorAppointmentDTO(false, "", DateTime.Now.Date.AddHours(19), DateTime.Now.Date.AddHours(19).AddMinutes(30), AppointmentType.CheckUp, DoctorMainWindowModel.Instance.Doctor.PrimaryRoom, -1, false, patient1, DoctorMainWindowModel.Instance.Doctor, false));
 
             appointmentRowDTO3.IsEnabled = true;
             appointmentRowDTO4.IsEnabled = true;
@@ -171,7 +151,7 @@ namespace Hospital_IS.DoctorRole.DoctorView
                         Keyboard.DefaultRestoreFocusMode = RestoreFocusMode.Auto;
                         Keyboard.Focus(homePage.docotrAppointments);
                         homePage.docotrAppointments.Focus();
-                        _ViewModel.NavigationService.Navigate(homePage);
+                        DoctorMainWindowModel.Instance.NavigationService.Navigate(homePage);
                         homePage._ViewModel.SelectedAppointment = null;
                         break;
                     case 1:
@@ -204,23 +184,23 @@ namespace Hospital_IS.DoctorRole.DoctorView
                             dataGridRow3.Foreground = Brushes.White;
                         }
                         appDetail._ViewModel.SelectedAppointment = list[0];
-                        _ViewModel.NavigationService.Navigate(appDetail);
+                        DoctorMainWindowModel.Instance.NavigationService.Navigate(appDetail);
                         break;
                     case 6:
                         appDetail.start.Focus();
                         break;
                     case 7:
-                        _ViewModel.NavigationService.Navigate(patientChart);
+                        DoctorMainWindowModel.Instance.NavigationService.Navigate(PatientChartViewModel.Instance);
                         break;
                     case 8:
-                        patientChart._ViewModel.ChangeCommand.Execute("3");
-                        patientChart._ViewModel.InsideNavigationService.Navigate(scheduledApp);
+                        PatientChartViewModel.Instance.ChangeCommand.Execute("3");
+                        PatientChartViewModel.Instance.InsideNavigationService.Navigate(scheduledApp);
                         break;
                     case 9:
                         scheduledApp.schedule.Focus();
                         break;
                     case 10:
-                        _ViewModel.NavigationService.Navigate(newApp);
+                        DoctorMainWindowModel.Instance.NavigationService.Navigate(newApp);
                         break;
                     case 11:
                         newApp.fromDate.IsDropDownOpen = true;
@@ -242,7 +222,7 @@ namespace Hospital_IS.DoctorRole.DoctorView
                     case 15:
                         foreach (Specialty s in newApp.specialty.Items)
                         {
-                            if (s.Name.Equals(_ViewModel.Doctor.Specialty))
+                            if (s.Name.Equals(DoctorMainWindowModel.Instance.Doctor.Specialty))
                             {
                                 newApp.specialty.SelectedItem = s;
                             }
@@ -257,7 +237,7 @@ namespace Hospital_IS.DoctorRole.DoctorView
                     case 17:
                         foreach (Doctor d in newApp.doctors.Items)
                         {
-                            if (d.Id.Equals(_ViewModel.Doctor.Id))
+                            if (d.Id.Equals(DoctorMainWindowModel.Instance.Doctor.Id))
                             {
                                 newApp.doctors.SelectedItem = d;
                             }
@@ -272,7 +252,7 @@ namespace Hospital_IS.DoctorRole.DoctorView
                     case 19:
                         foreach (Room r in newApp.rooms.Items)
                         {
-                            if (r.RoomId.Equals(_ViewModel.Doctor.PrimaryRoom))
+                            if (r.RoomId.Equals(DoctorMainWindowModel.Instance.Doctor.PrimaryRoom))
                             {
                                 newApp.rooms.SelectedItem = r;
                             }
@@ -303,7 +283,7 @@ namespace Hospital_IS.DoctorRole.DoctorView
                         newApp._ViewModel.SelectedAppointment = (AppointmentRowDTO)newCollectionEnumerator.Current;
                         break;
                     case 25:
-                        _ViewModel.NavigationService.Navigate(issueInstruction);
+                        DoctorMainWindowModel.Instance.NavigationService.Navigate(issueInstruction);
                         break;
                     case 26:
                         issueInstruction.cause.Text = "Drugi pregled nakon operacije.";
@@ -313,17 +293,19 @@ namespace Hospital_IS.DoctorRole.DoctorView
                         break;
                     case 28:
                         scheduledApp._ViewModel.ScheduledAppointments.Add(appointmentRowDTO3.Appointment);
-                        _ViewModel.NavigationService.Navigate(patientChart);
-                        patientChart._ViewModel.InsideNavigationService.Navigate(scheduledApp);
+                        // DoctorMainWindowModel.Instance.NavigationService.Navigate(patientChart);
+                        DoctorNavigationController.Instance.NavigateToChartCommand();
+                        PatientChartViewModel.Instance.InsideNavigationService.Navigate(scheduledApp);
                         break;
                     case 29:
-                        _ViewModel.DemoRunning = false;
+                        DoctorMainWindowModel.Instance.DemoRunning = false;
                         this.Home.BorderBrush = Brushes.Transparent;
                         this.demoLabel.Visibility = Visibility.Collapsed;
                         this.Home.BorderThickness = new Thickness(0);
-                        _ViewModel.PatientChartView._ViewModel.Started = false;
-                        _ViewModel.NavigateToHomePageCommand.Execute(null);
+                        PatientChartViewModel.Instance.Started = false;
+                        DoctorMainWindowModel.Instance.NavigateToHomePageCommand.Execute(null);
                         SecretaryManagementController.Instance.DeletePatient(patient1);
+                        PatientChartViewModel.Instance.Started = false;
                         dispatcherTimer.Stop();
                         this.Focus();
                         new ExitMess("Demo zakazivanja pregleda je završen.", "info").ShowDialog();

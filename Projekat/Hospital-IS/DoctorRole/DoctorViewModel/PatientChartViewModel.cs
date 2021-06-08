@@ -22,9 +22,23 @@ namespace Hospital_IS.DoctorViewModel
         private bool reportFocused;
         private bool generalFocused;
         private bool backButton;
-        private bool started;
+        private bool started = false;
         private bool prescriptionReview;
         private int patientYears;
+
+        private static PatientChartViewModel instance;
+
+        public static PatientChartViewModel Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new PatientChartViewModel();
+                }
+                return instance;
+            }
+        }
 
         public bool ReportFocused
         {
@@ -298,14 +312,14 @@ namespace Hospital_IS.DoctorViewModel
                 ReportDTO reportDTO = new ReportDTO(selectedAppointment.AppointmentStart, selectedAppointment.Doctor.Name, selectedAppointment.Doctor.Surname, selectedAppointment.Type, selectedAppointment.AppointmentCause, ReportView.reportDetail.Text, ReportView._ViewModel.Prescriptions.Count, selectedAppointment.Patient.Id);
                 ChartController.Instance.AddReport(reportDTO);
                 ChartController.Instance.AddPrescriptions(new List<PrescriptionDTO>(ReportView._ViewModel.Prescriptions), SelectedAppointment.Appointment.Patient);
-                DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(new AppDetail());
+                DoctorMainWindowModel.Instance.NavigationService.Navigate(new AppDetail());
                 this.Started = false;
             }
         }
 
         private void Execute_PrescriptionReviewCommand(object obj)
         {
-            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(new IssuePrescription(false));
+            DoctorMainWindowModel.Instance.NavigationService.Navigate(new IssuePrescription(false));
         }
 
         private void Execute_AddCommand(object obj)
@@ -314,7 +328,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 case "Report":
                     SearchMedicineView._ViewModel.Prescriptions = ReportView._ViewModel.Prescriptions;
-                    DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(SearchMedicineView);
+                    DoctorMainWindowModel.Instance.NavigationService.Navigate(SearchMedicineView);
                     break;
                 default:
                     break;
@@ -333,7 +347,7 @@ namespace Hospital_IS.DoctorViewModel
                 case "Therapies":
                 case "Tests":
                 case "Hospitalizations":
-                    DoctorMainWindow.Instance._ViewModel.NavigateBackCommand.Execute(obj);
+                    DoctorMainWindowModel.Instance.NavigateBackCommand.Execute(obj);
                     break;
                 default:
                     this.InsideNavigationService.GoBack();

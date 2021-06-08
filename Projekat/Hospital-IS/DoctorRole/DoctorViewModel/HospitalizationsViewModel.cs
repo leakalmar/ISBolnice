@@ -231,7 +231,7 @@ namespace Hospital_IS.DoctorViewModel
             SelectedRoom = Rooms[0];
             AddmissionDate = DateTime.Now;
             ReleaseDate = DateTime.Now.AddDays(3);
-            Doctor = DoctorMainWindow.Instance._ViewModel.Doctor.Name + " " + ShortSurname(DoctorMainWindow.Instance._ViewModel.Doctor);
+            Doctor = DoctorMainWindowModel.Instance.Doctor.Name + " " + ShortSurname(DoctorMainWindowModel.Instance.Doctor);
         }
 
         private void Execute_EndCreatingHospitalizationCommand(object obj)
@@ -311,7 +311,7 @@ namespace Hospital_IS.DoctorViewModel
             this.EndCreatingHospitalizationCommand = new RelayCommand(Execute_EndCreatingHospitalizationCommand, CanExecute_Command);
             this.ReleasePatientCommand = new RelayCommand(Execute_ReleasePatientCommand, CanExecute_Command);
             this.Rooms = RoomController.Instance.GetRoomByType(RoomType.RecoveryRoom);
-            this.Patient = PatientController.Instance.GetPatientByID(DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient.Id);
+            this.Patient = PatientController.Instance.GetPatientByID(PatientChartViewModel.Instance.Patient.Id);
             this.NewHospitalization = false;
         }
         #endregion

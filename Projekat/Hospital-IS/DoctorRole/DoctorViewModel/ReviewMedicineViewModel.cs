@@ -70,7 +70,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_ApproveCommand(object obj)
         {
             MedicineNotificationController.Instance.ApproveMedicine(MedicineNotification);
-            DoctorMainWindow.Instance._ViewModel.NavigateToApproveMedicineCommand.Execute(obj);
+            DoctorMainWindowModel.Instance.NavigateToApproveMedicineCommand.Execute(obj);
         }
 
         private void Execute_DisapproveCommand(object obj)
@@ -81,7 +81,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_SendNoteCommand(object obj)
         {
             MedicineNotificationController.Instance.DisapproveMedicine(MedicineNotification, Note);
-            DoctorMainWindow.Instance._ViewModel.NavigateToApproveMedicineCommand.Execute(obj);
+            DoctorMainWindowModel.Instance.NavigateToApproveMedicineCommand.Execute(obj);
         }
 
         private bool CanExecute_Command(object obj)

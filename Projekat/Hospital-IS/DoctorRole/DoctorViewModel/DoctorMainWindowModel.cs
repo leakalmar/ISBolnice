@@ -12,12 +12,24 @@ namespace Hospital_IS.DoctorViewModel
     {
         #region Feilds
         //slika
+        private static DoctorMainWindowModel instance = null;
         private NavigationService navigationService;
-        private PatientChart patientChartView;
         private Appointments appointmentsView;
         private DoctorDTO doctor;
         private bool focused;
         public bool DemoRunning { get; set; }
+
+        public static DoctorMainWindowModel Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new DoctorMainWindowModel();
+                }
+                return instance;
+            }
+        }
 
         public bool Focused
         {
@@ -44,16 +56,6 @@ namespace Hospital_IS.DoctorViewModel
             {
                 doctor = value;
                 OnPropertyChanged("Doctor");
-            }
-        }
-
-        public PatientChart PatientChartView
-        {
-            get { return patientChartView; }
-            set
-            {
-                patientChartView = value;
-                OnPropertyChanged("PatientChartView");
             }
         }
 
@@ -210,22 +212,13 @@ namespace Hospital_IS.DoctorViewModel
         #region Actions
         private void Execute_NavigateToHomePageCommand(object obj)
         {
-            if (PatientChartView != null)
+            if (PatientChartViewModel.Instance.Started)
             {
-                if (PatientChartView._ViewModel.Started)
-                {
-                    this.NavigationService.Navigate(PatientChartView);
-                }
-                else
-                {
-                    this.NavigationService.Navigate(
-                        new Uri("DoctorRole/DoctorView/HomePage.xaml", UriKind.Relative));
-                }
+                DoctorNavigationController.Instance.NavigateToChartCommand();
             }
             else
             {
-                this.NavigationService.Navigate(
-                    new Uri("DoctorRole/DoctorView/HomePage.xaml", UriKind.Relative));
+                DoctorNavigationController.Instance.NavigateToHomeCommand();
             }
         }
 
@@ -255,7 +248,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_NavigateToChartCommand(object obj)
         {
-            this.NavigationService.Navigate(PatientChartView);
+            DoctorNavigationController.Instance.NavigateToChartCommand();
         }
 
         private void Execute_NavigateToMedicinesCommand(object obj)
@@ -309,10 +302,10 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_NavigateBackCommand(object obj)
         {
-            if (NavigationService.Content.ToString().Contains("PatientChart") && PatientChartView._ViewModel.Started == true)
+            if (NavigationService.Content.ToString().Contains("PatientChart") && PatientChartViewModel.Instance.Started == true)
             {
 
-                PatientChartView._ViewModel.EndAppointmentCommand.Execute(null);
+                PatientChartViewModel.Instance.EndAppointmentCommand.Execute(null);
 
             }
             else
@@ -333,9 +326,9 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_NavigateToLogInCommand(object obj)
         {
-            if (PatientChartView != null)
-            {
-                if (PatientChartView._ViewModel.Started)
+            //if (PatientChartViewModel != null)
+            //{
+                if (PatientChartViewModel.Instance.Started)
                 {
                     new ExitMess("Termin nije završen! Molimo vas završite termin pre odjave.", "info").ShowDialog();
                     return;
@@ -348,34 +341,34 @@ namespace Hospital_IS.DoctorViewModel
                         //DoctorController.Instance..UpdateDoctor(Doctor);
                         MainWindow login = new MainWindow();
                         login.Show();
-                        DoctorMainWindow.Instance.Hide();
+                        //DoctorMainWindow.Instance.Hide();
 
                     }
                 }
-            }
-            else
-            {
-                bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da se odjavite?", "yesNo").ShowDialog();
-                if (dialog)
-                {
+            //}
+           // else
+           // {
+              //  bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da se odjavite?", "yesNo").ShowDialog();
+              //  if (dialog)
+              //  {
                     //DoctorController.Instance..UpdateDoctor(Doctor);
-                    MainWindow login = new MainWindow();
-                    login.Show();
-                    DoctorMainWindow.Instance.Hide();
+                 //   MainWindow login = new MainWindow();
+                //    login.Show();
+                    //DoctorMainWindow.Instance.Hide();
 
-                }
-            }
+               // }
+          //  }
 
         }
 
         private void Execute_MinimizeCommand(object obj)
         {
-            WindowControls.DoMinimize(DoctorMainWindow.Instance);
+            //WindowControls.DoMinimize(DoctorMainWindow.Instance);
         }
 
         private void Execute_MaximizeCommand(object obj)
         {
-            WindowControls.DoMaximize(DoctorMainWindow.Instance, DoctorMainWindow.Instance.full);
+            // WindowControls.DoMaximize(DoctorMainWindow.Instance, DoctorMainWindow.Instance.full);
         }
 
         private void Execute_OnLoadedCommand(object obj)
@@ -406,8 +399,9 @@ namespace Hospital_IS.DoctorViewModel
         #endregion
 
         #region Constructor
-        public DoctorMainWindowModel(NavigationService navigationService)
+        public DoctorMainWindowModel()
         {
+            this.NavigationService = DoctorNavigationController.Instance.NavigationService;
             this.Focused = true;
             this.NavigateToHomePageCommand = new RelayCommand(Execute_NavigateToHomePageCommand, CanExecute_NavigateCommand);
             this.NavigateToAppointmentsCommand = new RelayCommand(Execute_NavigateToAppointmentsCommand, CanExecute_NavigateCommand);
@@ -429,7 +423,6 @@ namespace Hospital_IS.DoctorViewModel
             this.NavigateToEquipmentCommand = new RelayCommand(Execute_NavigateToEquipmentCommand, CanExecute_NavigateCommand);
             this.NavigateToSettingsCommand = new RelayCommand(Execute_NavigateToSettingsCommand, CanExecute_NavigateCommand);
             this.NavigateToEquipCommand = new RelayCommand(Execute_NavigateToEquipCommand, CanExecute_NavigateCommand);
-            this.navigationService = navigationService;
         }
         #endregion
     }

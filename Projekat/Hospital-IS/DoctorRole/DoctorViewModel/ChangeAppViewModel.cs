@@ -135,7 +135,7 @@ namespace Hospital_IS.DoctorViewModel
                 DoctorAppointment newDoctorAppointment = (DoctorAppointment)SelectedAppointment;
                 newDoctorAppointment.Reserved = true;
                 DoctorAppointmentController.Instance.UpdateAppointment(OldAppointment, newDoctorAppointment);
-                DoctorMainWindow.Instance._ViewModel.AppointmentsView._ViewModel.ShowChangePanel = false;
+                DoctorMainWindowModel.Instance.AppointmentsView._ViewModel.ShowChangePanel = false;
             }
             else
             {
@@ -146,7 +146,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_BackCommand(object obj)
         {
-            DoctorMainWindow.Instance._ViewModel.AppointmentsView._ViewModel.ShowChangePanel = false;
+            DoctorMainWindowModel.Instance.AppointmentsView._ViewModel.ShowChangePanel = false;
         }
 
         private bool CanExecute_Command(object obj)
@@ -161,7 +161,7 @@ namespace Hospital_IS.DoctorViewModel
         {
             if (SelectedDate != null && SelectedDoctor != null && SelectedRoom != null && OldAppointment != null)
             {
-                DoctorMainWindow.Instance._ViewModel.AppointmentsView._ViewModel.SelectedAppointment = OldAppointment;
+                DoctorMainWindowModel.Instance.AppointmentsView._ViewModel.SelectedAppointment = OldAppointment;
                 TimeSpan duration = OldAppointment.AppointmentEnd - OldAppointment.AppointmentStart;
                 List<DateTime> dates = new List<DateTime>();
                 dates.Add(SelectedDate);
@@ -173,10 +173,10 @@ namespace Hospital_IS.DoctorViewModel
         private void InitializeFilters()
         {
             SelectedDate = DateTime.Now;
-            this.Doctors = DoctorController.Instance.GetDoctorsBySpecilty(DoctorMainWindow.Instance._ViewModel.Doctor.Specialty);
+            this.Doctors = DoctorController.Instance.GetDoctorsBySpecilty(DoctorMainWindowModel.Instance.Doctor.Specialty);
             foreach (Doctor doctor in Doctors)
             {
-                if (doctor.Id.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.Id))
+                if (doctor.Id.Equals(DoctorMainWindowModel.Instance.Doctor.Id))
                 {
                     this.SelectedDoctor = doctor;
                 }
@@ -197,7 +197,7 @@ namespace Hospital_IS.DoctorViewModel
                 }
                 foreach (Room room in Rooms)
                 {
-                    if (room.RoomId.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.PrimaryRoom))
+                    if (room.RoomId.Equals(DoctorMainWindowModel.Instance.Doctor.PrimaryRoom))
                     {
                         this.SelectedRoom = room;
                     }

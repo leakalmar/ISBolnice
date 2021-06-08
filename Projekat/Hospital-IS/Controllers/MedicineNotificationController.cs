@@ -1,4 +1,5 @@
 ﻿using Hospital_IS.DoctorRole.DoctorView;
+using Hospital_IS.DoctorViewModel;
 using Model;
 using Service;
 using System;
@@ -51,7 +52,7 @@ namespace Controllers
             reviewdNotification.Note = text;
             reviewdNotification.Title = "Odbijen " + reviewdNotification.Medicine.Name;
             reviewdNotification.SenderId.Clear();
-            reviewdNotification.SenderId.Add(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
+            reviewdNotification.SenderId.Add(DoctorMainWindowModel.Instance.Doctor.Id);
             reviewdNotification.RecieverIds.Clear();
             reviewdNotification.RecieverIds.Add(6);
             reviewdNotification.DateSent = DateTime.Now;
@@ -65,7 +66,7 @@ namespace Controllers
 
         public void ApproveMedicine(MedicineNotification reviewdNotification)
         {
-            MedicineNotificationService.Instance.AddApprovalDeleteDoctor(reviewdNotification, DoctorMainWindow.Instance._ViewModel.Doctor.Id);
+            MedicineNotificationService.Instance.AddApprovalDeleteDoctor(reviewdNotification, DoctorMainWindowModel.Instance.Doctor.Id);
         }
 
         public List<MedicineNotification> GetAll()

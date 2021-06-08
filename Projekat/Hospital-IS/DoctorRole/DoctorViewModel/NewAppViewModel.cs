@@ -266,7 +266,7 @@ namespace Hospital_IS.DoctorViewModel
                 InstructionView._ViewModel.SelectedAppointment = SelectedAppointment;
                 InstructionView._ViewModel.SelectedEmergencyAppointment = null;
             }
-            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(InstructionView);
+            DoctorMainWindowModel.Instance.NavigationService.Navigate(InstructionView);
         }
 
         private void Execute_ChangeEmergencyCommand(object obj)
@@ -292,11 +292,11 @@ namespace Hospital_IS.DoctorViewModel
         }
         private void SetSelectedDoctor()
         {
-            if (SelectedSpecialty.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.Specialty))
+            if (SelectedSpecialty.Equals(DoctorMainWindowModel.Instance.Doctor.Specialty))
             {
                 foreach (Doctor doctor in Doctors)
                 {
-                    if (doctor.Id.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.Id))
+                    if (doctor.Id.Equals(DoctorMainWindowModel.Instance.Doctor.Id))
                     {
                         SelectedDoctor = doctor;
                     }
@@ -346,7 +346,7 @@ namespace Hospital_IS.DoctorViewModel
             if (SelectedType != null && SelectedSpecialty != null && SelectedRoom != null && SelectedDoctor != null)
             {
                 List<DateTime> dates = GenerateDates();
-                PatientDTO patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
+                PatientDTO patient = PatientChartViewModel.Instance.Patient;
 
                 if (Emergency)
                 {
@@ -412,7 +412,7 @@ namespace Hospital_IS.DoctorViewModel
             this.Specializations = SpecializationController.Instance.GetAll();
             foreach (Specialty specialty in Specializations)
             {
-                if (specialty.Name.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.Specialty))
+                if (specialty.Name.Equals(DoctorMainWindowModel.Instance.Doctor.Specialty))
                 {
                     this.SelectedSpecialty = specialty;
                 }
@@ -421,7 +421,7 @@ namespace Hospital_IS.DoctorViewModel
             this.Doctors = DoctorController.Instance.GetDoctorsBySpecilty(selectedSpecialty.Name);
             foreach (Doctor doctor in Doctors)
             {
-                if (doctor.Id.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.Id))
+                if (doctor.Id.Equals(DoctorMainWindowModel.Instance.Doctor.Id))
                 {
                     this.SelectedDoctor = doctor;
                 }
@@ -437,7 +437,7 @@ namespace Hospital_IS.DoctorViewModel
             }
             foreach (Room room in Rooms)
             {
-                if (room.RoomId.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.PrimaryRoom))
+                if (room.RoomId.Equals(DoctorMainWindowModel.Instance.Doctor.PrimaryRoom))
                 {
                     this.SelectedRoom = room;
                 }

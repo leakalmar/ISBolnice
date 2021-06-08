@@ -96,20 +96,25 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_OpenChartCommand(object obj)
         {
-            SelectedAppointment.IsStarted = false;
-            PatientChart chart = new PatientChart();
-            chart._ViewModel.SelectedAppointment = SelectedAppointment;
-            DoctorMainWindow.Instance._ViewModel.PatientChartView = chart;
-            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(chart);
+            // SelectedAppointment.IsStarted = false;
+            //PatientChart chart = new PatientChart();
+            // chart._ViewModel.SelectedAppointment = SelectedAppointment;
+            //DoctorMainWindowModel.Instance.PatientChartView = chart;
+            // DoctorMainWindowModel.Instance.NavigationService.Navigate(chart);
+            PatientChartViewModel.Instance.SelectedAppointment = SelectedAppointment;
+            PatientChartViewModel.Instance.Started = false;
+            DoctorNavigationController.Instance.NavigateToChartCommand();
         }
 
         private void Execute_StartAppointmentCommand(object obj)
         {
-            SelectedAppointment.IsStarted = true;
-            PatientChart chart = new PatientChart();
-            chart._ViewModel.SelectedAppointment = SelectedAppointment;
-            DoctorMainWindow.Instance._ViewModel.PatientChartView = chart;
-            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(chart);
+            // SelectedAppointment.IsStarted = true;
+            // PatientChartViewModel.Instance.SelectedAppointment = SelectedAppointment;
+            //DoctorMainWindowModel.Instance.PatientChartView = chart;
+            PatientChartViewModel.Instance.SelectedAppointment = SelectedAppointment;
+            PatientChartViewModel.Instance.Started = true;
+            DoctorNavigationController.Instance.NavigateToChartCommand();
+            // DoctorMainWindowModel.Instance.NavigationService.Navigate(chart);
         }
         private void Execute_SetFocusCommand(object obj)
         {
@@ -131,7 +136,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Methods
         private void SetAppointmentFeilds()
         {
-            List<DoctorAppointmentDTO> appointmentDTOs = DoctorAppointmentManagementController.Instance.GetAppointmentByDoctorId(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
+            List<DoctorAppointmentDTO> appointmentDTOs = DoctorAppointmentManagementController.Instance.GetAppointmentByDoctorId(DoctorMainWindowModel.Instance.Doctor.Id);
             ObservableCollection<AppointmentRowDTO> doctorAppointments = new DoctorAppointmentConverter().ConvertNewAppointmentsToDTO(appointmentDTOs);
 
             appointmentsView = new CollectionViewSource { Source = doctorAppointments }.View;
@@ -145,7 +150,7 @@ namespace Hospital_IS.DoctorViewModel
             AppointmentsView = appointmentsView;
             if (doctorAppointments.Count == 0)
             {
-                DoctorMainWindow.Instance._ViewModel.NavigateToHomePageCommand.Execute(null);
+                DoctorMainWindowModel.Instance.NavigateToHomePageCommand.Execute(null);
             }
             else
             {

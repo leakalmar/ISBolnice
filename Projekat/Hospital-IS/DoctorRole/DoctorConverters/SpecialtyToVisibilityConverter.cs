@@ -1,4 +1,5 @@
 ﻿using Hospital_IS.DoctorRole.DoctorView;
+using Hospital_IS.DoctorViewModel;
 using Model;
 using System;
 using System.Windows;
@@ -19,7 +20,7 @@ namespace Hospital_IS.DoctorRole.DoctorConverters
 
             Visibility ret;
             Specialty specialty = (Specialty)value;
-            if (specialty.Name.Equals(DoctorMainWindow.Instance._ViewModel.Doctor.Specialty))
+            if (specialty.Name.Equals(DoctorMainWindowModel.Instance.Doctor.Specialty))
             {
                 ret = Visibility.Visible;
             }

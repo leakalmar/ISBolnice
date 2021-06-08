@@ -48,7 +48,7 @@ namespace Hospital_IS.DoctorViewModel
         {
             if(SelectedNotification != null)
             {
-                DoctorMainWindow.Instance._ViewModel.NavigateToViewMedicineCommand.Execute(SelectedNotification);
+                DoctorMainWindowModel.Instance.NavigateToViewMedicineCommand.Execute(SelectedNotification);
             }
         }
 
@@ -62,7 +62,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Constructor
         public ApproveMedicineViewModel()
         {
-            this.MedicineNotifications = MedicineNotificationController.Instance.GetAllByDoctorId(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
+            this.MedicineNotifications = MedicineNotificationController.Instance.GetAllByDoctorId(DoctorMainWindowModel.Instance.Doctor.Id);
             this.ShowNotificationCommand = new RelayCommand(Execute_ShowNotificationCommand, CanExecute_NavigateCommand);
         }
         #endregion

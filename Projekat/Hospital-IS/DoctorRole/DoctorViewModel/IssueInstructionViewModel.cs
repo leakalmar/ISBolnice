@@ -93,13 +93,13 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_IssueInstructionCommand(object obj)
         {
             ScheduleAppointment();
-            DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.ChangeCommand.Execute("3");
-            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(DoctorMainWindow.Instance._ViewModel.PatientChartView);
+            PatientChartViewModel.Instance.ChangeCommand.Execute("3");
+            DoctorMainWindowModel.Instance.NavigateToChartCommand.Execute(null);
         }
 
         private void Execute_NavigateToPatientChartCommand(object obj)
         {
-            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(DoctorMainWindow.Instance._ViewModel.PatientChartView);
+            DoctorMainWindowModel.Instance.NavigateToChartCommand.Execute(null);
         }
 
         #endregion
@@ -159,9 +159,9 @@ namespace Hospital_IS.DoctorViewModel
         #region Constructor
         public IssueInstructionViewModel()
         {
-            this.LogedInDoctor = DoctorMainWindow.Instance._ViewModel.Doctor;
+            this.LogedInDoctor = DoctorMainWindowModel.Instance.Doctor;
             this.IssueInstructionCommand = new RelayCommand(Execute_IssueInstructionCommand, CanExecute_Command);
-            this.BackCommand = DoctorMainWindow.Instance._ViewModel.NavigateBackCommand;
+            this.BackCommand = DoctorMainWindowModel.Instance.NavigateBackCommand;
             this.NavigateToPatientChartCommand = new RelayCommand(Execute_NavigateToPatientChartCommand, CanExecute_Command);
         }
 

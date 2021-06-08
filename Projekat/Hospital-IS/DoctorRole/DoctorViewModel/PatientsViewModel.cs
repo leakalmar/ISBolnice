@@ -111,11 +111,11 @@ namespace Hospital_IS.DoctorViewModel
         #region Actions
         private void Execute_OpenChartCommand(object obj)
         {
-            if (DoctorMainWindow.Instance._ViewModel.PatientChartView == null)
-            {
-                OpenChart(obj);
-            }
-            if (DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Started)
+            //if (PatientChartViewModel.Instance.Started)
+            //{
+            //    OpenChart(obj);
+            //}
+            if (PatientChartViewModel.Instance.Started)
             {
                 new ExitMess("Termin je trenutno u toku! Molimo vas završite termin pre otvaranja kartona drugog pacijenta.", "info").ShowDialog();
                 return;
@@ -129,10 +129,12 @@ namespace Hospital_IS.DoctorViewModel
 
         private void OpenChart(object obj)
         {
-            PatientChart view = new PatientChart();
-            view._ViewModel.Patient = SelectedPatient;
-            DoctorMainWindow.Instance._ViewModel.PatientChartView = view;
-            DoctorMainWindow.Instance._ViewModel.NavigateToChartCommand.Execute(obj);
+            //patientChartViewModel.Patient = SelectedPatient;
+            //DoctorMainWindowModel.Instance.PatientChartViewModel = patientChartViewModel;
+            //DoctorMainWindowModel.Instance.NavigateToChartCommand.Execute(obj);
+            DoctorNavigationController.Instance.NavigateToChartCommand();
+            PatientChartViewModel.Instance.Patient = SelectedPatient;
+            PatientChartViewModel.Instance.Started = false;
         }
 
         private bool CanExecute_Command(object obj)
