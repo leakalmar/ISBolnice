@@ -6,6 +6,7 @@ using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 
 
@@ -14,8 +15,9 @@ namespace Hospital_IS.SecretaryView
     /// <summary>
     /// Interaction logic for ScheduleEmergencyAppointment.xaml
     /// </summary>
-    public partial class ScheduleEmergencyAppointment : Window
+    public partial class ScheduleEmergencyAppointment : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<PatientDTO> Patients { get; set; } = new ObservableCollection<PatientDTO>();
         public ObservableCollection<string> Specializations { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<RoomDTO> Rooms { get; set; } = new ObservableCollection<RoomDTO>();
@@ -23,6 +25,20 @@ namespace Hospital_IS.SecretaryView
         public ObservableCollection<RescheduledAppointmentDTO> RescheduledAppointments { get; set; }
 
         private ScheduleAppointment sa;
+
+        private int _appDuration;
+        public int AppDuration
+        {
+            get { return _appDuration; }
+            set
+            {
+                if (value != _appDuration)
+                {
+                    _appDuration = value;
+                    OnPropertyChanged("AppDuration");
+                }
+            }
+        }
         public ScheduleEmergencyAppointment(ScheduleAppointment sa)
         {
             InitializeComponent();
@@ -51,16 +67,22 @@ namespace Hospital_IS.SecretaryView
 
         private void AddNewEmergencyAppointment(object sender, RoutedEventArgs e)
         {
-            foreach (RescheduledAppointmentDTO raDTO in RescheduledAppointments)
+            if (dgSuggestedAppointments.SelectedIndex != -1)
             {
-                DoctorAppointmentManagementController.Instance.UpdateAppointment(raDTO.OldDocAppointment, raDTO.NewDocAppointment);  //notifikacije ???
+                foreach (RescheduledAppointmentDTO raDTO in RescheduledAppointments)
+                {
+                    DoctorAppointmentManagementController.Instance.UpdateAppointment(raDTO.OldDocAppointment, raDTO.NewDocAppointment);
+                }
+                DoctorAppointmentManagementController.Instance.AddAppointment(SuggestedAppointments[dgSuggestedAppointments.SelectedIndex].SuggestedAppointment);
+                sa.uca.RefreshGrid();
+
+                sa.Close();
+                this.Close();
             }
-            DoctorAppointmentManagementController.Instance.AddAppointment(SuggestedAppointments[dgSuggestedAppointments.SelectedIndex].SuggestedAppointment);
-
-            sa.uca.RefreshGrid();
-
-            sa.Close();
-            this.Close();
+            else 
+            {
+                MessageBox.Show("Izaberite jedan od predloženih termina!");
+            }
         }
 
         private void txtAppDuration_LostFocus(object sender, RoutedEventArgs e)
@@ -110,6 +132,12 @@ namespace Hospital_IS.SecretaryView
             this.Close();
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            sa.Visibility = Visibility.Visible;
+            this.Close();
+        }
+
         private void SelectGuest(object sender, RoutedEventArgs e)
         {
             SelectGuestView sg = new SelectGuestView(this);
@@ -130,6 +158,14 @@ namespace Hospital_IS.SecretaryView
                 cbSpecialty.IsEnabled = true;
                 Rooms = new ObservableCollection<RoomDTO>(DoctorAppointmentManagementController.Instance.GetRoomByType(RoomType.OperationRoom));
                 cbRoom.ItemsSource = Rooms;
+            }
+        }
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
     }

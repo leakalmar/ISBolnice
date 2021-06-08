@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:val="clr-namespace:Hospital_IS.SecretaryView.Validation"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
-        Title="Zakazivanje termina" Height="700" Width="620"
+        Title="Zakazivanje termina" Height="730" Width="620"
         WindowStartupLocation="CenterScreen"
         FontSize="15"
         FontWeight="Light">
@@ -35,14 +36,14 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="Tip pregleda:" Margin="50 20 50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Pacijent:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="Doktor:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="Soba:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="6" Text="Datum pregleda:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="7" Text="Početak pregleda:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="8" Text="Trajanje pregleda:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="9" Text="Opis:" Margin="50 20" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="Tip pregleda *" Margin="50 20 50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Pacijent *" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="Doktor *" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="5" Text="Soba *" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="6" Text="Datum pregleda *" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="7" Text="Početak pregleda *" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="8" Text="Trajanje pregleda *" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="9" Text="Opis " Margin="50 20" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
         <ComboBox Name="cbAppType" Grid.Column="2" Grid.Row="2" Margin="50 20 50 10" SelectionChanged="cbAppType_SelectionChanged" FontSize="15">
             <ComboBoxItem Content="Pregled"/>
@@ -78,7 +79,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <DatePicker Name="dpAppDate" Grid.Column="2" Grid.Row="6" Margin="50 10" DisplayDateStart="{x:Static sys:DateTime.Today}"
-                    SelectedDateChanged="ShowScheduledAppointments"/>
+                    SelectedDateChanged="ShowScheduledAppointments" LostFocus="dpAppDate_LostFocus"/>
         
         <StackPanel Orientation="Horizontal"  Grid.Column="2" Grid.Row="7" Margin="50 10">
             <ComboBox Name="cbHours" MinWidth="70" ItemsSource="{Binding Hours}" LostFocus="VerifyAppointment"/>
@@ -93,8 +94,27 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="8" Margin="50 10">
-            <TextBox Name="txtAppDuration"  MinWidth="70" LostFocus="VerifyAppointment"
-                     Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+            <TextBox Name="txtAppDuration"  MinWidth="70" MaxWidth="70" LostFocus="VerifyAppointment"
+                     Style="{DynamicResource ResourceKey=RegularTextBox}">
+                <TextBox.Text>
+                    <Binding Path="AppDuration" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <val:IsEmptyValidationRule ValidationStep="RawProposedValue"/>
+                            <val:IsAppointmentDurationValid ValidationStep="RawProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder x:Name="textBox"/>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Style="{DynamicResource ResourceKey=Validation}"
+                                   VerticalAlignment="Bottom"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
+            
             <TextBlock Text="min" Margin="5 0 30 0"
                        Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
         </StackPanel>

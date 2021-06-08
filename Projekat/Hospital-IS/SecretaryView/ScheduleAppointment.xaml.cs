@@ -16,8 +16,9 @@ namespace Hospital_IS.SecretaryView
     /// <summary>
     /// Interaction logic for ScheduleAppointment.xaml
     /// </summary>
-    public partial class ScheduleAppointment : Window
+    public partial class ScheduleAppointment : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         public DoctorAppointmentDTO DocAppointment { get; set; } = new DoctorAppointmentDTO();
         public ObservableCollection<PatientDTO> Patients { get; set; } = new ObservableCollection<PatientDTO>();
         public ObservableCollection<DoctorDTO> Doctors { get; set; } = new ObservableCollection<DoctorDTO>();
@@ -33,6 +34,20 @@ namespace Hospital_IS.SecretaryView
         public DoctorDTO doctor = null;
         public DoctorView dv;
 
+        private int _appDuration;
+        public int AppDuration
+        {
+            get { return _appDuration; }
+            set
+            {
+                if (value != _appDuration)
+                {
+                    _appDuration = value;
+                    OnPropertyChanged("AppDuration");
+                }
+            }
+        }
+
         public ScheduleAppointment(UCAppointmentsView uca)
         {
             InitializeComponent();
@@ -40,6 +55,7 @@ namespace Hospital_IS.SecretaryView
 
             Patients = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllRegisteredPatients());
             Doctors = new ObservableCollection<DoctorDTO>(SecretaryManagementController.Instance.GetAllDoctors());
+            dpAppDate.SelectedDate = DateTime.Now;
 
             this.DataContext = this;
         }
@@ -51,6 +67,7 @@ namespace Hospital_IS.SecretaryView
             this.pv = pv;
             Patients = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllRegisteredPatients());
             Doctors = new ObservableCollection<DoctorDTO>(SecretaryManagementController.Instance.GetAllDoctors());
+            dpAppDate.SelectedDate = DateTime.Now;
 
             cbPatient.SelectedItem = patient;
             cbPatient.IsEnabled = false;
@@ -66,6 +83,7 @@ namespace Hospital_IS.SecretaryView
             this.dv = dv;
             Patients = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllRegisteredPatients());
             Doctors = new ObservableCollection<DoctorDTO>(SecretaryManagementController.Instance.GetAllDoctors());
+            dpAppDate.SelectedDate = DateTime.Now;
 
             cbDoctor.SelectedItem = doctor;
             cbDoctor.IsEnabled = false;
@@ -75,6 +93,15 @@ namespace Hospital_IS.SecretaryView
 
         private void NewAppointment(object sender, RoutedEventArgs e)
         {
+            if (cbAppType.SelectedIndex == -1 || cbPatient.SelectedIndex == -1 || cbDoctor.SelectedIndex == -1 
+                || cbRoom.SelectedIndex == -1 || cbHours.SelectedIndex == -1 || cbMinutes.SelectedIndex == -1 
+                || string.IsNullOrEmpty(txtAppDuration.Text))
+            {
+                MessageBox.Show("Morate da popunite sva obavezna polja!");
+                return;
+            }
+
+
             // doktor
             DocAppointment.Doctor = Doctors[cbDoctor.SelectedIndex];
 
@@ -184,8 +211,8 @@ namespace Hospital_IS.SecretaryView
             {
                 sea = new ScheduleEmergencyAppointment(this, patient);
             }
-            sea.ShowDialog();
             this.Visibility = Visibility.Collapsed;
+            sea.ShowDialog();
         }
 
         private void cbAppType_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -263,6 +290,26 @@ namespace Hospital_IS.SecretaryView
             }
 
             cbHours.ItemsSource = Hours;
+        }
+
+        private void dpAppDate_LostFocus(object sender, RoutedEventArgs e)
+        {
+            DateTime date = DateTime.Today;
+            if (dpAppDate.SelectedDate != null)
+                date = (DateTime)dpAppDate.SelectedDate;
+
+            if (date < DateTime.Today) 
+            {
+                dpAppDate.SelectedDate = DateTime.Today;
+            }
+        }
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

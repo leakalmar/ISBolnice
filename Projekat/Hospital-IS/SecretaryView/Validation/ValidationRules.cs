@@ -136,4 +136,40 @@ namespace Hospital_IS.SecretaryView.Validation
             }
         }
     }
+
+    class IsAppointmentDurationValid : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            Regex rgx = new Regex(@"^[0-9]+$");
+            var s = value as string;
+            if (rgx.IsMatch(s.ToString()))
+            {
+                int duration;
+                try
+                {
+                    duration = Int32.Parse(s);
+                    if (duration < 30)
+                    {
+                        return new ValidationResult(false, "Minimalna dužina trajanja termina je 30 min.");
+                    }
+                    else if (duration > 12 * 60)
+                    {
+                        return new ValidationResult(false, "Unesite validnu dužinu trajanja.");
+                    }
+                }
+                catch
+                {
+                    return new ValidationResult(false, "Unesite validnu dužinu trajanja.");
+                }
+
+                return new ValidationResult(true, null);
+            }
+            else
+            {
+                return new ValidationResult(false, "Mora se uneti broj.");
+            }
+
+        }
+    }
 }
