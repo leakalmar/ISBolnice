@@ -1,6 +1,7 @@
 ﻿using DTOs;
 using Hospital_IS.Storages;
 using Model;
+using System;
 using System.Collections.Generic;
 
 namespace Service
@@ -89,6 +90,18 @@ namespace Service
                 }
             }
             return null;
+        }
+
+        internal bool IsNameUnique(string name)
+        {
+           foreach (Medicine med in AllMedicines)
+            {
+                if (med.Name.Equals(name))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

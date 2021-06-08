@@ -12,7 +12,7 @@ namespace Hospital_IS.ManagerViewModel
 {
     public class MedicineViewModel:ViewModel
     {
-        private string name;
+        private string name = "";
         private string sideEffects;
         private string usage;
         private ObservableCollection<MedicineComponent> composition;
@@ -174,6 +174,7 @@ namespace Hospital_IS.ManagerViewModel
                 {
 
                     name = value;
+                   
                     OnPropertyChanged("Name");
 
                 }
@@ -335,8 +336,8 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToPreviousPage = new RelayCommand(Execute_NavigateToPreviousPage, CanExecute_NavigateCommand);
             this.NavigateToUpdateMedicinePage = new RelayCommand(Execute_NavigateToMedicineUpdatePage, CanExecute_IfMedicineIsSelected);
             this.NavigateMedicineRegistrationPage = new RelayCommand(Execute_NavigateToMedicineRegistrationPage, CanExecute_NavigateCommand);
-            this.RegistrateNewMedicineCommand = new RelayCommand(Execute_RegistrateNewMedicine);
-            this.UpdateMedicineCommand = new RelayCommand(Execute_UpdateMedicine);
+            this.RegistrateNewMedicineCommand = new RelayCommand(Execute_RegistrateNewMedicine, CanExecute_RegistrateNewMedicine);
+            this.UpdateMedicineCommand = new RelayCommand(Execute_UpdateMedicine, CanExecute_RegistrateNewMedicine);
             this.DeleteMedicineCommand = new RelayCommand(Execute_DeleteMedicine, CanExecute_IfMedicineIsSelected);
             this.NavigateToEquipmentPage = new RelayCommand(Execute_NavigateToEquipmentPageCommand);
             this.NavigateToManagerProfilePage = new RelayCommand(Execute_NavigateToManagerProfilePageCommand);
@@ -388,9 +389,9 @@ namespace Hospital_IS.ManagerViewModel
         {
             Composition = new ObservableCollection<MedicineComponent>();
             ReplaceMedicines = new ObservableCollection<ReplaceMedicineName>();
-            Name = null;
-            Usage = null;
-            SideEffects = null;
+            Name = "";
+            Usage = "";
+            SideEffects = "";
             CompositionDTO = new ObservableCollection<MedicineComponentDTO>();
             ReplaceMedicineNameDTOs = new ObservableCollection<ReplaceMedicineNameDTO>();
             this.NavService.GoBack();
@@ -406,37 +407,64 @@ namespace Hospital_IS.ManagerViewModel
         }
         private void Execute_UpdateMedicine(object obj)
         {
+            bool isUnique = MedicineController.Instance.IsNameUnique(SelectedMedicine.Name);
 
-            List<MedicineComponent> medicineComponents = new List<MedicineComponent>();
-            ConvertMedcineComponetDTOsToList(medicineComponents, CompositionDTO);
-            List<ReplaceMedicineName> replaceMedicineNames = new List<ReplaceMedicineName>();
-            ConvertReplaceMedicineNameDTOsToList(replaceMedicineNames, ReplaceMedicineNameDTOs);
+            if (isUnique)
+            {
 
-            MedicineController.Instance.UpdateMedicine(new Medicine(Name, medicineComponents, SideEffects, Usage, replaceMedicineNames));
-            Medicines = new ObservableCollection<Medicine>(MedicineController.Instance.GetAll());
-            CompositionDTO = new ObservableCollection<MedicineComponentDTO>();
-            ReplaceMedicineNameDTOs = new ObservableCollection<ReplaceMedicineNameDTO>();
-            this.NavService.GoBack();
+                List<MedicineComponent> medicineComponents = new List<MedicineComponent>();
+                ConvertMedcineComponetDTOsToList(medicineComponents, CompositionDTO);
+                List<ReplaceMedicineName> replaceMedicineNames = new List<ReplaceMedicineName>();
+                ConvertReplaceMedicineNameDTOsToList(replaceMedicineNames, ReplaceMedicineNameDTOs);
+                MedicineController.Instance.UpdateMedicineWithName(SelectedMedicine.Name, new Medicine(Name, medicineComponents, SideEffects, Usage, replaceMedicineNames));
+                Medicines = new ObservableCollection<Medicine>(MedicineController.Instance.GetAll());
+                Composition = new ObservableCollection<MedicineComponent>();
+                ReplaceMedicines = new ObservableCollection<ReplaceMedicineName>();
+                Name = "";
+                Usage = "";
+                SideEffects = "";
+                CompositionDTO = new ObservableCollection<MedicineComponentDTO>();
+                ReplaceMedicineNameDTOs = new ObservableCollection<ReplaceMedicineNameDTO>();
+                this.NavService.GoBack();
+            }
+            else
+            {
+                MessageBox.Show("Ime leka mora biti jedinstveno");
+            }
+           
+        }
+
+        private bool CanExecute_RegistrateNewMedicine(object obj)
+        {
+            return Name.Length > 0; 
         }
 
         private void Execute_RegistrateNewMedicine(object obj)
         {
 
-            List<MedicineComponent> medicineComponents = new List<MedicineComponent>();
-            ConvertMedcineComponetDTOsToList(medicineComponents,CompositionDTO);
-            List<ReplaceMedicineName> replaceMedicineNames = new List<ReplaceMedicineName>();
-            ConvertReplaceMedicineNameDTOsToList(replaceMedicineNames,ReplaceMedicineNameDTOs);
-            Medicine medicine = new Medicine(Name, medicineComponents, SideEffects, Usage, replaceMedicineNames);
 
            
-           
-            CompositionDTO = new ObservableCollection<MedicineComponentDTO>();
-            ReplaceMedicineNameDTOs = new ObservableCollection<ReplaceMedicineNameDTO>();
+            bool isUnique = MedicineController.Instance.IsNameUnique(Name);
+            if (isUnique)
+            {
 
-            RecipientViewModel.Instance.NotificationMedicine = medicine;
-            ChooseReciepientForNotification chooseRecipient = new ChooseReciepientForNotification();
-            chooseRecipient.SendReNotification.Visibility = Visibility.Collapsed;
-            chooseRecipient.ShowDialog();
+                List<MedicineComponent> medicineComponents = new List<MedicineComponent>();
+                ConvertMedcineComponetDTOsToList(medicineComponents, CompositionDTO);
+                List<ReplaceMedicineName> replaceMedicineNames = new List<ReplaceMedicineName>();
+                ConvertReplaceMedicineNameDTOsToList(replaceMedicineNames, ReplaceMedicineNameDTOs);
+                Medicine medicine = new Medicine(Name, medicineComponents, SideEffects, Usage, replaceMedicineNames);
+                CompositionDTO = new ObservableCollection<MedicineComponentDTO>();
+                ReplaceMedicineNameDTOs = new ObservableCollection<ReplaceMedicineNameDTO>();
+                RecipientViewModel.Instance.NotificationMedicine = medicine;
+                ChooseReciepientForNotification chooseRecipient = new ChooseReciepientForNotification();
+                chooseRecipient.SendReNotification.Visibility = Visibility.Collapsed;
+                chooseRecipient.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Ime leka mora biti jedinstveno");
+            }
+           
         }
 
         private void ConvertMedcineComponetDTOsToList(List<MedicineComponent> medicineComponents,ObservableCollection<MedicineComponentDTO> medicineComponentDTOs)

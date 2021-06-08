@@ -384,17 +384,21 @@ namespace Hospital_IS.ManagerViewModel
             {
                 if(IsMerge == true)
                 {
-                    Appointment appointmentFirstRoom = new Appointment(DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomFirst.RoomId);
-                    Appointment appointmentSecondRoom = new Appointment(DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomSecond.RoomId);
-                    bool isSucces = AppointmentController.Instance.MakeRenovationAppointmentForRoomMerge(appointmentFirstRoom, appointmentSecondRoom);
-                    if (isSucces)
+                    if (SelectedRoomFirst.RoomFloor != SelectedRoomSecond.RoomFloor)
                     {
-                        RoomType roomType = (RoomType)SelectedRoomTypeIndex;
-                        int surfaceArea = SelectedRoomFirst.SurfaceArea + SelectedRoomSecond.SurfaceArea;
-                        Room room = new Room(SelectedRoomFirst.RoomFloor, RoomNumber, surfaceArea, roomType, new List<Equipment>());
-                        AdvancedRenovation advancedRenovation = new AdvancedRenovation(SelectedRoomFirst, SelectedRoomSecond, room, IsSplit, IsMerge, DateEnd);
-                        AdvancedRenovationController.Instance.MakeAdvancedRenovation(advancedRenovation);
+                        Appointment appointmentFirstRoom = new Appointment(DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomFirst.RoomId);
+                        Appointment appointmentSecondRoom = new Appointment(DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomSecond.RoomId);
+                        bool isSucces = AppointmentController.Instance.MakeRenovationAppointmentForRoomMerge(appointmentFirstRoom, appointmentSecondRoom);
+                        if (isSucces)
+                        {
+                            RoomType roomType = (RoomType)SelectedRoomTypeIndex;
+                            int surfaceArea = SelectedRoomFirst.SurfaceArea + SelectedRoomSecond.SurfaceArea;
+                            Room room = new Room(SelectedRoomFirst.RoomFloor, RoomNumber, surfaceArea, roomType, new List<Equipment>());
+                            AdvancedRenovation advancedRenovation = new AdvancedRenovation(SelectedRoomFirst, SelectedRoomSecond, room, IsSplit, IsMerge, DateEnd);
+                            AdvancedRenovationController.Instance.MakeAdvancedRenovation(advancedRenovation);
 
+                        }
+                        MessageBox.Show("Sobe treba da budu na istom spratu");
                     }
                 }
             }

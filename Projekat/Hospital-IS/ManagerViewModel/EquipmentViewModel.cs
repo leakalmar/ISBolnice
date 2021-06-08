@@ -17,7 +17,7 @@ namespace Hospital_IS.ManagerViewModel
         private ObservableCollection<String> roomTypes { get; set; }
         private int selectedTransferOption = -1;
         private int selectedTypeIndex = -1;
-        private ICollectionView  _equipments { get; set; }
+        private ICollectionView _equipments;
       
         private String selectedRoomType;
         private NavigationService navService;

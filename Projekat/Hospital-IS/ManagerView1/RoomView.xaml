@@ -4,10 +4,113 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:Hospital_IS.ManagerViewModel" d:DataContext="{d:DesignInstance Type=viewModel:RoomViewModel}"
-      mc:Ignorable="d"
-        Loaded="Page_Loaded"
-      
-        Title="Upravnik" Height="750" Width="430">
+        mc:Ignorable="d"   
+        Background="Transparent"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+       x:Name="Room"
+      Loaded="Page_Loaded"
+      Title="Upravnik" Height="750" Width="430" >
+
+
+
+    <Page.Resources>
+
+
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style x:Key="ComboBoxTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Border CornerRadius="5,0,0,5"
+                            BorderThickness="1"
+                            Background="{TemplateBinding Background}"
+                                BorderBrush="Black">
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+        <ControlTemplate  x:Key="ComboBoxBaseControlTemplate" TargetType="{x:Type ComboBox}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition MaxWidth="18"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Name="PART_EditableTextBox"
+                                 Style="{StaticResource ComboBoxTextBoxStyle}"
+                                 Padding="5,0,0,0"
+                                 Height="{TemplateBinding Height}"/>
+                <ToggleButton Grid.Column="1" Margin="0"
+                                     Height="{TemplateBinding Height}"
+                                   
+                                     Focusable="False"
+                                     IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                      ClickMode="Press">
+                    <Path Grid.Column="1"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Data="M 0 0 L 4 4 L 8 0 Z"
+                                  Fill="DodgerBlue" />
+                </ToggleButton>
+                <ContentPresenter Name="ContentSite"
+                                      Content="{TemplateBinding SelectionBoxItem}"
+                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"
+                                      Margin="5,0,0,0"/>
+                <Popup Name="Popup"
+                               Placement="Bottom"
+                               IsOpen="{TemplateBinding IsDropDownOpen}"
+                               AllowsTransparency="True" 
+                               Focusable="False"
+                               PopupAnimation="Slide">
+                    <Grid Name="DropDown"
+                                 
+                                  SnapsToDevicePixels="True"                
+                                  MinWidth="{TemplateBinding ActualWidth}"
+                                  MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                        <Border 
+                                    x:Name="DropDownBorder"
+                                    BorderThickness="1"
+                                    CornerRadius="10"
+                                    Background="Azure"
+                                    BorderBrush="Black"/>
+                        <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                        </ScrollViewer>
+                    </Grid>
+                </Popup>
+            </Grid>
+        </ControlTemplate>
+    </Page.Resources>
+
 
     <Grid >
         <Border  >
@@ -18,9 +121,37 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
+        <StackPanel x:Name="SearchPanel" Visibility="Visible" Background="Transparent" Margin="40,106,15,611" >
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="25"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Template="{StaticResource ComboBoxBaseControlTemplate}" SelectedIndex="{Binding SearchSelectedIndex}"  Height="25" Grid.ColumnSpan="2" Margin="0,2,8,2" >
+                    <ComboBoxItem Content="Sobe za odmor"/>
+                    <ComboBoxItem Content="Sobe za pregled"/>
+                    <ComboBoxItem Content="Operacione sale"/>
+                    <ComboBoxItem Content="Magacini"/>
+                    <ComboBoxItem Content="Sve"/>
+                </ComboBox>
+                <Label Grid.Column="1" Content="Pretrazi:" Foreground="White" FontSize="15" Grid.ColumnSpan="2" Margin="22,0,53,0" />
+                <TextBox x:Name="SearchBox"  Grid.Column="2" Height="25" Padding="2" FontSize="15" Template="{StaticResource TextBoxBaseControlTemplate}" 
+                         Grid.ColumnSpan="2" Margin="75,2,-50,3" Text="{Binding SearchBox, UpdateSourceTrigger=PropertyChanged}" >
+
+
+                </TextBox>
+
+
+
+            </Grid>
+        </StackPanel>
+
+
         <DataGrid x:Name="DataGridRooms"  IsReadOnly="True" ItemsSource="{Binding Rooms}" AlternatingRowBackground="NavajoWhite"
                   SelectionMode="Single"  SelectedItem="{Binding SelectedRoom}"
-                  Height="430" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="350" Margin="40,145,40,0" Background="#FFC5DBDF" AutoGenerateColumns="False" >
+                  Height="411" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="350" Margin="0,164,0,0" Background="#FFC5DBDF" AutoGenerateColumns="False" >
             <DataGrid.CellStyle>
                 <Style/>
             </DataGrid.CellStyle>
@@ -170,7 +301,8 @@
                         <Image Source="pack://application:,,,/Resources/question.png"  Width="50" Height="64" />
                     </StackPanel>
                 </Button>
-                <Button x:Name="Search" Grid.RowSpan="2" BorderThickness="0" Grid.Column="3" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9">
+                <Button x:Name="Search" Grid.RowSpan="2" BorderThickness="0" Grid.Column="3" Grid.Row="1" Width="60" 
+                        Background="White" Margin="0,0,0,9" Command="{Binding ShowHelpDialogCommand}">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>

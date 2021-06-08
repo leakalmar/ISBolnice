@@ -5,6 +5,103 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       
       Title="Upravnik" Height="750" Width="430" Loaded="Page_Loaded" >
+    <Page.Resources>
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style x:Key="ComboBoxTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Border CornerRadius="5,0,0,5"
+                            BorderThickness="1"
+                            Background="{TemplateBinding Background}"
+                                BorderBrush="Black">
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+        <ControlTemplate  x:Key="ComboBoxBaseControlTemplate" TargetType="{x:Type ComboBox}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition MaxWidth="18"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Name="PART_EditableTextBox"
+                                 Style="{StaticResource ComboBoxTextBoxStyle}"
+                                 Padding="5,0,0,0"
+                                 Height="{TemplateBinding Height}"/>
+                <ToggleButton Grid.Column="1" Margin="0"
+                                     Height="{TemplateBinding Height}"
+                                   
+                                     Focusable="False"
+                                     IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                      ClickMode="Press">
+                    <Path Grid.Column="1"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Data="M 0 0 L 4 4 L 8 0 Z"
+                                  Fill="DodgerBlue" />
+                </ToggleButton>
+                <ContentPresenter Name="ContentSite"
+                                      Content="{TemplateBinding SelectionBoxItem}"
+                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"
+                                      Margin="5,0,0,0"/>
+                <Popup Name="Popup"
+                               Placement="Bottom"
+                               IsOpen="{TemplateBinding IsDropDownOpen}"
+                               AllowsTransparency="True" 
+                               Focusable="False"
+                               PopupAnimation="Slide">
+                    <Grid Name="DropDown"
+                                 
+                                  SnapsToDevicePixels="True"                
+                                  MinWidth="{TemplateBinding ActualWidth}"
+                                  MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                        <Border 
+                                    x:Name="DropDownBorder"
+                                    BorderThickness="1"
+                                    CornerRadius="10"
+                                    Background="Azure"
+                                    BorderBrush="Black"/>
+                        <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                        </ScrollViewer>
+                    </Grid>
+                </Popup>
+            </Grid>
+        </ControlTemplate>
+    </Page.Resources>
+    
+    
     <Grid >
         <Border  >
             <Border.Background>
@@ -179,9 +276,10 @@
                 </Button>
             </Grid>
         </StackPanel>
-        <ComboBox x:Name="Combo"   DisplayMemberPath="RoomIdType" ItemsSource="{Binding Rooms}" SelectedItem="{Binding SelectedRoom}" HorizontalAlignment="Left" Margin="165,86,0,0" VerticalAlignment="Top" Width="120"  />
+        <ComboBox x:Name="Combo"   DisplayMemberPath="RoomIdType" ItemsSource="{Binding Rooms}" SelectedItem="{Binding SelectedRoom}" 
+                  HorizontalAlignment="Left" Margin="165,86,0,0" Height="25" VerticalAlignment="Top" Width="120" Template="{StaticResource ComboBoxBaseControlTemplate}" />
         <TextBox HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" FontSize="15" Foreground="White" Margin="40,86,0,0"  Text="Izaberite sobu:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <StackPanel x:Name="SearchPanel" Visibility="Visible" Background="Transparent" Margin="40,162,15,563" >
+        <StackPanel x:Name="SearchPanel" Visibility="Visible" Background="Transparent" Margin="40,162,15,555" >
             <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
@@ -191,13 +289,13 @@
                     <ColumnDefinition Width="25"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="Pretrazi:" Foreground="White" FontSize="15" />
-                <TextBox x:Name="SearchBox"  Grid.Column="2" Height="25" FontSize="14" >
+                <TextBox x:Name="SearchBox"  Grid.Column="2" Height="25"  FontSize="14" Template="{StaticResource TextBoxBaseControlTemplate}" >
                     <TextBox.Text>
                         <Binding Path="SearchBox" UpdateSourceTrigger="PropertyChanged"></Binding>
                     </TextBox.Text>
 
                 </TextBox>
-                <ComboBox Grid.Column="3" Height="25" FontSize="14" SelectedIndex="{Binding SelectedCondition}" Width="90">
+                <ComboBox Grid.Column="3" Height="25" FontSize="14" SelectedIndex="{Binding SelectedCondition}" Template="{StaticResource ComboBoxBaseControlTemplate}" Width="90">
                     <ComboBoxItem Content="jednako"/>
                     <ComboBoxItem Content="vise od"/>
                     <ComboBoxItem Content="manje od"/>
@@ -216,8 +314,8 @@
             </Grid>
         </StackPanel>
         <TextBox HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" FontSize="15" Foreground="White" Margin="40,124,0,0"  Text="Izaberite tip:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="ComboType"   HorizontalAlignment="Left" Margin="165,123,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding RoomTypes}" 
-                  SelectedIndex="{Binding SelectedTypeIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox x:Name="ComboType"   HorizontalAlignment="Left" Margin="165,123,0,0" VerticalAlignment="Top" Height="25" Width="120" ItemsSource="{Binding RoomTypes}" 
+                  SelectedIndex="{Binding SelectedTypeIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Template="{StaticResource ComboBoxBaseControlTemplate}" />
 
 
 
@@ -374,7 +472,7 @@
                 </Button>
 
                 <TextBlock  Text="Lekovi" Grid.Column="1" Grid.Row ="2" FontWeight="SemiBold" FontSize="18" Height="20" HorizontalAlignment="Center" Foreground="#624cfc"/>
-                <Button x:Name="MedicineView" BorderThickness="0" Grid.Row="1" Width="80" Background="White" Command="{Binding NavigateToMedicinePage}" Grid.ColumnSpan="2" Margin="-13,0,16,0" >
+                <Button x:Name="MedicineView" BorderThickness="0" Grid.Row="1" Width="80" Background="White" Command="{Binding NavigateToMedicinePage}" Grid.ColumnSpan="2"  >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>

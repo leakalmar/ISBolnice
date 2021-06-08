@@ -1,10 +1,13 @@
 ﻿using Controllers;
+using Enums;
 using Hospital_IS.Controllers;
 using Hospital_IS.ManagerView1;
 using Model;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 
@@ -12,14 +15,16 @@ namespace Hospital_IS.ManagerViewModel
 {
     public class RoomViewModel : ViewModel
     {
-        private  ObservableCollection<Room> _rooms { get; set; }
+        private ICollectionView _rooms;
         private Injector injector;
         private String _roomNumber = "Unesite broj sobe";
         private String _roomFloor = "Unesite sprat sobe";
         private String _surfaceArea = "Unesite površinu sobe";
         private String _bedNumber = "Unesite broj kreveta";
+        private String searchBox = "";
         private int selectedRenovationOption = -1;
         private int comboBoxItem;
+        private int searchSelectedIndex = 4;
         private RelayCommand navigateToMEquipmentPageCommand;
         private RelayCommand navigateToMedicinePageCommand;
         private RelayCommand addNewRoom;
@@ -32,8 +37,9 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand navigateToBranchPage;
         private RelayCommand navigateToRenovationReport;
         private RelayCommand navigateToAddRoom;
+        private RelayCommand showHelpDialog;
         private NavigationService navService;
-        private Room selectedRoom;
+        private Room selectedRoom = null;
         private RelayCommand navigateToManagerProfilePage;
 
 
@@ -120,7 +126,7 @@ namespace Hospital_IS.ManagerViewModel
                 naviagteToUpdateRoom = value;
             }
         }
-        
+
         public RelayCommand NavigateToMedicinePageCommand
         {
             get { return navigateToMedicinePageCommand; }
@@ -146,6 +152,15 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
+        public RelayCommand ShowHelpDialogCommand
+        {
+            get { return showHelpDialog; }
+            set
+            {
+                showHelpDialog = value;
+            }
+        }
+
         public NavigationService NavService
         {
             get { return navService; }
@@ -163,7 +178,7 @@ namespace Hospital_IS.ManagerViewModel
                 injector = value;
             }
         }
-        public ObservableCollection<Room> Rooms
+        public ICollectionView Rooms
         {
             get
             {
@@ -196,7 +211,7 @@ namespace Hospital_IS.ManagerViewModel
                 }
             }
         }
-        
+
         public int SelectedRenovationOption
         {
             get
@@ -212,6 +227,89 @@ namespace Hospital_IS.ManagerViewModel
                 }
             }
         }
+
+        public int SearchSelectedIndex
+        {
+            get { return searchSelectedIndex; }
+            set
+            {
+                searchSelectedIndex = value;
+                ICollectionView view = new CollectionViewSource { Source = RoomController.Instance.GetAllRooms() }.View;
+                if (searchSelectedIndex != 4) {
+                    view.Filter = null;
+                    view.Filter = delegate (object item)
+                    {
+                        String broj = ((Room)item).RoomNumber.ToString();
+                        RoomType type = (RoomType)searchSelectedIndex;
+                        RoomType roomType = ((Room)item).Type;
+
+                        return broj.Contains(SearchBox) && type == roomType;
+                    };
+                }
+                else
+                {
+                    view.Filter = null;
+                    view.Filter = delegate (object item)
+                    {
+                        String broj = ((Room)item).RoomNumber.ToString();
+
+                        return broj.Contains(SearchBox);
+                    };
+
+                }
+
+                Rooms = view;
+
+
+                OnPropertyChanged("SearchSelectedIndex");
+
+            }
+        }
+
+
+
+
+        public String SearchBox
+        {
+            get { return searchBox; }
+            set
+            {
+                searchBox = value;
+                ICollectionView view = new CollectionViewSource { Source = RoomController.Instance.GetAllRooms()}.View;
+                view.Filter = null;
+
+                if (searchSelectedIndex != 4)
+                {
+                    view.Filter = null;
+                    view.Filter = delegate (object item)
+                    {
+                        String broj = ((Room)item).RoomNumber.ToString();
+                        RoomType type = (RoomType)searchSelectedIndex;
+                        RoomType roomType = ((Room)item).Type;
+
+                        return broj.Contains(SearchBox) && type == roomType;
+                    };
+                }
+                else
+                {
+                    view.Filter = null;
+                    view.Filter = delegate (object item)
+                    {
+                        String broj = ((Room)item).RoomNumber.ToString();
+
+                        return broj.Contains(SearchBox);
+                    };
+
+                }
+                Rooms = view;
+
+                OnPropertyChanged("SearchBox");
+
+            }
+        }
+
+
+
         public Room SelectedRoom
         {
             get { return selectedRoom; }
@@ -262,16 +360,16 @@ namespace Hospital_IS.ManagerViewModel
                 new Uri("ManagerView1/ManagerProfileOptionsView.xaml", UriKind.Relative));
         }
 
-     
 
-       
+
+
         private void Execute_DeleteRoomCommand(object obj)
         {
             RoomController.Instance.RemoveRoom(SelectedRoom);
             LoadRooms();
         }
 
-      
+
         private bool CanExecute_DeleteRoomCommand(object obj)
         {
             return !(SelectedRoom == null);
@@ -287,7 +385,7 @@ namespace Hospital_IS.ManagerViewModel
         {
             this.navService = navigationService;
             LoadRooms();
-           
+
             this.NavigateToRoomPage = new RelayCommand(Execute_NavigateToRoomPageCommand, CanExecute_NavigateCommand);
             this.DeleteRoom = new RelayCommand(Execute_DeleteRoomCommand, CanExecute_DeleteRoomCommand);
             this.NavigateToMedicinePageCommand = new RelayCommand(Execute_NavigateToMedicinePageCommand, CanExecute_NavigateCommand);
@@ -300,6 +398,8 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToRenovationReport = new RelayCommand(Execute_NavigateToRoomRenovationReport);
             this.NavigateToAddRoom = new RelayCommand(Execute_NavigateToAddRoomPage);
             this.NaviagteToUpdateRoom = new RelayCommand(Execute_NavigateToUpdateRoomPage, CanExecute_DeleteRoomCommand);
+            this.ShowHelpDialogCommand = new RelayCommand(Execute_ShowHelpMessage);
+
             DispatcherTimer dispatcherTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMinutes(1)
@@ -308,6 +408,19 @@ namespace Hospital_IS.ManagerViewModel
             dispatcherTimer.Start();
         }
 
+        private void Execute_ShowHelpMessage(object obj)
+        {
+
+          
+
+        }
+
+        public void OpenHelpDialog()
+        {
+           
+        }
+
+
         private void Execute_NavigateToUpdateRoomPage(object obj)
         {
 
@@ -315,6 +428,7 @@ namespace Hospital_IS.ManagerViewModel
             UpdateRoomViewModel.Instance.NavService = this.NavService;
             this.NavService.Navigate(
                     new Uri("ManagerView1/UpdateRoomVIew.xaml", UriKind.Relative));
+
         }
 
         private void Execute_NavigateToAddRoomPage(object obj)
@@ -423,10 +537,10 @@ namespace Hospital_IS.ManagerViewModel
 
 
         private void LoadRooms()
-        { 
-           
-            
-            Rooms = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
+        {
+
+
+            Rooms = new CollectionViewSource { Source = RoomController.Instance.GetAllRooms() }.View;
         }
 
         public String RoomNumber

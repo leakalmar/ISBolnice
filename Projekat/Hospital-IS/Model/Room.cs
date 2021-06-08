@@ -38,7 +38,7 @@ namespace Model
 
         public string RoomIdType
         {
-            get { return RoomId + " " + Type; }
+            get { return RoomNumber + " " + Type; }
         }
 
         public List<Equipment> Equipment { get; set; } = new List<Equipment>();
