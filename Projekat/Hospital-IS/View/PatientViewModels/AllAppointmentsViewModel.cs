@@ -17,7 +17,7 @@ namespace Hospital_IS.View.PatientViewModels
         private DoctorAppointment selectedDoctorAppointment;
         private bool shouldShowEvaluate = false;
         private bool shouldShowNote = false;
-        private bool chooseItem = true;
+        private bool chooseItem = false;
         private string date;
         private string doctorName;
         private string appointmentType;

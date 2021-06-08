@@ -71,7 +71,7 @@ namespace Hospital_IS.View.PatientViewModels
         private  void CheckDailyNotifications()
         {
             DateTime time = DateTime.Now;
-            
+            UnseenNotifications = "";
             foreach (Therapy therapy in ChartController.Instance.GetTherapiesByPatient(Patient))
             {
                 int usageHourDifference = (int)24 / therapy.TimesADay;
@@ -90,6 +90,11 @@ namespace Hospital_IS.View.PatientViewModels
                 {
                     UnseenNotifications += "Podsetnik podešen za " + note.NotificationTime + "h: " + note.NoteContent + "\r\n";
                 }
+            }
+
+            if (UnseenNotifications.Equals(""))
+            {
+                ShowUnseenNotifications = false;
             }
         }
         
