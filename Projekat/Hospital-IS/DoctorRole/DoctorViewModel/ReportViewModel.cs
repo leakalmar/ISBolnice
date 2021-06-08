@@ -106,7 +106,7 @@ namespace Hospital_IS.DoctorViewModel
             view._ViewModel.Patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
             view._ViewModel.Prescriptions = Prescriptions;
             DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.SearchMedicineView._ViewModel.Prescriptions = Prescriptions;
-            MainNavigationService.Navigate(view);
+            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(view);
         }
 
         #endregion
@@ -118,7 +118,6 @@ namespace Hospital_IS.DoctorViewModel
             this.NavigateBackCommand = DoctorMainWindow.Instance._ViewModel.NavigateBackCommand;
             this.DeletePrescriptionCommand = new RelayCommand(Execute_DeletePrescriptionCommand, CanExecute_Command);
             this.SearchMedicineCommad = new RelayCommand(Execute_SearchMedicineCommad, CanExecute_Command);
-            this.MainNavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
         }
         #endregion
 

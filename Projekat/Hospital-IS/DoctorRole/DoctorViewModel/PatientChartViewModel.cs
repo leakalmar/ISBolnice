@@ -382,7 +382,6 @@ namespace Hospital_IS.DoctorViewModel
             SearchMedicineView = new SearchMedicine();
             SearchMedicineView._ViewModel.Patient = Patient;
             SearchMedicineView._ViewModel.DatePrescribed = SelectedAppointment.Appointment.AppointmentStart;
-            SearchMedicineView._ViewModel.MainNavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
             Started = SelectedAppointment.IsStarted;
         }
         #endregion

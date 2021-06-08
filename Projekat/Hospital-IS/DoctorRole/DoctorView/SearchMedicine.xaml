@@ -12,7 +12,7 @@
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
     </UserControl.Resources>
     <UserControl.InputBindings>
-        <KeyBinding Key="Add" Command="{Binding AddRemoveMedicineCommand}" />
+        <KeyBinding Key="Space" Command="{Binding AddRemoveMedicineCommand}" />
     </UserControl.InputBindings>
     <Grid KeyboardNavigation.TabNavigation="Local">
         <Grid.ColumnDefinitions>
@@ -72,7 +72,7 @@
                     <commands:TabBehaviour />
                 </i:Interaction.Behaviors>
                 <DataGrid.InputBindings>
-                    <KeyBinding Key="Add"
+                    <KeyBinding Key="Space"
                             Command="{Binding AddRemoveMedicineCommand}" />
                 </DataGrid.InputBindings>
                 <DataGrid.Columns>

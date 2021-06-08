@@ -51,6 +51,20 @@ namespace Hospital_IS.DoctorRole.DoctorView
         public DoctorMainWindow()
         {
             InitializeComponent();
+            CommandBinding removeBinding = null;
+            foreach (CommandBinding cb in this.Home.CommandBindings)
+            {
+                if (cb.Command == NavigationCommands.Refresh)
+                {
+                    removeBinding = cb;
+                    break;
+                }
+                if (removeBinding != null)
+                {
+                    this.Home.CommandBindings.Remove(removeBinding);
+                }
+
+            }
             this.viewModel = new DoctorMainWindowModel(this.Home.NavigationService);
             this.DataContext = this.viewModel;
         }
@@ -75,32 +89,15 @@ namespace Hospital_IS.DoctorRole.DoctorView
                 return;
             }
 
-            if (e.Key == Key.D)
+            if (e.Key == Key.F11)
             {
-                if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+                bool dialog = (bool)new ExitMess("Da li želite da pokrenete demo zakazivanja pregleda?", "yesNo").ShowDialog();
+                if (dialog)
                 {
-                    bool dialog = (bool)new ExitMess("Da li želite da pokrenete demo zakazivanja pregleda?", "yesNo").ShowDialog();
-                    if (dialog)
-                    {
-                        _ViewModel.DemoRunning = true;
-                        this.demoLabel.Visibility = Visibility.Visible;
-                        this.Home.BorderBrush = new SolidColorBrush(Color.FromArgb(0x7F, 0x5B, 0x31, 0x7E));
-                        Demo();
-                    }
-                }
-            }
-            else if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
-            {
-                if (e.Key == Key.D)
-                {
-                    bool dialog = (bool)new ExitMess("Da li želite da pokrenete demo zakazivanja pregleda?", "yesNo").ShowDialog();
-                    if (dialog)
-                    {
-                        _ViewModel.DemoRunning = true;
-                        this.demoLabel.Visibility = Visibility.Visible;
-                        this.Home.BorderBrush = new SolidColorBrush(Color.FromArgb(0x7F, 0x5B, 0x31, 0x7E));
-                        Demo();
-                    }
+                    _ViewModel.DemoRunning = true;
+                    this.demoLabel.Visibility = Visibility.Visible;
+                    this.Home.BorderBrush = new SolidColorBrush(Color.FromArgb(0x7F, 0x5B, 0x31, 0x7E));
+                    Demo();
                 }
             }
         }

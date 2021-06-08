@@ -68,7 +68,7 @@
 
             <Label Grid.Row="4" Grid.Column="0" Content="Krvna grupa:"
                     Style="{StaticResource CustomLabel}" Margin="20,0,0,0" />
-            <ComboBox Grid.Row="4" Grid.Column="1" x:Name="blood" Text="/"
+            <ComboBox Grid.Row="4" Grid.Column="1" x:Name="blood" Text="{Binding BloodType}"
                     Style="{StaticResource CustomComboBox}" IsEnabled="False">
                 <ComboBoxItem Content="A" />
                 <ComboBoxItem Content="B" />

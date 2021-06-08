@@ -14,8 +14,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
     public class TherapyNewViewModel : BindableBase
     {
         #region Fields
-        private List<MedicineDTO> medicines;
-        private MedicineDTO selectedMedicine;
+        private string name;
         private TherapyDTO therapy;
         private DateTime date;
         private bool focused;
@@ -30,15 +29,6 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             }
         }
 
-        public List<MedicineDTO> Medicines
-        {
-            get { return medicines; }
-            set
-            {
-                medicines = value;
-                OnPropertyChanged("Medicines");
-            }
-        }
         public TherapyDTO Therapy
         {
             get { return therapy; }
@@ -61,7 +51,18 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
                 {
                     date = value;
                 }
-                OnPropertyChanged("Therapy");
+                OnPropertyChanged("Date");
+            }
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                Therapy.Name = value;
+                OnPropertyChanged("Name");
             }
         }
         #endregion
@@ -97,7 +98,16 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             Therapy.Validate();
             if (Therapy.IsValid)
             {
-                Therapy newTherapy = new Therapy(MedicineController.Instance.ConvertDTOToMedicine(Therapy.SelectedMedicine), Therapy.Pills, Therapy.Takings, DateTime.Now, (DateTime)new DateConverter().ConvertBack(Therapy.TherapyEnd, null, null, CultureInfo.CurrentCulture));
+                MedicineDTO med = MedicineController.Instance.GetByName(Name);
+                Therapy newTherapy;
+                if (med == null)
+                {
+                    newTherapy = new Therapy(new Medicine(Name,null,"","",null), Therapy.Pills, Therapy.Takings, DateTime.Now, (DateTime)new DateConverter().ConvertBack(Therapy.TherapyEnd, null, null, CultureInfo.CurrentCulture));
+                }
+                else
+                {
+                    newTherapy = new Therapy(MedicineController.Instance.ConvertDTOToMedicine(med), Therapy.Pills, Therapy.Takings, DateTime.Now, (DateTime)new DateConverter().ConvertBack(Therapy.TherapyEnd, null, null, CultureInfo.CurrentCulture));
+                }
                 ChartController.Instance.AddTherapy(newTherapy, DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient);
                 DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.ChangeCommand.Execute("4");
             }
@@ -125,7 +135,6 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             this.Therapy.TherapyEnd = DateTime.Now.ToString("dd.MM.yyyy.");
             this.SaveCommand = new RelayCommand(Execute_SaveCommand, CanExecute_Command);
             this.CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecute_Command);
-            this.Medicines = MedicineController.Instance.ConvertMedicineToDTO(MedicineController.Instance.GetAll());
             ;
         }
         #endregion

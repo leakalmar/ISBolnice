@@ -4,7 +4,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Hospital_IS.DoctorRole.DoctorView"
-        mc:Ignorable="d" d:DesignHeight="555" d:DesignWidth="783">
+        mc:Ignorable="d" d:DesignHeight="555" d:DesignWidth="783"
+             FocusManager.FocusedElement="{Binding ElementName=text}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*" />
@@ -22,7 +23,7 @@
                 <ColumnDefinition Width="0.4*" />
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0">
+            <Grid Grid.Column="3">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition Height="0.3*" />
@@ -55,7 +56,7 @@
                 </StackPanel>
 
             </Grid>
-            <Grid Grid.Column="1" Grid.ColumnSpan="3" Margin="0,50,0,0">
+            <Grid Grid.Column="0" Grid.ColumnSpan="3" Margin="0,25,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
@@ -69,26 +70,31 @@
                         Grid.Column="1" Style="{StaticResource LineTextBox}"
                         Margin="5,0" />-->
 
-                <Button Content="Izmeni lozinku"
+                <Button Content="Izmeni lozinku" Name="password"
                         Style="{StaticResource CustomButton}" Margin="130,10">
                     <Button.InputBindings>
                         <KeyBinding Key="Return"
-                                Command="{Binding ChangePasswordCommand}" />
-                        <KeyBinding Key="Space"
                                 Command="{Binding ChangePasswordCommand}" />
                     </Button.InputBindings>
                 </Button>
 
                 <Button Style="{StaticResource CustomButton}"
                         Content="Pošalji povrtne informacije" Grid.Row="1"
-                        Margin="130,10" />
+                        Margin="130,10">
+                    <Button.InputBindings>
+                        <KeyBinding Command="{Binding FeedBackCommand}"
+                                Key="Return" />
+                        <KeyBinding Command="{Binding FeedBackCommand}"
+                                Key="Space" />
+                    </Button.InputBindings>
+                </Button>
 
                 <StackPanel Grid.Row="2" VerticalAlignment="Center"
                         Margin="20,10">
                     <CheckBox>
                         <TextBlock TextWrapping="Wrap"
                                 Style="{StaticResource CustomTextBlock}"
-                                Text="Pitaj me za demo pri pokretanju (Demo je uvek moguće pokrenuti pritiskom na prečicu Ctrl+D) " />
+                                Text="Pitaj me za demo pri pokretanju (Demo je uvek moguće pokrenuti pritiskom na prečicu F11) " />
                     </CheckBox>
 
                     <TextBlock Style="{StaticResource CustomTextBlock}"
@@ -128,10 +134,18 @@
 
                     <TextBox AcceptsReturn="True" Grid.ColumnSpan="2"
                             Grid.RowSpan="3" Grid.Row="1" Margin="10"
-                            Style="{StaticResource CustomTextBox}" />
+                            Style="{StaticResource CustomTextBox}" x:Name="text"/>
 
                     <Button Style="{StaticResource CustomButton}"
-                            Content="Pošalji" Grid.ColumnSpan="2" Grid.Row="4" Margin="200,15"/>
+                            Content="Pošalji" Grid.ColumnSpan="2" Grid.Row="4"
+                            Margin="200,15">
+                        <Button.InputBindings>
+                            <KeyBinding Key="Space"
+                                    Command="{Binding SaveCommand}" />
+                            <KeyBinding Key="Enter"
+                                    Command="{Binding SaveCommand}" />
+                        </Button.InputBindings>
+                    </Button>
                 </Grid>
 
             </GroupBox>

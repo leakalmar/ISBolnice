@@ -4,7 +4,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:xctk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
-        mc:Ignorable="d" d:DesignHeight="555" d:DesignWidth="783">
+        mc:Ignorable="d" d:DesignHeight="555" d:DesignWidth="783"
+        FocusManager.FocusedElement="{Binding ElementName=search}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.4*" />
@@ -28,7 +29,7 @@
                         <ColumnDefinition Width="0.4*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBox Text="{Binding SearchText}"
+                    <TextBox Text="{Binding SearchText}" x:Name="search"
                             Style="{StaticResource LineTextBox}" />
                     <Label Grid.Column="1" Style="{StaticResource CustomLabel}"
                             Content="Količina:" HorizontalAlignment="Right"/>

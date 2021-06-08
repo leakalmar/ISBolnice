@@ -17,7 +17,7 @@ namespace Hospital_IS.DoctorViewModel
         private Appointments appointmentsView;
         private DoctorDTO doctor;
         private bool focused;
-        public bool DemoRunning{get; set; }
+        public bool DemoRunning { get; set; }
 
         public bool Focused
         {
@@ -85,7 +85,7 @@ namespace Hospital_IS.DoctorViewModel
         private RelayCommand minimizeCommand;
         private RelayCommand maximizeCommand;
         private RelayCommand onLoadedCommand;
-        private RelayCommand navigateBackWithoutCheckCommand; 
+        private RelayCommand navigateBackWithoutCheckCommand;
         private RelayCommand navigateToEquipmentCommand;
         private RelayCommand navigateToSettingsCommand;
         private RelayCommand navigateToEquipCommand;
@@ -182,7 +182,7 @@ namespace Hospital_IS.DoctorViewModel
             get { return onLoadedCommand; }
             set { onLoadedCommand = value; }
         }
-        
+
         public RelayCommand NavigateBackWithoutCheckCommand
         {
             get { return navigateBackWithoutCheckCommand; }
@@ -292,7 +292,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_NavigateToPrescriptionsCommand(object obj)
         {
 
-             this.NavigationService.Navigate(new IssuePrescription(true));
+            this.NavigationService.Navigate(new IssuePrescription(true));
         }
 
         private void Execute_NavigateToApprovemedicineCommand(object obj)
@@ -317,8 +317,9 @@ namespace Hospital_IS.DoctorViewModel
             }
             else
             {
-                this.NavigationService.GoBack();
-                this.NavigationService.Refresh();
+                try
+                { this.NavigationService.GoBack(); }
+                catch (Exception e) { }
             }
         }
 
@@ -364,7 +365,7 @@ namespace Hospital_IS.DoctorViewModel
 
                 }
             }
-            
+
         }
 
         private void Execute_MinimizeCommand(object obj)

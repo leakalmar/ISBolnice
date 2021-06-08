@@ -33,7 +33,15 @@ namespace Controllers
 
         public MedicineDTO GetByName(string medicineName)
         {
-            return ConvertMedicineToDTO(MedicineService.Instance.GetByName(medicineName));
+            Medicine med = MedicineService.Instance.GetByName(medicineName);
+            if (med != null)
+            {
+                return ConvertMedicineToDTO(med);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public MedicineDTO ConvertMedicineToDTO(Medicine medicine)

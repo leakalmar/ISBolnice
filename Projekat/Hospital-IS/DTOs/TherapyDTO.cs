@@ -10,18 +10,18 @@ namespace Hospital_IS.DTOs
 {
     public class TherapyDTO : ValidationBase
     {
-        private MedicineDTO selectedMedicine;
+        private string name;
         private int pills;
         private int takings;
         private String therapyEnd;
 
-        public MedicineDTO SelectedMedicine
+        public string Name
         {
-            get { return selectedMedicine; }
+            get { return name; }
             set
             {
-                selectedMedicine = value;
-                OnPropertyChanged("SelectedMedicine");
+                name = value;
+                OnPropertyChanged("Name");
             }
         }
         public int Pills
@@ -56,7 +56,7 @@ namespace Hospital_IS.DTOs
 
         protected override void ValidateSelf()
         {
-            if (this.selectedMedicine == null)
+            if (string.IsNullOrWhiteSpace(Name))
             {
                 this.ValidationErrors["Medicine"] = "Lek je obavezan.";
             }

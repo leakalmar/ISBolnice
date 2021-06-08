@@ -18,7 +18,6 @@ namespace Hospital_IS.DoctorViewModel
         #region Feilds
         private ICollectionView appointmentsView;
         private AppointmentRowDTO selectedAppointment;
-        private NavigationService navigationService;
         private bool focused;
 
         public bool Focused
@@ -31,14 +30,6 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public NavigationService NavigationService
-        {
-            get { return navigationService; }
-            set
-            {
-                navigationService = value;
-            }
-        }
         public AppointmentRowDTO SelectedAppointment
         {
             get { return selectedAppointment; }
@@ -109,7 +100,7 @@ namespace Hospital_IS.DoctorViewModel
             PatientChart chart = new PatientChart();
             chart._ViewModel.SelectedAppointment = SelectedAppointment;
             DoctorMainWindow.Instance._ViewModel.PatientChartView = chart;
-            this.NavigationService.Navigate(chart);
+            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(chart);
         }
 
         private void Execute_StartAppointmentCommand(object obj)
@@ -118,7 +109,7 @@ namespace Hospital_IS.DoctorViewModel
             PatientChart chart = new PatientChart();
             chart._ViewModel.SelectedAppointment = SelectedAppointment;
             DoctorMainWindow.Instance._ViewModel.PatientChartView = chart;
-            this.NavigationService.Navigate(chart);
+            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(chart);
         }
         private void Execute_SetFocusCommand(object obj)
         {
@@ -171,7 +162,6 @@ namespace Hospital_IS.DoctorViewModel
             this.StartAppointmentCommand = new RelayCommand(Execute_StartAppointmentCommand, CanExecute_NavigateCommand);
             this.SetFocusCommand = new RelayCommand(Execute_SetFocusCommand, CanExecute_NavigateCommand);
             this.LostFocusCommand = new RelayCommand(Execute_LostFocusCommand, CanExecute_NavigateCommand);
-            this.NavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
             SetAppointmentFeilds();
         }
         #endregion

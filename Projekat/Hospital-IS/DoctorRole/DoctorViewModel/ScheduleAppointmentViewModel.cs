@@ -13,7 +13,6 @@ namespace Hospital_IS.DoctorViewModel
     {
         #region Fields
         private ObservableCollection<DoctorAppointmentDTO> scheduledAppointments;
-        private NavigationService mainNavigationService;
         private bool started;
 
         public bool Started
@@ -23,15 +22,6 @@ namespace Hospital_IS.DoctorViewModel
             {
                 started = value;
                 OnPropertyChanged("Started");
-            }
-        }
-
-        public NavigationService MainNavigationService
-        {
-            get { return mainNavigationService; }
-            set
-            {
-                mainNavigationService = value;
             }
         }
 
@@ -61,7 +51,7 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_AddNewCommand(object obj)
         {
 
-            this.MainNavigationService.Navigate(new NewApp());
+            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(new NewApp());
         }
 
         private bool CanExecute_AddNewCommand(object obj)
@@ -77,7 +67,6 @@ namespace Hospital_IS.DoctorViewModel
             this.AddNewCommand = new RelayCommand(Execute_AddNewCommand, CanExecute_AddNewCommand);
             PatientDTO patient = DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Patient;
             this.ScheduledAppointments = new DoctorAppointmentConverter().ConvertAppointmentsToDTO(DoctorAppointmentController.Instance.GetFutureAppointmentsByPatient(patient.Id));
-            this.MainNavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
         }
         #endregion
     }

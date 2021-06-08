@@ -21,19 +21,9 @@ namespace Hospital_IS.DoctorViewModel
         private ICollectionView medicineList;
         private ObservableCollection<PrescriptionDTO> prescriptions;
         private MedicineDTO selectedMedicine;
-        private NavigationService mainNavigationService;
         private DateTime datePrescribed;
         private bool potentiallyAllergicMassage;
         private String searchText;
-
-        public NavigationService MainNavigationService
-        {
-            get { return mainNavigationService; }
-            set
-            {
-                mainNavigationService = value;
-            }
-        }
 
         public ICollectionView MedicineList
 

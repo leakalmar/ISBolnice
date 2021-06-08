@@ -111,11 +111,24 @@ namespace Hospital_IS.DoctorViewModel
         #region Actions
         private void Execute_OpenChartCommand(object obj)
         {
+            if (DoctorMainWindow.Instance._ViewModel.PatientChartView == null)
+            {
+                OpenChart(obj);
+            }
             if (DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Started)
             {
                 new ExitMess("Termin je trenutno u toku! Molimo vas završite termin pre otvaranja kartona drugog pacijenta.", "info").ShowDialog();
                 return;
             }
+            else
+            {
+                OpenChart(obj);
+            }
+
+        }
+
+        private void OpenChart(object obj)
+        {
             PatientChart view = new PatientChart();
             view._ViewModel.Patient = SelectedPatient;
             DoctorMainWindow.Instance._ViewModel.PatientChartView = view;
@@ -155,11 +168,11 @@ namespace Hospital_IS.DoctorViewModel
                 view.Filter = delegate (object item)
                 {
                     PatientDTO patient = item as PatientDTO;
-                    if(patient.Gender == null)
+                    if (patient.Gender == null)
                     {
                         return true;
                     }
-                    if(SelectedGender != null && SelectedGender != "")
+                    if (SelectedGender != null && SelectedGender != "")
                     {
                         return CheckIfPatientMeetsSearchCriteria(patient) && patient.Gender.Equals(SelectedGender) && patient.IsAdmitted == IsAdmitted;
                     }

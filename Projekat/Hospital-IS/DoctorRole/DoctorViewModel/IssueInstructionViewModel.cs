@@ -17,8 +17,6 @@ namespace Hospital_IS.DoctorViewModel
         private string appointmentCause;
         private DoctorDTO logedInDoctor;
 
-        private NavigationService mainNavigationService;
-
         public AppointmentRowDTO SelectedAppointment
         {
             get { return selectedAppointment; }
@@ -59,16 +57,6 @@ namespace Hospital_IS.DoctorViewModel
             }
         }
 
-        public NavigationService MainNavigationService
-        {
-            get { return mainNavigationService; }
-            set
-            {
-                mainNavigationService = value;
-                OnPropertyChanged("MainNavigationService");
-            }
-        }
-
         #endregion
 
         #region Commands
@@ -106,12 +94,12 @@ namespace Hospital_IS.DoctorViewModel
         {
             ScheduleAppointment();
             DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.ChangeCommand.Execute("3");
-            this.MainNavigationService.Navigate(DoctorMainWindow.Instance._ViewModel.PatientChartView);
+            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(DoctorMainWindow.Instance._ViewModel.PatientChartView);
         }
 
         private void Execute_NavigateToPatientChartCommand(object obj)
         {
-            this.MainNavigationService.Navigate(DoctorMainWindow.Instance._ViewModel.PatientChartView);
+            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(DoctorMainWindow.Instance._ViewModel.PatientChartView);
         }
 
         #endregion

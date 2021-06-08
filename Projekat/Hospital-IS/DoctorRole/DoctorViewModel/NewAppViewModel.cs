@@ -43,7 +43,6 @@ namespace Hospital_IS.DoctorViewModel
         private TimeSpan duration;
         private bool emergency;
 
-        private NavigationService mainNavigationService;
         private IssueInstruction instructionView;
         private bool focused;
 
@@ -214,11 +213,6 @@ namespace Hospital_IS.DoctorViewModel
                 FilterAppointments();
             }
         }
-        public NavigationService MainNavigationService
-        {
-            get { return mainNavigationService; }
-            set { mainNavigationService = value; }
-        }
 
         public IssueInstruction InstructionView
         {
@@ -272,7 +266,7 @@ namespace Hospital_IS.DoctorViewModel
                 InstructionView._ViewModel.SelectedAppointment = SelectedAppointment;
                 InstructionView._ViewModel.SelectedEmergencyAppointment = null;
             }
-            this.MainNavigationService.Navigate(InstructionView);
+            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(InstructionView);
         }
 
         private void Execute_ChangeEmergencyCommand(object obj)
@@ -294,7 +288,6 @@ namespace Hospital_IS.DoctorViewModel
             if (instructionView == null)
             {
                 InstructionView = new IssueInstruction();
-                InstructionView._ViewModel.MainNavigationService = MainNavigationService;
             }
         }
         private void SetSelectedDoctor()
@@ -458,7 +451,6 @@ namespace Hospital_IS.DoctorViewModel
         {
             InitializeFilters();
             this.Focused = true;
-            this.MainNavigationService = DoctorMainWindow.Instance._ViewModel.NavigationService;
             this.ChooseAppointmentCommand = new RelayCommand(Execute_ChooseAppointmentCommand, CanExecute_Command);
             this.ChangeEmergencyCommand = new RelayCommand(Execute_ChangeEmergencyCommand, CanExecute_Command);
         }

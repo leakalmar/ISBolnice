@@ -1,26 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using Hospital_IS.DoctorRole.DoctorViewModel;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Hospital_IS.DoctorRole.DoctorView
 {
-    /// <summary>
-    /// Interaction logic for FeedbackView.xaml
-    /// </summary>
     public partial class FeedbackView : UserControl
     {
+
+        private FeedbackViewModel viewModel;
+
+        public FeedbackViewModel _ViewModel
+        {
+            get { return viewModel; }
+            set { viewModel = value; }
+        }
+
         public FeedbackView()
         {
+            this._ViewModel = new FeedbackViewModel();
             InitializeComponent();
+            this.DataContext = _ViewModel;
         }
+
     }
 }

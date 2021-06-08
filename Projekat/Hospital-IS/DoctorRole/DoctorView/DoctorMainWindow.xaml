@@ -24,6 +24,7 @@
                 Command="{Binding Path=NavigateToApproveMedicineCommand}" />
         <KeyBinding Key="F9"
                 Command="{Binding Path=NavigateToNotificationsCommand}" />
+        <KeyBinding Key="F10" Command="{Binding Path=NavigateToSettingsCommand}" />
         <KeyBinding Key="Backspace" Command="{Binding Path=NavigateBackCommand}" />
         <KeyBinding Key="Esc" Command="{Binding Path=NavigateToLogInCommand}" />
         <KeyBinding Modifiers="Ctrl+Alt" Key="N"
@@ -188,6 +189,8 @@
                     VerticalAlignment="Top" Margin="30,0">
                 <Button.InputBindings>
                     <KeyBinding Key="Return"
+                            Command="{Binding NavigateToSettingsCommand}" />
+                    <KeyBinding Key="Space"
                             Command="{Binding NavigateToSettingsCommand}" />
                 </Button.InputBindings>
             </Button>

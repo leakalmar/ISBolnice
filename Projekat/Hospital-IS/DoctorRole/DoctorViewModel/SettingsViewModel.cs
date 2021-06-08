@@ -64,8 +64,9 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         private RelayCommand changePasswordCommand;
         private RelayCommand savePasswordCommand;
         private RelayCommand cancelPasswordCommand;
+        private RelayCommand feedbackCommand;
 
-        
+
         public RelayCommand ChangePasswordCommand
         {
             get { return changePasswordCommand; }
@@ -80,6 +81,11 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         {
             get { return cancelPasswordCommand; }
             set { cancelPasswordCommand = value; }
+        }
+        public RelayCommand FeedBackCommand
+        {
+            get { return feedbackCommand; }
+            set { feedbackCommand = value; }
         }
         #endregion
 
@@ -102,7 +108,10 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             this.NewAgainPassword = "";
             IsEnabled = false;
         }
-
+        private void Execute_FeedBackCommand(object obj)
+        {
+            DoctorMainWindow.Instance._ViewModel.NavigationService.Navigate(new FeedbackView());
+        }
         private bool CanExecute_Command(object obj)
         {
             return true;
@@ -120,6 +129,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             this.CancelPasswordCommand = new RelayCommand(Execute_CancelPasswordCommand, CanExecute_Command);
             this.ChangePasswordCommand = new RelayCommand(Execute_ChangePasswordCommand, CanExecute_Command);
             this.SavePasswordCommand = new RelayCommand(Execute_SavePasswordCommand, CanExecute_Command);
+            this.FeedBackCommand = new RelayCommand(Execute_FeedBackCommand, CanExecute_Command);
         }
         #endregion
 

@@ -11,6 +11,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
 {
     public class EquipmentUseViewModel : BindableBase
     {
+        #region Feilds
         private string searchText;
         private int quantity;
         private List<Equipment> equipmentList;
@@ -20,7 +21,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         public string SearchText
         {
             get { return searchText; }
-            set 
+            set
             {
                 searchText = value;
                 OnPropertyChanged("SearchText");
@@ -66,7 +67,9 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
                 OnPropertyChanged("SelectedEquipment");
             }
         }
+        #endregion
 
+        #region Commands;
         private RelayCommand newInputCommand;
 
         public RelayCommand NewInputCommand
@@ -74,7 +77,9 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             get { return newInputCommand; }
             set { newInputCommand = value; }
         }
+        #endregion
 
+        #region Actions
         private bool CanExecute_Command(object obj)
         {
             return true;
@@ -84,7 +89,9 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         {
             EnteredEquipment.Add(new UsedEquipmentDTO(SelectedEquipment.Name, Quantity));
         }
+        #endregion
 
+        #region Constructor
         public EquipmentUseViewModel()
         {
             this.Quantity = 1;
@@ -96,5 +103,6 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             EquipmentList.Add(new Equipment(EquiptType.Dynamic, "Igle", 10, "Proizvodjac4"));
             this.NewInputCommand = new RelayCommand(Execute_NewInputCommand, CanExecute_Command);
         }
+        #endregion
     }
 }
