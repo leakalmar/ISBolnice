@@ -73,7 +73,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Actions
         private void Execute_ViewMedicineCommand(object obj)
         {
-            DoctorMainWindowModel.Instance.NavigateToUpdateMedicineCommand.Execute(SelectedMedicine);
+            DoctorNavigationController.Instance.NavigateToUpdateMedicineCommand(SelectedMedicine);
         }
 
         private bool CanExecute_Command(object obj)

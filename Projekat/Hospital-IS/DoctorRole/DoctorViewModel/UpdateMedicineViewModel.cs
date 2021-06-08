@@ -134,6 +134,7 @@ namespace Hospital_IS.DoctorViewModel
             MedicineWhichIsUpdated.Usage = NewUsage;
 
             MedicineController.Instance.UpdateMedicine(MedicineWhichIsUpdated);
+            DoctorNavigationController.Instance.NavigateToMedicinesCommand();
         }
 
         private void Execute_AddCompositionCommand(object obj)

@@ -5,11 +5,11 @@ namespace Hospital_IS.DoctorRole.DoctorView
 {
     public partial class PatientChart : UserControl
     {
-        public PatientChart(PatientChartViewModel patientChartViewModel)
+        public PatientChart()
         {
             InitializeComponent();
-            patientChartViewModel.InsideNavigationService = this.patientInfo.NavigationService;
-            this.DataContext = patientChartViewModel;
+            PatientChartViewModel.Instance.InsideNavigationService = this.patientInfo.NavigationService;
+            this.DataContext = PatientChartViewModel.Instance;
         }
 
     }

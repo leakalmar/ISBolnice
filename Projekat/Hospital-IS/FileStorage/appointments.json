@@ -729,13 +729,13 @@
     "Id": 15
   },
   {
-    "NameSurnamePatient": null,
+    "NameSurnamePatient": "Simona Stantic",
     "AppTypeText": null,
     "IsUrgent": false,
     "Patient": {
       "hospital": null,
       "FileDate": "0001-01-01T00:00:00",
-      "Employer": "neki poslodavac",
+      "Employer": "Continental",
       "Admitted": true,
       "Alergies": [
         "Tetanus",
@@ -800,8 +800,8 @@
     "IsFinished": false,
     "Reserved": true,
     "AppointmentCause": null,
-    "AppointmentStart": "2021-06-22T09:00:00",
-    "AppointmentEnd": "2021-06-22T09:30:00",
+    "AppointmentStart": "2021-06-10T08:30:00",
+    "AppointmentEnd": "2021-06-10T09:00:00",
     "Type": 1,
     "Room": 1,
     "Id": 20
@@ -963,14 +963,14 @@
     "Id": 22
   },
   {
-    "NameSurnamePatient": null,
+    "NameSurnamePatient": "Simona Stantic",
     "AppTypeText": null,
     "IsUrgent": false,
     "Patient": {
       "hospital": null,
       "FileDate": "0001-01-01T00:00:00",
       "Employer": "Continental",
-      "Admitted": false,
+      "Admitted": true,
       "Alergies": [
         "Tetanus",
         "Paracetamol"
@@ -1034,8 +1034,8 @@
     "IsFinished": false,
     "Reserved": true,
     "AppointmentCause": null,
-    "AppointmentStart": "2021-06-22T09:45:00",
-    "AppointmentEnd": "2021-06-22T10:15:00",
+    "AppointmentStart": "2021-07-03T08:45:00",
+    "AppointmentEnd": "2021-07-03T09:15:00",
     "Type": 1,
     "Room": 1,
     "Id": 23

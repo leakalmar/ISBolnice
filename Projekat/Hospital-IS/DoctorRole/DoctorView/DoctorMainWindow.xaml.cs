@@ -48,7 +48,15 @@ namespace Hospital_IS.DoctorRole.DoctorView
             DoctorMainWindowModel.Instance.SetDoctor(doctor);
             this.DataContext = DoctorMainWindowModel.Instance;
         }
+        //private void Execute_MinimizeCommand(object obj)
+        //{
+        //    WindowControls.DoMinimize(this);
+        //}
 
+        //private void Execute_MaximizeCommand(object obj)
+        //{
+        //    WindowControls.DoMaximize(this, this.full);
+        //}
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (dispatcherTimer.IsEnabled)
@@ -311,6 +319,7 @@ namespace Hospital_IS.DoctorRole.DoctorView
                         dispatcherTimer.Stop();
                         this.Focus();
                         new ExitMess("Demo zakazivanja pregleda je završen.", "info").ShowDialog();
+                        demoNumber = 0;
                         return;
                 };
                 demoNumber++;

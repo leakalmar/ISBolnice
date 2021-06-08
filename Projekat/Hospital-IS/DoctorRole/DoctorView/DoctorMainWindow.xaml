@@ -17,7 +17,7 @@
         <KeyBinding Key="F3" Command="{Binding Path=NavigateToPatientsCommand}" />
         <KeyBinding Key="F4" Command="{Binding Path=NavigateToMedicinesCommand}" />
         <KeyBinding Key="F5" Command="{Binding Path=NavigateToRoomsCommand}" />
-        <KeyBinding Key="F6" Command="{Binding Path=NavigateToEquipCommand}" />
+        <KeyBinding Key="F6" Command="{Binding Path=NavigateToEquipmentCommand}" />
         <KeyBinding Key="F7"
                 Command="{Binding Path=NavigateToPrescriptionsCommand}" />
         <KeyBinding Key="F8"
@@ -27,10 +27,10 @@
         <KeyBinding Key="F10" Command="{Binding Path=NavigateToSettingsCommand}" />
         <KeyBinding Key="Backspace" Command="{Binding Path=NavigateBackCommand}" />
         <KeyBinding Key="Esc" Command="{Binding Path=NavigateToLogInCommand}" />
-        <KeyBinding Modifiers="Ctrl+Alt" Key="N"
+        <!--<KeyBinding Modifiers="Ctrl+Alt" Key="N"
                 Command="{Binding Path=MinimizeCommand}" />
         <KeyBinding Modifiers="Ctrl+Alt" Key="X"
-                Command="{Binding Path=MaximizeCommand}" />
+                Command="{Binding Path=MaximizeCommand}" />-->
     </Window.InputBindings>
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">

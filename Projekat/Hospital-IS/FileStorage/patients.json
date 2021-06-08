@@ -100,5 +100,38 @@
     "Password": "123",
     "Address": "Dure Dakovica 10",
     "Hospital": null
+  },
+  {
+    "$id": "7",
+    "hospital": null,
+    "FileDate": "0001-01-01T00:00:00",
+    "Employer": "Addiko banka",
+    "Admitted": false,
+    "Alergies": [
+      "Polen"
+    ],
+    "TrollMechanism": {
+      "$id": "8",
+      "TrollCheckStartDate": "0001-01-01T00:00:00",
+      "AppointmentCounterInTimeRange": 0,
+      "IsTroll": false
+    },
+    "PatientNotes": [],
+    "BloodType": null,
+    "IsGuest": false,
+    "doctor": null,
+    "Doctor": null,
+    "Education": 0,
+    "Id": -1,
+    "Name": "Petar",
+    "Surname": "Perić",
+    "BirthDate": "1990-05-12T00:00:00",
+    "Phone": null,
+    "Email": "petar@gmail.com",
+    "Gender": null,
+    "Relationship": null,
+    "Password": "petar",
+    "Address": "Zelengorska 31",
+    "Hospital": null
   }
 ]

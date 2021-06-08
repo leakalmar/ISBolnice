@@ -1,5 +1,6 @@
 ﻿using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DoctorViewModel;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -35,7 +36,16 @@ namespace Hospital_IS.DoctorRole.Commands
 
         public override void NavigateBackCommand()
         {
-            throw new NotImplementedException();
+            if (NavigationService.Content.ToString().Contains("PatientChart") && PatientChartViewModel.Instance.Started == true)
+            {
+                PatientChartViewModel.Instance.EndAppointmentCommand.Execute(null);
+            }
+            else
+            {
+                try
+                { this.NavigationService.GoBack(); }
+                catch (Exception e) { }
+            }
         }
 
         public override void NavigateBackWithoutCheckCommand()
@@ -45,27 +55,24 @@ namespace Hospital_IS.DoctorRole.Commands
 
         public override void NavigateToAppointmentsCommand()
         {
-            throw new NotImplementedException();
+            this.NavigationService.Navigate(new Appointments());
         }
 
         public override void NavigateToApprovemedicineCommand()
         {
-            throw new NotImplementedException();
+            this.NavigationService.Navigate(
+                new Uri("DoctorRole/DoctorView/ApproveMedicine.xaml", UriKind.Relative));
         }
 
         public override void NavigateToChartCommand()
         {
-            DoctorMainWindowModel.Instance.NavigationService.Navigate(new PatientChart(PatientChartViewModel.Instance));
-        }
-
-        public override void NavigateToEquipCommand()
-        {
-            throw new NotImplementedException();
+            this.NavigationService.Navigate(new PatientChart());
         }
 
         public override void NavigateToEquipmentCommand()
         {
-            throw new NotImplementedException();
+            this.NavigationService.Navigate(
+               new Uri("DoctorRole/DoctorView/EquipmentUse.xaml", UriKind.Relative));
         }
 
         public override void NavigateToHomeCommand()
@@ -81,42 +88,52 @@ namespace Hospital_IS.DoctorRole.Commands
 
         public override void NavigateToMedicinesCommand()
         {
-            throw new NotImplementedException();
+            this.NavigationService.Navigate(
+                new Uri("DoctorRole/DoctorView/Medicines.xaml", UriKind.Relative));
         }
 
         public override void NavigateToNotificationsCommand()
         {
-            throw new NotImplementedException();
+            this.NavigationService.Navigate(
+                new Uri("DoctorRole/DoctorView/DoctorNotifications.xaml", UriKind.Relative));
         }
 
         public override void NavigateToPatientsCommand()
         {
-            throw new NotImplementedException();
+            this.NavigationService.Navigate(
+               new Uri("DoctorRole/DoctorView/Patients.xaml", UriKind.Relative));
         }
 
         public override void NavigateToPrescriptionsCommand()
         {
-            throw new NotImplementedException();
+            //nije implementirano, samo zbog prikatya je bool da li da pokaze notifikaciju ili ne kada se odobri
+            this.NavigationService.Navigate(new IssuePrescription(true));
         }
 
         public override void NavigateToRoomsCommand()
         {
-            throw new NotImplementedException();
+            this.NavigationService.Navigate(
+               new Uri("DoctorRole/DoctorView/Rooms.xaml", UriKind.Relative));
         }
 
         public override void NavigateToSettingsCommand()
         {
-            throw new NotImplementedException();
+            this.NavigationService.Navigate(
+               new Uri("DoctorRole/DoctorView/Settings.xaml", UriKind.Relative));
         }
 
-        public override void NavigateToUpdateMedicineCommand()
+        public override void NavigateToUpdateMedicineCommand(Medicine medicine)
         {
-            throw new NotImplementedException();
+            UpdateMedicine updateMedicine = new UpdateMedicine();
+            updateMedicine._ViewModel.MedicineWhichIsUpdated = medicine;
+            this.NavigationService.Navigate(updateMedicine);
         }
 
-        public override void NavigateToViewMedicineCommand()
+        public override void NavigateToViewMedicineCommand(MedicineNotification medicineNotification)
         {
-            throw new NotImplementedException();
+            ReviewMedicine view = new ReviewMedicine();
+            view._ViewModel.MedicineNotification = medicineNotification;
+            this.NavigationService.Navigate(view);
         }
     }
 }

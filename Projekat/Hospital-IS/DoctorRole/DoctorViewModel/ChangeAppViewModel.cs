@@ -135,7 +135,7 @@ namespace Hospital_IS.DoctorViewModel
                 DoctorAppointment newDoctorAppointment = (DoctorAppointment)SelectedAppointment;
                 newDoctorAppointment.Reserved = true;
                 DoctorAppointmentController.Instance.UpdateAppointment(OldAppointment, newDoctorAppointment);
-                DoctorMainWindowModel.Instance.AppointmentsView._ViewModel.ShowChangePanel = false;
+                AppointmentsViewModel.Instance.ShowChangePanel = false;
             }
             else
             {
@@ -146,7 +146,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_BackCommand(object obj)
         {
-            DoctorMainWindowModel.Instance.AppointmentsView._ViewModel.ShowChangePanel = false;
+            AppointmentsViewModel.Instance.ShowChangePanel = false;
         }
 
         private bool CanExecute_Command(object obj)
@@ -161,7 +161,7 @@ namespace Hospital_IS.DoctorViewModel
         {
             if (SelectedDate != null && SelectedDoctor != null && SelectedRoom != null && OldAppointment != null)
             {
-                DoctorMainWindowModel.Instance.AppointmentsView._ViewModel.SelectedAppointment = OldAppointment;
+                AppointmentsViewModel.Instance.SelectedAppointment = OldAppointment;
                 TimeSpan duration = OldAppointment.AppointmentEnd - OldAppointment.AppointmentStart;
                 List<DateTime> dates = new List<DateTime>();
                 dates.Add(SelectedDate);

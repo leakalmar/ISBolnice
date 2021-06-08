@@ -32,6 +32,20 @@ namespace Hospital_IS.DoctorViewModel
         private NavigationService insideNavigation;
         private ChangeApp changeAppView;
 
+        private static AppointmentsViewModel instance;
+
+        public static AppointmentsViewModel Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new AppointmentsViewModel();
+                }
+                return instance;
+            }
+        }
+
         public List<Room> Rooms
         {
             get { return rooms; }
@@ -114,11 +128,9 @@ namespace Hospital_IS.DoctorViewModel
             {
                 if (ShowChangePanel == true && value == false)
                 {
-                    Appointments newApp= new Appointments();
-                    newApp._ViewModel.FromDate = FromDate;
-                    newApp._ViewModel.SelectedRoom = SelectedRoom;
-                    newApp._ViewModel.SelectedType = SelectedType;
-                    DoctorMainWindowModel.Instance.AppointmentsView = newApp;
+                    FromDate = FromDate;
+                    SelectedRoom = SelectedRoom;
+                    SelectedType = SelectedType;
                     DoctorMainWindowModel.Instance.NavigateToAppointmentsCommand.Execute(null);
                 }
                 showChangePanel = value;
@@ -165,8 +177,9 @@ namespace Hospital_IS.DoctorViewModel
             {
                 if (SelectedAppointment.AppointmentStart > DateTime.Now.AddDays(3))
                 {
-                    changeAppView._ViewModel.OldAppointment = SelectedAppointment;
-                    InsideNavigation.Navigate(changeAppView);
+                    ChangeApp changeApp = new ChangeApp();
+                    changeApp._ViewModel.OldAppointment = SelectedAppointment;
+                    InsideNavigation.Navigate(changeApp);
                     ShowChangePanel = true;
                 }
                 else if (SelectedAppointment.AppointmentStart < DateTime.Now)
@@ -295,7 +308,7 @@ namespace Hospital_IS.DoctorViewModel
         #endregion
 
         #region Constructor
-        public AppointmentsViewModel()
+        private AppointmentsViewModel()
         {
             InitializeFilters();
             ChangeAppView = new ChangeApp();

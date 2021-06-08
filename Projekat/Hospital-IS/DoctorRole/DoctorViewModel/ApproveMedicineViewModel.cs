@@ -48,7 +48,7 @@ namespace Hospital_IS.DoctorViewModel
         {
             if(SelectedNotification != null)
             {
-                DoctorMainWindowModel.Instance.NavigateToViewMedicineCommand.Execute(SelectedNotification);
+                DoctorNavigationController.Instance.NavigateToViewMedicineCommand(SelectedNotification);
             }
         }
 
