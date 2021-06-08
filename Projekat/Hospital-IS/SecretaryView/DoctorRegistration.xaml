@@ -3,12 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:val="clr-namespace:Hospital_IS.SecretaryView.Validation"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
-        Title="Registracija doktora" Height="540" Width="520"
+        Title="Registracija doktora" Height="570" Width="520"
         WindowStartupLocation="CenterScreen"
         FontSize="17"
         FontWeight="Light">
+    <Window.Resources>
+        <val:InverseAndBooleansToBooleanConverter x:Key="InverseAndBooleansToBooleanConverter"/>
+    </Window.Resources>
     <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -44,30 +48,160 @@
         <TextBlock Grid.Column="1" Grid.Row="9" Text="Ponovite šifru *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
 
-        <TextBox Grid.Column="2" Grid.Row="1" Margin="40 10 10 10" Text="{Binding Doctor.Name}"
-                 Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <TextBox Grid.Column="2" Grid.Row="2" Margin="40 5 10 10" Text="{Binding Doctor.Surname}"
-                 Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <TextBox Grid.Column="2" Grid.Row="3" Margin="40 5 10 10" Name="birthdateTxt"
-                 Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <TextBox Grid.Column="2" Grid.Row="4" Margin="40 5 10 10" Text="{Binding Doctor.Address}"
-                 Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <TextBox Grid.Column="2" Grid.Row="5" Margin="40 5 10 10" Text="{Binding Doctor.Phone}"
-                 Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <ComboBox Name="cbSpecialty" Grid.Column="2" Grid.Row="6" Margin="40 5 10 10" ItemsSource="{Binding Specialties}">
+        <TextBox Name="txtName" Grid.Column="2" Grid.Row="1" Margin="40 10 10 10"
+                 Style="{DynamicResource ResourceKey=RegularTextBox}">
+            <TextBox.Text>
+                <Binding Path="Doctor.Name" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:IsEmptyValidationRule ValidationStep="RawProposedValue"/>
+                        <val:IsFirstLetterInUppercaseValidationRule ValidationStep="RawProposedValue"/>
+                        <val:AreCharactersSuitableValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder x:Name="textBox"/>
+                        <TextBlock Text="{Binding [0].ErrorContent}" Style="{DynamicResource ResourceKey=Validation}"
+                                   VerticalAlignment="Bottom" FontSize="12"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+
+        <TextBox Name="txtSurname" Grid.Column="2" Grid.Row="2" Margin="40 10 10 10" 
+                 Style="{DynamicResource ResourceKey=RegularTextBox}">
+            <TextBox.Text>
+                <Binding Path="Doctor.Surname" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:IsEmptyValidationRule ValidationStep="RawProposedValue"/>
+                        <val:IsFirstLetterInUppercaseValidationRule ValidationStep="RawProposedValue"/>
+                        <val:AreCharactersSuitableValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder x:Name="textBox"/>
+                        <TextBlock Text="{Binding [0].ErrorContent}" Style="{DynamicResource ResourceKey=Validation}"
+                                   VerticalAlignment="Bottom" FontSize="12"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+
+        <TextBox Name="txtBirthDate"  Grid.Column="2" Grid.Row="3" Margin="40 10 10 10"
+                 Style="{DynamicResource ResourceKey=RegularTextBox}">
+            <TextBox.Text>
+                <Binding Path="BirthDate" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:IsEmptyValidationRule ValidationStep="RawProposedValue"/>
+                        <val:IsBirthdateValid ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder x:Name="textBox"/>
+                        <TextBlock Text="{Binding [0].ErrorContent}" Style="{DynamicResource ResourceKey=Validation}"
+                                   VerticalAlignment="Bottom" FontSize="12"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+
+        <TextBox Name="txtAddress" Grid.Column="2" Grid.Row="4" Margin="40 10 10 10"
+                 Style="{DynamicResource ResourceKey=RegularTextBox}">
+            <TextBox.Text>
+                <Binding Path="Doctor.Address" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:IsEmptyValidationRule ValidationStep="RawProposedValue"/>
+                        <val:IsAddressValid ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder x:Name="textBox"/>
+                        <TextBlock Text="{Binding [0].ErrorContent}" Style="{DynamicResource ResourceKey=Validation}"
+                                   VerticalAlignment="Bottom" FontSize="12"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+
+        <TextBox Name="txtPhone" Grid.Column="2" Grid.Row="5" Margin="40 10 10 10"
+                 Style="{DynamicResource ResourceKey=RegularTextBox}">
+            <TextBox.Text>
+                <Binding Path="Doctor.Phone" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:IsEmptyValidationRule ValidationStep="RawProposedValue"/>
+                        <val:IsPhoneNumberValid ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder x:Name="textBox"/>
+                        <TextBlock Text="{Binding [0].ErrorContent}" Style="{DynamicResource ResourceKey=Validation}"
+                                   VerticalAlignment="Bottom" FontSize="12"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+        
+        <ComboBox Name="cbSpecialty" Grid.Column="2" Grid.Row="6" Margin="40 10 10 10" ItemsSource="{Binding Specialties}">
         </ComboBox>
-        <TextBox Grid.Column="2" Grid.Row="7" Margin="40 5 10 10" Text="{Binding Doctor.Email}"
-                 Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <PasswordBox Name="passwordBox" Grid.Column="2" Grid.Row="8" Margin="40 20 10 10"
+        <TextBox Name="txtEmail" Grid.Column="2" Grid.Row="7" Margin="40 10 10 10"
+                 Style="{DynamicResource ResourceKey=RegularTextBox}">
+            <TextBox.Text>
+                <Binding Path="Doctor.Email" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:IsEmptyValidationRule ValidationStep="RawProposedValue"/>
+                        <val:IsEmailValid ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder x:Name="textBox"/>
+                        <TextBlock Text="{Binding [0].ErrorContent}" Style="{DynamicResource ResourceKey=Validation}"
+                                   VerticalAlignment="Bottom" FontSize="12"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+
+        <PasswordBox Name="passwordBox" Grid.Column="2" Grid.Row="8" Margin="40 20 10 10" PasswordChanged="CheckPassword"
                      Style="{DynamicResource ResourceKey=PasswordBox}"/>
-        <PasswordBox Grid.Column="2" Grid.Row="9" Margin="40 5 10 10"
+        <PasswordBox Name="passwordRepeated" Grid.Column="2" Grid.Row="9" Margin="40 10 10 20" PasswordChanged="CheckPassword"
                      Style="{DynamicResource ResourceKey=PasswordBox}"/>
+        <TextBlock Name="txtPasswordMatch" Grid.Column="2" Grid.Row="9" FontSize="12" VerticalAlignment="Bottom"
+                   Style="{DynamicResource ResourceKey=Validation}"  Margin="40 0"
+                   Text="Šifre se ne poklapaju / nisu unete." Visibility="Hidden"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center">
-            <Button Grid.Column="1" Grid.Row="11" Width="90"
+            <Button Name="btnConfirm" Grid.Column="1" Grid.Row="11" Width="90"
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="0 20 25 0"
-                    Content="Potvrdi" Click="AddDoctor"/>
+                    Content="Potvrdi" Click="AddDoctor">
+                <Button.IsEnabled>
+                    <MultiBinding Converter="{StaticResource InverseAndBooleansToBooleanConverter}" Mode="TwoWay">
+                        <Binding ElementName="txtName" Path="(Validation.HasError)" />
+                        <Binding ElementName="txtSurname" Path="(Validation.HasError)" />
+                        <Binding ElementName="txtBirthDate" Path="(Validation.HasError)" />
+                        <Binding ElementName="txtAddress" Path="(Validation.HasError)" />
+                        <Binding ElementName="txtPhone" Path="(Validation.HasError)" />
+                        <Binding ElementName="txtEmail" Path="(Validation.HasError)" />
+                    </MultiBinding>
+                </Button.IsEnabled>
+            </Button>
             <Button Grid.Column="2" Grid.Row="11" Width="90"
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="25 20 0 0 "

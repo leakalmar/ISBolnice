@@ -49,6 +49,7 @@ namespace Controllers
         {
             Doctor doctor = new Doctor(doctorDTO.Id, doctorDTO.Name, doctorDTO.Surname, doctorDTO.BirthDate, doctorDTO.Email, 
                 doctorDTO.Password, doctorDTO.Address, 80000.0, DateTime.Now, null, SpecializationService.Instance.GetSpecialtyByName(doctorDTO.Specialty), 0);
+            doctor.Phone = doctorDTO.Phone;
             DoctorService.Instance.AddDoctor(doctor);
         }
 
@@ -58,7 +59,7 @@ namespace Controllers
                doctorDTO.Password, doctorDTO.Address, 80000.0, DateTime.Now, null, SpecializationService.Instance.GetSpecialtyByName(doctorDTO.Specialty), 0);
             doctor.WorkShift = doctorDTO.WorkShift;
             doctor.VacationTimeStart = doctorDTO.VacationTimeStart;
-            //doctor.DaysOff.AddRange(doctorDTO.DaysOff);
+            doctor.Phone = doctorDTO.Phone;
             DoctorService.Instance.UpdateDoctor(doctor);
         }
 

@@ -172,4 +172,41 @@ namespace Hospital_IS.SecretaryView.Validation
 
         }
     }
+
+    class IsVacationTimeValid : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            Regex rgx = new Regex(@"^[0-9]{2}\.[0-9]{2}\.[0-9]{4}\.$");
+            var s = value as string;
+            DateTime date;
+            if (string.IsNullOrEmpty(s))
+                return new ValidationResult(true, null);
+
+            if (rgx.IsMatch(s.ToString().Trim()))
+            {
+                try
+                {
+                    date = DateTime.ParseExact(s.ToString(), "dd.MM.yyyy.", CultureInfo.InvariantCulture);
+                }
+                catch (Exception ex)
+                {
+                    return new ValidationResult(false, "Uneti datum je nepostojeći.");
+                }
+
+                if (date < DateTime.Now || date < DateTime.Now.AddYears(-90))
+                    return new ValidationResult(false, "Datum nije validan.");
+
+                if (date < DateTime.Now.AddDays(14))
+                    return new ValidationResult(false, "Godišnji se mora najavaiti bar dve nedelje unapred.");
+
+                return new ValidationResult(true, null);
+            }
+            else
+            {
+                return new ValidationResult(false, "Datum nije u dobrom formatu (dd.mm.yyyy.).");
+            }
+
+        }
+    }
 }

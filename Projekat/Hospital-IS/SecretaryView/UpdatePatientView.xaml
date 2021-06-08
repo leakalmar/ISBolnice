@@ -237,7 +237,7 @@
 
 
         <StackPanel Orientation="Horizontal" Grid.Row="16" Grid.ColumnSpan="4" HorizontalAlignment="Center">
-            <Button Content="Potvrdi" Width="65" Margin="5 5 30 5"
+            <Button Content="Potvrdi" Width="80" Margin="5 5 30 5"
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     Click="UpdatePatient">
                 <Button.IsEnabled>
@@ -251,7 +251,7 @@
                     </MultiBinding>
                 </Button.IsEnabled>
             </Button>
-            <Button Content="Odustani" Width="65" Margin="30 5 5 5"
+            <Button Content="Odustani" Width="80" Margin="30 5 5 5"
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     Click="Close"/>
         </StackPanel>

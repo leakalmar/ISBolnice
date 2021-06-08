@@ -3,6 +3,7 @@ using Hospital_IS.DTOs;
 using Hospital_IS.Enums;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
 
@@ -11,11 +12,20 @@ namespace Hospital_IS.SecretaryView
     /// <summary>
     /// Interaction logic for UpdateDoctorView.xaml
     /// </summary>
-    public partial class UpdateDoctorView : Window
+    public partial class UpdateDoctorView : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         public DoctorDTO Doctor { get; set; } = new DoctorDTO();
         public ObservableCollection<string> Specialties { get; set; } = new ObservableCollection<string>();
         public UCDoctorsView udv;
+
+        private String _name;
+        private String _surname;
+        private String _birthDate;
+        private String _address;
+        private String _phone;
+        private String _email;
+        private String _vacationStart;
         public UpdateDoctorView(DoctorDTO doctor, UCDoctorsView udv)
         {
             InitializeComponent();
@@ -28,11 +38,17 @@ namespace Hospital_IS.SecretaryView
         }
         private void SetDoctorInfo()
         {
+            _name = Doctor.Name;
             txtName.Text = Doctor.Name;
+            _surname = Doctor.Surname;
             txtSurname.Text = Doctor.Surname;
+            _birthDate = Doctor.BirthDate.ToString("dd.MM.yyyy.");
             txtBirthDate.Text = Doctor.BirthDate.ToString("dd.MM.yyyy.");
+            _address = Doctor.Address;
             txtAddress.Text = Doctor.Address;
+            _phone = Doctor.Phone;
             txtTelephone.Text = Doctor.Phone;
+            _email = Doctor.Email;
             txtEmail.Text = Doctor.Email;
 
 
@@ -44,8 +60,17 @@ namespace Hospital_IS.SecretaryView
             else if (Doctor.WorkShift.Equals(WorkDayShift.SecondShift))
                 shiftComboBox.SelectedIndex = 1;
 
-            vacationStartTxt.Text = Doctor.VacationTimeStart.ToString("dd.MM.yyyy.");
-            vacationEndTxt.Text = Doctor.VacationTimeStart.AddDays(14).ToString("dd.MM.yyyy.");
+            if (!Doctor.VacationTimeStart.Equals(new DateTime(1,1,1)))
+            {
+                _vacationStart = Doctor.VacationTimeStart.ToString("dd.MM.yyyy.");
+                vacationStartTxt.Text = Doctor.VacationTimeStart.ToString("dd.MM.yyyy.");
+                vacationEndTxt.Text = Doctor.VacationTimeStart.AddDays(14).ToString("dd.MM.yyyy.");
+            }
+            else
+            {
+                _vacationStart = "";
+                vacationStartTxt.Text = "";
+            }
         }
 
         private void UpdateDoctor(object sender, RoutedEventArgs e)
@@ -98,9 +123,15 @@ namespace Hospital_IS.SecretaryView
         {
             if (!string.IsNullOrEmpty(vacationStartTxt.Text))
             {
-                DateTime vacationStart = DateTime.ParseExact(vacationStartTxt.Text, "dd.MM.yyyy.", CultureInfo.InvariantCulture);
-                DateTime vacationEnd = vacationStart.AddDays(14);
-                vacationEndTxt.Text = vacationEnd.ToString("dd.MM.yyyy.");
+                try
+                {
+                    DateTime vacationStart = DateTime.ParseExact(vacationStartTxt.Text, "dd.MM.yyyy.", CultureInfo.InvariantCulture);
+                    DateTime vacationEnd = vacationStart.AddDays(14);
+                    vacationEndTxt.Text = vacationEnd.ToString("dd.MM.yyyy.");
+                }
+                catch (Exception ex)
+                {
+                }
             }
         }
 
@@ -113,6 +144,99 @@ namespace Hospital_IS.SecretaryView
         {
             udv.RefreshGrid();
             SetDoctorInfo();
+        }
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public String DoctorName
+        {
+            get { return _name; }
+            set
+            {
+                if (value != _name)
+                {
+                    _name = value;
+                    OnPropertyChanged("DoctorName");
+                }
+            }
+        }
+        public String Surname
+        {
+            get { return _surname; }
+            set
+            {
+                if (value != _surname)
+                {
+                    _surname = value;
+                    OnPropertyChanged("Surname");
+                }
+            }
+        }
+        public String BirthDate
+        {
+            get { return _birthDate; }
+            set
+            {
+                if (value != _birthDate)
+                {
+                    _birthDate = value;
+                    OnPropertyChanged("BirthDate");
+                }
+            }
+        }
+        public String Address
+        {
+            get { return _address; }
+            set
+            {
+                if (value != _address)
+                {
+                    _address = value;
+                    OnPropertyChanged("Address");
+                }
+            }
+        }
+        public String Phone
+        {
+            get { return _phone; }
+            set
+            {
+                if (value != _phone)
+                {
+                    _phone = value;
+                    OnPropertyChanged("Phone");
+                }
+            }
+        }
+        public String Email
+        {
+            get { return _email; }
+            set
+            {
+                if (value != _email)
+                {
+                    _email = value;
+                    OnPropertyChanged("Email");
+                }
+            }
+        }
+        public String VacationStart
+        {
+            get { return _vacationStart; }
+            set
+            {
+                if (value != _vacationStart)
+                {
+                    _vacationStart = value;
+                    OnPropertyChanged("VacationStart");
+                }
+            }
         }
     }
 }

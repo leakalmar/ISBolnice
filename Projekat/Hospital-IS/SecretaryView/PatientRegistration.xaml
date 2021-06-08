@@ -187,7 +187,7 @@
                    Text="Šifre se ne poklapaju / nisu unete." Visibility="Hidden"/>
 
         <CheckBox Name="checkBox" Grid.Column="2" Grid.Row="10" FontSize="14" Style="{DynamicResource ResourceKey=CheckBox}"
-                  Margin="40 5" HorizontalAlignment="Right" 
+                  Margin="40 5" HorizontalAlignment="Right" Click="checkBox_Click"
                   Content="Gostujući nalog"/>
 
         <Button Name="btnConfirm" Grid.Column="1" Grid.Row="11" Width="120" Height="30" Style="{DynamicResource ResourceKey=RegularButton}"
