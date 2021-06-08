@@ -28,6 +28,11 @@
         "Name": "fsd",
         "SampleDate": "2021-06-07T10:41:09.6727235+02:00",
         "Result": "fsd"
+      },
+      {
+        "Name": "fsd",
+        "SampleDate": "2021-06-08T19:59:09.3543768+02:00",
+        "Result": "fsd"
       }
     ],
     "Reports": [
@@ -95,6 +100,29 @@
         },
         "Doctor": "Dragana V. Simokov",
         "IsReleased": true
+      },
+      {
+        "AdmissionDate": "2021-06-08T19:59:16.8886397+02:00",
+        "ReleaseDate": "2021-06-23T00:00:00",
+        "Detail": null,
+        "Room": {
+          "RoomFloor": 2,
+          "RoomNumber": 26,
+          "SurfaceArea": 20,
+          "BedNumber": 6,
+          "RoomId": 15,
+          "Type": 0,
+          "RoomIdType": "15 RecoveryRoom",
+          "Equipment": [],
+          "isUsable": false
+        },
+        "Bed": {
+          "BedId": 0,
+          "RoomId": 15,
+          "Taken": true
+        },
+        "Doctor": "Dragana V. Simokov",
+        "IsReleased": false
       }
     ],
     "Therapies": [
@@ -197,6 +225,21 @@
         "TherapyEnd": "2021-06-07T00:00:00",
         "FirstUsageTime": 0,
         "LastTimeIssued": "2021-06-07T10:31:49.9565801+02:00"
+      },
+      {
+        "Medicine": {
+          "Name": "vsfd",
+          "Composition": null,
+          "SideEffects": "",
+          "Usage": "",
+          "ReplaceMedicine": null
+        },
+        "Quantity": 1,
+        "TimesADay": 1,
+        "TherapyStart": "2021-06-08T19:59:03.551111+02:00",
+        "TherapyEnd": "2021-06-08T00:00:00",
+        "FirstUsageTime": 0,
+        "LastTimeIssued": "2021-06-08T19:59:03.551111+02:00"
       }
     ]
   },

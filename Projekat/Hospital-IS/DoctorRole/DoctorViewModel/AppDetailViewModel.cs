@@ -96,24 +96,22 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_OpenChartCommand(object obj)
         {
-            // SelectedAppointment.IsStarted = false;
+            SelectedAppointment.IsStarted = false;
             //PatientChart chart = new PatientChart();
             // chart._ViewModel.SelectedAppointment = SelectedAppointment;
             //DoctorMainWindowModel.Instance.PatientChartView = chart;
             // DoctorMainWindowModel.Instance.NavigationService.Navigate(chart);
-            PatientChartViewModel.Instance.SelectedAppointment = SelectedAppointment;
-            PatientChartViewModel.Instance.Started = false;
             DoctorNavigationController.Instance.NavigateToChartCommand();
+            PatientChartViewModel.Instance.SelectedAppointment = SelectedAppointment;
         }
 
         private void Execute_StartAppointmentCommand(object obj)
         {
-            // SelectedAppointment.IsStarted = true;
+            SelectedAppointment.IsStarted = true;
             // PatientChartViewModel.Instance.SelectedAppointment = SelectedAppointment;
             //DoctorMainWindowModel.Instance.PatientChartView = chart;
-            PatientChartViewModel.Instance.SelectedAppointment = SelectedAppointment;
-            PatientChartViewModel.Instance.Started = true;
             DoctorNavigationController.Instance.NavigateToChartCommand();
+            PatientChartViewModel.Instance.SelectedAppointment = SelectedAppointment;
             // DoctorMainWindowModel.Instance.NavigationService.Navigate(chart);
         }
         private void Execute_SetFocusCommand(object obj)

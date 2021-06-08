@@ -3,6 +3,7 @@ using Enums;
 using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorView;
 using Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Data;
@@ -169,7 +170,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             ShowPanel = false;
             List<Room> rooms = RoomController.Instance.GetAllRooms();
             ICollectionView view = new CollectionViewSource { Source = rooms }.View;
-            if((EnteredNumber == null || EnteredNumber == "") && SelectedType == null && SelectedFloor == 0)
+            if ((EnteredNumber == null || EnteredNumber == "") && SelectedType == null && SelectedFloor == 0)
             {
                 view.SortDescriptions.Add(new SortDescription("RoomNumber", ListSortDirection.Ascending));
                 FilterdRooms = view;
@@ -188,11 +189,17 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
 
         public bool CheckRoom(Room room)
         {
-            if(EnteredNumber != null && EnteredNumber != "" && SelectedType == null && SelectedFloor == 0)
+            if (EnteredNumber != null && EnteredNumber != "" && SelectedType == null && SelectedFloor == 0)
             {
-                return room.RoomNumber > int.Parse(EnteredNumber);
+                int i;
+                try
+                {
+                    i = int.Parse(EnteredNumber);
+                    return room.RoomNumber > int.Parse(EnteredNumber);
+                }
+                catch (Exception e) { return true; }
             }
-            else if((EnteredNumber == null || EnteredNumber == "") && SelectedType != null && SelectedFloor == 0)
+            else if ((EnteredNumber == null || EnteredNumber == "") && SelectedType != null && SelectedFloor == 0)
             {
                 return room.Type.Equals(FindType());
             }

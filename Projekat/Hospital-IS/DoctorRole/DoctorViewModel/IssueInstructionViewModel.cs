@@ -93,8 +93,8 @@ namespace Hospital_IS.DoctorViewModel
         private void Execute_IssueInstructionCommand(object obj)
         {
             ScheduleAppointment();
-            PatientChartViewModel.Instance.ChangeCommand.Execute("3");
             DoctorMainWindowModel.Instance.NavigateToChartCommand.Execute(null);
+            PatientChartViewModel.Instance.ChangeCommand.Execute("3");
         }
 
         private void Execute_NavigateToPatientChartCommand(object obj)

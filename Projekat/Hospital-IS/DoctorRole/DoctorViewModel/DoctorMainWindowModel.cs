@@ -215,6 +215,7 @@ namespace Hospital_IS.DoctorViewModel
             if (PatientChartViewModel.Instance.Started)
             {
                 DoctorNavigationController.Instance.NavigateToChartCommand();
+                PatientChartViewModel.Instance.ChangeCommand.Execute("0");
             }
             else
             {

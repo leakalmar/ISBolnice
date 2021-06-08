@@ -81,12 +81,6 @@
                 <Button Style="{StaticResource CustomButton}"
                         Content="Pošalji povrtne informacije" Grid.Row="1"
                         Margin="130,10">
-                    <Button.InputBindings>
-                        <KeyBinding Command="{Binding FeedBackCommand}"
-                                Key="Return" />
-                        <KeyBinding Command="{Binding FeedBackCommand}"
-                                Key="Space" />
-                    </Button.InputBindings>
                 </Button>
 
                 <StackPanel Grid.Row="2" VerticalAlignment="Center"
@@ -112,7 +106,7 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="2" IsEnabled="{Binding IsEnabled}">
+        <Grid Grid.Row="2">
             <GroupBox Header="Izmena lozinke"
                     Style="{StaticResource CustomGroupBox}">
                 <Grid>

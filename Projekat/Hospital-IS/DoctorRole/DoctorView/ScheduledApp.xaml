@@ -25,8 +25,8 @@
             <Button.InputBindings>
                 <KeyBinding Key="Add" Modifiers="Ctrl"
                         Command="{Binding AddNewCommand}" />
-                <KeyBinding Key="Space" 
-                        Command="{Binding AddNewCommand}" />
+                <KeyBinding Key="Space" Command="{Binding AddNewCommand}" />
+                <KeyBinding Key="Return" Command="{Binding AddNewCommand}" />
             </Button.InputBindings>
         </Button>
 

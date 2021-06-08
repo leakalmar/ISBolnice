@@ -189,6 +189,8 @@
                     <DataGrid.InputBindings>
                         <KeyBinding Key="Return"
                                 Command="{Binding ChooseAppointmentCommand}" />
+                        <KeyBinding Key="Space"
+                                Command="{Binding ChooseAppointmentCommand}" />
                     </DataGrid.InputBindings>
                     <DataGrid.Resources>
                         <Style
@@ -251,6 +253,8 @@
                     </i:Interaction.Behaviors>
                     <DataGrid.InputBindings>
                         <KeyBinding Key="Return"
+                                Command="{Binding ChooseAppointmentCommand}" />
+                        <KeyBinding Key="Space"
                                 Command="{Binding ChooseAppointmentCommand}" />
                     </DataGrid.InputBindings>
                     <DataGrid.Columns>

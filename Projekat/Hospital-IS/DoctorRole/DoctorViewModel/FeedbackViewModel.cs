@@ -23,8 +23,15 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         }
 
         private RelayCommand saveCommand;
+        private RelayCommand changePasswordCommand;
 
         public RelayCommand SaveCommand
+        {
+            get { return saveCommand; }
+            set { saveCommand = value; }
+        }
+
+        public RelayCommand ChangePasswordCommand
         {
             get { return saveCommand; }
             set { saveCommand = value; }
@@ -35,6 +42,9 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
             DoctorMainWindowModel.Instance.NavigateToSettingsCommand.Execute(null);
         }
 
+        private void Execute_ChangePasswordCommand(object obj)
+        {
+        }
         private bool CanExecute_Command(object obj)
         {
             return true;
@@ -42,6 +52,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         public FeedbackViewModel()
         {
             this.SaveCommand = new RelayCommand(Execute_SaveCommand, CanExecute_Command);
+            this.ChangePasswordCommand = new RelayCommand(Execute_ChangePasswordCommand,CanExecute_Command);
         }
     }
 }

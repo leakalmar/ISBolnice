@@ -51,10 +51,10 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         {
             //zakucana vrendnost
             //PatientChartViewModel viewModel = new PatientChartViewModel();
+            DoctorNavigationController.Instance.NavigateToChartCommand();
             PatientChartViewModel.Instance.Patient = SecretaryManagementController.Instance.GetPatientByID(1);
             PatientChartViewModel.Instance.PrescriptionReview = true;
             // DoctorMainWindowModel.Instance.NavigateToChartCommand.Execute(obj);
-            DoctorNavigationController.Instance.NavigateToChartCommand();
         }
 
         private bool CanExecute_Command(object obj)
