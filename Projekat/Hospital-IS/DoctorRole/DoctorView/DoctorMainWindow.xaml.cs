@@ -109,17 +109,10 @@ namespace Hospital_IS.DoctorRole.DoctorView
 
             list[0].Appointment.IsFinished = false;
             list[0].IsStarted = true;
-            PatientChartViewModel.Instance.SelectedAppointment = list[0];
-            PatientChartViewModel.Instance.Started = true;
 
-            ScheduledApp scheduledApp = new ScheduledApp();
-            scheduledApp._ViewModel.Started = true;
+            ScheduledApp scheduledApp = null;
 
-            NewApp newApp = new NewApp();
-            newApp._ViewModel.Appointments = null;
-            newApp._ViewModel.EmergencyAppointments = null;
-            newApp.fromDate.SelectedDate = new DateTime(2021, 06, 07);
-            newApp.toDate.SelectedDate = new DateTime(2021, 06, 08);
+            NewApp newApp = null;
 
             List<AppointmentRowDTO> newAppointments = new List<AppointmentRowDTO>();
 
@@ -190,16 +183,25 @@ namespace Hospital_IS.DoctorRole.DoctorView
                         appDetail.start.Focus();
                         break;
                     case 7:
-                        DoctorMainWindowModel.Instance.NavigationService.Navigate(PatientChartViewModel.Instance);
+                        DoctorNavigationController.Instance.NavigateToChartCommand();
+                        PatientChartViewModel.Instance.SelectedAppointment = list[0];
+                        PatientChartViewModel.Instance.Started = true;
                         break;
                     case 8:
                         PatientChartViewModel.Instance.ChangeCommand.Execute("3");
+                        scheduledApp = new ScheduledApp();
+                        scheduledApp._ViewModel.Started = true;
                         PatientChartViewModel.Instance.InsideNavigationService.Navigate(scheduledApp);
                         break;
                     case 9:
                         scheduledApp.schedule.Focus();
                         break;
                     case 10:
+                        newApp = new NewApp();
+                        newApp._ViewModel.Appointments = null;
+                        newApp._ViewModel.EmergencyAppointments = null;
+                        newApp.fromDate.SelectedDate = new DateTime(2021, 06, 07);
+                        newApp.toDate.SelectedDate = new DateTime(2021, 06, 08);
                         DoctorMainWindowModel.Instance.NavigationService.Navigate(newApp);
                         break;
                     case 11:
