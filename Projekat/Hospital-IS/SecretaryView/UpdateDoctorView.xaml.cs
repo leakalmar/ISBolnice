@@ -20,28 +20,45 @@ namespace Hospital_IS.SecretaryView
         {
             InitializeComponent();
             this.udv = udv;
-            Specialties = new ObservableCollection<string>(SpecializationController.Instance.GetAllNames());
-            cbSpecialty.SelectedItem = doctor.Specialty;
-            birthdateTxt.Text = Doctor.BirthDate.ToString("dd.MM.yyyy.");
-
             Doctor = doctor;
 
+            SetDoctorInfo();
+            
+            this.DataContext = this;
+        }
+        private void SetDoctorInfo()
+        {
+            txtName.Text = Doctor.Name;
+            txtSurname.Text = Doctor.Surname;
+            txtBirthDate.Text = Doctor.BirthDate.ToString("dd.MM.yyyy.");
+            txtAddress.Text = Doctor.Address;
+            txtTelephone.Text = Doctor.Phone;
+            txtEmail.Text = Doctor.Email;
+
+
+            Specialties = new ObservableCollection<string>(SpecializationController.Instance.GetAllNames());
+            cbSpecialty.SelectedItem = Doctor.Specialty;
+
             if (Doctor.WorkShift.Equals(WorkDayShift.FirstShift))
-                shiftComboBox.SelectedIndex= 0;
+                shiftComboBox.SelectedIndex = 0;
             else if (Doctor.WorkShift.Equals(WorkDayShift.SecondShift))
                 shiftComboBox.SelectedIndex = 1;
 
             vacationStartTxt.Text = Doctor.VacationTimeStart.ToString("dd.MM.yyyy.");
             vacationEndTxt.Text = Doctor.VacationTimeStart.AddDays(14).ToString("dd.MM.yyyy.");
-
-            this.DataContext = this;
         }
 
         private void UpdateDoctor(object sender, RoutedEventArgs e)
         {
+            Doctor.Name = txtName.Text;
+            Doctor.Surname = txtSurname.Text;
+            Doctor.Address = txtAddress.Text;
+            Doctor.Phone = txtTelephone.Text;
+            Doctor.Email = txtEmail.Text;
+
             try
             {
-                DateTime birthDate = DateTime.ParseExact(birthdateTxt.Text, "dd.MM.yyyy.", CultureInfo.InvariantCulture);
+                DateTime birthDate = DateTime.ParseExact(txtBirthDate.Text, "dd.MM.yyyy.", CultureInfo.InvariantCulture);
                 Doctor.BirthDate = birthDate;
                 DateTime vacationTimeStart = DateTime.ParseExact(vacationStartTxt.Text, "dd.MM.yyyy.", CultureInfo.InvariantCulture);
                 Doctor.VacationTimeStart = vacationTimeStart;
@@ -85,6 +102,17 @@ namespace Hospital_IS.SecretaryView
                 DateTime vacationEnd = vacationStart.AddDays(14);
                 vacationEndTxt.Text = vacationEnd.ToString("dd.MM.yyyy.");
             }
+        }
+
+        private void DeleteDoctor(object sender, RoutedEventArgs e)
+        {
+            DeleteDoctorView ddv = new DeleteDoctorView(Doctor, this);
+            ddv.ShowDialog();
+        }
+        private void UndoAllChanges(object sender, RoutedEventArgs e)
+        {
+            udv.RefreshGrid();
+            SetDoctorInfo();
         }
     }
 }

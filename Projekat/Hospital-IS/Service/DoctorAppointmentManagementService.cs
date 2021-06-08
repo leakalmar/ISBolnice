@@ -149,9 +149,9 @@ namespace Hospital_IS.Service
                     DoctorAppointment oldDoctorAppointment = new DoctorAppointment(oldDoctorAppointmentDTO.Reserved, oldDoctorAppointmentDTO.AppointmentCause,
                         oldDoctorAppointmentDTO.AppointmentStart, oldDoctorAppointmentDTO.AppointmentEnd, oldDoctorAppointmentDTO.Type, oldDoctorAppointmentDTO.Room,
                         oldDoctorAppointmentDTO.Id, oldDoctorAppointmentDTO.IsUrgent, patient, doctor, oldDoctorAppointmentDTO.IsFinished);
-                    DoctorAppointment newDoctorAppointment = new DoctorAppointment(oldDoctorAppointmentDTO.Reserved, oldDoctorAppointmentDTO.AppointmentCause,
-                        oldDoctorAppointmentDTO.AppointmentStart, oldDoctorAppointmentDTO.AppointmentEnd, oldDoctorAppointmentDTO.Type, oldDoctorAppointmentDTO.Room,
-                        oldDoctorAppointmentDTO.Id, oldDoctorAppointmentDTO.IsUrgent, patient, doctor, oldDoctorAppointmentDTO.IsFinished);
+                    DoctorAppointment newDoctorAppointment = new DoctorAppointment(newDoctorAppointmentDTO.Reserved, newDoctorAppointmentDTO.AppointmentCause,
+                        newDoctorAppointmentDTO.AppointmentStart, newDoctorAppointmentDTO.AppointmentEnd, newDoctorAppointmentDTO.Type, newDoctorAppointmentDTO.Room,
+                        newDoctorAppointmentDTO.Id, newDoctorAppointmentDTO.IsUrgent, patient, doctor, newDoctorAppointmentDTO.IsFinished);
                     DoctorAppointmentService.Instance.UpdateAppointment(oldDoctorAppointment, newDoctorAppointment);
 
                     return;

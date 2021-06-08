@@ -1,12 +1,14 @@
-﻿using Controllers;
-using DTOs;
+﻿using DTOs;
 using Enums;
 using Hospital_IS.Controllers;
+using Hospital_IS.Enums;
 using Model;
 using System;
-using System.Globalization;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
-using System.Windows.Media;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace Hospital_IS.SecretaryView
 {
@@ -19,42 +21,82 @@ namespace Hospital_IS.SecretaryView
 
         public DoctorAppointmentDTO NewDocAppointment { get; set; }
 
-        UCAppointmentsView uca;
+        public UCAppointmentsView uca;
+
+        public ObservableCollection<int> Hours { get; set; } = new ObservableCollection<int>();
+        public ObservableCollection<DoctorAppointmentDTO> ScheduledAppointments { get; set; } = new ObservableCollection<DoctorAppointmentDTO>();
 
         public UpdateAppointment(DoctorAppointmentDTO appointment, UCAppointmentsView uca)
         {
             InitializeComponent();
             OldDocAppointment = appointment;
             this.uca = uca;
+            ScheduledAppointments = new ObservableCollection<DoctorAppointmentDTO>(DoctorAppointmentManagementController.Instance.GetFutureAppointmentsForDoctor(OldDocAppointment.Doctor.Id));
 
             this.DataContext = this;
+
+            GenerateAppointmentTimes();
 
             if (OldDocAppointment.Type == AppointmentType.CheckUp)
             {
                 txtAppType.Text = "Pregled";
-                txtEndOfApp.IsEnabled = false;
+                txtAppDuration.IsEnabled = false;
             }
             else if (OldDocAppointment.Type == AppointmentType.Operation)
             {
                 txtAppType.Text = "Operacija";
             }
 
-            txtAppDate.Text = OldDocAppointment.AppointmentStart.ToString("dd.MM.yyyy.");
-            txtStartOfApp.Text = OldDocAppointment.AppointmentStart.ToString("HH:mm");
-            txtEndOfApp.Text = OldDocAppointment.AppointmentEnd.ToString("HH:mm");
+            SetDoctorAppointmentInfo();
 
             NewDocAppointment = new DoctorAppointmentDTO(OldDocAppointment);
         }
 
+        private void SetDoctorAppointmentInfo()
+        {
+            dpAppDate.SelectedDate = OldDocAppointment.AppointmentStart;
+
+            cbHours.SelectedValue = Int32.Parse(OldDocAppointment.AppointmentStart.ToString("HH"));
+            if (OldDocAppointment.AppointmentStart.ToString("mm").Equals("00"))
+                cbMinutes.SelectedIndex = 0;
+            else
+                cbMinutes.SelectedIndex = 1;
+
+            TimeSpan appDuration = OldDocAppointment.AppointmentEnd - OldDocAppointment.AppointmentStart;
+
+            txtAppDuration.Text = appDuration.TotalMinutes.ToString();
+
+            txtAppCause.Text = OldDocAppointment.AppointmentCause;
+
+            ICollectionView view = new CollectionViewSource { Source = ScheduledAppointments }.View;
+            view.Filter = delegate (object item)
+            {
+                return CheckAppointmentDate((DoctorAppointmentDTO)item);
+            };
+
+            dataGridAppointments.ItemsSource = view;
+
+        }
+
         private void ChangeAppointment(object sender, RoutedEventArgs e)
         {
+            NewDocAppointment.AppointmentStart = (DateTime)dpAppDate.SelectedDate;
+            NewDocAppointment.AppointmentStart = NewDocAppointment.AppointmentStart.AddHours(Hours[cbHours.SelectedIndex]);
+            if (cbMinutes.SelectedIndex == 1)
+                NewDocAppointment.AppointmentStart = NewDocAppointment.AppointmentStart.AddMinutes(30);
+
+            int appDuration = Int32.Parse(txtAppDuration.Text);
+            NewDocAppointment.AppointmentEnd = NewDocAppointment.AppointmentStart.AddMinutes(appDuration);
+
+            NewDocAppointment.AppointmentCause = txtAppCause.Text;
+
             SendNotification(OldDocAppointment, NewDocAppointment);
 
             DoctorAppointmentManagementController.Instance.UpdateAppointment(OldDocAppointment, NewDocAppointment);
             uca.RefreshGrid();
             this.Close();
         }
-
+        
         private void SendNotification(DoctorAppointmentDTO oldApp, DoctorAppointmentDTO appointment)
         {
             string title = "Pomeren pregled";
@@ -76,49 +118,23 @@ namespace Hospital_IS.SecretaryView
             this.Close();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             uca.RefreshGrid();
         }
 
-
-        private void txtEndOfApp_LostFocus(object sender, RoutedEventArgs e)
-        {
-            VerifyAppointment();
-        }
-
-        private void txtStartOfApp_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (OldDocAppointment.Type == AppointmentType.CheckUp && !string.IsNullOrEmpty(txtStartOfApp.Text))
-            {
-                DateTime appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
-                DateTime appEnd = appStart.AddMinutes(30);
-                txtEndOfApp.Text = appEnd.ToString("t", DateTimeFormatInfo.InvariantInfo);
-
-                VerifyAppointment();
-            }
-        }
-
-        private void VerifyAppointment()
+        private void VerifyAppointment(object sender, RoutedEventArgs e)
         {
             // datum, vreme i trajanje pregleda
             try
             {
-                DateTime appDate = DateTime.ParseExact(txtAppDate.Text, "dd.MM.yyyy.", CultureInfo.InvariantCulture);
-                NewDocAppointment.AppointmentStart = appDate;
+                NewDocAppointment.AppointmentStart = (DateTime)dpAppDate.SelectedDate;
+                NewDocAppointment.AppointmentStart = NewDocAppointment.AppointmentStart.AddHours(Hours[cbHours.SelectedIndex]);
+                if (cbMinutes.SelectedIndex == 1)
+                    NewDocAppointment.AppointmentStart = NewDocAppointment.AppointmentStart.AddMinutes(30);
 
-                DateTime appStart = DateTime.ParseExact(txtStartOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
-                NewDocAppointment.AppointmentStart = appDate.Date.Add(appStart.TimeOfDay);
-
-                if (NewDocAppointment.Type == AppointmentType.CheckUp)
-                {
-                    NewDocAppointment.AppointmentEnd = NewDocAppointment.AppointmentStart.AddMinutes(30);
-                }
-                else if (NewDocAppointment.Type == AppointmentType.Operation)
-                {
-                    DateTime appEnd = DateTime.ParseExact(txtEndOfApp.Text, "HH:mm", CultureInfo.InvariantCulture);
-                    NewDocAppointment.AppointmentEnd = appDate.Date.Add(appEnd.TimeOfDay);
-                }
+                int appDuration = Int32.Parse(txtAppDuration.Text);
+                NewDocAppointment.AppointmentEnd = NewDocAppointment.AppointmentStart.AddMinutes(appDuration);
 
             }
             catch (Exception ex)
@@ -133,16 +149,69 @@ namespace Hospital_IS.SecretaryView
             if (isValid)
             {
                 btnConfirm.IsEnabled = true;
-                txtStartOfApp.Background = new SolidColorBrush(Colors.White);
-                txtEndOfApp.Background = new SolidColorBrush(Colors.White);
+               // txtStartOfApp.Background = new SolidColorBrush(Colors.White);
+               // txtEndOfApp.Background = new SolidColorBrush(Colors.White);
             }
             else
             {
-                txtStartOfApp.Background = new SolidColorBrush(Colors.Red);
-                txtEndOfApp.Background = new SolidColorBrush(Colors.Red);
+               // txtStartOfApp.Background = new SolidColorBrush(Colors.Red);
+               // txtEndOfApp.Background = new SolidColorBrush(Colors.Red);
                 btnConfirm.IsEnabled = false;
             }
         }
 
+        private void CancelAppointment(object sender, RoutedEventArgs e)
+        {
+            DeleteAppointmentView dav = new DeleteAppointmentView(OldDocAppointment, this);
+            dav.ShowDialog();
+        }
+
+
+        private void GenerateAppointmentTimes()
+        {
+            Hours.Clear();
+            if (OldDocAppointment.Doctor.WorkShift.Equals(WorkDayShift.FirstShift))
+            {
+                for (int i = 8; i <= 13; i++)
+                    Hours.Add(i);
+            }
+            else {
+                for (int i = 14; i <= 10; i++)
+                    Hours.Add(i);
+            }
+
+            cbHours.ItemsSource = Hours;
+        }
+
+        private void ShowScheduledAppointments(object sender, SelectionChangedEventArgs e)
+        {
+            ICollectionView view = new CollectionViewSource { Source = ScheduledAppointments }.View;
+            view.Filter = delegate (object item)
+            {
+                return CheckAppointmentDate((DoctorAppointmentDTO)item);
+            };
+
+            dataGridAppointments.ItemsSource = view;
+        }
+
+        private bool CheckAppointmentDate(DoctorAppointmentDTO docAppointment)
+        {
+            bool sameDay = false;
+            if (dpAppDate.SelectedDate == null)
+                sameDay = false;
+            else
+            {
+                DateTime appDate = (DateTime)dpAppDate.SelectedDate;
+                if (appDate.Date.Equals(docAppointment.AppointmentStart.Date) && !OldDocAppointment.Id.Equals(docAppointment.Id))
+                    sameDay = true;
+            }
+
+            return sameDay;
+        }
+
+        private void UndoAllChanges(object sender, RoutedEventArgs e)
+        {
+            SetDoctorAppointmentInfo();
+        }
     }
 }

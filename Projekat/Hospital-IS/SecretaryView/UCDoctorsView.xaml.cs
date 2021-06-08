@@ -60,15 +60,15 @@ namespace Hospital_IS.SecretaryView
             }
         }
 
-        private void DeleteDoctor(object sender, RoutedEventArgs e)
-        {
-            if ((DoctorDTO)dataGridDoctors.SelectedItem != null)
-            {
-                DoctorDTO doctor = (DoctorDTO)dataGridDoctors.SelectedItem;
-                Doctors.Remove(doctor);
-                DoctorController.Instance.DeleteDoctor(doctor);
-            }
-        }
+        //private void DeleteDoctor(object sender, RoutedEventArgs e)
+        //{
+        //    if ((DoctorDTO)dataGridDoctors.SelectedItem != null)
+        //    {
+        //        DoctorDTO doctor = (DoctorDTO)dataGridDoctors.SelectedItem;
+        //        Doctors.Remove(doctor);
+        //        DoctorController.Instance.DeleteDoctor(doctor);
+        //    }
+        //}
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {

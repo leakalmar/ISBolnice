@@ -132,10 +132,20 @@
                   
                 </DataGrid>
 
-                <Button Content="Prikaži" Grid.Row="3" Grid.Column="1"  Style="{DynamicResource ResourceKey=RegularButton}"
-                        Margin="40 0 0 150" Width="60" HorizontalAlignment="Left" Click="ShowAppointment"/>
-                <Button Content="Zakaži novi termin" Grid.Row="3" Grid.Column="1"  Style="{DynamicResource ResourceKey=RegularButton}"
-                        Margin="0 0 0 150" Width="130" HorizontalAlignment="Right" Click="ScheduleNewAppointment"/>
+                <Button Grid.Row="3" Grid.Column="1"  Style="{DynamicResource ResourceKey=RegularButton}"
+                        Margin="40 0 0 150" Width="80" HorizontalAlignment="Left" Click="ShowAppointment">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/Resources/eye.png" Height="20" Width="20"/>
+                        <TextBlock Text="Prikaži" VerticalAlignment="Center" Margin="5 0"/>
+                    </StackPanel>
+                </Button>
+                <Button Grid.Row="3" Grid.Column="1"  Style="{DynamicResource ResourceKey=RegularButton}"
+                        Margin="0 0 0 150" Width="150" HorizontalAlignment="Right" Click="ScheduleNewAppointment">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/Resources/add.png" Height="20" Width="20"/>
+                        <TextBlock Text="Zakaži novi termin" VerticalAlignment="Center" Margin="5 0"/>
+                    </StackPanel>
+                </Button>
 
                 <Button Content="OK" Width="55" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Click="Close"
                         Style="{DynamicResource ResourceKey=RegularButton}"/>
