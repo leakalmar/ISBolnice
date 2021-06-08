@@ -17,6 +17,7 @@ namespace Hospital_IS.DoctorViewModel
         private Appointments appointmentsView;
         private DoctorDTO doctor;
         private bool focused;
+        public bool DemoRunning{get; set; }
 
         public bool Focused
         {
@@ -230,6 +231,10 @@ namespace Hospital_IS.DoctorViewModel
 
         private bool CanExecute_NavigateCommand(object obj)
         {
+            if (DemoRunning)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -331,12 +336,12 @@ namespace Hospital_IS.DoctorViewModel
             {
                 if (PatientChartView._ViewModel.Started)
                 {
-                    new ExitMess("Termin nije završen! Molimo vas završite termin pre odjave.").ShowDialog();
+                    new ExitMess("Termin nije završen! Molimo vas završite termin pre odjave.", "info").ShowDialog();
                     return;
                 }
                 else
                 {
-                    bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da se odjavite?").ShowDialog();
+                    bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da se odjavite?", "yesNo").ShowDialog();
                     if (dialog)
                     {
                         //DoctorController.Instance..UpdateDoctor(Doctor);
@@ -349,7 +354,7 @@ namespace Hospital_IS.DoctorViewModel
             }
             else
             {
-                bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da se odjavite?").ShowDialog();
+                bool dialog = (bool)new ExitMess("Da li ste sigurni da želite da se odjavite?", "yesNo").ShowDialog();
                 if (dialog)
                 {
                     //DoctorController.Instance..UpdateDoctor(Doctor);

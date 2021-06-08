@@ -291,6 +291,11 @@
         <Setter Property="BorderBrush" Value="White" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Opacity" Value="0.8" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="CustomTextBox" TargetType="{x:Type TextBox}">

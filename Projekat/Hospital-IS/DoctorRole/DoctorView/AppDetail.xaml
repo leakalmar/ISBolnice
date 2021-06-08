@@ -6,7 +6,7 @@
         xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
         xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors" mc:Ignorable="d"
-        d:DesignHeight="555" d:DesignWidth="783">
+        d:DesignHeight="555" d:DesignWidth="783" FocusManager.FocusedElement="{Binding ElementName=focusButton}">
     <UserControl.Resources>
         <converters:StartedAppointmentConverter x:Key="saConverter" />
         <converters:AppTypeToString x:Key="AppTypeToString" />
@@ -186,7 +186,7 @@
                     </Button>
 
                     <Button Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"
-                            Content="Započni pregled" Margin="15"
+                            Content="Započni pregled" Margin="15" x:Name="start"
                             Visibility="{Binding Path=SelectedAppointment.Appointment.IsFinished, Converter={StaticResource saConverter}, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource CustomButton}">
 

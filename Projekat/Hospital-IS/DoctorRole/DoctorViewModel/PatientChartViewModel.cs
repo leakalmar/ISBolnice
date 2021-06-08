@@ -74,8 +74,8 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 selectedAppointment = value;
-                SetFields();
                 OnPropertyChanged("SelectedAppointment");
+                SetFields();
             }
         }
 
@@ -289,7 +289,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_EndAppointmentCommand(object obj)
         {
-            bool dialog = (bool)new ExitMess("Da li želite da završite termin?").ShowDialog();
+            bool dialog = (bool)new ExitMess("Da li želite da završite termin?", "yesNo").ShowDialog();
             if (dialog)
             {
                 DoctorAppointmentDTO selectedAppointment = SelectedAppointment.Appointment;

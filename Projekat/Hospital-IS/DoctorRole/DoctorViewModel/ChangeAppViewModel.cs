@@ -139,7 +139,7 @@ namespace Hospital_IS.DoctorViewModel
             }
             else
             {
-                new ExitMess("Morate odabrati termin koji želite da pomerite.").ShowDialog();
+                new ExitMess("Morate odabrati termin koji želite da pomerite.", "info").ShowDialog();
             }
 
         }

@@ -50,7 +50,7 @@
                     FontSize="14" />
             <ComboBox Grid.Row="1" Grid.Column="2"
                     ItemsSource="{Binding Specializations}"
-                    TextSearch.TextPath="Name"
+                    TextSearch.TextPath="Name" x:Name="specialty"
                     SelectedItem="{Binding SelectedSpecialty}" Height="24.62"
                     HorizontalAlignment="Stretch" FontSize="14"
                     VerticalAlignment="Center" Padding="1" Margin="0,0,20,0"
@@ -65,8 +65,9 @@
             <Label Content="Doktor:" Foreground="FloralWhite" Grid.Column="1"
                     VerticalAlignment="Center" Grid.Row="2" FontSize="14" />
             <ComboBox ItemsSource="{Binding Doctors}" Grid.Row="2"
-                    Grid.Column="2" Height="24.62" HorizontalAlignment="Stretch"
-                    FontSize="14" Grid.ColumnSpan="4" Margin="0,0,20,0"
+                    x:Name="doctors" Grid.Column="2" Height="24.62"
+                    HorizontalAlignment="Stretch" FontSize="14"
+                    Grid.ColumnSpan="4" Margin="0,0,20,0"
                     VerticalAlignment="Center" Padding="1"
                     SelectedItem="{Binding SelectedDoctor}">
                 <ComboBox.ItemTemplate>
@@ -88,8 +89,9 @@
                     Visibility="{Binding SelectedSpecialty,Converter={StaticResource SpecialtyToVisibility},UpdateSourceTrigger=PropertyChanged}" />
             <ComboBox ItemsSource="{Binding Rooms}" Grid.Row="3" Grid.Column="2"
                     Height="24.62" HorizontalAlignment="Stretch" FontSize="14"
-                    VerticalAlignment="Center" Padding="1" Grid.ColumnSpan="4"
-                    Margin="0,0,20,0" SelectedItem="{Binding SelectedRoom}"
+                    x:Name="rooms" VerticalAlignment="Center" Padding="1"
+                    Grid.ColumnSpan="4" Margin="0,0,20,0"
+                    SelectedItem="{Binding SelectedRoom}"
                     Visibility="{Binding SelectedSpecialty,Converter={StaticResource SpecialtyToVisibility},UpdateSourceTrigger=PropertyChanged}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -97,19 +99,19 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            
+
             <Label Content="Tip:" Foreground="FloralWhite" Grid.Column="1"
                     VerticalAlignment="Center" Grid.Row="4" FontSize="14"
                     Visibility="{Binding SelectedSpecialty,Converter={StaticResource SpecialtyToVisibility},UpdateSourceTrigger=PropertyChanged}" />
-            <ComboBox Grid.Row="4" Grid.Column="2" Height="24.62"
+            <ComboBox Grid.Row="4" Grid.Column="2" Height="24.62" x:Name="types"
                     ItemsSource="{Binding Types}" HorizontalAlignment="Stretch"
                     FontSize="14" VerticalAlignment="Center" Padding="1"
                     Margin="0,0,15,0" SelectedItem="{Binding SelectedType}"
                     Visibility="{Binding SelectedSpecialty,Converter={StaticResource SpecialtyToVisibility},UpdateSourceTrigger=PropertyChanged}">
             </ComboBox>
-            
+
             <Button Grid.Column="3" Grid.Row="4" Background="Transparent"
-                    BorderThickness="0" Margin="5"
+                    BorderThickness="0" Margin="5" x:Name="emergency"
                     Content="{Binding Emergency, Converter={StaticResource EmergencyImage},UpdateSourceTrigger=PropertyChanged}">
                 <Button.InputBindings>
                     <KeyBinding Key="Return"
@@ -123,13 +125,11 @@
                     Grid.Column="4" VerticalAlignment="Center" Grid.Row="4"
                     FontSize="14"
                     Visibility="{Binding SelectedType,Converter={StaticResource TypeToVisibility},UpdateSourceTrigger=PropertyChanged}" />
-            <local:TimeSpanUpDown Grid.Row="4" Grid.Column="5"
+            <local:TimeSpanUpDown Grid.Row="4" Grid.Column="5" x:Name="duration"
                     VerticalAlignment="Center" FontSize="14" Margin="0,0,20,0"
                     Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"
                     Visibility="{Binding SelectedType,Converter={StaticResource TypeToVisibility},UpdateSourceTrigger=PropertyChanged}" />
 
-            
-            
             <Label Content="Datumi:" Foreground="White" Grid.Row="1"
                     FontSize="14" HorizontalAlignment="Center"
                     VerticalAlignment="Center" />
@@ -141,7 +141,7 @@
                         Style="{StaticResource CustomDatePicker}"
                         VerticalAlignment="Center" Width="150"
                         SelectedDate="{Binding FromDate}"
-                        FirstDayOfWeek="Monday"
+                        FirstDayOfWeek="Monday" x:Name="fromDate"
                         DisplayDateStart="{x:Static sys:DateTime.Today}">
                     <DatePicker.Resources>
                         <Style TargetType="DatePickerTextBox">
@@ -156,18 +156,17 @@
                         HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <DatePicker Grid.Column="0" HorizontalAlignment="Center"
                         Style="{StaticResource CustomDatePicker}"
-                        VerticalAlignment="Center" Width="150"
+                        VerticalAlignment="Center" Width="150" x:Name="toDate"
                         DisplayDateStart="{x:Static sys:DateTime.Today}"
                         SelectedDate="{Binding ToDate}" FirstDayOfWeek="Monday">
                     <DatePicker.Resources>
                         <Style TargetType="DatePickerTextBox">
-                            <Setter Property="Focusable" Value="True"/>
+                            <Setter Property="Focusable" Value="True" />
                         </Style>
                     </DatePicker.Resources>
                 </DatePicker>
             </StackPanel>
 
-            
             <GroupBox Header="Rezultati pretrage" FontSize="16" Grid.Row="5"
                     Style="{StaticResource CustomGroupBox}" Grid.ColumnSpan="6"
                     BorderBrush="#FF2E3B55" Foreground="White" Grid.RowSpan="2"
@@ -175,7 +174,7 @@
                     Visibility="{Binding Emergency, Converter={StaticResource InverseVisibility},UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid ItemsSource="{Binding Appointments}" Margin="10"
                         Background="Transparent" RowBackground="Transparent"
-                        Foreground="White"
+                        Foreground="White" x:Name="classicAppointments"
                         ScrollViewer.VerticalScrollBarVisibility="Auto"
                         BorderThickness="0,0,0,0" AutoGenerateColumns="False"
                         SelectionMode="Single" IsReadOnly="True"
@@ -183,8 +182,7 @@
                         SelectedItem="{Binding SelectedAppointment}"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                         HorizontalScrollBarVisibility="Disabled" FontSize="14"
-                        RowHeaderWidth="0"
-                        >
+                        RowHeaderWidth="0">
                     <i:Interaction.Behaviors>
                         <commands:TabLast />
                     </i:Interaction.Behaviors>
@@ -245,10 +243,9 @@
                     Style="{StaticResource CustomGroupBox}"
                     Visibility="{Binding Emergency, Converter={StaticResource BoolToVisibility},UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid ItemsSource="{Binding EmergencyAppointments}"
-                        Margin="10"
+                        Margin="10" x:Name="emergencyAppointments"
                         SelectedItem="{Binding SelectedEmergencyAppointment}"
-                        Style="{StaticResource CustomDataGrid}"
-                        >
+                        Style="{StaticResource CustomDataGrid}">
                     <i:Interaction.Behaviors>
                         <commands:TabLast />
                     </i:Interaction.Behaviors>

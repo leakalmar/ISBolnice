@@ -113,7 +113,7 @@ namespace Hospital_IS.DoctorViewModel
         {
             if (DoctorMainWindow.Instance._ViewModel.PatientChartView._ViewModel.Started)
             {
-                new ExitMess("Termin je trenutno u toku! Molimo vas završite termin pre otvaranja kartona drugog pacijenta.").ShowDialog();
+                new ExitMess("Termin je trenutno u toku! Molimo vas završite termin pre otvaranja kartona drugog pacijenta.", "info").ShowDialog();
                 return;
             }
             PatientChart view = new PatientChart();

@@ -7,7 +7,8 @@
         Title="DoctorHomePage" Height="640" Width="1024"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
-        Background="Transparent" AllowsTransparency="True" Focusable="False">
+        Background="Transparent" AllowsTransparency="True" Focusable="False"
+        KeyDown="Window_KeyDown">
 
     <Window.InputBindings>
         <KeyBinding Key="F1" Command="{Binding Path=NavigateToHomePageCommand}" />
@@ -16,8 +17,7 @@
         <KeyBinding Key="F3" Command="{Binding Path=NavigateToPatientsCommand}" />
         <KeyBinding Key="F4" Command="{Binding Path=NavigateToMedicinesCommand}" />
         <KeyBinding Key="F5" Command="{Binding Path=NavigateToRoomsCommand}" />
-        <KeyBinding Key="F6"
-                Command="{Binding Path=NavigateToEquipCommand}" />
+        <KeyBinding Key="F6" Command="{Binding Path=NavigateToEquipCommand}" />
         <KeyBinding Key="F7"
                 Command="{Binding Path=NavigateToPrescriptionsCommand}" />
         <KeyBinding Key="F8"
@@ -184,8 +184,8 @@
 
             <Button Grid.Row="12" Content="Podešavanja"
                     KeyboardNavigation.TabNavigation="Continue"
-                    Foreground="FloralWhite"
-                    Background="{x:Null}" VerticalAlignment="Top" Margin="30,0">
+                    Foreground="FloralWhite" Background="{x:Null}"
+                    VerticalAlignment="Top" Margin="30,0">
                 <Button.InputBindings>
                     <KeyBinding Key="Return"
                             Command="{Binding NavigateToSettingsCommand}" />
@@ -196,7 +196,31 @@
 
         <Frame x:Name="Home" Grid.Row="2" Grid.Column="3" Grid.RowSpan="3"
                 Margin="20,0,15,0" NavigationUIVisibility="Hidden"
-                Focusable="False" />
+                Focusable="False">
+            <Frame.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="BorderBrush" Value="#7F5B317E" />
+                </Style>
+            </Frame.Resources>
+        </Frame>
+
+        <Label Grid.Row="4" Grid.Column="3"
+                HorizontalAlignment="Right" FontSize="20" VerticalAlignment="Bottom" Background="#DF213250"
+                Foreground="White" Visibility="Collapsed" x:Name="demoLabel">
+            <Label.Content>
+                <StackPanel Orientation="Horizontal" Margin="2">
+                    <TextBlock Text="Demo mode  "  VerticalAlignment="Center"/>
+                    <Image Source="pack://application:,,,/Resources/demo.png" Width="40"/>
+                </StackPanel>
+            </Label.Content>
+            <Label.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20" />
+                </Style>
+            </Label.Resources>
+        </Label>
 
     </Grid>
 </Window>

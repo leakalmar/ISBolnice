@@ -231,7 +231,7 @@ namespace Hospital_IS.DoctorViewModel
             pdfDoc.Add(spacer);
             pdfDoc.Add(spacer);
             pdfDoc.Close();
-            new ExitMess("PDF fajl je uspešno kreiran!").ShowDialog();
+            new ExitMess("PDF fajl je uspešno kreiran!", "info").ShowDialog();
         }
         #endregion
 

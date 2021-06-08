@@ -240,7 +240,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private static void PatientAllergicMassage()
         {
-            ExitMess mess = new ExitMess("Pacijent je alergican na izabrani lek!");
+            ExitMess mess = new ExitMess("Pacijent je alergican na izabrani lek!", "info");
             mess.btnCancle.Visibility = Visibility.Collapsed;
             mess.btnOk.Content = "U redu";
             mess.ShowDialog();

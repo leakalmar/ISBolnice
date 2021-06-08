@@ -171,16 +171,16 @@ namespace Hospital_IS.DoctorViewModel
                 }
                 else if (SelectedAppointment.AppointmentStart < DateTime.Now)
                 {
-                    new ExitMess("Odabrali ste termin koji je završen.").ShowDialog();
+                    new ExitMess("Odabrali ste termin koji je završen.", "info").ShowDialog();
                 }
                 else
                 {
-                    new ExitMess("Termin nije moguće odložiti tri dana pre održavanja.").ShowDialog();
+                    new ExitMess("Termin nije moguće odložiti tri dana pre održavanja.", "info").ShowDialog();
                 }
             }
             else
             {
-                new ExitMess("Morate odabrati termin koji želite da otkažete.").ShowDialog();
+                new ExitMess("Morate odabrati termin koji želite da otkažete.", "info").ShowDialog();
             }
             
         }
@@ -189,13 +189,13 @@ namespace Hospital_IS.DoctorViewModel
         {
             if (SelectedAppointment == null)
             {
-                bool dialog = (bool)new ExitMess("Morate odabrati termin koji želite da otkažete.").ShowDialog();
+                bool dialog = (bool)new ExitMess("Morate odabrati termin koji želite da otkažete.", "info").ShowDialog();
             }
             else
             {
                 if (SelectedAppointment.AppointmentStart > DateTime.Now.AddDays(3))
                 {
-                    bool dialog = (bool)new ExitMess("Da li želite da otkažete termin?").ShowDialog();
+                    bool dialog = (bool)new ExitMess("Da li želite da otkažete termin?", "yesNo").ShowDialog();
                     if (dialog)
                     {
                         SendCanceledNotification(SelectedAppointment);
@@ -206,11 +206,11 @@ namespace Hospital_IS.DoctorViewModel
                 }
                 else if(SelectedAppointment.AppointmentStart < DateTime.Now)
                 {
-                    new ExitMess("Odabrali ste termin koji je završen.").ShowDialog();
+                    new ExitMess("Odabrali ste termin koji je završen.", "info").ShowDialog();
                 }
                 else
                 {
-                    new ExitMess("Termin nije moguće otkazati tri dana pre održavanja.").ShowDialog();
+                    new ExitMess("Termin nije moguće otkazati tri dana pre održavanja.", "info").ShowDialog();
                 }
             }
         }

@@ -23,6 +23,7 @@
     <None Remove="Resources\bed.png" />
     <None Remove="Resources\calendar.png" />
     <None Remove="Resources\chooseFromTable.png" />
+    <None Remove="Resources\demo.png" />
     <None Remove="Resources\doctor-search.png" />
     <None Remove="Resources\hand-pill.png" />
     <None Remove="Resources\hospital.png" />
@@ -116,6 +117,7 @@
     <Resource Include="Resources\checkmark.png" />
     <Resource Include="Resources\chooseFromTable.png" />
     <Resource Include="Resources\deleteroom.png" />
+    <Resource Include="Resources\demo.png" />
     <Resource Include="Resources\doctor-search.png" />
     <Resource Include="Resources\doctor.jpg" />
     <Resource Include="Resources\edit.png" />

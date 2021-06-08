@@ -19,7 +19,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Button Margin="250,5,250,5" Style="{StaticResource CustomButton}"
+        <Button Margin="250,5,250,5" Style="{StaticResource CustomButton}" x:Name="schedule"
                 Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}"
                 Content="Novi termin">
             <Button.InputBindings>

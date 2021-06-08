@@ -85,7 +85,7 @@
             <DataGrid x:Name="docotrAppointments" KeyboardNavigation.DirectionalNavigation="Continue"
                 ItemsSource="{Binding Path=AppointmentsView}"
                     Style="{StaticResource CustomDataGrid}"
-                    SelectedItem="{Binding Path=SelectedAppointment}" Focusable="True">
+                    SelectedItem="{Binding Path=SelectedAppointment, UpdateSourceTrigger=PropertyChanged}" Focusable="True">
 
                 <DataGrid.InputBindings>
                     <KeyBinding Key="Return"

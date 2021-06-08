@@ -48,7 +48,7 @@
         <Label Grid.Row="1" Grid.Column="2" FontFamily="Verdana"
                 Foreground="FloralWhite" ContentStringFormat="dd.MM.yyyy"
                 Content="{Binding SelectedEmergencyAppointment.SuggestedAppointment.AppointmentStart.Date}"
-                FontSize="16" HorizontalAlignment="Right" Margin="0,0,70,0" />
+                FontSize="16" HorizontalAlignment="Left" Margin="180,0,0,0" />
         <Label Grid.Row="2" Grid.Column="2" FontFamily="Verdana"
                 Foreground="FloralWhite"
                 Content="{Binding SelectedAppointment.Appointment.AppointmentStart}"
@@ -60,7 +60,7 @@
                 Margin="0,0,70,0" HorizontalAlignment="Right" FontSize="16" />
         <Label Grid.Row="3" Grid.Column="2" FontFamily="Verdana" FontSize="16"
                 Foreground="FloralWhite"
-                Content="{Binding SelectedAppointment.Appointment.Doctor.Specialty.Name}"
+                Content="{Binding SelectedAppointment.Appointment.Doctor.Specialty}"
                 Margin="0,0,70,0" HorizontalAlignment="Right" />
         <Label Grid.Row="3" Grid.Column="2" FontFamily="Verdana" FontSize="16"
                 Foreground="FloralWhite"
@@ -134,7 +134,7 @@
                 HorizontalAlignment="Right" x:Name="today" FontSize="16" />
 
         <Button Grid.Row="9" Grid.Column="1" Margin="90,0,90,10"
-                Grid.ColumnSpan="2" Content="Potvrdi"
+                Grid.ColumnSpan="2" Content="Potvrdi" Name="issueButton"
                 Style="{StaticResource CustomButton}">
             <Button.IsEnabled>
                 <MultiBinding Converter="{StaticResource EnableInstruction}">
