@@ -43,10 +43,27 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-
-        <Label Content="Lista pregleda:" Grid.Row="0" Grid.Column="1" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
-        <DataGrid x:Name="dataGridAppointment"  IsReadOnly="True" CanUserAddRows="False" SelectedItem="{Binding SelectedDoctorAppointment}" ItemsSource="{Binding AllAppointments, Mode=TwoWay}"
-                  AutoGenerateColumns="False" Grid.Column="1" Grid.Row="1" Grid.RowSpan="8"
+        <TextBox Name="txtSearch" Background="white" BorderThickness="2" Foreground="CadetBlue" BorderBrush="CadetBlue" Text="{Binding SearchText}" Margin="350,10,470,0" Width="120" VerticalAlignment="Top" Padding="4"
+                         Style="{DynamicResource ResourceKey=RegularTextBox}"/>
+        <Button x:Name="previousMonth" Command="{Binding DoSearch}"  Margin="500,10,440,0" Foreground="#FFFDFAFA" FontSize="24" Cursor="Hand" FontWeight="Bold">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10,10,10,10"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF184095" Offset="0.0"/>
+                    <GradientStop Color="CadetBlue" Offset="1.5"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <StackPanel>
+                <Image Source="pack://application:,,,/Resources/doctor-search.png" Width="20"  Height="20" />
+            </StackPanel>
+        </Button>
+        <DataGrid x:Name="dataGridAppointment"  IsReadOnly="True" CanUserAddRows="False" SelectedItem="{Binding SelectedDoctorAppointment}" ItemsSource="{Binding Appointments, Mode=TwoWay}"
+                  SelectedIndex="-1" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="1" Grid.RowSpan="8"
                   Margin="10,10,440,0"
                   CanUserResizeColumns="False" CanUserResizeRows="False" 
                   Foreground="White" HorizontalGridLinesBrush="White" 

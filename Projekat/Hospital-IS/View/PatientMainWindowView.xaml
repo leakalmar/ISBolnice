@@ -11,7 +11,7 @@
         AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize"
         >
-    
+
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:HomePatientViewModel}">
             <views:HomePatientView/>
@@ -37,6 +37,7 @@
         <DataTemplate DataType="{x:Type viewModel:CalendarAppointmentViewModel}">
             <views:CalendarAppointmentView/>
         </DataTemplate>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
     <Grid Background="#FF184095">
         <Grid.Resources>
@@ -96,5 +97,18 @@
         <Button x:Name="Therapy" Command="{Binding NavCommand}" CommandParameter="therapy" Grid.Column="0" Grid.Row="8" Background="{x:Null}" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Foreground="White" Cursor="Hand"  Content="Terapije"/>
         <Button x:Name="Notifications" Command="{Binding NavCommand}" CommandParameter="notifications" Grid.Column="0" Grid.Row="9" FontSize="22" FontWeight="Bold" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Cursor="Hand" BorderThickness="1,1,0,1" >Obaveštenja</Button>
         <Button x:Name="UpdateProfile" Command="{Binding NavCommand}" CommandParameter="updateProfile" Grid.Column="0" Grid.Row="10" FontSize="22" FontWeight="Bold" Margin="0,0,0,260" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Cursor="Hand" BorderThickness="1,1,0,1" >Uredi profil</Button>
+        <Border x:Name="Notification" BorderThickness="0" BorderBrush="DeepSkyBlue" Grid.Column="0" Grid.Row="10" Margin="10,50,10,10" Visibility="{Binding Path=ShowUnseenNotifications, Converter={StaticResource BooleanToVisibilityConverter} }"  CornerRadius="20,20,20,20" Background="#FF058D91" Opacity="0.7">
+            <Grid>
+                <Button x:Name="exit" Opacity="0.6"
+                  BorderThickness="0" Margin="250,10,0,198"
+                  Command="{Binding CloseUnseenNotifications}"
+                  Background="{x:Null}" Foreground="White"
+                  BorderBrush="{x:Null}" FontSize="25" >
+                    X
+                </Button>
+                <Label Content="OBAVEŠTENJA" Width="150" HorizontalAlignment="Center" Margin="0,20,0,170" FontSize="22" Foreground="White" />
+                <TextBlock Text="{Binding UnseenNotifications}" Foreground="White" TextWrapping="Wrap" Margin="10,70,10,10" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

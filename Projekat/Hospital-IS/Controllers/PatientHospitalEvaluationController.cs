@@ -1,4 +1,5 @@
-﻿using Hospital_IS.Model;
+﻿using Hospital_IS.DTOs;
+using Hospital_IS.Model;
 using Hospital_IS.Service;
 using System;
 
@@ -23,10 +24,9 @@ namespace Hospital_IS.Controllers
         {
         }
 
-        public void AddAppointmentEvaluation(int grade, String comment, DateTime evaluationDate, int patientId)
+        public void AddHospitalEvaluation(HospitalEvaluationDTO hospitalEvaluationDTO)
         {
-            PatientHospitalEvaluationService.Instance.AddHospitalEvaluation(new PatientHospitalEvaluation(grade,comment,evaluationDate,patientId));
+            PatientHospitalEvaluationService.Instance.AddHospitalEvaluation(new PatientHospitalEvaluation(hospitalEvaluationDTO.Grade, hospitalEvaluationDTO.Comment, hospitalEvaluationDTO.Date, hospitalEvaluationDTO.PatientId));
         }
-
     }
 }

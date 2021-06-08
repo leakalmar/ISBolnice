@@ -10,7 +10,8 @@ namespace Hospital_IS.View.PatientViewModels
 {
     public class AllAppointmentsViewModel : BindableBase
     {
-        public ObservableCollection<DoctorAppointment> AllAppointments { get; set; }
+        //public ObservableCollection<DoctorAppointment> AllAppointments { get; set; }
+        private ICollectionView appointments;
         public KeyValuePair<string, int>[] ChartData { get; set; }
 
         private DoctorAppointment selectedDoctorAppointment;
@@ -22,18 +23,31 @@ namespace Hospital_IS.View.PatientViewModels
         private string appointmentType;
         private int roomId;
         private string details;
-
+        private string searchText;
         public MyICommand ShowEvaluationWindow { get; set; }
         public MyICommand ShowNote { get; set; }
+        public MyICommand DoSearch { get; set; }
         private readonly MyWindowFactory windowFactory;
 
         public AllAppointmentsViewModel()
         {
-            AllAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id));
+            ObservableCollection<DoctorAppointment> AllAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id));
+            Appointments = new CollectionViewSource { Source = AllAppointments }.View;
             windowFactory = new WindowProductionFactory();
             ShowEvaluationWindow = new MyICommand(ShowEvaluation);
             ShowNote = new MyICommand(ShowAppNote);
+            DoSearch = new MyICommand(Search);
             LoadAppointmentChartData();
+        }
+
+        public ICollectionView Appointments
+        {
+            get { return appointments; }
+            set
+            {
+                appointments = value;
+                OnPropertyChanged("Appointments");
+            }
         }
 
         public DoctorAppointment SelectedDoctorAppointment
@@ -154,6 +168,20 @@ namespace Hospital_IS.View.PatientViewModels
             }
         }
 
+        public string SearchText
+        {
+            get { return searchText; }
+            set
+            {
+                if (searchText != value)
+                {
+                    searchText = value;
+                    OnPropertyChanged("SearchText");
+                    Search();
+                }
+            }
+        }
+
         private void SetAppointmentInfo()
         {
             Date = SelectedDoctorAppointment.AppointmentStart.ToString("dd.MM.yyyy.");
@@ -193,6 +221,24 @@ namespace Hospital_IS.View.PatientViewModels
                 new KeyValuePair<string,int>("Maj", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "May")),
                 new KeyValuePair<string,int>("Jun", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "June"))
             };
+        }
+
+        private void Search()
+        {
+            Appointments.Filter = delegate (object item)
+            {
+                DoctorAppointment appointment = item as DoctorAppointment;
+                return CheckIfAppointmentMeetsSearchCriteria(appointment);
+            };
+        }
+
+        private bool CheckIfAppointmentMeetsSearchCriteria(DoctorAppointment appointment)
+        {
+            string[] search = SearchText.ToLower().Split(" ");
+            if (SearchText.Equals("Pretraži..."))
+                search[0] = string.Empty;
+
+            return appointment.AppointmentStart.Date.ToString("dd.MM.yyyy.").Contains(search[0]);
         }
     }
 }

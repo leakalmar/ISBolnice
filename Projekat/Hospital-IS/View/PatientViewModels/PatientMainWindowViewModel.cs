@@ -10,6 +10,7 @@ namespace Hospital_IS.View.PatientViewModels
     public class PatientMainWindowViewModel : BindableBase
     {
         public MyICommand<string> NavCommand { get; private set; }
+        public MyICommand CloseUnseenNotifications { get; private set; }
         private HomePatientViewModel homePatientViewModel;
         private AppointmentPatientViewModel appointmentViewModel;
         private AllAppointmentsViewModel allAppointmentsViewModel;
@@ -18,11 +19,14 @@ namespace Hospital_IS.View.PatientViewModels
         private PatientUpdateProfileViewModel updateProfileViewModel;
         private BindableBase currentViewModel;
         public static Patient Patient{ get; set;}
+        private bool showUnseenNotifications = true;
+        private string unseenNotifications;
 
         public PatientMainWindowViewModel()
         {
             Patient = MainWindow.PatientUser;
             NavCommand = new MyICommand<string>(OnNav);
+            CloseUnseenNotifications = new MyICommand(CloseUnseenNots);
             homePatientViewModel = new HomePatientViewModel();
             appointmentViewModel = new AppointmentPatientViewModel();
             allAppointmentsViewModel = new AllAppointmentsViewModel();
@@ -67,7 +71,7 @@ namespace Hospital_IS.View.PatientViewModels
         private  void CheckDailyNotifications()
         {
             DateTime time = DateTime.Now;
-
+            
             foreach (Therapy therapy in ChartController.Instance.GetTherapiesByPatient(Patient))
             {
                 int usageHourDifference = (int)24 / therapy.TimesADay;
@@ -75,7 +79,7 @@ namespace Hospital_IS.View.PatientViewModels
                 {
                     if (time.Hour >= (therapy.FirstUsageTime + i * usageHourDifference) && time.Hour <= (therapy.FirstUsageTime + i * usageHourDifference) + 2)
                     {
-                        MessageBox.Show("Trebalo je da popijete lek " + therapy.Medicine.Name + " u " + (therapy.FirstUsageTime + i * usageHourDifference) + "h.");
+                        unseenNotifications += "Trebalo je da popijete lek " + therapy.Medicine.Name + " u " + (therapy.FirstUsageTime + i * usageHourDifference) + "h.\r\n";
                     }
                 }
             }
@@ -84,7 +88,7 @@ namespace Hospital_IS.View.PatientViewModels
             {
                 if (time.Hour >= note.NotificationTime && time.Hour <= note.NotificationTime + 2 && note.IsNotifyChecked)
                 {
-                    MessageBox.Show("Podsetnik podešen za " + note.NotificationTime + "h: " + note.NoteContent);
+                    UnseenNotifications += "Podsetnik podešen za " + note.NotificationTime + "h: " + note.NoteContent + "\r\n";
                 }
             }
         }
@@ -124,5 +128,35 @@ namespace Hospital_IS.View.PatientViewModels
             }
         }
 
+        public bool ShowUnseenNotifications
+        {
+            get { return showUnseenNotifications; }
+            set
+            {
+                if(showUnseenNotifications != value)
+                {
+                    showUnseenNotifications = value;
+                    OnPropertyChanged("ShowUnseenNotifications");
+                }
+            }
+        }
+
+        public string UnseenNotifications
+        {
+            get { return unseenNotifications; }
+            set
+            {
+                if (unseenNotifications != value)
+                {
+                    unseenNotifications = value;
+                    OnPropertyChanged("UnseenNotifications");
+                }
+            }
+        }
+
+        private void CloseUnseenNots()
+        {
+            ShowUnseenNotifications = false;
+        }
     }
 }

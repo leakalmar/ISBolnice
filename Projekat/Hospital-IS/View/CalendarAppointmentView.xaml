@@ -26,7 +26,7 @@
                                 <TextBlock.Background>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                         <GradientStop Color="White" Offset="0"/>
-                                        <GradientStop Color="#FF040404" Offset="1"/>
+                                        <GradientStop Color="White" Offset="1"/>
                                     </LinearGradientBrush>
                                 </TextBlock.Background>
                             </TextBlock>
@@ -43,7 +43,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <!--Box-->
-                            <Border Name="InnerBorder" BorderBrush="Black" BorderThickness="1" Padding="0">
+                            <Border Name="InnerBorder" BorderBrush="White" BorderThickness="2" Padding="0">
                                 <Border.Style>
                                     <Style >
                                         <Style.Triggers>
@@ -70,7 +70,7 @@
                                         </TextBlock>
                                     </StackPanel>
 
-                                    <TextBox IsEnabled="False" Text="{Binding AppointmentInformation, Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="{x:Null}" Foreground="White" Height="50" />
+                                    <TextBox IsEnabled="False" Text="{Binding AppointmentInformation, Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="{x:Null}" Foreground="Black" Height="50" />
                                 </DockPanel>
                             </Border>
                         </DataTemplate>

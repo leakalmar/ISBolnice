@@ -44,8 +44,6 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-
-        <Label Content="Terapije:" Grid.Row="0" Grid.Column="0" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
         <DataGrid x:Name="dataGridTherapy" RowBackground="#FF297CAC" Background="#FF297CAC"
                   IsReadOnly="True" SelectedItem="{Binding Therapy}" ItemsSource="{Binding Therapies, Mode=TwoWay}"  
                   CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="0" 
