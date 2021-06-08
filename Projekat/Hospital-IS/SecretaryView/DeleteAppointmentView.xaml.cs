@@ -20,6 +20,7 @@ namespace Hospital_IS.SecretaryView
 
         private void Delete(object sender, RoutedEventArgs e)
         {
+            NotificationController.Instance.SendAppointmentCancelationNotification(DoctorAppointment);
             DoctorAppointmentManagementController.Instance.RemoveAppointment(DoctorAppointment);
             uv.uca.RefreshGrid();
             this.Close();
