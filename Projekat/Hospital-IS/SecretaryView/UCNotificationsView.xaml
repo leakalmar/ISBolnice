@@ -21,14 +21,9 @@
         </Grid.RowDefinitions>
 
 
-        <Button Grid.Row="1" Grid.Column="1" Width="195" FontSize="13" Height="30" Margin="10 10 10 10"
-                Style="{DynamicResource ResourceKey=RegularButton}"
-                HorizontalAlignment="Right" Click="CreateNotification">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="pack://application:,,,/Resources/plus.png" Height="20" Width="20"/>
-                <TextBlock Text="Postavi novo obaveštenje" VerticalAlignment="Center" Margin="5 0"/>
-            </StackPanel>
-        </Button>
+        <Button Grid.Row="1" Grid.Column="1" Width="175" Content="Postavi novo obaveštenje" Height="30" Margin="10 10 10 10"
+                Style="{DynamicResource ResourceKey=RegularButton}" FontSize="14"
+                HorizontalAlignment="Right" Click="CreateNotification"/>
 
         <ScrollViewer  Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" Grid.RowSpan="1" Margin="10" VerticalScrollBarVisibility="Auto" Style="{DynamicResource ResourceKey=NotificationViewer}">
             <StackPanel>
@@ -54,22 +49,12 @@
                                     <TextBlock Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Right"
                                                Text="{Binding DatePosted, StringFormat=\{0:HH:mm  dd.MM.yyyy.\}}" Margin="10" FontSize="9" FontWeight="Light"/>
                                     <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="2">
-                                        <Button Tag="{Binding Id}"  Style="{DynamicResource ResourceKey=NotificationButton}"
+                                        <Button Tag="{Binding Id}" Content="Prikaži"  Style="{DynamicResource ResourceKey=NotificationButton}"
                                                 VerticalAlignment="Top" Margin="10" Click="ShowNotification" 
-                                                HorizontalAlignment="Right">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Image Source="pack://application:,,,/Resources/eye.png" Height="15" Width="15"/>
-                                                <TextBlock Text="Prikaži" VerticalAlignment="Center" Margin="5 0"/>
-                                            </StackPanel>
-                                        </Button>
-                                        <Button Tag="{Binding Id}" FontSize="13" Style="{DynamicResource ResourceKey=NotificationButton}"
+                                                HorizontalAlignment="Right"/>
+                                        <Button Tag="{Binding Id}" Content="Izmeni" Style="{DynamicResource ResourceKey=NotificationButton}"
                                                 VerticalAlignment="Top"  Margin="10" 
-                                                Click="UpdateNotification">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Image Source="pack://application:,,,/Resources/pen.png" Height="15" Width="15"/>
-                                                <TextBlock Text="Izmeni" VerticalAlignment="Center" Margin="5 0"/>
-                                            </StackPanel>
-                                        </Button>
+                                                Click="UpdateNotification"/>
                                     </StackPanel>
                                 </Grid>
                             </Border>

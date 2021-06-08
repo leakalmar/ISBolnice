@@ -23,9 +23,6 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#4160AF"/>
             </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="#80A0EE"/>
-            </Trigger>
         </Style.Triggers>
     </Style>
 
@@ -141,7 +138,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Height="20" Width="80" CornerRadius="5"
+                    <Border Height="20" Width="90" CornerRadius="5"
                                 Background="{TemplateBinding Background}">
 
                         <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -247,10 +244,6 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="StackPanel" x:Key="AppointmentFilterStackPanel">
-        <Setter Property="Background" Value="#9774D6"/>
-    </Style>
-
     <Style TargetType="Button" x:Key="DeleteButton">
         <Setter Property="TextElement.FontFamily" Value="Tahoma"/>
         <Setter Property="Background" Value="#EA1E27"/>
@@ -274,10 +267,6 @@
                 <Setter Property="Background" Value="#CD1A22"/>
             </Trigger>
         </Style.Triggers>
-    </Style>
-
-    <Style TargetType="TextBlock" x:Key="Validation">
-        <Setter Property="Foreground" Value="#C70039"/>
     </Style>
 
     <Style TargetType="CheckBox" x:Key="CheckBox">

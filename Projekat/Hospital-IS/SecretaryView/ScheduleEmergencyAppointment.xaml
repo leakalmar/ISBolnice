@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:val="clr-namespace:Hospital_IS.SecretaryView.Validation"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
         Title="Zakazivanje hitnog termina" Height="520" Width="640"
@@ -31,18 +30,18 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
-                   Text="Tip pregleda *" Margin="70 0 0 20"/>
+                   Text="Tip pregleda:" Margin="70 0 0 20"/>
         <TextBlock Grid.Row="2" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
-                   Text="Pacijent *" Margin="70 0 0 20"/>
+                   Text="Pacijent" Margin="70 0 0 20"/>
         <TextBlock Grid.Row="3" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
-                   Text="Specijalizacija *" Margin="70 0 0 20"/>
+                   Text="Specijalizacija" Margin="70 0 0 20"/>
         <TextBlock Grid.Row="4" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
-                   Text="Soba *" Margin="70 0 0 20"/>
+                   Text="Soba" Margin="70 0 0 20"/>
         <TextBlock Grid.Row="5" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
-                   Text="Trajanje *" Margin="70 0 0 20"/>
+                   Text="Trajanje(min)" Margin="70 0 0 20"/>
 
         <ComboBox Name="cbAppType" Grid.Row="1" Grid.Column="2" Margin="20 0 70 20"
-                  SelectionChanged="cbAppType_SelectionChanged" FontSize="15">
+                LostFocus="cbAppType_LostFocus" FontSize="15">
             <ComboBoxItem Content="Pregled" />
             <ComboBoxItem Content="Operacija" />
         </ComboBox>
@@ -80,32 +79,9 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="5" Margin="20 0 70 20">
-            <TextBox Name="txtAppDuration"  MinWidth="70" MaxWidth="70"
-                     Style="{DynamicResource ResourceKey=RegularTextBox}">
-                <TextBox.Text>
-                    <Binding Path="AppDuration" UpdateSourceTrigger="PropertyChanged">
-                        <Binding.ValidationRules>
-                            <val:IsEmptyValidationRule ValidationStep="RawProposedValue"/>
-                            <val:IsAppointmentDurationValid ValidationStep="RawProposedValue"/>
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-                <Validation.ErrorTemplate>
-                    <ControlTemplate>
-                        <StackPanel>
-                            <AdornedElementPlaceholder x:Name="textBox"/>
-                            <TextBlock Text="{Binding [0].ErrorContent}" Style="{DynamicResource ResourceKey=Validation}"
-                                   VerticalAlignment="Bottom" FontSize="13"/>
-                        </StackPanel>
-                    </ControlTemplate>
-                </Validation.ErrorTemplate>
-            </TextBox>
-            
-            <TextBlock Text="min" Margin="5 0 30 0"
-                       Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        </StackPanel>
-        
+        <TextBox x:Name="txtAppDuration" Grid.Row="5" Grid.Column="2" Margin="20 0 70 20" 
+                 LostFocus="txtAppDuration_LostFocus"
+                 Style="{DynamicResource ResourceKey=RegularTextBox}"/>
 
         <TextBlock Text="Mogući termini:" Grid.Row="6" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                    FontSize="14" Margin="10 0 0 0"/>

@@ -1,5 +1,4 @@
 ﻿using DTOs;
-using Hospital_IS.Controllers;
 using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using System;
@@ -68,9 +67,6 @@ namespace Hospital_IS.SecretaryView
 
         private void btnPatients_Click(object sender, RoutedEventArgs e)
         {
-            SecretaryManagementController.Instance.ReloadPatients();
-            ucp.RefreshGrid();
-
             miShow.IsEnabled = true;
             miUpdate.IsEnabled = true;
             miRegistration.IsEnabled = true;
@@ -89,9 +85,6 @@ namespace Hospital_IS.SecretaryView
 
         private void btnAppointments_Click(object sender, RoutedEventArgs e)
         {
-            DoctorAppointmentManagementController.Instance.ReloadAppointments();
-            uca.RefreshGrid();
-
             miShow.IsEnabled = true;
             miUpdate.IsEnabled = true;
             miRegistration.IsEnabled = false;
@@ -101,9 +94,6 @@ namespace Hospital_IS.SecretaryView
 
         private void btnDoctors_Click(object sender, RoutedEventArgs e)
         {
-            SecretaryManagementController.Instance.ReloadDoctors();
-            ucd.RefreshGrid();
-
             miShow.IsEnabled = true;
             miUpdate.IsEnabled = true;
             miRegistration.IsEnabled = false;

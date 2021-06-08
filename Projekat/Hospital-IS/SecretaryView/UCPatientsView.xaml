@@ -38,48 +38,28 @@
 
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-            <Button Width="80" Height="30" Margin="10 10 10 10" FontSize="13"
+            <Button Width="55" Content="Prikaži" Height="30" Margin="10 10 10 10"
                     Style="{DynamicResource ResourceKey=RegularButton}"
-                    HorizontalAlignment="Right" Click="ShowPatient">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="pack://application:,,,/Resources/eye.png" Height="20" Width="20"/>
-                    <TextBlock Text="Prikaži" VerticalAlignment="Center" Margin="5 0"/>
-                </StackPanel>
-            </Button>
+                    HorizontalAlignment="Right" Click="ShowPatient"/>
 
-            <Button Width="80" FontSize="13" Height="30" Margin="10 0 10 0"
+            <Button Width="55" Content="Izmeni" Height="30" Margin="10 0 10 0"
                     Style="{DynamicResource ResourceKey=RegularButton}"
-                    HorizontalAlignment="Left" Click="UpdatePatient">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="pack://application:,,,/Resources/pen.png" Height="20" Width="20"/>
-                    <TextBlock Text="Izmeni" VerticalAlignment="Center" Margin="5 0"/>
-                </StackPanel>
-            </Button>
+                    HorizontalAlignment="Left" Click="UpdatePatient"/>
 
-            <!--<Button Width="55" Content="Obriši" Height="30" Margin="10 0 40 0"
+            <Button Width="55" Content="Obriši" Height="30" Margin="10 0 40 0"
                     Style="{DynamicResource ResourceKey=RegularButton}"
-                    HorizontalAlignment="Right" Click="DeletePatient"/>-->
+                    HorizontalAlignment="Right" Click="DeletePatient"/>
 
-            <Button Width="115" FontSize="13" Height="30" Margin="70 0 0 0 "
+            <Button Width="100" Content="Registracija" Height="30" Margin="40 0 0 0 "
                     Style="{DynamicResource ResourceKey=RegularButton}"
-                    Click="AddNewPatient">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="pack://application:,,,/Resources/register.png" Height="20" Width="20"/>
-                    <TextBlock Text="Registracija" VerticalAlignment="Center" Margin="5 0"/>
-                </StackPanel>
-            </Button>
+                    Click="AddNewPatient"/>
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="3" Grid.RowSpan="2"
                     HorizontalAlignment="Right" Margin="10">
-            <Button x:Name="btnGuests" Width="140" Margin="0 0 20 5" 
-                    HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="13"
-                    Style="{DynamicResource ResourceKey=RegularButton}" Click="btnGuests_Click">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="pack://application:,,,/Resources/guests.png" Height="20" Width="20"/>
-                    <TextBlock Text="Gostujući nalozi" VerticalAlignment="Center" Margin="5 0"/>
-                </StackPanel>
-            </Button>
+            <Button x:Name="btnGuests" Width="120" Margin="0 0 20 5" 
+                    Content="Gostujući nalozi" HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Style="{DynamicResource ResourceKey=RegularButton}" Click="btnGuests_Click"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 20 0">
                 <TextBox Name="txtSearch" Foreground="DarkSlateGray" Text="Pretraži..." Margin="0 5 10 0" Width="120" VerticalAlignment="Center" Padding="4"
                          Style="{DynamicResource ResourceKey=RegularTextBox}"

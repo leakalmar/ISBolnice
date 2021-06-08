@@ -36,8 +36,7 @@ namespace DTOs
             Doctor = doctor;
             IsFinished = isFinished;
 
-            if (patient != null)
-                NameSurnamePatient = Patient.Name + " " + Patient.Surname;
+            NameSurnamePatient = Patient.Name + " " + Patient.Surname;
             if (Type.Equals(AppointmentType.CheckUp))
                 AppTypeText = "Pregled";
             else if (Type.Equals(AppointmentType.Operation))

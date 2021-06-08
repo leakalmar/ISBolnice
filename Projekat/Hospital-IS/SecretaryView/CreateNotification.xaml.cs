@@ -5,43 +5,26 @@ using Hospital_IS.SecretaryView;
 using Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows;
+
 
 namespace Hospital_IS
 {
     /// <summary>
     /// Interaction logic for CreateNotification.xaml
     /// </summary>
-    public partial class CreateNotification : Window, INotifyPropertyChanged
+    public partial class CreateNotification : Window
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private NotificationDTO _notification;
-        public NotificationDTO Notification 
-        {
-            get { return _notification; }
-            set
-            {
-                if (value != _notification)
-                {
-                    _notification = value;
-                    OnPropertyChanged("Notification");
-                }
-            }
-        }
+        public NotificationDTO Notification { get; set; } = new NotificationDTO();
 
         public List<int> Ids { get; set; } = new List<int>();
 
         public UCNotificationsView ucn;
-
         public CreateNotification(UCNotificationsView ucn)
         {
             InitializeComponent();
-            _notification = new NotificationDTO();
             this.DataContext = this;
             this.ucn = ucn;
-            btnConfirm.IsEnabled = false;
 
             rbSelectSome.IsEnabled = false;
         }
@@ -53,26 +36,26 @@ namespace Hospital_IS
 
         private void postNotification(object sender, RoutedEventArgs e)
         {
-            _notification.DatePosted = DateTime.Now;
-            _notification.LastChanged = DateTime.Now;
+            Notification.DatePosted = DateTime.Now;
+            Notification.LastChanged = DateTime.Now;
 
             if (rbSelectSome.IsChecked == true)
             {
                 foreach (int id in Ids)
-                    _notification.Recipients.Add(id);
+                    Notification.Recipients.Add(id);
             }
             else if (rbSelectAll.IsChecked == true)
             {
                 foreach (PatientDTO patient in SecretaryManagementController.Instance.GetAllRegisteredPatients())
-                    _notification.Recipients.Add(patient.Id);
+                    Notification.Recipients.Add(patient.Id);
 
                 foreach (Doctor doctor in DoctorController.Instance.GetAll())
-                    _notification.Recipients.Add(doctor.Id);
+                    Notification.Recipients.Add(doctor.Id);
             }
 
-            ucn.Notifications.Insert(0, _notification);
+            ucn.Notifications.Insert(0, Notification);
 
-            SecretaryManagementController.Instance.AddNotification(_notification);
+            SecretaryManagementController.Instance.AddNotification(Notification);
 
             ucn.RefreshList();
 
@@ -89,21 +72,6 @@ namespace Hospital_IS
         {
             rbSelectAll.IsChecked = true;
             rbSelectSome.IsChecked = false;
-        }
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
-        private void ManageConfirmationButton(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtTitle.Text) || string.IsNullOrEmpty(txtText.Text))
-                btnConfirm.IsEnabled = false;
-            else
-                btnConfirm.IsEnabled = true;
         }
     }
 }
