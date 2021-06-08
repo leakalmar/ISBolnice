@@ -276,6 +276,10 @@
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="TextBlock" x:Key="Validation">
+        <Setter Property="Foreground" Value="#C70039"/>
+    </Style>
+
     <Style TargetType="CheckBox" x:Key="CheckBox">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Foreground" Value="Black"/>

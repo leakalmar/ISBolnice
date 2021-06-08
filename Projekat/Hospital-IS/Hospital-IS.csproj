@@ -32,6 +32,7 @@
     <None Remove="Resources\insight.png" />
     <None Remove="Resources\lekovi.png" />
     <None Remove="Resources\logout.png" />
+    <None Remove="Resources\minus.png" />
     <None Remove="Resources\notification.png" />
     <None Remove="Resources\notification1.png" />
     <None Remove="Resources\obavest.png" />
@@ -137,6 +138,7 @@
     <Resource Include="Resources\maximize.png" />
     <Resource Include="Resources\menubar.png" />
     <Resource Include="Resources\minimize.png" />
+    <Resource Include="Resources\minus.png" />
     <Resource Include="Resources\notification.png" />
     <Resource Include="Resources\notification1.png" />
     <Resource Include="Resources\obavest.png" />

@@ -251,6 +251,10 @@
         <Setter Property="Background" Value="#5C7C99"/>
     </Style>
 
+    <Style TargetType="TextBlock" x:Key="Validation">
+        <Setter Property="Foreground" Value="#EC7D8E"/>
+    </Style>
+
     <Style TargetType="Button" x:Key="DeleteButton">
         <Setter Property="TextElement.FontFamily" Value="Tahoma"/>
         <Setter Property="Background" Value="#772627"/>
