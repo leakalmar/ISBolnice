@@ -1,3 +1,4 @@
+using Enums;
 using Hospital_IS.Model;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,13 @@ namespace Model
         public Patient(int id, string name, string surname, DateTime birthDate, string address, string email, string password, DateTime filedate, String employer, List<String> alergies, Boolean isGuest) : base(id, name, surname, birthDate, address, email, password)
         {
             this.FileDate = filedate;
+            this.Employer = employer;
+            this.Alergies = alergies;
+            this.IsGuest = isGuest;
+        }
+
+        public Patient(int id, string name, string surname, string gender, DateTime birthDate, string address, string phone, string email, string relationship, EducationCategory education, string password, String employer, List<String> alergies, Boolean isGuest) : base(id, name, surname, gender, birthDate, address, phone, email, relationship, education, password)
+        {
             this.Employer = employer;
             this.Alergies = alergies;
             this.IsGuest = isGuest;

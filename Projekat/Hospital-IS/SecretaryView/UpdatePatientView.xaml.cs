@@ -5,6 +5,7 @@ using Hospital_IS.SecretaryView;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 
 namespace Hospital_IS
@@ -12,11 +13,20 @@ namespace Hospital_IS
     /// <summary>
     /// Interaction logic for UpdatePatient.xaml
     /// </summary>
-    public partial class UpdatePatientView : Window
+    public partial class UpdatePatientView : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<String> Allergies { get; set; }
         public PatientDTO Patient { get; set; }
         public UCPatientsView ucp;
+
+        private String _name;
+        private String _surname;
+        private String _birthDate;
+        private String _address;
+        private String _phone;
+        private String _email;
+        private String _relationship;
 
         public UpdatePatientView(PatientDTO patient, UCPatientsView ucp)
         {
@@ -30,11 +40,17 @@ namespace Hospital_IS
 
         private void SetPatientInfo()
         {
+            _name = Patient.Name;
             nameTxt.Text = Patient.Name;
+            _surname = Patient.Surname;
             surnameTxt.Text = Patient.Surname;
+            _address = Patient.Address;
             addressTxt.Text = Patient.Address;
+            _phone = Patient.Phone;
             phoneTxt.Text = Patient.Phone;
+            _email = Patient.Email;
             emailTxt.Text = Patient.Email;
+            _relationship = Patient.Relationship;
             relationshipTxt.Text = Patient.Relationship;
             employerTxt.Text = Patient.Employer;
             if (Patient.Gender != null)
@@ -55,6 +71,7 @@ namespace Hospital_IS
             if (Patient.Alergies != null)
                 Allergies = new ObservableCollection<String>(Patient.Alergies);
 
+            _birthDate = Patient.BirthDate.ToString("dd.MM.yyyy.");
             birthdateTxt.Text = Patient.BirthDate.ToString("dd.MM.yyyy.");
         }
 
@@ -80,9 +97,12 @@ namespace Hospital_IS
                 education = EducationCategory.GradeSchool;
             else if (eduComboBox.SelectedIndex == 1)
                 education = EducationCategory.HighSchool;
-            else
+            else if (eduComboBox.SelectedIndex == 2)
                 education = EducationCategory.College;
+            else
+                education = EducationCategory.NA;
 
+            MessageBox.Show(gender);
 
             try
             {
@@ -151,6 +171,100 @@ namespace Hospital_IS
             SetPatientInfo();
             dataGridAllergies.ItemsSource = Allergies;
             this.DataContext = this;
+        }
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public String PatientName
+        {
+            get { return _name; }
+            set
+            {
+                if (value != _name)
+                {
+                    _name = value;
+                    OnPropertyChanged("PatientName");
+                }
+            }
+        }
+        public String Surname
+        {
+            get { return _surname; }
+            set
+            {
+                if (value != _surname)
+                {
+                    _surname = value;
+                    OnPropertyChanged("Surname");
+                }
+            }
+        }
+        public String BirthDate
+        {
+            get { return _birthDate; }
+            set
+            {
+                if (value != _birthDate)
+                {
+                    _birthDate = value;
+                    OnPropertyChanged("BirthDate");
+                }
+            }
+        }
+        public String Address
+        {
+            get { return _address; }
+            set
+            {
+                if (value != _address)
+                {
+                    _address = value;
+                    OnPropertyChanged("Address");
+                }
+            }
+        }
+        public String Phone
+        {
+            get { return _phone; }
+            set
+            {
+                if (value != _phone)
+                {
+                    _phone = value;
+                    OnPropertyChanged("Phone");
+                }
+            }
+        }
+        public String Email
+        {
+            get { return _email; }
+            set
+            {
+                if (value != _email)
+                {
+                    _email = value;
+                    OnPropertyChanged("Email");
+                }
+            }
+        }
+
+        public String Relationship
+        {
+            get { return _relationship; }
+            set
+            {
+                if (value != _relationship)
+                {
+                    _relationship = value;
+                    OnPropertyChanged("Relationship");
+                }
+            }
         }
     }
 }
