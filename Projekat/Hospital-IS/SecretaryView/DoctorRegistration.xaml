@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
-        Title="Registracija doktora" Height="440" Width="450"
+        Title="Registracija doktora" Height="540" Width="520"
         WindowStartupLocation="CenterScreen"
-        FontSize="15"
+        FontSize="17"
         FontWeight="Light">
     <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
@@ -33,42 +33,42 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Ime:" Margin="20 10 20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="Prezime:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Datum rođenja:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="Adresa:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="Telefon:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="6" Text="Specijalizacija:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="7" Text="Email:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="8" Text="Šifra:" Margin="20 20 20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="9" Text="Ponovite šifru:" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="Ime *" Margin="20 10 20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="Prezime *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Datum rođenja *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="Adresa *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="5" Text="Telefon *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="6" Text="Specijalizacija *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="7" Text="Email *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="8" Text="Šifra *" Margin="20 20 20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Grid.Column="1" Grid.Row="9" Text="Ponovite šifru *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
 
-        <TextBox Grid.Column="2" Grid.Row="1" Margin="40 10 10 5" Text="{Binding Doctor.Name}"
+        <TextBox Grid.Column="2" Grid.Row="1" Margin="40 10 10 10" Text="{Binding Doctor.Name}"
                  Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <TextBox Grid.Column="2" Grid.Row="2" Margin="40 5 10 5" Text="{Binding Doctor.Surname}"
+        <TextBox Grid.Column="2" Grid.Row="2" Margin="40 5 10 10" Text="{Binding Doctor.Surname}"
                  Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <TextBox Grid.Column="2" Grid.Row="3" Margin="40 5 10 5" Name="birthdateTxt"
+        <TextBox Grid.Column="2" Grid.Row="3" Margin="40 5 10 10" Name="birthdateTxt"
                  Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <TextBox Grid.Column="2" Grid.Row="4" Margin="40 5 10 5" Text="{Binding Doctor.Address}"
+        <TextBox Grid.Column="2" Grid.Row="4" Margin="40 5 10 10" Text="{Binding Doctor.Address}"
                  Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <TextBox Grid.Column="2" Grid.Row="5" Margin="40 5 10 5" Text="{Binding Doctor.Phone}"
+        <TextBox Grid.Column="2" Grid.Row="5" Margin="40 5 10 10" Text="{Binding Doctor.Phone}"
                  Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <ComboBox Name="cbSpecialty" Grid.Column="2" Grid.Row="6" Margin="40 5 10 5" ItemsSource="{Binding Specialties}">
+        <ComboBox Name="cbSpecialty" Grid.Column="2" Grid.Row="6" Margin="40 5 10 10" ItemsSource="{Binding Specialties}">
         </ComboBox>
-        <TextBox Grid.Column="2" Grid.Row="7" Margin="40 5 10 5" Text="{Binding Doctor.Email}"
+        <TextBox Grid.Column="2" Grid.Row="7" Margin="40 5 10 10" Text="{Binding Doctor.Email}"
                  Style="{DynamicResource ResourceKey=RegularTextBox}"/>
-        <PasswordBox Name="passwordBox" Grid.Column="2" Grid.Row="8" Margin="40 20 10 5"
+        <PasswordBox Name="passwordBox" Grid.Column="2" Grid.Row="8" Margin="40 20 10 10"
                      Style="{DynamicResource ResourceKey=PasswordBox}"/>
-        <PasswordBox Grid.Column="2" Grid.Row="9" Margin="40 5 10 5"
+        <PasswordBox Grid.Column="2" Grid.Row="9" Margin="40 5 10 10"
                      Style="{DynamicResource ResourceKey=PasswordBox}"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center">
-            <Button Grid.Column="1" Grid.Row="11" Width="80"
+            <Button Grid.Column="1" Grid.Row="11" Width="90"
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="0 20 25 0"
                     Content="Potvrdi" Click="AddDoctor"/>
-            <Button Grid.Column="2" Grid.Row="11" Width="80"
+            <Button Grid.Column="2" Grid.Row="11" Width="90"
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="25 20 0 0 "
                     Content="Odustani" Click="Close"/>

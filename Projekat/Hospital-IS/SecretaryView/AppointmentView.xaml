@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
-        Title="Prikaz termina" Height="400" Width="500"
+        Title="Prikaz termina" Height="480" Width="580"
         WindowStartupLocation="CenterScreen"
-        FontSize="16"
+        FontSize="18"
         FontWeight="Light">
     <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
@@ -17,7 +17,7 @@
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -49,7 +49,7 @@
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
-        <TextBlock FontSize="15" Grid.Column="2" Grid.Row="2" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}">
+        <TextBlock Grid.Column="2" Grid.Row="2" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}">
             <TextBlock.Text>
                 <MultiBinding StringFormat="{}{0} {1}">
                     <Binding Path="DocAppointment.Doctor.Name"/>
@@ -62,7 +62,7 @@
         <TextBlock Grid.Column="2" Grid.Row="5" Margin="20 5" Text="{Binding Duration}" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                    Name="txtDuration"/>
         <TextBlock Grid.Column="2" Grid.Row="6" Margin="20 5" Text="{Binding DocAppointment.Room}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBox Grid.Column="2" Grid.Row="7" Grid.RowSpan="2"  Height="80" ScrollViewer.VerticalScrollBarVisibility="Auto"
+        <TextBox Grid.Column="2" Grid.Row="7" Grid.RowSpan="2"  Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto"
                  Margin="20 5" IsEnabled="False" Text="{Binding DocAppointment.AppointmentCause}"
                  Style="{DynamicResource ResourceKey=RegularTextBox}"
                  VerticalAlignment="Top" FontSize="13" TextWrapping="Wrap"/>
