@@ -71,6 +71,7 @@ namespace Hospital_IS.SecretaryView
             {
                 foreach (RescheduledAppointmentDTO raDTO in RescheduledAppointments)
                 {
+                    NotificationController.Instance.SendNAppointmentRescheduledNotification(raDTO.OldDocAppointment, raDTO.NewDocAppointment);
                     DoctorAppointmentManagementController.Instance.UpdateAppointment(raDTO.OldDocAppointment, raDTO.NewDocAppointment);
                 }
                 DoctorAppointmentManagementController.Instance.AddAppointment(SuggestedAppointments[dgSuggestedAppointments.SelectedIndex].SuggestedAppointment);
