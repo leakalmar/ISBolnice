@@ -4,6 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:val="clr-namespace:Hospital_IS.SecretaryView.Validation"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+        lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
         Title="Registracija doktora" Height="570" Width="520"
@@ -37,15 +41,15 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Ime *" Margin="20 10 20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="Prezime *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Datum rođenja *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="Adresa *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="Telefon *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="6" Text="Specijalizacija *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="7" Text="Email *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="8" Text="Šifra *" Margin="20 20 20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="9" Text="Ponovite šifru *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbNameS" Grid.Column="1" Grid.Row="1" Text="{lex:Loc}" Margin="20 10 20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbSurnameS" Grid.Column="1" Grid.Row="2" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbBirthDateS" Grid.Column="1" Grid.Row="3" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbAddressS" Grid.Column="1" Grid.Row="4" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbPhoneS" Grid.Column="1" Grid.Row="5" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbSpecialtyS" Grid.Column="1" Grid.Row="6" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbEmailS" Grid.Column="1" Grid.Row="7" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbPasswordS" Grid.Column="1" Grid.Row="8" Text="{lex:Loc}" Margin="20 20 20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbPasswordConfS" Grid.Column="1" Grid.Row="9" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
 
         <TextBox Name="txtName" Grid.Column="2" Grid.Row="1" Margin="40 10 10 10"
@@ -190,7 +194,7 @@
             <Button Name="btnConfirm" Grid.Column="1" Grid.Row="11" Width="90"
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="0 20 25 0"
-                    Content="Potvrdi" Click="AddDoctor">
+                    Content="{lex:Loc}" Click="AddDoctor">
                 <Button.IsEnabled>
                     <MultiBinding Converter="{StaticResource InverseAndBooleansToBooleanConverter}" Mode="TwoWay">
                         <Binding ElementName="txtName" Path="(Validation.HasError)" />
@@ -202,10 +206,10 @@
                     </MultiBinding>
                 </Button.IsEnabled>
             </Button>
-            <Button Grid.Column="2" Grid.Row="11" Width="90"
+            <Button x:Name="btnCancel" Grid.Column="2" Grid.Row="11" Width="90"
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="25 20 0 0 "
-                    Content="Odustani" Click="Close"/>
+                    Content="{lex:Loc}" Click="Close"/>
 
         </StackPanel>
 

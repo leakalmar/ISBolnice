@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows;
+using WPFLocalizeExtension.Engine;
 
 namespace Hospital_IS
 {
@@ -8,6 +10,11 @@ namespace Hospital_IS
     /// </summary>
     public partial class App : Application
     {
+        public App() 
+        {
+            LocalizeDictionary.Instance.Culture = CultureInfo.CurrentCulture;
+        }
+
         public ResourceDictionary ThemeDictionary
         {
             get { return Resources.MergedDictionaries[0]; }

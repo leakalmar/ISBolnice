@@ -3,6 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+        lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
         Title="Prikaz termina" Height="480" Width="580"
@@ -31,13 +35,13 @@
         </Grid.RowDefinitions>
 
 
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Pacijent" Margin="20 10 20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="Doktor" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Tip pregleda" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="Datum i vreme pregleda" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="Trajanje pregleda" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="6" Text="Soba" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="7" Text="Opis" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbPatient" Grid.Column="1" Grid.Row="1" Text="{lex:Loc}" Margin="20 10 20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbDoctor" Grid.Column="1" Grid.Row="2" Text="{lex:Loc}" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbAppType" Grid.Column="1" Grid.Row="3" Text="{lex:Loc}" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbAppDate" Grid.Column="1" Grid.Row="4" Text="{lex:Loc}" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbAppDuration" Grid.Column="1" Grid.Row="5" Text="{lex:Loc}" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbRoom" Grid.Column="1" Grid.Row="6" Text="{lex:Loc}" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbDetails" Grid.Column="1" Grid.Row="7" Text="{lex:Loc}" Margin="20 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
 
 

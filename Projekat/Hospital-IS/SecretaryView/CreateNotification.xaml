@@ -4,6 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:val="clr-namespace:Hospital_IS.SecretaryView.Validation"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+        lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         xmlns:local="clr-namespace:Hospital_IS"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -29,8 +33,8 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
-                   Text="Naslov obaveštenja *" FontSize="17" FontWeight="Light"/>
+        <TextBlock Name="tbTitle" Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
+                   Text="{lex:Loc}" FontSize="17" FontWeight="Light"/>
 
         <TextBox Name="txtTitle" Grid.Row="2" Grid.Column="1" FontSize="17" Margin="0 5" Height="32" Width="200"
                  Style="{DynamicResource ResourceKey=RegularTextBox}" TextChanged="ManageConfirmationButton">
@@ -51,8 +55,8 @@
             </Validation.ErrorTemplate>
         </TextBox>
 
-        <TextBlock Grid.Row="3" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
-                   Text="Tekst obaveštenja *" FontSize="18" FontWeight="Light"/>
+        <TextBlock Name="tbText" Grid.Row="3" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
+                   Text="{lex:Loc}" FontSize="18" FontWeight="Light"/>
 
         <TextBox Name="txtText" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" Margin="0 10"
                  Style="{DynamicResource ResourceKey=RegularTextBox}" TextChanged="ManageConfirmationButton"
@@ -73,15 +77,15 @@
         </TextBox>
 
         <StackPanel Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3">
-            <RadioButton x:Name="rbSelectAll" Content="Prosledi svima" IsChecked="True" Style="{DynamicResource ResourceKey=RadioButton}" Margin="0 3" Click="rbSelectAll_Click"/>
+            <RadioButton x:Name="rbSelectAll" Content="{lex:Loc}" IsChecked="True" Style="{DynamicResource ResourceKey=RadioButton}" Margin="0 3" Click="rbSelectAll_Click"/>
             <StackPanel Orientation="Horizontal">
-                <RadioButton x:Name="rbSelectSome" Content="Prosledi određenim osobama" Style="{DynamicResource ResourceKey=RadioButton}" Margin="0 3 13 3"/>
+                <RadioButton x:Name="rbSelectSome" Content="{lex:Loc}" Style="{DynamicResource ResourceKey=RadioButton}" Margin="0 3 13 3"/>
                 <Button x:Name="btnSelect" Width="80"
                         Style="{DynamicResource ResourceKey=SecondaryButton}"
                         Click="btnSelect_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="pack://application:,,,/Resources/guests.png" Height="20" Width="20"/>
-                        <TextBlock Text="Izaberi" VerticalAlignment="Center" Margin="5 0"/>
+                        <TextBlock Name="tbSelect" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -89,7 +93,7 @@
 
         <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Margin="0 15 0 0"
                     Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2">
-            <Button Name="btnConfirm" Content="Potvrdi" FontSize="15" Margin="10 0" Click="postNotification" 
+            <Button Name="btnConfirm" Content="{lex:Loc}" FontSize="15" Margin="10 0" Click="postNotification" 
                     Width="80"
                     Style="{DynamicResource ResourceKey=RegularButton}">
                 <Button.IsEnabled>
@@ -99,8 +103,8 @@
                     </MultiBinding>
                 </Button.IsEnabled>
             </Button>
-            
-            <Button Content="Odustani" FontSize="15" Margin="10 0" Click="Close"
+
+            <Button Name="btnCancel" Content="{lex:Loc}" FontSize="15" Margin="10 0" Click="Close"
                     Width="80"
                     Style="{DynamicResource ResourceKey=RegularButton}"/>
         </StackPanel>

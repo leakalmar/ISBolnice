@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             lex:LocalizeDictionary.DesignCulture="en"
+             lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+             lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -28,7 +32,7 @@
                     HorizontalAlignment="Right" Click="ShowAppointment">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="pack://application:,,,/Resources/eye.png" Height="20" Width="20"/>
-                    <TextBlock Text="Prikaži" VerticalAlignment="Center" Margin="5 0"/>
+                    <TextBlock Name="txtShow" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
                 </StackPanel>
             </Button>
 
@@ -37,7 +41,7 @@
                     HorizontalAlignment="Left" Click="UpdateAppointment">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="pack://application:,,,/Resources/pen.png" Height="20" Width="20"/>
-                    <TextBlock Text="Izmeni" VerticalAlignment="Center" Margin="5 0"/>
+                    <TextBlock Name="txtUpdate" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
                 </StackPanel>
             </Button>
 
@@ -45,12 +49,12 @@
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     HorizontalAlignment="Left" Click="DeleteAppointment"/>-->
 
-            <Button Width="140" FontSize="13" Height="30" Margin="70 0 0 0 "
+            <Button Width="170" FontSize="13" Height="30" Margin="70 0 0 0 "
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     Click="ScheduleAppointment">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="pack://application:,,,/Resources/add.png" Height="20" Width="20"/>
-                    <TextBlock Text="Zakaži novi termin" VerticalAlignment="Center" Margin="5 0"/>
+                    <TextBlock Name="txtSchedule" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
                 </StackPanel>
             </Button>
         </StackPanel>
@@ -70,9 +74,9 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Label Content="Doktor" Grid.Row="0" Grid.Column="0" FontSize="14" 
+                <Label Name="tbDoctor" Content="{lex:Loc}" Grid.Row="0" Grid.Column="0" FontSize="14" 
                        Foreground="Black" FontWeight="Light" VerticalAlignment="Center" Margin="5 0"/>
-                <Label Content="Soba" Grid.Row="1" Grid.Column="0" FontSize="14" Margin="5 0" 
+                <Label Name="tbRoom" Content="{lex:Loc}" Grid.Row="1" Grid.Column="0" FontSize="14" Margin="5 0" 
                        Foreground="Black" FontWeight="Light" VerticalAlignment="Top"/>
                 
                 <ComboBox x:Name="cbDoctor" ItemsSource="{Binding Doctors}" Grid.Row="0" Grid.Column="1" Margin="5 0"
@@ -104,12 +108,12 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
 
-                <Label Content="Od:" Grid.Row="0" Grid.Column="3" FontSize="14" Margin="5 5"
+                <Label Name="labFrom" Content="{lex:Loc}" Grid.Row="0" Grid.Column="3" FontSize="14" Margin="5 5"
                        Foreground="Black" FontWeight="Light" VerticalAlignment="Bottom"/>
-                <Label Content="Do:" Grid.Row="1" Grid.Column="3" FontSize="14" Margin="5 0"
+                <Label Name="labUntil" Content="{lex:Loc}" Grid.Row="1" Grid.Column="3" FontSize="14" Margin="5 0"
                        Foreground="Black" FontWeight="Light" VerticalAlignment="Bottom"/>
 
-                <Label Content="Datum:" Grid.Row="0" Grid.Column="2" FontSize="14" Margin="20 0 5 0"
+                <Label Name="labDate" Content="{lex:Loc}" Grid.Row="0" Grid.Column="2" FontSize="14" Margin="20 0 5 0"
                        Foreground="Black" FontWeight="Light" VerticalAlignment="Top" HorizontalAlignment="Center"/>
 
                 <Button Name="btnResetDoctors" Content="X" Padding="-1" Grid.Row="0" Grid.Column="2" FontSize="13" Margin="0 0 0 0"
@@ -182,7 +186,7 @@
                 Style="{DynamicResource ResourceKey=RegularButton}">
             <StackPanel Orientation="Horizontal">
                 <Image Source="pack://application:,,,/Resources/secretaryReport.png" Height="20" Width="20"/>
-                <TextBlock Text="Formiraj izveštaj" VerticalAlignment="Center" Margin="5 0"/>
+                <TextBlock Name="txtFormReport" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
             </StackPanel>
         </Button>
 

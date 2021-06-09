@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             lex:LocalizeDictionary.DesignCulture="en"
+             lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+             lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -43,7 +47,7 @@
                 HorizontalAlignment="Right" Click="ShowDoctor">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="pack://application:,,,/Resources/eye.png" Height="20" Width="20"/>
-                    <TextBlock Text="Prikaži" VerticalAlignment="Center" Margin="5 0"/>
+                    <TextBlock Name="txtShow" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
                 </StackPanel>
             </Button>
 
@@ -52,7 +56,7 @@
                     HorizontalAlignment="Left" Click="UpdateDoctor">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="pack://application:,,,/Resources/pen.png" Height="20" Width="20"/>
-                    <TextBlock Text="Izmeni" VerticalAlignment="Center" Margin="5 0"/>
+                    <TextBlock Name="txtUpdate" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
                 </StackPanel>
             </Button>
 
@@ -65,7 +69,7 @@
                     Click="AddNewDoctor">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="pack://application:,,,/Resources/register.png" Height="20" Width="20"/>
-                    <TextBlock Text="Registracija" VerticalAlignment="Center" Margin="5 0"/>
+                    <TextBlock Name="txtRegistration" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
                 </StackPanel>
             </Button>
         </StackPanel>

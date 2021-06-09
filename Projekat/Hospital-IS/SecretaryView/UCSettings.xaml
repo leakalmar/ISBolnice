@@ -2,7 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             lex:LocalizeDictionary.DesignCulture="en"
+             lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+             lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
              mc:Ignorable="d" 
              FontSize="17"
@@ -37,12 +41,12 @@
                 Margin="20 0" FontSize="15" Width="140"
                 Style="{DynamicResource ResourceKey=SecondaryButton}"/>
 
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Ime *" Margin="20 20 20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="Prezime *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="Datum rođenja *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="6" Text="Adresa *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="7" Text="Telefon *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="8" Text="Email *" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbNameS" Grid.Column="1" Grid.Row="3" Text="{lex:Loc}" Margin="20 20 20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbSurnameS" Grid.Column="1" Grid.Row="4" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbBirthDateS" Grid.Column="1" Grid.Row="5" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbAddressS" Grid.Column="1" Grid.Row="6" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbPhoneS" Grid.Column="1" Grid.Row="7" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbEmailS" Grid.Column="1" Grid.Row="8" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
         <TextBox Grid.Column="1" Grid.Row="3" Margin="20 20 20 10" HorizontalAlignment="Right"
                  Width="200" Height="25"

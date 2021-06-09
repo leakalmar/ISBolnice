@@ -93,6 +93,7 @@
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.2" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="WPFLocalizeExtension" Version="3.8.0" />
     <PackageReference Include="WPFToolkit.DataVisualization" Version="3.5.50211.1" />
   </ItemGroup>
 
@@ -169,6 +170,30 @@
     <Resource Include="Resources\tube.png" />
     <Resource Include="Resources\worker.png" />
     <Resource Include="Resources\x-icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="SecretaryView\Localization\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <Compile Update="SecretaryView\Localization\Strings.sr-LATN-CS.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.sr-LATN-CS.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="SecretaryView\Localization\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SecretaryView\Localization\Strings.sr-LATN-CS.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.sr-LATN-CS.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

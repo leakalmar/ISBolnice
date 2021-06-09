@@ -3,6 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+        lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         xmlns:local="clr-namespace:Hospital_IS"
         mc:Ignorable="d"
         Title="Dodavanje alergena" WindowStartupLocation="CenterScreen"
@@ -22,10 +26,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="Аko dodajete više alergena odvojite ih zarezom."
+        <TextBlock Name="txtAddAllergies" Grid.Row="1" Grid.Column="1" Text="{lex:Loc}"
                    Margin="0 0 0 10" FontSize="12"
                    Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="Unesite alergene:"
+        <TextBlock Name="txtEnterAllergies" Grid.Row="2" Grid.Column="1" Text="{lex:Loc}"
                    Margin="0 0 0 5" FontSize="14"
                    Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
         <TextBox Grid.Row="3" Grid.RowSpan="2"  Name="txtAllergies"
@@ -34,11 +38,11 @@
                  ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
         
         <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="4" HorizontalAlignment="Center">
-            <Button Content="Potvrdi" Width="55" 
+            <Button Name="btnConfirm" Content="{lex:Loc}" Width="55" 
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="5 5 15 5"
                     Click="AddAllergies"/>
-            <Button Content="Odustani" Width="55" 
+            <Button Name="btnCancel" Content="{lex:Loc}" Width="55" 
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="15 5 5 5"
                     Click="Close"/>

@@ -14,7 +14,7 @@ namespace Hospital_IS
             InitializeComponent();
             this.upv = upv;
             allergy = (string)upv.dataGridAllergies.SelectedItem;
-            txtConfirmation.Text = "Da li ste sigurni da želite da uklonite alregen \"" + allergy + "\"?";
+            tbDeleteAllergen.Text = "Da li ste sigurni da želite da uklonite alregen \"" + allergy + "\"?";
         }
 
         private void DeleteAllergy(object sender, RoutedEventArgs e)

@@ -3,6 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+        lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
         Title="Prikaz doktora" Height="520" Width="500"
@@ -11,7 +15,7 @@
         FontWeight="Light"
         Background="#CCC5CFE5">
     <TabControl Name="tab" Grid.Row="0" Grid.ColumnSpan="4" Style="{DynamicResource ResourceKey=TabControl}">
-        <TabItem Header="Opste informacije" Style="{DynamicResource ResourceKey=TabItem}">
+        <TabItem Name="tabGeneral" Header="{lex:Loc}" Style="{DynamicResource ResourceKey=TabItem}">
             <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60"/>
@@ -33,24 +37,24 @@
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="1" Grid.Row="1" Text="Ime:" Margin="20 10 20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Grid.Column="1" Grid.Row="2" Text="Prezime:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Grid.Column="1" Grid.Row="3" Text="Datum rođenja:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Grid.Column="1" Grid.Row="4" Text="Adresa:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Grid.Column="1" Grid.Row="5" Text="Telefon:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Grid.Column="1" Grid.Row="6" Text="Email:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Grid.Column="1" Grid.Row="7" Text="Specijalizacija:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Grid.Column="1" Grid.Row="8" Text="Smena:" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Name="tbName" Grid.Column="1" Grid.Row="1" Text="{lex:Loc}" Margin="20 10 20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Name="tbSurname" Grid.Column="1" Grid.Row="2" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Name="tbBirthDate" Grid.Column="1" Grid.Row="3" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Name="tbAddress" Grid.Column="1" Grid.Row="4" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Name="tbPhone" Grid.Column="1" Grid.Row="5" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Name="tbEmail" Grid.Column="1" Grid.Row="6" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Name="tbSpecialty" Grid.Column="1" Grid.Row="7" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Name="tbShift" Grid.Column="1" Grid.Row="8" Text="{lex:Loc}" Margin="20 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
 
                 <TextBlock Grid.Column="2" Grid.Row="1" Margin="40 10 20 10" Text="{Binding Doctor.Name}" VerticalAlignment="Center" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Grid.Column="2" Grid.Row="2" Margin="40 5 10 10" Text="{Binding Doctor.Surname}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Grid.Column="2" Grid.Row="3" Margin="40 5 10 10" Text="{Binding Doctor.BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Grid.Column="2" Grid.Row="4" Margin="40 5 10 10" Text="{Binding Doctor.Address}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Grid.Column="2" Grid.Row="5" Margin="40 5 10 10" Text="{Binding Doctor.Phone}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Grid.Column="2" Grid.Row="6" Margin="40 5 10 10" Text="{Binding Doctor.Email}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Grid.Column="2" Grid.Row="7" Margin="40 5 10 10" Text="{Binding Doctor.Specialty}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Name="txtWorkShift" Grid.Column="2" Grid.Row="8" Margin="40 5 10 10" Text="{Binding Doctor.Specialty}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="2" Margin="40 10 10 10" Text="{Binding Doctor.Surname}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="3" Margin="40 10 10 10" Text="{Binding Doctor.BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="4" Margin="40 10 10 10" Text="{Binding Doctor.Address}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="5" Margin="40 10 10 10" Text="{Binding Doctor.Phone}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="6" Margin="40 10 10 10" Text="{Binding Doctor.Email}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Grid.Column="2" Grid.Row="7" Margin="40 10 10 10" Text="{Binding Doctor.Specialty}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Name="txtWorkShift" Grid.Column="2" Grid.Row="8" Margin="40 10 10 10" Text="{Binding Doctor.Specialty}" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
                 <Button Grid.Row="9" Grid.ColumnSpan="4" Grid.RowSpan="2" 
                         Style="{DynamicResource ResourceKey=RegularButton}"
@@ -58,7 +62,7 @@
                         Width="55" Click="Close"/>
             </Grid>
         </TabItem>
-        <TabItem Header="Istorija pregleda" Style="{DynamicResource ResourceKey=TabItem}">
+        <TabItem Name="tabAppHistory" Header="Istorija pregleda" Style="{DynamicResource ResourceKey=TabItem}">
             <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
@@ -74,7 +78,7 @@
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Pregledi" Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
+                <TextBlock Name="tbApps" Text="{lex:Loc}" Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                            FontSize="17"/>
 
                 <DataGrid x:Name="dataGridAppointments" ItemsSource="{Binding Appointments}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
@@ -112,7 +116,7 @@
                         Margin="40 0 0 70" Width="85" HorizontalAlignment="Left" Click="ShowAppointment">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="pack://application:,,,/Resources/eye.png" Height="20" Width="20"/>
-                        <TextBlock Text="Prikaži" VerticalAlignment="Center" Margin="5 0"/>
+                        <TextBlock Name="txtShow" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
                     </StackPanel>
                 </Button>
                
@@ -121,7 +125,7 @@
 
             </Grid>
         </TabItem>
-        <TabItem Header="Zakazani pregledi" Style="{DynamicResource ResourceKey=TabItem}">
+        <TabItem Name="tabScheduledApps" Header="{lex:Loc}" Style="{DynamicResource ResourceKey=TabItem}">
             <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
@@ -137,7 +141,7 @@
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Zakazani pregledi" Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
+                <TextBlock Name="txtScheduledApps" Text="{lex:Loc}" Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                            FontSize="17"/>
 
                 <DataGrid x:Name="dataGridFutureAppointments" ItemsSource="{Binding FutureAppointments}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
@@ -174,15 +178,15 @@
                         Margin="40 0 0 70" Width="85" HorizontalAlignment="Left" Click="ShowAppointment">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="pack://application:,,,/Resources/eye.png" Height="20" Width="20"/>
-                        <TextBlock Text="Prikaži" VerticalAlignment="Center" Margin="5 0"/>
+                        <TextBlock Name="txtShow2" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
                     </StackPanel>
                 </Button>
                 <Button Grid.Row="3" Grid.Column="1" FontSize="15"
                         Style="{DynamicResource ResourceKey=RegularButton}"
-                        Margin="0 0 0 70" Width="165" HorizontalAlignment="Right" Click="ScheduleNewAppointment">
+                        Margin="0 0 0 70" Width="185" HorizontalAlignment="Right" Click="ScheduleNewAppointment">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="pack://application:,,,/Resources/add.png" Height="20" Width="20"/>
-                        <TextBlock Text="Zakaži novi termin" VerticalAlignment="Center" Margin="5 0"/>
+                        <TextBlock Name="txtSchedule" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
                     </StackPanel>
                 </Button>
 

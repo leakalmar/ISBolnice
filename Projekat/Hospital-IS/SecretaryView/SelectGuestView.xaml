@@ -3,6 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+        lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
         Title="Gostujući korisnici" Height="420" Width="380"
@@ -36,15 +40,15 @@
             </DataGrid.Resources>
         </DataGrid>
 
-        <Button Content="Dodaj novog korisnika" Width="130" 
+        <Button Name="btnAddNewGuest" Content="{lex:Loc}" Width="130" 
                 HorizontalAlignment="Left" Style="{DynamicResource ResourceKey=RegularButton}"
                 Grid.Row="2" Grid.Column="1" Click="AddNewGuest"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" 
                     HorizontalAlignment="Center">
-            <Button Content="Izaberi" Width="60" Margin="0 10 20 0" Style="{DynamicResource ResourceKey=RegularButton}"
+            <Button Name="tbSelect" Content="{lex:Loc}" Width="60" Margin="0 10 20 0" Style="{DynamicResource ResourceKey=RegularButton}"
                     Click="Select"/>
-            <Button Content="Odustani" Width="60" Margin="20 10 0 0" Style="{DynamicResource ResourceKey=RegularButton}"
+            <Button Name="btnCancel" Content="{lex:Loc}" Width="60" Margin="20 10 0 0" Style="{DynamicResource ResourceKey=RegularButton}"
                     Click="Close"/>
         </StackPanel>
 

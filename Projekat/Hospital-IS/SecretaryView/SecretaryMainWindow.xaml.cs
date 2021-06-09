@@ -2,6 +2,7 @@
 using Hospital_IS.Controllers;
 using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
+using Hospital_IS.SecretaryView.Localization;
 using Hospital_IS.SecretaryView.ViewModel;
 using System;
 using System.Windows;
@@ -257,6 +258,25 @@ namespace Hospital_IS.SecretaryView
                 miLight.IsChecked = false;
                 miDark.IsChecked = true;
                 ucs.cbTheme.SelectedIndex = 1;
+            }
+        }
+
+        private void ChangeLanguage(object sender, RoutedEventArgs e)
+        {
+            MenuItem mi = (MenuItem)sender;
+            if (mi.Name.ToString().Equals("miSerbian"))
+            {
+                LocalizedStrings.Instance.SetCulture("sr-LATN-CS");
+                miSerbian.IsChecked = true;
+                miEnglish.IsChecked = false;
+                ucs.cbLanguage.SelectedIndex = 0;
+            }
+            else
+            {
+                LocalizedStrings.Instance.SetCulture("en-US");
+                miSerbian.IsChecked = false;
+                miEnglish.IsChecked = true;
+                ucs.cbLanguage.SelectedIndex = 1;
             }
         }
     }
