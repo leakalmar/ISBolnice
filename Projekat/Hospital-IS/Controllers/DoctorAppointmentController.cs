@@ -115,7 +115,7 @@ namespace Controllers
 
         public bool VerifyAppointment(DoctorAppointment doctorAppointment)
         {
-            return DoctorAppointmentService.Instance.VerifyAppointment(doctorAppointment);
+            return VerifyAppointmentService.Instance.VerifyAppointment(doctorAppointment);
         }
 
         public List<DoctorAppointment> GetAllByDoctorAndDates(int idDoctor, List<DateTime> dates)
