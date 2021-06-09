@@ -1,8 +1,4 @@
-﻿using Enums;
-using Hospital_IS.DTOs;
-using Hospital_IS.Enums;
-using Hospital_IS.Service;
-using Model;
+﻿using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -75,7 +71,7 @@ namespace Service
             {
                 doctorAppointment.Id = AppointmentService.Instance.GenerateAppointmentID();
                 allAppointments.Add(doctorAppointment);
-                afs.SaveAppointment(allAppointments);
+                afs.Add(doctorAppointment);
             }
         }
 
@@ -115,75 +111,6 @@ namespace Service
             }
         }
 
-        public bool VerifyAppointment(DoctorAppointment doctorAppointment)
-        {
-            List<Appointment> docAppsByRoom = new List<Appointment>(GetAllByRoom(doctorAppointment.Room));
-            List<Appointment> classicAppsByRoom = AppointmentService.Instance.GetAppByRoom(doctorAppointment.Room);
-            List<Appointment> appsByDoctor = new List<Appointment>(GetAllByDoctor(doctorAppointment.Doctor.Id));
-            Boolean isVerified = true;
-
-            if (!AppointmentService.Instance.CheckAppointment(docAppsByRoom, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd))
-                isVerified = false;
-            if (!AppointmentService.Instance.CheckAppointment(classicAppsByRoom, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd) && isVerified == true)
-                isVerified = false;
-            if (!AppointmentService.Instance.CheckAppointment(appsByDoctor, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd) && isVerified == true)
-                isVerified = false;
-            if (!IsDoctorWorking(doctorAppointment.Doctor, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd) && isVerified == true)
-                isVerified = false;
-
-            return isVerified;
-        }
-
-        private bool IsDoctorWorking(Doctor doctor, DateTime appointmentStart, DateTime appointmentEnd)
-        {
-            if (IsDoctorOnVacation(doctor, appointmentStart, appointmentEnd))
-                return false;
-
-            if (doctor.WorkShift.Equals(WorkDayShift.FirstShift))
-            {
-                if (appointmentStart.TimeOfDay >= new TimeSpan(8, 0, 0) && appointmentEnd.TimeOfDay <= new TimeSpan(14, 0, 0))
-                    return true;
-            }
-            else 
-            {
-                if (appointmentStart.TimeOfDay >= new TimeSpan(14, 0, 0) && appointmentEnd.TimeOfDay <= new TimeSpan(20, 0, 0))
-                    return true;
-            }
-            return false;
-        }
-
-        private bool IsDoctorOnVacation(Doctor doctor, DateTime appointmentStart, DateTime appointmentEnd)
-        {
-            DateTime VacationTimeEnd = doctor.VacationTimeStart.AddDays(14);
-            if (appointmentStart > doctor.VacationTimeStart && appointmentStart < VacationTimeEnd)
-                return true;
-            if (appointmentEnd > doctor.VacationTimeStart && appointmentEnd < VacationTimeEnd)
-                return true;
-            if (appointmentStart < doctor.VacationTimeStart && appointmentEnd > VacationTimeEnd)
-                return true;
-
-            return false;
-        }
-
-        public List<DoctorAppointment> GetAvailableAppointmentsByDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
-        {
-            List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
-            List<DoctorAppointment> allPossibleAppointments = SuggestedAppointmentService.Instance.GenerateAppointmentsForDoctor(dates, tempAppointment);
-            foreach (DoctorAppointment doctorAppointment in allPossibleAppointments)
-            {
-                bool isFree = VerifyAppointment(doctorAppointment);
-                if (isFree)
-                {
-                    isFree = SuggestedAppointmentService.Instance.VerifyAppointmentByPatient(doctorAppointment, tempAppointment.Patient.Id);
-                }
-                if (isFree)
-                {
-                    availableAppointments.Add(doctorAppointment);
-                }
-            }
-            return availableAppointments;
-        }
-
         public List<DoctorAppointment> GetFutureAppointmentsByPatient(int patientId)
         {
             List<DoctorAppointment> futurePatientAppointments = new List<DoctorAppointment>();
@@ -197,6 +124,7 @@ namespace Service
             }
             return futurePatientAppointments;
         }
+
 
         public void ReloadDoctorAppointments()
         {

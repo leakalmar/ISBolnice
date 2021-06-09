@@ -148,28 +148,13 @@ namespace Hospital_IS.Service
             }
         }
 
-
-        public bool VerifyAppointmentByPatient(DoctorAppointment doctorAppointment, int idPatient)
-        {
-            bool isFree = true;
-            foreach (DoctorAppointment patientAppointment in DoctorAppointmentService.Instance.GetAllByPatient(idPatient))
-            {
-                if (doctorAppointment.AppointmentStart == patientAppointment.AppointmentStart)
-                {
-                    isFree = false;
-                    return isFree;
-                }
-            }
-            return isFree;
-        }
-
         public List<DoctorAppointment> SuggestAppointmentsToPatient(PossibleAppointmentForPatientDTO possibleAppointment)
         {
             List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
             List<DoctorAppointment> allPossibleAppointments = GenerateAppointmentForPatient(possibleAppointment);
             foreach (DoctorAppointment doctorAppointment in allPossibleAppointments)
             {
-                bool isFree = DoctorAppointmentService.Instance.VerifyAppointment(doctorAppointment);
+                bool isFree = VerifyAppointmentService.Instance.VerifyAppointment(doctorAppointment);
                 if (isFree)
                 {
                     availableAppointments.Add(doctorAppointment);
@@ -182,10 +167,29 @@ namespace Hospital_IS.Service
         {
             List<DoctorAppointment> allAppointments = new List<DoctorAppointment>();
 
-            allAppointments = DoctorAppointmentService.Instance.GetAvailableAppointmentsByDoctor(dates, tempAppointment);
+            allAppointments = GetAvailableAppointmentsByDoctor(dates, tempAppointment);
             allAppointments.AddRange(DoctorAppointmentService.Instance.GetAllByDoctorAndDates(tempAppointment.Doctor.Id, dates));
 
             return allAppointments;
+        }
+
+        public List<DoctorAppointment> GetAvailableAppointmentsByDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
+        {
+            List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
+            List<DoctorAppointment> allPossibleAppointments = SuggestedAppointmentService.Instance.GenerateAppointmentsForDoctor(dates, tempAppointment);
+            foreach (DoctorAppointment doctorAppointment in allPossibleAppointments)
+            {
+                bool isFree = VerifyAppointmentService.Instance.VerifyAppointment(doctorAppointment);
+                if (isFree)
+                {
+                    isFree = VerifyAppointmentService.Instance.VerifyAppointmentByPatient(doctorAppointment, tempAppointment.Patient.Id);
+                }
+                if (isFree)
+                {
+                    availableAppointments.Add(doctorAppointment);
+                }
+            }
+            return availableAppointments;
         }
     }
 }
