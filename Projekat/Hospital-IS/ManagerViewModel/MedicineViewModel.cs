@@ -425,7 +425,11 @@ namespace Hospital_IS.ManagerViewModel
         }
         private void Execute_UpdateMedicine(object obj)
         {
-            bool isUnique = MedicineController.Instance.IsNameUnique(SelectedMedicine.Name);
+            bool isUnique = MedicineController.Instance.IsNameUnique(Name);
+            if (Name.Equals(SelectedMedicine.Name))
+            {
+                isUnique = true;
+            }
 
             if (isUnique)
             {
