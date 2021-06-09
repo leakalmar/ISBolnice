@@ -99,7 +99,7 @@
           "BedNumber": 6,
           "RoomId": 15,
           "Type": 0,
-          "RoomIdType": "15 RecoveryRoom",
+          "RoomIdType": "26 RecoveryRoom",
           "Equipment": [],
           "isUsable": false
         },
@@ -122,7 +122,7 @@
           "BedNumber": 6,
           "RoomId": 15,
           "Type": 0,
-          "RoomIdType": "15 RecoveryRoom",
+          "RoomIdType": "26 RecoveryRoom",
           "Equipment": [],
           "isUsable": false
         },
@@ -304,7 +304,7 @@
           "BedNumber": 6,
           "RoomId": 15,
           "Type": 0,
-          "RoomIdType": "15 RecoveryRoom",
+          "RoomIdType": "26 RecoveryRoom",
           "Equipment": [],
           "isUsable": false
         },

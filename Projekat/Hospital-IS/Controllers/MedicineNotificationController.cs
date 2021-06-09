@@ -1,6 +1,5 @@
 ﻿using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DoctorViewModel;
-﻿using Hospital_IS.DoctorView;
 using Hospital_IS.DTOs;
 using Model;
 using Service;
