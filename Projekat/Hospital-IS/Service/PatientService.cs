@@ -34,7 +34,7 @@ namespace Service
         {
             ChartService.Instance.SaveChart(new MedicalHistory(patient.Id));
             AllPatients.Add(patient);
-            pfs.SavePatients(AllPatients);
+            pfs.Add(patient);
         }
 
         public void UpdatePatient(Patient patient)

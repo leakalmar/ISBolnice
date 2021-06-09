@@ -93,7 +93,7 @@ namespace Service
         {
             AllDoctors.Add(doctor);
 
-            dfs.SaveDoctors(AllDoctors);
+            dfs.Add(doctor);
         }
 
         public void UpdateDoctor(Doctor doctor)

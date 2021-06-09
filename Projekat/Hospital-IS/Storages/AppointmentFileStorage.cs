@@ -1,3 +1,4 @@
+using Hospital_IS.Storages;
 using Model;
 using Newtonsoft.Json;
 using System;
@@ -6,20 +7,11 @@ using System.IO;
 
 namespace Storages
 {
-    public class AppointmentFileStorage
+    public class AppointmentFileStorage : GenericFileStorage<DoctorAppointment>
     {
-        private string fileLocation;
-
         public AppointmentFileStorage()
         {
             this.fileLocation = "../../../FileStorage/appointments.json";
-        }
-
-        public List<DoctorAppointment> GetAll()
-        {
-            String text = File.ReadAllText(this.fileLocation);
-            List<DoctorAppointment> allAppointments = JsonConvert.DeserializeObject<List<DoctorAppointment>>(text);
-            return allAppointments;
         }
 
         public void SaveAppointment(List<DoctorAppointment> allAppointments)

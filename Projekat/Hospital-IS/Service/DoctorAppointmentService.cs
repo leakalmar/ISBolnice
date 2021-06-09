@@ -75,7 +75,7 @@ namespace Service
             {
                 doctorAppointment.Id = AppointmentService.Instance.GenerateAppointmentID();
                 allAppointments.Add(doctorAppointment);
-                afs.SaveAppointment(allAppointments);
+                afs.Add(doctorAppointment);
             }
         }
 
