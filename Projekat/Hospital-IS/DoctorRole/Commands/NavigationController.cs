@@ -1,5 +1,8 @@
-﻿using Hospital_IS.DoctorViewModel;
+﻿using DTOs;
+using Hospital_IS.DoctorViewModel;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
+using System.Collections.ObjectModel;
 
 namespace Hospital_IS.DoctorRole.Commands
 {
@@ -22,8 +25,12 @@ namespace Hospital_IS.DoctorRole.Commands
         public abstract void NavigateBackWithoutCheckCommand();
         public abstract void NavigateToSettingsCommand();
         public abstract void NavigateToAppDetailCommand(HomePageViewModel homePageViewModel);
+        public abstract void NavigateToAppDetailCommand();
         public abstract void NavigateToInstructionCommand(NewAppViewModel newAppViewModel);
-        public abstract void NavigateToSearchMedicineCommand(ReportViewModel reportViewModel);
+        public abstract void NavigateToSearchMedicineCommand(ObservableCollection<PrescriptionDTO> prescriptions);
         public abstract void NavigateToNewAppointment();
+        public abstract void NavigateTIssuePrescriptionCommand();
+        public abstract void NavigateToFeedbackCommand();
+        public abstract void NavigateToNotificationDisplayCommand(NotificationDTO notificationDTO);
     }
 }

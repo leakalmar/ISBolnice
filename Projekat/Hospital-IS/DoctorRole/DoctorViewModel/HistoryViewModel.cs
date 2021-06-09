@@ -5,19 +5,15 @@ using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using Model;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.Reflection.Metadata;
 using System.Windows.Data;
-using System.Windows.Navigation;
-using System.Windows.Input;
 using System.Linq;
 using Enums;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class HistoryViewModel : BindableBase
@@ -27,18 +23,8 @@ namespace Hospital_IS.DoctorViewModel
         private PatientDTO patient;
         private ICollectionView reports;
         private ReportDTO selectedReport;
-        private NavigationService insideNavigationService;
         private DateTime fromDate;
         private DateTime toDate;
-
-        public NavigationService InsideNavigationService
-        {
-            get { return insideNavigationService; }
-            set
-            {
-                insideNavigationService = value;
-            }
-        }
 
         public bool Started
         {
@@ -103,7 +89,8 @@ namespace Hospital_IS.DoctorViewModel
         {
             get { return toDate; }
             set
-            {   if(value < FromDate || value>DateTime.Now)
+            {
+                if (value < FromDate || value > DateTime.Now)
                 {
                     toDate = DateTime.Now;
                 }
@@ -144,10 +131,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_OldReportCommand(object obj)
         {
-
-            OldReport view = new OldReport();
-            view._ViewModel.Report = SelectedReport;
-            this.InsideNavigationService.Navigate(view);
+            DoctorInsideNavigationController.Instance.NavigateToOldReportCommand(SelectedReport);
         }
 
         private void Execute_PrintCommand(object obj)
@@ -182,7 +166,7 @@ namespace Hospital_IS.DoctorViewModel
             pdfDoc.Add(spacer);
             pdfDoc.Add(spacer);
 
-            var columnWidth = new[] { 0.85f, 1.5f, 0.6f , 2f };
+            var columnWidth = new[] { 0.85f, 1.5f, 0.6f, 2f };
 
             if (reports.Cast<object>().Count() != 0)
             {
@@ -198,7 +182,7 @@ namespace Hospital_IS.DoctorViewModel
                 pdfTable.AddCell("Doktor");
                 pdfTable.AddCell("Tip");
                 pdfTable.AddCell("Razlog održavanja");
-                
+
                 foreach (ReportDTO report in Reports)
                 {
                     pdfTable.AddCell(report.AppointmentStart.ToString("dd.MM.yyyy."));
@@ -212,7 +196,7 @@ namespace Hospital_IS.DoctorViewModel
                         pdfTable.AddCell("Operacija");
                     }
                     pdfTable.AddCell(report.AppointmentCause);
-                    
+
 
                 }
 

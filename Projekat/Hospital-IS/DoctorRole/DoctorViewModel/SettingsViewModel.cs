@@ -1,5 +1,4 @@
 ﻿using Hospital_IS.DoctorRole.Commands;
-using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DoctorViewModel;
 using Hospital_IS.DTOs;
 
@@ -112,7 +111,7 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
         }
         private void Execute_FeedBackCommand(object obj)
         {
-            DoctorMainWindowModel.Instance.NavigationService.Navigate(new FeedbackView());
+            DoctorNavigationController.Instance.NavigateToFeedbackCommand();
         }
         private bool CanExecute_Command(object obj)
         {

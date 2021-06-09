@@ -6,22 +6,10 @@ namespace Hospital_IS.DoctorRole.DoctorView
 {
     public partial class SearchMedicine : UserControl
     {
-
-        private SearchMedicineViewModel viewModel;
-
-        public SearchMedicineViewModel _ViewModel
-        {
-            get { return viewModel; }
-            set
-            {
-                viewModel = value;
-            }
-        }
-        public SearchMedicine()
+        public SearchMedicine(SearchMedicineViewModel searchMedicineViewModel)
         {
             InitializeComponent();
-            this.viewModel = new SearchMedicineViewModel();
-            this.DataContext = this.viewModel;
+            this.DataContext = searchMedicineViewModel;
         }
 
         private void TextBox_KeyDown(object sender, KeyEventArgs e)

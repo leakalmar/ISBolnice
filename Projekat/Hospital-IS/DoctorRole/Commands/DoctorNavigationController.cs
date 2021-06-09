@@ -1,8 +1,12 @@
-﻿using Hospital_IS.DoctorRole.DoctorView;
+﻿using DTOs;
+using Hospital_IS.DoctorRole.DoctorView;
+using Hospital_IS.DoctorRole.DoctorViewModel;
 using Hospital_IS.DoctorViewModel;
+using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Navigation;
 
@@ -77,8 +81,17 @@ namespace Hospital_IS.DoctorRole.Commands
 
         public override void NavigateToHomeCommand()
         {
-            this.NavigationService.Navigate(
+            if (PatientChartViewModel.Instance.Started)
+            {
+                DoctorNavigationController.Instance.NavigateToChartCommand();
+                PatientChartViewModel.Instance.ChangeCommand.Execute("0");
+            }
+            else
+            {
+                this.NavigationService.Navigate(
                     new Uri("DoctorRole/DoctorView/HomePage.xaml", UriKind.Relative));
+            }
+            
         }
 
         public override void NavigateToMedicinesCommand()
@@ -138,6 +151,11 @@ namespace Hospital_IS.DoctorRole.Commands
             appDetail._ViewModel.AppointmentsView = homePageViewModel.AppointmentsView;
             this.NavigationService.Navigate(appDetail);
         }
+        public override void NavigateToAppDetailCommand()
+        {
+            this.NavigationService.Navigate(new AppDetail());
+        }
+
 
         public override void NavigateToInstructionCommand(NewAppViewModel newAppViewModel)
         {
@@ -155,18 +173,30 @@ namespace Hospital_IS.DoctorRole.Commands
             this.navigaitonService.Navigate(issueInstruction);
         }
 
-        public override void NavigateToSearchMedicineCommand(ReportViewModel reportViewModel)
+        public override void NavigateToSearchMedicineCommand(ObservableCollection<PrescriptionDTO> prescriptions)
         {
-            SearchMedicine view = new SearchMedicine();
-            view._ViewModel.Patient = PatientChartViewModel.Instance.Patient;
-            view._ViewModel.Prescriptions = reportViewModel.Prescriptions;
-            PatientChartViewModel.Instance.SearchMedicineView._ViewModel.Prescriptions = reportViewModel.Prescriptions;
-            this.NavigationService.Navigate(view);
+            PatientChartViewModel.Instance.SearchMedicineViewModel.Prescriptions = prescriptions;
+            this.NavigationService.Navigate(new SearchMedicine(PatientChartViewModel.Instance.SearchMedicineViewModel));
         }
 
         public override void NavigateToNewAppointment()
         {
             this.NavigationService.Navigate(new NewApp());
+        }
+
+        public override void NavigateTIssuePrescriptionCommand()
+        {
+            this.NavigationService.Navigate(new IssuePrescription(false));
+        }
+        public override void NavigateToFeedbackCommand()
+        {
+            this.NavigationService.Navigate(new FeedbackView());
+        }
+        public override void NavigateToNotificationDisplayCommand(NotificationDTO notificationDTO)
+        {
+            NotificationDisplayViewModel notificationDisplayViewModel = new NotificationDisplayViewModel();
+            notificationDisplayViewModel.SelectedNotification = notificationDTO;
+            this.NavigationService.Navigate(new NotificationDisplay(notificationDisplayViewModel));
         }
     }
 }

@@ -75,6 +75,16 @@
         "DoctorSurname": "Vukmanov Simokov",
         "Type": 1,
         "Cause": null
+      },
+      {
+        "Anamnesis": null,
+        "HaveRecipe": false,
+        "HaveTest": false,
+        "ReportId": "2021-06-09T10:45:00",
+        "DoctorName": "Dragana",
+        "DoctorSurname": "Vukmanov Simokov",
+        "Type": 1,
+        "Cause": null
       }
     ],
     "Hospitalization": [
@@ -122,7 +132,7 @@
           "Taken": true
         },
         "Doctor": "Dragana V. Simokov",
-        "IsReleased": false
+        "IsReleased": true
       }
     ],
     "Therapies": [

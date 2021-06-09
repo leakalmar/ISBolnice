@@ -1,11 +1,8 @@
 ﻿using Hospital_IS.DoctorRole.Commands;
-using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DTOs;
-using Model;
-using System;
-using System.Windows;
 using System.Windows.Navigation;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class DoctorMainWindowModel : BindableBase
@@ -159,15 +156,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Actions
         private void Execute_NavigateToHomePageCommand(object obj)
         {
-            if (PatientChartViewModel.Instance.Started)
-            {
-                DoctorNavigationController.Instance.NavigateToChartCommand();
-                PatientChartViewModel.Instance.ChangeCommand.Execute("0");
-            }
-            else
-            {
-                DoctorNavigationController.Instance.NavigateToHomeCommand();
-            }
+            DoctorNavigationController.Instance.NavigateToHomeCommand();
         }
 
         private bool CanExecute_NavigateCommand(object obj)

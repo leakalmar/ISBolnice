@@ -6,19 +6,10 @@ namespace Hospital_IS.DoctorRole.DoctorView
 {
     public partial class ReportView : UserControl
     {
-        private ReportViewModel viewModel;
-
-        public ReportViewModel _ViewModel
-        {
-            get { return viewModel; }
-            set { viewModel = value; }
-        }
-
-        public ReportView()
+        public ReportView(ReportViewModel reportViewModel)
         {
             InitializeComponent();
-            this._ViewModel = new ReportViewModel();
-            this.DataContext = _ViewModel;
+            this.DataContext = reportViewModel;
 
         }
     }

@@ -5,18 +5,10 @@ namespace Hospital_IS.DoctorRole.DoctorView
 {
     public partial class Therapies : UserControl
     {
-        private TherapyViewModel viewModel;
-
-        public TherapyViewModel _ViewModel
-        {
-            get { return viewModel; }
-            set { viewModel = value; }
-        }
-        public Therapies()
+        public Therapies(TherapyViewModel therapyViewModel)
         {
             InitializeComponent();
-            this._ViewModel = new TherapyViewModel();
-            this.DataContext = _ViewModel;
+            this.DataContext = therapyViewModel;
 
         }
     }

@@ -1,6 +1,5 @@
 ﻿using Controllers;
 using Hospital_IS.DoctorRole.Commands;
-using Hospital_IS.DoctorRole.DoctorView;
 using Model;
 using System.Collections.ObjectModel;
 
@@ -50,7 +49,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Actions
         private void Execute_NewTherapyCommand(object obj)
         {
-            PatientChartViewModel.Instance.InsideNavigationService.Navigate(new TherapyNew());
+            DoctorInsideNavigationController.Instance.NavigateToTherapyNewCommand();
         }
 
         private bool CanExecute_NavigateCommand(object obj)

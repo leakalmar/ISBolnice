@@ -5,19 +5,10 @@ namespace Hospital_IS.DoctorRole.DoctorView
 {
     public partial class NotificationDisplay : UserControl
     {
-        private NotificationDisplayViewModel viewModel;
-
-        public NotificationDisplayViewModel _ViewModel
-        {
-            get { return viewModel; }
-            set { viewModel = value; }
-        }
-
-        public NotificationDisplay()
+        public NotificationDisplay(NotificationDisplayViewModel notificationDisplayViewModel)
         {
             InitializeComponent();
-            this._ViewModel = new NotificationDisplayViewModel();
-            this.DataContext = _ViewModel;
+            this.DataContext = notificationDisplayViewModel;
 
         }
     }

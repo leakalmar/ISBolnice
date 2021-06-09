@@ -8,7 +8,11 @@
   },
   {
     "Name": "Defrinol tableta",
-    "Composition": [],
+    "Composition": [
+      {
+        "Component": "fs"
+      }
+    ],
     "SideEffects": "",
     "Usage": "",
     "ReplaceMedicine": []
@@ -55,6 +59,9 @@
     "Composition": [
       {
         "Component": "sve najbolje"
+      },
+      {
+        "Component": "fsd"
       }
     ],
     "SideEffects": "okej",

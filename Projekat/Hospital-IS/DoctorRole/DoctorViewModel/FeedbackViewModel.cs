@@ -1,10 +1,6 @@
 ﻿using Hospital_IS.Controllers;
 using Hospital_IS.DoctorRole.Commands;
-using Hospital_IS.DoctorRole.DoctorView;
-using Hospital_IS.DoctorViewModel;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 //MVVM
 namespace Hospital_IS.DoctorRole.DoctorViewModel

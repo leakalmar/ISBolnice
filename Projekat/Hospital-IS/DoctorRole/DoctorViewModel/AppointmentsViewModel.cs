@@ -177,10 +177,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 if (SelectedAppointment.AppointmentStart > DateTime.Now.AddDays(3))
                 {
-                    ChangeApp changeApp = new ChangeApp();
-                    changeApp._ViewModel.OldAppointment = SelectedAppointment;
-                    InsideNavigation.Navigate(changeApp);
-                    ShowChangePanel = true;
+                    DoctorInsideNavigationController.Instance.NavigateToChangeAppointment(this);
                 }
                 else if (SelectedAppointment.AppointmentStart < DateTime.Now)
                 {

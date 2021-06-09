@@ -1,6 +1,5 @@
 ﻿using Hospital_IS.Controllers;
 using Hospital_IS.DoctorRole.Commands;
-using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using System.Collections.Generic;
 
@@ -50,9 +49,7 @@ namespace Hospital_IS.DoctorViewModel
         {
             if (SelectedNotification != null)
             {
-                NotificationDisplay display = new NotificationDisplay();
-                display._ViewModel.SelectedNotification = SelectedNotification;
-                DoctorMainWindowModel.Instance.NavigationService.Navigate(display);
+                DoctorNavigationController.Instance.NavigateToNotificationDisplayCommand(SelectedNotification);
             }
         }
 

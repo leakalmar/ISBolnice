@@ -5,19 +5,10 @@ namespace Hospital_IS.DoctorRole.DoctorView
 {
     public partial class OldReport : UserControl
     {
-        private OldReportViewModel viewModel;
-
-        public OldReportViewModel _ViewModel
-        {
-            get { return viewModel; }
-            set { viewModel = value; }
-        }
-
-        public OldReport()
+        public OldReport(OldReportViewModel oldReportViewModel)
         {
             InitializeComponent();
-            this._ViewModel = new OldReportViewModel();
-            this.DataContext = _ViewModel;
+            this.DataContext = oldReportViewModel;
 
         }
 

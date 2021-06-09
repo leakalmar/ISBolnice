@@ -5,20 +5,10 @@ namespace Hospital_IS.DoctorRole.DoctorView
 {
     public partial class History : UserControl
     {
-        private HistoryViewModel viewModel;
-
-        public HistoryViewModel _ViewModel
-        {
-            get { return viewModel; }
-            set { viewModel = value; }
-        }
-
-        public History()
+        public History(HistoryViewModel historyViewModel)
         {
             InitializeComponent();
-            this._ViewModel = new HistoryViewModel();
-            InitializeComponent();
-            this.DataContext = _ViewModel;
+            this.DataContext = historyViewModel;
         }
 
     }

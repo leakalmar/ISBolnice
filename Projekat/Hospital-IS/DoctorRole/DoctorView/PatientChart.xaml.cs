@@ -1,4 +1,5 @@
-﻿using Hospital_IS.DoctorViewModel;
+﻿using Hospital_IS.DoctorRole.Commands;
+using Hospital_IS.DoctorViewModel;
 using System.Windows.Controls;
 
 namespace Hospital_IS.DoctorRole.DoctorView
@@ -8,7 +9,7 @@ namespace Hospital_IS.DoctorRole.DoctorView
         public PatientChart()
         {
             InitializeComponent();
-            PatientChartViewModel.Instance.InsideNavigationService = this.patientInfo.NavigationService;
+            DoctorInsideNavigationController.Instance.NavigationService = this.patientInfo.NavigationService;
             this.DataContext = PatientChartViewModel.Instance;
         }
 

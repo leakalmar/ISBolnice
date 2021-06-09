@@ -192,7 +192,7 @@ namespace Hospital_IS.DoctorViewModel
                     medicine.Check = false;
                 }
             }
-            PatientChartViewModel.Instance.ReportView._ViewModel.Prescriptions = Prescriptions;
+            PatientChartViewModel.Instance.ReportViewModel.Prescriptions = Prescriptions;
         }
 
         private void FilterMedicines()
@@ -225,7 +225,7 @@ namespace Hospital_IS.DoctorViewModel
                     medicine.Check = true;
                 }
             }
-            PatientChartViewModel.Instance.ReportView._ViewModel.Prescriptions = Prescriptions;
+            PatientChartViewModel.Instance.ReportViewModel.Prescriptions = Prescriptions;
         }
 
         private static void PatientAllergicMassage()

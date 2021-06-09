@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Navigation;
 
+//MVVM
 namespace Hospital_IS.DoctorViewModel
 {
     public class PatientChartViewModel : BindableBase
@@ -160,24 +161,24 @@ namespace Hospital_IS.DoctorViewModel
         }
         #endregion
 
-        #region Views
-        private SearchMedicine searchMedicineView;
-        private ReportView reportView;
-        public SearchMedicine SearchMedicineView
+        #region ViewModels
+        private SearchMedicineViewModel searchMedicineViewModel;
+        private ReportViewModel reportViewModel;
+        public SearchMedicineViewModel SearchMedicineViewModel
         {
-            get { return searchMedicineView; }
+            get { return searchMedicineViewModel; }
             set
             {
-                searchMedicineView = value;
+                searchMedicineViewModel = value;
                 OnPropertyChanged("SearchMedicineView");
             }
         }
-        public ReportView ReportView
+        public ReportViewModel ReportViewModel
         {
-            get { return reportView; }
+            get { return reportViewModel; }
             set
             {
-                reportView = value;
+                reportViewModel = value;
                 OnPropertyChanged("ReportView");
             }
         }
@@ -259,40 +260,39 @@ namespace Hospital_IS.DoctorViewModel
             {
                 case 0:
                     ReportFocused = true;
-                    this.InsideNavigationService.Navigate(reportView);
+                    DoctorInsideNavigationController.Instance.NavigateToReportCommand(reportViewModel);
                     break;
                 case 1:
                     GeneralFocused = true;
-                    GeneralInfo view = new GeneralInfo();
-                    view._ViewModel.Started = tempStarted;
-                    view._ViewModel.Patient = Patient;
-                    this.InsideNavigationService.Navigate(view);
+                    GeneralInfoViewModel viewModel = new GeneralInfoViewModel();
+                    viewModel.Started = tempStarted;
+                    viewModel.Patient = Patient;
+                    DoctorInsideNavigationController.Instance.NavigateToGeneralCommand(viewModel);
                     break;
                 case 2:
-                    History history = new History();
-                    history._ViewModel.InsideNavigationService = InsideNavigationService;
-                    history._ViewModel.Patient = Patient;
-                    this.InsideNavigationService.Navigate(history);
+                    HistoryViewModel historyViewModel = new HistoryViewModel();
+                    historyViewModel.Patient = Patient;
+                    DoctorInsideNavigationController.Instance.NavigateToHistoryCommand(historyViewModel);
                     break;
                 case 3:
-                    ScheduledApp scheduledApp = new ScheduledApp();
-                    scheduledApp._ViewModel.Started = tempStarted;
-                    this.InsideNavigationService.Navigate(scheduledApp);
+                    ScheduleAppointmentViewModel scheduleAppointmentViewModel = new ScheduleAppointmentViewModel();
+                    scheduleAppointmentViewModel.Started = tempStarted;
+                    DoctorInsideNavigationController.Instance.NavigateToSheduledAppointmentsCommand(scheduleAppointmentViewModel);
                     break;
                 case 4:
-                    Therapies therapy = new Therapies();
-                    therapy._ViewModel.Started = tempStarted;
-                    this.InsideNavigationService.Navigate(therapy);
+                    TherapyViewModel therapyViewModel = new TherapyViewModel();
+                    therapyViewModel.Started = tempStarted;
+                    DoctorInsideNavigationController.Instance.NavigateToTherapiesCommand(therapyViewModel);
                     break;
                 case 5:
-                    Tests tests = new Tests();
-                    tests._ViewModel.Started = tempStarted;
-                    this.InsideNavigationService.Navigate(tests);
+                    TestsViewModel testsViewModel = new TestsViewModel();
+                    testsViewModel.Started = tempStarted;
+                    DoctorInsideNavigationController.Instance.NavigateToTestsCommand(testsViewModel);
                     break;
                 case 6:
-                    Hospitalizations hospitalizations = new Hospitalizations();
-                    hospitalizations._ViewModel.Started = tempStarted;
-                    this.InsideNavigationService.Navigate(hospitalizations);
+                    HospitalizationsViewModel hospitalizationsViewModel = new HospitalizationsViewModel();
+                    hospitalizationsViewModel.Started = tempStarted;
+                    DoctorInsideNavigationController.Instance.NavigateToHospitalizationsCommand(hospitalizationsViewModel);
                     break;
             }
         }
@@ -309,26 +309,25 @@ namespace Hospital_IS.DoctorViewModel
                 DoctorAppointmentDTO selectedAppointment = SelectedAppointment.Appointment;
                 DoctorAppointmentController.Instance.EndAppointment(selectedAppointment);
                 DoctorAppointmentManagementController.Instance.EndAppointment(selectedAppointment);
-                ReportDTO reportDTO = new ReportDTO(selectedAppointment.AppointmentStart, selectedAppointment.Doctor.Name, selectedAppointment.Doctor.Surname, selectedAppointment.Type, selectedAppointment.AppointmentCause, ReportView.reportDetail.Text, ReportView._ViewModel.Prescriptions.Count, selectedAppointment.Patient.Id);
+                ReportDTO reportDTO = new ReportDTO(selectedAppointment.AppointmentStart, selectedAppointment.Doctor.Name, selectedAppointment.Doctor.Surname, selectedAppointment.Type, selectedAppointment.AppointmentCause, ReportViewModel.Anemnesis, ReportViewModel.Prescriptions.Count, selectedAppointment.Patient.Id);
                 ChartController.Instance.AddReport(reportDTO);
-                ChartController.Instance.AddPrescriptions(new List<PrescriptionDTO>(ReportView._ViewModel.Prescriptions), SelectedAppointment.Appointment.Patient);
-                DoctorMainWindowModel.Instance.NavigationService.Navigate(new AppDetail());
+                ChartController.Instance.AddPrescriptions(new List<PrescriptionDTO>(ReportViewModel.Prescriptions), SelectedAppointment.Appointment.Patient);
+                DoctorNavigationController.Instance.NavigateToAppDetailCommand();
                 this.Started = false;
             }
         }
 
         private void Execute_PrescriptionReviewCommand(object obj)
         {
-            DoctorMainWindowModel.Instance.NavigationService.Navigate(new IssuePrescription(false));
+            DoctorNavigationController.Instance.NavigateTIssuePrescriptionCommand();
         }
 
         private void Execute_AddCommand(object obj)
         {
-            switch (InsideNavigationService.Content.GetType().Name)
+            switch (DoctorInsideNavigationController.Instance.NavigationService.Content.GetType().Name)
             {
                 case "Report":
-                    SearchMedicineView._ViewModel.Prescriptions = ReportView._ViewModel.Prescriptions;
-                    DoctorMainWindowModel.Instance.NavigationService.Navigate(SearchMedicineView);
+                    DoctorNavigationController.Instance.NavigateToSearchMedicineCommand(ReportViewModel.Prescriptions);
                     break;
                 default:
                     break;
@@ -338,7 +337,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_NavigateBackCommand(object obj)
         {
-            switch (InsideNavigationService.Content.GetType().Name)
+            switch (DoctorInsideNavigationController.Instance.NavigationService.Content.GetType().Name)
             {
                 case "Report":
                 case "GeneralInfo":
@@ -347,10 +346,10 @@ namespace Hospital_IS.DoctorViewModel
                 case "Therapies":
                 case "Tests":
                 case "Hospitalizations":
-                    DoctorMainWindowModel.Instance.NavigateBackCommand.Execute(obj);
+                    DoctorNavigationController.Instance.NavigateBackCommand();
                     break;
                 default:
-                    this.InsideNavigationService.GoBack();
+                    DoctorInsideNavigationController.Instance.NavigationService.GoBack();
                     break;
             }
 
@@ -365,10 +364,10 @@ namespace Hospital_IS.DoctorViewModel
             {
                 GeneralFocused = true;
                 ReportFocused = false;
-                GeneralInfo view = new GeneralInfo();
-                view._ViewModel.Started = Started;
-                view._ViewModel.Patient = Patient;
-                InsideNavigationService.Navigate(view);
+                GeneralInfoViewModel viewModel = new GeneralInfoViewModel();
+                viewModel.Started = Started;
+                viewModel.Patient = Patient;
+                DoctorInsideNavigationController.Instance.NavigateToGeneralCommand(viewModel);
             }
             else
             {
@@ -376,16 +375,16 @@ namespace Hospital_IS.DoctorViewModel
                 {
                     GeneralFocused = false;
                     ReportFocused = true;
-                    InsideNavigationService.Navigate(ReportView);
+                    DoctorInsideNavigationController.Instance.NavigateToReportCommand(ReportViewModel);
                 }
                 else
                 {
                     GeneralFocused = true;
                     ReportFocused = false;
-                    GeneralInfo view = new GeneralInfo();
-                    view._ViewModel.Started = Started;
-                    view._ViewModel.Patient = Patient;
-                    InsideNavigationService.Navigate(view);
+                    GeneralInfoViewModel viewModel = new GeneralInfoViewModel();
+                    viewModel.Started = Started;
+                    viewModel.Patient = Patient;
+                    DoctorInsideNavigationController.Instance.NavigateToGeneralCommand(viewModel);
                 }
             }
         }
@@ -393,9 +392,8 @@ namespace Hospital_IS.DoctorViewModel
         private void SetFields()
         {
             Patient = SelectedAppointment.Appointment.Patient;
-            SearchMedicineView = new SearchMedicine();
-            SearchMedicineView._ViewModel.Patient = Patient;
-            SearchMedicineView._ViewModel.DatePrescribed = SelectedAppointment.Appointment.AppointmentStart;
+            SearchMedicineViewModel.Patient = Patient;
+            SearchMedicineViewModel.DatePrescribed = SelectedAppointment.Appointment.AppointmentStart;
             Started = SelectedAppointment.IsStarted;
         }
         #endregion
@@ -403,7 +401,8 @@ namespace Hospital_IS.DoctorViewModel
         #region Constructor
         public PatientChartViewModel()
         {
-            this.ReportView = new ReportView();
+            this.ReportViewModel = new ReportViewModel();
+            this.SearchMedicineViewModel = new SearchMedicineViewModel();
             Started = false;
             this.NavigateBackCommand = new RelayCommand(Execute_NavigateBackCommand, CanExecute_Command);
             this.AddCommand = new RelayCommand(Execute_AddCommand, CanExecute_Command);

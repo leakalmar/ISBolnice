@@ -5,19 +5,10 @@ namespace Hospital_IS.DoctorRole.DoctorView
 {
     public partial class GeneralInfo : UserControl
     {
-        private GeneralInfoViewModel viewModel;
-
-        public GeneralInfoViewModel _ViewModel
+        public GeneralInfo(GeneralInfoViewModel generalInfoViewModel)
         {
-            get { return viewModel; }
-            set { viewModel = value; }
-        }
-
-        public GeneralInfo()
-        {
-            this._ViewModel = new GeneralInfoViewModel();
             InitializeComponent();
-            this.DataContext = _ViewModel;
+            this.DataContext = generalInfoViewModel;
         }
 
     }

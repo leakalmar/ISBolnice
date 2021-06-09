@@ -80,7 +80,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_SearchMedicineCommad(object obj)
         {
-            DoctorNavigationController.Instance.NavigateToSearchMedicineCommand(this);
+            DoctorNavigationController.Instance.NavigateToSearchMedicineCommand(this.Prescriptions);
         }
 
         #endregion

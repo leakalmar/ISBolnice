@@ -5,18 +5,10 @@ namespace Hospital_IS.DoctorRole.DoctorView
 {
     public partial class Tests : UserControl
     {
-        private TestsViewModel viewModel;
-
-        public TestsViewModel _ViewModel
-        {
-            get { return viewModel; }
-            set { viewModel = value; }
-        }
-        public Tests()
+        public Tests(TestsViewModel testsViewModel)
         {
             InitializeComponent();
-            this._ViewModel = new TestsViewModel();
-            this.DataContext = _ViewModel;
+            this.DataContext = testsViewModel;
 
         }
     }

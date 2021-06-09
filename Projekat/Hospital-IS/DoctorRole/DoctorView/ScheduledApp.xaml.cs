@@ -5,19 +5,10 @@ namespace Hospital_IS.DoctorRole.DoctorView
 {
     public partial class ScheduledApp : UserControl
     {
-        private ScheduleAppointmentViewModel viewModel;
-
-        public ScheduleAppointmentViewModel _ViewModel
-        {
-            get { return viewModel; }
-            set { viewModel = value; }
-        }
-
-        public ScheduledApp()
+        public ScheduledApp(ScheduleAppointmentViewModel scheduleAppointmentViewModel)
         {
             InitializeComponent();
-            this._ViewModel = new ScheduleAppointmentViewModel();
-            this.DataContext = _ViewModel;
+            this.DataContext = scheduleAppointmentViewModel;
         }
 
     }

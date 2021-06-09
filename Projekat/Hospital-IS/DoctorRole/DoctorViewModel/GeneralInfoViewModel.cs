@@ -1,6 +1,4 @@
-﻿using Hospital_IS.Controllers;
-using Hospital_IS.DoctorRole.Commands;
-using Hospital_IS.DoctorRole.DoctorView;
+﻿using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DTOs.SecretaryDTOs;
 
 //MVVM
@@ -50,8 +48,7 @@ namespace Hospital_IS.DoctorViewModel
 
         private void Execute_ChangeInfoCommand(object obj)
         {
-
-            PatientChartViewModel.Instance.InsideNavigationService.Navigate(new GeneralInfoChange());
+           DoctorInsideNavigationController.Instance.NavigateToGeneralInfoChangeCommand();
         }
 
         private bool CanExecute_NavigateCommand(object obj)
