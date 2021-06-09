@@ -1,6 +1,7 @@
 ﻿using Controllers;
 using Enums;
 using Hospital_IS.Controllers;
+using Hospital_IS.DTOs;
 using Hospital_IS.ManagerView1;
 using Model;
 using System;
@@ -31,7 +32,8 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand openRenovationWindow;
         private RelayCommand navigateToPreviousPage;
         private Room selectedValue;
-        private int roomNumber;
+        private RoomNumberValidation roomValidation = new RoomNumberValidation();
+        private RenovationWindow renovationWindow = new RenovationWindow();
         private NavigationService navService;
 
 
@@ -45,19 +47,19 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
-        public int RoomNumber
+        public RoomNumberValidation RoomValidation
         {
             get
             {
-                return roomNumber;
+                return roomValidation;
             }
             set
             {
-                if (value != roomNumber)
+                if (value != roomValidation)
                 {
 
-                    roomNumber = value;
-                    OnPropertyChanged("RoomNumber");
+                    roomValidation = value;
+                    OnPropertyChanged("RoomValidation");
                 }
             }
         }
@@ -199,10 +201,7 @@ namespace Hospital_IS.ManagerViewModel
                 {
                     
                     selectedRoomFirst = value;
-                    if(SelectedRoomSecond != null)
-                    {
-                        MessageBox.Show(SelectedRoomSecond.RoomId.ToString());
-                    }
+                   
                     
                     if (selectedRoomFirst != null)
                     {
@@ -243,7 +242,7 @@ namespace Hospital_IS.ManagerViewModel
                     selectedRoomSecond = value;               
                     if (selectedRoomSecond != null)
                     {
-                        MessageBox.Show("usloo");
+                       
                         if (SelectedRoomSecond != null && SelectedRoomFirst != null)
                         {
                             if (SelectedRoomSecond.RoomId == SelectedRoomFirst.RoomId)
@@ -260,7 +259,7 @@ namespace Hospital_IS.ManagerViewModel
                         if (SelectedRoomFirst != null)
                         {
                             AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(SelectedRoomFirst.RoomId, selectedRoomSecond.RoomId));
-                            MessageBox.Show(AllAppointments.Count.ToString());
+                           
                         }
                         else
                         {
@@ -462,39 +461,64 @@ namespace Hospital_IS.ManagerViewModel
 
         private void Execute_AdvancedRenovationCommand(object obj)
         {
-            if (IsSplit == true)
+            RoomValidation.Validate();
+        
+            if (RoomValidation.IsValid)
             {
-                Appointment renovationAppointment = new Appointment(true, Note, DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomFirst.RoomId);
-                bool isSuccess = AppointmentController.Instance.MakeRenovationAppointment(renovationAppointment);              
-                if (isSuccess)
+                
+                if (IsSplit == true)
                 {
-                    MessageBox.Show("Dodavanje uspjesno");
-                    RoomType roomType = (RoomType)SelectedRoomTypeIndex;
-                    Room room = new Room(SelectedRoomFirst.RoomFloor, RoomNumber, SelectedRoomFirst.SurfaceArea / 2, roomType, new List<Equipment>());
-                    AdvancedRenovation advancedRenovation = new AdvancedRenovation(SelectedRoomFirst, null, room, IsSplit, IsMerge, DateEnd);
-                    advancedRenovation.isMade = false;
-                    AdvancedRenovationController.Instance.MakeAdvancedRenovation(advancedRenovation);
-                }
-            }
-            else
-            {
-                if(IsMerge == true)
-                {
-                    if (SelectedRoomFirst.RoomFloor != SelectedRoomSecond.RoomFloor)
+                    Appointment renovationAppointment = new Appointment(true, Note, DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomFirst.RoomId);
+                    bool isSuccess = AppointmentController.Instance.MakeRenovationAppointment(renovationAppointment);
+                    if (isSuccess)
                     {
-                        Appointment appointmentFirstRoom = new Appointment(DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomFirst.RoomId);
-                        Appointment appointmentSecondRoom = new Appointment(DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomSecond.RoomId);
-                        bool isSucces = AppointmentController.Instance.MakeRenovationAppointmentForRoomMerge(appointmentFirstRoom, appointmentSecondRoom);
-                        if (isSucces)
+                        MessageBox.Show("Uspjesno zakazivanje razdvajanja");
+                        RoomType roomType = (RoomType)SelectedRoomTypeIndex;
+                        Room room = new Room(SelectedRoomFirst.RoomFloor, Convert.ToInt32(RoomValidation.RoomNumber), SelectedRoomFirst.SurfaceArea / 2, roomType, new List<Equipment>());
+                        AdvancedRenovation advancedRenovation = new AdvancedRenovation(SelectedRoomFirst, null, room, IsSplit, IsMerge, DateEnd);
+                        advancedRenovation.isMade = false;
+                        AdvancedRenovationController.Instance.MakeAdvancedRenovation(advancedRenovation);
+                        MessageBox.Show("Uspjesno zakazivanje razdvajanja");
+                        AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(SelectedRoomFirst.RoomId));
+                        renovationWindow.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Izaberite drugi termin");
+                    }
+                }
+                else
+                {
+                    if (IsMerge == true)
+                    {
+                        if (SelectedRoomFirst.RoomFloor != SelectedRoomSecond.RoomFloor)
                         {
-                            RoomType roomType = (RoomType)SelectedRoomTypeIndex;
-                            int surfaceArea = SelectedRoomFirst.SurfaceArea + SelectedRoomSecond.SurfaceArea;
-                            Room room = new Room(SelectedRoomFirst.RoomFloor, RoomNumber, surfaceArea, roomType, new List<Equipment>());
-                            AdvancedRenovation advancedRenovation = new AdvancedRenovation(SelectedRoomFirst, SelectedRoomSecond, room, IsSplit, IsMerge, DateEnd);
-                            AdvancedRenovationController.Instance.MakeAdvancedRenovation(advancedRenovation);
+                            Appointment appointmentFirstRoom = new Appointment(DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomFirst.RoomId);
+                            Appointment appointmentSecondRoom = new Appointment(DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomSecond.RoomId);
+                            bool isSucces = AppointmentController.Instance.MakeRenovationAppointmentForRoomMerge(appointmentFirstRoom, appointmentSecondRoom);
+                            if (isSucces)
+                            {
+                                MessageBox.Show("Uspjesno zakazivanje spajanja");
+                                RoomType roomType = (RoomType)SelectedRoomTypeIndex;
+                                int surfaceArea = SelectedRoomFirst.SurfaceArea + SelectedRoomSecond.SurfaceArea;
+                                Room room = new Room(SelectedRoomFirst.RoomFloor, Convert.ToInt32(RoomValidation.RoomNumber), surfaceArea, roomType, new List<Equipment>());
+                                AdvancedRenovation advancedRenovation = new AdvancedRenovation(SelectedRoomFirst, SelectedRoomSecond, room, IsSplit, IsMerge, DateEnd);
+                                AdvancedRenovationController.Instance.MakeAdvancedRenovation(advancedRenovation);
+                            
+                                AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(SelectedRoomFirst.RoomId, SelectedRoomSecond.RoomId));
+                                renovationWindow.Hide();
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("Izaberite drugi termin");
+                            }
 
                         }
-                        MessageBox.Show("Sobe treba da budu na istom spratu");
+                        else
+                        {
+                            MessageBox.Show("Sobe treba da budu na istom spratu");
+                        }
                     }
                 }
             }
@@ -508,8 +532,14 @@ namespace Hospital_IS.ManagerViewModel
         }
         private void Execute_OpenWinodowCommand(object obj)
         {
-            RenovationWindow renovation = new RenovationWindow();
-            renovation.Show();
+          
+        }
+
+        public void OpenWindow()
+        {
+            renovationWindow.DataContext = this;
+            renovationWindow.Show();
+
         }
 
         private bool CanExecute_AdancedRenovationCommand(object obj)

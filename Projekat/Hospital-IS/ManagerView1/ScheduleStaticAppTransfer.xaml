@@ -37,8 +37,9 @@
             <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="180"/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="15"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -81,7 +82,18 @@
                 <Image Source="pack://application:,,,/Resources/backbutton.png" Width="50" Height="50"/>
             </StackPanel>
         </Button>
-        <DataGrid Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="3" ItemsSource="{Binding Appointments}" CanUserAddRows="False">
+        <Button  BorderThickness="0" Width="50" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" Click="Button_Click" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+
+            <StackPanel>
+                <Image Source="pack://application:,,,/Resources/question.png" Width="50" Height="50"/>
+            </StackPanel>
+        </Button>
+        <DataGrid Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="4" ItemsSource="{Binding Appointments}" CanUserAddRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vrsta" Width="85" Binding="{Binding Type}"/>
                 <DataGridTextColumn Header="Vrijeme pocetka" Width="120" Binding="{Binding  AppointmentStart,StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" CanUserResize="False" IsReadOnly="True"/>
@@ -91,15 +103,15 @@
         <Label Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Content="Lista zakazanih termina" Foreground="White" FontSize="18" VerticalAlignment="Center"/>
         <Label Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" Content="Termin transfera" Foreground="White" FontSize="18" VerticalAlignment="Center"/>
         <Label Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="2" Content="Pocetak transfera:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
-        <wpfx:DateTimePicker x:Name="TransferStart" Grid.Column="4" Grid.Row="9" Height="25" Margin="30,0,0,0"  Value="{Binding DateStart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
-           
+        <wpfx:DateTimePicker x:Name="TransferStart" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="9" Height="25" Margin="45,0,0,0"  Value="{Binding DateStart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+
         </wpfx:DateTimePicker>
-            <Label Grid.Row="11" Grid.Column="2" Grid.ColumnSpan="2" Content="Kraj transfera:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
-        <wpfx:DateTimePicker x:Name="TransferEnd" Grid.Column="4" Grid.Row="11" Height="25" Margin="30,0,0,0" Value="{Binding DateEnd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  >
-           
+        <Label Grid.Row="11" Grid.Column="2" Grid.ColumnSpan="2" Content="Kraj transfera:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
+        <wpfx:DateTimePicker x:Name="TransferEnd" Grid.Column="4"  Grid.ColumnSpan="2" Grid.Row="11" Height="25" Margin="45,0,0,0" Value="{Binding DateEnd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  >
+
         </wpfx:DateTimePicker>
         <Label Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="2" Width="150" Content="Unesite opis:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="13" Grid.Column="4" Grid.RowSpan="2" Margin="30,0,0,0" Text="{Binding Note}" Padding="2" Template="{StaticResource TextBoxBaseControlTemplate}"/>
+        <TextBox Grid.Row="13" Grid.Column="4" Grid.RowSpan="2" Margin="44,0,0,0" Text="{Binding Note}" Padding="2" Template="{StaticResource TextBoxBaseControlTemplate}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="161"/>
         <Button x:Name="AffirmTransfer" Grid.Column="3" Grid.Row="16" Grid.ColumnSpan="2" Width="200" Height="40" Content="Potvrdi" FontSize="18" Background="White"
                 BorderThickness="3" BorderBrush="Green"  CommandParameter="{Binding ElementName=TransferStart}" Command="{ Binding TransferStaticEquipmentCommand}" Click="AffirmTransfer_Click">
             <Button.Resources>
@@ -108,7 +120,8 @@
                 </Style>
             </Button.Resources>
         </Button>
+    
     </Grid>
 
-    
+
 </Page>

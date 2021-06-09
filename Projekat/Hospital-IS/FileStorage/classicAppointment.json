@@ -43,5 +43,50 @@
     "Type": 2,
     "Room": 7,
     "Id": 20
+  },
+  {
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-17T00:00:00",
+    "AppointmentEnd": "2021-06-26T00:00:00",
+    "Type": 2,
+    "Room": 2,
+    "Id": 21
+  },
+  {
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-17T00:00:00",
+    "AppointmentEnd": "2021-06-26T00:00:00",
+    "Type": 2,
+    "Room": 15,
+    "Id": 22
+  },
+  {
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-07-10T00:00:00",
+    "AppointmentEnd": "2021-07-17T00:00:00",
+    "Type": 2,
+    "Room": 2,
+    "Id": 23
+  },
+  {
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-07-10T00:00:00",
+    "AppointmentEnd": "2021-07-17T00:00:00",
+    "Type": 2,
+    "Room": 15,
+    "Id": 24
+  },
+  {
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-10T00:00:00",
+    "AppointmentEnd": "2021-06-12T00:00:00",
+    "Type": 2,
+    "Room": 2,
+    "Id": 25
   }
 ]

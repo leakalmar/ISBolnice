@@ -100,8 +100,8 @@
             </Grid>
         </ControlTemplate>
     </Page.Resources>
-    
-    
+
+
     <Grid >
         <Border  >
             <Border.Background>
@@ -111,10 +111,10 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <DataGrid x:Name="DataGridEquipment"  IsReadOnly="True" ItemsSource="{Binding Equipments}" SelectedIndex="-1" SelectedItem="{Binding SelectedEquipment}" AlternatingRowBackground="NavajoWhite"
+        <DataGrid x:Name="DataGridEquipment"  IsReadOnly="True" ItemsSource="{Binding Equipments}" SelectedIndex="-1" SelectedItem="{Binding SelectedEquipment}" AlternatingRowBackground="LightBlue"
                   SelectionMode="Single"
-                  Height="350" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="350" Background="#FFC5DBDF" AutoGenerateColumns="False" 
-                  Margin="0,223,0,0" >
+                  Height="373" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="350" Background="#FFC5DBDF" AutoGenerateColumns="False" 
+                  Margin="0,200,0,0" >
             <DataGrid.CellStyle>
                 <Style/>
             </DataGrid.CellStyle>
@@ -254,7 +254,7 @@
                         <Image Source="pack://application:,,,/Resources/options.png" HorizontalAlignment="Left" Width="50" Height="64" />
                     </StackPanel>
                 </Button>
-                <Button x:Name="Search" Grid.RowSpan="2" BorderThickness="0" Grid.Column="5" Grid.Row="1" Width="50" Background="White" Margin="0,0,0,9" >
+                <Button x:Name="Search" Grid.RowSpan="2" BorderThickness="0" Grid.Column="5" Grid.Row="1" Width="50" Background="White" Margin="0,0,0,9" Command="{Binding OpenHelpWindow}" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -264,7 +264,7 @@
                         <Image Source="pack://application:,,,/Resources/question.png"  Width="50" Height="64" />
                     </StackPanel>
                 </Button>
-                <Button x:Name="SearchButton" Grid.RowSpan="2" BorderThickness="0" Grid.Column="3" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9" Click="Search_Click" >
+                <Button x:Name="SearchButton" Grid.RowSpan="2" BorderThickness="0" Grid.Column="3" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9" Command="{Binding SearchCommnd}"   >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -285,7 +285,7 @@
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="25"/>
                     <ColumnDefinition Width="120"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="90"/>
                     <ColumnDefinition Width="25"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="Pretrazi:" Foreground="White" FontSize="15" />
@@ -295,20 +295,20 @@
                     </TextBox.Text>
 
                 </TextBox>
-                <ComboBox Grid.Column="3" Height="25" FontSize="14" SelectedIndex="{Binding SelectedCondition}" Template="{StaticResource ComboBoxBaseControlTemplate}" Width="90">
+                <ComboBox Grid.Column="3" Height="25" FontSize="14" SelectedIndex="{Binding SelectedCondition}" Template="{StaticResource ComboBoxBaseControlTemplate}" Margin="3,2,12,3" Grid.ColumnSpan="2" >
                     <ComboBoxItem Content="jednako"/>
                     <ComboBoxItem Content="vise od"/>
                     <ComboBoxItem Content="manje od"/>
                 </ComboBox>
 
-                <Button Grid.Column="4" Command="{Binding SearchCommnd}" >
+                <Button Grid.Column="4" Visibility="Collapsed" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="20"/>
                         </Style>
                     </Button.Resources>
                     <StackPanel>
-                        <Image Source="pack://application:,,,/Resources/search.png"  />
+                        <Image Source="pack://application:,,,/Resources/search.png" RenderTransformOrigin="0.133,0.657"  />
                     </StackPanel>
                 </Button>
             </Grid>
@@ -464,7 +464,7 @@
                     <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
 
-                <Button x:Name="CloseOptions" BorderThickness="0"  Grid.Column="5" Grid.Row="0" Height="40"  Width="40" Background="White"  >
+                <Button x:Name="CloseOptions" BorderThickness="0"  Grid.Column="5" Grid.Row="0" Height="40"  Width="40" Background="White" Click="CloseOptions_Click" >
 
                     <StackPanel>
                         <Image  Source="pack://application:,,,/Resources/angledown.png" Width="40" Height="40"  />

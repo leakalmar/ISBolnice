@@ -39,17 +39,18 @@
             </Border.Background>
         </Border>
         <Label Content="Broj sobe" Grid.Row="3" Grid.Column="1"  FontSize="15" Foreground="White"/>
+        <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding RoomValidation.ValidationErrors[RoomNumber]}" Foreground="Red" Margin="0,27,0,3" Grid.RowSpan="2" />
         <Label Content="Tip sobe" Grid.Row="5" Grid.Column="1" FontSize="15" Foreground="White"/>
-        <TextBox Grid.Row="3" Grid.Column="2" Height="30" Padding="2" Text="{Binding RoomNumber}" FontSize="15"/>
+        <TextBox Grid.Row="3" Grid.Column="2" Height="30" Padding="2" Text="{Binding RoomValidation.RoomNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15"/>
         <ComboBox Grid.Row="5" Grid.Column="2" Height="30" SelectedIndex="{Binding SelectedRoomTypeIndex}" FontSize="15">
             <ComboBoxItem Content="Soba za operacije"/>
             <ComboBoxItem Content="Soba preglede"/>
             <ComboBoxItem Content="Soba za odmor"/>
         </ComboBox>
-            
-            
-            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" FontWeight="SemiBold" Content="Unesite broj i tip nove sobe"   Foreground="White"/>
-        <Button x:Name="Send" Grid.Column="1" Grid.Row="7"  Width="120" Foreground="Black" Click="Send_Click"
+
+
+        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" FontWeight="SemiBold" Content="Unesite broj i tip nove sobe"   Foreground="White"/>
+        <Button x:Name="Send" Grid.Column="1" Grid.Row="7"  Width="120" Foreground="Black"
                 BorderThickness="1" Height="25" Content="Zakazi"  Background="White" Command="{Binding MakeAdvacedRenovation}" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -57,10 +58,10 @@
                 </Style>
             </Button.Resources>
         </Button>
-     
+
 
         <Button x:Name="BackButton" Grid.Column="2" Grid.Row="7"  Width="120" Foreground="Black"
-                BorderThickness="1" Height="25" Content="Odustani"  Background="White" Click="BackButton_Click" >
+                BorderThickness="1" Height="25" Content="Odustani"  Background="White"  >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="15"/>

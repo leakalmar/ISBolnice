@@ -127,16 +127,25 @@ namespace Service
 
         public bool CheckIfRoomNumberIsUnique(int roomNumber)
         {
+            bool isUnique = true;
            foreach(Room room in AllRooms)
            {
                 if(room.RoomNumber == roomNumber)
                 {
-                  
-                    return false;
+
+                    isUnique = false;
                 }
            }
 
-            return true;
+           foreach(AdvancedRenovation renovation in AdvancedRenovationService.Instance.AllAdvancedRenovations)
+            {
+                if(renovation.RenovationResultRoom.RoomNumber == roomNumber)
+                {
+                    isUnique = false;
+                }
+            }
+
+            return isUnique;
         }
 
        

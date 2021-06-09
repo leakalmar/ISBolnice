@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital_IS.ManagerView1;
+using System;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.ManagerViewModel
@@ -9,6 +10,7 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand navigateToNotificationPageCommand;
         private RelayCommand navigateToPreviousMainPage;
         private RelayCommand navigateToFeedbackCommand;
+        private RelayCommand openHelpWindow;
         private Uri previousMainPage;
         private NavigationService navService;
 
@@ -27,6 +29,15 @@ namespace Hospital_IS.ManagerViewModel
                     OnPropertyChanged("PreviousMainPage");
 
                 }
+            }
+        }
+
+        public RelayCommand OpenHelpWindow
+        {
+            get { return openHelpWindow; }
+            set
+            {
+                openHelpWindow = value;
             }
         }
         public RelayCommand NavigateToFeedbackCommand
@@ -91,9 +102,18 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToNotificationPageCommand = new RelayCommand(Execute_NavigateToNotificationPageCommand);
             this.NavigateToPreviousMainPage = new RelayCommand(Execute_NavigateToPreviousMainPage);
             this.NavigateToFeedbackCommand = new RelayCommand(Execute_NavigateToFeedbackCommand);
+            this.OpenHelpWindow = new RelayCommand(Execute_OpenHelpWindowCommand);
 
 
         }
+
+        private void Execute_OpenHelpWindowCommand(object obj)
+        {
+
+            HelpWindow helpWindow = new HelpWindow();
+            helpWindow.ShowDialog();
+        }
+
 
         private void Execute_NavigateToFeedbackCommand(object obj)
         {

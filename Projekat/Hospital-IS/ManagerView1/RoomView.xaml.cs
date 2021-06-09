@@ -13,7 +13,11 @@ namespace Hospital_IS.ManagerView1
     {
         public RoomView()
         {
-            Thread.Sleep(500);
+            if (HelpViewModel.Instance.isShowed == false)
+            {
+                Thread.Sleep(500);
+               
+            }
             InitializeComponent();
         }
 
@@ -54,6 +58,21 @@ namespace Hospital_IS.ManagerView1
                 HelpViewModel.Instance.isShowed = true;
             }
             this.DataContext = roomView;       
+        }
+
+
+        private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (SearchBox.Text.Equals("Unesite broj sobe"))
+            {
+                SearchBox.Text = "";
+            }
+        }
+
+        private void CloseOptions_Click(object sender, RoutedEventArgs e)
+        {
+
+            OtherOptions.Visibility = Visibility.Hidden;
         }
     }
 

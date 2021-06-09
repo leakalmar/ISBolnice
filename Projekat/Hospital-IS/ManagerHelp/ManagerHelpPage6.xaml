@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:Hospital_IS.ManagerHelp"
       mc:Ignorable="d" 
       Background="Transparent"
+     
       d:DesignHeight="335" d:DesignWidth="380"
       Title="ManagerHelpPage1">
 
@@ -67,7 +68,8 @@
             </Image>
         </Border>
         
-        <Button Grid.Column="3" Grid.Row="13" Width="100" Grid.ColumnSpan="2" Height="30" Content="Kraj" IsEnabled="False" Background="White" BorderBrush="Green" BorderThickness="2" Margin="214,4,6,6">
+        <Button Grid.Column="3" Grid.Row="13" Width="100" Grid.ColumnSpan="2" Height="30" Content="Kraj"  Background="White" BorderBrush="Green" BorderThickness="2"
+                Margin="214,4,6,6"  CommandParameter="{Binding ElementName=RenovationStart}" Command="{Binding TransferStaticEquipmentCommand}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="15"/>

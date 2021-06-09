@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using Hospital_IS.DTOs;
+using Hospital_IS.ManagerHelp;
 using Hospital_IS.ManagerView1;
 using Model;
 using System;
@@ -33,6 +34,7 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand navigateToBranchPage;
         private RelayCommand navigateToManagerProfilePage;
         private RelayCommand navigateToEquipmentPage;
+        private RelayCommand openHelpWindow;
         private Medicine selectedMedicine;
 
 
@@ -51,6 +53,15 @@ namespace Hospital_IS.ManagerViewModel
                     OnPropertyChanged("SelectedMedicine");
 
                 }
+            }
+        }
+
+        public RelayCommand OpenHelpWindow
+        {
+            get { return openHelpWindow; }
+            set
+            {
+                openHelpWindow = value;
             }
         }
 
@@ -343,7 +354,14 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToManagerProfilePage = new RelayCommand(Execute_NavigateToManagerProfilePageCommand);
             this.NavigateToEmployeePage = new RelayCommand(Execute_NavigateToEmployeePageCommand);
             this.NavigateToBranchPage = new RelayCommand(Execute_NavigateToBranchPageCommand);
+            this.OpenHelpWindow = new RelayCommand(Execute_OpenHelpWindowCommand);
 
+        }
+
+        private void Execute_OpenHelpWindowCommand(object obj)
+        {
+            MedicineHelpWindow medicineHelp = new MedicineHelpWindow();
+            medicineHelp.ShowDialog();
         }
 
 

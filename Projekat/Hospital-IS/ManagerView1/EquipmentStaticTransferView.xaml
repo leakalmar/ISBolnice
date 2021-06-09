@@ -149,6 +149,17 @@
                 <Image Source="pack://application:,,,/Resources/backbutton.png" Width="50" Height="50"/>
             </StackPanel>
         </Button>
+        <Button BorderThickness="0" Width="50" Grid.Column="7" Grid.Row="1"  Background="Transparent" Click="Button_Click" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+
+            <StackPanel>
+                <Image Source="pack://application:,,,/Resources/question.png" Width="50" Height="50"/>
+            </StackPanel>
+        </Button>
         <TextBlock Text="Transfer opreme" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="5" FontWeight="SemiBold" FontSize="30" Foreground="White" TextAlignment="Center"/>
 
         <ComboBox x:Name="ComboSource"  Grid.Column="1"  Grid.Row="3"  ItemsSource="{Binding RoomsStaticTransferFirstBox}" DisplayMemberPath="RoomIdType"  Grid.ColumnSpan="3" HorizontalAlignment="Center" 

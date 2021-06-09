@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using Enums;
+using Hospital_IS.ManagerHelp;
 using Model;
 using System;
 using System.Collections.ObjectModel;
@@ -27,6 +28,7 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand deleteEquipment;
         private RelayCommand updateEquipment;
         private RelayCommand navigateToUpdateEquipment;
+        private RelayCommand openHelpWindow;
         private int comboBoxItem;
         private Equipment selectedEquipment;
         private Room selectedRoom;
@@ -40,6 +42,14 @@ namespace Hospital_IS.ManagerViewModel
         private string searchBox;
         private int selectedCondition =0;
 
+        public RelayCommand OpenHelpWindow
+        {
+            get { return openHelpWindow; }
+            set
+            {
+                openHelpWindow = value;
+            }
+        }
 
         public RelayCommand NavigateToAddEquipment
         {
@@ -388,8 +398,16 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToEmployeePage = new RelayCommand(Execute_NavigateToEmployeePageCommand);
             this.NavigateToBranchPage = new RelayCommand(Execute_NavigateToBranchPageCommand);
             this.NavigateToAddEquipment = new RelayCommand(Execute_NavigateToAddEquipmetCommand, CanExecute_NavigateAddEquipmentViewwCommand);
+            this.OpenHelpWindow = new RelayCommand(Execute_OpenHelpWindowCommand);
 
         }
+
+        private void Execute_OpenHelpWindowCommand(object obj)
+        {
+            EquipmentHelpWindow equipmentHelp = new EquipmentHelpWindow();
+            equipmentHelp.ShowDialog();
+        }
+
 
         private void Execute_NavigateToAddEquipmetCommand(object obj)
         {
@@ -579,14 +597,15 @@ namespace Hospital_IS.ManagerViewModel
 
         private void Execute_NavigateToRoomPageCommand(object obj)
         {
-            this.NavService.GoBack();
+            this.NavService.Navigate(
+                new Uri("ManagerView1/RoomView.xaml", UriKind.Relative));
             SelectedEquipment = null;
 
         }
 
         private void Execute_DeleteEquipmentComand(object obj)
         {
-
+            MessageBox.Show("Uspjesno ste izvrsili brisanje");
             RoomController.Instance.RemoveEquipment(SelectedRoom,SelectedEquipment);
             Equipments = new CollectionViewSource { Source = SelectedRoom.Equipment }.View;
             SelectedEquipment = null;

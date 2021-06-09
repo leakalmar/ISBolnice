@@ -24,5 +24,18 @@ namespace Hospital_IS.ManagerView1
             InitializeComponent();
             this.DataContext = AdvancedRoomRenovationViewModel.Instance;
         }
+
+        private void Transfer_Click(object sender, RoutedEventArgs e)
+        {
+            if(RenovationStart.Text.Equals("") || RenovationEnd.Text.Equals(""))
+            {
+                MessageBox.Show("Unesite datum u validnom obliku");
+            }
+            else
+            {
+                AdvancedRoomRenovationViewModel.Instance.OpenWindow();
+            }
+
+        }
     }
 }

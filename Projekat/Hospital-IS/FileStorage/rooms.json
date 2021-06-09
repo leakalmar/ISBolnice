@@ -40,14 +40,6 @@
       },
       {
         "EquipType": 1,
-        "EquiptId": 8,
-        "Name": "sasa",
-        "Quantity": 3500,
-        "ProducerName": "sasa",
-        "EquiptTypeIndex": 1
-      },
-      {
-        "EquipType": 1,
         "EquiptId": 9,
         "Name": "tatoio",
         "Quantity": 60,

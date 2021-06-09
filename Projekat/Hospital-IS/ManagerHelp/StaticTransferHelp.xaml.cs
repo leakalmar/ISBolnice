@@ -8,25 +8,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hospital_IS.ManagerHelp
 {
     /// <summary>
-    /// Interaction logic for ManagerHelpPage6.xaml
+    /// Interaction logic for StaticTransferHelp.xaml
     /// </summary>
-    public partial class ManagerHelpPage6 : Page
+    public partial class StaticTransferHelp : Window
     {
-        public ManagerHelpPage6()
+        public StaticTransferHelp()
         {
             InitializeComponent();
-            this.DataContext = HelpViewModel.Instance;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }

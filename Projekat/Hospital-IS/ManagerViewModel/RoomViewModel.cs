@@ -1,6 +1,7 @@
 ﻿using Controllers;
 using Enums;
 using Hospital_IS.Controllers;
+using Hospital_IS.ManagerHelp;
 using Hospital_IS.ManagerView1;
 using Model;
 using System;
@@ -21,7 +22,7 @@ namespace Hospital_IS.ManagerViewModel
         private String _roomFloor = "Unesite sprat sobe";
         private String _surfaceArea = "Unesite površinu sobe";
         private String _bedNumber = "Unesite broj kreveta";
-        private String searchBox = "";
+        private String searchBox = "Unesite broj sobe";
         private int selectedRenovationOption = -1;
         private int comboBoxItem;
         private int searchSelectedIndex = 4;
@@ -40,11 +41,20 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand showHelpDialog;
         private RelayCommand deleteRoomCoomand;
         private RelayCommand closeWindowCoomand;
+        private RelayCommand openHelpWindow;
         private NavigationService navService;
         private Room selectedRoom = null;
         private RelayCommand navigateToManagerProfilePage;
         private DeleteRoomWindow deleteRoomWindow = new DeleteRoomWindow();
 
+        public RelayCommand OpenHelpWindow
+        {
+            get { return openHelpWindow; }
+            set
+            {
+                openHelpWindow = value;
+            }
+        }
 
         public RelayCommand NavigateToAddRoom
         {
@@ -343,6 +353,13 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
+        private void Execute_OpenHelpWindowCommand(object obj)
+        {
+            RoomHelpWindow roomHelpWindow = new RoomHelpWindow();
+            roomHelpWindow.ShowDialog();
+        }
+
+
         private void Execute_NavigateToBranchPageCommand(object obj)
         {
             this.NavService.Navigate(
@@ -417,6 +434,7 @@ namespace Hospital_IS.ManagerViewModel
             this.ShowHelpDialogCommand = new RelayCommand(Execute_ShowHelpMessage);
             this.DeleteRoomCoomand = new RelayCommand(Execute_DeleteRoomByWindowCommand);
             this.CloseWindowCoomand = new RelayCommand(Execute_CloseWindowInCommand);
+            this.OpenHelpWindow = new RelayCommand(Execute_OpenHelpWindowCommand);
 
             DispatcherTimer dispatcherTimer = new DispatcherTimer
             {

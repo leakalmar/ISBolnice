@@ -15,20 +15,12 @@ namespace Hospital_IS.ManagerView1
            
         }
 
-        private void Search_Click(object sender, RoutedEventArgs e)
-        {
-            if (SearchPanel.Visibility == Visibility.Collapsed)
-            {
-                SearchPanel.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                SearchPanel.Visibility = Visibility.Collapsed;
-            }
-        }
+      
 
         private void Options_Click(object sender, RoutedEventArgs e)
         {
+            OtherOptions.Visibility = Visibility.Hidden;
+        
             if (OptionsPanel.Visibility == Visibility.Collapsed)
             {
                 OptionsPanel.Visibility = Visibility.Visible;
@@ -42,6 +34,7 @@ namespace Hospital_IS.ManagerView1
 
         private void MoreOptions_Click(object sender, RoutedEventArgs e)
         {
+            OptionsPanel.Visibility = Visibility.Collapsed;
             if (OtherOptions.Visibility == Visibility.Visible)
             {
                 OtherOptions.Visibility = Visibility.Hidden;
@@ -58,6 +51,11 @@ namespace Hospital_IS.ManagerView1
         {
             this.DataContext = EquipmentViewModel.Instance;
             EquipmentViewModel.Instance.NavService = this.NavigationService;
+        }
+
+        private void CloseOptions_Click(object sender, RoutedEventArgs e)
+        {
+            OtherOptions.Visibility = Visibility.Hidden;
         }
     }
 }

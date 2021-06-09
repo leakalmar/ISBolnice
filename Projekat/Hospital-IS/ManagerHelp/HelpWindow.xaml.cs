@@ -22,26 +22,7 @@ namespace Hospital_IS.ManagerView1
             InitializeComponent();
         }
 
-        private void SendReNotification_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Window_LostFocus(object sender, RoutedEventArgs e)
-        {
-           
-            this.Focus();
-        }
-
-        private void Window_StateChanged(object sender, EventArgs e)
-        {
-            MessageBox.Show("uouo");
-        }
+      
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

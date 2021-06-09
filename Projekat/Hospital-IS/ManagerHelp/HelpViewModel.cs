@@ -1,7 +1,9 @@
 ﻿using Hospital_IS.Commands;
+using Hospital_IS.ManagerView1;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.ManagerHelp
@@ -14,8 +16,18 @@ namespace Hospital_IS.ManagerHelp
         private RelayCommand naviagateToHelpPage4;
         private RelayCommand naviagateToHelpPage5;
         private RelayCommand naviagateToHelpPage6;
+        private RelayCommand closeHelpWindow;
         private NavigationService navService;
         public Boolean isShowed { get; set; } = false;
+
+        public RelayCommand CloseHelpWindow
+        {
+            get { return closeHelpWindow; }
+            set
+            {
+                closeHelpWindow = value;
+            }
+        }
 
         public RelayCommand NavigateToPreviousPage
         {
@@ -99,6 +111,7 @@ namespace Hospital_IS.ManagerHelp
             this.NaviagateToHelpPage4 = new RelayCommand(Execute_NavigateToHelpPage4);
             this.NaviagateToHelpPage5 = new RelayCommand(Execute_NavigateToHelpPage5);
             this.NaviagateToHelpPage6 = new RelayCommand(Execute_NavigateToHelpPage6);
+            this.CloseHelpWindow = new RelayCommand(Execute_CloseWindow);
 
         }
 
@@ -106,7 +119,12 @@ namespace Hospital_IS.ManagerHelp
         {
             this.NavService.GoBack();
         }
-
+        private void Execute_CloseWindow(object obj)
+        {
+            HelpWindow helpWindow = (HelpWindow)obj;
+            helpWindow.Close();
+            MessageBox.Show("Ugodan rad u nasoj aplikaciji");
+        }
 
         private void Execute_NavigateToHelpPage2(object obj)
         {

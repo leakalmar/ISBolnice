@@ -125,9 +125,10 @@
             <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="15"/>
                 </Grid.ColumnDefinitions>
                 <ComboBox Template="{StaticResource ComboBoxBaseControlTemplate}" SelectedIndex="{Binding SearchSelectedIndex}"  Height="25" Grid.ColumnSpan="2" Margin="0,2,8,2" >
                     <ComboBoxItem Content="Sobe za odmor"/>
@@ -136,9 +137,9 @@
                     <ComboBoxItem Content="Magacini"/>
                     <ComboBoxItem Content="Sve"/>
                 </ComboBox>
-                <Label Grid.Column="1" Content="Pretrazi:" Foreground="White" FontSize="15" Grid.ColumnSpan="2" Margin="22,0,53,0" />
-                <TextBox x:Name="SearchBox"  Grid.Column="2" Height="25" Padding="2" FontSize="15" Template="{StaticResource TextBoxBaseControlTemplate}" 
-                         Grid.ColumnSpan="2" Margin="75,2,-50,3" Text="{Binding SearchBox, UpdateSourceTrigger=PropertyChanged}" >
+                <Label Grid.Column="2" Content="Pretrazi:" Foreground="White" FontSize="15" Margin="2,0,5,0" />
+                <TextBox x:Name="SearchBox" Grid.Column="3" Height="25" Padding="2" FontSize="15" Template="{StaticResource TextBoxBaseControlTemplate}" 
+                           GotFocus="SearchBox_GotFocus" Text="{Binding SearchBox, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="130"  >
 
 
                 </TextBox>
@@ -149,7 +150,7 @@
         </StackPanel>
 
 
-        <DataGrid x:Name="DataGridRooms"  IsReadOnly="True" ItemsSource="{Binding Rooms}" AlternatingRowBackground="NavajoWhite"
+        <DataGrid x:Name="DataGridRooms"  IsReadOnly="True" ItemsSource="{Binding Rooms}" AlternatingRowBackground="LightBlue" 
                   SelectionMode="Single"  SelectedItem="{Binding SelectedRoom}"
                   Height="411" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="350" Margin="0,164,0,0" Background="#FFC5DBDF" AutoGenerateColumns="False" >
             <DataGrid.CellStyle>
@@ -162,9 +163,9 @@
                 <DropShadowEffect/>
             </DataGrid.Effect>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Broj" Width="70" Binding = "{Binding RoomNumber}"/>
-                <DataGridTextColumn Header="Sprat" Width="70" Binding="{Binding RoomFloor}"/>
-                <DataGridTextColumn Header="Vrsta" Width="70" Binding="{Binding Type}"/>
+                <DataGridTextColumn Header="Broj" Width="100" Binding = "{Binding RoomNumber}"/>
+                <DataGridTextColumn Header="Sprat" Width="100" Binding="{Binding RoomFloor}"/>
+                <DataGridTextColumn Header="Vrsta" Width="*" Binding="{Binding Type}"/>
 
             </DataGrid.Columns>
         </DataGrid>
@@ -291,7 +292,7 @@
                         <Image Source="pack://application:,,,/Resources/options.png" HorizontalAlignment="Left" Width="50" Height="64" />
                     </StackPanel>
                 </Button>
-                <Button Grid.RowSpan="2" BorderThickness="0" Grid.Column="5" Grid.Row="1" Width="50" Background="White" Margin="0,0,0,9" >
+                <Button Grid.RowSpan="2" BorderThickness="0" Grid.Column="5" Grid.Row="1" Width="50" Background="White" Margin="0,0,0,9" Command="{Binding OpenHelpWindow}" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -338,7 +339,7 @@
                     <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
 
-                <Button x:Name="CloseOptions" BorderThickness="0"  Grid.Column="5" Grid.Row="0" Height="40"  Width="40" Background="White"  >
+                <Button x:Name="CloseOptions" BorderThickness="0"  Grid.Column="5" Grid.Row="0" Height="40"  Width="40" Background="White" Click="CloseOptions_Click"  >
 
                     <StackPanel>
                         <Image  Source="pack://application:,,,/Resources/angledown.png" Width="40" Height="40"  />

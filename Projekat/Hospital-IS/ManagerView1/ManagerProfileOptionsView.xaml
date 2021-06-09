@@ -123,6 +123,8 @@
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="15"/>
                     <RowDefinition Height="40"/>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
                 <Ellipse Width="60" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
                     <Ellipse.Fill>
@@ -173,6 +175,17 @@
                     </Button.Resources>
                     <StackPanel>
                         <Image Source="pack://application:,,,/Resources/feedback.png" Width="40"  Height="40" />
+                    </StackPanel>
+                </Button>
+                <TextBlock Text="  Pomoć" Grid.Row="10" Grid.Column="3" Foreground="White" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Button  BorderThickness="0" Width="40" Height="40" Grid.Column="1" Grid.Row="10"   Background="Transparent" Command="{Binding OpenHelpWindow}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Resources/question.png" Width="40"  Height="40" />
                     </StackPanel>
                 </Button>
                 <GridSplitter Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="3" Foreground="White" Height="5" Background="White" HorizontalAlignment="Stretch" Margin="0,0,-10,0"   />

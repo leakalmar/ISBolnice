@@ -1,4 +1,5 @@
 ﻿using Hospital_IS.ManagerViewModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Hospital_IS.ManagerView1
@@ -12,6 +13,18 @@ namespace Hospital_IS.ManagerView1
         {
             InitializeComponent();
             this.DataContext = RoomRenovationViewModel.Instance;
+        }
+
+        private void AffirmRenovation_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if(RenovationEnd.Text.Equals("") || RenovationStart.Text.Equals(""))
+            {
+                MessageBox.Show("Unesite datum u validnom obliku");
+            }
+            else
+            {
+                RoomRenovationViewModel.Instance.DoRoomRenovation();
+            }
         }
     }
 }

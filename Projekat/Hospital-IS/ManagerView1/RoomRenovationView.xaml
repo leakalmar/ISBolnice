@@ -84,7 +84,7 @@
                 <Image Source="pack://application:,,,/Resources/backbutton.png" Width="50" Height="50"/>
             </StackPanel>
         </Button>
-        <DataGrid x:Name="RenovationDateGrid" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="3" ItemsSource="{Binding Appointments}" CanUserAddRows="False">
+        <DataGrid x:Name="RenovationDateGrid" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="4" ItemsSource="{Binding Appointments}" CanUserAddRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vrsta" Width="85" Binding="{Binding Type}"/>
                 <DataGridTextColumn Header="Vrijeme pocetka" Width="120" Binding="{Binding AppointmentStart, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" CanUserResize="False" IsReadOnly="True"/>
@@ -94,19 +94,19 @@
         <Label Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Content="Lista zakazanih termina" Foreground="White" FontSize="18" VerticalAlignment="Center"/>
         <Label Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="3" Content="Termin renoviranja" Foreground="White" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="2" Content="Pocetak renoviranja:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
-        <wpfx:DateTimePicker x:Name="RenovationStart" Grid.Column="4" Grid.Row="9" Height="25" Margin="30,0,0,0" Value="{Binding DateStart}">
-            
+        <wpfx:DateTimePicker x:Name="RenovationStart" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="9" Height="25" Margin="45,0,0,0" Value="{Binding DateStart}">
+
         </wpfx:DateTimePicker>
         <Label Grid.Row="11" Grid.Column="2" Grid.ColumnSpan="2" Content="Kraj renoviranja:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
-        <wpfx:DateTimePicker x:Name="RenovationEnd" Grid.Column="4" Grid.Row="11" Height="25" Margin="30,0,0,0" Value="{Binding DateEnd}" />
+        <wpfx:DateTimePicker x:Name="RenovationEnd" Grid.Column="4" Grid.Row="11" Grid.ColumnSpan="2" Height="25" Margin="45,0,0,0" Value="{Binding DateEnd}" />
         <Label Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="2"  Content="Unesite opis:" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
-        <TextBox x:Name="DescriptionField" Grid.Row="13" Grid.Column="4" Grid.RowSpan="2" Margin="30,0,0,0" Text="{Binding Note}" Padding="2" Template="{StaticResource TextBoxBaseControlTemplate}"/>
-        <Button x:Name="AffirmRenovation" Grid.Column="3" Grid.Row="16" Grid.ColumnSpan="2" Width="200" Content="Potvrdi" FontSize="20" Background="White"
+        <TextBox x:Name="DescriptionField" Grid.Row="13" Grid.Column="4" Grid.RowSpan="2" Margin="44,0,0,0" Text="{Binding Note}" Padding="2" Template="{StaticResource TextBoxBaseControlTemplate}" Grid.ColumnSpan="2"/>
+        <Button x:Name="AffirmRenovation" Grid.Column="3" Grid.Row="16" Grid.ColumnSpan="2" Width="200" Content="Potvrdi" FontSize="20" Background="White" Click="AffirmRenovation_Click"
                  Height="40" BorderThickness="3" BorderBrush="Green"  CommandParameter="{Binding ElementName=RenovationStart}" Command="{Binding TransferStaticEquipmentCommand}" >
             <Button.Resources>
-            <Style TargetType="{x:Type Border}">
-                <Setter Property="CornerRadius" Value="15"/>
-            </Style>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
             </Button.Resources>
         </Button>
     </Grid>

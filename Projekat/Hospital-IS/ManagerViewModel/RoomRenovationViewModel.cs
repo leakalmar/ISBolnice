@@ -20,7 +20,6 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand transferStaticEquipmentCommand;
         private RelayCommand navigateToPreviousPage;
         private Room firstRoom;
-        private Room fecondRoom;
         private Equipment equipment;
         public int Quantity { get; set; }
 
@@ -193,7 +192,13 @@ namespace Hospital_IS.ManagerViewModel
 
         private void Execute_RoomRenovation(object obj)
         {
-            Appointment renovationAppointment = new Appointment(true, Note, DateStart, DateEnd, AppointmentType.Renovation,FirstRoom.RoomId);
+           
+
+        }
+
+        public void DoRoomRenovation()
+        {
+            Appointment renovationAppointment = new Appointment(true, Note, DateStart, DateEnd, AppointmentType.Renovation, FirstRoom.RoomId);
             bool isSuccces = AppointmentController.Instance.MakeRenovationAppointment(renovationAppointment);
             Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(FirstRoom.RoomId));
             if (!isSuccces)
@@ -204,7 +209,6 @@ namespace Hospital_IS.ManagerViewModel
             {
                 System.Windows.MessageBox.Show("Uspjesno zakazivanje termina");
             }
-
         }
 
     }

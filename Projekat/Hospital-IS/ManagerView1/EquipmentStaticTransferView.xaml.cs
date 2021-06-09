@@ -1,4 +1,5 @@
-﻿using Hospital_IS.ManagerViewModel;
+﻿using Hospital_IS.ManagerHelp;
+using Hospital_IS.ManagerViewModel;
 using System.Windows.Controls;
 
 namespace Hospital_IS.ManagerView1
@@ -12,6 +13,12 @@ namespace Hospital_IS.ManagerView1
         {
             InitializeComponent();
             this.DataContext = EquipmentTransferStaticViewModel.Instance;
+        }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ScheduleAppointmentHelp scheduleAppointmentHelp = new ScheduleAppointmentHelp();
+            scheduleAppointmentHelp.ShowDialog();
         }
     }
 }
