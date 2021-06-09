@@ -1,4 +1,6 @@
-﻿using Model;
+﻿using Enums;
+using Hospital_IS.Service;
+using Model;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -41,6 +43,22 @@ namespace Hospital_IS.Controllers
         public void RemoveAdvancedRenovation(AdvancedRenovation advancedRenovation)
         {
             AdvancedRenovationService.Instance.RemoveAdvancedRenovation(advancedRenovation);
+        }
+
+
+        public void ExecuteAdvancedRoomRenovation(AdvancedRenovation advancedRenovation)
+        {
+            IAdvancedRenovationService advancedRenovationService;
+            if(advancedRenovation.Type == AdvancedRenovationType.MERGE)
+            {
+                advancedRenovationService = new AdvancedRenovationMergeService();
+                advancedRenovationService.ExecuteAdvancedRoomRenovation(advancedRenovation);
+            }
+            else if(advancedRenovation.Type == AdvancedRenovationType.SPLIT)
+            {
+                advancedRenovationService = new AdvancedRenovationSplitService();
+                advancedRenovationService.ExecuteAdvancedRoomRenovation(advancedRenovation);
+            }
         }
     }
 }

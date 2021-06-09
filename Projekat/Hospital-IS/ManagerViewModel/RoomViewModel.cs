@@ -444,6 +444,30 @@ namespace Hospital_IS.ManagerViewModel
             dispatcherTimer.Start();
         }
 
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            DateTime time = DateTime.Now;
+            foreach (AdvancedRenovation renovation in AdvancedRenovationController.Instance.GetAll())
+            {
+                
+                if (DateTime.Compare(renovation.RenovationEnd, time) < 0)
+                {
+                    AdvancedRenovationController.Instance.ExecuteAdvancedRoomRenovation(renovation);
+                    AdvancedRenovationController.Instance.RemoveAdvancedRenovation(renovation);
+                    if(renovation.Type == AdvancedRenovationType.MERGE)
+                    {
+                        MessageBox.Show("Uspjesno izvrseno spajanje");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Uspjenso izvrsena podijela");
+                    }
+                    break;
+                }
+            }
+        }
+
+
         private void Execute_ShowHelpMessage(object obj)
         {
 
@@ -500,34 +524,7 @@ namespace Hospital_IS.ManagerViewModel
         }
 
 
-        private void timer_Tick(object sender, EventArgs e)
-        {
-          
-            DateTime time = DateTime.Now;
-            foreach (AdvancedRenovation renovation in AdvancedRenovationController.Instance.GetAll())
-            {
-               
-                if (renovation.RenovationEnd <= time && renovation.isMade == false)
-                {
-                        if(renovation.IsSplit == true)
-                        {
-                        MessageBox.Show("Uspjesna podijela soba");
-                            SplitOneRoomIntoTwo(renovation);
-                        AdvancedRenovationController.Instance.RemoveAdvancedRenovation(renovation);
-                        break;
-                        }else if (renovation.IsMerge == true)
-                        {
-                        MergeTwoRoomInOne(renovation);
-                        MessageBox.Show("Uspjesno spajanje soba");
-                        AdvancedRenovationController.Instance.RemoveAdvancedRenovation(renovation);
-                        break;
-                    }
-                                                        
-                }
-                
-               
-            }
-        }
+       
 
         private  void MergeTwoRoomInOne(AdvancedRenovation renovation)
         {

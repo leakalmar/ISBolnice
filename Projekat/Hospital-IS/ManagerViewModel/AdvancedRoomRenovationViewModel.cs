@@ -474,11 +474,13 @@ namespace Hospital_IS.ManagerViewModel
                     {
                         MessageBox.Show("Uspjesno zakazivanje razdvajanja");
                         RoomType roomType = (RoomType)SelectedRoomTypeIndex;
+                    
                         Room room = new Room(SelectedRoomFirst.RoomFloor, Convert.ToInt32(RoomValidation.RoomNumber), SelectedRoomFirst.SurfaceArea / 2, roomType, new List<Equipment>());
-                        AdvancedRenovation advancedRenovation = new AdvancedRenovation(SelectedRoomFirst, null, room, IsSplit, IsMerge, DateEnd);
-                        advancedRenovation.isMade = false;
+                        AdvancedRenovation advancedRenovation = new AdvancedRenovation(SelectedRoomFirst, null, room, AdvancedRenovationType.SPLIT,false, DateEnd);
+                   
                         AdvancedRenovationController.Instance.MakeAdvancedRenovation(advancedRenovation);
                         MessageBox.Show("Uspjesno zakazivanje razdvajanja");
+
                         AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(SelectedRoomFirst.RoomId));
                         renovationWindow.Hide();
                     }
@@ -502,7 +504,7 @@ namespace Hospital_IS.ManagerViewModel
                                 RoomType roomType = (RoomType)SelectedRoomTypeIndex;
                                 int surfaceArea = SelectedRoomFirst.SurfaceArea + SelectedRoomSecond.SurfaceArea;
                                 Room room = new Room(SelectedRoomFirst.RoomFloor, Convert.ToInt32(RoomValidation.RoomNumber), surfaceArea, roomType, new List<Equipment>());
-                                AdvancedRenovation advancedRenovation = new AdvancedRenovation(SelectedRoomFirst, SelectedRoomSecond, room, IsSplit, IsMerge, DateEnd);
+                                AdvancedRenovation advancedRenovation = new AdvancedRenovation(SelectedRoomFirst, SelectedRoomSecond, room, AdvancedRenovationType.MERGE, false, DateEnd);
                                 AdvancedRenovationController.Instance.MakeAdvancedRenovation(advancedRenovation);
                             
                                 AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(SelectedRoomFirst.RoomId, SelectedRoomSecond.RoomId));
