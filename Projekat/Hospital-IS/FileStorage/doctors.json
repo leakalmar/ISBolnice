@@ -1,27 +1,26 @@
 [
   {
+    "$id": "1",
     "patient": [],
     "hospital": null,
+    "VacationTimeStart": "2021-12-12T00:00:00",
+    "WorkShift": 0,
     "Specialty": {
+      "$id": "2",
       "Name": "Dermatolog"
     },
-    "PrimaryRoom": 1,
+    "DaysOff": [],
+    "PrimaryRoom": 0,
     "Patient": [],
-    "Salary": 70000.0,
-    "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-    "WorkDay": [
-      {
-        "Day": 0,
-        "StartTime": "2021-02-02T08:00:00",
-        "EndTime": "2021-02-02T20:00:00"
-      }
-    ],
+    "Salary": 80000.0,
+    "EmploymentDate": "2021-06-09T15:09:16.6407902+02:00",
+    "WorkDay": null,
     "Education": 0,
     "Id": 4,
     "Name": "Dragana",
     "Surname": "Vukmanov Simokov",
     "BirthDate": "1985-05-07T00:00:00",
-    "Phone": null,
+    "Phone": "064765234",
     "Email": "dragana@gmail.com",
     "Gender": null,
     "Relationship": null,
@@ -30,28 +29,27 @@
     "Hospital": null
   },
   {
+    "$id": "3",
     "patient": [],
     "hospital": null,
+    "VacationTimeStart": "0001-01-01T00:00:00",
+    "WorkShift": 0,
     "Specialty": {
+      "$id": "4",
       "Name": "Stomatolog"
     },
-    "PrimaryRoom": 2,
+    "DaysOff": [],
+    "PrimaryRoom": 0,
     "Patient": [],
-    "Salary": 70000.0,
-    "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-    "WorkDay": [
-      {
-        "Day": 0,
-        "StartTime": "2021-02-02T08:00:00",
-        "EndTime": "2021-02-02T20:00:00"
-      }
-    ],
+    "Salary": 80000.0,
+    "EmploymentDate": "2021-06-09T15:09:44.8502764+02:00",
+    "WorkDay": null,
     "Education": 0,
     "Id": 10,
     "Name": "Ksenija",
     "Surname": "Dimitrijevic",
-    "BirthDate": "1985-05-07T00:00:00",
-    "Phone": null,
+    "BirthDate": "1982-03-02T00:00:00",
+    "Phone": "063212334",
     "Email": "ksenija@gmail.com",
     "Gender": null,
     "Relationship": null,
@@ -60,28 +58,26 @@
     "Hospital": null
   },
   {
+    "$id": "5",
     "patient": [],
     "hospital": null,
+    "VacationTimeStart": "2021-07-07T00:00:00",
+    "WorkShift": 0,
     "Specialty": {
-      "Name": "Dermatolog"
+      "$ref": "2"
     },
-    "PrimaryRoom": 3,
+    "DaysOff": [],
+    "PrimaryRoom": 0,
     "Patient": [],
-    "Salary": 70000.0,
-    "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-    "WorkDay": [
-      {
-        "Day": 0,
-        "StartTime": "2021-02-02T08:00:00",
-        "EndTime": "2021-02-02T20:00:00"
-      }
-    ],
+    "Salary": 80000.0,
+    "EmploymentDate": "2021-06-09T15:10:12.6573979+02:00",
+    "WorkDay": null,
     "Education": 0,
     "Id": 11,
     "Name": "Ivan",
     "Surname": "Stankovic",
-    "BirthDate": "1985-05-07T00:00:00",
-    "Phone": null,
+    "BirthDate": "1981-02-03T00:00:00",
+    "Phone": "067234123",
     "Email": "ivan@gmail.com",
     "Gender": null,
     "Relationship": null,
@@ -90,28 +86,27 @@
     "Hospital": null
   },
   {
+    "$id": "6",
     "patient": [],
     "hospital": null,
+    "VacationTimeStart": "0001-01-01T00:00:00",
+    "WorkShift": 0,
     "Specialty": {
+      "$id": "7",
       "Name": ""
     },
-    "PrimaryRoom": 4,
+    "DaysOff": [],
+    "PrimaryRoom": 0,
     "Patient": [],
-    "Salary": 70000.0,
-    "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-    "WorkDay": [
-      {
-        "Day": 0,
-        "StartTime": "2021-02-02T08:00:00",
-        "EndTime": "2021-02-02T20:00:00"
-      }
-    ],
+    "Salary": 80000.0,
+    "EmploymentDate": "2021-06-09T15:10:37.6382365+02:00",
+    "WorkDay": null,
     "Education": 0,
     "Id": 12,
     "Name": "Nikolina",
     "Surname": "Kontic",
-    "BirthDate": "1985-05-07T00:00:00",
-    "Phone": null,
+    "BirthDate": "1991-08-09T00:00:00",
+    "Phone": "06432342123",
     "Email": "nikolina@gmail.com",
     "Gender": null,
     "Relationship": null,
@@ -120,28 +115,27 @@
     "Hospital": null
   },
   {
-    "patient": [],
+    "$id": "8",
+    "patient": null,
     "hospital": null,
+    "VacationTimeStart": "0001-01-01T00:00:00",
+    "WorkShift": 0,
     "Specialty": {
+      "$id": "9",
       "Name": ""
     },
-    "PrimaryRoom": 5,
+    "DaysOff": [],
+    "PrimaryRoom": 0,
     "Patient": [],
-    "Salary": 70000.0,
-    "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-    "WorkDay": [
-      {
-        "Day": 0,
-        "StartTime": "2021-02-02T08:00:00",
-        "EndTime": "2021-02-02T20:00:00"
-      }
-    ],
+    "Salary": 80000.0,
+    "EmploymentDate": "2021-06-09T17:49:32.1327882+02:00",
+    "WorkDay": null,
     "Education": 0,
     "Id": 13,
     "Name": "Sasa",
     "Surname": "Aksin",
-    "BirthDate": "1985-05-07T00:00:00",
-    "Phone": null,
+    "BirthDate": "1985-11-07T00:00:00",
+    "Phone": "065324312",
     "Email": "sasa@gmail.com",
     "Gender": null,
     "Relationship": null,
