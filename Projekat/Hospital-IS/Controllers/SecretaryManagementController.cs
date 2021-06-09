@@ -98,5 +98,10 @@ namespace Hospital_IS.Controllers
             return SecretaryUserManagementService.Instance.AllDoctors;
         }
 
+        public DoctorDTO GetDoctorById(int id)
+        {
+            return SecretaryUserManagementService.Instance.GetDoctorByID(id);
+        }
+
     }
 }

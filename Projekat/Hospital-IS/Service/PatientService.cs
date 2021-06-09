@@ -1,5 +1,4 @@
-﻿using Hospital_IS.DoctorView;
-using Hospital_IS.Model;
+﻿using Hospital_IS.Model;
 using Hospital_IS.Storages;
 using Model;
 using System;

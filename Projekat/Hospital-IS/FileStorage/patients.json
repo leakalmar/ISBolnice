@@ -2,8 +2,8 @@
   {
     "$id": "1",
     "hospital": null,
-    "FileDate": "2021-03-29T23:21:22.7048933+02:00",
-    "Employer": "neki poslodavac",
+    "FileDate": "0001-01-01T00:00:00",
+    "Employer": "Continental",
     "Admitted": false,
     "Alergies": [
       "Tetanus",
@@ -11,33 +11,12 @@
     ],
     "TrollMechanism": {
       "$id": "2",
-      "TrollCheckStartDate": "2021-04-29T00:00:00",
-      "AppointmentCounterInTimeRange": 2,
+      "TrollCheckStartDate": "0001-01-01T00:00:00",
+      "AppointmentCounterInTimeRange": 0,
       "IsTroll": false
     },
-    "PatientNotes": [
-      {
-        "$id": "3",
-        "NotificationTime": 11,
-        "IsNotifyChecked": true,
-        "NoteContent": "Setaj sat vremena!!!",
-        "AppointmentId": 5
-      },
-      {
-        "$id": "4",
-        "NotificationTime": 8,
-        "IsNotifyChecked": false,
-        "NoteContent": "Doktorka je rekla da zakazem pregled po potrebi",
-        "AppointmentId": 1
-      },
-      {
-        "$id": "5",
-        "NotificationTime": 17,
-        "IsNotifyChecked": true,
-        "NoteContent": "Koliko si vode danas popio??",
-        "AppointmentId": 13
-      }
-    ],
+    "PatientNotes": [],
+    "BloodType": "A",
     "IsGuest": false,
     "doctor": null,
     "Doctor": null,
@@ -45,17 +24,17 @@
     "Id": 1,
     "Name": "Simona",
     "Surname": "Stantic",
-    "BirthDate": "1991-03-29T00:00:00",
+    "BirthDate": "1999-03-13T00:00:00",
     "Phone": null,
     "Email": "simona@gmail.com",
-    "Gender": null,
+    "Gender": "Žensko",
     "Relationship": null,
     "Password": "123",
     "Address": "Petra Drapsina 8",
     "Hospital": null
   },
   {
-    "$id": "6",
+    "$id": "3",
     "hospital": null,
     "FileDate": "2021-03-29T23:21:22.7064891+02:00",
     "Employer": "neki poslodavac",
@@ -65,12 +44,13 @@
       "Paracetamol"
     ],
     "TrollMechanism": {
-      "$id": "7",
+      "$id": "4",
       "TrollCheckStartDate": "0001-01-01T00:00:00",
       "AppointmentCounterInTimeRange": 0,
       "IsTroll": false
     },
     "PatientNotes": [],
+    "BloodType": "0",
     "IsGuest": false,
     "doctor": null,
     "Doctor": null,
@@ -81,14 +61,14 @@
     "BirthDate": "2021-03-29T23:21:22.7064868+02:00",
     "Phone": null,
     "Email": "stefan@gmail.com",
-    "Gender": null,
+    "Gender": "Muško",
     "Relationship": null,
     "Password": "123",
     "Address": "Zelengoska 15",
     "Hospital": null
   },
   {
-    "$id": "8",
+    "$id": "5",
     "hospital": null,
     "FileDate": "2021-03-29T23:21:22.7064923+02:00",
     "Employer": "neki poslodavac",
@@ -98,12 +78,13 @@
       "Paracetamol"
     ],
     "TrollMechanism": {
-      "$id": "9",
+      "$id": "6",
       "TrollCheckStartDate": "0001-01-01T00:00:00",
       "AppointmentCounterInTimeRange": 0,
       "IsTroll": false
     },
     "PatientNotes": [],
+    "BloodType": "B",
     "IsGuest": false,
     "doctor": null,
     "Doctor": null,
@@ -114,7 +95,7 @@
     "BirthDate": "2021-03-29T23:21:22.7064919+02:00",
     "Phone": null,
     "Email": "uros@gmail.com",
-    "Gender": null,
+    "Gender": "Muško",
     "Relationship": null,
     "Password": "123",
     "Address": "Dure Dakovica 10",

@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="Hospital_IS.DoctorRole.DoctorView.EquipmentUse"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:xctk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+        mc:Ignorable="d" d:DesignHeight="555" d:DesignWidth="783"
+        FocusManager.FocusedElement="{Binding ElementName=search}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.4*" />
+            <RowDefinition Height="0.02*" />
+            <RowDefinition Height="0.55*" />
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Unos potrošene opreme"
+                Style="{StaticResource CustomGroupBox}">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Text="{Binding SearchText}" x:Name="search"
+                            Style="{StaticResource LineTextBox}" />
+                    <Label Grid.Column="1" Style="{StaticResource CustomLabel}"
+                            Content="Količina:" HorizontalAlignment="Right"/>
+                    <xctk:IntegerUpDown Grid.Column="2"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Left" Width="60" Height="25"
+                            Minimum="1" Value="{Binding Quantity}" />
+                </Grid>
+
+                <DataGrid Grid.Row="1" ItemsSource="{Binding EquipmentList}"
+                          SelectedItem="{Binding SelectedEquipment}"
+                        Style="{StaticResource CustomDataGrid}" Margin="0,10,0,0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Naziv"
+                                Binding="{Binding Name}" CanUserResize="False"
+                                Width="0.05*" />
+                        <DataGridTextColumn Header="Proizviđač"
+                                Binding="{Binding ProducerName}"
+                                CanUserResize="False" Width="0.05*" />
+                        <DataGridTextColumn Header="Tip"
+                                Binding="{Binding EquipType}"
+                                CanUserResize="False" Width="0.05*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Grid.Row="2" Style="{StaticResource CustomButton}"
+                        Content="Potvrdi" Margin="100,5,100,5">
+                    <Button.InputBindings>
+                        <KeyBinding Key="Return"
+                                Command="{Binding NewInputCommand}" />
+                    </Button.InputBindings>
+                </Button>
+
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="2" Header="Lista potrošene opreme"
+                Style="{StaticResource CustomGroupBox}">
+            <DataGrid Style="{StaticResource CustomDataGrid}"
+                    ItemsSource="{Binding EnteredEquipment}" Margin="10">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Naziv" Binding="{Binding Name}"
+                            CanUserResize="False" Width="0.05*" />
+                    <DataGridTextColumn Header="Količina"
+                            Binding="{Binding Quantity}" CanUserResize="False"
+                            Width="0.05*" />
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </GroupBox>
+
+    </Grid>
+</UserControl>

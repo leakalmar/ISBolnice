@@ -2,7 +2,12 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
 
 namespace Hospital_IS.Storages
 {
@@ -17,7 +22,11 @@ namespace Hospital_IS.Storages
 
         public List<Patient> GetAll()
         {
-            String text = File.ReadAllText(this.fileLocation);
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
+            };
+            String text = File.ReadAllText(this.fileLocation, Encoding.UTF8);
             List<Patient> patients = JsonConvert.DeserializeObject<List<Patient>>(text);
 
             /*ObservableCollection<String> alergije = new ObservableCollection<String>();

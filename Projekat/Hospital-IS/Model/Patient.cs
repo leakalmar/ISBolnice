@@ -21,6 +21,7 @@ namespace Model
         public List<String> Alergies { get; set; }
         public AntiTroll TrollMechanism { get; set; } = new AntiTroll();
         public List<PatientNote> PatientNotes { get; set; } = new List<PatientNote>();
+        public String BloodType { get; set; }
         
         public Boolean IsGuest { get; set; } = false;
 
@@ -31,12 +32,13 @@ namespace Model
             this.Alergies = alergies;
         }
 
-        public Patient(int id, string name, string surname, DateTime birthDate, string address, string email, string password, DateTime filedate, String employer, List<String> alergies, Boolean isGuest) : base(id, name, surname, birthDate, address, email, password)
+        public Patient(int id, string name, string surname, DateTime birthDate, string address, string email, string password, DateTime filedate, String employer, List<String> alergies, Boolean isGuest, Boolean isAdmitted) : base(id, name, surname, birthDate, address, email, password)
         {
             this.FileDate = filedate;
             this.Employer = employer;
             this.Alergies = alergies;
             this.IsGuest = isGuest;
+            this.Admitted = isAdmitted;
         }
 
         public Patient()

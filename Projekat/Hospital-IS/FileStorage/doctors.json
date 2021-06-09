@@ -1,26 +1,25 @@
 [
   {
-    "patient": [],
+    "$id": "1",
+    "patient": null,
     "hospital": null,
+    "VacationTimeStart": "0001-01-01T00:00:00",
+    "WorkShift": 1,
     "Specialty": {
+      "$id": "2",
       "Name": "Dermatolog"
     },
+    "DaysOff": [],
     "PrimaryRoom": 1,
     "Patient": [],
-    "Salary": 70000.0,
-    "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-    "WorkDay": [
-      {
-        "Day": 0,
-        "StartTime": "2021-02-02T08:00:00",
-        "EndTime": "2021-02-02T20:00:00"
-      }
-    ],
+    "Salary": 80000.0,
+    "EmploymentDate": "2021-06-09T09:54:52.7993538+02:00",
+    "WorkDay": null,
     "Education": 0,
     "Id": 4,
     "Name": "Dragana",
-    "Surname": "Vukmanov Simokov",
-    "BirthDate": "1985-05-07T00:00:00",
+    "Surname": "Vukmanov",
+    "BirthDate": "0001-01-01T00:00:00",
     "Phone": null,
     "Email": "dragana@gmail.com",
     "Gender": null,
@@ -30,17 +29,23 @@
     "Hospital": null
   },
   {
+    "$id": "3",
     "patient": [],
     "hospital": null,
+    "VacationTimeStart": "0001-01-01T00:00:00",
+    "WorkShift": 0,
     "Specialty": {
+      "$id": "4",
       "Name": "Stomatolog"
     },
+    "DaysOff": [],
     "PrimaryRoom": 2,
     "Patient": [],
     "Salary": 70000.0,
     "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
     "WorkDay": [
       {
+        "$id": "5",
         "Day": 0,
         "StartTime": "2021-02-02T08:00:00",
         "EndTime": "2021-02-02T20:00:00"
@@ -60,17 +65,23 @@
     "Hospital": null
   },
   {
+    "$id": "6",
     "patient": [],
     "hospital": null,
+    "VacationTimeStart": "0001-01-01T00:00:00",
+    "WorkShift": 0,
     "Specialty": {
+      "$id": "7",
       "Name": "Dermatolog"
     },
+    "DaysOff": [],
     "PrimaryRoom": 3,
     "Patient": [],
     "Salary": 70000.0,
     "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
     "WorkDay": [
       {
+        "$id": "8",
         "Day": 0,
         "StartTime": "2021-02-02T08:00:00",
         "EndTime": "2021-02-02T20:00:00"
@@ -90,17 +101,23 @@
     "Hospital": null
   },
   {
+    "$id": "9",
     "patient": [],
     "hospital": null,
+    "VacationTimeStart": "0001-01-01T00:00:00",
+    "WorkShift": 0,
     "Specialty": {
+      "$id": "10",
       "Name": ""
     },
+    "DaysOff": [],
     "PrimaryRoom": 4,
     "Patient": [],
     "Salary": 70000.0,
     "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
     "WorkDay": [
       {
+        "$id": "11",
         "Day": 0,
         "StartTime": "2021-02-02T08:00:00",
         "EndTime": "2021-02-02T20:00:00"
@@ -120,17 +137,23 @@
     "Hospital": null
   },
   {
+    "$id": "12",
     "patient": [],
     "hospital": null,
+    "VacationTimeStart": "0001-01-01T00:00:00",
+    "WorkShift": 0,
     "Specialty": {
+      "$id": "13",
       "Name": ""
     },
+    "DaysOff": [],
     "PrimaryRoom": 5,
     "Patient": [],
     "Salary": 70000.0,
     "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
     "WorkDay": [
       {
+        "$id": "14",
         "Day": 0,
         "StartTime": "2021-02-02T08:00:00",
         "EndTime": "2021-02-02T20:00:00"

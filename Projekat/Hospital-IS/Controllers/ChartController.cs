@@ -33,6 +33,16 @@ namespace Controllers
             return ChartService.Instance.GetTherapiesByPatientId(patient.Id);
         }
 
+        public List<Therapy> GetTherapiesByPatient(PatientDTO patient)
+        {
+            return ChartService.Instance.GetTherapiesByPatientId(patient.Id);
+        }
+
+        public List<Test> GetTestsByPatient(PatientDTO patient)
+        {
+            return ChartService.Instance.GetTestsByPatientId(patient.Id);
+        }
+
         public List<ReportDTO> GetReportsByPatient(int patientId)
         {
             return ConvertToReportDTO(ChartService.Instance.GetReportsByPatientId(patientId));
@@ -56,6 +66,11 @@ namespace Controllers
         public List<PrescriptionDTO> GetPrescriptionsForReport(int patientId, DateTime reportDate)
         {
             return ConvertPrescriptionToDTO(ChartService.Instance.GetPrescriptionsForReport(patientId, reportDate));
+        }
+
+        public List<Test> GetTestsForReport(int patientId, DateTime reportDate)
+        {
+            return ChartService.Instance.GetTestsForReport(patientId, reportDate);
         }
 
         public Hospitalization GetActivHospitalization(Patient patient)
@@ -129,6 +144,15 @@ namespace Controllers
         public List<Therapy> FindTherapiesInTimeRange(TherapyReportDTO therapyReportDTO)
         {
             return ChartService.Instance.FindTherapiesInTimeRange(therapyReportDTO);
+        }
+        public void AddTherapy(Therapy newTherapy, PatientDTO patient)
+        {
+            ChartService.Instance.AddTherapy(newTherapy, patient.Id);
+        }
+
+        public void AddTest(Test newTest, PatientDTO patient)
+        {
+            ChartService.Instance.AddTest(newTest, patient.Id);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Controllers;
 using Hospital_IS.Controllers;
-using Hospital_IS.DoctorView;
+using Hospital_IS.DoctorRole.DoctorView;
 using Hospital_IS.DTOs;
 using Hospital_IS.ManagerView1;
 using Hospital_IS.SecretaryView;
@@ -55,9 +55,9 @@ namespace Hospital_IS
             {
                 if (email.Text == doctor.Email && password.Password.ToString() == doctor.Password)
                 {
-                    DoctorMainWindow.Instance._ViewModel.SetDoctor(doctor);
-                    DoctorMainWindow.Instance.Show();
+                    new DoctorMainWindow(doctor).Show();
                     this.Close();
+                    return;
                 }
             }
 
@@ -72,6 +72,10 @@ namespace Hospital_IS
                 SecretaryMainWindow.Instance.Show();
 
                 this.Close();
+            }
+            else
+            {
+                message.Visibility = Visibility.Visible;
             }
         }
 

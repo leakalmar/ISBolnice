@@ -24,10 +24,12 @@
     <None Remove="Resources\bookAppointment.png" />
     <None Remove="Resources\calendar.png" />
     <None Remove="Resources\chooseFromTable.png" />
+    <None Remove="Resources\demo.png" />
     <None Remove="Resources\doctor-search.png" />
     <None Remove="Resources\equipmentView.png" />
     <None Remove="Resources\feedback.png" />
     <None Remove="Resources\helpmanager.png" />
+    <None Remove="Resources\hand-pill.png" />
     <None Remove="Resources\hospital.png" />
     <None Remove="Resources\hospitalCroped.png" />
     <None Remove="Resources\insight.png" />
@@ -48,6 +50,8 @@
     <None Remove="Resources\shoppingcart.png" />
     <None Remove="Resources\redsiren.png" />
     <None Remove="Resources\siren.png" />
+    <None Remove="Resources\star-doctor.png" />
+    <None Remove="Resources\star-filled-doctor.png" />
     <None Remove="Resources\treatment.png" />
     <None Remove="other_facilities.png" />
     <None Remove="request.png" />
@@ -65,6 +69,7 @@
     <None Remove="Resources\settings.png" />
     <None Remove="Resources\toolbar.png" />
     <None Remove="Resources\transfer.png" />
+    <None Remove="Resources\user.png" />
     <None Remove="Resources\worker.png" />
     <None Remove="room_icon.jpg" />
     <None Remove="thredots.png" />
@@ -121,6 +126,7 @@
     <Resource Include="Resources\checkmark.png" />
     <Resource Include="Resources\chooseFromTable.png" />
     <Resource Include="Resources\deleteroom.png" />
+    <Resource Include="Resources\demo.png" />
     <Resource Include="Resources\doctor-search.png" />
     <Resource Include="Resources\doctor.jpg" />
     <Resource Include="Resources\edit.png" />
@@ -128,6 +134,7 @@
     <Resource Include="Resources\feedback.png" />
     <Resource Include="Resources\filijale.png" />
     <Resource Include="Resources\helpmanager.png" />
+    <Resource Include="Resources\hand-pill.png" />
     <Resource Include="Resources\hospital.png" />
     <Resource Include="Resources\hospitalCroped.png" />
     <Resource Include="Resources\hospitalroom.png" />
@@ -161,10 +168,13 @@
     <Resource Include="Resources\shoppingcart.png" />
     <Resource Include="Resources\simona.jpg" />
     <Resource Include="Resources\siren.png" />
+    <Resource Include="Resources\star-doctor.png" />
+    <Resource Include="Resources\star-filled-doctor.png" />
     <Resource Include="Resources\treatment.png" />
     <Resource Include="Resources\toolbar.png" />
     <Resource Include="Resources\transfer.png" />
     <Resource Include="Resources\tube.png" />
+    <Resource Include="Resources\user.png" />
     <Resource Include="Resources\worker.png" />
     <Resource Include="Resources\x-icon.png" />
   </ItemGroup>

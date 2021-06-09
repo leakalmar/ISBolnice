@@ -1,0 +1,226 @@
+﻿<Window x:Class="Hospital_IS.DoctorRole.DoctorView.DoctorMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors" mc:Ignorable="d"
+        Title="DoctorHomePage" Height="640" Width="1024"
+        WindowStartupLocation="CenterScreen" WindowStyle="None"
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+        Background="Transparent" AllowsTransparency="True" Focusable="False"
+        KeyDown="Window_KeyDown">
+
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding Path=NavigateToHomePageCommand}" />
+        <KeyBinding Key="F2"
+                Command="{Binding Path=NavigateToAppointmentsCommand}" />
+        <KeyBinding Key="F3" Command="{Binding Path=NavigateToPatientsCommand}" />
+        <KeyBinding Key="F4" Command="{Binding Path=NavigateToMedicinesCommand}" />
+        <KeyBinding Key="F5" Command="{Binding Path=NavigateToRoomsCommand}" />
+        <KeyBinding Key="F6" Command="{Binding Path=NavigateToEquipmentCommand}" />
+        <KeyBinding Key="F7"
+                Command="{Binding Path=NavigateToPrescriptionsCommand}" />
+        <KeyBinding Key="F8"
+                Command="{Binding Path=NavigateToApproveMedicineCommand}" />
+        <KeyBinding Key="F9"
+                Command="{Binding Path=NavigateToNotificationsCommand}" />
+        <KeyBinding Key="F10" Command="{Binding Path=NavigateToSettingsCommand}" />
+        <KeyBinding Key="Backspace" Command="{Binding Path=NavigateBackCommand}" />
+        <!--<KeyBinding Modifiers="Ctrl+Alt" Key="N"
+                Command="{Binding Path=MinimizeCommand}" />
+        <KeyBinding Modifiers="Ctrl+Alt" Key="X"
+                Command="{Binding Path=MaximizeCommand}" />-->
+    </Window.InputBindings>
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding Path=OnLoadedCommand}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.03*" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="0.15*" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="0.01*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="0.03*" />
+            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="0.03*" />
+            <RowDefinition />
+            <RowDefinition Height="0.04*" />
+        </Grid.RowDefinitions>
+        <Border CornerRadius="20" Grid.RowSpan="8" Grid.ColumnSpan="8">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="1,1" StartPoint="0.8,0.5">
+                    <GradientStop Color="#FF213250" Offset="0" />
+                    <GradientStop Color="#FF5B317E" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Border CornerRadius="20" Grid.ColumnSpan="7" Grid.Row="0"
+                BorderThickness="0,0,0,1" BorderBrush="White">
+        </Border>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+                HorizontalAlignment="Right" Grid.Row="0" Grid.Column="3">
+            <Button x:Name="min" Height="20" Width="20" Opacity="0.6"
+                    BorderThickness="0" 
+                    Background="{x:Null}" Foreground="White"
+                    BorderBrush="{x:Null}" FontSize="14" Focusable="False">
+                _
+            </Button>
+            <Button x:Name="full" Height="20" Width="20" Opacity="0.6"
+                    BorderThickness="0" 
+                    Background="{x:Null}" Foreground="White"
+                    BorderBrush="{x:Null}" FontSize="14" Focusable="False">
+                ⛶
+            </Button>
+            <Button x:Name="exit" Height="20" Width="20" Opacity="0.6"
+                    BorderThickness="0"
+                    Background="{x:Null}" Foreground="White"
+                    BorderBrush="{x:Null}" FontSize="14" Focusable="False">
+                X
+            </Button>
+
+        </StackPanel>
+
+        <Ellipse Height="50" Width="50" Grid.Row="2" Grid.Column="1"
+                HorizontalAlignment="Left">
+            <Ellipse.Fill>
+                <ImageBrush
+                        ImageSource="pack://application:,,,/Resources/doctor.jpg" />
+            </Ellipse.Fill>
+        </Ellipse>
+
+        <TextBlock TextWrapping="WrapWithOverflow" VerticalAlignment="Center"
+                Grid.Row="2" Grid.Column="2" Width="auto"
+                HorizontalAlignment="Center" FontSize="16"
+                FontFamily="Cambria Math" Foreground="FloralWhite"
+                FontWeight="Bold" Margin="10,0,0,0"
+                DataContext="{Binding Doctor}">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{} {0} {1}">
+                    <Binding Path="Name" />
+                    <Binding Path="Surname" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+
+        <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3"
+                KeyboardNavigation.TabNavigation="Cycle">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.5*" />
+
+            </Grid.RowDefinitions>
+
+            <RadioButton Content="Početna" x:Name="home"
+                    KeyboardNavigation.TabNavigation="Continue"
+                    Style="{StaticResource MenuButtonTheme}" Grid.Row="1"
+                    Command="{Binding NavigateToHomePageCommand}">
+            </RadioButton>
+            <RadioButton Content="Termini" x:Name="appointments"
+                    KeyboardNavigation.TabNavigation="Continue"
+                    Style="{StaticResource MenuButtonTheme}" Grid.Row="2"
+                    Command="{Binding NavigateToAppointmentsCommand}">
+            </RadioButton>
+            <RadioButton Content="Pacijenti" x:Name="patients"
+                    KeyboardNavigation.TabNavigation="Continue"
+                    Style="{StaticResource MenuButtonTheme}" Grid.Row="3"
+                    Command="{Binding NavigateToPatientsCommand}">
+            </RadioButton>
+            <RadioButton Content="Lekovi" x:Name="medicines"
+                    KeyboardNavigation.TabNavigation="Continue"
+                    Style="{StaticResource MenuButtonTheme}" Grid.Row="4"
+                    Command="{Binding NavigateToMedicinesCommand}">
+            </RadioButton>
+            <RadioButton Content="Sobe" x:Name="rooms"
+                    KeyboardNavigation.TabNavigation="Continue"
+                    Style="{StaticResource MenuButtonTheme}" Grid.Row="5"
+                    Command="{Binding NavigateToRoomsCommand}">
+            </RadioButton>
+            <RadioButton Content="Oprema" x:Name="equip"
+                    KeyboardNavigation.TabNavigation="Continue"
+                    Style="{StaticResource MenuButtonTheme}" Grid.Row="6"
+                    Command="{Binding NavigateToEquipmentCommand}">
+            </RadioButton>
+            <RadioButton Content="Izdavanje recepta" x:Name="prescriptions"
+                    KeyboardNavigation.TabNavigation="Continue"
+                    Style="{StaticResource MenuButtonTheme}" Grid.Row="7"
+                    Command="{Binding NavigateToPrescriptionsCommand}">
+            </RadioButton>
+            <RadioButton Content="Odobravanje leka" x:Name="approve"
+                    KeyboardNavigation.TabNavigation="Continue"
+                    Style="{StaticResource MenuButtonTheme}" Grid.Row="8"
+                    Command="{Binding NavigateToApproveMedicineCommand}">
+            </RadioButton>
+            <RadioButton Content="Obaveštenja" x:Name="notifications"
+                    KeyboardNavigation.TabNavigation="Continue"
+                    Style="{StaticResource MenuButtonTheme}" Grid.Row="9"
+                    Command="{Binding NavigateToNotificationsCommand}">
+            </RadioButton>
+
+            <Button Content="Odjavi se" Style="{StaticResource CustomButton}"
+                    KeyboardNavigation.TabNavigation="Continue" Grid.Row="11"
+                    Padding="10,0,10,0" Margin="15,5,15,5" Click="Button_Click">
+            </Button>
+
+            <Button Grid.Row="12" Content="Podešavanja"
+                    KeyboardNavigation.TabNavigation="Continue"
+                    Foreground="FloralWhite" Background="{x:Null}"
+                    VerticalAlignment="Top" Margin="30,0">
+                <Button.InputBindings>
+                    <KeyBinding Key="Return"
+                            Command="{Binding NavigateToSettingsCommand}" />
+                    <KeyBinding Key="Space"
+                            Command="{Binding NavigateToSettingsCommand}" />
+                </Button.InputBindings>
+            </Button>
+
+        </Grid>
+
+        <Frame x:Name="Home" Grid.Row="2" Grid.Column="3" Grid.RowSpan="3"
+                Margin="20,0,15,0" NavigationUIVisibility="Hidden"
+                Focusable="False">
+            <Frame.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="BorderBrush" Value="#7F5B317E" />
+                </Style>
+            </Frame.Resources>
+        </Frame>
+
+        <Label Grid.Row="4" Grid.Column="3"
+                HorizontalAlignment="Right" FontSize="20" VerticalAlignment="Bottom" Background="#DF213250"
+                Foreground="White" Visibility="Collapsed" x:Name="demoLabel">
+            <Label.Content>
+                <StackPanel Orientation="Horizontal" Margin="2">
+                    <TextBlock Text="Demo mode  "  VerticalAlignment="Center"/>
+                    <Image Source="pack://application:,,,/Resources/demo.png" Width="40"/>
+                </StackPanel>
+            </Label.Content>
+            <Label.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20" />
+                </Style>
+            </Label.Resources>
+        </Label>
+
+    </Grid>
+</Window>

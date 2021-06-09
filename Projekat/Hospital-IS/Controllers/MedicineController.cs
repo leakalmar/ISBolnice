@@ -33,7 +33,15 @@ namespace Controllers
 
         public MedicineDTO GetByName(string medicineName)
         {
-            return ConvertMedicineToDTO(MedicineService.Instance.GetByName(medicineName));
+            Medicine med = MedicineService.Instance.GetByName(medicineName);
+            if (med != null)
+            {
+                return ConvertMedicineToDTO(med);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public MedicineDTO ConvertMedicineToDTO(Medicine medicine)
@@ -50,7 +58,15 @@ namespace Controllers
             }
             return new MedicineDTO(componentDTOs, medicine.SideEffects, medicine.Usage, replacmentDTOs, medicine.Name, false, false);
         }
-
+        public List<MedicineDTO> ConvertMedicineToDTO(List<Medicine> medicines)
+        {
+            List<MedicineDTO> list = new List<MedicineDTO>();
+            foreach(Medicine m in medicines)
+            {
+                list.Add(ConvertMedicineToDTO(m));
+            }
+            return list;
+        }
         public Medicine ConvertDTOToMedicine(MedicineDTO medicineDTO)
         {
             List<MedicineComponent> components = new List<MedicineComponent>();

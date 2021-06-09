@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="Hospital_IS.DoctorRole.DoctorView.Therapies"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+    </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Key="Add" Command="{Binding NewTherapyCommand}" />
+    </UserControl.InputBindings>
+    <Grid Margin="0,25,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="0.03*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Button Margin="250,5,250,5" Style="{StaticResource CustomButton}"
+                Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}"
+                Content="Nova terapija" >
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding NewTherapyCommand}" />
+                <KeyBinding Key="Space" Command="{Binding NewTherapyCommand}" />
+            </Button.InputBindings>
+        </Button>
+
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Therapies}"
+                Grid.Row="2" Style="{StaticResource CustomDataGrid}"
+                  KeyboardNavigation.TabNavigation="None">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Datum početka"
+                        Binding="{Binding TherapyStart,StringFormat=\{0:dd.MM.yyyy.\}}" CanUserResize="False"
+                        Width="auto" />
+                <DataGridTextColumn Header="Lek"
+                        Binding="{Binding Medicine.Name}" CanUserResize="False"
+                        Width="*" />
+                <DataGridTextColumn Header="Broj tableta"
+                        Binding="{Binding Quantity}" CanUserResize="False"
+                        Width="auto" />
+                <DataGridTextColumn Header="Broj uzimanja"
+                        Binding="{Binding TimesADay}" CanUserResize="False"
+                        Width="auto" />
+                <DataGridTextColumn Header="Recept"
+                        Binding="{Binding LastTimeIssued,StringFormat=\{0:dd.MM.yyyy.\}}" CanUserResize="False"
+                        Width="auto" />
+                <DataGridCheckBoxColumn Header="Završena" CanUserResize="False"
+                        Width="auto" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

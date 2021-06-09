@@ -37,6 +37,12 @@ namespace Controllers
         {
             return RoomService.Instance.GetAllRooms();
         }
+
+        public List<int> GetAllFloors()
+        {
+            return RoomService.Instance.GetAllFloors();
+        }
+
         public List<Room> GetRoomByType(RoomType type)
         {
             return RoomService.Instance.GetRoomByType(type);
@@ -45,6 +51,12 @@ namespace Controllers
         {
             return RoomService.Instance.GetRoomById(roomId);
         }
+
+        public List<Room> GetRoomByNumber(string roomNumber)
+        {
+            return RoomService.Instance.GetRoomByNumber(roomNumber);
+        }
+
         public void AddEquipment(Room room, Equipment newEquip)
         {
             RoomService.Instance.AddEquipment(room,newEquip);
@@ -54,10 +66,10 @@ namespace Controllers
             RoomService.Instance.RemoveEquipment(room,oldEquip);
         }
         public Boolean UpdateEquipment(Room room, Equipment updateEquip)
-        {         
+        {
             return RoomService.Instance.UpdateEquipment(room,updateEquip);
-        }    
-       
+        }
+
         public bool CheckIfRoomNumberIsUnique(int roomNumber)
         {
             return RoomService.Instance.CheckIfRoomNumberIsUnique(roomNumber);

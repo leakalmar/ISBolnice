@@ -35,7 +35,7 @@ namespace Hospital_IS.Service
         {
             foreach (Patient patient in PatientService.Instance.AllPatients)
                 AllPatients.Add(new PatientDTO(patient.Id, patient.Name, patient.Surname, patient.Gender, patient.BirthDate, patient.Phone, patient.Email,
-                    patient.Education, patient.Relationship, patient.Employer, patient.Password, patient.Address, patient.Alergies, patient.IsGuest));
+                    patient.Education, patient.Relationship, patient.Employer, patient.Password, patient.Address, patient.Alergies, patient.IsGuest, patient.Admitted));
         }
 
         public void ReloadPatients()
@@ -49,7 +49,7 @@ namespace Hospital_IS.Service
         {
             AllPatients.Add(patientDTO);
             PatientService.Instance.AddPatient(new Patient(patientDTO.Id, patientDTO.Name, patientDTO.Surname, patientDTO.BirthDate, patientDTO.Address, patientDTO.Email,
-                patientDTO.Password, patientDTO.FileDate, patientDTO.Employer, patientDTO.Alergies, patientDTO.IsGuest));
+                patientDTO.Password, patientDTO.FileDate, patientDTO.Employer, patientDTO.Alergies, patientDTO.IsGuest, patientDTO.IsAdmitted));
         }
 
         public void UpdatePatient(PatientDTO patientDTO)
@@ -62,7 +62,7 @@ namespace Hospital_IS.Service
                     AllPatients.Insert(i, patientDTO);
 
                     PatientService.Instance.UpdatePatient(new Patient(patientDTO.Id, patientDTO.Name, patientDTO.Surname, patientDTO.BirthDate, patientDTO.Address, patientDTO.Email,
-                patientDTO.Password, patientDTO.FileDate, patientDTO.Employer, patientDTO.Alergies, patientDTO.IsGuest));
+                patientDTO.Password, patientDTO.FileDate, patientDTO.Employer, patientDTO.Alergies, patientDTO.IsGuest, patientDTO.IsAdmitted));
 
                 }
             }
@@ -77,7 +77,7 @@ namespace Hospital_IS.Service
                     AllPatients.Remove(AllPatients[i]);
                     ChartService.Instance.DeleteChart(patientDTO.Id);
                     PatientService.Instance.DeletePatient(new Patient(patientDTO.Id, patientDTO.Name, patientDTO.Surname, patientDTO.BirthDate, patientDTO.Address, patientDTO.Email,
-                patientDTO.Password, patientDTO.FileDate, patientDTO.Employer, patientDTO.Alergies, patientDTO.IsGuest));
+                patientDTO.Password, patientDTO.FileDate, patientDTO.Employer, patientDTO.Alergies, patientDTO.IsGuest, patientDTO.IsAdmitted));
                 }
             }
 

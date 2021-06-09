@@ -12,8 +12,9 @@
                         <ResourceDictionary Source="SecretaryView/Themes/DarkTheme.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
-                <ResourceDictionary Source="DoctorView/DoctorStyles.xaml"/>
+                <ResourceDictionary Source="DoctorRole/DoctorView/DoctorStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

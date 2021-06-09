@@ -1,0 +1,207 @@
+﻿<UserControl x:Class="Hospital_IS.DoctorRole.DoctorView.SearchMedicine"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+        mc:Ignorable="d" d:DesignHeight="555" d:DesignWidth="783"
+        FocusManager.FocusedElement="{Binding ElementName=search}">
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+    </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Key="Space" Command="{Binding AddRemoveMedicineCommand}" />
+    </UserControl.InputBindings>
+    <Grid KeyboardNavigation.TabNavigation="Local">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Label Content="Recept" FontSize="20" BorderThickness="0"
+                Foreground="FloralWhite" HorizontalAlignment="Center"
+                Grid.ColumnSpan="3" FontWeight="Bold" VerticalAlignment="Center" />
+
+        <TextBox Grid.ColumnSpan="2" Grid.Row="1" Margin="10"
+                Background="Transparent" Padding="10,0,10,0" Name="search"
+                Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}" KeyDown="TextBox_KeyDown"
+                Foreground="White" FontWeight="Light" FontSize="16" TabIndex="1" KeyboardNavigation.TabNavigation="Continue">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15" />
+                    <Setter Property="BorderBrush" Value="White" />
+                    <Setter Property="BorderThickness" Value="1" />
+                </Style>
+            </TextBox.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="GotFocus">
+                    <i:InvokeCommandAction Command="{Binding GotFocusCommand}" />
+                </i:EventTrigger>
+                <i:EventTrigger EventName="LostFocus">
+                    <i:InvokeCommandAction Command="{Binding LostFocusCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+
+        <Label Content="Alergeni" Grid.Column="2" FontSize="14"
+                FontFamily="Verdana" Foreground="FloralWhite"
+                HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                FontWeight="Bold" Grid.Row="1" />
+        <ListBox x:Name="alergies" ItemsSource="{Binding Patient.Alergies}"
+                Grid.Row="2" Grid.Column="2" FontSize="14" FontFamily="Verdana"
+                Foreground="FloralWhite" Background="{x:Null}"
+                Margin="10,10,10,0" BorderThickness="1" TabIndex="2" />
+
+        <GroupBox Header="Rezultati pretrage" FontSize="16" Grid.Row="2"
+                Grid.ColumnSpan="2" BorderBrush="#FF2E3B55" Foreground="White">
+            <DataGrid KeyboardNavigation.TabNavigation="Continue"
+                    ItemsSource="{Binding MedicineList, UpdateSourceTrigger=PropertyChanged}"
+                    Margin="10" Style="{StaticResource CustomDataGrid}"
+                     TabIndex="3" x:Name="grid"
+                    SelectedItem="{Binding SelectedMedicine,UpdateSourceTrigger=PropertyChanged}">
+                <i:Interaction.Behaviors>
+                    <commands:TabBehaviour />
+                </i:Interaction.Behaviors>
+                <DataGrid.InputBindings>
+                    <KeyBinding Key="Space"
+                            Command="{Binding AddRemoveMedicineCommand}" />
+                </DataGrid.InputBindings>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Naziv leka"
+                            Binding="{Binding Name}" CanUserResize="False"
+                            Width="0.05*" SortDirection="Ascending" />
+                    <DataGridCheckBoxColumn Header="Dodato"
+                            Binding="{Binding Check,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                            x:Name="isAdded" CanUserResize="False" Width="0.05*">
+                    </DataGridCheckBoxColumn>
+                </DataGrid.Columns>
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Allergic}"
+                                    Value="true">
+                                <Setter Property="Foreground" Value="IndianRed"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Allergic}"
+                                    Value="false">
+                                <Setter Property="Foreground"
+                                        Value="FloralWhite"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+            </DataGrid>
+        </GroupBox>
+        <GroupBox Header="Informacije o leku" Grid.Row="3" Grid.ColumnSpan="3"
+                BorderBrush="#FF2E3B55" Foreground="White" FontSize="16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="0.3*" />
+                </Grid.RowDefinitions>
+
+                <Label Content="{Binding SelectedMedicine.Name}"
+                        Grid.ColumnSpan="2" FontSize="18" FontFamily="Verdana"
+                        Foreground="FloralWhite" Margin="0,0,20,10"
+                        VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+                <TextBlock Grid.Row="5" Grid.ColumnSpan="2" TextWrapping="Wrap"
+                        TextAlignment="Center"
+                        Text="Pacijent potencijalno alergičan na izabrani lek!"
+                        FontSize="14" FontFamily="Verdana"
+                        Foreground="IndianRed" VerticalAlignment="Center"
+                        Margin="5,0,5,0"
+                        Visibility="{Binding PotentiallyAllergicMassage, Converter={StaticResource BoolToVisibility}}" />
+
+                <Label Content="Sastav" FontSize="14" Grid.Row="1"
+                        FontFamily="Verdana" Foreground="FloralWhite"
+                        Margin="10,0,10,0" BorderThickness="0,0,0,2"
+                        BorderBrush="Gray" />
+
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                        VerticalScrollBarVisibility="Auto" Grid.Row="2"
+                        KeyboardNavigation.TabNavigation="Local"
+                        Margin="10,0,10,10" x:Name="composition" TabIndex="4">
+                    <ListBox
+                            ItemsSource="{Binding SelectedMedicine.Composition}"
+                            FontSize="14" FontFamily="Verdana"
+                            Foreground="FloralWhite" Background="{x:Null}"
+                            BorderThickness="0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Component}"
+                                        Foreground="FloralWhite" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+                <Label Content="Zamena" Grid.Row="3" FontSize="14"
+                        FontFamily="Verdana" Foreground="FloralWhite"
+                        Margin="10,0,10,0" BorderThickness="0,0,0,2"
+                        BorderBrush="Gray" />
+
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                        VerticalScrollBarVisibility="Auto" Grid.Row="4"
+                        KeyboardNavigation.TabNavigation="Local"
+                        Margin="10,0,10,10" TabIndex="5">
+                    <ListBox
+                            ItemsSource="{Binding SelectedMedicine.ReplaceMedicine}"
+                            FontSize="14" FontFamily="Verdana"
+                            Foreground="FloralWhite" Background="{x:Null}"
+                            BorderThickness="0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"
+                                        Foreground="FloralWhite" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+
+                <Label Content="Terapijske indikacije" FontSize="14"
+                        FontFamily="Verdana" Foreground="FloralWhite"
+                        Grid.Column="1" Grid.Row="1" Margin="10,0,10,0"
+                        BorderThickness="0,0,0,2" BorderBrush="Gray" />
+                <Label Content="Neželjena dejstva" Grid.Column="1" FontSize="14"
+                        FontFamily="Verdana" Foreground="FloralWhite"
+                        Grid.Row="3" Margin="10,0,10,0"
+                        BorderThickness="0,0,0,2" BorderBrush="Gray" />
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                        Grid.Column="1" VerticalScrollBarVisibility="Auto"
+                        KeyboardNavigation.TabNavigation="Local" Grid.Row="2" Margin="10,0,10,10" TabIndex="6">
+                    <TextBox Text="{Binding SelectedMedicine.Usage}"
+                            Style="{StaticResource CustomTextBox}"
+                            BorderThickness="0" IsReadOnly="True"
+                            IsReadOnlyCaretVisible="True" />
+                </ScrollViewer>
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                        VerticalScrollBarVisibility="Auto" Grid.Row="4"
+                        KeyboardNavigation.TabNavigation="Local" Grid.Column="1" Margin="10,0,10,10" TabIndex="7">
+                    <TextBox Text="{Binding SelectedMedicine.SideEffects}"
+                            Style="{StaticResource CustomTextBox}"
+                            BorderThickness="0" IsReadOnly="True"
+                            IsReadOnlyCaretVisible="True" />
+                </ScrollViewer>
+
+            </Grid>
+        </GroupBox>
+        
+    </Grid>
+</UserControl>

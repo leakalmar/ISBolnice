@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="Hospital_IS.DoctorRole.DoctorView.TestNew"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Hospital_IS.DoctorRole.DoctorView"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
+    <Grid Margin="0,25,0,0" KeyboardNavigation.TabNavigation="Cycle">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.ColumnSpan="2" Grid.Row="1" Margin="50,20,50,50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.4*" />
+                <ColumnDefinition Width="0.1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Label Content="Datum sprovođenja testiranja:"
+                    Style="{StaticResource CustomLabel}" Grid.Row="1" />
+            <Label Content="{Binding Source={x:Static sys:DateTime.Now}}"
+                    ContentStringFormat="dd.MM.yyyy." IsEnabled="False"
+                    Style="{StaticResource CustomLabel}" Grid.Row="2"
+                    Margin="5,0,0,0" BorderBrush="Gray"
+                    BorderThickness="0,0,0,2" />
+
+            <Label Content="Naziv testa:" Style="{StaticResource CustomLabel}"
+                    Grid.Row="3" />
+            <TextBox Style="{StaticResource CustomTextBox}"
+                    commands:FocusExtension.IsFocused="{Binding Focused}"
+                    Text="{Binding TestName}" Grid.Row="4" Margin="5,0,0,0"
+                    BorderBrush="White" BorderThickness="0,0,0,2" />
+
+            <Label Content="Rezultati testa:" Grid.Column="2"
+                    Style="{StaticResource CustomLabel}" Grid.Row="0" />
+
+            <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+                    Grid.RowSpan="5" Style="{StaticResource CustomTextBox}"
+                    VerticalScrollBarVisibility="Auto"
+                    Text="{Binding TestResults}" />
+
+        </Grid>
+
+        <Button Style="{StaticResource CustomButton}" Margin="150,5,50,5"
+                Content="Potvrdi">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding SaveCommand}" />
+                <KeyBinding Key="Space" Command="{Binding SaveCommand}" />
+            </Button.InputBindings>
+        </Button>
+
+        <Button Style="{StaticResource CustomButton}" Grid.Column="1"
+                Margin="50,5,150,5" Grid.ColumnSpan="2" Content="Odustani">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding CancelCommand}" />
+                <KeyBinding Key="Space" Command="{Binding CancelCommand}" />
+            </Button.InputBindings>
+        </Button>
+
+    </Grid>
+</UserControl>

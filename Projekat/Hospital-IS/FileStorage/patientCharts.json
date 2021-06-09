@@ -23,7 +23,18 @@
         "DatePrescribed": "2021-05-02T00:00:00"
       }
     ],
-    "Test": [],
+    "Test": [
+      {
+        "Name": "fsd",
+        "SampleDate": "2021-06-07T10:41:09.6727235+02:00",
+        "Result": "fsd"
+      },
+      {
+        "Name": "fsd",
+        "SampleDate": "2021-06-08T19:59:09.3543768+02:00",
+        "Result": "fsd"
+      }
+    ],
     "Reports": [
       {
         "Anamnesis": "dsgsdsetewed",
@@ -46,7 +57,7 @@
         "Cause": "uzrok"
       },
       {
-        "Anamnesis": "",
+        "Anamnesis": null,
         "HaveRecipe": false,
         "HaveTest": false,
         "ReportId": "2021-05-25T08:00:00",
@@ -54,9 +65,76 @@
         "DoctorSurname": "Vukmanov Simokov",
         "Type": 1,
         "Cause": null
+      },
+      {
+        "Anamnesis": "",
+        "HaveRecipe": false,
+        "HaveTest": false,
+        "ReportId": "2021-06-02T12:00:00",
+        "DoctorName": "Dragana",
+        "DoctorSurname": "Vukmanov Simokov",
+        "Type": 1,
+        "Cause": null
+      },
+      {
+        "Anamnesis": null,
+        "HaveRecipe": false,
+        "HaveTest": false,
+        "ReportId": "2021-06-09T10:45:00",
+        "DoctorName": "Dragana",
+        "DoctorSurname": "Vukmanov Simokov",
+        "Type": 1,
+        "Cause": null
       }
     ],
-    "Hospitalization": [],
+    "Hospitalization": [
+      {
+        "AdmissionDate": "2021-06-06T20:08:40.2949979+02:00",
+        "ReleaseDate": "2021-07-02T00:00:00",
+        "Detail": null,
+        "Room": {
+          "RoomFloor": 2,
+          "RoomNumber": 26,
+          "SurfaceArea": 20,
+          "BedNumber": 6,
+          "RoomId": 15,
+          "Type": 0,
+          "RoomIdType": "15 RecoveryRoom",
+          "Equipment": [],
+          "isUsable": false
+        },
+        "Bed": {
+          "BedId": 0,
+          "RoomId": 15,
+          "Taken": true
+        },
+        "Doctor": "Dragana V. Simokov",
+        "IsReleased": true
+      },
+      {
+        "AdmissionDate": "2021-06-08T19:59:16.8886397+02:00",
+        "ReleaseDate": "2021-06-23T00:00:00",
+        "Detail": null,
+        "Room": {
+          "RoomFloor": 2,
+          "RoomNumber": 26,
+          "SurfaceArea": 20,
+          "BedNumber": 6,
+          "RoomId": 15,
+          "Type": 0,
+          "RoomIdType": "15 RecoveryRoom",
+          "Equipment": [],
+          "isUsable": false
+        },
+        "Bed": {
+          "BedId": 0,
+          "RoomId": 15,
+          "Taken": true
+        },
+        "Doctor": "Dragana V. Simokov",
+        "IsReleased": true
+      }
+    ],
     "Therapies": [
       {
         "Medicine": {
@@ -70,7 +148,8 @@
         "TimesADay": 2,
         "TherapyStart": "2021-04-19T00:00:00",
         "TherapyEnd": "2021-05-01T00:00:00",
-        "FirstUsageTime": 11
+        "FirstUsageTime": 11,
+        "LastTimeIssued": "0001-01-01T00:00:00"
       },
       {
         "Medicine": {
@@ -84,7 +163,108 @@
         "TimesADay": 3,
         "TherapyStart": "2021-04-19T00:00:00",
         "TherapyEnd": "2021-05-01T00:00:00",
-        "FirstUsageTime": 8
+        "FirstUsageTime": 8,
+        "LastTimeIssued": "0001-01-01T00:00:00"
+      },
+      {
+        "Medicine": null,
+        "Quantity": 1,
+        "TimesADay": 1,
+        "TherapyStart": "2021-05-29T22:41:11.9381986+02:00",
+        "TherapyEnd": "2021-06-26T00:00:00",
+        "FirstUsageTime": 0,
+        "LastTimeIssued": "0001-01-01T00:00:00"
+      },
+      {
+        "Medicine": {
+          "Name": "Tritace 10mg tableta",
+          "Composition": [],
+          "SideEffects": "",
+          "Usage": "",
+          "ReplaceMedicine": []
+        },
+        "Quantity": 1,
+        "TimesADay": 1,
+        "TherapyStart": "2021-06-07T10:09:26.3638538+02:00",
+        "TherapyEnd": "2021-06-07T00:00:00",
+        "FirstUsageTime": 0,
+        "LastTimeIssued": "2021-06-07T10:09:26.3638538+02:00"
+      },
+      {
+        "Medicine": {
+          "Name": "Brufen 600mg tableta",
+          "Composition": [],
+          "SideEffects": "Bol i inflamacija kod reumatoidnog artritisa (uključujući juvenilni reumatoidni artritis), ankilozirajućeg spondilitisa, osteoartritisa, nereumatoidnih artropatija, vanzglobnog reumatizma(kapsulitis, tendinitis, tendosinovitis, burzitis). Bolovi različite etiologije: nakon povrede mekih tkiva, kod lumbalnog sindroma, uganuća, istegnuća, dismenoreja, glavobolja(uključujući migrenu), zubobolja, postoperativnih bolnih stanja. ",
+          "Usage": "Pojava neželjenih reakcija može se svesti na minimum ukoliko se koristi najniža efektivna doza leka u što kraćem vremenskom periodu(videti odeljak 4.4). Za oralnu primenu. Film tabletu progutati sa tečnošću.Odrasli: preporučena doza iznosi 1200–1800 mg dnevno, podeljeno u 2 - 3 doze.Kod nekih pacijenata, dozaodržavanja može biti od 600 do 1200 mg dnevno.U teškim ili akutnim stanjima doza se može povećati(sve dok se akutna faza bolesti ne stavi pod kontrolu), poduslovom da ne preñe maksimalnu dnevnu dozu od 2400 mg.Deca: Brufen600 mg nije namenjen za primenu kod dece.Starije osobe: kod starijih osoba postoji povećani rizik od javljanja i ozbiljnih posledica neželjenih reakcija.Treba koristiti najnižu efektivnu dozu u što kraćem vremenskom periodu. Pacijenti se moraju redovnokontrolisati zbog opasnosti od gastrointestinalnog krvarenja. U slučaju oštećene funkcije bubrega ili jetre, dozase mora podesiti individualno. ",
+          "ReplaceMedicine": []
+        },
+        "Quantity": 1,
+        "TimesADay": 1,
+        "TherapyStart": "2021-06-07T10:11:03.6514083+02:00",
+        "TherapyEnd": "2021-06-07T00:00:00",
+        "FirstUsageTime": 0,
+        "LastTimeIssued": "2021-06-07T10:11:03.6514083+02:00"
+      },
+      {
+        "Medicine": {
+          "Name": "Paracetamol 500mg tableta",
+          "Composition": [
+            {
+              "Component": "celuloz"
+            },
+            {
+              "Component": "mikrokristalna"
+            },
+            {
+              "Component": "povidon K-30"
+            },
+            {
+              "Component": "magnezijum-stearat"
+            },
+            {
+              "Component": "novi sastav"
+            }
+          ],
+          "SideEffects": "Preosetljivost na paracetamol ili na bilo koju od pomoćnih supstanci.",
+          "Usage": "Paracetamol je blag analgetik i antipiretik. Upotreba tableta se preporučuje za lečenje bolnih i febrilnih stanja kao što su glavobolja (uključujući i migrenu i tenzionu glavobolju), zubobolja, bol u leđima, reumatski bolovi i bolovi u mišićima, dismenoreja, bol u grlu, kao i za ublažavanje groznice, odnosno tegoba i bolova koji prate prehladu i grip. Lek se takođe može koristiti kao simptomatska terapija kod bolova povezanih sa osteoartritisom.",
+          "ReplaceMedicine": []
+        },
+        "Quantity": 1,
+        "TimesADay": 1,
+        "TherapyStart": "2021-06-07T10:31:49.9565801+02:00",
+        "TherapyEnd": "2021-06-07T00:00:00",
+        "FirstUsageTime": 0,
+        "LastTimeIssued": "2021-06-07T10:31:49.9565801+02:00"
+      },
+      {
+        "Medicine": {
+          "Name": "vsfd",
+          "Composition": null,
+          "SideEffects": "",
+          "Usage": "",
+          "ReplaceMedicine": null
+        },
+        "Quantity": 1,
+        "TimesADay": 1,
+        "TherapyStart": "2021-06-08T19:59:03.551111+02:00",
+        "TherapyEnd": "2021-06-08T00:00:00",
+        "FirstUsageTime": 0,
+        "LastTimeIssued": "2021-06-08T19:59:03.551111+02:00"
+      },
+      {
+        "Medicine": {
+          "Name": "gfd",
+          "Composition": null,
+          "SideEffects": "",
+          "Usage": "",
+          "ReplaceMedicine": null
+        },
+        "Quantity": 1,
+        "TimesADay": 1,
+        "TherapyStart": "2021-06-09T00:59:46.0964062+02:00",
+        "TherapyEnd": "2021-06-09T00:00:00",
+        "FirstUsageTime": 0,
+        "LastTimeIssued": "2021-06-09T00:59:46.0964062+02:00"
       }
     ]
   },
