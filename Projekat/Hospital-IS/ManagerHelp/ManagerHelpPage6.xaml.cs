@@ -28,5 +28,13 @@ namespace Hospital_IS.ManagerHelp
         {
 
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var window = Window.GetWindow(this);
+            
+            window.Close();
+            MessageBox.Show("Sretno u nastavku rada sa aplikacijom");
+        }
     }
 }

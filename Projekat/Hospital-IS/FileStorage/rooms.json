@@ -71,8 +71,8 @@
   {
     "RoomFloor": 1,
     "RoomNumber": 1,
-    "SurfaceArea": 1,
-    "BedNumber": 1,
+    "SurfaceArea": 5,
+    "BedNumber": 1000,
     "RoomId": 14,
     "Type": 0,
     "RoomIdType": "1 RecoveryRoom",
@@ -98,6 +98,17 @@
     "RoomId": 16,
     "Type": 0,
     "RoomIdType": "582 RecoveryRoom",
+    "Equipment": [],
+    "isUsable": false
+  },
+  {
+    "RoomFloor": 1,
+    "RoomNumber": 50,
+    "SurfaceArea": 5,
+    "BedNumber": 9,
+    "RoomId": 17,
+    "Type": 0,
+    "RoomIdType": "50 RecoveryRoom",
     "Equipment": [],
     "isUsable": false
   }

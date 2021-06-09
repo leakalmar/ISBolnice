@@ -69,7 +69,7 @@
         </Border>
         
         <Button Grid.Column="3" Grid.Row="13" Width="100" Grid.ColumnSpan="2" Height="30" Content="Kraj"  Background="White" BorderBrush="Green" BorderThickness="2"
-                Margin="214,4,6,6"  CommandParameter="{Binding ElementName=RenovationStart}" Command="{Binding TransferStaticEquipmentCommand}">
+                Margin="214,4,6,6" Click="Button_Click_1">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="15"/>

@@ -113,7 +113,7 @@
         </Border>
         <DataGrid x:Name="DataGridEquipment"  IsReadOnly="True" ItemsSource="{Binding Equipments}" SelectedIndex="-1" SelectedItem="{Binding SelectedEquipment}" AlternatingRowBackground="LightBlue"
                   SelectionMode="Single"
-                  Height="373" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="350" Background="#FFC5DBDF" AutoGenerateColumns="False" 
+                  Height="370" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="350" Background="#FFC5DBDF" AutoGenerateColumns="False" 
                   Margin="0,200,0,0" >
             <DataGrid.CellStyle>
                 <Style/>
@@ -279,7 +279,7 @@
         <ComboBox x:Name="Combo"   DisplayMemberPath="RoomIdType" ItemsSource="{Binding Rooms}" SelectedItem="{Binding SelectedRoom}" 
                   HorizontalAlignment="Left" Margin="165,86,0,0" Height="25" VerticalAlignment="Top" Width="120" Template="{StaticResource ComboBoxBaseControlTemplate}" />
         <TextBox HorizontalAlignment="Left" BorderThickness="0" Background="Transparent" FontSize="15" Foreground="White" Margin="40,86,0,0"  Text="Izaberite sobu:" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <StackPanel x:Name="SearchPanel" Visibility="Visible" Background="Transparent" Margin="40,162,15,555" >
+        <StackPanel x:Name="SearchPanel" Visibility="Visible" Background="Transparent" Margin="40,160,15,555" >
             <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
@@ -288,8 +288,8 @@
                     <ColumnDefinition Width="90"/>
                     <ColumnDefinition Width="25"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Content="Pretrazi:" Foreground="White" FontSize="15" />
-                <TextBox x:Name="SearchBox"  Grid.Column="2" Height="25"  FontSize="14" Template="{StaticResource TextBoxBaseControlTemplate}" >
+                <Label Grid.Column="0" Content="Pretrazi:" Foreground="White" FontSize="15" Margin="-1,0,1,0" />
+                <TextBox x:Name="SearchBox"  Grid.Column="2" Height="25"  FontSize="14" Template="{StaticResource TextBoxBaseControlTemplate}"  >
                     <TextBox.Text>
                         <Binding Path="SearchBox" UpdateSourceTrigger="PropertyChanged"></Binding>
                     </TextBox.Text>

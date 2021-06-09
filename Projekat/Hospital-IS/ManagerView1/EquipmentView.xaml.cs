@@ -57,5 +57,7 @@ namespace Hospital_IS.ManagerView1
         {
             OtherOptions.Visibility = Visibility.Hidden;
         }
+
+     
     }
 }
