@@ -188,7 +188,7 @@ namespace Hospital_IS.Service
         {
             Patient patient = PatientService.Instance.GetPatientByID(doctorAppointmentDTO.Patient.Id);
             Doctor doctor = DoctorService.Instance.GetDoctorByID(doctorAppointmentDTO.Doctor.Id);
-            return DoctorAppointmentService.Instance.VerifyAppointment(new DoctorAppointment(doctorAppointmentDTO.Reserved, doctorAppointmentDTO.AppointmentCause,
+            return SuggestedAppointmentService.Instance.VerifyAppointment(new DoctorAppointment(doctorAppointmentDTO.Reserved, doctorAppointmentDTO.AppointmentCause,
                         doctorAppointmentDTO.AppointmentStart, doctorAppointmentDTO.AppointmentEnd, doctorAppointmentDTO.Type, doctorAppointmentDTO.Room,
                         doctorAppointmentDTO.Id, doctorAppointmentDTO.IsUrgent, patient, doctor, doctorAppointmentDTO.IsFinished));
         }
