@@ -16,7 +16,7 @@
       "IsTroll": false
     },
     "PatientNotes": [],
-    "BloodType": null,
+    "BloodType": "A",
     "IsGuest": false,
     "doctor": null,
     "Doctor": null,
@@ -50,7 +50,7 @@
       "IsTroll": false
     },
     "PatientNotes": [],
-    "BloodType": null,
+    "BloodType": "0",
     "IsGuest": false,
     "doctor": null,
     "Doctor": null,
@@ -84,7 +84,7 @@
       "IsTroll": false
     },
     "PatientNotes": [],
-    "BloodType": null,
+    "BloodType": "B",
     "IsGuest": false,
     "doctor": null,
     "Doctor": null,

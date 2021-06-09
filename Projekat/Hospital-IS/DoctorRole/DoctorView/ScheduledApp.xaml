@@ -35,7 +35,7 @@
                 Style="{StaticResource CustomDataGrid}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Datum i vreme"
-                        Binding="{Binding AppointmentStart,StringFormat=\{0:dd.MM.yyyy.\}}"
+                        Binding="{Binding AppointmentStart,StringFormat=\{0:dd.MM.yyyy. HH:mm\}}"
                         CanUserResize="False" Width="0.05*" />
                 <DataGridTextColumn Header="Tip pregleda"
                         Binding="{Binding Type, Converter={StaticResource AppTypeToString}}" CanUserResize="False"

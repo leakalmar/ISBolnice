@@ -1,5 +1,26 @@
 [
   {
+    "Id": 16498,
+    "Title": "Zakazan pregled",
+    "Text": "Zakazan Vam je novi pregled 09.06.2021. u 14:30 do 14:30h.",
+    "DatePosted": "2021-06-09T09:58:42.2009065+02:00",
+    "LastChanged": "2021-06-09T09:58:42.2009065+02:00",
+    "Recipients": [
+      1
+    ]
+  },
+  {
+    "Id": 31604,
+    "Title": "Otkazan pregled",
+    "Text": "Pregled koji ste imali 09.06.2021. u 14:00h je otkazan.",
+    "DatePosted": "2021-06-09T09:24:21.427103+02:00",
+    "LastChanged": "2021-06-09T09:24:21.427103+02:00",
+    "Recipients": [
+      1,
+      4
+    ]
+  },
+  {
     "Id": 94304,
     "Title": "Zakazan pregled",
     "Text": "Zakazan Vam je novi pregled 09.06.2021. u 09:30 do 09:30h.",

@@ -9,7 +9,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        d:DesignHeight="555" d:DesignWidth="783">
+        d:DesignHeight="555" d:DesignWidth="783" FocusManager.FocusedElement="{Binding ElementName=specialty}">
     <UserControl.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
         <converters:InverseVisibilityConverter x:Key="InverseVisibility" />

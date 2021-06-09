@@ -70,14 +70,14 @@
                                         ItemsSource="{Binding Composition}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Horizontal" />
+                                            <StackPanel Orientation="Horizontal" Margin="10,0,0,0"/>
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Label Padding="0,0,5,0"
+                                            <TextBlock Padding="1,0,5,0"
                                                     Foreground="FloralWhite"
-                                                    Content="{Binding Component}" />
+                                                    Text="{Binding Component}" />
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>

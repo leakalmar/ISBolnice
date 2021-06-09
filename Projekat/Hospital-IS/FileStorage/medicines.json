@@ -8,18 +8,18 @@
   },
   {
     "Name": "Defrinol tableta",
-    "Composition": [
-      {
-        "Component": "fs"
-      }
-    ],
+    "Composition": [],
     "SideEffects": "",
     "Usage": "",
     "ReplaceMedicine": []
   },
   {
     "Name": "Tritace 10mg tableta",
-    "Composition": [],
+    "Composition": [
+      {
+        "Component": "magnezijum-stearat"
+      }
+    ],
     "SideEffects": "",
     "Usage": "",
     "ReplaceMedicine": []
@@ -35,15 +35,6 @@
       },
       {
         "Component": "povidon K-30"
-      },
-      {
-        "Component": "magnezijum-stearat"
-      },
-      {
-        "Component": "novi sastav"
-      },
-      {
-        "Component": "Novi ssastasvv"
       }
     ],
     "SideEffects": "Preosetljivost na paracetamol ili na bilo koju od pomoćnih supstanci.",
@@ -58,10 +49,10 @@
     "Name": "Flonidan 100mg",
     "Composition": [
       {
-        "Component": "sve najbolje"
+        "Component": "sastav1"
       },
       {
-        "Component": "fsd"
+        "Component": "sastav2"
       }
     ],
     "SideEffects": "okej",
@@ -74,14 +65,7 @@
   },
   {
     "Name": "dsvdsvdsv",
-    "Composition": [
-      {
-        "Component": ""
-      },
-      {
-        "Component": "dvsvdsv"
-      }
-    ],
+    "Composition": [],
     "SideEffects": "dsvdsvsdvds",
     "Usage": "vdsvdsvsdv",
     "ReplaceMedicine": [
