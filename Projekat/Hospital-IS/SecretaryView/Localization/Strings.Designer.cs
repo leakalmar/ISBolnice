@@ -646,6 +646,15 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Datum kreiranja naloga.
+        /// </summary>
+        internal static string tbAccCreationDate {
+            get {
+                return ResourceManager.GetString("tbAccCreationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Podešavanja naloga.
         /// </summary>
         internal static string tbAccountSet {
@@ -691,11 +700,29 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alergije.
+        /// </summary>
+        internal static string tbAllergies {
+            get {
+                return ResourceManager.GetString("tbAllergies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Datum i vreme pregleda.
         /// </summary>
         internal static string tbAppDate {
             get {
                 return ResourceManager.GetString("tbAppDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datum.
+        /// </summary>
+        internal static string tbAppDateDG {
+            get {
+                return ResourceManager.GetString("tbAppDateDG", resourceCulture);
             }
         }
         
@@ -750,6 +777,15 @@ namespace Hospital_IS.SecretaryView.Localization {
         internal static string tbAppsToMove {
             get {
                 return ResourceManager.GetString("tbAppsToMove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vreme.
+        /// </summary>
+        internal static string tbAppTimeDG {
+            get {
+                return ResourceManager.GetString("tbAppTimeDG", resourceCulture);
             }
         }
         
@@ -862,6 +898,15 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Obavljen.
+        /// </summary>
+        internal static string tbDone {
+            get {
+                return ResourceManager.GetString("tbDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nivo obrazovanja.
         /// </summary>
         internal static string tbEducation {
@@ -903,6 +948,33 @@ namespace Hospital_IS.SecretaryView.Localization {
         internal static string tbEmployees {
             get {
                 return ResourceManager.GetString("tbEmployees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Količina opreme.
+        /// </summary>
+        internal static string tbEqipQuantity {
+            get {
+                return ResourceManager.GetString("tbEqipQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tip opreme.
+        /// </summary>
+        internal static string tbEqipType {
+            get {
+                return ResourceManager.GetString("tbEqipType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Naziv.
+        /// </summary>
+        internal static string tbEquipName {
+            get {
+                return ResourceManager.GetString("tbEquipName", resourceCulture);
             }
         }
         
@@ -1245,6 +1317,15 @@ namespace Hospital_IS.SecretaryView.Localization {
         internal static string tbTitle {
             get {
                 return ResourceManager.GetString("tbTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID korisnika.
+        /// </summary>
+        internal static string tbUserId {
+            get {
+                return ResourceManager.GetString("tbUserId", resourceCulture);
             }
         }
         

@@ -31,10 +31,10 @@
                   ColumnHeaderStyle="{DynamicResource ResourceKey=ColumHeader}"
                   RowStyle="{DynamicResource ResourceKey=GridRow}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="Prezime" Binding="{Binding Surname}" Width="*"/>
-                <DataGridTextColumn Header="Datum rođenja" Binding="{Binding BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}" Width="*"/>
-                <DataGridTextColumn Header="Specijalizacija" Binding="{Binding Specialty}" Width="*"/>
+                <DataGridTextColumn Header="{lex:Loc tbName}" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="{lex:Loc tbSurname}" Binding="{Binding Surname}" Width="*"/>
+                <DataGridTextColumn Header="{lex:Loc tbBirthDate}" Binding="{Binding BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}" Width="*"/>
+                <DataGridTextColumn Header="{lex:Loc tbSpecialty}" Binding="{Binding Specialty}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF3558A2"/>

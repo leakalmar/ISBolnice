@@ -312,6 +312,9 @@
   <data name="tabScheduledApps" xml:space="preserve">
     <value>Zakazani pregledi</value>
   </data>
+  <data name="tbAccCreationDate" xml:space="preserve">
+    <value>Datum kreiranja naloga</value>
+  </data>
   <data name="tbAccountSet" xml:space="preserve">
     <value>Podešavanja naloga</value>
   </data>
@@ -327,8 +330,14 @@
   <data name="tbAllergenOldValue" xml:space="preserve">
     <value>Stara vrednost</value>
   </data>
+  <data name="tbAllergies" xml:space="preserve">
+    <value>Alergije</value>
+  </data>
   <data name="tbAppDate" xml:space="preserve">
     <value>Datum i vreme pregleda</value>
+  </data>
+  <data name="tbAppDateDG" xml:space="preserve">
+    <value>Datum</value>
   </data>
   <data name="tbAppDay" xml:space="preserve">
     <value>Datum pregleda</value>
@@ -347,6 +356,9 @@
   </data>
   <data name="tbAppsToMove" xml:space="preserve">
     <value>Termini koje je potrebno pomeriti:</value>
+  </data>
+  <data name="tbAppTimeDG" xml:space="preserve">
+    <value>Vreme</value>
   </data>
   <data name="tbAppTS" xml:space="preserve">
     <value>Početak pregleda *</value>
@@ -384,6 +396,9 @@
   <data name="tbDoctorS" xml:space="preserve">
     <value>Doktor *</value>
   </data>
+  <data name="tbDone" xml:space="preserve">
+    <value>Obavljen</value>
+  </data>
   <data name="tbEducation" xml:space="preserve">
     <value>Nivo obrazovanja</value>
   </data>
@@ -398,6 +413,15 @@
   </data>
   <data name="tbEmployees" xml:space="preserve">
     <value>Zaposleni</value>
+  </data>
+  <data name="tbEqipQuantity" xml:space="preserve">
+    <value>Količina opreme</value>
+  </data>
+  <data name="tbEqipType" xml:space="preserve">
+    <value>Tip opreme</value>
+  </data>
+  <data name="tbEquipName" xml:space="preserve">
+    <value>Naziv</value>
   </data>
   <data name="tbFloorNum" xml:space="preserve">
     <value>Sprat</value>
@@ -512,6 +536,9 @@
   </data>
   <data name="tbTitle" xml:space="preserve">
     <value>Naslov obaveštenja *</value>
+  </data>
+  <data name="tbUserId" xml:space="preserve">
+    <value>ID korisnika</value>
   </data>
   <data name="tbVacation" xml:space="preserve">
     <value>Godišnji odmor</value>

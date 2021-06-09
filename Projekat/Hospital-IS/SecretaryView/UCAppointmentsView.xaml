@@ -138,7 +138,7 @@
                   ColumnHeaderStyle="{DynamicResource ResourceKey=ColumHeader}"
                   RowStyle="{DynamicResource ResourceKey=GridRow}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Doktor" Width="*">
+                <DataGridTextColumn Header="{lex:Loc tbDoctor}" Width="*">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{} {0} {1}">
                             <Binding Path="Doctor.Name"/>
@@ -146,7 +146,7 @@
                         </MultiBinding>
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Pacijent"  Width="*">
+                <DataGridTextColumn Header="{lex:Loc tbPatient}"  Width="*">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{} {0} {1}">
                             <Binding Path="Patient.Name"/>
@@ -154,13 +154,13 @@
                         </MultiBinding>
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Datum" 
+                <DataGridTextColumn Header="{lex:Loc tbAppDateDG}" 
                                     Binding="{Binding AppointmentStart, StringFormat=\{0: dd.MM.yyyy. \}}" Width="auto"/>
-                <DataGridTextColumn Header="Vreme" 
+                <DataGridTextColumn Header="{lex:Loc tbAppTimeDG}" 
                                     Binding="{Binding AppointmentStart, StringFormat=\{0: HH:mm \}}" Width="auto"/>
-                <DataGridTextColumn Header="Tip pregleda" 
+                <DataGridTextColumn Header="{lex:Loc tbAppType}" 
                                     Binding="{Binding AppTypeText}" Width="auto"/>
-                <DataGridTextColumn Header="Soba" 
+                <DataGridTextColumn Header="{lex:Loc tbRoom}" 
                                     Binding="{Binding Room}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.Resources>

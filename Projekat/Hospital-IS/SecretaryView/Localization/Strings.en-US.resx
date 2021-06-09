@@ -312,6 +312,9 @@
   <data name="tabScheduledApps" xml:space="preserve">
     <value>Scheduled appointments</value>
   </data>
+  <data name="tbAccCreationDate" xml:space="preserve">
+    <value>Account creation date</value>
+  </data>
   <data name="tbAccountSet" xml:space="preserve">
     <value>Account settings</value>
   </data>
@@ -327,8 +330,14 @@
   <data name="tbAllergenOldValue" xml:space="preserve">
     <value>Old value</value>
   </data>
+  <data name="tbAllergies" xml:space="preserve">
+    <value>Allergies</value>
+  </data>
   <data name="tbAppDate" xml:space="preserve">
     <value>Time of appointment</value>
+  </data>
+  <data name="tbAppDateDG" xml:space="preserve">
+    <value>Date</value>
   </data>
   <data name="tbAppDay" xml:space="preserve">
     <value>Date of appointment</value>
@@ -347,6 +356,9 @@
   </data>
   <data name="tbAppsToMove" xml:space="preserve">
     <value>Appointments that will need to be rescheduled:</value>
+  </data>
+  <data name="tbAppTimeDG" xml:space="preserve">
+    <value>Time</value>
   </data>
   <data name="tbAppTS" xml:space="preserve">
     <value>Appointment time *</value>
@@ -384,6 +396,9 @@
   <data name="tbDoctorS" xml:space="preserve">
     <value>Doctor *</value>
   </data>
+  <data name="tbDone" xml:space="preserve">
+    <value>Done</value>
+  </data>
   <data name="tbEducation" xml:space="preserve">
     <value>Education level</value>
   </data>
@@ -398,6 +413,15 @@
   </data>
   <data name="tbEmployees" xml:space="preserve">
     <value>Employees</value>
+  </data>
+  <data name="tbEqipQuantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="tbEqipType" xml:space="preserve">
+    <value>Eqipment type</value>
+  </data>
+  <data name="tbEquipName" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="tbFloorNum" xml:space="preserve">
     <value>Floor</value>
@@ -512,6 +536,9 @@
   </data>
   <data name="tbTitle" xml:space="preserve">
     <value>Notification title *</value>
+  </data>
+  <data name="tbUserId" xml:space="preserve">
+    <value>User ID</value>
   </data>
   <data name="tbVacation" xml:space="preserve">
     <value>Vacation time</value>

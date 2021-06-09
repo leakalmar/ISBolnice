@@ -53,9 +53,9 @@
                   RowStyle="{DynamicResource ResourceKey=GridRow}"                 
                   FontSize="13">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Naziv" Binding="{Binding Name}" Width="auto"/>
-                <DataGridTextColumn Header="Količina opreme" Binding="{Binding Quantity}" Width="auto"/>
-                <DataGridTextColumn Header="Tip opreme" Binding="{Binding EquipTypeText}" Width="*"/>
+                <DataGridTextColumn Header="{lex:Loc tbEquipName}" Binding="{Binding Name}" Width="auto"/>
+                <DataGridTextColumn Header="{lex:Loc tbEqipQuantity}" Binding="{Binding Quantity}" Width="auto"/>
+                <DataGridTextColumn Header="{lex:Loc tbEqipType}" Binding="{Binding EquipTypeText}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 

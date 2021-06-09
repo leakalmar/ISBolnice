@@ -31,9 +31,9 @@
                   ColumnHeaderStyle="{DynamicResource ResourceKey=ColumHeader}"
                   RowStyle="{DynamicResource ResourceKey=GridRow}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Broj sobe" Binding="{Binding RoomId}" Width="*"/>
-                <DataGridTextColumn Header="Sprat" Binding="{Binding RoomFloor}" Width="*"/>
-                <DataGridTextColumn Header="Tip sobe" Binding="{Binding RoomTypeText}" Width="*"/>
+                <DataGridTextColumn Header="{lex:Loc tbRoomNum}" Binding="{Binding RoomId}" Width="*"/>
+                <DataGridTextColumn Header="{lex:Loc tbFloorNum}" Binding="{Binding RoomFloor}" Width="*"/>
+                <DataGridTextColumn Header="{lex:Loc tbRoomType}" Binding="{Binding RoomTypeText}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF3558A2"/>
