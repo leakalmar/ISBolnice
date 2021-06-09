@@ -108,7 +108,7 @@
                 Margin="0 0 0 10" Width="140" Click="UndoAllChanges"
                 Style="{DynamicResource ResourceKey=SecondaryButton}"/>
         <Button Name="btnCancelAppointment" Grid.Column="2" Grid.Row="1" Content="{lex:Loc}" HorizontalAlignment="Right" 
-                Margin="0 0 0 10" Width="120"
+                Margin="0 0 0 10" Width="150"
                 Style="{DynamicResource ResourceKey=DeleteButton}" Click="CancelAppointment"/>
 
         <DataGrid x:Name="dataGridAppointments" ItemsSource="{Binding ScheduledAppointments}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"

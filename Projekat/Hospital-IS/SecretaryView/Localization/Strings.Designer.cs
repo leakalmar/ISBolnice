@@ -331,6 +331,15 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pregled.
+        /// </summary>
+        internal static string ciAppCU {
+            get {
+                return ResourceManager.GetString("ciAppCU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fakultet.
         /// </summary>
         internal static string ciCol {
@@ -372,6 +381,15 @@ namespace Hospital_IS.SecretaryView.Localization {
         internal static string ciMale {
             get {
                 return ResourceManager.GetString("ciMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operacija.
+        /// </summary>
+        internal static string ciOper {
+            get {
+                return ResourceManager.GetString("ciOper", resourceCulture);
             }
         }
         

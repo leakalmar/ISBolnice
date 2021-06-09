@@ -207,6 +207,9 @@
   <data name="checkBox" xml:space="preserve">
     <value>Gostujući nalog</value>
   </data>
+  <data name="ciAppCU" xml:space="preserve">
+    <value>Pregled</value>
+  </data>
   <data name="ciCol" xml:space="preserve">
     <value>Fakultet</value>
   </data>
@@ -221,6 +224,9 @@
   </data>
   <data name="ciMale" xml:space="preserve">
     <value>Muško</value>
+  </data>
+  <data name="ciOper" xml:space="preserve">
+    <value>Operacija</value>
   </data>
   <data name="druga" xml:space="preserve">
     <value>Druga</value>

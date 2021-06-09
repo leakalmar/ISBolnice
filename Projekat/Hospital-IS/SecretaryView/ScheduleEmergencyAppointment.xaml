@@ -47,8 +47,8 @@
 
         <ComboBox Name="cbAppType" Grid.Row="1" Grid.Column="2" Margin="20 0 70 20"
                   SelectionChanged="cbAppType_SelectionChanged" FontSize="15">
-            <ComboBoxItem Content="Pregled" />
-            <ComboBoxItem Content="Operacija" />
+            <ComboBoxItem Name="ciAppCU"  Content="{lex:Loc}"/>
+            <ComboBoxItem Name="ciOper" Content="{lex:Loc}"/>
         </ComboBox>
 
         <TextBox Name="txtGuest" Grid.Column="2" Grid.Row="2" Margin="20 0 70 20" IsEnabled="False"/>
