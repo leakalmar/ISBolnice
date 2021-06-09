@@ -1,4 +1,5 @@
 ﻿using Hospital_IS.Controllers;
+using Hospital_IS.DTOs;
 using System;
 
 namespace Hospital_IS.View.PatientViewModels
@@ -46,7 +47,8 @@ namespace Hospital_IS.View.PatientViewModels
 
         private void EvaluateHosp()
         {
-            PatientHospitalEvaluationController.Instance.AddAppointmentEvaluation(Grade + 1, Comment, DateTime.Today, PatientMainWindowViewModel.Patient.Id);
+            HospitalEvaluationDTO hospitalEvaluationDTO = new HospitalEvaluationDTO(Grade + 1, Comment, DateTime.Today, PatientMainWindowViewModel.Patient.Id);
+            PatientHospitalEvaluationController.Instance.AddHospitalEvaluation(hospitalEvaluationDTO);
             OnRequestClose(this, new EventArgs());
         }
     }

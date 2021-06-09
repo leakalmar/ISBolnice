@@ -10,44 +10,45 @@ namespace Hospital_IS.View.PatientViewModels
 {
     public class AllAppointmentsViewModel : BindableBase
     {
-        public ObservableCollection<DoctorAppointment> AllAppointments { get; set; }
-        //private ICollectionView allApps;
+        //public ObservableCollection<DoctorAppointment> AllAppointments { get; set; }
+        private ICollectionView appointments;
         public KeyValuePair<string, int>[] ChartData { get; set; }
 
         private DoctorAppointment selectedDoctorAppointment;
         private bool shouldShowEvaluate = false;
         private bool shouldShowNote = false;
-        private bool chooseItem = true;
+        private bool chooseItem = false;
         private string date;
         private string doctorName;
         private string appointmentType;
         private int roomId;
         private string details;
-
-
+        private string searchText;
         public MyICommand ShowEvaluationWindow { get; set; }
         public MyICommand ShowNote { get; set; }
+        public MyICommand DoSearch { get; set; }
+        private readonly MyWindowFactory windowFactory;
 
         public AllAppointmentsViewModel()
         {
-            /*
-            ObservableCollection<DoctorAppointment>  allAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id));
-            AllAppointments = new CollectionViewSource { Source = allAppointments }.View;*/
-            AllAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id));
+            ObservableCollection<DoctorAppointment> AllAppointments = new ObservableCollection<DoctorAppointment>(DoctorAppointmentController.Instance.GetAllAppointmentsByPatient(PatientMainWindowViewModel.Patient.Id));
+            Appointments = new CollectionViewSource { Source = AllAppointments }.View;
+            windowFactory = new WindowProductionFactory();
             ShowEvaluationWindow = new MyICommand(ShowEvaluation);
             ShowNote = new MyICommand(ShowAppNote);
+            DoSearch = new MyICommand(Search);
             LoadAppointmentChartData();
         }
-        /*
-        public ICollectionView AllAppointments
+
+        public ICollectionView Appointments
         {
-            get { return allApps; }
+            get { return appointments; }
             set
             {
-                allApps = value;
-                OnPropertyChanged("Patients");
+                appointments = value;
+                OnPropertyChanged("Appointments");
             }
-        }*/
+        }
 
         public DoctorAppointment SelectedDoctorAppointment
         {
@@ -167,6 +168,20 @@ namespace Hospital_IS.View.PatientViewModels
             }
         }
 
+        public string SearchText
+        {
+            get { return searchText; }
+            set
+            {
+                if (searchText != value)
+                {
+                    searchText = value;
+                    OnPropertyChanged("SearchText");
+                    Search();
+                }
+            }
+        }
+
         private void SetAppointmentInfo()
         {
             Date = SelectedDoctorAppointment.AppointmentStart.ToString("dd.MM.yyyy.");
@@ -188,16 +203,12 @@ namespace Hospital_IS.View.PatientViewModels
 
         private void ShowEvaluation()
         {
-            PatientAppointmentEvaluationWindow appointmentEvaluation = new PatientAppointmentEvaluationWindow(SelectedDoctorAppointment.Id);
-            appointmentEvaluation.AppointmentEvaluation.OnRequestClose += (s, e) => appointmentEvaluation.Close();
-            appointmentEvaluation.Show();
+            windowFactory.CreateAppointmentEvaluation(SelectedDoctorAppointment.Id);
         }
 
         private void ShowAppNote()
         {
-            PatientNoteView appointmentNote = new PatientNoteView(SelectedDoctorAppointment.Id);
-            appointmentNote.AppointmentNoteViewModel.OnRequestClose += (s, e) => appointmentNote.Close();
-            appointmentNote.Show();
+            windowFactory.CreateNote(SelectedDoctorAppointment.Id);
         }
 
         private void LoadAppointmentChartData()
@@ -210,6 +221,57 @@ namespace Hospital_IS.View.PatientViewModels
                 new KeyValuePair<string,int>("Maj", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "May")),
                 new KeyValuePair<string,int>("Jun", DoctorAppointmentController.Instance.GetNumberOfAppointmentsByMonth(PatientMainWindowViewModel.Patient.Id, "June"))
             };
+        }
+
+        private void Search()
+        {
+            Appointments.Filter = delegate (object item)
+            {
+                DoctorAppointment appointment = item as DoctorAppointment;
+                return CheckIfAppointmentMeetsSearchCriteria(appointment);
+            };
+        }
+
+        private bool CheckIfAppointmentMeetsSearchCriteria(DoctorAppointment appointment)
+        {
+            string[] search = SearchText.ToLower().Split(" ");
+            if (SearchText.Equals("Pretraži..."))
+                search[0] = string.Empty;
+
+            if (search.Length <= 1)
+                return appointment.Doctor.Name.ToLower().Contains(search[0]) | appointment.Doctor.Surname.ToLower().Contains(search[0]) | appointment.AppointmentStart.Date.ToString("dd.MM.yyyy.").Contains(search[0]);
+            else
+            {
+                bool FirstName = true;
+                bool LastName = true;
+                bool AppointmentDate = true;
+                int cnt = 0;
+
+                for (int i = 0; i < search.Length; i++)
+                {
+                    if (appointment.Doctor.Name.ToLower().Contains(search[i]) && FirstName)
+                    {
+                        FirstName = false;
+                        cnt++;
+                        continue;
+                    }
+                    if (appointment.Doctor.Surname.ToLower().Contains(search[i]) && LastName)
+                    {
+                        LastName = false;
+                        cnt++;
+                        continue;
+                    }
+                    if (appointment.AppointmentStart.Date.ToString("dd.MM.yyyy.").Contains(search[i]) && AppointmentDate)
+                    {
+                        AppointmentDate = false;
+                        cnt++;
+                        continue;
+                    }
+                }
+
+                return cnt == search.Length;
+            }
+
         }
     }
 }

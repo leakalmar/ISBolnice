@@ -1,4 +1,4 @@
-﻿<UserControl  x:Class="Hospital_IS.View.PatientNotificationsView"
+﻿<UserControl x:Name="Notifications"  x:Class="Hospital_IS.View.PatientNotificationsView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,6 +11,9 @@
         d:Height="660" d:Width="980" 
         Background="Transparent"  
        >
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -37,12 +40,12 @@
             </Border.Background>
         </Border>
 
-        <ScrollViewer  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="10" Margin="10" VerticalScrollBarVisibility="Auto" Background="#CCF1F3F8">
+        <ScrollViewer x:Name="notifications"  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="10" Margin="{Binding NotificationMargin}" VerticalScrollBarVisibility="Auto" Background="#CCF1F3F8">
             <StackPanel>
                 <ItemsControl x:Name="ListViewNotifications" ItemsSource="{Binding NotificationMessages}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Height="70" Margin="10" CornerRadius="3" BorderBrush="Black" BorderThickness="1" Background="#CCC5CFE5">
+                            <Border Height="70" Margin="10" CornerRadius="3" BorderBrush="Black" BorderThickness="1" Background="#FF529C9D">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto"/>
@@ -61,7 +64,7 @@
                                     <TextBlock Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Center"
                                                Text="{Binding DatePosted, StringFormat=\{0:HH:mm  dd.MM.yyyy.\}}" Margin="10" FontSize="9"/>
                                     <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="2">
-                                        <Button Tag="{Binding Id}" Content="Prikaži" VerticalAlignment="Top" Margin="10" Click="ShowNotification"/>
+                                        <Button Tag="{Binding Id}" Content="Prikaži" VerticalAlignment="Top" Margin="10" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.ShowNotification}" CommandParameter="{Binding Id}" />
                                     </StackPanel>
                                 </Grid>
                             </Border>
@@ -74,7 +77,20 @@
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </StackPanel>
-
         </ScrollViewer>
+        <Border x:Name="NotificationInfo" BorderThickness="0" BorderBrush="DeepSkyBlue" Grid.Column="1" Grid.Row="1" Grid.RowSpan="9" Margin="100,10,10,60" Visibility="{Binding Path=ShowNotificationInfo, Converter={StaticResource BooleanToVisibilityConverter} }"  CornerRadius="20,20,20,20" Background="#FF058D91">
+            <StackPanel x:Name="notificationData" Grid.RowSpan="9" Grid.Row="1" Grid.Column="2" Margin="10,10,10,10" >
+                <Grid>
+                    <Label Content="Naslov:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="#FFFFFCFC" />
+                    <TextBlock x:Name="Heading" Text="{Binding Path = Heading}" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White" />
+                </Grid>
+                <Grid>
+                    <Label Content="Datum obaveštenja:" Width="255"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
+                    <Label x:Name="date" Content="{Binding Path = Date}" HorizontalAlignment="Right" Width="150" Background="{x:Null}" FontSize="18" Foreground="White"/>
+                </Grid>
+                <Label Content="Tekst:" Width="200"  HorizontalAlignment="Left" FontSize="18" Foreground="White" />
+                <TextBlock x:Name="text" Text="{Binding Notification}" TextWrapping="Wrap" Width="398" Background="{x:Null}" Height="259" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" Margin="25,20,10,10" Foreground="White" FontSize="20" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

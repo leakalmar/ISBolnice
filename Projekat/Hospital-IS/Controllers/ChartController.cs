@@ -1,4 +1,5 @@
 ﻿using DTOs;
+using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using Service;
@@ -123,6 +124,11 @@ namespace Controllers
             Bed bed = BedController.Instance.GetBedById(hospitalizationDTO.BedID);
             Hospitalization newHospitalization = new Hospitalization(hospitalizationDTO.AdmissionDate,hospitalizationDTO.ReleaseDate,hospitalizationDTO.Detail,hospitalizationDTO.Doctor,hospitalizationDTO.IsReleased, room, bed);
             ChartService.Instance.AddHospitalization(newHospitalization, patient.Id);
+        }
+
+        public List<Therapy> FindTherapiesInTimeRange(TherapyReportDTO therapyReportDTO)
+        {
+            return ChartService.Instance.FindTherapiesInTimeRange(therapyReportDTO);
         }
     }
 }
