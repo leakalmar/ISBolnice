@@ -85,7 +85,7 @@
         </ComboBox>
 
         <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="5" Margin="20 0 70 20">
-            <TextBox Name="txtAppDuration"  MinWidth="70" MaxWidth="70"
+            <TextBox Name="txtAppDuration"  MinWidth="70" MaxWidth="70" LostFocus="txtAppDuration_LostFocus"
                      Style="{DynamicResource ResourceKey=RegularTextBox}">
                 <TextBox.Text>
                     <Binding Path="AppDuration" UpdateSourceTrigger="PropertyChanged">
