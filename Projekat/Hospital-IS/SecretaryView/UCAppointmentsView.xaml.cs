@@ -74,6 +74,8 @@ namespace Hospital_IS.SecretaryView
                 AppointmentView av = new AppointmentView(appointment);
                 av.Show();
             }
+            else
+                MessageBox.Show("Izaberite termin!");
         }
 
         private void UpdateAppointment(object sender, RoutedEventArgs e)
@@ -84,6 +86,8 @@ namespace Hospital_IS.SecretaryView
                 UpdateAppointment ua = new UpdateAppointment(appointment, this);
                 ua.ShowDialog();
             }
+            else
+                MessageBox.Show("Izaberite termin!");
         }
 
         //private void DeleteAppointment(object sender, RoutedEventArgs e)

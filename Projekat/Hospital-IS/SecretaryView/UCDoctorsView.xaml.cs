@@ -48,6 +48,8 @@ namespace Hospital_IS.SecretaryView
                 DoctorView dv = new DoctorView(doctor);
                 dv.Show();
             }
+            else
+                MessageBox.Show("Izaberite doktora!");
         }
 
         private void UpdateDoctor(object sender, RoutedEventArgs e)
@@ -58,6 +60,8 @@ namespace Hospital_IS.SecretaryView
                 UpdateDoctorView upv = new UpdateDoctorView(doctor, this);
                 upv.ShowDialog();
             }
+            else
+                MessageBox.Show("Izaberite doktora!");
         }
 
         //private void DeleteDoctor(object sender, RoutedEventArgs e)

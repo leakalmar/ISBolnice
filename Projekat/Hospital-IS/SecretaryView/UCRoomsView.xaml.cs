@@ -32,7 +32,9 @@ namespace Hospital_IS.SecretaryView
                 RoomView rv = new RoomView(room);
                 rv.Show();
             }
-            
+            else
+                MessageBox.Show("Izaberite prostoriju!");
+
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)

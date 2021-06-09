@@ -51,6 +51,8 @@ namespace Hospital_IS
                 PatientView pv = new PatientView(patient);
                 pv.Show();
             }
+            else
+                MessageBox.Show("Izaberite pacijenta!");
         }
 
         private void UpdatePatient(object sender, RoutedEventArgs e)
@@ -61,6 +63,8 @@ namespace Hospital_IS
                 UpdatePatientView upv = new UpdatePatientView(patient, this);
                 upv.ShowDialog();
             }
+            else
+                MessageBox.Show("Izaberite pacijenta!");
         }
 
         //private void DeletePatient(object sender, RoutedEventArgs e)
