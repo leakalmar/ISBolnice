@@ -23,7 +23,7 @@
 
         <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Name="txtConfirmation"
                    FontSize="17" TextWrapping="Wrap" Style="{DynamicResource ResourceKey=RegularTextBlock}"
-                   Text="Da li ste sigurni da želite da uklonite alregen?"/>
+                   Text="Da li ste sigurni da želite da uklonite alergen?"/>
         
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top">
             <Button Content="Da" Width="40" 

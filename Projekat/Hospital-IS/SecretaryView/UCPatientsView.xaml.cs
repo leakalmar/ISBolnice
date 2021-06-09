@@ -1,4 +1,5 @@
-﻿using Hospital_IS.Controllers;
+﻿using Controllers;
+using Hospital_IS.Controllers;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using Hospital_IS.SecretaryView;
 using System.Collections.ObjectModel;
@@ -30,6 +31,7 @@ namespace Hospital_IS
             if (Patients != null)
                 Patients.Clear();
 
+            PatientController.Instance.ReloadPatients();
             SecretaryManagementController.Instance.ReloadPatients();
             Patients = new ObservableCollection<PatientDTO>(SecretaryManagementController.Instance.GetAllRegisteredPatients());
             dataGridPatients.ItemsSource = Patients;
@@ -61,15 +63,15 @@ namespace Hospital_IS
             }
         }
 
-        private void DeletePatient(object sender, RoutedEventArgs e)
-        {
-            if ((PatientDTO)dataGridPatients.SelectedItem != null)
-            {
-                PatientDTO patient = (PatientDTO)dataGridPatients.SelectedItem;
-                Patients.Remove(patient);
-                SecretaryManagementController.Instance.DeletePatient(patient);
-            }
-        }
+        //private void DeletePatient(object sender, RoutedEventArgs e)
+        //{
+        //    if ((PatientDTO)dataGridPatients.SelectedItem != null)
+        //    {
+        //        PatientDTO patient = (PatientDTO)dataGridPatients.SelectedItem;
+        //        Patients.Remove(patient);
+        //        SecretaryManagementController.Instance.DeletePatient(patient);
+        //    }
+        //}
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {

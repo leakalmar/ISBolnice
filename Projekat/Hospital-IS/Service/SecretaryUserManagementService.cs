@@ -48,8 +48,8 @@ namespace Hospital_IS.Service
         public void AddPatient(PatientDTO patientDTO)
         {
             AllPatients.Add(patientDTO);
-            PatientService.Instance.AddPatient(new Patient(patientDTO.Id, patientDTO.Name, patientDTO.Surname, patientDTO.BirthDate, patientDTO.Address, patientDTO.Email,
-                patientDTO.Password, patientDTO.FileDate, patientDTO.Employer, patientDTO.Alergies, patientDTO.IsGuest));
+            PatientService.Instance.AddPatient(new Patient(patientDTO.Id, patientDTO.Name, patientDTO.Surname, patientDTO.Gender, patientDTO.BirthDate, patientDTO.Address,
+                        patientDTO.Phone, patientDTO.Email, patientDTO.Relationship, patientDTO.Education, patientDTO.Password, patientDTO.Employer, patientDTO.Alergies, patientDTO.IsGuest));
         }
 
         public void UpdatePatient(PatientDTO patientDTO)
@@ -61,8 +61,8 @@ namespace Hospital_IS.Service
                     AllPatients.Remove(AllPatients[i]);
                     AllPatients.Insert(i, patientDTO);
 
-                    PatientService.Instance.UpdatePatient(new Patient(patientDTO.Id, patientDTO.Name, patientDTO.Surname, patientDTO.BirthDate, patientDTO.Address, patientDTO.Email,
-                patientDTO.Password, patientDTO.FileDate, patientDTO.Employer, patientDTO.Alergies, patientDTO.IsGuest));
+                    PatientService.Instance.UpdatePatient(new Patient(patientDTO.Id, patientDTO.Name, patientDTO.Surname, patientDTO.Gender, patientDTO.BirthDate, patientDTO.Address, 
+                        patientDTO.Phone, patientDTO.Email, patientDTO.Relationship, patientDTO.Education, patientDTO.Password, patientDTO.Employer, patientDTO.Alergies, patientDTO.IsGuest));
 
                 }
             }
