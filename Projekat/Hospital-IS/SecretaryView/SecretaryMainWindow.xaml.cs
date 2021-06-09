@@ -2,6 +2,7 @@
 using Hospital_IS.Controllers;
 using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
+using Hospital_IS.SecretaryView.ViewModel;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,9 +36,22 @@ namespace Hospital_IS.SecretaryView
             }
         }
 
+        private SecretaryMainWindowViewModel viewModel;
+
+        public SecretaryMainWindowViewModel _ViewModel
+        {
+            get { return viewModel; }
+            set
+            {
+                viewModel = value;
+            }
+        }
+
         public SecretaryMainWindow()
         {
             InitializeComponent();
+            //this.viewModel = new SecretaryMainWindowViewModel(this.HomePage.NavigationService);
+            //this.DataContext = viewModel
 
             CurrentTimeLabel.Content = DateTime.Now.ToString("HH:mm  dd.MM.yyyy.");
             DispatcherTimer dispatcherTimer = new DispatcherTimer
