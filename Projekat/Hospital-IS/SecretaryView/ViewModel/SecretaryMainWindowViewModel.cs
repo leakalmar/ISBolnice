@@ -1,4 +1,4 @@
-﻿using Hospital_IS.Commands;
+﻿using Hospital_IS.DoctorRole.Commands;
 using System;
 using System.Collections.Generic;
 using System.Text;
