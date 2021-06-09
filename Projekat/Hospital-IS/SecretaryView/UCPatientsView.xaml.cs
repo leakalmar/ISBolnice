@@ -91,7 +91,7 @@ namespace Hospital_IS
         private bool CheckIfPatientMeetsSearchCriteria(PatientDTO patient)
         {
             string[] search = txtSearch.Text.ToLower().Split(" ");
-            if (txtSearch.Text.Equals("Pretraži..."))
+            if (txtSearch.Text.Equals("Pretraži...") || txtSearch.Text.Equals("Search..."))
                 search[0] = string.Empty;
 
             if (search.Length <= 1)
@@ -132,7 +132,7 @@ namespace Hospital_IS
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (txtSearch.Text.Equals("Pretraži..."))
+            if (txtSearch.Text.Equals("Pretraži...") || txtSearch.Text.Equals("Search..."))
             {
                 txtSearch.Text = string.Empty;
                 txtSearch.Foreground = new SolidColorBrush(Colors.Black);
@@ -144,7 +144,10 @@ namespace Hospital_IS
             if (string.IsNullOrEmpty(txtSearch.Text))
             {
                 txtSearch.Foreground = new SolidColorBrush(Colors.Gray);
-                txtSearch.Text = "Pretraži...";
+                if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                    txtSearch.Text = "Pretraži...";
+                else
+                    txtSearch.Text = "Search...";
             }
         }
 

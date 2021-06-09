@@ -61,6 +61,15 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dodaj.
+        /// </summary>
+        internal static string btnAddA {
+            get {
+                return ResourceManager.GetString("btnAddA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dodaj novog korisnika.
         /// </summary>
         internal static string btnAddNewGuest {
@@ -88,6 +97,15 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Otkaži termin.
+        /// </summary>
+        internal static string btnCancelAppointment {
+            get {
+                return ResourceManager.GetString("btnCancelAppointment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Potvrdi.
         /// </summary>
         internal static string btnConfirm {
@@ -102,6 +120,42 @@ namespace Hospital_IS.SecretaryView.Localization {
         internal static string btnCreatePermAccount {
             get {
                 return ResourceManager.GetString("btnCreatePermAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obriši.
+        /// </summary>
+        internal static string btnDeleteA {
+            get {
+                return ResourceManager.GetString("btnDeleteA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obriši doktora.
+        /// </summary>
+        internal static string btnDeleteDoctor {
+            get {
+                return ResourceManager.GetString("btnDeleteDoctor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obriši obaveštenje.
+        /// </summary>
+        internal static string btnDeleteNotification {
+            get {
+                return ResourceManager.GetString("btnDeleteNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obriši pacijenta.
+        /// </summary>
+        internal static string btnDeletePatient {
+            get {
+                return ResourceManager.GetString("btnDeletePatient", resourceCulture);
             }
         }
         
@@ -129,6 +183,24 @@ namespace Hospital_IS.SecretaryView.Localization {
         internal static string btnDoctors {
             get {
                 return ResourceManager.GetString("btnDoctors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hitan pregled?.
+        /// </summary>
+        internal static string btnEmergency {
+            get {
+                return ResourceManager.GetString("btnEmergency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gost.
+        /// </summary>
+        internal static string btnGuest {
+            get {
+                return ResourceManager.GetString("btnGuest", resourceCulture);
             }
         }
         
@@ -169,11 +241,29 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Štampaj.
+        /// </summary>
+        internal static string btnPrint {
+            get {
+                return ResourceManager.GetString("btnPrint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prostorije.
         /// </summary>
         internal static string btnRooms {
             get {
                 return ResourceManager.GetString("btnRooms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sačuvaj izmene.
+        /// </summary>
+        internal static string btnSave {
+            get {
+                return ResourceManager.GetString("btnSave", resourceCulture);
             }
         }
         
@@ -205,6 +295,24 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Poništi sve izmene.
+        /// </summary>
+        internal static string btnUndo {
+            get {
+                return ResourceManager.GetString("btnUndo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Izmeni.
+        /// </summary>
+        internal static string btnUpdateA {
+            get {
+                return ResourceManager.GetString("btnUpdateA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Da.
         /// </summary>
         internal static string btnYes {
@@ -219,6 +327,60 @@ namespace Hospital_IS.SecretaryView.Localization {
         internal static string checkBox {
             get {
                 return ResourceManager.GetString("checkBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fakultet.
+        /// </summary>
+        internal static string ciCol {
+            get {
+                return ResourceManager.GetString("ciCol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Osnovna škola.
+        /// </summary>
+        internal static string ciElem {
+            get {
+                return ResourceManager.GetString("ciElem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Žensko.
+        /// </summary>
+        internal static string ciFemale {
+            get {
+                return ResourceManager.GetString("ciFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Srednja škola.
+        /// </summary>
+        internal static string ciHS {
+            get {
+                return ResourceManager.GetString("ciHS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Muško.
+        /// </summary>
+        internal static string ciMale {
+            get {
+                return ResourceManager.GetString("ciMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Druga.
+        /// </summary>
+        internal static string druga {
+            get {
+                return ResourceManager.GetString("druga", resourceCulture);
             }
         }
         
@@ -385,6 +547,33 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Prva.
+        /// </summary>
+        internal static string prva {
+            get {
+                return ResourceManager.GetString("prva", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Da.
+        /// </summary>
+        internal static string rbInUse {
+            get {
+                return ResourceManager.GetString("rbInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ne.
+        /// </summary>
+        internal static string rbNotInUse {
+            get {
+                return ResourceManager.GetString("rbNotInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prosledi svima.
         /// </summary>
         internal static string rbSelectAll {
@@ -439,6 +628,15 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Podešavanja naloga.
+        /// </summary>
+        internal static string tbAccountSet {
+            get {
+                return ResourceManager.GetString("tbAccountSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adresa.
         /// </summary>
         internal static string tbAddress {
@@ -484,11 +682,38 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Datum pregleda.
+        /// </summary>
+        internal static string tbAppDay {
+            get {
+                return ResourceManager.GetString("tbAppDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datum pregleda *.
+        /// </summary>
+        internal static string tbAppDS {
+            get {
+                return ResourceManager.GetString("tbAppDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trajanje pregleda.
         /// </summary>
         internal static string tbAppDuration {
             get {
                 return ResourceManager.GetString("tbAppDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trajanje pregleda *.
+        /// </summary>
+        internal static string tbAppDurationS {
+            get {
+                return ResourceManager.GetString("tbAppDurationS", resourceCulture);
             }
         }
         
@@ -502,11 +727,38 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Termini koje je potrebno pomeriti:.
+        /// </summary>
+        internal static string tbAppsToMove {
+            get {
+                return ResourceManager.GetString("tbAppsToMove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Početak pregleda *.
+        /// </summary>
+        internal static string tbAppTS {
+            get {
+                return ResourceManager.GetString("tbAppTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tip pregleda.
         /// </summary>
         internal static string tbAppType {
             get {
                 return ResourceManager.GetString("tbAppType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tip pregleda *.
+        /// </summary>
+        internal static string tbAppTypeS {
+            get {
+                return ResourceManager.GetString("tbAppTypeS", resourceCulture);
             }
         }
         
@@ -583,6 +835,15 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Doktor *.
+        /// </summary>
+        internal static string tbDoctorS {
+            get {
+                return ResourceManager.GetString("tbDoctorS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nivo obrazovanja.
         /// </summary>
         internal static string tbEducation {
@@ -628,6 +889,15 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sprat.
+        /// </summary>
+        internal static string tbFloorNum {
+            get {
+                return ResourceManager.GetString("tbFloorNum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pol.
         /// </summary>
         internal static string tbGender {
@@ -646,11 +916,38 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Opšta podešavanja.
+        /// </summary>
+        internal static string tbGeneralSet {
+            get {
+                return ResourceManager.GetString("tbGeneralSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bolnica Zdravo.
         /// </summary>
         internal static string tbHospital {
             get {
                 return ResourceManager.GetString("tbHospital", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soba je trenutno u upotrebi.
+        /// </summary>
+        internal static string tbIsInUse {
+            get {
+                return ResourceManager.GetString("tbIsInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jezik.
+        /// </summary>
+        internal static string tbLanguage {
+            get {
+                return ResourceManager.GetString("tbLanguage", resourceCulture);
             }
         }
         
@@ -718,6 +1015,15 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pacijent *.
+        /// </summary>
+        internal static string tbPatientSt {
+            get {
+                return ResourceManager.GetString("tbPatientSt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Telefon.
         /// </summary>
         internal static string tbPhone {
@@ -736,6 +1042,15 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mogući termini:.
+        /// </summary>
+        internal static string tbPossibleApps {
+            get {
+                return ResourceManager.GetString("tbPossibleApps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bračni status.
         /// </summary>
         internal static string tbRelationship {
@@ -745,11 +1060,74 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Datum:.
+        /// </summary>
+        internal static string tbReportDate {
+            get {
+                return ResourceManager.GetString("tbReportDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Izveštaj o zakazanim terminima.
+        /// </summary>
+        internal static string tbReportTitle {
+            get {
+                return ResourceManager.GetString("tbReportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Soba.
         /// </summary>
         internal static string tbRoom {
             get {
                 return ResourceManager.GetString("tbRoom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oprema sobe.
+        /// </summary>
+        internal static string tbRoomEq {
+            get {
+                return ResourceManager.GetString("tbRoomEq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Broj sobe.
+        /// </summary>
+        internal static string tbRoomNum {
+            get {
+                return ResourceManager.GetString("tbRoomNum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soba *.
+        /// </summary>
+        internal static string tbRoomS {
+            get {
+                return ResourceManager.GetString("tbRoomS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tip sobe.
+        /// </summary>
+        internal static string tbRoomType {
+            get {
+                return ResourceManager.GetString("tbRoomType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nikola Nikolić, sekretar.
+        /// </summary>
+        internal static string tbSecretary {
+            get {
+                return ResourceManager.GetString("tbSecretary", resourceCulture);
             }
         }
         
@@ -768,6 +1146,24 @@ namespace Hospital_IS.SecretaryView.Localization {
         internal static string tbShift {
             get {
                 return ResourceManager.GetString("tbShift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smena *.
+        /// </summary>
+        internal static string tbShiftS {
+            get {
+                return ResourceManager.GetString("tbShiftS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potpis:.
+        /// </summary>
+        internal static string tbSignature {
+            get {
+                return ResourceManager.GetString("tbSignature", resourceCulture);
             }
         }
         
@@ -817,11 +1213,29 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tema.
+        /// </summary>
+        internal static string tbTheme {
+            get {
+                return ResourceManager.GetString("tbTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Naslov obaveštenja *.
         /// </summary>
         internal static string tbTitle {
             get {
                 return ResourceManager.GetString("tbTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Godišnji odmor.
+        /// </summary>
+        internal static string tbVacation {
+            get {
+                return ResourceManager.GetString("tbVacation", resourceCulture);
             }
         }
         

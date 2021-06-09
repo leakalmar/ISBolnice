@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+        lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
-        Title="Pomeranje termina" Height="700" Width="580"
+        Title="Pomeranje termina" Height="700" Width="590"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         FontSize="15"
@@ -36,14 +40,14 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="Tip pregleda:" Margin="50 10 50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Pacijent:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="Doktor:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="Soba:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="6" Text="Datum pregleda:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="7" Text="Početak pregleda:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="8" Text="Trajanje pregleda:" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-        <TextBlock Grid.Column="1" Grid.Row="9" Text="Opis:" Margin="50 20" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbAppType" Grid.Column="1" Grid.Row="2" Text="{lex:Loc}"  Margin="50 10 50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbPatient" Grid.Column="1" Grid.Row="3" Text="{lex:Loc}"  Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbDoctor" Grid.Column="1" Grid.Row="4" Text="{lex:Loc}"  Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbRoom" Grid.Column="1" Grid.Row="5" Text="{lex:Loc}"  Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbAppDay" Grid.Column="1" Grid.Row="6" Text="{lex:Loc}"  Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbAppDate" Grid.Column="1" Grid.Row="7" Text="{lex:Loc}"  Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbAppDurationS" Grid.Column="1" Grid.Row="8" Text="{lex:Loc}" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        <TextBlock Name="tbDetails" Grid.Column="1" Grid.Row="9" Text="{lex:Loc}" Margin="50 20" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
         <TextBlock Name="txtAppType" Grid.Column="2" Grid.Row="2" Margin="50 10 50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
         <TextBlock Name="txtPatient" Grid.Column="2" Grid.Row="3" Margin="50 10" Style="{DynamicResource ResourceKey=RegularTextBlock}">
@@ -93,17 +97,17 @@
         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="4" Grid.Row="13" HorizontalAlignment="Center">
             <Button Name="btnConfirm" Width="120" Margin="0 0 50 0"
                     Style="{DynamicResource ResourceKey=RegularButton}"
-                    Content="Potvrdi" Click="ChangeAppointment"/>
-            <Button Width="120" Margin="50 0 0 0"
+                    Content="{lex:Loc}"  Click="ChangeAppointment"/>
+            <Button Name="btnCancel" Width="120" Margin="50 0 0 0"
                     Style="{DynamicResource ResourceKey=RegularButton}"
-                    Content="Odustani" Click="Close"/>
+                    Content="{lex:Loc}"  Click="Close"/>
         </StackPanel>
 
 
-        <Button Grid.Column="1" Grid.Row="1" Content="Poništi sve izmene" HorizontalAlignment="Left" 
+        <Button Name="btnUndo" Grid.Column="1" Grid.Row="1" Content="{lex:Loc}" HorizontalAlignment="Left" 
                 Margin="0 0 0 10" Width="140" Click="UndoAllChanges"
                 Style="{DynamicResource ResourceKey=SecondaryButton}"/>
-        <Button Grid.Column="2" Grid.Row="1" Content="Otkaži termin" HorizontalAlignment="Right" 
+        <Button Name="btnCancelAppointment" Grid.Column="2" Grid.Row="1" Content="{lex:Loc}" HorizontalAlignment="Right" 
                 Margin="0 0 0 10" Width="120"
                 Style="{DynamicResource ResourceKey=DeleteButton}" Click="CancelAppointment"/>
 

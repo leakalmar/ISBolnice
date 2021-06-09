@@ -47,9 +47,9 @@
                 <TextBlock Name="tbPhone" Grid.Column="1" Grid.Row="5" Text="{lex:Loc}" Margin="60 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
                 <TextBlock Name="tbEmail" Grid.Column="1" Grid.Row="6" Text="{lex:Loc}" Margin="60 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
                 <TextBlock Name="tbGender" Grid.Column="1" Grid.Row="7" Text="{lex:Loc}" Margin="60 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Name="tbRelationship" Grid.Column="1" Grid.Row="8" Text="Bračni status:" Margin="60 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Name="tbEducation" Grid.Column="1" Grid.Row="9" Text="Nivo obrazovanja:" Margin="60 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
-                <TextBlock Name="tbEmployeer" Grid.Column="1" Grid.Row="10" Text="Poslodavac:" Margin="60 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Name="tbRelationship" Grid.Column="1" Grid.Row="8" Text="{lex:Loc}" Margin="60 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Name="tbEducation" Grid.Column="1" Grid.Row="9" Text="{lex:Loc}" Margin="60 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+                <TextBlock Name="tbEmployeer" Grid.Column="1" Grid.Row="10" Text="{lex:Loc}" Margin="60 5" Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
 
 
 
@@ -85,7 +85,7 @@
             </Grid>
 
         </TabItem>
-        <TabItem Header="Pregledi" Style="{DynamicResource ResourceKey=TabItem}">
+        <TabItem Name="tabAppointments" Header="{lex:Loc}"  Style="{DynamicResource ResourceKey=TabItem}">
             <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>

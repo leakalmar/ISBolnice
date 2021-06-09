@@ -64,6 +64,8 @@ namespace Hospital_IS.SecretaryView
 
             miScheduling.IsEnabled = false;
             HomePage.Content = ucp;
+
+            SetSearchField("sr");
         }
 
 
@@ -270,6 +272,7 @@ namespace Hospital_IS.SecretaryView
                 miSerbian.IsChecked = true;
                 miEnglish.IsChecked = false;
                 ucs.cbLanguage.SelectedIndex = 0;
+                SetSearchField("sr");
             }
             else
             {
@@ -277,6 +280,25 @@ namespace Hospital_IS.SecretaryView
                 miSerbian.IsChecked = false;
                 miEnglish.IsChecked = true;
                 ucs.cbLanguage.SelectedIndex = 1;
+                SetSearchField("en");
+            }
+        }
+
+        public void SetSearchField(string lang)
+        {
+            if (lang.Equals("sr"))
+            {
+                ucp.txtSearch.Text = "Pretraži...";
+                uca.txtSearch.Text = "Pretraži...";
+                ucd.txtSearch.Text = "Pretraži...";
+                ucr.txtSearch.Text = "Pretraži...";
+            }
+            else 
+            {
+                ucp.txtSearch.Text = "Search...";
+                uca.txtSearch.Text = "Search...";
+                ucd.txtSearch.Text = "Search...";
+                ucr.txtSearch.Text = "Search...";
             }
         }
     }

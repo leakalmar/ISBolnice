@@ -117,17 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="btnAddA" xml:space="preserve">
+    <value>Dodaj</value>
+  </data>
+  <data name="btnAddNewGuest" xml:space="preserve">
+    <value>Dodaj novog korisnika</value>
+  </data>
   <data name="btnAppointments" xml:space="preserve">
     <value>Termini</value>
   </data>
   <data name="btnCancel" xml:space="preserve">
     <value>Odustani</value>
   </data>
+  <data name="btnCancelAppointment" xml:space="preserve">
+    <value>Otkaži termin</value>
+  </data>
   <data name="btnConfirm" xml:space="preserve">
     <value>Potvrdi</value>
   </data>
   <data name="btnCreatePermAccount" xml:space="preserve">
     <value>Napravi trajni nalog</value>
+  </data>
+  <data name="btnDeleteA" xml:space="preserve">
+    <value>Obriši</value>
+  </data>
+  <data name="btnDeleteDoctor" xml:space="preserve">
+    <value>Obriši doktora</value>
+  </data>
+  <data name="btnDeleteNotification" xml:space="preserve">
+    <value>Obriši obaveštenje</value>
+  </data>
+  <data name="btnDeletePatient" xml:space="preserve">
+    <value>Obriši pacijenta</value>
   </data>
   <data name="btnDeselectAllEpmloyees" xml:space="preserve">
     <value>Deselektuj sve zaposlene</value>
@@ -137,6 +158,12 @@
   </data>
   <data name="btnDoctors" xml:space="preserve">
     <value>Doktori</value>
+  </data>
+  <data name="btnEmergency" xml:space="preserve">
+    <value>Hitan pregled?</value>
+  </data>
+  <data name="btnGuest" xml:space="preserve">
+    <value>Gost</value>
   </data>
   <data name="btnLogout" xml:space="preserve">
     <value>Odjava</value>
@@ -150,8 +177,14 @@
   <data name="btnPatients" xml:space="preserve">
     <value>Pacijenti</value>
   </data>
+  <data name="btnPrint" xml:space="preserve">
+    <value>Štampaj</value>
+  </data>
   <data name="btnRooms" xml:space="preserve">
     <value>Prostorije</value>
+  </data>
+  <data name="btnSave" xml:space="preserve">
+    <value>Sačuvaj izmene</value>
   </data>
   <data name="btnSelectAllEpmloyees" xml:space="preserve">
     <value>Selektuj sve zaposlene</value>
@@ -162,11 +195,35 @@
   <data name="btnSettings" xml:space="preserve">
     <value>Podešavanja</value>
   </data>
+  <data name="btnUndo" xml:space="preserve">
+    <value>Poništi sve izmene</value>
+  </data>
+  <data name="btnUpdateA" xml:space="preserve">
+    <value>Izmeni</value>
+  </data>
   <data name="btnYes" xml:space="preserve">
     <value>Da</value>
   </data>
   <data name="checkBox" xml:space="preserve">
     <value>Gostujući nalog</value>
+  </data>
+  <data name="ciCol" xml:space="preserve">
+    <value>Fakultet</value>
+  </data>
+  <data name="ciElem" xml:space="preserve">
+    <value>Osnovna škola</value>
+  </data>
+  <data name="ciFemale" xml:space="preserve">
+    <value>Žensko</value>
+  </data>
+  <data name="ciHS" xml:space="preserve">
+    <value>Srednja škola</value>
+  </data>
+  <data name="ciMale" xml:space="preserve">
+    <value>Muško</value>
+  </data>
+  <data name="druga" xml:space="preserve">
+    <value>Druga</value>
   </data>
   <data name="heHelp" xml:space="preserve">
     <value>Pomoć</value>
@@ -222,6 +279,15 @@
   <data name="miUpdate" xml:space="preserve">
     <value>Izmeni</value>
   </data>
+  <data name="prva" xml:space="preserve">
+    <value>Prva</value>
+  </data>
+  <data name="rbInUse" xml:space="preserve">
+    <value>Da</value>
+  </data>
+  <data name="rbNotInUse" xml:space="preserve">
+    <value>Ne</value>
+  </data>
   <data name="rbSelectAll" xml:space="preserve">
     <value>Prosledi svima</value>
   </data>
@@ -240,6 +306,9 @@
   <data name="tabScheduledApps" xml:space="preserve">
     <value>Zakazani pregledi</value>
   </data>
+  <data name="tbAccountSet" xml:space="preserve">
+    <value>Podešavanja naloga</value>
+  </data>
   <data name="tbAddress" xml:space="preserve">
     <value>Adresa</value>
   </data>
@@ -255,14 +324,32 @@
   <data name="tbAppDate" xml:space="preserve">
     <value>Datum i vreme pregleda</value>
   </data>
+  <data name="tbAppDay" xml:space="preserve">
+    <value>Datum pregleda</value>
+  </data>
+  <data name="tbAppDS" xml:space="preserve">
+    <value>Datum pregleda *</value>
+  </data>
   <data name="tbAppDuration" xml:space="preserve">
     <value>Trajanje pregleda</value>
+  </data>
+  <data name="tbAppDurationS" xml:space="preserve">
+    <value>Trajanje pregleda *</value>
   </data>
   <data name="tbApps" xml:space="preserve">
     <value>Pregledi</value>
   </data>
+  <data name="tbAppsToMove" xml:space="preserve">
+    <value>Termini koje je potrebno pomeriti:</value>
+  </data>
+  <data name="tbAppTS" xml:space="preserve">
+    <value>Početak pregleda *</value>
+  </data>
   <data name="tbAppType" xml:space="preserve">
     <value>Tip pregleda</value>
+  </data>
+  <data name="tbAppTypeS" xml:space="preserve">
+    <value>Tip pregleda *</value>
   </data>
   <data name="tbBirthDate" xml:space="preserve">
     <value>Datum rođenja</value>
@@ -288,6 +375,9 @@
   <data name="tbDoctor" xml:space="preserve">
     <value>Doktor</value>
   </data>
+  <data name="tbDoctorS" xml:space="preserve">
+    <value>Doktor *</value>
+  </data>
   <data name="tbEducation" xml:space="preserve">
     <value>Nivo obrazovanja</value>
   </data>
@@ -303,14 +393,26 @@
   <data name="tbEmployees" xml:space="preserve">
     <value>Zaposleni</value>
   </data>
+  <data name="tbFloorNum" xml:space="preserve">
+    <value>Sprat</value>
+  </data>
   <data name="tbGender" xml:space="preserve">
     <value>Pol</value>
   </data>
   <data name="tbGenderS" xml:space="preserve">
     <value>Pol *</value>
   </data>
+  <data name="tbGeneralSet" xml:space="preserve">
+    <value>Opšta podešavanja</value>
+  </data>
   <data name="tbHospital" xml:space="preserve">
     <value>Bolnica Zdravo</value>
+  </data>
+  <data name="tbIsInUse" xml:space="preserve">
+    <value>Soba je trenutno u upotrebi</value>
+  </data>
+  <data name="tbLanguage" xml:space="preserve">
+    <value>Jezik</value>
   </data>
   <data name="tbName" xml:space="preserve">
     <value>Ime</value>
@@ -333,23 +435,56 @@
   <data name="tbPatients" xml:space="preserve">
     <value>Pacijenti</value>
   </data>
+  <data name="tbPatientSt" xml:space="preserve">
+    <value>Pacijent *</value>
+  </data>
   <data name="tbPhone" xml:space="preserve">
     <value>Telefon</value>
   </data>
   <data name="tbPhoneS" xml:space="preserve">
     <value>Telefon *</value>
   </data>
+  <data name="tbPossibleApps" xml:space="preserve">
+    <value>Mogući termini:</value>
+  </data>
   <data name="tbRelationship" xml:space="preserve">
     <value>Bračni status</value>
   </data>
+  <data name="tbReportDate" xml:space="preserve">
+    <value>Datum:</value>
+  </data>
+  <data name="tbReportTitle" xml:space="preserve">
+    <value>Izveštaj o zakazanim terminima</value>
+  </data>
   <data name="tbRoom" xml:space="preserve">
     <value>Soba</value>
+  </data>
+  <data name="tbRoomEq" xml:space="preserve">
+    <value>Oprema sobe</value>
+  </data>
+  <data name="tbRoomNum" xml:space="preserve">
+    <value>Broj sobe</value>
+  </data>
+  <data name="tbRoomS" xml:space="preserve">
+    <value>Soba *</value>
+  </data>
+  <data name="tbRoomType" xml:space="preserve">
+    <value>Tip sobe</value>
+  </data>
+  <data name="tbSecretary" xml:space="preserve">
+    <value>Nikola Nikolić, sekretar</value>
   </data>
   <data name="tbSelect" xml:space="preserve">
     <value>Izaberi</value>
   </data>
   <data name="tbShift" xml:space="preserve">
     <value>Smena</value>
+  </data>
+  <data name="tbShiftS" xml:space="preserve">
+    <value>Smena *</value>
+  </data>
+  <data name="tbSignature" xml:space="preserve">
+    <value>Potpis:</value>
   </data>
   <data name="tbSpecialty" xml:space="preserve">
     <value>Specijalizacija</value>
@@ -366,8 +501,14 @@
   <data name="tbText" xml:space="preserve">
     <value>Tekst obaveštenja *</value>
   </data>
+  <data name="tbTheme" xml:space="preserve">
+    <value>Tema</value>
+  </data>
   <data name="tbTitle" xml:space="preserve">
     <value>Naslov obaveštenja *</value>
+  </data>
+  <data name="tbVacation" xml:space="preserve">
+    <value>Godišnji odmor</value>
   </data>
   <data name="txtAddAllergies" xml:space="preserve">
     <value>Аko dodajete više alergena odvojite ih zarezom.</value>

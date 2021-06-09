@@ -13,7 +13,10 @@ namespace Hospital_IS.SecretaryView.Validation
             var s = value as string;
             if (string.IsNullOrEmpty(s))
             {
-                return new ValidationResult(false, "Polje je obavezno.");
+                if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                    return new ValidationResult(false, "Polje je obavezno.");
+                else
+                    return new ValidationResult(false, "Field cannot be empty.");
             }
             else
             {
@@ -29,7 +32,10 @@ namespace Hospital_IS.SecretaryView.Validation
             var s = value as string;
             if (!s[0].ToString().Equals(s[0].ToString().ToUpper()))
             {
-                return new ValidationResult(false, "Prvo slovo mora biti veliko.");
+                if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                    return new ValidationResult(false, "Prvo slovo mora biti veliko.");
+                else
+                    return new ValidationResult(false, "First letter has to be uppercase.");
             }
             else
             {
@@ -50,7 +56,10 @@ namespace Hospital_IS.SecretaryView.Validation
             }
             else
             {
-                return new ValidationResult(false, "Polje sme da sadrži samo slova.");
+                if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                    return new ValidationResult(false, "Polje sme da sadrži samo slova.");
+                else
+                    return new ValidationResult(false, "Field can conatain only letters.");
             }
         }
     }
@@ -67,7 +76,11 @@ namespace Hospital_IS.SecretaryView.Validation
             }
             else
             {
-                return new ValidationResult(false, "Broj telefona nije u dobrom formatu.");
+                if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                    return new ValidationResult(false, "Broj telefona nije u dobrom formatu.");
+                else
+                    return new ValidationResult(false, "Incorrect format.");
+
             }
         }
     }
@@ -86,17 +99,28 @@ namespace Hospital_IS.SecretaryView.Validation
                 }
                 catch (Exception ex)
                 {
-                    return new ValidationResult(false, "Uneti datum je nepostojeći.");
+                    if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                        return new ValidationResult(false, "Uneti datum je nepostojeći.");
+                    else
+                        return new ValidationResult(false, "Date doesn't exist.");
                 }
 
                 if (date > DateTime.Now.AddYears(-13) || date < DateTime.Now.AddYears(-90))
-                    return new ValidationResult(false, "Datum nije validan.");
+                {
+                    if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                        return new ValidationResult(false, "Datum nije validan.");
+                    else
+                        return new ValidationResult(false, "Date isn't valid.");
+                }
 
                 return new ValidationResult(true, null);
             }
             else
             {
-                return new ValidationResult(false, "Datum nije u dobrom formatu (dd.mm.yyyy.).");
+                if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                    return new ValidationResult(false, "Datum nije u dobrom formatu (dd.mm.yyyy.).");
+                else
+                    return new ValidationResult(false, "Date is not in correct format (dd.mm.yyyy.).");
             }
 
         }
@@ -114,7 +138,10 @@ namespace Hospital_IS.SecretaryView.Validation
             }
             catch (FormatException)
             {
-                return new ValidationResult(false, "Email adresa nije u dobrom formatu.");
+                if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                    return new ValidationResult(false, "Email adresa nije u dobrom formatu.");
+                else
+                    return new ValidationResult(false, "Incorrect format.");
             }
 
             return new ValidationResult(true, null);
@@ -132,7 +159,10 @@ namespace Hospital_IS.SecretaryView.Validation
             }
             else
             {
-                return new ValidationResult(false, "Adresa nije u dobrom formatu.");
+                if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                    return new ValidationResult(false, "Adresa nije u dobrom formatu.");
+                else
+                    return new ValidationResult(false, "Incorrect format.");
             }
         }
     }
@@ -151,23 +181,35 @@ namespace Hospital_IS.SecretaryView.Validation
                     duration = Int32.Parse(s);
                     if (duration < 30)
                     {
-                        return new ValidationResult(false, "Minimalna dužina trajanja termina je 30 min.");
+                        if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                            return new ValidationResult(false, "Minimalna dužina trajanja termina je 30 min.");
+                        else
+                            return new ValidationResult(false, "Shortest possible appointment time is 30 min.");
                     }
                     else if (duration > 12 * 60)
                     {
-                        return new ValidationResult(false, "Unesite validnu dužinu trajanja.");
+                        if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                            return new ValidationResult(false, "Unesite validnu dužinu trajanja.");
+                        else
+                            return new ValidationResult(false, "Enter valid appointment duration.");
                     }
                 }
                 catch
                 {
-                    return new ValidationResult(false, "Unesite validnu dužinu trajanja.");
+                    if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                        return new ValidationResult(false, "Unesite validnu dužinu trajanja.");
+                    else
+                        return new ValidationResult(false, "Enter valid appointment duration.");
                 }
 
                 return new ValidationResult(true, null);
             }
             else
             {
-                return new ValidationResult(false, "Mora se uneti broj.");
+                if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                    return new ValidationResult(false, "Mora se uneti broj.");
+                else
+                    return new ValidationResult(false, "Only numbers are allowed.");
             }
 
         }
@@ -191,20 +233,38 @@ namespace Hospital_IS.SecretaryView.Validation
                 }
                 catch (Exception ex)
                 {
-                    return new ValidationResult(false, "Uneti datum je nepostojeći.");
+                    if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                        return new ValidationResult(false, "Uneti datum je nepostojeći.");
+                    else
+                        return new ValidationResult(false, "Date doesn't exist.");
                 }
 
                 if (date < DateTime.Now || date < DateTime.Now.AddYears(-90))
-                    return new ValidationResult(false, "Datum nije validan.");
+                {
+                    if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                        return new ValidationResult(false, "Datum nije validan.");
+                    else
+                        return new ValidationResult(false, "Date isn't valid.");
+                }
+
 
                 if (date < DateTime.Now.AddDays(14))
-                    return new ValidationResult(false, "Godišnji se mora najavaiti bar dve nedelje unapred.");
+                {
+                    if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                        return new ValidationResult(false, "Godišnji se mora najavaiti bar dve nedelje unapred.");
+                    else
+                        return new ValidationResult(false, "Vacation has to be announced at least two weeks in advance.");
+                }
+                    
 
                 return new ValidationResult(true, null);
             }
             else
             {
-                return new ValidationResult(false, "Datum nije u dobrom formatu (dd.mm.yyyy.).");
+                if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                    return new ValidationResult(false, "Datum nije u dobrom formatu (dd.mm.yyyy.).");
+                else
+                    return new ValidationResult(false, "Date is not in correct format (dd.mm.yyyy.).");
             }
 
         }

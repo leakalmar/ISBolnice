@@ -62,7 +62,7 @@
                         Width="55" Click="Close"/>
             </Grid>
         </TabItem>
-        <TabItem Name="tabAppHistory" Header="Istorija pregleda" Style="{DynamicResource ResourceKey=TabItem}">
+        <TabItem Name="tabAppHistory" Header="{lex:Loc}" Style="{DynamicResource ResourceKey=TabItem}">
             <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
