@@ -102,8 +102,6 @@ namespace Hospital_IS
             else
                 education = EducationCategory.NA;
 
-            MessageBox.Show(gender);
-
             try
             {
                 birthDate = DateTime.ParseExact(birthdateTxt.Text, "dd.MM.yyyy.", System.Globalization.CultureInfo.InvariantCulture);

@@ -1,6 +1,7 @@
 ﻿using DTOs;
 using Hospital_IS.Controllers;
 using Hospital_IS.DTOs;
+using Hospital_IS.Enums;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -21,6 +22,12 @@ namespace Hospital_IS.SecretaryView
             Appointments = new ObservableCollection<DoctorAppointmentDTO>(DoctorAppointmentManagementController.Instance.GetPreviousAppointmentsForDoctor(Doctor.Id));
             RefreshGrid();
             this.DataContext = this;
+
+            if (Doctor.WorkShift.Equals(WorkDayShift.FirstShift))
+                txtWorkShift.Text = "Prva";
+            else
+                txtWorkShift.Text = "Druga";
+
         }
 
         private void Close(object sender, RoutedEventArgs e)

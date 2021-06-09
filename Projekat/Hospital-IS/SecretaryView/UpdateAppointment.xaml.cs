@@ -90,26 +90,11 @@ namespace Hospital_IS.SecretaryView
 
             NewDocAppointment.AppointmentCause = txtAppCause.Text;
 
-            SendNotification(OldDocAppointment, NewDocAppointment);
+            NotificationController.Instance.SendNAppointmentRescheduledNotification(OldDocAppointment, NewDocAppointment);
 
             DoctorAppointmentManagementController.Instance.UpdateAppointment(OldDocAppointment, NewDocAppointment);
             uca.RefreshGrid();
             this.Close();
-        }
-        
-        private void SendNotification(DoctorAppointmentDTO oldApp, DoctorAppointmentDTO appointment)
-        {
-            string title = "Pomeren pregled";
-
-            string text = "Pregled koji ste imali " + oldApp.AppointmentStart.ToString("dd.MM.yyyy.") + " u "
-                + oldApp.AppointmentStart.ToString("HH:mm") + "h je pomeren za "
-                + appointment.AppointmentStart.ToString("dd.MM.yyyy.") + " u " + appointment.AppointmentStart.ToString("HH:mm") + "h.";
-
-            Notification notification = new Notification(title, text, DateTime.Now);
-            notification.Recipients.Add(appointment.Patient.Id);
-            notification.Recipients.Add(appointment.Doctor.Id);
-
-            NotificationController.Instance.AddNotification(notification);
         }
 
         private void Close(object sender, RoutedEventArgs e)

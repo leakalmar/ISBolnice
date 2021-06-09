@@ -144,9 +144,9 @@ namespace Hospital_IS
         }
 
         private bool ShouldConfirmationButtonBeEnabled() {
-            if (string.IsNullOrEmpty(nameTxt.Text) || string.IsNullOrEmpty(surnameTxt.Text) || string.IsNullOrEmpty(birthdateTxt.Text)
+            if ((string.IsNullOrEmpty(nameTxt.Text) || string.IsNullOrEmpty(surnameTxt.Text) || string.IsNullOrEmpty(birthdateTxt.Text)
                 || string.IsNullOrEmpty(addressTxt.Text) || string.IsNullOrEmpty(phoneTxt.Text) || string.IsNullOrEmpty(emailTxt.Text)
-                || comboBox.SelectedIndex == -1 || txtPasswordMatch.Visibility.Equals(Visibility.Visible))
+                || comboBox.SelectedIndex == -1 || txtPasswordMatch.Visibility.Equals(Visibility.Visible)) && checkBox.IsChecked == false)
             {
                 nameTxt.Text = nameTxt.Text;
                 surnameTxt.Text = surnameTxt.Text;
@@ -165,6 +165,12 @@ namespace Hospital_IS
                 btnConfirm.IsEnabled = true;
                 return true;
             }
+        }
+
+        private void checkBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (checkBox.IsChecked == true)
+                btnConfirm.IsEnabled = true;
         }
     }
 }

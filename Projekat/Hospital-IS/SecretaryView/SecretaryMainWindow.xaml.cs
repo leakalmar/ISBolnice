@@ -2,6 +2,8 @@
 using Hospital_IS.Controllers;
 using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
+using Hospital_IS.SecretaryView.Localization;
+using Hospital_IS.SecretaryView.ViewModel;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,6 +20,7 @@ namespace Hospital_IS.SecretaryView
         UCNotificationsView ucn = new UCNotificationsView();
         UCDoctorsView ucd = new UCDoctorsView();
         UCRoomsView ucr = new UCRoomsView();
+        UCSettings ucs = new UCSettings();
         public UCAppointmentsView uca = new UCAppointmentsView();
 
         private static SecretaryMainWindow instance = null;
@@ -34,9 +37,22 @@ namespace Hospital_IS.SecretaryView
             }
         }
 
+        private SecretaryMainWindowViewModel viewModel;
+
+        public SecretaryMainWindowViewModel _ViewModel
+        {
+            get { return viewModel; }
+            set
+            {
+                viewModel = value;
+            }
+        }
+
         public SecretaryMainWindow()
         {
             InitializeComponent();
+            //this.viewModel = new SecretaryMainWindowViewModel(this.HomePage.NavigationService);
+            //this.DataContext = viewModel
 
             CurrentTimeLabel.Content = DateTime.Now.ToString("HH:mm  dd.MM.yyyy.");
             DispatcherTimer dispatcherTimer = new DispatcherTimer
@@ -48,6 +64,8 @@ namespace Hospital_IS.SecretaryView
 
             miScheduling.IsEnabled = false;
             HomePage.Content = ucp;
+
+            SetSearchField("sr");
         }
 
 
@@ -118,6 +136,11 @@ namespace Hospital_IS.SecretaryView
             miRegistration.IsEnabled = false;
             miScheduling.IsEnabled = false;
             HomePage.Content = ucr;
+        }
+
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            HomePage.Content = ucs;
         }
 
         private void miShow_Click(object sender, RoutedEventArgs e)
@@ -229,12 +252,53 @@ namespace Hospital_IS.SecretaryView
                 app.ChangeTheme(new Uri("SecretaryView/Themes/LightTheme.xaml", UriKind.Relative));
                 miLight.IsChecked = true;
                 miDark.IsChecked = false;
+                ucs.cbTheme.SelectedIndex = 0;
             }
             else 
             {
                 app.ChangeTheme(new Uri("SecretaryView/Themes/DarkTheme.xaml", UriKind.Relative));
                 miLight.IsChecked = false;
                 miDark.IsChecked = true;
+                ucs.cbTheme.SelectedIndex = 1;
+            }
+        }
+
+        private void ChangeLanguage(object sender, RoutedEventArgs e)
+        {
+            MenuItem mi = (MenuItem)sender;
+            if (mi.Name.ToString().Equals("miSerbian"))
+            {
+                LocalizedStrings.Instance.SetCulture("sr-LATN-CS");
+                miSerbian.IsChecked = true;
+                miEnglish.IsChecked = false;
+                ucs.cbLanguage.SelectedIndex = 0;
+                SetSearchField("sr");
+            }
+            else
+            {
+                LocalizedStrings.Instance.SetCulture("en-US");
+                miSerbian.IsChecked = false;
+                miEnglish.IsChecked = true;
+                ucs.cbLanguage.SelectedIndex = 1;
+                SetSearchField("en");
+            }
+        }
+
+        public void SetSearchField(string lang)
+        {
+            if (lang.Equals("sr"))
+            {
+                ucp.txtSearch.Text = "Pretraži...";
+                uca.txtSearch.Text = "Pretraži...";
+                ucd.txtSearch.Text = "Pretraži...";
+                ucr.txtSearch.Text = "Pretraži...";
+            }
+            else 
+            {
+                ucp.txtSearch.Text = "Search...";
+                uca.txtSearch.Text = "Search...";
+                ucd.txtSearch.Text = "Search...";
+                ucr.txtSearch.Text = "Search...";
             }
         }
     }

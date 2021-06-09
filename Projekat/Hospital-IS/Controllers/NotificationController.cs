@@ -70,5 +70,19 @@ namespace Hospital_IS.Controllers
         {
             return NotificationService.Instance.GetPrescriptionNotification(doctorId);
         }
+        public void SendNAppointmentRescheduledNotification(DoctorAppointmentDTO oldApp, DoctorAppointmentDTO newApp)
+        {
+            Patient patient = PatientService.Instance.GetPatientByID(oldApp.Patient.Id);
+            Doctor doctor = DoctorService.Instance.GetDoctorByID(oldApp.Doctor.Id);
+            DoctorAppointment oldAppointment = new DoctorAppointment(new DoctorAppointment(oldApp.Reserved, oldApp.AppointmentCause,
+                    oldApp.AppointmentStart, oldApp.AppointmentEnd, oldApp.Type, oldApp.Room,
+                    oldApp.Id, oldApp.IsUrgent, patient, doctor, oldApp.IsFinished));
+            DoctorAppointment newAppointment = new DoctorAppointment(new DoctorAppointment(oldApp.Reserved, newApp.AppointmentCause,
+                   newApp.AppointmentStart, newApp.AppointmentEnd, oldApp.Type, oldApp.Room,
+                   oldApp.Id, oldApp.IsUrgent, patient, doctor, oldApp.IsFinished));
+
+            NotificationService.Instance.SendAppointmentRescheduledNotification(oldAppointment, newAppointment);
+        }
+
     }
 }

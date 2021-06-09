@@ -48,6 +48,8 @@ namespace Hospital_IS.SecretaryView
                 DoctorView dv = new DoctorView(doctor);
                 dv.Show();
             }
+            else
+                MessageBox.Show("Izaberite doktora!");
         }
 
         private void UpdateDoctor(object sender, RoutedEventArgs e)
@@ -58,6 +60,8 @@ namespace Hospital_IS.SecretaryView
                 UpdateDoctorView upv = new UpdateDoctorView(doctor, this);
                 upv.ShowDialog();
             }
+            else
+                MessageBox.Show("Izaberite doktora!");
         }
 
         //private void DeleteDoctor(object sender, RoutedEventArgs e)
@@ -84,7 +88,7 @@ namespace Hospital_IS.SecretaryView
         private bool CheckIfDoctorMeetsSearchCriteria(DoctorDTO doctor)
         {
             string[] search = txtSearch.Text.ToLower().Split(" ");
-            if (txtSearch.Text.Equals("Pretraži..."))
+            if (txtSearch.Text.Equals("Pretraži...")||txtSearch.Text.Equals("Search..."))
                 search[0] = string.Empty;
 
             if (search.Length <= 1)
@@ -133,7 +137,7 @@ namespace Hospital_IS.SecretaryView
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (txtSearch.Text.Equals("Pretraži..."))
+            if (txtSearch.Text.Equals("Pretraži...")||txtSearch.Text.Equals("Search..."))
             {
                 txtSearch.Text = string.Empty;
                 txtSearch.Foreground = new SolidColorBrush(Colors.Black);
@@ -145,7 +149,10 @@ namespace Hospital_IS.SecretaryView
             if (string.IsNullOrEmpty(txtSearch.Text))
             {
                 txtSearch.Foreground = new SolidColorBrush(Colors.Gray);
-                txtSearch.Text = "Pretraži...";
+                if (SecretaryMainWindow.Instance.miSerbian.IsChecked)
+                    txtSearch.Text = "Pretraži...";
+                else
+                    txtSearch.Text = "Search...";
             }
         }
     }

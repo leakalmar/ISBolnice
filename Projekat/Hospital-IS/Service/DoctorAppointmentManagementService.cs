@@ -97,6 +97,18 @@ namespace Hospital_IS.Service
             return appointments;
         }
 
+        internal List<DoctorAppointmentDTO> GetAllAppointmentsForCurrentWeek(DateTime startOfTheWeek)
+        {
+            List<DoctorAppointmentDTO> appointments = new List<DoctorAppointmentDTO>();
+            foreach (DoctorAppointmentDTO appointment in AllAppointments)
+            {
+                if (appointment.AppointmentStart >= startOfTheWeek && appointment.AppointmentEnd <= startOfTheWeek.AddDays(7))
+                    appointments.Add(appointment);
+            }
+
+            return appointments;
+        }
+
         public List<DoctorAppointmentDTO> GetPreviousAppointmentsForDoctor(int doctorId)
         {
             List<DoctorAppointmentDTO> appointments = new List<DoctorAppointmentDTO>();

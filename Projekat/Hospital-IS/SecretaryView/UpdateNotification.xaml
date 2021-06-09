@@ -4,6 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:val="clr-namespace:Hospital_IS.SecretaryView.Validation"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+        lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
         Title="Izmena obaveštenja" 
@@ -27,8 +31,8 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <Button Name="btnDelete" Width="110" Style="{DynamicResource ResourceKey=DeleteButton}"
-                Grid.Row="1" Grid.Column="1" Content="Obriši obaveštenje"  Click="DeleteNotification"
+        <Button Name="btnDeleteNotification" Width="110" Style="{DynamicResource ResourceKey=DeleteButton}"
+                Grid.Row="1" Grid.Column="1" Content="{lex:Loc}"  Click="DeleteNotification"
                 HorizontalAlignment="Right" Margin="0 0 10 0"/>
         <TextBox Name="txtTitle" Grid.Row="2" Grid.Column="1" FontSize="20" Margin="10 10 10 0" 
                  Style="{DynamicResource ResourceKey=RegularTextBox}">
@@ -68,7 +72,7 @@
         </TextBox>
 
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center">
-            <Button Content="Potvrdi" FontSize="14" Width="65" Style="{DynamicResource ResourceKey=RegularButton}"
+            <Button Name="btnConfirm" Content="{lex:Loc}" FontSize="14" Width="65" Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="0 0 40 0"
                     Click="EditNotification">
                 <Button.IsEnabled>
@@ -78,7 +82,7 @@
                     </MultiBinding>
                 </Button.IsEnabled>
             </Button>
-            <Button Content="Odustani" FontSize="14" Width="65" Style="{DynamicResource ResourceKey=RegularButton}"
+            <Button Name="btnCancel" Content="{lex:Loc}" FontSize="14" Width="65" Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="40 0 0 0"
                     Click="Close"/>
         </StackPanel>

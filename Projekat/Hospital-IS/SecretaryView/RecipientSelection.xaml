@@ -3,6 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+        lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -28,8 +32,8 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Grid.Column="1"  FontSize="17" Style="{DynamicResource ResourceKey=RegularTextBlock}"
-                   Text="Pacijenti"/>
+        <TextBlock Name="tbPatients" Grid.Row="1" Grid.Column="1"  FontSize="17" Style="{DynamicResource ResourceKey=RegularTextBlock}"
+                   Text="{lex:Loc}"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0 10 0 0">
             <TextBox Name="txtSearchPatients"  Margin="0 5 10 0" Width="120" 
@@ -59,8 +63,8 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <TextBlock Grid.Row="4" Grid.Column="1"  FontSize="17" Style="{DynamicResource ResourceKey=RegularTextBlock}"
-                   Text="Zaposleni"/>
+        <TextBlock Name="tbEmployees" Grid.Row="4" Grid.Column="1"  FontSize="17" Style="{DynamicResource ResourceKey=RegularTextBlock}"
+                   Text="{lex:Loc}"/>
 
 
         <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" Margin="0 10 0 0">
@@ -91,28 +95,28 @@
 
         <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Margin="0 15 0 0"
                     Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3">
-            <Button x:Name="btnConfirm" Content="Potvrdi" FontSize="15" Width="80"
+            <Button Name="btnConfirm" Content="{lex:Loc}" FontSize="15" Width="80"
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="10 0" Click="btnConfirm_Click"/>
-            <Button Content="Odustani" FontSize="15" Width="80"
+            <Button Name="btnCancel" Content="{lex:Loc}" FontSize="15" Width="80"
                     Style="{DynamicResource ResourceKey=RegularButton}"
                     Margin="10 0" Click="Close"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="3">
-            <Button Name="btnSelectAllPatients" Content="Selektuj sve pacijente" HorizontalAlignment="Left"
+            <Button Name="btnSelectAllPatients" Content="{lex:Loc}" HorizontalAlignment="Left"
                     Style="{DynamicResource ResourceKey=SecondaryButton}"
                     Margin="30 15 0 20" Width="150" Click="SelectAll"/>
-            <Button Name="btnDeselectAllPatients" Content="Deselektuj sve pacijente" HorizontalAlignment="Left" 
+            <Button Name="btnDeselectAllPatients" Content="{lex:Loc}" HorizontalAlignment="Left" 
                     Style="{DynamicResource ResourceKey=SecondaryButton}"
                     Margin="30 0 0 20" Width="150" Click="DeselectAll"/>
         </StackPanel>
 
         <StackPanel Grid.Row="6" Grid.Column="3">
-            <Button Name="btnSelectAllEpmloyees" Content="Selektuj sve zaposlene" HorizontalAlignment="Left" 
+            <Button Name="btnSelectAllEpmloyees" Content="{lex:Loc}" HorizontalAlignment="Left" 
                     Style="{DynamicResource ResourceKey=SecondaryButton}"
                     Margin="30 15 0 20" Width="150" Click="SelectAll"/>
-            <Button Name="btnDeselectAllEpmloyees" Content="Deselektuj sve zaposlene" HorizontalAlignment="Left" 
+            <Button Name="btnDeselectAllEpmloyees" Content="{lex:Loc}" HorizontalAlignment="Left" 
                     Style="{DynamicResource ResourceKey=SecondaryButton}"
                     Margin="30 0 0 20" Width="150" Click="DeselectAll"/>
         </StackPanel>

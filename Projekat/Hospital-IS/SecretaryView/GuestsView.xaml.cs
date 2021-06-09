@@ -36,10 +36,11 @@ namespace Hospital_IS.SecretaryView
         {
             if ((PatientDTO)dataGridGuests.SelectedItem != null)
             {
-                PatientDTO guest = (PatientDTO)dataGridGuests.SelectedItem;
                 PatientRegistration pr = new PatientRegistration(ucp, this);
                 pr.ShowDialog();
             }
+            else
+                MessageBox.Show("Izaberite gostujućeg korisnika!");
         }
 
         private void Close(object sender, RoutedEventArgs e)
