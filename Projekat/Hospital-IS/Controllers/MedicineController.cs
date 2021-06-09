@@ -71,9 +71,9 @@ namespace Controllers
             MedicineService.Instance.UpdateMedicine(medicine);
         }
 
-        public void UpdateMedicineWithName(string oldName, string name, List<MedicineComponent> composition, string sideEffects, string usage, List<ReplaceMedicineName> replaceMedicine)
+        public void UpdateMedicineWithName(string oldName,Medicine medicine)
         {
-            Medicine medicine = new Medicine(name, composition, sideEffects, usage, replaceMedicine);
+           
             MedicineService.Instance.UpdateMedicineWithName(oldName, medicine);
 
         }
@@ -153,6 +153,11 @@ namespace Controllers
                 }
             }
             return ret;
+        }
+
+        public bool IsNameUnique(string name)
+        {
+            return MedicineService.Instance.IsNameUnique(name);
         }
     }
 }

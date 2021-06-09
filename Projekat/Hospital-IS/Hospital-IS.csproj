@@ -21,9 +21,13 @@
     <None Remove="Resources\angledown.png" />
     <None Remove="Resources\backButtonLeft.png" />
     <None Remove="Resources\bed.png" />
+    <None Remove="Resources\bookAppointment.png" />
     <None Remove="Resources\calendar.png" />
     <None Remove="Resources\chooseFromTable.png" />
     <None Remove="Resources\doctor-search.png" />
+    <None Remove="Resources\equipmentView.png" />
+    <None Remove="Resources\feedback.png" />
+    <None Remove="Resources\helpmanager.png" />
     <None Remove="Resources\hospital.png" />
     <None Remove="Resources\hospitalCroped.png" />
     <None Remove="Resources\insight.png" />
@@ -86,6 +90,7 @@
     <PackageReference Include="iTextSharp" Version="5.5.13.2" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
     <PackageReference Include="WPFToolkit.DataVisualization" Version="3.5.50211.1" />
   </ItemGroup>
 
@@ -108,6 +113,7 @@
     <Resource Include="Resources\bed.png" />
     <Resource Include="Resources\addroom.png" />
     <Resource Include="Resources\backbutton.png" />
+    <Resource Include="Resources\bookAppointment.png" />
     <Resource Include="Resources\bookmark.png" />
     <Resource Include="Resources\calendar.png" />
     <Resource Include="Resources\checkmark.png" />
@@ -116,7 +122,10 @@
     <Resource Include="Resources\doctor-search.png" />
     <Resource Include="Resources\doctor.jpg" />
     <Resource Include="Resources\edit.png" />
+    <Resource Include="Resources\equipmentView.png" />
+    <Resource Include="Resources\feedback.png" />
     <Resource Include="Resources\filijale.png" />
+    <Resource Include="Resources\helpmanager.png" />
     <Resource Include="Resources\hospital.png" />
     <Resource Include="Resources\hospitalCroped.png" />
     <Resource Include="Resources\hospitalroom.png" />

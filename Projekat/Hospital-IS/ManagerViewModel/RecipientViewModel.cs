@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using Hospital_IS.DTOs;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -128,12 +129,13 @@ namespace Hospital_IS.ManagerViewModel
         {
 
             System.Collections.IList items = (System.Collections.IList)obj;
-         
-            foreach(var doctor in items)
+            selectedDoctors.Clear();
+            foreach (var doctor in items)
             {
                 selectedDoctors.Add((Doctor)doctor);
             }
-            return !(selectedDoctors.Count < 2);
+            
+            return selectedDoctors.Count >= 2;
         }
 
         private void Execute_SendNotificationToDoctor(object obj)
@@ -144,16 +146,12 @@ namespace Hospital_IS.ManagerViewModel
                 if (!doctorIds.Contains(d.Id))
                 {
                     doctorIds.Add(d.Id);
-                }
-                
+                }         
             }
-
-            MedicineNotificationController.Instance.CreateNotification(NotificationMedicine.Name, NotificationMedicine.SideEffects, NotificationMedicine.Usage, 
-                NotificationMedicine.ReplaceMedicine, NotificationMedicine.Composition, doctorIds);
-
-
+            MedicineNotificationDTO notificationDTO = new MedicineNotificationDTO(NotificationMedicine.Name, NotificationMedicine.SideEffects, NotificationMedicine.Usage, NotificationMedicine.ReplaceMedicine,
+               NotificationMedicine.Composition, doctorIds);
+            MedicineNotificationController.Instance.CreateNotification(notificationDTO);
             selectedDoctors = new List<Doctor>();
-
         }
 
         private void Execute_SendReNotificationToDoctor(object obj)
@@ -167,17 +165,14 @@ namespace Hospital_IS.ManagerViewModel
                 }
 
             }
-
-            MedicineNotificationController.Instance.CreateReNotification(NotificationMedicine.Name, NotificationMedicine.SideEffects, NotificationMedicine.Usage,
-                NotificationMedicine.ReplaceMedicine, NotificationMedicine.Composition, doctorIds);
+            MedicineNotificationDTO notificationDTO = new MedicineNotificationDTO(NotificationMedicine.Name, NotificationMedicine.SideEffects, NotificationMedicine.Usage, NotificationMedicine.ReplaceMedicine,
+                NotificationMedicine.Composition, doctorIds);
+            MedicineNotificationController.Instance.CreateReNotification(notificationDTO);
             MedicineNotificationController.Instance.DeleteNotification(Notification);
             NotificationViewModel.Instance.Notifications = new ObservableCollection<MedicineNotification>(MedicineNotificationController.Instance.GetAllByDoctorId(6));
             this.NavService.Navigate(
                   new Uri("ManagerView1/NotificationView.xaml", UriKind.Relative));
-
-
             selectedDoctors = new List<Doctor>();
-
         }
 
     }

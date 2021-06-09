@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading;
+using System.Windows;
 
 namespace Hospital_IS.ManagerView1
 {
@@ -7,12 +8,15 @@ namespace Hospital_IS.ManagerView1
     /// </summary>
     public partial class ManagerMainView : Window
     {
-        public ManagerMainView()
+        public ManagerMainView(MainWindow mainWindow)
         {
-            InitializeComponent();
-            
+            mainWindow.Close();
+            InitializeComponent();          
         }
 
-        
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+           
+        }
     }
 }

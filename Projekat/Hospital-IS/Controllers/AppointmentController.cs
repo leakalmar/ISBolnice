@@ -37,32 +37,14 @@ namespace Controllers
             return AppointmentService.Instance.GetAllAppByTwoRooms(roomIdSource, roomIdDestination);
         }    
 
-        public bool MakeRenovationAppointment(DateTime start, DateTime end, String description,int roomId)
-        {
-            Appointment renovationAppointment = new Appointment(start, end, AppointmentType.Renovation, roomId);
-            renovationAppointment.AppointmentCause = description;
+        public bool MakeRenovationAppointment(Appointment renovationAppointment)
+        { 
            return AppointmentService.Instance.MakeRenovationAppointment(renovationAppointment);
-
         }
 
         public List<Appointment> GetAppByRoomId(int roomId)
         {
             return AppointmentService.Instance.GetAppByRoom(roomId);
-        }
-
-        public void AddAppointment(Appointment appointment)
-        {
-
-        }
-
-        public void RemoveAppointment(Appointment appointment)
-        {
-
-        }
-
-        public void UpdateAppointment(Appointment appointment)
-        {
-
         }
 
         public List<RenovationReportDTO> FindAllRenovationAppBetweeenDates(RenovationDTO renovationDTO)

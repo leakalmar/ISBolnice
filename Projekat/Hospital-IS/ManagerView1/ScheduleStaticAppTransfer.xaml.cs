@@ -1,12 +1,11 @@
-﻿using Hospital_IS.ManagerViewModel;
+﻿using Hospital_IS.ManagerHelp;
+using Hospital_IS.ManagerViewModel;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace Hospital_IS.ManagerView1
 {
-    /// <summary>
-    /// Interaction logic for ScheduleStaticAppTransfer.xaml
-    /// </summary>
+    
     public partial class ScheduleStaticAppTransfer : Page
     {
 
@@ -32,6 +31,12 @@ namespace Hospital_IS.ManagerView1
             else{
                 ScheduleStaticTransferViewModel.Instance.TransferStaticExecute();
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            StaticTransferHelp staticTransfer = new StaticTransferHelp();
+            staticTransfer.ShowDialog();
         }
     }
 }

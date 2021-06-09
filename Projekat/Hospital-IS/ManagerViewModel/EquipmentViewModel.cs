@@ -1,9 +1,11 @@
 ﻿using Controllers;
 using Enums;
+using Hospital_IS.ManagerHelp;
 using Model;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Navigation;
 
@@ -16,10 +18,8 @@ namespace Hospital_IS.ManagerViewModel
         private ObservableCollection<String> roomTypes { get; set; }
         private int selectedTransferOption = -1;
         private int selectedTypeIndex = -1;
-        private ICollectionView  _equipments { get; set; }
-        private string _name= "Unesite ime opreme";
-        private string _quantity = "Unesite kolicinu";
-        private string _producerName = "Unesite ime proizvodjaca";
+        private ICollectionView _equipments;
+      
         private String selectedRoomType;
         private NavigationService navService;
         private RelayCommand navigateToRoomPage;
@@ -28,6 +28,7 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand deleteEquipment;
         private RelayCommand updateEquipment;
         private RelayCommand navigateToUpdateEquipment;
+        private RelayCommand openHelpWindow;
         private int comboBoxItem;
         private Equipment selectedEquipment;
         private Room selectedRoom;
@@ -37,11 +38,27 @@ namespace Hospital_IS.ManagerViewModel
         private RelayCommand navigateToMedicinePage;
         private RelayCommand navigateToEmployeePage;
         private RelayCommand navigateToBranchPage;
+        private RelayCommand navigateToAddEquipment;
         private string searchBox;
         private int selectedCondition =0;
 
+        public RelayCommand OpenHelpWindow
+        {
+            get { return openHelpWindow; }
+            set
+            {
+                openHelpWindow = value;
+            }
+        }
 
-
+        public RelayCommand NavigateToAddEquipment
+        {
+            get { return navigateToAddEquipment; }
+            set
+            {
+                navigateToAddEquipment = value;
+            }
+        }
 
         public RelayCommand NavigateToBranchPage
         {
@@ -323,57 +340,7 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
-        public String Quantity
-        {
-            get
-            {
-                return _quantity;
-            }
-            set
-            {
-                if (value != _quantity)
-                {
-
-                    _quantity = value;
-                    OnPropertyChanged("Quantity");
-                }
-            }
-        }
-
-        public String ProducerName
-        {
-            get
-            {
-                return _producerName;
-            }
-            set
-            {
-                if (value != _producerName)
-                {
-
-                    _producerName = value;
-                    OnPropertyChanged("ProducerName");
-                }
-            }
-        }
-
-        public String Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                if (value != _name)
-                {
-
-                    _name = value;
-                    OnPropertyChanged("Name");
-                }
-            }
-        }
-
+        
         public NavigationService NavService
         {
             get { return navService; }
@@ -420,17 +387,45 @@ namespace Hospital_IS.ManagerViewModel
             RoomTypes.Add("Dinamicka");
             RoomTypes.Add("Sva");
             this.NavigateToRoomPage = new RelayCommand(Execute_NavigateToRoomPageCommand, CanExecute_NavigateCommand);
-            this.AddNewEquipment = new RelayCommand(Execute_AddNewEquipmentCommand);
+        
             this.DeleteEquipment = new RelayCommand(Execute_DeleteEquipmentComand, CanExecute_IfEquipmentIsSelected);
             this.NavigateToUpdateEquipment = new RelayCommand(Execute_NavigateToUpdateEquipmentPageCommand, CanExecute_IfEquipmentIsSelected);
-            this.UpdateEquipment = new RelayCommand(Execute_UpdateEquipmentCommand);
+            
             this.NavigateToManagerProfilePage = new RelayCommand(Execute_NavigateToManagerProfilePageCommand, CanExecute_NavigateCommand);
             this.NavigateToTransferOptions = new RelayCommand(Execute_NavigateToTransferEquipmentPageCommand, CanExecute_NavigateToTransferViewCommand);
             this.SearchCommnd = new RelayCommand(Execute_SearchCommand);
             this.NavigateToMedicinePage = new RelayCommand(Execute_NavigateToMedicinePageCommand);
             this.NavigateToEmployeePage = new RelayCommand(Execute_NavigateToEmployeePageCommand);
             this.NavigateToBranchPage = new RelayCommand(Execute_NavigateToBranchPageCommand);
+            this.NavigateToAddEquipment = new RelayCommand(Execute_NavigateToAddEquipmetCommand, CanExecute_NavigateAddEquipmentViewwCommand);
+            this.OpenHelpWindow = new RelayCommand(Execute_OpenHelpWindowCommand);
 
+        }
+
+        private void Execute_OpenHelpWindowCommand(object obj)
+        {
+            EquipmentHelpWindow equipmentHelp = new EquipmentHelpWindow();
+            equipmentHelp.ShowDialog();
+        }
+
+
+        private void Execute_NavigateToAddEquipmetCommand(object obj)
+        {
+            if (SelectedRoom.Type == RoomType.StorageRoom)
+            {
+                AddEquipmentViewModel.Instance.NavService = this.NavService;
+                AddEquipmentViewModel.Instance.SelectedRoom = this.SelectedRoom;
+                this.NavService.Navigate(
+                    new Uri("ManagerView1/AddEquipmentView.xaml", UriKind.Relative));
+            }else
+            {
+                MessageBox.Show("Izaberite magacin za dodavanje");
+            }
+        }
+
+        private bool CanExecute_NavigateAddEquipmentViewwCommand(object obj)
+        {
+            return !(SelectedRoom == null);
         }
 
 
@@ -602,29 +597,29 @@ namespace Hospital_IS.ManagerViewModel
 
         private void Execute_NavigateToRoomPageCommand(object obj)
         {
-            this.NavService.GoBack();
+            this.NavService.Navigate(
+                new Uri("ManagerView1/RoomView.xaml", UriKind.Relative));
             SelectedEquipment = null;
 
         }
 
         private void Execute_DeleteEquipmentComand(object obj)
         {
-
+            MessageBox.Show("Uspjesno ste izvrsili brisanje");
             RoomController.Instance.RemoveEquipment(SelectedRoom,SelectedEquipment);
             Equipments = new CollectionViewSource { Source = SelectedRoom.Equipment }.View;
+            SelectedEquipment = null;
 
 
         }
 
         private void Execute_NavigateToUpdateEquipmentPageCommand(object obj)
         {
+            UpdateEquipmentViewModel.Instance.NavService = this.NavService;
+            UpdateEquipmentViewModel.Instance.SetEquipment(SelectedEquipment);
+            UpdateEquipmentViewModel.Instance.SelectedRoom = SelectedRoom;
             this.NavService.Navigate(
                     new Uri("ManagerView1/UpdateEquipmentView.xaml", UriKind.Relative));
-            Name = SelectedEquipment.Name;
-            ProducerName = SelectedEquipment.Name;
-            Quantity = SelectedEquipment.Quantity.ToString();
-            ComboBoxItem = (int)SelectedEquipment.EquipType;
-
         }
 
 
@@ -632,57 +627,5 @@ namespace Hospital_IS.ManagerViewModel
         {
             return !(SelectedEquipment == null);
         }
-
-
-        private void Execute_AddNewEquipmentCommand(object obj)
-        {
-            if(!string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(ProducerName) && int.TryParse(Quantity,out int quantity))
-            {
-                if(quantity > 0)
-                {
-                    EquiptType equiptType = (EquiptType)ComboBoxItem;
-                    Equipment equipment = new Equipment(equiptType, Name, quantity, ProducerName);
-                    
-                    RoomController.Instance.AddEquipment(SelectedRoom, equipment);
-                    Name = "Unesite ime opreme";
-                    Quantity = "Unesite kolicinu";
-                    ProducerName = "Unesite ime proizvodjaca";
-
-                    this.NavService.Navigate(
-                    new Uri("ManagerView1/EquipmentView.xaml", UriKind.Relative));
-
-                }
-
-            } 
-        }
-
-        private void Execute_UpdateEquipmentCommand(object obj)
-        {
-           
-            if (!string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(ProducerName) && int.TryParse(Quantity, out int quantity))
-            {
-                if (quantity > 0)
-                {
-                    EquiptType equiptType = (EquiptType)ComboBoxItem;
-                    Equipment equipment = new Equipment(equiptType, Name, quantity, ProducerName);
-                    equipment.EquiptId = SelectedEquipment.EquiptId;
-                    RoomController.Instance.UpdateEquipment(SelectedRoom,equipment);
-                   
-                    SelectedEquipment = null;
-                    this.NavService.Navigate(
-                    new Uri("ManagerView1/EquipmentView.xaml", UriKind.Relative));
-
-                }
-
-            }
-        }
-
-        public void SetSelectedRoom(object selectedItem)
-        {
-            SelectedRoom = (Room)selectedItem;
-        }
-
-
-
     }
 }

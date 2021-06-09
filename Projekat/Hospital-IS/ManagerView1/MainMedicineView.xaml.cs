@@ -24,7 +24,7 @@ namespace Hospital_IS.ManagerView1
 
         private void OtherOptionsButton_Click(object sender, RoutedEventArgs e)
         {
-
+            MedicineOptions.Visibility = Visibility.Hidden;
             if (OtherOptions.Visibility == Visibility.Visible)
             {
                 OtherOptions.Visibility = Visibility.Hidden;
@@ -39,6 +39,8 @@ namespace Hospital_IS.ManagerView1
 
         private void Options_Click(object sender, RoutedEventArgs e)
         {
+
+            OtherOptions.Visibility = Visibility.Hidden;
             if (MedicineOptions.Visibility == Visibility.Visible)
             {
                 DataGridMedicine.SelectedItem = null;
@@ -49,6 +51,11 @@ namespace Hospital_IS.ManagerView1
                 DataGridMedicine.SelectedItem = null;
                 MedicineOptions.Visibility = Visibility.Visible;
             }
+        }
+
+        private void CloseOptions_Click(object sender, RoutedEventArgs e)
+        {
+            OtherOptions.Visibility = Visibility.Hidden;
         }
     }
 }

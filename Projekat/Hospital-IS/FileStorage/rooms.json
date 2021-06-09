@@ -6,18 +6,7 @@
     "BedNumber": 111,
     "RoomId": 1,
     "Type": 1,
-    "RoomIdType": "1 ConsultingRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 1,
-    "RoomNumber": 21,
-    "SurfaceArea": 20,
-    "BedNumber": 11,
-    "RoomId": 0,
-    "Type": 3,
-    "RoomIdType": "0 StorageRoom",
+    "RoomIdType": "11 ConsultingRoom",
     "Equipment": [],
     "isUsable": false
   },
@@ -28,38 +17,30 @@
     "BedNumber": 1,
     "RoomId": 2,
     "Type": 3,
-    "RoomIdType": "2 StorageRoom",
+    "RoomIdType": "12 StorageRoom",
     "Equipment": [
       {
+        "EquipType": 0,
+        "EquiptId": 0,
+        "Name": "makaze",
+        "Quantity": 500,
+        "ProducerName": "Metalika",
+        "EquiptTypeIndex": 0
+      },
+      {
         "EquipType": 1,
-        "EquiptId": 7,
-        "Name": "10",
+        "EquiptId": 1,
+        "Name": "rendgen",
+        "Quantity": 3,
+        "ProducerName": "Metalprom",
+        "EquiptTypeIndex": 1
+      },
+      {
+        "EquipType": 1,
+        "EquiptId": 2,
+        "Name": "hirusrski sto",
         "Quantity": 50,
-        "ProducerName": "10",
-        "EquiptTypeIndex": 1
-      },
-      {
-        "EquipType": 1,
-        "EquiptId": 8,
-        "Name": "sasa",
-        "Quantity": 4000,
-        "ProducerName": "sasa",
-        "EquiptTypeIndex": 1
-      },
-      {
-        "EquipType": 1,
-        "EquiptId": 9,
-        "Name": "tat",
-        "Quantity": 60,
-        "ProducerName": "tata",
-        "EquiptTypeIndex": 1
-      },
-      {
-        "EquipType": 1,
-        "EquiptId": 10,
-        "Name": "rer",
-        "Quantity": 100,
-        "ProducerName": "erer",
+        "ProducerName": "Holvic",
         "EquiptTypeIndex": 1
       }
     ],
@@ -72,32 +53,18 @@
     "BedNumber": 10,
     "RoomId": 7,
     "Type": 1,
-    "RoomIdType": "7 ConsultingRoom",
+    "RoomIdType": "10 ConsultingRoom",
     "Equipment": [],
     "isUsable": false
   },
-  
-  {
-    "RoomFloor": 5,
-    "RoomNumber": 5,
-    "SurfaceArea": 5,
-    "BedNumber": 5,
-    "RoomId": 9,
-    "Type": 0,
-    "RoomIdType": "9 RecoveryRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  
-  
   {
     "RoomFloor": 1,
     "RoomNumber": 1,
-    "SurfaceArea": 1,
-    "BedNumber": 1,
+    "SurfaceArea": 5,
+    "BedNumber": 1000,
     "RoomId": 14,
     "Type": 0,
-    "RoomIdType": "14 RecoveryRoom",
+    "RoomIdType": "1 RecoveryRoom",
     "Equipment": [],
     "isUsable": false
   },
@@ -108,7 +75,29 @@
     "BedNumber": 6,
     "RoomId": 15,
     "Type": 0,
-    "RoomIdType": "15 RecoveryRoom",
+    "RoomIdType": "26 RecoveryRoom",
+    "Equipment": [],
+    "isUsable": false
+  },
+  {
+    "RoomFloor": 7,
+    "RoomNumber": 582,
+    "SurfaceArea": 55,
+    "BedNumber": 0,
+    "RoomId": 16,
+    "Type": 0,
+    "RoomIdType": "582 RecoveryRoom",
+    "Equipment": [],
+    "isUsable": false
+  },
+  {
+    "RoomFloor": 1,
+    "RoomNumber": 50,
+    "SurfaceArea": 5,
+    "BedNumber": 9,
+    "RoomId": 17,
+    "Type": 0,
+    "RoomIdType": "50 RecoveryRoom",
     "Equipment": [],
     "isUsable": false
   }

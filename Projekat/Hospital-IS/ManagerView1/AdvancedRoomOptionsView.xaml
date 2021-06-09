@@ -8,7 +8,7 @@
       xmlns:wpfx="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended" xmlns:managerviewmodel="clr-namespace:Hospital_IS.ManagerViewModel" d:DataContext="{d:DesignInstance Type=managerviewmodel:AdvancedRoomRenovationViewModel}"
       d:DesignHeight="750" d:DesignWidth="430"
       Title="AdvancedRoomOptionsView">
-
+    
     <Page.Resources>
         <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
             <Border Background="{TemplateBinding Background}" 
@@ -165,18 +165,18 @@
 
         <ComboBox x:Name="ComboSource"  Grid.Column="5"  Grid.Row="5"  ItemsSource="{Binding RoomsComboFirst}" DisplayMemberPath="RoomIdType"  Grid.ColumnSpan="3" HorizontalAlignment="Left" 
                   Width="160" Height="30" Template="{StaticResource ComboBoxBaseControlTemplate}" SelectedItem="{Binding SelectedRoomFirst}" 
-                  Margin="10,1,0,0" IsEnabled="{Binding IsComboEnabledOne,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="2"/>
+                  Margin="10,1,0,0" IsEnabled="{Binding IsComboEnabledOne,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Grid.RowSpan="2"/>
 
         <ComboBox  x:Name="ComboDestionation" Grid.Column="5" Grid.ColumnSpan="3" HorizontalAlignment="Left" Grid.Row="7"  ItemsSource="{Binding RoomsComboSecond}" DisplayMemberPath="RoomIdType"  
                    Width="160" Height="30" VerticalAlignment="Top"  Template="{StaticResource ComboBoxBaseControlTemplate}" SelectedItem="{Binding SelectedRoomSecond}"
-                    Margin="10,44,0,0" IsEnabled="{Binding IsComboEnabledTwo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    Margin="10,33,0,0" IsEnabled="{Binding IsComboEnabledTwo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding SelectedValue, UpdateSourceTrigger=PropertyChanged}"/>
 
 
         <Label Grid.Row="2" Grid.Column="1" Content="Izaberite opciju" Grid.ColumnSpan="3" Foreground="White" FontSize="15" HorizontalAlignment="Left" Margin="14,28,0,2" Grid.RowSpan="2" />
         <CheckBox Grid.Row="3" Grid.Column="5" Content="Spajanje" FontSize="15" Foreground="White" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="10,4,40,0" IsChecked="{Binding Path=IsMerge, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <CheckBox Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="3" Content="Podeli" FontSize="15" Foreground="White" VerticalAlignment="Center" Margin="15,0,0,0" IsChecked="{Binding Path=IsSplit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <CheckBox Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="3" Content="Podela" FontSize="15" Foreground="White" VerticalAlignment="Top" Margin="15,4,0,0" IsChecked="{Binding Path=IsSplit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Button x:Name="Transfer" Grid.Row="15" Grid.Column="3" Grid.ColumnSpan="3" Width="200" Height="40" BorderThickness="3" BorderBrush="Green" 
-                FontSize="20" Content="Zakazi termin" Background="White" Foreground="Black"  Margin="0,10,0,19" Grid.RowSpan="2" Command="{Binding OpenMakeNewWindow}">
+                FontSize="20" Content="Zakazi termin" Background="White" Foreground="Black"  Margin="0,10,0,19" Grid.RowSpan="2" Command="{Binding OpenMakeNewWindow}" Click="Transfer_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="15"/>
@@ -185,15 +185,15 @@
         </Button>
 
         <Label Grid.Row="5" Grid.Column="1" Content="Izaberite sobu" Grid.ColumnSpan="3" Foreground="White" FontSize="15" HorizontalAlignment="Left" Margin="13,0,0,0" Height="30" VerticalAlignment="Center" />
-        <Label Grid.Row="7" Grid.Column="1" Content="Izaberite sobu" Grid.ColumnSpan="3" Foreground="White" FontSize="15" HorizontalAlignment="Left" Margin="15,43,0,227" />
+        <Label Grid.Row="7" Grid.Column="1" Content="Izaberite sobu" Grid.ColumnSpan="3" Foreground="White" FontSize="15" HorizontalAlignment="Left" Margin="15,33,0,237" />
         <Label Grid.Row="7" Grid.Column="1" Content="Zauzeti termini" Grid.ColumnSpan="3" Foreground="White" FontSize="20" HorizontalAlignment="Left" Margin="17,84,0,181" Width="168" />
         <Label Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" Content="Pocetak renoviranja:" Foreground="White" FontSize="15" VerticalAlignment="Center" Margin="17,0,33,0"/>
         <wpfx:DateTimePicker x:Name="RenovationStart" Grid.Column="5" Grid.Row="7" Grid.ColumnSpan="3"   Height="30" Margin="10,299,20,1" Grid.RowSpan="2" Value="{Binding DateStart}" FontSize="15"/>
         <Label Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" Content="Kraj renoviranja:" Foreground="White" FontSize="15" VerticalAlignment="Center" Margin="18,0,32,0" />
         <wpfx:DateTimePicker x:Name="RenovationEnd" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="9" Height="30" Margin="10,13,20,2" Grid.RowSpan="2"  Value="{Binding DateEnd}" FontSize="15" />
         <Label Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="3" Content="Opis:" Foreground="White" FontSize="15" VerticalAlignment="Center" Margin="20,0,10,0"/>
-        <TextBox Grid.Row="12" Grid.Column="5" Grid.ColumnSpan="3" Margin="10,0,15,0" Grid.RowSpan="3" Text="{Binding Note}"/>
-        <DataGrid Grid.Column="1" Grid.Row="7" Height="166" VerticalAlignment="Top" Grid.ColumnSpan="7" Margin="25,124,15,0" ItemsSource="{Binding AllAppointments}" >
+        <TextBox Grid.Row="12" Grid.Column="5" Grid.ColumnSpan="3" Margin="10,0,15,0" Grid.RowSpan="3" Text="{Binding Note}" Padding="2" Template="{StaticResource TextBoxBaseControlTemplate}"/>
+        <DataGrid Grid.Column="1" Grid.Row="7" Height="166" VerticalAlignment="Top" Grid.ColumnSpan="7" CanUserAddRows="False" Margin="25,124,15,0" AutoGenerateColumns="False" ItemsSource="{Binding AllAppointments, UpdateSourceTrigger=PropertyChanged}" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vrsta" Width="85" Binding="{Binding Type}"/>
                 <DataGridTextColumn Header="Vrijeme pocetka" Width="120" Binding="{Binding AppointmentStart, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" CanUserResize="False" IsReadOnly="True"/>

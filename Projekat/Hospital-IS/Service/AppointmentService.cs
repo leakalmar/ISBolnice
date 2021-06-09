@@ -207,15 +207,6 @@ namespace Service
             }
         }
 
-        public void RemoveAppointment(Appointment appointment)
-        {
-
-        }
-
-        public void UpdateAppointment(Appointment appointment)
-        {
-
-        }
 
         public void FindMaxID()
         {

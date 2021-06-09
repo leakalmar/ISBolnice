@@ -1,1 +1,146 @@
-[]
+[
+  {
+    "RoomFirst": {
+      "RoomFloor": 1,
+      "RoomNumber": 12,
+      "SurfaceArea": 2,
+      "BedNumber": 1,
+      "RoomId": 2,
+      "Type": 3,
+      "RoomIdType": "12 StorageRoom",
+      "Equipment": [
+        {
+          "EquipType": 1,
+          "EquiptId": 7,
+          "Name": "10",
+          "Quantity": 50,
+          "ProducerName": "10",
+          "EquiptTypeIndex": 1
+        },
+        {
+          "EquipType": 1,
+          "EquiptId": 8,
+          "Name": "sasa",
+          "Quantity": 3500,
+          "ProducerName": "sasa",
+          "EquiptTypeIndex": 1
+        },
+        {
+          "EquipType": 1,
+          "EquiptId": 9,
+          "Name": "tatoio",
+          "Quantity": 60,
+          "ProducerName": "tata",
+          "EquiptTypeIndex": 1
+        },
+        {
+          "EquipType": 0,
+          "EquiptId": 10,
+          "Name": "nhnbgfbb",
+          "Quantity": 454,
+          "ProducerName": "gbgb",
+          "EquiptTypeIndex": 0
+        }
+      ],
+      "isUsable": false
+    },
+    "RoomSecond": {
+      "RoomFloor": 2,
+      "RoomNumber": 26,
+      "SurfaceArea": 20,
+      "BedNumber": 6,
+      "RoomId": 15,
+      "Type": 0,
+      "RoomIdType": "26 RecoveryRoom",
+      "Equipment": [],
+      "isUsable": false
+    },
+    "RenovationResultRoom": {
+      "RoomFloor": 1,
+      "RoomNumber": 800,
+      "SurfaceArea": 22,
+      "BedNumber": 0,
+      "RoomId": 0,
+      "Type": 0,
+      "RoomIdType": "800 RecoveryRoom",
+      "Equipment": [],
+      "isUsable": false
+    },
+    "IsSplit": false,
+    "IsMerge": true,
+    "isMade": false,
+    "RenovationEnd": "2021-06-26T00:00:00"
+  },
+  {
+    "RoomFirst": {
+      "RoomFloor": 1,
+      "RoomNumber": 12,
+      "SurfaceArea": 2,
+      "BedNumber": 1,
+      "RoomId": 2,
+      "Type": 3,
+      "RoomIdType": "12 StorageRoom",
+      "Equipment": [
+        {
+          "EquipType": 1,
+          "EquiptId": 7,
+          "Name": "10",
+          "Quantity": 50,
+          "ProducerName": "10",
+          "EquiptTypeIndex": 1
+        },
+        {
+          "EquipType": 1,
+          "EquiptId": 8,
+          "Name": "sasa",
+          "Quantity": 3500,
+          "ProducerName": "sasa",
+          "EquiptTypeIndex": 1
+        },
+        {
+          "EquipType": 1,
+          "EquiptId": 9,
+          "Name": "tatoio",
+          "Quantity": 60,
+          "ProducerName": "tata",
+          "EquiptTypeIndex": 1
+        },
+        {
+          "EquipType": 0,
+          "EquiptId": 10,
+          "Name": "nhnbgfbb",
+          "Quantity": 454,
+          "ProducerName": "gbgb",
+          "EquiptTypeIndex": 0
+        }
+      ],
+      "isUsable": false
+    },
+    "RoomSecond": {
+      "RoomFloor": 2,
+      "RoomNumber": 26,
+      "SurfaceArea": 20,
+      "BedNumber": 6,
+      "RoomId": 15,
+      "Type": 0,
+      "RoomIdType": "26 RecoveryRoom",
+      "Equipment": [],
+      "isUsable": false
+    },
+    "RenovationResultRoom": {
+      "RoomFloor": 1,
+      "RoomNumber": 700,
+      "SurfaceArea": 22,
+      "BedNumber": 0,
+      "RoomId": 0,
+      "Type": 0,
+      "RoomIdType": "700 RecoveryRoom",
+      "Equipment": [],
+      "isUsable": false
+    },
+    "IsSplit": false,
+    "IsMerge": true,
+    "isMade": false,
+    "RenovationEnd": "2021-07-17T00:00:00"
+  }
+]

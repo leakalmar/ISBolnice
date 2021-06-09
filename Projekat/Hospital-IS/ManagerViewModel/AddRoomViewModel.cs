@@ -105,12 +105,13 @@ namespace Hospital_IS.ManagerViewModel
             if (RoomVallidationDTO.IsValid)
             {
               
-                RoomType type = (RoomType)selectedEnumIndex;
+                RoomType type = (RoomType)SelectedEnumIndex;
                 int roomNumber = Convert.ToInt32(RoomVallidationDTO.RoomNumber);
                 int roomFloor = Convert.ToInt32(RoomVallidationDTO.RoomFloor);
                 int bedNumber = Convert.ToInt32(RoomVallidationDTO.BedNumber);
                 int surfaceArea = Convert.ToInt32(RoomVallidationDTO.SurfaceArea);
                 RoomController.Instance.AddRoom(new Room(roomFloor,roomNumber,surfaceArea,bedNumber,type));
+               
                 this.NavService.GoBack();
                 this.RoomVallidationDTO = new RoomVallidationDTO();
             }
