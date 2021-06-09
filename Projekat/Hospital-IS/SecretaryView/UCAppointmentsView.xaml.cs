@@ -224,5 +224,11 @@ namespace Hospital_IS.SecretaryView
             else
                 cbRoom.SelectedItem = null;
         }
+
+        private void FormReport(object sender, RoutedEventArgs e)
+        {
+            SecretaryReport sr = new SecretaryReport();
+            sr.ShowDialog();
+        }
     }
 }

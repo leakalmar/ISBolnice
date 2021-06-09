@@ -176,7 +176,7 @@
             </Button>
         </StackPanel>
 
-        <Button Width="140" FontSize="13" 
+        <Button Width="140" FontSize="13"  Click="FormReport"
                 Height="30" Grid.Row="1" Grid.Column="3"
                 HorizontalAlignment="Right" Margin="20 0"
                 Style="{DynamicResource ResourceKey=RegularButton}">

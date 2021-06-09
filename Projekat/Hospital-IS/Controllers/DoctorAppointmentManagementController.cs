@@ -3,6 +3,7 @@ using DTOs;
 using Enums;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using Hospital_IS.Service;
+using System;
 using System.Collections.Generic;
 
 namespace Hospital_IS.Controllers
@@ -97,5 +98,9 @@ namespace Hospital_IS.Controllers
             return DoctorAppointmentManagementService.Instance.GetPreviousAppointmentsForDoctor(doctorId);
         }
 
+        public List<DoctorAppointmentDTO> GetAllAppointmentsForCurrentWeek(DateTime startOfTheWeek)
+        {
+            return DoctorAppointmentManagementService.Instance.GetAllAppointmentsForCurrentWeek(startOfTheWeek);
+        }
     }
 }
