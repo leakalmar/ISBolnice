@@ -180,7 +180,9 @@ namespace Hospital_IS.DTOs.SecretaryDTOs
             }
         }
         #endregion
-        public PatientDTO(int id, string name, string surname, string gender, DateTime birthDate, string phone, string email, EducationCategory education, string relationship, string employer, string password, string address, List<string> alergies, Boolean isGuest, Boolean isAdmitted)
+        public PatientDTO(int id, string name, string surname, string gender, DateTime birthDate, string phone, string email, 
+            EducationCategory education, string relationship, string employer, string password, string address, List<string> alergies, 
+            Boolean isGuest, Boolean isAdmitted)
         {
             Id = id;
             Name = name;

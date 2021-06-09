@@ -113,7 +113,7 @@ namespace Hospital_IS
             }
 
             List<String> allergies = new List<string>(Allergies);
-            PatientDTO updatedPatient = new PatientDTO(Patient.Id, name, surname, gender, birthDate, phone, email, education, relationship, employer, Patient.Password, address, allergies, Patient.IsGuest);
+            PatientDTO updatedPatient = new PatientDTO(Patient.Id, name, surname, gender, birthDate, phone, email, education, relationship, employer, Patient.Password, address, allergies, Patient.IsGuest, Patient.IsAdmitted);
 
             ucp.dataGridPatients.ItemsSource = null;
             ucp.dataGridPatients.ItemsSource = ucp.Patients;
