@@ -29,6 +29,13 @@
         "IsNotifyChecked": false,
         "NoteContent": "Doktorka je rekla da zakazem pregled po potrebi",
         "AppointmentId": 1
+      },
+      {
+        "$id": "5",
+        "NotificationTime": 17,
+        "IsNotifyChecked": true,
+        "NoteContent": "Koliko si vode danas popio??",
+        "AppointmentId": 13
       }
     ],
     "IsGuest": false,
@@ -48,7 +55,7 @@
     "Hospital": null
   },
   {
-    "$id": "5",
+    "$id": "6",
     "hospital": null,
     "FileDate": "2021-03-29T23:21:22.7064891+02:00",
     "Employer": "neki poslodavac",
@@ -58,7 +65,7 @@
       "Paracetamol"
     ],
     "TrollMechanism": {
-      "$id": "6",
+      "$id": "7",
       "TrollCheckStartDate": "0001-01-01T00:00:00",
       "AppointmentCounterInTimeRange": 0,
       "IsTroll": false
@@ -81,7 +88,7 @@
     "Hospital": null
   },
   {
-    "$id": "7",
+    "$id": "8",
     "hospital": null,
     "FileDate": "2021-03-29T23:21:22.7064923+02:00",
     "Employer": "neki poslodavac",
@@ -91,7 +98,7 @@
       "Paracetamol"
     ],
     "TrollMechanism": {
-      "$id": "8",
+      "$id": "9",
       "TrollCheckStartDate": "0001-01-01T00:00:00",
       "AppointmentCounterInTimeRange": 0,
       "IsTroll": false

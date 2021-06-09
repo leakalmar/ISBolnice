@@ -238,7 +238,40 @@ namespace Hospital_IS.View.PatientViewModels
             if (SearchText.Equals("Pretraži..."))
                 search[0] = string.Empty;
 
-            return appointment.AppointmentStart.Date.ToString("dd.MM.yyyy.").Contains(search[0]);
+            if (search.Length <= 1)
+                return appointment.Doctor.Name.ToLower().Contains(search[0]) | appointment.Doctor.Surname.ToLower().Contains(search[0]) | appointment.AppointmentStart.Date.ToString("dd.MM.yyyy.").Contains(search[0]);
+            else
+            {
+                bool FirstName = true;
+                bool LastName = true;
+                bool AppointmentDate = true;
+                int cnt = 0;
+
+                for (int i = 0; i < search.Length; i++)
+                {
+                    if (appointment.Doctor.Name.ToLower().Contains(search[i]) && FirstName)
+                    {
+                        FirstName = false;
+                        cnt++;
+                        continue;
+                    }
+                    if (appointment.Doctor.Surname.ToLower().Contains(search[i]) && LastName)
+                    {
+                        LastName = false;
+                        cnt++;
+                        continue;
+                    }
+                    if (appointment.AppointmentStart.Date.ToString("dd.MM.yyyy.").Contains(search[i]) && AppointmentDate)
+                    {
+                        AppointmentDate = false;
+                        cnt++;
+                        continue;
+                    }
+                }
+
+                return cnt == search.Length;
+            }
+
         }
     }
 }

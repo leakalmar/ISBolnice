@@ -43,7 +43,7 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <TextBox Name="txtSearch" Background="white" ToolTip="Pretraga po datumu" BorderThickness="2" Foreground="CadetBlue" BorderBrush="CadetBlue" Text="{Binding SearchText}" Margin="350,10,470,0" Width="120" VerticalAlignment="Top" Padding="4"
+        <TextBox Name="txtSearch" Background="white" ToolTip="Pretraga pregleda" BorderThickness="2" Foreground="CadetBlue" BorderBrush="CadetBlue" Text="{Binding SearchText}" Margin="350,10,470,0" Width="120" VerticalAlignment="Top" Padding="4"
                          Style="{DynamicResource ResourceKey=RegularTextBox}">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
