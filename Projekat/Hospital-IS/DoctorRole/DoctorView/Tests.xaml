@@ -32,14 +32,14 @@
                 Style="{StaticResource CustomDataGrid}"
                 KeyboardNavigation.TabNavigation="None">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Datum"
+                <DataGridTextColumn Header="Datum" Width="auto" MinWidth="90"
                         Binding="{Binding SampleDate,StringFormat=\{0:dd.MM.yyyy.\}}" CanUserResize="False"
-                        Width="auto" />
+                        />
                 <DataGridTextColumn Header="Test" Binding="{Binding Name}"
-                        CanUserResize="False" Width="auto" />
+                        CanUserResize="False" Width="auto" MinWidth="70" />
                 <DataGridTextColumn Header="Broj Rezultat"
                         Binding="{Binding Result}" CanUserResize="False"
-                        Width="*" />
+                        Width="auto" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

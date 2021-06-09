@@ -90,7 +90,10 @@ namespace Hospital_IS.DoctorViewModel
             {
                 selectedAppointment = value;
                 OnPropertyChanged("SelectedAppointment");
-                SetFields();
+                if(value  != null)
+                {
+                    SetFields();
+                }
             }
         }
 

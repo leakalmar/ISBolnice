@@ -66,12 +66,14 @@ namespace Hospital_IS.DoctorRole.DoctorView
                 this.Home.BorderBrush = Brushes.Transparent;
                 this.demoLabel.Visibility = Visibility.Collapsed;
                 dispatcherTimer.Stop();
-                if(previousChart.SelectedAppointment != null)
+                PatientChartViewModel.Instance.Started = false;
+                PatientChartViewModel.Instance.SelectedAppointment = null;
+                PatientChartViewModel.Instance.SearchMedicineViewModel = null;
+                PatientChartViewModel.Instance.ReportViewModel = null;
+                if (previousChart.SelectedAppointment != null)
                 {
                     PatientChartViewModel.Instance.SelectedAppointment = previousChart.SelectedAppointment;
                     PatientChartViewModel.Instance.Started = previousChart.Started;
-                    PatientChartViewModel.Instance.SearchMedicineViewModel = previousChart.SearchMedicineViewModel;
-                    PatientChartViewModel.Instance.ReportViewModel = previousChart.ReportViewModel;
                 }
                 
                 DoctorNavigationController.Instance.NavigateToHomeCommand();
@@ -328,6 +330,8 @@ namespace Hospital_IS.DoctorRole.DoctorView
                         this.Home.BorderBrush = Brushes.Transparent;
                         this.demoLabel.Visibility = Visibility.Collapsed;
                         this.Home.BorderThickness = new Thickness(0);
+                        PatientChartViewModel.Instance.Started = false;
+                        PatientChartViewModel.Instance.SelectedAppointment = null;
                         if (previousChart.SelectedAppointment != null)
                         {
                             PatientChartViewModel.Instance.SelectedAppointment = previousChart.SelectedAppointment;

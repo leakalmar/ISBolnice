@@ -189,39 +189,41 @@ namespace Hospital_IS.DoctorRole.DoctorViewModel
 
         public bool CheckRoom(Room room)
         {
-            if (EnteredNumber != null && EnteredNumber != "" && SelectedType == null && SelectedFloor == 0)
+            int i;
+            try
             {
-                int i;
-                try
-                {
-                    i = int.Parse(EnteredNumber);
-                    return room.RoomNumber > int.Parse(EnteredNumber);
-                }
-                catch (Exception e) { return true; }
+                i = int.Parse(EnteredNumber.Trim());
+
             }
-            else if ((EnteredNumber == null || EnteredNumber == "") && SelectedType != null && SelectedFloor == 0)
+            catch (Exception e) { return true; }
+
+            if (SelectedType == null && SelectedFloor == 0)
+            {
+                return room.RoomNumber > i;
+            }
+            else if (SelectedType != null && SelectedFloor == 0)
             {
                 return room.Type.Equals(FindType());
             }
-            else if ((EnteredNumber == null || EnteredNumber == "") && SelectedType == null && SelectedFloor != 0)
+            else if (SelectedType == null && SelectedFloor != 0)
             {
                 return room.RoomFloor == SelectedFloor;
             }
-            else if ((EnteredNumber == null || EnteredNumber == "") && SelectedType != null && SelectedFloor != 0)
+            else if (SelectedType != null && SelectedFloor != 0)
             {
                 return room.Type.Equals(FindType()) && room.RoomFloor == SelectedFloor;
             }
-            else if (EnteredNumber != null && EnteredNumber != "" && SelectedType == null && SelectedFloor != 0)
+            else if (SelectedType == null && SelectedFloor != 0)
             {
-                return room.RoomNumber > int.Parse(EnteredNumber) && room.RoomFloor == SelectedFloor;
+                return room.RoomNumber > i && room.RoomFloor == SelectedFloor;
             }
-            else if ((EnteredNumber != null && EnteredNumber != "") && SelectedType != null && SelectedFloor == 0)
+            else if (SelectedType != null && SelectedFloor == 0)
             {
-                return room.RoomNumber > int.Parse(EnteredNumber) && room.Type.Equals(FindType());
+                return room.RoomNumber > i && room.Type.Equals(FindType());
             }
             else
             {
-                return room.RoomNumber > int.Parse(EnteredNumber) && room.Type.Equals(FindType()) && room.RoomFloor == SelectedFloor;
+                return room.RoomNumber > i && room.Type.Equals(FindType()) && room.RoomFloor == SelectedFloor;
             }
         }
 

@@ -32,6 +32,7 @@ namespace Hospital_IS.DoctorRole.DoctorView
         {
             TimeSpan timeSpan = (TimeSpan)Value;
             timeSpan = timeSpan.Add(new TimeSpan(0, value, 0));
+            Minimum = new TimeSpan(0, 15, 0);
 
             if (IsLowerThan(timeSpan, Minimum))
             {

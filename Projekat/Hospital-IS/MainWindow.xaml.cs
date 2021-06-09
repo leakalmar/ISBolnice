@@ -57,6 +57,7 @@ namespace Hospital_IS
                 {
                     new DoctorMainWindow(doctor).Show();
                     this.Close();
+                    return;
                 }
             }
 
@@ -71,6 +72,10 @@ namespace Hospital_IS
                 SecretaryMainWindow.Instance.Show();
 
                 this.Close();
+            }
+            else
+            {
+                message.Visibility = Visibility.Visible;
             }
         }
 
