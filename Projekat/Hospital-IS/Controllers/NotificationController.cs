@@ -1,5 +1,7 @@
-﻿using Hospital_IS.Service;
+﻿using DTOs;
+using Hospital_IS.Service;
 using Model;
+using Service;
 using System.Collections.Generic;
 
 namespace Hospital_IS.Controllers
@@ -53,7 +55,17 @@ namespace Hospital_IS.Controllers
             NotificationService.Instance.DeleteNotification(notification);
         }
 
-        
+        public void SendAppointmentCancelationNotification(DoctorAppointmentDTO doctorAppointment)
+        {
+            Patient patient = PatientService.Instance.GetPatientByID(doctorAppointment.Patient.Id);
+            Doctor doctor = DoctorService.Instance.GetDoctorByID(doctorAppointment.Doctor.Id);
+            DoctorAppointment docAppointment = new DoctorAppointment(new DoctorAppointment(doctorAppointment.Reserved, doctorAppointment.AppointmentCause,
+                    doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd, doctorAppointment.Type, doctorAppointment.Room,
+                    doctorAppointment.Id, doctorAppointment.IsUrgent, patient, doctor, doctorAppointment.IsFinished));
+            NotificationService.Instance.SendAppointmentCancelationNotification(docAppointment);
+        }
+
+
         public List<Notification> GetPrescriptionNotification(int doctorId)
         {
             return NotificationService.Instance.GetPrescriptionNotification(doctorId);

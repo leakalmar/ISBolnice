@@ -1,5 +1,6 @@
 ﻿using Hospital_IS.Storages;
 using Model;
+using System;
 using System.Collections.Generic;
 
 namespace Hospital_IS.Service
@@ -82,6 +83,20 @@ namespace Hospital_IS.Service
             }
 
             nfs.SaveNotifications(AllNotifications);
+        }
+
+        public void SendAppointmentCancelationNotification(DoctorAppointment docAppointment)
+        {
+            string title = "Otkazan pregled";
+
+            string text = "Pregled koji ste imali " + docAppointment.AppointmentStart.ToString("dd.MM.yyyy.") + " u "
+                + docAppointment.AppointmentStart.ToString("HH:mm") + "h je otkazan.";
+
+            Notification notification = new Notification(title, text, DateTime.Now);
+            notification.Recipients.Add(docAppointment.Patient.Id);
+            notification.Recipients.Add(docAppointment.Doctor.Id);
+
+            AddNotification(notification);
         }
 
 

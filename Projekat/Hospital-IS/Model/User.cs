@@ -47,6 +47,21 @@ namespace Model
             Password = password;
         }
 
+        public User(int id, string name, string surname, string gender, DateTime birthDate, string address, string phone, string email, string relationship, EducationCategory education, string password)
+        {
+            Education = education;
+            Id = id;
+            Name = name;
+            Surname = surname;
+            Gender = gender;
+            BirthDate = birthDate;
+            Address = address;
+            Phone = phone;
+            Email = email;
+            Relationship = relationship;
+            Password = password;
+        }
+
         public User()
         {
         }

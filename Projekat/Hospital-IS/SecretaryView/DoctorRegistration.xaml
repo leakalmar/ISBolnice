@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
-        Title="Registracija doktora" Height="440" Width="420"
+        Title="Registracija doktora" Height="440" Width="450"
         WindowStartupLocation="CenterScreen"
         FontSize="15"
         FontWeight="Light">
