@@ -1,7 +1,11 @@
 ﻿using Controllers;
+using DTOs;
+using Hospital_IS.Adapter;
+using Hospital_IS.Controllers;
 using Hospital_IS.DTOs;
 using Hospital_IS.Enums;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
@@ -18,6 +22,7 @@ namespace Hospital_IS.SecretaryView
         public DoctorDTO Doctor { get; set; } = new DoctorDTO();
         public ObservableCollection<string> Specialties { get; set; } = new ObservableCollection<string>();
         public UCDoctorsView udv;
+        public IDoctorAppointmentTarget doctorAppointmentTarget = SecretaryMainWindow.Instance.target;
 
         private String _name;
         private String _surname;
@@ -26,12 +31,14 @@ namespace Hospital_IS.SecretaryView
         private String _phone;
         private String _email;
         private String _vacationStart;
+
+        private WorkDayShift oldShift;
         public UpdateDoctorView(DoctorDTO doctor, UCDoctorsView udv)
         {
             InitializeComponent();
             this.udv = udv;
             Doctor = doctor;
-
+            oldShift = doctor.WorkShift;
             SetDoctorInfo();
             
             this.DataContext = this;
@@ -102,10 +109,23 @@ namespace Hospital_IS.SecretaryView
             else
                 Doctor.Specialty = "";
 
+            if (oldShift != Doctor.WorkShift)
+                CancelFutureAppointments();
+
             DoctorController.Instance.UpdateDoctor(Doctor);
 
             udv.RefreshGrid();
             this.Close();
+        }
+
+        private void CancelFutureAppointments()
+        {
+            List<DoctorAppointmentDTO> appointments = doctorAppointmentTarget.GetFutureAppointmentsForDoctor(Doctor.Id);
+            for (int i = 0; i < appointments.Count; i++)
+            {
+                NotificationController.Instance.SendAppointmentCancelationNotification(appointments[i]);
+                doctorAppointmentTarget.DeleteDoctorAppointment(appointments[i]);
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
