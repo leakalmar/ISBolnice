@@ -477,6 +477,7 @@ namespace Hospital_IS.ManagerViewModel
                     
                         Room room = new Room(SelectedRoomFirst.RoomFloor, Convert.ToInt32(RoomValidation.RoomNumber), SelectedRoomFirst.SurfaceArea / 2, roomType, new List<Equipment>());
                         AdvancedRenovation advancedRenovation = new AdvancedRenovation(SelectedRoomFirst, null, room, AdvancedRenovationType.SPLIT,false, DateEnd);
+                        advancedRenovation.RenovationStart = DateStart;
                         
                         AdvancedRenovationController.Instance.MakeAdvancedRenovation(advancedRenovation);
                         MessageBox.Show("Uspjesno zakazivanje razdvajanja");
@@ -507,6 +508,7 @@ namespace Hospital_IS.ManagerViewModel
                                 int surfaceArea = SelectedRoomFirst.SurfaceArea + SelectedRoomSecond.SurfaceArea;
                                 Room room = new Room(Convert.ToInt32(RoomValidation.RoomNumber),SelectedRoomFirst.RoomFloor, surfaceArea, roomType, new List<Equipment>());
                                 AdvancedRenovation advancedRenovation = new AdvancedRenovation(SelectedRoomFirst, SelectedRoomSecond, room, AdvancedRenovationType.MERGE, false, DateEnd);
+                                advancedRenovation.RenovationStart = DateStart;
                                 AdvancedRenovationController.Instance.MakeAdvancedRenovation(advancedRenovation);                            
                                 AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(SelectedRoomFirst.Id, SelectedRoomSecond.Id));
                                 renovationWindow.Hide();

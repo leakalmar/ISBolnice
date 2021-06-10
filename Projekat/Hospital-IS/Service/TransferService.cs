@@ -155,6 +155,11 @@ namespace Service
             tfs.Save(allTransfer);
         }
 
+        public void SaveTransfers(List<Transfer> transfers)
+        {
+            tfs.Save(transfers);
+        }
+
         public List<Transfer> GetAllTransfers()
         {
             return allTransfer;

@@ -38,13 +38,28 @@ namespace Hospital_IS.Service
 
             CancelDocAppFromBothRoom(advancedRenovation);
             CancelClassicAppFromBothRoom(advancedRenovation);
+            MarkTransferAsCompleted(advancedRenovation.RenovationStart);
         }
 
         private void CancelClassicAppFromBothRoom(AdvancedRenovation advancedRenovation)
         {
             CancelClassicAppAfterDateEnd(advancedRenovation.RoomFirst.Id, advancedRenovation.RenovationEnd);
             CancelClassicAppAfterDateEnd(advancedRenovation.RoomSecond.Id, advancedRenovation.RenovationEnd);
+          
 
+        }
+
+        private void MarkTransferAsCompleted(DateTime renovationStart)
+        {
+            List<Transfer> transfers = TransferService.Instance.GetAllTransfers();
+            foreach (Transfer transfer in transfers)
+            {
+                if(DateTime.Compare(transfer.TransferEnd,renovationStart ) > 0)
+                {
+                    transfer.isMade = true;
+                }
+            }
+            TransferService.Instance.SaveTransfers(transfers);
         }
 
         private void CancelClassicAppAfterDateEnd(int roomId, DateTime renovationEnd)

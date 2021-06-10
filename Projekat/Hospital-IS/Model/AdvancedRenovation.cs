@@ -15,6 +15,7 @@ namespace Model
 
         public Boolean IsMade { get; set; }
         public DateTime RenovationEnd { get; set; }
+        public DateTime RenovationStart { get; set; }
 
         public AdvancedRenovation(Room roomFirst, Room roomSecond, Room renovationResultRoom, AdvancedRenovationType type, bool isMade, DateTime renovationEnd)
         {
