@@ -65,15 +65,16 @@ namespace Hospital_IS.Service
 
         private bool IsDoctorOnVacation(Doctor doctor, DateTime appointmentStart, DateTime appointmentEnd)
         {
+            bool isOnVacation = false;
             DateTime VacationTimeEnd = doctor.VacationTimeStart.AddDays(14);
             if (appointmentStart > doctor.VacationTimeStart && appointmentStart < VacationTimeEnd)
-                return true;
+                isOnVacation = true;
             if (appointmentEnd > doctor.VacationTimeStart && appointmentEnd < VacationTimeEnd)
-                return true;
+                isOnVacation = true;
             if (appointmentStart < doctor.VacationTimeStart && appointmentEnd > VacationTimeEnd)
-                return true;
+                isOnVacation = true;
 
-            return false;
+            return isOnVacation;
         }
 
         public bool VerifyAppointmentByPatient(DoctorAppointment doctorAppointment, int idPatient)
