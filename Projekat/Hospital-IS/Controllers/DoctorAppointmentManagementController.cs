@@ -27,21 +27,10 @@ namespace Hospital_IS.Controllers
         {
 
         }
-
-        public List<DoctorAppointmentDTO> GetAll()
-        {
-            return DoctorAppointmentManagementService.Instance.AllAppointments;
-        }
-
         public void AddAppointment(DoctorAppointmentDTO docAppointmentDTO)
         {
             docAppointmentDTO.Reserved = true;
             DoctorAppointmentManagementService.Instance.AddAppointment(docAppointmentDTO);
-        }
-
-        public void RemoveAppointment(DoctorAppointmentDTO doctorAppointmentDTO)
-        {
-            DoctorAppointmentManagementService.Instance.RemoveAppointment(doctorAppointmentDTO);
         }
 
         public void UpdateAppointment(DoctorAppointmentDTO oldDoctorAppointmentDTO, DoctorAppointmentDTO newDoctorAppointmentDTO)
@@ -50,28 +39,15 @@ namespace Hospital_IS.Controllers
             DoctorAppointmentManagementService.Instance.UpdateAppointment(oldDoctorAppointmentDTO, newDoctorAppointmentDTO);
         }
 
-        public void ReloadAppointments()
-        {
-            DoctorAppointmentManagementService.Instance.ReloadAppointments();
-        }
         public DoctorAppointmentDTO GetAppointmentById(int id)
         {
             return DoctorAppointmentManagementService.Instance.GetAppointmentById(id);
-        }
-
-        public List<DoctorAppointmentDTO> GetAppointmentsByPatientId(int patientId)
-        {
-            return DoctorAppointmentManagementService.Instance.GetAppointmentsByPatientId(patientId);
         }
 
         public void EndAppointment(DoctorAppointmentDTO docAppointmentDTO)
         {
             docAppointmentDTO.IsFinished = true;
             DoctorAppointmentManagementService.Instance.UpdateAppointment(docAppointmentDTO, docAppointmentDTO);
-        }
-        public bool VerifyAppointment(DoctorAppointmentDTO doctorAppointmentDTO)
-        {
-            return DoctorAppointmentManagementService.Instance.VerifyAppointment(doctorAppointmentDTO);
         }
 
         public List<RoomDTO> GetAllRooms()
@@ -93,19 +69,5 @@ namespace Hospital_IS.Controllers
             return DoctorAppointmentManagementService.Instance.GetAppointmentByDoctorId(doctorId);
         }
 
-        public List<DoctorAppointmentDTO> GetFutureAppointmentsForDoctor(int doctorId)
-        {
-            return DoctorAppointmentManagementService.Instance.GetFutureAppointmentsForDoctor(doctorId);
-        }
-
-        public List<DoctorAppointmentDTO> GetPreviousAppointmentsForDoctor(int doctorId)
-        {
-            return DoctorAppointmentManagementService.Instance.GetPreviousAppointmentsForDoctor(doctorId);
-        }
-
-        public List<DoctorAppointmentDTO> GetAllAppointmentsForCurrentWeek(DateTime startOfTheWeek)
-        {
-            return DoctorAppointmentManagementService.Instance.GetAllAppointmentsForCurrentWeek(startOfTheWeek);
-        }
     }
 }

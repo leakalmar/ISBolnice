@@ -133,7 +133,7 @@ namespace Hospital_IS.SecretaryView
             int appDuration = Int32.Parse(txtAppDuration.Text);
             DocAppointment.AppointmentEnd = DocAppointment.AppointmentStart.AddMinutes(appDuration);
 
-            DoctorAppointmentManagementController.Instance.AddAppointment(DocAppointment);
+            uca.doctorAppointmentTarget.AddDoctorAppointment(DocAppointment);
 
             uca.RefreshGrid();
 
@@ -180,7 +180,7 @@ namespace Hospital_IS.SecretaryView
                 {
                 }
 
-                EnableAppointmentConfirmation(DoctorAppointmentManagementController.Instance.VerifyAppointment(DocAppointment));
+                EnableAppointmentConfirmation(uca.doctorAppointmentTarget.VerifyAppointment(DocAppointment));
             }
         }
 
@@ -237,7 +237,7 @@ namespace Hospital_IS.SecretaryView
 
         private void cbDoctor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ScheduledAppointments = new ObservableCollection<DoctorAppointmentDTO>(DoctorAppointmentManagementController.Instance.GetFutureAppointmentsForDoctor(Doctors[cbDoctor.SelectedIndex].Id));
+            ScheduledAppointments = new ObservableCollection<DoctorAppointmentDTO>(uca.doctorAppointmentTarget.GetFutureAppointmentsForDoctor(Doctors[cbDoctor.SelectedIndex].Id));
             GenerateAppointmentTimes(Doctors[cbDoctor.SelectedIndex]);
             if (dpAppDate.SelectedDate != null) {
                 ICollectionView view = new CollectionViewSource { Source = ScheduledAppointments }.View;

@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using DTOs;
+using Hospital_IS.Adapter;
 using Hospital_IS.Controllers;
 using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
@@ -22,10 +23,13 @@ namespace Hospital_IS.SecretaryView
         public ObservableCollection<RoomDTO> Rooms { get; set; }
         public ObservableCollection<DoctorDTO> Doctors { get; set; }
 
-        public UCAppointmentsView()
+        public IDoctorAppointmentTarget doctorAppointmentTarget;
+
+        public UCAppointmentsView(IDoctorAppointmentTarget target)
         {
             InitializeComponent();
-            Appointments = new ObservableCollection<DoctorAppointmentDTO>(DoctorAppointmentManagementController.Instance.GetAll());
+            doctorAppointmentTarget = target;
+            Appointments = new ObservableCollection<DoctorAppointmentDTO>(doctorAppointmentTarget.GetAll());
             dataGridAppointments.ItemsSource = Appointments;
             Rooms = new ObservableCollection<RoomDTO>(DoctorAppointmentManagementController.Instance.GetAllRooms());
             Doctors = new ObservableCollection<DoctorDTO>(SecretaryManagementController.Instance.GetAllDoctors());
@@ -43,19 +47,7 @@ namespace Hospital_IS.SecretaryView
                 Appointments.Clear();
 
             DoctorAppointmentController.Instance.ReloadDoctorAppointments();
-            DoctorAppointmentManagementController.Instance.ReloadAppointments();
-            Appointments = new ObservableCollection<DoctorAppointmentDTO>(DoctorAppointmentManagementController.Instance.GetAll());
-
-            /*foreach (DoctorAppointment appointment in Appointments)
-            {
-                if (string.IsNullOrEmpty(appointment.AppTypeText))
-                {
-                    if (appointment.Type == AppointmentType.CheckUp)
-                        appointment.AppTypeText = "Pregled";
-                    else if (appointment.Type == AppointmentType.Operation)
-                        appointment.AppTypeText = "Operacija";
-                }
-            }*/
+            Appointments = new ObservableCollection<DoctorAppointmentDTO>(doctorAppointmentTarget.GetAll());
 
             ICollectionView view = new CollectionViewSource { Source = Appointments }.View;
             view.Filter = delegate (object item)
@@ -89,15 +81,6 @@ namespace Hospital_IS.SecretaryView
             else
                 MessageBox.Show("Izaberite termin!");
         }
-
-        //private void DeleteAppointment(object sender, RoutedEventArgs e)
-        //{
-        //    if ((DoctorAppointmentDTO)dataGridAppointments.SelectedItem != null)
-        //    {
-        //        CancelAppointment ca = new CancelAppointment(this);
-        //        ca.ShowDialog();
-        //    }
-        //}
 
         private void ScheduleAppointment(object sender, RoutedEventArgs e)
         {

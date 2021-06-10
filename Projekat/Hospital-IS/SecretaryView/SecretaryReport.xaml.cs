@@ -1,4 +1,5 @@
 ﻿using DTOs;
+using Hospital_IS.Adapter;
 using Hospital_IS.Controllers;
 using System;
 using System.Collections.ObjectModel;
@@ -13,11 +14,12 @@ namespace Hospital_IS.SecretaryView
     public partial class SecretaryReport : Window
     {
         public ObservableCollection<DoctorAppointmentDTO> Appointments { get; set; }
+        public IDoctorAppointmentTarget doctorAppointmentTarget = SecretaryMainWindow.Instance.target;
         public SecretaryReport()
         {
             InitializeComponent();
             var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
-            Appointments = new ObservableCollection<DoctorAppointmentDTO>(DoctorAppointmentManagementController.Instance.GetAllAppointmentsForCurrentWeek(monday));
+            Appointments = new ObservableCollection<DoctorAppointmentDTO>(doctorAppointmentTarget.GetAllDoctorAppointmentsForCurrentWeek(monday));
             txtDate.Text = DateTime.Now.ToString("dd.MM.yyyy.");
             this.DataContext = this;
         }

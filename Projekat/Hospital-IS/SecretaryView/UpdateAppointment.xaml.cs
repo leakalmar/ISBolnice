@@ -31,7 +31,7 @@ namespace Hospital_IS.SecretaryView
             InitializeComponent();
             OldDocAppointment = appointment;
             this.uca = uca;
-            ScheduledAppointments = new ObservableCollection<DoctorAppointmentDTO>(DoctorAppointmentManagementController.Instance.GetFutureAppointmentsForDoctor(OldDocAppointment.Doctor.Id));
+            ScheduledAppointments = new ObservableCollection<DoctorAppointmentDTO>(uca.doctorAppointmentTarget.GetFutureAppointmentsForDoctor(OldDocAppointment.Doctor.Id));
 
             this.DataContext = this;
 
@@ -92,7 +92,7 @@ namespace Hospital_IS.SecretaryView
 
             NotificationController.Instance.SendNAppointmentRescheduledNotification(OldDocAppointment, NewDocAppointment);
 
-            DoctorAppointmentManagementController.Instance.UpdateAppointment(OldDocAppointment, NewDocAppointment);
+            uca.doctorAppointmentTarget.UpdateDoctorAppointment(OldDocAppointment, NewDocAppointment);
             uca.RefreshGrid();
             this.Close();
         }
@@ -126,7 +126,7 @@ namespace Hospital_IS.SecretaryView
             {
             }
 
-            EnableAppointmentConfirmation(DoctorAppointmentManagementController.Instance.VerifyAppointment(NewDocAppointment));
+            EnableAppointmentConfirmation(uca.doctorAppointmentTarget.VerifyAppointment(NewDocAppointment));
         }
 
         private void EnableAppointmentConfirmation(bool isValid)
@@ -161,7 +161,7 @@ namespace Hospital_IS.SecretaryView
                     Hours.Add(i);
             }
             else {
-                for (int i = 14; i <= 10; i++)
+                for (int i = 14; i <= 20; i++)
                     Hours.Add(i);
             }
 

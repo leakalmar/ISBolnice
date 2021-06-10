@@ -1,4 +1,6 @@
-﻿using DTOs;
+﻿using Controllers;
+using DTOs;
+using Hospital_IS.Adapter;
 using Hospital_IS.Controllers;
 using Hospital_IS.DTOs;
 using Hospital_IS.Enums;
@@ -15,11 +17,13 @@ namespace Hospital_IS.SecretaryView
         public DoctorDTO Doctor { get; set; }
         public ObservableCollection<DoctorAppointmentDTO> Appointments { get; set; }
         public ObservableCollection<DoctorAppointmentDTO> FutureAppointments { get; set; }
+        public IDoctorAppointmentTarget doctorAppointmentTarget = SecretaryMainWindow.Instance.target;
+
         public DoctorView(DoctorDTO doctor)
         {
             InitializeComponent();
             Doctor = doctor;
-            Appointments = new ObservableCollection<DoctorAppointmentDTO>(DoctorAppointmentManagementController.Instance.GetPreviousAppointmentsForDoctor(Doctor.Id));
+            Appointments = new ObservableCollection<DoctorAppointmentDTO>(doctorAppointmentTarget.GetPreviousAppointmentsForDoctor(Doctor.Id));
             RefreshGrid();
             this.DataContext = this;
 
@@ -70,8 +74,8 @@ namespace Hospital_IS.SecretaryView
             if (FutureAppointments != null)
                 FutureAppointments.Clear();
 
-            DoctorAppointmentManagementController.Instance.ReloadAppointments();
-            FutureAppointments = new ObservableCollection<DoctorAppointmentDTO>(DoctorAppointmentManagementController.Instance.GetFutureAppointmentsForDoctor(Doctor.Id));
+            DoctorAppointmentController.Instance.ReloadDoctorAppointments();
+            FutureAppointments = new ObservableCollection<DoctorAppointmentDTO>(doctorAppointmentTarget.GetFutureAppointmentsForDoctor(Doctor.Id));
 
             dataGridFutureAppointments.ItemsSource = FutureAppointments;
         }
