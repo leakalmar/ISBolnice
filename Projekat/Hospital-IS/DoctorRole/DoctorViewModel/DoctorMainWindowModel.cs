@@ -1,4 +1,5 @@
-﻿using Hospital_IS.DoctorRole.Commands;
+﻿using Hospital_IS.Adapter;
+using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DTOs;
 using System.Windows.Navigation;
 
@@ -14,6 +15,9 @@ namespace Hospital_IS.DoctorViewModel
         private DoctorDTO doctor;
         private bool focused;
         public bool DemoRunning { get; set; }
+
+        public IDoctorAppointmentTarget Adapter { get; } = new DoctorAppointmentAdapter();
+
 
         public static DoctorMainWindowModel Instance
         {

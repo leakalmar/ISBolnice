@@ -59,7 +59,7 @@ namespace Hospital_IS.DoctorRole.DoctorConverters
             ObservableCollection<DoctorAppointmentDTO> dtoAppointments = new ObservableCollection<DoctorAppointmentDTO>();
             foreach (DoctorAppointment d in appointments)
             {
-                dtoAppointments.Add(DoctorAppointmentManagementController.Instance.GetAppointmentById(d.Id));
+                dtoAppointments.Add(DoctorMainWindowModel.Instance.Adapter.GetDoctorAppointmentById(d.Id));
             }
             return dtoAppointments;
         }
