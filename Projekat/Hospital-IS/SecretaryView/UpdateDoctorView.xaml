@@ -179,7 +179,7 @@
             </Validation.ErrorTemplate>
         </TextBox>
         
-        <ComboBox Name="shiftComboBox" Grid.Column="2" Grid.Row="9" Margin="40 20 10 10">
+        <ComboBox Name="shiftComboBox" Grid.Column="2" Grid.Row="9" Margin="40 20 10 10" GotFocus="shiftComboBox_GotFocus">
             <ComboBoxItem Content="Prva"/>
             <ComboBoxItem Content="Druga"/>
         </ComboBox>

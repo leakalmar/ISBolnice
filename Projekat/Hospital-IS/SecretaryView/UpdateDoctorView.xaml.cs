@@ -238,5 +238,10 @@ namespace Hospital_IS.SecretaryView
                 }
             }
         }
+
+        private void shiftComboBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Ukoliko promenite smenu svi ne obavljeni termini će biti otkazani!");
+        }
     }
 }

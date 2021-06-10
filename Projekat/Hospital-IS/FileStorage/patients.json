@@ -12,18 +12,11 @@
       "AppointmentCounterInTimeRange": 0,
       "IsTroll": false
     },
-    "PatientNotes": [
-      {
-        "NotificationTime": 8,
-        "IsNotifyChecked": false,
-        "NoteContent": "nesto",
-        "AppointmentId": 1
-      }
-    ],
+    "PatientNotes": [],
     "BloodType": null,
     "IsGuest": false,
     "Education": 0,
-    "Name": "Simonapo",
+    "Name": "Simona",
     "Surname": "Stantic",
     "BirthDate": "1999-03-13T00:00:00",
     "Phone": "",
@@ -35,5 +28,32 @@
     "doctor": null,
     "Doctor": null,
     "Id": 1
+  },
+  {
+    "FileDate": "0001-01-01T00:00:00",
+    "Employer": null,
+    "Admitted": false,
+    "Alergies": null,
+    "TrollMechanism": {
+      "TrollCheckStartDate": "0001-01-01T00:00:00",
+      "AppointmentCounterInTimeRange": 0,
+      "IsTroll": false
+    },
+    "PatientNotes": [],
+    "BloodType": null,
+    "IsGuest": false,
+    "Education": 0,
+    "Name": "Nikola",
+    "Surname": "Nikolic",
+    "BirthDate": "1992-11-12T00:00:00",
+    "Phone": "068912321",
+    "Email": "nikola@gmail.com",
+    "Gender": "Muško",
+    "Relationship": null,
+    "Password": "123",
+    "Address": "Bulevar Evrope 12, Novi Sad",
+    "doctor": null,
+    "Doctor": null,
+    "Id": 14
   }
 ]

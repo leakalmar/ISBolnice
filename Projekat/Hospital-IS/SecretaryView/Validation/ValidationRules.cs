@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Hospital_IS.SecretaryView.Validation
@@ -255,8 +256,8 @@ namespace Hospital_IS.SecretaryView.Validation
                     else
                         return new ValidationResult(false, "Vacation has to be announced at least two weeks in advance.");
                 }
-                    
 
+                MessageBox.Show("Upozorenje: Svi termini u naznačenom periodu će biti otkazani!");
                 return new ValidationResult(true, null);
             }
             else

@@ -206,5 +206,13 @@
     "Reports": [],
     "Hospitalization": [],
     "Therapies": []
+  },
+  {
+    "Id": 14,
+    "Prescription": [],
+    "Test": [],
+    "Reports": [],
+    "Hospitalization": [],
+    "Therapies": []
   }
 ]
