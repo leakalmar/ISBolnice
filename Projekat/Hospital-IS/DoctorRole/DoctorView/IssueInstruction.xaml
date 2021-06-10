@@ -64,7 +64,7 @@
                 Margin="0,0,70,0" HorizontalAlignment="Right" />
         <Label Grid.Row="3" Grid.Column="2" FontFamily="Verdana" FontSize="16"
                 Foreground="FloralWhite"
-                Content="{Binding SelectedEmergencyAppointment.SuggestedAppointment.Doctor.Specialty.Name}"
+                Content="{Binding SelectedEmergencyAppointment.SuggestedAppointment.Doctor.Specialty}"
                 Margin="0,0,70,0" HorizontalAlignment="Right" />
         <TextBlock Grid.Row="4" Grid.Column="2" FontFamily="Verdana"
                 FontSize="16" Foreground="FloralWhite" Margin="0,0,70,0"

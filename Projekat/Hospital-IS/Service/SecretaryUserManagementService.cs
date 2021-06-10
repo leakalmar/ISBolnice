@@ -107,12 +107,13 @@ namespace Hospital_IS.Service
 
         public PatientDTO GetPatientByID(int id)
         {
+            PatientDTO patientDto = null;
             foreach (PatientDTO patientDTO in AllPatients)
             {
                 if (patientDTO.Id.Equals(id))
-                    return patientDTO;
+                    patientDto = patientDTO;
             }
-            return null;
+            return patientDto;
         }
         private void LoadNotifications()
         {
@@ -202,12 +203,13 @@ namespace Hospital_IS.Service
 
         public DoctorDTO GetDoctorByID(int id)
         {
+            DoctorDTO doctor = null;
             foreach (DoctorDTO doctorDTO in AllDoctors)
             {
                 if (doctorDTO.Id.Equals(id))
-                    return doctorDTO;
+                    doctor = doctorDTO;
             }
-            return null;
+            return doctor;
         }
     }
 }

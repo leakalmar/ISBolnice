@@ -225,6 +225,19 @@ namespace Hospital_IS.Service
             return allRoomByType;
         }
 
+        public RoomDTO GetRoomById(int id)
+        {
+            RoomDTO room = null;
+            foreach (RoomDTO roomDTO in AllRooms)
+            {
+                if (roomDTO.RoomId == id)
+                {
+                    room = roomDTO;
+                }
+            }
+            return room;
+        }
+
         public DoctorAppointmentDTO FormDoctorAppointmentDTO(DoctorAppointment docAppointment)
         {
             PatientDTO patientDTO = SecretaryUserManagementService.Instance.GetPatientByID(docAppointment.Patient.Id);

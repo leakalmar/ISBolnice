@@ -1,8 +1,10 @@
 ﻿using Controllers;
 using DTOs;
 using Enums;
+using Hospital_IS.Controllers;
 using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DoctorRole.DoctorConverters;
+using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using Model;
 using System;
@@ -340,7 +342,11 @@ namespace Hospital_IS.DoctorViewModel
 
         private void GetEmergencyAppointments(List<DateTime> dates, Doctor doctor, int patientId)
         {
-            List<SuggestedEmergencyAppDTO> allEmergencyAppointments = DoctorAppointmentController.Instance.SuggestEmergencyAppsToDoctor(dates, Emergency, SelectedRoom, FindType(), Duration, patientId, doctor);
+            PatientDTO patientDTO = SecretaryManagementController.Instance.GetPatientByID(patientId);
+            RoomDTO roomDTO = DoctorAppointmentManagementController.Instance.GetRoomById(SelectedRoom.RoomId);
+            EmergencyAppointmentDTO emergencyAppointmentDTO = new EmergencyAppointmentDTO(FindType(), doctor.Specialty.Name, patientDTO, roomDTO, duration.Minutes);
+            emergencyAppointmentDTO.RequestedDates = dates;
+            List<SuggestedEmergencyAppDTO> allEmergencyAppointments = DoctorAppointmentController.Instance.SuggestEmergencyAppsToDoctor(emergencyAppointmentDTO);
             ICollectionView view = new CollectionViewSource { Source = allEmergencyAppointments }.View;
             if (doctor.Id != -1)
             {

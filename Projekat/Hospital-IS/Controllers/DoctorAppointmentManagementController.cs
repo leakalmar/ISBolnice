@@ -83,6 +83,11 @@ namespace Hospital_IS.Controllers
             return DoctorAppointmentManagementService.Instance.GetRoomByType(type);
         }
 
+        public RoomDTO GetRoomById(int id)
+        {
+            return DoctorAppointmentManagementService.Instance.GetRoomById(id);
+        }
+
         public List<DoctorAppointmentDTO> GetAppointmentByDoctorId(int doctorId)
         {
             return DoctorAppointmentManagementService.Instance.GetAppointmentByDoctorId(doctorId);
