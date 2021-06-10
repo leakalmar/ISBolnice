@@ -153,7 +153,7 @@ namespace Hospital_IS.SecretaryView
         private void VerifyAppointment(object sender, RoutedEventArgs e)
         {
             if (cbDoctor.SelectedIndex != -1 && cbRoom.SelectedIndex != -1 && cbPatient.SelectedIndex != -1 
-                && dpAppDate.SelectedDate != null && cbHours.SelectedIndex != -1 && cbMinutes.SelectedIndex != -1 && string.IsNullOrEmpty(txtAppDuration.Text)) 
+                && dpAppDate.SelectedDate != null && cbHours.SelectedIndex != -1 && cbMinutes.SelectedIndex != -1 && !string.IsNullOrEmpty(txtAppDuration.Text)) 
             {
                 // doktor
                 DocAppointment.Doctor = Doctors[cbDoctor.SelectedIndex];

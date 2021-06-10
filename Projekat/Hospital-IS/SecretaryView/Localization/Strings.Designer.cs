@@ -196,6 +196,15 @@ namespace Hospital_IS.SecretaryView.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Prijavi grešku.
+        /// </summary>
+        internal static string btnErrorReport {
+            get {
+                return ResourceManager.GetString("btnErrorReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gost.
         /// </summary>
         internal static string btnGuest {

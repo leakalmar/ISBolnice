@@ -162,6 +162,9 @@
   <data name="btnEmergency" xml:space="preserve">
     <value>Hitan pregled?</value>
   </data>
+  <data name="btnErrorReport" xml:space="preserve">
+    <value>Prijavi grešku</value>
+  </data>
   <data name="btnGuest" xml:space="preserve">
     <value>Gost</value>
   </data>
