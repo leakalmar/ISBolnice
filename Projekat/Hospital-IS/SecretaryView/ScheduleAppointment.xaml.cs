@@ -285,7 +285,7 @@ namespace Hospital_IS.SecretaryView
             }
             else
             {
-                for (int i = 14; i <= 10; i++)
+                for (int i = 14; i <= 20; i++)
                     Hours.Add(i);
             }
 
