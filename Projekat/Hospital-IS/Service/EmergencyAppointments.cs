@@ -1,5 +1,6 @@
 ﻿using DTOs;
 using Hospital_IS.DTOs;
+using Hospital_IS.Utils;
 using Model;
 using Service;
 using System;
@@ -7,42 +8,9 @@ using System.Collections.Generic;
 
 namespace Hospital_IS.Service
 {
-    class EmergencyDoctorAppointmentService
+    public abstract class EmergencyAppointments
     {
-        private static EmergencyDoctorAppointmentService instance = null;
-        public static EmergencyDoctorAppointmentService Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new EmergencyDoctorAppointmentService();
-                }
-                return instance;
-            }
-        }
-        public List<SuggestedEmergencyAppDTO> GenerateEmergencyAppointmentsForDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
-        {
-            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
-
-            List<Doctor> doctors = DoctorService.Instance.GetDoctorsBySpecialty(tempAppointment.Doctor.Specialty.Name);
-
-            foreach (Doctor doc in doctors)
-            {
-                tempAppointment.Doctor = doc;
-                List<DoctorAppointment> allPossibleAppointments = SuggestedAppointmentService.Instance.GenerateAppointmentsForDoctor(dates, tempAppointment);
-                appointments.AddRange(allPossibleAppointments);
-            }
-
-            int durationInMinutes = (int)(tempAppointment.AppointmentEnd - tempAppointment.AppointmentStart).TotalMinutes;
-            List<SuggestedEmergencyAppDTO> suggestedAppointments = FormEmergencyAppDTOs(appointments, durationInMinutes);
-            SetConflictingIsUrgent(suggestedAppointments);
-            CheckIfConflictingIsStarted(suggestedAppointments);
-
-            return suggestedAppointments;
-        }
-
-        public List<SuggestedEmergencyAppDTO> GenerateEmergencyAppointmentsForSecretary(EmergencyAppointmentDTO emerAppointmentDTO)
+        public List<SuggestedEmergencyAppDTO> GenerateEmergencyAppointments(EmergencyAppointmentDTO emerAppointmentDTO)
         {
             List<DoctorAppointment> appointments = new List<DoctorAppointment>();
 
@@ -50,13 +18,7 @@ namespace Hospital_IS.Service
 
             foreach (Doctor doc in doctors)
             {
-                DateTime appointmentStart = RoundUp(DateTime.Now, TimeSpan.FromMinutes(15));
-                for (int i = 0; i < 4; i++)
-                {
-                    appointments.Add(new DoctorAppointment(appointmentStart, appointmentStart.AddMinutes(emerAppointmentDTO.DurationInMinutes), emerAppointmentDTO.AppointmetType,
-                        emerAppointmentDTO.Room.RoomId, doc, PatientService.Instance.GetPatientByID(emerAppointmentDTO.Patient.Id)));
-                    appointmentStart = appointmentStart.AddMinutes(15);
-                }
+                appointments.AddRange(GenerateAppointments(emerAppointmentDTO, doc));
             }
 
             List<SuggestedEmergencyAppDTO> suggestedAppointments = FormEmergencyAppDTOs(appointments, emerAppointmentDTO.DurationInMinutes);
@@ -66,6 +28,8 @@ namespace Hospital_IS.Service
 
             return suggestedAppointments;
         }
+
+        public abstract List<DoctorAppointment> GenerateAppointments(EmergencyAppointmentDTO emerAppointmentDTO, Doctor doc);
 
         private List<SuggestedEmergencyAppDTO> FormEmergencyAppDTOs(List<DoctorAppointment> appointments, int durationInMinutes)
         {
@@ -87,12 +51,6 @@ namespace Hospital_IS.Service
             }
 
             return suggestedAppointments;
-        }
-
-
-        private DateTime RoundUp(DateTime date, TimeSpan time)
-        {
-            return new DateTime((date.Ticks + time.Ticks - 1) / time.Ticks * time.Ticks, date.Kind);
         }
 
         private List<DoctorAppointmentDTO> FindConflictingAppointments(DoctorAppointment appointment)
@@ -128,7 +86,7 @@ namespace Hospital_IS.Service
         private List<RescheduledAppointmentDTO> FindNextFreeAppointments(List<DoctorAppointmentDTO> oldAppointments, double emergencyAppDuration)
         {
             DateTime appointmentStart = DateTime.Now.AddMinutes(emergencyAppDuration);
-            appointmentStart = RoundUp(appointmentStart, TimeSpan.FromMinutes(30));
+            appointmentStart = UtilityMethods.Instance.RoundUp(appointmentStart, TimeSpan.FromMinutes(30));
             appointmentStart = appointmentStart.AddMinutes(60);
             List<RescheduledAppointmentDTO> newAppointments = new List<RescheduledAppointmentDTO>();
 
@@ -174,13 +132,13 @@ namespace Hospital_IS.Service
             return validSuggestedApp;
         }
 
-        private void SetConflictingIsUrgent(List<SuggestedEmergencyAppDTO> suggestedEmergencyApps)
-        {
-            foreach (SuggestedEmergencyAppDTO suggested in suggestedEmergencyApps)
-            {
-                suggested.CheckIfConflictingIsUrgent();
-            }
-        }
+        //private void SetConflictingIsUrgent(List<SuggestedEmergencyAppDTO> suggestedEmergencyApps)
+        //{
+        //    foreach (SuggestedEmergencyAppDTO suggested in suggestedEmergencyApps)
+        //    {
+        //        suggested.CheckIfConflictingIsUrgent();
+        //    }
+        //}
 
         private void CheckIfConflictingIsStarted(List<SuggestedEmergencyAppDTO> suggestedEmergencyApps)
         {
