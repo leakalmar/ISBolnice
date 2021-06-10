@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Hospital_IS.DoctorRole.DoctorView.Tests"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Hospital_IS.DoctorRole.DoctorView"
+        xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+    </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Key="Add" Command="{Binding NewTestCommand}" />
+    </UserControl.InputBindings>
+    <Grid Margin="0,25,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="0.03*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Button Margin="250,5,250,5" Style="{StaticResource CustomButton}"
+                Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}"
+                Content="Novi test">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding NewTestCommand}" />
+                <KeyBinding Key="Space" Command="{Binding NewTestCommand}" />
+            </Button.InputBindings>
+        </Button>
+
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Tests}" Grid.Row="2"
+                Style="{StaticResource CustomDataGrid}"
+                KeyboardNavigation.TabNavigation="None">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Datum" Width="auto" MinWidth="90"
+                        Binding="{Binding SampleDate,StringFormat=\{0:dd.MM.yyyy.\}}" CanUserResize="False"
+                        />
+                <DataGridTextColumn Header="Test" Binding="{Binding Name}"
+                        CanUserResize="False" Width="auto" MinWidth="70" />
+                <DataGridTextColumn Header="Broj Rezultat"
+                        Binding="{Binding Result}" CanUserResize="False"
+                        Width="auto" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

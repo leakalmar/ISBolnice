@@ -16,6 +16,7 @@ namespace Hospital_IS.ManagerViewModel
         private ObservableCollection<Room> roomsStaticTransferFirstBox;
         private ObservableCollection<Room> roomsStaticTransferSecondBox;
         private RelayCommand transferStaticEquipmentCommand;
+        private RelayCommand navigateToPreviousPage;
         private Room selectedRoomFirst;
         private Room selectedRoomSecond;
         private string transferAmount;
@@ -41,6 +42,17 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
+        public RelayCommand NavigateToPreviousPage
+        {
+            get { return navigateToPreviousPage; }
+            set
+            {
+                navigateToPreviousPage = value;
+            }
+        }
+
+
+
         public RelayCommand TransferStaticEquipmentCommand
         {
             get { return transferStaticEquipmentCommand; }
@@ -65,9 +77,10 @@ namespace Hospital_IS.ManagerViewModel
                     OnPropertyChanged("SelectedRoomSecond");
                     if (SelectedRoomFirst != null)
                     {
-                        if (SelectedRoomFirst.RoomId == SelectedRoomSecond.RoomId)
+                        if (SelectedRoomFirst.Id == SelectedRoomSecond.Id)
                         {
                             MessageBox.Show("Izabrali ste istu sobu");
+
                             EquipmentSecondRoom = new ObservableCollection<Equipment>();
                             return;
                          
@@ -114,7 +127,7 @@ namespace Hospital_IS.ManagerViewModel
 
                     if(SelectedRoomSecond != null && SelectedRoomFirst != null)
                     {
-                        if (SelectedRoomFirst.RoomId == SelectedRoomSecond.RoomId)
+                        if (SelectedRoomFirst.Id == SelectedRoomSecond.Id)
                         {
                             MessageBox.Show("Izabrali ste istu sobu");
                             EquipmentsFirstRoom = new ObservableCollection<Equipment>();
@@ -266,32 +279,50 @@ namespace Hospital_IS.ManagerViewModel
             RoomsStaticTransferFirstBox = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
             RoomsStaticTransferSecondBox = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
             this.TransferStaticEquipmentCommand = new RelayCommand(Execute_TransferStaticEquipment, CanExecute_NavigateToChooseAppViewCommand);
+            this.NavigateToPreviousPage = new RelayCommand(Execute_NavigateToPreviousPage);
         }
+
+
+        private void Execute_NavigateToPreviousPage(object obj)
+        {
+            this.NavService.GoBack();
+            SelectedRoomFirst = null;
+            SelectedRoomSecond = null;
+            SelectedEquipmentFirst = null;
+            TransferAmount = null;
+            EquipmentSecondRoom = new ObservableCollection<Equipment>();
+            EquipmentsFirstRoom = new ObservableCollection<Equipment>();
+        }
+
+
+
+
 
         private void Execute_TransferStaticEquipment(object obj)
         {
 
-            if (RoomController.Instance.CheckQuantity(SelectedRoomFirst, SelectedEquipmentFirst, Convert.ToInt32(TransferAmount))) ;
+            if (RoomController.Instance.CheckQuantity(SelectedRoomFirst, SelectedEquipmentFirst, Convert.ToInt32(TransferAmount))) 
             {
-                ScheduleStaticTransferViewModel.Instance.SetAppointmentsForRoom(SelectedRoomFirst.RoomId, SelectedRoomSecond.RoomId);
+                ScheduleStaticTransferViewModel.Instance.SetAppointmentsForRoom(SelectedRoomFirst.Id, SelectedRoomSecond.Id);
                 ScheduleStaticTransferViewModel.Instance.SourceRoom = SelectedRoomFirst;
                 ScheduleStaticTransferViewModel.Instance.DestinationRoom = SelectedRoomSecond;
                 ScheduleStaticTransferViewModel.Instance.Quantity = Convert.ToInt32(TransferAmount);
                 ScheduleStaticTransferViewModel.Instance.NavService = NavService;
+                ScheduleStaticTransferViewModel.Instance.Equipment = SelectedEquipmentFirst;
                 this.NavService.Navigate(
                    new Uri("ManagerView1/ScheduleStaticAppTransfer.xaml", UriKind.Relative));
 
-                EquipmentsFirstRoom = new ObservableCollection<Equipment>();
-                EquipmentSecondRoom = new ObservableCollection<Equipment>();
-                SelectedRoomFirst = null;
-                SelectedRoomSecond = null;
+               
+            }else
+            {
+                MessageBox.Show("Nedovoljna kolicina opreme");
             }
         }
 
         private bool CanExecute_NavigateToChooseAppViewCommand(object obj)
         {
 
-            return isNumberIsGraterThanZero() && SelectedEquipmentFirst != null && SelectedRoomSecond!= null && (SelectedRoomSecond.RoomId != SelectedRoomFirst.RoomId);
+            return isNumberIsGraterThanZero() && SelectedEquipmentFirst != null && SelectedRoomSecond!= null && (SelectedRoomSecond.Id != SelectedRoomFirst.Id);
         }
 
         private bool isNumberIsGraterThanZero()

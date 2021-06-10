@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="Hospital_IS.DoctorRole.DoctorView.TherapyNew"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Hospital_IS.DoctorRole.DoctorView"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:validationrules="clr-namespace:Hospital_IS.DoctorRole.ValidationRules"
+        xmlns:doctorconverters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
+    <UserControl.Resources>
+        <doctorconverters:DateConverter x:Key="DateConverter" />
+    </UserControl.Resources>
+    <Grid Margin="0,25,0,0" KeyboardNavigation.TabNavigation="Cycle">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.ColumnSpan="2" Grid.Row="1" Margin="50,20,50,50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.4*" />
+                <ColumnDefinition Width="0.1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0"
+                    Grid.ColumnSpan="4" HorizontalAlignment="Center">
+                <Label Content="Lek:" Style="{StaticResource CustomLabel}" />
+                <TextBox Style="{StaticResource LineTextBox}" Margin="5,0,0,0"
+                        commands:FocusExtension.IsFocused="{Binding Focused}"
+                        Text="{Binding Name}"
+                        HorizontalAlignment="Stretch" TextSearch.TextPath="Name"
+                        MinWidth="250">
+                </TextBox>
+            </StackPanel>
+            <TextBlock Grid.Row="1" Grid.ColumnSpan="4"
+                    HorizontalAlignment="Center"
+                    Text="{Binding Therapy.ValidationErrors[Medicine]}"
+                    Foreground="Red" />
+
+            <Label Content="Datum početka terapije:"
+                    Style="{StaticResource CustomLabel}" Grid.Row="2" />
+            <Label Content="{Binding Source={x:Static sys:DateTime.Now}}"
+                    ContentStringFormat="dd.MM.yyyy." IsEnabled="False"
+                    Style="{StaticResource CustomLabel}" Grid.Row="3"
+                    Margin="5,0,0,0" BorderBrush="Gray"
+                    BorderThickness="0,0,0,2" />
+
+            <Label Content="Datum kraja terapije:"
+                    Style="{StaticResource CustomLabel}" Grid.Row="4" />
+            <DatePicker Grid.Row="5" Style="{StaticResource CustomDatePicker}"
+                    SelectedDate="{Binding Path=Date}"
+                    DisplayDateStart="{x:Static sys:DateTime.Today}">
+                <DatePicker.Resources>
+                    <Style TargetType="DatePickerTextBox">
+                        <Setter Property="Focusable" Value="True" />
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
+            <TextBlock Grid.Row="6" Text="{Binding Therapy.ValidationErrors[Date]}"
+                    Foreground="Red" />
+
+                <Label Content="Broj tableta (po uzimanju):" Grid.Column="2"
+                        Style="{StaticResource CustomLabel}" Grid.Row="2"
+                        Grid.RowSpan="2" />
+                <xctk:IntegerUpDown Grid.Column="3" Grid.Row="2"
+                        Grid.RowSpan="2" VerticalAlignment="Bottom"
+                        HorizontalAlignment="Left" Width="60" Height="25"
+                        Maximum="5" Minimum="1" Value="{Binding Therapy.Pills}" />
+                <Label Content="Broj uzimanja (po danu):" Grid.Column="2"
+                        Style="{StaticResource CustomLabel}" Grid.Row="4"
+                        Grid.RowSpan="2" />
+                <xctk:IntegerUpDown Grid.Column="3" Grid.Row="4"
+                        Grid.RowSpan="2" VerticalAlignment="Bottom"
+                        HorizontalAlignment="Left" Width="60" Height="25"
+                        Maximum="5" Minimum="1"
+                        Value="{Binding Therapy.Takings}" />
+        </Grid>
+
+        <Button Content="Potvrdi" Style="{StaticResource CustomButton}"
+                Margin="150,5,50,5">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding SaveCommand}" />
+                <KeyBinding Key="Space" Command="{Binding SaveCommand}" />
+            </Button.InputBindings>
+        </Button>
+
+        <Button Style="{StaticResource CustomButton}" Content="Odustani"
+                Grid.Column="1" Margin="50,5,150,5" Grid.ColumnSpan="2">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding CancelCommand}" />
+                <KeyBinding Key="Space" Command="{Binding CancelCommand}" />
+            </Button.InputBindings>
+        </Button>
+
+    </Grid>
+</UserControl>

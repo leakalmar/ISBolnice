@@ -18,28 +18,49 @@
     <None Remove="hospital.png" />
     <None Remove="hospital2.png" />
     <None Remove="Resources\add-row.png" />
+    <None Remove="Resources\add.png" />
     <None Remove="Resources\angledown.png" />
     <None Remove="Resources\backButtonLeft.png" />
     <None Remove="Resources\bed.png" />
+    <None Remove="Resources\bookAppointment.png" />
     <None Remove="Resources\calendar.png" />
     <None Remove="Resources\chooseFromTable.png" />
+    <None Remove="Resources\demo.png" />
     <None Remove="Resources\doctor-search.png" />
+    <None Remove="Resources\equipmentView.png" />
+    <None Remove="Resources\feedback.png" />
+    <None Remove="Resources\helpmanager.png" />
+    <None Remove="Resources\hand-pill.png" />
+    <None Remove="Resources\eye.png" />
+    <None Remove="Resources\guests.png" />
     <None Remove="Resources\hospital.png" />
     <None Remove="Resources\hospitalCroped.png" />
     <None Remove="Resources\insight.png" />
+    <None Remove="Resources\left.png" />
     <None Remove="Resources\lekovi.png" />
+    <None Remove="Resources\logout.png" />
+    <None Remove="Resources\minus.png" />
     <None Remove="Resources\notification.png" />
     <None Remove="Resources\notification1.png" />
     <None Remove="Resources\obavest.png" />
+    <None Remove="Resources\pen.png" />
     <None Remove="Resources\pill-hand.png" />
+    <None Remove="Resources\plus.png" />
     <None Remove="Resources\print.png" />
     <None Remove="Resources\question.png" />
+    <None Remove="Resources\register.png" />
     <None Remove="Resources\registration.png" />
     <None Remove="Resources\renovation.png" />
+    <None Remove="Resources\reportren.png" />
+    <None Remove="Resources\right.png" />
     <None Remove="Resources\search.png" />
+    <None Remove="Resources\SearchSecretary.png" />
+    <None Remove="Resources\secretaryReport.png" />
     <None Remove="Resources\shoppingcart.png" />
     <None Remove="Resources\redsiren.png" />
     <None Remove="Resources\siren.png" />
+    <None Remove="Resources\star-doctor.png" />
+    <None Remove="Resources\star-filled-doctor.png" />
     <None Remove="Resources\treatment.png" />
     <None Remove="other_facilities.png" />
     <None Remove="request.png" />
@@ -57,6 +78,7 @@
     <None Remove="Resources\settings.png" />
     <None Remove="Resources\toolbar.png" />
     <None Remove="Resources\transfer.png" />
+    <None Remove="Resources\user.png" />
     <None Remove="Resources\worker.png" />
     <None Remove="room_icon.jpg" />
     <None Remove="thredots.png" />
@@ -81,8 +103,11 @@
 
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.2" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.2" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="WPFLocalizeExtension" Version="3.8.0" />
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
     <PackageReference Include="WPFToolkit.DataVisualization" Version="3.5.50211.1" />
   </ItemGroup>
 
@@ -100,55 +125,101 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\add-row.png" />
+    <Resource Include="Resources\add.png" />
     <Resource Include="Resources\angledown.png" />
     <Resource Include="Resources\backButtonLeft.png" />
     <Resource Include="Resources\bed.png" />
     <Resource Include="Resources\addroom.png" />
     <Resource Include="Resources\backbutton.png" />
+    <Resource Include="Resources\bookAppointment.png" />
     <Resource Include="Resources\bookmark.png" />
     <Resource Include="Resources\calendar.png" />
     <Resource Include="Resources\checkmark.png" />
     <Resource Include="Resources\chooseFromTable.png" />
     <Resource Include="Resources\deleteroom.png" />
+    <Resource Include="Resources\demo.png" />
     <Resource Include="Resources\doctor-search.png" />
     <Resource Include="Resources\doctor.jpg" />
     <Resource Include="Resources\edit.png" />
+    <Resource Include="Resources\equipmentView.png" />
+    <Resource Include="Resources\feedback.png" />
+    <Resource Include="Resources\helpmanager.png" />
+    <Resource Include="Resources\hand-pill.png" />
+    <Resource Include="Resources\eye.png" />
     <Resource Include="Resources\filijale.png" />
+    <Resource Include="Resources\guests.png" />
     <Resource Include="Resources\hospital.png" />
     <Resource Include="Resources\hospitalCroped.png" />
     <Resource Include="Resources\hospitalroom.png" />
     <Resource Include="Resources\importance.png" />
     <Resource Include="Resources\insight.png" />
+    <Resource Include="Resources\left.png" />
     <Resource Include="Resources\lekovi.png" />
+    <Resource Include="Resources\logout.png" />
     <Resource Include="Resources\manager.png" />
     <Resource Include="Resources\maximize.png" />
     <Resource Include="Resources\menubar.png" />
     <Resource Include="Resources\minimize.png" />
+    <Resource Include="Resources\minus.png" />
     <Resource Include="Resources\notification.png" />
     <Resource Include="Resources\notification1.png" />
     <Resource Include="Resources\obavest.png" />
+    <Resource Include="Resources\pen.png" />
     <Resource Include="Resources\pill-hand.png" />
     <Resource Include="Resources\options.png" />
     <Resource Include="Resources\pill.png" />
+    <Resource Include="Resources\plus.png" />
     <Resource Include="Resources\print.png" />
     <Resource Include="Resources\question.png" />
+    <Resource Include="Resources\register.png" />
     <Resource Include="Resources\registration.png" />
     <Resource Include="Resources\renovation.png" />
     <Resource Include="Resources\redsiren.png" />
     <Resource Include="Resources\report.png" />
+    <Resource Include="Resources\reportren.png" />
+    <Resource Include="Resources\right.png" />
     <Resource Include="Resources\room.png" />
     <Resource Include="Resources\room1.png" />
     <Resource Include="Resources\search.png" />
+    <Resource Include="Resources\SearchSecretary.png" />
+    <Resource Include="Resources\secretaryReport.png" />
     <Resource Include="Resources\settings.png" />
     <Resource Include="Resources\shoppingcart.png" />
     <Resource Include="Resources\simona.jpg" />
     <Resource Include="Resources\siren.png" />
+    <Resource Include="Resources\star-doctor.png" />
+    <Resource Include="Resources\star-filled-doctor.png" />
     <Resource Include="Resources\treatment.png" />
     <Resource Include="Resources\toolbar.png" />
     <Resource Include="Resources\transfer.png" />
     <Resource Include="Resources\tube.png" />
+    <Resource Include="Resources\user.png" />
     <Resource Include="Resources\worker.png" />
     <Resource Include="Resources\x-icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="SecretaryView\Localization\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <Compile Update="SecretaryView\Localization\Strings.sr-LATN-CS.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.sr-LATN-CS.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="SecretaryView\Localization\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SecretaryView\Localization\Strings.sr-LATN-CS.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.sr-LATN-CS.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

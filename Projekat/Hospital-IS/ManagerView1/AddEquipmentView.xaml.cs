@@ -9,10 +9,10 @@ namespace Hospital_IS.ManagerView1
     /// </summary>
     public partial class AddEquipmentView : Page
     {
-        public AddEquipmentView(EquipmentViewModel eqiupmentViewModel)
+        public AddEquipmentView()
         {
             InitializeComponent();
-            this.DataContext = eqiupmentViewModel;
+            this.DataContext = AddEquipmentViewModel.Instance;
         }
 
         private void EquipmentName_GotFocus(object sender, RoutedEventArgs e)

@@ -21,17 +21,9 @@ namespace Hospital_IS.ManagerView1
         public RenovationWindow()
         {
             InitializeComponent();
-            this.DataContext = AdvancedRoomRenovationViewModel.Instance;
+          
         }
 
-        private void Send_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+     
     }
 }

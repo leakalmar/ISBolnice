@@ -12,6 +12,7 @@ namespace Hospital_IS.DTOs
         public String Name { get; set; }
         public int Quantity { get; set; }
         public String ProducerName { get; set; }
+        public String EquipTypeText { get; set; }
 
         public EquipmentDTO(EquiptType equipType, int equiptId, string name, int quantity, string producerName)
         {
@@ -20,6 +21,11 @@ namespace Hospital_IS.DTOs
             Name = name;
             Quantity = quantity;
             ProducerName = producerName;
+
+            if (equipType.Equals(EquiptType.Dynamic))
+                EquipTypeText = "Dinamička";
+            else if (equipType.Equals(EquiptType.Stationary))
+                EquipTypeText = "Statička";
         }
     }
 }

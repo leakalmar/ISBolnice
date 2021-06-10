@@ -1,19 +1,18 @@
 using Enums;
+using Hospital_IS.Model;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 
 namespace Model
 {
-    public class Room
+    public class Room: Entity
     {
-
 
         public Room()
         {
             
         }
-
 
         public int RoomFloor
         {
@@ -29,7 +28,8 @@ namespace Model
         public int SurfaceArea { get; set; }
         public int BedNumber { get; set; }
 
-        public int RoomId { get; set; }
+     
+        
 
         public RoomType Type
         {
@@ -38,7 +38,7 @@ namespace Model
 
         public string RoomIdType
         {
-            get { return RoomId + " " + Type; }
+            get { return RoomNumber + " " + Type; }
         }
 
         public List<Equipment> Equipment { get; set; } = new List<Equipment>();
@@ -51,16 +51,19 @@ namespace Model
             RoomNumber = roomNumber;
             SurfaceArea = surfaceArea;
             BedNumber = bedNumber;
+            Type = type;        
+        }
+
+        public Room(int roomFloor, int roomNumber, int surfaceArea, int bedNumber, int roomId, RoomType type)
+        {
+            RoomFloor = roomFloor;
+            RoomNumber = roomNumber;
+            SurfaceArea = surfaceArea;
+            BedNumber = bedNumber;
+            Id = roomId;
             Type = type;
         }
 
-        public Room(int roomId, RoomType type, int roomNumber, int bedNumber)
-        {
-            RoomId = roomId;
-            Type = type;
-            RoomNumber = roomNumber;
-            BedNumber = bedNumber;
-        }
         public Room(int roomFloor, int roomNumber, int surfaceArea, RoomType type, List<Equipment> equipment)
         {
             RoomFloor = roomFloor;
@@ -111,10 +114,8 @@ namespace Model
         }
         public Boolean UpdateEquipment(Equipment updateEquip)
         {
-
             foreach (Equipment r in Equipment)
             {
-                MessageBox.Show(r.EquiptId.ToString() + " " + updateEquip.EquiptId.ToString());
                 if (r.EquiptId == updateEquip.EquiptId)
                 {
                     
@@ -124,9 +125,8 @@ namespace Model
                     return true;
                 }
             }
-
             return false;
         }
-      
+   
     }
 }

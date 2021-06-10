@@ -33,7 +33,15 @@ namespace Controllers
 
         public MedicineDTO GetByName(string medicineName)
         {
-            return ConvertMedicineToDTO(MedicineService.Instance.GetByName(medicineName));
+            Medicine med = MedicineService.Instance.GetByName(medicineName);
+            if (med != null)
+            {
+                return ConvertMedicineToDTO(med);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public MedicineDTO ConvertMedicineToDTO(Medicine medicine)
@@ -50,7 +58,15 @@ namespace Controllers
             }
             return new MedicineDTO(componentDTOs, medicine.SideEffects, medicine.Usage, replacmentDTOs, medicine.Name, false, false);
         }
-
+        public List<MedicineDTO> ConvertMedicineToDTO(List<Medicine> medicines)
+        {
+            List<MedicineDTO> list = new List<MedicineDTO>();
+            foreach(Medicine m in medicines)
+            {
+                list.Add(ConvertMedicineToDTO(m));
+            }
+            return list;
+        }
         public Medicine ConvertDTOToMedicine(MedicineDTO medicineDTO)
         {
             List<MedicineComponent> components = new List<MedicineComponent>();
@@ -71,9 +87,9 @@ namespace Controllers
             MedicineService.Instance.UpdateMedicine(medicine);
         }
 
-        public void UpdateMedicineWithName(string oldName, string name, List<MedicineComponent> composition, string sideEffects, string usage, List<ReplaceMedicineName> replaceMedicine)
+        public void UpdateMedicineWithName(string oldName,Medicine medicine)
         {
-            Medicine medicine = new Medicine(name, composition, sideEffects, usage, replaceMedicine);
+           
             MedicineService.Instance.UpdateMedicineWithName(oldName, medicine);
 
         }
@@ -153,6 +169,11 @@ namespace Controllers
                 }
             }
             return ret;
+        }
+
+        public bool IsNameUnique(string name)
+        {
+            return MedicineService.Instance.IsNameUnique(name);
         }
     }
 }

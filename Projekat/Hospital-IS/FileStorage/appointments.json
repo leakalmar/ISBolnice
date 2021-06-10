@@ -4,7 +4,6 @@
     "AppTypeText": "Pregled",
     "IsUrgent": false,
     "Patient": {
-      "hospital": null,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -18,11 +17,9 @@
         "IsTroll": false
       },
       "PatientNotes": [],
+      "BloodType": null,
       "IsGuest": false,
-      "doctor": null,
-      "Doctor": null,
       "Education": 0,
-      "Id": 1,
       "Name": "Simona",
       "Surname": "Stantic",
       "BirthDate": "2021-03-29T23:21:22.7048652+02:00",
@@ -32,11 +29,12 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
-      "Hospital": null
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
     },
     "Doctor": {
       "patient": [],
-      "hospital": null,
       "VacationTimeStart": "0001-01-01T00:00:00",
       "WorkShift": 0,
       "Specialty": {
@@ -45,17 +43,7 @@
       "DaysOff": [],
       "PrimaryRoom": 1,
       "Patient": [],
-      "Salary": 70000.0,
-      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-      "WorkDay": [
-        {
-          "Day": 0,
-          "StartTime": "2021-02-02T08:00:00",
-          "EndTime": "2021-02-02T20:00:00"
-        }
-      ],
       "Education": 0,
-      "Id": 4,
       "Name": "Dragana",
       "Surname": "Vukmanov Simokov",
       "BirthDate": "1985-05-07T00:00:00",
@@ -65,7 +53,16 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
-      "Hospital": null
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 4
     },
     "IsFinished": true,
     "Reserved": true,
@@ -81,7 +78,6 @@
     "AppTypeText": "Pregled",
     "IsUrgent": false,
     "Patient": {
-      "hospital": null,
       "FileDate": "2021-03-29T23:21:22.7064891+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -95,11 +91,9 @@
         "IsTroll": false
       },
       "PatientNotes": [],
+      "BloodType": null,
       "IsGuest": false,
-      "doctor": null,
-      "Doctor": null,
       "Education": 0,
-      "Id": 2,
       "Name": "Stefan",
       "Surname": "Beckovic",
       "BirthDate": "2021-03-29T23:21:22.7064868+02:00",
@@ -109,11 +103,12 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Zelengoska 15",
-      "Hospital": null
+      "doctor": null,
+      "Doctor": null,
+      "Id": 2
     },
     "Doctor": {
       "patient": [],
-      "hospital": null,
       "VacationTimeStart": "0001-01-01T00:00:00",
       "WorkShift": 0,
       "Specialty": {
@@ -122,17 +117,7 @@
       "DaysOff": [],
       "PrimaryRoom": 1,
       "Patient": [],
-      "Salary": 70000.0,
-      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-      "WorkDay": [
-        {
-          "Day": 0,
-          "StartTime": "2021-02-02T08:00:00",
-          "EndTime": "2021-02-02T20:00:00"
-        }
-      ],
       "Education": 0,
-      "Id": 4,
       "Name": "Dragana",
       "Surname": "Vukmanov Simokov",
       "BirthDate": "1985-05-07T00:00:00",
@@ -142,7 +127,16 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
-      "Hospital": null
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 4
     },
     "IsFinished": false,
     "Reserved": true,
@@ -158,7 +152,6 @@
     "AppTypeText": "Pregled",
     "IsUrgent": false,
     "Patient": {
-      "hospital": null,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -172,11 +165,9 @@
         "IsTroll": false
       },
       "PatientNotes": [],
+      "BloodType": null,
       "IsGuest": false,
-      "doctor": null,
-      "Doctor": null,
       "Education": 0,
-      "Id": 1,
       "Name": "Simona",
       "Surname": "Stantic",
       "BirthDate": "2021-03-29T00:00:00",
@@ -186,11 +177,12 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
-      "Hospital": null
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
     },
     "Doctor": {
       "patient": [],
-      "hospital": null,
       "VacationTimeStart": "0001-01-01T00:00:00",
       "WorkShift": 0,
       "Specialty": {
@@ -199,17 +191,7 @@
       "DaysOff": [],
       "PrimaryRoom": 1,
       "Patient": [],
-      "Salary": 70000.0,
-      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-      "WorkDay": [
-        {
-          "Day": 0,
-          "StartTime": "2021-02-02T08:00:00",
-          "EndTime": "2021-02-02T20:00:00"
-        }
-      ],
       "Education": 0,
-      "Id": 4,
       "Name": "Dragana",
       "Surname": "Vukmanov Simokov",
       "BirthDate": "1985-05-07T00:00:00",
@@ -219,7 +201,16 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
-      "Hospital": null
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 4
     },
     "IsFinished": true,
     "Reserved": true,
@@ -235,7 +226,6 @@
     "AppTypeText": "Pregled",
     "IsUrgent": false,
     "Patient": {
-      "hospital": null,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -249,11 +239,9 @@
         "IsTroll": false
       },
       "PatientNotes": [],
+      "BloodType": null,
       "IsGuest": false,
-      "doctor": null,
-      "Doctor": null,
       "Education": 0,
-      "Id": 1,
       "Name": "Simona",
       "Surname": "Stantic",
       "BirthDate": "2021-03-29T00:00:00",
@@ -263,11 +251,12 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
-      "Hospital": null
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
     },
     "Doctor": {
       "patient": [],
-      "hospital": null,
       "VacationTimeStart": "0001-01-01T00:00:00",
       "WorkShift": 0,
       "Specialty": {
@@ -276,17 +265,7 @@
       "DaysOff": [],
       "PrimaryRoom": 1,
       "Patient": [],
-      "Salary": 70000.0,
-      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-      "WorkDay": [
-        {
-          "Day": 0,
-          "StartTime": "2021-02-02T08:00:00",
-          "EndTime": "2021-02-02T20:00:00"
-        }
-      ],
       "Education": 0,
-      "Id": 4,
       "Name": "Dragana",
       "Surname": "Vukmanov Simokov",
       "BirthDate": "1985-05-07T00:00:00",
@@ -296,7 +275,16 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
-      "Hospital": null
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 4
     },
     "IsFinished": false,
     "Reserved": true,
@@ -312,7 +300,6 @@
     "AppTypeText": "Pregled",
     "IsUrgent": false,
     "Patient": {
-      "hospital": null,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -326,11 +313,9 @@
         "IsTroll": false
       },
       "PatientNotes": [],
+      "BloodType": null,
       "IsGuest": false,
-      "doctor": null,
-      "Doctor": null,
       "Education": 0,
-      "Id": 1,
       "Name": "Simona",
       "Surname": "Stantic",
       "BirthDate": "2021-03-29T00:00:00",
@@ -340,11 +325,12 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
-      "Hospital": null
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
     },
     "Doctor": {
       "patient": [],
-      "hospital": null,
       "VacationTimeStart": "0001-01-01T00:00:00",
       "WorkShift": 0,
       "Specialty": {
@@ -353,17 +339,7 @@
       "DaysOff": [],
       "PrimaryRoom": 1,
       "Patient": [],
-      "Salary": 70000.0,
-      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-      "WorkDay": [
-        {
-          "Day": 0,
-          "StartTime": "2021-02-02T08:00:00",
-          "EndTime": "2021-02-02T20:00:00"
-        }
-      ],
       "Education": 0,
-      "Id": 4,
       "Name": "Dragana",
       "Surname": "Vukmanov Simokov",
       "BirthDate": "1985-05-07T00:00:00",
@@ -373,7 +349,16 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
-      "Hospital": null
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 4
     },
     "IsFinished": false,
     "Reserved": true,
@@ -389,7 +374,6 @@
     "AppTypeText": "Pregled",
     "IsUrgent": false,
     "Patient": {
-      "hospital": null,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -410,11 +394,9 @@
           "AppointmentId": 5
         }
       ],
+      "BloodType": null,
       "IsGuest": false,
-      "doctor": null,
-      "Doctor": null,
       "Education": 0,
-      "Id": 1,
       "Name": "Simona",
       "Surname": "Stantic",
       "BirthDate": "2021-03-29T00:00:00",
@@ -424,11 +406,12 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
-      "Hospital": null
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
     },
     "Doctor": {
       "patient": [],
-      "hospital": null,
       "VacationTimeStart": "0001-01-01T00:00:00",
       "WorkShift": 0,
       "Specialty": {
@@ -437,17 +420,7 @@
       "DaysOff": [],
       "PrimaryRoom": 2,
       "Patient": [],
-      "Salary": 70000.0,
-      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-      "WorkDay": [
-        {
-          "Day": 0,
-          "StartTime": "2021-02-02T08:00:00",
-          "EndTime": "2021-02-02T20:00:00"
-        }
-      ],
       "Education": 0,
-      "Id": 10,
       "Name": "Ksenija",
       "Surname": "Dimitrijevic",
       "BirthDate": "1985-05-07T00:00:00",
@@ -457,7 +430,16 @@
       "Relationship": null,
       "Password": "ksenija",
       "Address": "Brace Radica 15",
-      "Hospital": null
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 10
     },
     "IsFinished": false,
     "Reserved": true,
@@ -469,95 +451,10 @@
     "Id": 11
   },
   {
-    "NameSurnamePatient": "Simona Stantic",
-    "AppTypeText": null,
-    "IsUrgent": false,
-    "Patient": {
-      "hospital": null,
-      "FileDate": "2021-03-29T23:21:22.7048933+02:00",
-      "Employer": "neki poslodavac",
-      "Admitted": false,
-      "Alergies": [
-        "Tetanus",
-        "Paracetamol"
-      ],
-      "TrollMechanism": {
-        "TrollCheckStartDate": "2021-04-29T00:00:00",
-        "AppointmentCounterInTimeRange": 2,
-        "IsTroll": false
-      },
-      "PatientNotes": [
-        {
-          "NotificationTime": 11,
-          "IsNotifyChecked": true,
-          "NoteContent": "Setaj sat vremena!!!",
-          "AppointmentId": 5
-        }
-      ],
-      "IsGuest": false,
-      "doctor": null,
-      "Doctor": null,
-      "Education": 0,
-      "Id": 1,
-      "Name": "Simona",
-      "Surname": "Stantic",
-      "BirthDate": "2021-03-29T00:00:00",
-      "Phone": null,
-      "Email": "simona@gmail.com",
-      "Gender": null,
-      "Relationship": null,
-      "Password": "123",
-      "Address": "Petra Drapsina 8",
-      "Hospital": null
-    },
-    "Doctor": {
-      "patient": [],
-      "hospital": null,
-      "VacationTimeStart": "0001-01-01T00:00:00",
-      "WorkShift": 0,
-      "Specialty": {
-        "Name": "Stomatolog"
-      },
-      "DaysOff": [],
-      "PrimaryRoom": 2,
-      "Patient": [],
-      "Salary": 70000.0,
-      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-      "WorkDay": [
-        {
-          "Day": 0,
-          "StartTime": "2021-02-02T08:00:00",
-          "EndTime": "2021-02-02T20:00:00"
-        }
-      ],
-      "Education": 0,
-      "Id": 10,
-      "Name": "Ksenija",
-      "Surname": "Dimitrijevic",
-      "BirthDate": "1985-05-07T00:00:00",
-      "Phone": null,
-      "Email": "ksenija@gmail.com",
-      "Gender": null,
-      "Relationship": null,
-      "Password": "ksenija",
-      "Address": "Brace Radica 15",
-      "Hospital": null
-    },
-    "IsFinished": false,
-    "Reserved": true,
-    "AppointmentCause": null,
-    "AppointmentStart": "2021-06-14T13:00:00",
-    "AppointmentEnd": "2021-06-14T13:30:00",
-    "Type": 1,
-    "Room": 2,
-    "Id": 12
-  },
-  {
     "NameSurnamePatient": null,
     "AppTypeText": "Pregled",
     "IsUrgent": false,
     "Patient": {
-      "hospital": null,
       "FileDate": "2021-03-29T23:21:22.7048933+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -584,11 +481,9 @@
           "AppointmentId": 1
         }
       ],
+      "BloodType": null,
       "IsGuest": false,
-      "doctor": null,
-      "Doctor": null,
       "Education": 0,
-      "Id": 1,
       "Name": "Simona",
       "Surname": "Stantic",
       "BirthDate": "2021-03-29T00:00:00",
@@ -598,11 +493,12 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Petra Drapsina 8",
-      "Hospital": null
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
     },
     "Doctor": {
       "patient": [],
-      "hospital": null,
       "VacationTimeStart": "0001-01-01T00:00:00",
       "WorkShift": 0,
       "Specialty": {
@@ -611,17 +507,7 @@
       "DaysOff": [],
       "PrimaryRoom": 1,
       "Patient": [],
-      "Salary": 70000.0,
-      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-      "WorkDay": [
-        {
-          "Day": 0,
-          "StartTime": "2021-02-02T08:00:00",
-          "EndTime": "2021-02-02T20:00:00"
-        }
-      ],
       "Education": 0,
-      "Id": 4,
       "Name": "Dragana",
       "Surname": "Vukmanov Simokov",
       "BirthDate": "1985-05-07T00:00:00",
@@ -631,7 +517,16 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
-      "Hospital": null
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 4
     },
     "IsFinished": false,
     "Reserved": true,
@@ -647,7 +542,6 @@
     "AppTypeText": null,
     "IsUrgent": false,
     "Patient": {
-      "hospital": null,
       "FileDate": "2021-03-29T23:21:22.7064891+02:00",
       "Employer": "neki poslodavac",
       "Admitted": false,
@@ -661,11 +555,9 @@
         "IsTroll": false
       },
       "PatientNotes": [],
+      "BloodType": null,
       "IsGuest": false,
-      "doctor": null,
-      "Doctor": null,
       "Education": 0,
-      "Id": 2,
       "Name": "Stefan",
       "Surname": "Beckovic",
       "BirthDate": "2021-03-29T23:21:22.7064868+02:00",
@@ -675,11 +567,12 @@
       "Relationship": null,
       "Password": "123",
       "Address": "Zelengoska 15",
-      "Hospital": null
+      "doctor": null,
+      "Doctor": null,
+      "Id": 2
     },
     "Doctor": {
       "patient": [],
-      "hospital": null,
       "VacationTimeStart": "0001-01-01T00:00:00",
       "WorkShift": 0,
       "Specialty": {
@@ -688,17 +581,7 @@
       "DaysOff": [],
       "PrimaryRoom": 1,
       "Patient": [],
-      "Salary": 70000.0,
-      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-      "WorkDay": [
-        {
-          "Day": 0,
-          "StartTime": "2021-02-02T08:00:00",
-          "EndTime": "2021-02-02T20:00:00"
-        }
-      ],
       "Education": 0,
-      "Id": 4,
       "Name": "Dragana",
       "Surname": "Vukmanov Simokov",
       "BirthDate": "1985-05-07T00:00:00",
@@ -708,7 +591,16 @@
       "Relationship": null,
       "Password": "dragana",
       "Address": "Brace Radica 15",
-      "Hospital": null
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 4
     },
     "IsFinished": false,
     "Reserved": true,
@@ -718,5 +610,1229 @@
     "Type": 0,
     "Room": 8,
     "Id": 15
+  },
+  {
+    "NameSurnamePatient": "Simona Stantic",
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "FileDate": "0001-01-01T00:00:00",
+      "Employer": "Continental",
+      "Admitted": true,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [],
+      "BloodType": null,
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "1999-03-13T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
+    },
+    "Doctor": {
+      "patient": [],
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 0,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 4
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-10T08:30:00",
+    "AppointmentEnd": "2021-06-10T09:00:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 20
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "FileDate": "0001-01-01T00:00:00",
+      "Employer": "neki poslodavac",
+      "Admitted": true,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [],
+      "BloodType": null,
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "1999-03-13T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
+    },
+    "Doctor": {
+      "patient": [],
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 0,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 4
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-07T09:00:00",
+    "AppointmentEnd": "2021-06-07T09:30:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 21
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "FileDate": "0001-01-01T00:00:00",
+      "Employer": "neki poslodavac",
+      "Admitted": true,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [],
+      "BloodType": null,
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "1999-03-13T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
+    },
+    "Doctor": {
+      "patient": [],
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 0,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 4
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-08T23:55:00",
+    "AppointmentEnd": "2021-06-08T23:59:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 22
+  },
+  {
+    "NameSurnamePatient": "Simonapo Stantic",
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "FileDate": "0001-01-01T00:00:00",
+      "Employer": "Continental",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [
+        {
+          "NotificationTime": 8,
+          "IsNotifyChecked": false,
+          "NoteContent": "nesto",
+          "AppointmentId": 1
+        }
+      ],
+      "BloodType": null,
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Simonapo",
+      "Surname": "Stantic",
+      "BirthDate": "1999-03-13T00:00:00",
+      "Phone": "",
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": "",
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
+    },
+    "Doctor": {
+      "patient": null,
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 0,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Dragana",
+      "Surname": "Vukmanov",
+      "BirthDate": "0001-01-01T00:00:00",
+      "Phone": "",
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Salary": 80000.0,
+      "EmploymentDate": "2021-06-10T06:54:50.934202+02:00",
+      "WorkDay": null,
+      "Id": 4
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-10T12:15:00",
+    "AppointmentEnd": "2021-06-10T12:45:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 23
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "FileDate": "0001-01-01T00:00:00",
+      "Employer": "Continental",
+      "Admitted": true,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [],
+      "BloodType": null,
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "1999-03-13T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
+    },
+    "Doctor": {
+      "patient": [],
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 0,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 4
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-09T09:00:00",
+    "AppointmentEnd": "2021-06-09T09:30:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 24
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "FileDate": "0001-01-01T00:00:00",
+      "Employer": "Continental",
+      "Admitted": true,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [],
+      "BloodType": null,
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "1999-03-13T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
+    },
+    "Doctor": {
+      "patient": [],
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 0,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 4
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-09T08:00:00",
+    "AppointmentEnd": "2021-06-09T08:30:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 25
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "FileDate": "0001-01-01T00:00:00",
+      "Employer": "Continental",
+      "Admitted": true,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [],
+      "BloodType": null,
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "1999-03-13T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
+    },
+    "Doctor": {
+      "patient": [],
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 0,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 4
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-09T10:00:00",
+    "AppointmentEnd": "2021-06-09T10:30:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 26
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "FileDate": "0001-01-01T00:00:00",
+      "Employer": "Continental",
+      "Admitted": true,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [],
+      "BloodType": null,
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "1999-03-13T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
+    },
+    "Doctor": {
+      "patient": [],
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 0,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 4
+    },
+    "IsFinished": true,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-09T10:45:00",
+    "AppointmentEnd": "2021-06-09T11:15:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 27
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "FileDate": "0001-01-01T00:00:00",
+      "Employer": "Continental",
+      "Admitted": true,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [],
+      "BloodType": null,
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "1999-03-13T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
+    },
+    "Doctor": {
+      "patient": [],
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 0,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 4
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-09T09:30:00",
+    "AppointmentEnd": "2021-06-09T10:00:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 28
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "FileDate": "0001-01-01T00:00:00",
+      "Employer": "Continental",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [],
+      "BloodType": null,
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "1999-03-13T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
+    },
+    "Doctor": {
+      "patient": [],
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 1,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 0,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "0001-01-01T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Salary": 80000.0,
+      "EmploymentDate": "2021-06-09T09:23:25.0829484+02:00",
+      "WorkDay": null,
+      "Id": 4
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-09T19:00:00",
+    "AppointmentEnd": "2021-06-09T19:30:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 30
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "FileDate": "2021-03-29T23:21:22.7064891+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [],
+      "BloodType": null,
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Stefan",
+      "Surname": "Beckovic",
+      "BirthDate": "2021-03-29T23:21:22.7064868+02:00",
+      "Phone": null,
+      "Email": "stefan@gmail.com",
+      "Gender": "Muško",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Zelengoska 15",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 2
+    },
+    "Doctor": {
+      "patient": [],
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 1,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 0,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "0001-01-01T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Salary": 80000.0,
+      "EmploymentDate": "2021-06-09T09:23:25.0829484+02:00",
+      "WorkDay": null,
+      "Id": 4
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-09T19:30:00",
+    "AppointmentEnd": "2021-06-09T20:00:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 31
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "FileDate": "2021-03-29T23:21:22.7064923+02:00",
+      "Employer": "neki poslodavac",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [],
+      "BloodType": null,
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Uros",
+      "Surname": "Lekic",
+      "BirthDate": "2021-03-29T23:21:22.7064919+02:00",
+      "Phone": null,
+      "Email": "uros@gmail.com",
+      "Gender": "Muško",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Dure Dakovica 10",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 3
+    },
+    "Doctor": {
+      "patient": [],
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 1,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 0,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Dragana",
+      "Surname": "Vukmanov Simokov",
+      "BirthDate": "0001-01-01T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Salary": 80000.0,
+      "EmploymentDate": "2021-06-09T09:23:25.0829484+02:00",
+      "WorkDay": null,
+      "Id": 4
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-09T18:30:00",
+    "AppointmentEnd": "2021-06-09T19:00:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 32
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "FileDate": "0001-01-01T00:00:00",
+      "Employer": "Continental",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [],
+      "BloodType": "A",
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "1999-03-13T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
+    },
+    "Doctor": {
+      "patient": null,
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 1,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Dragana",
+      "Surname": "Vukmanov",
+      "BirthDate": "0001-01-01T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Salary": 80000.0,
+      "EmploymentDate": "2021-06-09T09:54:52.7993538+02:00",
+      "WorkDay": null,
+      "Id": 4
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-09T14:30:00",
+    "AppointmentEnd": "2021-06-09T15:00:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 33
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": null,
+    "IsUrgent": true,
+    "Patient": {
+      "FileDate": "0001-01-01T00:00:00",
+      "Employer": "Continental",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [],
+      "BloodType": "A",
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "1999-03-13T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
+    },
+    "Doctor": {
+      "patient": null,
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 1,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Dragana",
+      "Surname": "Vukmanov",
+      "BirthDate": "0001-01-01T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Salary": 80000.0,
+      "EmploymentDate": "2021-06-09T09:54:52.7993538+02:00",
+      "WorkDay": null,
+      "Id": 4
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-10T04:30:00",
+    "AppointmentEnd": "2021-06-10T05:00:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 34
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": null,
+    "IsUrgent": true,
+    "Patient": {
+      "FileDate": "0001-01-01T00:00:00",
+      "Employer": "Continental",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [],
+      "BloodType": "A",
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "1999-03-13T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
+    },
+    "Doctor": {
+      "patient": null,
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 1,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Dragana",
+      "Surname": "Vukmanov",
+      "BirthDate": "0001-01-01T00:00:00",
+      "Phone": null,
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Salary": 80000.0,
+      "EmploymentDate": "2021-06-09T09:54:52.7993538+02:00",
+      "WorkDay": null,
+      "Id": 4
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-10T03:45:00",
+    "AppointmentEnd": "2021-06-10T04:15:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 35
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "FileDate": "0001-01-01T00:00:00",
+      "Employer": "Continental",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [],
+      "BloodType": "A",
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Simona",
+      "Surname": "Stantic",
+      "BirthDate": "1999-03-13T00:00:00",
+      "Phone": null,
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": null,
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
+    },
+    "Doctor": {
+      "patient": [],
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 0,
+      "Specialty": {
+        "Name": ""
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 4,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Nikolina",
+      "Surname": "Kontic",
+      "BirthDate": "1985-05-07T00:00:00",
+      "Phone": null,
+      "Email": "nikolina@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "nikolina",
+      "Address": "Brace Radica 15",
+      "Salary": 70000.0,
+      "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+      "WorkDay": [
+        {
+          "Day": 0,
+          "StartTime": "2021-02-02T08:00:00",
+          "EndTime": "2021-02-02T20:00:00"
+        }
+      ],
+      "Id": 12
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-10T03:15:00+02:00",
+    "AppointmentEnd": "2021-06-10T03:45:00+02:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 36
+  },
+  {
+    "NameSurnamePatient": null,
+    "AppTypeText": null,
+    "IsUrgent": false,
+    "Patient": {
+      "FileDate": "0001-01-01T00:00:00",
+      "Employer": "Continental",
+      "Admitted": false,
+      "Alergies": [
+        "Tetanus",
+        "Paracetamol"
+      ],
+      "TrollMechanism": {
+        "TrollCheckStartDate": "0001-01-01T00:00:00",
+        "AppointmentCounterInTimeRange": 0,
+        "IsTroll": false
+      },
+      "PatientNotes": [
+        {
+          "NotificationTime": 8,
+          "IsNotifyChecked": false,
+          "NoteContent": "nesto",
+          "AppointmentId": 1
+        }
+      ],
+      "BloodType": null,
+      "IsGuest": false,
+      "Education": 0,
+      "Name": "Simonapo",
+      "Surname": "Stantic",
+      "BirthDate": "1999-03-13T00:00:00",
+      "Phone": "",
+      "Email": "simona@gmail.com",
+      "Gender": "Žensko",
+      "Relationship": "",
+      "Password": "123",
+      "Address": "Petra Drapsina 8",
+      "doctor": null,
+      "Doctor": null,
+      "Id": 1
+    },
+    "Doctor": {
+      "patient": null,
+      "VacationTimeStart": "0001-01-01T00:00:00",
+      "WorkShift": 0,
+      "Specialty": {
+        "Name": "Dermatolog"
+      },
+      "DaysOff": [],
+      "PrimaryRoom": 1,
+      "Patient": [],
+      "Education": 0,
+      "Name": "Dragana",
+      "Surname": "Vukmanov",
+      "BirthDate": "0001-01-01T00:00:00",
+      "Phone": "",
+      "Email": "dragana@gmail.com",
+      "Gender": null,
+      "Relationship": null,
+      "Password": "dragana",
+      "Address": "Brace Radica 15",
+      "Salary": 80000.0,
+      "EmploymentDate": "2021-06-10T06:54:50.934202+02:00",
+      "WorkDay": null,
+      "Id": 4
+    },
+    "IsFinished": false,
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-10T10:30:00",
+    "AppointmentEnd": "2021-06-10T11:00:00",
+    "Type": 1,
+    "Room": 1,
+    "Id": 38
   }
 ]

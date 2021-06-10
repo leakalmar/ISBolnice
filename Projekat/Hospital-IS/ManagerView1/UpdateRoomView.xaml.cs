@@ -8,10 +8,10 @@ namespace Hospital_IS.ManagerView1
     /// </summary>
     public partial class UpdateRoomView : Page
     {
-        public UpdateRoomView(RoomViewModel roomViewModel)
+        public UpdateRoomView()
         {
             InitializeComponent();
-            this.DataContext = roomViewModel;
+            this.DataContext = UpdateRoomViewModel.Instance;
         }
     }
 }

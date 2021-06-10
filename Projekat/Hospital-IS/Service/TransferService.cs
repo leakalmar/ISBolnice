@@ -55,12 +55,12 @@ namespace Service
 
             if (sourceRoom.Type != RoomType.StorageRoom)
             {
-                CreateAppointment(staticTransfer, sourceRoom.RoomId);
+                CreateAppointment(staticTransfer, sourceRoom.Id);
             }
 
             if (destinationRoom.Type != RoomType.StorageRoom)
             {
-                CreateAppointment(staticTransfer, destinationRoom.RoomId);
+                CreateAppointment(staticTransfer, destinationRoom.Id);
             }
         }
 
@@ -98,7 +98,7 @@ namespace Service
 
                 }
             }
-            RoomService.Instance.SaveChange();
+            RoomService.Instance.UpdateEquipment(sourceRoom,equip);
 
         }
 
@@ -118,7 +118,7 @@ namespace Service
                 IncreaseEquipmentQuantity(transfer.Equip, transfer.Quantity, destinationRoom);
             }
 
-            RoomService.Instance.SaveChange();
+           
         }
 
         private static void IncreaseEquipmentQuantity(Equipment equip, int quantity, Room destinationRoom)
@@ -144,6 +144,7 @@ namespace Service
                 Equipment equipment = new Equipment(equip.EquipType, equip.EquiptId, equip.Name, quantity);
                 destinationRoom.Equipment.Add(equipment);
             }
+            RoomService.Instance.UpdateEquipment(destinationRoom, equip);
         }
 
 
@@ -152,6 +153,11 @@ namespace Service
         {
             allTransfer.Add(transfer);
             tfs.Save(allTransfer);
+        }
+
+        public void SaveTransfers(List<Transfer> transfers)
+        {
+            tfs.Save(transfers);
         }
 
         public List<Transfer> GetAllTransfers()

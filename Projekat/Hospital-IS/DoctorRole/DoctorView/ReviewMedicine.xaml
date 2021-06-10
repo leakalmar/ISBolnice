@@ -1,0 +1,177 @@
+﻿<UserControl x:Class="Hospital_IS.DoctorRole.DoctorView.ReviewMedicine"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Hospital_IS.DoctorRole.DoctorView"
+        xmlns:doctorconverters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        mc:Ignorable="d" d:DesignHeight="575.84"
+        d:DesignWidth="783.487394957983"
+        FocusManager.FocusedElement="{Binding ElementName=composition}" KeyboardNavigation.TabNavigation="Cycle">
+    <UserControl.Resources>
+        <doctorconverters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+        <doctorconverters:InverseVisibilityConverter x:Key="InverseConverter" />
+    </UserControl.Resources>
+    <Grid x:Name="medInfo">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" x:Name="column" />
+        </Grid.RowDefinitions>
+
+        <Label Content="{Binding MedicineNotification.Medicine.Name}"
+                Grid.ColumnSpan="2" FontSize="18" FontFamily="Verdana"
+                Foreground="FloralWhite" Margin="0,0,20,10"
+                VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+        <TextBlock x:Name="allergieMess" Grid.Row="5" Grid.ColumnSpan="2"
+                TextWrapping="Wrap" TextAlignment="Center"
+                Text="Neki sastojci leka se poklapaju sa lekovima na koje je pacijent alergičan!"
+                FontSize="14" FontFamily="Verdana" Foreground="IndianRed"
+                VerticalAlignment="Center" Margin="5,0,5,0"
+                Visibility="Collapsed" />
+
+        <Label Content="Sastav" FontSize="14" Grid.Row="1" FontFamily="Verdana"
+                Foreground="FloralWhite" Padding="150,0,0,0"
+                BorderThickness="0,0,0,2" BorderBrush="Gray" Margin="20,0,20,0" />
+
+        <Border Grid.Row="2" Margin="20,0,20,20" CornerRadius="0,0,20,20"
+                BorderThickness="1,0,1,1" BorderBrush="FloralWhite">
+            <DataGrid
+                    ItemsSource="{Binding MedicineNotification.Medicine.Composition}"
+                    FontSize="14" x:Name="composition" FontFamily="Verdana"
+                    Foreground="FloralWhite" HeadersVisibility="None"
+                    Background="Transparent" RowBackground="Transparent"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    BorderThickness="0" AutoGenerateColumns="False"
+                    BorderBrush="{x:Null}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    HorizontalScrollBarVisibility="Disabled" RowHeaderWidth="0"
+                    CanUserSortColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=Component}"
+                            Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <Label Content="Zamena" Grid.Row="1" Grid.Column="1" FontSize="14"
+                FontFamily="Verdana" Foreground="FloralWhite"
+                BorderThickness="0,0,0,2" Margin="20,0,20,0" BorderBrush="Gray"
+                Padding="150,0,0,0" />
+
+        <Border Grid.Row="2" Grid.Column="1" Margin="20,0,20,20"
+                CornerRadius="0,0,20,20" BorderThickness="1,0,1,1"
+                BorderBrush="FloralWhite">
+            <DataGrid
+                    ItemsSource="{Binding MedicineNotification.Medicine.ReplaceMedicine}"
+                    FontSize="14" x:Name="change" FontFamily="Verdana"
+                    Foreground="FloralWhite" HeadersVisibility="None"
+                    Background="Transparent" RowBackground="Transparent"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    BorderThickness="0" AutoGenerateColumns="False"
+                    BorderBrush="{x:Null}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    HorizontalScrollBarVisibility="Disabled" RowHeaderWidth="0"
+                    CanUserSortColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=Name}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <Label Content="Terapijske indikacije" FontSize="14"
+                FontFamily="Verdana" Foreground="FloralWhite" Grid.Row="4"
+                Padding="20,0,0,0" Margin="20,0,20,0" BorderThickness="0,0,0,2"
+                BorderBrush="Gray" Grid.ColumnSpan="2" />
+        <Label Content="Neželjena dejstva" FontSize="14" FontFamily="Verdana"
+                Foreground="FloralWhite" Grid.Row="6" Padding="20,0,0,0"
+                Margin="20,0,20,0" BorderThickness="0,0,0,2" BorderBrush="Gray"
+                Grid.ColumnSpan="2" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto"
+                Grid.Row="5" Margin="20,0,20,20">
+            <TextBox Text="{Binding MedicineNotification.Medicine.Usage}"
+                    TextWrapping="Wrap" FontSize="14" x:Name="usage"
+                    IsReadOnlyCaretVisible="True" FontFamily="Verdana"
+                    Foreground="FloralWhite" BorderThickness="0"
+                    CaretBrush="White" IsReadOnly="True"
+                    Background="Transparent" MaxHeight="133" Padding="5" />
+        </ScrollViewer>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                VerticalScrollBarVisibility="Auto" Grid.Row="7"
+                Grid.ColumnSpan="2" Margin="20,0,20,20">
+            <TextBox Text="{Binding MedicineNotification.Medicine.SideEffects}"
+                    TextWrapping="Wrap" FontSize="14" x:Name="sideEff"
+                    IsReadOnlyCaretVisible="True" BorderThickness="0"
+                    FontFamily="Verdana" Foreground="FloralWhite"
+                    CaretBrush="White" IsReadOnly="True" Background="{x:Null}"
+                    MaxHeight="133" Padding="5" />
+        </ScrollViewer>
+
+        <Button Grid.Row="8" Margin="50,0,50,10" Content="Odobri"
+                Style="{StaticResource CustomButton}"
+                Visibility="{Binding ShowDisapproveNote, Converter={StaticResource InverseConverter}}">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding ApproveCommand}" />
+                <KeyBinding Key="Space" Command="{Binding ApproveCommand}" />
+            </Button.InputBindings>
+        </Button>
+
+        <Button Grid.Row="8" Grid.Column="1" Margin="50,0,50,10" Content="Odbij"
+                Style="{StaticResource CustomButton}"
+                Visibility="{Binding ShowDisapproveNote, Converter={StaticResource InverseConverter}}">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding DisapproveCommand}" />
+                <KeyBinding Key="Space" Command="{Binding DisapproveCommand}" />
+            </Button.InputBindings>
+        </Button>
+
+        <Label Content="Beleške" FontSize="14" FontFamily="Verdana"
+                Foreground="FloralWhite" Grid.Row="8" Padding="20,0,0,0"
+                Margin="20,0,20,0" BorderThickness="0,0,0,2" BorderBrush="Gray"
+                Grid.ColumnSpan="2" x:Name="lblNotes"
+                Visibility="{Binding ShowDisapproveNote, Converter={StaticResource BoolToVisibility}}" />
+
+        <!--BorderThickness="{Binding Note,Converter={StaticResource RedConverter}}"-->
+        <StackPanel Grid.Row="9" Grid.ColumnSpan="2"
+                Visibility="{Binding ShowDisapproveNote, Converter={StaticResource BoolToVisibility}}"
+                x:Name="notes" >
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                    x:Name="txtNotes" VerticalScrollBarVisibility="Auto"
+                    Margin="20,0,20,0" Height="71">
+                <TextBox TextWrapping="Wrap" FontSize="14" BorderThickness="0"
+                        FontFamily="Verdana" Foreground="FloralWhite"
+                        Background="{x:Null}" x:Name="text" CaretBrush="White"
+                        Style="{StaticResource WaterMarkStyle}"
+                        IsVisibleChanged="notes_IsVisibleChanged"
+                        Tag="Unesite razlog odbijanja leka." Padding="5">
+                    <TextBox.Text>
+                        <Binding Path="Note"
+                                UpdateSourceTrigger="PropertyChanged">
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </ScrollViewer>
+
+            <Button Content="Pošalji" Style="{StaticResource CustomButton}" Margin="150,0,150,0">
+                <Button.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding SendNoteCommand}" />
+                    <KeyBinding Key="Space" Command="{Binding SendNoteCommand}" />
+                </Button.InputBindings>
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

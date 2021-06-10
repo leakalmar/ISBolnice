@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace Hospital_IS.ManagerView1
@@ -11,17 +10,12 @@ namespace Hospital_IS.ManagerView1
             try
             {
                 var s = value as string;
-                MessageBox.Show(s);
                 int r;
                 if (int.TryParse(s, out r))
                 {
                     return new ValidationResult(true, null);
                 }
-                //MessageBox.Show("uslo u validaciju");
-
-                
                 return new ValidationResult(false, "Unesite samo brojeve.");
-               
             }
             catch
             {
@@ -31,47 +25,47 @@ namespace Hospital_IS.ManagerView1
 
     }
 
-   
+
     public class MinMaxValidationRule : ValidationRule
+    {
+        public int Min
         {
-            public int Min
-            {
-                get;
-                set;
-            }
-
-            public int Max
-            {
-                get;
-                set;
-            }
-
-            public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
-            {
-               /* value = Convert.ToInt32(value);
-            if (value is int)
-            {
-                int d = (int)value;
-                if (d < Min || d > Max)
-                {
-                    return new ValidationResult(false, "Vrijednost izvan opsega " + "(" + Convert.ToString(Min) + "," + Convert.ToString(Max) + ")");
-                }
-                else
-                {
-                    return new ValidationResult(true, null);
-                }
-            }
-            else
-            {
-                return new ValidationResult(false, "Unknown error occured.");
-
-            }
-               */
-                return new ValidationResult(true, "Unknown error occured.");
-
-            }
-            
+            get;
+            set;
         }
 
-        
+        public int Max
+        {
+            get;
+            set;
+        }
+
+        public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
+        {
+            /* value = Convert.ToInt32(value);
+         if (value is int)
+         {
+             int d = (int)value;
+             if (d < Min || d > Max)
+             {
+                 return new ValidationResult(false, "Vrijednost izvan opsega " + "(" + Convert.ToString(Min) + "," + Convert.ToString(Max) + ")");
+             }
+             else
+             {
+                 return new ValidationResult(true, null);
+             }
+         }
+         else
+         {
+             return new ValidationResult(false, "Unknown error occured.");
+
+         }
+            */
+            return new ValidationResult(true, "Unknown error occured.");
+
+        }
+
+    }
+
+
 }

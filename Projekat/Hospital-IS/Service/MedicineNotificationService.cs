@@ -78,12 +78,13 @@ namespace Service
 
         private  bool CheckIfMedicineIsApproved(MedicineNotification rewiewdNotification)
         {
+            bool isApproved = false;
             if (rewiewdNotification.ApprovalCounter >= 2)
             {
                 MedicineService.Instance.AddNewMedicine(rewiewdNotification.Medicine);
-                return true;
+                isApproved = true;
             }
-            return false;
+            return isApproved;
         }
 
         public void DeleteMedicineNotification(MedicineNotification reviewdNotification)

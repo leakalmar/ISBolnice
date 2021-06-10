@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             lex:LocalizeDictionary.DesignCulture="en"
+             lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+             lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -23,12 +27,14 @@
         <DataGrid x:Name="dataGridDoctors" ItemsSource="{Binding Doctors}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
                   Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" Grid.RowSpan="1" Margin="10" RowHeaderWidth="0"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  Background="Transparent" RowBackground="AliceBlue">
+                  Style="{DynamicResource ResourceKey=DataGrid}"
+                  ColumnHeaderStyle="{DynamicResource ResourceKey=ColumHeader}"
+                  RowStyle="{DynamicResource ResourceKey=GridRow}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="Prezime" Binding="{Binding Surname}" Width="*"/>
-                <DataGridTextColumn Header="Datum rođenja" Binding="{Binding BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}" Width="*"/>
-                <DataGridTextColumn Header="Specijalizacija" Binding="{Binding Specialty}" Width="*"/>
+                <DataGridTextColumn Header="{lex:Loc tbName}" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="{lex:Loc tbSurname}" Binding="{Binding Surname}" Width="*"/>
+                <DataGridTextColumn Header="{lex:Loc tbBirthDate}" Binding="{Binding BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}" Width="*"/>
+                <DataGridTextColumn Header="{lex:Loc tbSpecialty}" Binding="{Binding Specialty}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF3558A2"/>
@@ -37,22 +43,46 @@
 
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-            <Button Width="55" Content="Prikaži" Height="30" Margin="10 10 10 10"
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
-                HorizontalAlignment="Right" Click="ShowDoctor"/>
+            <Button Width="80" FontSize="13" Height="30" Margin="10 10 10 10" Style="{DynamicResource ResourceKey=RegularButton}"
+                HorizontalAlignment="Right" Click="ShowDoctor">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/Resources/eye.png" Height="20" Width="20"/>
+                    <TextBlock Name="txtShow" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
+                </StackPanel>
+            </Button>
 
-            <Button Width="55" Content="Izmeni" Height="30" Margin="10 0 10 0"
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
-                HorizontalAlignment="Left" Click="UpdateDoctor"/>
+            <Button Width="80" FontSize="13" Height="30" Margin="10 0 10 0"
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    HorizontalAlignment="Left" Click="UpdateDoctor">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/Resources/pen.png" Height="20" Width="20"/>
+                    <TextBlock Name="txtUpdate" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
+                </StackPanel>
+            </Button>
 
-            <Button Width="55" Content="Obriši" Height="30" Margin="10 0 40 0"
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
-                HorizontalAlignment="Right" Click="DeleteDoctor"/>
+            <!--<Button Width="55" Content="Obriši" Height="30" Margin="10 0 40 0"
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    HorizontalAlignment="Right" Click="DeleteDoctor"/>-->
 
-            <Button Width="100" Content="Registracija" Height="30" Margin="40 0 0 0 "
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
-                Click="AddNewDoctor"/>
+            <Button Width="115" FontSize="13" Height="30" Margin="70 0 0 0 "
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    Click="AddNewDoctor">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/Resources/register.png" Height="20" Width="20"/>
+                    <TextBlock Name="txtRegistration" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
 
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="3"
+                    HorizontalAlignment="Right" Margin="0 10 20 0">
+            <TextBox Name="txtSearch" Foreground="DarkSlateGray" Margin="0 5 10 0" Width="120" VerticalAlignment="Center" Padding="4"
+                     Style="{DynamicResource ResourceKey=RegularTextBox}"
+                     GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
+            <Button Style="{DynamicResource ResourceKey=SearchButton}" Margin="0 5 0 0" Click="SearchButton_Click">
+                <Image Source="pack://application:,,,/Resources/SearchSecretary.png"/>
+            </Button>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

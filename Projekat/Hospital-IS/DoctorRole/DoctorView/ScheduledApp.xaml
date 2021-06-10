@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Hospital_IS.DoctorRole.DoctorView.ScheduledApp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+        <converters:AppTypeToString x:Key="AppTypeToString" />
+    </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Key="Add" Command="{Binding AddNewCommand}" />
+    </UserControl.InputBindings>
+    <Grid Margin="0,25,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="0.03*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Button Margin="250,5,250,5" Style="{StaticResource CustomButton}" x:Name="schedule"
+                Visibility="{Binding Started, Converter={StaticResource BoolToVisibility}}"
+                Content="Novi termin">
+            <Button.InputBindings>
+                <KeyBinding Key="Add" Modifiers="Ctrl"
+                        Command="{Binding AddNewCommand}" />
+                <KeyBinding Key="Space" Command="{Binding AddNewCommand}" />
+                <KeyBinding Key="Return" Command="{Binding AddNewCommand}" />
+            </Button.InputBindings>
+        </Button>
+
+        <DataGrid x:Name="dataGrid" KeyboardNavigation.TabNavigation="None"
+                ItemsSource="{Binding  ScheduledAppointments}" Grid.Row="2"
+                Style="{StaticResource CustomDataGrid}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Datum i vreme"
+                        Binding="{Binding AppointmentStart,StringFormat=\{0:dd.MM.yyyy. HH:mm\}}"
+                        CanUserResize="False" Width="0.05*" />
+                <DataGridTextColumn Header="Tip pregleda"
+                        Binding="{Binding Type, Converter={StaticResource AppTypeToString}}" CanUserResize="False"
+                        Width="0.05*" />
+                <DataGridTextColumn Header="Uzrok"
+                        Binding="{Binding AppointmentCause}"
+                        CanUserResize="False" Width="0.05*" />
+                <DataGridTextColumn Header="Doktor"
+                        Binding="{Binding Doctor.Surname}" CanUserResize="False"
+                        Width="0.05*" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

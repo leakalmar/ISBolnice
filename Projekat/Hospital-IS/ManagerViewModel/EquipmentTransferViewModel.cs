@@ -4,6 +4,7 @@ using Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Navigation;
 
 namespace Hospital_IS.ManagerViewModel
@@ -11,15 +12,12 @@ namespace Hospital_IS.ManagerViewModel
     public class EquipmentTransferViewModel:ViewModel
     {
         private ObservableCollection<Equipment> equipmentsFirstRoom;
-        private ObservableCollection<Equipment> equipmentSecondRoom;
         private Equipment selectedEquipmentFirst;
         private ObservableCollection<Room> roomsDynamicTransfer;
-        private ObservableCollection<Room> roomsStaticTransferFirstBox;
-        private ObservableCollection<Room> roomsStaticTransferSecondBox;
         private RelayCommand transferDynamicEquipmentCommand;
+        private RelayCommand navigateToPreviousPage;
         private Room selectedRoomFirst;
-        private Room selectedRoomSecond;
-        private string transferAmount = "haloo";
+        private string transferAmount ;
         private NavigationService navService;
 
 
@@ -42,6 +40,16 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
+        public RelayCommand NavigateToPreviousPage
+        {
+            get { return navigateToPreviousPage; }
+            set
+            {
+                navigateToPreviousPage = value;
+            }
+        }
+
+
         public RelayCommand TransferDynamicEquipmentCommand
         {
             get { return transferDynamicEquipmentCommand; }
@@ -51,24 +59,7 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
-        public Room SelectedRoomSecond
-        {
-            get
-            {
-                return selectedRoomSecond;
-            }
-            set
-            {
-                if (value != selectedRoomSecond)
-                {
-                    
-                    selectedRoomSecond = value;
-                    EquipmentSecondRoom = new ObservableCollection<Equipment>(SelectedRoomSecond.Equipment);
-                    OnPropertyChanged("SelectedRoomSecond");
-
-                }
-            }
-        }
+       
         public Room SelectedRoomFirst
         {
             get
@@ -81,7 +72,15 @@ namespace Hospital_IS.ManagerViewModel
                 {
 
                     selectedRoomFirst = value;
-                    EquipmentsFirstRoom = new ObservableCollection<Equipment>(SelectedRoomFirst.Equipment);
+                    if (SelectedRoomFirst != null)
+                    {
+                        EquipmentsFirstRoom = new ObservableCollection<Equipment>(SelectedRoomFirst.Equipment);
+                    }
+                    else
+                    {
+                        EquipmentsFirstRoom = new ObservableCollection<Equipment>();
+                    }
+
                     OnPropertyChanged("SelectedRoomFirst");
 
                 }
@@ -126,41 +125,7 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
-        public ObservableCollection<Room> RoomsStaticTransferFirstBox
-        {
-            get
-            {
-                return roomsStaticTransferFirstBox;
-            }
-            set
-            {
-                if (value != roomsStaticTransferFirstBox)
-                {
-
-                    roomsStaticTransferFirstBox = value;
-                    OnPropertyChanged("RoomsStaticTransferFirstBox");
-
-                }
-            }
-        }
-
-        public ObservableCollection<Room> RoomsStaticTransferSecondBox
-        {
-            get
-            {
-                return roomsStaticTransferSecondBox;
-            }
-            set
-            {
-                if (value != roomsStaticTransferSecondBox)
-                {
-
-                    roomsStaticTransferSecondBox = value;
-                    OnPropertyChanged("RoomsStaticTransferSecondBox");
-
-                }
-            }
-        }
+        
 
         public ObservableCollection<Equipment> EquipmentsFirstRoom
         {
@@ -180,23 +145,7 @@ namespace Hospital_IS.ManagerViewModel
             }
         }
 
-        public ObservableCollection<Equipment> EquipmentSecondRoom
-        {
-            get
-            {
-                return equipmentSecondRoom;
-            }
-            set
-            {
-                if (value != equipmentSecondRoom)
-                {
-
-                    equipmentSecondRoom = value;
-                    OnPropertyChanged("EquipmentSecondRoom");
-
-                }
-            }
-        }
+    
 
         public NavigationService NavService
         {
@@ -223,20 +172,35 @@ namespace Hospital_IS.ManagerViewModel
         {
 
             RoomsDynamicTransfer = new ObservableCollection<Room>(RoomController.Instance.GetRoomByType(RoomType.StorageRoom));
-            RoomsStaticTransferFirstBox = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
-            RoomsStaticTransferSecondBox = new ObservableCollection<Room>(RoomController.Instance.GetAllRooms());
+           
+
             this.TransferDynamicEquipmentCommand = new RelayCommand(Execute_TransferDynamicEquipment, CanExecute_NavigateToTransferViewCommand);
+            this.NavigateToPreviousPage = new RelayCommand(Execute_NavigateToPreviousPage);
           
 
         }
 
+        private void Execute_NavigateToPreviousPage(object obj)
+        {
+            this.NavService.GoBack();
+            SelectedRoomFirst = null;
+            TransferAmount = "";
+          
+        }
+
+
+
         private void Execute_TransferDynamicEquipment(object obj)
         {
 
-            if(RoomController.Instance.CheckQuantity(SelectedRoomFirst, SelectedEquipmentFirst, Convert.ToInt32(TransferAmount)));
+            if(RoomController.Instance.CheckQuantity(SelectedRoomFirst, SelectedEquipmentFirst, Convert.ToInt32(TransferAmount)))
             {
                 TransferController.Instance.ReduceEquipmentQuantity(SelectedRoomFirst, SelectedEquipmentFirst, Convert.ToInt32(TransferAmount));
                 EquipmentsFirstRoom = new ObservableCollection<Equipment>(SelectedRoomFirst.Equipment);
+            }
+            else
+            {
+                MessageBox.Show("Nedovoljna kolicina opreme");
             }
         }
 

@@ -57,14 +57,15 @@ namespace Service
 
         public string GetDoctorNameAndSurname(int senderId)
         {
+            string fullName = null;
             foreach (Doctor doctor in AllDoctors)
             {
                 if (senderId == doctor.Id)
                 {
-                    return doctor.Name + " " + doctor.Surname;
+                    fullName = doctor.Name + " " + doctor.Surname;
                 }
             }
-            return null;
+            return fullName;
         }
 
         public List<Doctor> GetDoctorsBySpecialty(string specialtyName)
@@ -81,19 +82,14 @@ namespace Service
         }
         public Doctor GetDoctorByID(int id)
         {
-            foreach (Doctor doctor in AllDoctors)
-            {
-                if (doctor.Id.Equals(id))
-                    return doctor;
-            }
-            return null;
+            return dfs.GetById(id);
         }
 
         public void AddDoctor(Doctor doctor)
         {
             AllDoctors.Add(doctor);
 
-            dfs.SaveDoctors(AllDoctors);
+            dfs.Add(doctor);
         }
 
         public void UpdateDoctor(Doctor doctor)
@@ -104,9 +100,10 @@ namespace Service
                 {
                     AllDoctors.Remove(AllDoctors[i]);
                     AllDoctors.Insert(i, doctor);
+                    dfs.Update(doctor);
                 }
             }
-            dfs.SaveDoctors(AllDoctors);
+           
         }
 
         public void DeleteDoctor(Doctor doctor)
@@ -116,10 +113,11 @@ namespace Service
                 if (doctor.Id.Equals(AllDoctors[i].Id))
                 {
                     AllDoctors.Remove(AllDoctors[i]);
+                    dfs.Delete(doctor);
                 }
             }
 
-            dfs.SaveDoctors(AllDoctors);
+          
         }
 
     }

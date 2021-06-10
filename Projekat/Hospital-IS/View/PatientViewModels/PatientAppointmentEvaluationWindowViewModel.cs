@@ -11,12 +11,16 @@ namespace Hospital_IS.View.PatientViewModels
         public PatientAppointmentEvaluation AppointmentEvaluation { get; set; }
 
         public MyICommand EvaluateAppointment { get; set; }
+        public MyICommand CloseEvaluate { get; set; }
         public EventHandler OnRequestClose;
+        private readonly MyWindowFactory windowFactory;
 
         public PatientAppointmentEvaluationWindowViewModel(int doctorAppointmentId)
         {
             AppointmentEvaluation = new PatientAppointmentEvaluation(doctorAppointmentId);
             EvaluateAppointment = new MyICommand(EvaluateApp);
+            CloseEvaluate = new MyICommand(Close);
+            windowFactory = new WindowProductionFactory();
             Grade = 0;
             Comment = "";
         }
@@ -55,13 +59,15 @@ namespace Hospital_IS.View.PatientViewModels
             if (PatientAppointmentEvaluationController.Instance.ShowHospitalEvaluation(PatientMainWindowViewModel.Patient.Id))
             {
                 //Napraviti prozor za pitanje da li zeli da oceni bolnicu,ako zeli napravi prozor sa anketom/ocenjivanjem bolnice
-                YesNoDialogMessage yesNoDialog = new YesNoDialogMessage("Da li želite da ocenite bolnicu?");
-                yesNoDialog.DialogMessageViewModel.OnRequestClose += (s, e) => yesNoDialog.Close();
-                yesNoDialog.Show();
+                windowFactory.CreateYesNo("Da li želite da ocenite bolnicu?");
                 OnRequestClose(this, new EventArgs());
             }
             OnRequestClose(this, new EventArgs());
         }
 
+        private void Close()
+        {
+            OnRequestClose(this, new EventArgs());
+        }
     }
 }

@@ -15,7 +15,11 @@
   },
   {
     "Name": "Tritace 10mg tableta",
-    "Composition": [],
+    "Composition": [
+      {
+        "Component": "magnezijum-stearat"
+      }
+    ],
     "SideEffects": "",
     "Usage": "",
     "ReplaceMedicine": []
@@ -31,23 +35,24 @@
       },
       {
         "Component": "povidon K-30"
-      },
-      {
-        "Component": "magnezijum-stearat"
-      },
-      {
-        "Component": "novi sastav"
       }
     ],
     "SideEffects": "Preosetljivost na paracetamol ili na bilo koju od pomoćnih supstanci.",
     "Usage": "Paracetamol je blag analgetik i antipiretik. Upotreba tableta se preporučuje za lečenje bolnih i febrilnih stanja kao što su glavobolja (uključujući i migrenu i tenzionu glavobolju), zubobolja, bol u leđima, reumatski bolovi i bolovi u mišićima, dismenoreja, bol u grlu, kao i za ublažavanje groznice, odnosno tegoba i bolova koji prate prehladu i grip. Lek se takođe može koristiti kao simptomatska terapija kod bolova povezanih sa osteoartritisom.",
-    "ReplaceMedicine": []
+    "ReplaceMedicine": [
+      {
+        "Name": "fsdfadf"
+      }
+    ]
   },
   {
-    "Name": "Flonidan 100mg",
+    "Name": "Flonidan 1000mg",
     "Composition": [
       {
-        "Component": "sve najbolje"
+        "Component": "sastav1"
+      },
+      {
+        "Component": "sastav2"
       }
     ],
     "SideEffects": "okej",
@@ -60,14 +65,7 @@
   },
   {
     "Name": "dsvdsvdsv",
-    "Composition": [
-      {
-        "Component": ""
-      },
-      {
-        "Component": "dvsvdsv"
-      }
-    ],
+    "Composition": [],
     "SideEffects": "dsvdsvsdvds",
     "Usage": "vdsvdsvsdv",
     "ReplaceMedicine": [

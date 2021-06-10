@@ -1,7 +1,4 @@
-﻿using Enums;
-using Hospital_IS.DTOs;
-using Hospital_IS.Enums;
-using Hospital_IS.Service;
+﻿using Hospital_IS.Storages;
 using Model;
 using Storages;
 using System;
@@ -11,8 +8,10 @@ namespace Service
 {
     class DoctorAppointmentService
     {
-        private AppointmentFileStorage afs = new AppointmentFileStorage();
-        public List<DoctorAppointment> allAppointments { get; set; }
+        //private AppointmentFileStorage afs = new AppointmentFileStorage();
+        public List<DoctorAppointment> AllAppointments { get; set; }
+        public IStorageFactory<AppointmentFileStorage> appointmentFileStorageFactory;
+        public AppointmentFileStorage AppointmentStorage { get; set; }
 
         private static DoctorAppointmentService instance = null;
         public static DoctorAppointmentService Instance
@@ -29,13 +28,15 @@ namespace Service
 
         private DoctorAppointmentService()
         {
-            allAppointments = afs.GetAll();
+            appointmentFileStorageFactory = new AppointmentFileStorageFactory();
+            AppointmentStorage = appointmentFileStorageFactory.GetStorage();
+            AllAppointments = AppointmentStorage.GetAll();
         }
 
         public List<DoctorAppointment> GetAllByDoctor(int doctorId)
         {
             List<DoctorAppointment> doctorAppointments = new List<DoctorAppointment>();
-                foreach (DoctorAppointment docApp in allAppointments)
+                foreach (DoctorAppointment docApp in AllAppointments)
             {
                 if (docApp.Doctor.Id == doctorId)
                 {
@@ -48,7 +49,7 @@ namespace Service
         public List<DoctorAppointment> GetAllByPatient(int patientId)
         {
             List<DoctorAppointment> patientAppointments = new List<DoctorAppointment>();
-            foreach (DoctorAppointment docApp in allAppointments)
+            foreach (DoctorAppointment docApp in AllAppointments)
             {
                 if (docApp.Patient.Id == patientId)
                 {
@@ -65,18 +66,19 @@ namespace Service
                 return;
             }
 
-            if (allAppointments == null)
+            if (AllAppointments == null)
             {
-                allAppointments = new List<DoctorAppointment>();
+                AllAppointments = new List<DoctorAppointment>();
 
             }
 
-            if (!allAppointments.Contains(doctorAppointment))
+            if (!AllAppointments.Contains(doctorAppointment))
             {
                 doctorAppointment.Id = AppointmentService.Instance.GenerateAppointmentID();
-                allAppointments.Add(doctorAppointment);
-                afs.SaveAppointment(allAppointments);
+                AllAppointments.Add(doctorAppointment);
+                AppointmentStorage.Add(doctorAppointment);
             }
+
         }
 
         public void RemoveAppointment(DoctorAppointment doctorAppointment)
@@ -86,14 +88,14 @@ namespace Service
                 return;
             }
 
-            if (allAppointments != null)
+            if (AllAppointments != null)
             {
-                foreach (DoctorAppointment doctorApp in allAppointments)
+                foreach (DoctorAppointment doctorApp in AllAppointments)
                 {
                     if (doctorAppointment.AppointmentStart.Equals(doctorApp.AppointmentStart) && doctorAppointment.Doctor.Id.Equals(doctorApp.Doctor.Id))
                     {
-                        allAppointments.Remove(doctorApp);
-                        afs.SaveAppointment(allAppointments);
+                        AllAppointments.Remove(doctorApp);
+                        AppointmentStorage.Delete(doctorApp);
                         break;
                     }
                 }
@@ -103,84 +105,16 @@ namespace Service
 
         public void UpdateAppointment(DoctorAppointment oldDoctorAppointment, DoctorAppointment newDoctorAppointment)
         {
-            for (int i = 0; i < allAppointments.Count; i++)
+            for (int i = 0; i < AllAppointments.Count; i++)
             {
-                if (newDoctorAppointment.Id == allAppointments[i].Id)
+                if (newDoctorAppointment.Id == AllAppointments[i].Id)
                 {
-                    allAppointments.Remove(allAppointments[i]);
-                    allAppointments.Insert(i, newDoctorAppointment);
-                    afs.SaveAppointment(allAppointments);
+                    AllAppointments.Remove(AllAppointments[i]);
+                    AllAppointments.Insert(i, newDoctorAppointment);
+                    AppointmentStorage.Update(newDoctorAppointment);
                     return;
                 }
             }
-        }
-
-        public bool VerifyAppointment(DoctorAppointment doctorAppointment)
-        {
-            List<Appointment> docAppsByRoom = new List<Appointment>(GetAllByRoom(doctorAppointment.Room));
-            List<Appointment> classicAppsByRoom = AppointmentService.Instance.GetAppByRoom(doctorAppointment.Room);
-            List<Appointment> appsByDoctor = new List<Appointment>(GetAllByDoctor(doctorAppointment.Doctor.Id));
-
-            if (!AppointmentService.Instance.CheckAppointment(docAppsByRoom, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd))
-                return false;
-            if (!AppointmentService.Instance.CheckAppointment(classicAppsByRoom, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd))
-                return false;
-            if (!AppointmentService.Instance.CheckAppointment(appsByDoctor, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd))
-                return false;
-            if (!IsDoctorWorking(doctorAppointment.Doctor, doctorAppointment.AppointmentStart, doctorAppointment.AppointmentEnd))
-                return false;
-
-            return true;
-        }
-
-        private bool IsDoctorWorking(Doctor doctor, DateTime appointmentStart, DateTime appointmentEnd)
-        {
-            if (IsDoctorOnVacation(doctor, appointmentStart, appointmentEnd))
-                return false;
-
-            if (doctor.WorkShift.Equals(WorkDayShift.FirstShift))
-            {
-                if (appointmentStart.TimeOfDay > new TimeSpan(8, 0, 0) && appointmentEnd.TimeOfDay < new TimeSpan(14, 0, 0))
-                    return true;
-            }
-            else 
-            {
-                if (appointmentStart.TimeOfDay > new TimeSpan(14, 0, 0) && appointmentEnd.TimeOfDay < new TimeSpan(20, 0, 0))
-                    return true;
-            }
-            return false;
-        }
-
-        private bool IsDoctorOnVacation(Doctor doctor, DateTime appointmentStart, DateTime appointmentEnd)
-        {
-            DateTime VacationTimeEnd = doctor.VacationTimeStart.AddDays(14);
-            if (appointmentStart > doctor.VacationTimeStart && appointmentStart < VacationTimeEnd)
-                return true;
-            if (appointmentEnd > doctor.VacationTimeStart && appointmentEnd < VacationTimeEnd)
-                return true;
-            if (appointmentStart < doctor.VacationTimeStart && appointmentEnd > VacationTimeEnd)
-                return true;
-
-            return false;
-        }
-
-        public List<DoctorAppointment> GetAvailableAppointmentsByDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
-        {
-            List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
-            List<DoctorAppointment> allPossibleAppointments = SuggestedAppointmentService.Instance.GenerateAppointmentsForDoctor(dates, tempAppointment);
-            foreach (DoctorAppointment doctorAppointment in allPossibleAppointments)
-            {
-                bool isFree = VerifyAppointment(doctorAppointment);
-                if (isFree)
-                {
-                    isFree = SuggestedAppointmentService.Instance.VerifyAppointmentByPatient(doctorAppointment, tempAppointment.Patient.Id);
-                }
-                if (isFree)
-                {
-                    availableAppointments.Add(doctorAppointment);
-                }
-            }
-            return availableAppointments;
         }
 
         public List<DoctorAppointment> GetFutureAppointmentsByPatient(int patientId)
@@ -197,15 +131,16 @@ namespace Service
             return futurePatientAppointments;
         }
 
+
         public void ReloadDoctorAppointments()
         {
-            allAppointments = afs.GetAll();
+            AllAppointments = AppointmentStorage.GetAll();
         }
 
         public List<DoctorAppointment> GetAllByRoom(int roomId)
         {
             List<DoctorAppointment> roomAppointments = new List<DoctorAppointment>();
-            foreach (DoctorAppointment roomApp in allAppointments)
+            foreach (DoctorAppointment roomApp in AllAppointments)
             {
                 if (roomApp.Room == roomId)
                 {
@@ -223,7 +158,7 @@ namespace Service
             {
                 datesWithoutTime.Add(date.Date);
             }
-            foreach (DoctorAppointment docApp in allAppointments)
+            foreach (DoctorAppointment docApp in AllAppointments)
             {
                 if (docApp.Doctor.Id == idDoctor && datesWithoutTime.Contains(docApp.AppointmentStart.Date))
                 {
@@ -236,7 +171,7 @@ namespace Service
         public int GetNumberOfAppointmentsInTimeRange(int patientId, DateTime timeRangeStart, DateTime timeRangeEnd)
         {
             int numberOfAppointments = 0;
-            foreach (DoctorAppointment docApp in allAppointments)
+            foreach (DoctorAppointment docApp in AllAppointments)
             {
                 if (docApp.Patient.Id == patientId && docApp.AppointmentStart >= timeRangeStart && docApp.AppointmentStart <= timeRangeEnd)
                 {
@@ -248,14 +183,7 @@ namespace Service
 
         public DoctorAppointment GetAppointmentById(int appointmentId)
         {
-            foreach (DoctorAppointment doctorAppointment in allAppointments)
-            {
-                if (doctorAppointment.Id == appointmentId)
-                {
-                    return doctorAppointment;
-                }
-            }
-            return null;
+            return AppointmentStorage.GetById(appointmentId);
         }
 
         public int GetNumberOfAppointmentsByMonth(int patientId, string month)
@@ -314,6 +242,55 @@ namespace Service
                 }
             }
             return counter;
+        }
+        public List<DoctorAppointment> GetAllAppointmentsForCurrentWeek(DateTime startOfTheWeek)
+        {
+            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
+            foreach (DoctorAppointment appointment in AllAppointments)
+            {
+                if (appointment.AppointmentStart >= startOfTheWeek && appointment.AppointmentEnd <= startOfTheWeek.AddDays(7))
+                    appointments.Add(appointment);
+            }
+
+            return appointments;
+        }
+        public List<DoctorAppointment> GetFutureAppointmentsForDoctor(int doctorId)
+        {
+            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
+            foreach (DoctorAppointment appointment in AllAppointments)
+            {
+                if (appointment.AppointmentStart > DateTime.Now && appointment.Doctor.Id.Equals(doctorId))
+                    appointments.Add(appointment);
+            }
+
+            return appointments;
+        }
+
+        public List<DoctorAppointment> GetPreviousAppointmentsForDoctor(int doctorId)
+        {
+            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
+            foreach (DoctorAppointment appointment in AllAppointments)
+            {
+                if (appointment.AppointmentEnd < DateTime.Now && appointment.Doctor.Id.Equals(doctorId))
+                    appointments.Add(appointment);
+            }
+
+            return appointments;
+        }
+
+        public List<DoctorAppointment> GetConflictingAppointmentsForVacationPeriod(Doctor doctor, DateTime vacationStart)
+        {
+            List<DoctorAppointment> doctorAppointments = new List<DoctorAppointment>();
+            DateTime vacationEnd = vacationStart.AddDays(14);
+
+            foreach(DoctorAppointment appointment in AllAppointments)
+            {
+                if(appointment.Doctor.Id.Equals(doctor.Id) && appointment.AppointmentStart >= vacationStart && appointment.AppointmentEnd <= vacationEnd)
+                {
+                    doctorAppointments.Add(appointment);
+                }
+            }
+            return doctorAppointments;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Enums;
+using Hospital_IS.DTOs;
 using Model;
 using Service;
 using System;
@@ -36,32 +37,19 @@ namespace Controllers
             return AppointmentService.Instance.GetAllAppByTwoRooms(roomIdSource, roomIdDestination);
         }    
 
-        public bool MakeRenovationAppointment(DateTime start, DateTime end, String description,int roomId)
-        {
-            Appointment renovationAppointment = new Appointment(start, end, AppointmentType.Renovation, roomId);
-            renovationAppointment.AppointmentCause = description;
+        public bool MakeRenovationAppointment(Appointment renovationAppointment)
+        { 
            return AppointmentService.Instance.MakeRenovationAppointment(renovationAppointment);
-
         }
 
         public List<Appointment> GetAppByRoomId(int roomId)
         {
-            return AppointmentService.Instance.GetAppByRoom(roomId);
+            return AppointmentService.Instance.GetAllApointmentsByRoomId(roomId);
         }
 
-        public void AddAppointment(Appointment appointment)
+        public List<RenovationReportDTO> FindAllRenovationAppBetweeenDates(RenovationDTO renovationDTO)
         {
-
-        }
-
-        public void RemoveAppointment(Appointment appointment)
-        {
-
-        }
-
-        public void UpdateAppointment(Appointment appointment)
-        {
-
+            return AppointmentService.Instance.FindAllRenovationAppBetweeenDates(renovationDTO);
         }
     }
 }

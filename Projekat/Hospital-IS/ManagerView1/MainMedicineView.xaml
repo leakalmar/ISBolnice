@@ -20,7 +20,7 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <DataGrid x:Name="DataGridMedicine"  IsReadOnly="True" ItemsSource="{Binding Medicines}" SelectedItem="{Binding SelectedMedicine}" AlternatingRowBackground="NavajoWhite"
+        <DataGrid x:Name="DataGridMedicine"  IsReadOnly="True" ItemsSource="{Binding Medicines}" SelectedItem="{Binding SelectedMedicine}" AlternatingRowBackground="LightBlue"
                   SelectionMode="Single"
                   Height="430" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="350" Margin="40,145,40,0" Background="#FFC5DBDF" AutoGenerateColumns="False"  >
             <DataGrid.CellStyle>
@@ -92,7 +92,7 @@
                     </StackPanel>
                 </Button>
                 <TextBlock Grid.Row="2" Grid.Column="3" Height="20" Text="RADNICI" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#624cfc"   />
-                <Button BorderThickness="0" Width="80" Grid.Column="3" Grid.Row="1"  Background="Transparent" >
+                <Button BorderThickness="0" Width="80" Grid.Column="3" Grid.Row="1"  Background="Transparent" Command="{Binding NavigateToEmployeePage}" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -103,7 +103,7 @@
                     </StackPanel>
                 </Button>
                 <TextBlock Grid.Row="2" Grid.Column="5" Height="20" Text="FILIJALE" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#624cfc"   />
-                <Button BorderThickness="0" Width="80" Grid.Column="5" Grid.Row="1"  Background="Transparent" >
+                <Button BorderThickness="0" Width="80" Grid.Column="5" Grid.Row="1"  Background="Transparent" Command="{Binding NavigateToBranchPage}">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -114,7 +114,7 @@
                     </StackPanel>
                 </Button>
                 <TextBlock Grid.Row="2" Grid.Column="7" Height="20" Text="OPREMA" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#624cfc"   />
-                <Button x:Name="Eqiupment" BorderThickness="0" Width="80" Grid.Column="7" Grid.Row="1"  Background="Transparent" >
+                <Button x:Name="Eqiupment" BorderThickness="0" Width="80" Grid.Column="7" Grid.Row="1"  Background="Transparent" Command="{Binding NavigateToEquipmentPage}" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -159,7 +159,8 @@
                     <RowDefinition/>
                     <RowDefinition Height="3"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="Profil"  Grid.RowSpan="2" BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9" >
+                <Button x:Name="Profil"  Grid.RowSpan="2" BorderThickness="0" Grid.Column="1" Grid.Row="1" Width="60" Background="White" Margin="0,0,0,9" 
+                        Command="{Binding NavigateToManagerProfilePage}">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -180,7 +181,7 @@
                         <Image Source="pack://application:,,,/Resources/options.png" HorizontalAlignment="Left" Width="50" Height="64" />
                     </StackPanel>
                 </Button>
-                <Button Grid.RowSpan="2" BorderThickness="0" Grid.Column="5" Grid.Row="1" Width="50" Background="White" Margin="0,0,0,9" >
+                <Button Grid.RowSpan="2" BorderThickness="0" Grid.Column="5" Grid.Row="1" Width="50" Background="White" Margin="0,0,0,9" Command="{Binding OpenHelpWindow}">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>
@@ -226,7 +227,7 @@
                     <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
 
-                <Button x:Name="CloseOptions" BorderThickness="0"  Grid.Column="5" Grid.Row="0" Height="40"  Width="40" Background="White"  >
+                <Button x:Name="CloseOptions" BorderThickness="0"  Grid.Column="5" Grid.Row="0" Height="40"  Width="40" Background="White" Click="CloseOptions_Click" >
 
                     <StackPanel>
                         <Image  Source="pack://application:,,,/Resources/angledown.png" Width="40" Height="40"  />

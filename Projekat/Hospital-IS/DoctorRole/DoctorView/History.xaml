@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="Hospital_IS.DoctorRole.DoctorView.History"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+        xmlns:doctorconverters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783">
+    <UserControl.Resources>
+        <doctorconverters:AppTypeToString x:Key="AppTypeToString" />
+    </UserControl.Resources>
+    <Grid Margin="0,25,0,0" KeyboardNavigation.TabNavigation="Continue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" KeyboardNavigation.TabNavigation="Continue">
+            <Label Content="Od:" Style="{StaticResource CustomLabel}"
+                    VerticalAlignment="Center" />
+            <DatePicker Width="160" FontSize="14" BorderThickness="0"
+                    VerticalAlignment="Center" Margin="0,0,20,0"
+                    SelectedDate="{Binding FromDate}" Focusable="True"
+                    KeyboardNavigation.TabIndex="1"
+                    Style="{StaticResource CustomDatePicker}"
+                    DisplayDateEnd="{x:Static sys:DateTime.Today}">
+                <DatePicker.Resources>
+                    <Style TargetType="DatePickerTextBox">
+                        <Setter Property="Focusable" Value="True" />
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
+            <Label Content="Do:" Style="{StaticResource CustomLabel}"
+                    VerticalAlignment="Center" />
+            <DatePicker Width="160" FontSize="14" BorderThickness="0"
+                    VerticalAlignment="Center" Margin="0,0,160,0"
+                    SelectedDate="{Binding ToDate}" Focusable="True"
+                    KeyboardNavigation.TabIndex="2"
+                    Style="{StaticResource CustomDatePicker}"
+                    DisplayDateEnd="{x:Static sys:DateTime.Today}">
+                <DatePicker.Resources>
+                    <Style TargetType="DatePickerTextBox">
+                        <Setter Property="Focusable" Value="True" />
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
+            
+            <Button Style="{StaticResource CustomButton}" Width="200"
+                    Margin="10" KeyboardNavigation.TabIndex="3" >
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Stampaj" Margin="0,0,20,0"
+                                FontSize="20"
+                                Style="{StaticResource CustomTextBlock}"
+                                VerticalAlignment="Center" />
+                        <Image
+                                Source="pack://application:,,,/Resources/print.png" />
+                    </StackPanel>
+                </Button.Content>
+                <Button.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding PrintCommand}" />
+                    <KeyBinding Key="Space" Command="{Binding PrintCommand}" />
+                    <KeyBinding Key="P" Modifiers="Ctrl"
+                            Command="{Binding PrintCommand}" />
+                </Button.InputBindings>
+            </Button>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Reports}"
+                Style="{StaticResource CustomDataGrid}"
+                SelectedItem="{Binding SelectedReport}"
+                KeyboardNavigation.TabNavigation="None">
+            <DataGrid.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding OldReportCommand}" />
+                <KeyBinding Key="Space" Command="{Binding OldReportCommand}" />
+            </DataGrid.InputBindings>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Datum"
+                        Binding="{Binding AppointmentStart,StringFormat=\{0:dd.MM.yyyy.\}}"
+                        CanUserResize="False" Width="0.05*" />
+                <DataGridTextColumn Header="Tip pregleda"
+                        Binding="{Binding Type,Converter={StaticResource AppTypeToString}}" CanUserResize="False"
+                        Width="0.05*" />
+                <DataGridTextColumn Header="Dijagnoza"
+                        Binding="{Binding AppointmentCause}"
+                        CanUserResize="False" Width="0.05*" />
+                <DataGridTextColumn Header="Doktor"
+                        Binding="{Binding DoctorSurname}" CanUserResize="False"
+                        Width="0.05*" />
+                <DataGridCheckBoxColumn Header="Recept"
+                        Binding="{Binding CountPresciption}"
+                        CanUserResize="False" Width="0.02*" />
+                <DataGridCheckBoxColumn Header="Test"
+                        Binding="{Binding CountTests}" CanUserResize="False"
+                        Width="0.02*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</UserControl>

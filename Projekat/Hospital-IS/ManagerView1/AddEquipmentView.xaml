@@ -3,8 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Hospital_IS.ManagerView1"
-      xmlns:viewModel ="clr-namespace:Hospital_IS.ManagerViewModel" d:DataContext="{d:DesignInstance Type=viewModel:EquipmentViewModel}"
+      xmlns:local="clr-namespace:Hospital_IS.ManagerView1" xmlns:managerviewmodel="clr-namespace:Hospital_IS.ManagerViewModel" d:DataContext="{d:DesignInstance Type=managerviewmodel:AddEquipmentViewModel}"
       mc:Ignorable="d" 
          Title="Dodaj sobu" Height="750" Width="430" Background="Transparent"
        >
@@ -130,16 +129,16 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="15"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="15"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="15"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="15"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
 
@@ -159,7 +158,7 @@
             </Border.Background>
         </Border>
 
-        <Button x:Name="Back"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" Command="{Binding NavigateToRoomPage}">
+        <Button x:Name="Back"  BorderThickness="0" Width="50" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" Command="{Binding NavigateToPreviousPage}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="15"/>
@@ -174,107 +173,32 @@
                HorizontalAlignment="Center" VerticalAlignment="Center" />
         <Label Content="Naziv opreme*" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
         <TextBox x:Name="EquipmentName"  Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="4" Grid.Column="3" 
-                 Grid.ColumnSpan="2" Height="30"   FontSize="15" Padding="4" GotFocus="EquipmentName_GotFocus" >
-            <TextBox.Text>
-
-                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-            <Validation.ErrorTemplate>
-                <ControlTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
-                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-
-                        <TextBlock  Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" TextAlignment="Center" 
-                                    Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                    </Grid>
-                </ControlTemplate>
-            </Validation.ErrorTemplate>
+                 Grid.ColumnSpan="2" Height="30"   FontSize="15" Padding="4" GotFocus="EquipmentName_GotFocus" Text="{Binding EquipmentValidationDTO.Name,Mode=TwoWay}" >
+           
+               
         </TextBox>
-
+        <TextBlock Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2" Text="{Binding EquipmentValidationDTO.ValidationErrors[Name]}" Grid.RowSpan="2" Foreground="Red"/>
+        
         <Label Content="Proizvođač*" Grid.Row="6" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
         <TextBox x:Name="Producer" Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="7" Grid.Column="3" 
-                  Grid.ColumnSpan="2" Height="30"  FontSize="15" Padding="4" GotFocus="Producer_GotFocus" >
-            <TextBox.Text>
-                <Binding Path="ProducerName" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-            <Validation.ErrorTemplate>
-                <ControlTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
-                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-
-                        <TextBlock  Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" TextAlignment="Center" 
-                                    Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                    </Grid>
-                </ControlTemplate>
-            </Validation.ErrorTemplate>
+                  Grid.ColumnSpan="2" Height="30"  FontSize="15" Padding="4" GotFocus="Producer_GotFocus" Text="{Binding EquipmentValidationDTO.ProducerName,Mode=TwoWay}" >
+           
         </TextBox>
+        <TextBlock Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="2" Text="{Binding EquipmentValidationDTO.ValidationErrors[ProducerName]}" Grid.RowSpan="2" Foreground="Red"/>
         <Label Content="Količina*" Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
         <TextBox x:Name="Quantity"  Template="{StaticResource TextBoxBaseControlTemplate}" Grid.Row="10" Grid.Column="3"
-                  Grid.ColumnSpan="2" Height="30" FontSize="15" Padding="4" GotFocus="Quantity_GotFocus" >
-            <TextBox.Text>
-                <Binding Path="Quantity" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <local:StringToIntValidationRule ValidationStep="RawProposedValue"/>
-                        <local:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="0" Max="10000"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-            <Validation.ErrorTemplate>
-                <ControlTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
-                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-
-                        <TextBlock  Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" TextAlignment="Center" 
-                                    Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                    </Grid>
-                </ControlTemplate>
-            </Validation.ErrorTemplate>
+                  Grid.ColumnSpan="2" Height="30" FontSize="15" Padding="4" GotFocus="Quantity_GotFocus" Text="{Binding EquipmentValidationDTO.Quantity,Mode=TwoWay}" >
         </TextBox>
-        
+        <TextBlock Grid.Row="11" Grid.Column="3" Grid.ColumnSpan="2" Text="{Binding EquipmentValidationDTO.ValidationErrors[Quantity]}" Grid.RowSpan="2" Foreground="Red"/>
 
         <Label Content="Tip opreme*" Grid.Row="12" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
-        <ComboBox x:Name="ComboBox" Template="{StaticResource ComboBoxBaseControlTemplate}" SelectedIndex="{Binding ComboBoxItem}" Grid.Row="13" Grid.Column="3" Grid.ColumnSpan="2" FontSize="15">
-            <ComboBoxItem Content="Dinamička oprema"/>
+        <ComboBox x:Name="ComboBox" Template="{StaticResource ComboBoxBaseControlTemplate}" SelectedIndex="{Binding SelectedEnum}" Grid.Row="13" Grid.Column="3" Grid.ColumnSpan="2" FontSize="15">
             <ComboBoxItem Content="Statička oprema"/>
+            <ComboBoxItem Content="Dinamička oprema"/>
         </ComboBox>
 
         <Button x:Name="Submit" Content="Potvrdi" FontSize="20" Height="40" Background="White" BorderThickness="3" BorderBrush="Green" Foreground="#FF5B317E" FontWeight="SemiBold" Grid.Row="17" 
-                 Grid.Column="3" Grid.ColumnSpan="2" Width="200" Command="{Binding AddNewEquipment}" >
+                 Grid.Column="3" Grid.ColumnSpan="2" Width="200" Command="{Binding AddNewEquipmentToRoom}" >
 
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">

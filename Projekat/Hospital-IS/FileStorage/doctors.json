@@ -1,53 +1,40 @@
 [
   {
-    "patient": [],
-    "hospital": null,
+    "patient": null,
+    "VacationTimeStart": "0001-01-01T00:00:00",
+    "WorkShift": 0,
     "Specialty": {
       "Name": "Dermatolog"
     },
+    "DaysOff": [],
     "PrimaryRoom": 1,
     "Patient": [],
-    "Salary": 70000.0,
-    "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-    "WorkDay": [
-      {
-        "Day": 0,
-        "StartTime": "2021-02-02T08:00:00",
-        "EndTime": "2021-02-02T20:00:00"
-      }
-    ],
     "Education": 0,
-    "Id": 4,
     "Name": "Dragana",
-    "Surname": "Vukmanov Simokov",
-    "BirthDate": "1985-05-07T00:00:00",
-    "Phone": null,
+    "Surname": "Vukmanov",
+    "BirthDate": "0001-01-01T00:00:00",
+    "Phone": "",
     "Email": "dragana@gmail.com",
     "Gender": null,
     "Relationship": null,
     "Password": "dragana",
     "Address": "Brace Radica 15",
-    "Hospital": null
+    "Salary": 80000.0,
+    "EmploymentDate": "2021-06-10T06:54:50.934202+02:00",
+    "WorkDay": null,
+    "Id": 4
   },
   {
     "patient": [],
-    "hospital": null,
+    "VacationTimeStart": "0001-01-01T00:00:00",
+    "WorkShift": 0,
     "Specialty": {
       "Name": "Stomatolog"
     },
+    "DaysOff": [],
     "PrimaryRoom": 2,
     "Patient": [],
-    "Salary": 70000.0,
-    "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
-    "WorkDay": [
-      {
-        "Day": 0,
-        "StartTime": "2021-02-02T08:00:00",
-        "EndTime": "2021-02-02T20:00:00"
-      }
-    ],
     "Education": 0,
-    "Id": 10,
     "Name": "Ksenija",
     "Surname": "Dimitrijevic",
     "BirthDate": "1985-05-07T00:00:00",
@@ -57,16 +44,6 @@
     "Relationship": null,
     "Password": "ksenija",
     "Address": "Brace Radica 15",
-    "Hospital": null
-  },
-  {
-    "patient": [],
-    "hospital": null,
-    "Specialty": {
-      "Name": "Dermatolog"
-    },
-    "PrimaryRoom": 3,
-    "Patient": [],
     "Salary": 70000.0,
     "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
     "WorkDay": [
@@ -76,8 +53,19 @@
         "EndTime": "2021-02-02T20:00:00"
       }
     ],
+    "Id": 10
+  },
+  {
+    "patient": [],
+    "VacationTimeStart": "0001-01-01T00:00:00",
+    "WorkShift": 0,
+    "Specialty": {
+      "Name": "Dermatolog"
+    },
+    "DaysOff": [],
+    "PrimaryRoom": 3,
+    "Patient": [],
     "Education": 0,
-    "Id": 11,
     "Name": "Ivan",
     "Surname": "Stankovic",
     "BirthDate": "1985-05-07T00:00:00",
@@ -87,16 +75,6 @@
     "Relationship": null,
     "Password": "ivan",
     "Address": "Brace Radica 15",
-    "Hospital": null
-  },
-  {
-    "patient": [],
-    "hospital": null,
-    "Specialty": {
-      "Name": ""
-    },
-    "PrimaryRoom": 4,
-    "Patient": [],
     "Salary": 70000.0,
     "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
     "WorkDay": [
@@ -106,8 +84,19 @@
         "EndTime": "2021-02-02T20:00:00"
       }
     ],
+    "Id": 11
+  },
+  {
+    "patient": [],
+    "VacationTimeStart": "0001-01-01T00:00:00",
+    "WorkShift": 0,
+    "Specialty": {
+      "Name": ""
+    },
+    "DaysOff": [],
+    "PrimaryRoom": 4,
+    "Patient": [],
     "Education": 0,
-    "Id": 12,
     "Name": "Nikolina",
     "Surname": "Kontic",
     "BirthDate": "1985-05-07T00:00:00",
@@ -117,16 +106,6 @@
     "Relationship": null,
     "Password": "nikolina",
     "Address": "Brace Radica 15",
-    "Hospital": null
-  },
-  {
-    "patient": [],
-    "hospital": null,
-    "Specialty": {
-      "Name": ""
-    },
-    "PrimaryRoom": 5,
-    "Patient": [],
     "Salary": 70000.0,
     "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
     "WorkDay": [
@@ -136,8 +115,19 @@
         "EndTime": "2021-02-02T20:00:00"
       }
     ],
+    "Id": 12
+  },
+  {
+    "patient": [],
+    "VacationTimeStart": "0001-01-01T00:00:00",
+    "WorkShift": 0,
+    "Specialty": {
+      "Name": ""
+    },
+    "DaysOff": [],
+    "PrimaryRoom": 5,
+    "Patient": [],
     "Education": 0,
-    "Id": 13,
     "Name": "Sasa",
     "Surname": "Aksin",
     "BirthDate": "1985-05-07T00:00:00",
@@ -147,6 +137,15 @@
     "Relationship": null,
     "Password": "sasa",
     "Address": "Brace Radica 15",
-    "Hospital": null
+    "Salary": 70000.0,
+    "EmploymentDate": "2021-03-30T21:21:40.8828631+02:00",
+    "WorkDay": [
+      {
+        "Day": 0,
+        "StartTime": "2021-02-02T08:00:00",
+        "EndTime": "2021-02-02T20:00:00"
+      }
+    ],
+    "Id": 13
   }
 ]

@@ -3,64 +3,56 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hospital_IS"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="320" Width="500" WindowStartupLocation="CenterScreen"
-        AllowsTransparency="True" Background="Transparent"
-        WindowStyle="None" ResizeMode="NoResize"
+        xmlns:local="clr-namespace:Hospital_IS" mc:Ignorable="d"
+        Title="MainWindow" Height="320" Width="500"
+        WindowStartupLocation="CenterScreen" AllowsTransparency="True"
+        Background="Transparent" WindowStyle="None" ResizeMode="NoResize"
         MouseDown="Window_MouseDown">
     <Grid>
         <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Border CornerRadius="20" Grid.ColumnSpan="2">
-                <Border.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF213868" Offset="0.0"/>
-                        <GradientStop Color="#FF5B317E" Offset="1"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-            </Border>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Border CornerRadius="20" Grid.ColumnSpan="2">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF213868" Offset="0.0" />
+                    <GradientStop Color="#FF5B317E" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
 
-            
-            <Image Source="hospital.png" Width="250" Height="250"/>
+        <Image Source="hospital.png" Width="250" Height="250" />
 
-            <StackPanel Grid.Column="1">
-                <StackPanel>
-                <TextBox Background="Transparent"  Name="email"
-                         Text="Email"
-                         Foreground="White"
-                         FontWeight="Light"
-                         FontSize="18"
-                         BorderThickness="0"
-                         Width="220"
-                         Margin="10 100 0 0"
-                         Opacity="0.7"
-                         GotFocus="email_GotFocus"
-                         LostFocus="email_LostFocus"/>
-                 </StackPanel>
-                  <Border Height="1" Width="220" Background="White" Opacity="0.7"></Border>
-                <StackPanel>
+        <StackPanel Grid.Column="1">
+            <StackPanel>
+                <TextBox Background="Transparent" Name="email" Text="Email"
+                        Foreground="White" FontWeight="Light" FontSize="18"
+                        BorderThickness="0" Width="220" Margin="10 100 0 0"
+                        Opacity="0.7" GotFocus="email_GotFocus"
+                        LostFocus="email_LostFocus" />
+            </StackPanel>
+            <Border Height="1" Width="220" Background="White" Opacity="0.7"></Border>
+            <StackPanel>
                 <PasswordBox Background="Transparent" Name="password"
-                         Password="Password" 
-                         Foreground="White"
-                         FontWeight="Light"
-                         FontSize="18"
-                         BorderThickness="0"
-                         Width="220"
-                         Margin="10 20 0 0"
-                         Opacity="0.7"
-                         GotFocus="password_GotFocus"/>
-                </StackPanel>
-                <Border Height="1" Width="220" Background="White" Opacity="0.7"></Border>
-                <StackPanel>
-                <Button Height="20" Width="120"
-                        Content="Login"
-                        Margin="50" Background="LavenderBlush"
-                        Click="Login" IsDefault="True"/>
+                        Password="Password" Foreground="White"
+                        FontWeight="Light" FontSize="18" BorderThickness="0"
+                        Width="220" Margin="10 20 0 0" Opacity="0.7"
+                        GotFocus="password_GotFocus" />
             </StackPanel>
+            <Border Height="1" Width="220" Background="White" Opacity="0.7"></Border>
+            <StackPanel>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                        Text="Pogrešan unos emaila ili lozinke. Pokušajte ponovo." Focusable="False"
+                        Foreground="Red" HorizontalAlignment="Center" x:Name="message" Visibility="Hidden"/>
             </StackPanel>
+            
+            <StackPanel>
+                <Button Height="20" Width="120" Content="Login" Margin="50,30,50,50"
+                        Background="LavenderBlush" Click="Login"
+                        IsDefault="True" />
+            </StackPanel>
+        </StackPanel>
 
     </Grid>
 </Window>

@@ -1,0 +1,36 @@
+﻿<Window x:Class="Hospital_IS.SecretaryView.DeleteAppointmentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+        lex:ResxLocalizationProvider.DefaultDictionary="Strings"
+        xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
+        mc:Ignorable="d"
+        Title="Otkazivanje termina" WindowStartupLocation="CenterScreen"
+        Height="180" Width="400" FontSize="14">
+    <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Name="tbCancelApp" Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
+                   FontSize="15" TextWrapping="Wrap"
+                   Text="{lex:Loc}"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Button Name="btnYes" Content="{lex:Loc}" Width="40" Style="{DynamicResource ResourceKey=RegularButton}" Margin="5 5 25 5" Click="Delete"/>
+            <Button Name="btnNo" Content="{lex:Loc}" Width="40" Style="{DynamicResource ResourceKey=RegularButton}" Margin="25 5 5 5" Click="Close"/>
+        </StackPanel>
+    </Grid>
+</Window>

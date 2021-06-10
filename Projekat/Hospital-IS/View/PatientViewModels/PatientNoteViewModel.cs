@@ -14,6 +14,7 @@ namespace Hospital_IS.View.PatientViewModels
 
         public EventHandler OnRequestClose;
         public MyICommand AppointmentNote { get; set; }
+        public MyICommand CloseNote { get; set; }
 
         public PatientNoteViewModel(int appointmentId)
         {
@@ -26,6 +27,7 @@ namespace Hospital_IS.View.PatientViewModels
                 IsNotifyChecked = Note.IsNotifyChecked;
             }
             AppointmentNote = new MyICommand(AppNote);
+            CloseNote = new MyICommand(Close);
         }
 
         public int NotificationTime
@@ -74,7 +76,7 @@ namespace Hospital_IS.View.PatientViewModels
                 Note.NotificationTime = NotificationTime + 8;
                 Note.NoteContent = NoteContent;
                 Note.IsNotifyChecked = IsNotifyChecked;
-                PatientController.Instance.SavePatients();
+                PatientController.Instance.UpdatePatient(PatientMainWindowViewModel.Patient);
             }
             else
             {
@@ -82,6 +84,11 @@ namespace Hospital_IS.View.PatientViewModels
                 PatientController.Instance.AddAppointmentNote(PatientMainWindowViewModel.Patient.Id, Note);
             }
             
+            OnRequestClose(this, new EventArgs());
+        }
+
+        private void Close()
+        {
             OnRequestClose(this, new EventArgs());
         }
     }

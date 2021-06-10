@@ -1,0 +1,121 @@
+﻿<UserControl x:Class="Hospital_IS.DoctorRole.DoctorView.HomePage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+        xmlns:doctorconverters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        FocusManager.FocusedElement="{Binding ElementName=docotrAppointments}"
+        mc:Ignorable="d">
+    <UserControl.Resources>
+        <doctorconverters:AppTypeToString x:Key="AppTypeToString"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0">
+                <TextBlock FontSize="20" Foreground="White"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="Eras ITC" Margin="0,15,0,0">
+                    Termini
+                </TextBlock>
+                <Image Source="pack://application:,,,/Resources/calendar.png"
+                        Width="130" />
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="2">
+                <TextBlock FontSize="20" Foreground="White"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="Eras ITC" Margin="0,15,0,0">
+                    Pacijenti
+                </TextBlock>
+                <Image Source="pack://application:,,,/Resources/bed.png"
+                        Grid.Column="1" Width="130" />
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="3">
+                <Label FontSize="20" Foreground="White"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="Eras ITC" Padding="0,-4,0,0">Izdavanje</Label>
+                <Label FontSize="20" Foreground="White"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="Eras ITC" Padding="0,0,0,0">recepta</Label>
+                <Image Source="pack://application:,,,/Resources/treatment.png"
+                        Grid.Column="2" Width="130" />
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="4">
+                <Label FontSize="20" Foreground="White"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="Eras ITC" Padding="0,-4,0,0">Odobravanje</Label>
+                <Label FontSize="20" Foreground="White"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="Eras ITC" Padding="0,-4,0,0">leka</Label>
+                <Image Source="pack://application:,,,/Resources/pill.png"
+                        Grid.Column="4" Width="130" />
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="5">
+                <Label FontSize="20" Foreground="White"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontFamily="Eras ITC" Padding="5,5,5,5"
+                        Margin="0,10,0,0">Obaveštenja</Label>
+                <Image
+                        Source="pack://application:,,,/Resources/notification.png"
+                        Grid.Column="4" Width="130" />
+            </StackPanel>
+
+
+        </Grid>
+
+        <Frame x:Name="homePage" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" />
+
+        <GroupBox Header="Zakazani pregledi" Grid.Row="1" Grid.Column="0"
+                BorderBrush="#FF2E3B55" Foreground="White" FontSize="16">
+            <DataGrid x:Name="docotrAppointments" KeyboardNavigation.DirectionalNavigation="Continue"
+                ItemsSource="{Binding Path=AppointmentsView}"
+                    Style="{StaticResource CustomDataGrid}"
+                    SelectedItem="{Binding Path=SelectedAppointment, UpdateSourceTrigger=PropertyChanged}" Focusable="True">
+
+                <DataGrid.InputBindings>
+                    <KeyBinding Key="Return"
+                            Command="{Binding NavigateToDetailsCommand}" />
+                    <KeyBinding Key="Space"
+                            Command="{Binding NavigateToDetailsCommand}" />
+                </DataGrid.InputBindings>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Vreme"
+                            Binding="{Binding Appointment.AppointmentStart,StringFormat=\{0: HH:mm\}}"
+                            CanUserResize="False" Width="0.05*" />
+                    <DataGridTextColumn Header="Pacijent" CanUserResize="False"
+                            Width="0.05*">
+                        <DataGridTextColumn.Binding>
+                            <MultiBinding StringFormat="{}{0}  {1}">
+                                <Binding Path="Appointment.Patient.Name" />
+                                <Binding Path="Appointment.Patient.Surname" />
+                            </MultiBinding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Tip"
+                            Binding="{Binding Appointment.Type,Converter={StaticResource AppTypeToString}}"
+                            CanUserResize="False" Width="0.05*" />
+                    <DataGridTextColumn Header="Soba"
+                            Binding="{Binding Appointment.Room}"
+                            CanUserResize="False" Width="0.05*" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </GroupBox>
+    </Grid>
+
+</UserControl>

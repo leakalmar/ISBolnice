@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             lex:LocalizeDictionary.DesignCulture="en"
+             lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+             lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              xmlns:local="clr-namespace:Hospital_IS"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -21,16 +25,21 @@
         </Grid.RowDefinitions>
 
 
-        <Button Grid.Row="1" Grid.Column="1" Width="165" Content="Postavi novo obaveštenje" Height="30" Margin="10 10 10 10"
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White" FontSize="14"
-                HorizontalAlignment="Right" Click="CreateNotification"/>
+        <Button Grid.Row="1" Grid.Column="1" Width="195" FontSize="13" Height="30" Margin="10 10 10 10"
+                Style="{DynamicResource ResourceKey=RegularButton}"
+                HorizontalAlignment="Right" Click="CreateNotification">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="pack://application:,,,/Resources/plus.png" Height="20" Width="20"/>
+                <TextBlock Name="txtCreateNotification" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
+            </StackPanel>
+        </Button>
 
-        <ScrollViewer  Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" Grid.RowSpan="1" Margin="10" VerticalScrollBarVisibility="Auto" Background="#CCF1F3F8">
+        <ScrollViewer  Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" Grid.RowSpan="1" Margin="10" VerticalScrollBarVisibility="Auto" Style="{DynamicResource ResourceKey=NotificationViewer}">
             <StackPanel>
                 <ItemsControl x:Name="ListViewNotifications" ItemsSource="{Binding Notification}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Height="70" Margin="10" CornerRadius="3" BorderBrush="Black" BorderThickness="1" Background="#CCC5CFE5">
+                            <Border Height="70" Margin="10" CornerRadius="3" BorderBrush="Black" BorderThickness="1" Style="{DynamicResource ResourceKey=NotificationBorder}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto"/>
@@ -46,11 +55,25 @@
                                         <TextBlock Text="{Binding Title}" Margin="10" FontSize="20" FontWeight="Light"/>
                                         <TextBlock Text="{Binding Text}" Margin="10 0 10 10" FontSize="12" TextTrimming="CharacterEllipsis"  MaxWidth="1750" FontWeight="Light"/>
                                     </StackPanel>
-                                    <TextBlock Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Center"
+                                    <TextBlock Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Right"
                                                Text="{Binding DatePosted, StringFormat=\{0:HH:mm  dd.MM.yyyy.\}}" Margin="10" FontSize="9" FontWeight="Light"/>
                                     <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="2">
-                                        <Button Tag="{Binding Id}" Content="Prikaži" VerticalAlignment="Top" Margin="10" Click="ShowNotification" HorizontalAlignment="Right"/>
-                                        <Button Tag="{Binding Id}" Content="Izmeni" VerticalAlignment="Top"  Margin="10" Click="UpdateNotification"/>
+                                        <Button Tag="{Binding Id}"  Style="{DynamicResource ResourceKey=NotificationButton}"
+                                                VerticalAlignment="Top" Margin="10" Click="ShowNotification" 
+                                                HorizontalAlignment="Right">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="pack://application:,,,/Resources/eye.png" Height="15" Width="15"/>
+                                                <TextBlock  Name="txtShow" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
+                                            </StackPanel>
+                                        </Button>
+                                        <Button Tag="{Binding Id}" FontSize="13" Style="{DynamicResource ResourceKey=NotificationButton}"
+                                                VerticalAlignment="Top"  Margin="10" 
+                                                Click="UpdateNotification">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="pack://application:,,,/Resources/pen.png" Height="15" Width="15"/>
+                                                <TextBlock  Name="txtUpdate" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
+                                            </StackPanel>
+                                        </Button>
                                     </StackPanel>
                                 </Grid>
                             </Border>
@@ -65,8 +88,6 @@
             </StackPanel>
 
         </ScrollViewer>
-
-
 
     </Grid>
 </UserControl>

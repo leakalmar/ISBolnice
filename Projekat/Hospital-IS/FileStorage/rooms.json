@@ -1,168 +1,90 @@
 [
   {
-    "RoomFloor": 10,
-    "RoomNumber": 11,
-    "SurfaceArea": 11,
-    "BedNumber": 111,
-    "RoomId": 1,
-    "Type": 1,
-    "RoomIdType": "0 ConsultingRoom",
+    "RoomFloor": 1,
+    "RoomNumber": 99,
+    "SurfaceArea": 1405,
+    "BedNumber": 0,
+    "Type": 0,
+    "RoomIdType": "99 RecoveryRoom",
     "Equipment": [],
-    "isUsable": false
+    "isUsable": false,
+    "Id": 0
+  },
+  {
+    "RoomFloor": 6,
+    "RoomNumber": 123,
+    "SurfaceArea": 40,
+    "BedNumber": 60,
+    "Type": 1,
+    "RoomIdType": "123 ConsultingRoom",
+    "Equipment": [],
+    "isUsable": false,
+    "Id": 1
   },
   {
     "RoomFloor": 1,
-    "RoomNumber": 21,
-    "SurfaceArea": 20,
-    "BedNumber": 11,
-    "RoomId": 0,
-    "Type": 3,
-    "RoomIdType": "1 StorageRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 1,
-    "RoomNumber": 12,
-    "SurfaceArea": 2,
-    "BedNumber": 1,
-    "RoomId": 2,
-    "Type": 3,
-    "RoomIdType": "2 StorageRoom",
-    "Equipment": [
-      {
-        "EquipType": 1,
-        "EquiptId": 7,
-        "Name": "10",
-        "Quantity": 50,
-        "ProducerName": "10",
-        "EquiptTypeIndex": 1
-      },
-      {
-        "EquipType": 1,
-        "EquiptId": 8,
-        "Name": "sasa",
-        "Quantity": 4000,
-        "ProducerName": "sasa",
-        "EquiptTypeIndex": 1
-      },
-      {
-        "EquipType": 1,
-        "EquiptId": 9,
-        "Name": "tat",
-        "Quantity": 60,
-        "ProducerName": "tata",
-        "EquiptTypeIndex": 1
-      },
-      {
-        "EquipType": 1,
-        "EquiptId": 10,
-        "Name": "rer",
-        "Quantity": 100,
-        "ProducerName": "erer",
-        "EquiptTypeIndex": 1
-      }
-    ],
-    "isUsable": false
-  },
-  
-  {
-    "RoomFloor": 10,
-    "RoomNumber": 10,
-    "SurfaceArea": 10,
-    "BedNumber": 10,
-    "RoomId": 7,
+    "RoomNumber": 101,
+    "SurfaceArea": 50,
+    "BedNumber": 0,
     "Type": 1,
-    "RoomIdType": "7 ConsultingRoom",
+    "RoomIdType": "101 ConsultingRoom",
     "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 10,
-    "RoomNumber": 10,
-    "SurfaceArea": 10,
-    "BedNumber": 10,
-    "RoomId": 8,
-    "Type": 2,
-    "RoomIdType": "8 OperationRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 5,
-    "RoomNumber": 5,
-    "SurfaceArea": 5,
-    "BedNumber": 5,
-    "RoomId": 9,
-    "Type": 0,
-    "RoomIdType": "9 RecoveryRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 10,
-    "RoomNumber": 1,
-    "SurfaceArea": 10,
-    "BedNumber": 10,
-    "RoomId": 10,
-    "Type": 1,
-    "RoomIdType": "10 ConsultingRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 10,
-    "RoomNumber": 1,
-    "SurfaceArea": 10,
-    "BedNumber": 10,
-    "RoomId": 11,
-    "Type": 0,
-    "RoomIdType": "11 RecoveryRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 10,
-    "RoomNumber": 10,
-    "SurfaceArea": 10,
-    "BedNumber": 5,
-    "RoomId": 12,
-    "Type": 0,
-    "RoomIdType": "12 RecoveryRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 10,
-    "RoomNumber": 9,
-    "SurfaceArea": 10,
-    "BedNumber": 10,
-    "RoomId": 13,
-    "Type": 0,
-    "RoomIdType": "13 RecoveryRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 1,
-    "RoomNumber": 1,
-    "SurfaceArea": 1,
-    "BedNumber": 1,
-    "RoomId": 14,
-    "Type": 0,
-    "RoomIdType": "14 RecoveryRoom",
-    "Equipment": [],
-    "isUsable": false
+    "isUsable": false,
+    "Id": 4
   },
   {
     "RoomFloor": 2,
-    "RoomNumber": 26,
-    "SurfaceArea": 20,
-    "BedNumber": 6,
-    "RoomId": 15,
-    "Type": 0,
-    "RoomIdType": "15 RecoveryRoom",
+    "RoomNumber": 200,
+    "SurfaceArea": 50,
+    "BedNumber": 0,
+    "Type": 1,
+    "RoomIdType": "200 ConsultingRoom",
     "Equipment": [],
-    "isUsable": false
+    "isUsable": false,
+    "Id": 7
+  },
+  {
+    "RoomFloor": 2,
+    "RoomNumber": 205,
+    "SurfaceArea": 50,
+    "BedNumber": 0,
+    "Type": 1,
+    "RoomIdType": "200 ConsultingRoom",
+    "Equipment": [],
+    "isUsable": false,
+    "Id": 2
+  },
+  {
+    "RoomFloor": 3,
+    "RoomNumber": 305,
+    "SurfaceArea": 50,
+    "BedNumber": 0,
+    "Type": 1,
+    "RoomIdType": "200 ConsultingRoom",
+    "Equipment": [],
+    "isUsable": false,
+    "Id": 3
+  },
+  {
+    "RoomFloor": 2,
+    "RoomNumber": 208,
+    "SurfaceArea": 50,
+    "BedNumber": 0,
+    "Type": 1,
+    "RoomIdType": "200 ConsultingRoom",
+    "Equipment": [],
+    "isUsable": false,
+    "Id": 5
+  },
+  {
+    "RoomFloor": 3,
+    "RoomNumber": 300,
+    "SurfaceArea": 50,
+    "BedNumber": 0,
+    "Type": 1,
+    "RoomIdType": "300 ConsultingRoom",
+    "Equipment": [],
+    "isUsable": false,
+    "Id": 8
   }
 ]

@@ -4,12 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+        lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
         Title="Gostujući korisnici" Height="400" Width="500"
-        WindowStartupLocation="CenterScreen"
-        Background="#CCC5CFE5">
-    
-    <Grid>
+        WindowStartupLocation="CenterScreen">
+    <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
@@ -27,19 +29,23 @@
         <DataGrid x:Name="dataGridGuests" ItemsSource="{Binding Guests}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
                   Grid.Column="1" Grid.Row="1" Margin="10" RowHeaderWidth="0"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  Background="Transparent" RowBackground="AliceBlue">
+                  Style="{DynamicResource ResourceKey=DataGrid}"
+                  ColumnHeaderStyle="{DynamicResource ResourceKey=ColumHeader}"
+                  RowStyle="{DynamicResource ResourceKey=GridRow}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID korisnika" Binding="{Binding Id}" Width="auto"/>
-                <DataGridTextColumn Header="Datum kreiranja naloga" Binding="{Binding BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}" Width="*"/>
+                <DataGridTextColumn Header="{lex:Loc tbUserId}" Binding="{Binding Id}" Width="auto"/>
+                <DataGridTextColumn Header="{lex:Loc tbAccCreationDate}" Binding="{Binding BirthDate, StringFormat=\{0:dd.MM.yyyy.\}}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF3558A2"/>
             </DataGrid.Resources>
         </DataGrid>
 
-        <Button Grid.Row="2" Grid.Column="1" Content="Napravi trajni nalog" Margin="10 0"
+        <Button Name="btnCreatePermAccount" Grid.Row="2" Grid.Column="1" Content="{lex:Loc}" Margin="10 0"
+                Style="{DynamicResource ResourceKey=RegularButton}"
                 HorizontalAlignment="Right" Width="150" FontSize="15" Click="RegisterPatient"/>
         <Button Grid.Row="3" Grid.Column="1" Content="OK" Margin="0 10 0 0"
+                Style="{DynamicResource ResourceKey=RegularButton}"
                 HorizontalAlignment="Center" Width="50" FontSize="15" Click="Close"/>
 
     </Grid>

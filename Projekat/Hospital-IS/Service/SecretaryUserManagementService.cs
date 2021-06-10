@@ -35,7 +35,7 @@ namespace Hospital_IS.Service
         {
             foreach (Patient patient in PatientService.Instance.AllPatients)
                 AllPatients.Add(new PatientDTO(patient.Id, patient.Name, patient.Surname, patient.Gender, patient.BirthDate, patient.Phone, patient.Email,
-                    patient.Education, patient.Relationship, patient.Employer, patient.Password, patient.Address, patient.Alergies, patient.IsGuest));
+                    patient.Education, patient.Relationship, patient.Employer, patient.Password, patient.Address, patient.Alergies, patient.IsGuest, patient.Admitted));
         }
 
         public void ReloadPatients()
@@ -48,8 +48,8 @@ namespace Hospital_IS.Service
         public void AddPatient(PatientDTO patientDTO)
         {
             AllPatients.Add(patientDTO);
-            PatientService.Instance.AddPatient(new Patient(patientDTO.Id, patientDTO.Name, patientDTO.Surname, patientDTO.BirthDate, patientDTO.Address, patientDTO.Email,
-                patientDTO.Password, patientDTO.FileDate, patientDTO.Employer, patientDTO.Alergies, patientDTO.IsGuest));
+            PatientService.Instance.AddPatient(new Patient(patientDTO.Id, patientDTO.Name, patientDTO.Surname, patientDTO.Gender, patientDTO.BirthDate, patientDTO.Address,
+                        patientDTO.Phone, patientDTO.Email, patientDTO.Relationship, patientDTO.Education, patientDTO.Password, patientDTO.Employer, patientDTO.Alergies, patientDTO.IsGuest));
         }
 
         public void UpdatePatient(PatientDTO patientDTO)
@@ -61,8 +61,8 @@ namespace Hospital_IS.Service
                     AllPatients.Remove(AllPatients[i]);
                     AllPatients.Insert(i, patientDTO);
 
-                    PatientService.Instance.UpdatePatient(new Patient(patientDTO.Id, patientDTO.Name, patientDTO.Surname, patientDTO.BirthDate, patientDTO.Address, patientDTO.Email,
-                patientDTO.Password, patientDTO.FileDate, patientDTO.Employer, patientDTO.Alergies, patientDTO.IsGuest));
+                    PatientService.Instance.UpdatePatient(new Patient(patientDTO.Id, patientDTO.Name, patientDTO.Surname, patientDTO.Gender, patientDTO.BirthDate, patientDTO.Address, 
+                        patientDTO.Phone, patientDTO.Email, patientDTO.Relationship, patientDTO.Education, patientDTO.Password, patientDTO.Employer, patientDTO.Alergies, patientDTO.IsGuest));
 
                 }
             }
@@ -77,7 +77,7 @@ namespace Hospital_IS.Service
                     AllPatients.Remove(AllPatients[i]);
                     ChartService.Instance.DeleteChart(patientDTO.Id);
                     PatientService.Instance.DeletePatient(new Patient(patientDTO.Id, patientDTO.Name, patientDTO.Surname, patientDTO.BirthDate, patientDTO.Address, patientDTO.Email,
-                patientDTO.Password, patientDTO.FileDate, patientDTO.Employer, patientDTO.Alergies, patientDTO.IsGuest));
+                patientDTO.Password, patientDTO.FileDate, patientDTO.Employer, patientDTO.Alergies, patientDTO.IsGuest, patientDTO.IsAdmitted));
                 }
             }
 
@@ -107,12 +107,13 @@ namespace Hospital_IS.Service
 
         public PatientDTO GetPatientByID(int id)
         {
+            PatientDTO patientDto = null;
             foreach (PatientDTO patientDTO in AllPatients)
             {
                 if (patientDTO.Id.Equals(id))
-                    return patientDTO;
+                    patientDto = patientDTO;
             }
-            return null;
+            return patientDto;
         }
         private void LoadNotifications()
         {
@@ -129,7 +130,7 @@ namespace Hospital_IS.Service
 
         public void AddNotification(NotificationDTO notificationDTO)
         {
-            NotificationService.Instance.AddNotification(new Notification(notificationDTO.Title, notificationDTO.Text, 
+            NotificationService.Instance.AddNotification(new Notification(notificationDTO.Title, notificationDTO.Text,
                 notificationDTO.DatePosted, notificationDTO.LastChanged, notificationDTO.Recipients, notificationDTO.Id));
             ReloadNotifications();
         }
@@ -202,12 +203,13 @@ namespace Hospital_IS.Service
 
         public DoctorDTO GetDoctorByID(int id)
         {
+            DoctorDTO doctor = null;
             foreach (DoctorDTO doctorDTO in AllDoctors)
             {
                 if (doctorDTO.Id.Equals(id))
-                    return doctorDTO;
+                    doctor = doctorDTO;
             }
-            return null;
+            return doctor;
         }
     }
 }

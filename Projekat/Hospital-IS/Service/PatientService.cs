@@ -1,5 +1,5 @@
-﻿using Hospital_IS.DoctorView;
-using Hospital_IS.Model;
+﻿using Hospital_IS.Model;
+using Hospital_IS.Service;
 using Hospital_IS.Storages;
 using Model;
 using System;
@@ -7,10 +7,12 @@ using System.Collections.Generic;
 
 namespace Service
 {
-    class PatientService
+    public class PatientService 
     {
-        private PatientFileStorage pfs = new PatientFileStorage();
+        //private PatientFileStorage pfs = new PatientFileStorage();
         public List<Patient> AllPatients { get; set; }
+        public IStorageFactory<PatientFileStorage> patientFileStorageFactory;
+        public PatientFileStorage PatientStorage { get; set; }
 
         private static PatientService instance = null;
         public static PatientService Instance
@@ -27,7 +29,9 @@ namespace Service
 
         private PatientService()
         {
-            AllPatients = pfs.GetAll();
+            patientFileStorageFactory = new PatientFileStorageFactory();
+            PatientStorage = patientFileStorageFactory.GetStorage();
+            AllPatients = PatientStorage.GetAll();
             UpdatePatientTrollMechanism();
         }
 
@@ -35,8 +39,7 @@ namespace Service
         {
             ChartService.Instance.SaveChart(new MedicalHistory(patient.Id));
             AllPatients.Add(patient);
-            
-            pfs.SavePatients(AllPatients);
+            PatientStorage.Add(patient);
         }
 
         public void UpdatePatient(Patient patient)
@@ -47,11 +50,10 @@ namespace Service
                 {
                     AllPatients.Remove(AllPatients[i]);
                     AllPatients.Insert(i, patient);
+                    PatientStorage.Update(patient);
                 }
             }
-
-
-            pfs.SavePatients(AllPatients);
+            
         }
 
         public void DeletePatient(Patient patient)
@@ -62,14 +64,16 @@ namespace Service
                 {
                     AllPatients.Remove(AllPatients[i]);
                     ChartService.Instance.DeleteChart(patient.Id);
+                    PatientStorage.Delete(patient);
                 }
             }
 
-            pfs.SavePatients(AllPatients);
+            
         }
 
         public bool CheckIfAllergicToComponent(string medicineName, List<String> allergies)
         {
+            bool isAllergic = false;
             List<MedicineComponent> components = MedicineService.Instance.GetByName(medicineName).Composition;
             foreach (MedicineComponent c in components)
             {
@@ -83,7 +87,7 @@ namespace Service
                         {
                             if (c.Component.ToLower().Equals(allergieComp.Component.ToLower()))
                             {
-                                return true;
+                                isAllergic = true;
                             }
                         }
                     }
@@ -91,19 +95,20 @@ namespace Service
                 }
             }
 
-            return false;
+            return isAllergic;
         }
 
         public bool CheckIfAllergicToMedicine(List<String> allergies, string name)
         {
+            bool isAllergic = false;
             foreach (String allergie in allergies)
             {
                 if (name.ToLower().Contains(allergie.ToLower()))
                 {
-                    return true;
+                    isAllergic = true;
                 }
             }
-            return false;
+            return isAllergic;
         }
 
         public List<int> GetPatientIDs()
@@ -185,43 +190,36 @@ namespace Service
 
         public Patient GetPatientByID(int id) 
         {
-            foreach (Patient patient in AllPatients)
-            {
-                if (patient.Id.Equals(id))
-                    return patient;
-            }
-            return null;
+            return PatientStorage.GetById(id);
         }
 
         public void ReloadPatients()
         {
-            AllPatients = pfs.GetAll();
+            AllPatients = PatientStorage.GetAll();
         }
 
         public PatientNote GetNoteForPatientByAppointmentId(int patientId, int appointmentId)
         {
+            PatientNote patientNote = null;
             Patient patient = GetPatientByID(patientId);
             foreach (PatientNote note in patient.PatientNotes)
             {
                 if (note.AppointmentId.Equals(appointmentId))
                 {
-                    return note;
+                    patientNote = note;
                 }
             }
-            return null;
+            return patientNote;
         }
 
         public void AddAppointmentNote(int patientId, PatientNote patientNote)
         {
             Patient patient = GetPatientByID(patientId);
             patient.PatientNotes.Add(patientNote);
-            pfs.SavePatients(AllPatients);
+            PatientStorage.Update(patient);
         }
 
-        public void SavePatients()
-        {
-            pfs.SavePatients(AllPatients);
-        }
+       
 
         public List<PatientNote> GetNotesByPatient(int patientId)
         {

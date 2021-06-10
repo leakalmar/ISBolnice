@@ -1,4 +1,5 @@
-﻿using Hospital_IS.ManagerViewModel;
+﻿using Hospital_IS.ManagerHelp;
+using Hospital_IS.ManagerViewModel;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,13 +13,17 @@ namespace Hospital_IS.ManagerView1
     {
         public RoomView()
         {
-            Thread.Sleep(500);
+            if (HelpViewModel.Instance.isShowed == false)
+            {
+                Thread.Sleep(500);
+               
+            }
             InitializeComponent();
-           
         }
 
         private void OtherOptionsButton_Click(object sender, RoutedEventArgs e)
         {
+            RoomOptions.Visibility = Visibility.Collapsed;
             if (OtherOptions.Visibility == Visibility.Visible)
             {
                 OtherOptions.Visibility = Visibility.Hidden;
@@ -27,10 +32,12 @@ namespace Hospital_IS.ManagerView1
             {
                 OtherOptions.Visibility = Visibility.Visible;
             }
+            DataGridRooms.SelectedItem = null;
         }
 
         private void RoomOptions_Click(object sender, RoutedEventArgs e)
         {
+            OtherOptions.Visibility = Visibility.Hidden;
             if (RoomOptions.Visibility == Visibility.Visible)
             {
                 RoomOptions.Visibility = Visibility.Collapsed;
@@ -39,32 +46,33 @@ namespace Hospital_IS.ManagerView1
             {
                 RoomOptions.Visibility = Visibility.Visible;
             }
+            DataGridRooms.SelectedItem = null;
         }
-
-       
-        private void AddRoom_Click(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            RoomViewModel roomViewModel = new RoomViewModel(this.NavigationService);
-            AddRoom addRoom = new AddRoom(roomViewModel);
-            this.NavigationService.Navigate(addRoom);
-        }
-
-       
-
-        private void EditRoom_Click(object sender, RoutedEventArgs e)
-        {
-            if (DataGridRooms.SelectedItem != null)
+            RoomViewModel roomView = new RoomViewModel(this.NavigationService);
+            HelpWindow helpWindow = new HelpWindow();
+            if(HelpViewModel.Instance.isShowed == false)
             {
-                RoomViewModel roomViewModel = new RoomViewModel(this.NavigationService);
-                roomViewModel.SetFields(DataGridRooms.SelectedItem);
-                UpdateRoomView updateRoom = new UpdateRoomView(roomViewModel);
-                this.NavigationService.Navigate(updateRoom);
+                helpWindow.ShowDialog();
+                HelpViewModel.Instance.isShowed = true;
+            }
+            this.DataContext = roomView;       
+        }
+
+
+        private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (SearchBox.Text.Equals("Unesite broj sobe"))
+            {
+                SearchBox.Text = "";
             }
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private void CloseOptions_Click(object sender, RoutedEventArgs e)
         {
-            this.DataContext = new RoomViewModel(this.NavigationService);
+
+            OtherOptions.Visibility = Visibility.Hidden;
         }
     }
 

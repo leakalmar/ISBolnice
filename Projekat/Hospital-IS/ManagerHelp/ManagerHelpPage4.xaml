@@ -1,0 +1,92 @@
+﻿<Page x:Class="Hospital_IS.ManagerHelp.ManagerHelpPage4"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital_IS.ManagerHelp"
+      mc:Ignorable="d" 
+      Background="Transparent"
+      d:DesignHeight="335" d:DesignWidth="380"
+      Title="ManagerHelpPage1">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="10"/>
+
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <Border  Grid.ColumnSpan="20" Grid.RowSpan="20" BorderThickness="3" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF213868" Offset="0.0"/>
+                    <GradientStop Color="#FF5B317E" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Label Content="Objasnjenje funkcionalnosti transfera opreme" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" FontSize="14" Foreground="White"/>
+
+        <TextBlock Text="Prikaz opcije transfera" Grid.Column="1" Grid.Row="3" Foreground="White" FontWeight="Bold"
+                   Grid.ColumnSpan="3" TextWrapping="Wrap"  Grid.RowSpan="3"/>
+        <TextBlock Text="Korak 3" Grid.Column="1" Grid.Row="6" Foreground="White" FontWeight="Bold"
+                   Grid.ColumnSpan="3" TextWrapping="Wrap"  Grid.RowSpan="3"/>
+        <TextBlock Text="Korak 4" Grid.Column="1" Grid.Row="8" Foreground="White" FontWeight="Bold"
+                   Grid.ColumnSpan="3" TextWrapping="Wrap"  Grid.RowSpan="3"/>
+        <Image Grid.Column="1" Grid.Row="5" Height="50" Grid.ColumnSpan="4"  >
+            <Image.Source>
+                <BitmapImage   UriSource="pack://application:,,,/Resources/helpmanager.png" />
+            </Image.Source>
+        </Image>
+        <TextBlock Text="Potrebno je izabrati vrstu opreme za transfer iz combo-boxa,ponudjene opcije su staticka i dinamicka, nakon toga dugme je omoguceno" 
+                   Grid.Column="1" Grid.Row="7" Foreground="White"
+                   Grid.ColumnSpan="4" TextWrapping="Wrap"/>
+        <TextBlock Text="Ukoliko ste izabrali opciju transfera staticke opreme potrebno je da izaberete sobe, opremu za transfer, u unesete kolicinu, deatljno objansjeno u koraku 5." 
+                   Grid.Column="1" Grid.Row="9" Foreground="White" Grid.RowSpan="2"
+                   Grid.ColumnSpan="4" TextWrapping="Wrap"/>
+
+
+        <Button Grid.Column="3" Grid.Row="13" Width="100" Height="30" Content="Sljedeca" Background="White" BorderBrush="Green" BorderThickness="2" 
+                Margin="110,4,70,6" Command="{Binding NaviagateToHelpPage5}">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Grid.Column="3" Grid.Row="13" Width="100" Height="30" Content="Prethodna" Background="White" BorderBrush="Green" BorderThickness="2" 
+                Margin="8,4,172,6"  Command="{Binding NavigateToPreviousPage}">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Grid.Column="3" Grid.Row="13" Width="100" Grid.ColumnSpan="2" Height="30" Content="Kraj" IsEnabled="False" Background="White" BorderBrush="Green" BorderThickness="2" Margin="214,4,6,6">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</Page>

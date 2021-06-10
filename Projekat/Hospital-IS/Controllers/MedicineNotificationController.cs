@@ -1,4 +1,6 @@
-﻿using Hospital_IS.DoctorView;
+﻿using Hospital_IS.DoctorRole.DoctorView;
+using Hospital_IS.DoctorViewModel;
+using Hospital_IS.DTOs;
 using Model;
 using Service;
 using System;
@@ -31,14 +33,16 @@ namespace Controllers
 
         private MedicineNotificationController()
         {
-          
+
         }
 
-        public void CreateNotification(string name, string sideEffect, string usage, List<ReplaceMedicineName> medicineNames, List<MedicineComponent> medicineComponents, List<int> recieverIds)
+        public void CreateNotification(MedicineNotificationDTO notificationDTO)
         {
-            Medicine medicine = new Medicine(name, medicineComponents, sideEffect, usage, medicineNames);
 
-            MedicineNotification medicineNotification = new MedicineNotification("Odobrenje" + " " + name, medicine, recieverIds);
+            Medicine medicine = new Medicine(notificationDTO.Name, notificationDTO.MedicineComponents, notificationDTO.SideEffect,
+                notificationDTO.Usage, notificationDTO.MedicineNames);
+
+            MedicineNotification medicineNotification = new MedicineNotification("Odobrenje" + " " + notificationDTO.Name, medicine, notificationDTO.RecieverIds);
             medicineNotification.ApprovalCounter = 0;
             medicineNotification.SenderId.Add(6);
             medicineNotification.DateSent = DateTime.Now;
@@ -51,7 +55,7 @@ namespace Controllers
             reviewdNotification.Note = text;
             reviewdNotification.Title = "Odbijen " + reviewdNotification.Medicine.Name;
             reviewdNotification.SenderId.Clear();
-            reviewdNotification.SenderId.Add(DoctorMainWindow.Instance._ViewModel.Doctor.Id);
+            reviewdNotification.SenderId.Add(DoctorMainWindowModel.Instance.Doctor.Id);
             reviewdNotification.RecieverIds.Clear();
             reviewdNotification.RecieverIds.Add(6);
             reviewdNotification.DateSent = DateTime.Now;
@@ -60,12 +64,12 @@ namespace Controllers
 
         public void DeleteNotification(MedicineNotification medicineNotification)
         {
-            MedicineNotificationService.Instance.DeleteNotification(medicineNotification);    
+            MedicineNotificationService.Instance.DeleteNotification(medicineNotification);
         }
 
         public void ApproveMedicine(MedicineNotification reviewdNotification)
         {
-            MedicineNotificationService.Instance.AddApprovalDeleteDoctor(reviewdNotification, DoctorMainWindow.Instance._ViewModel.Doctor.Id);
+            MedicineNotificationService.Instance.AddApprovalDeleteDoctor(reviewdNotification, DoctorMainWindowModel.Instance.Doctor.Id);
         }
 
         public List<MedicineNotification> GetAll()
@@ -73,11 +77,12 @@ namespace Controllers
             return MedicineNotificationService.Instance.GetAll();
         }
 
-        internal void CreateReNotification(string name, string sideEffect, string therapeutic, List<ReplaceMedicineName> medicineNames, List<MedicineComponent> medicineComponents, List<int> recieverIds)
+        internal void CreateReNotification(MedicineNotificationDTO notificationDTO)
         {
-            Medicine medicine = new Medicine(name, medicineComponents, sideEffect, therapeutic, medicineNames);
+            Medicine medicine = new Medicine(notificationDTO.Name, notificationDTO.MedicineComponents, notificationDTO.SideEffect,
+                notificationDTO.Usage, notificationDTO.MedicineNames);
 
-            MedicineNotification medicineNotification = new MedicineNotification("RE:Odobrenje" + " " + name, medicine, recieverIds);
+            MedicineNotification medicineNotification = new MedicineNotification("RE:Odobrenje" + " " + notificationDTO.Name, medicine, notificationDTO.RecieverIds);
             medicineNotification.SenderId.Add(6);
             medicineNotification.DateSent = DateTime.Now;
 

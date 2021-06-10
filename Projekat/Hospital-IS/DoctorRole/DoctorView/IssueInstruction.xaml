@@ -1,0 +1,166 @@
+﻿<UserControl x:Class="Hospital_IS.DoctorRole.DoctorView.IssueInstruction"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
+        FocusManager.FocusedElement="{Binding ElementName=cause}">
+    <UserControl.Resources>
+        <converters:RedConverter x:Key="RedConverter" />
+        <converters:EnableInstructionConverter x:Key="EnableInstruction" />
+    </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Key="Esc" Command="{Binding NavigateToPatientChartCommand}" />
+        <KeyBinding Key="S" Modifiers="Ctrl"
+                Command="{Binding IssueInstructionCommand}" />
+    </UserControl.InputBindings>
+
+    <Grid KeyboardNavigation.TabNavigation="Cycle">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="0.35*" />
+            <ColumnDefinition Width="0.65*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Uput" FontSize="20" BorderThickness="0"
+                Foreground="FloralWhite" HorizontalAlignment="Center"
+                Grid.ColumnSpan="3" FontWeight="Bold" VerticalAlignment="Center"
+                Margin="0,0,0,40" />
+        <Label Grid.Row="1" Grid.Column="2" FontFamily="Verdana"
+                Foreground="FloralWhite"
+                Content="{Binding SelectedAppointment.Appointment.AppointmentStart.Date}"
+                ContentStringFormat="dd.MM.yyyy" FontSize="16"
+                HorizontalAlignment="Right" Margin="0,0,70,0" />
+        <Label Grid.Row="1" Grid.Column="2" FontFamily="Verdana"
+                Foreground="FloralWhite" ContentStringFormat="dd.MM.yyyy"
+                Content="{Binding SelectedEmergencyAppointment.SuggestedAppointment.AppointmentStart.Date}"
+                FontSize="16" HorizontalAlignment="Left" Margin="180,0,0,0" />
+        <Label Grid.Row="2" Grid.Column="2" FontFamily="Verdana"
+                Foreground="FloralWhite"
+                Content="{Binding SelectedAppointment.Appointment.AppointmentStart}"
+                ContentStringFormat="HH:mm" Margin="0,0,70,0"
+                HorizontalAlignment="Right" FontSize="16" />
+        <Label Grid.Row="2" Grid.Column="2" FontFamily="Verdana"
+                Foreground="FloralWhite" ContentStringFormat="HH:mm"
+                Content="{Binding SelectedEmergencyAppointment.SuggestedAppointment.AppointmentStart}"
+                Margin="0,0,70,0" HorizontalAlignment="Right" FontSize="16" />
+        <Label Grid.Row="3" Grid.Column="2" FontFamily="Verdana" FontSize="16"
+                Foreground="FloralWhite"
+                Content="{Binding SelectedAppointment.Appointment.Doctor.Specialty}"
+                Margin="0,0,70,0" HorizontalAlignment="Right" />
+        <Label Grid.Row="3" Grid.Column="2" FontFamily="Verdana" FontSize="16"
+                Foreground="FloralWhite"
+                Content="{Binding SelectedEmergencyAppointment.SuggestedAppointment.Doctor.Specialty}"
+                Margin="0,0,70,0" HorizontalAlignment="Right" />
+        <TextBlock Grid.Row="4" Grid.Column="2" FontFamily="Verdana"
+                FontSize="16" Foreground="FloralWhite" Margin="0,0,70,0"
+                HorizontalAlignment="Right">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} {1}">
+                    <Binding Path="SelectedAppointment.Appointment.Doctor.Name" />
+                    <Binding
+                            Path="SelectedAppointment.Appointment.Doctor.Surname" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <TextBlock Grid.Row="4" Grid.Column="2" FontFamily="Verdana"
+                FontSize="16" Foreground="FloralWhite" Margin="0,0,70,0"
+                HorizontalAlignment="Right">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} {1}">
+                    <Binding
+                            Path="SelectedEmergencyAppointment.SuggestedAppointment.Doctor.Name" />
+                    <Binding
+                            Path="SelectedEmergencyAppointment.SuggestedAppointment.Doctor.Surname" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <Label Grid.Row="1" Grid.Column="1" FontFamily="Verdana" FontSize="16"
+                Foreground="FloralWhite" Content="Datum:" />
+        <Label Grid.Row="2" Grid.Column="1" FontFamily="Verdana" FontSize="16"
+                Foreground="FloralWhite" Content="Vreme:" />
+        <Label Grid.Row="3" Grid.Column="1" FontFamily="Verdana" FontSize="16"
+                Foreground="FloralWhite" Content="Specijalizacija:" />
+        <Label Grid.Row="4" Grid.Column="1" FontFamily="Verdana" FontSize="16"
+                Foreground="FloralWhite" Content="Doktor:" />
+        <Label Content="Opis" FontSize="16" FontFamily="Verdana"
+                Foreground="FloralWhite" Grid.Row="5" Padding="30,0,0,0"
+                Margin="70,0,70,0" BorderThickness="0,0,0,2" BorderBrush="Gray"
+                Grid.ColumnSpan="3" />
+        <TextBox Grid.Row="6" Grid.ColumnSpan="3" Background="Transparent"
+                Foreground="FloralWhite" x:Name="cause" FontSize="16"
+                Margin="70,0,70,0"
+                BorderThickness="{Binding AppointmentCause,Converter={StaticResource RedConverter}}">
+            <TextBox.Text>
+                <Binding Path="AppointmentCause"
+                        UpdateSourceTrigger="PropertyChanged">
+                </Binding>
+            </TextBox.Text>
+            <TextBox.InputBindings>
+                <KeyBinding Key="Esc"
+                        Command="{Binding NavigateToPatientChartCommand}" />
+            </TextBox.InputBindings>
+        </TextBox>
+
+        <TextBlock Grid.Row="7" Grid.Column="1" Margin="0,100,70,0"
+                FontFamily="Verdana" Foreground="FloralWhite"
+                Grid.ColumnSpan="2" HorizontalAlignment="Right"
+                x:Name="thisDoctor" FontSize="16">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} {1}">
+                    <Binding Path="LogedInDoctor.Name" />
+                    <Binding Path="LogedInDoctor.Surname" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <Label Grid.Row="8" Grid.Column="1" Margin="0,0,70,50"
+                FontFamily="Verdana" Foreground="FloralWhite"
+                Content="{Binding Source={x:Static sys:DateTime.Now}}"
+                ContentStringFormat="dd.MM.yyyy HH:mm" Grid.ColumnSpan="2"
+                HorizontalAlignment="Right" x:Name="today" FontSize="16" />
+
+        <Button Grid.Row="9" Grid.Column="1" Margin="90,0,90,10"
+                Grid.ColumnSpan="2" Content="Potvrdi" Name="issueButton"
+                Style="{StaticResource CustomButton}">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource EnableInstruction}">
+                    <Binding Path="LogedInDoctor" />
+                    <Binding Path="SelectedAppointment.Appointment.Doctor" />
+                    <Binding
+                            Path="SelectedEmergencyAppointment.SuggestedAppointment.Doctor" />
+                    <Binding Path="AppointmentCause"
+                            UpdateSourceTrigger="PropertyChanged" />
+                </MultiBinding>
+            </Button.IsEnabled>
+            <Button.InputBindings>
+                <KeyBinding Key="Return"
+                        Command="{Binding IssueInstructionCommand}" />
+                <KeyBinding Key="Space"
+                        Command="{Binding IssueInstructionCommand}" />
+            </Button.InputBindings>
+        </Button>
+
+        <Button Grid.Row="9" Margin="90,0,90,10" Content="Nazad"
+                Style="{StaticResource CustomButton}">
+            <Button.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding BackCommand}" />
+                <KeyBinding Key="Space" Command="{Binding BackCommand}" />
+            </Button.InputBindings>
+        </Button>
+
+    </Grid>
+</UserControl>

@@ -1,4 +1,6 @@
-﻿using Model;
+﻿using Hospital_IS.DTOs;
+using Hospital_IS.Service;
+using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -53,7 +55,7 @@ namespace Service
 
         }
 
-        private void GetAllClassicAppointments(int roomId, List<Appointment> allApointments)
+        public void GetAllClassicAppointments(int roomId, List<Appointment> allApointments)
         {
            
             foreach (Appointment ap in GetAppByRoom(roomId))
@@ -89,6 +91,41 @@ namespace Service
             return isPossible;
         }
 
+        public List<RenovationReportDTO> FindAllRenovationAppBetweeenDates(RenovationDTO renovationDTO)
+        {
+            List<RenovationReportDTO> renovationReports = new List<RenovationReportDTO>();
+            foreach (Appointment app in AllAppointments)
+            {
+                if (app.Type == renovationDTO.AppType && app.AppointmentStart >= renovationDTO.DateStart && app.AppointmentStart <= renovationDTO.DateEnd)
+                {
+                    AddRenovationReport(renovationReports, app);
+                }
+                  
+            }
+
+            return renovationReports;
+        }
+
+        public void RemoveAppointment(Appointment appointment)
+        {
+            foreach(Appointment app in AllAppointments)
+            {
+                if(app.Id == appointment.Id)
+                {
+                    
+                    AllAppointments.Remove(app);
+                    afs.SaveAppointment(AllAppointments);
+                    break;
+                }
+            }
+        }
+
+        private static void AddRenovationReport(List<RenovationReportDTO> renovationReports, Appointment app)
+        {
+            int roomNumber = RoomService.Instance.GetRoomNumber(app.Room);
+            RenovationReportDTO renovationReportDTO = new RenovationReportDTO(app.AppointmentStart, app.AppointmentEnd, roomNumber, app.AppointmentCause);
+            renovationReports.Add(renovationReportDTO);
+        }
 
         public bool MakeRenovationAppointmentForRoomMerge(Appointment firstRoomAppointment,Appointment secondRoomAppointment)
         {
@@ -184,19 +221,10 @@ namespace Service
             }
         }
 
-        public void RemoveAppointment(Appointment appointment)
-        {
-
-        }
-
-        public void UpdateAppointment(Appointment appointment)
-        {
-
-        }
 
         public void FindMaxID()
         {
-            List<Appointment> appointments = new List<Appointment>(DoctorAppointmentService.Instance.allAppointments);
+            List<Appointment> appointments = new List<Appointment>(DoctorAppointmentService.Instance.AllAppointments);
             appointments.AddRange(AllAppointments);
             int max = 0;
             foreach (Appointment appointment in appointments)
@@ -215,6 +243,39 @@ namespace Service
             FindMaxID();
             ++MaxId;
             return MaxId;
+        }
+        public void CancelAllAppFromRoom(int roomId)
+        {
+            CancelClassicAppointments(roomId);
+            CanacelDocAppointments(roomId);
+        }
+
+        private void CancelClassicAppointments(int roomId)
+        {
+            List<Appointment> appointments = new List<Appointment>();
+            AppointmentService.Instance.GetAllClassicAppointments(roomId, appointments);
+            for (int i = 0; i < appointments.Count; i++)
+            {
+                if (appointments[i].Room == roomId)
+                {
+                    AppointmentService.Instance.RemoveAppointment(appointments[i]);
+                }
+            }
+        }
+
+        private void CanacelDocAppointments(int roomId)
+        {
+            List<DoctorAppointment> doctorAppointments = DoctorAppointmentService.Instance.GetAllByRoom(roomId);
+
+            for (int i = 0; i < doctorAppointments.Count; i++)
+            {
+                if (doctorAppointments[i].Room == roomId)
+                {
+                    NotificationService.Instance.SendAppointmentCancelationNotification(doctorAppointments[i]);
+                    DoctorAppointmentService.Instance.RemoveAppointment(doctorAppointments[i]);
+                }
+            }
+
         }
 
     }

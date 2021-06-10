@@ -21,101 +21,68 @@ namespace Controllers
                 return instance;
             }
         }
-
         private RoomController()
         {
 
         }
-
         public bool CheckQuantity(Room sourceRoom, Equipment equip, int quantity)
         {
            return RoomService.Instance.CheckQuantity(sourceRoom, equip, quantity);
         }
-
-     
-
         public void RemoveRoom(Room room)
         {
             RoomService.Instance.RemoveRoom(room);
         }
-
-       
-
         public List<Room> GetAllRooms()
         {
             return RoomService.Instance.GetAllRooms();
+        }
+
+        public List<int> GetAllFloors()
+        {
+            return RoomService.Instance.GetAllFloors();
         }
 
         public List<Room> GetRoomByType(RoomType type)
         {
             return RoomService.Instance.GetRoomByType(type);
         }
-
         public Room GetRoomById(int roomId)
         {
             return RoomService.Instance.GetRoomById(roomId);
+        }
+
+        public List<Room> GetRoomByNumber(string roomNumber)
+        {
+            return RoomService.Instance.GetRoomByNumber(roomNumber);
         }
 
         public void AddEquipment(Room room, Equipment newEquip)
         {
             RoomService.Instance.AddEquipment(room,newEquip);
         }
-
         public void RemoveEquipment(Room room, Equipment oldEquip)
         {
             RoomService.Instance.RemoveEquipment(room,oldEquip);
         }
-
-
         public Boolean UpdateEquipment(Room room, Equipment updateEquip)
         {
-            MessageBox.Show("uslo u kontroler");
             return RoomService.Instance.UpdateEquipment(room,updateEquip);
         }
 
-        public void UpdateRoom(int roomNumber, int roomFloor, int surfaceArea, int bedNumber, int roomTypeIndex)
+        public bool CheckIfRoomNumberIsUnique(int roomNumber)
         {
-            RoomType roomType = new RoomType();
-            roomType = CheckRoomType(roomTypeIndex, roomType);
-            Room room = new Room(roomFloor, roomNumber, surfaceArea, bedNumber, roomType);
-            RoomService.Instance.UpdateRoom(room);
+            return RoomService.Instance.CheckIfRoomNumberIsUnique(roomNumber);
         }
 
-
-
-        internal void AddRoom(int roomNumber, int roomFloor, int surfaceArea, int bedNumber, int roomTypeIndex)
+        public void AddRoom(Room room)
         {
-            RoomType roomType = new RoomType();
-            roomType = CheckRoomType(roomTypeIndex, roomType);
-            Room room = new Room(roomFloor, roomNumber, surfaceArea, bedNumber, roomType);
             RoomService.Instance.AddRoom(room);
         }
 
-      
-        private static RoomType CheckRoomType(int roomTypeIndex, RoomType roomType)
+        public void UpdateRoom(Room updateRoom)
         {
-            if (roomTypeIndex == 0)
-            {
-               
-                roomType = RoomType.RecoveryRoom;
-            }
-            else if (roomTypeIndex == 1)
-            {
-              
-                roomType = RoomType.ConsultingRoom;
-            }
-            else if (roomTypeIndex == 2)
-            {
-                roomType = RoomType.OperationRoom;
-            }
-            else if (roomTypeIndex == 3)
-            {
-                roomType = RoomType.StorageRoom;
-            }
-
-            return roomType;
+            RoomService.Instance.UpdateRoom(updateRoom);
         }
-
-      
     }
 }

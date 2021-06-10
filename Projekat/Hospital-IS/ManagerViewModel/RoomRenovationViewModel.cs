@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using Enums;
 using Microsoft.Windows.Controls;
 using Model;
 using System;
@@ -17,8 +18,8 @@ namespace Hospital_IS.ManagerViewModel
         private NavigationService navService;
         private ObservableCollection<Appointment> appointments;
         private RelayCommand transferStaticEquipmentCommand;
+        private RelayCommand navigateToPreviousPage;
         private Room firstRoom;
-        private Room fecondRoom;
         private Equipment equipment;
         public int Quantity { get; set; }
 
@@ -61,26 +62,15 @@ namespace Hospital_IS.ManagerViewModel
                 }
             }
         }
-        /*
-        public Room SourceRoom
+
+        public RelayCommand NavigateToPreviousPagel
         {
-            get
-            {
-                return sourceRoom;
-            }
+            get { return navigateToPreviousPage; }
             set
             {
-                if (value != sourceRoom)
-                {
-
-                    sourceRoom = value;
-                    OnPropertyChanged("SourceRoom");
-
-                }
+                navigateToPreviousPage = value;
             }
         }
-
-        */
 
         public RelayCommand TransferStaticEquipmentCommand
         {
@@ -177,13 +167,12 @@ namespace Hospital_IS.ManagerViewModel
         private RoomRenovationViewModel()
         {
             this.TransferStaticEquipmentCommand = new RelayCommand(Execute_RoomRenovation, CanExecute_IfEveryhingIsCorecct);
+            this.NavigateToPreviousPagel = new RelayCommand(Execute_NavigateToPreviousPage);
         }
 
-
-        public void SetAppointmentsForRooms(int roomIdSource, int roomIdDestination)
+        private void Execute_NavigateToPreviousPage(object obj)
         {
-            Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(roomIdSource, roomIdDestination));
-            this.TransferStaticEquipmentCommand = new RelayCommand(Execute_RoomRenovation, CanExecute_IfEveryhingIsCorecct);
+            this.NavService.GoBack();
         }
 
         public void SetAppointmnetForRoom(int roomIdSource)
@@ -203,8 +192,15 @@ namespace Hospital_IS.ManagerViewModel
 
         private void Execute_RoomRenovation(object obj)
         {
-            bool isSuccces = AppointmentController.Instance.MakeRenovationAppointment(DateStart, dateEnd, Note,FirstRoom.RoomId);
-            Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(FirstRoom.RoomId));
+           
+
+        }
+
+        public void DoRoomRenovation()
+        {
+            Appointment renovationAppointment = new Appointment(true, Note, DateStart, DateEnd, AppointmentType.Renovation, FirstRoom.Id);
+            bool isSuccces = AppointmentController.Instance.MakeRenovationAppointment(renovationAppointment);
+            Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(FirstRoom.Id));
             if (!isSuccces)
             {
                 System.Windows.MessageBox.Show("Niste uspjeli da zakazete termin");
@@ -213,7 +209,6 @@ namespace Hospital_IS.ManagerViewModel
             {
                 System.Windows.MessageBox.Show("Uspjesno zakazivanje termina");
             }
-
         }
 
     }

@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             lex:LocalizeDictionary.DesignCulture="en"
+             lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+             lex:ResxLocalizationProvider.DefaultDictionary="Strings"
              xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -15,7 +19,7 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="0"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -23,30 +27,118 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
-            <Button Width="55" Content="Prikaži" Height="30" Margin="10 10 10 10"
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
-                HorizontalAlignment="Right" Click="ShowAppointment"/>
+            <Button Width="80" Height="30" Margin="10 10 10 10" FontSize="14"
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    HorizontalAlignment="Right" Click="ShowAppointment">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/Resources/eye.png" Height="20" Width="20"/>
+                    <TextBlock Name="txtShow" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
+                </StackPanel>
+            </Button>
 
-            <Button Width="55" Content="Izmeni" Height="30" Margin="10 0 10 0"
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
-                HorizontalAlignment="Left" Click="UpdateAppointment"/>
+            <Button Width="80" FontSize="13" Height="30" Margin="10 0 10 0"
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    HorizontalAlignment="Left" Click="UpdateAppointment">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/Resources/pen.png" Height="20" Width="20"/>
+                    <TextBlock Name="txtUpdate" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
+                </StackPanel>
+            </Button>
 
-            <Button Width="55" Content="Otkaži" Height="30" Margin="10 0 10 0"
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
-                HorizontalAlignment="Left" Click="DeleteAppointment"/>
+            <!--<Button Width="55" Content="Otkaži" Height="30" Margin="10 0 10 0"
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    HorizontalAlignment="Left" Click="DeleteAppointment"/>-->
 
-            <Button Width="110" Content="Zakaži novi termin" Height="30" Margin="40 0 0 0 "
-                Background="#FF184095" Foreground="White" FontWeight="Light" BorderBrush="White"
-                Click="ScheduleAppointment"/>
+            <Button Width="170" FontSize="13" Height="30" Margin="70 0 0 0 "
+                    Style="{DynamicResource ResourceKey=RegularButton}"
+                    Click="ScheduleAppointment">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/Resources/add.png" Height="20" Width="20"/>
+                    <TextBlock Name="txtSchedule" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
 
+        <StackPanel Margin="10 0" Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                    Style="{DynamicResource ResourceKey=AppointmentFilterStackPanel}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label Name="tbDoctor" Content="{lex:Loc}" Grid.Row="0" Grid.Column="0" FontSize="14" 
+                       Foreground="Black" FontWeight="Light" VerticalAlignment="Center" Margin="5 0"/>
+                <Label Name="tbRoom" Content="{lex:Loc}" Grid.Row="1" Grid.Column="0" FontSize="14" Margin="5 0" 
+                       Foreground="Black" FontWeight="Light" VerticalAlignment="Top"/>
+                
+                <ComboBox x:Name="cbDoctor" ItemsSource="{Binding Doctors}" Grid.Row="0" Grid.Column="1" Margin="5 0"
+                          Height="24.62" Width="140" VerticalAlignment="Center" Padding="1" SelectionChanged="filter_changed" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Padding="4">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{} {0} {1}">
+                                        <Binding Path="Name"/>
+                                        <Binding Path="Surname"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                
+                <ComboBox x:Name="cbRoom" ItemsSource="{Binding Rooms}" Grid.Row="1" Grid.Column="1" Margin="5 0"
+                          Height="24.62" Width="140" VerticalAlignment="Center" Padding="1" SelectionChanged="filter_changed" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Padding="4">
+                                <TextBlock.Text>
+                                    <Binding Path="RoomId"/>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <Label Name="labFrom" Content="{lex:Loc}" Grid.Row="0" Grid.Column="3" FontSize="14" Margin="5 5"
+                       Foreground="Black" FontWeight="Light" VerticalAlignment="Bottom"/>
+                <Label Name="labUntil" Content="{lex:Loc}" Grid.Row="1" Grid.Column="3" FontSize="14" Margin="5 0"
+                       Foreground="Black" FontWeight="Light" VerticalAlignment="Bottom"/>
+
+                <Label Name="labDate" Content="{lex:Loc}" Grid.Row="0" Grid.Column="2" FontSize="14" Margin="20 0 5 0"
+                       Foreground="Black" FontWeight="Light" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+
+                <Button Name="btnResetDoctors" Content="X" Padding="-1" Grid.Row="0" Grid.Column="2" FontSize="13" Margin="0 0 0 0"
+                        VerticalAlignment="Center" HorizontalAlignment="Left" Style="{DynamicResource ResourceKey=ButtonX}"
+                        FontWeight="Light" Click="ResetFillters"/>
+                
+                <Button Name="btnResetRooms" Content="X" Padding="0" Grid.Row="1" Grid.Column="2" FontSize="13" Margin="0 0 0 0"
+                        VerticalAlignment="Center" HorizontalAlignment="Left" Style="{DynamicResource ResourceKey=ButtonX}"
+                        FontWeight="Light" Click="ResetFillters"/>
+                
+                <DatePicker Grid.Row="0" Grid.Column="4" FontSize="14" BorderThickness="0" Margin="5 2"
+                            Width="130" VerticalAlignment="Center" x:Name="dpFrom" SelectedDateChanged="filter_changed"/>
+                <DatePicker Grid.Row="1" Grid.Column="4" FontSize="14" BorderThickness="0" Margin="5 0"
+                            Width="130" VerticalAlignment="Center" x:Name="dpTo" SelectedDateChanged="filter_changed" />
+            </Grid>
         </StackPanel>
 
         <DataGrid x:Name="dataGridAppointments" ItemsSource="{Binding Appointments}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
                   Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5" Grid.RowSpan="1" Margin="10" RowHeaderWidth="0"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  Background="Transparent" RowBackground="AliceBlue">
+                  Style="{DynamicResource ResourceKey=DataGrid}"
+                  ColumnHeaderStyle="{DynamicResource ResourceKey=ColumHeader}"
+                  RowStyle="{DynamicResource ResourceKey=GridRow}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Doktor" Width="*">
+                <DataGridTextColumn Header="{lex:Loc tbDoctor}" Width="*">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{} {0} {1}">
                             <Binding Path="Doctor.Name"/>
@@ -54,7 +146,7 @@
                         </MultiBinding>
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Pacijent"  Width="*">
+                <DataGridTextColumn Header="{lex:Loc tbPatient}"  Width="*">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{} {0} {1}">
                             <Binding Path="Patient.Name"/>
@@ -62,13 +154,13 @@
                         </MultiBinding>
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Datum" 
+                <DataGridTextColumn Header="{lex:Loc tbAppDateDG}" 
                                     Binding="{Binding AppointmentStart, StringFormat=\{0: dd.MM.yyyy. \}}" Width="auto"/>
-                <DataGridTextColumn Header="Vreme" 
+                <DataGridTextColumn Header="{lex:Loc tbAppTimeDG}" 
                                     Binding="{Binding AppointmentStart, StringFormat=\{0: HH:mm \}}" Width="auto"/>
-                <DataGridTextColumn Header="Tip pregleda" 
+                <DataGridTextColumn Header="{lex:Loc tbAppType}" 
                                     Binding="{Binding AppTypeText}" Width="auto"/>
-                <DataGridTextColumn Header="Soba" 
+                <DataGridTextColumn Header="{lex:Loc tbRoom}" 
                                     Binding="{Binding Room}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.Resources>
@@ -76,6 +168,27 @@
             </DataGrid.Resources>
 
         </DataGrid>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="3"
+                    HorizontalAlignment="Right" Margin="0 10 20 0">
+            <TextBox Name="txtSearch" Foreground="DarkSlateGray"
+                     Style="{DynamicResource ResourceKey=RegularTextBox}"
+                     Margin="0 5 10 0" Width="120" VerticalAlignment="Center" Padding="4"
+                     GotFocus="SearchBox_GotFocus" LostFocus="SearchBox_LostFocus"/>
+            <Button Style="{DynamicResource ResourceKey=SearchButton}" Margin="0 5 0 0" Click="SearchButton_Click">
+                <Image Source="pack://application:,,,/Resources/SearchSecretary.png"/>
+            </Button>
+        </StackPanel>
+
+        <Button Width="140" FontSize="13"  Click="FormReport"
+                Height="30" Grid.Row="1" Grid.Column="3"
+                HorizontalAlignment="Right" Margin="20 0"
+                Style="{DynamicResource ResourceKey=RegularButton}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="pack://application:,,,/Resources/secretaryReport.png" Height="20" Width="20"/>
+                <TextBlock Name="txtFormReport" Text="{lex:Loc}" VerticalAlignment="Center" Margin="5 0"/>
+            </StackPanel>
+        </Button>
 
     </Grid>
 </UserControl>

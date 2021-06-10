@@ -3,14 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:val="clr-namespace:Hospital_IS.SecretaryView.Validation"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="Hospital-IS"
+        lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
         Title="Zakazivanje hitnog termina" Height="520" Width="640"
         WindowStartupLocation="CenterScreen"
         FontSize="18"
-        FontWeight="Light"
-        Background="#CCC5CFE5">
-    <Grid>
+        FontWeight="Light">
+    <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
@@ -30,21 +34,21 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Grid.Column="1"
-                   Text="Tip pregleda:" Margin="70 0 0 20"/>
-        <TextBlock Grid.Row="2" Grid.Column="1"
-                   Text="Pacijent" Margin="70 0 0 20"/>
-        <TextBlock Grid.Row="3" Grid.Column="1"
-                   Text="Specijalizacija" Margin="70 0 0 20"/>
-        <TextBlock Grid.Row="4" Grid.Column="1"
-                   Text="Soba" Margin="70 0 0 20"/>
-        <TextBlock Grid.Row="5" Grid.Column="1"
-                   Text="Trajanje(min)" Margin="70 0 0 20"/>
+        <TextBlock Name="tbAppTypeS" Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
+                   Text="{lex:Loc}" Margin="70 0 0 20"/>
+        <TextBlock Name="tbPatientSt" Grid.Row="2" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
+                   Text="{lex:Loc}" Margin="70 0 0 20"/>
+        <TextBlock Name="tbSpecialtyS" Grid.Row="3" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
+                   Text="{lex:Loc}" Margin="70 0 0 20"/>
+        <TextBlock Name="tbRoomS" Grid.Row="4" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
+                   Text="{lex:Loc}" Margin="70 0 0 20"/>
+        <TextBlock Name="tbAppDurationS" Grid.Row="5" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
+                   Text="{lex:Loc}" Margin="70 0 0 20"/>
 
         <ComboBox Name="cbAppType" Grid.Row="1" Grid.Column="2" Margin="20 0 70 20"
-                LostFocus="cbAppType_LostFocus" FontSize="15">
-            <ComboBoxItem Content="Pregled" />
-            <ComboBoxItem Content="Operacija" />
+                  SelectionChanged="cbAppType_SelectionChanged" FontSize="15">
+            <ComboBoxItem Name="ciAppCU"  Content="{lex:Loc}"/>
+            <ComboBoxItem Name="ciOper" Content="{lex:Loc}"/>
         </ComboBox>
 
         <TextBox Name="txtGuest" Grid.Column="2" Grid.Row="2" Margin="20 0 70 20" IsEnabled="False"/>
@@ -80,18 +84,46 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <TextBox x:Name="txtAppDuration" Grid.Row="5" Grid.Column="2" Margin="20 0 70 20" LostFocus="txtAppDuration_LostFocus"/>
+        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="5" Margin="20 0 70 20">
+            <TextBox Name="txtAppDuration"  MinWidth="70" MaxWidth="70" LostFocus="txtAppDuration_LostFocus"
+                     Style="{DynamicResource ResourceKey=RegularTextBox}">
+                <TextBox.Text>
+                    <Binding Path="AppDuration" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <val:IsEmptyValidationRule ValidationStep="RawProposedValue"/>
+                            <val:IsAppointmentDurationValid ValidationStep="RawProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder x:Name="textBox"/>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Style="{DynamicResource ResourceKey=Validation}"
+                                   VerticalAlignment="Bottom" FontSize="13"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
+            
+            <TextBlock Text="min" Margin="5 0 30 0"
+                       Style="{DynamicResource ResourceKey=RegularTextBlock}"/>
+        </StackPanel>
 
-        <TextBlock Text="Mogući termini:" Grid.Row="6" Grid.Column="1"
+
+        <TextBlock Name="tbPossibleApps" Text="{lex:Loc}" Grid.Row="6" Grid.Column="1" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                    FontSize="14" Margin="10 0 0 0"/>
-        <TextBlock Text="Termini koje je potrebno pomeriti:" Grid.Row="6" Grid.Column="2"
+        <TextBlock Name="tbAppsToMove" Text="{lex:Loc}" Grid.Row="6" Grid.Column="2" Style="{DynamicResource ResourceKey=RegularTextBlock}"
                    FontSize="14" Margin="10 0 0 0"/>
 
         <DataGrid x:Name="dgSuggestedAppointments" ItemsSource="{Binding SuggestedAppointments}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
                   Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="7" Grid.RowSpan="1" Margin="10" RowHeaderWidth="0"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   FontSize="11"
-                  Background="Transparent" RowBackground="AliceBlue" SelectionChanged="dgSuggestedAppointments_SelectionChanged">
+                  Style="{DynamicResource ResourceKey=DataGrid}"
+                  ColumnHeaderStyle="{DynamicResource ResourceKey=ColumHeader}"
+                  RowStyle="{DynamicResource ResourceKey=GridRow}"
+                  SelectionChanged="dgSuggestedAppointments_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vreme" 
                                     Binding="{Binding SuggestedAppointment.AppointmentStart, StringFormat=\{0: HH:mm \}}" Width="auto"/>
@@ -111,7 +143,9 @@
                   Grid.Column="2" Grid.ColumnSpan="1" Grid.Row="7" Grid.RowSpan="1" Margin="10" RowHeaderWidth="0"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   FontSize="11"
-                  Background="Transparent" RowBackground="AliceBlue">
+                  Style="{DynamicResource ResourceKey=DataGrid}"
+                  ColumnHeaderStyle="{DynamicResource ResourceKey=ColumHeader}"
+                  RowStyle="{DynamicResource ResourceKey=GridRow}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vreme" 
                                     Binding="{Binding OldDocAppointment.AppointmentStart, StringFormat=\{0: HH:mm \}}" Width="auto"/>
@@ -141,13 +175,15 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Content="Gost" Grid.Row="2" Grid.Column="2" FontSize="17" VerticalAlignment="Top" HorizontalAlignment="Right"
-                    Height="28" Width="45" Margin="0 0 0 0" Click="SelectGuest"/>
+        <Button Name="btnGuest" Content="{lex:Loc}" Grid.Row="2" Grid.Column="2" FontSize="17" VerticalAlignment="Top" HorizontalAlignment="Right"
+                    Style="{DynamicResource ResourceKey=RegularButton}" Width="55" Margin="0 0 0 0" Click="SelectGuest"/>
 
-        <Button Name="btnConfirm" Grid.Column="1" Grid.Row="8" Width="110" Height="30"
-                Content="Potvrdi" Margin="0 5 0 0" Click="AddNewEmergencyAppointment"/>
-        <Button Name="btnCancel" Grid.Column="2" Grid.Row="8" Width="110" Height="30"
-                Content="Odustani" Margin="0 6 0 0" Click="btnCancel_Click"/>
+        <Button Name="btnConfirm" Grid.Column="1" Grid.Row="8" Width="110"
+                Style="{DynamicResource ResourceKey=RegularButton}"
+                Content="{lex:Loc}" Margin="0 5 0 0" Click="AddNewEmergencyAppointment"/>
+        <Button Name="btnCancel" Grid.Column="2" Grid.Row="8" Width="110"
+                Style="{DynamicResource ResourceKey=RegularButton}"
+                Content="{lex:Loc}" Margin="0 6 0 0" Click="btnCancel_Click"/>
 
 
     </Grid>

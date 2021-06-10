@@ -1,0 +1,205 @@
+﻿<UserControl x:Class="Hospital_IS.DoctorRole.DoctorView.AppDetail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors" mc:Ignorable="d"
+        d:DesignHeight="555" d:DesignWidth="783" FocusManager.FocusedElement="{Binding ElementName=focusButton}">
+    <UserControl.Resources>
+        <converters:StartedAppointmentConverter x:Key="saConverter" />
+        <converters:AppTypeToString x:Key="AppTypeToString" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.03*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Današnji termini"
+                Style="{StaticResource CustomGroupBox}">
+            <DataGrid x:Name="doctorAppointments"
+                    KeyboardNavigation.DirectionalNavigation="Continue"
+                    Style="{StaticResource CustomDataGrid}"
+                    ItemsSource="{Binding Path=AppointmentsView, UpdateSourceTrigger=PropertyChanged}"
+                    Margin="10" CanUserSortColumns="False"
+                    SelectedItem="{Binding Path=SelectedAppointment}"
+                    Focusable="True">
+                <DataGrid.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding SetFocusCommand}" />
+                    <KeyBinding Key="Space" Command="{Binding SetFocusCommand}" />
+                </DataGrid.InputBindings>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Vreme"
+                            Binding="{Binding Appointment.AppointmentStart,StringFormat=\{0: HH:mm\}}"
+                            CanUserResize="False" Width="0.05*"
+                            SortDirection="Ascending" />
+                    <DataGridTextColumn Header="Pacijent" CanUserResize="False"
+                            Width="0.05*">
+                        <DataGridTextColumn.Binding>
+                            <MultiBinding StringFormat="{}{0}  {1}">
+                                <Binding Path="Appointment.Patient.Name" />
+                                <Binding Path="Appointment.Patient.Surname" />
+                            </MultiBinding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <GroupBox Header="Informacije o terminu"
+                Style="{StaticResource CustomGroupBox}" Grid.Row="2" Margin="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.1*" />
+                    <RowDefinition Height="0.25*" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Column="0" Margin="10" x:Name="info" Grid.RowSpan="2"
+                        DataContext="{Binding Path=SelectedAppointment.Appointment}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Row="0" Grid.ColumnSpan="2"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                        <Label Content="{Binding Patient.Name}"
+                                Foreground="FloralWhite" FontSize="25" />
+                        <Label Content="{Binding Patient.Surname}"
+                                Foreground="FloralWhite" FontSize="25" />
+                    </StackPanel>
+
+                    <Ellipse Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2"
+                            Width="100" Height="100">
+                        <Ellipse.Fill>
+                            <ImageBrush
+                                    ImageSource="pack://application:,,,/Resources/user.png" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+
+                    <Label Grid.Row="3" Grid.Column="0" Content="Pol:"
+                            Style="{StaticResource CustomLabel}" />
+                    <Label Grid.Row="4" Grid.Column="0" Content="Email:"
+                            Style="{StaticResource CustomLabel}" />
+                    <Label Grid.Row="5" Grid.Column="0"
+                            Content="Kontakt telefon:"
+                            Style="{StaticResource CustomLabel}" />
+
+                    <Label Grid.Row="3" Grid.Column="1"
+                            Content="{Binding Patient.Gender}"
+                            Style="{StaticResource CustomLabel}" />
+                    <Label Grid.Row="4" Grid.Column="1"
+                            Content="{Binding Patient.Email}"
+                            Style="{StaticResource CustomLabel}" />
+                    <Label Grid.Row="5" Grid.Column="1"
+                            Content="{Binding Patient.Phone}"
+                            Style="{StaticResource CustomLabel}" />
+                </Grid>
+
+                <Grid Grid.Column="1" Margin="10" x:Name="info2"
+                        DataContext="{Binding Path=SelectedAppointment.Appointment}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="Doktor:"
+                            Style="{StaticResource CustomLabel}" />
+                    <Label Grid.Row="1" Grid.Column="0" Content="Soba:"
+                            Style="{StaticResource CustomLabel}" />
+                    <Label Grid.Row="2" Grid.Column="0" Content="Tip:"
+                            Style="{StaticResource CustomLabel}" />
+
+                    <StackPanel Grid.Row="0" Grid.Column="1"
+                            Orientation="Horizontal" HorizontalAlignment="Left"
+                            Grid.ColumnSpan="2">
+                        <Label Content="{Binding Doctor.Name}"
+                                Style="{StaticResource CustomLabel}" />
+                        <Label Content="{Binding Doctor.Surname}"
+                                Style="{StaticResource CustomLabel}" />
+                    </StackPanel>
+                    <Label Grid.Row="1" Grid.Column="1" Content="{Binding Room}"
+                            Style="{StaticResource CustomLabel}" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Type,Converter={StaticResource AppTypeToString}}"
+                            Style="{StaticResource CustomTextBlock}" />
+
+                    <Label Grid.Row="4" Grid.Column="0" Content="Kratak opis:"
+                            Style="{StaticResource CustomLabel}" />
+                    <Border Grid.Row="5" Grid.ColumnSpan="3"
+                            BorderBrush="FloralWhite" BorderThickness="1"
+                            MinWidth="350" MinHeight="100">
+                        <TextBlock Background="Transparent"
+                                Foreground="FloralWhite"
+                                Text="{Binding AppointmentCause}" />
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="focusButton"
+                            Style="{StaticResource CustomButton}" Margin="15"
+                            Content="Karton pacijenta"
+                            commands:FocusExtension.IsFocused="{Binding Focused,UpdateSourceTrigger=PropertyChanged}">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="LostFocus">
+                                <b:InvokeCommandAction
+                                        Command="{Binding LostFocusCommand}" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                        <Button.InputBindings>
+                            <KeyBinding Key="Return"
+                                    Command="{Binding OpenChartCommand}" />
+                            <KeyBinding Key="Space"
+                                    Command="{Binding OpenChartCommand}" />
+                        </Button.InputBindings>
+                    </Button>
+
+                    <Button Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"
+                            Content="Započni pregled" Margin="15" x:Name="start"
+                            Visibility="{Binding Path=SelectedAppointment.Appointment.IsFinished, Converter={StaticResource saConverter}, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource CustomButton}">
+
+                        <Button.InputBindings>
+                            <KeyBinding Key="Return"
+                                    Command="{Binding StartAppointmentCommand}" />
+                            <KeyBinding Key="Space"
+                                    Command="{Binding StartAppointmentCommand}" />
+                        </Button.InputBindings>
+                    </Button>
+
+                </Grid>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

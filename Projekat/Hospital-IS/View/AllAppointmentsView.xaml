@@ -43,10 +43,33 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-
-        <Label Content="Lista pregleda:" Grid.Row="0" Grid.Column="1" FontSize="22" Margin="10,0,0,0" FontWeight="Bold"/>
-        <DataGrid x:Name="dataGridAppointment"  IsReadOnly="True" CanUserAddRows="False" SelectedItem="{Binding SelectedDoctorAppointment}" ItemsSource="{Binding AllAppointments, Mode=TwoWay}"
-                  AutoGenerateColumns="False" Grid.Column="1" Grid.Row="1" Grid.RowSpan="8"
+        <TextBox Name="txtSearch" Background="white" ToolTip="Pretraga pregleda" BorderThickness="2" Foreground="CadetBlue" BorderBrush="CadetBlue" Text="{Binding SearchText}" Margin="350,10,470,0" Width="120" VerticalAlignment="Top" Padding="4"
+                         Style="{DynamicResource ResourceKey=RegularTextBox}">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10,10,10,10"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <Button x:Name="previousMonth" Command="{Binding DoSearch}" ToolTip="Pretraži" Margin="500,10,440,0" Foreground="#FFFDFAFA" FontSize="24" Cursor="Hand" FontWeight="Bold">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10,10,10,10"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF184095" Offset="0.0"/>
+                    <GradientStop Color="CadetBlue" Offset="1.5"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <StackPanel>
+                <Image Source="pack://application:,,,/Resources/doctor-search.png" Width="20"  Height="20" />
+            </StackPanel>
+        </Button>
+        <DataGrid x:Name="dataGridAppointment"  IsReadOnly="True" CanUserAddRows="False" SelectedItem="{Binding SelectedDoctorAppointment}" ItemsSource="{Binding Appointments, Mode=TwoWay}"
+                  SelectedIndex="-1" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="1" Grid.RowSpan="8"
                   Margin="10,10,440,0"
                   CanUserResizeColumns="False" CanUserResizeRows="False" 
                   Foreground="White" HorizontalGridLinesBrush="White" 
@@ -97,7 +120,7 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Border x:Name="AppointmentInfo" BorderThickness="0" BorderBrush="DeepSkyBlue" Grid.Row="1" Grid.RowSpan="9" Margin="563,10,10,80" Visibility="{Binding Path=ShouldShowNote, Converter={StaticResource BooleanToVisibilityConverter} }"  CornerRadius="20,20,20,20" Background="#FF058D91">
+        <Border x:Name="AppointmentInfo" BorderThickness="0" BorderBrush="DeepSkyBlue" Grid.Row="1" Grid.RowSpan="9" Margin="563,10,10,60" Visibility="{Binding Path=ShouldShowNote, Converter={StaticResource BooleanToVisibilityConverter} }"  CornerRadius="20,20,20,20" Background="#FF058D91">
             <StackPanel x:Name="PersonalData" Grid.RowSpan="9" Grid.Row="1" Grid.Column="2" Margin="10,10,10,10" >
 
                 <Grid>
@@ -120,13 +143,13 @@
                 <TextBlock x:Name="Details" Text="{Binding Path = Details}" TextWrapping="Wrap" Width="320" Background="{x:Null}" Height="302" ScrollViewer.HorizontalScrollBarVisibility="Disabled" UseLayoutRounding="False" MinWidth="220" MinHeight="94" MaxWidth="220" MaxHeight="94" Foreground="White"/>
             </StackPanel>
         </Border>
-        <Border x:Name="ChooseItem" BorderThickness="0" BorderBrush="DeepSkyBlue" Grid.Row="1" Grid.RowSpan="9" Margin="563,10,10,40" Visibility="{Binding Path=ChooseItem, Converter={StaticResource BooleanToVisibilityConverter} }"  CornerRadius="20,20,20,20" Background="#FF058D91">
+        <Border x:Name="ChooseItem" BorderThickness="0" BorderBrush="DeepSkyBlue" Grid.Row="1" Grid.RowSpan="9" Margin="563,10,10,20" Visibility="{Binding Path=ChooseItem, Converter={StaticResource BooleanToVisibilityConverter} }"  CornerRadius="20,20,20,20" Background="#FF058D91">
             <StackPanel>
                 <Image Source="/Resources/chooseFromTable.png" Width="365"  Height="445" Stretch="Uniform" />
                 <Label Content="Izaberite pregled iz tabele." Margin="0,20,0,0" Foreground="White" HorizontalAlignment="Center" FontSize="22"/>
             </StackPanel>
         </Border>
-        <Button x:Name="evaluateApp" Visibility="{Binding Path=ShouldShowEvaluate, Converter={StaticResource BooleanToVisibilityConverter} }" Command="{Binding ShowEvaluationWindow}" Grid.Row="9" Margin="563,230,10,40" Foreground="#FFFDFAFA" FontSize="18" Cursor="Hand" >
+        <Button x:Name="evaluateApp" Visibility="{Binding Path=ShouldShowEvaluate, Converter={StaticResource BooleanToVisibilityConverter} }" Command="{Binding ShowEvaluationWindow}" Grid.Row="9" Margin="563,250,10,20" Foreground="#FFFDFAFA" FontSize="18" Cursor="Hand" >
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20,20,20,20"/>
@@ -154,7 +177,7 @@
                 </LinearGradientBrush>
             </Button.Background> Beleška
         </Button>
-        <Border Background="CadetBlue" CornerRadius="20,20,20,20" Grid.Row="9" Margin="10,10,440,40">
+        <Border Background="CadetBlue" CornerRadius="20,20,20,20" Grid.Row="9" Margin="10,10,440,20">
             <dvc:Chart Canvas.Left="10" Name="appointmentsChart"  
                 Width="500" Height="250"  
                 Background="Transparent"  

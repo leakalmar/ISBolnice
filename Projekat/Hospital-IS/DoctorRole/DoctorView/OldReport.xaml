@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="Hospital_IS.DoctorRole.DoctorView.OldReport"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:converters="clr-namespace:Hospital_IS.DoctorRole.DoctorConverters"
+        xmlns:commands="clr-namespace:Hospital_IS.DoctorRole.Commands"
+        mc:Ignorable="d" d:DesignHeight="344.660194174757" d:DesignWidth="783"
+        FocusManager.FocusedElement="{Binding ElementName=group}">
+    <UserControl.Resources>
+        <converters:IsTodayAppointmentConverter x:Key="IsTodayAppointment" />
+    </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding SaveCommand}" />
+        <KeyBinding Key="Backspace" Command="{Binding NavigateBackCommand}" />
+    </UserControl.InputBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <GroupBox x:Name="group" Margin="10" Header="Detalji pregleda"
+                Foreground="FloralWhite" Grid.ColumnSpan="3" Focusable="True">
+            <TextBox x:Name="reportDetail" Margin="5,5,5,5"
+                    Background="Transparent" Foreground="FloralWhite"
+                    BorderThickness="0"
+                    commands:FocusExtension.IsFocused="{Binding Focused}"
+                    IsReadOnly="{Binding Report.AppointmentStart, Converter={StaticResource IsTodayAppointment}}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="S" Modifiers="Ctrl"
+                            Command="{Binding SaveCommand}" />
+                </TextBox.InputBindings>
+                <TextBox.Text>
+                    <Binding Path="Anamnesis"
+                            UpdateSourceTrigger="PropertyChanged">
+
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1" Header="Recepti" Margin="5"
+                Foreground="FloralWhite">
+            <ListBox x:Name="medicines" ItemsSource="{Binding Prescriptions}"
+                    Background="Transparent" BorderThickness="0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Medicine.Name}"
+                                Foreground="FloralWhite" FontSize="14" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Testovi" Margin="5"
+                Foreground="FloralWhite">
+            <ListBox x:Name="tests" ItemsSource="{Binding Tests}"
+                    Background="Transparent" BorderThickness="0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="" Foreground="FloralWhite" FontSize="14" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+
+        <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right"
+                VerticalAlignment="Center">
+            <Label.Content>
+                <StackPanel>
+                    <Label Content="{Binding Report.DoctorName}"
+                            Foreground="FloralWhite" FontSize="14" />
+                    <Label Content="{Binding Report.DoctorSurname}"
+                            Foreground="FloralWhite" FontSize="14" />
+                    <Label
+                            Content="{Binding Report.AppointmentStart,StringFormat=\{0:dd.MM.yyyy\}}"
+                            Foreground="FloralWhite" FontSize="12" />
+                </StackPanel>
+            </Label.Content>
+        </Label>
+
+    </Grid>
+</UserControl>
