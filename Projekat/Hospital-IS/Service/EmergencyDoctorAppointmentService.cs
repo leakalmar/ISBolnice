@@ -98,7 +98,7 @@ namespace Hospital_IS.Service
         private List<DoctorAppointmentDTO> FindConflictingAppointments(DoctorAppointment appointment)
         {
             List<DoctorAppointmentDTO> conflictingAppointments = new List<DoctorAppointmentDTO>();
-            foreach (DoctorAppointment app in DoctorAppointmentService.Instance.allAppointments)
+            foreach (DoctorAppointment app in DoctorAppointmentService.Instance.AllAppointments)
             {
                 if ((appointment.Doctor.Id.Equals(app.Doctor.Id) || appointment.Room.Equals(app.Room)))
                 {

@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Hospital_IS.Storages;
+using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -7,8 +8,10 @@ namespace Service
 {
     class DoctorAppointmentService
     {
-        private AppointmentFileStorage afs = new AppointmentFileStorage();
-        public List<DoctorAppointment> allAppointments { get; set; }
+        //private AppointmentFileStorage afs = new AppointmentFileStorage();
+        public List<DoctorAppointment> AllAppointments { get; set; }
+        public IStorageFactory<AppointmentFileStorage> appointmentFileStorageFactory;
+        public AppointmentFileStorage AppointmentStorage { get; set; }
 
         private static DoctorAppointmentService instance = null;
         public static DoctorAppointmentService Instance
@@ -25,13 +28,15 @@ namespace Service
 
         private DoctorAppointmentService()
         {
-            allAppointments = afs.GetAll();
+            appointmentFileStorageFactory = new AppointmentFileStorageFactory();
+            AppointmentStorage = appointmentFileStorageFactory.GetStorage();
+            AllAppointments = AppointmentStorage.GetAll();
         }
 
         public List<DoctorAppointment> GetAllByDoctor(int doctorId)
         {
             List<DoctorAppointment> doctorAppointments = new List<DoctorAppointment>();
-                foreach (DoctorAppointment docApp in allAppointments)
+                foreach (DoctorAppointment docApp in AllAppointments)
             {
                 if (docApp.Doctor.Id == doctorId)
                 {
@@ -44,7 +49,7 @@ namespace Service
         public List<DoctorAppointment> GetAllByPatient(int patientId)
         {
             List<DoctorAppointment> patientAppointments = new List<DoctorAppointment>();
-            foreach (DoctorAppointment docApp in allAppointments)
+            foreach (DoctorAppointment docApp in AllAppointments)
             {
                 if (docApp.Patient.Id == patientId)
                 {
@@ -61,17 +66,17 @@ namespace Service
                 return;
             }
 
-            if (allAppointments == null)
+            if (AllAppointments == null)
             {
-                allAppointments = new List<DoctorAppointment>();
+                AllAppointments = new List<DoctorAppointment>();
 
             }
 
-            if (!allAppointments.Contains(doctorAppointment))
+            if (!AllAppointments.Contains(doctorAppointment))
             {
                 doctorAppointment.Id = AppointmentService.Instance.GenerateAppointmentID();
-                allAppointments.Add(doctorAppointment);
-                afs.Add(doctorAppointment);
+                AllAppointments.Add(doctorAppointment);
+                AppointmentStorage.Add(doctorAppointment);
             }
         }
 
@@ -82,14 +87,14 @@ namespace Service
                 return;
             }
 
-            if (allAppointments != null)
+            if (AllAppointments != null)
             {
-                foreach (DoctorAppointment doctorApp in allAppointments)
+                foreach (DoctorAppointment doctorApp in AllAppointments)
                 {
                     if (doctorAppointment.AppointmentStart.Equals(doctorApp.AppointmentStart) && doctorAppointment.Doctor.Id.Equals(doctorApp.Doctor.Id))
                     {
-                        allAppointments.Remove(doctorApp);
-                        afs.SaveAppointment(allAppointments);
+                        AllAppointments.Remove(doctorApp);
+                        AppointmentStorage.SaveAppointment(AllAppointments);
                         break;
                     }
                 }
@@ -99,13 +104,13 @@ namespace Service
 
         public void UpdateAppointment(DoctorAppointment oldDoctorAppointment, DoctorAppointment newDoctorAppointment)
         {
-            for (int i = 0; i < allAppointments.Count; i++)
+            for (int i = 0; i < AllAppointments.Count; i++)
             {
-                if (newDoctorAppointment.Id == allAppointments[i].Id)
+                if (newDoctorAppointment.Id == AllAppointments[i].Id)
                 {
-                    allAppointments.Remove(allAppointments[i]);
-                    allAppointments.Insert(i, newDoctorAppointment);
-                    afs.SaveAppointment(allAppointments);
+                    AllAppointments.Remove(AllAppointments[i]);
+                    AllAppointments.Insert(i, newDoctorAppointment);
+                    AppointmentStorage.SaveAppointment(AllAppointments);
                     return;
                 }
             }
@@ -128,13 +133,13 @@ namespace Service
 
         public void ReloadDoctorAppointments()
         {
-            allAppointments = afs.GetAll();
+            AllAppointments = AppointmentStorage.GetAll();
         }
 
         public List<DoctorAppointment> GetAllByRoom(int roomId)
         {
             List<DoctorAppointment> roomAppointments = new List<DoctorAppointment>();
-            foreach (DoctorAppointment roomApp in allAppointments)
+            foreach (DoctorAppointment roomApp in AllAppointments)
             {
                 if (roomApp.Room == roomId)
                 {
@@ -152,7 +157,7 @@ namespace Service
             {
                 datesWithoutTime.Add(date.Date);
             }
-            foreach (DoctorAppointment docApp in allAppointments)
+            foreach (DoctorAppointment docApp in AllAppointments)
             {
                 if (docApp.Doctor.Id == idDoctor && datesWithoutTime.Contains(docApp.AppointmentStart.Date))
                 {
@@ -165,7 +170,7 @@ namespace Service
         public int GetNumberOfAppointmentsInTimeRange(int patientId, DateTime timeRangeStart, DateTime timeRangeEnd)
         {
             int numberOfAppointments = 0;
-            foreach (DoctorAppointment docApp in allAppointments)
+            foreach (DoctorAppointment docApp in AllAppointments)
             {
                 if (docApp.Patient.Id == patientId && docApp.AppointmentStart >= timeRangeStart && docApp.AppointmentStart <= timeRangeEnd)
                 {
@@ -177,7 +182,7 @@ namespace Service
 
         public DoctorAppointment GetAppointmentById(int appointmentId)
         {
-            foreach (DoctorAppointment doctorAppointment in allAppointments)
+            foreach (DoctorAppointment doctorAppointment in AllAppointments)
             {
                 if (doctorAppointment.Id == appointmentId)
                 {

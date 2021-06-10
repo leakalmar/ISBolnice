@@ -1,4 +1,5 @@
 ﻿using Hospital_IS.Model;
+using Hospital_IS.Service;
 using Hospital_IS.Storages;
 using Model;
 using System;
@@ -6,10 +7,12 @@ using System.Collections.Generic;
 
 namespace Service
 {
-    class PatientService
+    public class PatientService 
     {
-        private PatientFileStorage pfs = new PatientFileStorage();
+        //private PatientFileStorage pfs = new PatientFileStorage();
         public List<Patient> AllPatients { get; set; }
+        public IStorageFactory<PatientFileStorage> patientFileStorageFactory;
+        public PatientFileStorage PatientStorage { get; set; }
 
         private static PatientService instance = null;
         public static PatientService Instance
@@ -26,7 +29,9 @@ namespace Service
 
         private PatientService()
         {
-            AllPatients = pfs.GetAll();
+            patientFileStorageFactory = new PatientFileStorageFactory();
+            PatientStorage = patientFileStorageFactory.GetStorage();
+            AllPatients = PatientStorage.GetAll();
             UpdatePatientTrollMechanism();
         }
 
@@ -34,7 +39,7 @@ namespace Service
         {
             ChartService.Instance.SaveChart(new MedicalHistory(patient.Id));
             AllPatients.Add(patient);
-            pfs.Add(patient);
+            PatientStorage.Add(patient);
         }
 
         public void UpdatePatient(Patient patient)
@@ -47,7 +52,7 @@ namespace Service
                     AllPatients.Insert(i, patient);
                 }
             }
-            pfs.SavePatients(AllPatients);
+            PatientStorage.SavePatients(AllPatients);
         }
 
         public void DeletePatient(Patient patient)
@@ -61,7 +66,7 @@ namespace Service
                 }
             }
 
-            pfs.SavePatients(AllPatients);
+            PatientStorage.SavePatients(AllPatients);
         }
 
         public bool CheckIfAllergicToComponent(string medicineName, List<String> allergies)
@@ -191,7 +196,7 @@ namespace Service
 
         public void ReloadPatients()
         {
-            AllPatients = pfs.GetAll();
+            AllPatients = PatientStorage.GetAll();
         }
 
         public PatientNote GetNoteForPatientByAppointmentId(int patientId, int appointmentId)
@@ -211,12 +216,12 @@ namespace Service
         {
             Patient patient = GetPatientByID(patientId);
             patient.PatientNotes.Add(patientNote);
-            pfs.SavePatients(AllPatients);
+            PatientStorage.SavePatients(AllPatients);
         }
 
         public void SavePatients()
         {
-            pfs.SavePatients(AllPatients);
+            PatientStorage.SavePatients(AllPatients);
         }
 
         public List<PatientNote> GetNotesByPatient(int patientId)

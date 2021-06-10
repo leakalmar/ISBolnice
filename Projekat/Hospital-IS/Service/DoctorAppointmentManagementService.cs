@@ -35,7 +35,7 @@ namespace Hospital_IS.Service
 
         private void LoadAppointments()
         {
-            foreach (DoctorAppointment docAppointment in DoctorAppointmentService.Instance.allAppointments)
+            foreach (DoctorAppointment docAppointment in DoctorAppointmentService.Instance.AllAppointments)
             {
                 PatientDTO patientDTO = SecretaryUserManagementService.Instance.GetPatientByID(docAppointment.Patient.Id);
                 DoctorDTO doctorDTO = SecretaryUserManagementService.Instance.GetDoctorByID(docAppointment.Doctor.Id);

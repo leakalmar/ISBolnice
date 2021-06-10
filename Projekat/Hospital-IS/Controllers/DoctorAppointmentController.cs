@@ -32,7 +32,7 @@ namespace Controllers
 
         public List<DoctorAppointment> GetAll()
         {
-            return DoctorAppointmentService.Instance.allAppointments;
+            return DoctorAppointmentService.Instance.AllAppointments;
         }
 
         public List<DoctorAppointment> GetAllByDoctor(int doctorId)

@@ -210,7 +210,7 @@ namespace Service
 
         public void FindMaxID()
         {
-            List<Appointment> appointments = new List<Appointment>(DoctorAppointmentService.Instance.allAppointments);
+            List<Appointment> appointments = new List<Appointment>(DoctorAppointmentService.Instance.AllAppointments);
             appointments.AddRange(AllAppointments);
             int max = 0;
             foreach (Appointment appointment in appointments)
