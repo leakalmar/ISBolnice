@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace Model
 {
-    public class Patient : IPatientUser
+    public class Patient : Entity, IPatientUser
     {
         public DateTime FileDate { get; set; }
         public string Employer { get; set; }
@@ -18,7 +18,7 @@ namespace Model
         public string BloodType { get; set; }
         public bool IsGuest { get; set; } = false;
         public EducationCategory Education { get; set; }
-        public int Id { get; set; }
+      
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime BirthDate { get; set; }

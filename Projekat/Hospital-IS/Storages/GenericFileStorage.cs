@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Hospital_IS.Model;
+using Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Hospital_IS.Storages
 {
-    public class GenericFileStorage<T> : IGenericStorage<T> where T : class
+    public class GenericFileStorage<T> : IGenericStorage<T> where T : Entity
     {
         protected string fileLocation;
         public List<T> GetAll()
@@ -26,18 +27,48 @@ namespace Hospital_IS.Storages
 
         public void Delete(T selectedObject)
         {
-            throw new NotImplementedException();
+            List<T> objects = GetAll();
+            foreach (T obj in objects)
+            {
+                if (obj.Id == selectedObject.Id)
+                {                
+                    objects.Remove(obj); 
+                    break;
+                }
+            }
+            SaveAll(objects);
         }
 
         public T GetById(int id)
         {
-            throw new NotImplementedException();
+            T findObj = null;
+            List<T> objects = GetAll();
+            foreach (T obj in objects)
+            {
+                if (obj.Id == id)
+                {
+                    findObj = obj;
+                }
+            }
+            return findObj;
         }
 
         public void Update(T selectedObject)
         {
-            throw new NotImplementedException();
+            List<T> objects = GetAll();
+            foreach (T obj in objects)
+            {
+                if (obj.Id == selectedObject.Id)
+                {
+                    int index = objects.IndexOf(obj);
+                    objects.Remove(obj);
+                    objects.Insert(index, selectedObject);
+                    break;
+                }
+            }
+            SaveAll(objects);
         }
+
         public void SaveAll(List<T> objects)
         {
             var file = JsonConvert.SerializeObject(objects, Formatting.Indented);

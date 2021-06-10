@@ -15,7 +15,7 @@ namespace Hospital_IS.Service
         public void ExecuteAdvancedRoomRenovation(AdvancedRenovation advancedRenovation)
         {
             advancedRenovation.RoomFirst.SurfaceArea = advancedRenovation.RoomFirst.SurfaceArea / 2;
-            Room updateRoom = new Room(advancedRenovation.RoomFirst.RoomId, advancedRenovation.RoomFirst.RoomFloor, advancedRenovation.RoomFirst.SurfaceArea / 2,
+            Room updateRoom = new Room(advancedRenovation.RoomFirst.Id, advancedRenovation.RoomFirst.RoomFloor, advancedRenovation.RoomFirst.SurfaceArea / 2,
                 advancedRenovation.RoomFirst.BedNumber, advancedRenovation.RoomFirst.Type);
             RoomService.Instance.UpdateRoom(updateRoom);
             Room room = new Room(advancedRenovation.RenovationResultRoom.RoomNumber, advancedRenovation.RenovationResultRoom.RoomFloor, advancedRenovation.RenovationResultRoom.SurfaceArea,

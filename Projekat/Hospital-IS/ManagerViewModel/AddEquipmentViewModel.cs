@@ -108,7 +108,7 @@ namespace Hospital_IS.ManagerViewModel
                 {
                     for(int i = 0; i < Convert.ToInt32(EquipmentValidationDTO.Quantity) ; i++)
                     {
-                        BedController.Instance.AddBed(new Bed(SelectedRoom.RoomId, false));
+                        BedController.Instance.AddBed(new Bed(SelectedRoom.Id, false));
                         SelectedRoom.BedNumber = Convert.ToInt32(EquipmentValidationDTO.Quantity);
                         RoomController.Instance.UpdateRoom(SelectedRoom);
 

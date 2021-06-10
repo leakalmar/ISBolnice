@@ -1,14 +1,15 @@
 using Enums;
+using Hospital_IS.Model;
 using Hospital_IS.Model.Interface;
 using System;
 using System.Collections.Generic;
 
 namespace Model
 {
-    public class Employee : IEmployeeUser
+    public class Employee :Entity, IEmployeeUser
     {
         public EducationCategory Education { get; set; }
-        public int Id { get; set; }
+      
         public String Name { get; set; }
         public String Surname { get; set; }
         public DateTime BirthDate { get; set; }

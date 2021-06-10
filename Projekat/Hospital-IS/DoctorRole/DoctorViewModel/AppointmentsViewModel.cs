@@ -255,7 +255,7 @@ namespace Hospital_IS.DoctorViewModel
                 view.Filter = null;
                 view.Filter = delegate (object item)
                 {
-                    return ((DoctorAppointment)item).Type.Equals(FindType()) & ((DoctorAppointment)item).Room == SelectedRoom.RoomId & ((DoctorAppointment)item).AppointmentStart.Date <= ToDate.Date & ((DoctorAppointment)item).AppointmentStart.Date >= FromDate.Date;
+                    return ((DoctorAppointment)item).Type.Equals(FindType()) & ((DoctorAppointment)item).Room == SelectedRoom.Id & ((DoctorAppointment)item).AppointmentStart.Date <= ToDate.Date & ((DoctorAppointment)item).AppointmentStart.Date >= FromDate.Date;
                 };
 
                 Appointments = view;
@@ -281,7 +281,7 @@ namespace Hospital_IS.DoctorViewModel
             }
             foreach (Room room in Rooms)
             {
-                if (room.RoomId.Equals(DoctorMainWindowModel.Instance.Doctor.PrimaryRoom))
+                if (room.Id.Equals(DoctorMainWindowModel.Instance.Doctor.PrimaryRoom))
                 {
                     this.SelectedRoom = room;
                 }

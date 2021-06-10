@@ -539,7 +539,7 @@ namespace Hospital_IS.ManagerViewModel
         private void SplitOneRoomIntoTwo(AdvancedRenovation renovation)
         {
             renovation.RoomFirst.SurfaceArea = renovation.RoomFirst.SurfaceArea / 2;
-            Room updateRoom = new Room(renovation.RoomFirst.RoomId, renovation.RoomFirst.RoomFloor, renovation.RoomFirst.SurfaceArea / 2,
+            Room updateRoom = new Room(renovation.RoomFirst.Id, renovation.RoomFirst.RoomFloor, renovation.RoomFirst.SurfaceArea / 2,
                 renovation.RoomFirst.BedNumber, renovation.RoomFirst.Type);
             RoomController.Instance.UpdateRoom(updateRoom);
             Room room = new Room(renovation.RenovationResultRoom.RoomNumber, renovation.RenovationResultRoom.RoomFloor, renovation.RenovationResultRoom.SurfaceArea,
@@ -571,7 +571,7 @@ namespace Hospital_IS.ManagerViewModel
         }
         private void Execute_RenovationRoomCommand(object obj)
         {
-            RoomRenovationViewModel.Instance.SetAppointmnetForRoom(SelectedRoom.RoomId);
+            RoomRenovationViewModel.Instance.SetAppointmnetForRoom(SelectedRoom.Id);
             RoomRenovationViewModel.Instance.FirstRoom = SelectedRoom;
             RoomRenovationViewModel.Instance.NavService = this.NavService;
             this.NavService.Navigate(

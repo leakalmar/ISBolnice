@@ -111,7 +111,7 @@ namespace Hospital_IS.View.PatientViewModels
                 if (roomId != value)
                 {
                     roomId = value;
-                    OnPropertyChanged("RoomId");
+                    OnPropertyChanged("Id");
                 }
             }
         }

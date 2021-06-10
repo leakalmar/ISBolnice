@@ -88,10 +88,7 @@ namespace Controllers
             PatientService.Instance.AddAppointmentNote(patientId, patientNote);
         }
 
-        public void SavePatients()
-        {
-            PatientService.Instance.SavePatients();
-        }
+       
 
         public List<PatientNote> GetNotesByPatient(int patientId)
         {

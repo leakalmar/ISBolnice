@@ -63,15 +63,15 @@ namespace Service
             bool areInRenovation = false;
             if (advancedRenovation.Type == AdvancedRenovationType.MERGE)
             {
-                if (roomIdSource == advancedRenovation.RoomFirst.RoomId || roomIdSource == advancedRenovation.RoomSecond.RoomId || roomIdDestination == advancedRenovation.RoomSecond.RoomId ||
-                    roomIdDestination == advancedRenovation.RoomFirst.RoomId)
+                if (roomIdSource == advancedRenovation.RoomFirst.Id || roomIdSource == advancedRenovation.RoomSecond.Id || roomIdDestination == advancedRenovation.RoomSecond.Id ||
+                    roomIdDestination == advancedRenovation.RoomFirst.Id)
                 {
                     areInRenovation = true;
                 }
             }
             else
             {
-                if (roomIdSource == advancedRenovation.RoomFirst.RoomId || roomIdDestination == advancedRenovation.RoomFirst.RoomId)
+                if (roomIdSource == advancedRenovation.RoomFirst.Id || roomIdDestination == advancedRenovation.RoomFirst.Id)
                 {
                     areInRenovation = true;
                 }

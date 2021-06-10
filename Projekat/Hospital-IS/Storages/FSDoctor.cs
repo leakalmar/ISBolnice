@@ -13,17 +13,6 @@ namespace Hospital_IS.Storages
             this.fileLocation = "../../../FileStorage/doctors.json";
         }
 
-        public void SaveDoctors(List<Doctor> doctors)
-        {
-            var file = JsonConvert.SerializeObject(doctors, Formatting.Indented, new JsonSerializerSettings()
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects
-            });
-            using (StreamWriter writer = new StreamWriter(this.fileLocation))
-            {
-                writer.Write(file);
-            }
-        }
+      
     }
 }

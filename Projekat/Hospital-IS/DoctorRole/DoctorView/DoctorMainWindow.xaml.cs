@@ -281,7 +281,7 @@ namespace Hospital_IS.DoctorRole.DoctorView
                     case 19:
                         foreach (Room r in newApp.rooms.Items)
                         {
-                            if (r.RoomId.Equals(DoctorMainWindowModel.Instance.Doctor.PrimaryRoom))
+                            if (r.Id.Equals(DoctorMainWindowModel.Instance.Doctor.PrimaryRoom))
                             {
                                 newApp.rooms.SelectedItem = r;
                             }

@@ -1,9 +1,10 @@
 using Enums;
+using Hospital_IS.Model;
 using System;
 
 namespace Model
 {
-    public class Appointment
+    public class Appointment: Entity
     {
 
         public Boolean Reserved { get; set; }
@@ -18,7 +19,7 @@ namespace Model
         
         public int Room { get; set; }
 
-        public int Id { get; set; }
+       
 
         public Appointment(bool reserved, string appointmentCause, DateTime appointmentStart, DateTime appointmentEnd, AppointmentType type, int room)
         {

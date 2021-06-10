@@ -76,7 +76,7 @@ namespace Hospital_IS.View.PatientViewModels
                 Note.NotificationTime = NotificationTime + 8;
                 Note.NoteContent = NoteContent;
                 Note.IsNotifyChecked = IsNotifyChecked;
-                PatientController.Instance.SavePatients();
+                PatientController.Instance.UpdatePatient(PatientMainWindowViewModel.Patient);
             }
             else
             {

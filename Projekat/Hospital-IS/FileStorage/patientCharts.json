@@ -97,11 +97,11 @@
           "RoomNumber": 26,
           "SurfaceArea": 20,
           "BedNumber": 6,
-          "RoomId": 15,
           "Type": 0,
           "RoomIdType": "26 RecoveryRoom",
           "Equipment": [],
-          "isUsable": false
+          "isUsable": false,
+          "Id": 0
         },
         "Bed": {
           "BedId": 0,
@@ -120,11 +120,11 @@
           "RoomNumber": 26,
           "SurfaceArea": 20,
           "BedNumber": 6,
-          "RoomId": 15,
           "Type": 0,
           "RoomIdType": "26 RecoveryRoom",
           "Equipment": [],
-          "isUsable": false
+          "isUsable": false,
+          "Id": 0
         },
         "Bed": {
           "BedId": 0,
@@ -198,57 +198,6 @@
         "LastTimeIssued": "2021-06-07T10:31:49.9565801+02:00"
       }
     ]
-  },
-  {
-    "Id": 2,
-    "Prescription": [],
-    "Test": [],
-    "Reports": [],
-    "Hospitalization": [],
-    "Therapies": []
-  },
-  {
-    "Id": 3,
-    "Prescription": [],
-    "Test": [],
-    "Reports": [
-      {
-        "Anamnesis": "",
-        "HaveRecipe": false,
-        "HaveTest": false,
-        "ReportId": "2021-05-25T09:00:00",
-        "DoctorName": "Dragana",
-        "DoctorSurname": "Vukmanov Simokov",
-        "Type": 1,
-        "Cause": null
-      }
-    ],
-    "Hospitalization": [
-      {
-        "AdmissionDate": "2021-05-25T10:57:22.3575008+02:00",
-        "ReleaseDate": "2021-05-28T10:57:22.357738+02:00",
-        "Detail": null,
-        "Room": {
-          "RoomFloor": 2,
-          "RoomNumber": 26,
-          "SurfaceArea": 20,
-          "BedNumber": 6,
-          "RoomId": 15,
-          "Type": 0,
-          "RoomIdType": "26 RecoveryRoom",
-          "Equipment": [],
-          "isUsable": false
-        },
-        "Bed": {
-          "BedId": 0,
-          "RoomId": 15,
-          "Taken": false
-        },
-        "Doctor": "Dragana V. Simokov",
-        "IsReleased": true
-      }
-    ],
-    "Therapies": []
   },
   {
     "Id": 14,

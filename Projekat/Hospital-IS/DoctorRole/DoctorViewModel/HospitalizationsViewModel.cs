@@ -140,7 +140,7 @@ namespace Hospital_IS.DoctorViewModel
             set
             {
                 selectedRoom = value;
-                Beds = BedController.Instance.GetBedsByRoomId(selectedRoom.RoomId);
+                Beds = BedController.Instance.GetBedsByRoomId(selectedRoom.Id);
                 OnPropertyChanged("SelectedRoom");
             }
         }
@@ -152,7 +152,7 @@ namespace Hospital_IS.DoctorViewModel
             {
                 if (!NewHospitalization)
                 {
-                    beds = BedController.Instance.GetBedsByRoomId(SelectedRoom.RoomId);
+                    beds = BedController.Instance.GetBedsByRoomId(SelectedRoom.Id);
                 }
                 else
                 {
@@ -242,7 +242,7 @@ namespace Hospital_IS.DoctorViewModel
             PatientController.Instance.UpdatePatient(Patient);
             SelectedBed.Taken = true;
             BedController.Instance.UpdateBed(SelectedBed);
-            HospitalizationDTO hospitalizationDTO = new HospitalizationDTO(AddmissionDate, ReleaseDate, Details, SelectedRoom.RoomId, SelectedBed.BedId, Doctor, false);
+            HospitalizationDTO hospitalizationDTO = new HospitalizationDTO(AddmissionDate, ReleaseDate, Details, SelectedRoom.Id, SelectedBed.BedId, Doctor, false);
             ChartController.Instance.AddHospitalization(hospitalizationDTO, Patient);
             this.Hospitalizations = new ObservableCollection<Hospitalization>(ChartController.Instance.GetHospitalizationsByPatient(Patient));
         }
@@ -297,7 +297,7 @@ namespace Hospital_IS.DoctorViewModel
                 Hospitalization hospitalization = ChartController.Instance.GetActivHospitalization(Patient);
                 AddmissionDate = hospitalization.AdmissionDate;
                 ReleaseDate = hospitalization.ReleaseDate;
-                SelectedRoom = RoomController.Instance.GetRoomById(hospitalization.Room.RoomId);
+                SelectedRoom = RoomController.Instance.GetRoomById(hospitalization.Room.Id);
                 SelectedBed = BedController.Instance.GetBedById(hospitalization.Bed.BedId);
                 Doctor = hospitalization.Doctor;
             }

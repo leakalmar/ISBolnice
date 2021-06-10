@@ -226,8 +226,8 @@ namespace Hospital_IS.ManagerViewModel
         public void TransferStaticExecute()
         {
            
-            StaticTransferAppointmentDTO staticTransfer = new StaticTransferAppointmentDTO(SourceRoom.RoomId, DestinationRoom.RoomId, Equipment.EquiptId, Quantity, DateStart, DateEnd, Note);
-            bool isAfterRoomRenovation = AdvancedRenovationController.Instance.CheckIfTransferIsAfterRenovation(dateStart, SourceRoom.RoomId, DestinationRoom.RoomId);
+            StaticTransferAppointmentDTO staticTransfer = new StaticTransferAppointmentDTO(SourceRoom.Id, DestinationRoom.Id, Equipment.EquiptId, Quantity, DateStart, DateEnd, Note);
+            bool isAfterRoomRenovation = AdvancedRenovationController.Instance.CheckIfTransferIsAfterRenovation(dateStart, SourceRoom.Id, DestinationRoom.Id);
             bool isSucces = false;
             if (isAfterRoomRenovation)
             {
@@ -239,7 +239,7 @@ namespace Hospital_IS.ManagerViewModel
                isSucces = TransferController.Instance.ScheduleStaticTransfer(staticTransfer);
             }
          
-            Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(SourceRoom.RoomId, DestinationRoom.RoomId));
+            Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(SourceRoom.Id, DestinationRoom.Id));
             MessageBox.Show(isAfterRoomRenovation.ToString());
 
             if (!isSucces)
