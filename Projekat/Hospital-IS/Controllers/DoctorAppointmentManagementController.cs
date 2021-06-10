@@ -27,28 +27,6 @@ namespace Hospital_IS.Controllers
         {
 
         }
-        public void AddAppointment(DoctorAppointmentDTO docAppointmentDTO)
-        {
-            docAppointmentDTO.Reserved = true;
-            DoctorAppointmentManagementService.Instance.AddAppointment(docAppointmentDTO);
-        }
-
-        public void UpdateAppointment(DoctorAppointmentDTO oldDoctorAppointmentDTO, DoctorAppointmentDTO newDoctorAppointmentDTO)
-        {
-            newDoctorAppointmentDTO.Id = oldDoctorAppointmentDTO.Id;
-            DoctorAppointmentManagementService.Instance.UpdateAppointment(oldDoctorAppointmentDTO, newDoctorAppointmentDTO);
-        }
-
-        public DoctorAppointmentDTO GetAppointmentById(int id)
-        {
-            return DoctorAppointmentManagementService.Instance.GetAppointmentById(id);
-        }
-
-        public void EndAppointment(DoctorAppointmentDTO docAppointmentDTO)
-        {
-            docAppointmentDTO.IsFinished = true;
-            DoctorAppointmentManagementService.Instance.UpdateAppointment(docAppointmentDTO, docAppointmentDTO);
-        }
 
         public List<RoomDTO> GetAllRooms()
         {
@@ -62,11 +40,6 @@ namespace Hospital_IS.Controllers
         public RoomDTO GetRoomById(int id)
         {
             return DoctorAppointmentManagementService.Instance.GetRoomById(id);
-        }
-
-        public List<DoctorAppointmentDTO> GetAppointmentByDoctorId(int doctorId)
-        {
-            return DoctorAppointmentManagementService.Instance.GetAppointmentByDoctorId(doctorId);
         }
 
     }

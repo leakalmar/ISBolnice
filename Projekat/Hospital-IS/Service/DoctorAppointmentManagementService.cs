@@ -50,70 +50,9 @@ namespace Hospital_IS.Service
 
         }
 
-        public void AddAppointment(DoctorAppointmentDTO docAppointmentDTO)
-        {
-            if (docAppointmentDTO == null)
-            {
-                return;
-            }
-
-            if (AllAppointments == null)
-            {
-                AllAppointments = new List<DoctorAppointmentDTO>();
-
-            }
-
-            if (!AllAppointments.Contains(docAppointmentDTO))
-            {
-                Patient patient = PatientService.Instance.GetPatientByID(docAppointmentDTO.Patient.Id);
-                Doctor doctor = DoctorService.Instance.GetDoctorByID(docAppointmentDTO.Doctor.Id);
-                DoctorAppointmentService.Instance.AddAppointment(new DoctorAppointment(docAppointmentDTO.Reserved, docAppointmentDTO.AppointmentCause, 
-                    docAppointmentDTO.AppointmentStart, docAppointmentDTO.AppointmentEnd, docAppointmentDTO.Type, docAppointmentDTO.Room, 
-                    docAppointmentDTO.Id, docAppointmentDTO.IsUrgent, patient, doctor, docAppointmentDTO.IsFinished));
-                ReloadAppointments();    
-            }
-        }
-
-
-        public void UpdateAppointment(DoctorAppointmentDTO oldDoctorAppointmentDTO, DoctorAppointmentDTO newDoctorAppointmentDTO)
-        {
-            for (int i = 0; i < AllAppointments.Count; i++)
-            {
-                if (newDoctorAppointmentDTO.Id == AllAppointments[i].Id)
-                {
-                    AllAppointments.Remove(AllAppointments[i]);
-                    AllAppointments.Insert(i, newDoctorAppointmentDTO);
-
-                    Patient patient = PatientService.Instance.GetPatientByID(newDoctorAppointmentDTO.Patient.Id);
-                    Doctor doctor = DoctorService.Instance.GetDoctorByID(newDoctorAppointmentDTO.Doctor.Id);
-                    DoctorAppointment oldDoctorAppointment = new DoctorAppointment(oldDoctorAppointmentDTO.Reserved, oldDoctorAppointmentDTO.AppointmentCause,
-                        oldDoctorAppointmentDTO.AppointmentStart, oldDoctorAppointmentDTO.AppointmentEnd, oldDoctorAppointmentDTO.Type, oldDoctorAppointmentDTO.Room,
-                        oldDoctorAppointmentDTO.Id, oldDoctorAppointmentDTO.IsUrgent, patient, doctor, oldDoctorAppointmentDTO.IsFinished);
-                    DoctorAppointment newDoctorAppointment = new DoctorAppointment(newDoctorAppointmentDTO.Reserved, newDoctorAppointmentDTO.AppointmentCause,
-                        newDoctorAppointmentDTO.AppointmentStart, newDoctorAppointmentDTO.AppointmentEnd, newDoctorAppointmentDTO.Type, newDoctorAppointmentDTO.Room,
-                        newDoctorAppointmentDTO.Id, newDoctorAppointmentDTO.IsUrgent, patient, doctor, newDoctorAppointmentDTO.IsFinished);
-                    DoctorAppointmentService.Instance.UpdateAppointment(oldDoctorAppointment, newDoctorAppointment);
-
-                    return;
-                }
-            }
-        }
-
-        public DoctorAppointmentDTO GetAppointmentById(int id)
-        {
-            DoctorAppointmentDTO foundAppointment = null;
-            foreach (DoctorAppointmentDTO appointment in AllAppointments)
-            {
-                if (appointment.Id.Equals(id))
-                {
-                    foundAppointment = appointment;
-                }
-            }
-            return foundAppointment;
-        }
-
         public bool VerifyAppointment(DoctorAppointmentDTO doctorAppointmentDTO)
         {
+            ReloadAppointments();
             Patient patient = PatientService.Instance.GetPatientByID(doctorAppointmentDTO.Patient.Id);
             Doctor doctor = DoctorService.Instance.GetDoctorByID(doctorAppointmentDTO.Doctor.Id);
             return VerifyAppointmentService.Instance.VerifyAppointment(new DoctorAppointment(doctorAppointmentDTO.Reserved, doctorAppointmentDTO.AppointmentCause,
@@ -172,19 +111,6 @@ namespace Hospital_IS.Service
             DoctorDTO doctorDTO = SecretaryUserManagementService.Instance.GetDoctorByID(docAppointment.Doctor.Id);
             return new DoctorAppointmentDTO(docAppointment.Reserved, docAppointment.AppointmentCause, docAppointment.AppointmentStart, docAppointment.AppointmentEnd,
                     docAppointment.Type, docAppointment.Room, docAppointment.Id, docAppointment.IsUrgent, patientDTO, doctorDTO, docAppointment.IsFinished);
-        }
-
-        public List<DoctorAppointmentDTO> GetAppointmentByDoctorId(int doctorId)
-        {
-            List<DoctorAppointmentDTO> doctorAppointmentDTOs = new List<DoctorAppointmentDTO>();
-            foreach (DoctorAppointmentDTO appointment in AllAppointments)
-            {
-                if (appointment.Doctor.Id.Equals(doctorId))
-                {
-                    doctorAppointmentDTOs.Add(appointment);
-                }
-            }
-            return doctorAppointmentDTOs;
         }
     }
 }
