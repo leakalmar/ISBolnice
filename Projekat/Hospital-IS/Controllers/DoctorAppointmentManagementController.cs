@@ -54,21 +54,12 @@ namespace Hospital_IS.Controllers
         {
             DoctorAppointmentManagementService.Instance.ReloadAppointments();
         }
-        public DoctorAppointmentDTO GetAppointmentById(int id)
-        {
-            return DoctorAppointmentManagementService.Instance.GetAppointmentById(id);
-        }
 
         public List<DoctorAppointmentDTO> GetAppointmentsByPatientId(int patientId)
         {
             return DoctorAppointmentManagementService.Instance.GetAppointmentsByPatientId(patientId);
         }
 
-        public void EndAppointment(DoctorAppointmentDTO docAppointmentDTO)
-        {
-            docAppointmentDTO.IsFinished = true;
-            DoctorAppointmentManagementService.Instance.UpdateAppointment(docAppointmentDTO, docAppointmentDTO);
-        }
         public bool VerifyAppointment(DoctorAppointmentDTO doctorAppointmentDTO)
         {
             return DoctorAppointmentManagementService.Instance.VerifyAppointment(doctorAppointmentDTO);
@@ -86,11 +77,6 @@ namespace Hospital_IS.Controllers
         public RoomDTO GetRoomById(int id)
         {
             return DoctorAppointmentManagementService.Instance.GetRoomById(id);
-        }
-
-        public List<DoctorAppointmentDTO> GetAppointmentByDoctorId(int doctorId)
-        {
-            return DoctorAppointmentManagementService.Instance.GetAppointmentByDoctorId(doctorId);
         }
 
         public List<DoctorAppointmentDTO> GetFutureAppointmentsForDoctor(int doctorId)

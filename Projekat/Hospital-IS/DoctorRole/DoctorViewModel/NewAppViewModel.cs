@@ -334,7 +334,12 @@ namespace Hospital_IS.DoctorViewModel
 
         private void GetAppointments(List<DateTime> dates, Doctor doctor, int patientId)
         {
-            ICollectionView view = new CollectionViewSource { Source = new DoctorAppointmentConverter().ConvertExistingAppointmentsToDTO(DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, Emergency, SelectedRoom, FindType(), Duration, patientId, doctor)) }.View;
+
+            DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], FindType(), false, SelectedRoom.Id, doctor, PatientController.Instance.GetPatientByID(patientId));
+            tempAppointment.AppointmentEnd = dates[0].Add(Duration);
+            tempAppointment.IsUrgent = Emergency;
+            List<DoctorAppointment> list = DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, tempAppointment);
+            ICollectionView view = new CollectionViewSource { Source = new DoctorAppointmentConverter().ConvertExistingAppointmentsToDTO(DoctorAppointmentController.Instance.SuggestAppointmetsToDoctor(dates, tempAppointment)) }.View;
             view.SortDescriptions.Clear();
             view.SortDescriptions.Add(new SortDescription("Appointment.AppointmentStart", ListSortDirection.Ascending));
             Appointments = view;

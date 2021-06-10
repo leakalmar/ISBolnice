@@ -74,12 +74,8 @@ namespace Controllers
             return SuggestedAppointmentService.Instance.SuggestAppointmentsToPatient(possibleAppointment);
         }
 
-        public List<DoctorAppointment> SuggestAppointmetsToDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmentType type, TimeSpan duration, int patientId, Doctor doctor)
+        public List<DoctorAppointment> SuggestAppointmetsToDoctor(List<DateTime> dates, DoctorAppointment tempAppointment)
         {
-
-            DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, room.Id, doctor, PatientController.Instance.GetPatientByID(patientId));
-            tempAppointment.AppointmentEnd = dates[0].Add(duration);
-            tempAppointment.IsUrgent = isUrgent;
             return SuggestedAppointmentService.Instance.SuggestAppointmetsToDoctor(dates, tempAppointment);
         }
 
@@ -123,6 +119,25 @@ namespace Controllers
             return DoctorAppointmentService.Instance.GetNumberOfAppointmentsByMonth(patientId, month);
         }
 
-       
+        public DoctorAppointment GetAppointmentById(int appointmentId)
+        {
+            return DoctorAppointmentService.Instance.GetAppointmentById(appointmentId);
+        }
+
+        public List<DoctorAppointment> GetAllAppointmentsForCurrentWeek(DateTime startOfTheWeek)
+        {
+            return DoctorAppointmentService.Instance.GetAllAppointmentsForCurrentWeek(startOfTheWeek);
+        }
+
+        public List<DoctorAppointment> GetFutureAppointmentsForDoctor(int doctorId)
+        {
+            return DoctorAppointmentService.Instance.GetFutureAppointmentsForDoctor(doctorId);
+        }
+
+        public List<DoctorAppointment> GetPreviousAppointmentsForDoctor(int doctorId)
+        {
+            return DoctorAppointmentService.Instance.GetPreviousAppointmentsForDoctor(doctorId);
+        }
+
     }
 }

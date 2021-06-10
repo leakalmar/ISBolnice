@@ -1,4 +1,5 @@
 ﻿using DTOs;
+using Hospital_IS.Adapter;
 using Hospital_IS.Controllers;
 using Hospital_IS.DoctorRole.Commands;
 using Hospital_IS.DTOs;
@@ -139,17 +140,17 @@ namespace Hospital_IS.DoctorViewModel
             {
                 SelectedAppointment.Appointment.AppointmentCause = AppointmentCause;
                 SendScheduledNotification(SelectedAppointment.Appointment);
-                DoctorAppointmentManagementController.Instance.AddAppointment(SelectedAppointment.Appointment);
+                DoctorMainWindowModel.Instance.Adapter.AddDoctorAppointment(SelectedAppointment.Appointment);
             }
             else
             {
                 foreach (RescheduledAppointmentDTO rescheduled in SelectedEmergencyAppointment.RescheduledAppointments)
                 {
                     SendRescheduleNotification(rescheduled.OldDocAppointment, rescheduled.NewDocAppointment);
-                    DoctorAppointmentManagementController.Instance.UpdateAppointment(rescheduled.OldDocAppointment, rescheduled.NewDocAppointment);
+                    DoctorMainWindowModel.Instance.Adapter.UpdateDoctorAppointment(rescheduled.OldDocAppointment, rescheduled.NewDocAppointment);
                 }
                 SelectedEmergencyAppointment.SuggestedAppointment.AppointmentCause = AppointmentCause;
-                DoctorAppointmentManagementController.Instance.AddAppointment(SelectedEmergencyAppointment.SuggestedAppointment);
+                DoctorMainWindowModel.Instance.Adapter.AddDoctorAppointment(SelectedEmergencyAppointment.SuggestedAppointment);
             }
         }
 

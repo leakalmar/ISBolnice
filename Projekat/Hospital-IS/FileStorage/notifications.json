@@ -1,5 +1,15 @@
 [
   {
+    "Id": 55535,
+    "Title": "Zakazan pregled",
+    "Text": "Zakazan Vam je novi pregled 10.06.2021. u 10:30 do 10:30h.",
+    "DatePosted": "2021-06-10T09:58:10.7543897+02:00",
+    "LastChanged": "2021-06-10T09:58:10.7543897+02:00",
+    "Recipients": [
+      1
+    ]
+  },
+  {
     "Id": 247,
     "Title": "Obaveštenje",
     "Text": "Obaveštenja rade!",

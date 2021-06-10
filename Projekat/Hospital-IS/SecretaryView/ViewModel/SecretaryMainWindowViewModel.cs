@@ -1,4 +1,5 @@
-﻿using Hospital_IS.DoctorRole.Commands;
+﻿using Hospital_IS.Adapter;
+using Hospital_IS.DoctorRole.Commands;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Hospital_IS.SecretaryView.ViewModel
     {
         #region Fields
         private NavigationService navService;
+        public IDoctorAppointmentTarget DoctorAppointmentTarget { get; } = new DoctorAppointmentAdapter();
 
         private string currentTheme;
         public NavigationService NavService

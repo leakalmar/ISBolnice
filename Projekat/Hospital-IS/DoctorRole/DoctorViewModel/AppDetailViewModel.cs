@@ -125,7 +125,7 @@ namespace Hospital_IS.DoctorViewModel
         #region Methods
         private void SetAppointmentFeilds()
         {
-            List<DoctorAppointmentDTO> appointmentDTOs = DoctorAppointmentManagementController.Instance.GetAppointmentByDoctorId(DoctorMainWindowModel.Instance.Doctor.Id);
+            List<DoctorAppointmentDTO> appointmentDTOs = DoctorMainWindowModel.Instance.Adapter.GetAppointmentByDoctorId(DoctorMainWindowModel.Instance.Doctor.Id);
             ObservableCollection<AppointmentRowDTO> doctorAppointments = new DoctorAppointmentConverter().ConvertNewAppointmentsToDTO(appointmentDTOs);
 
             appointmentsView = new CollectionViewSource { Source = doctorAppointments }.View;
