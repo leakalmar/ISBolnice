@@ -1,5 +1,7 @@
-﻿using DTOs;
+﻿using Controllers;
+using DTOs;
 using Enums;
+using Hospital_IS.Adapter;
 using Hospital_IS.Controllers;
 using Hospital_IS.DTOs.SecretaryDTOs;
 using Hospital_IS.SecretaryView;
@@ -17,6 +19,7 @@ namespace Hospital_IS
     {
         public PatientDTO Patient { get; set; }
         public ObservableCollection<DoctorAppointmentDTO> Appointments { get; set; }
+        public IDoctorAppointmentTarget doctorAppointmentTarget = SecretaryMainWindow.Instance.target;
         public PatientView(PatientDTO patient)
         {
             InitializeComponent();
@@ -62,8 +65,8 @@ namespace Hospital_IS
             if (Appointments != null)
                 Appointments.Clear();
 
-            DoctorAppointmentManagementController.Instance.ReloadAppointments();
-            Appointments = new ObservableCollection<DoctorAppointmentDTO>(DoctorAppointmentManagementController.Instance.GetAppointmentsByPatientId(Patient.Id));
+            DoctorAppointmentController.Instance.ReloadDoctorAppointments();
+            Appointments = new ObservableCollection<DoctorAppointmentDTO>(doctorAppointmentTarget.GetDoctorAppointmentsByPatientId(Patient.Id));
 
             dataGridAppointments.ItemsSource = Appointments;
         }

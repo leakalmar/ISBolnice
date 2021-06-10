@@ -72,9 +72,9 @@ namespace Hospital_IS.SecretaryView
                 foreach (RescheduledAppointmentDTO raDTO in RescheduledAppointments)
                 {
                     NotificationController.Instance.SendNAppointmentRescheduledNotification(raDTO.OldDocAppointment, raDTO.NewDocAppointment);
-                    DoctorAppointmentManagementController.Instance.UpdateAppointment(raDTO.OldDocAppointment, raDTO.NewDocAppointment);
+                    sa.uca.doctorAppointmentTarget.UpdateDoctorAppointment(raDTO.OldDocAppointment, raDTO.NewDocAppointment);
                 }
-                DoctorAppointmentManagementController.Instance.AddAppointment(SuggestedAppointments[dgSuggestedAppointments.SelectedIndex].SuggestedAppointment);
+                sa.uca.doctorAppointmentTarget.AddDoctorAppointment(SuggestedAppointments[dgSuggestedAppointments.SelectedIndex].SuggestedAppointment);
                 sa.uca.RefreshGrid();
 
                 sa.Close();

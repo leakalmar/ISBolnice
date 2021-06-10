@@ -1,4 +1,6 @@
-﻿using DTOs;
+﻿using Controllers;
+using DTOs;
+using Hospital_IS.Adapter;
 using Hospital_IS.Controllers;
 using Hospital_IS.DTOs;
 using Hospital_IS.DTOs.SecretaryDTOs;
@@ -16,12 +18,13 @@ namespace Hospital_IS.SecretaryView
     /// </summary>
     public partial class SecretaryMainWindow : Window
     {
+        public IDoctorAppointmentTarget target = new DoctorAppointmentAdapter();
         UCPatientsView ucp = new UCPatientsView();
         UCNotificationsView ucn = new UCNotificationsView();
         UCDoctorsView ucd = new UCDoctorsView();
         UCRoomsView ucr = new UCRoomsView();
         UCSettings ucs = new UCSettings();
-        public UCAppointmentsView uca = new UCAppointmentsView();
+        public UCAppointmentsView uca;
 
         private static SecretaryMainWindow instance = null;
 
@@ -51,8 +54,7 @@ namespace Hospital_IS.SecretaryView
         public SecretaryMainWindow()
         {
             InitializeComponent();
-            //this.viewModel = new SecretaryMainWindowViewModel(this.HomePage.NavigationService);
-            //this.DataContext = viewModel
+            this.uca = new UCAppointmentsView(target);
 
             CurrentTimeLabel.Content = DateTime.Now.ToString("HH:mm  dd.MM.yyyy.");
             DispatcherTimer dispatcherTimer = new DispatcherTimer
@@ -107,7 +109,7 @@ namespace Hospital_IS.SecretaryView
 
         private void btnAppointments_Click(object sender, RoutedEventArgs e)
         {
-            DoctorAppointmentManagementController.Instance.ReloadAppointments();
+            DoctorAppointmentController.Instance.ReloadDoctorAppointments();
             uca.RefreshGrid();
 
             miShow.IsEnabled = true;
