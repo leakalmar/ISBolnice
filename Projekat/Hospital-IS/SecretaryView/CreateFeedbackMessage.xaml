@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital_IS.SecretaryView"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="Prijava greške" Height="590" Width="550">
     <Grid Style="{DynamicResource ResourceKey=WindowGrid}">
         <Grid.ColumnDefinitions>
@@ -15,10 +16,26 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        
-        
+
+        <TextBlock Grid.Row="1" Grid.Column="1" FontSize="20" Margin="0 0 0 0"
+                   Style="{DynamicResource RegularTextBlock}"
+                   Text="Unesite Vašu poruku:"/>
+        <TextBox Name="txtText" Grid.Row="2" Grid.Column="1" FontSize="18" Margin="0 10 0 50"
+                 Style="{DynamicResource ResourceKey=RegularTextBox}"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
+
+        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Margin="0 15 0 0"
+                    Grid.Row="3" Grid.Column="1">
+            <Button Name="btnConfirm" Content="Potvrdi" FontSize="15" Margin="0 0 40 0"
+                    Width="80"
+                    Style="{DynamicResource ResourceKey=RegularButton}"/>
+            <Button Name="btnCancel" Content="Odustani" FontSize="15" Margin="40 0 0 0" Click="Close"
+                    Width="80"
+                    Style="{DynamicResource ResourceKey=RegularButton}"/>
+        </StackPanel>
     </Grid>
 </Window>
