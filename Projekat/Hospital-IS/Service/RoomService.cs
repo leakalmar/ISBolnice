@@ -33,18 +33,18 @@ namespace Service
 
         public bool CheckQuantity(Room sourceRoom, Equipment equip, int quantity)
         {
+            bool isEnough = false;
             foreach (Equipment eq in sourceRoom.Equipment)
             {
                 if (eq.EquiptId == equip.EquiptId)
                 {
                     if (equip.Quantity - quantity >= 0)
                     {
-                        return true;
+                        isEnough = true;
                     }
                 }
             }
-            return false;
-
+            return isEnough;
         }
 
         public Room GetRoomById(int roomId)
