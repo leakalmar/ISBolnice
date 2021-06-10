@@ -277,5 +277,20 @@ namespace Service
 
             return appointments;
         }
+
+        public List<DoctorAppointment> GetConflictingAppointmentsForVacationPeriod(Doctor doctor, DateTime vacationStart)
+        {
+            List<DoctorAppointment> doctorAppointments = new List<DoctorAppointment>();
+            DateTime vacationEnd = vacationStart.AddDays(14);
+
+            foreach(DoctorAppointment appointment in AllAppointments)
+            {
+                if(appointment.Doctor.Id.Equals(doctor.Id) && appointment.AppointmentStart >= vacationStart && appointment.AppointmentEnd <= vacationEnd)
+                {
+                    doctorAppointments.Add(appointment);
+                }
+            }
+            return doctorAppointments;
+        }
     }
 }
