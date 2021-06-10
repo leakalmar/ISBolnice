@@ -1,93 +1,32 @@
 [
   {
     "SourceRoomId": 2,
-    "DestinationRoomId": 5,
+    "DestinationRoomId": 14,
     "Equip": {
-      "EquipType": 1,
-      "EquiptId": 1,
-      "Name": "makaze",
-      "Quantity": 125,
-      "ProducerName": null,
-      "EquiptTypeIndex": 1
+      "EquipType": 0,
+      "EquiptId": 4,
+      "Name": "bolnicki krevet",
+      "Quantity": 50,
+      "ProducerName": "Metalac",
+      "EquiptTypeIndex": 0
     },
-    "Quantity": 50,
-    "TransferEnd": "2021-04-26T15:54:42",
+    "Quantity": 25,
+    "TransferEnd": "2021-06-10T04:49:57",
     "isMade": true
   },
   {
     "SourceRoomId": 2,
-    "DestinationRoomId": 8,
-    "Equip": null,
-    "Quantity": 50,
-    "TransferEnd": "2021-05-27T00:00:00",
-    "isMade": false
-  },
-  {
-    "SourceRoomId": 2,
-    "DestinationRoomId": 8,
-    "Equip": null,
-    "Quantity": 50,
-    "TransferEnd": "2021-12-02T00:00:00",
-    "isMade": false
-  },
-  {
-    "SourceRoomId": 2,
-    "DestinationRoomId": 8,
+    "DestinationRoomId": 14,
     "Equip": {
-      "EquipType": 1,
-      "EquiptId": 8,
-      "Name": "sasa",
-      "Quantity": 4000,
-      "ProducerName": "sasa",
-      "EquiptTypeIndex": 1
+      "EquipType": 0,
+      "EquiptId": 4,
+      "Name": "bolnicki krevet",
+      "Quantity": 50,
+      "ProducerName": "Metalac",
+      "EquiptTypeIndex": 0
     },
-    "Quantity": 10,
-    "TransferEnd": "2021-06-26T00:00:00",
-    "isMade": false
-  },
-  {
-    "SourceRoomId": 2,
-    "DestinationRoomId": 8,
-    "Equip": {
-      "EquipType": 1,
-      "EquiptId": 8,
-      "Name": "sasa",
-      "Quantity": 4000,
-      "ProducerName": "sasa",
-      "EquiptTypeIndex": 1
-    },
-    "Quantity": 40,
-    "TransferEnd": "2021-06-18T00:00:00",
-    "isMade": false
-  },
-  {
-    "SourceRoomId": 2,
-    "DestinationRoomId": 7,
-    "Equip": {
-      "EquipType": 1,
-      "EquiptId": 8,
-      "Name": "sasa",
-      "Quantity": 4000,
-      "ProducerName": "sasa",
-      "EquiptTypeIndex": 1
-    },
-    "Quantity": 40,
-    "TransferEnd": "2021-07-17T00:00:00",
-    "isMade": false
-  },
-  {
-    "SourceRoomId": 2,
-    "DestinationRoomId": 9,
-    "Equip": {
-      "EquipType": 1,
-      "EquiptId": 9,
-      "Name": "tat",
-      "Quantity": 60,
-      "ProducerName": "tata",
-      "EquiptTypeIndex": 1
-    },
-    "Quantity": 40,
-    "TransferEnd": "2021-07-03T00:00:00",
-    "isMade": false
+    "Quantity": 25,
+    "TransferEnd": "2021-06-10T05:01:30",
+    "isMade": true
   }
 ]

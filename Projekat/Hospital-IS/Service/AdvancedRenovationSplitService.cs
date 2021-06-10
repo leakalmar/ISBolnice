@@ -1,5 +1,6 @@
 ﻿using Model;
 using Service;
+using Storages;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Hospital_IS.Service
 {
     class AdvancedRenovationSplitService : IAdvancedRenovationService
     {
+       
 
         public void ExecuteAdvancedRoomRenovation(AdvancedRenovation advancedRenovation)
         {
@@ -20,5 +22,12 @@ namespace Hospital_IS.Service
                  0, advancedRenovation.RenovationResultRoom.Type);
             RoomService.Instance.AddRoom(room);
         }
+
+        public void MakeAdvancedRenovation(AdvancedRenovation advancedRenovation)
+        {
+            AdvancedRenovationService.Instance.AddNewAdvancedRenovation(advancedRenovation);
+        }
+
+      
     }
 }

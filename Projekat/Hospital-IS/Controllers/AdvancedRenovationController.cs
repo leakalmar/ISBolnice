@@ -37,7 +37,17 @@ namespace Hospital_IS.Controllers
 
         public void MakeAdvancedRenovation(AdvancedRenovation advancedRenovation)
         {
-             AdvancedRenovationService.Instance.AddNewAdvancedRenovation(advancedRenovation);
+            IAdvancedRenovationService advancedRenovationService;
+            if (advancedRenovation.Type == AdvancedRenovationType.MERGE)
+            {
+                advancedRenovationService = new AdvancedRenovationMergeService();
+                advancedRenovationService.MakeAdvancedRenovation(advancedRenovation);
+            }
+            else if (advancedRenovation.Type == AdvancedRenovationType.SPLIT)
+            {
+                advancedRenovationService = new AdvancedRenovationSplitService();
+                advancedRenovationService.MakeAdvancedRenovation(advancedRenovation);
+            }
         }
 
         public void RemoveAdvancedRenovation(AdvancedRenovation advancedRenovation)
@@ -59,6 +69,11 @@ namespace Hospital_IS.Controllers
                 advancedRenovationService = new AdvancedRenovationSplitService();
                 advancedRenovationService.ExecuteAdvancedRoomRenovation(advancedRenovation);
             }
+        }
+
+        public bool CheckIfTransferIsAfterRenovation(DateTime dateStart, int roomIdSource, int roomIdDestination)
+        {
+            return AdvancedRenovationService.Instance.CheckIfTransferIsAfterRenovation(dateStart, roomIdSource, roomIdDestination);
         }
     }
 }

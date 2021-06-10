@@ -191,9 +191,9 @@
         <TextBlock Grid.Row="11" Grid.Column="3" Grid.ColumnSpan="2" Text="{Binding EquipmentValidationDTO.ValidationErrors[Quantity]}" Grid.RowSpan="2" Foreground="Red"/>
 
         <Label Content="Tip opreme*" Grid.Row="12" Grid.Column="3" Grid.ColumnSpan="2" Foreground="White" FontSize="15"/>
-        <ComboBox x:Name="ComboBox" Template="{StaticResource ComboBoxBaseControlTemplate}" SelectedIndex="{Binding SelectedEnum}" Grid.Row="13" Grid.Column="3" Grid.ColumnSpan="2" FontSize="15">
-            <ComboBoxItem Content="Dinamička oprema"/>
+        <ComboBox x:Name="ComboBox" Template="{StaticResource ComboBoxBaseControlTemplate}" IsEnabled="False" SelectedIndex="{Binding SelectedEnum}" Grid.Row="13" Grid.Column="3" Grid.ColumnSpan="2" FontSize="15">
             <ComboBoxItem Content="Statička oprema"/>
+            <ComboBoxItem Content="Dinamička oprema"/>
         </ComboBox>
 
         <Button x:Name="Submit" Content="Potvrdi" FontSize="20" Height="40" Background="White" BorderThickness="3" BorderBrush="Green" Foreground="#FF5B317E" FontWeight="SemiBold" Grid.Row="17" 

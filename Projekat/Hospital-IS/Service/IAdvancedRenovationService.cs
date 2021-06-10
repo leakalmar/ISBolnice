@@ -8,5 +8,6 @@ namespace Hospital_IS.Service
     public interface IAdvancedRenovationService
     {
         void ExecuteAdvancedRoomRenovation(AdvancedRenovation advancedRenovation);
+        void MakeAdvancedRenovation(AdvancedRenovation advancedRenovation);
     }
 }

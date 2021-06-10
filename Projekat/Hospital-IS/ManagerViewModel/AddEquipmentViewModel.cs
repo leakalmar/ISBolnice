@@ -104,16 +104,28 @@ namespace Hospital_IS.ManagerViewModel
             EquipmentValidationDTO.Validate();
             if (EquipmentValidationDTO.IsValid)
             {
+                if (EquipmentValidationDTO.Name.Equals("bolnicki krevet"))
+                {
+                    for(int i = 0; i < Convert.ToInt32(EquipmentValidationDTO.Quantity) ; i++)
+                    {
+                        BedController.Instance.AddBed(new Bed(SelectedRoom.RoomId, false));
+                        SelectedRoom.BedNumber = Convert.ToInt32(EquipmentValidationDTO.Quantity);
+                        RoomController.Instance.UpdateRoom(SelectedRoom);
 
-                EquiptType equiptType = (EquiptType)SelectedEnum;
-                Equipment equipment = new Equipment(equiptType, EquipmentValidationDTO.Name, Convert.ToInt32(EquipmentValidationDTO.Quantity), 
-                    EquipmentValidationDTO.ProducerName);
+                    }
 
-                RoomController.Instance.AddEquipment(SelectedRoom, equipment);
-                EquipmentViewModel.Instance.SelectedEquipment = null;
-                EquipmentValidationDTO = new EquipmentValidationDTO();
-                this.NavService.Navigate(
-                new Uri("ManagerView1/EquipmentView.xaml", UriKind.Relative));
+                }
+             
+                    EquiptType equiptType = (EquiptType)SelectedEnum;
+                    Equipment equipment = new Equipment(equiptType, EquipmentValidationDTO.Name, Convert.ToInt32(EquipmentValidationDTO.Quantity),
+                        EquipmentValidationDTO.ProducerName);
+
+                    RoomController.Instance.AddEquipment(SelectedRoom, equipment);
+                    EquipmentViewModel.Instance.SelectedEquipment = null;
+                    EquipmentValidationDTO = new EquipmentValidationDTO();
+                    this.NavService.Navigate(
+                    new Uri("ManagerView1/EquipmentView.xaml", UriKind.Relative));
+               
             }
         }
 

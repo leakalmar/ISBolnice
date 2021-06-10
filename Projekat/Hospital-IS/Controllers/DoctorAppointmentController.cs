@@ -127,5 +127,7 @@ namespace Controllers
         {
             return DoctorAppointmentService.Instance.GetNumberOfAppointmentsByMonth(patientId, month);
         }
+
+       
     }
 }

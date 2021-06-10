@@ -3,5 +3,255 @@
     "BedId": 0,
     "RoomId": 15,
     "Taken": false
+  },
+  {
+    "BedId": 1,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 2,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 3,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 4,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 5,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 6,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 7,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 8,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 9,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 10,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 11,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 12,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 13,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 14,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 15,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 16,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 17,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 18,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 19,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 20,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 21,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 22,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 23,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 24,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 25,
+    "RoomId": 14,
+    "Taken": false
+  },
+  {
+    "BedId": 26,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 27,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 28,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 29,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 30,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 31,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 32,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 33,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 34,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 35,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 36,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 37,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 38,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 39,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 40,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 41,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 42,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 43,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 44,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 45,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 46,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 47,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 48,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 49,
+    "RoomId": 2,
+    "Taken": false
+  },
+  {
+    "BedId": 50,
+    "RoomId": 2,
+    "Taken": false
   }
 ]

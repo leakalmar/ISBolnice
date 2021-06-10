@@ -477,9 +477,10 @@ namespace Hospital_IS.ManagerViewModel
                     
                         Room room = new Room(SelectedRoomFirst.RoomFloor, Convert.ToInt32(RoomValidation.RoomNumber), SelectedRoomFirst.SurfaceArea / 2, roomType, new List<Equipment>());
                         AdvancedRenovation advancedRenovation = new AdvancedRenovation(SelectedRoomFirst, null, room, AdvancedRenovationType.SPLIT,false, DateEnd);
-                   
+                        
                         AdvancedRenovationController.Instance.MakeAdvancedRenovation(advancedRenovation);
                         MessageBox.Show("Uspjesno zakazivanje razdvajanja");
+
 
                         AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(SelectedRoomFirst.RoomId));
                         renovationWindow.Hide();
@@ -493,7 +494,8 @@ namespace Hospital_IS.ManagerViewModel
                 {
                     if (IsMerge == true)
                     {
-                        if (SelectedRoomFirst.RoomFloor != SelectedRoomSecond.RoomFloor)
+                        MessageBox.Show(SelectedRoomFirst.RoomFloor.ToString() + " " + SelectedRoomSecond.RoomFloor.ToString());
+                        if (SelectedRoomFirst.RoomFloor == SelectedRoomSecond.RoomFloor)
                         {
                             Appointment appointmentFirstRoom = new Appointment(DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomFirst.RoomId);
                             Appointment appointmentSecondRoom = new Appointment(DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomSecond.RoomId);
@@ -503,10 +505,9 @@ namespace Hospital_IS.ManagerViewModel
                                 MessageBox.Show("Uspjesno zakazivanje spajanja");
                                 RoomType roomType = (RoomType)SelectedRoomTypeIndex;
                                 int surfaceArea = SelectedRoomFirst.SurfaceArea + SelectedRoomSecond.SurfaceArea;
-                                Room room = new Room(SelectedRoomFirst.RoomFloor, Convert.ToInt32(RoomValidation.RoomNumber), surfaceArea, roomType, new List<Equipment>());
+                                Room room = new Room(Convert.ToInt32(RoomValidation.RoomNumber),SelectedRoomFirst.RoomFloor, surfaceArea, roomType, new List<Equipment>());
                                 AdvancedRenovation advancedRenovation = new AdvancedRenovation(SelectedRoomFirst, SelectedRoomSecond, room, AdvancedRenovationType.MERGE, false, DateEnd);
-                                AdvancedRenovationController.Instance.MakeAdvancedRenovation(advancedRenovation);
-                            
+                                AdvancedRenovationController.Instance.MakeAdvancedRenovation(advancedRenovation);                            
                                 AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(SelectedRoomFirst.RoomId, SelectedRoomSecond.RoomId));
                                 renovationWindow.Hide();
 

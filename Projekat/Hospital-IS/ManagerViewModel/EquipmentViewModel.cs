@@ -3,11 +3,13 @@ using Enums;
 using Hospital_IS.ManagerHelp;
 using Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Navigation;
+using System.Windows.Threading;
 
 namespace Hospital_IS.ManagerViewModel
 {
@@ -399,7 +401,41 @@ namespace Hospital_IS.ManagerViewModel
             this.NavigateToBranchPage = new RelayCommand(Execute_NavigateToBranchPageCommand);
             this.NavigateToAddEquipment = new RelayCommand(Execute_NavigateToAddEquipmetCommand, CanExecute_NavigateAddEquipmentViewwCommand);
             this.OpenHelpWindow = new RelayCommand(Execute_OpenHelpWindowCommand);
+            DispatcherTimer dispatcherTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMinutes(1)
+            };
+            dispatcherTimer.Tick += timer_Tick;
+            dispatcherTimer.Start();
+        }
 
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            DateTime time = DateTime.Now;
+            foreach (Transfer transfer in TransferController.Instance.GetAllTransfers())
+            {
+                if (DateTime.Compare(transfer.TransferEnd, time) < 0 && transfer.isMade == false)
+                {
+                    transfer.isMade = true;
+                    TransferController.Instance.ExecuteStaticTransfer(transfer);
+                    MessageBox.Show("Uspjesno izvrsen transfer");
+                    
+                    if(transfer.Equip.Name.Equals("bolnicki krevet"))
+                    {
+                       
+                        List<Bed> beds = BedController.Instance.GetBedsByRoomId(transfer.SourceRoomId);
+                        for (int i = 0; i < transfer.Quantity; i++)
+                        {
+                            beds[i].RoomId = transfer.DestinationRoomId;
+                            BedController.Instance.UpdateBed(beds[i]);
+                           
+                        }
+                    }
+                    LoadRooms();
+                  
+                    break;
+                }
+            }
         }
 
         private void Execute_OpenHelpWindowCommand(object obj)

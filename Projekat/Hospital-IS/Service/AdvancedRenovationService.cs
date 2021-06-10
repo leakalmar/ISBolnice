@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Enums;
+using Model;
 using Storages;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,40 @@ namespace Service
 
             AllAdvancedRenovations.Remove(advancedRenovation);
             afs.Save(AllAdvancedRenovations);
+        }
+
+        public bool CheckIfTransferIsAfterRenovation(DateTime dateStart, int roomIdSource, int roomIdDestination)
+        {
+            bool isAfter = false;
+           foreach(AdvancedRenovation advancedRenovation in AllAdvancedRenovations)
+            {
+                if (DateTime.Compare(dateStart, advancedRenovation.RenovationEnd) > 0)
+                {
+                    isAfter = CheckIfTransferRoomsAreInRenovation(roomIdSource, roomIdDestination, advancedRenovation);
+                }
+            }
+            return isAfter;
+        }
+
+        private static bool CheckIfTransferRoomsAreInRenovation(int roomIdSource, int roomIdDestination, AdvancedRenovation advancedRenovation)
+        {
+            bool areInRenovation = false;
+            if (advancedRenovation.Type == AdvancedRenovationType.MERGE)
+            {
+                if (roomIdSource == advancedRenovation.RoomFirst.RoomId || roomIdSource == advancedRenovation.RoomSecond.RoomId || roomIdDestination == advancedRenovation.RoomSecond.RoomId ||
+                    roomIdDestination == advancedRenovation.RoomFirst.RoomId)
+                {
+                    areInRenovation = true;
+                }
+            }
+            else
+            {
+                if (roomIdSource == advancedRenovation.RoomFirst.RoomId || roomIdDestination == advancedRenovation.RoomFirst.RoomId)
+                {
+                    areInRenovation = true;
+                }
+            }
+            return areInRenovation;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using DTOs;
+using Hospital_IS.Controllers;
 using Microsoft.Windows.Controls;
 using Model;
 using System;
@@ -185,7 +186,8 @@ namespace Hospital_IS.ManagerViewModel
         }
         private ScheduleStaticTransferViewModel()
         {
-
+            this.TransferStaticEquipmentCommand = new RelayCommand(Execute_TransferStaticEquipment, CanExecute_IfEveryhingIsCorecct);
+            this.NavigateToPreviousPage = new RelayCommand(Execute_NavigateToPreviousPage);
         }
 
 
@@ -193,11 +195,6 @@ namespace Hospital_IS.ManagerViewModel
         {
            
             Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(roomIdSource, roomIdDestination));
-            List<Appointment> appointments = AppointmentController.Instance.GetAllAppByTwoRooms(roomIdSource, roomIdDestination);
-           
-            this.TransferStaticEquipmentCommand = new RelayCommand(Execute_TransferStaticEquipment,CanExecute_IfEveryhingIsCorecct);
-            this.NavigateToPreviousPage = new RelayCommand(Execute_NavigateToPreviousPage);
-
         }
 
         private bool CanExecute_IfEveryhingIsCorecct(object obj)
@@ -228,9 +225,22 @@ namespace Hospital_IS.ManagerViewModel
         
         public void TransferStaticExecute()
         {
+           
             StaticTransferAppointmentDTO staticTransfer = new StaticTransferAppointmentDTO(SourceRoom.RoomId, DestinationRoom.RoomId, Equipment.EquiptId, Quantity, DateStart, DateEnd, Note);
-            bool isSucces = TransferController.Instance.ScheduleStaticTransfer(staticTransfer);
+            bool isAfterRoomRenovation = AdvancedRenovationController.Instance.CheckIfTransferIsAfterRenovation(dateStart, SourceRoom.RoomId, DestinationRoom.RoomId);
+            bool isSucces = false;
+            if (isAfterRoomRenovation)
+            {
+                MessageBox.Show("Zakazivanje nije uspjelo jer postoji napredna renovacija");
+
+            }
+            else
+            {
+               isSucces = TransferController.Instance.ScheduleStaticTransfer(staticTransfer);
+            }
+         
             Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(SourceRoom.RoomId, DestinationRoom.RoomId));
+            MessageBox.Show(isAfterRoomRenovation.ToString());
 
             if (!isSucces)
             {

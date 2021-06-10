@@ -14,7 +14,7 @@
     "RoomFloor": 1,
     "RoomNumber": 12,
     "SurfaceArea": 2,
-    "BedNumber": 1,
+    "BedNumber": 50,
     "RoomId": 2,
     "Type": 3,
     "RoomIdType": "12 StorageRoom",
@@ -39,9 +39,17 @@
         "EquipType": 1,
         "EquiptId": 2,
         "Name": "hirusrski sto",
-        "Quantity": 50,
+        "Quantity": 25,
         "ProducerName": "Holvic",
         "EquiptTypeIndex": 1
+      },
+      {
+        "EquipType": 0,
+        "EquiptId": 4,
+        "Name": "bolnicki krevet",
+        "Quantity": 25,
+        "ProducerName": "Metalac",
+        "EquiptTypeIndex": 0
       }
     ],
     "isUsable": false
@@ -54,7 +62,16 @@
     "RoomId": 14,
     "Type": 0,
     "RoomIdType": "1 RecoveryRoom",
-    "Equipment": [],
+    "Equipment": [
+      {
+        "EquipType": 0,
+        "EquiptId": 4,
+        "Name": "bolnicki krevet",
+        "Quantity": 25,
+        "ProducerName": null,
+        "EquiptTypeIndex": 0
+      }
+    ],
     "isUsable": false
   },
   {
@@ -65,28 +82,26 @@
     "RoomId": 16,
     "Type": 0,
     "RoomIdType": "582 RecoveryRoom",
-    "Equipment": [],
+    "Equipment": [
+      {
+        "EquipType": 1,
+        "EquiptId": 3,
+        "Name": "bolnicki krevet",
+        "Quantity": 2,
+        "ProducerName": null,
+        "EquiptTypeIndex": 1
+      }
+    ],
     "isUsable": false
   },
   {
     "RoomFloor": 1,
-    "RoomNumber": 50,
-    "SurfaceArea": 5,
-    "BedNumber": 9,
+    "RoomNumber": 99,
+    "SurfaceArea": 1405,
+    "BedNumber": 0,
     "RoomId": 17,
     "Type": 0,
-    "RoomIdType": "50 RecoveryRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 500,
-    "RoomNumber": 10,
-    "SurfaceArea": 30,
-    "BedNumber": 0,
-    "RoomId": 18,
-    "Type": 0,
-    "RoomIdType": "10 RecoveryRoom",
+    "RoomIdType": "99 RecoveryRoom",
     "Equipment": [],
     "isUsable": false
   }

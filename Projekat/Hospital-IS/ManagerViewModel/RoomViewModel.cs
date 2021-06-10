@@ -449,11 +449,11 @@ namespace Hospital_IS.ManagerViewModel
             DateTime time = DateTime.Now;
             foreach (AdvancedRenovation renovation in AdvancedRenovationController.Instance.GetAll())
             {
-                
                 if (DateTime.Compare(renovation.RenovationEnd, time) < 0)
                 {
                     AdvancedRenovationController.Instance.ExecuteAdvancedRoomRenovation(renovation);
                     AdvancedRenovationController.Instance.RemoveAdvancedRenovation(renovation);
+                    LoadRooms();
                     if(renovation.Type == AdvancedRenovationType.MERGE)
                     {
                         MessageBox.Show("Uspjesno izvrseno spajanje");

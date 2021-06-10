@@ -54,7 +54,7 @@ namespace Service
 
         }
 
-        private void GetAllClassicAppointments(int roomId, List<Appointment> allApointments)
+        public void GetAllClassicAppointments(int roomId, List<Appointment> allApointments)
         {
            
             foreach (Appointment ap in GetAppByRoom(roomId))
@@ -93,7 +93,6 @@ namespace Service
         public List<RenovationReportDTO> FindAllRenovationAppBetweeenDates(RenovationDTO renovationDTO)
         {
             List<RenovationReportDTO> renovationReports = new List<RenovationReportDTO>();
-
             foreach (Appointment app in AllAppointments)
             {
                 if (app.Type == renovationDTO.AppType && app.AppointmentStart >= renovationDTO.DateStart && app.AppointmentStart <= renovationDTO.DateEnd)
@@ -104,6 +103,20 @@ namespace Service
             }
 
             return renovationReports;
+        }
+
+        public void RemoveAppointment(Appointment appointment)
+        {
+            foreach(Appointment app in AllAppointments)
+            {
+                if(app.Id == appointment.Id)
+                {
+                    
+                    AllAppointments.Remove(app);
+                    afs.SaveAppointment(AllAppointments);
+                    break;
+                }
+            }
         }
 
         private static void AddRenovationReport(List<RenovationReportDTO> renovationReports, Appointment app)
