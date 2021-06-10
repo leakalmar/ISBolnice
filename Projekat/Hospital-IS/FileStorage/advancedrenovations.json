@@ -1,3 +1,40 @@
 [
-  
+  {
+    "RoomFirst": {
+      "RoomFloor": 1,
+      "RoomNumber": 101,
+      "SurfaceArea": 50,
+      "BedNumber": 0,
+      "Type": 1,
+      "RoomIdType": "101 ConsultingRoom",
+      "Equipment": [],
+      "isUsable": false,
+      "Id": 4
+    },
+    "RoomSecond": {
+      "RoomFloor": 1,
+      "RoomNumber": 99,
+      "SurfaceArea": 1405,
+      "BedNumber": 0,
+      "Type": 0,
+      "RoomIdType": "99 RecoveryRoom",
+      "Equipment": [],
+      "isUsable": false,
+      "Id": 0
+    },
+    "RenovationResultRoom": {
+      "RoomFloor": 401,
+      "RoomNumber": 1,
+      "SurfaceArea": 1455,
+      "BedNumber": 0,
+      "Type": 0,
+      "RoomIdType": "1 RecoveryRoom",
+      "Equipment": [],
+      "isUsable": false,
+      "Id": 0
+    },
+    "Type": 0,
+    "IsMade": false,
+    "RenovationEnd": "2021-06-13T00:00:00"
+  }
 ]

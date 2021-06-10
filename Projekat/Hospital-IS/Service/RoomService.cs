@@ -88,6 +88,7 @@ namespace Service
 
         public void RemoveRoom(Room room)
         {
+            AppointmentService.Instance.CancelAllAppFromRoom(room.Id);
             foreach (Room r in AllRooms)
             {
                 if (r.Id == room.Id)

@@ -1,4 +1,5 @@
 ﻿using Hospital_IS.DTOs;
+using Hospital_IS.Service;
 using Model;
 using Storages;
 using System;
@@ -242,6 +243,39 @@ namespace Service
             FindMaxID();
             ++MaxId;
             return MaxId;
+        }
+        public void CancelAllAppFromRoom(int roomId)
+        {
+            CancelClassicAppointments(roomId);
+            CanacelDocAppointments(roomId);
+        }
+
+        private void CancelClassicAppointments(int roomId)
+        {
+            List<Appointment> appointments = new List<Appointment>();
+            AppointmentService.Instance.GetAllClassicAppointments(roomId, appointments);
+            for (int i = 0; i < appointments.Count; i++)
+            {
+                if (appointments[i].Room == roomId)
+                {
+                    AppointmentService.Instance.RemoveAppointment(appointments[i]);
+                }
+            }
+        }
+
+        private void CanacelDocAppointments(int roomId)
+        {
+            List<DoctorAppointment> doctorAppointments = DoctorAppointmentService.Instance.GetAllByRoom(roomId);
+
+            for (int i = 0; i < doctorAppointments.Count; i++)
+            {
+                if (doctorAppointments[i].Room == roomId)
+                {
+                    NotificationService.Instance.SendAppointmentCancelationNotification(doctorAppointments[i]);
+                    DoctorAppointmentService.Instance.RemoveAppointment(doctorAppointments[i]);
+                }
+            }
+
         }
 
     }

@@ -34,5 +34,23 @@
     "Type": 3,
     "Room": 14,
     "Id": 37
+  },
+  {
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-11T00:00:00",
+    "AppointmentEnd": "2021-06-13T00:00:00",
+    "Type": 2,
+    "Room": 4,
+    "Id": 39
+  },
+  {
+    "Reserved": true,
+    "AppointmentCause": null,
+    "AppointmentStart": "2021-06-11T00:00:00",
+    "AppointmentEnd": "2021-06-13T00:00:00",
+    "Type": 2,
+    "Room": 0,
+    "Id": 40
   }
 ]

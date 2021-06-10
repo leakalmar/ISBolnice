@@ -20,5 +20,71 @@
     "Equipment": [],
     "isUsable": false,
     "Id": 1
+  },
+  {
+    "RoomFloor": 1,
+    "RoomNumber": 101,
+    "SurfaceArea": 50,
+    "BedNumber": 0,
+    "Type": 1,
+    "RoomIdType": "101 ConsultingRoom",
+    "Equipment": [],
+    "isUsable": false,
+    "Id": 4
+  },
+  {
+    "RoomFloor": 2,
+    "RoomNumber": 200,
+    "SurfaceArea": 50,
+    "BedNumber": 0,
+    "Type": 1,
+    "RoomIdType": "200 ConsultingRoom",
+    "Equipment": [],
+    "isUsable": false,
+    "Id": 7
+  },
+  {
+    "RoomFloor": 2,
+    "RoomNumber": 205,
+    "SurfaceArea": 50,
+    "BedNumber": 0,
+    "Type": 1,
+    "RoomIdType": "200 ConsultingRoom",
+    "Equipment": [],
+    "isUsable": false,
+    "Id": 2
+  },
+  {
+    "RoomFloor": 3,
+    "RoomNumber": 305,
+    "SurfaceArea": 50,
+    "BedNumber": 0,
+    "Type": 1,
+    "RoomIdType": "200 ConsultingRoom",
+    "Equipment": [],
+    "isUsable": false,
+    "Id": 3
+  },
+  {
+    "RoomFloor": 2,
+    "RoomNumber": 208,
+    "SurfaceArea": 50,
+    "BedNumber": 0,
+    "Type": 1,
+    "RoomIdType": "200 ConsultingRoom",
+    "Equipment": [],
+    "isUsable": false,
+    "Id": 5
+  },
+  {
+    "RoomFloor": 3,
+    "RoomNumber": 300,
+    "SurfaceArea": 50,
+    "BedNumber": 0,
+    "Type": 1,
+    "RoomIdType": "300 ConsultingRoom",
+    "Equipment": [],
+    "isUsable": false,
+    "Id": 8
   }
 ]

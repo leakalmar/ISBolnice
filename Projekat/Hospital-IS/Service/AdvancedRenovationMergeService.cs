@@ -54,12 +54,10 @@ namespace Hospital_IS.Service
             for (int i = 0; i < appointments.Count; i++)
             {               
                 if (DateTime.Compare(renovationEnd, appointments[i].AppointmentStart) <= 0)
-                {
-                   
+                {                  
                     AppointmentService.Instance.RemoveAppointment(appointments[i]);
                 }
             }
-
         }
 
         private void CancelDocAppFromBothRoom(AdvancedRenovation advancedRenovation)

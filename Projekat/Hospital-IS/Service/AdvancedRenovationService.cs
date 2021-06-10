@@ -1,4 +1,5 @@
 ﻿using Enums;
+using Hospital_IS.DTOs;
 using Model;
 using Storages;
 using System;
@@ -45,21 +46,24 @@ namespace Service
             afs.Save(AllAdvancedRenovations);
         }
 
-        public bool CheckIfTransferIsAfterRenovation(DateTime dateStart, int roomIdSource, int roomIdDestination)
+        public bool CheckIfTransferIsAfterRenovation(RenovationAppointmentDTO renovationAppointmentDTO )
         {
             bool isAfter = false;
            foreach(AdvancedRenovation advancedRenovation in AllAdvancedRenovations)
             {
-                if (DateTime.Compare(dateStart, advancedRenovation.RenovationEnd) > 0)
+                if (DateTime.Compare(renovationAppointmentDTO.DateStart, advancedRenovation.RenovationEnd) > 0)
                 {
-                    isAfter = CheckIfTransferRoomsAreInRenovation(roomIdSource, roomIdDestination, advancedRenovation);
+                    TwoRoomsIdDTO twoRoomsIdDTO = new TwoRoomsIdDTO(renovationAppointmentDTO.RoomIdSource, renovationAppointmentDTO.RoomIdDestination);
+                    isAfter = CheckIfTransferRoomsAreInRenovation(twoRoomsIdDTO, advancedRenovation);
                 }
             }
             return isAfter;
         }
 
-        private static bool CheckIfTransferRoomsAreInRenovation(int roomIdSource, int roomIdDestination, AdvancedRenovation advancedRenovation)
+        private static bool CheckIfTransferRoomsAreInRenovation(TwoRoomsIdDTO twoRoomsIdDTO,AdvancedRenovation advancedRenovation)
         {
+            int roomIdSource = twoRoomsIdDTO.RoomIdSource;
+            int roomIdDestination = twoRoomsIdDTO.RoomIdDestination;
             bool areInRenovation = false;
             if (advancedRenovation.Type == AdvancedRenovationType.MERGE)
             {

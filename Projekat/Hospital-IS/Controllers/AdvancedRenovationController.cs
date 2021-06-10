@@ -1,4 +1,5 @@
 ﻿using Enums;
+using Hospital_IS.DTOs;
 using Hospital_IS.Service;
 using Model;
 using Service;
@@ -71,9 +72,9 @@ namespace Hospital_IS.Controllers
             }
         }
 
-        public bool CheckIfTransferIsAfterRenovation(DateTime dateStart, int roomIdSource, int roomIdDestination)
+        public bool CheckIfTransferIsAfterRenovation(RenovationAppointmentDTO renovationAppointmentDTO)
         {
-            return AdvancedRenovationService.Instance.CheckIfTransferIsAfterRenovation(dateStart, roomIdSource, roomIdDestination);
+            return AdvancedRenovationService.Instance.CheckIfTransferIsAfterRenovation(renovationAppointmentDTO);
         }
     }
 }

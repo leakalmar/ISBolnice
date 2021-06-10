@@ -1,6 +1,7 @@
 ﻿using Controllers;
 using DTOs;
 using Hospital_IS.Controllers;
+using Hospital_IS.DTOs;
 using Microsoft.Windows.Controls;
 using Model;
 using System;
@@ -227,7 +228,8 @@ namespace Hospital_IS.ManagerViewModel
         {
            
             StaticTransferAppointmentDTO staticTransfer = new StaticTransferAppointmentDTO(SourceRoom.Id, DestinationRoom.Id, Equipment.EquiptId, Quantity, DateStart, DateEnd, Note);
-            bool isAfterRoomRenovation = AdvancedRenovationController.Instance.CheckIfTransferIsAfterRenovation(dateStart, SourceRoom.Id, DestinationRoom.Id);
+            RenovationAppointmentDTO renovationAppointmentDTO = new RenovationAppointmentDTO(dateStart, SourceRoom.Id, DestinationRoom.Id);
+            bool isAfterRoomRenovation = AdvancedRenovationController.Instance.CheckIfTransferIsAfterRenovation(renovationAppointmentDTO);
             bool isSucces = false;
             if (isAfterRoomRenovation)
             {

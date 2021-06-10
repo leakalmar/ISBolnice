@@ -44,7 +44,7 @@ namespace Controllers
 
         public List<Appointment> GetAppByRoomId(int roomId)
         {
-            return AppointmentService.Instance.GetAppByRoom(roomId);
+            return AppointmentService.Instance.GetAllApointmentsByRoomId(roomId);
         }
 
         public List<RenovationReportDTO> FindAllRenovationAppBetweeenDates(RenovationDTO renovationDTO)
