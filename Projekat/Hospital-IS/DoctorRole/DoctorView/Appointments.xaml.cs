@@ -1,4 +1,5 @@
-﻿using Hospital_IS.DoctorViewModel;
+﻿using Hospital_IS.DoctorRole.Commands;
+using Hospital_IS.DoctorViewModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,7 +10,7 @@ namespace Hospital_IS.DoctorRole.DoctorView
         public Appointments()
         {
             InitializeComponent();
-            AppointmentsViewModel.Instance.InsideNavigation = this.frame.NavigationService;
+            DoctorInsideNavigationController.Instance.NavigationService = this.frame.NavigationService;
             this.DataContext = AppointmentsViewModel.Instance;
         }
 

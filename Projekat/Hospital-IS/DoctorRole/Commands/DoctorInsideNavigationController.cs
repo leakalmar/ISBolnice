@@ -24,7 +24,9 @@ namespace Hospital_IS.DoctorRole.Commands
 
         public NavigationService NavigationService
         {
-            set { navigaitonService = value; }
+            set { 
+                navigaitonService = value; 
+            }
             get { return navigaitonService; }
         }
 

@@ -81,7 +81,7 @@
                     KeyboardNavigation.TabIndex="3">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <Label Content="{Binding RoomId}" Padding="0" />
+                        <Label Content="{Binding Id}" Padding="0" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
