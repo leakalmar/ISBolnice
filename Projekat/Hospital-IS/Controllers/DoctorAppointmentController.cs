@@ -123,6 +123,25 @@ namespace Controllers
             return DoctorAppointmentService.Instance.GetNumberOfAppointmentsByMonth(patientId, month);
         }
 
-       
+        public DoctorAppointment GetAppointmentById(int appointmentId)
+        {
+            return DoctorAppointmentService.Instance.GetAppointmentById(appointmentId);
+        }
+
+        public List<DoctorAppointment> GetAllAppointmentsForCurrentWeek(DateTime startOfTheWeek)
+        {
+            return DoctorAppointmentService.Instance.GetAllAppointmentsForCurrentWeek(startOfTheWeek);
+        }
+
+        public List<DoctorAppointment> GetFutureAppointmentsForDoctor(int doctorId)
+        {
+            return DoctorAppointmentService.Instance.GetFutureAppointmentsForDoctor(doctorId);
+        }
+
+        public List<DoctorAppointment> GetPreviousAppointmentsForDoctor(int doctorId)
+        {
+            return DoctorAppointmentService.Instance.GetPreviousAppointmentsForDoctor(doctorId);
+        }
+
     }
 }

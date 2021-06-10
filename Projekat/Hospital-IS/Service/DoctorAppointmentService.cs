@@ -249,5 +249,39 @@ namespace Service
             }
             return counter;
         }
+        public List<DoctorAppointment> GetAllAppointmentsForCurrentWeek(DateTime startOfTheWeek)
+        {
+            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
+            foreach (DoctorAppointment appointment in AllAppointments)
+            {
+                if (appointment.AppointmentStart >= startOfTheWeek && appointment.AppointmentEnd <= startOfTheWeek.AddDays(7))
+                    appointments.Add(appointment);
+            }
+
+            return appointments;
+        }
+        public List<DoctorAppointment> GetFutureAppointmentsForDoctor(int doctorId)
+        {
+            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
+            foreach (DoctorAppointment appointment in AllAppointments)
+            {
+                if (appointment.AppointmentStart > DateTime.Now && appointment.Doctor.Id.Equals(doctorId))
+                    appointments.Add(appointment);
+            }
+
+            return appointments;
+        }
+
+        public List<DoctorAppointment> GetPreviousAppointmentsForDoctor(int doctorId)
+        {
+            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
+            foreach (DoctorAppointment appointment in AllAppointments)
+            {
+                if (appointment.AppointmentEnd < DateTime.Now && appointment.Doctor.Id.Equals(doctorId))
+                    appointments.Add(appointment);
+            }
+
+            return appointments;
+        }
     }
 }
