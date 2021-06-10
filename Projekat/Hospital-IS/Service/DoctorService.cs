@@ -82,13 +82,7 @@ namespace Service
         }
         public Doctor GetDoctorByID(int id)
         {
-            Doctor doc = null;
-            foreach (Doctor doctor in AllDoctors)
-            {
-                if (doctor.Id.Equals(id))
-                    doc = doctor;
-            }
-            return doc;
+            return dfs.GetById(id);
         }
 
         public void AddDoctor(Doctor doctor)
@@ -106,9 +100,10 @@ namespace Service
                 {
                     AllDoctors.Remove(AllDoctors[i]);
                     AllDoctors.Insert(i, doctor);
+                    dfs.Update(doctor);
                 }
             }
-            dfs.SaveDoctors(AllDoctors);
+           
         }
 
         public void DeleteDoctor(Doctor doctor)
@@ -118,10 +113,11 @@ namespace Service
                 if (doctor.Id.Equals(AllDoctors[i].Id))
                 {
                     AllDoctors.Remove(AllDoctors[i]);
+                    dfs.Delete(doctor);
                 }
             }
 
-            dfs.SaveDoctors(AllDoctors);
+          
         }
 
     }

@@ -124,7 +124,7 @@ namespace Hospital_IS.ManagerViewModel
                 int bedNumber = Convert.ToInt32(RoomVallidationDTO.BedNumber);
                 int surfaceArea = Convert.ToInt32(RoomVallidationDTO.SurfaceArea);
            
-                Room updateRoom = new Room(roomFloor, roomNumber, surfaceArea, bedNumber, this.room.RoomId, type);
+                Room updateRoom = new Room(roomFloor, roomNumber, surfaceArea, bedNumber, this.room.Id, type);
                 RoomController.Instance.UpdateRoom(updateRoom);
                 this.NavService.GoBack();
                 this.RoomVallidationDTO = new RoomVallidationDTO();

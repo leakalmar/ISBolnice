@@ -42,8 +42,8 @@ namespace Hospital_IS.Service
 
         private void CancelClassicAppFromBothRoom(AdvancedRenovation advancedRenovation)
         {
-            CancelClassicAppAfterDateEnd(advancedRenovation.RoomFirst.RoomId, advancedRenovation.RenovationEnd);
-            CancelClassicAppAfterDateEnd(advancedRenovation.RoomSecond.RoomId, advancedRenovation.RenovationEnd);
+            CancelClassicAppAfterDateEnd(advancedRenovation.RoomFirst.Id, advancedRenovation.RenovationEnd);
+            CancelClassicAppAfterDateEnd(advancedRenovation.RoomSecond.Id, advancedRenovation.RenovationEnd);
 
         }
 
@@ -64,8 +64,8 @@ namespace Hospital_IS.Service
 
         private void CancelDocAppFromBothRoom(AdvancedRenovation advancedRenovation)
         {
-            CanacelDocAppAfterDateEnd(advancedRenovation.RoomFirst.RoomId, advancedRenovation.RenovationEnd);
-            CanacelDocAppAfterDateEnd(advancedRenovation.RoomSecond.RoomId, advancedRenovation.RenovationEnd);
+            CanacelDocAppAfterDateEnd(advancedRenovation.RoomFirst.Id, advancedRenovation.RenovationEnd);
+            CanacelDocAppAfterDateEnd(advancedRenovation.RoomSecond.Id, advancedRenovation.RenovationEnd);
         }
 
         public void CanacelDocAppAfterDateEnd(int roomId, DateTime dateEnd)

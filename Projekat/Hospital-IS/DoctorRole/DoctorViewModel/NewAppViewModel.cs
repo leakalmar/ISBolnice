@@ -343,7 +343,7 @@ namespace Hospital_IS.DoctorViewModel
         private void GetEmergencyAppointments(List<DateTime> dates, Doctor doctor, int patientId)
         {
             PatientDTO patientDTO = SecretaryManagementController.Instance.GetPatientByID(patientId);
-            RoomDTO roomDTO = DoctorAppointmentManagementController.Instance.GetRoomById(SelectedRoom.RoomId);
+            RoomDTO roomDTO = DoctorAppointmentManagementController.Instance.GetRoomById(SelectedRoom.Id);
             EmergencyAppointmentDTO emergencyAppointmentDTO = new EmergencyAppointmentDTO(FindType(), doctor.Specialty.Name, patientDTO, roomDTO, duration.Minutes);
             emergencyAppointmentDTO.RequestedDates = dates;
             List<SuggestedEmergencyAppDTO> allEmergencyAppointments = DoctorAppointmentController.Instance.SuggestEmergencyAppsToDoctor(emergencyAppointmentDTO);
@@ -414,7 +414,7 @@ namespace Hospital_IS.DoctorViewModel
             }
             foreach (Room room in Rooms)
             {
-                if (room.RoomId.Equals(DoctorMainWindowModel.Instance.Doctor.PrimaryRoom))
+                if (room.Id.Equals(DoctorMainWindowModel.Instance.Doctor.PrimaryRoom))
                 {
                     this.SelectedRoom = room;
                 }

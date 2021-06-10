@@ -14,13 +14,6 @@ namespace Storages
             this.fileLocation = "../../../FileStorage/appointments.json";
         }
 
-        public void SaveAppointment(List<DoctorAppointment> allAppointments)
-        {
-            var file = JsonConvert.SerializeObject(allAppointments, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
-            using (StreamWriter writer = new StreamWriter(this.fileLocation))
-            {
-                writer.Write(file);
-            }
-        }
+      
     }
 }

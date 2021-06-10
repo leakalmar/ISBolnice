@@ -50,9 +50,10 @@ namespace Service
                 {
                     AllPatients.Remove(AllPatients[i]);
                     AllPatients.Insert(i, patient);
+                    PatientStorage.Update(patient);
                 }
             }
-            PatientStorage.SavePatients(AllPatients);
+            
         }
 
         public void DeletePatient(Patient patient)
@@ -63,10 +64,11 @@ namespace Service
                 {
                     AllPatients.Remove(AllPatients[i]);
                     ChartService.Instance.DeleteChart(patient.Id);
+                    PatientStorage.Delete(patient);
                 }
             }
 
-            PatientStorage.SavePatients(AllPatients);
+            
         }
 
         public bool CheckIfAllergicToComponent(string medicineName, List<String> allergies)
@@ -188,13 +190,7 @@ namespace Service
 
         public Patient GetPatientByID(int id) 
         {
-            Patient patient = null;
-            foreach (Patient pat in AllPatients)
-            {
-                if (pat.Id.Equals(id))
-                    patient = pat;
-            }
-            return patient;
+            return PatientStorage.GetById(id);
         }
 
         public void ReloadPatients()
@@ -220,13 +216,10 @@ namespace Service
         {
             Patient patient = GetPatientByID(patientId);
             patient.PatientNotes.Add(patientNote);
-            PatientStorage.SavePatients(AllPatients);
+            PatientStorage.Update(patient);
         }
 
-        public void SavePatients()
-        {
-            PatientStorage.SavePatients(AllPatients);
-        }
+       
 
         public List<PatientNote> GetNotesByPatient(int patientId)
         {

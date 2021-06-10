@@ -1,7 +1,5 @@
 [
   {
-    "$id": "1",
-    "hospital": null,
     "FileDate": "0001-01-01T00:00:00",
     "Employer": "Continental",
     "Admitted": false,
@@ -10,95 +8,32 @@
       "Paracetamol"
     ],
     "TrollMechanism": {
-      "$id": "2",
       "TrollCheckStartDate": "0001-01-01T00:00:00",
       "AppointmentCounterInTimeRange": 0,
       "IsTroll": false
     },
-    "PatientNotes": [],
-    "BloodType": "A",
+    "PatientNotes": [
+      {
+        "NotificationTime": 8,
+        "IsNotifyChecked": false,
+        "NoteContent": "nesto",
+        "AppointmentId": 1
+      }
+    ],
+    "BloodType": null,
     "IsGuest": false,
-    "doctor": null,
-    "Doctor": null,
     "Education": 0,
-    "Id": 1,
-    "Name": "Simona",
+    "Name": "Simonapo",
     "Surname": "Stantic",
     "BirthDate": "1999-03-13T00:00:00",
-    "Phone": null,
+    "Phone": "",
     "Email": "simona@gmail.com",
     "Gender": "Žensko",
-    "Relationship": null,
+    "Relationship": "",
     "Password": "123",
     "Address": "Petra Drapsina 8",
-    "Hospital": null
-  },
-  {
-    "$id": "3",
-    "hospital": null,
-    "FileDate": "2021-03-29T23:21:22.7064891+02:00",
-    "Employer": "neki poslodavac",
-    "Admitted": false,
-    "Alergies": [
-      "Tetanus",
-      "Paracetamol"
-    ],
-    "TrollMechanism": {
-      "$id": "4",
-      "TrollCheckStartDate": "0001-01-01T00:00:00",
-      "AppointmentCounterInTimeRange": 0,
-      "IsTroll": false
-    },
-    "PatientNotes": [],
-    "BloodType": "0",
-    "IsGuest": false,
     "doctor": null,
     "Doctor": null,
-    "Education": 0,
-    "Id": 2,
-    "Name": "Stefan",
-    "Surname": "Beckovic",
-    "BirthDate": "2021-03-29T23:21:22.7064868+02:00",
-    "Phone": null,
-    "Email": "stefan@gmail.com",
-    "Gender": "Muško",
-    "Relationship": null,
-    "Password": "123",
-    "Address": "Zelengoska 15",
-    "Hospital": null
-  },
-  {
-    "$id": "5",
-    "hospital": null,
-    "FileDate": "2021-03-29T23:21:22.7064923+02:00",
-    "Employer": "neki poslodavac",
-    "Admitted": false,
-    "Alergies": [
-      "Tetanus",
-      "Paracetamol"
-    ],
-    "TrollMechanism": {
-      "$id": "6",
-      "TrollCheckStartDate": "0001-01-01T00:00:00",
-      "AppointmentCounterInTimeRange": 0,
-      "IsTroll": false
-    },
-    "PatientNotes": [],
-    "BloodType": "B",
-    "IsGuest": false,
-    "doctor": null,
-    "Doctor": null,
-    "Education": 0,
-    "Id": 3,
-    "Name": "Uros",
-    "Surname": "Lekic",
-    "BirthDate": "2021-03-29T23:21:22.7064919+02:00",
-    "Phone": null,
-    "Email": "uros@gmail.com",
-    "Gender": "Muško",
-    "Relationship": null,
-    "Password": "123",
-    "Address": "Dure Dakovica 10",
-    "Hospital": null
+    "Id": 1
   }
 ]

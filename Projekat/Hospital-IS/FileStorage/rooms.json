@@ -1,108 +1,24 @@
 [
   {
-    "RoomFloor": 10,
-    "RoomNumber": 11,
-    "SurfaceArea": 11,
-    "BedNumber": 111,
-    "RoomId": 1,
-    "Type": 1,
-    "RoomIdType": "11 ConsultingRoom",
-    "Equipment": [],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 1,
-    "RoomNumber": 12,
-    "SurfaceArea": 2,
-    "BedNumber": 50,
-    "RoomId": 2,
-    "Type": 3,
-    "RoomIdType": "12 StorageRoom",
-    "Equipment": [
-      {
-        "EquipType": 0,
-        "EquiptId": 0,
-        "Name": "makaze",
-        "Quantity": 500,
-        "ProducerName": "Metalika",
-        "EquiptTypeIndex": 0
-      },
-      {
-        "EquipType": 1,
-        "EquiptId": 1,
-        "Name": "rendgen",
-        "Quantity": 3,
-        "ProducerName": "Metalprom",
-        "EquiptTypeIndex": 1
-      },
-      {
-        "EquipType": 1,
-        "EquiptId": 2,
-        "Name": "hirusrski sto",
-        "Quantity": 25,
-        "ProducerName": "Holvic",
-        "EquiptTypeIndex": 1
-      },
-      {
-        "EquipType": 0,
-        "EquiptId": 4,
-        "Name": "bolnicki krevet",
-        "Quantity": 25,
-        "ProducerName": "Metalac",
-        "EquiptTypeIndex": 0
-      }
-    ],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 1,
-    "RoomNumber": 1,
-    "SurfaceArea": 5,
-    "BedNumber": 1000,
-    "RoomId": 14,
-    "Type": 0,
-    "RoomIdType": "1 RecoveryRoom",
-    "Equipment": [
-      {
-        "EquipType": 0,
-        "EquiptId": 4,
-        "Name": "bolnicki krevet",
-        "Quantity": 25,
-        "ProducerName": null,
-        "EquiptTypeIndex": 0
-      }
-    ],
-    "isUsable": false
-  },
-  {
-    "RoomFloor": 7,
-    "RoomNumber": 582,
-    "SurfaceArea": 55,
-    "BedNumber": 0,
-    "RoomId": 16,
-    "Type": 0,
-    "RoomIdType": "582 RecoveryRoom",
-    "Equipment": [
-      {
-        "EquipType": 1,
-        "EquiptId": 3,
-        "Name": "bolnicki krevet",
-        "Quantity": 2,
-        "ProducerName": null,
-        "EquiptTypeIndex": 1
-      }
-    ],
-    "isUsable": false
-  },
-  {
     "RoomFloor": 1,
     "RoomNumber": 99,
     "SurfaceArea": 1405,
     "BedNumber": 0,
-    "RoomId": 17,
     "Type": 0,
     "RoomIdType": "99 RecoveryRoom",
     "Equipment": [],
-    "isUsable": false
+    "isUsable": false,
+    "Id": 0
+  },
+  {
+    "RoomFloor": 6,
+    "RoomNumber": 123,
+    "SurfaceArea": 40,
+    "BedNumber": 60,
+    "Type": 1,
+    "RoomIdType": "123 ConsultingRoom",
+    "Equipment": [],
+    "isUsable": false,
+    "Id": 1
   }
 ]

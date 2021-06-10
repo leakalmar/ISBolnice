@@ -1,3 +1,4 @@
+using Hospital_IS.Storages;
 using Model;
 using Newtonsoft.Json;
 using System;
@@ -6,32 +7,15 @@ using System.IO;
 
 namespace Storages
 {
-    public class RoomStorage
+    public class RoomStorage: GenericFileStorage<Room>
     {
-        private String fileLocation ;
-        private List<Room> allRooms = new List<Room>();
-
+       
         public RoomStorage()
         {
             this.fileLocation = "../../../FileStorage/rooms.json";
         }
 
-        public List<Room>  GetAll()
-        {
-            String text = File.ReadAllText(this.fileLocation);
-            List<Room> allRooms = JsonConvert.DeserializeObject<List<Room>>(text);
-            return allRooms;
-         
-        }
-
-        public void SaveRooms(List<Room> allRooms)
-        {
-            var file = JsonConvert.SerializeObject(allRooms, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
-            using (StreamWriter writer = new StreamWriter(this.fileLocation))
-            {
-                writer.Write(file);
-            }
-        }
+       
 
     }
 }

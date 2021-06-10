@@ -207,7 +207,7 @@ namespace Hospital_IS.ManagerViewModel
                     {
                         if (SelectedRoomSecond != null && SelectedRoomFirst != null)
                         {
-                            if (SelectedRoomSecond.RoomId == SelectedRoomFirst.RoomId)
+                            if (SelectedRoomSecond.Id == SelectedRoomFirst.Id)
                             {
                                 MessageBox.Show("Izabrali ste istu sobu");
                                 return;
@@ -215,11 +215,11 @@ namespace Hospital_IS.ManagerViewModel
                         }
                         if (isMerge == true && SelectedRoomSecond != null)
                         {
-                            AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(selectedRoomFirst.RoomId, SelectedRoomSecond.RoomId));
+                            AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(selectedRoomFirst.Id, SelectedRoomSecond.Id));
                         }
                         else
                         {
-                            AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(selectedRoomFirst.RoomId));
+                            AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(selectedRoomFirst.Id));
 
                         }
                     }
@@ -245,7 +245,7 @@ namespace Hospital_IS.ManagerViewModel
                        
                         if (SelectedRoomSecond != null && SelectedRoomFirst != null)
                         {
-                            if (SelectedRoomSecond.RoomId == SelectedRoomFirst.RoomId)
+                            if (SelectedRoomSecond.Id == SelectedRoomFirst.Id)
                             {
                                 MessageBox.Show("Izabrali ste istu sobu");
                                 ChangeValue();
@@ -258,12 +258,12 @@ namespace Hospital_IS.ManagerViewModel
 
                         if (SelectedRoomFirst != null)
                         {
-                            AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(SelectedRoomFirst.RoomId, selectedRoomSecond.RoomId));
+                            AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(SelectedRoomFirst.Id, selectedRoomSecond.Id));
                            
                         }
                         else
                         {
-                            AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(selectedRoomSecond.RoomId));
+                            AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(selectedRoomSecond.Id));
                         }
                     }
                  
@@ -468,7 +468,7 @@ namespace Hospital_IS.ManagerViewModel
                 
                 if (IsSplit == true)
                 {
-                    Appointment renovationAppointment = new Appointment(true, Note, DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomFirst.RoomId);
+                    Appointment renovationAppointment = new Appointment(true, Note, DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomFirst.Id);
                     bool isSuccess = AppointmentController.Instance.MakeRenovationAppointment(renovationAppointment);
                     if (isSuccess)
                     {
@@ -482,7 +482,7 @@ namespace Hospital_IS.ManagerViewModel
                         MessageBox.Show("Uspjesno zakazivanje razdvajanja");
 
 
-                        AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(SelectedRoomFirst.RoomId));
+                        AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(SelectedRoomFirst.Id));
                         renovationWindow.Hide();
                     }
                     else
@@ -497,8 +497,8 @@ namespace Hospital_IS.ManagerViewModel
                         MessageBox.Show(SelectedRoomFirst.RoomFloor.ToString() + " " + SelectedRoomSecond.RoomFloor.ToString());
                         if (SelectedRoomFirst.RoomFloor == SelectedRoomSecond.RoomFloor)
                         {
-                            Appointment appointmentFirstRoom = new Appointment(DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomFirst.RoomId);
-                            Appointment appointmentSecondRoom = new Appointment(DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomSecond.RoomId);
+                            Appointment appointmentFirstRoom = new Appointment(DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomFirst.Id);
+                            Appointment appointmentSecondRoom = new Appointment(DateStart, DateEnd, AppointmentType.Renovation, SelectedRoomSecond.Id);
                             bool isSucces = AppointmentController.Instance.MakeRenovationAppointmentForRoomMerge(appointmentFirstRoom, appointmentSecondRoom);
                             if (isSucces)
                             {
@@ -508,7 +508,7 @@ namespace Hospital_IS.ManagerViewModel
                                 Room room = new Room(Convert.ToInt32(RoomValidation.RoomNumber),SelectedRoomFirst.RoomFloor, surfaceArea, roomType, new List<Equipment>());
                                 AdvancedRenovation advancedRenovation = new AdvancedRenovation(SelectedRoomFirst, SelectedRoomSecond, room, AdvancedRenovationType.MERGE, false, DateEnd);
                                 AdvancedRenovationController.Instance.MakeAdvancedRenovation(advancedRenovation);                            
-                                AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(SelectedRoomFirst.RoomId, SelectedRoomSecond.RoomId));
+                                AllAppointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAllAppByTwoRooms(SelectedRoomFirst.Id, SelectedRoomSecond.Id));
                                 renovationWindow.Hide();
 
                             }
@@ -560,7 +560,7 @@ namespace Hospital_IS.ManagerViewModel
                 {
                     return false;
                 }
-                else if (SelectedRoomFirst.RoomId == SelectedRoomSecond.RoomId || CheckIfDateIsValid())
+                else if (SelectedRoomFirst.Id == SelectedRoomSecond.Id || CheckIfDateIsValid())
                 {
 
                     return false;

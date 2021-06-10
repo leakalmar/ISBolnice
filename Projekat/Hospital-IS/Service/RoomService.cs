@@ -49,15 +49,8 @@ namespace Service
 
         public Room GetRoomById(int roomId)
         {
-            Room room = null;
-            foreach (Room r in AllRooms)
-            {
-                if (r.RoomId == roomId)
-                {
-                    room = r;
-                }
-            }
-            return room;
+            
+            return rfs.GetById(roomId);
         }
 
         public List<int> GetAllFloors()
@@ -75,9 +68,9 @@ namespace Service
 
         public void AddRoom(Room newRoom)
         {
-         newRoom.RoomId = FindMax() + 1;
-         AllRooms.Add(newRoom);
-         rfs.SaveRooms(AllRooms);
+            newRoom.Id = FindMax() + 1;
+            AllRooms.Add(newRoom);
+            rfs.Add(newRoom);
         }
 
         private int FindMax()
@@ -85,9 +78,9 @@ namespace Service
             int maxId = -1;
             foreach(Room  r in AllRooms)
             {
-                if(maxId < r.RoomId)
+                if(maxId < r.Id)
                 {
-                    maxId = r.RoomId;
+                    maxId = r.Id;
                 }
             }
             return maxId;
@@ -97,28 +90,30 @@ namespace Service
         {
             foreach (Room r in AllRooms)
             {
-                if (r.RoomId == room.RoomId)
+                if (r.Id == room.Id)
                 {
                     AllRooms.Remove(r);
+                    rfs.Delete(room);
                     break;
                 }
             }
-            rfs.SaveRooms(AllRooms);
+           
         }
 
         public void UpdateRoom(Room oldRoom)
         {
             foreach (Room r in AllRooms)
             {
-                if (r.RoomId == oldRoom.RoomId)
+                if (r.Id == oldRoom.Id)
                 {
                     int index = AllRooms.IndexOf(r);
                     AllRooms.Remove(r);
                     AllRooms.Insert(index, oldRoom);
+                    rfs.Update(oldRoom);
                     break;
                 }
             }
-            rfs.SaveRooms(AllRooms);
+          
         }
 
         public List<Room> GetRoomByType(RoomType type)
@@ -174,16 +169,13 @@ namespace Service
             return AllRooms;
         }
 
-        public void SaveChange()
-        {
-            rfs.SaveRooms(AllRooms);
-        }
+      
 
         public void AddEquipment(Room room, Equipment newEquip)
         {
             newEquip.EquiptId = genereteId(room.Equipment);
             room.AddEquipment(newEquip);
-            rfs.SaveRooms(AllRooms);
+            rfs.Update(room);
         }
 
         private int genereteId(List<Equipment> equipList)
@@ -237,7 +229,7 @@ namespace Service
         public void RemoveEquipment(Room room, Equipment oldEquip)
         {
             room.RemoveEquipment(oldEquip);
-            rfs.SaveRooms(AllRooms);
+            rfs.Update(room);
         }
 
       
@@ -245,7 +237,7 @@ namespace Service
         {
             MessageBox.Show("uslo u kontroler");
             bool isSucces = room.UpdateEquipment(updateEquip);
-            rfs.SaveRooms(AllRooms);
+            rfs.Update(room);
             return isSucces;
         }
 
@@ -254,7 +246,7 @@ namespace Service
             int roomNum = 0;
             foreach (Room r in AllRooms)
             {
-                if(r.RoomId == roomId)
+                if(r.Id == roomId)
                 {
                     roomNum = r.RoomNumber;
                 }

@@ -198,7 +198,7 @@ namespace Hospital_IS.Service
             foreach (Room room in RoomService.Instance.AllRooms)
             {
                 List<EquipmentDTO> equipment = LoadRoomEquipment(room);
-                AllRooms.Add(new RoomDTO(room.RoomNumber, room.BedNumber, room.RoomId, room.Type, equipment, room.RoomFloor, room.isUsable));
+                AllRooms.Add(new RoomDTO(room.RoomNumber, room.BedNumber, room.Id, room.Type, equipment, room.RoomFloor, room.isUsable));
             }
         }
 

@@ -1,11 +1,12 @@
 using Enums;
+using Hospital_IS.Model;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 
 namespace Model
 {
-    public class Room
+    public class Room: Entity
     {
 
         public Room()
@@ -27,7 +28,8 @@ namespace Model
         public int SurfaceArea { get; set; }
         public int BedNumber { get; set; }
 
-        public int RoomId { get; set; }
+     
+        
 
         public RoomType Type
         {
@@ -49,7 +51,7 @@ namespace Model
             RoomNumber = roomNumber;
             SurfaceArea = surfaceArea;
             BedNumber = bedNumber;
-            Type = type;
+            Type = type;        
         }
 
         public Room(int roomFloor, int roomNumber, int surfaceArea, int bedNumber, int roomId, RoomType type)
@@ -58,7 +60,7 @@ namespace Model
             RoomNumber = roomNumber;
             SurfaceArea = surfaceArea;
             BedNumber = bedNumber;
-            RoomId = roomId;
+            Id = roomId;
             Type = type;
         }
 

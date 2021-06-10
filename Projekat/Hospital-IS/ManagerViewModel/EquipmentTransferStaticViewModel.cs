@@ -77,7 +77,7 @@ namespace Hospital_IS.ManagerViewModel
                     OnPropertyChanged("SelectedRoomSecond");
                     if (SelectedRoomFirst != null)
                     {
-                        if (SelectedRoomFirst.RoomId == SelectedRoomSecond.RoomId)
+                        if (SelectedRoomFirst.Id == SelectedRoomSecond.Id)
                         {
                             MessageBox.Show("Izabrali ste istu sobu");
 
@@ -127,7 +127,7 @@ namespace Hospital_IS.ManagerViewModel
 
                     if(SelectedRoomSecond != null && SelectedRoomFirst != null)
                     {
-                        if (SelectedRoomFirst.RoomId == SelectedRoomSecond.RoomId)
+                        if (SelectedRoomFirst.Id == SelectedRoomSecond.Id)
                         {
                             MessageBox.Show("Izabrali ste istu sobu");
                             EquipmentsFirstRoom = new ObservableCollection<Equipment>();
@@ -303,7 +303,7 @@ namespace Hospital_IS.ManagerViewModel
 
             if (RoomController.Instance.CheckQuantity(SelectedRoomFirst, SelectedEquipmentFirst, Convert.ToInt32(TransferAmount))) 
             {
-                ScheduleStaticTransferViewModel.Instance.SetAppointmentsForRoom(SelectedRoomFirst.RoomId, SelectedRoomSecond.RoomId);
+                ScheduleStaticTransferViewModel.Instance.SetAppointmentsForRoom(SelectedRoomFirst.Id, SelectedRoomSecond.Id);
                 ScheduleStaticTransferViewModel.Instance.SourceRoom = SelectedRoomFirst;
                 ScheduleStaticTransferViewModel.Instance.DestinationRoom = SelectedRoomSecond;
                 ScheduleStaticTransferViewModel.Instance.Quantity = Convert.ToInt32(TransferAmount);
@@ -322,7 +322,7 @@ namespace Hospital_IS.ManagerViewModel
         private bool CanExecute_NavigateToChooseAppViewCommand(object obj)
         {
 
-            return isNumberIsGraterThanZero() && SelectedEquipmentFirst != null && SelectedRoomSecond!= null && (SelectedRoomSecond.RoomId != SelectedRoomFirst.RoomId);
+            return isNumberIsGraterThanZero() && SelectedEquipmentFirst != null && SelectedRoomSecond!= null && (SelectedRoomSecond.Id != SelectedRoomFirst.Id);
         }
 
         private bool isNumberIsGraterThanZero()

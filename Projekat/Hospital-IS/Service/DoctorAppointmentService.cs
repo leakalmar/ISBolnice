@@ -78,6 +78,7 @@ namespace Service
                 AllAppointments.Add(doctorAppointment);
                 AppointmentStorage.Add(doctorAppointment);
             }
+
         }
 
         public void RemoveAppointment(DoctorAppointment doctorAppointment)
@@ -94,7 +95,7 @@ namespace Service
                     if (doctorAppointment.AppointmentStart.Equals(doctorApp.AppointmentStart) && doctorAppointment.Doctor.Id.Equals(doctorApp.Doctor.Id))
                     {
                         AllAppointments.Remove(doctorApp);
-                        AppointmentStorage.SaveAppointment(AllAppointments);
+                        AppointmentStorage.Delete(doctorApp);
                         break;
                     }
                 }
@@ -110,7 +111,7 @@ namespace Service
                 {
                     AllAppointments.Remove(AllAppointments[i]);
                     AllAppointments.Insert(i, newDoctorAppointment);
-                    AppointmentStorage.SaveAppointment(AllAppointments);
+                    AppointmentStorage.Update(newDoctorAppointment);
                     return;
                 }
             }
@@ -182,14 +183,7 @@ namespace Service
 
         public DoctorAppointment GetAppointmentById(int appointmentId)
         {
-            foreach (DoctorAppointment doctorAppointment in AllAppointments)
-            {
-                if (doctorAppointment.Id == appointmentId)
-                {
-                    return doctorAppointment;
-                }
-            }
-            return null;
+            return AppointmentStorage.GetById(appointmentId);
         }
 
         public int GetNumberOfAppointmentsByMonth(int patientId, string month)

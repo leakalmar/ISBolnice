@@ -77,7 +77,7 @@ namespace Controllers
         public List<DoctorAppointment> SuggestAppointmetsToDoctor(List<DateTime> dates, bool isUrgent, Room room, AppointmentType type, TimeSpan duration, int patientId, Doctor doctor)
         {
 
-            DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, room.RoomId, doctor, PatientController.Instance.GetPatientByID(patientId));
+            DoctorAppointment tempAppointment = new DoctorAppointment(dates[0], type, false, room.Id, doctor, PatientController.Instance.GetPatientByID(patientId));
             tempAppointment.AppointmentEnd = dates[0].Add(duration);
             tempAppointment.IsUrgent = isUrgent;
             return SuggestedAppointmentService.Instance.SuggestAppointmetsToDoctor(dates, tempAppointment);

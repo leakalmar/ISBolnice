@@ -199,7 +199,7 @@ namespace Hospital_IS.DoctorViewModel
                 }
                 foreach (Room room in Rooms)
                 {
-                    if (room.RoomId.Equals(DoctorMainWindowModel.Instance.Doctor.PrimaryRoom))
+                    if (room.Id.Equals(DoctorMainWindowModel.Instance.Doctor.PrimaryRoom))
                     {
                         this.SelectedRoom = room;
                     }

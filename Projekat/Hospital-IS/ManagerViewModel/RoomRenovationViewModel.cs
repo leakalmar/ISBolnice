@@ -198,9 +198,9 @@ namespace Hospital_IS.ManagerViewModel
 
         public void DoRoomRenovation()
         {
-            Appointment renovationAppointment = new Appointment(true, Note, DateStart, DateEnd, AppointmentType.Renovation, FirstRoom.RoomId);
+            Appointment renovationAppointment = new Appointment(true, Note, DateStart, DateEnd, AppointmentType.Renovation, FirstRoom.Id);
             bool isSuccces = AppointmentController.Instance.MakeRenovationAppointment(renovationAppointment);
-            Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(FirstRoom.RoomId));
+            Appointments = new ObservableCollection<Appointment>(AppointmentController.Instance.GetAppByRoomId(FirstRoom.Id));
             if (!isSuccces)
             {
                 System.Windows.MessageBox.Show("Niste uspjeli da zakazete termin");

@@ -15,14 +15,7 @@ namespace Storages
             this.fileLocation = "../../../FileStorage/employees.json";
         }
 
-        public void SaveEmployees(List<Employee> allEmployees)
-        {
-            var file = JsonConvert.SerializeObject(allEmployees, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
-            using (StreamWriter writer = new StreamWriter(this.fileLocation))
-            {
-                writer.Write(file);
-            }
-        }
+      
 
         public List<Employee> GetAll()
         {
