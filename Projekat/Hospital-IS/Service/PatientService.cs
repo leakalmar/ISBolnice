@@ -66,6 +66,7 @@ namespace Service
 
         public bool CheckIfAllergicToComponent(string medicineName, List<String> allergies)
         {
+            bool isAllergic = false;
             List<MedicineComponent> components = MedicineService.Instance.GetByName(medicineName).Composition;
             foreach (MedicineComponent c in components)
             {
@@ -79,7 +80,7 @@ namespace Service
                         {
                             if (c.Component.ToLower().Equals(allergieComp.Component.ToLower()))
                             {
-                                return true;
+                                isAllergic = true;
                             }
                         }
                     }
@@ -87,19 +88,20 @@ namespace Service
                 }
             }
 
-            return false;
+            return isAllergic;
         }
 
         public bool CheckIfAllergicToMedicine(List<String> allergies, string name)
         {
+            bool isAllergic = false;
             foreach (String allergie in allergies)
             {
                 if (name.ToLower().Contains(allergie.ToLower()))
                 {
-                    return true;
+                    isAllergic = true;
                 }
             }
-            return false;
+            return isAllergic;
         }
 
         public List<int> GetPatientIDs()
@@ -181,12 +183,13 @@ namespace Service
 
         public Patient GetPatientByID(int id) 
         {
-            foreach (Patient patient in AllPatients)
+            Patient patient = null;
+            foreach (Patient pat in AllPatients)
             {
-                if (patient.Id.Equals(id))
-                    return patient;
+                if (pat.Id.Equals(id))
+                    patient = pat;
             }
-            return null;
+            return patient;
         }
 
         public void ReloadPatients()
@@ -196,15 +199,16 @@ namespace Service
 
         public PatientNote GetNoteForPatientByAppointmentId(int patientId, int appointmentId)
         {
+            PatientNote patientNote = null;
             Patient patient = GetPatientByID(patientId);
             foreach (PatientNote note in patient.PatientNotes)
             {
                 if (note.AppointmentId.Equals(appointmentId))
                 {
-                    return note;
+                    patientNote = note;
                 }
             }
-            return null;
+            return patientNote;
         }
 
         public void AddAppointmentNote(int patientId, PatientNote patientNote)

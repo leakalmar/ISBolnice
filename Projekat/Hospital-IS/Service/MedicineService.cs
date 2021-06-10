@@ -82,26 +82,28 @@ namespace Service
 
         public Medicine FindMedicineByName(string name)
         {
+            Medicine medicine = null;
             foreach (Medicine med in AllMedicines)
             {
                 if (med.Name.ToLower().Contains(name.ToLower()))
                 {
-                    return med;
+                    medicine = med;
                 }
             }
-            return null;
+            return medicine;
         }
 
         internal bool IsNameUnique(string name)
         {
+            bool isUnique = true;
            foreach (Medicine med in AllMedicines)
             {
                 if (med.Name.Equals(name))
                 {
-                    return false;
+                    isUnique = false;
                 }
             }
-            return true;
+            return isUnique;
         }
     }
 }

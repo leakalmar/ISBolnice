@@ -70,11 +70,12 @@ namespace Hospital_IS.Service
 
         private bool CheckAppointmentDates(DoctorAppointment newAppointment, DoctorAppointment appointment)
         {
+            bool isOverlaping = false;
             if (AreAppointmentsOverlaping(newAppointment, appointment))
             {
-                return true;
+                isOverlaping = true;
             }
-            return false;
+            return isOverlaping;
         }
         private bool AreAppointmentsOverlaping(DoctorAppointment newAppointment, DoctorAppointment appointment)
         {
@@ -131,14 +132,6 @@ namespace Hospital_IS.Service
             }
             return validSuggestedApp;
         }
-
-        //private void SetConflictingIsUrgent(List<SuggestedEmergencyAppDTO> suggestedEmergencyApps)
-        //{
-        //    foreach (SuggestedEmergencyAppDTO suggested in suggestedEmergencyApps)
-        //    {
-        //        suggested.CheckIfConflictingIsUrgent();
-        //    }
-        //}
 
         private void CheckIfConflictingIsStarted(List<SuggestedEmergencyAppDTO> suggestedEmergencyApps)
         {

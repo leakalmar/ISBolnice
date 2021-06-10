@@ -49,14 +49,15 @@ namespace Service
 
         public Room GetRoomById(int roomId)
         {
+            Room room = null;
             foreach (Room r in AllRooms)
             {
                 if (r.RoomId == roomId)
                 {
-                    return r;
+                    room = r;
                 }
             }
-            return null;
+            return room;
         }
 
         public List<int> GetAllFloors()
@@ -76,7 +77,6 @@ namespace Service
         {
          newRoom.RoomId = FindMax() + 1;
          AllRooms.Add(newRoom);
-       
          rfs.SaveRooms(AllRooms);
         }
 
@@ -99,13 +99,10 @@ namespace Service
             {
                 if (r.RoomId == room.RoomId)
                 {
-
                     AllRooms.Remove(r);
-
                     break;
                 }
             }
-
             rfs.SaveRooms(AllRooms);
         }
 
@@ -127,7 +124,6 @@ namespace Service
         public List<Room> GetRoomByType(RoomType type)
         {
             List<Room> allRoomByType = new List<Room>();
-
             foreach (Room room in AllRooms)
             {
                 if (room.Type == type)
@@ -141,7 +137,6 @@ namespace Service
         public List<Room> GetRoomByNumber(string roomNumber)
         {
             List<Room> allRoomByNumber = new List<Room>();
-
             foreach (Room room in AllRooms)
             {
                 if (Int32.Parse(roomNumber) > room.RoomNumber )
@@ -159,7 +154,6 @@ namespace Service
            {
                 if(room.RoomNumber == roomNumber)
                 {
-
                     isUnique = false;
                 }
            }
@@ -171,7 +165,6 @@ namespace Service
                     isUnique = false;
                 }
             }
-
             return isUnique;
         }
 
@@ -197,7 +190,6 @@ namespace Service
         {
             if (equipList != null)
             {
-
                 int id = 0;
                 foreach (Equipment eq in equipList)
                 {
@@ -208,15 +200,12 @@ namespace Service
 
                 }
 
-
                 bool isUnique = CheckIfUnique(id);
-
                 while (!isUnique)
                 {
                     ++id;
                     isUnique = CheckIfUnique(id);
                 }
-
                 return id;
             }
             else
@@ -228,6 +217,7 @@ namespace Service
 
         private bool CheckIfUnique(int id)
         {
+            bool isUnique = true;
             foreach (Room room in AllRooms)
             {
                 if (room.Equipment != null)
@@ -236,12 +226,12 @@ namespace Service
                     {
                         if (eq.EquiptId == id)
                         {
-                            return false;
+                            isUnique = false;
                         }
                     }
                 }
             }
-            return true;
+            return isUnique;
         }
 
         public void RemoveEquipment(Room room, Equipment oldEquip)
@@ -261,14 +251,15 @@ namespace Service
 
         public int GetRoomNumber(int roomId)
         {
+            int roomNum = 0;
             foreach (Room r in AllRooms)
             {
                 if(r.RoomId == roomId)
                 {
-                    return r.RoomNumber;
+                    roomNum = r.RoomNumber;
                 }
             }
-            return 0;
+            return roomNum;
         }
 
     }

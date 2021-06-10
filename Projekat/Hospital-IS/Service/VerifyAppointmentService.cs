@@ -43,20 +43,24 @@ namespace Hospital_IS.Service
 
         private bool IsDoctorWorking(Doctor doctor, DateTime appointmentStart, DateTime appointmentEnd)
         {
+            bool isOnVacation = false;
+            bool isWorkingTheRightShift = false;
             if (IsDoctorOnVacation(doctor, appointmentStart, appointmentEnd))
-                return false;
+                isOnVacation = true;
 
             if (doctor.WorkShift.Equals(WorkDayShift.FirstShift))
             {
                 if (appointmentStart.TimeOfDay >= new TimeSpan(8, 0, 0) && appointmentEnd.TimeOfDay <= new TimeSpan(14, 0, 0))
-                    return true;
+                    isWorkingTheRightShift = true;
+
             }
             else
             {
                 if (appointmentStart.TimeOfDay >= new TimeSpan(14, 0, 0) && appointmentEnd.TimeOfDay <= new TimeSpan(20, 0, 0))
-                    return true;
+                    isWorkingTheRightShift = true;
             }
-            return false;
+
+            return !isOnVacation && isWorkingTheRightShift;
         }
 
         private bool IsDoctorOnVacation(Doctor doctor, DateTime appointmentStart, DateTime appointmentEnd)
@@ -80,7 +84,7 @@ namespace Hospital_IS.Service
                 if (doctorAppointment.AppointmentStart == patientAppointment.AppointmentStart)
                 {
                     isFree = false;
-                    return isFree;
+                    break;
                 }
             }
             return isFree;
