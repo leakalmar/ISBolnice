@@ -56,18 +56,20 @@ namespace Service
 
         public Boolean IsAppointmentEvaluated(int evaluatedAppointmentId)
         {
+            bool isEvaluated = false;
             foreach (PatientAppointmentEvaluation appointment in AllAppointmentEvaluations)
             {
                 if(appointment.DoctorAppointmentId == evaluatedAppointmentId)
                 {
-                    return true;
+                    isEvaluated = true;
                 }
             }
-            return false;
+            return isEvaluated;
         }
 
         public Boolean ShowHospitalEvaluation(int patientId)
         {
+            bool showEvaluation = false;
             int appointmentCounter = 0;
             int hospitalEvaluation = 3;
             foreach (PatientAppointmentEvaluation appointment in AllAppointmentEvaluations)
@@ -81,9 +83,9 @@ namespace Service
 
             if (appointmentCounter % hospitalEvaluation == 0)
             {
-                return true;
+                showEvaluation = true;
             }
-            return false;
+            return showEvaluation;
         }
     }
 }

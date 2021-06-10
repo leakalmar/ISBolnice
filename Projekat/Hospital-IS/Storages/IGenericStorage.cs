@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Hospital_IS.Storages
 {
-    interface IGenericStorage<T> where T:class
+    public interface IGenericStorage<T> where T:class
     {
         List<T> GetAll();
         T GetById(int id);

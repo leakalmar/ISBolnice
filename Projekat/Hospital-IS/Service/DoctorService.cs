@@ -57,14 +57,15 @@ namespace Service
 
         public string GetDoctorNameAndSurname(int senderId)
         {
+            string fullName = null;
             foreach (Doctor doctor in AllDoctors)
             {
                 if (senderId == doctor.Id)
                 {
-                    return doctor.Name + " " + doctor.Surname;
+                    fullName = doctor.Name + " " + doctor.Surname;
                 }
             }
-            return null;
+            return fullName;
         }
 
         public List<Doctor> GetDoctorsBySpecialty(string specialtyName)
@@ -81,12 +82,13 @@ namespace Service
         }
         public Doctor GetDoctorByID(int id)
         {
+            Doctor doc = null;
             foreach (Doctor doctor in AllDoctors)
             {
                 if (doctor.Id.Equals(id))
-                    return doctor;
+                    doc = doctor;
             }
-            return null;
+            return doc;
         }
 
         public void AddDoctor(Doctor doctor)

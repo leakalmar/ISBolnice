@@ -42,12 +42,13 @@ namespace Service
 
         public Specialty GetSpecialtyByName(string specialtyName)
         {
+            Specialty spec = null;
             foreach (Specialty specialty in AllSpecialties)
             {
                 if (specialty.Name.Equals(specialtyName))
-                    return specialty;
+                    spec = specialty;
             }
-            return null;
+            return spec;
         }
     }
 }
