@@ -1,4 +1,6 @@
-﻿using Hospital_IS.DTOs;
+﻿using Hospital_IS.Controllers;
+using Hospital_IS.DTOs;
+using System;
 using System.Windows;
 
 namespace Hospital_IS.SecretaryView
@@ -26,6 +28,11 @@ namespace Hospital_IS.SecretaryView
             this.Close();
         }
 
-
+        private void SendMessage(object sender, RoutedEventArgs e)
+        {
+            Message.DateSent = DateTime.Now;
+            FeedbackMessageController.Instance.AddFeedbackMessage(Message);
+            this.Close();
+        }
     }
 }

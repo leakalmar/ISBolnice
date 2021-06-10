@@ -220,5 +220,11 @@
                 </ComboBox>
             </StackPanel>
         </StackPanel>
+
+        <Button Name="btnErrorReport" Grid.Column="2" Grid.Row="2" 
+                Content="{lex:Loc}" FontSize="15" Width="110" 
+                Click="ReportIssue" HorizontalAlignment="Right"
+                Margin="20 0"
+                Style="{DynamicResource ResourceKey=DeleteButton}"/>
     </Grid>
 </UserControl>

@@ -164,5 +164,11 @@ namespace Hospital_IS.SecretaryView
                 }
             }
         }
+
+        private void ReportIssue(object sender, RoutedEventArgs e)
+        {
+            CreateFeedbackMessage cfm = new CreateFeedbackMessage();
+            cfm.ShowDialog();
+        }
     }
 }
