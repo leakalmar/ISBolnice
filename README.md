@@ -1,6 +1,6 @@
 ## About
 Hospital information system made for a course in Software specification and modeling at the Faculty of Technical Sciences. </br>
-Implemented in Visual Studio using: _PowerDesigner_,_C#_, _XAML_. 
+Implemented in Visual Studio using: _PowerDesigner_, _C#_, _XAML_. 
 
 ## Authors
 • Lea Kalmar
@@ -14,17 +14,17 @@ Implemented in Visual Studio using: _PowerDesigner_,_C#_, _XAML_.
 
 ## Key Features
 ### • For doctor  </br>
-&emsp;&emsp; ◦ CRUD operations for examination and operations </br>
+&emsp;&emsp; ◦ CRUD operations for examinations and operations </br>
 &emsp;&emsp; ◦ Work schedule overview </br>
 &emsp;&emsp; ◦ Prescription creation </br>
-&emsp;&emsp; ◦ Scheduling an appointment for an examination/operation with a specialist </br>
+&emsp;&emsp; ◦ Able to schedule an appointment for an examination/operation with a specialist </br>
 &emsp;&emsp; ◦ Medicine validation </br>
 
 ### • For secretary  </br>
 &emsp;&emsp; ◦ CRUD operations for patients </br> 
-&emsp;&emsp; ◦ CRUD operations for examination </br>
+&emsp;&emsp; ◦ CRUD operations for examinations </br>
 &emsp;&emsp; ◦ Emergency appointment creation </br>
-&emsp;&emsp; ◦ Notificaiton publishing </br>
+&emsp;&emsp; ◦ Notification publishing </br>
 
 ### • For manager </br>
 &emsp;&emsp; ◦ CRUD operations for hospital rooms </br>
@@ -34,7 +34,7 @@ Implemented in Visual Studio using: _PowerDesigner_,_C#_, _XAML_.
 &emsp;&emsp; ◦ CRUD for medications </br>
 
 ### • For patient
-&emsp;&emsp; ◦ CRUD operations for examination and operations  </br>
-&emsp;&emsp; ◦ Notification for therapies </br>
+&emsp;&emsp; ◦ CRUD operations for examinations and operations  </br>
+&emsp;&emsp; ◦ Notifications for therapies and treatments </br>
 &emsp;&emsp; ◦ Anti-troll mechanism </br>
-&emsp;&emsp; ◦ Survey about hospital and services</br>
+&emsp;&emsp; ◦ Able to leave a survey about the hospital and it's services </br>
